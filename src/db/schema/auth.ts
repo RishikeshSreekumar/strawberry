@@ -1,4 +1,10 @@
-import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  pgTable,
+  text,
+  timestamp,
+  uniqueIndex,
+} from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -29,23 +35,30 @@ export const session = pgTable("session", {
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
-export const account = pgTable("account", {
-  id: text("id").primaryKey(),
-  accountId: text("account_id").notNull(),
-  providerId: text("provider_id").notNull(),
-  userId: text("user_id")
-    .notNull()
-    .references(() => user.id, { onDelete: "cascade" }),
-  accessToken: text("access_token"),
-  refreshToken: text("refresh_token"),
-  idToken: text("id_token"),
-  accessTokenExpiresAt: timestamp("access_token_expires_at"),
-  refreshTokenExpiresAt: timestamp("refresh_token_expires_at"),
-  scope: text("scope"),
-  password: text("password"),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at").notNull().defaultNow(),
-});
+export const account = pgTable(
+  "account",
+  {
+    id: text("id").primaryKey(),
+    // Added in better-auth 1.7: OIDC issuer (credential accounts get a
+    // synthetic local issuer). Required, unique together with accountId.
+    issuer: text("issuer").notNull(),
+    accountId: text("account_id").notNull(),
+    providerId: text("provider_id").notNull(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    accessToken: text("access_token"),
+    refreshToken: text("refresh_token"),
+    idToken: text("id_token"),
+    accessTokenExpiresAt: timestamp("access_token_expires_at"),
+    refreshTokenExpiresAt: timestamp("refresh_token_expires_at"),
+    scope: text("scope"),
+    password: text("password"),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  },
+  (t) => [uniqueIndex("account_issuer_account_id_idx").on(t.issuer, t.accountId)],
+);
 
 export const verification = pgTable("verification", {
   id: text("id").primaryKey(),
