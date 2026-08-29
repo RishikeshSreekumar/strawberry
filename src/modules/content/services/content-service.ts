@@ -1,4 +1,4 @@
-import { and, asc, desc, eq } from "drizzle-orm";
+import { and, asc, desc, eq, isNotNull } from "drizzle-orm";
 import type { PgDatabase } from "drizzle-orm/pg-core";
 import * as schema from "@/db/schema";
 import {
@@ -183,6 +183,58 @@ export async function listLessonVersions(db: DB, lessonId: string) {
     .where(eq(lessonVersions.lessonId, lessonId))
     .orderBy(desc(lessonVersions.version));
 }
+
+/**
+ * Ordered outline of a course's published lessons, grouped by chapter.
+ * Chapters with no published lessons are omitted.
+ */
+export async function getCourseOutline(db: DB, courseId: string) {
+  const rows = await db
+    .select({
+      chapterId: chapters.id,
+      chapterSlug: chapters.slug,
+      chapterTitle: chapters.title,
+      lessonId: lessons.id,
+      lessonSlug: lessons.slug,
+      lessonTitle: lessons.title,
+    })
+    .from(lessons)
+    .innerJoin(chapters, eq(lessons.chapterId, chapters.id))
+    .where(and(eq(chapters.courseId, courseId), isNotNull(lessons.publishedVersionId)))
+    .orderBy(
+      asc(chapters.position),
+      asc(chapters.title),
+      asc(lessons.position),
+      asc(lessons.title),
+    );
+
+  const outline: Array<{
+    id: string;
+    slug: string;
+    title: string;
+    lessons: Array<{ id: string; slug: string; title: string }>;
+  }> = [];
+  for (const row of rows) {
+    let chapter = outline.at(-1);
+    if (!chapter || chapter.id !== row.chapterId) {
+      chapter = {
+        id: row.chapterId,
+        slug: row.chapterSlug,
+        title: row.chapterTitle,
+        lessons: [],
+      };
+      outline.push(chapter);
+    }
+    chapter.lessons.push({
+      id: row.lessonId,
+      slug: row.lessonSlug,
+      title: row.lessonTitle,
+    });
+  }
+  return outline;
+}
+
+export type CourseOutline = Awaited<ReturnType<typeof getCourseOutline>>;
 
 /** Resolve a published lesson by its slug path, for the student-facing page. */
 export async function getPublishedLesson(

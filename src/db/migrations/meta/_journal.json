@@ -15,6 +15,13 @@
       "when": 1787988252851,
       "tag": "0001_account-issuer",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1787990983165,
+      "tag": "0002_ancient_wilson_fisk",
+      "breakpoints": true
     }
   ]
 }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { requireUser } from "@/modules/auth/session";
 import { SignOutButton } from "@/app/pending/sign-out-button";
+import { StrawberryLogo } from "@/components/logo";
 
 export default async function LearningLayout({
   children,
@@ -12,10 +13,17 @@ export default async function LearningLayout({
 
   return (
     <div className="flex min-h-full flex-1 flex-col">
-      <header className="border-b">
-        <div className="mx-auto flex h-14 w-full max-w-4xl items-center justify-between px-4">
-          <Link href="/courses" className="font-semibold">
-            🍓 Strawberry
+      <header
+        className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur"
+        style={{ viewTransitionName: "site-header" }}
+      >
+        <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-4">
+          <Link
+            href="/courses"
+            className="flex items-center gap-2 font-semibold tracking-tight text-primary"
+          >
+            <StrawberryLogo className="size-5" />
+            Strawberry
           </Link>
           <nav className="flex items-center gap-4 text-sm">
             {isStaff && (
@@ -23,12 +31,14 @@ export default async function LearningLayout({
                 Admin
               </Link>
             )}
-            <span className="text-muted-foreground">{user.name}</span>
+            <span className="hidden text-muted-foreground sm:inline">
+              {user.name}
+            </span>
             <SignOutButton />
           </nav>
         </div>
       </header>
-      <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-8">
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
         {children}
       </main>
     </div>
