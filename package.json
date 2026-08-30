@@ -13,7 +13,8 @@
     "db:studio": "drizzle-kit studio",
     "db:seed": "tsx scripts/seed.ts",
     "db:seed:chapter0": "tsx scripts/seed-chapter-0.ts",
-    "db:seed:chapter1": "tsx scripts/seed-chapter-1.ts"
+    "db:seed:chapter1": "tsx scripts/seed-chapter-1.ts",
+    "db:seed:trigonometry": "tsx scripts/seed-trigonometry.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

@@ -82,20 +82,57 @@ function curvePath(curve: Curve, window: PlotWindow): string {
  * grid, sampled curves (with breaks at exclusions), points and segments.
  * Extra SVG overlays can be passed as children (use makeScales to map).
  */
+/**
+ * Ticks at multiples of pi/2 across the window, labelled the way the
+ * trigonometry course writes them (pi/2, pi, 3pi/2, -pi ...).
+ */
+function radianTicks(window: PlotWindow): Tick[] {
+  const ticks: Tick[] = [];
+  const lo = Math.ceil(window.xmin / (Math.PI / 2));
+  const hi = Math.floor(window.xmax / (Math.PI / 2));
+  for (let k = lo; k <= hi; k++) {
+    if (k === 0) continue;
+    const sign = k < 0 ? "-" : "";
+    const n = Math.abs(k);
+    const label =
+      n % 2 === 0
+        ? `${sign}${n / 2 === 1 ? "" : n / 2}\u03c0`
+        : `${sign}${n === 1 ? "" : n}\u03c0/2`;
+    ticks.push({ x: (k * Math.PI) / 2, label });
+  }
+  return ticks;
+}
+
+type Tick = { x: number; label: string };
+
 export function FunctionPlot({
   window,
   curves = [],
   points = [],
   segments = [],
+  xAxis = "numeric",
   children,
 }: {
   window: PlotWindow;
   curves?: Curve[];
   points?: Point[];
   segments?: Segment[];
+  /** Radian mode labels the x-axis in multiples of pi instead of integers. */
+  xAxis?: "numeric" | "radians";
   children?: React.ReactNode;
 }) {
   const { sx, sy } = makeScales(window);
+  const labelEvery = window.xmax - window.xmin > 12 ? 2 : 1;
+  const xTickMarks: Tick[] =
+    xAxis === "radians"
+      ? radianTicks(window)
+      : (() => {
+          const out: Tick[] = [];
+          for (let x = Math.ceil(window.xmin); x <= Math.floor(window.xmax); x++) {
+            if (x !== 0 && x % labelEvery === 0) out.push({ x, label: String(x) });
+          }
+          return out;
+        })();
   const xTicks: number[] = [];
   for (let x = Math.ceil(window.xmin); x <= Math.floor(window.xmax); x++) {
     if (x !== 0) xTicks.push(x);
@@ -113,7 +150,7 @@ export function FunctionPlot({
       role="img"
     >
       {/* grid */}
-      {xTicks.map((x) => (
+      {(xAxis === "radians" ? xTickMarks.map((t) => t.x) : xTicks).map((x) => (
         <line
           key={`gx${x}`}
           x1={sx(x)}
@@ -143,19 +180,17 @@ export function FunctionPlot({
         <line x1={sx(0)} y1={0} x2={sx(0)} y2={H} className="stroke-foreground/50" strokeWidth={1} />
       )}
       {/* axis tick labels (sparse) */}
-      {xTicks
-        .filter((x) => x % (window.xmax - window.xmin > 12 ? 2 : 1) === 0)
-        .map((x) => (
-          <text
-            key={`tx${x}`}
-            x={sx(x)}
-            y={Math.min(H - 4, Math.max(10, sy(0) + 12))}
-            className="fill-muted-foreground text-[9px]"
-            textAnchor="middle"
-          >
-            {x}
-          </text>
-        ))}
+      {xTickMarks.map((t) => (
+        <text
+          key={`tx${t.x}`}
+          x={sx(t.x)}
+          y={Math.min(H - 4, Math.max(10, sy(0) + 12))}
+          className="fill-muted-foreground text-[9px]"
+          textAnchor="middle"
+        >
+          {t.label}
+        </text>
+      ))}
       {curves.map((curve, i) => (
         <path
           key={i}

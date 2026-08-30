@@ -39,6 +39,19 @@ describe("math expression evaluator", () => {
     expect(() => evaluateAt("(x", 1)).toThrow();
   });
 
+  it("supports the trigonometry grammar: inverse functions and pi", () => {
+    expect(evaluateAt("cos(pi)", 0)).toBeCloseTo(-1);
+    expect(evaluateAt("sin(pi/2)", 0)).toBeCloseTo(1);
+    expect(evaluateAt("asin(x)", 1)).toBeCloseTo(Math.PI / 2);
+    expect(evaluateAt("acos(x)", 0)).toBeCloseTo(Math.PI / 2);
+    expect(evaluateAt("atan(x)", 1)).toBeCloseTo(Math.PI / 4);
+    expect(evaluateAt("sin(x)/x", 0.001)).toBeCloseTo(1, 4);
+  });
+
+  it("resolves constants ahead of the caller's environment", () => {
+    expect(compileExpression("pi")({ pi: 3 })).toBeCloseTo(Math.PI);
+  });
+
   it("returns Infinity for division by zero (caller filters)", () => {
     expect(evaluateAt("1/x", 0)).toBe(Infinity);
   });

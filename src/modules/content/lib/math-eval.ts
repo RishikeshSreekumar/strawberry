@@ -21,6 +21,15 @@ const FUNCTIONS: Record<string, (x: number) => number> = {
   ln: Math.log,
   log: Math.log,
   exp: Math.exp,
+  asin: Math.asin,
+  acos: Math.acos,
+  atan: Math.atan,
+};
+
+/** Names resolved before the caller's environment; not overridable. */
+const CONSTANTS: Record<string, number> = {
+  pi: Math.PI,
+  e: Math.E,
 };
 
 class Parser {
@@ -127,7 +136,7 @@ function evalNode(node: Node, env: Record<string, number>): number {
     case "num":
       return node.value;
     case "var": {
-      const value = env[node.name];
+      const value = CONSTANTS[node.name] ?? env[node.name];
       if (value === undefined) throw new Error(`Unknown variable "${node.name}"`);
       return value;
     }

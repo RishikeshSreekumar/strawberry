@@ -177,6 +177,50 @@ const lesson01: LessonSeed = {
       ],
       hint: "Hunt for one input that could produce two different outputs.",
     },
+    {
+      type: "text",
+      content:
+        "**Worked example — checking a list of pairs.** Is $(1, 5), (2, 5), (3, 7), (2, 9)$ a function?\n\nStep 1: List the inputs — $1, 2, 3, 2$.\nStep 2: Look for a repeated input — $2$ appears twice.\nStep 3: Compare its outputs — $2 \\to 5$ and $2 \\to 9$. Two different answers for the same input.\n\nVerdict: not a function. Notice the contrast: the output $5$ appearing twice (for inputs 1 and 2) was never a problem. Only a repeated *input* with disagreeing outputs breaks the rule.",
+    },
+    {
+      type: "quiz",
+      id: "what-is-a-function-quiz-5",
+      variant: "practice",
+      question: "Is the set of pairs $(-1, 1), (0, 0), (1, 1)$ a function?",
+      options: [
+        {
+          text: "Yes — each input appears once, with exactly one output.",
+          correct: true,
+          feedback:
+            "Inputs $-1$ and $1$ sharing the output 1 is fine. (This is just $x \\to x^2$ in disguise.)",
+        },
+        {
+          text: "No — the output 1 appears twice.",
+          feedback:
+            "Repeated outputs never disqualify. Check the inputs instead: $-1, 0, 1$, each used exactly once.",
+        },
+      ],
+      hint: "Run the three steps from the worked example: list inputs, find repeats, compare their outputs.",
+    },
+    {
+      type: "quiz",
+      id: "what-is-a-function-quiz-6",
+      variant: "concept",
+      question: "Real-world check: which of these rules is a function?",
+      options: [
+        {
+          text: "Each date → the noon temperature in your city on that date",
+          correct: true,
+          feedback:
+            "One date, one noon temperature. Many dates can share a temperature — outputs repeating is allowed.",
+        },
+        {
+          text: "Each temperature → a date your city hit it at noon",
+          feedback:
+            "The same temperature can occur on many dates — one input, many candidate outputs. Reversing a function doesn't always give a function.",
+        },
+      ],
+    },
   ]),
 };
 
@@ -286,6 +330,66 @@ const lesson02: LessonSeed = {
       variant: "tip",
       content:
         "Later you will meet $f(x+h)$ in the definition of the derivative. It's the same move you just made: substitute the whole expression $x+h$ wherever the input variable appears. No panic required.",
+    },
+    {
+      type: "text",
+      content:
+        "**Worked example — a negative input.** With $f(x) = x^2 - 3x$, find $f(-2)$.\n\nStep 1: Substitute $-2$ everywhere $x$ appears, *keeping the parentheses*:",
+    },
+    { type: "math", latex: "f(-2) = (-2)^2 - 3(-2)" },
+    {
+      type: "text",
+      content:
+        "Step 2: Evaluate each piece: $(-2)^2 = 4$ (a negative squared is positive) and $-3(-2) = +6$.\n\nStep 3: Combine: $f(-2) = 4 + 6 = 10$.\n\nThe classic mistake is dropping the parentheses and computing $-2^2 = -4$. Substituting means the *whole* input, sign included, goes into every slot.",
+    },
+    {
+      type: "quiz",
+      id: "function-notation-quiz-4",
+      variant: "practice",
+      question: "If $f(x) = x^2 + 2x$, what is $f(-3)$?",
+      options: [
+        {
+          text: "$3$",
+          correct: true,
+          feedback: "$(-3)^2 + 2(-3) = 9 - 6 = 3$. Parentheses respected.",
+        },
+        {
+          text: "$-15$",
+          feedback:
+            "That's $-9 - 6$, from computing $-3^2 = -9$. Squaring the whole input gives $(-3)^2 = +9$, so $9 - 6 = 3$.",
+        },
+        {
+          text: "$15$",
+          feedback:
+            "The second term is $2(-3) = -6$, not $+6$. So $9 - 6 = 3$.",
+        },
+      ],
+      hint: "Write $(-3)$ with parentheses in both slots before computing anything.",
+    },
+    {
+      type: "quiz",
+      id: "function-notation-quiz-5",
+      variant: "practice",
+      question:
+        "The function $h(x) = 5$ ignores its input entirely. What is $h(100)$?",
+      options: [
+        {
+          text: "$5$",
+          correct: true,
+          feedback:
+            "A constant function outputs 5 no matter what goes in. Perfectly legal: every input still has exactly one output.",
+        },
+        {
+          text: "$500$",
+          feedback:
+            "$h(100)$ isn't $h \\times 100$ — notation, not multiplication. The rule says: output 5, always.",
+        },
+        {
+          text: "Undefined — there's no $x$ in the formula to substitute into",
+          feedback:
+            "No $x$ slots just means the substitution changes nothing. The output is 5 for every input.",
+        },
+      ],
     },
   ]),
 };
@@ -402,6 +506,91 @@ const lesson03: LessonSeed = {
         },
       ],
     },
+    {
+      type: "text",
+      content:
+        "**Worked example — both suspects at once.** Find the domain of",
+    },
+    { type: "math", latex: "f(x) = \\frac{\\sqrt{x - 1}}{x - 4}" },
+    {
+      type: "text",
+      content:
+        "Step 1: The square root demands $x - 1 \\ge 0$, so $x \\ge 1$.\n\nStep 2: The division demands $x - 4 \\ne 0$, so $x \\ne 4$.\n\nStep 3: Both conditions must hold at once. Domain: $x \\ge 1$ and $x \\ne 4$.\n\nThe method is always the same: interrogate each suspect separately, then intersect the verdicts.",
+    },
+    {
+      type: "quiz",
+      id: "domain-and-range-quiz-3",
+      variant: "practice",
+      question: "What is the domain of $f(x) = \\sqrt{x - 4}$?",
+      options: [
+        {
+          text: "$x \\ge 4$",
+          correct: true,
+          feedback:
+            "The expression under the root must be $\\ge 0$: $x - 4 \\ge 0$ means $x \\ge 4$. Equality is fine: $\\sqrt{0} = 0$.",
+        },
+        {
+          text: "$x > 4$",
+          feedback:
+            "Almost — $x = 4$ itself works: $\\sqrt{0} = 0$ is a perfectly good output. Only strictly negative insides fail.",
+        },
+        {
+          text: "$x \\ne 4$",
+          feedback:
+            "That's the division-by-zero reflex, but there's no division here. The root needs $x - 4 \\ge 0$: domain $x \\ge 4$.",
+        },
+      ],
+    },
+    {
+      type: "quiz",
+      id: "domain-and-range-quiz-4",
+      variant: "practice",
+      question: "What is the domain of $f(x) = \\sqrt{5 - x}$?",
+      options: [
+        {
+          text: "$x \\le 5$",
+          correct: true,
+          feedback:
+            "Solve $5 - x \\ge 0$: that's $x \\le 5$. The inequality flips direction from the $\\sqrt{x-4}$ case because $x$ is being subtracted.",
+        },
+        {
+          text: "$x \\ge 5$",
+          feedback:
+            "Try $x = 6$: $\\sqrt{5 - 6} = \\sqrt{-1}$ — not real. It's the small inputs that are safe here: $x \\le 5$.",
+        },
+        {
+          text: "$x \\ge -5$",
+          feedback:
+            "Solve the actual condition $5 - x \\ge 0$ rather than pattern-matching: it gives $x \\le 5$.",
+        },
+      ],
+      hint: "Set what's under the root $\\ge 0$ and solve the inequality carefully.",
+    },
+    {
+      type: "quiz",
+      id: "domain-and-range-quiz-5",
+      variant: "mastery",
+      question: "What is the domain of $f(x) = \\dfrac{1}{x^2 - 9}$?",
+      options: [
+        {
+          text: "All real numbers except $x = 3$ and $x = -3$",
+          correct: true,
+          feedback:
+            "$x^2 - 9 = (x-3)(x+3)$ is zero at BOTH $3$ and $-3$. A quadratic denominator can hide two forbidden inputs.",
+        },
+        {
+          text: "All real numbers except $x = 3$",
+          feedback:
+            "Half credit — check $x = -3$ too: $(-3)^2 - 9 = 0$. Both roots of the denominator are forbidden.",
+        },
+        {
+          text: "All real numbers except $x = 9$",
+          feedback:
+            "At $x = 9$ the denominator is $81 - 9 = 72$ — fine. Solve $x^2 - 9 = 0$: $x = \\pm 3$.",
+        },
+      ],
+      hint: "Factor the denominator: which inputs make it zero?",
+    },
   ]),
 };
 
@@ -512,6 +701,60 @@ const lesson04: LessonSeed = {
         },
       ],
       hint: "Read the graph like a story, left to right. Falling curve = decreasing.",
+    },
+    {
+      type: "text",
+      content:
+        "**Worked example — the two directions of reading.** Same graph, $f(x) = x^2$. Two questions that look similar and aren't:\n\n*Question A: what is $f(3)$?* Start on the x-axis at 3, ride up to the curve, read the height: $9$. One input → one answer, always.\n\n*Question B: where is $f(x) = 9$?* Start on the y-axis at height 9, slide horizontally, and mark every place you cross the curve: $x = 3$ and $x = -3$. Two answers — and that's fine, because this is the reverse question. A function promises one output per input, not one input per output.",
+    },
+    {
+      type: "quiz",
+      id: "reading-functions-from-graphs-quiz-4",
+      variant: "practice",
+      question: "On the graph of $f(x) = x^2$, for which $x$ does $f(x) = 4$?",
+      options: [
+        {
+          text: "$x = 2$ and $x = -2$",
+          correct: true,
+          feedback:
+            "The horizontal line at height 4 crosses the parabola twice. Reverse questions can have several answers.",
+        },
+        {
+          text: "Only $x = 2$",
+          feedback:
+            "Check the left half: $(-2)^2 = 4$ too. Sweep the whole width of the graph before answering.",
+        },
+        {
+          text: "$x = 16$",
+          feedback:
+            "That's $f(4)$, the forward question. Here we know the OUTPUT is 4 and hunt for the inputs: $x = \\pm 2$.",
+        },
+      ],
+    },
+    {
+      type: "quiz",
+      id: "reading-functions-from-graphs-quiz-5",
+      variant: "concept",
+      question: "Still reading $f(x) = x^2$: where is $f(x) > 0$?",
+      options: [
+        {
+          text: "Everywhere except $x = 0$",
+          correct: true,
+          feedback:
+            "The curve sits above the x-axis at every point except the single touch at the origin, where $f(0) = 0$ exactly.",
+        },
+        {
+          text: "Everywhere",
+          feedback:
+            "One point spoils it: $f(0) = 0$, and $0 > 0$ is false. Strict inequalities care about such details.",
+        },
+        {
+          text: "Only for $x > 0$",
+          feedback:
+            "Look left: $f(-2) = 4 > 0$. Height above the axis is what matters, not the sign of the input.",
+        },
+      ],
+      hint: "\"$f(x) > 0$\" asks: where is the curve strictly above the x-axis?",
     },
   ]),
 };
@@ -631,6 +874,76 @@ const lesson05: LessonSeed = {
         },
       ],
     },
+    {
+      type: "text",
+      content:
+        "**Worked example — building a change table.** How does $f(x) = 2^x$ change? Compute outputs, then the jumps between them:",
+    },
+    {
+      type: "table",
+      headers: ["$x$", "$f(x)$", "change"],
+      rows: [
+        ["$1$", "$2$", ""],
+        ["$2$", "$4$", "$+2$"],
+        ["$3$", "$8$", "$+4$"],
+        ["$4$", "$16$", "$+8$"],
+      ],
+    },
+    {
+      type: "text",
+      content:
+        "Step 1: fill the output column. Step 2: subtract neighbours to get each change. Step 3: read the pattern in the change column — here every change *doubles*. Compare with $x^2$, whose changes went $+3, +5, +7$: growing, but only by 2 each time. The change column is a fingerprint; different function families leave different prints. (That column, taken to its logical extreme, is the derivative.)",
+    },
+    {
+      type: "quiz",
+      id: "how-functions-change-quiz-4",
+      variant: "practice",
+      question:
+        "For $f(x) = x^3$: the change from $x=1$ to $x=2$ is $8 - 1 = 7$. What is the change from $x=2$ to $x=3$, and what does the comparison tell you?",
+      options: [
+        {
+          text: "$+19$ — the curve is much steeper there.",
+          correct: true,
+          feedback:
+            "$27 - 8 = 19$, nearly triple the previous jump. Cubics steepen even faster than squares.",
+        },
+        {
+          text: "$+7$ — equal steps in $x$ give equal changes.",
+          feedback:
+            "Equal changes are the signature of a straight line. $x^3$ curves: $27 - 8 = 19$, much bigger than 7.",
+        },
+        {
+          text: "$+27$",
+          feedback:
+            "$27$ is $f(3)$ itself. Change means the difference: $f(3) - f(2) = 27 - 8 = 19$.",
+        },
+      ],
+    },
+    {
+      type: "quiz",
+      id: "how-functions-change-quiz-5",
+      variant: "concept",
+      question:
+        "A bathtub fills at a steady 5 litres per minute. What does the change column of (time → volume) look like?",
+      options: [
+        {
+          text: "Constant: $+5, +5, +5, \\ldots$ — the graph is a straight line.",
+          correct: true,
+          feedback:
+            "Steady rate = constant change column = constant steepness = a line. This chain of equalities is worth memorizing.",
+        },
+        {
+          text: "Growing: $+5, +10, +15, \\ldots$",
+          feedback:
+            "That would be a tap opening wider every minute. A steady tap adds the same 5 litres each minute: constant change.",
+        },
+        {
+          text: "It depends on how full the tub already is.",
+          feedback:
+            "The rate is fixed at 5 L/min regardless of the current volume — so every minute's change is the same $+5$.",
+        },
+      ],
+    },
   ]),
 };
 
@@ -739,6 +1052,61 @@ const lesson06: LessonSeed = {
         },
       ],
     },
+    {
+      type: "text",
+      content:
+        "**Worked example — decoding a dressed-up formula.** Describe $y = -2(x - 3)^2 + 4$ as transformations of $y = x^2$. Read it from the inside out:\n\nStep 1: $(x - 3)$ inside — shift right 3 (the backwards one).\nStep 2: the factor $2$ — stretch vertically by 2 (twice as steep).\nStep 3: the minus sign — flip upside down.\nStep 4: $+4$ outside — shift up 4.\n\nResult: an upside-down, extra-steep parabola with its peak at $(3, 4)$. Four knobs, each with one job — no memorized \"vertex form\" needed.",
+    },
+    {
+      type: "quiz",
+      id: "transforming-functions-quiz-3",
+      variant: "concept",
+      question: "What does $y = -f(x)$ do to the graph of $f$?",
+      options: [
+        {
+          text: "Flips it upside down (across the x-axis)",
+          correct: true,
+          feedback:
+            "Every output's sign is reversed: heights become depths. It's the $a \\cdot f(x)$ stretch with $a = -1$.",
+        },
+        {
+          text: "Flips it left-to-right (across the y-axis)",
+          feedback:
+            "Left-right flipping is $f(-x)$ — the minus acting on the INPUT. $-f(x)$ negates the output: upside down.",
+        },
+        {
+          text: "Shifts it down",
+          feedback:
+            "Shifting down is $f(x) - c$: subtract a constant. Multiplying by $-1$ reverses each height instead: a flip.",
+        },
+      ],
+    },
+    {
+      type: "quiz",
+      id: "transforming-functions-quiz-4",
+      variant: "mastery",
+      question:
+        "Which formula takes $y = \\sqrt{x}$ and moves it right 4 and up 2?",
+      options: [
+        {
+          text: "$y = \\sqrt{x - 4} + 2$",
+          correct: true,
+          feedback:
+            "Minus inside → right 4; plus outside → up 2. The starting point of the curve moves from $(0,0)$ to $(4, 2)$.",
+        },
+        {
+          text: "$y = \\sqrt{x + 4} + 2$",
+          feedback:
+            "Plus inside moves LEFT. Right 4 needs $x - 4$ under the root.",
+        },
+        {
+          text: "$y = \\sqrt{x + 2} - 4$",
+          feedback:
+            "The knobs are swapped and the signs are off: horizontal lives inside the root, vertical outside. Right 4, up 2 is $\\sqrt{x-4} + 2$.",
+        },
+      ],
+      hint: "Same rules as the parabola — the rules don't care which function they dress up.",
+    },
   ]),
 };
 
@@ -833,6 +1201,62 @@ const lesson07: LessonSeed = {
           feedback: "The V has a sharp corner, but it's one connected piece.",
         },
       ],
+    },
+    {
+      type: "text",
+      content:
+        "**Worked example — identifying a family from clues.** A function is described: *it repeats the same wave forever, and its outputs never leave $[-1, 1]$.*\n\nStep 1: \"repeats forever\" — only sine and cosine are periodic in the gallery.\nStep 2: need to split the tie. Extra clue: *its value at $x = 0$ is $1$.* Then $\\sin 0 = 0$ but $\\cos 0 = 1$ — it's cosine.\n\nThis is how the families earn their keep: each one has behaviours no other family can fake.",
+    },
+    {
+      type: "quiz",
+      id: "function-families-quiz-3",
+      variant: "practice",
+      question:
+        "A quantity oscillates endlessly between fixed bounds — a pendulum's angle over time. Which family models it?",
+      options: [
+        {
+          text: "Sine or cosine",
+          correct: true,
+          feedback:
+            "Periodic repetition within fixed bounds is the trig signature. No polynomial or exponential ever repeats.",
+        },
+        {
+          text: "Quadratic",
+          feedback:
+            "A parabola turns exactly once and then commits — no repetition. Endless oscillation is sine/cosine territory.",
+        },
+        {
+          text: "Exponential",
+          feedback:
+            "Exponentials are monotonic: always growing or always dying. Repetition is the one thing they never do.",
+        },
+      ],
+    },
+    {
+      type: "quiz",
+      id: "function-families-quiz-4",
+      variant: "mastery",
+      question:
+        "Which family is defined at $x = 0$ but at no negative $x$?",
+      options: [
+        {
+          text: "Square root, $\\sqrt{x}$",
+          correct: true,
+          feedback:
+            "$\\sqrt{0} = 0$ is fine; $\\sqrt{-1}$ is not real. Domain $x \\ge 0$, boundary included.",
+        },
+        {
+          text: "Logarithmic, $\\ln x$",
+          feedback:
+            "Close — $\\ln$ also rejects negatives, but it rejects 0 too (the graph dives to $-\\infty$ there). Domain $x > 0$, strictly.",
+        },
+        {
+          text: "Reciprocal, $\\tfrac{1}{x}$",
+          feedback:
+            "Backwards: $\\tfrac1x$ happily accepts negatives — it's exactly $x = 0$ it refuses.",
+        },
+      ],
+      hint: "Two families dislike negatives. Only one of them accepts 0 itself.",
     },
   ]),
 };
@@ -947,6 +1371,63 @@ const lesson08: LessonSeed = {
             "That pipeline gives $\\sqrt{x} + 3$ — root first, then add. We need to add first.",
         },
       ],
+    },
+    {
+      type: "text",
+      content:
+        "**Worked example — composing formulas, not just numbers.** With $g(x) = x + 1$ and $f(x) = x^2$, find a single formula for $f(g(x))$.\n\nStep 1: Write the outer function with a blank slot: $f(\\square) = \\square^2$.\nStep 2: Fill the slot with ALL of $g(x)$: $f(g(x)) = (x + 1)^2$.\nStep 3: Sanity-check with a number from the machine above: $x = 2$ gives $(2+1)^2 = 9$. ✓\n\nAnd the other order? $g(f(x)) = f(x) + 1 = x^2 + 1$. Different pipeline, different formula — $(x+1)^2$ versus $x^2 + 1$ — confirming that order matters not just for single values but everywhere at once.",
+    },
+    {
+      type: "quiz",
+      id: "combining-functions-quiz-4",
+      variant: "practice",
+      question:
+        "With $f(x) = x^2$ and $g(x) = x + 1$, what is $(f + g)(2)$?",
+      options: [
+        {
+          text: "$7$",
+          correct: true,
+          feedback:
+            "Pointwise addition: $f(2) + g(2) = 4 + 3 = 7$. No pipelines here — both functions eat the same input, then the outputs add.",
+        },
+        {
+          text: "$9$",
+          feedback:
+            "$9$ is the composition $f(g(2))$. The SUM $(f+g)(2)$ evaluates each function at 2 separately and adds: $4 + 3 = 7$.",
+        },
+        {
+          text: "$12$",
+          feedback:
+            "That's $f(2) \\cdot g(2)$ — the product. The sum is $4 + 3 = 7$.",
+        },
+      ],
+      hint: "$(f+g)(x)$ means $f(x) + g(x)$: evaluate both at the same input, then add.",
+    },
+    {
+      type: "quiz",
+      id: "combining-functions-quiz-5",
+      variant: "mastery",
+      question:
+        "$h(x) = (2x + 1)^3$ is a composition $f(g(x))$. Which decomposition works?",
+      options: [
+        {
+          text: "$g(x) = 2x + 1$ inside, $f(x) = x^3$ outside",
+          correct: true,
+          feedback:
+            "First build $2x+1$, then cube the result. \"What gets computed first\" is always the inner function.",
+        },
+        {
+          text: "$g(x) = x^3$ inside, $f(x) = 2x + 1$ outside",
+          feedback:
+            "That pipeline gives $2x^3 + 1$ — cube first, then double and add. Expand the order: here the doubling happens first.",
+        },
+        {
+          text: "$g(x) = 2x$ inside, $f(x) = x^3 + 1$ outside",
+          feedback:
+            "Check: $f(g(x)) = (2x)^3 + 1 = 8x^3 + 1$ — the $+1$ ended up outside the cube. It needs to ride inside: $g(x) = 2x + 1$.",
+        },
+      ],
+      hint: "Evaluate $h(1) = 27$ by hand and watch which operation you do first.",
     },
   ]),
 };
@@ -1064,6 +1545,71 @@ const lesson09: LessonSeed = {
         },
       ],
     },
+    {
+      type: "text",
+      content:
+        "**Worked example — three pieces, three checks.** An electricity tariff charges by usage $u$ (in units):",
+    },
+    {
+      type: "math",
+      latex:
+        "C(u) = \\begin{cases} 3u & u \\le 100 \\\\ 5u & 100 < u \\le 200 \\\\ 8u & u > 200 \\end{cases}",
+    },
+    {
+      type: "text",
+      content:
+        "Find $C(100)$, $C(150)$ and $C(250)$.\n\nStep 1 — $C(100)$: which condition holds? $100 \\le 100$ ✓ (the first, since $\\le$ includes equality). So $C(100) = 3(100) = 300$.\nStep 2 — $C(150)$: $150 \\le 100$? No. $100 < 150 \\le 200$? Yes. So $C(150) = 5(150) = 750$.\nStep 3 — $C(250)$: only $u > 200$ holds. $C(250) = 8(250) = 2000$.\n\nThe discipline: check conditions *before* touching any formula, and note carefully who owns each boundary.",
+    },
+    {
+      type: "quiz",
+      id: "piecewise-functions-quiz-4",
+      variant: "practice",
+      question: "Using the tariff $C(u)$ above, what is $C(200)$?",
+      options: [
+        {
+          text: "$1000$, from the middle rule",
+          correct: true,
+          feedback:
+            "$100 < 200 \\le 200$ — the $\\le$ gives the middle rule ownership of the boundary: $5(200) = 1000$.",
+        },
+        {
+          text: "$1600$, from the top rule",
+          feedback:
+            "The top rule needs $u > 200$, strictly — 200 itself doesn't qualify. The middle rule's $\\le 200$ claims it: $5(200) = 1000$.",
+        },
+        {
+          text: "Both $1000$ and $1600$",
+          feedback:
+            "The strict/non-strict inequalities are written precisely so exactly one rule owns each input. $\\le 200$ wins: $C(200) = 1000$.",
+        },
+      ],
+      hint: "Is the condition on the third piece $\\ge$ or a strict $>$?",
+    },
+    {
+      type: "quiz",
+      id: "piecewise-functions-quiz-5",
+      variant: "concept",
+      question:
+        "The absolute value $|x|$ is secretly piecewise: $|x| = \\begin{cases} x & x \\ge 0 \\\\ -x & x < 0 \\end{cases}$. What is $|-5|$, by the rules?",
+      options: [
+        {
+          text: "$5$ — the input is negative, so the $-x$ rule gives $-(-5) = 5$",
+          correct: true,
+          feedback:
+            "The $-x$ rule doesn't output negatives — it flips the sign of an already-negative input. That's how $|x|$ makes everything non-negative.",
+        },
+        {
+          text: "$-5$ — the second rule has a minus sign, so the output is negative",
+          feedback:
+            "Substitute carefully: $-x$ at $x = -5$ is $-(-5) = +5$. A minus applied to a negative turns positive.",
+        },
+        {
+          text: "Undefined — $-5$ isn't allowed in an absolute value",
+          feedback:
+            "Every real number has an absolute value; the domain is all reals. $-5 < 0$ picks the second rule: $-(-5) = 5$.",
+        },
+      ],
+    },
   ]),
 };
 
@@ -1167,6 +1713,70 @@ const lesson10: LessonSeed = {
           text: "There's no way to know",
           feedback:
             "The slopes aren't wandering — they march steadily toward 4. Turning that trend into a rigorous answer is what limits are for.",
+        },
+      ],
+    },
+    {
+      type: "text",
+      content:
+        "**Worked example — average rate of change, start to finish.** For $f(x) = x^3$, find the average rate of change between $x = 1$ and $x = 2$.\n\nStep 1: Evaluate at both ends: $f(1) = 1$, $f(2) = 8$.\nStep 2: Change in output: $8 - 1 = 7$.\nStep 3: Change in input: $2 - 1 = 1$.\nStep 4: Divide:",
+    },
+    {
+      type: "math",
+      latex: "\\frac{f(2) - f(1)}{2 - 1} = \\frac{8 - 1}{1} = 7",
+    },
+    {
+      type: "text",
+      content:
+        "Geometrically: the secant line through $(1, 1)$ and $(2, 8)$ has slope 7. On average, over that stretch, the function climbs 7 units of output per unit of input.",
+    },
+    {
+      type: "quiz",
+      id: "from-functions-to-calculus-quiz-3",
+      variant: "practice",
+      question:
+        "For the straight line $f(x) = 3x + 1$, what is the average rate of change between $x = 2$ and $x = 6$?",
+      options: [
+        {
+          text: "$3$",
+          correct: true,
+          feedback:
+            "$\\frac{f(6) - f(2)}{6 - 2} = \\frac{19 - 7}{4} = 3$. For a line, EVERY interval gives the same answer — the slope. Lines are the one family where average and instantaneous change already agree.",
+        },
+        {
+          text: "$12$",
+          feedback:
+            "$12$ is just the change in output, $19 - 7$. Rate of change divides by the input change too: $\\frac{12}{4} = 3$.",
+        },
+        {
+          text: "It depends on the interval.",
+          feedback:
+            "For curves, yes — but this is a line. Try any interval: the answer is always the slope, 3.",
+        },
+      ],
+    },
+    {
+      type: "quiz",
+      id: "from-functions-to-calculus-quiz-4",
+      variant: "practice",
+      question:
+        "For $f(x) = \\dfrac{1}{x}$, the average rate of change between $x = 1$ and $x = 2$ is $\\dfrac{0.5 - 1}{2 - 1} = -0.5$. What does the minus sign mean?",
+      options: [
+        {
+          text: "The function is decreasing over that stretch — outputs fall as $x$ grows.",
+          correct: true,
+          feedback:
+            "Negative rate = falling secant line. Rates carry direction, not just speed: down 0.5 output units per input unit, on average.",
+        },
+        {
+          text: "A calculation error — rates can't be negative.",
+          feedback:
+            "They can and constantly are: cooling coffee, draining batteries, depreciating cars. The sign is the direction of change.",
+        },
+        {
+          text: "The function is negative there.",
+          feedback:
+            "The OUTPUTS are positive ($1$ and $0.5$); it's the CHANGE between them that's negative. Sign of value and sign of change are independent.",
         },
       ],
     },
@@ -1341,6 +1951,52 @@ const lessonMastery: LessonSeed = {
           text: "A bigger interval, to avoid the problem",
           feedback:
             "Bigger intervals give average change. The instantaneous question needs the points closer, not farther.",
+        },
+      ],
+    },
+    {
+      type: "quiz",
+      id: "chapter-mastery-quiz-9",
+      variant: "mastery",
+      question:
+        "Compute-it-all check: $f(x) = x^2 - x$. What is $f(-2)$? (0.2)",
+      options: [
+        {
+          text: "$6$",
+          correct: true,
+          feedback: "$(-2)^2 - (-2) = 4 + 2 = 6$. Parentheses on both slots.",
+        },
+        {
+          text: "$2$",
+          feedback: "That's $4 - 2$ — the second term is $-(-2) = +2$, so $4 + 2 = 6$.",
+        },
+        {
+          text: "$-6$",
+          feedback: "$(-2)^2 = +4$, not $-4$. Then $4 + 2 = 6$.",
+        },
+      ],
+    },
+    {
+      type: "quiz",
+      id: "chapter-mastery-quiz-10",
+      variant: "mastery",
+      question:
+        "What is the average rate of change of $f(x) = x^2$ between $x = 0$ and $x = 3$? (0.10)",
+      options: [
+        {
+          text: "$3$",
+          correct: true,
+          feedback:
+            "$\\frac{f(3) - f(0)}{3 - 0} = \\frac{9 - 0}{3} = 3$: the slope of the secant from $(0,0)$ to $(3,9)$.",
+        },
+        {
+          text: "$9$",
+          feedback: "That's the change in output alone. Divide by the input change: $\\frac{9}{3} = 3$.",
+        },
+        {
+          text: "$6$",
+          feedback:
+            "$6$ will turn out to be the INSTANTANEOUS rate at $x = 3$ — a limit, next chapter's tool. The average over $[0,3]$ is $\\frac{9-0}{3-0} = 3$.",
         },
       ],
     },

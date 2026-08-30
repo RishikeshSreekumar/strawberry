@@ -104,6 +104,45 @@ describe("lesson block schemas", () => {
     expect(block.config.outputLabel).toBe("Output");
   });
 
+  it("accepts the trigonometry interactives and applies their defaults", () => {
+    const parsed = parseLessonBlocks([
+      { type: "interactive", config: { component: "right-triangle-explorer", initialAngle: 30 } },
+      { type: "interactive", config: { component: "unit-circle", initialAngle: 210 } },
+      { type: "interactive", config: { component: "circle-to-wave" } },
+      {
+        type: "interactive",
+        config: {
+          component: "sinusoid-playground",
+          window: { xmin: -6, xmax: 6, ymin: -3, ymax: 3 },
+        },
+      },
+      { type: "interactive", config: { component: "identity-diagram" } },
+      {
+        type: "interactive",
+        config: {
+          component: "equation-solution-viewer",
+          expr: "sin(x)",
+          exprLatex: "\\sin x",
+          window: { xmin: 0, xmax: 6.3, ymin: -1.5, ymax: 1.5 },
+        },
+      },
+      { type: "interactive", config: { component: "triangle-solver", mode: "ssa" } },
+    ]);
+    expect(parsed).toHaveLength(7);
+    const triangle = parsed[0];
+    if (triangle.type !== "interactive" || triangle.config.component !== "right-triangle-explorer") {
+      throw new Error("unexpected parse result");
+    }
+    expect(triangle.config.ratios).toEqual(["sin", "cos", "tan"]);
+    expect(triangle.config.showScale).toBe(true);
+    const circle = parsed[1];
+    if (circle.type !== "interactive" || circle.config.component !== "unit-circle") {
+      throw new Error("unexpected parse result");
+    }
+    expect(circle.config.showReferenceAngle).toBe(false);
+    expect(circle.config.maxAngle).toBe(720);
+  });
+
   it("rejects an interactive with an unknown component", () => {
     expect(() =>
       parseLessonBlocks([

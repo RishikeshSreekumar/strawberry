@@ -224,6 +224,142 @@ export const epsilonDeltaSchema = z.object({
   window: plotWindowSchema,
 });
 
+// ---------- Trigonometry interactives ----------
+
+/**
+ * Right triangle with a draggable angle and an independent size slider:
+ * the side lengths move, the ratios do not. Chapter 0's workhorse.
+ */
+export const rightTriangleExplorerSchema = z.object({
+  component: z.literal("right-triangle-explorer"),
+  /** Angle at the lower-left vertex, in degrees. */
+  initialAngle: z.number(),
+  minAngle: z.number().default(10),
+  maxAngle: z.number().default(80),
+  /** Hypotenuse length, in the units the labels use. */
+  initialScale: z.number().default(5),
+  minScale: z.number().default(2),
+  maxScale: z.number().default(10),
+  /** Show the size slider (the similar-triangle demonstration). */
+  showScale: z.boolean().default(true),
+  /** Which ratios get a live readout. */
+  ratios: z.array(z.enum(["sin", "cos", "tan"])).default(["sin", "cos", "tan"]),
+  angleLabel: z.string().default("\\theta"),
+  unit: z.string().default(""),
+  caption: z.string().optional(),
+});
+
+/**
+ * The unit circle with a draggable angle: coordinates, the dropped right
+ * triangle, quadrant signs, the reference angle, and tan as the slope of
+ * the radius. Chapter 1's workhorse, reused in 4.1.
+ */
+export const unitCircleSchema = z.object({
+  component: z.literal("unit-circle"),
+  /** Angle in degrees; may run past 360 or below 0 to show coterminal angles. */
+  initialAngle: z.number(),
+  minAngle: z.number().default(-360),
+  maxAngle: z.number().default(720),
+  step: z.number().positive().default(1),
+  /** Drop the right triangle from the point to the x-axis. */
+  showTriangle: z.boolean().default(true),
+  showCoordinates: z.boolean().default(true),
+  /** Highlight the acute angle to the nearest half of the x-axis. */
+  showReferenceAngle: z.boolean().default(false),
+  /** Show tan as the slope of the radius, with its sign. */
+  showTangent: z.boolean().default(false),
+  /** Print the angle in radians alongside degrees. */
+  showRadians: z.boolean().default(true),
+  caption: z.string().optional(),
+});
+
+/**
+ * Circle on the left, graph on the right, one shared angle: the moment the
+ * circle becomes a wave. Also runs the tangent case, where the trace
+ * escapes vertically instead of oscillating.
+ */
+export const circleToWaveSchema = z.object({
+  component: z.literal("circle-to-wave"),
+  fn: z.enum(["sin", "cos", "tan"]).default("sin"),
+  /** How far the trace can run, in radians. */
+  maxRadians: z.number().default(2 * Math.PI),
+  initialAngle: z.number().default(0),
+  caption: z.string().optional(),
+});
+
+/** a*sin(b(x - c)) + d against its untransformed base curve. */
+export const sinusoidPlaygroundSchema = z.object({
+  component: z.literal("sinusoid-playground"),
+  fn: z.enum(["sin", "cos"]).default("sin"),
+  initialA: z.number().default(1),
+  initialB: z.number().default(1),
+  initialC: z.number().default(0),
+  initialD: z.number().default(0),
+  window: plotWindowSchema,
+  /** Optional target curve for "match this graph" exercises. */
+  target: z
+    .object({ a: z.number(), b: z.number(), c: z.number(), d: z.number() })
+    .optional(),
+  caption: z.string().optional(),
+});
+
+/**
+ * The angle-sum construction: two stacked right triangles inside a unit
+ * radius, with every segment labelled by the product it equals. Drives the
+ * derivation of sin(a+b) and cos(a+b) in 3.3.
+ */
+export const identityDiagramSchema = z.object({
+  component: z.literal("identity-diagram"),
+  initialAlpha: z.number().default(30),
+  initialBeta: z.number().default(25),
+  /** Which of the two results the numeric check displays. */
+  highlight: z.enum(["sin", "cos", "both"]).default("both"),
+  caption: z.string().optional(),
+});
+
+/**
+ * A horizontal line dragged across a trig graph, with every solution in a
+ * chosen interval marked and listed. Makes "infinitely many answers"
+ * something you can watch rather than assert.
+ */
+export const equationSolutionViewerSchema = z.object({
+  component: z.literal("equation-solution-viewer"),
+  expr: z.string().min(1),
+  exprLatex: z.string().min(1),
+  initialLevel: z.number().default(0.5),
+  minLevel: z.number().default(-1.5),
+  maxLevel: z.number().default(1.5),
+  levelStep: z.number().positive().default(0.1),
+  /** Interval the solutions are counted in (defaults to the plot window). */
+  intervalMin: z.number().optional(),
+  intervalMax: z.number().optional(),
+  /** x-values where the expression is undefined; sign changes there are ignored. */
+  excluded: z.array(z.number()).default([]),
+  window: plotWindowSchema,
+  caption: z.string().optional(),
+});
+
+/**
+ * A general (non-right) triangle. In "sas" mode two sides and the included
+ * angle are adjustable and the law of cosines closes the triangle; in
+ * "ssa" mode the third side swings, so zero, one or two triangles fit.
+ */
+export const triangleSolverSchema = z.object({
+  component: z.literal("triangle-solver"),
+  mode: z.enum(["sas", "ssa"]).default("sas"),
+  /** Side b (SAS: adjacent to A; SSA: the fixed side next to A). */
+  initialB: z.number().default(6),
+  /** Side c in SAS mode. */
+  initialC: z.number().default(8),
+  /** Side a in SSA mode: the one opposite the given angle, swung to fit. */
+  initialA: z.number().default(5),
+  /** The given angle at vertex A, in degrees. */
+  initialAngle: z.number().default(40),
+  /** Show the law-of-sines ratio readouts. */
+  showLawOfSines: z.boolean().default(true),
+  caption: z.string().optional(),
+});
+
 export const interactiveConfigSchema = z.discriminatedUnion("component", [
   functionMachineSchema,
   functionEvaluatorSchema,
@@ -235,6 +371,13 @@ export const interactiveConfigSchema = z.discriminatedUnion("component", [
   secantExplorerSchema,
   limitExplorerSchema,
   epsilonDeltaSchema,
+  rightTriangleExplorerSchema,
+  unitCircleSchema,
+  circleToWaveSchema,
+  sinusoidPlaygroundSchema,
+  identityDiagramSchema,
+  equationSolutionViewerSchema,
+  triangleSolverSchema,
 ]);
 
 export const interactiveBlockSchema = z.object({

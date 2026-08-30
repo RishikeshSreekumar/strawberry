@@ -115,6 +115,18 @@
   html {
     @apply font-sans;
   }
+  /* Tailwind v4 dropped the pointer cursor on buttons; restore it for all
+     enabled interactive controls. */
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  label[for]:not(:has(input:disabled)),
+  input[type="range"]:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled),
+  select:not(:disabled),
+  summary {
+    cursor: pointer;
+  }
 }
 
 @layer components {

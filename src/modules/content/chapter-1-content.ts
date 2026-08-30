@@ -147,6 +147,54 @@ const lesson01: LessonSeed = {
       ],
       hint: "Which question does a limit answer: at the point, or near the point?",
     },
+    {
+      type: "text",
+      content:
+        "**Worked example — estimating a limit from a table.** One of the most famous limits in mathematics: what is $\\lim_{x \\to 0} \\frac{\\sin x}{x}$? (Angle in radians.) Plugging in gives $\\frac{0}{0}$, so build a table instead:\n\nStep 1: pick inputs marching toward 0 from both sides.\nStep 2: compute the outputs.\nStep 3: read the trend.",
+    },
+    {
+      type: "table",
+      headers: ["$x$", "$\\frac{\\sin x}{x}$"],
+      rows: [
+        ["$-0.5$", "$0.9589$"],
+        ["$-0.1$", "$0.9983$"],
+        ["$-0.01$", "$0.99998$"],
+        ["$0.01$", "$0.99998$"],
+        ["$0.1$", "$0.9983$"],
+        ["$0.5$", "$0.9589$"],
+      ],
+    },
+    {
+      type: "text",
+      content:
+        "Both columns squeeze in on 1 symmetrically. Conclusion: $\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$ — a limit no amount of plugging-in could ever find, read cleanly off the approach. (This particular limit later becomes the engine behind the derivative of $\\sin$.)",
+    },
+    {
+      type: "quiz",
+      id: "the-idea-of-a-limit-quiz-4",
+      variant: "practice",
+      question:
+        "A table for $f$ near $x = 3$ shows: $f(2.9) = 5.8$, $f(2.99) = 5.98$, $f(3.01) = 6.02$, $f(3.1) = 6.2$. Best estimate of $\\lim_{x \\to 3} f(x)$?",
+      options: [
+        {
+          text: "$6$",
+          correct: true,
+          feedback:
+            "From below: $5.8, 5.98, \\ldots$ climbing toward 6. From above: $6.2, 6.02, \\ldots$ descending toward 6. Consensus: 6.",
+        },
+        {
+          text: "$5.98$ — the closest value from the left",
+          feedback:
+            "The limit is the trend's destination, not the last sample taken. Both sides are converging on 6.",
+        },
+        {
+          text: "Can't tell without knowing $f(3)$",
+          feedback:
+            "$f(3)$ is irrelevant to the limit — the approach is complete information, and it points to 6.",
+        },
+      ],
+      hint: "Read each side's trend separately, then check they agree.",
+    },
   ]),
 };
 
@@ -278,6 +326,46 @@ const lesson02: LessonSeed = {
         },
       ],
       hint: "Think of the relocated-dot function.",
+    },
+    {
+      type: "text",
+      content:
+        "**Worked example — reading all three quantities off one function.** Let",
+    },
+    {
+      type: "math",
+      latex:
+        "h(x) = \\begin{cases} x + 1 & x \\ne 0 \\\\ 5 & x = 0 \\end{cases}",
+    },
+    {
+      type: "text",
+      content:
+        "Find $h(0)$, $\\lim_{x \\to 0^-} h(x)$, and $\\lim_{x \\to 0} h(x)$.\n\nStep 1 — the value: the $x = 0$ rule says $h(0) = 5$. Done; no limits involved.\nStep 2 — the approach: for every $x \\ne 0$ (which is ALL the limit looks at), $h(x) = x + 1$. From the left: $0.9, 0.99, \\ldots \\to 1$.\nStep 3 — the right side gives $1.1, 1.01, \\ldots \\to 1$ as well. Sides agree, so $\\lim_{x \\to 0} h(x) = 1$.\n\nSummary: value 5, limit 1, and the two never interact. When asked about a limit of a piecewise function, the rule *at* the point is the one piece of information you may completely ignore.",
+    },
+    {
+      type: "quiz",
+      id: "limits-dont-care-quiz-4",
+      variant: "practice",
+      question:
+        "For the $h$ above: a classmate answers \"$\\lim_{x \\to 0} h(x) = 5$, because $h(0) = 5$.\" What's the error?",
+      options: [
+        {
+          text: "They read the value at the point instead of the trend near it — the nearby outputs follow $x + 1$, heading to 1.",
+          correct: true,
+          feedback:
+            "Exactly the confusion this lesson kills. The limit consults only $x \\ne 0$, where $h$ is $x + 1$: limit 1, value 5.",
+        },
+        {
+          text: "Nothing — the limit really is 5.",
+          feedback:
+            "Check inputs near 0: $h(0.01) = 1.01$, $h(-0.01) = 0.99$. The approach targets 1; the lone dot at 5 has no vote.",
+        },
+        {
+          text: "The limit should be the average of 1 and 5.",
+          feedback:
+            "Limits never compromise. The approach (both sides) says 1, so the limit is exactly 1 — the value 5 is simply a separate fact.",
+        },
+      ],
     },
   ]),
 };
@@ -420,6 +508,47 @@ const lesson03: LessonSeed = {
       ],
       hint: "Handle each side separately first, then compare.",
     },
+    {
+      type: "text",
+      content:
+        "**Worked example — when the sides DO agree.** Not every piecewise function jumps. Take",
+    },
+    {
+      type: "math",
+      latex:
+        "f(x) = \\begin{cases} x^2 & x < 2 \\\\ 6 - x & x \\ge 2 \\end{cases}",
+    },
+    {
+      type: "text",
+      content:
+        "Does $\\lim_{x \\to 2} f(x)$ exist?\n\nStep 1 — left side: for $x < 2$ the rule is $x^2$, so $\\lim_{x \\to 2^-} f(x) = 2^2 = 4$.\nStep 2 — right side: for $x > 2$ the rule is $6 - x$, so $\\lim_{x \\to 2^+} f(x) = 6 - 2 = 4$.\nStep 3 — compare: $4 = 4$. The sides agree, so $\\lim_{x \\to 2} f(x) = 4$.\n\nTwo different formulas can still splice together seamlessly — the pieces happen to meet at height 4. A piecewise boundary is always a *question*, never automatically a jump. Run the two-sided check every time.",
+    },
+    {
+      type: "quiz",
+      id: "one-sided-limits-quiz-4",
+      variant: "practice",
+      question:
+        "The sign-reading function $f(x) = \\dfrac{|x|}{x}$ outputs $1$ for positive $x$ and $-1$ for negative $x$. What are its one-sided limits at 0?",
+      options: [
+        {
+          text: "$\\lim_{x \\to 0^-} f(x) = -1$, $\\lim_{x \\to 0^+} f(x) = 1$ — so the two-sided limit does not exist.",
+          correct: true,
+          feedback:
+            "Each side is locked to a constant, and the constants disagree. This little function is the purest possible jump.",
+        },
+        {
+          text: "Both are 0 — the function is heading to $f(0)$.",
+          feedback:
+            "$f$ never outputs 0 anywhere ($f(0)$ isn't even defined: $\\frac00$). Left of 0 it's frozen at $-1$; right of 0, at $1$.",
+        },
+        {
+          text: "Both are 1, since $|x|$ makes everything positive.",
+          feedback:
+            "$|x|$ is positive, but the bottom $x$ keeps its sign. Test $x = -2$: $\\frac{|-2|}{-2} = \\frac{2}{-2} = -1$. The left side is glued to $-1$.",
+        },
+      ],
+      hint: "Test one number from each side: $x = -2$ and $x = 2$.",
+    },
   ]),
 };
 
@@ -561,6 +690,72 @@ const lesson04: LessonSeed = {
         },
       ],
     },
+    {
+      type: "text",
+      content:
+        "**Worked example — a blow-up with a twist.** Classify $\\lim_{x \\to 0} \\frac{1}{x}$ (note: not $\\frac{1}{x^2}$).\n\nStep 1 — right side: $x = 0.1, 0.01, 0.001$ gives $10, 100, 1000$ — climbing to $+\\infty$.\nStep 2 — left side: $x = -0.1, -0.01$ gives $-10, -100$ — plunging to $-\\infty$.\nStep 3 — verdict: both sides blow up, but in *opposite directions*. There's a vertical asymptote at $x = 0$, yet we can't even write $= \\infty$ as a summary, because the sides can't agree on which infinity. The honest statement uses one-sided notation:",
+    },
+    {
+      type: "math",
+      latex:
+        "\\lim_{x \\to 0^-} \\frac{1}{x} = -\\infty \\qquad \\lim_{x \\to 0^+} \\frac{1}{x} = +\\infty",
+    },
+    {
+      type: "text",
+      content:
+        "Compare with $\\frac{1}{x^2}$, where squaring forces both sides positive and up they go together. One exponent changes the whole geometry — always check each side's *sign*, not just its size.",
+    },
+    {
+      type: "quiz",
+      id: "when-limits-fail-quiz-4",
+      variant: "practice",
+      question:
+        "Classify $\\lim_{x \\to 3} \\dfrac{1}{(x - 3)^2}$.",
+      options: [
+        {
+          text: "Blow-up: both sides climb to $+\\infty$ — write $= \\infty$.",
+          correct: true,
+          feedback:
+            "The square makes the denominator tiny AND positive on both sides of 3, so the outputs rocket upward together. Vertical asymptote at $x = 3$.",
+        },
+        {
+          text: "The limit is 0, since the fraction's top is small compared to big inputs.",
+          feedback:
+            "Near $x = 3$ the DENOMINATOR is what shrinks — dividing by something tiny makes the result huge, not small.",
+        },
+        {
+          text: "Jump: the sides land on different values.",
+          feedback:
+            "A jump means two different finite landings. Here neither side lands anywhere — both run away upward. Blow-up.",
+        },
+      ],
+      hint: "What sign does $(x-3)^2$ have on each side of 3?",
+    },
+    {
+      type: "quiz",
+      id: "when-limits-fail-quiz-5",
+      variant: "concept",
+      question:
+        "Sort each limit into its failure mode (or non-failure): (A) $\\lim_{x \\to 0} \\cos(1/x)$, (B) $\\lim_{x \\to 0} \\frac{1}{x^4}$, (C) $\\lim_{x \\to 0} (x + 2)$.",
+      options: [
+        {
+          text: "A oscillates, B blows up, C exists and equals 2.",
+          correct: true,
+          feedback:
+            "A swings forever in $[-1,1]$ like its sine cousin; B's even power sends both sides to $+\\infty$; C is a polite polynomial — plug in.",
+        },
+        {
+          text: "All three fail — anything happening at 0 is trouble.",
+          feedback:
+            "C is perfectly healthy: $x + 2 \\to 2$ as $x \\to 0$. Limits at 0 are only interesting when the FUNCTION misbehaves there, and $x+2$ doesn't.",
+        },
+        {
+          text: "A blows up, B oscillates, C jumps.",
+          feedback:
+            "Swapped: cosine of a huge spinning angle OSCILLATES (bounded, never settling); $\\frac{1}{x^4}$ BLOWS UP; and C doesn't fail at all — it's 2.",
+        },
+      ],
+    },
   ]),
 };
 
@@ -682,6 +877,71 @@ const lesson05: LessonSeed = {
         },
       ],
       hint: "Evaluate top and bottom separately at $x = 2$.",
+    },
+    {
+      type: "text",
+      content:
+        "**Worked example — a full computation, law by law.** Compute $\\lim_{x \\to 2} \\dfrac{x^3 - 2x + 1}{x + 3}$.\n\nStep 1 — triage the denominator: at $x = 2$ it's $5 \\ne 0$, so the quotient law applies and plugging in is licensed.\nStep 2 — numerator: $2^3 - 2(2) + 1 = 8 - 4 + 1 = 5$.\nStep 3 — assemble:",
+    },
+    {
+      type: "math",
+      latex:
+        "\\lim_{x \\to 2} \\frac{x^3 - 2x + 1}{x + 3} = \\frac{5}{5} = 1",
+    },
+    {
+      type: "text",
+      content:
+        "Every worked limit in this course starts exactly this way: check the denominator, then substitute. Only when the check fails does anything more interesting happen.",
+    },
+    {
+      type: "quiz",
+      id: "limit-laws-quiz-4",
+      variant: "practice",
+      question: "What is $\\lim_{x \\to -2} \\dfrac{x^2 + 4}{x + 1}$?",
+      options: [
+        {
+          text: "$-8$",
+          correct: true,
+          feedback:
+            "Denominator at $-2$ is $-1 \\ne 0$: safe to substitute. $\\frac{(-2)^2 + 4}{-2 + 1} = \\frac{8}{-1} = -8$. Mind both signs.",
+        },
+        {
+          text: "$8$",
+          feedback:
+            "The numerator is 8, but the denominator is $-2 + 1 = -1$. The quotient is $-8$.",
+        },
+        {
+          text: "$\\frac{0}{0}$ — needs algebra",
+          feedback:
+            "Check before declaring: numerator $= 8$, denominator $= -1$. Neither is 0, so plug in: $-8$.",
+        },
+      ],
+    },
+    {
+      type: "quiz",
+      id: "limit-laws-quiz-5",
+      variant: "mastery",
+      question:
+        "Full triage, three patients: (A) $\\lim_{x \\to 1} \\frac{x^2 - 1}{x - 1}$, (B) $\\lim_{x \\to 1} \\frac{x^2 + 1}{x - 1}$, (C) $\\lim_{x \\to 1} \\frac{x^2 + 1}{x + 1}$. Which diagnosis chart is right?",
+      options: [
+        {
+          text: "A: $\\frac00$, algebra needed. B: $\\frac20$, blow-up. C: healthy — limit is 1.",
+          correct: true,
+          feedback:
+            "Three near-identical fractions, three different fates — everything hinges on what top and bottom do at the target. (C: $\\frac{1+1}{1+1} = 1$.)",
+        },
+        {
+          text: "All three are $\\frac{\\cdot}{0}$ cases with no limit.",
+          feedback:
+            "Only A and B have a vanishing denominator ($x - 1 \\to 0$); C's denominator is $x + 1 \\to 2$. And A's $\\frac00$ hides a real answer (it's 2, via next lesson's algebra).",
+        },
+        {
+          text: "A: blow-up. B: $\\frac00$. C: healthy.",
+          feedback:
+            "Check A's numerator: $1^2 - 1 = 0$, so A is $\\frac00$ (the puzzle). B's numerator is $2 \\ne 0$, so B is $\\frac20$: the blow-up.",
+        },
+      ],
+      hint: "For each: evaluate numerator and denominator separately at $x = 1$ before deciding anything.",
     },
   ]),
 };
@@ -817,6 +1077,97 @@ const lesson06: LessonSeed = {
             "$\\sqrt{x+9} - 3$ doesn't factor like a polynomial. Roots call for the conjugate trick: multiply by $\\sqrt{x+9}+3$.",
         },
       ],
+    },
+    {
+      type: "text",
+      content:
+        "**Worked example — when BOTH top and bottom need factoring.** Compute $\\lim_{x \\to 1} \\dfrac{x^2 + x - 2}{x^2 - 1}$.\n\nStep 1 — triage: at $x = 1$, top is $1 + 1 - 2 = 0$, bottom is $0$. A genuine $\\frac00$.\nStep 2 — factor both. Top: $x^2 + x - 2 = (x + 2)(x - 1)$. Bottom: $x^2 - 1 = (x - 1)(x + 1)$.\nStep 3 — cancel the shared cause of death, $(x - 1)$, and substitute:",
+    },
+    {
+      type: "math",
+      latex:
+        "\\lim_{x \\to 1} \\frac{(x+2)(x-1)}{(x-1)(x+1)} = \\lim_{x \\to 1} \\frac{x + 2}{x + 1} = \\frac{3}{2}",
+    },
+    {
+      type: "text",
+      content:
+        "The $\\frac00$ always has a culprit factor — here $(x-1)$, hiding in both top and bottom because $x = 1$ kills each of them. Factoring is how you find it; cancelling is how you remove it; what's left tells the truth.",
+    },
+    {
+      type: "quiz",
+      id: "zero-over-zero-quiz-4",
+      variant: "practice",
+      question: "Compute $\\lim_{x \\to -3} \\dfrac{x^2 - 9}{x + 3}$.",
+      options: [
+        {
+          text: "$-6$",
+          correct: true,
+          feedback:
+            "$\\frac{(x-3)(x+3)}{x+3} = x - 3$ away from $-3$, and $-3 - 3 = -6$. Same factoring as at $+3$, opposite sign in the answer.",
+        },
+        {
+          text: "$6$",
+          feedback:
+            "That's the limit at $x = +3$. Here the surviving factor is $x - 3$, evaluated at $-3$: it gives $-6$.",
+        },
+        {
+          text: "$0$",
+          feedback:
+            "The $\\frac00$ from plugging in is the disguise. Factor $x^2 - 9 = (x-3)(x+3)$, cancel $(x+3)$, and read off $x - 3 \\to -6$.",
+        },
+      ],
+      hint: "Difference of squares again — but watch which factor cancels this time.",
+    },
+    {
+      type: "quiz",
+      id: "zero-over-zero-quiz-5",
+      variant: "practice",
+      question: "Compute $\\lim_{x \\to 0} \\dfrac{\\sqrt{x + 16} - 4}{x}$.",
+      options: [
+        {
+          text: "$\\dfrac{1}{8}$",
+          correct: true,
+          feedback:
+            "Conjugate: top becomes $x + 16 - 16 = x$, cancel with the bottom, leaving $\\frac{1}{\\sqrt{x+16}+4} \\to \\frac{1}{4+4} = \\frac18$.",
+        },
+        {
+          text: "$\\dfrac{1}{4}$",
+          feedback:
+            "That's the $\\sqrt{x+4}$ answer from the lesson. Here the root heads to $\\sqrt{16} = 4$, so the tail is $\\frac{1}{4 + 4} = \\frac18$.",
+        },
+        {
+          text: "$0$ — the numerator vanishes at $x = 0$",
+          feedback:
+            "The denominator vanishes too: $\\frac00$, no verdict from plugging in. Multiply by $\\frac{\\sqrt{x+16}+4}{\\sqrt{x+16}+4}$ and the answer $\\frac18$ appears.",
+        },
+      ],
+      hint: "Multiply by the conjugate $\\sqrt{x+16} + 4$ over itself.",
+    },
+    {
+      type: "quiz",
+      id: "zero-over-zero-quiz-6",
+      variant: "mastery",
+      question:
+        "The third playbook entry: $\\lim_{x \\to 0} \\dfrac{\\frac{1}{x + 2} - \\frac{1}{2}}{x}$ — a fraction inside a fraction. What is it?",
+      options: [
+        {
+          text: "$-\\dfrac{1}{4}$",
+          correct: true,
+          feedback:
+            "Combine the top: $\\frac{1}{x+2} - \\frac12 = \\frac{2 - (x+2)}{2(x+2)} = \\frac{-x}{2(x+2)}$. Divide by $x$ (cancel it!) to get $\\frac{-1}{2(x+2)} \\to -\\frac14$.",
+        },
+        {
+          text: "$0$ — the top is 0 at $x = 0$",
+          feedback:
+            "So is the bottom: $\\frac00$ again. Put the top over a common denominator and an $x$ appears upstairs, ready to cancel; the dust settles at $-\\frac14$.",
+        },
+        {
+          text: "$\\dfrac{1}{4}$",
+          feedback:
+            "Sign check: the combined top is $\\frac{2 - (x+2)}{2(x+2)} = \\frac{-x}{2(x+2)}$ — note the minus. The limit is $-\\frac14$.",
+        },
+      ],
+      hint: "First job: write $\\frac{1}{x+2} - \\frac{1}{2}$ as one fraction over a common denominator.",
     },
   ]),
 };
@@ -956,6 +1307,70 @@ const lesson07: LessonSeed = {
         },
       ],
       hint: "Divide numerator and denominator by $x^3$.",
+    },
+    {
+      type: "text",
+      content:
+        "**Worked example — the three degree cases, side by side.** For a ratio of polynomials as $x \\to \\infty$, everything is decided by comparing the top and bottom degrees. One example of each:\n\n*Case 1 — bottom heavier:* $\\lim_{x \\to \\infty} \\frac{5x + 1}{x^2 + 3}$. Divide through by $x^2$: top becomes $\\frac{5}{x} + \\frac{1}{x^2} \\to 0$, bottom $\\to 1$. Limit: $0$. The heavier denominator crushes the fraction flat.\n\n*Case 2 — equal degrees:* $\\lim_{x \\to \\infty} \\frac{3x^2 + x}{x^2 + 1} = 3$ (the lesson's example). Evenly matched heavyweights — the limit is the ratio of leading coefficients.\n\n*Case 3 — top heavier:* $\\lim_{x \\to \\infty} \\frac{x^3 + 1}{x^2 + 1}$. The top outgrows the bottom without bound: the outputs run away, $= \\infty$, no horizontal asymptote.\n\nSummary worth keeping:",
+    },
+    {
+      type: "table",
+      headers: ["Degrees", "$\\lim_{x \\to \\infty}$", "Graph's long-run look"],
+      rows: [
+        ["top < bottom", "$0$", "hugs the x-axis"],
+        ["top = bottom", "ratio of leading coefficients", "hugs a horizontal line"],
+        ["top > bottom", "$\\pm\\infty$ (no finite limit)", "climbs or dives forever"],
+      ],
+    },
+    {
+      type: "quiz",
+      id: "limits-at-infinity-quiz-4",
+      variant: "practice",
+      question: "What is $\\lim_{x \\to \\infty} \\dfrac{7x + 2}{x^2 - 5}$?",
+      options: [
+        {
+          text: "$0$",
+          correct: true,
+          feedback:
+            "Degree 1 over degree 2: the bottom wins the growth race and the fraction is squeezed to 0. Horizontal asymptote at $y = 0$.",
+        },
+        {
+          text: "$7$",
+          feedback:
+            "The leading-coefficient ratio only applies when the degrees MATCH. Here the bottom is heavier (2 vs 1): the limit is 0.",
+        },
+        {
+          text: "$\\infty$",
+          feedback:
+            "Runaway needs the TOP to be heavier. It's the underdog here — the fraction dies to 0.",
+        },
+      ],
+      hint: "Compare the degrees first; only then reach for coefficients.",
+    },
+    {
+      type: "quiz",
+      id: "limits-at-infinity-quiz-5",
+      variant: "concept",
+      question:
+        "A battery's charge fades as $Q(t) = 100e^{-t/2}$ percent after $t$ hours. What is $\\lim_{t \\to \\infty} Q(t)$, and what does it mean?",
+      options: [
+        {
+          text: "$0$ — in the long run the charge drains toward empty, never quite reaching it.",
+          correct: true,
+          feedback:
+            "$e^{-t/2} \\to 0$, dragging the whole expression down to its horizontal asymptote at 0. Exponential decay: ever closer, never arrived.",
+        },
+        {
+          text: "$100$ — that's the number in the formula.",
+          feedback:
+            "$100$ is the STARTING charge, $Q(0) = 100e^0 = 100$. The limit asks where things end up, and $e^{-t/2}$ drags it to 0.",
+        },
+        {
+          text: "$50$ — halfway between full and empty.",
+          feedback:
+            "Limits don't average the journey. The decay factor $e^{-t/2}$ keeps shrinking past every positive value: destination 0.",
+        },
+      ],
     },
   ]),
 };
@@ -1097,6 +1512,72 @@ const lesson08: LessonSeed = {
         },
       ],
     },
+    {
+      type: "text",
+      content:
+        "**Worked example — the three-condition checklist, run in full.** Is",
+    },
+    {
+      type: "math",
+      latex:
+        "f(x) = \\begin{cases} x^2 & x < 1 \\\\ 2 - x & x \\ge 1 \\end{cases}",
+    },
+    {
+      type: "text",
+      content:
+        "continuous at $x = 1$?\n\nCondition 1 — does $f(1)$ exist? The $x \\ge 1$ rule owns it: $f(1) = 2 - 1 = 1$. ✓\nCondition 2 — does the limit exist? Left: $x^2 \\to 1$. Right: $2 - x \\to 1$. Sides agree: $\\lim_{x \\to 1} f(x) = 1$. ✓\nCondition 3 — are they equal? $1 = 1$. ✓\n\nAll three hold: continuous. The two formulas splice without a seam — you could draw this graph without lifting your pen, corner and all. (A corner is perfectly continuous; it will cause trouble later, but for *derivatives*, not for continuity.)",
+    },
+    {
+      type: "quiz",
+      id: "continuity-quiz-4",
+      variant: "practice",
+      question:
+        "Find $k$ so that $f(x) = \\begin{cases} kx + 1 & x < 2 \\\\ x^2 & x \\ge 2 \\end{cases}$ is continuous at $x = 2$.",
+      options: [
+        {
+          text: "$k = \\dfrac{3}{2}$",
+          correct: true,
+          feedback:
+            "The pieces must meet: left limit $2k + 1$ must equal right value $2^2 = 4$. Solve $2k + 1 = 4$: $k = \\frac32$. You just engineered continuity.",
+        },
+        {
+          text: "$k = 2$",
+          feedback:
+            "That makes the left side approach $2(2) + 1 = 5$ while the right sits at 4 — still a jump. Set $2k + 1 = 4$ and solve: $k = \\frac32$.",
+        },
+        {
+          text: "No $k$ can work — the formulas are different types.",
+          feedback:
+            "Different formulas can meet perfectly (see the worked example). The left approach is $2k+1$, a knob you control: dial it to 4.",
+        },
+      ],
+      hint: "Write the left-hand limit at 2 in terms of $k$, and set it equal to $f(2)$.",
+    },
+    {
+      type: "quiz",
+      id: "continuity-quiz-5",
+      variant: "concept",
+      question:
+        "Classify the discontinuity of $f(x) = \\dfrac{1}{x - 2}$ at $x = 2$.",
+      options: [
+        {
+          text: "Infinite — the function blows up on both sides of 2.",
+          correct: true,
+          feedback:
+            "No value at 2, no finite limit (the sides run to $-\\infty$ and $+\\infty$): the worst kind, and no redefinition of a single point could ever repair it.",
+        },
+        {
+          text: "Removable — just define $f(2)$ to fill the hole.",
+          feedback:
+            "Removable requires a finite limit to move the dot to. There's no finite target here — the outputs escape to infinity. Nothing to patch with.",
+        },
+        {
+          text: "It's continuous — the formula is defined by one clean expression.",
+          feedback:
+            "A single formula is no guarantee: $f(2)$ would be $\\frac{1}{0}$ — division by zero. Condition 1 already fails, and condition 2 fails harder.",
+        },
+      ],
+    },
   ]),
 };
 
@@ -1219,6 +1700,37 @@ const lesson09: LessonSeed = {
             "δ rarely equals ε (you just saw δ = ε/2 for the doubler). The point of 'every ε' is to make the closing-in unbounded, not to fix a formula.",
         },
       ],
+    },
+    {
+      type: "text",
+      content:
+        "**Worked example — answering a demand, with reasoning shown.** Claim: $\\lim_{x \\to 1} 4x = 4$. The skeptic demands $\\varepsilon = 0.2$: keep the outputs within $0.2$ of $4$. Find a winning $\\delta$.\n\nStep 1 — understand the machine: $f(x) = 4x$ multiplies every input-distance by 4. If $x$ sits within $\\delta$ of 1, then $4x$ sits within $4\\delta$ of 4.\nStep 2 — set up the requirement: we need $4\\delta \\le 0.2$.\nStep 3 — solve: $\\delta \\le 0.05$. Answer $\\delta = 0.05$ (or anything smaller).\nStep 4 — verify with an edge case: $x = 1.05$ gives $f(x) = 4.2$, exactly on the boundary of the tolerance band. ✓\n\nNotice the general pattern for a line of slope $m$: the winning answer is $\\delta = \\varepsilon / |m|$ — steeper functions demand proportionally tighter input control. That's the machinist's rule from the piston-ring shop, in symbols.",
+    },
+    {
+      type: "quiz",
+      id: "epsilon-delta-quiz-4",
+      variant: "practice",
+      question:
+        "Claim: $\\lim_{x \\to 2} \\frac{x}{2} = 1$. The skeptic demands $\\varepsilon = 0.1$. What is the LARGEST $\\delta$ that still wins the round?",
+      options: [
+        {
+          text: "$\\delta = 0.2$",
+          correct: true,
+          feedback:
+            "This function HALVES distances, so the input leash can be twice the output tolerance: $\\delta = \\varepsilon / |m| = 0.1 / \\frac12 = 0.2$. Gentle slopes are forgiving.",
+        },
+        {
+          text: "$\\delta = 0.05$",
+          feedback:
+            "That wins, but it's needlessly tight — the ε/2 reflex from the doubler. This function halves distances, so you can afford $\\delta = 2\\varepsilon = 0.2$.",
+        },
+        {
+          text: "$\\delta = 0.4$",
+          feedback:
+            "Too loose: $x = 2.4$ is allowed but gives $f(x) = 1.2$, outside the $\\pm 0.1$ band. The largest safe leash is $0.2$.",
+        },
+      ],
+      hint: "The slope is $\\frac12$: input errors get halved on the way through. How long can the leash be?",
     },
   ]),
 };
@@ -1364,6 +1876,89 @@ const lesson10: LessonSeed = {
             "They can (though much tinier ones do cause floating-point trouble!). The mathematical reason is exactness: the limit is the exact destination, a tiny-h slope is a nearby approximation.",
         },
       ],
+    },
+    {
+      type: "text",
+      content:
+        "**Worked example — the slope at EVERY point at once.** Instead of $x = 2$ or $x = 3$ one at a time, run the computation at a general point $x$ for $f(x) = x^2$:\n\nStep 1 — set up the difference quotient:",
+    },
+    {
+      type: "math",
+      latex:
+        "\\frac{f(x+h) - f(x)}{h} = \\frac{(x+h)^2 - x^2}{h}",
+    },
+    {
+      type: "text",
+      content: "Step 2 — expand and cancel (the $x^2$'s kill each other):",
+    },
+    {
+      type: "math",
+      latex:
+        "\\frac{x^2 + 2xh + h^2 - x^2}{h} = \\frac{h(2x + h)}{h} = 2x + h",
+    },
+    {
+      type: "text",
+      content: "Step 3 — take the limit as the gap closes:",
+    },
+    {
+      type: "math",
+      latex: "f'(x) = \\lim_{h \\to 0} (2x + h) = 2x",
+    },
+    {
+      type: "text",
+      content:
+        "One computation, infinitely many answers: the slope of $x^2$ at any point $x$ is exactly $2x$. Check it against everything you've computed: at $x=2$, slope 4 ✓; at $x=3$, slope 6 ✓. The derivative isn't a number — it's a *function*, and this is the first entry in the table of derivatives Chapter 2 will fill.",
+    },
+    {
+      type: "quiz",
+      id: "limits-to-derivatives-quiz-4",
+      variant: "practice",
+      question:
+        "Using $f'(x) = 2x$ for $f(x) = x^2$: what is the slope of the curve at $x = 5$, and at $x = -1$?",
+      options: [
+        {
+          text: "$10$ and $-2$",
+          correct: true,
+          feedback:
+            "Plug into $2x$. The negative slope at $x = -1$ checks out: the parabola's left half is falling — a downhill tangent.",
+        },
+        {
+          text: "$25$ and $1$",
+          feedback:
+            "Those are the HEIGHTS $f(5)$ and $f(-1)$. The slope function is $f'(x) = 2x$: slopes 10 and $-2$.",
+        },
+        {
+          text: "$10$ and $2$",
+          feedback:
+            "Half right — at $x = -1$ the slope is $2(-1) = -2$, and the sign matters: it says the curve is falling there.",
+        },
+      ],
+    },
+    {
+      type: "quiz",
+      id: "limits-to-derivatives-quiz-5",
+      variant: "mastery",
+      question:
+        "Run the machinery on a line: for $f(x) = 3x$, what does $\\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}$ give?",
+      options: [
+        {
+          text: "$3$, for every $x$ — a line has the same slope everywhere.",
+          correct: true,
+          feedback:
+            "$\\frac{3(x+h) - 3x}{h} = \\frac{3h}{h} = 3$ — no limit even needed, the $h$'s cancel outright. The machinery agrees with what you've always known about lines.",
+        },
+        {
+          text: "$3x$",
+          feedback:
+            "Compute it: $\\frac{3(x+h) - 3x}{h} = \\frac{3h}{h} = 3$, with no $x$ left. The slope of a line doesn't depend on where you stand.",
+        },
+        {
+          text: "$0$ — the numerator vanishes as $h \\to 0$",
+          feedback:
+            "Top and bottom vanish TOGETHER ($\\frac00$, the chapter's oldest friend). Simplify first: $\\frac{3h}{h} = 3$ for every $h \\ne 0$.",
+        },
+      ],
+      hint: "Substitute, expand, and watch how much cancels before the limit is even taken.",
     },
   ]),
 };
@@ -1603,6 +2198,56 @@ const lessonMastery: LessonSeed = {
           text: "$\\frac{0}{0}$, which is undefined.",
           feedback:
             "Plugging $h = 0$ into the fraction is undefined — but the limit doesn't plug in, it approaches. That distinction is this whole chapter.",
+        },
+      ],
+    },
+    {
+      type: "quiz",
+      id: "chapter-1-mastery-quiz-11",
+      variant: "mastery",
+      question:
+        "Full computation: $\\lim_{x \\to 0} \\dfrac{\\sqrt{x + 25} - 5}{x}$. (1.6)",
+      options: [
+        {
+          text: "$\\dfrac{1}{10}$",
+          correct: true,
+          feedback:
+            "Conjugate $\\sqrt{x+25}+5$: the top becomes $x$, cancel, and $\\frac{1}{\\sqrt{x+25}+5} \\to \\frac{1}{10}$.",
+        },
+        {
+          text: "$0$",
+          feedback:
+            "$\\frac00$ is a disguise, not a zero. Rationalize with $\\sqrt{x+25}+5$ and the answer $\\frac1{10}$ emerges.",
+        },
+        {
+          text: "$\\dfrac{1}{5}$",
+          feedback:
+            "After the conjugate move the tail is $\\frac{1}{\\sqrt{x+25} + 5} \\to \\frac{1}{5 + 5}$ — don't forget the added 5.",
+        },
+      ],
+    },
+    {
+      type: "quiz",
+      id: "chapter-1-mastery-quiz-12",
+      variant: "mastery",
+      question:
+        "Long-run behaviour: $\\lim_{x \\to \\infty} \\dfrac{4x^2 + 1}{2x^2 - x}$. (1.7)",
+      options: [
+        {
+          text: "$2$",
+          correct: true,
+          feedback:
+            "Equal degrees → ratio of leading coefficients: $\\frac42 = 2$. The $+1$ and $-x$ are long-run irrelevancies.",
+        },
+        {
+          text: "$4$",
+          feedback:
+            "$4$ is only the top's coefficient. The bottom grows with coefficient 2 in lockstep: the ratio settles at $\\frac42 = 2$.",
+        },
+        {
+          text: "$\\infty$",
+          feedback:
+            "Runaway needs the top to outgun the bottom. Both are quadratics — evenly matched — so the ratio flattens onto $y = 2$.",
         },
       ],
     },
