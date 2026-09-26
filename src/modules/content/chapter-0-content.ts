@@ -28,6 +28,14 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/calc-0-functions.mp4",
+      poster: "/videos/calc-0-functions.jpg",
+      title: "Chapter 0 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "Imagine you get into a taxi. The meter starts at ₹50, and every kilometre adds ₹15:",

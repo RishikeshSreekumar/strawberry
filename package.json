@@ -14,7 +14,13 @@
     "db:seed": "tsx scripts/seed.ts",
     "db:seed:chapter0": "tsx scripts/seed-chapter-0.ts",
     "db:seed:chapter1": "tsx scripts/seed-chapter-1.ts",
-    "db:seed:trigonometry": "tsx scripts/seed-trigonometry.ts"
+    "db:seed:trigonometry": "tsx scripts/seed-trigonometry.ts",
+    "db:seed:matrices": "tsx scripts/seed-matrices.ts",
+    "db:seed:statistics": "tsx scripts/seed-statistics.ts",
+    "db:seed:probability": "tsx scripts/seed-probability.ts",
+    "db:seed:permutations-combinations-binomial": "tsx scripts/seed-permutations-combinations-binomial.ts",
+    "db:seed:vector-algebra": "tsx scripts/seed-vector-algebra.ts",
+    "db:seed:all-new": "pnpm run db:seed:matrices && pnpm run db:seed:statistics && pnpm run db:seed:probability && pnpm run db:seed:permutations-combinations-binomial && pnpm run db:seed:vector-algebra"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

@@ -21,6 +21,14 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/trig-1-unit-circle.mp4",
+      poster: "/videos/trig-1-unit-circle.jpg",
+      title: "Chapter 1 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "Chapter 0 ended with a ceiling. Every angle lived inside a right triangle, so every angle was between 0° and 90°. But a Ferris wheel turns through 200°, a crankshaft passes 360° every revolution, and a pendulum swings to −15°. None of those fit in a right triangle.\n\nThe fix is small and changes everything: stop drawing the triangle on its own, and draw it inside a circle.",

@@ -1,6 +1,6 @@
 import katex from "katex";
-import { BookOpen, Info, Lightbulb, TriangleAlert } from "lucide-react";
-import type { CalloutBlock, LessonBlock } from "../schemas/blocks";
+import { BookOpen, Info, Lightbulb, PlayCircle, TriangleAlert } from "lucide-react";
+import type { CalloutBlock, LessonBlock, VideoBlock } from "../schemas/blocks";
 import { Interactive } from "./interactives";
 import { QuizBlockView } from "./quiz-block";
 import { RichText } from "./rich-text";
@@ -41,6 +41,32 @@ function MathBlockView({ latex }: { latex: string }) {
       className="overflow-x-auto py-2"
       dangerouslySetInnerHTML={{ __html: html }}
     />
+  );
+}
+
+function VideoBlockView({ block }: { block: VideoBlock }) {
+  return (
+    <figure className="overflow-hidden rounded-xl border bg-card">
+      {block.title && (
+        <figcaption className="flex items-center gap-2 border-b px-4 py-2.5 font-semibold">
+          <PlayCircle className="size-4 shrink-0 text-primary" aria-hidden />
+          {block.title}
+        </figcaption>
+      )}
+      <video
+        className="aspect-video w-full bg-muted"
+        src={block.src}
+        poster={block.poster}
+        controls
+        playsInline
+        preload="metadata"
+      />
+      {block.caption && (
+        <p className="px-4 py-2.5 text-sm text-muted-foreground">
+          <RichText text={block.caption} />
+        </p>
+      )}
+    </figure>
   );
 }
 
@@ -110,6 +136,8 @@ export function BlockRenderer({
                 </table>
               </div>
             );
+          case "video":
+            return <VideoBlockView key={i} block={block} />;
           case "quiz":
             return <QuizBlockView key={i} block={block} lessonId={lessonId} />;
           case "interactive":

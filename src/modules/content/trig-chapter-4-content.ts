@@ -23,6 +23,14 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/trig-4-solving-equations.mp4",
+      poster: "/videos/trig-4-solving-equations.jpg",
+      title: "Chapter 4 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "Solve $\\sin x = \\frac{1}{2}$.\n\nA calculator answers $30^\\circ$, or $\\frac{\\pi}{6}$. That is one solution. It is not *the* solution, and treating it as such is the defining error of this chapter.",

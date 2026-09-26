@@ -23,6 +23,14 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/trig-2-trig-functions.mp4",
+      poster: "/videos/trig-2-trig-functions.jpg",
+      title: "Chapter 2 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "So far $\\sin\\theta$ has been a *lookup*: give me an angle, I give you a number. That is exactly what a function is. So plot it — angle along the horizontal axis, value up the vertical axis — and see what shape the whole collection of values makes.",

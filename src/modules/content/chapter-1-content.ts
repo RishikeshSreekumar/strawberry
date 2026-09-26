@@ -21,6 +21,14 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/calc-1-limits.mp4",
+      poster: "/videos/calc-1-limits.jpg",
+      title: "Chapter 1 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "A speed camera photographs your car. A photograph freezes a single instant — in it, the car isn't moving at all. Yet the ticket says 62 km/h. How can a car have a speed *at an instant*, when speed is distance divided by time, and an instant contains no distance and no time?\n\nThat is the exact wall we hit at the end of Chapter 0. The average rate of change of $f(x) = x^2$ between two points worked fine — until we pushed the two points together and got:",

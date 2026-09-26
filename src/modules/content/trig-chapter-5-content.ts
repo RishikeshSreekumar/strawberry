@@ -21,6 +21,14 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/trig-5-any-triangle.mp4",
+      poster: "/videos/trig-5-any-triangle.jpg",
+      title: "Chapter 5 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "Everything so far that involved a triangle involved a *right* triangle. Most triangles in the world are not right-angled: a surveyor's sightlines between three hilltops, the two legs of a sailing course, the three struts of a roof truss.\n\nThere is a standard labelling that makes the results readable. Vertices $A$, $B$, $C$; the side opposite each vertex takes the matching lower-case letter, so side $a$ is opposite angle $A$.",

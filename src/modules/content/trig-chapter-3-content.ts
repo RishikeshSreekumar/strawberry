@@ -23,6 +23,14 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/trig-3-identities.mp4",
+      poster: "/videos/trig-3-identities.jpg",
+      title: "Chapter 3 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "Two equations that look alike but behave nothing alike:",

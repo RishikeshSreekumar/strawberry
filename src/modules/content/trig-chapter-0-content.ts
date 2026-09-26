@@ -22,6 +22,14 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/trig-0-angles-and-ratios.mp4",
+      poster: "/videos/trig-0-angles-and-ratios.jpg",
+      title: "Chapter 0 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "There is a tree in front of you. How tall is it?\n\nYou could climb it with a tape measure. You could cut it down and lay it flat. Both work; neither is a method. And neither one helps at all with the distance to a ship on the horizon, the height of a mountain, or the radius of the Earth — none of which you can reach.\n\nBut here is something you *can* do standing on the ground: measure the tree's **shadow**, and measure the **angle** from the tip of the shadow up to the top of the tree.",
