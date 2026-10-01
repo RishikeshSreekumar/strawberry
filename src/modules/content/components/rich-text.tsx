@@ -1,63 +1,83 @@
 import katex from "katex";
 import { Fragment, type ReactNode } from "react";
 
-/** `**bold**` and `*italic*` inside a math-free text segment. */
-function renderEmphasis(text: string, keyPrefix: string): ReactNode[] {
-  const nodes: ReactNode[] = [];
-  const pattern = /\*\*([^*]+)\*\*|\*([^*]+)\*/g;
-  let last = 0;
-  let match: RegExpExecArray | null;
+type Token =
+  | { kind: "text"; value: string }
+  | { kind: "math"; value: string }
+  | { kind: "marker"; value: "**" | "*" };
 
-  while ((match = pattern.exec(text)) !== null) {
-    if (match.index > last) {
-      nodes.push(
-        <Fragment key={`${keyPrefix}-t${last}`}>
-          {text.slice(last, match.index)}
-        </Fragment>,
-      );
+/**
+ * Splits text into plain runs, $...$ math and emphasis markers. Markers are
+ * paired in order (like the old `**[^*]+**` / `*[^*]+*` regex); an unpaired
+ * marker, or a pair with nothing between it, stays literal text.
+ */
+function tokenize(text: string): Token[] {
+  const tokens: Token[] = [];
+  text.split(/\$([^$]+)\$/g).forEach((part, i) => {
+    if (i % 2 === 1) {
+      tokens.push({ kind: "math", value: part });
+      return;
     }
-    nodes.push(
-      match[1] !== undefined ? (
-        <strong key={`${keyPrefix}-b${match.index}`}>{match[1]}</strong>
-      ) : (
-        <em key={`${keyPrefix}-i${match.index}`}>{match[2]}</em>
-      ),
-    );
-    last = pattern.lastIndex;
+    for (const piece of part.split(/(\*\*|\*)/g)) {
+      if (piece === "**" || piece === "*") tokens.push({ kind: "marker", value: piece });
+      else if (piece) tokens.push({ kind: "text", value: piece });
+    }
+  });
+
+  for (const marker of ["**", "*"] as const) {
+    let open = -1;
+    tokens.forEach((token, i) => {
+      if (token.kind !== "marker" || token.value !== marker) return;
+      if (open === -1) {
+        open = i;
+      } else if (i === open + 1) {
+        // "**" with nothing inside (or "* *"): not emphasis.
+        tokens[open] = { kind: "text", value: marker };
+        open = i;
+      } else {
+        open = -1;
+      }
+    });
+    if (open !== -1) tokens[open] = { kind: "text", value: marker };
   }
-  if (last < text.length) {
-    nodes.push(
-      <Fragment key={`${keyPrefix}-t${last}`}>{text.slice(last)}</Fragment>,
-    );
-  }
-  return nodes;
+  return tokens;
 }
 
 /**
  * Renders text with inline math and inline markdown emphasis: anything
  * between $...$ goes through KaTeX in inline mode, and `**bold**` /
- * `*italic*` in the surrounding text become <strong> / <em>.
- * Works in both server and client trees.
+ * `*italic*` become <strong> / <em>. Emphasis may wrap math, e.g.
+ * `**Why $1/r^2$?**`. Works in both server and client trees.
  */
 export function RichText({ text }: { text: string }) {
-  const parts = text.split(/\$([^$]+)\$/g);
-  return (
-    <>
-      {parts.map((part, i) =>
-        i % 2 === 0 ? (
-          <Fragment key={i}>{renderEmphasis(part, String(i))}</Fragment>
-        ) : (
-          <span
-            key={i}
-            dangerouslySetInnerHTML={{
-              __html: katex.renderToString(part, {
-                displayMode: false,
-                throwOnError: false,
-              }),
-            }}
-          />
-        ),
-      )}
-    </>
-  );
+  const nodes: ReactNode[] = [];
+  let bold = false;
+  let italic = false;
+
+  tokenize(text).forEach((token, i) => {
+    if (token.kind === "marker") {
+      if (token.value === "**") bold = !bold;
+      else italic = !italic;
+      return;
+    }
+    let node: ReactNode =
+      token.kind === "math" ? (
+        <span
+          key={i}
+          dangerouslySetInnerHTML={{
+            __html: katex.renderToString(token.value, {
+              displayMode: false,
+              throwOnError: false,
+            }),
+          }}
+        />
+      ) : (
+        <Fragment key={i}>{token.value}</Fragment>
+      );
+    if (italic) node = <em key={`i${i}`}>{node}</em>;
+    if (bold) node = <strong key={`b${i}`}>{node}</strong>;
+    nodes.push(node);
+  });
+
+  return <>{nodes}</>;
 }

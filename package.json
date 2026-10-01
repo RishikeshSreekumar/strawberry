@@ -20,7 +20,13 @@
     "db:seed:probability": "tsx scripts/seed-probability.ts",
     "db:seed:permutations-combinations-binomial": "tsx scripts/seed-permutations-combinations-binomial.ts",
     "db:seed:vector-algebra": "tsx scripts/seed-vector-algebra.ts",
-    "db:seed:all-new": "pnpm run db:seed:matrices && pnpm run db:seed:statistics && pnpm run db:seed:probability && pnpm run db:seed:permutations-combinations-binomial && pnpm run db:seed:vector-algebra"
+    "db:seed:all-new": "pnpm run db:seed:matrices && pnpm run db:seed:statistics && pnpm run db:seed:probability && pnpm run db:seed:permutations-combinations-binomial && pnpm run db:seed:vector-algebra",
+    "db:seed:motion-forces-energy": "tsx scripts/seed-motion-forces-energy.ts",
+    "db:seed:momentum-rotation-gravitation": "tsx scripts/seed-momentum-rotation-gravitation.ts",
+    "db:seed:oscillations-waves-thermal": "tsx scripts/seed-oscillations-waves-thermal.ts",
+    "db:seed:electricity-and-magnetism": "tsx scripts/seed-electricity-and-magnetism.ts",
+    "db:seed:optics-and-modern-physics": "tsx scripts/seed-optics-and-modern-physics.ts",
+    "db:seed:physics": "pnpm run db:seed:motion-forces-energy && pnpm run db:seed:momentum-rotation-gravitation && pnpm run db:seed:oscillations-waves-thermal && pnpm run db:seed:electricity-and-magnetism && pnpm run db:seed:optics-and-modern-physics"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

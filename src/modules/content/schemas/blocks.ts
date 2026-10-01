@@ -1298,7 +1298,790 @@ export const statsNormalSamplingLabSchema = z
     }
   });
 
+// ---------- Oscillations, Waves & Thermal (owt) interactives ----------
+
+const owtRangeSchema = z.object({ min: z.number(), max: z.number(), step: z.number().positive() });
+
+const owtWaveSliderSchema = z.enum([
+  "amplitude",
+  "omega",
+  "phase",
+  "damping",
+  "mass",
+  "length",
+  "angleAmplitude",
+  "wavelength",
+  "frequency",
+  "amplitude2",
+  "wavelength2",
+  "phase2",
+  "harmonic",
+  "stringLength",
+  "waveSpeed",
+  "f1",
+  "f2",
+  "sourceSpeed",
+  "observerSpeed",
+]);
+
+/**
+ * Oscillation and wave lab. One shared time t (slider plus a user-started
+ * Play button; SSR renders the t = 0 frame, Doppler the developed pattern).
+ * shm: spring block or pendulum with x/v/a-t graphs, energy bars, optional
+ * reference circle and damping. traveling: y = A sin(kx ∓ ωt + φ) with a probe
+ * particle. superposition: two waves and their sum. standing: harmonics on a
+ * string or in a pipe with nodes/antinodes. beats: two tones and the envelope.
+ * doppler: wavefronts from a moving source, observers ahead and behind.
+ * Units: SI (m, s, Hz, rad, kg); g = 10 m/s².
+ */
+export const owtWaveLabSchema = z
+  .object({
+    component: z.literal("owt-wave-lab"),
+    mode: z.enum(["shm", "traveling", "superposition", "standing", "beats", "doppler"]),
+    /** shm: "spring" (block on a spring) or "pendulum" (ω = √(g/L)). */
+    oscillator: z.enum(["spring", "pendulum"]).default("spring"),
+    /** Amplitude in m (shm spring, traveling, superposition wave 1, standing: each travelling component). */
+    amplitude: z.number().positive().default(0.1),
+    /** shm spring: angular frequency in rad/s. */
+    omega: z.number().positive().default(2 * Math.PI),
+    /** Initial phase φ in rad (shm: x = A cos(ωt + φ); traveling: y = A sin(kx − ωt + φ)). */
+    phase: z.number().default(0),
+    /** shm: damping constant γ in s⁻¹ (x = A e^{−γt} cos(ω′t + φ)); 0 = undamped. */
+    damping: z.number().min(0).default(0),
+    /** shm: mass in kg, for energies and k = mω². */
+    mass: z.number().positive().default(1),
+    /** shm pendulum: length in m. */
+    length: z.number().positive().default(1),
+    /** shm pendulum: angular amplitude in degrees. */
+    angleAmplitude: z.number().positive().max(30).default(10),
+    /** shm: which time graphs to draw. */
+    graphs: z.array(z.enum(["x", "v", "a"])).min(1).max(3).default(["x"]),
+    /** shm: KE / PE / total energy bars. */
+    showEnergy: z.boolean().default(true),
+    /** shm: the rotating reference-circle phasor whose shadow is the motion. */
+    showReferenceCircle: z.boolean().default(false),
+    /** shm: time span of the graphs, in periods. */
+    periodsShown: z.number().positive().max(10).default(3),
+    /** traveling / superposition: wavelength in m. */
+    wavelength: z.number().positive().default(1),
+    /** traveling / superposition: frequency in Hz. */
+    frequency: z.number().positive().default(1),
+    /** traveling / superposition: direction of wave 1. */
+    direction: z.enum(["right", "left"]).default("right"),
+    /** superposition: wave 2 (defaults: same amplitude, wavelength, direction; φ₂ = 0). */
+    amplitude2: z.number().positive().optional(),
+    wavelength2: z.number().positive().optional(),
+    direction2: z.enum(["right", "left"]).optional(),
+    phase2: z.number().default(0),
+    /** traveling / superposition: length of string shown, in m (default 3λ). */
+    xMax: z.number().positive().optional(),
+    /** traveling: x of the probe particle, in m (default λ/4). */
+    probeX: z.number().min(0).optional(),
+    /** traveling: faint snapshot of the wave at t = 0. */
+    showGhost: z.boolean().default(true),
+    /** standing: string ends (fixed-*) or pipe ends (open/closed-*). Position x is measured from the left end. */
+    boundary: z.enum(["fixed-fixed", "fixed-free", "open-open", "closed-open", "closed-closed"]).default("fixed-fixed"),
+    /** standing: string or pipe length L in m. */
+    stringLength: z.number().positive().default(1),
+    /** standing / doppler: wave speed in m/s. */
+    waveSpeed: z.number().positive().default(100),
+    /** standing: mode number (n for both-same ends; for one closed/free end the harmonic is 2n − 1). */
+    harmonic: z.number().int().min(1).default(1),
+    maxHarmonic: z.number().int().min(1).max(8).default(5),
+    /** standing (strings): draw the two counter-travelling waves that build the pattern. */
+    showComponents: z.boolean().default(false),
+    /** beats: the two frequencies in Hz. */
+    f1: z.number().positive().default(10),
+    f2: z.number().positive().default(12),
+    /** beats: time window in s (default three beat periods). */
+    duration: z.number().positive().optional(),
+    /** doppler: source frequency (Hz), source speed and observer speed (m/s, observer moves towards the source). */
+    sourceFrequency: z.number().positive().default(500),
+    sourceSpeed: z.number().min(0).default(40),
+    observerSpeed: z.number().min(0).default(0),
+    /** Which parameters get sliders (default depends on mode). */
+    sliders: z.array(owtWaveSliderSchema).optional(),
+    /** Override a slider's range, e.g. { amplitude: { min: 0.05, max: 0.3, step: 0.05 } }. */
+    ranges: z.partialRecord(owtWaveSliderSchema, owtRangeSchema).optional(),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    if (cfg.harmonic > cfg.maxHarmonic) {
+      ctx.addIssue({ code: "custom", path: ["harmonic"], message: "harmonic must not exceed maxHarmonic" });
+    }
+    if (cfg.probeX !== undefined && cfg.xMax !== undefined && cfg.probeX > cfg.xMax) {
+      ctx.addIssue({ code: "custom", path: ["probeX"], message: "probeX must lie on the string (≤ xMax)" });
+    }
+    if (cfg.mode === "shm" && cfg.oscillator === "spring" && cfg.damping >= cfg.omega) {
+      ctx.addIssue({ code: "custom", path: ["damping"], message: "damping must be below omega (underdamped only)" });
+    }
+    for (const [key, r] of Object.entries(cfg.ranges ?? {})) {
+      if (r && !(r.min < r.max)) {
+        ctx.addIssue({ code: "custom", path: ["ranges", key], message: "min must be below max" });
+      }
+    }
+  });
+
+const owtThermoSliderSchema = z.enum([
+  "finalVolume",
+  "finalPressure",
+  "polytropicN",
+  "coldTemperature",
+  "compressionRatio",
+  "pressureRatio",
+  "temperature",
+  "volume",
+]);
+
+/**
+ * Ideal-gas / thermodynamics lab on a p–V diagram. Pressures in kPa, volumes
+ * in L (so kPa·L = J), temperatures in K, R = 8.314 J/(mol·K).
+ * process: one process from state A with W (shaded area), ΔU, Q readouts.
+ * compare: isothermal vs adiabatic from A to the same final volume.
+ * cycle: rectangle (2 isobars + 2 isochores), carnot or otto, with a per-leg
+ * Q, W, ΔU table, net work (enclosed area) and efficiency.
+ * kinetic: gas molecules in a box (Play to animate) with v_rms, P, U readouts.
+ */
+export const owtThermoLabSchema = z
+  .object({
+    component: z.literal("owt-thermo-lab"),
+    mode: z.enum(["process", "compare", "cycle", "kinetic"]),
+    /** monatomic γ = 5/3, diatomic γ = 7/5. */
+    gas: z.enum(["monatomic", "diatomic"]).default("monatomic"),
+    /** Offer monatomic / diatomic toggle buttons. */
+    gasToggle: z.boolean().default(true),
+    /** Amount of gas in mol. */
+    moles: z.number().positive().default(1),
+    /** State A (process/compare/cycle: rectangle bottom-left, carnot hot-isotherm start, otto start of compression). */
+    initial: z.object({ p: z.number().positive(), v: z.number().positive() }).default({ p: 100, v: 25 }),
+    /** process mode: which process. */
+    process: z.enum(["isothermal", "isobaric", "isochoric", "adiabatic", "polytropic"]).default("isothermal"),
+    /** Offer buttons to switch process. */
+    processToggle: z.boolean().default(false),
+    /** polytropic exponent n in pVⁿ = const. */
+    polytropicN: z.number().default(1.5),
+    /** Final volume in L (process except isochoric, compare, rectangle right edge, carnot state B). Default 2 × initial. */
+    finalVolume: z.number().positive().optional(),
+    /** Final pressure in kPa (isochoric process; rectangle top edge). Default 2 × initial. */
+    finalPressure: z.number().positive().optional(),
+    /** cycle: which cycle. */
+    cycle: z.enum(["rectangle", "carnot", "otto"]).default("rectangle"),
+    /** carnot: cold reservoir temperature in K (hot = T at A). Default T_A / 2. */
+    coldTemperature: z.number().positive().optional(),
+    /** otto: compression ratio V_max / V_min. */
+    compressionRatio: z.number().gt(1).default(4),
+    /** otto: pressure rise ratio in the heating step (p₃ / p₂). */
+    pressureRatio: z.number().gt(1).default(2),
+    /** Faint isotherms behind the p–V diagram. */
+    showIsotherms: z.boolean().default(true),
+    /** kinetic: temperature in K. */
+    temperature: z.number().positive().default(300),
+    /** kinetic: box volume in L. */
+    volume: z.number().positive().default(25),
+    /** kinetic: molar mass in g/mol (4 He, 28 N₂, 32 O₂). */
+    molarMass: z.number().positive().default(4),
+    /** kinetic: number of molecules drawn (the readouts still use `moles`). */
+    particles: z.number().int().min(5).max(120).default(40),
+    /** kinetic: deterministic seed for starting positions. */
+    seed: z.number().int().default(7),
+    /** Which parameters get sliders (default depends on mode). */
+    sliders: z.array(owtThermoSliderSchema).optional(),
+    ranges: z.partialRecord(owtThermoSliderSchema, owtRangeSchema).optional(),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    if (cfg.mode === "process" && cfg.process === "polytropic" && Math.abs(cfg.polytropicN - 1) < 1e-9) {
+      ctx.addIssue({ code: "custom", path: ["polytropicN"], message: "n = 1 is isothermal; use process: isothermal" });
+    }
+    for (const [key, r] of Object.entries(cfg.ranges ?? {})) {
+      if (r && !(r.min < r.max)) {
+        ctx.addIssue({ code: "custom", path: ["ranges", key], message: "min must be below max" });
+      }
+    }
+  });
+
+// ---------- Mechanics I (mfe) interactives ----------
+
+/** One slider. min === max pins the value: it is shown as a fixed readout with no slider. */
+const mfeRangeSchema = z
+  .object({
+    min: z.number(),
+    max: z.number(),
+    step: z.number().positive(),
+    initial: z.number(),
+  })
+  .refine((r) => r.min <= r.initial && r.initial <= r.max, {
+    message: "need min ≤ initial ≤ max",
+  });
+
+/**
+ * Kinematics lab (SI units, g configurable, default 10 m/s²). Any slider
+ * key left out gets a per-mode default; keys a mode does not use are ignored.
+ *  line:       x0 (m), u (m/s), a (m/s²). Track + stacked x-t, v-t, a-t graphs with a time scrubber.
+ *  projectile: speed (m/s), angle (° above horizontal), height (m, launch height above the ground).
+ *  river-boat: river (m/s, flow to the right), boat (m/s, relative to water),
+ *              heading (° from straight across; + = upstream).
+ *  rain-man:   rain (m/s, vertical fall speed), wind (m/s, rain's horizontal velocity, + = right),
+ *              man (m/s, + = right).
+ *  circular:   radius (m), speed (m/s at t = 0), tangential (m/s², 0 = uniform circular motion).
+ */
+export const mfeMotionLabSchema = z.object({
+  component: z.literal("mfe-motion-lab"),
+  mode: z.enum(["line", "projectile", "river-boat", "rain-man", "circular"]).default("line"),
+  g: z.number().positive().default(10),
+  sliders: z
+    .object({
+      x0: mfeRangeSchema.optional(),
+      u: mfeRangeSchema.optional(),
+      a: mfeRangeSchema.optional(),
+      speed: mfeRangeSchema.optional(),
+      angle: mfeRangeSchema.optional(),
+      height: mfeRangeSchema.optional(),
+      river: mfeRangeSchema.optional(),
+      boat: mfeRangeSchema.optional(),
+      heading: mfeRangeSchema.optional(),
+      rain: mfeRangeSchema.optional(),
+      wind: mfeRangeSchema.optional(),
+      man: mfeRangeSchema.optional(),
+      radius: mfeRangeSchema.optional(),
+      tangential: mfeRangeSchema.optional(),
+    })
+    .default({}),
+  /** line, and circular with tangential ≠ 0: the time axis runs from 0 to this many seconds. */
+  duration: z.number().positive().default(10),
+  /** line: which stacked graphs to draw. */
+  graphs: z.array(z.enum(["x", "v", "a"])).min(1).default(["x", "v", "a"]),
+  /** line: shade the area under v-t up to t (the displacement). */
+  showArea: z.boolean().default(true),
+  /** line: draw the tangent to x-t at t (its slope is v). */
+  showTangent: z.boolean().default(true),
+  /** projectile: velocity and its components at t; circular: velocity and acceleration arrows. */
+  showVectors: z.boolean().default(true),
+  /** projectile: also trace the complementary angle 90° − θ at the same speed. */
+  showComplementary: z.boolean().default(false),
+  /** river-boat: river width in metres. */
+  riverWidth: z.number().positive().default(100),
+  caption: z.string().optional(),
+});
+
+/**
+ * Forces lab: free-body diagrams with live Newton's-law bookkeeping (SI,
+ * g default 10 m/s²). Any slider key left out gets a per-mode default.
+ *  incline:        m (kg), angle (°), muS, muK, force (N, applied along the slope, + = up the slope).
+ *  friction:       m (kg), muS, muK, force (N, horizontal pull). Includes the f-vs-F graph.
+ *  lift:           m (kg), a (m/s², lift acceleration, + = up). Ground frame vs lift frame (pseudo force).
+ *  atwood:         m1, m2 (kg) over an ideal pulley.
+ *  table-pulley:   m1 (kg, on the table), m2 (kg, hanging), mu (table; static = kinetic).
+ *  block-on-block: m1 (kg, top), m2 (kg, bottom), mu (between the blocks; floor smooth), force (N).
+ *  banking:        m (kg), angle (° of bank), radius (m), speed (m/s), mu.
+ *  vertical-circle: m (kg), radius (m), speed (m/s at the lowest point), theta (° from the lowest point).
+ *  spring:         m (kg), k (N/m), x0 (m, initial compression), mu (floor). Released from rest; a
+ *                  position slider runs over the first pass, with F-x graph and energy bars.
+ */
+export const mfeForceLabSchema = z.object({
+  component: z.literal("mfe-force-lab"),
+  mode: z
+    .enum([
+      "incline",
+      "friction",
+      "lift",
+      "atwood",
+      "table-pulley",
+      "block-on-block",
+      "banking",
+      "vertical-circle",
+      "spring",
+    ])
+    .default("incline"),
+  g: z.number().positive().default(10),
+  sliders: z
+    .object({
+      m: mfeRangeSchema.optional(),
+      m1: mfeRangeSchema.optional(),
+      m2: mfeRangeSchema.optional(),
+      angle: mfeRangeSchema.optional(),
+      muS: mfeRangeSchema.optional(),
+      muK: mfeRangeSchema.optional(),
+      mu: mfeRangeSchema.optional(),
+      force: mfeRangeSchema.optional(),
+      a: mfeRangeSchema.optional(),
+      radius: mfeRangeSchema.optional(),
+      speed: mfeRangeSchema.optional(),
+      theta: mfeRangeSchema.optional(),
+      k: mfeRangeSchema.optional(),
+      x0: mfeRangeSchema.optional(),
+    })
+    .default({}),
+  /** block-on-block: which block the force F acts on. */
+  pushOn: z.enum(["bottom", "top"]).default("bottom"),
+  /** lift: the frame the free-body diagram starts in (the student can toggle). */
+  frame: z.enum(["ground", "lift"]).default("ground"),
+  /** incline, banking: draw the components of the weight (incline) or of N and f (banking). */
+  showComponents: z.boolean().default(true),
+  /** friction: f-vs-F graph; vertical-circle, spring: energy bars and graphs. */
+  showGraph: z.boolean().default(true),
+  caption: z.string().optional(),
+});
+
+// ---------- Optics & Modern Physics (omp) interactives ----------
+
+/** A slider: bounds, step and starting value. min === max hides the slider (value locked). */
+const ompRangeSchema = z.object({
+  min: z.number(),
+  max: z.number(),
+  step: z.number().positive(),
+  initial: z.number(),
+});
+
+type OmpRange = z.infer<typeof ompRangeSchema>;
+
+function ompCheckRanges(
+  ctx: z.RefinementCtx,
+  ranges: Record<string, OmpRange>,
+  positive: string[] = [],
+) {
+  for (const [key, r] of Object.entries(ranges)) {
+    if (!(r.min <= r.initial && r.initial <= r.max)) {
+      ctx.addIssue({ code: "custom", path: [key], message: "need min ≤ initial ≤ max" });
+    }
+    if (positive.includes(key) && r.min <= 0) {
+      ctx.addIssue({ code: "custom", path: [key, "min"], message: "must be positive" });
+    }
+  }
+}
+
+/**
+ * The optics bench. Image modes (plane/concave/convex mirror, convex/concave
+ * lens) trace the three principal rays from a draggable object (New
+ * Cartesian signs, light travelling left to right, distances in cm) and
+ * read out u, v, f, m and the nature of the image. `refraction` is Snell's
+ * law at a flat boundary (with critical angle and TIR), `apparent-depth`
+ * shows the virtual image of an object under a flat surface at a chosen
+ * viewing angle, and `prism` traces a ray through a prism with a
+ * deviation-vs-incidence graph and the minimum-deviation point.
+ */
+export const ompRayBenchSchema = z
+  .object({
+    component: z.literal("omp-ray-bench"),
+    mode: z
+      .enum([
+        "plane-mirror",
+        "concave-mirror",
+        "convex-mirror",
+        "convex-lens",
+        "concave-lens",
+        "refraction",
+        "apparent-depth",
+        "prism",
+      ])
+      .default("convex-lens"),
+    /** Image modes: object distance |u| in cm (the object sits to the left). */
+    objectDistance: ompRangeSchema.default({ min: 5, max: 60, step: 1, initial: 30 }),
+    /** Curved mirror / lens modes: |f| in cm; the sign comes from the mode. */
+    focalLength: ompRangeSchema.default({ min: 5, max: 30, step: 1, initial: 15 }),
+    /** Image modes: object height in cm. */
+    objectHeight: z.number().positive().default(3),
+    /** Image modes: which principal rays to draw. */
+    rays: z.array(z.enum(["parallel", "centre", "focal"])).min(1).default(["parallel", "centre", "focal"]),
+    /** Image modes: show the mirror/lens formula with the live numbers substituted. */
+    showFormula: z.boolean().default(true),
+    /** Image modes: horizontal extent of the bench in cm (±). Omitted = fitted to the ranges. */
+    benchHalfWidth: z.number().positive().optional(),
+    /** refraction: medium the ray starts in (top). apparent-depth: medium of the observer (top). */
+    n1: ompRangeSchema.default({ min: 1, max: 2.5, step: 0.01, initial: 1 }),
+    /** refraction: medium the ray enters (bottom). apparent-depth: medium holding the object (bottom). */
+    n2: ompRangeSchema.default({ min: 1, max: 2.5, step: 0.01, initial: 1.5 }),
+    /** refraction: angle of incidence in degrees. */
+    incidence: ompRangeSchema.default({ min: 0, max: 89, step: 1, initial: 30 }),
+    /** apparent-depth: real depth of the object in cm. */
+    depth: ompRangeSchema.default({ min: 5, max: 40, step: 1, initial: 20 }),
+    /** apparent-depth: angle of the viewing ray to the normal, in the observer's medium (degrees). */
+    viewAngle: ompRangeSchema.default({ min: 0, max: 70, step: 1, initial: 10 }),
+    /** prism: apex (refracting) angle A in degrees. */
+    apexAngle: ompRangeSchema.default({ min: 30, max: 75, step: 1, initial: 60 }),
+    /** prism: refractive index of the prism (surroundings are air). */
+    prismIndex: ompRangeSchema.default({ min: 1.2, max: 2, step: 0.01, initial: 1.5 }),
+    /** prism: angle of incidence i in degrees. */
+    prismIncidence: ompRangeSchema.default({ min: 20, max: 89, step: 1, initial: 40 }),
+    /** prism: draw the δ-vs-i curve with the current point and δ_min. */
+    showDeviationGraph: z.boolean().default(true),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    ompCheckRanges(
+      ctx,
+      {
+        objectDistance: cfg.objectDistance,
+        focalLength: cfg.focalLength,
+        n1: cfg.n1,
+        n2: cfg.n2,
+        incidence: cfg.incidence,
+        depth: cfg.depth,
+        viewAngle: cfg.viewAngle,
+        apexAngle: cfg.apexAngle,
+        prismIndex: cfg.prismIndex,
+        prismIncidence: cfg.prismIncidence,
+      },
+      ["objectDistance", "focalLength", "depth"],
+    );
+    for (const key of ["n1", "n2", "prismIndex"] as const) {
+      if (cfg[key].min < 1) ctx.addIssue({ code: "custom", path: [key, "min"], message: "refractive index must be ≥ 1" });
+    }
+    for (const key of ["incidence", "viewAngle", "prismIncidence"] as const) {
+      if (cfg[key].min < 0 || cfg[key].max > 89) {
+        ctx.addIssue({ code: "custom", path: [key], message: "angles must lie in 0–89°" });
+      }
+    }
+    if (cfg.apexAngle.min < 10 || cfg.apexAngle.max > 80) {
+      ctx.addIssue({ code: "custom", path: ["apexAngle"], message: "apex angle must lie in 10–80°" });
+    }
+  });
+
+const ompMetalSchema = z.object({
+  name: z.string().min(1),
+  /** Work function in eV. */
+  workFunction: z.number().positive(),
+});
+
+/**
+ * The quantum lab. `photoelectric`: light of chosen wavelength and
+ * intensity on a metal plate, a collector voltage, electrons that reach (or
+ * turn back before) the collector, and the I–V curve with the stopping
+ * potential. `einstein-graph`: stopping potential (or K_max) against
+ * frequency for several metals, parallel lines of slope h/e. `de-broglie`:
+ * a particle accelerated through V and its wavelength λ = h/√(2mqV).
+ * `bohr-levels`: hydrogen-like energy levels, a transition between two
+ * levels, the photon's wavelength and series, and the orbits with n de
+ * Broglie wavelengths fitted round the circumference. Uses hc = 1240 eV·nm.
+ */
+export const ompQuantumLabSchema = z
+  .object({
+    component: z.literal("omp-quantum-lab"),
+    mode: z.enum(["photoelectric", "einstein-graph", "de-broglie", "bohr-levels"]).default("photoelectric"),
+    /** Metals on offer (NCERT work functions by default). */
+    metals: z
+      .array(ompMetalSchema)
+      .min(1)
+      .max(6)
+      .default([
+        { name: "Caesium", workFunction: 2.14 },
+        { name: "Potassium", workFunction: 2.3 },
+        { name: "Sodium", workFunction: 2.75 },
+        { name: "Calcium", workFunction: 3.2 },
+        { name: "Copper", workFunction: 4.65 },
+        { name: "Platinum", workFunction: 5.65 },
+      ]),
+    /** Index into metals of the one selected at start. */
+    initialMetal: z.number().int().min(0).default(0),
+    /** photoelectric: wavelength in nm. */
+    wavelength: ompRangeSchema.default({ min: 150, max: 700, step: 5, initial: 400 }),
+    /** photoelectric: light intensity in % of the lamp's maximum. */
+    intensity: ompRangeSchema.default({ min: 0, max: 100, step: 5, initial: 60 }),
+    /** photoelectric: collector potential relative to the emitter, in volts. */
+    voltage: ompRangeSchema.default({ min: -5, max: 5, step: 0.1, initial: 0 }),
+    /** einstein-graph: frequency in units of 10^14 Hz. */
+    frequency: ompRangeSchema.default({ min: 4, max: 16, step: 0.1, initial: 8 }),
+    /** einstein-graph: plot stopping potential (V) or K_max (eV). */
+    graphY: z.enum(["stopping-potential", "kmax"]).default("stopping-potential"),
+    /** de-broglie: the particle being accelerated. */
+    particle: z.enum(["electron", "proton", "alpha"]).default("electron"),
+    /** de-broglie: offer buttons to switch particle. */
+    allowParticleChange: z.boolean().default(true),
+    /** de-broglie: accelerating potential in volts. */
+    acceleratingVoltage: ompRangeSchema.default({ min: 10, max: 1000, step: 10, initial: 100 }),
+    /** bohr-levels: Z of the hydrogen-like ion (1 = H, 2 = He⁺, 3 = Li²⁺). */
+    atomicNumber: z.number().int().min(1).max(3).default(1),
+    /** bohr-levels: starting upper and lower levels (1–7, lower < upper). */
+    upperLevel: z.number().int().min(2).max(7).default(3),
+    lowerLevel: z.number().int().min(1).max(6).default(2),
+    /** bohr-levels: emission (photon out, downward arrow) or absorption. */
+    transition: z.enum(["emission", "absorption"]).default("emission"),
+    /** bohr-levels: draw the orbits with the standing de Broglie wave on the upper orbit. */
+    showOrbits: z.boolean().default(true),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    ompCheckRanges(
+      ctx,
+      {
+        wavelength: cfg.wavelength,
+        intensity: cfg.intensity,
+        voltage: cfg.voltage,
+        frequency: cfg.frequency,
+        acceleratingVoltage: cfg.acceleratingVoltage,
+      },
+      ["wavelength", "frequency", "acceleratingVoltage"],
+    );
+    if (cfg.intensity.min < 0) ctx.addIssue({ code: "custom", path: ["intensity", "min"], message: "must be ≥ 0" });
+    if (cfg.initialMetal >= cfg.metals.length) {
+      ctx.addIssue({ code: "custom", path: ["initialMetal"], message: "initialMetal must index into metals" });
+    }
+    if (cfg.lowerLevel >= cfg.upperLevel) {
+      ctx.addIssue({ code: "custom", path: ["lowerLevel"], message: "lowerLevel must be below upperLevel" });
+    }
+  });
+
+// ---------- Mechanics II (mrg) interactives ----------
+
+/** A slider: bounds, step and starting value (SI units unless noted). */
+const mrgRangeSchema = z
+  .object({
+    min: z.number(),
+    max: z.number(),
+    step: z.number().positive(),
+    initial: z.number(),
+  })
+  .refine((r) => r.min <= r.initial && r.initial <= r.max, { message: "need min ≤ initial ≤ max" });
+
+/**
+ * One-dimensional collision track (g = 10 m/s², SI units). Two carts meet
+ * through a springy bumper that pushes with a constant force: the
+ * compression phase ends at the common velocity, the restitution phase
+ * gives back e times the approach speed. A time scrubber and a Play button
+ * run the event; a graph below plots velocity, momentum or kinetic energy
+ * against time.
+ * - collision: carts m1, m2 with velocities u1, u2 (+ = rightwards) and
+ *   coefficient of restitution e; ground or centre-of-mass frame.
+ * - explosion: the two carts start locked together at v0; a spring
+ *   releases `energy` joules and pushes them apart; the COM keeps gliding.
+ * - wall: a ball (m1, u1 towards a rigid wall) bounces with restitution e;
+ *   the graph is the force-time pulse (contactTime ms, pulse shape) whose
+ *   shaded area is the impulse, accumulated up to the scrubber.
+ */
+export const mrgCollisionLabSchema = z.object({
+  component: z.literal("mrg-collision-lab"),
+  mode: z.enum(["collision", "explosion", "wall"]).default("collision"),
+  /** Mass of cart 1 (the ball in wall mode), kg. */
+  m1: mrgRangeSchema.default({ min: 0.5, max: 5, step: 0.5, initial: 2 }),
+  /** Mass of cart 2, kg. */
+  m2: mrgRangeSchema.default({ min: 0.5, max: 5, step: 0.5, initial: 1 }),
+  /** Velocity of cart 1 before, m/s (wall mode: its speed towards the wall; sign ignored). */
+  u1: mrgRangeSchema.default({ min: -6, max: 6, step: 0.5, initial: 4 }),
+  /** Velocity of cart 2 before, m/s. */
+  u2: mrgRangeSchema.default({ min: -6, max: 6, step: 0.5, initial: 0 }),
+  /** Coefficient of restitution (collision, wall). */
+  e: mrgRangeSchema.default({ min: 0, max: 1, step: 0.05, initial: 1 }),
+  /** explosion: common velocity before the spring is released, m/s. */
+  v0: mrgRangeSchema.default({ min: -3, max: 3, step: 0.5, initial: 0 }),
+  /** explosion: energy released by the spring, J. */
+  energy: mrgRangeSchema.default({ min: 0, max: 50, step: 1, initial: 12 }),
+  /** wall: duration of contact, milliseconds. */
+  contactTime: mrgRangeSchema.default({ min: 5, max: 200, step: 5, initial: 50 }),
+  /** wall: shape of the force-time pulse (same area, different peak). */
+  pulse: z.enum(["rectangle", "triangle", "half-sine"]).default("triangle"),
+  /**
+   * Sliders shown; omitted = per-mode default (collision: m1 m2 u1 u2 e;
+   * explosion: m1 m2 v0 energy; wall: m1 u1 e contactTime). Hidden
+   * quantities stay fixed at their `initial`.
+   */
+  controls: z.array(z.enum(["m1", "m2", "u1", "u2", "e", "v0", "energy", "contactTime"])).optional(),
+  /** Mark the centre of mass on the track (collision, explosion). */
+  showCom: z.boolean().default(true),
+  /** Reference frame to start in (collision, explosion). */
+  frame: z.enum(["ground", "com"]).default("ground"),
+  /** Offer a ground/COM frame toggle (collision, explosion). */
+  allowFrameToggle: z.boolean().default(true),
+  /** Graph under the track (collision, explosion); wall mode always shows F against t. */
+  graph: z.enum(["velocity", "momentum", "energy", "none"]).default("velocity"),
+  /**
+   * Live values; omitted = per-mode default (collision: velocities,
+   * momentum, energy; explosion: velocities, momentum, energy, com;
+   * wall: impulse, velocities).
+   */
+  readouts: z.array(z.enum(["velocities", "momentum", "energy", "com", "impulse"])).optional(),
+  caption: z.string().optional(),
+});
+
+/**
+ * Rolling and rotation lab (g = 10 m/s²). Bodies: ring (k²/R² = 1), disc
+ * (1/2), solid-sphere (2/5), hollow-sphere (2/3), plus sliding-block in
+ * the incline race.
+ * - velocities: a wheel whose centre speed v and spin ω are separate
+ *   sliders (ω > 0 = clockwise, the forward-rolling sense); every marked
+ *   rim point shows v_cm + ω × r, split into its translation and rotation
+ *   parts, with the contact-point velocity, rolling status, instantaneous
+ *   centre and optional cycloid trace. lockRolling ties ω = v/R.
+ * - incline: race of `bodies` down an incline of length `length`, angle
+ *   slider, optional friction slider μ (below μ_min a body slips);
+ *   progress bars, table of a, time, final speed and KE split.
+ * - slip-to-roll: a `body` launched along a rough floor with v0 and ω0;
+ *   kinetic friction drives v and ωR together until pure rolling; graph
+ *   of v and ωR against t, and L about the contact point stays constant.
+ */
+export const mrgRollingLabSchema = z.object({
+  component: z.literal("mrg-rolling-lab"),
+  mode: z.enum(["velocities", "incline", "slip-to-roll"]).default("velocities"),
+  /** velocities, slip-to-roll: the body (velocities only uses it for the KE readout). */
+  body: z.enum(["ring", "disc", "solid-sphere", "hollow-sphere"]).default("disc"),
+  /** Radius in metres (velocities, slip-to-roll). */
+  radius: z.number().positive().default(0.5),
+  /** velocities: speed of the centre, m/s (+ = rightwards). */
+  v: mrgRangeSchema.default({ min: -4, max: 4, step: 0.5, initial: 2 }),
+  /** velocities: angular velocity, rad/s (+ = clockwise). */
+  omega: mrgRangeSchema.default({ min: -12, max: 12, step: 0.5, initial: 4 }),
+  /** velocities: hide the ω slider and hold ω = v/R (pure rolling). */
+  lockRolling: z.boolean().default(false),
+  /** velocities: draw the translation and rotation parts at each rim point. */
+  showParts: z.boolean().default(true),
+  /** velocities: mark the instantaneous centre of rotation. */
+  showIcr: z.boolean().default(false),
+  /** velocities: trace the path of the marked rim point (cycloid when rolling). */
+  showTrace: z.boolean().default(false),
+  /** incline: bodies in the race (1-5, distinct). */
+  bodies: z
+    .array(z.enum(["ring", "disc", "solid-sphere", "hollow-sphere", "sliding-block"]))
+    .min(1)
+    .max(5)
+    .default(["ring", "disc", "solid-sphere"]),
+  /** incline: angle in degrees. */
+  angle: mrgRangeSchema.default({ min: 10, max: 60, step: 5, initial: 30 }),
+  /** incline: length of the slope, m. */
+  length: z.number().positive().default(5),
+  /** incline: friction coefficient slider; omitted = rough enough for pure rolling (block frictionless). */
+  mu: mrgRangeSchema.optional(),
+  /** slip-to-roll: launch speed, m/s. */
+  v0: mrgRangeSchema.default({ min: 0, max: 8, step: 0.5, initial: 7 }),
+  /** slip-to-roll: launch spin, rad/s (+ = forward topspin, − = backspin). */
+  omega0: mrgRangeSchema.default({ min: -20, max: 20, step: 1, initial: 0 }),
+  /** slip-to-roll: kinetic friction coefficient. */
+  muK: mrgRangeSchema.default({ min: 0.1, max: 0.8, step: 0.05, initial: 0.2 }),
+  /** Show the kinetic-energy split (translation vs rotation). */
+  showEnergy: z.boolean().default(true),
+  caption: z.string().optional(),
+});
+
+// ---------- Electricity & Magnetism (em) interactives ----------
+
+const emRangeSchema = z.object({
+  min: z.number(),
+  max: z.number(),
+  step: z.number().positive(),
+  initial: z.number(),
+});
+
+const emPointChargeSchema = z.object({
+  /** Charge in microcoulombs (μC); the sign matters. */
+  q: z.number(),
+  /** Position in grid units (metres, or centimetres when unit = "cm"). */
+  pos: vec2Schema,
+  /** LaTeX name; default q_1, q_2, ... */
+  label: z.string().optional(),
+  /** Whether the student may drag this charge. */
+  draggable: z.boolean().default(true),
+});
+
+/**
+ * Point charges on a grid (k = 9 × 10⁹ SI). Draggable charges and probe
+ * points; field lines traced from the charges, a field-arrow grid,
+ * equipotential contours, Coulomb forces on one charge, and the work done
+ * moving a test charge between two points. Readouts in SI via KaTeX.
+ */
+export const emFieldCanvasSchema = z
+  .object({
+    component: z.literal("em-field-canvas"),
+    mode: z
+      .enum(["field-lines", "field-vectors", "equipotentials", "force", "work"])
+      .default("field-lines"),
+    charges: z
+      .array(emPointChargeSchema)
+      .min(1)
+      .max(6)
+      .default([
+        { q: 2, pos: [-2, 0], draggable: true },
+        { q: -2, pos: [2, 0], draggable: true },
+      ]),
+    /** When set, each charge gets a q slider (μC) with this range. */
+    chargeSlider: z
+      .object({ min: z.number(), max: z.number(), step: z.number().positive() })
+      .optional(),
+    /** Probe point P (field/potential readouts); point A in work mode. */
+    probe: vec2Schema.default([0, 2]),
+    /** Point B in work mode. */
+    probeB: vec2Schema.default([3, 2]),
+    /** Test charge q₀ in μC placed at the probe (force readout, work mode). */
+    testCharge: z.number().default(1),
+    /** force mode: index into `charges` of the charge whose net force is shown. */
+    forceOn: z.number().int().min(0).default(0),
+    unit: z.enum(["m", "cm"]).default("m"),
+    window: plotWindowSchema.default({ xmin: -5, xmax: 5, ymin: -4, ymax: 4 }),
+    /** Grid step dragged handles snap to, in grid units. */
+    snap: z.number().positive().default(0.5),
+    /** Layer overrides; omitted = a sensible per-mode default. */
+    showLines: z.boolean().optional(),
+    showVectors: z.boolean().optional(),
+    showEquipotentials: z.boolean().optional(),
+    showProbe: z.boolean().optional(),
+    /** Field lines drawn per μC of charge (line count ∝ q). */
+    linesPerMicroC: z.number().positive().default(4),
+    /** Equipotential levels in volts; omitted = automatic. */
+    potentialLevels: z.array(z.number()).optional(),
+    /** Live values to show; omitted = a sensible per-mode default. */
+    readouts: z
+      .array(z.enum(["field", "components", "potential", "superposition", "force", "work", "dipole"]))
+      .optional(),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    if (cfg.forceOn >= cfg.charges.length) {
+      ctx.addIssue({ code: "custom", path: ["forceOn"], message: "forceOn must index an existing charge" });
+    }
+    if (cfg.mode === "force" && cfg.charges.length < 2) {
+      ctx.addIssue({ code: "custom", path: ["charges"], message: "force mode needs at least two charges" });
+    }
+    if (cfg.window.xmin >= cfg.window.xmax || cfg.window.ymin >= cfg.window.ymax) {
+      ctx.addIssue({ code: "custom", path: ["window"], message: "window must have positive width and height" });
+    }
+  });
+
+/**
+ * Circuit lab for time-varying circuits. rc / lr: charging or discharging
+ * transients with τ marked. ac-element: a single R, L or C across an AC
+ * source (waveforms + rotating phasors). lcr: series LCR phasor diagram,
+ * impedance and power factor. resonance: I_rms against frequency with
+ * bandwidth and Q. Units: resistance Ω, inductance mH, capacitance μF,
+ * frequency Hz, emf V (battery EMF in rc/lr, peak voltage V₀ in AC modes).
+ */
+export const emCircuitLabSchema = z
+  .object({
+    component: z.literal("em-circuit-lab"),
+    mode: z.enum(["rc", "lr", "ac-element", "lcr", "resonance"]).default("lcr"),
+    /** rc / lr: charging (current growth) or discharging (decay). */
+    process: z.enum(["charge", "discharge"]).default("charge"),
+    emf: z.number().positive().default(10),
+    /** ac-element mode: the single element across the source. */
+    element: z.enum(["R", "L", "C"]).default("R"),
+    resistance: emRangeSchema.default({ min: 10, max: 500, step: 10, initial: 100 }),
+    inductance: emRangeSchema.default({ min: 10, max: 1000, step: 10, initial: 100 }),
+    capacitance: emRangeSchema.default({ min: 1, max: 100, step: 1, initial: 10 }),
+    frequency: emRangeSchema.default({ min: 10, max: 500, step: 5, initial: 50 }),
+    /** Sliders to show; omitted = a sensible per-mode default. */
+    sliders: z.array(z.enum(["R", "L", "C", "f"])).optional(),
+    showPhasors: z.boolean().default(true),
+    showWaveforms: z.boolean().default(true),
+    /** rc / lr: keep the starting curve as a dashed ghost while sliders move. */
+    showGhost: z.boolean().default(true),
+    /** Live values to show; omitted = a sensible per-mode default. */
+    readouts: z
+      .array(
+        z.enum(["tau", "instant", "energy", "reactance", "impedance", "phase", "power", "resonance", "quality"]),
+      )
+      .optional(),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    for (const key of ["resistance", "inductance", "capacitance", "frequency"] as const) {
+      const r = cfg[key];
+      if (r.min <= 0 || r.min > r.max || r.initial < r.min || r.initial > r.max) {
+        ctx.addIssue({ code: "custom", path: [key], message: "need 0 < min ≤ initial ≤ max" });
+      }
+    }
+  });
+
 export const interactiveConfigSchema = z.discriminatedUnion("component", [
+  emFieldCanvasSchema,
+  emCircuitLabSchema,
+  ompRayBenchSchema,
+  ompQuantumLabSchema,
   functionMachineSchema,
   functionEvaluatorSchema,
   graphExplorerSchema,
@@ -1330,6 +2113,12 @@ export const interactiveConfigSchema = z.discriminatedUnion("component", [
   statsDistributionBuilderSchema,
   statsScatterRegressionSchema,
   statsNormalSamplingLabSchema,
+  mrgCollisionLabSchema,
+  mrgRollingLabSchema,
+  owtWaveLabSchema,
+  owtThermoLabSchema,
+  mfeMotionLabSchema,
+  mfeForceLabSchema,
 ]);
 
 export const interactiveBlockSchema = z.object({

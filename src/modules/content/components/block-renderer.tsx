@@ -97,7 +97,9 @@ export function BlockRenderer({
                 {block.title && (
                   <p className="mb-1 flex items-center gap-2 font-semibold">
                     <Icon className={`size-4 shrink-0 ${icon}`} aria-hidden />
-                    {block.title}
+                    <span>
+                      <RichText text={block.title} />
+                    </span>
                   </p>
                 )}
                 <p className="leading-7 whitespace-pre-wrap">

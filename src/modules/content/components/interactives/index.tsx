@@ -1,6 +1,8 @@
 import type { InteractiveConfig } from "../../schemas/blocks";
 import { CircleToWave } from "./circle-to-wave";
 import { CompositionMachine } from "./composition-machine";
+import { EmCircuitLab } from "./em-circuit-lab";
+import { EmFieldCanvas } from "./em-field-canvas";
 import { EpsilonDelta } from "./epsilon-delta";
 import { EquationSolutionViewer } from "./equation-solution-viewer";
 import { FamilyGallery } from "./family-gallery";
@@ -12,6 +14,14 @@ import { LimitExplorer } from "./limit-explorer";
 import { LinearSystemLines } from "./linear-system-lines";
 import { MatrixRowReducer } from "./matrix-row-reducer";
 import { MatrixTransformGrid } from "./matrix-transform-grid";
+import { MfeForceLab } from "./mfe-force-lab";
+import { MfeMotionLab } from "./mfe-motion-lab";
+import { MrgCollisionLab } from "./mrg-collision-lab";
+import { MrgRollingLab } from "./mrg-rolling-lab";
+import { OmpQuantumLab } from "./omp-quantum-lab";
+import { OmpRayBench } from "./omp-ray-bench";
+import { OwtThermoLab } from "./owt-thermo-lab";
+import { OwtWaveLab } from "./owt-wave-lab";
 import { PiecewiseExplorer } from "./piecewise-explorer";
 import { PncArrangementLister } from "./pnc-arrangement-lister";
 import { PncCountingTree } from "./pnc-counting-tree";
@@ -33,6 +43,14 @@ import { VecSpace3d } from "./vec-space-3d";
 
 export function Interactive({ config }: { config: InteractiveConfig }) {
   switch (config.component) {
+    case "omp-ray-bench":
+      return <OmpRayBench config={config} />;
+    case "omp-quantum-lab":
+      return <OmpQuantumLab config={config} />;
+    case "em-field-canvas":
+      return <EmFieldCanvas config={config} />;
+    case "em-circuit-lab":
+      return <EmCircuitLab config={config} />;
     case "function-machine":
       return <FunctionMachine config={config} />;
     case "function-evaluator":
@@ -95,5 +113,17 @@ export function Interactive({ config }: { config: InteractiveConfig }) {
       return <StatsScatterRegression config={config} />;
     case "stats-normal-sampling-lab":
       return <StatsNormalSamplingLab config={config} />;
+    case "mrg-collision-lab":
+      return <MrgCollisionLab config={config} />;
+    case "mrg-rolling-lab":
+      return <MrgRollingLab config={config} />;
+    case "owt-wave-lab":
+      return <OwtWaveLab config={config} />;
+    case "owt-thermo-lab":
+      return <OwtThermoLab config={config} />;
+    case "mfe-motion-lab":
+      return <MfeMotionLab config={config} />;
+    case "mfe-force-lab":
+      return <MfeForceLab config={config} />;
   }
 }
