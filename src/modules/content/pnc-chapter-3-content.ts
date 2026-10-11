@@ -46,6 +46,7 @@ const lesson01: LessonSeed = {
       content:
         "Write the three combinations out as factorials and most of it cancels:\n\n$\\displaystyle \\frac{12!}{5!\\,7!} \\times \\frac{7!}{4!\\,3!} \\times \\frac{3!}{3!\\,0!} = \\frac{12!}{5!\\,4!\\,3!}$\n\nThat shape should look familiar. It is the formula for arranging a word with repeated letters from 1.3. Give each student a letter for their team, B for bridge, P for poster, Q for quiz. Then a split of the class is a 12-letter word with five B's, four P's and three Q's, and 1.3 counted those words as $\\frac{12!}{5!\\,4!\\,3!}$.",
     },
+    { type: "heading", text: "Groups with names" },
     {
       type: "text",
       content:
@@ -69,10 +70,11 @@ const lesson01: LessonSeed = {
       content:
         "The number of ways to split $n$ different objects into groups that have **names** (or different sizes) with $n_1, n_2, \\ldots, n_k$ objects, where $n_1 + n_2 + \\cdots + n_k = n$, is\n\n$\\displaystyle \\frac{n!}{n_1!\\,n_2!\\cdots n_k!}$\n\nIt is the same number as the arrangements of a word with $n_1$ copies of one letter, $n_2$ of another, and so on.",
     },
+    { type: "heading", text: "Taking the names away" },
     {
       type: "text",
       content:
-        "**Now take the names away.** Suppose the four friends just need to pair up for a game of doubles, with no Red team and no Green team. The 6 labelled splits come in matching twos:\n\n- RRGG and GGRR both mean {Asha, Ben} and {Chitra, Dev}\n- RGRG and GRGR both mean {Asha, Chitra} and {Ben, Dev}\n- RGGR and GRRG both mean {Asha, Dev} and {Ben, Chitra}\n\nOnce the names are gone, each split has been counted $2! = 2$ times, once for each way of putting the names back on. So there are $6 \\div 2 = 3$ ways to pair up.",
+        "Suppose the four friends just need to pair up for a game of doubles, with no Red team and no Green team. The 6 labelled splits come in matching twos:\n\n- RRGG and GGRR both mean {Asha, Ben} and {Chitra, Dev}\n- RGRG and GRGR both mean {Asha, Chitra} and {Ben, Dev}\n- RGGR and GRRG both mean {Asha, Dev} and {Ben, Chitra}\n\nOnce the names are gone, each split has been counted $2! = 2$ times, once for each way of putting the names back on. So there are $6 \\div 2 = 3$ ways to pair up.",
     },
     {
       type: "text",
@@ -112,62 +114,135 @@ const lesson01: LessonSeed = {
       content:
         "\"Split 4 people into two pairs\" is **3**, not 6. The answer 6 treats the pairs as if they were called the Red team and the Green team. Before dividing by $k!$, check two things: are the groups the same size, and does anything in the question give them names? Look for words like rooms, projects, colours or \"first group\". Only equal-sized groups with no names get the $k!$.",
     },
+    { type: "heading", text: "Pairs, mixed sizes and named owners" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** In how many ways can 8 players be split into 4 doubles pairs?\n\n1. With named courts, 1 to 4: $\\frac{8!}{(2!)^4} = \\frac{40\\,320}{16} = 2520$.\n2. The pairs are not named, and there are 4 equal pairs, so divide by $4!$: $\\frac{2520}{24} = 105$.\n3. Check another way. Player 1 picks a partner in 7 ways. The lowest-numbered player still unpaired picks from 5, the next from 3, the last from 1. That gives $7 \\times 5 \\times 3 \\times 1 = 105$.",
+      type: "worked-example",
+      id: "pc3-1-we1",
+      title: "Worked example 1",
+      problem:
+        "In how many ways can 8 players be split into 4 doubles pairs?",
+      steps: [
+        {
+          text: "With named courts, 1 to 4: $\\frac{8!}{(2!)^4} = \\frac{40\\,320}{16} = 2520$.",
+        },
+        {
+          text: "The pairs are not named, and there are 4 equal pairs, so divide by $4!$: $\\frac{2520}{24} = 105$.",
+        },
+        {
+          text: "Check another way. Player 1 picks a partner in 7 ways. The lowest-numbered player still unpaired picks from 5, the next from 3, the last from 1. That gives $7 \\times 5 \\times 3 \\times 1 = 105$.",
+        },
+      ],
+      answer: "$105$ ways.",
+    },
+    {
+      type: "worked-example",
+      id: "pc3-1-we2",
+      title: "Worked example 2 (mixed sizes)",
+      problem:
+        "Split 9 people into groups of 2, 2 and 5, with no names on the groups. In how many ways can this be done?",
+      steps: [
+        {
+          text: "Named count: $\\frac{9!}{2!\\,2!\\,5!} = \\frac{362\\,880}{480} = 756$.",
+        },
+        {
+          text: "The **two** pairs are the same size, so swapping them gives the same split. Divide by $2!$ only, not $3!$: $\\frac{756}{2} = 378$.",
+        },
+        {
+          text: "Check another way. Choose the group of five in ${}^9C_5 = 126$ ways, then pair the remaining 4 people in 3 ways: $126 \\times 3 = 378$.",
+        },
+      ],
+      answer: "$378$ ways.",
+    },
+    {
+      type: "worked-example",
+      id: "pc3-1-we3",
+      title: "Worked example 3 (to people)",
+      problem:
+        "Share 9 different toys among 3 children, 3 toys each. In how many ways can this be done?",
+      steps: [
+        {
+          text: "The children are the names. Child 1 gets ${}^9C_3 = 84$ choices, child 2 gets ${}^6C_3 = 20$, and child 3 gets the rest.",
+        },
+        {
+          text: "$84 \\times 20 = 1680 = \\frac{9!}{3!\\,3!\\,3!}$. There is no division by $3!$, because Riya getting the red set is different from Kabir getting it.",
+        },
+      ],
+      answer: "$1680$ ways.",
+    },
+    { type: "heading", text: "Tournament draws, captains and card deals" },
+    {
+      type: "worked-example",
+      id: "pc3-1-we4",
+      title: "Worked example 4 (a tournament draw)",
+      problem:
+        "16 football teams are split into 4 groups of 4 for the league stage. In how many ways can this be done (a) if the groups are named A to D, (b) if they are four unnamed pools?",
+      steps: [
+        {
+          text: "**(a) The groups are Group A, B, C and D.** Choose Group A's four, then Group B's from the 12 left, then Group C's from the 8 left. Group D is whoever remains. *Why this step:* the groups have names, so filling them one at a time is exactly the labelled count.",
+        },
+        {
+          text: "Multiply, and the factorials cancel into the multinomial:",
+          latex: "{}^{16}C_4 \\cdot {}^{12}C_4 \\cdot {}^{8}C_4 \\cdot {}^{4}C_4 = 1820 \\times 495 \\times 70 \\times 1 = \\frac{16!}{(4!)^4} = 63\\,063\\,000",
+        },
+        {
+          text: "**(b) The organisers first make four unnamed pools, and the letters are drawn later.** Now a split is only 'which teams play together'. Each unnamed split can be given the letters A to D in $4!$ orders, and each order is a different answer to part (a). *Why this step:* this is the equal-size, no-names case, so divide by the number of ways the names could have been attached.",
+          latex: "\\frac{16!}{(4!)^4\\,4!} = \\frac{63\\,063\\,000}{24} = 2\\,627\\,625",
+        },
+        {
+          text: "Check the logic in reverse: $2\\,627\\,625 \\times 24 = 63\\,063\\,000$. Unnamed splits times ways to name them gives the named splits.",
+        },
+      ],
+      answer: "(a) $63\\,063\\,000$ (b) $2\\,627\\,625$",
+    },
+    {
+      type: "worked-example",
+      id: "pc3-1-we5",
+      title: "Worked example 5 (JEE style: a condition on two people)",
+      problem:
+        "10 players are split into two teams of 5 for a practice match, with no names on the teams. In how many ways can this be done if the two captains, Aarav and Bhavna, must be on **opposite** teams?",
+      steps: [
+        {
+          text: "Without the condition: $\\frac{10!}{5!\\,5!\\,2!} = \\frac{252}{2} = 126$. *Why divide by $2!$:* two equal teams with no names.",
+        },
+        {
+          text: "A cleaner idea: Aarav's team **names** itself. Call it 'Aarav's team'. Once one team has a name, the other is 'the rest', so no division is needed any more.",
+        },
+        {
+          text: "Aarav needs 4 teammates, and Bhavna is not allowed. Choose them from the other 8 players:",
+          latex: "{}^{8}C_4 = 70",
+        },
+        {
+          text: "Check by the complement. Aarav and Bhavna on the **same** team: choose their 3 teammates from 8, ${}^8C_3 = 56$. Then $126 - 56 = 70$. The two methods agree.",
+        },
+      ],
+      answer: "${}^{8}C_4 = 70$ ways.",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 (mixed sizes).** Split 9 people into groups of 2, 2 and 5, with no names on the groups.\n\n1. Named count: $\\frac{9!}{2!\\,2!\\,5!} = \\frac{362\\,880}{480} = 756$.\n2. The **two** pairs are the same size, so swapping them gives the same split. Divide by $2!$ only, not $3!$: $\\frac{756}{2} = 378$.\n3. Check another way. Choose the group of five in ${}^9C_5 = 126$ ways, then pair the remaining 4 people in 3 ways: $126 \\times 3 = 378$.",
+        "**The exam habit:** when one special person is in the problem, let them label their own group. It turns an unlabelled count into a labelled one and removes the risk of dividing wrongly.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (to people).** Share 9 different toys among 3 children, 3 toys each.\n\n1. The children are the names. Child 1 gets ${}^9C_3 = 84$ choices, child 2 gets ${}^6C_3 = 20$, and child 3 gets the rest.\n2. $84 \\times 20 = 1680 = \\frac{9!}{3!\\,3!\\,3!}$. There is no division by $3!$, because Riya getting the red set is different from Kabir getting it.",
+      type: "worked-example",
+      id: "pc3-1-we6",
+      title: "Worked example 6 (answers left in factorials)",
+      problem:
+        "A pack of 52 cards is dealt. Exam questions often want the answer as a factorial expression, so the skill is choosing the right denominator. Count the ways to deal it equally among 4 players, to divide it into 4 piles of 13, and to divide it into three sets of 17 cards and one single card.",
+      steps: [
+        {
+          text: "**Dealt equally among 4 players.** The players are names: $\\dfrac{52!}{(13!)^4}$.",
+        },
+        {
+          text: "**Divided into 4 piles of 13.** Four equal piles with no names: $\\dfrac{52!}{(13!)^4\\,4!}$. *Why:* each split into piles can be handed to 4 players in $4!$ ways.",
+        },
+        {
+          text: "**Divided into 4 sets: three of 17 cards and one of 1 card.** Only the three 17-sets can swap with each other, so divide by $3!$, not $4!$:",
+          latex: "\\frac{52!}{(17!)^3\\,1!\\,3!}",
+        },
+      ],
+      answer: "Equally among 4 players: $\\dfrac{52!}{(13!)^4}$. Into 4 piles of 13: $\\dfrac{52!}{(13!)^4\\,4!}$. Into three 17-sets and a single card: $\\dfrac{52!}{(17!)^3\\,1!\\,3!}$.",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (a tournament draw).** 16 football teams are split into 4 groups of 4 for the league stage.\n\n**(a) The groups are Group A, B, C and D.**\n\n1. Choose Group A's four, then Group B's from the 12 left, then Group C's from the 8 left. Group D is whoever remains. *Why this step:* the groups have names, so filling them one at a time is exactly the labelled count.\n2. Multiply, and the factorials cancel into the multinomial:",
-    },
-    {
-      type: "math",
-      latex:
-        "{}^{16}C_4 \\cdot {}^{12}C_4 \\cdot {}^{8}C_4 \\cdot {}^{4}C_4 = 1820 \\times 495 \\times 70 \\times 1 = \\frac{16!}{(4!)^4} = 63\\,063\\,000",
-    },
-    {
-      type: "text",
-      content:
-        "**(b) The organisers first make four unnamed pools, and the letters are drawn later.**\n\n3. Now a split is only 'which teams play together'. Each unnamed split can be given the letters A to D in $4!$ orders, and each order is a different answer to part (a). *Why this step:* this is the equal-size, no-names case, so divide by the number of ways the names could have been attached.",
-    },
-    {
-      type: "math",
-      latex: "\\frac{16!}{(4!)^4\\,4!} = \\frac{63\\,063\\,000}{24} = 2\\,627\\,625",
-    },
-    {
-      type: "text",
-      content:
-        "4. Check the logic in reverse: $2\\,627\\,625 \\times 24 = 63\\,063\\,000$. Unnamed splits times ways to name them gives the named splits.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (JEE style: a condition on two people).** 10 players are split into two teams of 5 for a practice match, with no names on the teams. In how many ways can this be done if the two captains, Aarav and Bhavna, must be on **opposite** teams?\n\n1. Without the condition: $\\frac{10!}{5!\\,5!\\,2!} = \\frac{252}{2} = 126$. *Why divide by $2!$:* two equal teams with no names.\n2. A cleaner idea: Aarav's team **names** itself. Call it 'Aarav's team'. Once one team has a name, the other is 'the rest', so no division is needed any more.\n3. Aarav needs 4 teammates, and Bhavna is not allowed. Choose them from the other 8 players:",
-    },
-    { type: "math", latex: "{}^{8}C_4 = 70" },
-    {
-      type: "text",
-      content:
-        "4. Check by the complement. Aarav and Bhavna on the **same** team: choose their 3 teammates from 8, ${}^8C_3 = 56$. Then $126 - 56 = 70$. The two methods agree.\n\n**The exam habit:** when one special person is in the problem, let them label their own group. It turns an unlabelled count into a labelled one and removes the risk of dividing wrongly.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 6 (answers left in factorials).** A pack of 52 cards is dealt. Exam questions often want the answer as a factorial expression, so the skill is choosing the right denominator.\n\n1. **Dealt equally among 4 players.** The players are names: $\\dfrac{52!}{(13!)^4}$.\n2. **Divided into 4 piles of 13.** Four equal piles with no names: $\\dfrac{52!}{(13!)^4\\,4!}$. *Why:* each split into piles can be handed to 4 players in $4!$ ways.\n3. **Divided into 4 sets: three of 17 cards and one of 1 card.** Only the three 17-sets can swap with each other, so divide by $3!$, not $4!$:",
-    },
-    { type: "math", latex: "\\frac{52!}{(17!)^3\\,1!\\,3!}" },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc3-1-q6",
@@ -262,6 +337,7 @@ const lesson02: LessonSeed = {
       content:
         "You have 4 identical toffees and 3 children: Arjun, Bela and Chirag. Some children may get none. How many ways can the toffees be shared?\n\nThe toffees are identical, so the only thing that matters is **how many** each child gets. A distribution is a list like (2, 1, 1) or (0, 4, 0). Listing them all by hand is error-prone, so here is a trick that turns the question into something you already know how to count.",
     },
+    { type: "heading", text: "Stars and bars: a picture of sharing" },
     {
       type: "text",
       content:
@@ -307,10 +383,11 @@ const lesson02: LessonSeed = {
       content:
         "The number of ways to put $n$ **identical** objects into $k$ **distinct** boxes, with empty boxes allowed, is\n\n$\\displaystyle {}^{n+k-1}C_{k-1} = \\frac{(n+k-1)!}{n!\\,(k-1)!}$\n\n$n$ stars and $k-1$ bars make $n+k-1$ symbols. Choose which $k-1$ of them are bars. You need $k-1$ bars because $k$ boxes need $k-1$ dividers between them.",
     },
+    { type: "heading", text: "The same count as an equation" },
     {
       type: "text",
       content:
-        "**The same count as an equation.** A distribution of $n$ identical things to $k$ boxes is a list of whole numbers adding to $n$. So the number of **non-negative integer solutions** of\n\n$\\displaystyle x_1 + x_2 + \\cdots + x_k = n$\n\nis also ${}^{n+k-1}C_{k-1}$. For example, $x + y + z = 10$ with $x, y, z \\ge 0$ is 10 stars and 2 bars:",
+        "A distribution of $n$ identical things to $k$ boxes is a list of whole numbers adding to $n$. So the number of **non-negative integer solutions** of\n\n$\\displaystyle x_1 + x_2 + \\cdots + x_k = n$\n\nis also ${}^{n+k-1}C_{k-1}$. For example, $x + y + z = 10$ with $x, y, z \\ge 0$ is 10 stars and 2 bars:",
     },
     { type: "math", latex: "{}^{12}C_2 = \\frac{12 \\times 11}{2} = 66" },
     {
@@ -325,15 +402,49 @@ const lesson02: LessonSeed = {
       content:
         "For 4 toffees and 3 children, ${}^4C_3 = 4$ is far too small. The list (2, 1, 1), (1, 2, 1), (1, 1, 2), (4, 0, 0), (0, 4, 0), ... already has more than 4 entries. ${}^nC_k$ chooses $k$ **different** things from $n$ with no repeats. Here a child can receive several toffees, and the toffees are all the same. The count you want arranges $n$ stars and $k-1$ bars: ${}^{n+k-1}C_{k-1}$.",
     },
+    { type: "heading", text: "Spotting stars and bars in disguise" },
     {
-      type: "text",
-      content:
-        "**Worked example 1: choosing with repeats.** An ice-cream shop has 5 flavours. You order a cup of 3 scoops. Repeats are allowed and the order in the cup does not matter. How many different cups?\n\n1. What is identical and what is distinct? The 3 scoops are the stars, and the 5 flavours are the boxes.\n2. A cup is a record of how many scoops of each flavour, so it is a solution of $f_1 + \\cdots + f_5 = 3$.\n3. That gives ${}^{3+5-1}C_{5-1} = {}^7C_4 = 35$.\n\nThis is the standard way to count **selections with repetition**. Choosing $r$ things from $n$ types, with repeats allowed, gives ${}^{n+r-1}C_r$.",
+      type: "worked-example",
+      id: "pc3-2-we1",
+      title: "Worked example 1: choosing with repeats",
+      problem:
+        "An ice-cream shop has 5 flavours. You order a cup of 3 scoops. Repeats are allowed and the order in the cup does not matter. How many different cups?",
+      steps: [
+        {
+          text: "What is identical and what is distinct? The 3 scoops are the stars, and the 5 flavours are the boxes.",
+        },
+        {
+          text: "A cup is a record of how many scoops of each flavour, so it is a solution of $f_1 + \\cdots + f_5 = 3$.",
+        },
+        {
+          text: "That gives ${}^{3+5-1}C_{5-1} = {}^7C_4 = 35$.",
+        },
+      ],
+      answer: "${}^7C_4 = 35$ cups.",
     },
     {
       type: "text",
       content:
-        "**Worked example 2: terms of an expansion.** How many different terms are in $(a + b + c)^5$ once like terms are collected?\n\n1. Every term looks like $a^p b^q c^s$ with $p + q + s = 5$ and $p, q, s \\ge 0$.\n2. So count the non-negative solutions: ${}^{5+3-1}C_{3-1} = {}^7C_2 = 21$.\n3. Check with two letters: $(a+b)^5$ has ${}^6C_1 = 6$ terms, $a^5, a^4b, \\ldots, b^5$. That matches.",
+        "This is the standard way to count **selections with repetition**. Choosing $r$ things from $n$ types, with repeats allowed, gives ${}^{n+r-1}C_r$.",
+    },
+    {
+      type: "worked-example",
+      id: "pc3-2-we2",
+      title: "Worked example 2: terms of an expansion",
+      problem:
+        "How many different terms are in $(a + b + c)^5$ once like terms are collected?",
+      steps: [
+        {
+          text: "Every term looks like $a^p b^q c^s$ with $p + q + s = 5$ and $p, q, s \\ge 0$.",
+        },
+        {
+          text: "So count the non-negative solutions: ${}^{5+3-1}C_{3-1} = {}^7C_2 = 21$.",
+        },
+        {
+          text: "Check with two letters: $(a+b)^5$ has ${}^6C_1 = 6$ terms, $a^5, a^4b, \\ldots, b^5$. That matches.",
+        },
+      ],
+      answer: "$21$ terms.",
     },
     {
       type: "table",
@@ -342,43 +453,82 @@ const lesson02: LessonSeed = {
         ["4 toffees, 3 children", "4", "3", "${}^6C_2 = 15$"],
         ["$x + y + z = 10$, $x,y,z \\ge 0$", "10", "3", "${}^{12}C_2 = 66$"],
         ["3 scoops, 5 flavours", "3", "5", "${}^7C_4 = 35$"],
-        ["Terms of $(a+b+c)^5$", "5", "3", "${}^7C_2 = 21$"],
         ["10 identical balls, 4 boxes", "10", "4", "${}^{13}C_3 = 286$"],
       ],
     },
+    { type: "heading", text: "Name the stars and boxes first", level: 3 },
     {
       type: "text",
       content:
         "**Three more worked examples, from routine to exam style.** Each one starts by naming the stars and the boxes. That single step is where most mistakes happen, so do it out loud.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (routine).** 12 identical mangoes are shared among 4 children, and a child may get none. How many ways?\n\n1. Stars: the 12 mangoes. Boxes: the 4 children. *Why:* the mangoes are identical, so a sharing is just the list of how many each child gets.\n2. 4 boxes need $4 - 1 = 3$ bars, so there are $12 + 3 = 15$ symbols in a row.\n3. Choose which 3 of the 15 places hold bars:",
+      type: "worked-example",
+      id: "pc3-2-we3",
+      title: "Worked example 3 (routine)",
+      problem:
+        "12 identical mangoes are shared among 4 children, and a child may get none. How many ways?",
+      steps: [
+        {
+          text: "Stars: the 12 mangoes. Boxes: the 4 children. *Why:* the mangoes are identical, so a sharing is just the list of how many each child gets.",
+        },
+        {
+          text: "4 boxes need $4 - 1 = 3$ bars, so there are $12 + 3 = 15$ symbols in a row.",
+        },
+        {
+          text: "Choose which 3 of the 15 places hold bars:",
+          latex: "{}^{15}C_3 = \\frac{15 \\times 14 \\times 13}{3 \\times 2 \\times 1} = 455",
+        },
+      ],
+      answer: "${}^{15}C_3 = 455$ ways.",
     },
-    { type: "math", latex: "{}^{15}C_3 = \\frac{15 \\times 14 \\times 13}{3 \\times 2 \\times 1} = 455" },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (application: a handful of coins).** A shopkeeper's drawer has plenty of ₹1, ₹2, ₹5 and ₹10 coins. You take out 5 coins. How many different handfuls are possible (only how many of each kind matters)?\n\n1. Stars: the 5 coins you take. Boxes: the 4 denominations. *Why this way round:* a handful is fixed by 'how many ₹1, how many ₹2, …', a list of 4 numbers adding to 5. Coins of the same value are identical.\n2. So count $c_1 + c_2 + c_5 + c_{10} = 5$ with every $c \\ge 0$: 5 stars, 3 bars.",
+      type: "worked-example",
+      id: "pc3-2-we4",
+      title: "Worked example 4 (application: a handful of coins)",
+      problem:
+        "A shopkeeper's drawer has plenty of ₹1, ₹2, ₹5 and ₹10 coins. You take out 5 coins. How many different handfuls are possible (only how many of each kind matters)?",
+      steps: [
+        {
+          text: "Stars: the 5 coins you take. Boxes: the 4 denominations. *Why this way round:* a handful is fixed by 'how many ₹1, how many ₹2, …', a list of 4 numbers adding to 5. Coins of the same value are identical.",
+        },
+        {
+          text: "So count $c_1 + c_2 + c_5 + c_{10} = 5$ with every $c \\ge 0$: 5 stars, 3 bars.",
+          latex: "{}^{5+4-1}C_{4-1} = {}^{8}C_3 = 56",
+        },
+        {
+          text: "Sanity check on a tiny case: 1 coin from 4 kinds should give 4 handfuls, and ${}^{4}C_3 = 4$. Good.",
+        },
+        {
+          text: "The classic slip is ${}^5C_4$ or ${}^4C_5$, which treat the question as choosing different objects with no repeats. Here the same kind of coin can be taken many times.",
+        },
+      ],
+      answer: "${}^{8}C_3 = 56$ handfuls.",
     },
-    { type: "math", latex: "{}^{5+4-1}C_{4-1} = {}^{8}C_3 = 56" },
     {
-      type: "text",
-      content:
-        "3. Sanity check on a tiny case: 1 coin from 4 kinds should give 4 handfuls, and ${}^{4}C_3 = 4$. Good.\n\nThe classic slip is ${}^5C_4$ or ${}^4C_5$, which treat the question as choosing different objects with no repeats. Here the same kind of coin can be taken many times.",
+      type: "worked-example",
+      id: "pc3-2-we5",
+      title: "Worked example 5 (JEE style: digits in order)",
+      problem:
+        "How many 4-digit numbers have digits that never decrease from left to right, like 1129 or 3333?",
+      steps: [
+        {
+          text: "**Spot the hidden selection.** Once you know *which* digits are used, and how many times each, there is exactly one way to write them in non-decreasing order. So a number is the same thing as a **multiset** of 4 digits. *Why this matters:* order has been taken out of the problem, which is what stars and bars needs.",
+        },
+        {
+          text: "**Which digits are allowed?** A 0 would have to come first, since it is the smallest digit, and a 4-digit number can't start with 0. So the digits come from 1 to 9.",
+        },
+        {
+          text: "**Count.** Choose 4 digits from 9 kinds with repeats allowed. That is 4 stars in 9 boxes, so 8 bars:",
+          latex: "{}^{4+9-1}C_{4} = {}^{12}C_4 = 495",
+        },
+        {
+          text: "Watch the trap in step 2. Allowing 0 would give ${}^{13}C_4 = 715$, and every extra case starts with 0. The same method gives ${}^{11}C_3 = 165$ three-digit numbers with non-decreasing digits.",
+        },
+      ],
+      answer: "${}^{12}C_4 = 495$ numbers.",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (JEE style: digits in order).** How many 4-digit numbers have digits that never decrease from left to right, like 1129 or 3333?\n\n1. **Spot the hidden selection.** Once you know *which* digits are used, and how many times each, there is exactly one way to write them in non-decreasing order. So a number is the same thing as a **multiset** of 4 digits. *Why this matters:* order has been taken out of the problem, which is what stars and bars needs.\n2. **Which digits are allowed?** A 0 would have to come first, since it is the smallest digit, and a 4-digit number can't start with 0. So the digits come from 1 to 9.\n3. **Count.** Choose 4 digits from 9 kinds with repeats allowed. That is 4 stars in 9 boxes, so 8 bars:",
-    },
-    { type: "math", latex: "{}^{4+9-1}C_{4} = {}^{12}C_4 = 495" },
-    {
-      type: "text",
-      content:
-        "4. Watch the trap in step 2. Allowing 0 would give ${}^{13}C_4 = 715$, and every extra case starts with 0. The same method gives ${}^{11}C_3 = 165$ three-digit numbers with non-decreasing digits.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc3-2-q6",
@@ -472,6 +622,7 @@ const lesson03: LessonSeed = {
       content:
         "Real sharing problems come with rules: *every* child gets at least one toffee, Arjun gets at least two, nobody gets more than three. Stars and bars counts only the plain case with no rules. This lesson shows how to turn a problem with rules into a plain one, using two moves. **Hand things out first** handles a lower bound. **Subtract the rule-breakers** handles an upper bound.",
     },
+    { type: "heading", text: "Lower bounds: pay them out first" },
     {
       type: "text",
       content:
@@ -512,16 +663,29 @@ const lesson03: LessonSeed = {
         "**Any lower bound works the same way.** For $x + y + z = 10$ with $x \\ge 2$ and $y, z \\ge 0$, give $x$ its 2 first. Put $x' = x - 2 \\ge 0$, so $x' + y + z = 8$ and the count is ${}^{10}C_2 = 45$. Each lower bound is paid out before the sharing starts, and the total drops by that amount.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (routine): Diwali laddoos.** 15 identical laddoos are shared among 4 cousins so that each cousin gets **at least 2**. How many ways?\n\n1. Write it as an equation: $a + b + c + d = 15$ with every variable $\\ge 2$.\n2. Pay out the minimum first: hand each cousin 2 laddoos. That uses $4 \\times 2 = 8$, leaving 7. *Why this step:* after the payout nobody has a rule any more, so plain stars and bars applies.\n3. Now $a' + b' + c' + d' = 7$ with all values $\\ge 0$, where $a' = a - 2$ and so on. That is 7 stars and 3 bars:",
+      type: "worked-example",
+      id: "pc3-3-we1",
+      title: "Worked example (routine): Diwali laddoos",
+      problem:
+        "15 identical laddoos are shared among 4 cousins so that each cousin gets **at least 2**. How many ways?",
+      steps: [
+        {
+          text: "Write it as an equation: $a + b + c + d = 15$ with every variable $\\ge 2$.",
+        },
+        {
+          text: "Pay out the minimum first: hand each cousin 2 laddoos. That uses $4 \\times 2 = 8$, leaving 7. *Why this step:* after the payout nobody has a rule any more, so plain stars and bars applies.",
+        },
+        {
+          text: "Now $a' + b' + c' + d' = 7$ with all values $\\ge 0$, where $a' = a - 2$ and so on. That is 7 stars and 3 bars:",
+          latex: "{}^{7+3}C_3 = {}^{10}C_3 = 120",
+        },
+        {
+          text: "Common slip: paying out only 2 in total instead of 2 **each** gives ${}^{16}C_3 = 560$, which is far too many.",
+        },
+      ],
+      answer: "${}^{10}C_3 = 120$ ways.",
     },
-    { type: "math", latex: "{}^{7+3}C_3 = {}^{10}C_3 = 120" },
-    {
-      type: "text",
-      content:
-        "4. Common slip: paying out only 2 in total instead of 2 **each** gives ${}^{16}C_3 = 560$, which is far too many.",
-    },
+    { type: "heading", text: "Upper bounds: subtract the rule-breakers" },
     {
       type: "text",
       content:
@@ -539,10 +703,33 @@ const lesson03: LessonSeed = {
       content:
         "\"$x \\le 3$\" is broken by $x \\ge 4$, **not** $x \\ge 3$. Subtracting the $x \\ge 3$ cases also throws away the allowed value $x = 3$. Write the broken rule down in words before you substitute.",
     },
+    { type: "heading", text: "Dice sums and mixed rules" },
     {
-      type: "text",
-      content:
-        "**Dice sums are bounded equations.** In how many ways can three dice, red, blue and green, show a total of 10?\n\n1. Write it as an equation: $a + b + c = 10$ with $1 \\le a, b, c \\le 6$.\n2. Pay out the lower bounds. Put $a' = a - 1$ and so on. Then $a' + b' + c' = 7$ with $0 \\le a', b', c' \\le 5$.\n3. Ignore the upper bounds for now: ${}^{9}C_2 = 36$.\n4. Subtract the solutions with $a' \\ge 6$. Put $a'' = a' - 6$, so $a'' + b' + c' = 1$, which has ${}^3C_2 = 3$ solutions. The same happens for $b'$ and $c'$, so subtract $3 \\times 3 = 9$.\n5. Can two values both be $\\ge 6$? That needs a total of at least 12, which is more than 7. So nothing was subtracted twice.\n6. Answer: $36 - 9 = 27$.",
+      type: "worked-example",
+      id: "pc3-3-we7",
+      title: "Dice sums are bounded equations",
+      problem: "In how many ways can three dice, red, blue and green, show a total of 10?",
+      steps: [
+        {
+          text: "Write it as an equation: $a + b + c = 10$ with $1 \\le a, b, c \\le 6$.",
+        },
+        {
+          text: "Pay out the lower bounds. Put $a' = a - 1$ and so on. Then $a' + b' + c' = 7$ with $0 \\le a', b', c' \\le 5$.",
+        },
+        {
+          text: "Ignore the upper bounds for now: ${}^{9}C_2 = 36$.",
+        },
+        {
+          text: "Subtract the solutions with $a' \\ge 6$. Put $a'' = a' - 6$, so $a'' + b' + c' = 1$, which has ${}^3C_2 = 3$ solutions. The same happens for $b'$ and $c'$, so subtract $3 \\times 3 = 9$.",
+        },
+        {
+          text: "Can two values both be $\\ge 6$? That needs a total of at least 12, which is more than 7. So nothing was subtracted twice.",
+        },
+        {
+          text: "Combine: $36 - 9 = 27$.",
+        },
+      ],
+      answer: "$27$ ways.",
     },
     {
       type: "table",
@@ -555,21 +742,60 @@ const lesson03: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example: a mixed set of rules.** Solve $x + y + z = 12$ with $x \\ge 3$, $y \\ge 2$, $z \\ge 0$ and $z \\le 4$.\n\n1. Pay out the lower bounds: $x' = x - 3$, $y' = y - 2$, so $x' + y' + z = 7$ with all values $\\ge 0$ and $z \\le 4$.\n2. Ignoring the upper bound: ${}^9C_2 = 36$.\n3. Rule-breakers have $z \\ge 5$. Put $z' = z - 5$, so $x' + y' + z' = 2$, with ${}^4C_2 = 6$ solutions.\n4. Answer: $36 - 6 = 30$.\n5. Check: $z = 0, 1, 2, 3, 4$ leave $x' + y' = 7, 6, 5, 4, 3$, with $8 + 7 + 6 + 5 + 4 = 30$ solutions.",
+      type: "worked-example",
+      id: "pc3-3-we2",
+      title: "Worked example: a mixed set of rules",
+      problem:
+        "Solve $x + y + z = 12$ with $x \\ge 3$, $y \\ge 2$, $z \\ge 0$ and $z \\le 4$.",
+      steps: [
+        {
+          text: "Pay out the lower bounds: $x' = x - 3$, $y' = y - 2$, so $x' + y' + z = 7$ with all values $\\ge 0$ and $z \\le 4$.",
+        },
+        {
+          text: "Ignoring the upper bound: ${}^9C_2 = 36$.",
+        },
+        {
+          text: "Rule-breakers have $z \\ge 5$. Put $z' = z - 5$, so $x' + y' + z' = 2$, with ${}^4C_2 = 6$ solutions.",
+        },
+        {
+          text: "Subtract the rule-breakers: $36 - 6 = 30$.",
+        },
+        {
+          text: "Check: $z = 0, 1, 2, 3, 4$ leave $x' + y' = 7, 6, 5, 4, 3$, with $8 + 7 + 6 + 5 + 4 = 30$ solutions.",
+        },
+      ],
+      answer: "$30$ solutions.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (application): setting a question paper.** A teacher sets 10 questions across 3 sections, A, B and C. Each section must have at least 2 questions and at most 5. How many ways can she choose the section sizes?\n\n1. Equation: $a + b + c = 10$ with $2 \\le a, b, c \\le 5$.\n2. Pay out the lower bounds: $a' = a - 2$ and so on. Now $a' + b' + c' = 4$ with $0 \\le a', b', c' \\le 3$. *Why first:* lower bounds are easy to remove, and they also shrink the numbers for the next step.\n3. Ignore the upper bounds: ${}^{6}C_2 = 15$.\n4. Rule-breakers have some value $\\ge 4$. If $a' \\ge 4$, put $a'' = a' - 4$, so $a'' + b' + c' = 0$, which has just 1 solution. The same for $b'$ and $c'$: subtract 3.\n5. Overlap check: two values $\\ge 4$ would need a total of at least 8, and the total is only 4. Nothing to add back.",
+      type: "worked-example",
+      id: "pc3-3-we3",
+      title: "Worked example (application): setting a question paper",
+      problem:
+        "A teacher sets 10 questions across 3 sections, A, B and C. Each section must have at least 2 questions and at most 5. How many ways can she choose the section sizes?",
+      steps: [
+        {
+          text: "Equation: $a + b + c = 10$ with $2 \\le a, b, c \\le 5$.",
+        },
+        {
+          text: "Pay out the lower bounds: $a' = a - 2$ and so on. Now $a' + b' + c' = 4$ with $0 \\le a', b', c' \\le 3$. *Why first:* lower bounds are easy to remove, and they also shrink the numbers for the next step.",
+        },
+        {
+          text: "Ignore the upper bounds: ${}^{6}C_2 = 15$.",
+        },
+        {
+          text: "Rule-breakers have some value $\\ge 4$. If $a' \\ge 4$, put $a'' = a' - 4$, so $a'' + b' + c' = 0$, which has just 1 solution. The same for $b'$ and $c'$: subtract 3.",
+        },
+        {
+          text: "Overlap check: two values $\\ge 4$ would need a total of at least 8, and the total is only 4. Nothing to add back.",
+          latex: "15 - 3 = 12",
+        },
+        {
+          text: "Check by listing the size patterns. $(5,3,2)$ in any order gives $3! = 6$. $(4,4,2)$ gives 3. $(4,3,3)$ gives 3. Total $6 + 3 + 3 = 12$.",
+        },
+      ],
+      answer: "$12$ ways.",
     },
-    { type: "math", latex: "15 - 3 = 12" },
-    {
-      type: "text",
-      content:
-        "6. Check by listing the size patterns. $(5,3,2)$ in any order gives $3! = 6$. $(4,4,2)$ gives 3. $(4,3,3)$ gives 3. Total $6 + 3 + 3 = 12$.",
-    },
+    { type: "heading", text: "Adding back an overlap", level: 3 },
     {
       type: "callout",
       variant: "info",
@@ -578,31 +804,90 @@ const lesson03: LessonSeed = {
         "When two rule-breaks can happen together, subtracting each one removes the overlap twice, so you add the overlap back once. That is inclusion–exclusion, and 3.4 builds it properly. In many exam questions, like the dice sum above, the totals are small enough that two breaks cannot happen together. Always check that. The next example is one where they can.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example: an overlap you must add back.** Solve $x + y + z + w = 8$ with $0 \\le x, y, z, w \\le 3$.\n\n1. Ignoring the upper bounds: 8 stars and 3 bars, ${}^{11}C_3 = 165$.\n2. One variable breaks its rule, say $x \\ge 4$. Put $x' = x - 4$, so $x' + y + z + w = 4$, with ${}^7C_3 = 35$ solutions. Any of the 4 variables could be the one, so subtract $4 \\times 35 = 140$.\n3. Can two variables break together? $x \\ge 4$ and $y \\ge 4$ uses up all 8, leaving $x' + y' + z + w = 0$, which has exactly 1 solution. There are ${}^4C_2 = 6$ such pairs, and each of these solutions was subtracted **twice** in step 2. Add them back: $+6$.\n4. Three variables $\\ge 4$ would need a total of at least 12, so nothing more.\n5. Answer: $165 - 140 + 6 = 31$.\n\nForgetting step 3 gives $25$, which is wrong. For example, $(4, 4, 0, 0)$ was removed once as '$x$ too big' and again as '$y$ too big'.",
+      type: "worked-example",
+      id: "pc3-3-we4",
+      title: "Worked example: an overlap you must add back",
+      problem:
+        "Solve $x + y + z + w = 8$ with $0 \\le x, y, z, w \\le 3$.",
+      steps: [
+        {
+          text: "Ignoring the upper bounds: 8 stars and 3 bars, ${}^{11}C_3 = 165$.",
+        },
+        {
+          text: "One variable breaks its rule, say $x \\ge 4$. Put $x' = x - 4$, so $x' + y + z + w = 4$, with ${}^7C_3 = 35$ solutions. Any of the 4 variables could be the one, so subtract $4 \\times 35 = 140$.",
+        },
+        {
+          text: "Can two variables break together? $x \\ge 4$ and $y \\ge 4$ uses up all 8, leaving $x' + y' + z + w = 0$, which has exactly 1 solution. There are ${}^4C_2 = 6$ such pairs, and each of these solutions was subtracted **twice** in step 2. Add them back: $+6$.",
+        },
+        {
+          text: "Three variables $\\ge 4$ would need a total of at least 12, so nothing more.",
+        },
+        {
+          text: "Combine: $165 - 140 + 6 = 31$.",
+        },
+        {
+          text: "Forgetting step 3 gives $25$, which is wrong. For example, $(4, 4, 0, 0)$ was removed once as '$x$ too big' and again as '$y$ too big'.",
+        },
+      ],
+      answer: "$31$ solutions.",
+    },
+    { type: "heading", text: "Inequalities, negative bounds and odd numbers" },
+    {
+      type: "worked-example",
+      id: "pc3-3-we5",
+      title: "Worked example: an inequality instead of an equation",
+      problem:
+        "How many solutions does $x + y + z \\le 10$ have with $x, y, z \\ge 0$?",
+      steps: [
+        {
+          text: "The total is not fixed, but the amount left over is. Call the unused amount $w = 10 - (x + y + z)$, a **slack variable**. Then $w \\ge 0$ and",
+        },
+        {
+          text: "$\\displaystyle x + y + z + w = 10$",
+        },
+        {
+          text: "Each solution of the inequality matches exactly one solution of this equation, and back again.",
+        },
+        {
+          text: "Stars and bars with 4 boxes: ${}^{13}C_3 = 286$.",
+        },
+        {
+          text: "Check another way: add up the equation counts for totals $0, 1, \\ldots, 10$: ${}^2C_2 + {}^3C_2 + \\cdots + {}^{12}C_2 = 1 + 3 + 6 + \\cdots + 66 = 286$.",
+        },
+      ],
+      answer: "${}^{13}C_3 = 286$ solutions.",
     },
     {
       type: "text",
       content:
-        "**Worked example: an inequality instead of an equation.** How many solutions does $x + y + z \\le 10$ have with $x, y, z \\ge 0$?\n\n1. The total is not fixed, but the amount left over is. Call the unused amount $w = 10 - (x + y + z)$, a **slack variable**. Then $w \\ge 0$ and\n\n$\\displaystyle x + y + z + w = 10$\n\n2. Each solution of the inequality matches exactly one solution of this equation, and back again.\n3. Stars and bars with 4 boxes: ${}^{13}C_3 = 286$.\n4. Check another way: add up the equation counts for totals $0, 1, \\ldots, 10$: ${}^2C_2 + {}^3C_2 + \\cdots + {}^{12}C_2 = 1 + 3 + 6 + \\cdots + 66 = 286$.\n\nFor a strict inequality such as $x + y + z < 10$, first rewrite it as $x + y + z \\le 9$.",
+        "For a strict inequality such as $x + y + z < 10$, first rewrite it as $x + y + z \\le 9$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (JEE style): negative lower bounds and odd numbers.** Two classic exam twists use the same substitution idea.\n\n**(a)** How many integer solutions does $x + y + z = 0$ have with $x, y, z \\ge -5$?\n\n1. Negative values break stars and bars, because you can't hand out a negative number of stars. So shift each variable **up** to start at 0: $x' = x + 5$, and the same for $y$ and $z$. *Why +5:* the smallest allowed value, $-5$, must become 0.\n2. The total rises by $3 \\times 5 = 15$, so $x' + y' + z' = 15$ with all values $\\ge 0$.",
-    },
-    { type: "math", latex: "{}^{15+2}C_2 = {}^{17}C_2 = 136" },
-    {
-      type: "text",
-      content:
-        "**(b)** How many solutions does $x + y + z = 15$ have in **positive odd** integers?\n\n3. Every positive odd number is $2a + 1$ with $a \\ge 0$. Put $x = 2a + 1$, $y = 2b + 1$, $z = 2c + 1$. *Why this form:* it turns 'odd' into an ordinary non-negative variable.\n4. Then $2(a + b + c) + 3 = 15$, so $a + b + c = 6$:",
-    },
-    { type: "math", latex: "{}^{6+2}C_2 = {}^{8}C_2 = 28" },
-    {
-      type: "text",
-      content:
-        "5. Parity check before you start: three odd numbers add to an odd number, and 15 is odd, so solutions exist. For $x + y + z = 14$ the answer would be 0, and the substitution shows it too, because $a + b + c = 5.5$ has no whole-number solutions.",
+      type: "worked-example",
+      id: "pc3-3-we6",
+      title: "Worked example (JEE style): negative lower bounds and odd numbers",
+      problem:
+        "Two classic exam twists use the same substitution idea.\n\n**(a)** How many integer solutions does $x + y + z = 0$ have with $x, y, z \\ge -5$?\n\n**(b)** How many solutions does $x + y + z = 15$ have in **positive odd** integers?",
+      steps: [
+        {
+          text: "**(a)** Negative values break stars and bars, because you can't hand out a negative number of stars. So shift each variable **up** to start at 0: $x' = x + 5$, and the same for $y$ and $z$. *Why +5:* the smallest allowed value, $-5$, must become 0.",
+        },
+        {
+          text: "The total rises by $3 \\times 5 = 15$, so $x' + y' + z' = 15$ with all values $\\ge 0$.",
+          latex: "{}^{15+2}C_2 = {}^{17}C_2 = 136",
+        },
+        {
+          text: "**(b)** Every positive odd number is $2a + 1$ with $a \\ge 0$. Put $x = 2a + 1$, $y = 2b + 1$, $z = 2c + 1$. *Why this form:* it turns 'odd' into an ordinary non-negative variable.",
+        },
+        {
+          text: "Then $2(a + b + c) + 3 = 15$, so $a + b + c = 6$:",
+          latex: "{}^{6+2}C_2 = {}^{8}C_2 = 28",
+        },
+        {
+          text: "Parity check before you start: three odd numbers add to an odd number, and 15 is odd, so solutions exist. For $x + y + z = 14$ the answer would be 0, and the substitution shows it too, because $a + b + c = 5.5$ has no whole-number solutions.",
+        },
+      ],
+      answer: "(a) $136$ (b) $28$",
     },
     {
       type: "callout",
@@ -611,6 +896,7 @@ const lesson03: LessonSeed = {
       content:
         "A bounded equation can also be read as a coefficient. For $0 \\le x, y, z, w \\le 3$, each variable contributes a factor $(1 + t + t^2 + t^3)$, and the number of solutions of $x + y + z + w = 8$ is the coefficient of $t^8$ in\n\n$\\displaystyle (1 + t + t^2 + t^3)^4 = \\left(\\frac{1 - t^4}{1 - t}\\right)^4$\n\nExpanding the top with the binomial theorem and the bottom as ${}^{n+3}C_3\\,t^n$ gives $165 - 4\\cdot 35 + 6\\cdot 1 = 31$, exactly the inclusion–exclusion sum above. Chapter 4 builds the binomial theorem used on the top, and lesson 5.5 previews the series for negative powers such as $(1 - t)^{-4}$.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc3-3-q1",
@@ -758,17 +1044,28 @@ const lesson04: LessonSeed = {
       content:
         "Ask which things are choosing. Each letter picks a box, so it is $(\\text{boxes})^{\\text{letters}} = 3^5$. The answer $5^3$ would be each box picking one letter, but a box can hold several letters or none. That is the same trap as $n^r$ against $r^n$ in 1.2.",
     },
+    { type: "heading", text: "Rings on fingers, as functions" },
     {
-      type: "text",
-      content:
-        "**Worked example (routine): rings on fingers.** In how many ways can 5 different rings be worn on the 4 fingers of one hand (not the thumb), if only which finger each ring is on matters?\n\n1. Who is choosing? Each **ring** picks a finger. A finger can take several rings or none, so fingers can't be the ones choosing. *Why ask this first:* it decides which number goes in the base.\n2. Each of 5 rings has 4 choices, independently:",
+      type: "worked-example",
+      id: "pc3-4-we1",
+      title: "Worked example (routine): rings on fingers",
+      problem:
+        "In how many ways can 5 different rings be worn on the 4 fingers of one hand (not the thumb), if only which finger each ring is on matters?",
+      steps: [
+        {
+          text: "Who is choosing? Each **ring** picks a finger. A finger can take several rings or none, so fingers can't be the ones choosing. *Why ask this first:* it decides which number goes in the base.",
+        },
+        {
+          text: "Each of 5 rings has 4 choices, independently:",
+          latex: "4 \\times 4 \\times 4 \\times 4 \\times 4 = 4^5 = 1024",
+        },
+        {
+          text: "The same count in the language of functions, which JEE uses a lot: a **function** from a 5-element set to a 4-element set sends each input to one output, so there are $4^5$ functions. Rings are the inputs and fingers are the outputs.",
+        },
+      ],
+      answer: "$4^5 = 1024$ ways.",
     },
-    { type: "math", latex: "4 \\times 4 \\times 4 \\times 4 \\times 4 = 4^5 = 1024" },
-    {
-      type: "text",
-      content:
-        "3. The same count in the language of functions, which JEE uses a lot: a **function** from a 5-element set to a 4-element set sends each input to one output, so there are $4^5$ functions. Rings are the inputs and fingers are the outputs.",
-    },
+    { type: "heading", text: "No box empty: inclusion–exclusion" },
     {
       type: "text",
       content:
@@ -812,37 +1109,73 @@ const lesson04: LessonSeed = {
       content:
         "**Check small cases.**\n\n- $n = 3$: $27 - 24 + 3 = 6$. That is right, because 3 letters into 3 boxes with none empty means one letter per box, and there are $3! = 6$ ways.\n- $n = 2$: $9 - 12 + 3 = 0$. That is right too, because 2 letters cannot fill 3 boxes.\n- $n = 4$: $81 - 48 + 3 = 36$.\n- $n = 5$: $243 - 96 + 3 = 150$.",
     },
+    { type: "heading", text: "Checking and applying the onto count" },
     {
-      type: "text",
-      content:
-        "**Worked example: check 150 using groups from 3.1.** Five students go into three named rooms, with no room empty. The room sizes must be $3,1,1$ or $2,2,1$.\n\n1. Sizes $(3,1,1)$: choose which room gets 3 people (3 ways), then $\\frac{5!}{3!\\,1!\\,1!} = 20$. That gives 60.\n2. Sizes $(2,2,1)$: choose which room gets 1 person (3 ways), then $\\frac{5!}{2!\\,2!\\,1!} = 30$. That gives 90.\n3. Total: $60 + 90 = 150$. This matches $3^5 - 3\\cdot 2^5 + 3$.",
+      type: "worked-example",
+      id: "pc3-4-we2",
+      title: "Worked example: the same count using groups from 3.1",
+      problem:
+        "Five students go into three named rooms, with no room empty. The room sizes must be $3,1,1$ or $2,2,1$. Count the ways using these room sizes.",
+      steps: [
+        {
+          text: "Sizes $(3,1,1)$: choose which room gets 3 people (3 ways), then $\\frac{5!}{3!\\,1!\\,1!} = 20$. That gives 60.",
+        },
+        {
+          text: "Sizes $(2,2,1)$: choose which room gets 1 person (3 ways), then $\\frac{5!}{2!\\,2!\\,1!} = 30$. That gives 90.",
+        },
+        {
+          text: "Total: $60 + 90 = 150$. This matches $3^5 - 3\\cdot 2^5 + 3$.",
+        },
+      ],
+      answer: "$150$ ways.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (application): tasks to teams.** A start-up has 6 different tasks for a sprint and 3 teams: design, backend and testing. Every team must get at least one task. How many ways can the tasks be assigned?\n\n1. Model: different objects (tasks) into different boxes (named teams), no box empty. That is an onto count with $n = 6$, $k = 3$.\n2. All assignments: $3^6 = 729$. *Why start here:* it's easy to count everything, then remove the bad cases.\n3. Subtract the ones that leave a named team idle: $3 \\times 2^6 = 192$.\n4. Add back the 3 'all six tasks to one team' cases, which were subtracted twice:",
+      type: "worked-example",
+      id: "pc3-4-we3",
+      title: "Worked example (application): tasks to teams",
+      problem:
+        "A start-up has 6 different tasks for a sprint and 3 teams: design, backend and testing. Every team must get at least one task. How many ways can the tasks be assigned?",
+      steps: [
+        {
+          text: "Model: different objects (tasks) into different boxes (named teams), no box empty. That is an onto count with $n = 6$, $k = 3$.",
+        },
+        {
+          text: "All assignments: $3^6 = 729$. *Why start here:* it's easy to count everything, then remove the bad cases.",
+        },
+        {
+          text: "Subtract the ones that leave a named team idle: $3 \\times 2^6 = 192$.",
+        },
+        {
+          text: "Add back the 3 'all six tasks to one team' cases, which were subtracted twice:",
+          latex: "3^6 - 3\\cdot 2^6 + 3\\cdot 1^6 = 729 - 192 + 3 = 540",
+        },
+        {
+          text: "Check by team sizes, using 3.1. Sizes $(4,1,1)$: pick the busy team (3 ways) times $\\frac{6!}{4!\\,1!\\,1!} = 30$, giving 90. Sizes $(3,2,1)$: $3! = 6$ ways to match sizes to teams times $\\frac{6!}{3!\\,2!\\,1!} = 60$, giving 360. Sizes $(2,2,2)$: $\\frac{6!}{2!\\,2!\\,2!} = 90$. Total $90 + 360 + 90 = 540$.",
+        },
+      ],
+      answer: "$540$ ways.",
     },
-    { type: "math", latex: "3^6 - 3\\cdot 2^6 + 3\\cdot 1^6 = 729 - 192 + 3 = 540" },
     {
-      type: "text",
-      content:
-        "5. Check by team sizes, using 3.1. Sizes $(4,1,1)$: pick the busy team (3 ways) times $\\frac{6!}{4!\\,1!\\,1!} = 30$, giving 90. Sizes $(3,2,1)$: $3! = 6$ ways to match sizes to teams times $\\frac{6!}{3!\\,2!\\,1!} = 60$, giving 360. Sizes $(2,2,2)$: $\\frac{6!}{2!\\,2!\\,2!} = 90$. Total $90 + 360 + 90 = 540$.",
+      type: "worked-example",
+      id: "pc3-4-we4",
+      title: "Worked example (JEE style): onto functions",
+      problem:
+        "Let $A = \\{1, 2, 3, 4, 5, 6\\}$ and $B = \\{a, b, c, d\\}$. How many functions from $A$ onto $B$ are there? (Onto means every element of $B$ is hit at least once.)",
+      steps: [
+        {
+          text: "Translate: the 6 inputs are different objects, the 4 outputs are different boxes, and 'onto' means no box is empty.",
+        },
+        {
+          text: "Use the $k$-box formula with $k = 4$. Choose $j$ outputs to miss (${}^4C_j$ ways), send all inputs to the other $4 - j$, and alternate the signs. *Why alternate:* each correction over-corrects the next layer of overlaps.",
+          latex: "4^6 - {}^4C_1\\,3^6 + {}^4C_2\\,2^6 - {}^4C_3\\,1^6 = 4096 - 2916 + 384 - 4 = 1560",
+        },
+        {
+          text: "Check by sizes: 6 inputs onto 4 outputs means sizes $(3,1,1,1)$ or $(2,2,1,1)$. The first gives $4 \\times \\frac{6!}{3!} = 4 \\times 120 = 480$. The second gives ${}^4C_2 \\times \\frac{6!}{2!\\,2!} = 6 \\times 180 = 1080$. Total $480 + 1080 = 1560$.",
+        },
+      ],
+      answer: "$1560$ onto functions.",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example (JEE style): onto functions.** Let $A = \\{1, 2, 3, 4, 5, 6\\}$ and $B = \\{a, b, c, d\\}$. How many functions from $A$ onto $B$ are there? (Onto means every element of $B$ is hit at least once.)\n\n1. Translate: the 6 inputs are different objects, the 4 outputs are different boxes, and 'onto' means no box is empty.\n2. Use the $k$-box formula with $k = 4$. Choose $j$ outputs to miss (${}^4C_j$ ways), send all inputs to the other $4 - j$, and alternate the signs. *Why alternate:* each correction over-corrects the next layer of overlaps.",
-    },
-    {
-      type: "math",
-      latex:
-        "4^6 - {}^4C_1\\,3^6 + {}^4C_2\\,2^6 - {}^4C_3\\,1^6 = 4096 - 2916 + 384 - 4 = 1560",
-    },
-    {
-      type: "text",
-      content:
-        "3. Check by sizes: 6 inputs onto 4 outputs means sizes $(3,1,1,1)$ or $(2,2,1,1)$. The first gives $4 \\times \\frac{6!}{3!} = 4 \\times 120 = 480$. The second gives ${}^4C_2 \\times \\frac{6!}{2!\\,2!} = 6 \\times 180 = 1080$. Total $480 + 1080 = 1560$.",
-    },
+    { type: "heading", text: "Unnamed boxes, and just two boxes", level: 3 },
     {
       type: "callout",
       variant: "definition",
@@ -855,10 +1188,11 @@ const lesson04: LessonSeed = {
       content:
         "**With two boxes** the same reasoning is shorter. All $2^n$, minus the 2 ways where everything goes in one box, gives $2^n - 2$. For example, 4 different balls in 2 different boxes, neither empty: $16 - 2 = 14$.",
     },
+    { type: "heading", text: "Derangements: nobody gets their own" },
     {
       type: "text",
       content:
-        "**Derangements: nobody gets their own.** Four friends put their name slips in a hat and each draws one. In how many ways does **nobody** draw their own name? Write a draw as a word: position $i$ is the slip person $i$ drew. We want words using 1, 2, 3, 4 where no digit sits in its own position. There are nine:\n\n2143, 2341, 2413, 3142, 3412, 3421, 4123, 4312, 4321\n\nSo $D_4 = 9$ out of $4! = 24$ draws.",
+        "Four friends put their name slips in a hat and each draws one. In how many ways does **nobody** draw their own name? Write a draw as a word: position $i$ is the slip person $i$ drew. We want words using 1, 2, 3, 4 where no digit sits in its own position. There are nine:\n\n2143, 2341, 2413, 3142, 3412, 3421, 4123, 4312, 4321\n\nSo $D_4 = 9$ out of $4! = 24$ draws.",
     },
     {
       type: "callout",
@@ -868,15 +1202,27 @@ const lesson04: LessonSeed = {
         "Inclusion–exclusion counts derangements too. Let $F_i$ be the arrangements where person $i$ gets their own slip. Fixing any $j$ named people leaves $(n-j)!$ arrangements, and there are ${}^nC_j$ ways to pick them. So\n\n$\\displaystyle D_n = n! - {}^nC_1(n-1)! + {}^nC_2(n-2)! - \\cdots = n!\\left(1 - \\frac{1}{1!} + \\frac{1}{2!} - \\cdots + \\frac{(-1)^n}{n!}\\right)$\n\nFor $n = 4$: $24 - 24 + 12 - 4 + 1 = 9$. For $n = 5$: $120 - 120 + 60 - 20 + 5 - 1 = 44$. As $n$ grows, $D_n / n!$ gets closer to $1/e \\approx 0.37$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (JEE style): exactly some right.** A clerk puts 5 letters into their 5 addressed envelopes at random, one letter each. In how many ways do **exactly 2** letters go into the correct envelope?\n\n1. Choose which 2 letters are right: ${}^5C_2 = 10$ ways. *Why choose them first:* 'exactly 2' names a set of lucky letters, and once they are fixed, the rest of the problem is about the other 3.\n2. The other 3 letters must **all** be wrong, or we would have more than 2 right. That is a derangement of 3: $D_3 = 2$ (for letters $c, d, e$ the only options are $d, e, c$ and $e, c, d$).\n3. Multiply:",
-    },
-    { type: "math", latex: "{}^5C_2 \\times D_3 = 10 \\times 2 = 20" },
-    {
-      type: "text",
-      content:
-        "4. The general pattern: exactly $r$ of $n$ right is ${}^nC_r\\,D_{n-r}$. A quick check: exactly 4 of 5 right is ${}^5C_4\\,D_1 = 5 \\times 0 = 0$, which is correct, because if 4 letters are right the last one has only its own envelope left.",
+      type: "worked-example",
+      id: "pc3-4-we5",
+      title: "Worked example (JEE style): exactly some right",
+      problem:
+        "A clerk puts 5 letters into their 5 addressed envelopes at random, one letter each. In how many ways do **exactly 2** letters go into the correct envelope?",
+      steps: [
+        {
+          text: "Choose which 2 letters are right: ${}^5C_2 = 10$ ways. *Why choose them first:* 'exactly 2' names a set of lucky letters, and once they are fixed, the rest of the problem is about the other 3.",
+        },
+        {
+          text: "The other 3 letters must **all** be wrong, or we would have more than 2 right. That is a derangement of 3: $D_3 = 2$ (for letters $c, d, e$ the only options are $d, e, c$ and $e, c, d$).",
+        },
+        {
+          text: "Multiply:",
+          latex: "{}^5C_2 \\times D_3 = 10 \\times 2 = 20",
+        },
+        {
+          text: "The general pattern: exactly $r$ of $n$ right is ${}^nC_r\\,D_{n-r}$. A quick check: exactly 4 of 5 right is ${}^5C_4\\,D_1 = 5 \\times 0 = 0$, which is correct, because if 4 letters are right the last one has only its own envelope left.",
+        },
+      ],
+      answer: "$20$ ways.",
     },
     {
       type: "table",
@@ -893,6 +1239,7 @@ const lesson04: LessonSeed = {
       content:
         "The table only saves space. The first two columns put $n$ objects into **3** boxes. The last column puts $n$ letters into **$n$** envelopes, one each. They answer different questions and are not related to each other.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc3-4-q1",
@@ -1009,6 +1356,7 @@ const lesson05: LessonSeed = {
       content:
         "You now have eight or nine counting formulas. In an exam the hard part is rarely the arithmetic. It is deciding **which** formula the story describes. Two problems can read almost the same and still need different models. This lesson is a procedure for choosing, followed by a sorting drill.",
     },
+    { type: "heading", text: "Three questions that pick the model" },
     {
       type: "callout",
       variant: "definition",
@@ -1065,38 +1413,80 @@ const lesson05: LessonSeed = {
           "Different books: 4 leaves, $2^2$. If the books were identical, the highlighted leaf (book 1 to Meera, book 2 to Tanvi) and the leaf (Tanvi, Meera) would be the same outcome, leaving 3, which is the stars-and-bars count ${}^3C_1$.",
       },
     },
+    { type: "heading", text: "The three questions in action" },
     {
       type: "text",
       content:
-        "**Worked examples: the three questions in action.** Each example below answers the three questions *in writing* before any arithmetic. That is the habit to build.",
+        "Each example below answers the three questions *in writing* before any arithmetic. That is the habit to build.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (routine).** 7 different chocolates are shared between two children, Isha and Kabir, and each child must get at least one. How many ways?\n\n1. Order? No, a child's chocolates form a pile. Repeat? A child can get several chocolates, so yes. Identical? The chocolates are different and the children are named.\n2. That is the $k^n$ model with a 'none empty' rule: different objects into different boxes, onto.\n3. All shares: $2^7 = 128$. Remove 'all to Isha' and 'all to Kabir'. *Why only 2 cases:* with two boxes, an empty box means everything is in the other one.",
+      type: "worked-example",
+      id: "pc3-5-we1",
+      title: "Worked example 1 (routine)",
+      problem:
+        "7 different chocolates are shared between two children, Isha and Kabir, and each child must get at least one. How many ways?",
+      steps: [
+        {
+          text: "Order? No, a child's chocolates form a pile. Repeat? A child can get several chocolates, so yes. Identical? The chocolates are different and the children are named.",
+        },
+        {
+          text: "That is the $k^n$ model with a 'none empty' rule: different objects into different boxes, onto.",
+        },
+        {
+          text: "All shares: $2^7 = 128$. Remove 'all to Isha' and 'all to Kabir'. *Why only 2 cases:* with two boxes, an empty box means everything is in the other one.",
+          latex: "2^7 - 2 = 126",
+        },
+      ],
+      answer: "$126$ ways.",
     },
-    { type: "math", latex: "2^7 - 2 = 126" },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (application: hotel rooms).** 5 friends check into a hotel with 3 different rooms, and each room holds **at most 2** people. In how many ways can they be put into rooms?\n\n1. Order? No, a room holds a group. Repeat? A room holds up to 2, so boxes take more than one object. Identical? Friends are different, rooms are named.\n2. The cap changes the model. 5 people with at most 2 per room in 3 rooms forces the sizes to be $(2, 2, 1)$ in some order: $2 + 2 + 1 = 5$ is the only way. *Why list the sizes:* a cap on a box is easiest to handle by listing the allowed group sizes, the method from 3.1.\n3. Choose which room gets the single person (3 ways). Then fill the rooms, which are named: $\\frac{5!}{2!\\,2!\\,1!} = 30$.",
+      type: "worked-example",
+      id: "pc3-5-we2",
+      title: "Worked example 2 (application: hotel rooms)",
+      problem:
+        "5 friends check into a hotel with 3 different rooms, and each room holds **at most 2** people. In how many ways can they be put into rooms?",
+      steps: [
+        {
+          text: "Order? No, a room holds a group. Repeat? A room holds up to 2, so boxes take more than one object. Identical? Friends are different, rooms are named.",
+        },
+        {
+          text: "The cap changes the model. 5 people with at most 2 per room in 3 rooms forces the sizes to be $(2, 2, 1)$ in some order: $2 + 2 + 1 = 5$ is the only way. *Why list the sizes:* a cap on a box is easiest to handle by listing the allowed group sizes, the method from 3.1.",
+        },
+        {
+          text: "Choose which room gets the single person (3 ways). Then fill the rooms, which are named: $\\frac{5!}{2!\\,2!\\,1!} = 30$.",
+          latex: "3 \\times \\frac{5!}{2!\\,2!\\,1!} = 3 \\times 30 = 90",
+        },
+        {
+          text: "Check by the complement. From all $3^5 = 243$, remove the ones where some room has 3 or more. For one named room that happens in ${}^5C_3\\,2^2 + {}^5C_4\\,2 + 1 = 40 + 10 + 1 = 51$ ways, and two rooms can't both have 3 of only 5 people, so subtract $3 \\times 51 = 153$: $243 - 153 = 90$. Both routes agree, but listing sizes was quicker.",
+        },
+      ],
+      answer: "$90$ ways.",
     },
-    { type: "math", latex: "3 \\times \\frac{5!}{2!\\,2!\\,1!} = 3 \\times 30 = 90" },
     {
-      type: "text",
-      content:
-        "4. Check by the complement. From all $3^5 = 243$, remove the ones where some room has 3 or more. For one named room that happens in ${}^5C_3\\,2^2 + {}^5C_4\\,2 + 1 = 40 + 10 + 1 = 51$ ways, and two rooms can't both have 3 of only 5 people, so subtract $3 \\times 51 = 153$: $243 - 153 = 90$. Both routes agree, but listing sizes was quicker.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 (JEE style: two models in one question).** 5 different books and 4 identical pens are given to 3 students. A student may get nothing. In how many ways?\n\n1. Split the story. The books and the pens are handed out independently, so answer the three questions for **each** kind of object. *Why split:* one question can hide two models, and the multiplication principle joins them back up.\n2. Books: different objects into named students, $3^5 = 243$.\n3. Pens: identical objects into named students, stars and bars with 4 stars and 2 bars, ${}^6C_2 = 15$.\n4. Every book-share can go with every pen-share:",
-    },
-    { type: "math", latex: "3^5 \\times {}^{6}C_2 = 243 \\times 15 = 3645" },
-    {
-      type: "text",
-      content:
-        "5. Two wrong models to avoid. Treating all 9 objects as different gives $3^9$, which counts pen swaps that change nothing. Treating all 9 as identical gives ${}^{11}C_2 = 55$, which forgets that who gets the maths book matters.",
+      type: "worked-example",
+      id: "pc3-5-we3",
+      title: "Worked example 3 (JEE style: two models in one question)",
+      problem:
+        "5 different books and 4 identical pens are given to 3 students. A student may get nothing. In how many ways?",
+      steps: [
+        {
+          text: "Split the story. The books and the pens are handed out independently, so answer the three questions for **each** kind of object. *Why split:* one question can hide two models, and the multiplication principle joins them back up.",
+        },
+        {
+          text: "Books: different objects into named students, $3^5 = 243$.",
+        },
+        {
+          text: "Pens: identical objects into named students, stars and bars with 4 stars and 2 bars, ${}^6C_2 = 15$.",
+        },
+        {
+          text: "Every book-share can go with every pen-share:",
+          latex: "3^5 \\times {}^{6}C_2 = 243 \\times 15 = 3645",
+        },
+        {
+          text: "Two wrong models to avoid. Treating all 9 objects as different gives $3^9$, which counts pen swaps that change nothing. Treating all 9 as identical gives ${}^{11}C_2 = 55$, which forgets that who gets the maths book matters.",
+        },
+      ],
+      answer: "$3645$ ways.",
     },
     {
       type: "quiz",
@@ -1122,10 +1512,11 @@ const lesson05: LessonSeed = {
       ],
       hint: "Answer the three questions separately for the books and for the pens.",
     },
+    { type: "heading", text: "Sorting drill: pick the model first" },
     {
       type: "text",
       content:
-        "**Sorting drill.** For each problem, pick the model *before* computing anything. The options are models, not numbers. Once you have the model, the arithmetic is quick.",
+        "For each problem, pick the model *before* computing anything. The options are models, not numbers. Once you have the model, the arithmetic is quick.",
     },
     {
       type: "quiz",
@@ -1215,10 +1606,11 @@ const lesson05: LessonSeed = {
         { text: "$6! = 720$", feedback: "The order in which toppings go on does not change the pizza." },
       ],
     },
+    { type: "heading", text: "Two more models from the same questions" },
     {
       type: "text",
       content:
-        "**Two more models from the same questions.** Sometimes the items come in identical **groups** and you choose some of them. You have 3 identical apples, 4 identical mangoes and 2 identical bananas, and you want a basket with at least one fruit. A basket is fixed by how many of each you take: 0 to 3 apples (4 choices), 0 to 4 mangoes (5 choices), 0 to 2 bananas (3 choices). Remove the empty basket:\n\n$\\displaystyle (3+1)(4+1)(2+1) - 1 = 60 - 1 = 59$\n\nThe same model counts divisors. A divisor of $2^3 \\cdot 3^2 \\cdot 5$ picks 0 to 3 twos, 0 to 2 threes and 0 to 1 five, so there are $4 \\times 3 \\times 2 = 24$ of them. Here the 'empty basket' is the divisor 1, and it is kept.\n\nAnd sometimes **both** the items and the boxes are identical. Then a distribution is just a way to write $n$ as a sum of at most $k$ parts, with the order of the parts ignored. For small numbers, list them. For 5 identical balls in 3 identical boxes: $5$, $4+1$, $3+2$, $3+1+1$, $2+2+1$, which makes 5 ways.",
+        "Sometimes the items come in identical **groups** and you choose some of them. You have 3 identical apples, 4 identical mangoes and 2 identical bananas, and you want a basket with at least one fruit. A basket is fixed by how many of each you take: 0 to 3 apples (4 choices), 0 to 4 mangoes (5 choices), 0 to 2 bananas (3 choices). Remove the empty basket:\n\n$\\displaystyle (3+1)(4+1)(2+1) - 1 = 60 - 1 = 59$\n\nThe same model counts divisors. A divisor of $2^3 \\cdot 3^2 \\cdot 5$ picks 0 to 3 twos, 0 to 2 threes and 0 to 1 five, so there are $4 \\times 3 \\times 2 = 24$ of them. Here the 'empty basket' is the divisor 1, and it is kept.\n\nAnd sometimes **both** the items and the boxes are identical. Then a distribution is just a way to write $n$ as a sum of at most $k$ parts, with the order of the parts ignored. For small numbers, list them. For 5 identical balls in 3 identical boxes: $5$, $4+1$, $3+2$, $3+1+1$, $2+2+1$, which makes 5 ways.",
     },
     {
       type: "quiz",

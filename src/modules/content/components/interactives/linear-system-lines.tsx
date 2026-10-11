@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { z } from "zod";
 import type { linearSystemLinesSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { FunctionPlot, formatNumber, makeScales } from "./function-plot";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 
@@ -253,8 +254,8 @@ export function LinearSystemLines({ config }: { config: Config }) {
 
       <div className="flex items-start justify-between gap-3">
         <p className="text-xs text-muted-foreground">
-          {config.caption ??
-            "Each equation is a line; a solution is a point on both. Move the coefficients: the lines cross once, run parallel, or lie on top of each other."}
+          <RichText text={config.caption ??
+            "Each equation is a line; a solution is a point on both. Move the coefficients: the lines cross once, run parallel, or lie on top of each other."} />
         </p>
         <button
           type="button"

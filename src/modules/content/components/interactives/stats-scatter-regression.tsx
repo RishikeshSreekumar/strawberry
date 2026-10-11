@@ -3,6 +3,7 @@
 import { useId, useRef, useState } from "react";
 import type { z } from "zod";
 import type { statsScatterRegressionSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { fmt, niceStep, snapTo, ticks } from "./stats-math";
 import { InteractiveFrame, Latex } from "./ui";
 
@@ -500,7 +501,7 @@ export function StatsScatterRegression({ config }: { config: Config }) {
         </div>
       )}
 
-      <p className="text-center text-xs text-muted-foreground">{caption}</p>
+      <p className="text-center text-xs text-muted-foreground"><RichText text={caption} /></p>
     </InteractiveFrame>
   );
 }

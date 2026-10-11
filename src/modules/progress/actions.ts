@@ -2,20 +2,15 @@
 
 import { z } from "zod";
 import { db } from "@/db";
+import type { QuestionResponse } from "@/db/schema/progress";
 import { requireUser } from "@/modules/auth/session";
 import {
   markLessonCompleted,
   recordQuizAttempt,
 } from "./services/progress-service";
+import { quizAttemptSchema } from "./attempt-schema";
 
 const lessonIdSchema = z.string().uuid();
-
-const quizAttemptSchema = z.object({
-  lessonId: z.string().uuid(),
-  questionId: z.string().min(1).max(200),
-  selectedIndex: z.number().int().min(0).max(50),
-  correct: z.boolean(),
-});
 
 export async function markLessonCompletedAction(
   lessonId: string,
@@ -27,11 +22,16 @@ export async function markLessonCompletedAction(
   return { ok: true };
 }
 
+/**
+ * Records one question attempt. Single-correct quiz: `selectedIndex` only.
+ * Multiple-correct quiz / numeric: `selectedIndex: -1` plus `response`.
+ */
 export async function recordQuizAttemptAction(input: {
   lessonId: string;
   questionId: string;
   selectedIndex: number;
   correct: boolean;
+  response?: QuestionResponse;
 }): Promise<{ ok: boolean }> {
   const user = await requireUser();
   const parsed = quizAttemptSchema.safeParse(input);

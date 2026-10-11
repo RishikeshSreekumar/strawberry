@@ -26,6 +26,7 @@ import { emChapter2Lessons } from "@/modules/content/em-chapter-2-content";
 import { emChapter3Lessons } from "@/modules/content/em-chapter-3-content";
 import { emChapter4Lessons } from "@/modules/content/em-chapter-4-content";
 import { emChapter5Lessons } from "@/modules/content/em-chapter-5-content";
+import { emChapter6Lessons } from "@/modules/content/em-chapter-6-content";
 import { ompChapter0Lessons } from "@/modules/content/omp-chapter-0-content";
 import { ompChapter1Lessons } from "@/modules/content/omp-chapter-1-content";
 import { ompChapter2Lessons } from "@/modules/content/omp-chapter-2-content";
@@ -33,29 +34,12 @@ import { ompChapter3Lessons } from "@/modules/content/omp-chapter-3-content";
 import { ompChapter4Lessons } from "@/modules/content/omp-chapter-4-content";
 import { ompChapter5Lessons } from "@/modules/content/omp-chapter-5-content";
 import { BlockRenderer } from "@/modules/content/components/block-renderer";
-import type { LessonBlock } from "@/modules/content/schemas/blocks";
-
-/** Every string the BlockRenderer passes through RichText. */
-function richTextStrings(blocks: LessonBlock[]): string[] {
-  return blocks.flatMap((block) => {
-    switch (block.type) {
-      case "text":
-        return [block.content];
-      case "callout":
-        return [block.content, ...(block.title ? [block.title] : [])];
-      case "table":
-        return [...block.headers, ...block.rows.flat()];
-      case "quiz":
-        return [
-          block.question,
-          ...(block.hint ? [block.hint] : []),
-          ...block.options.flatMap((o) => [o.text, ...(o.feedback ? [o.feedback] : [])]),
-        ];
-      default:
-        return [];
-    }
-  });
-}
+import {
+  allLatex,
+  CONTROL_CHARS,
+  hasBareSemicolon,
+  richTextStrings,
+} from "./helpers/lesson-text";
 
 const physicsCourses = [
   {
@@ -104,6 +88,7 @@ const physicsCourses = [
       { name: "em chapter 3", lessons: emChapter3Lessons, count: 8 },
       { name: "em chapter 4", lessons: emChapter4Lessons, count: 8 },
       { name: "em chapter 5", lessons: emChapter5Lessons, count: 8 },
+      { name: "em chapter 6", lessons: emChapter6Lessons, count: 8 },
     ],
   },
   {
@@ -138,27 +123,31 @@ for (const { course, prefix, chapters } of physicsCourses) {
         expect(last.slug).toBe(`chapter-${index}-mastery`);
         expect(last.title).toMatch(/Mastery/);
         expect(
-          last.blocks.some((b) => b.type === "quiz" && b.variant === "mastery"),
+          last.blocks.some(
+            (b) => (b.type === "quiz" || b.type === "numeric") && b.variant === "mastery",
+          ),
         ).toBe(true);
       });
     });
 
     it("all inline and display math is valid KaTeX, with no stray escape characters", () => {
       for (const lesson of allLessons) {
+        // Rich text (every block type, incl. worked-example and numeric
+        // fields), math blocks and worked-example step latex.
         const texts = richTextStrings(lesson.blocks);
-        const math = [
-          ...texts.flatMap((t) => [...t.matchAll(/\$([^$]+)\$/g)].map((m) => m[1])),
-          ...lesson.blocks.flatMap((b) => (b.type === "math" ? [b.latex] : [])),
-        ];
-        for (const latex of math) {
-          expect(() => katex.renderToString(latex, { throwOnError: true }), `${lesson.slug}: ${latex}`).not.toThrow();
+        const math = allLatex(lesson.blocks);
+        for (const { latex, display } of math) {
+          expect(
+            () => katex.renderToString(latex, { displayMode: display, throwOnError: true }),
+            `${lesson.slug}: ${latex}`,
+          ).not.toThrow();
           // "\;" written with one backslash in TS reaches KaTeX as a bare ";".
-          expect(latex.replace(/\\;/g, ""), `${lesson.slug}: ${latex}`).not.toContain(";");
+          expect(hasBareSemicolon(latex), `${lesson.slug}: ${latex}`).toBe(false);
         }
         // A single backslash before f, t, v, b or r in the TS source ("\frac", "\times")
         // silently becomes a control character instead of reaching KaTeX.
-        for (const text of [...texts, ...math]) {
-          expect(text, lesson.slug).not.toMatch(/[\t\f\v\b\r]/);
+        for (const text of [...texts, ...math.map((m) => m.latex)]) {
+          expect(text, lesson.slug).not.toMatch(CONTROL_CHARS);
         }
       }
     });
@@ -169,21 +158,25 @@ for (const { course, prefix, chapters } of physicsCourses) {
       }
     });
 
-    it("every quiz has exactly one correct option", () => {
+    it("every quiz has exactly one correct option, or at least one when multiple", () => {
       for (const lesson of allLessons) {
         for (const block of lesson.blocks) {
           if (block.type !== "quiz") continue;
           const correct = block.options.filter((o) => o.correct).length;
-          expect(correct, `${lesson.slug}: "${block.question}"`).toBe(1);
+          if (block.multiple) {
+            expect(correct, `${lesson.slug}: "${block.question}"`).toBeGreaterThanOrEqual(1);
+          } else {
+            expect(correct, `${lesson.slug}: "${block.question}"`).toBe(1);
+          }
         }
       }
     });
 
-    it("quiz ids are present, prefixed and unique across the course", () => {
+    it("question (quiz and numeric) ids are present, prefixed and unique across the course", () => {
       const ids: string[] = [];
       for (const lesson of allLessons) {
         for (const block of lesson.blocks) {
-          if (block.type !== "quiz") continue;
+          if (block.type !== "quiz" && block.type !== "numeric") continue;
           expect(block.id, `${lesson.slug}: "${block.question}"`).toMatch(
             new RegExp(`^${prefix}\\d-\\d+-q\\d+$`),
           );

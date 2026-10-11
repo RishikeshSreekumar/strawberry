@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import type { z } from "zod";
 import type { owtWaveLabSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import {
   ArrowMarker,
   PlayButton,
@@ -450,10 +451,10 @@ function ShmView({ config, p, ranges, sliders }: ViewProps) {
       <div className="space-y-2">{sliders}</div>
       <Readouts rows={rows} />
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ??
+        <RichText text={config.caption ??
           (isPend
             ? "Small swings: the bob obeys the same cosine as a spring, with ω = √(g/L). Notice that the mass slider (if shown) never changes the period."
-            : "Press Play or drag t. The dashed cursor on each graph is this instant; watch where v and a are largest.")}
+            : "Press Play or drag t. The dashed cursor on each graph is this instant; watch where v and a are largest.")} />
       </p>
     </InteractiveFrame>
   );
@@ -644,10 +645,10 @@ function TravelingView({ config, p, ranges, sliders }: ViewProps) {
       <div className="space-y-2">{sliders}</div>
       <Readouts rows={rows} />
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ??
+        <RichText text={config.caption ??
           (sup
             ? "Thin curves are the two waves; the thick curve is their sum, point by point. Slide the phase of wave 2 and watch the sum grow and vanish."
-            : "The shape moves along the string, but P only moves up and down. The dashed curve is the string at t = 0.")}
+            : "The shape moves along the string, but P only moves up and down. The dashed curve is the string at t = 0.")} />
       </p>
     </InteractiveFrame>
   );
@@ -800,10 +801,10 @@ function StandingView({ config, p, ranges, sliders }: ViewProps) {
       <div className="space-y-2">{sliders}</div>
       <Readouts rows={rows} />
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ??
+        <RichText text={config.caption ??
           (pipe
             ? "N and A mark displacement nodes and antinodes. A closed end is always a displacement node, an open end an antinode."
-            : "Every point oscillates in place; the nodes (N) never move. Step n and count the loops.")}
+            : "Every point oscillates in place; the nodes (N) never move. Step n and count the loops.")} />
       </p>
     </InteractiveFrame>
   );
@@ -853,8 +854,8 @@ function BeatsView({ config, p, sliders }: { config: Config; p: Params; sliders:
       <div className="space-y-2">{sliders}</div>
       <Readouts rows={rows} />
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ??
-          "The loudness (dashed envelope) swells and fades |f₁ − f₂| times per second. Make the two frequencies equal and the beats vanish."}
+        <RichText text={config.caption ??
+          "The loudness (dashed envelope) swells and fades |f₁ − f₂| times per second. Make the two frequencies equal and the beats vanish."} />
       </p>
     </InteractiveFrame>
   );
@@ -940,8 +941,8 @@ function DopplerView({ config, p, sliders }: { config: Config; p: Params; slider
       <div className="space-y-2">{sliders}</div>
       <Readouts rows={rows} />
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ??
-          "Each circle is one crest, centred where the source was when it emitted it. Crests bunch up ahead (higher pitch) and spread out behind. Push v_s past v to see the shock cone."}
+        <RichText text={config.caption ??
+          "Each circle is one crest, centred where the source was when it emitted it. Crests bunch up ahead (higher pitch) and spread out behind. Push v_s past v to see the shock cone."} />
       </p>
     </InteractiveFrame>
   );

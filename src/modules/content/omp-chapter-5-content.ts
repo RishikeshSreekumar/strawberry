@@ -24,14 +24,23 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
-      type: "text",
-      content:
-        "Heat a copper wire and its resistance goes up. Heat a piece of silicon and its resistance goes *down*, sharply: a few tens of degrees can halve it. Ohm's-law thinking says hotter means more jiggling atoms and more collisions, so every material should get worse. Silicon disagrees, and the reason is quantum: in silicon, heat does not just shake the carriers, it *creates* them.",
+      type: "video",
+      src: "/videos/omp-5-semiconductor-electronics.mp4",
+      poster: "/videos/omp-5-semiconductor-electronics.jpg",
+      title: "Chapter 5 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
     },
     {
       type: "text",
       content:
-        "**From levels to bands.** An isolated silicon atom has sharp energy levels, like Bohr's hydrogen ladder (Chapter 4). Bring two atoms close and each level splits into two slightly different levels, because the electrons of one atom feel the other. Bring $N \\approx 10^{23}$ atoms together into a crystal and each level splits into $N$ levels packed so closely that they form a continuous **band**. Between bands there may be energy ranges that no electron in the crystal can have: **band gaps**.",
+        "Heat a copper wire and its resistance goes up. Heat a piece of silicon and its resistance goes *down*, sharply: a few tens of degrees can halve it. Ohm's-law thinking says hotter means more jiggling atoms and more collisions, so every material should get worse. Silicon disagrees, and the reason is quantum: in silicon, heat does not just shake the carriers, it *creates* them.",
+    },
+    { type: "heading", text: "From levels to bands" },
+    {
+      type: "text",
+      content:
+        "An isolated silicon atom has sharp energy levels, like Bohr's hydrogen ladder (Chapter 4). Bring two atoms close and each level splits into two slightly different levels, because the electrons of one atom feel the other. Bring $N \\approx 10^{23}$ atoms together into a crystal and each level splits into $N$ levels packed so closely that they form a continuous **band**. Between bands there may be energy ranges that no electron in the crystal can have: **band gaps**.",
     },
     {
       type: "callout",
@@ -49,10 +58,11 @@ const lesson01: LessonSeed = {
         ["Semiconductor (Si, Ge)", "Same as insulator but a narrow gap", "Si 1.1 eV, Ge 0.7 eV", "A few electrons are thermally excited across; more at higher $T$"],
       ],
     },
+    { type: "heading", text: "Intrinsic semiconductors" },
     {
       type: "text",
       content:
-        "**Intrinsic semiconductors.** In pure silicon each atom forms four covalent bonds with its neighbours. At room temperature, thermal energy occasionally breaks a bond: an electron jumps into the conduction band and leaves behind a vacancy in the valence band, a **hole**. A neighbouring bonded electron can hop into the hole, which moves the hole the other way. The hole therefore behaves like a positive charge carrier. Every electron freed makes exactly one hole, so",
+        "In pure silicon each atom forms four covalent bonds with its neighbours. At room temperature, thermal energy occasionally breaks a bond: an electron jumps into the conduction band and leaves behind a vacancy in the valence band, a **hole**. A neighbouring bonded electron can hop into the hole, which moves the hole the other way. The hole therefore behaves like a positive charge carrier. Every electron freed makes exactly one hole, so",
     },
     { type: "math", latex: "n_e = n_h = n_i \\qquad (\\text{Si at 300 K: } n_i \\approx 1.5\\times10^{16}\\ \\text{m}^{-3})" },
     {
@@ -60,6 +70,7 @@ const lesson01: LessonSeed = {
       content:
         "Compare $n_i$ with the number of silicon atoms, about $5\\times10^{28}$ m⁻³: only about one atom in $3\\times10^{12}$ has released a conduction electron. Raising the temperature increases $n_i$ steeply (it depends on $e^{-E_g/2kT}$), which is why a semiconductor's resistance *falls* when heated.",
     },
+    { type: "heading", text: "Creating carriers with light" },
     {
       type: "text",
       content:
@@ -87,9 +98,41 @@ const lesson01: LessonSeed = {
         "What you should have seen: silicon (1.1 eV) responds to light out to about 1127 nm, into the near infrared, which is why phone cameras need an infrared filter. Germanium (0.7 eV) reaches 1771 nm. A gap of 3.1 eV or more responds only to violet and ultraviolet, so such materials look transparent: visible photons cannot be absorbed.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (can 1000 nm light excite silicon?).**\n\n1. Photon energy: $1240/1000 = 1.24$ eV. *Why this step:* one photon creates one pair, so compare one photon's energy with $E_g$.\n2. $1.24$ eV $> 1.1$ eV: yes, each photon can create an electron–hole pair.\n\n**Worked example 2 (why diamond is transparent).** $E_g = 5.4$ eV.\n\n1. $\\lambda_{\\max} = 1240/5.4 \\approx 230$ nm, in the ultraviolet.\n2. All visible light (400–700 nm) has too little energy per photon to be absorbed across the gap, so it passes through. *Why this step:* colour and transparency are band-gap physics.\n\n**Worked example 3 (thermal excitation).** Room temperature gives $kT \\approx 0.025$ eV. Why do Si ($1.1$ eV) and Ge ($0.7$ eV) have any free carriers at all?\n\n1. The *average* thermal energy is far below $E_g$, but thermal energies are spread out; a tiny fraction of electrons have many times $kT$.\n2. Because $e^{-E_g/2kT}$ depends exponentially on $E_g$, germanium's smaller gap gives it over a thousand times more intrinsic carriers than silicon ($n_i \\approx 2.4\\times10^{19}$ m⁻³ against $1.5\\times10^{16}$).",
+      type: "worked-example",
+      id: "omp5-1-we1",
+      title: "Worked example 1",
+      problem:
+        "Can 1000 nm light excite silicon?",
+      steps: [
+        { text: "Photon energy: $1240/1000 = 1.24$ eV. *Why this step:* one photon creates one pair, so compare one photon's energy with $E_g$." },
+        { text: "$1.24$ eV $> 1.1$ eV: yes, each photon can create an electron–hole pair." },
+      ],
+      answer: "Yes: a 1.24 eV photon exceeds silicon's 1.1 eV gap.",
+      tryFirst: false,
+    },
+    {
+      type: "worked-example",
+      id: "omp5-1-we2",
+      title: "Worked example 2 (why diamond is transparent)",
+      problem:
+        "Diamond has $E_g = 5.4$ eV. Find the longest wavelength it can absorb across the gap, and explain why diamond is transparent.",
+      steps: [
+        { text: "$\\lambda_{\\max} = 1240/5.4 \\approx 230$ nm, in the ultraviolet." },
+        { text: "All visible light (400–700 nm) has too little energy per photon to be absorbed across the gap, so it passes through. *Why this step:* colour and transparency are band-gap physics." },
+      ],
+      answer: "$\\lambda_{\\max} \\approx 230$ nm (ultraviolet), so all visible light passes through.",
+    },
+    {
+      type: "worked-example",
+      id: "omp5-1-we3",
+      title: "Worked example 3 (thermal excitation)",
+      problem:
+        "Room temperature gives $kT \\approx 0.025$ eV. Why do Si ($1.1$ eV) and Ge ($0.7$ eV) have any free carriers at all?",
+      steps: [
+        { text: "The *average* thermal energy is far below $E_g$, but thermal energies are spread out; a tiny fraction of electrons have many times $kT$." },
+        { text: "Because $e^{-E_g/2kT}$ depends exponentially on $E_g$, germanium's smaller gap gives it over a thousand times more intrinsic carriers than silicon ($n_i \\approx 2.4\\times10^{19}$ m⁻³ against $1.5\\times10^{16}$)." },
+      ],
+      answer: "A tiny fraction of electrons have many times $kT$; the exponential gives Ge over a thousand times more carriers than Si.",
     },
     {
       type: "callout",
@@ -105,16 +148,21 @@ const lesson01: LessonSeed = {
       content:
         "In a metal the number of carriers is fixed and heating only adds collisions, so resistance rises. In a semiconductor heating multiplies the number of carriers, which far outweighs the extra collisions, so resistance falls. Semiconductors have a *negative* temperature coefficient of resistance.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp5-1-q1",
       variant: "practice",
-      question: "What is the longest wavelength of light that can create electron–hole pairs in germanium ($E_g = 0.7$ eV)?",
-      options: [
-        { text: "About 868 nm", feedback: "That is $1240\\times0.7$. The wavelength is $1240/E_g$." },
-        { text: "About 1127 nm", feedback: "That is silicon's value ($E_g = 1.1$ eV)." },
-        { text: "About 177 nm", feedback: "A power-of-ten slip: $1240/0.7 \\approx 1771$." },
-        { text: "About 1771 nm", correct: true, feedback: "$1240/0.7 \\approx 1771$ nm, in the infrared." },
+      question: "What is the longest wavelength of light that can create electron–hole pairs in germanium ($E_g = 0.7$ eV)? Give your answer in nm. Use $hc = 1240$ eV·nm.",
+      answer: 1771,
+      relTolerance: 0.01,
+      unit: "nm",
+      hint: "The photon energy must be at least $E_g$, so $\\lambda_{\\max} = hc/E_g$.",
+      solution: "$\\lambda_{\\max} = \\dfrac{1240}{E_g} = \\dfrac{1240}{0.7} \\approx 1771$ nm, in the infrared.",
+      commonMistakes: [
+        { answer: 868, feedback: "That is $1240\\times0.7$. The wavelength is $1240/E_g$." },
+        { answer: 1127, feedback: "That is silicon's value ($E_g = 1.1$ eV). Germanium's smaller gap reaches further into the infrared." },
+        { answer: 177.1, feedback: "A power-of-ten slip: $1240/0.7 \\approx 1771$." },
       ],
     },
     {
@@ -128,6 +176,7 @@ const lesson01: LessonSeed = {
         { text: "An insulator has no conduction band.", feedback: "Every solid has higher bands; in an insulator the conduction band is just too far up to reach." },
         { text: "A semiconductor's valence band is half empty at 0 K.", feedback: "At 0 K a semiconductor's valence band is full and it does not conduct at all." },
       ],
+      hint: "Compare the band diagrams of a semiconductor and an insulator at 0 K in 5.1, feature by feature.",
     },
     {
       type: "quiz",
@@ -140,6 +189,7 @@ const lesson01: LessonSeed = {
         { text: "$n_h = 0$, because holes are only made by doping", feedback: "Thermal generation creates holes in pure material too." },
         { text: "$n_e = n_h = 0$", feedback: "That is true only at absolute zero." },
       ],
+      hint: "Recall how carriers are created in a pure semiconductor (5.1), and count what each such event produces.",
     },
     {
       type: "quiz",
@@ -152,6 +202,7 @@ const lesson01: LessonSeed = {
         { text: "Silicon's rises, copper's falls.", feedback: "Exactly reversed." },
         { text: "Silicon's falls, copper's rises.", correct: true, feedback: "Silicon gains many carriers; copper keeps the same carriers and suffers more collisions." },
       ],
+      hint: "Heating does two things: it frees more carriers and it makes the lattice vibrate more. Which effect wins in each material?",
     },
     {
       type: "quiz",
@@ -164,6 +215,7 @@ const lesson01: LessonSeed = {
         { text: "4.1 eV and 5.4 eV", feedback: "With $E_g > 4.1$ eV, 300 nm photons (4.1 eV) could not be absorbed." },
         { text: "0.7 eV and 1.1 eV", feedback: "That range would absorb all visible light, making the material opaque." },
       ],
+      hint: "Use $E(\\text{eV}) \\approx 1240/\\lambda(\\text{nm})$: photons with less energy than the gap pass through, those with more are absorbed.",
     },
   ]),
 };
@@ -178,6 +230,7 @@ const lesson02: LessonSeed = {
       content:
         "Pure silicon is a poor conductor, and its conductivity changes wildly with temperature: useless for building reliable circuits. The fix is almost absurdly small. Replace one silicon atom in a million with an arsenic atom and the conductivity rises by a factor of about a million, and is set by *you*, not by the weather.",
     },
+    { type: "heading", text: "n-type and p-type doping" },
     {
       type: "text",
       content:
@@ -200,10 +253,11 @@ const lesson02: LessonSeed = {
         ["Net charge", "Neutral", "Neutral"],
       ],
     },
+    { type: "heading", text: "The mass action law" },
     {
       type: "text",
       content:
-        "**The mass action law.** Electrons and holes are constantly created (thermally) and constantly recombine. The recombination rate is proportional to how often an electron meets a hole, $\\propto n_en_h$; the generation rate depends only on temperature. In equilibrium the two balance, so $n_en_h$ is fixed at a given temperature. For pure material it equals $n_i^2$, and doping cannot change it:",
+        "Electrons and holes are constantly created (thermally) and constantly recombine. The recombination rate is proportional to how often an electron meets a hole, $\\propto n_en_h$; the generation rate depends only on temperature. In equilibrium the two balance, so $n_en_h$ is fixed at a given temperature. For pure material it equals $n_i^2$, and doping cannot change it:",
     },
     { type: "math", latex: "n_e\\,n_h = n_i^2" },
     {
@@ -230,21 +284,52 @@ const lesson02: LessonSeed = {
       content:
         "What you should have seen: at $n_e = 4.5\\times10^{22}$ m⁻³, $n_h = 0.5\\times10^{10} = 5\\times10^{9}$ m⁻³. Doubling the doping halves the minority carriers. The minority density is about $10^{13}$ times smaller than the majority density.",
     },
+    { type: "heading", text: "Conductivity of a doped sample" },
     {
       type: "text",
       content:
-        "**Conductivity.** Both carriers drift in an electric field (from current electricity: $v_d = \\mu E$, with mobility $\\mu$). Each contributes $ne\\mu$:",
+        "Both carriers drift in an electric field (from current electricity: $v_d = \\mu E$, with mobility $\\mu$). Each contributes $ne\\mu$:",
     },
     { type: "math", latex: "\\sigma = \\frac1\\rho = e\\,(n_e\\mu_e + n_h\\mu_h)" },
+    { type: "heading", text: "Worked examples: carrier densities" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (NCERT-style, JEE Main).** Silicon ($n_i = 1.5\\times10^{16}$ m⁻³) is doped with $4.5\\times10^{22}$ m⁻³ arsenic atoms. Find $n_e$ and $n_h$.\n\n1. Arsenic is a donor and $N_D \\gg n_i$, so $n_e \\approx N_D = 4.5\\times10^{22}$ m⁻³. *Why this step:* each donor gives one electron; the thermally generated ones are negligible by comparison.\n2. Mass action: $n_h = \\dfrac{n_i^2}{n_e} = \\dfrac{(1.5\\times10^{16})^2}{4.5\\times10^{22}} = \\dfrac{2.25\\times10^{32}}{4.5\\times10^{22}} = 5\\times10^{9}$ m⁻³.\n3. The sample is n-type, with holes as minority carriers.\n\n**Worked example 2 (conductivity).** Take $\\mu_e = 0.135$ m²/V·s and $\\mu_h = 0.048$ m²/V·s for silicon.\n\n1. Pure silicon: $\\sigma = 1.6\\times10^{-19}\\times1.5\\times10^{16}\\times(0.135 + 0.048) \\approx 4.4\\times10^{-4}$ S/m.\n2. Doped with $n_e = 10^{22}$ m⁻³: the hole term is negligible, so $\\sigma \\approx 1.6\\times10^{-19}\\times10^{22}\\times0.135 = 216$ S/m. *Why this step:* in extrinsic material only the majority term matters.\n3. Ratio: about $5\\times10^{5}$. One dopant atom in five million silicon atoms multiplied the conductivity half a million times.",
+      type: "worked-example",
+      id: "omp5-2-we1",
+      title: "Worked example 1 (NCERT-style, JEE Main)",
+      problem:
+        "Silicon ($n_i = 1.5\\times10^{16}$ m⁻³) is doped with $4.5\\times10^{22}$ m⁻³ arsenic atoms. Find $n_e$ and $n_h$.",
+      steps: [
+        { text: "Arsenic is a donor and $N_D \\gg n_i$, so $n_e \\approx N_D = 4.5\\times10^{22}$ m⁻³. *Why this step:* each donor gives one electron; the thermally generated ones are negligible by comparison." },
+        { text: "Mass action: $n_h = \\dfrac{n_i^2}{n_e} = \\dfrac{(1.5\\times10^{16})^2}{4.5\\times10^{22}} = \\dfrac{2.25\\times10^{32}}{4.5\\times10^{22}} = 5\\times10^{9}$ m⁻³." },
+        { text: "The sample is n-type, with holes as minority carriers." },
+      ],
+      answer: "$n_e \\approx 4.5\\times10^{22}$ m⁻³, $n_h = 5\\times10^9$ m⁻³ (n-type)",
+      tryFirst: false,
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (p-type germanium).** Germanium ($n_i = 2.4\\times10^{19}$ m⁻³) is doped with $4.8\\times10^{21}$ m⁻³ indium atoms. Find the electron density.\n\n1. Indium is an acceptor: $n_h \\approx 4.8\\times10^{21}$ m⁻³.\n2. $n_e = \\dfrac{(2.4\\times10^{19})^2}{4.8\\times10^{21}} = \\dfrac{5.76\\times10^{38}}{4.8\\times10^{21}} = 1.2\\times10^{17}$ m⁻³. *Why this step:* the mass action law gives the minority carriers directly.",
+      type: "worked-example",
+      id: "omp5-2-we2",
+      title: "Worked example 2 (conductivity)",
+      problem:
+        "Take $\\mu_e = 0.135$ m²/V·s and $\\mu_h = 0.048$ m²/V·s for silicon ($n_i = 1.5\\times10^{16}$ m⁻³). Find the conductivity of pure silicon and of silicon doped to $n_e = 10^{22}$ m⁻³, and compare them.",
+      steps: [
+        { text: "Pure silicon: $\\sigma = 1.6\\times10^{-19}\\times1.5\\times10^{16}\\times(0.135 + 0.048) \\approx 4.4\\times10^{-4}$ S/m." },
+        { text: "Doped with $n_e = 10^{22}$ m⁻³: the hole term is negligible, so $\\sigma \\approx 1.6\\times10^{-19}\\times10^{22}\\times0.135 = 216$ S/m. *Why this step:* in extrinsic material only the majority term matters." },
+        { text: "Ratio: about $5\\times10^{5}$. One dopant atom in five million silicon atoms multiplied the conductivity half a million times." },
+      ],
+      answer: "Pure: $\\sigma \\approx 4.4\\times10^{-4}$ S/m; doped: $\\sigma \\approx 216$ S/m, about $5\\times10^5$ times more.",
+    },
+    {
+      type: "worked-example",
+      id: "omp5-2-we3",
+      title: "Worked example 3 (p-type germanium)",
+      problem:
+        "Germanium ($n_i = 2.4\\times10^{19}$ m⁻³) is doped with $4.8\\times10^{21}$ m⁻³ indium atoms. Find the electron density.",
+      steps: [
+        { text: "Indium is an acceptor: $n_h \\approx 4.8\\times10^{21}$ m⁻³." },
+        { text: "$n_e = \\dfrac{(2.4\\times10^{19})^2}{4.8\\times10^{21}} = \\dfrac{5.76\\times10^{38}}{4.8\\times10^{21}} = 1.2\\times10^{17}$ m⁻³. *Why this step:* the mass action law gives the minority carriers directly." },
+      ],
+      answer: "$n_e = 1.2\\times10^{17}$ m⁻³",
     },
     {
       type: "callout",
@@ -260,6 +345,7 @@ const lesson02: LessonSeed = {
       content:
         "Donors add electrons, and by the mass action law the extra electrons *reduce* the holes below $n_i$. Doping raises one carrier type and lowers the other.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "omp5-2-q1",
@@ -271,17 +357,22 @@ const lesson02: LessonSeed = {
         { text: "p-type, with holes as majority carriers", correct: true, feedback: "Gallium is trivalent: an acceptor." },
         { text: "p-type and negatively charged", feedback: "It is p-type but electrically neutral: the acceptor ions balance the holes." },
       ],
+      hint: "Compare gallium's valence electrons (group 13) with silicon's four. Is each bond left short of an electron or with one to spare? Remember the crystal as a whole stays neutral.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp5-2-q2",
       variant: "practice",
-      question: "In a silicon sample ($n_i = 1.5\\times10^{16}$ m⁻³), the hole density is $4.5\\times10^{22}$ m⁻³. What is the electron density?",
-      options: [
-        { text: "$1.5\\times10^{16}$ m⁻³", feedback: "That is the intrinsic density. Doping pushes the minority carriers far below it." },
-        { text: "$4.5\\times10^{22}$ m⁻³", feedback: "$n_e = n_h$ only in intrinsic material." },
-        { text: "$3.3\\times10^{-7}$ m⁻³", feedback: "That divides $n_i$, not $n_i^2$, by $n_h$. The mass action law is $n_en_h = n_i^2$." },
-        { text: "$5\\times10^{9}$ m⁻³", correct: true, feedback: "$n_e = n_i^2/n_h = 2.25\\times10^{32}/4.5\\times10^{22} = 5\\times10^9$." },
+      question: "In a silicon sample ($n_i = 1.5\\times10^{16}$ m⁻³), the hole density is $4.5\\times10^{22}$ m⁻³. What is the electron density? Give your answer in m⁻³ (scientific notation such as 2e9 is fine).",
+      answer: 5e9,
+      relTolerance: 0.02,
+      unit: "m⁻³",
+      hint: "The mass action law: $n_en_h = n_i^2$.",
+      solution: "$n_e = \\dfrac{n_i^2}{n_h} = \\dfrac{(1.5\\times10^{16})^2}{4.5\\times10^{22}} = \\dfrac{2.25\\times10^{32}}{4.5\\times10^{22}} = 5\\times10^{9}$ m⁻³. Electrons are the minority carriers in this p-type sample.",
+      commonMistakes: [
+        { answer: 1.5e16, feedback: "That is the intrinsic density. Doping pushes the minority carriers far below it." },
+        { answer: 4.5e22, feedback: "$n_e = n_h$ only in intrinsic material." },
+        { answer: 3.33e-7, feedback: "That divides $n_i$, not $n_i^2$, by $n_h$. The mass action law is $n_en_h = n_i^2$." },
       ],
     },
     {
@@ -295,18 +386,36 @@ const lesson02: LessonSeed = {
         { text: "It also increases by $10^6$.", feedback: "Donors do not create holes; they add electrons, which then remove holes." },
         { text: "It becomes exactly zero.", feedback: "Thermal generation still produces some holes; $n_h = n_i^2/n_e$." },
       ],
+      hint: "Use the mass-action law $n_e n_h = n_i^2$.",
+    },
+    {
+      type: "numeric",
+      id: "omp5-2-q4",
+      variant: "practice",
+      question: "An n-type sample has $n_e = 2\\times10^{22}$ m⁻³ and $\\mu_e = 0.125$ m²/V·s (holes negligible). Find its resistivity in Ω·m. Use $e = 1.6\\times10^{-19}$ C.",
+      answer: 2.5e-3,
+      relTolerance: 0.02,
+      unit: "Ω·m",
+      hint: "Find the conductivity $\\sigma = n_ee\\mu_e$ first, then take its reciprocal.",
+      solution: "$\\sigma = n_ee\\mu_e = 2\\times10^{22}\\times1.6\\times10^{-19}\\times0.125 = 400$ S/m.\n\n$\\rho = \\dfrac{1}{\\sigma} = \\dfrac{1}{400} = 2.5\\times10^{-3}$ Ω·m.",
+      commonMistakes: [
+        { answer: 400, feedback: "400 S/m is the conductivity. Resistivity is its reciprocal." },
+        { answer: 3.125e-4, feedback: "That drops the mobility factor: $1/(ne) = 1/3200$. $\\sigma = ne\\mu$." },
+      ],
     },
     {
       type: "quiz",
-      id: "omp5-2-q4",
-      variant: "practice",
-      question: "An n-type sample has $n_e = 2\\times10^{22}$ m⁻³ and $\\mu_e = 0.125$ m²/V·s (holes negligible). Find its resistivity.",
+      id: "omp5-2-q5",
+      variant: "concept",
+      multiple: true,
+      question: "Pure silicon is doped with phosphorus. Select every statement that is correct for the doped sample at room temperature.",
       options: [
-        { text: "$400$ Ω·m", feedback: "400 S/m is the conductivity. Resistivity is its reciprocal." },
-        { text: "$6.25\\times10^{-3}$ Ω·m", feedback: "Recheck: $1.6\\times10^{-19}\\times2\\times10^{22} = 3200$, times 0.125 is 400 S/m." },
-        { text: "$2.5\\times10^{-3}$ Ω·m", correct: true, feedback: "$\\sigma = 1.6\\times10^{-19}\\times2\\times10^{22}\\times0.125 = 400$ S/m; $\\rho = 1/400$." },
-        { text: "$3.1\\times10^{-4}$ Ω·m", feedback: "That drops the mobility factor: $1/(ne) = 1/3200$. $\\sigma = ne\\mu$." },
+        { text: "Electrons are the majority carriers.", correct: true, feedback: "Phosphorus is pentavalent, a donor: each atom gives one conduction electron." },
+        { text: "The hole density is now *below* the intrinsic value $n_i$.", correct: true, feedback: "$n_h = n_i^2/n_e$, and $n_e > n_i$, so $n_h < n_i$: the extra electrons mop up holes." },
+        { text: "The sample carries a net negative charge.", feedback: "Every extra electron left behind a fixed positive donor ion. The sample is neutral." },
+        { text: "The donor level lies just above the top of the valence band.", feedback: "That is where acceptor levels sit. Donor levels lie just *below* the conduction band, so their electrons are easily freed." },
       ],
+      hint: "Phosphorus has five valence electrons. Then apply $n_en_h = n_i^2$.",
     },
   ]),
 };
@@ -321,10 +430,11 @@ const lesson03: LessonSeed = {
       content:
         "Put a p-type region and an n-type region side by side in one crystal and something surprising happens: the combination conducts easily one way and almost not at all the other. It is a one-way valve for current, the **diode**, and nearly every device in this chapter is a variation on it.",
     },
+    { type: "heading", text: "Formation of the junction" },
     {
       type: "text",
       content:
-        "**Formation (step by step).**\n\n1. The n side has many electrons, the p side many holes. Carriers diffuse from where they are crowded to where they are scarce: electrons into the p side, holes into the n side.\n2. Arriving electrons fill holes (and vice versa). Near the junction, the free carriers are wiped out.\n3. What remains there are the **fixed ions**: positive donor ions on the n side, negative acceptor ions on the p side. This thin carrier-free layer is the **depletion region** (typically $10^{-7}$ to $10^{-6}$ m wide).\n4. The ions create an electric field pointing from n to p, which pushes electrons back to n and holes back to p. This opposes further diffusion.\n5. Equilibrium: the diffusion current (majority carriers going across) exactly balances the **drift current** (minority carriers swept across by the field). The potential difference across the depletion layer is the **barrier potential**, about 0.7 V for silicon and 0.3 V for germanium.",
+        "1. The n side has many electrons, the p side many holes. Carriers diffuse from where they are crowded to where they are scarce: electrons into the p side, holes into the n side.\n2. Arriving electrons fill holes (and vice versa). Near the junction, the free carriers are wiped out.\n3. What remains there are the **fixed ions**: positive donor ions on the n side, negative acceptor ions on the p side. This thin carrier-free layer is the **depletion region** (typically $10^{-7}$ to $10^{-6}$ m wide).\n4. The ions create an electric field pointing from n to p, which pushes electrons back to n and holes back to p. This opposes further diffusion.\n5. Equilibrium: the diffusion current (majority carriers going across) exactly balances the **drift current** (minority carriers swept across by the field). The potential difference across the depletion layer is the **barrier potential**, about 0.7 V for silicon and 0.3 V for germanium.",
     },
     {
       type: "callout",
@@ -333,6 +443,7 @@ const lesson03: LessonSeed = {
       content:
         "**Forward bias:** p side to the + terminal, n side to −. The applied voltage opposes the barrier, the depletion layer narrows, and once $V$ approaches the barrier (the knee) majority carriers flood across: large current.\n**Reverse bias:** p side to −, n side to +. The barrier grows, the depletion layer widens, and only the tiny drift current of minority carriers flows (μA for Ge, nA for Si), nearly independent of $V$, until **breakdown** at a large reverse voltage.",
     },
+    { type: "heading", text: "The diode's I–V curve" },
     {
       type: "text",
       content:
@@ -365,20 +476,60 @@ const lesson03: LessonSeed = {
       content:
         "$r_d = \\dfrac{\\Delta V}{\\Delta I}$ measured along the curve. It is small beyond the knee (a few ohms) and huge in reverse bias. A diode is not an ohmic resistor: $V/I$ is different at every point.",
     },
+    { type: "heading", text: "Solving diode circuits" },
     {
       type: "text",
       content:
-        "**Solving diode circuits.** Two models are used in JEE: the **ideal diode** (a closed switch when forward biased, open when reverse biased), and the **constant-drop** model (a closed switch with a fixed 0.7 V drop for Si, 0.3 V for Ge). Method: guess which diodes conduct, solve, then check the guess (current must flow forwards through every \"on\" diode; every \"off\" diode must be reverse biased).",
+        "Two models are used in JEE: the **ideal diode** (a closed switch when forward biased, open when reverse biased), and the **constant-drop** model (a closed switch with a fixed 0.7 V drop for Si, 0.3 V for Ge). Method: guess which diodes conduct, solve, then check the guess (current must flow forwards through every \"on\" diode; every \"off\" diode must be reverse biased).",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (JEE Main).** A 5 V battery drives current through a silicon diode (0.7 V drop) in forward bias and a 1 kΩ resistor in series. Find the current.\n\n1. The diode takes 0.7 V; the resistor gets the rest: $5 - 0.7 = 4.3$ V. *Why this step:* Kirchhoff's loop rule with the diode as a fixed drop.\n2. $I = 4.3/1000 = 4.3$ mA.\n3. With an ideal diode it would be 5 mA. For large supply voltages the difference hardly matters; for small ones it matters a lot.\n\n**Worked example 2 (dynamic resistance).** A diode's current rises from 10 mA to 30 mA when its voltage rises from 0.70 V to 0.80 V.\n\n1. $r_d = \\dfrac{\\Delta V}{\\Delta I} = \\dfrac{0.10}{0.020} = 5\\ \\Omega$.\n2. The static value at 0.8 V is $0.8/0.030 \\approx 27\\ \\Omega$. *Why this step:* the two differ because the curve is not a straight line through the origin.",
+      type: "worked-example",
+      id: "omp5-3-we1",
+      title: "Worked example 1 (JEE Main)",
+      problem:
+        "A 5 V battery drives current through a silicon diode (0.7 V drop) in forward bias and a 1 kΩ resistor in series. Find the current.",
+      steps: [
+        { text: "The diode takes 0.7 V; the resistor gets the rest: $5 - 0.7 = 4.3$ V. *Why this step:* Kirchhoff's loop rule with the diode as a fixed drop." },
+        { text: "$I = 4.3/1000 = 4.3$ mA." },
+        { text: "With an ideal diode it would be 5 mA. For large supply voltages the difference hardly matters; for small ones it matters a lot." },
+      ],
+      answer: "$I = 4.3$ mA",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (which diodes conduct?).** A 6 V battery is connected across two parallel branches: branch 1 has an ideal diode $D_1$ pointing with the conventional current and a 3 Ω resistor; branch 2 has an ideal diode $D_2$ pointing against it and a 2 Ω resistor. Find the battery current.\n\n1. $D_1$ is forward biased: a closed switch. $D_2$ is reverse biased: an open switch. *Why this step:* decide each diode's state from the direction the battery tries to push current.\n2. Only branch 1 carries current: $I = 6/3 = 2$ A.\n3. Reverse the battery and the answer becomes $6/2 = 3$ A through branch 2 instead.\n\n**Worked example 4 (germanium).** Repeat Worked example 1 with a germanium diode (0.3 V) and a 3 V supply through 100 Ω.\n\n1. $I = \\dfrac{3 - 0.3}{100} = 27$ mA.",
+      type: "worked-example",
+      id: "omp5-3-we2",
+      title: "Worked example 2 (dynamic resistance)",
+      problem:
+        "A diode's current rises from 10 mA to 30 mA when its voltage rises from 0.70 V to 0.80 V. Find its dynamic resistance in this range and its static resistance at 0.80 V.",
+      steps: [
+        { text: "$r_d = \\dfrac{\\Delta V}{\\Delta I} = \\dfrac{0.10}{0.020} = 5\\ \\Omega$." },
+        { text: "The static value at 0.8 V is $0.8/0.030 \\approx 27\\ \\Omega$. *Why this step:* the two differ because the curve is not a straight line through the origin." },
+      ],
+      answer: "$r_d = 5\\ \\Omega$; static resistance $\\approx 27\\ \\Omega$.",
+    },
+    {
+      type: "worked-example",
+      id: "omp5-3-we3",
+      title: "Worked example 3 (which diodes conduct?)",
+      problem:
+        "A 6 V battery is connected across two parallel branches: branch 1 has an ideal diode $D_1$ pointing with the conventional current and a 3 Ω resistor; branch 2 has an ideal diode $D_2$ pointing against it and a 2 Ω resistor. Find the battery current.",
+      steps: [
+        { text: "$D_1$ is forward biased: a closed switch. $D_2$ is reverse biased: an open switch. *Why this step:* decide each diode's state from the direction the battery tries to push current." },
+        { text: "Only branch 1 carries current: $I = 6/3 = 2$ A." },
+        { text: "Reverse the battery and the answer becomes $6/2 = 3$ A through branch 2 instead." },
+      ],
+      answer: "$I = 2$ A (through branch 1 only)",
+    },
+    {
+      type: "worked-example",
+      id: "omp5-3-we4",
+      title: "Worked example 4 (germanium)",
+      problem:
+        "Repeat Worked example 1 with a germanium diode (0.3 V) and a 3 V supply through 100 Ω.",
+      steps: [
+        { text: "$I = \\dfrac{3 - 0.3}{100} = 27$ mA." },
+      ],
+      answer: "$I = 27$ mA",
     },
     {
       type: "callout",
@@ -394,16 +545,21 @@ const lesson03: LessonSeed = {
       content:
         "Minority carriers (holes on the n side, electrons on the p side) are swept across by the barrier field, so a small reverse saturation current always flows: microamps in germanium, nanoamps in silicon. It rises with temperature and with light, which is exactly what a photodiode uses (5.5).",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp5-3-q1",
       variant: "practice",
-      question: "A 9 V supply, a silicon diode (0.7 V) in forward bias and a 2 kΩ resistor are in series. Find the current.",
-      options: [
-        { text: "$4.15$ mA", correct: true, feedback: "$(9 - 0.7)/2000 = 4.15$ mA." },
-        { text: "$4.5$ mA", feedback: "That treats the diode as ideal. Subtract the 0.7 V drop first." },
-        { text: "$4.85$ mA", feedback: "The 0.7 V is a drop across the diode, so it is subtracted, not added." },
-        { text: "Zero", feedback: "The diode is forward biased and the supply is well above 0.7 V." },
+      question: "A 9 V supply, a silicon diode (0.7 V) in forward bias and a 2 kΩ resistor are in series. Find the current in mA.",
+      answer: 4.15,
+      relTolerance: 0.01,
+      unit: "mA",
+      hint: "The diode takes a fixed 0.7 V; the resistor gets the rest.",
+      solution: "The resistor gets $9 - 0.7 = 8.3$ V, so $I = \\dfrac{8.3}{2000} = 4.15$ mA.",
+      commonMistakes: [
+        { answer: 4.5, feedback: "That treats the diode as ideal. Subtract the 0.7 V drop first." },
+        { answer: 4.85, feedback: "The 0.7 V is a drop across the diode, so it is subtracted, not added." },
+        { answer: 0, tolerance: 0, feedback: "The diode is forward biased and the supply is well above 0.7 V, so current flows." },
       ],
     },
     {
@@ -417,17 +573,21 @@ const lesson03: LessonSeed = {
         { text: "widens and the barrier increases", correct: true, feedback: "The applied voltage adds to the barrier, pulling carriers further from the junction." },
         { text: "fills with majority carriers", feedback: "Reverse bias pulls majority carriers *away* from the junction." },
       ],
+      hint: "Compare the direction of the applied field with the junction's built-in field in reverse bias (5.3).",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp5-3-q3",
       variant: "practice",
-      question: "A diode's current changes from 20 mA to 40 mA as its voltage changes from 0.75 V to 0.80 V. What is its dynamic resistance?",
-      options: [
-        { text: "$2.5\\ \\Omega$", correct: true, feedback: "$0.05/0.020 = 2.5\\ \\Omega$." },
-        { text: "$20\\ \\Omega$", feedback: "That is $0.80/0.040$, the static resistance at one point." },
-        { text: "$37.5\\ \\Omega$", feedback: "That is $0.75/0.020$, a static value. Dynamic resistance uses the *changes*." },
-        { text: "$0.4\\ \\Omega$", feedback: "That is $\\Delta I/\\Delta V$ in inverted form. $r_d = \\Delta V/\\Delta I$." },
+      question: "A diode's current changes from 20 mA to 40 mA as its voltage changes from 0.75 V to 0.80 V. What is its dynamic resistance, in ohms?",
+      answer: 2.5,
+      unit: "Ω",
+      hint: "Dynamic resistance uses the *changes*: $r_d = \\Delta V/\\Delta I$.",
+      solution: "$r_d = \\dfrac{\\Delta V}{\\Delta I} = \\dfrac{0.80 - 0.75}{0.040 - 0.020} = \\dfrac{0.05}{0.020} = 2.5\\ \\Omega$.",
+      commonMistakes: [
+        { answer: 20, feedback: "That is $0.80/0.040$, the static resistance at one point." },
+        { answer: 37.5, feedback: "That is $0.75/0.020$, a static value. Dynamic resistance uses the *changes*." },
+        { answer: 0.4, feedback: "That is $\\Delta I/\\Delta V$. $r_d = \\Delta V/\\Delta I$." },
       ],
     },
     {
@@ -441,6 +601,7 @@ const lesson03: LessonSeed = {
         { text: "Electrons and holes cannot move in a crystal.", feedback: "They move freely; it is the *net* flow that is zero." },
         { text: "The diffusion current of majority carriers is exactly balanced by the drift current of minority carriers.", correct: true, feedback: "The barrier grows until the two flows cancel." },
       ],
+      hint: "At equilibrium no net charge crosses the junction. Which two carrier flows are there, and how must they compare?",
     },
     {
       type: "quiz",
@@ -453,6 +614,21 @@ const lesson03: LessonSeed = {
         { text: "$0.25$ A", feedback: "Diodes are not half-conducting; one blocks completely." },
         { text: "$0.43$ A", feedback: "That subtracts a 0.7 V drop, but no current can flow at all." },
       ],
+      hint: "Decide the bias of each diode when the battery is connected, remembering that the same current would have to flow through both.",
+    },
+    {
+      type: "quiz",
+      id: "omp5-3-q6",
+      variant: "concept",
+      multiple: true,
+      question: "A silicon p-n junction is switched from zero bias to forward bias. Select every change that occurs.",
+      options: [
+        { text: "The depletion region becomes narrower.", correct: true, feedback: "The applied voltage opposes the barrier field, so fewer ions need to be uncovered: the layer shrinks." },
+        { text: "The potential barrier the majority carriers must climb is reduced.", correct: true, feedback: "The effective barrier becomes $V_0 - V$, which is why majority carriers can flood across beyond the knee." },
+        { text: "The current becomes carried mainly by minority carriers.", feedback: "Minority-carrier drift dominates in *reverse* bias. Forward current is majority carriers diffusing across." },
+        { text: "The current rises in proportion to the applied voltage.", feedback: "The diode is not ohmic: the current is tiny below the knee (about 0.7 V) and then rises exponentially." },
+      ],
+      hint: "Forward bias pushes against the built-in barrier.",
     },
   ]),
 };
@@ -467,10 +643,11 @@ const lesson04: LessonSeed = {
       content:
         "The socket in your wall supplies alternating current, reversing 50 times a second. Your phone's battery needs current that flows one way only. Somewhere in the charger, diodes are throwing away or flipping the backwards half of every cycle. That job is **rectification**, and a diode's one-way behaviour does it with no moving parts.",
     },
+    { type: "heading", text: "The half-wave rectifier" },
     {
       type: "text",
       content:
-        "**Half-wave rectifier.** One diode in series with the load. During the positive half-cycle the diode is forward biased and the load sees the input; during the negative half-cycle the diode is reverse biased and the load sees nothing. The output is a train of positive humps, one per input cycle, so the **output frequency equals the input frequency** (50 Hz in, 50 Hz ripple out).",
+        "One diode in series with the load. During the positive half-cycle the diode is forward biased and the load sees the input; during the negative half-cycle the diode is reverse biased and the load sees nothing. The output is a train of positive humps, one per input cycle, so the **output frequency equals the input frequency** (50 Hz in, 50 Hz ripple out).",
     },
     {
       type: "interactive",
@@ -489,10 +666,11 @@ const lesson04: LessonSeed = {
       content:
         "What you should have seen: the output follows the input when the input is positive and sits at zero when it is negative. The expression $\\frac{\\sin x + |\\sin x|}{2}$ is exactly \"keep the positive part\". Over the plotted $x$ from 0 to 13 (just over two cycles) there are two full humps, one per input cycle.",
     },
+    { type: "heading", text: "Full-wave rectifiers" },
     {
       type: "text",
       content:
-        "**Full-wave rectifiers.** Use the negative half-cycle too, by steering it through the load in the same direction.\n\n- **Centre-tap:** the transformer secondary has a centre tap; two diodes each conduct on alternate half-cycles, each using half the secondary.\n- **Bridge:** four diodes in a diamond; on each half-cycle two diagonally opposite diodes conduct and route current the same way through the load. No centre tap is needed.\n\nEither way the output is $|\\sin|$-shaped: two humps per input cycle, so the **output frequency is double the input** (100 Hz ripple from 50 Hz mains).",
+        "Use the negative half-cycle too, by steering it through the load in the same direction.\n\n- **Centre-tap:** the transformer secondary has a centre tap; two diodes each conduct on alternate half-cycles, each using half the secondary.\n- **Bridge:** four diodes in a diamond; on each half-cycle two diagonally opposite diodes conduct and route current the same way through the load. No centre tap is needed.\n\nEither way the output is $|\\sin|$-shaped: two humps per input cycle, so the **output frequency is double the input** (100 Hz ripple from 50 Hz mains).",
     },
     {
       type: "interactive",
@@ -518,6 +696,7 @@ const lesson04: LessonSeed = {
       content:
         "Average output (ideal diodes, peak $V_m$): half-wave $\\dfrac{V_m}{\\pi}$, full-wave $\\dfrac{2V_m}{\\pi}$.\n**Peak inverse voltage (PIV):** the largest reverse voltage a diode must withstand. Half-wave: $V_m$. Centre-tap full-wave: $2V_m$ (where $V_m$ is the peak of *each half* of the secondary). Bridge: $V_m$.",
     },
+    { type: "heading", text: "Averages and filtering" },
     {
       type: "text",
       content:
@@ -533,9 +712,41 @@ const lesson04: LessonSeed = {
         "The full-wave output has a hump in *both* halves, so it averages twice as much, $2V_m/\\pi$.\n\n**Filtering.** Rectified output is one-way but still bumpy. A capacitor across the load charges up to nearly $V_m$ on each hump and discharges slowly through the load between humps, smoothing the output to nearly steady dc with a small **ripple**. A full-wave output refills the capacitor twice as often, so it gives less ripple for the same capacitor.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (frequencies, JEE Main).** 50 Hz mains feed (a) a half-wave and (b) a full-wave rectifier. Find the output ripple frequency.\n\n1. Half-wave: one hump per input cycle, 50 Hz.\n2. Full-wave: two humps per input cycle, 100 Hz. *Why this step:* count humps per second; the flipping of the negative half doubles them.\n\n**Worked example 2 (averages).** The peak of the rectified voltage is $V_m = 20$ V (ideal diodes).\n\n1. Half-wave: $20/\\pi \\approx 6.37$ V.\n2. Full-wave: $40/\\pi \\approx 12.7$ V.\n\n**Worked example 3 (PIV).** A centre-tap transformer gives 15 V peak on each half of the secondary, and a bridge rectifier is fed with 15 V peak. What PIV must the diodes survive?\n\n1. Centre-tap: when one diode conducts, the other sees the full secondary (both halves) in reverse: $2\\times15 = 30$ V. *Why this step:* the non-conducting diode's cathode sits at $+V_m$ while its anode is at $-V_m$.\n2. Bridge: each non-conducting diode sits across the input peak: 15 V.\n3. This is one reason bridges are popular: cheaper, lower-rated diodes and no centre tap.",
+      type: "worked-example",
+      id: "omp5-4-we1",
+      title: "Worked example 1 (frequencies, JEE Main)",
+      problem:
+        "50 Hz mains feed (a) a half-wave and (b) a full-wave rectifier. Find the output ripple frequency.",
+      steps: [
+        { text: "Half-wave: one hump per input cycle, 50 Hz." },
+        { text: "Full-wave: two humps per input cycle, 100 Hz. *Why this step:* count humps per second; the flipping of the negative half doubles them." },
+      ],
+      answer: "(a) 50 Hz; (b) 100 Hz",
+    },
+    {
+      type: "worked-example",
+      id: "omp5-4-we2",
+      title: "Worked example 2 (averages)",
+      problem:
+        "The peak of the rectified voltage is $V_m = 20$ V (ideal diodes). Find the average output voltage of a half-wave and of a full-wave rectifier.",
+      steps: [
+        { text: "Half-wave: $20/\\pi \\approx 6.37$ V." },
+        { text: "Full-wave: $40/\\pi \\approx 12.7$ V." },
+      ],
+      answer: "Half-wave $\\approx 6.37$ V; full-wave $\\approx 12.7$ V",
+    },
+    {
+      type: "worked-example",
+      id: "omp5-4-we3",
+      title: "Worked example 3 (PIV)",
+      problem:
+        "A centre-tap transformer gives 15 V peak on each half of the secondary, and a bridge rectifier is fed with 15 V peak. What PIV must the diodes survive?",
+      steps: [
+        { text: "Centre-tap: when one diode conducts, the other sees the full secondary (both halves) in reverse: $2\\times15 = 30$ V. *Why this step:* the non-conducting diode's cathode sits at $+V_m$ while its anode is at $-V_m$." },
+        { text: "Bridge: each non-conducting diode sits across the input peak: 15 V." },
+        { text: "This is one reason bridges are popular: cheaper, lower-rated diodes and no centre tap." },
+      ],
+      answer: "Centre-tap: 30 V; bridge: 15 V",
     },
     {
       type: "callout",
@@ -551,28 +762,36 @@ const lesson04: LessonSeed = {
       content:
         "Rectification only makes the current one-directional. The voltage still rises and falls from zero to $V_m$ each hump. A filter capacitor (and often a Zener regulator, 5.5) is needed to make it steady.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp5-4-q1",
       variant: "practice",
-      question: "A full-wave rectifier is fed from a 60 Hz supply. What is the fundamental frequency of the output ripple?",
-      options: [
-        { text: "60 Hz", feedback: "That is the half-wave answer." },
-        { text: "120 Hz", correct: true, feedback: "Two humps per input cycle." },
-        { text: "30 Hz", feedback: "Rectification never lowers the frequency." },
-        { text: "0 Hz, because the output is dc", feedback: "The output is one-directional but still pulsates." },
+      question: "A full-wave rectifier is fed from a 60 Hz supply. What is the fundamental frequency of the output ripple, in Hz?",
+      answer: 120,
+      unit: "Hz",
+      hint: "Count the humps in the output per input cycle.",
+      solution: "A full-wave rectifier flips every negative half-cycle up, so there are two identical humps per input cycle: $2\\times60 = 120$ Hz.",
+      commonMistakes: [
+        { answer: 60, feedback: "That is the half-wave answer. Full-wave gives two humps per input cycle." },
+        { answer: 30, feedback: "Rectification never lowers the frequency." },
+        { answer: 0, feedback: "The output is one-directional but still pulsates, so it has a ripple frequency." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp5-4-q2",
       variant: "practice",
-      question: "The peak output of an ideal half-wave rectifier is 10 V. What is its average (dc) value?",
-      options: [
-        { text: "About 6.37 V", feedback: "That is $2V_m/\\pi$, the full-wave value." },
-        { text: "5 V", feedback: "Half of the peak would be right for a square wave; a sine hump averages $V_m/\\pi$ over a full period." },
-        { text: "About 7.07 V", feedback: "That is $V_m/\\sqrt2$, the rms value of the unrectified sine wave." },
-        { text: "About 3.18 V", correct: true, feedback: "$V_m/\\pi = 10/\\pi \\approx 3.18$ V." },
+      question: "The peak output of an ideal half-wave rectifier is 10 V. What is its average (dc) value, in volts?",
+      answer: 3.18,
+      relTolerance: 0.01,
+      unit: "V",
+      hint: "Average one hump over a *full* period: half the period has no output at all.",
+      solution: "$\\bar V = \\dfrac{V_m}{\\pi} = \\dfrac{10}{\\pi} \\approx 3.18$ V.",
+      commonMistakes: [
+        { answer: 6.37, feedback: "That is $2V_m/\\pi$, the full-wave value. The half-wave output is zero for half of each cycle." },
+        { answer: 5, feedback: "Half of the peak would be right for a square wave; a sine hump averages $V_m/\\pi$ over a full period." },
+        { answer: 7.07, feedback: "That is $V_m/\\sqrt2$, the rms value of the unrectified sine wave." },
       ],
     },
     {
@@ -586,6 +805,7 @@ const lesson04: LessonSeed = {
         { text: "$V_m/2$", feedback: "The reverse voltage is larger, not smaller, than one half's peak." },
         { text: "Zero, because one diode always conducts", feedback: "The *other* diode is reverse biased by the full secondary voltage." },
       ],
+      hint: "At the peak, one diode conducts and connects its end of the secondary to the load. Find the voltage across the non-conducting diode using the whole secondary.",
     },
     {
       type: "quiz",
@@ -598,6 +818,21 @@ const lesson04: LessonSeed = {
         { text: "It charges near the peak and discharges slowly between peaks, smoothing the output.", correct: true, feedback: "The output becomes nearly steady dc with a small ripple." },
         { text: "It removes the need for diodes.", feedback: "Without diodes the capacitor would simply follow the ac input." },
       ],
+      hint: "Think about what a capacitor does while the rectified voltage rises to a peak, and then while it falls away.",
+    },
+    {
+      type: "quiz",
+      id: "omp5-4-q5",
+      variant: "practice",
+      multiple: true,
+      question: "A bridge rectifier with four ideal diodes is fed with 50 Hz ac of peak $V_m$. Select every correct statement.",
+      options: [
+        { text: "The output ripple frequency is 100 Hz.", correct: true, feedback: "A bridge is a full-wave rectifier: two humps per input cycle." },
+        { text: "The average output voltage is $2V_m/\\pi$.", correct: true, feedback: "Each half-cycle gives a hump, so the average is twice the half-wave value $V_m/\\pi$." },
+        { text: "Each diode must withstand a peak inverse voltage of $2V_m$.", feedback: "$2V_m$ is the PIV in a centre-tap rectifier. In a bridge each blocking diode sits across the input peak, $V_m$." },
+        { text: "All four diodes conduct at the same time.", feedback: "Only two diagonally opposite diodes conduct on each half-cycle; the other two are reverse biased." },
+      ],
+      hint: "A bridge is full-wave, but its diodes are arranged differently from a centre-tap circuit.",
     },
   ]),
 };
@@ -612,10 +847,11 @@ const lesson05: LessonSeed = {
       content:
         "A p-n junction is more than a valve. Dope it heavily and its breakdown becomes a precise, repeatable voltage you can build a regulator on. Shine light on it and it produces current; push current through it and (with the right material) it produces light. All four devices in this lesson are the same junction used in different ways.",
     },
+    { type: "heading", text: "The Zener diode as a regulator" },
     {
       type: "text",
       content:
-        "**The Zener diode.** Both sides are heavily doped, so the depletion layer is very thin and the field across it enormous (about $5\\times10^{6}$ V/m or more) at a modest reverse voltage. At the **Zener voltage** $V_Z$ this field rips electrons out of bonds and the reverse current rises steeply, while the voltage stays almost exactly $V_Z$ over a wide range of current. Used in reverse bias with a series resistor to limit the current, this breakdown is not damage; it is the whole point.",
+        "Both sides are heavily doped, so the depletion layer is very thin and the field across it enormous (about $5\\times10^{6}$ V/m or more) at a modest reverse voltage. At the **Zener voltage** $V_Z$ this field rips electrons out of bonds and the reverse current rises steeply, while the voltage stays almost exactly $V_Z$ over a wide range of current. Used in reverse bias with a series resistor to limit the current, this breakdown is not damage; it is the whole point.",
     },
     {
       type: "callout",
@@ -625,14 +861,37 @@ const lesson05: LessonSeed = {
         "Unregulated supply $V_S$ → series resistor $R_S$ → Zener (reverse biased) in parallel with the load $R_L$.\nWhile the Zener is in breakdown, the load voltage is $V_Z$ and\n$I_S = \\dfrac{V_S - V_Z}{R_S}, \\quad I_L = \\dfrac{V_Z}{R_L}, \\quad I_Z = I_S - I_L$\nIf $V_S$ rises, $I_S$ rises and the Zener absorbs the extra current; the load voltage stays $V_Z$. Regulation needs $I_Z > 0$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (Zener regulator, JEE Main).** $V_S = 15$ V, $V_Z = 10$ V, $R_S = 250\\ \\Omega$, $R_L = 1$ kΩ. Find $I_S$, $I_L$ and $I_Z$.\n\n1. The load is in parallel with the Zener, so it sits at 10 V. *Why this step:* start from the one voltage you know for certain.\n2. $I_S = \\dfrac{15 - 10}{250} = 20$ mA.\n3. $I_L = \\dfrac{10}{1000} = 10$ mA.\n4. $I_Z = 20 - 10 = 10$ mA $> 0$: the Zener is in breakdown and regulating. ✓\n\n**Worked example 2 (how small can the load be?).** Same circuit. What is the smallest $R_L$ for which the output stays at 10 V?\n\n1. $I_S = 20$ mA whatever the load (while regulating). The load can take at most all of it: $I_L \\le 20$ mA.\n2. $R_L \\ge \\dfrac{10}{0.020} = 500\\ \\Omega$. *Why this step:* at $I_Z = 0$ the Zener has nothing left to give; a smaller load would pull the voltage below $V_Z$.\n3. Below 500 Ω, the Zener switches off and the circuit is just a divider: with $R_L = 250\\ \\Omega$, $V_L = 15\\times\\dfrac{250}{500} = 7.5$ V.",
+      type: "worked-example",
+      id: "omp5-5-we1",
+      title: "Worked example 1 (Zener regulator, JEE Main)",
+      problem:
+        "$V_S = 15$ V, $V_Z = 10$ V, $R_S = 250\\ \\Omega$, $R_L = 1$ kΩ. Find $I_S$, $I_L$ and $I_Z$.",
+      steps: [
+        { text: "The load is in parallel with the Zener, so it sits at 10 V. *Why this step:* start from the one voltage you know for certain." },
+        { text: "$I_S = \\dfrac{15 - 10}{250} = 20$ mA." },
+        { text: "$I_L = \\dfrac{10}{1000} = 10$ mA." },
+        { text: "$I_Z = 20 - 10 = 10$ mA $> 0$: the Zener is in breakdown and regulating. ✓" },
+      ],
+      answer: "$I_S = 20$ mA, $I_L = 10$ mA, $I_Z = 10$ mA",
     },
+    {
+      type: "worked-example",
+      id: "omp5-5-we2",
+      title: "Worked example 2 (how small can the load be?)",
+      problem:
+        "Same circuit. What is the smallest $R_L$ for which the output stays at 10 V?",
+      steps: [
+        { text: "$I_S = 20$ mA whatever the load (while regulating). The load can take at most all of it: $I_L \\le 20$ mA." },
+        { text: "$R_L \\ge \\dfrac{10}{0.020} = 500\\ \\Omega$. *Why this step:* at $I_Z = 0$ the Zener has nothing left to give; a smaller load would pull the voltage below $V_Z$." },
+        { text: "Below 500 Ω, the Zener switches off and the circuit is just a divider: with $R_L = 250\\ \\Omega$, $V_L = 15\\times\\dfrac{250}{500} = 7.5$ V." },
+      ],
+      answer: "$R_L = 500\\ \\Omega$",
+    },
+    { type: "heading", text: "Junctions and light" },
     {
       type: "text",
       content:
-        "**Junctions and light.** A photon absorbed near the junction with $h\\nu \\ge E_g$ creates an electron–hole pair (5.1). Conversely, when an electron in the conduction band drops into a hole, it can emit a photon of energy about $E_g$. That gives three devices:",
+        "A photon absorbed near the junction with $h\\nu \\ge E_g$ creates an electron–hole pair (5.1). Conversely, when an electron in the conduction band drops into a hole, it can emit a photon of energy about $E_g$. That gives three devices:",
     },
     {
       type: "table",
@@ -668,10 +927,11 @@ const lesson05: LessonSeed = {
       content:
         "What you should have seen: 2.0 eV gives 620 nm (red-orange), 2.5 eV gives 496 nm (green-blue), and above 3.1 eV the emission leaves the visible range into the ultraviolet. A visible LED needs a gap between about 1.8 and 3.1 eV.",
     },
+    { type: "heading", text: "The solar cell" },
     {
       type: "text",
       content:
-        "**Solar cell.** Light makes electron–hole pairs; the junction's built-in field separates them (electrons to n, holes to p) and they flow round an external circuit with no battery. Its I–V curve is the diode curve shifted *down* by the light-generated current $I_L$. The point on the $V$ axis is the open-circuit voltage $V_{oc}$; the point on the $I$ axis is the short-circuit current $I_{sc}$. Slide the light level below (mA against volts).",
+        "Light makes electron–hole pairs; the junction's built-in field separates them (electrons to n, holes to p) and they flow round an external circuit with no battery. Its I–V curve is the diode curve shifted *down* by the light-generated current $I_L$. The point on the $V$ axis is the open-circuit voltage $V_{oc}$; the point on the $I$ axis is the short-circuit current $I_{sc}$. Slide the light level below (mA against volts).",
     },
     {
       type: "interactive",
@@ -693,7 +953,31 @@ const lesson05: LessonSeed = {
     {
       type: "text",
       content:
-        "**Choosing the solar-cell gap.** Sunlight's photons peak around 1.5 eV. Too small a gap wastes most of each photon's energy as heat (only $E_g$ per pair is usable); too large a gap lets most photons pass unabsorbed. The best compromise is $E_g \\approx 1.0$–$1.8$ eV; silicon (1.1 eV) and GaAs (1.4 eV) are used.\n\n**Worked example 3 (LED band gap).** A red LED emits at 620 nm. Find its band gap.\n\n1. $E_g \\approx \\dfrac{1240}{620} = 2.0$ eV. *Why this step:* one recombination, one photon, energy about $E_g$.\n\n**Worked example 4 (can a photodiode see it?).** A silicon photodiode ($E_g = 1.1$ eV) is used to detect the 1300 nm light used in optical fibres. Will it respond?\n\n1. $1240/1300 = 0.95$ eV $< 1.1$ eV: no. *Why this step:* below the gap, photons pass straight through without making pairs.\n2. Germanium ($0.7$ eV, $\\lambda_{\\max} \\approx 1771$ nm) or InGaAs detectors are used instead.",
+        "**Choosing the solar-cell gap.** Sunlight's photons peak around 1.5 eV. Too small a gap wastes most of each photon's energy as heat (only $E_g$ per pair is usable); too large a gap lets most photons pass unabsorbed. The best compromise is $E_g \\approx 1.0$–$1.8$ eV; silicon (1.1 eV) and GaAs (1.4 eV) are used.",
+    },
+    {
+      type: "worked-example",
+      id: "omp5-5-we3",
+      title: "Worked example 3 (LED band gap)",
+      problem:
+        "A red LED emits at 620 nm. Find its band gap.",
+      steps: [
+        { text: "$E_g \\approx \\dfrac{1240}{620} = 2.0$ eV. *Why this step:* one recombination, one photon, energy about $E_g$." },
+      ],
+      answer: "$E_g \\approx 2.0$ eV",
+      tryFirst: false,
+    },
+    {
+      type: "worked-example",
+      id: "omp5-5-we4",
+      title: "Worked example 4 (can a photodiode see it?)",
+      problem:
+        "A silicon photodiode ($E_g = 1.1$ eV) is used to detect the 1300 nm light used in optical fibres. Will it respond?",
+      steps: [
+        { text: "$1240/1300 = 0.95$ eV $< 1.1$ eV: no. *Why this step:* below the gap, photons pass straight through without making pairs." },
+        { text: "Germanium ($0.7$ eV, $\\lambda_{\\max} \\approx 1771$ nm) or InGaAs detectors are used instead." },
+      ],
+      answer: "No: 1300 nm photons (0.95 eV) are below silicon's 1.1 eV gap.",
     },
     {
       type: "callout",
@@ -709,28 +993,36 @@ const lesson05: LessonSeed = {
       content:
         "Zener breakdown is reversible and is the normal operating region. What destroys a Zener (or any diode) is excess *power*, $V_ZI_Z$, which is why a series resistor always limits the current.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp5-5-q1",
       variant: "practice",
-      question: "A Zener regulator has $V_S = 12$ V, $V_Z = 6$ V, $R_S = 200\\ \\Omega$ and $R_L = 1$ kΩ. What is the Zener current?",
-      options: [
-        { text: "$30$ mA", feedback: "That is the supply current $I_S$. The load takes 6 mA of it." },
-        { text: "$6$ mA", feedback: "That is the load current." },
-        { text: "$60$ mA", feedback: "That uses the full 12 V across $R_S$. The resistor gets $V_S - V_Z = 6$ V." },
-        { text: "$24$ mA", correct: true, feedback: "$I_S = 6/200 = 30$ mA, $I_L = 6/1000 = 6$ mA, $I_Z = 24$ mA." },
+      question: "A Zener regulator has $V_S = 12$ V, $V_Z = 6$ V, $R_S = 200\\ \\Omega$ and $R_L = 1$ kΩ. What is the Zener current, in mA?",
+      answer: 24,
+      unit: "mA",
+      hint: "The load sits at $V_Z$. Find $I_S$ through $R_S$ and $I_L$ through the load, then subtract.",
+      solution: "$I_S = \\dfrac{V_S - V_Z}{R_S} = \\dfrac{6}{200} = 30$ mA.\n\n$I_L = \\dfrac{V_Z}{R_L} = \\dfrac{6}{1000} = 6$ mA.\n\n$I_Z = I_S - I_L = 24$ mA (positive, so the Zener is regulating).",
+      commonMistakes: [
+        { answer: 30, feedback: "That is the supply current $I_S$. The load takes 6 mA of it." },
+        { answer: 6, feedback: "That is the load current." },
+        { answer: 60, feedback: "That uses the full 12 V across $R_S$. The resistor gets $V_S - V_Z = 6$ V." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp5-5-q2",
       variant: "practice",
-      question: "An LED emits green light of wavelength 500 nm. Estimate its band gap.",
-      options: [
-        { text: "About 1.1 eV", feedback: "That is silicon's gap, which corresponds to about 1127 nm (infrared)." },
-        { text: "About 2.5 eV", correct: true, feedback: "$1240/500 = 2.48$ eV." },
-        { text: "About 0.4 eV", feedback: "That inverts the ratio: $500/1240$." },
-        { text: "About 6.2 eV", feedback: "That would be 200 nm ultraviolet." },
+      question: "An LED emits green light of wavelength 500 nm. Estimate its band gap in eV, using $hc = 1240$ eV·nm.",
+      answer: 2.48,
+      relTolerance: 0.02,
+      unit: "eV",
+      hint: "One recombination across the gap gives one photon of energy about $E_g$.",
+      solution: "$E_g \\approx \\dfrac{hc}{\\lambda} = \\dfrac{1240}{500} = 2.48$ eV.",
+      commonMistakes: [
+        { answer: 1.1, feedback: "That is silicon's gap, which corresponds to about 1127 nm (infrared)." },
+        { answer: 0.403, feedback: "That inverts the ratio: $500/1240$. Use $E = 1240/\\lambda$." },
+        { answer: 6.2, feedback: "That would be 200 nm ultraviolet. Check the division: $1240/500$." },
       ],
     },
     {
@@ -744,6 +1036,7 @@ const lesson05: LessonSeed = {
         { text: "The light changes the minority-carrier current by a large fraction, which is easy to measure.", correct: true, feedback: "In reverse bias the current *is* the minority current, so light has a big relative effect." },
         { text: "Light can only enter a reverse-biased junction.", feedback: "Light enters either way; bias decides how visible its effect is." },
       ],
+      hint: "Is the photodiode's reverse current large or small to begin with? Then think about the fractional change that light makes to it.",
     },
     {
       type: "quiz",
@@ -756,18 +1049,36 @@ const lesson05: LessonSeed = {
         { text: "The third: reverse bias, like a photodiode", feedback: "A photodiode works in the third quadrant and absorbs power from its bias battery." },
         { text: "It does not matter; any quadrant works", feedback: "Only in the fourth quadrant is power delivered." },
       ],
+      hint: "A device delivers power when $V$ and $I$ have opposite signs in the passive sign convention. Which way does the light-generated current flow?",
+    },
+    {
+      type: "numeric",
+      id: "omp5-5-q5",
+      variant: "practice",
+      question: "In the regulator of Worked example 1 ($V_S = 15$ V, $V_Z = 10$ V, $R_S = 250\\ \\Omega$), the load is changed to 2 kΩ. Find the new Zener current, in mA.",
+      answer: 15,
+      unit: "mA",
+      hint: "While the Zener regulates, $I_S$ does not depend on the load.",
+      solution: "$I_S = \\dfrac{15 - 10}{250} = 20$ mA, as before.\n\n$I_L = \\dfrac{10}{2000} = 5$ mA.\n\n$I_Z = 20 - 5 = 15$ mA.",
+      commonMistakes: [
+        { answer: 10, feedback: "That was the value with the 1 kΩ load. A lighter load takes less current, leaving more for the Zener." },
+        { answer: 5, feedback: "That is the new load current." },
+        { answer: 25, feedback: "The supply current is fixed at $(15 - 10)/250 = 20$ mA while regulating; the Zener cannot get more than that." },
+      ],
     },
     {
       type: "quiz",
-      id: "omp5-5-q5",
-      variant: "practice",
-      question: "In the regulator of Worked example 1 ($V_S = 15$ V, $V_Z = 10$ V, $R_S = 250\\ \\Omega$), the load is changed to 2 kΩ. Find the new Zener current.",
+      id: "omp5-5-q6",
+      variant: "concept",
+      multiple: true,
+      question: "Select every device that is normally operated with its p-n junction **reverse** biased.",
       options: [
-        { text: "$10$ mA", feedback: "That was the value with the 1 kΩ load. A lighter load takes less current, leaving more for the Zener." },
-        { text: "$5$ mA", feedback: "That is the new load current." },
-        { text: "$15$ mA", correct: true, feedback: "$I_S$ is still 20 mA; $I_L = 10/2000 = 5$ mA; $I_Z = 15$ mA." },
-        { text: "$25$ mA", feedback: "The supply current is fixed at $(15 - 10)/250 = 20$ mA while regulating; the Zener cannot get more than that." },
+        { text: "A Zener diode used as a voltage regulator", correct: true, feedback: "Regulation uses the reverse breakdown at $V_Z$." },
+        { text: "A photodiode used as a light detector", correct: true, feedback: "In reverse bias the current is the minority-carrier current, which light changes by a large fraction." },
+        { text: "An LED", feedback: "An LED is forward biased: carriers must be pushed across the junction to recombine and emit light." },
+        { text: "A solar cell delivering power to a load", feedback: "A solar cell has no external bias; it is the source, working in the fourth quadrant." },
       ],
+      hint: "Ask, for each device, which carriers must cross the junction for it to do its job.",
     },
   ]),
 };
@@ -782,6 +1093,7 @@ const lesson06: LessonSeed = {
       content:
         "A microphone produces a signal of a few millivolts. A loudspeaker needs volts. Somewhere between them, a small current must *control* a large one. A transistor does exactly this: a tiny current into its middle layer decides how much current flows through the whole device. Billions of them, used as switches, run every computer.",
     },
+    { type: "heading", text: "How an npn transistor works" },
     {
       type: "text",
       content:
@@ -830,6 +1142,7 @@ const lesson06: LessonSeed = {
       content:
         "What you should have seen: 20 μA in the base controls 2000 μA $= 2$ mA in the collector; every extra 5 μA of base current adds 0.5 mA. In a real circuit this proportionality stops at **saturation**, when the collector resistor cannot pass any more current, and at **cut-off**, when $I_B = 0$ and $I_C \\approx 0$.",
     },
+    { type: "heading", text: "Operating regions and characteristics" },
     {
       type: "table",
       headers: ["Region", "E–B junction", "C–B junction", "Behaviour", "Use"],
@@ -844,10 +1157,11 @@ const lesson06: LessonSeed = {
       content:
         "**Common-emitter characteristics (qualitative).** The *input* characteristic ($I_B$ against $V_{BE}$) looks like a forward-biased diode curve with a knee near 0.7 V; its slope gives the input resistance $r_i = \\Delta V_{BE}/\\Delta I_B$. The *output* characteristics ($I_C$ against $V_{CE}$, one curve per $I_B$) rise steeply near $V_{CE} = 0$ (saturation) and then run nearly flat at $I_C \\approx \\beta I_B$ (active region); their slight slope gives the output resistance.",
     },
+    { type: "heading", text: "The common-emitter amplifier" },
     {
       type: "text",
       content:
-        "**The amplifier.** In a common-emitter amplifier, a small input signal changes $I_B$ slightly; $I_C$ changes $\\beta$ times as much; that change flows through the collector resistor $R_C$ and produces a large output voltage change. With input resistance $R_B$ (NCERT form):",
+        "In a common-emitter amplifier, a small input signal changes $I_B$ slightly; $I_C$ changes $\\beta$ times as much; that change flows through the collector resistor $R_C$ and produces a large output voltage change. With input resistance $R_B$ (NCERT form):",
     },
     {
       type: "math",
@@ -858,15 +1172,55 @@ const lesson06: LessonSeed = {
       content:
         "The minus sign means the output is inverted (180° out of phase): more base current means more collector current, a bigger drop across $R_C$, and so a *lower* collector voltage.",
     },
+    { type: "heading", text: "Worked examples: gains and switching" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (α to β, JEE Main).** $\\alpha = 0.98$. Find $\\beta$.\n\n1. $\\beta = \\dfrac{0.98}{1 - 0.98} = \\dfrac{0.98}{0.02} = 49$. *Why this step:* 98% of emitter current reaches the collector, 2% leaves by the base, so $I_C/I_B = 98/2$.\n\n**Worked example 2 (amplifier gain).** $\\beta = 100$, $R_C = 2$ kΩ, $R_B = 1$ kΩ. Find the voltage and power gains, and the output for a 10 mV input.\n\n1. $A_v = -100\\times\\dfrac{2}{1} = -200$.\n2. Power gain $= \\beta|A_v| = 100\\times200 = 2\\times10^{4}$. *Why this step:* power gain is current gain times voltage gain.\n3. Output: $200\\times10$ mV $= 2$ V, inverted.",
+      type: "worked-example",
+      id: "omp5-6-we1",
+      title: "Worked example 1 (α to β, JEE Main)",
+      problem:
+        "$\\alpha = 0.98$. Find $\\beta$.",
+      steps: [
+        { text: "$\\beta = \\dfrac{0.98}{1 - 0.98} = \\dfrac{0.98}{0.02} = 49$. *Why this step:* 98% of emitter current reaches the collector, 2% leaves by the base, so $I_C/I_B = 98/2$." },
+      ],
+      answer: "$\\beta = 49$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (transistor as a switch).** An npn transistor with $\\beta = 100$ has $R_C = 1$ kΩ connected to $V_{CC} = 5$ V. The base is driven from a 5 V logic signal through $R_B$ ($V_{BE} = 0.7$ V). What base current, and what largest $R_B$, will switch it fully ON?\n\n1. Fully on (saturated): $V_{CE} \\approx 0$, so $I_C \\approx V_{CC}/R_C = 5$ mA. *Why this step:* in saturation the collector current is limited by the resistor, not by $\\beta$.\n2. To reach it, $\\beta I_B \\ge 5$ mA, so $I_B \\ge 50$ μA.\n3. $R_B \\le \\dfrac{5 - 0.7}{50\\times10^{-6}} = 86$ kΩ. Designers pick less (say 47 kΩ) to switch on firmly.\n4. With the input at 0 V, $I_B = 0$: cut-off, $I_C = 0$, output at 5 V. Input high gives output low: this circuit is a NOT gate (5.7).\n\n**Worked example 4 (currents).** $I_B = 40$ μA and $\\beta = 50$.\n\n1. $I_C = 50\\times40$ μA $= 2$ mA; $I_E = 2 + 0.04 = 2.04$ mA; $\\alpha = 2/2.04 \\approx 0.98$.",
+      type: "worked-example",
+      id: "omp5-6-we2",
+      title: "Worked example 2 (amplifier gain)",
+      problem:
+        "$\\beta = 100$, $R_C = 2$ kΩ, $R_B = 1$ kΩ. Find the voltage and power gains, and the output for a 10 mV input.",
+      steps: [
+        { text: "$A_v = -100\\times\\dfrac{2}{1} = -200$." },
+        { text: "Power gain $= \\beta|A_v| = 100\\times200 = 2\\times10^{4}$. *Why this step:* power gain is current gain times voltage gain." },
+        { text: "Output: $200\\times10$ mV $= 2$ V, inverted." },
+      ],
+      answer: "$A_v = -200$, power gain $2\\times10^4$, output 2 V (inverted).",
+    },
+    {
+      type: "worked-example",
+      id: "omp5-6-we3",
+      title: "Worked example 3 (transistor as a switch)",
+      problem:
+        "An npn transistor with $\\beta = 100$ has $R_C = 1$ kΩ connected to $V_{CC} = 5$ V. The base is driven from a 5 V logic signal through $R_B$ ($V_{BE} = 0.7$ V). What base current, and what largest $R_B$, will switch it fully ON?",
+      steps: [
+        { text: "Fully on (saturated): $V_{CE} \\approx 0$, so $I_C \\approx V_{CC}/R_C = 5$ mA. *Why this step:* in saturation the collector current is limited by the resistor, not by $\\beta$." },
+        { text: "To reach it, $\\beta I_B \\ge 5$ mA, so $I_B \\ge 50$ μA." },
+        { text: "$R_B \\le \\dfrac{5 - 0.7}{50\\times10^{-6}} = 86$ kΩ. Designers pick less (say 47 kΩ) to switch on firmly." },
+        { text: "With the input at 0 V, $I_B = 0$: cut-off, $I_C = 0$, output at 5 V. Input high gives output low: this circuit is a NOT gate (5.7)." },
+      ],
+      answer: "$I_B \\ge 50$ μA, so $R_B \\le 86$ kΩ.",
+    },
+    {
+      type: "worked-example",
+      id: "omp5-6-we4",
+      title: "Worked example 4 (currents)",
+      problem:
+        "A transistor has $I_B = 40$ μA and $\\beta = 50$. Find $I_C$, $I_E$ and $\\alpha$.",
+      steps: [
+        { text: "$I_C = 50\\times40$ μA $= 2$ mA; $I_E = 2 + 0.04 = 2.04$ mA; $\\alpha = 2/2.04 \\approx 0.98$." },
+      ],
+      answer: "$I_C = 2$ mA, $I_E = 2.04$ mA, $\\alpha \\approx 0.98$",
     },
     {
       type: "callout",
@@ -882,28 +1236,35 @@ const lesson06: LessonSeed = {
       content:
         "It is the opposite: the base is the *thinnest* and most *lightly* doped region. That is what lets most carriers cross it without recombining, making $I_B$ small and $\\beta$ large. The emitter is the most heavily doped; the collector is the largest.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp5-6-q1",
       variant: "practice",
       question: "For a transistor, $\\alpha = 0.95$. What is $\\beta$?",
-      options: [
-        { text: "19", correct: true, feedback: "$0.95/0.05 = 19$." },
-        { text: "0.95", feedback: "That is $\\alpha$. $\\beta = \\alpha/(1 - \\alpha)$." },
-        { text: "20", feedback: "That is $1/(1 - \\alpha)$, which is $\\beta + 1$." },
-        { text: "0.487", feedback: "That uses $\\alpha/(1 + \\alpha)$, the inverse relation." },
+      answer: 19,
+      hint: "$\\beta = \\dfrac{\\alpha}{1 - \\alpha}$.",
+      solution: "$\\beta = \\dfrac{0.95}{1 - 0.95} = \\dfrac{0.95}{0.05} = 19$. Of every 100 electrons leaving the emitter, 95 reach the collector and 5 leave by the base: $95/5 = 19$.",
+      commonMistakes: [
+        { answer: 0.95, feedback: "That is $\\alpha$. $\\beta = \\alpha/(1 - \\alpha)$." },
+        { answer: 20, feedback: "That is $1/(1 - \\alpha)$, which is $\\beta + 1$." },
+        { answer: 0.487, tolerance: 0.001, feedback: "That uses $\\alpha/(1 + \\alpha)$, the inverse relation." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp5-6-q2",
       variant: "practice",
-      question: "A transistor has $\\beta = 50$ and base current 40 μA. Find the emitter current.",
-      options: [
-        { text: "$2.00$ mA", feedback: "That is $I_C$. Add the base current." },
-        { text: "$1.96$ mA", feedback: "$I_E$ is the *sum* of $I_B$ and $I_C$, the largest of the three." },
-        { text: "$0.8$ μA", feedback: "That divides $I_B$ by $\\beta$ instead of multiplying: $I_C = \\beta I_B$." },
-        { text: "$2.04$ mA", correct: true, feedback: "$I_C = 2$ mA; $I_E = I_B + I_C = 2.04$ mA." },
+      question: "A transistor has $\\beta = 50$ and base current 40 μA. Find the emitter current, in mA.",
+      answer: 2.04,
+      tolerance: 0.001,
+      unit: "mA",
+      hint: "Find $I_C = \\beta I_B$ first, then use $I_E = I_B + I_C$.",
+      solution: "$I_C = \\beta I_B = 50\\times40$ μA $= 2000$ μA $= 2$ mA.\n\n$I_E = I_B + I_C = 0.04 + 2 = 2.04$ mA.",
+      commonMistakes: [
+        { answer: 2, feedback: "That is $I_C$. Add the base current." },
+        { answer: 1.96, feedback: "$I_E$ is the *sum* of $I_B$ and $I_C$, the largest of the three." },
+        { answer: 0.0008, tolerance: 0.00001, feedback: "That divides $I_B$ by $\\beta$ instead of multiplying: $I_C = \\beta I_B$." },
       ],
     },
     {
@@ -917,6 +1278,7 @@ const lesson06: LessonSeed = {
         { text: "12.5 and 625", feedback: "That inverts the resistor ratio. $A_v = \\beta R_C/R_B$." },
         { text: "50 and 2500", feedback: "That leaves out the resistor ratio $R_C/R_B = 4$." },
       ],
+      hint: "Recall from 5.6 how the voltage gain depends on $\\beta$ and the two resistances, and how the power gain combines the current and voltage gains.",
     },
     {
       type: "quiz",
@@ -929,6 +1291,7 @@ const lesson06: LessonSeed = {
         { text: "Both reverse", feedback: "That is cut-off, a switch that is OFF." },
         { text: "Emitter–base reverse, collector–base forward", feedback: "That is the \"inverse active\" mode, which gives very poor gain." },
       ],
+      hint: "The emitter must inject carriers into the base, and the collector must sweep them up. Which bias does each junction need for that?",
     },
     {
       type: "quiz",
@@ -941,6 +1304,21 @@ const lesson06: LessonSeed = {
         { text: "Because $\\alpha < 1$.", feedback: "$\\alpha < 1$ describes current division, not the phase." },
         { text: "More base current gives more collector current, a larger drop across $R_C$, and so a lower collector voltage.", correct: true, feedback: "$V_{CE} = V_{CC} - I_CR_C$ falls as the input rises." },
       ],
+      hint: "Write the output voltage in terms of the collector current, $V_{CE} = V_{CC} - I_CR_C$, and ask which way it moves when the input increases.",
+    },
+    {
+      type: "quiz",
+      id: "omp5-6-q6",
+      variant: "concept",
+      multiple: true,
+      question: "Select every correct statement about an npn transistor working in the active region.",
+      options: [
+        { text: "The emitter current equals the sum of the base and collector currents.", correct: true, feedback: "Charge conservation: $I_E = I_B + I_C$." },
+        { text: "The base is the thinnest and most lightly doped of the three regions.", correct: true, feedback: "That lets most electrons cross the base without recombining, keeping $I_B$ small and $\\beta$ large." },
+        { text: "The common-base current gain $\\alpha$ is slightly greater than 1.", feedback: "$\\alpha = I_C/I_E$ and $I_C < I_E$, so $\\alpha$ is slightly *less* than 1." },
+        { text: "The collector–base junction is forward biased.", feedback: "In the active region the collector–base junction is reverse biased; both junctions forward biased is saturation." },
+      ],
+      hint: "Recall the biasing for the active region and where the emitter's electrons go.",
     },
   ]),
 };
@@ -962,6 +1340,7 @@ const lesson07: LessonSeed = {
       content:
         "A digital signal has two levels: **1** (high, e.g. 5 V) and **0** (low, 0 V). A **logic gate** has one or more inputs and one output that is a fixed function of the inputs, listed in its **truth table**. Boolean notation: $A + B$ means OR, $A\\cdot B$ (or $AB$) means AND, $\\bar A$ means NOT A.",
     },
+    { type: "heading", text: "Truth tables and symbols" },
     {
       type: "table",
       headers: ["A", "B", "OR $A + B$", "AND $AB$", "NAND $\\overline{AB}$", "NOR $\\overline{A + B}$", "XOR $A\\oplus B$"],
@@ -977,6 +1356,7 @@ const lesson07: LessonSeed = {
       content:
         "**NOT** has one input: $Y = \\bar A$ (0 → 1, 1 → 0). Its symbol is a triangle with a small circle (the \"bubble\") at the output. AND is a D-shape, OR a curved shield shape; a bubble on the output of either gives NAND or NOR. XOR (\"exclusive OR\") is 1 when the inputs *differ*: $A\\oplus B = A\\bar B + \\bar AB$.\n\n**Reading the table quickly.** AND: 1 only if all inputs are 1. OR: 0 only if all inputs are 0. NAND and NOR: the opposite of AND and OR in every row.",
     },
+    { type: "heading", text: "De Morgan's laws" },
     {
       type: "text",
       content:
@@ -998,31 +1378,64 @@ const lesson07: LessonSeed = {
       content:
         "Columns 5 and 6 agree in every row, and so do columns 7 and 8: both laws are proved by exhaustion, since there are only four input combinations.\n\n**NAND is universal (step by step).**\n\n1. **NOT:** tie both inputs of a NAND together: $\\overline{A\\cdot A} = \\bar A$.\n2. **AND:** follow a NAND with a NAND-as-NOT: $\\overline{\\overline{AB}} = AB$.\n3. **OR:** invert each input with a NAND-as-NOT, then NAND them: $\\overline{\\bar A\\cdot\\bar B} = \\bar{\\bar A} + \\bar{\\bar B} = A + B$ (De Morgan).\n\n**NOR is universal too:** NOT is a NOR with tied inputs; OR is NOR followed by NOT; AND is $\\overline{\\bar A + \\bar B} = AB$, a NOR fed with inverted inputs. Chip makers build whole processors from one gate type because it simplifies manufacture.",
     },
+    { type: "heading", text: "Worked examples: reading gate circuits" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (a NOR circuit that is really AND).** Input A goes into a NOR gate with both its inputs tied together; so does B. The two outputs feed a third NOR gate. Find Y.\n\n1. First two gates: $\\overline{A + A} = \\bar A$ and $\\bar B$. *Why this step:* a NOR with tied inputs is a NOT.\n2. Third gate: $Y = \\overline{\\bar A + \\bar B}$.\n3. De Morgan: $\\overline{\\bar A + \\bar B} = \\bar{\\bar A}\\cdot\\bar{\\bar B} = AB$. The circuit is an AND gate.\n4. Check one row: $A = 1, B = 0$: $\\bar A = 0$, $\\bar B = 1$, NOR$(0, 1) = 0 = 1\\cdot0$. ✓",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2 (output waveform).** Inputs A and B are held at the levels below for six equal time intervals. Sketch the output of a NAND gate.\n\n1. For each interval, read the pair $(A, B)$ and look up NAND: 0 only when both are 1. *Why this step:* a gate has no memory; each interval is a separate truth-table lookup.",
-    },
-    {
-      type: "table",
-      headers: ["Interval", "1", "2", "3", "4", "5", "6"],
-      rows: [
-        ["A", "0", "1", "1", "0", "1", "0"],
-        ["B", "0", "0", "1", "1", "1", "0"],
-        ["NAND", "1", "1", "0", "1", "0", "1"],
-        ["NOR (for comparison)", "1", "0", "0", "0", "0", "1"],
-        ["XOR (for comparison)", "0", "1", "0", "1", "0", "0"],
+      type: "worked-example",
+      id: "omp5-7-we1",
+      title: "Worked example 1 (three NOR gates)",
+      problem:
+        "Input A goes into a NOR gate with both its inputs tied together; so does B. The two outputs feed a third NOR gate. Find Y.",
+      steps: [
+        { text: "First two gates: $\\overline{A + A} = \\bar A$ and $\\bar B$. *Why this step:* a NOR with tied inputs is a NOT." },
+        { text: "Third gate: $Y = \\overline{\\bar A + \\bar B}$." },
+        { text: "De Morgan: $\\overline{\\bar A + \\bar B} = \\bar{\\bar A}\\cdot\\bar{\\bar B} = AB$. The circuit is an AND gate." },
+        { text: "Check one row: $A = 1, B = 0$: $\\bar A = 0$, $\\bar B = 1$, NOR$(0, 1) = 0 = 1\\cdot0$. ✓" },
       ],
+      answer: "$Y = AB$: an AND gate.",
     },
     {
-      type: "text",
-      content:
-        "2. The NAND output drops to 0 only in intervals 3 and 5, where both inputs are high.\n\n**Worked example 3 (identify the single gate).** A and B feed both an OR gate and a NAND gate; their outputs feed an AND gate. What single gate is equivalent?\n\n1. $Y = (A + B)\\cdot\\overline{AB}$.\n2. Row by row: $(0,0)$: $0\\cdot1 = 0$; $(0,1)$: $1\\cdot1 = 1$; $(1,0)$: $1\\cdot1 = 1$; $(1,1)$: $1\\cdot0 = 0$.\n3. Output 1 exactly when the inputs differ: XOR. *Why this step:* when the algebra is unclear, the four-row table always settles it.",
+      type: "worked-example",
+      id: "omp5-7-we2",
+      title: "Worked example 2 (output waveform)",
+      problem:
+        "Inputs A and B are held at the levels in the table for six equal time intervals. Sketch the output of a NAND gate.",
+      problemTable: {
+        headers: ["Interval", "1", "2", "3", "4", "5", "6"],
+        rows: [
+          ["A", "0", "1", "1", "0", "1", "0"],
+          ["B", "0", "0", "1", "1", "1", "0"],
+        ],
+      },
+      steps: [
+        {
+          text: "For each interval, read the pair $(A, B)$ and look up NAND: 0 only when both are 1. *Why this step:* a gate has no memory; each interval is a separate truth-table lookup.",
+          table: {
+            headers: ["Interval", "1", "2", "3", "4", "5", "6"],
+            rows: [
+              ["A", "0", "1", "1", "0", "1", "0"],
+              ["B", "0", "0", "1", "1", "1", "0"],
+              ["NAND", "1", "1", "0", "1", "0", "1"],
+              ["NOR (for comparison)", "1", "0", "0", "0", "0", "1"],
+              ["XOR (for comparison)", "0", "1", "0", "1", "0", "0"],
+            ],
+          },
+        },
+        { text: "The NAND output drops to 0 only in intervals 3 and 5, where both inputs are high." },
+      ],
+      answer: "NAND output 1, 1, 0, 1, 0, 1: low only in intervals 3 and 5.",
+    },
+    {
+      type: "worked-example",
+      id: "omp5-7-we3",
+      title: "Worked example 3 (identify the single gate)",
+      problem:
+        "A and B feed both an OR gate and a NAND gate; their outputs feed an AND gate. What single gate is equivalent?",
+      steps: [
+        { text: "$Y = (A + B)\\cdot\\overline{AB}$." },
+        { text: "Row by row: $(0,0)$: $0\\cdot1 = 0$; $(0,1)$: $1\\cdot1 = 1$; $(1,0)$: $1\\cdot1 = 1$; $(1,1)$: $1\\cdot0 = 0$." },
+        { text: "Output 1 exactly when the inputs differ: XOR. *Why this step:* when the algebra is unclear, the four-row table always settles it." },
+      ],
+      answer: "XOR",
     },
     {
       type: "callout",
@@ -1038,6 +1451,7 @@ const lesson07: LessonSeed = {
       content:
         "A basic gate has no memory. Its output at any moment depends only on the input levels at that moment, through the truth table. (Circuits with memory, flip-flops, are built by feeding outputs back to inputs, which is beyond this chapter.)",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "omp5-7-q1",
@@ -1049,6 +1463,7 @@ const lesson07: LessonSeed = {
         { text: "AND", feedback: "AND is 1 only when both inputs are 1." },
         { text: "XOR", feedback: "XOR is 0 when both inputs are 0." },
       ],
+      hint: "Write the four-row truth table for the behaviour described, then compare it with the AND, NAND, NOR and XOR tables in this lesson.",
     },
     {
       type: "quiz",
@@ -1061,6 +1476,7 @@ const lesson07: LessonSeed = {
         { text: "$A + B$ (OR)", correct: true, feedback: "$\\overline{\\bar A\\cdot\\bar B} = A + B$ by De Morgan." },
         { text: "$\\overline{AB}$ (NAND)", feedback: "The input NOTs change the function. Try $A = B = 0$: NAND of $(1, 1)$ is 0, not 1." },
       ],
+      hint: "Write $Y = \\overline{\\bar A\\,\\bar B}$ and apply De Morgan's law.",
     },
     {
       type: "quiz",
@@ -1073,6 +1489,7 @@ const lesson07: LessonSeed = {
         { text: "NAND", feedback: "The NOT inverts the NAND output, so it is no longer NAND." },
         { text: "AND", correct: true, feedback: "$\\overline{\\overline{AB}} = AB$." },
       ],
+      hint: "Write NAND as $\\overline{AB}$, then invert it once more.",
     },
     {
       type: "quiz",
@@ -1085,6 +1502,7 @@ const lesson07: LessonSeed = {
         { text: "$\\overline{A + B} = \\bar A + \\bar B$", feedback: "At $A = 1, B = 0$: left is 0, right is 1." },
         { text: "$\\overline{A + B} = A\\,B$", feedback: "At $A = B = 0$: left is 1, right is 0." },
       ],
+      hint: "Test each identity with a truth table: try, say, $A = 1$, $B = 0$ on both sides.",
     },
     {
       type: "quiz",
@@ -1097,6 +1515,7 @@ const lesson07: LessonSeed = {
         { text: "1", correct: true, feedback: "XOR of equal inputs is 0; NOT makes it 1. (XOR + NOT is XNOR, an \"equality detector\".)" },
         { text: "Undefined, because XOR needs different inputs", feedback: "XOR is defined for all inputs; it gives 0 when they are equal." },
       ],
+      hint: "XOR is high only when the inputs differ. Find the XOR output for these inputs, then invert it.",
     },
   ]),
 };
@@ -1121,13 +1540,15 @@ const lessonMastery: LessonSeed = {
       type: "quiz",
       id: "omp5-8-q1",
       variant: "mastery",
-      question: "Light of wavelength 800 nm falls on Si ($E_g = 1.1$ eV), GaAs ($1.43$ eV) and CdS ($2.42$ eV) photodetectors. Which respond?",
+      multiple: true,
+      question: "Light of wavelength 800 nm falls on four photodetectors. Select every one that responds.",
       options: [
-        { text: "Si and GaAs only", correct: true, feedback: "$1240/800 = 1.55$ eV, above 1.1 and 1.43 eV but below 2.42 eV." },
-        { text: "All three", feedback: "CdS needs photons of at least 2.42 eV (below 512 nm)." },
-        { text: "Si only", feedback: "GaAs's 1.43 eV is also below the photon's 1.55 eV." },
-        { text: "CdS only, because it has the largest gap", feedback: "A larger gap needs *more* energetic photons, not fewer." },
+        { text: "Ge ($E_g = 0.7$ eV)", correct: true, feedback: "The photon energy is $1240/800 = 1.55$ eV, well above 0.7 eV." },
+        { text: "Si ($E_g = 1.1$ eV)", correct: true, feedback: "$1.55$ eV $> 1.1$ eV: each photon can make an electron–hole pair." },
+        { text: "GaAs ($E_g = 1.43$ eV)", correct: true, feedback: "$1.55$ eV $> 1.43$ eV, just enough." },
+        { text: "CdS ($E_g = 2.42$ eV)", feedback: "CdS needs photons of at least 2.42 eV (wavelengths below 512 nm). A larger gap needs *more* energetic photons." },
       ],
+      hint: "Find one photon's energy, $1240/\\lambda$ eV, and compare it with each gap.",
     },
     {
       type: "quiz",
@@ -1140,17 +1561,22 @@ const lessonMastery: LessonSeed = {
         { text: "$10^{10}$ m⁻³; n-type", correct: true, feedback: "$n_h = 10^{32}/10^{22} = 10^{10}$; electrons are the majority." },
         { text: "$10^{22}$ m⁻³; intrinsic", feedback: "$n_e = n_h$ holds only for intrinsic material, and here $n_e \\gg n_i$." },
       ],
+      hint: "The mass-action law (5.2): $n_e n_h = n_i^2$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp5-8-q3",
       variant: "mastery",
-      question: "A 12 V battery feeds two parallel branches. Branch 1: a silicon diode (0.7 V) forward biased in series with 4 Ω. Branch 2: an identical diode reverse biased in series with 2 Ω. Find the battery current.",
-      options: [
-        { text: "About 2.83 A", correct: true, feedback: "Only branch 1 conducts: $(12 - 0.7)/4 = 2.825$ A." },
-        { text: "3 A", feedback: "That treats the diode as ideal. Subtract its 0.7 V drop." },
-        { text: "About 8.48 A", feedback: "That lets both branches conduct. The reverse-biased diode blocks branch 2." },
-        { text: "About 5.65 A", feedback: "That is branch 2's current if *it* conducted. Its diode is reverse biased." },
+      question: "A 12 V battery feeds two parallel branches. Branch 1: a silicon diode (0.7 V) forward biased in series with 4 Ω. Branch 2: an identical diode reverse biased in series with 2 Ω. Find the battery current, in amperes.",
+      answer: 2.825,
+      relTolerance: 0.01,
+      unit: "A",
+      hint: "Decide which diode conducts first; a reverse-biased diode is an open switch.",
+      solution: "The reverse-biased diode blocks branch 2, so only branch 1 conducts.\n\n$I = \\dfrac{12 - 0.7}{4} = \\dfrac{11.3}{4} = 2.825$ A.",
+      commonMistakes: [
+        { answer: 3, feedback: "That treats the diode as ideal. Subtract its 0.7 V drop." },
+        { answer: 8.475, feedback: "That lets both branches conduct. The reverse-biased diode blocks branch 2." },
+        { answer: 5.65, feedback: "That is branch 2's current if *it* conducted. Its diode is reverse biased." },
       ],
     },
     {
@@ -1164,17 +1590,21 @@ const lessonMastery: LessonSeed = {
         { text: "50 Hz and 40 V", feedback: "Both numbers belong to other circuits: 50 Hz is half-wave, $2V_m$ is centre-tap." },
         { text: "100 Hz and 20 V", correct: true, feedback: "Full-wave doubles the frequency; in a bridge each blocking diode sees $V_m$." },
       ],
+      hint: "The bridge rectifier (5.4): ripple frequency and peak inverse voltage.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp5-8-q5",
       variant: "mastery",
-      question: "A Zener regulator has $V_S = 20$ V, $V_Z = 12$ V and $R_S = 400\\ \\Omega$. What is the smallest load resistance for which the output stays at 12 V?",
-      options: [
-        { text: "$1000\\ \\Omega$", feedback: "That is $20/0.020$, using the supply voltage instead of $V_Z$ across the load." },
-        { text: "$600\\ \\Omega$", correct: true, feedback: "$I_S = 8/400 = 20$ mA; the load may take all of it at most: $R_L \\ge 12/0.020 = 600\\ \\Omega$." },
-        { text: "$400\\ \\Omega$", feedback: "That is $R_S$. With $R_L = 400\\ \\Omega$ the load would need 30 mA, more than the 20 mA available." },
-        { text: "$240\\ \\Omega$", feedback: "That takes $I_S = 20/400 = 50$ mA, putting the whole supply across $R_S$. Only $V_S - V_Z = 8$ V is across it, so $I_S = 20$ mA." },
+      question: "A Zener regulator has $V_S = 20$ V, $V_Z = 12$ V and $R_S = 400\\ \\Omega$. What is the smallest load resistance, in ohms, for which the output stays at 12 V?",
+      answer: 600,
+      unit: "Ω",
+      hint: "While regulating, $I_S$ is fixed. The load can take at most all of it, leaving $I_Z = 0$.",
+      solution: "$I_S = \\dfrac{V_S - V_Z}{R_S} = \\dfrac{8}{400} = 20$ mA.\n\nThe load may take at most all of it: $I_L \\le 20$ mA, so $R_L \\ge \\dfrac{12}{0.020} = 600\\ \\Omega$.",
+      commonMistakes: [
+        { answer: 1000, feedback: "That is $20/0.020$, using the supply voltage instead of $V_Z$ across the load." },
+        { answer: 400, feedback: "That is $R_S$. With $R_L = 400\\ \\Omega$ the load would need 30 mA, more than the 20 mA available." },
+        { answer: 240, feedback: "That takes $I_S = 20/400 = 50$ mA, putting the whole supply across $R_S$. Only $V_S - V_Z = 8$ V is across it, so $I_S = 20$ mA." },
       ],
     },
     {
@@ -1188,6 +1618,7 @@ const lessonMastery: LessonSeed = {
         { text: "60 mA to 80 mA", feedback: "That is $V_S/R_S$: it puts the full input across $R_S$ and forgets the load current. The resistor only gets $V_S - V_Z$." },
         { text: "It stays at 10 mA.", feedback: "The *load* current is constant; the Zener absorbs every change in the supply current." },
       ],
+      hint: "The Zener regulator (5.5): the current through $R_S$ splits between the load and the Zener.",
     },
     {
       type: "quiz",
@@ -1200,29 +1631,37 @@ const lessonMastery: LessonSeed = {
         { text: "Green (about 530 nm)", feedback: "Green needs about 2.3 eV." },
         { text: "Red (about 653 nm)", correct: true, feedback: "$1240/1.9 \\approx 653$ nm." },
       ],
+      hint: "LED colour from the band gap (5.5): convert the gap energy into a wavelength.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp5-8-q8",
       variant: "mastery",
-      question: "A transistor with $\\alpha = 0.98$ is used in a common-emitter amplifier with $R_C = 4$ kΩ and $R_B = 1$ kΩ. A 10 mV signal is applied. What is the output amplitude?",
-      options: [
-        { text: "About 1.96 V", correct: true, feedback: "$\\beta = 0.98/0.02 = 49$; $|A_v| = 49\\times4 = 196$; $196\\times10$ mV $= 1.96$ V." },
-        { text: "About 39 mV", feedback: "That uses $\\alpha$ as the gain: $0.98\\times4\\times10$ mV. The common-emitter current gain is $\\beta$." },
-        { text: "About 2.0 V", feedback: "That takes $\\beta = 50$, i.e. $1/(1 - \\alpha)$. The correct value is $\\alpha/(1-\\alpha) = 49$." },
-        { text: "About 0.49 V", feedback: "That leaves out the resistor ratio $R_C/R_B = 4$." },
+      question: "A transistor with $\\alpha = 0.98$ is used in a common-emitter amplifier with $R_C = 4$ kΩ and $R_B = 1$ kΩ. A 10 mV signal is applied. What is the output amplitude, in volts?",
+      answer: 1.96,
+      relTolerance: 0.01,
+      unit: "V",
+      hint: "Convert $\\alpha$ to $\\beta$ first, then $|A_v| = \\beta R_C/R_B$.",
+      solution: "$\\beta = \\dfrac{0.98}{0.02} = 49$.\n\n$|A_v| = \\beta\\dfrac{R_C}{R_B} = 49\\times4 = 196$.\n\nOutput $= 196\\times10$ mV $= 1.96$ V (inverted).",
+      commonMistakes: [
+        { answer: 0.0392, feedback: "That uses $\\alpha$ as the gain: $0.98\\times4\\times10$ mV. The common-emitter current gain is $\\beta$." },
+        { answer: 2, feedback: "That takes $\\beta = 50$, i.e. $1/(1 - \\alpha)$. The correct value is $\\alpha/(1-\\alpha) = 49$." },
+        { answer: 0.49, feedback: "That leaves out the resistor ratio $R_C/R_B = 4$." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp5-8-q9",
       variant: "mastery",
-      question: "An npn switch has $V_{CC} = 10$ V, $R_C = 2$ kΩ and $\\beta = 50$. What minimum base current drives it into saturation?",
-      options: [
-        { text: "$5$ mA", feedback: "That is the saturation collector current. Divide by $\\beta$." },
-        { text: "$250$ mA", feedback: "That multiplies by $\\beta$ instead of dividing." },
-        { text: "$100$ μA", correct: true, feedback: "$I_{C,\\text{sat}} \\approx 10/2000 = 5$ mA; $I_B \\ge 5\\text{ mA}/50 = 100$ μA." },
-        { text: "$200$ μA", feedback: "That uses $R_C = 1$ kΩ. With 2 kΩ the saturation current is 5 mA." },
+      question: "An npn switch has $V_{CC} = 10$ V, $R_C = 2$ kΩ and $\\beta = 50$. What minimum base current, in μA, drives it into saturation?",
+      answer: 100,
+      unit: "μA",
+      hint: "In saturation $V_{CE} \\approx 0$, so the collector resistor alone sets $I_C$.",
+      solution: "$I_{C,\\text{sat}} \\approx \\dfrac{V_{CC}}{R_C} = \\dfrac{10}{2000} = 5$ mA.\n\nTo reach it, $\\beta I_B \\ge 5$ mA, so $I_B \\ge \\dfrac{5\\text{ mA}}{50} = 100$ μA.",
+      commonMistakes: [
+        { answer: 5000, feedback: "That is the saturation collector current (5 mA). Divide by $\\beta$." },
+        { answer: 250000, feedback: "That multiplies by $\\beta$ instead of dividing." },
+        { answer: 200, feedback: "That uses $R_C = 1$ kΩ. With 2 kΩ the saturation current is 5 mA." },
       ],
     },
     {
@@ -1236,6 +1675,7 @@ const lessonMastery: LessonSeed = {
         { text: "$A\\oplus B$ (XOR)", feedback: "Check $A = B = 1$: $\\bar A = \\bar B = 0$, NOR gives 1, but XOR gives 0." },
         { text: "$AB$ (AND)", correct: true, feedback: "$\\overline{\\bar A + \\bar B} = AB$ by De Morgan." },
       ],
+      hint: "A NOR gate with tied inputs is an inverter; then use De Morgan's law (5.7).",
     },
     {
       type: "quiz",
@@ -1248,18 +1688,22 @@ const lessonMastery: LessonSeed = {
         { text: "NAND gate", feedback: "At $A = B = 0$ the OR gives 0, so the output is 0, not 1." },
         { text: "AND gate", feedback: "At $A = B = 1$ the output is 0." },
       ],
+      hint: "Build the truth table (5.7).",
     },
     {
       type: "quiz",
       id: "omp5-8-q12",
       variant: "mastery",
-      question: "Which statement about p-n junction devices is correct?",
+      multiple: true,
+      question: "Select every correct statement about p-n junction devices.",
       options: [
         { text: "A Zener diode is used in forward bias to regulate voltage.", feedback: "Regulation uses reverse breakdown." },
         { text: "An LED emits photons of energy much larger than its band gap.", feedback: "Recombination across the gap gives photons of energy about $E_g$." },
-        { text: "A photodiode is reverse biased, an LED forward biased, and a solar cell needs no bias.", correct: true, feedback: "Detector, emitter and source respectively." },
-        { text: "A solar cell works in the first quadrant of its I–V curve.", feedback: "It delivers power in the fourth quadrant." },
+        { text: "A photodiode is reverse biased and an LED forward biased.", correct: true, feedback: "The detector uses the light-sensitive minority current; the emitter needs carriers pushed across to recombine." },
+        { text: "A solar cell delivers power without any external bias.", correct: true, feedback: "It is the source: its built-in field separates the light-made pairs and drives current round the circuit." },
+        { text: "A solar cell works in the first quadrant of its I–V curve.", feedback: "It delivers power in the fourth quadrant ($V > 0$, $I < 0$)." },
       ],
+      hint: "The bias and operating quadrant of each device (5.5). Test each statement on its own.",
     },
     {
       type: "callout",

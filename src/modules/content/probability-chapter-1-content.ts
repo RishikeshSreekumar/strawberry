@@ -52,6 +52,7 @@ const lesson01: LessonSeed = {
           "The shaded diagonal is the event 'sum is 7': 6 of the 36 equally likely cells. Run a few batches and watch the proportion of 7s settle near 6/36 ≈ 0.167.",
       },
     },
+    { type: "heading", text: "Probability as a fraction of $S$" },
     {
       type: "callout",
       variant: "definition",
@@ -89,39 +90,122 @@ const lesson01: LessonSeed = {
         ["Probability", "1/36", "2/36", "3/36", "4/36", "5/36", "6/36", "5/36", "4/36", "3/36", "2/36", "1/36"],
       ],
     },
+    { type: "heading", text: "Counting favourable outcomes" },
     {
-      type: "text",
-      content:
-        "**Worked example 1: a card.** One card is drawn from a well-shuffled deck of 52.\n\n1. $S$ = the 52 cards, all equally likely, so $n(S) = 52$.\n2. \"A king\": 4 cards, so $P = \\frac{4}{52} = \\frac{1}{13}$.\n3. \"A red face card\": the J, Q, K of hearts and of diamonds, 6 cards, so $P = \\frac{6}{52} = \\frac{3}{26}$.\n4. \"Not a king\": $1 - \\frac{1}{13} = \\frac{12}{13}$.",
+      type: "worked-example",
+      id: "pr1-1-we1",
+      title: "Worked example 1: a card",
+      problem:
+        "One card is drawn from a well-shuffled deck of 52. Find the probability that it is a king, that it is a red face card, and that it is not a king.",
+      steps: [
+        {
+          text: "$S$ = the 52 cards, all equally likely, so $n(S) = 52$.",
+        },
+        {
+          text: "\"A king\": 4 cards, so $P = \\frac{4}{52} = \\frac{1}{13}$.",
+        },
+        {
+          text: "\"A red face card\": the J, Q, K of hearts and of diamonds, 6 cards, so $P = \\frac{6}{52} = \\frac{3}{26}$.",
+        },
+        {
+          text: "\"Not a king\": $1 - \\frac{1}{13} = \\frac{12}{13}$.",
+        },
+      ],
+      answer: "$\\frac{1}{13}$, $\\frac{3}{26}$ and $\\frac{12}{13}$",
+    },
+    {
+      type: "worked-example",
+      id: "pr1-1-we2",
+      title: "Worked example 2: a prime sum",
+      problem:
+        "Two fair dice are rolled. Find $P(\\text{sum is prime})$.",
+      steps: [
+        {
+          text: "Prime sums possible: 2, 3, 5, 7, 11.",
+        },
+        {
+          text: "Read the cell counts from the table: $1 + 2 + 4 + 6 + 2 = 15$.",
+        },
+        {
+          text: "$P = \\frac{15}{36} = \\frac{5}{12}$.",
+        },
+      ],
+      answer: "$\\frac{15}{36} = \\frac{5}{12}$",
+    },
+    {
+      type: "worked-example",
+      id: "pr1-1-we3",
+      title: "Worked example 3: 53 Sundays",
+      problem:
+        "What is the probability that a randomly chosen leap year has 53 Sundays?",
+      steps: [
+        {
+          text: "A leap year has 366 days = 52 weeks + 2 days. The 52 full weeks give 52 Sundays.",
+        },
+        {
+          text: "The 2 extra days are one of 7 equally likely consecutive pairs: (Sun, Mon), (Mon, Tue), …, (Sat, Sun).",
+        },
+        {
+          text: "A 53rd Sunday happens for (Sun, Mon) and (Sat, Sun): 2 of the 7.",
+        },
+        {
+          text: "$P = \\frac{2}{7}$. (For a non-leap year, only 1 extra day, so $\\frac{1}{7}$.)",
+        },
+      ],
+      answer: "$\\frac{2}{7}$",
+    },
+    {
+      type: "worked-example",
+      id: "pr1-1-we4",
+      title: "Worked example 4: d'Alembert's mistake",
+      problem:
+        "Two fair coins are tossed. Find $P(\\text{exactly one head})$.",
+      steps: [
+        {
+          text: "*Wrong sample space:* $\\{0 \\text{ heads}, 1 \\text{ head}, 2 \\text{ heads}\\}$. Three outcomes, one favourable, so \"$P = \\frac{1}{3}$\". The great mathematician Jean d'Alembert argued exactly this in 1754.",
+        },
+        {
+          text: "*Check the assumption:* are the three outcomes equally likely? Label the coins (a 1-rupee and a 2-rupee coin, say). Then \"1 head\" can happen in two ways, HT and TH, while \"2 heads\" happens only as HH.",
+        },
+        {
+          text: "*Right sample space:* $\\{HH, HT, TH, TT\\}$, four equally likely outcomes by symmetry. Exactly one head is $\\{HT, TH\\}$, so $P = \\frac{2}{4} = \\frac{1}{2}$.",
+        },
+        {
+          text: "*Frequency check:* toss two coins a few hundred times and \"exactly one head\" turns up about half the time, not a third. The coins do not know they look alike; they land as if they were labelled.",
+        },
+      ],
+      answer: "$\\frac{2}{4} = \\frac{1}{2}$, not $\\frac{1}{3}$.",
+    },
+    {
+      type: "worked-example",
+      id: "pr1-1-we5",
+      title: "Worked example 5 (exam style): an inequality in disguise",
+      problem:
+        "A number $x$ is chosen at random from $1, 2, \\ldots, 100$. Find the probability that $x + \\frac{100}{x} > 29$.",
+      steps: [
+        {
+          text: "*Sample space.* 100 equally likely numbers, so $n(S) = 100$. *Why:* \"at random\" from a finite list means each value is equally likely, so the classical ratio applies.",
+        },
+        {
+          text: "*Turn the condition into something countable.* $x$ is positive, so multiplying by $x$ keeps the direction of the inequality:",
+          latex: "x + \\frac{100}{x} > 29 \\iff x^2 - 29x + 100 > 0 \\iff (x - 4)(x - 25) > 0",
+        },
+        {
+          text: "*Read off the solution.* A product of two factors is positive when both have the same sign: $x < 4$ or $x > 25$. *Why check the endpoints:* at $x = 4$ and $x = 25$ the expression equals exactly 29 ($4 + 25$ and $25 + 4$), which is not *greater* than 29, so both are excluded.",
+        },
+        {
+          text: "*Count.* $x \\in \\{1, 2, 3\\}$ gives 3 values; $x \\in \\{26, \\ldots, 100\\}$ gives $100 - 25 = 75$ values. So $n(E) = 78$.",
+        },
+        {
+          text: "$P(E) = \\frac{78}{100} = \\frac{39}{50}$.",
+        },
+      ],
+      answer: "$\\frac{78}{100} = \\frac{39}{50}$",
     },
     {
       type: "text",
       content:
-        "**Worked example 2: a prime sum.** Two fair dice are rolled. Find $P(\\text{sum is prime})$.\n\n1. Prime sums possible: 2, 3, 5, 7, 11.\n2. Read the cell counts from the table: $1 + 2 + 4 + 6 + 2 = 15$.\n3. $P = \\frac{15}{36} = \\frac{5}{12}$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3: 53 Sundays.** What is the probability that a randomly chosen leap year has 53 Sundays?\n\n1. A leap year has 366 days = 52 weeks + 2 days. The 52 full weeks give 52 Sundays.\n2. The 2 extra days are one of 7 equally likely consecutive pairs: (Sun, Mon), (Mon, Tue), …, (Sat, Sun).\n3. A 53rd Sunday happens for (Sun, Mon) and (Sat, Sun): 2 of the 7.\n4. $P = \\frac{2}{7}$. (For a non-leap year, only 1 extra day, so $\\frac{1}{7}$.)",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4: d'Alembert's mistake.** Two fair coins are tossed. Find $P(\\text{exactly one head})$.\n\n1. *Wrong sample space:* $\\{0 \\text{ heads}, 1 \\text{ head}, 2 \\text{ heads}\\}$. Three outcomes, one favourable, so \"$P = \\frac{1}{3}$\". The great mathematician Jean d'Alembert argued exactly this in 1754.\n2. *Check the assumption:* are the three outcomes equally likely? Label the coins (a 1-rupee and a 2-rupee coin, say). Then \"1 head\" can happen in two ways, HT and TH, while \"2 heads\" happens only as HH.\n3. *Right sample space:* $\\{HH, HT, TH, TT\\}$, four equally likely outcomes by symmetry. Exactly one head is $\\{HT, TH\\}$, so $P = \\frac{2}{4} = \\frac{1}{2}$.\n4. *Frequency check:* toss two coins a few hundred times and \"exactly one head\" turns up about half the time, not a third. The coins do not know they look alike; they land as if they were labelled.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (exam style): an inequality in disguise.** A number $x$ is chosen at random from $1, 2, \\ldots, 100$. Find the probability that $x + \\frac{100}{x} > 29$.\n\n1. *Sample space.* 100 equally likely numbers, so $n(S) = 100$. *Why:* \"at random\" from a finite list means each value is equally likely, so the classical ratio applies.\n2. *Turn the condition into something countable.* $x$ is positive, so multiplying by $x$ keeps the direction of the inequality:",
-    },
-    {
-      type: "math",
-      latex: "x + \\frac{100}{x} > 29 \\iff x^2 - 29x + 100 > 0 \\iff (x - 4)(x - 25) > 0",
-    },
-    {
-      type: "text",
-      content:
-        "3. *Read off the solution.* A product of two factors is positive when both have the same sign: $x < 4$ or $x > 25$. *Why check the endpoints:* at $x = 4$ and $x = 25$ the expression equals exactly 29 ($4 + 25$ and $25 + 4$), which is not *greater* than 29, so both are excluded.\n4. *Count.* $x \\in \\{1, 2, 3\\}$ gives 3 values; $x \\in \\{26, \\ldots, 100\\}$ gives $100 - 25 = 75$ values. So $n(E) = 78$.\n5. $P(E) = \\frac{78}{100} = \\frac{39}{50}$.\n\nThe probability part is one line; the real work was turning a condition into a list of outcomes. That is typical of exam questions on classical probability.",
+        "The probability part is one line; the real work was turning a condition into a list of outcomes. That is typical of exam questions on classical probability.",
     },
     {
       type: "callout",
@@ -130,6 +214,7 @@ const lesson01: LessonSeed = {
       content:
         "\"Either I win the lottery or I don't, so it's 50-50.\" \"Either the sum is 2 or it isn't, so $P = \\frac{1}{2}$.\" Splitting the world into two *events* does not make them equally likely. The sum is 2 in 1 cell and not 2 in 35 cells, so $P(\\text{sum} = 2) = \\frac{1}{36}$. Count equally likely *outcomes*, never categories.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr1-1-q1",
@@ -284,6 +369,7 @@ const lesson02: LessonSeed = {
           "After 10 rolls the bars are ragged. After 10,000 they hug the triangle 1/36, 2/36, …, 6/36, …, 1/36 that the grid predicted.",
       },
     },
+    { type: "heading", text: "Empirical probability" },
     {
       type: "callout",
       variant: "definition",
@@ -303,60 +389,79 @@ const lesson02: LessonSeed = {
       content:
         "For a fair die the classical value of $P(\\text{sum} = 7)$ is $\\frac{6}{36} \\approx 0.1667$. Simulations of thousands of rolls give relative frequencies like 0.165, 0.168, 0.1669. When symmetry is available, frequency confirms it; when it isn't, frequency is the only measurement we have.",
     },
+    { type: "heading", text: "Estimating from data tables" },
     {
-      type: "text",
-      content:
-        "**Worked example 1: a data table.** A die is rolled 300 times with these results.",
+      type: "worked-example",
+      id: "pr1-2-we1",
+      title: "Worked example 1: a data table",
+      problem:
+        "A die is rolled 300 times with these results. Estimate $P(\\text{face } 4)$ and $P(\\text{even})$, and compare them with the classical values.",
+      problemTable: {
+        headers: ["Face", "1", "2", "3", "4", "5", "6", "Total"],
+        rows: [["Frequency", "48", "52", "45", "55", "50", "50", "300"]],
+      },
+      steps: [
+        {
+          text: "Empirical $P(\\text{face } 4) = \\frac{55}{300} \\approx 0.183$.",
+        },
+        {
+          text: "Empirical $P(\\text{even}) = \\frac{52 + 55 + 50}{300} = \\frac{157}{300} \\approx 0.523$.",
+        },
+        {
+          text: "Compare with the classical values $\\frac{1}{6} \\approx 0.167$ and $\\frac{1}{2}$. The gaps are small for 300 rolls, so the data give no real reason to suspect the die.",
+        },
+      ],
+      answer: "$P(\\text{face } 4) \\approx 0.183$, $P(\\text{even}) \\approx 0.523$: close to $\\frac{1}{6}$ and $\\frac{1}{2}$.",
     },
     {
-      type: "table",
-      headers: ["Face", "1", "2", "3", "4", "5", "6", "Total"],
-      rows: [["Frequency", "48", "52", "45", "55", "50", "50", "300"]],
+      type: "worked-example",
+      id: "pr1-2-we2",
+      title: "Worked example 2: no symmetry available",
+      problem:
+        "A factory tests 1000 bulbs. Estimate the probability that a bulb lasts under 500 hours, and at least 500 hours.",
+      problemTable: {
+        headers: ["Lifetime (hours)", "under 500", "500 to 999", "1000 or more", "Total"],
+        rows: [["Bulbs", "80", "370", "550", "1000"]],
+      },
+      steps: [
+        {
+          text: "$P(\\text{lasts under 500 h}) \\approx \\frac{80}{1000} = 0.08$.",
+        },
+        {
+          text: "$P(\\text{lasts at least 500 h}) \\approx \\frac{370 + 550}{1000} = 0.92$, which is also $1 - 0.08$. The complement rule holds for frequencies too.",
+        },
+        {
+          text: "*Using the estimate.* A shop orders 5000 bulbs from the same factory. How many should it expect to fail before 500 hours? Expected number $\\approx 5000 \\times 0.08 = 400$. *Why this works:* the relative frequency is our best estimate of the probability, and a probability is exactly the fraction of a large batch we expect to see the event in.",
+        },
+      ],
+      answer: "$0.08$ and $0.92$; about $400$ of 5000 bulbs fail before 500 hours.",
     },
     {
-      type: "text",
-      content:
-        "1. Empirical $P(\\text{face } 4) = \\frac{55}{300} \\approx 0.183$.\n2. Empirical $P(\\text{even}) = \\frac{52 + 55 + 50}{300} = \\frac{157}{300} \\approx 0.523$.\n3. Compare with the classical values $\\frac{1}{6} \\approx 0.167$ and $\\frac{1}{2}$. The gaps are small for 300 rolls, so the data give no real reason to suspect the die.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2: no symmetry available.** A factory tests 1000 bulbs.",
-    },
-    {
-      type: "table",
-      headers: ["Lifetime (hours)", "under 500", "500 to 999", "1000 or more", "Total"],
-      rows: [["Bulbs", "80", "370", "550", "1000"]],
-    },
-    {
-      type: "text",
-      content:
-        "1. $P(\\text{lasts under 500 h}) \\approx \\frac{80}{1000} = 0.08$.\n2. $P(\\text{lasts at least 500 h}) \\approx \\frac{370 + 550}{1000} = 0.92$, which is also $1 - 0.08$. The complement rule holds for frequencies too.\n3. *Using the estimate.* A shop orders 5000 bulbs from the same factory. How many should it expect to fail before 500 hours? Expected number $\\approx 5000 \\times 0.08 = 400$. *Why this works:* the relative frequency is our best estimate of the probability, and a probability is exactly the fraction of a large batch we expect to see the event in.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 (CBSE style): checking a model against data.** Two coins are tossed together 1000 times with these results.",
-    },
-    {
-      type: "table",
-      headers: ["Outcome", "2 heads", "1 head", "0 heads", "Total"],
-      rows: [["Frequency", "245", "508", "247", "1000"]],
-    },
-    {
-      type: "text",
-      content:
-        "Find the empirical probability of (a) at most one head, (b) at least one head, and compare with the classical values.\n\n1. *At most one head* means 1 head or 0 heads. *Why add:* the rows are separate categories, so no toss is counted twice.",
-    },
-    {
-      type: "math",
-      latex:
-        "P(\\text{at most one head}) \\approx \\frac{508 + 247}{1000} = \\frac{755}{1000} = 0.755",
-    },
-    {
-      type: "text",
-      content:
-        "2. *At least one head* is the complement of 0 heads: $1 - \\frac{247}{1000} = \\frac{753}{1000} = 0.753$. *Why the complement:* one subtraction is quicker than adding two rows, and it gives the same answer ($\\frac{245 + 508}{1000}$).\n3. *Compare with the model.* From $\\{HH, HT, TH, TT\\}$ the classical values are $P(\\text{at most one head}) = \\frac{3}{4}$ and $P(\\text{at least one head}) = \\frac{3}{4}$. The data give 0.755 and 0.753.\n4. *Conclusion.* The middle row (about half the tosses) matches $\\frac{2}{4}$, not d'Alembert's $\\frac{1}{3}$. A thousand tosses are enough to tell those two models apart.",
+      type: "worked-example",
+      id: "pr1-2-we3",
+      title: "Worked example 3 (CBSE style): checking a model against data",
+      problem:
+        "Two coins are tossed together 1000 times with these results.\n\nFind the empirical probability of (a) at most one head, (b) at least one head, and compare with the classical values.",
+      problemTable: {
+        headers: ["Outcome", "2 heads", "1 head", "0 heads", "Total"],
+        rows: [["Frequency", "245", "508", "247", "1000"]],
+      },
+      steps: [
+        {
+          text: "*At most one head* means 1 head or 0 heads. *Why add:* the rows are separate categories, so no toss is counted twice.",
+          latex: "P(\\text{at most one head}) \\approx \\frac{508 + 247}{1000} = \\frac{755}{1000} = 0.755",
+        },
+        {
+          text: "*At least one head* is the complement of 0 heads: $1 - \\frac{247}{1000} = \\frac{753}{1000} = 0.753$. *Why the complement:* one subtraction is quicker than adding two rows, and it gives the same answer ($\\frac{245 + 508}{1000}$).",
+        },
+        {
+          text: "*Compare with the model.* From $\\{HH, HT, TH, TT\\}$ the classical values are $P(\\text{at most one head}) = \\frac{3}{4}$ and $P(\\text{at least one head}) = \\frac{3}{4}$. The data give 0.755 and 0.753.",
+        },
+        {
+          text: "*Conclusion.* The middle row (about half the tosses) matches $\\frac{2}{4}$, not d'Alembert's $\\frac{1}{3}$. A thousand tosses are enough to tell those two models apart.",
+        },
+      ],
+      answer: "(a) $0.755$ (b) $0.753$, close to the classical $\\frac{3}{4}$.",
     },
     {
       type: "interactive",
@@ -376,6 +481,7 @@ const lesson02: LessonSeed = {
       content:
         "Flip a fair coin 4 times and get 3 heads. That does **not** mean $P(\\text{heads}) = 0.75$. With a fair coin, exactly 3 heads in 4 flips happens in 4 of the 16 equally likely sequences, a quarter of the time, and 3 or more heads happens $\\frac{5}{16} \\approx 31\\%$ of the time. A small sample is mostly noise. The frequency definition only means something when $n$ is large.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr1-2-q1",
@@ -474,6 +580,7 @@ const lesson03: LessonSeed = {
       content:
         "Keep one picture in mind. Think of probability as **1 kg of sand** spread over the outcomes in $S$; the probability of an event is the weight of sand on its outcomes. You cannot have a negative amount of sand on any pile. The total is exactly 1 kg. And the sand on two separate piles, with no outcome in common, is just the two weights added. Those three facts are the three axioms.",
     },
+    { type: "heading", text: "Kolmogorov's three axioms" },
     {
       type: "callout",
       variant: "definition",
@@ -486,6 +593,7 @@ const lesson03: LessonSeed = {
       content:
         "Check that the two earlier views satisfy them. Classical: a fraction $\\frac{n(E)}{n(S)}$ is never negative, $\\frac{n(S)}{n(S)} = 1$, and disjoint events have counts that simply add. Frequency: the same three facts hold for $\\frac{f}{n}$. So both are special cases of the axioms.",
     },
+    { type: "heading", text: "Rules derived from the axioms" },
     {
       type: "text",
       content:
@@ -519,15 +627,35 @@ const lesson03: LessonSeed = {
       content:
         "Because now any answer outside $[0, 1]$ is not a slip in arithmetic but a sign that a rule was misapplied. The axioms are a built-in error detector, and they let us assign probabilities in situations with no symmetry at all.",
     },
+    { type: "heading", text: "Assigning probabilities without symmetry" },
     {
       type: "text",
       content:
-        "**Assigning probabilities without symmetry.** For a finite sample space $S = \\{o_1, \\ldots, o_n\\}$, the axioms say exactly this: give each outcome a weight $p_i \\ge 0$ with $p_1 + \\cdots + p_n = 1$, and let $P(E)$ be the sum of the weights of the outcomes in $E$. Equal weights $\\frac{1}{n}$ bring back classical probability.",
+        "For a finite sample space $S = \\{o_1, \\ldots, o_n\\}$, the axioms say exactly this: give each outcome a weight $p_i \\ge 0$ with $p_1 + \\cdots + p_n = 1$, and let $P(E)$ be the sum of the weights of the outcomes in $E$. Equal weights $\\frac{1}{n}$ bring back classical probability.",
+    },
+    {
+      type: "worked-example",
+      id: "pr1-3-we1",
+      title: "Worked example 1: a loaded die",
+      problem:
+        "A die is weighted so that the probability of face $k$ is proportional to $k$. Find $P(\\text{even})$.",
+      steps: [
+        {
+          text: "Write $P(k) = ck$ for $k = 1, \\ldots, 6$.",
+        },
+        {
+          text: "The weights must sum to 1: $c(1 + 2 + 3 + 4 + 5 + 6) = 21c = 1$, so $c = \\frac{1}{21}$.",
+        },
+        {
+          text: "$P(\\text{even}) = \\frac{2 + 4 + 6}{21} = \\frac{12}{21} = \\frac{4}{7} \\approx 0.571$.",
+        },
+      ],
+      answer: "$\\frac{4}{7} \\approx 0.571$",
     },
     {
       type: "text",
       content:
-        "**Worked example 1: a loaded die.** A die is weighted so that the probability of face $k$ is proportional to $k$. Find $P(\\text{even})$.\n\n1. Write $P(k) = ck$ for $k = 1, \\ldots, 6$.\n2. The weights must sum to 1: $c(1 + 2 + 3 + 4 + 5 + 6) = 21c = 1$, so $c = \\frac{1}{21}$.\n3. $P(\\text{even}) = \\frac{2 + 4 + 6}{21} = \\frac{12}{21} = \\frac{4}{7} \\approx 0.571$.\n\nThe simulator below uses exactly these weights and tracks even faces.",
+        "The simulator below uses exactly these weights and tracks even faces.",
     },
     {
       type: "interactive",
@@ -539,44 +667,75 @@ const lesson03: LessonSeed = {
         track: "event-A",
         seed: 21,
         caption:
-          "A die weighted 1 : 2 : 3 : 4 : 5 : 6. The tracked event is 'even face'; its frequency settles near 12/21 ≈ 0.571, not 0.5.",
+          "A die weighted 1 : 2 : 3 : 4 : 5 : 6. The tracked event is 'even face'; its frequency settles near the worked example's answer, not 0.5.",
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2: checking an assignment.** Outcomes $\\{a, b, c, d\\}$. Which assignments are valid?\n\n1. $0.1, 0.2, 0.3, 0.4$: all non-negative, sum 1. **Valid.**\n2. $0.4, 0.4, 0.3, -0.1$: sums to 1 but has a negative weight. **Violates Axiom 1.**\n3. $0.3, 0.3, 0.3, 0.3$: sum 1.2. **Violates Axiom 2.**\n4. $\\frac{1}{2}, \\frac{1}{4}, \\frac{1}{8}, \\frac{1}{8}$: non-negative, sum 1. **Valid.**",
+      type: "worked-example",
+      id: "pr1-3-we2",
+      title: "Worked example 2: checking an assignment",
+      problem:
+        "Outcomes $\\{a, b, c, d\\}$. Which assignments are valid? (i) $0.1, 0.2, 0.3, 0.4$ (ii) $0.4, 0.4, 0.3, -0.1$ (iii) $0.3, 0.3, 0.3, 0.3$ (iv) $\\frac{1}{2}, \\frac{1}{4}, \\frac{1}{8}, \\frac{1}{8}$",
+      steps: [
+        {
+          text: "$0.1, 0.2, 0.3, 0.4$: all non-negative, sum 1. **Valid.**",
+        },
+        {
+          text: "$0.4, 0.4, 0.3, -0.1$: sums to 1 but has a negative weight. **Violates Axiom 1.**",
+        },
+        {
+          text: "$0.3, 0.3, 0.3, 0.3$: sum 1.2. **Violates Axiom 2.**",
+        },
+        {
+          text: "$\\frac{1}{2}, \\frac{1}{4}, \\frac{1}{8}, \\frac{1}{8}$: non-negative, sum 1. **Valid.**",
+        },
+      ],
+      answer: "(i) and (iv) are valid; (ii) violates Axiom 1 and (iii) violates Axiom 2.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3: using the rules.** $A$ and $B$ are mutually exclusive with $P(A) = 0.3$ and $P(B) = 0.5$. Find $P(\\text{neither})$.\n\n1. By Axiom 3, $P(A \\cup B) = 0.3 + 0.5 = 0.8$.\n2. \"Neither\" is $(A \\cup B)'$, so $P = 1 - 0.8 = 0.2$.",
+      type: "worked-example",
+      id: "pr1-3-we3",
+      title: "Worked example 3: using the rules",
+      problem:
+        "$A$ and $B$ are mutually exclusive with $P(A) = 0.3$ and $P(B) = 0.5$. Find $P(\\text{neither})$.",
+      steps: [
+        {
+          text: "By Axiom 3, $P(A \\cup B) = 0.3 + 0.5 = 0.8$.",
+        },
+        {
+          text: "\"Neither\" is $(A \\cup B)'$, so $P = 1 - 0.8 = 0.2$.",
+        },
+      ],
+      answer: "$0.2$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (JEE style): which values of a parameter are allowed?** The probabilities of three mutually exclusive events are $\\frac{1 + 3p}{3}$, $\\frac{1 - p}{4}$ and $\\frac{1 - 2p}{2}$. Find the set of possible values of $p$.\n\n1. *Each probability must lie in $[0, 1]$.* *Why:* Axiom 1 gives $\\ge 0$, and Rule 4 gives $\\le 1$. Solve each pair of inequalities:",
+      type: "worked-example",
+      id: "pr1-3-we4",
+      title: "Worked example 4 (JEE style): which values of a parameter are allowed?",
+      problem:
+        "The probabilities of three mutually exclusive events are $\\frac{1 + 3p}{3}$, $\\frac{1 - p}{4}$ and $\\frac{1 - 2p}{2}$. Find the set of possible values of $p$.",
+      steps: [
+        {
+          text: "*Each probability must lie in $[0, 1]$.* *Why:* Axiom 1 gives $\\ge 0$, and Rule 4 gives $\\le 1$. Solve each pair of inequalities:",
+          latex: "\\begin{aligned} 0 \\le \\tfrac{1 + 3p}{3} \\le 1 &\\iff -\\tfrac{1}{3} \\le p \\le \\tfrac{2}{3} \\\\ 0 \\le \\tfrac{1 - p}{4} \\le 1 &\\iff -3 \\le p \\le 1 \\\\ 0 \\le \\tfrac{1 - 2p}{2} \\le 1 &\\iff -\\tfrac{1}{2} \\le p \\le \\tfrac{1}{2} \\end{aligned}",
+        },
+        {
+          text: "*The union of the three events is an event too, so its probability is at most 1.* *Why this is needed:* the events are mutually exclusive, so by Axiom 3 the probability of their union is the sum, and that sum cannot exceed $P(S) = 1$. Put the sum over 12:",
+          latex: "\\frac{4(1 + 3p) + 3(1 - p) + 6(1 - 2p)}{12} = \\frac{13 - 3p}{12} \\le 1 \\iff p \\ge \\tfrac{1}{3}",
+        },
+        {
+          text: "*Intersect all the conditions.* The tightest lower bound is $\\frac{1}{3}$ (from the sum) and the tightest upper bound is $\\frac{1}{2}$ (from the third event). So $\\frac{1}{3} \\le p \\le \\frac{1}{2}$.",
+        },
+        {
+          text: "*Sanity check at $p = \\frac{1}{3}$:* the probabilities are $\\frac{2}{3}, \\frac{1}{6}, \\frac{1}{6}$, which sum to exactly 1. At $p = \\frac{1}{2}$: $\\frac{5}{6}, \\frac{1}{8}, 0$, sum $\\frac{23}{24} \\le 1$. Both ends work.",
+        },
+        {
+          text: "The common slip is to forget step 2. Each number can be a valid probability on its own while the three together claim more than all the sand.",
+        },
+      ],
+      answer: "$\\frac{1}{3} \\le p \\le \\frac{1}{2}$",
     },
-    {
-      type: "math",
-      latex:
-        "\\begin{aligned} 0 \\le \\tfrac{1 + 3p}{3} \\le 1 &\\iff -\\tfrac{1}{3} \\le p \\le \\tfrac{2}{3} \\\\ 0 \\le \\tfrac{1 - p}{4} \\le 1 &\\iff -3 \\le p \\le 1 \\\\ 0 \\le \\tfrac{1 - 2p}{2} \\le 1 &\\iff -\\tfrac{1}{2} \\le p \\le \\tfrac{1}{2} \\end{aligned}",
-    },
-    {
-      type: "text",
-      content:
-        "2. *The union of the three events is an event too, so its probability is at most 1.* *Why this is needed:* the events are mutually exclusive, so by Axiom 3 the probability of their union is the sum, and that sum cannot exceed $P(S) = 1$. Put the sum over 12:",
-    },
-    {
-      type: "math",
-      latex:
-        "\\frac{4(1 + 3p) + 3(1 - p) + 6(1 - 2p)}{12} = \\frac{13 - 3p}{12} \\le 1 \\iff p \\ge \\tfrac{1}{3}",
-    },
-    {
-      type: "text",
-      content:
-        "3. *Intersect all the conditions.* The tightest lower bound is $\\frac{1}{3}$ (from the sum) and the tightest upper bound is $\\frac{1}{2}$ (from the third event). So $\\frac{1}{3} \\le p \\le \\frac{1}{2}$.\n4. *Sanity check at $p = \\frac{1}{3}$:* the probabilities are $\\frac{2}{3}, \\frac{1}{6}, \\frac{1}{6}$, which sum to exactly 1. At $p = \\frac{1}{2}$: $\\frac{5}{6}, \\frac{1}{8}, 0$, sum $\\frac{23}{24} \\le 1$. Both ends work.\n\nThe common slip is to forget step 2. Each number can be a valid probability on its own while the three together claim more than all the sand.",
-    },
+    { type: "heading", text: "Odds for and against" },
     {
       type: "callout",
       variant: "definition",
@@ -602,19 +761,26 @@ const lesson03: LessonSeed = {
         "Odds of $3 : 2$ in favour do **not** mean $P = \\frac{3}{2}$ (impossible, since it exceeds 1) or $P = \\frac{2}{3}$. Odds compare *for* against *against*; probability compares *for* against *total*. So $P = \\frac{3}{3 + 2} = \\frac{3}{5}$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5: odds at the racecourse.** In a race with a single winner, the odds against horse $A$ are $3 : 1$ and the odds against horse $B$ are $5 : 2$. Find the probability that $A$ or $B$ wins, and the odds in favour of that.\n\n1. *Convert odds to probabilities.* Against $3 : 1$ means 3 shares against and 1 for, so $P(A) = \\frac{1}{3 + 1} = \\frac{1}{4}$. Similarly $P(B) = \\frac{2}{5 + 2} = \\frac{2}{7}$. *Why convert first:* odds cannot be added; probabilities of disjoint events can.\n2. *Check the events are mutually exclusive.* Only one horse can win, so $A \\cap B = \\varnothing$ and Axiom 3 applies:",
+      type: "worked-example",
+      id: "pr1-3-we5",
+      title: "Worked example 5: odds at the racecourse",
+      problem:
+        "In a race with a single winner, the odds against horse $A$ are $3 : 1$ and the odds against horse $B$ are $5 : 2$. Find the probability that $A$ or $B$ wins, and the odds in favour of that.",
+      steps: [
+        {
+          text: "*Convert odds to probabilities.* Against $3 : 1$ means 3 shares against and 1 for, so $P(A) = \\frac{1}{3 + 1} = \\frac{1}{4}$. Similarly $P(B) = \\frac{2}{5 + 2} = \\frac{2}{7}$. *Why convert first:* odds cannot be added; probabilities of disjoint events can.",
+        },
+        {
+          text: "*Check the events are mutually exclusive.* Only one horse can win, so $A \\cap B = \\varnothing$ and Axiom 3 applies:",
+          latex: "P(A \\cup B) = \\frac{1}{4} + \\frac{2}{7} = \\frac{7 + 8}{28} = \\frac{15}{28}",
+        },
+        {
+          text: "*Back to odds.* $P(\\text{neither}) = 1 - \\frac{15}{28} = \\frac{13}{28}$, so the odds in favour of \"$A$ or $B$ wins\" are $15 : 13$.",
+        },
+      ],
+      answer: "$P(A \\cup B) = \\frac{15}{28}$",
     },
-    {
-      type: "math",
-      latex: "P(A \\cup B) = \\frac{1}{4} + \\frac{2}{7} = \\frac{7 + 8}{28} = \\frac{15}{28}",
-    },
-    {
-      type: "text",
-      content:
-        "3. *Back to odds.* $P(\\text{neither}) = 1 - \\frac{15}{28} = \\frac{13}{28}$, so the odds in favour of \"$A$ or $B$ wins\" are $15 : 13$.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr1-3-q1",
@@ -749,6 +915,7 @@ const lesson04: LessonSeed = {
       content:
         "The three cells $(2,5), (4,3), (6,1)$ are in both events. Adding $n(A) + n(B)$ counts them once for $A$ and again for $B$, so subtract them once: $n(A \\cup B) = 18 + 6 - 3 = 21$ and $P(A \\cup B) = \\frac{21}{36} = \\frac{7}{12}$.",
     },
+    { type: "heading", text: "The addition rule from the axioms" },
     {
       type: "text",
       content:
@@ -770,10 +937,11 @@ const lesson04: LessonSeed = {
       content:
         "For any events $A$ and $B$:\n\n$\\displaystyle P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$\n\nIf $A$ and $B$ are mutually exclusive, $P(A \\cap B) = 0$ and this reduces to Axiom 3.",
     },
+    { type: "heading", text: "Three events: inclusion–exclusion" },
     {
       type: "text",
       content:
-        "**Three events.** Add the three probabilities. Each pairwise overlap has been counted twice, so subtract the three pairwise intersections. But look at the centre, $A \\cap B \\cap C$: it was added 3 times and subtracted 3 times, so now it is not counted at all. Add it back once:",
+        "Add the three probabilities. Each pairwise overlap has been counted twice, so subtract the three pairwise intersections. But look at the centre, $A \\cap B \\cap C$: it was added 3 times and subtracted 3 times, so now it is not counted at all. Add it back once:",
     },
     {
       type: "math",
@@ -801,40 +969,120 @@ const lesson04: LessonSeed = {
       content:
         "Many questions ask for one *region* of the Venn diagram rather than the whole union. Read each one off the picture.\n\n**$A$ but not $B$.** $A$ splits into $A \\cap B$ and $A \\cap B'$, so $P(A \\cap B') = P(A) - P(A \\cap B)$.\n\n**Exactly one of $A$, $B$.** That is $A$ only plus $B$ only: $[P(A) - P(A \\cap B)] + [P(B) - P(A \\cap B)] = P(A) + P(B) - 2P(A \\cap B)$. The overlap is removed twice, not once, because this time it is not wanted at all.\n\n**Bounds on the overlap.** $A \\cap B$ sits inside both $A$ and $B$, so $P(A \\cap B) \\le \\min(P(A), P(B))$. And $P(A \\cup B) \\le 1$ in the addition rule gives $P(A \\cap B) \\ge P(A) + P(B) - 1$. Equivalently, $\\max(P(A), P(B)) \\le P(A \\cup B) \\le \\min(1, P(A) + P(B))$.\n\n**Three events.** Write $S_1 = P(A) + P(B) + P(C)$, $S_2$ = the sum of the three pairwise intersections, $S_3 = P(A \\cap B \\cap C)$. A point in exactly two events is counted once in $S_2$; a point in all three is counted 3 times in $S_2$ and 3 times in $S_1$. Tracking the regions gives\n\n$P(\\text{exactly one}) = S_1 - 2S_2 + 3S_3$, $\\quad P(\\text{exactly two}) = S_2 - 3S_3$, $\\quad P(\\text{at least two}) = S_2 - 2S_3$.",
     },
+    { type: "heading", text: "Surveys, divisibility and overlap bounds" },
     {
-      type: "text",
-      content:
-        "**Worked example: reading the regions of a survey.** Of 100 students, 50 read newspaper $A$, 40 read $B$, 30 read $C$; 20 read $A$ and $B$, 15 read $B$ and $C$, 10 read $A$ and $C$; 5 read all three.\n\n1. Totals: $S_1 = 50 + 40 + 30 = 120$, $S_2 = 20 + 15 + 10 = 45$, $S_3 = 5$.\n2. Exactly two: $S_2 - 3S_3 = 45 - 15 = 30$. (Check: $A \\cap B$ only is $20 - 5 = 15$, $B \\cap C$ only is $10$, $A \\cap C$ only is $5$; total 30.)\n3. Exactly one: $S_1 - 2S_2 + 3S_3 = 120 - 90 + 15 = 45$. (Check: $A$ only is $50 - 15 - 5 - 5 = 25$, $B$ only is $40 - 15 - 10 - 5 = 10$, $C$ only is $30 - 10 - 5 - 5 = 10$; total 45.)\n4. At least one: $45 + 30 + 5 = 80$, which matches inclusion–exclusion $120 - 45 + 5$.\n5. So $P(\\text{exactly one}) = 0.45$ and $P(\\text{exactly two}) = 0.30$.",
+      type: "worked-example",
+      id: "pr1-4-we1",
+      title: "Worked example: reading the regions of a survey",
+      problem:
+        "Of 100 students, 50 read newspaper $A$, 40 read $B$, 30 read $C$; 20 read $A$ and $B$, 15 read $B$ and $C$, 10 read $A$ and $C$; 5 read all three. Find the probability that a student picked at random reads exactly one of the papers, and exactly two.",
+      steps: [
+        {
+          text: "Totals: $S_1 = 50 + 40 + 30 = 120$, $S_2 = 20 + 15 + 10 = 45$, $S_3 = 5$.",
+        },
+        {
+          text: "Exactly two: $S_2 - 3S_3 = 45 - 15 = 30$. (Check: $A \\cap B$ only is $20 - 5 = 15$, $B \\cap C$ only is $10$, $A \\cap C$ only is $5$; total 30.)",
+        },
+        {
+          text: "Exactly one: $S_1 - 2S_2 + 3S_3 = 120 - 90 + 15 = 45$. (Check: $A$ only is $50 - 15 - 5 - 5 = 25$, $B$ only is $40 - 15 - 10 - 5 = 10$, $C$ only is $30 - 10 - 5 - 5 = 10$; total 45.)",
+        },
+        {
+          text: "At least one: $45 + 30 + 5 = 80$, which matches inclusion–exclusion $120 - 45 + 5$.",
+        },
+        {
+          text: "So $P(\\text{exactly one}) = 0.45$ and $P(\\text{exactly two}) = 0.30$.",
+        },
+      ],
+      answer: "$P(\\text{exactly one}) = 0.45$, $P(\\text{exactly two}) = 0.30$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1: divisible by 2 or 3.** A number is chosen at random from 1 to 100. Find the probability that it is divisible by 2 or 3.\n\n1. $A$ = divisible by 2: $\\lfloor 100/2 \\rfloor = 50$ numbers.\n2. $B$ = divisible by 3: $\\lfloor 100/3 \\rfloor = 33$ numbers.\n3. $A \\cap B$ = divisible by 6: $\\lfloor 100/6 \\rfloor = 16$ numbers.\n4. $n(A \\cup B) = 50 + 33 - 16 = 67$, so $P = \\frac{67}{100} = 0.67$.",
+      type: "worked-example",
+      id: "pr1-4-we2",
+      title: "Worked example 1: divisible by 2 or 3",
+      problem:
+        "A number is chosen at random from 1 to 100. Find the probability that it is divisible by 2 or 3.",
+      steps: [
+        {
+          text: "$A$ = divisible by 2: $\\lfloor 100/2 \\rfloor = 50$ numbers.",
+        },
+        {
+          text: "$B$ = divisible by 3: $\\lfloor 100/3 \\rfloor = 33$ numbers.",
+        },
+        {
+          text: "$A \\cap B$ = divisible by 6: $\\lfloor 100/6 \\rfloor = 16$ numbers.",
+        },
+        {
+          text: "$n(A \\cup B) = 50 + 33 - 16 = 67$, so $P = \\frac{67}{100} = 0.67$.",
+        },
+      ],
+      answer: "$0.67$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2: add a third divisor.** Same choice, divisible by 2, 3 or 5.\n\n1. Singles: $50 + 33 + 20 = 103$.\n2. Pairs: by 6: 16, by 10: 10, by 15: 6. Total 32.\n3. Triple: by 30: 3.\n4. $n = 103 - 32 + 3 = 74$, so $P = 0.74$.",
+      type: "worked-example",
+      id: "pr1-4-we3",
+      title: "Worked example 2: add a third divisor",
+      problem:
+        "Same choice, divisible by 2, 3 or 5. Find the probability.",
+      steps: [
+        {
+          text: "Singles: $50 + 33 + 20 = 103$.",
+        },
+        {
+          text: "Pairs: by 6: 16, by 10: 10, by 15: 6. Total 32.",
+        },
+        {
+          text: "Triple: by 30: 3.",
+        },
+        {
+          text: "$n = 103 - 32 + 3 = 74$, so $P = 0.74$.",
+        },
+      ],
+      answer: "$0.74$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3: two subjects.** In a class of 60 students, 30 take NCC, 32 take NSS and 24 take both. A student is chosen at random.\n\n1. $P(\\text{NCC or NSS}) = \\frac{30}{60} + \\frac{32}{60} - \\frac{24}{60} = \\frac{38}{60} = \\frac{19}{30}$.\n2. $P(\\text{neither}) = 1 - \\frac{19}{30} = \\frac{11}{30}$.\n3. $P(\\text{NCC only}) = P(A) - P(A \\cap B) = \\frac{30 - 24}{60} = \\frac{1}{10}$.",
+      type: "worked-example",
+      id: "pr1-4-we4",
+      title: "Worked example 3: two subjects",
+      problem:
+        "In a class of 60 students, 30 take NCC, 32 take NSS and 24 take both. A student is chosen at random. Find the probability that the student takes NCC or NSS, neither, and NCC only.",
+      steps: [
+        {
+          text: "$P(\\text{NCC or NSS}) = \\frac{30}{60} + \\frac{32}{60} - \\frac{24}{60} = \\frac{38}{60} = \\frac{19}{30}$.",
+        },
+        {
+          text: "$P(\\text{neither}) = 1 - \\frac{19}{30} = \\frac{11}{30}$.",
+        },
+        {
+          text: "$P(\\text{NCC only}) = P(A) - P(A \\cap B) = \\frac{30 - 24}{60} = \\frac{1}{10}$.",
+        },
+      ],
+      answer: "$\\frac{19}{30}$, $\\frac{11}{30}$ and $\\frac{1}{10}$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (exam style): bounds on an unknown overlap.** In a town, 60% of households read an English paper ($E$) and 50% read a Hindi paper ($H$). Nobody tells us how many read both. Find the smallest and largest possible values of $P(E \\cap H)$, and the range of $P(E \\cup H)$.\n\n1. *Largest overlap.* $E \\cap H$ sits inside $H$, so by monotonicity $P(E \\cap H) \\le P(H) = 0.5$. *Why this can happen:* if every Hindi reader also reads English, $H \\subseteq E$ and the overlap is all of $H$.\n2. *Smallest overlap.* Rearrange the addition rule and use $P(E \\cup H) \\le 1$:",
-    },
-    {
-      type: "math",
-      latex:
-        "P(E \\cap H) = P(E) + P(H) - P(E \\cup H) \\ge 0.6 + 0.5 - 1 = 0.1",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this can happen:* if every household reads at least one paper, $P(E \\cup H) = 1$ and the overlap is as small as it can be.\n3. So $0.1 \\le P(E \\cap H) \\le 0.5$, and correspondingly $P(E \\cup H) = 1.1 - P(E \\cap H)$ lies between $0.6$ and $1$.\n4. *Picture it.* Slide the Hindi circle inside the English one (overlap 0.5, union 0.6), then pull it outward until the two circles fill the whole square (overlap 0.1, union 1). Every position in between is possible.",
+      type: "worked-example",
+      id: "pr1-4-we5",
+      title: "Worked example 4 (exam style): bounds on an unknown overlap",
+      problem:
+        "In a town, 60% of households read an English paper ($E$) and 50% read a Hindi paper ($H$). Nobody tells us how many read both. Find the smallest and largest possible values of $P(E \\cap H)$, and the range of $P(E \\cup H)$.",
+      steps: [
+        {
+          text: "*Largest overlap.* $E \\cap H$ sits inside $H$, so by monotonicity $P(E \\cap H) \\le P(H) = 0.5$. *Why this can happen:* if every Hindi reader also reads English, $H \\subseteq E$ and the overlap is all of $H$.",
+        },
+        {
+          text: "*Smallest overlap.* Rearrange the addition rule and use $P(E \\cup H) \\le 1$:",
+          latex: "P(E \\cap H) = P(E) + P(H) - P(E \\cup H) \\ge 0.6 + 0.5 - 1 = 0.1",
+        },
+        {
+          text: "*Why this can happen:* if every household reads at least one paper, $P(E \\cup H) = 1$ and the overlap is as small as it can be.",
+        },
+        {
+          text: "So $0.1 \\le P(E \\cap H) \\le 0.5$, and correspondingly $P(E \\cup H) = 1.1 - P(E \\cap H)$ lies between $0.6$ and $1$.",
+        },
+        {
+          text: "*Picture it.* Slide the Hindi circle inside the English one (overlap 0.5, union 0.6), then pull it outward until the two circles fill the whole square (overlap 0.1, union 1). Every position in between is possible.",
+        },
+      ],
+      answer: "$0.1 \\le P(E \\cap H) \\le 0.5$ and $0.6 \\le P(E \\cup H) \\le 1$",
     },
     {
       type: "callout",
@@ -843,6 +1091,7 @@ const lesson04: LessonSeed = {
       content:
         "Plain addition is only for mutually exclusive events. If $P(A) = 0.7$ and $P(B) = 0.6$, adding gives $1.3$, which is impossible. That tells you the events *must* overlap, by at least $0.3$. Whenever a sum of probabilities exceeds 1, you have double-counted an intersection.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr1-4-q1",
@@ -957,6 +1206,7 @@ const lesson05: LessonSeed = {
       content:
         "The gambler Chevalier de Méré had a puzzle. He had won steadily betting on **at least one six in 4 rolls of a die**. So he reasoned that **at least one double-six in 24 rolls of two dice** should be just as good: a double-six is 6 times rarer, and 24 is 6 times 4. Yet the second bet seemed to lose (or at least his reasoning troubled him), and in 1654 he put the puzzle to Pascal, whose correspondence with Fermat helped start probability theory.",
     },
+    { type: "heading", text: "At least one: use the complement" },
     {
       type: "text",
       content:
@@ -993,6 +1243,7 @@ const lesson05: LessonSeed = {
       content:
         "Slide from 3 to 4: the probability crosses $\\frac{1}{2}$ at exactly 4 rolls (3 rolls give $\\frac{91}{216} \\approx 0.421$). De Méré's first bet was a small but real edge. Notice also that the curve climbs towards 1 and never reaches it.",
     },
+    { type: "heading", text: "De Méré's second bet" },
     {
       type: "text",
       content:
@@ -1067,10 +1318,11 @@ const lesson05: LessonSeed = {
         { text: "$\\left(\\frac{5}{6}\\right)^4$", feedback: "That is the probability of *no* six. Subtract it from 1." },
       ],
     },
+    { type: "heading", text: "The birthday problem" },
     {
       type: "text",
       content:
-        "**The birthday problem.** How many people must be in a room for it to be more likely than not that two share a birthday? Ignore 29 February and assume the 365 days are equally likely.",
+        "How many people must be in a room for it to be more likely than not that two share a birthday? Ignore 29 February and assume the 365 days are equally likely.",
     },
     {
       type: "text",
@@ -1146,46 +1398,89 @@ const lesson05: LessonSeed = {
         { text: "253", feedback: "253 is the number needed for someone to match *your* birthday, a different and much harder event." },
       ],
     },
+    { type: "heading", text: "Months, PINs, aces and coin tosses" },
     {
-      type: "text",
-      content:
-        "**Worked example: a birthday-style variant.** Four people are chosen. Assuming the 12 months are equally likely, find the probability that at least two share a birth month.\n\n1. All four in different months: $\\frac{12 \\cdot 11 \\cdot 10 \\cdot 9}{12^4} = \\frac{11880}{20736} = \\frac{55}{96}$.\n2. At least two share: $1 - \\frac{55}{96} = \\frac{41}{96} \\approx 0.427$.\n3. With only four people, the chance of a shared month is already over 40%.",
+      type: "worked-example",
+      id: "pr1-5-we1",
+      title: "Worked example: a birthday-style variant",
+      problem:
+        "Four people are chosen. Assuming the 12 months are equally likely, find the probability that at least two share a birth month.",
+      steps: [
+        {
+          text: "All four in different months: $\\frac{12 \\cdot 11 \\cdot 10 \\cdot 9}{12^4} = \\frac{11880}{20736} = \\frac{55}{96}$.",
+        },
+        {
+          text: "At least two share: $1 - \\frac{55}{96} = \\frac{41}{96} \\approx 0.427$.",
+        },
+        {
+          text: "With only four people, the chance of a shared month is already over 40%.",
+        },
+      ],
+      answer: "$\\frac{41}{96} \\approx 0.427$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example: a random ATM PIN.** A 4-digit PIN (digits 0 to 9, repeats allowed, leading 0 allowed) is generated at random. Find the probability that some digit appears more than once.\n\n1. *Sample space.* Each of the 4 places has 10 choices, so $n(S) = 10^4 = 10000$ equally likely PINs.\n2. *Complement.* \"Some digit repeats\" covers one pair, two pairs, a triple, four of a kind… Its complement \"all four digits different\" is one clean product. *Why:* this is the birthday problem with 10 \"days\" and 4 \"people\".",
+      type: "worked-example",
+      id: "pr1-5-we2",
+      title: "Worked example: a random ATM PIN",
+      problem:
+        "A 4-digit PIN (digits 0 to 9, repeats allowed, leading 0 allowed) is generated at random. Find the probability that some digit appears more than once.",
+      steps: [
+        {
+          text: "*Sample space.* Each of the 4 places has 10 choices, so $n(S) = 10^4 = 10000$ equally likely PINs.",
+        },
+        {
+          text: "*Complement.* \"Some digit repeats\" covers one pair, two pairs, a triple, four of a kind… Its complement \"all four digits different\" is one clean product. *Why:* this is the birthday problem with 10 \"days\" and 4 \"people\".",
+          latex: "P(\\text{all different}) = \\frac{10 \\cdot 9 \\cdot 8 \\cdot 7}{10^4} = \\frac{5040}{10000} = 0.504",
+        },
+        {
+          text: "$P(\\text{some repeat}) = 1 - 0.504 = 0.496$, almost a coin flip. Most people guess far lower, for the same reason they guess 183 in the birthday problem: they forget how many *pairs* of positions there are (${}^4C_2 = 6$).",
+        },
+      ],
+      answer: "$0.496$",
     },
     {
-      type: "math",
-      latex:
-        "P(\\text{all different}) = \\frac{10 \\cdot 9 \\cdot 8 \\cdot 7}{10^4} = \\frac{5040}{10000} = 0.504",
+      type: "worked-example",
+      id: "pr1-5-we3",
+      title: "Worked example (exam style): at least one ace",
+      problem:
+        "Five cards are dealt from a well-shuffled deck. Find the probability of at least one ace.",
+      steps: [
+        {
+          text: "*Why the complement:* \"at least one ace\" splits into 1, 2, 3 or 4 aces, four separate counts. \"No ace\" is a single count: all 5 cards come from the 48 non-aces.",
+        },
+        {
+          text: "*Count both sides as unordered hands* (the consistency rule from Lesson 0.5, which Lesson 1.6 makes a habit):",
+          latex: "P(\\text{no ace}) = \\frac{{}^{48}C_5}{{}^{52}C_5} = \\frac{48 \\cdot 47 \\cdot 46 \\cdot 45 \\cdot 44}{52 \\cdot 51 \\cdot 50 \\cdot 49 \\cdot 48} = \\frac{35673}{54145} \\approx 0.659",
+        },
+        {
+          text: "$P(\\text{at least one ace}) = 1 - \\frac{35673}{54145} = \\frac{18472}{54145} \\approx 0.341$.",
+        },
+        {
+          text: "*Sanity check:* the naive $5 \\times \\frac{4}{52} \\approx 0.385$ is too big. It counts hands with two aces twice, which is exactly the error the complement avoids.",
+        },
+      ],
+      answer: "$\\frac{18472}{54145} \\approx 0.341$",
     },
     {
-      type: "text",
-      content:
-        "3. $P(\\text{some repeat}) = 1 - 0.504 = 0.496$, almost a coin flip. Most people guess far lower, for the same reason they guess 183 in the birthday problem: they forget how many *pairs* of positions there are (${}^4C_2 = 6$).",
+      type: "worked-example",
+      id: "pr1-5-we4",
+      title: "Worked example (exam style): how many trials?",
+      problem:
+        "How many times must a fair coin be tossed so that the probability of at least one head exceeds $0.99$?",
+      steps: [
+        {
+          text: "The complement is \"all tails\": 1 of the $2^n$ equally likely sequences, so $P(\\text{no head}) = \\frac{1}{2^n}$.",
+        },
+        {
+          text: "We need $1 - \\frac{1}{2^n} > 0.99$, that is $\\frac{1}{2^n} < 0.01$, that is $2^n > 100$. *Why flip the inequality this way:* it turns a probability condition into a plain power-of-2 comparison.",
+        },
+        {
+          text: "$2^6 = 64 < 100$ but $2^7 = 128 > 100$, so the least $n$ is **7**.",
+        },
+      ],
+      answer: "$7$ tosses.",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example (exam style): at least one ace.** Five cards are dealt from a well-shuffled deck. Find the probability of at least one ace.\n\n1. *Why the complement:* \"at least one ace\" splits into 1, 2, 3 or 4 aces, four separate counts. \"No ace\" is a single count: all 5 cards come from the 48 non-aces.\n2. *Count both sides as unordered hands* (the consistency rule from Lesson 0.5, which Lesson 1.6 makes a habit):",
-    },
-    {
-      type: "math",
-      latex:
-        "P(\\text{no ace}) = \\frac{{}^{48}C_5}{{}^{52}C_5} = \\frac{48 \\cdot 47 \\cdot 46 \\cdot 45 \\cdot 44}{52 \\cdot 51 \\cdot 50 \\cdot 49 \\cdot 48} = \\frac{35673}{54145} \\approx 0.659",
-    },
-    {
-      type: "text",
-      content:
-        "3. $P(\\text{at least one ace}) = 1 - \\frac{35673}{54145} = \\frac{18472}{54145} \\approx 0.341$.\n4. *Sanity check:* the naive $5 \\times \\frac{4}{52} \\approx 0.385$ is too big. It counts hands with two aces twice, which is exactly the error the complement avoids.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example (exam style): how many trials?** How many times must a fair coin be tossed so that the probability of at least one head exceeds $0.99$?\n\n1. The complement is \"all tails\": 1 of the $2^n$ equally likely sequences, so $P(\\text{no head}) = \\frac{1}{2^n}$.\n2. We need $1 - \\frac{1}{2^n} > 0.99$, that is $\\frac{1}{2^n} < 0.01$, that is $2^n > 100$. *Why flip the inequality this way:* it turns a probability condition into a plain power-of-2 comparison.\n3. $2^6 = 64 < 100$ but $2^7 = 128 > 100$, so the least $n$ is **7**.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr1-5-q3",
@@ -1250,6 +1545,7 @@ const lesson06: LessonSeed = {
       content:
         "Classical probability is a ratio of two counts. When the sample space is too big to draw (${}^{52}C_5 = 2{,}598{,}960$ poker hands) we count with the tools of Lesson 0.5: the multiplication principle, ${}^nP_r$ and ${}^nC_r$. There is one rule to keep in mind throughout this lesson.",
     },
+    { type: "heading", text: "Ordered or unordered: stay consistent" },
     {
       type: "callout",
       variant: "definition",
@@ -1258,9 +1554,31 @@ const lesson06: LessonSeed = {
         "Choose **one** description of an outcome (ordered or unordered) and use it for **both** the numerator and the denominator. If outcomes are unordered selections, count both with ${}^nC_r$. If they are ordered sequences, count both with ${}^nP_r$ or the multiplication principle. Either way, the outcomes you count must be equally likely.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1: an urn, two ways.** An urn has 5 red and 3 blue balls. Two are drawn without replacement. Find $P(\\text{both red})$.\n\n*Unordered:* $\\;\\dfrac{{}^5C_2}{{}^8C_2} = \\dfrac{10}{28} = \\dfrac{5}{14}$.\n\n*Ordered:* $\\;\\dfrac{5 \\times 4}{8 \\times 7} = \\dfrac{20}{56} = \\dfrac{5}{14}$.\n\nThe answers agree because each unordered pair corresponds to exactly $2! = 2$ ordered pairs, both in the event and in the sample space, and the factor of 2 cancels.",
+      type: "worked-example",
+      id: "pr1-6-we1",
+      title: "Worked example 1: an urn, two ways",
+      problem:
+        "An urn has 5 red and 3 blue balls. Two are drawn without replacement. Find $P(\\text{both red})$.",
+      steps: [
+        {
+          text: "*Unordered:* $\\;\\dfrac{{}^5C_2}{{}^8C_2} = \\dfrac{10}{28} = \\dfrac{5}{14}$.",
+        },
+        {
+          text: "*Ordered:* $\\;\\dfrac{5 \\times 4}{8 \\times 7} = \\dfrac{20}{56} = \\dfrac{5}{14}$.",
+        },
+        {
+          text: "The answers agree because each unordered pair corresponds to exactly $2! = 2$ ordered pairs, both in the event and in the sample space, and the factor of 2 cancels.",
+          table: {
+            headers: ["Method", "Numerator", "Denominator", "Result"],
+            rows: [
+              ["Unordered / unordered", "⁵C₂ = 10", "⁸C₂ = 28", "5/14 ✓"],
+              ["Ordered / ordered", "5 × 4 = 20", "8 × 7 = 56", "5/14 ✓"],
+              ["Unordered / ordered (mixed)", "⁵C₂ = 10", "8 × 7 = 56", "5/28 ✗"],
+            ],
+          },
+        },
+      ],
+      answer: "$\\frac{5}{14}$ either way.",
     },
     {
       type: "interactive",
@@ -1279,77 +1597,168 @@ const lesson06: LessonSeed = {
         },
         seed: 14,
         caption:
-          "Draw 2 balls from 5 red and 3 blue, without replacement. The frequency of 'both red' settles at 5/14 ≈ 0.357. Toggle replacement to see it change to (5/8)² ≈ 0.391.",
+          "Draw 2 balls from 5 red and 3 blue, without replacement. The frequency of 'both red' settles at the worked example's answer. Toggle replacement to see it change to (5/8)² ≈ 0.391.",
       },
-    },
-    {
-      type: "table",
-      headers: ["Method", "Numerator", "Denominator", "Result"],
-      rows: [
-        ["Unordered / unordered", "⁵C₂ = 10", "⁸C₂ = 28", "5/14 ✓"],
-        ["Ordered / ordered", "5 × 4 = 20", "8 × 7 = 56", "5/14 ✓"],
-        ["Unordered / ordered (mixed)", "⁵C₂ = 10", "8 × 7 = 56", "5/28 ✗"],
-      ],
     },
     {
       type: "callout",
       variant: "warning",
       title: "Misconception: mixing ordered and unordered counts",
       content:
-        "The third row is the classic error: counting the event as a *selection* but the sample space as a *sequence*. The denominator is then twice too big, so the answer is half the true value. Before dividing, ask: does my numerator count the same *kind* of object as my denominator?",
+        "The mixed row in the worked example's table is the classic error: counting the event as a *selection* but the sample space as a *sequence*. The denominator is then twice too big, so the answer is half the true value. Before dividing, ask: does my numerator count the same *kind* of object as my denominator?",
+    },
+    { type: "heading", text: "Urns, cards and committees" },
+    {
+      type: "worked-example",
+      id: "pr1-6-we2",
+      title: "Worked example 2: mixed colours",
+      problem:
+        "Same urn, draw 3. Find $P(\\text{at least 2 red})$.",
+      steps: [
+        {
+          text: "$n(S) = {}^8C_3 = 56$.",
+        },
+        {
+          text: "Exactly 2 red: ${}^5C_2 \\cdot {}^3C_1 = 10 \\cdot 3 = 30$.",
+        },
+        {
+          text: "Exactly 3 red: ${}^5C_3 = 10$.",
+        },
+        {
+          text: "$P = \\frac{30 + 10}{56} = \\frac{40}{56} = \\frac{5}{7}$.",
+        },
+      ],
+      answer: "$\\frac{5}{7}$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2: mixed colours.** Same urn, draw 3. Find $P(\\text{at least 2 red})$.\n\n1. $n(S) = {}^8C_3 = 56$.\n2. Exactly 2 red: ${}^5C_2 \\cdot {}^3C_1 = 10 \\cdot 3 = 30$.\n3. Exactly 3 red: ${}^5C_3 = 10$.\n4. $P = \\frac{30 + 10}{56} = \\frac{40}{56} = \\frac{5}{7}$.",
+      type: "worked-example",
+      id: "pr1-6-we3",
+      title: "Worked example 3: card hands",
+      problem:
+        "Two cards are drawn from a deck. $P(\\text{both aces}) = \\frac{{}^4C_2}{{}^{52}C_2} = \\frac{6}{1326} = \\frac{1}{221}$.\n\nFour cards are drawn. Find $P(\\text{one from each suit})$.",
+      steps: [
+        {
+          text: "$n(S) = {}^{52}C_4 = 270725$.",
+        },
+        {
+          text: "Choose one card from each suit: $13 \\times 13 \\times 13 \\times 13 = 28561$.",
+        },
+        {
+          text: "$P = \\frac{28561}{270725} = \\frac{2197}{20825} \\approx 0.105$.",
+        },
+      ],
+      answer: "$\\frac{2197}{20825} \\approx 0.105$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3: card hands.** Two cards are drawn from a deck. $P(\\text{both aces}) = \\frac{{}^4C_2}{{}^{52}C_2} = \\frac{6}{1326} = \\frac{1}{221}$.\n\nFour cards are drawn. Find $P(\\text{one from each suit})$.\n\n1. $n(S) = {}^{52}C_4 = 270725$.\n2. Choose one card from each suit: $13 \\times 13 \\times 13 \\times 13 = 28561$.\n3. $P = \\frac{28561}{270725} = \\frac{2197}{20825} \\approx 0.105$.",
+      type: "worked-example",
+      id: "pr1-6-we4",
+      title: "Worked example 4: a committee with a constraint",
+      problem:
+        "A committee of 3 is chosen at random from 4 men and 6 women. Find the probability of exactly 2 women, and of at least one man.",
+      steps: [
+        {
+          text: "$n(S) = {}^{10}C_3 = 120$.",
+        },
+        {
+          text: "Exactly 2 women: ${}^6C_2 \\cdot {}^4C_1 = 15 \\cdot 4 = 60$, so $P = \\frac{60}{120} = \\frac{1}{2}$.",
+        },
+        {
+          text: "At least one man: complement is 'all women', ${}^6C_3 = 20$. So $P = 1 - \\frac{20}{120} = \\frac{5}{6}$.",
+        },
+      ],
+      answer: "$\\frac{1}{2}$ and $\\frac{5}{6}$",
+    },
+    { type: "heading", text: "Arranging letters at random" },
+    {
+      type: "worked-example",
+      id: "pr1-6-we5",
+      title: "Worked example 5: letters together",
+      problem:
+        "The letters of ORANGE are arranged at random. Find $P(\\text{the three vowels are together})$.",
+      steps: [
+        {
+          text: "Here order matters: $n(S) = 6! = 720$ arrangements, all equally likely.",
+        },
+        {
+          text: "Glue O, A, E into one block. Arrange the block with R, N, G: $4! = 24$ ways. Arrange letters inside the block: $3! = 6$ ways.",
+        },
+        {
+          text: "$n(E) = 24 \\times 6 = 144$, so $P = \\frac{144}{720} = \\frac{1}{5}$.",
+        },
+        {
+          text: "By the complement, $P(\\text{vowels not all together}) = \\frac{4}{5}$.",
+        },
+      ],
+      answer: "$\\frac{1}{5}$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4: a committee with a constraint.** A committee of 3 is chosen at random from 4 men and 6 women.\n\n1. $n(S) = {}^{10}C_3 = 120$.\n2. Exactly 2 women: ${}^6C_2 \\cdot {}^4C_1 = 15 \\cdot 4 = 60$, so $P = \\frac{60}{120} = \\frac{1}{2}$.\n3. At least one man: complement is 'all women', ${}^6C_3 = 20$. So $P = 1 - \\frac{20}{120} = \\frac{5}{6}$.",
+      type: "worked-example",
+      id: "pr1-6-we6",
+      title: "Worked example 6: repeated letters and the gap method",
+      problem:
+        "The letters of ASSASSIN are arranged at random. Find $P(\\text{no two S's are together})$.",
+      steps: [
+        {
+          text: "The letters are A, A, I, N and four S's. Distinct arrangements: $n(S) = \\frac{8!}{4! \\, 2!} = 840$.",
+        },
+        {
+          text: "Are these 840 patterns equally likely? Yes: imagine the letters labelled ($S_1, \\ldots, S_4$, $A_1, A_2$). All $8!$ labelled orders are equally likely, and each pattern corresponds to exactly $4! \\, 2! = 48$ of them. Equal-sized groups of equally likely outcomes are equally likely.",
+        },
+        {
+          text: "*Gap method:* first arrange the non-S letters A, A, I, N in $\\frac{4!}{2!} = 12$ ways. That creates 5 gaps (\\_ X \\_ X \\_ X \\_ X \\_). Placing the S's in 4 different gaps keeps them apart: ${}^5C_4 = 5$ ways.",
+        },
+        {
+          text: "$n(E) = 12 \\times 5 = 60$, so $P = \\frac{60}{840} = \\frac{1}{14}$.",
+        },
+      ],
+      answer: "$\\frac{1}{14}$",
+    },
+    { type: "heading", text: "Defective bulbs and arithmetic progressions" },
+    {
+      type: "worked-example",
+      id: "pr1-6-we7",
+      title: "Worked example 7: quality control",
+      problem:
+        "A box of 12 bulbs contains 3 defective ones. An inspector picks 4 at random. Find (a) $P(\\text{none defective})$ and (b) $P(\\text{exactly one defective})$.",
+      steps: [
+        {
+          text: "*One outcome* is a set of 4 bulbs; order of picking is irrelevant, so count with ${}^nC_r$ on both sides. $n(S) = {}^{12}C_4 = 495$.",
+        },
+        {
+          text: "*(a)* All 4 from the 9 good bulbs: ${}^9C_4 = 126$. *Why only the good bulbs:* \"none defective\" leaves no choice about which pool to draw from.",
+          latex: "P(\\text{none defective}) = \\frac{{}^9C_4}{{}^{12}C_4} = \\frac{126}{495} = \\frac{14}{55} \\approx 0.255",
+        },
+        {
+          text: "*(b)* Choose which defective bulb (${}^3C_1 = 3$) and which 3 good ones (${}^9C_3 = 84$). *Why multiply:* each choice of defective bulb pairs with each choice of good bulbs (multiplication principle). $n(E) = 3 \\times 84 = 252$, so $P = \\frac{252}{495} = \\frac{28}{55} \\approx 0.509$.",
+        },
+        {
+          text: "*Consequence:* the inspector finds at least one defective bulb with probability $1 - \\frac{14}{55} = \\frac{41}{55} \\approx 0.745$. A sample of 4 misses a 25% defect rate about a quarter of the time.",
+        },
+      ],
+      answer: "(a) $\\frac{14}{55} \\approx 0.255$ (b) $\\frac{28}{55} \\approx 0.509$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5: letters together.** The letters of ORANGE are arranged at random. Find $P(\\text{the three vowels are together})$.\n\n1. Here order matters: $n(S) = 6! = 720$ arrangements, all equally likely.\n2. Glue O, A, E into one block. Arrange the block with R, N, G: $4! = 24$ ways. Arrange letters inside the block: $3! = 6$ ways.\n3. $n(E) = 24 \\times 6 = 144$, so $P = \\frac{144}{720} = \\frac{1}{5}$.\n4. By the complement, $P(\\text{vowels not all together}) = \\frac{4}{5}$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 6: repeated letters and the gap method.** The letters of ASSASSIN are arranged at random. Find $P(\\text{no two S's are together})$.\n\n1. The letters are A, A, I, N and four S's. Distinct arrangements: $n(S) = \\frac{8!}{4! \\, 2!} = 840$.\n2. Are these 840 patterns equally likely? Yes: imagine the letters labelled ($S_1, \\ldots, S_4$, $A_1, A_2$). All $8!$ labelled orders are equally likely, and each pattern corresponds to exactly $4! \\, 2! = 48$ of them. Equal-sized groups of equally likely outcomes are equally likely.\n3. *Gap method:* first arrange the non-S letters A, A, I, N in $\\frac{4!}{2!} = 12$ ways. That creates 5 gaps (\\_ X \\_ X \\_ X \\_ X \\_). Placing the S's in 4 different gaps keeps them apart: ${}^5C_4 = 5$ ways.\n4. $n(E) = 12 \\times 5 = 60$, so $P = \\frac{60}{840} = \\frac{1}{14}$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 7: quality control.** A box of 12 bulbs contains 3 defective ones. An inspector picks 4 at random. Find (a) $P(\\text{none defective})$ and (b) $P(\\text{exactly one defective})$.\n\n1. *One outcome* is a set of 4 bulbs; order of picking is irrelevant, so count with ${}^nC_r$ on both sides. $n(S) = {}^{12}C_4 = 495$.\n2. *(a)* All 4 from the 9 good bulbs: ${}^9C_4 = 126$. *Why only the good bulbs:* \"none defective\" leaves no choice about which pool to draw from.",
-    },
-    {
-      type: "math",
-      latex: "P(\\text{none defective}) = \\frac{{}^9C_4}{{}^{12}C_4} = \\frac{126}{495} = \\frac{14}{55} \\approx 0.255",
-    },
-    {
-      type: "text",
-      content:
-        "3. *(b)* Choose which defective bulb (${}^3C_1 = 3$) and which 3 good ones (${}^9C_3 = 84$). *Why multiply:* each choice of defective bulb pairs with each choice of good bulbs (multiplication principle). $n(E) = 3 \\times 84 = 252$, so $P = \\frac{252}{495} = \\frac{28}{55} \\approx 0.509$.\n4. *Consequence:* the inspector finds at least one defective bulb with probability $1 - \\frac{14}{55} = \\frac{41}{55} \\approx 0.745$. A sample of 4 misses a 25% defect rate about a quarter of the time.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 8 (JEE style): three numbers in AP.** Three distinct numbers are chosen at random from $1, 2, \\ldots, 20$. Find the probability that they form an arithmetic progression.\n\n1. $n(S) = {}^{20}C_3 = 1140$ unordered triples.\n2. *Key idea:* arrange the chosen numbers as $a < b < c$. They are in AP exactly when $a + c = 2b$, so $b = \\frac{a + c}{2}$. *Why this helps:* once $a$ and $c$ are fixed, $b$ is forced, and it is a whole number exactly when $a$ and $c$ have the same parity. So count pairs $\\{a, c\\}$ instead of triples.\n3. Same-parity pairs: two odd numbers from the 10 odd ones, or two even from the 10 even ones:",
-    },
-    {
-      type: "math",
-      latex: "n(E) = {}^{10}C_2 + {}^{10}C_2 = 45 + 45 = 90, \\qquad P = \\frac{90}{1140} = \\frac{3}{38}",
-    },
-    {
-      type: "text",
-      content:
-        "4. *Check the middle term is valid:* for same-parity $a < c$, the middle $b = \\frac{a + c}{2}$ lies strictly between them, so it is a different number from 1 to 20. Every such pair gives exactly one AP triple, and every AP triple arises this way.",
+      type: "worked-example",
+      id: "pr1-6-we8",
+      title: "Worked example 8 (JEE style): three numbers in AP",
+      problem:
+        "Three distinct numbers are chosen at random from $1, 2, \\ldots, 20$. Find the probability that they form an arithmetic progression.",
+      steps: [
+        {
+          text: "$n(S) = {}^{20}C_3 = 1140$ unordered triples.",
+        },
+        {
+          text: "*Key idea:* arrange the chosen numbers as $a < b < c$. They are in AP exactly when $a + c = 2b$, so $b = \\frac{a + c}{2}$. *Why this helps:* once $a$ and $c$ are fixed, $b$ is forced, and it is a whole number exactly when $a$ and $c$ have the same parity. So count pairs $\\{a, c\\}$ instead of triples.",
+        },
+        {
+          text: "Same-parity pairs: two odd numbers from the 10 odd ones, or two even from the 10 even ones:",
+          latex: "n(E) = {}^{10}C_2 + {}^{10}C_2 = 45 + 45 = 90, \\qquad P = \\frac{90}{1140} = \\frac{3}{38}",
+        },
+        {
+          text: "*Check the middle term is valid:* for same-parity $a < c$, the middle $b = \\frac{a + c}{2}$ lies strictly between them, so it is a different number from 1 to 20. Every such pair gives exactly one AP triple, and every AP triple arises this way.",
+        },
+      ],
+      answer: "$\\frac{90}{1140} = \\frac{3}{38}$",
     },
     {
       type: "callout",
@@ -1358,6 +1767,7 @@ const lesson06: LessonSeed = {
       content:
         "1. **What is one outcome?** A set of cards, a sequence of letters, a list of dice values?\n2. **Are these outcomes equally likely?** If not, change the description.\n3. **Does the numerator count the same kind of outcome as the denominator?**",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr1-6-q1",

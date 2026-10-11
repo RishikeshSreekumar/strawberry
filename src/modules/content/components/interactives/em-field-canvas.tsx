@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import type { z } from "zod";
 import type { emFieldCanvasSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { K_COULOMB, directionDeg, niceStep, sciLatex, sigText } from "./em-format";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 import { ArrowSvg, SvgLatex, type VecColor } from "./vec-canvas-2d";
@@ -698,7 +699,7 @@ export function EmFieldCanvas({ config }: { config: Config }) {
 
       <div className="flex items-start justify-between gap-3">
         <p className="text-xs text-muted-foreground">
-          {config.caption ?? DEFAULT_CAPTIONS[mode]}
+          <RichText text={config.caption ?? DEFAULT_CAPTIONS[mode]} />
           {mode !== "force" && !superpose && showProbe && mode !== "work" && " (The arrow at P is log-scaled.)"}
           {` Grid squares are ${sigText(gridStep)} ${config.unit}; k = 9 × 10⁹ N m² C⁻².`}
         </p>

@@ -24,10 +24,19 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/omp-4-atoms-and-nuclei.mp4",
+      poster: "/videos/omp-4-atoms-and-nuclei.jpg",
+      title: "Chapter 4 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "In 1909 Geiger and Marsden fired alpha particles at a gold foil a few hundred atoms thick. Almost all went straight through, deflected by a degree or so. But about one in eight thousand bounced back through more than 90°. Rutherford later said: \"It was quite the most incredible event that has ever happened to me in my life. It was almost as incredible as if you fired a 15-inch shell at a piece of tissue paper and it came back and hit you.\"",
     },
+    { type: "heading", text: "Plum pudding versus the nucleus" },
     {
       type: "text",
       content:
@@ -45,10 +54,11 @@ const lesson01: LessonSeed = {
       content:
         "The model explains the numbers. Most alphas pass far from any nucleus and barely deflect. A very few happen to head almost straight at one; they are pushed back hard. Rutherford calculated how many should scatter through each angle $\\theta$ and found a count proportional to $1/\\sin^4(\\theta/2)$, which fell steeply with angle exactly as Geiger and Marsden measured. The count depends on how close each alpha's line of approach is to the nucleus, the **impact parameter** $b$: a head-on shot ($b = 0$) bounces straight back, and larger $b$ means smaller deflection ($b \\propto \\cot\\frac\\theta2$).",
     },
+    { type: "heading", text: "Deriving the distance of closest approach" },
     {
       type: "text",
       content:
-        "**Distance of closest approach (derivation).** Take the head-on case. The alpha (charge $2e$) starts far away with kinetic energy $K$ and slows down as it climbs the Coulomb hill of the nucleus (charge $Ze$, assumed fixed because it is so much heavier). It stops momentarily at distance $r_0$, where all its kinetic energy has become potential energy:",
+        "Take the head-on case. The alpha (charge $2e$) starts far away with kinetic energy $K$ and slows down as it climbs the Coulomb hill of the nucleus (charge $Ze$, assumed fixed because it is so much heavier). It stops momentarily at distance $r_0$, where all its kinetic energy has become potential energy:",
     },
     { type: "math", latex: "K = \\frac{1}{4\\pi\\varepsilon_0}\\,\\frac{(2e)(Ze)}{r_0} \\quad\\Longrightarrow\\quad r_0 = \\frac{1}{4\\pi\\varepsilon_0}\\,\\frac{2Ze^2}{K}" },
     {
@@ -79,20 +89,51 @@ const lesson01: LessonSeed = {
       content:
         "What you should have seen: at 5 MeV, $r_0 = 4.55$ units, that is 45.5 fm; doubling the energy halves the distance. Gold's nucleus has radius about 7 fm, so even these violent head-on collisions stop well outside it. The alphas measure an *upper bound* on the nuclear size; only above about 30 MeV would they touch.",
     },
+    { type: "heading", text: "Worked examples: closest approach" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (JEE Main).** 5 MeV alpha particles are fired head-on at gold nuclei ($Z = 79$). Find the distance of closest approach.\n\n1. Energy conservation: $K = \\dfrac{1}{4\\pi\\varepsilon_0}\\dfrac{2Ze^2}{r_0}$. *Why this step:* at the turning point the alpha is momentarily at rest, so all of $K$ is Coulomb energy.\n2. $r_0 = \\dfrac{2\\times79\\times1.44\\ \\text{MeV·fm}}{5\\ \\text{MeV}} = \\dfrac{227.5}{5} \\approx 45.5$ fm $= 4.55\\times10^{-14}$ m.\n3. Compare: the gold atom is about $3\\times10^{-10}$ m across, nearly $10^4$ times bigger.\n\n**Worked example 2 (energy to touch the nucleus).** Gold's nuclear radius is about 7 fm. What alpha energy would bring it that close (ignoring the alpha's own size)?\n\n1. Set $r_0 = 7$ fm: $K = \\dfrac{227.5\\ \\text{MeV·fm}}{7\\ \\text{fm}} \\approx 32.5$ MeV.\n2. Natural alpha sources give at most about 9 MeV, which is why Rutherford's alphas never reached gold's nuclear force; the scattering was pure Coulomb, and his $1/\\sin^4$ law fitted perfectly. *Why this step:* this explains why the experiment could use only Coulomb's law and still be exact.",
+      type: "worked-example",
+      id: "omp4-1-we1",
+      title: "Worked example 1 (JEE Main)",
+      problem:
+        "5 MeV alpha particles are fired head-on at gold nuclei ($Z = 79$). Find the distance of closest approach.",
+      steps: [
+        { text: "Energy conservation: $K = \\dfrac{1}{4\\pi\\varepsilon_0}\\dfrac{2Ze^2}{r_0}$. *Why this step:* at the turning point the alpha is momentarily at rest, so all of $K$ is Coulomb energy." },
+        { text: "$r_0 = \\dfrac{2\\times79\\times1.44\\ \\text{MeV·fm}}{5\\ \\text{MeV}} = \\dfrac{227.5}{5} \\approx 45.5$ fm $= 4.55\\times10^{-14}$ m." },
+        { text: "Compare: the gold atom is about $3\\times10^{-10}$ m across, nearly $10^4$ times bigger." },
+      ],
+      tryFirst: false,
+      answer: "$r_0 \\approx 45.5$ fm $= 4.55\\times10^{-14}$ m",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (a lighter target).** 4 MeV alphas hit aluminium ($Z = 13$) head-on. Find $r_0$.\n\n1. $r_0 = \\dfrac{2\\times13\\times1.44}{4} = \\dfrac{37.4}{4} \\approx 9.4$ fm.\n2. Aluminium's radius is about $1.2\\times27^{1/3} = 3.6$ fm (lesson 4.5). Still outside, but closer. With light nuclei, Rutherford later did see departures from the Coulomb law: the first sign of a new, short-range nuclear force.",
+      type: "worked-example",
+      id: "omp4-1-we2",
+      title: "Worked example 2 (energy to touch the nucleus)",
+      problem:
+        "Gold's nuclear radius is about 7 fm. What alpha energy would bring it that close (ignoring the alpha's own size)?",
+      steps: [
+        { text: "Set $r_0 = 7$ fm: $K = \\dfrac{227.5\\ \\text{MeV·fm}}{7\\ \\text{fm}} \\approx 32.5$ MeV." },
+        { text: "Natural alpha sources give at most about 9 MeV, which is why Rutherford's alphas never reached gold's nuclear force; the scattering was pure Coulomb, and his $1/\\sin^4$ law fitted perfectly. *Why this step:* this explains why the experiment could use only Coulomb's law and still be exact." },
+      ],
+      tryFirst: false,
+      answer: "About 32.5 MeV",
     },
+    {
+      type: "worked-example",
+      id: "omp4-1-we3",
+      title: "Worked example 3 (a lighter target)",
+      problem:
+        "4 MeV alphas hit aluminium ($Z = 13$) head-on. Find $r_0$.",
+      steps: [
+        { text: "$r_0 = \\dfrac{2\\times13\\times1.44}{4} = \\dfrac{37.4}{4} \\approx 9.4$ fm." },
+        { text: "Aluminium's radius is about $1.2\\times27^{1/3} = 3.6$ fm (lesson 4.5). Still outside, but closer. With light nuclei, Rutherford later did see departures from the Coulomb law: the first sign of a new, short-range nuclear force." },
+      ],
+      answer: "$r_0 \\approx 9.4$ fm",
+    },
+    { type: "heading", text: "Where the model breaks" },
     {
       type: "text",
       content:
-        "**Where the model breaks.** An electron circling a nucleus is accelerating (centripetal acceleration), and classical electromagnetism says accelerating charges radiate. The electron should lose energy, spiral inwards and crash into the nucleus in about $10^{-11}$ s, emitting a continuous smear of frequencies on the way. Atoms are stable and emit sharp lines. Something beyond classical physics is needed, and lesson 4.2 supplies it.",
+        "An electron circling a nucleus is accelerating (centripetal acceleration), and classical electromagnetism says accelerating charges radiate. The electron should lose energy, spiral inwards and crash into the nucleus in about $10^{-11}$ s, emitting a continuous smear of frequencies on the way. Atoms are stable and emit sharp lines. Something beyond classical physics is needed, and lesson 4.2 supplies it.",
     },
     {
       type: "callout",
@@ -101,6 +142,7 @@ const lesson01: LessonSeed = {
       content:
         "Almost all of them went straight through with tiny deflections; roughly 1 in 8000 was scattered through more than 90°. The rare back-scatters are the whole point: they show the positive charge is concentrated in a tiny region that most alphas never come near.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "omp4-1-q1",
@@ -112,17 +154,22 @@ const lesson01: LessonSeed = {
         { text: "Electrons are much heavier than alpha particles.", feedback: "Electrons are about 7300 times lighter than an alpha; they cannot turn it round." },
         { text: "Gold atoms are tightly packed with no empty space.", feedback: "Most alphas passing straight through shows the opposite: the atom is mostly empty." },
       ],
+      hint: "Ask what kind of charge distribution could push a fast, heavy alpha particle back the way it came.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp4-1-q2",
       variant: "practice",
-      question: "An 8 MeV alpha particle approaches a gold nucleus ($Z = 79$) head-on. Find the distance of closest approach. ($e^2/4\\pi\\varepsilon_0 = 1.44$ MeV·fm)",
-      options: [
-        { text: "About 14 fm", feedback: "That leaves out the alpha's charge $2e$: $79\\times1.44/8 = 14.2$ fm." },
-        { text: "About 57 fm", feedback: "That is $227.5/4$, the answer for 4 MeV. Doubling $K$ halves $r_0$." },
-        { text: "About 28 fm", correct: true, feedback: "$r_0 = 227.5/8 \\approx 28.4$ fm." },
-        { text: "About 1820 fm", feedback: "That multiplies by $K$ instead of dividing: $r_0 \\propto 1/K$." },
+      question: "An 8 MeV alpha particle approaches a gold nucleus ($Z = 79$) head-on. Find the distance of closest approach, in fm. ($e^2/4\\pi\\varepsilon_0 = 1.44$ MeV·fm)",
+      answer: 28.44,
+      relTolerance: 0.02,
+      unit: "fm",
+      hint: "At closest approach all the kinetic energy has become Coulomb energy: $K = \\dfrac{(2e)(Ze)}{4\\pi\\varepsilon_0 r_0}$.",
+      solution: "$r_0 = \\dfrac{2Z\\,(e^2/4\\pi\\varepsilon_0)}{K} = \\dfrac{2\\times79\\times1.44}{8} = \\dfrac{227.5}{8} \\approx 28.4$ fm.",
+      commonMistakes: [
+        { answer: 14.22, feedback: "That leaves out the alpha's charge $2e$: $79\\times1.44/8 = 14.2$ fm." },
+        { answer: 56.88, feedback: "That is $227.5/4$, the answer for 4 MeV. Doubling $K$ halves $r_0$." },
+        { answer: 1820, feedback: "That multiplies by $K$ instead of dividing: $r_0 \\propto 1/K$." },
       ],
     },
     {
@@ -136,6 +183,7 @@ const lesson01: LessonSeed = {
         { text: "$1/\\sqrt2$ times", feedback: "There is no square root: $r_0 \\propto 1/K$ directly." },
         { text: "Unchanged", feedback: "$r_0$ is set by where $K$ equals the Coulomb energy, so it depends on $K$." },
       ],
+      hint: "At closest approach all the kinetic energy has become Coulomb potential energy: $K = \\dfrac{k(Ze)(2e)}{r_0}$.",
     },
     {
       type: "quiz",
@@ -148,18 +196,37 @@ const lesson01: LessonSeed = {
         { text: "An orbiting electron accelerates, so classically it should radiate, spiral in, and emit a continuous spectrum.", correct: true, feedback: "Real atoms are stable and emit sharp lines, so classical physics fails inside the atom." },
         { text: "The nucleus it predicted was too large.", feedback: "Scattering experiments set only an *upper* bound on its size, consistent with later measurements." },
       ],
+      hint: "Apply classical electromagnetism to an electron in a circular orbit. What would it predict for the orbit and for the spectrum?",
+    },
+    {
+      type: "numeric",
+      id: "omp4-1-q5",
+      variant: "practice",
+      question: "What kinetic energy, in MeV, must an alpha particle have to reach 10 fm from a nucleus of charge $Z = 50$ (head-on)? ($e^2/4\\pi\\varepsilon_0 = 1.44$ MeV·fm)",
+      answer: 14.4,
+      relTolerance: 0.01,
+      unit: "MeV",
+      hint: "$K = \\dfrac{2Z\\,(e^2/4\\pi\\varepsilon_0)}{r_0}$, with the alpha's charge $2e$.",
+      solution: "$K = \\dfrac{2\\times50\\times1.44}{10} = \\dfrac{144}{10} = 14.4$ MeV.",
+      commonMistakes: [
+        { answer: 7.2, feedback: "That forgets the alpha's charge $2e$." },
+        { answer: 1440, feedback: "That multiplies by the distance. $K = 2Z(1.44)/r_0$." },
+        { answer: 72, feedback: "Check the arithmetic: $2\\times50\\times1.44 = 144$, and $144/10 = 14.4$." },
+      ],
     },
     {
       type: "quiz",
-      id: "omp4-1-q5",
-      variant: "practice",
-      question: "What kinetic energy must an alpha particle have to reach 10 fm from a nucleus of charge $Z = 50$ (head-on)?",
+      id: "omp4-1-q6",
+      variant: "concept",
+      multiple: true,
+      question: "Select every conclusion that Rutherford's alpha-scattering results support.",
       options: [
-        { text: "$14.4$ MeV", correct: true, feedback: "$K = \\frac{2\\times50\\times1.44}{10} = 14.4$ MeV." },
-        { text: "$7.2$ MeV", feedback: "That forgets the alpha's charge $2e$." },
-        { text: "$1440$ MeV", feedback: "That multiplies by the distance. $K = 2Z(1.44)/r_0$." },
-        { text: "$72$ MeV", feedback: "Check the arithmetic: $2\\times50\\times1.44 = 144$, and $144/10 = 14.4$." },
+        { text: "Most of the volume of an atom is empty space.", correct: true, feedback: "Almost all the alphas passed straight through the foil with tiny deflections." },
+        { text: "The atom's positive charge and nearly all its mass sit in a tiny central nucleus.", correct: true, feedback: "Only a concentrated charge can push hard enough to turn a fast alpha back." },
+        { text: "Electrons can occupy only certain fixed orbits.", feedback: "Scattering says nothing about the electrons' orbits. Quantised orbits are Bohr's later postulate." },
+        { text: "Large-angle scattering is common because gold atoms are tightly packed.", feedback: "Large-angle scattering was rare (about 1 in 8000 beyond 90°), and the atom is mostly empty." },
       ],
+      hint: "Think about what most alphas did, and what the rare few did.",
     },
   ]),
 };
@@ -181,11 +248,13 @@ const lesson02: LessonSeed = {
       content:
         "1. **Stationary orbits.** The electron moves in circular orbits under the Coulomb force and, in these orbits only, does not radiate.\n2. **Quantised angular momentum.** Allowed orbits have $mvr = n\\dfrac{h}{2\\pi}$, $n = 1, 2, 3, \\ldots$\n3. **Frequency condition.** A photon is emitted or absorbed only when the electron jumps between orbits: $h\\nu = E_i - E_f$.",
     },
+    { type: "heading", text: "Why only some orbits are allowed" },
     {
       type: "text",
       content:
         "**Why only those orbits? (de Broglie's picture).** An electron of momentum $mv$ is a wave of wavelength $\\lambda = h/mv$. Going round an orbit, the wave meets itself. Unless a whole number of wavelengths fits the circumference, it interferes with itself destructively and cannot persist. So $2\\pi r = n\\lambda = n\\dfrac{h}{mv}$, which is exactly $mvr = nh/2\\pi$. Postulate 2 is a standing-wave condition.",
     },
+    { type: "heading", text: "Radius, speed and energy of orbits" },
     {
       type: "text",
       content:
@@ -246,15 +315,57 @@ const lesson02: LessonSeed = {
       content:
         "What you should have seen: every level scales by $Z^2$ ($E_1 = -13.6$, $-54.4$, $-122.4$ eV), and the orbits shrink by $1/Z$. The orbit for level $n$ holds exactly $n$ wavelengths. Higher orbits are larger ($r \\propto n^2$) but the electron moves more slowly there ($v \\propto 1/n$).",
     },
+    { type: "heading", text: "Worked examples: He⁺ and Li²⁺" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (He⁺, n = 2).** Find the radius and speed.\n\n1. $r_2 = 0.529\\times\\dfrac{2^2}{2} = 1.058$ Å. *Why this step:* $n^2$ in the numerator, $Z$ in the denominator; the higher charge pulls the orbit in.\n2. $v_2 = 2.19\\times10^6\\times\\dfrac{2}{2} = 2.19\\times10^6$ m/s: the same speed as hydrogen's ground state.\n3. Energy: $E_2 = -13.6\\times\\dfrac{4}{4} = -13.6$ eV, also equal to hydrogen's ground state. Coincidences like these are common JEE traps; they all come from $Z/n = 1$.\n\n**Worked example 2 (period and orbital current, hydrogen ground state).**\n\n1. $T = \\dfrac{2\\pi r_1}{v_1} = \\dfrac{2\\pi\\times0.529\\times10^{-10}}{2.19\\times10^6} = 1.52\\times10^{-16}$ s.\n2. The electron passes any point once per period, so the current is $I = \\dfrac{e}{T} = \\dfrac{1.6\\times10^{-19}}{1.52\\times10^{-16}} \\approx 1.05\\times10^{-3}$ A $\\approx 1$ mA. *Why this step:* current is charge per unit time through a point on the loop.\n3. Scaling: $T \\propto r/v \\propto n^3/Z^2$, so $I \\propto Z^2/n^3$.",
+      type: "worked-example",
+      id: "omp4-2-we1",
+      title: "Worked example 1 (He⁺, n = 2)",
+      problem:
+        "For He⁺ in the $n = 2$ level, find the orbit radius, the electron's speed and its energy.",
+      steps: [
+        { text: "$r_2 = 0.529\\times\\dfrac{2^2}{2} = 1.058$ Å. *Why this step:* $n^2$ in the numerator, $Z$ in the denominator; the higher charge pulls the orbit in." },
+        { text: "$v_2 = 2.19\\times10^6\\times\\dfrac{2}{2} = 2.19\\times10^6$ m/s: the same speed as hydrogen's ground state." },
+        { text: "Energy: $E_2 = -13.6\\times\\dfrac{4}{4} = -13.6$ eV, also equal to hydrogen's ground state. Coincidences like these are common JEE traps; they all come from $Z/n = 1$." },
+      ],
+      answer: "$r_2 = 1.058$ Å, $v_2 = 2.19\\times10^6$ m/s, $E_2 = -13.6$ eV",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (ionisation energy of Li²⁺).**\n\n1. Ground state: $E_1 = -13.6\\times3^2 = -122.4$ eV.\n2. Ionisation takes the electron to $E = 0$, so it costs $122.4$ eV. *Why this step:* ionisation energy is the depth of the level below zero.\n\n**Worked example 4 (energy bookkeeping).** A hydrogen electron is in the level with $E = -3.4$ eV. Find $n$, $K$ and $U$.\n\n1. $-13.6/n^2 = -3.4$ gives $n^2 = 4$, $n = 2$.\n2. $K = -E = 3.4$ eV and $U = 2E = -6.8$ eV. Check: $3.4 - 6.8 = -3.4$. ✓",
+      type: "worked-example",
+      id: "omp4-2-we2",
+      title: "Worked example 2 (period and orbital current, hydrogen ground state)",
+      problem:
+        "Find the orbital period of the electron in the hydrogen ground state, and the current its orbit is equivalent to.",
+      steps: [
+        { text: "$T = \\dfrac{2\\pi r_1}{v_1} = \\dfrac{2\\pi\\times0.529\\times10^{-10}}{2.19\\times10^6} = 1.52\\times10^{-16}$ s." },
+        { text: "The electron passes any point once per period, so the current is $I = \\dfrac{e}{T} = \\dfrac{1.6\\times10^{-19}}{1.52\\times10^{-16}} \\approx 1.05\\times10^{-3}$ A $\\approx 1$ mA. *Why this step:* current is charge per unit time through a point on the loop." },
+        { text: "Scaling: $T \\propto r/v \\propto n^3/Z^2$, so $I \\propto Z^2/n^3$." },
+      ],
+      answer: "$T \\approx 1.52\\times10^{-16}$ s, $I \\approx 1.05$ mA",
+    },
+    {
+      type: "worked-example",
+      id: "omp4-2-we3",
+      title: "Worked example 3 (ionisation energy of Li²⁺)",
+      problem:
+        "Find the ionisation energy of a Li²⁺ ion in its ground state.",
+      steps: [
+        { text: "Ground state: $E_1 = -13.6\\times3^2 = -122.4$ eV." },
+        { text: "Ionisation takes the electron to $E = 0$, so it costs $122.4$ eV. *Why this step:* ionisation energy is the depth of the level below zero." },
+      ],
+      tryFirst: false,
+      answer: "122.4 eV",
+    },
+    {
+      type: "worked-example",
+      id: "omp4-2-we4",
+      title: "Worked example 4 (energy bookkeeping)",
+      problem:
+        "A hydrogen electron is in the level with $E = -3.4$ eV. Find $n$, $K$ and $U$.",
+      steps: [
+        { text: "$-13.6/n^2 = -3.4$ gives $n^2 = 4$, $n = 2$." },
+        { text: "$K = -E = 3.4$ eV and $U = 2E = -6.8$ eV. Check: $3.4 - 6.8 = -3.4$. ✓" },
+      ],
+      answer: "$n = 2$, $K = 3.4$ eV, $U = -6.8$ eV",
     },
     {
       type: "table",
@@ -281,16 +392,21 @@ const lesson02: LessonSeed = {
       content:
         "Energy is measured from a chosen zero: an electron at rest infinitely far away. Anything bound to the nucleus has less energy than that, so its energy is negative. The more negative, the more tightly bound.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp4-2-q1",
       variant: "practice",
-      question: "What is the radius of the third Bohr orbit in Li²⁺ ($Z = 3$)?",
-      options: [
-        { text: "$4.761$ Å", feedback: "That is the hydrogen value, $0.529\\times9$. Divide by $Z = 3$." },
-        { text: "$0.529$ Å", feedback: "That would need $n^2/Z = 1$; here $n^2/Z = 9/3 = 3$." },
-        { text: "$0.176$ Å", feedback: "That divides by $Z^2$. The radius goes as $1/Z$." },
-        { text: "$1.587$ Å", correct: true, feedback: "$r_3 = 0.529\\times9/3 = 1.587$ Å." },
+      question: "What is the radius of the third Bohr orbit in Li²⁺ ($Z = 3$), in ångströms? (Hydrogen's first Bohr radius is 0.529 Å.)",
+      answer: 1.587,
+      relTolerance: 0.01,
+      unit: "Å",
+      hint: "$r_n = 0.529\\,\\dfrac{n^2}{Z}$ Å.",
+      solution: "$r_3 = 0.529\\times\\dfrac{3^2}{3} = 0.529\\times3 = 1.587$ Å.",
+      commonMistakes: [
+        { answer: 4.761, feedback: "That is the hydrogen value, $0.529\\times9$. Divide by $Z = 3$." },
+        { answer: 0.529, feedback: "That divides by $Z^2$ ($9/9 = 1$). The radius goes as $n^2/Z$, not $n^2/Z^2$." },
+        { answer: 0.176, feedback: "That is Li²⁺'s first orbit, $0.529/3$. The third orbit is $n^2 = 9$ times larger." },
       ],
     },
     {
@@ -304,17 +420,22 @@ const lesson02: LessonSeed = {
         { text: "kinetic energy increases, total energy decreases", feedback: "Both go the other way." },
         { text: "both decrease", feedback: "The total energy becomes less negative, which is an increase." },
       ],
+      hint: "Use the Bohr relations $KE = |E_n|$ and $E_n = -13.6/n^2$ eV, and watch the signs.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp4-2-q3",
       variant: "practice",
-      question: "The ionisation energy of He⁺ in its ground state is",
-      options: [
-        { text: "$27.2$ eV", feedback: "That scales by $Z$. Energy scales by $Z^2$." },
-        { text: "$54.4$ eV", correct: true, feedback: "$13.6\\times Z^2 = 13.6\\times4 = 54.4$ eV." },
-        { text: "$13.6$ eV", feedback: "That is hydrogen. He⁺ has twice the nuclear charge." },
-        { text: "$122.4$ eV", feedback: "That is Li²⁺ ($Z = 3$)." },
+      question: "What is the ionisation energy of He⁺ in its ground state, in eV?",
+      answer: 54.4,
+      relTolerance: 0.01,
+      unit: "eV",
+      hint: "$E_n = -13.6\\,Z^2/n^2$ eV; ionising from $n = 1$ costs $|E_1|$.",
+      solution: "$|E_1| = 13.6\\times Z^2 = 13.6\\times4 = 54.4$ eV.",
+      commonMistakes: [
+        { answer: 27.2, feedback: "That scales by $Z$. Energy scales by $Z^2$." },
+        { answer: 13.6, feedback: "That is hydrogen. He⁺ has twice the nuclear charge." },
+        { answer: 122.4, feedback: "That is Li²⁺ ($Z = 3$)." },
       ],
     },
     {
@@ -328,18 +449,38 @@ const lesson02: LessonSeed = {
         { text: "It depends on $Z$.", feedback: "The count is set by $n$ alone; $Z$ changes the size of both orbit and wavelength together." },
         { text: "4", correct: true, feedback: "$2\\pi r_n = n\\lambda$: the orbit holds exactly $n$ wavelengths." },
       ],
+      hint: "Write Bohr's condition $mvr = n\\dfrac{h}{2\\pi}$ with $\\lambda = h/mv$, and compare the orbit's circumference with $\\lambda$.",
+    },
+    {
+      type: "numeric",
+      id: "omp4-2-q5",
+      variant: "practice",
+      question: "A hydrogen atom's electron has total energy $-1.51$ eV. What is its potential energy, in eV? Include the sign.",
+      answer: -3.02,
+      tolerance: 0.01,
+      unit: "eV",
+      hint: "In a Coulomb orbit $K = -E$ and $U = 2E$.",
+      solution: "$U = 2E = 2\\times(-1.51) = -3.02$ eV, and $K = -E = +1.51$ eV, so $K + U = -1.51$ eV as required.",
+      commonMistakes: [
+        { answer: -1.51, feedback: "That is the total energy. $U = 2E$ in a Coulomb orbit." },
+        { answer: 1.51, feedback: "That is the kinetic energy, $K = -E$." },
+        { answer: -0.755, feedback: "That is $E/2$. The virial relation gives $U = 2E$." },
+        { answer: 3.02, feedback: "Right size, wrong sign. The potential energy of a bound electron is negative: $U = 2E$." },
+      ],
     },
     {
       type: "quiz",
-      id: "omp4-2-q5",
-      variant: "practice",
-      question: "A hydrogen atom's electron has total energy $-1.51$ eV. What is its potential energy?",
+      id: "omp4-2-q6",
+      variant: "concept",
+      multiple: true,
+      question: "For a Bohr orbit of a hydrogen-like atom (fixed $Z$), select every quantity that *decreases* as $n$ increases.",
       options: [
-        { text: "$-3.02$ eV", correct: true, feedback: "$U = 2E = -3.02$ eV (and $K = +1.51$ eV)." },
-        { text: "$-1.51$ eV", feedback: "That is the total energy. $U = 2E$ in a Coulomb orbit." },
-        { text: "$+1.51$ eV", feedback: "That is the kinetic energy, $K = -E$." },
-        { text: "$-0.755$ eV", feedback: "That is $E/2$. The virial relation gives $U = 2E$." },
+        { text: "The electron's speed", correct: true, feedback: "$v_n \\propto Z/n$, so it falls as $n$ grows." },
+        { text: "The electron's kinetic energy", correct: true, feedback: "$K = 13.6\\,Z^2/n^2$ eV, which falls." },
+        { text: "The orbit radius", feedback: "$r_n \\propto n^2/Z$ grows with $n$." },
+        { text: "The total energy", feedback: "$E_n = -13.6\\,Z^2/n^2$ eV becomes *less negative*, which is an increase towards zero." },
       ],
+      hint: "Write each quantity's dependence on $n$: $r \\propto n^2$, $v \\propto 1/n$, $E \\propto -1/n^2$.",
     },
   ]),
 };
@@ -354,10 +495,11 @@ const lesson03: LessonSeed = {
       content:
         "Pass an electric discharge through hydrogen gas and look at the glow through a prism. Instead of a rainbow you see four sharp lines: red at 656 nm, blue-green at 486 nm, and two violet lines at 434 and 410 nm. Balmer found a formula for them in 1885 by pure number-juggling. Bohr's levels turn that formula into physics.",
     },
+    { type: "heading", text: "Deriving the Rydberg formula" },
     {
       type: "text",
       content:
-        "**Derivation of the Rydberg formula.** When an electron drops from level $n_i$ to a lower level $n_f$, one photon carries away the difference in energy:",
+        "When an electron drops from level $n_i$ to a lower level $n_f$, one photon carries away the difference in energy:",
     },
     {
       type: "math",
@@ -380,10 +522,11 @@ const lesson03: LessonSeed = {
       content:
         "Either compute the energy gap in eV and use $\\lambda = 1240/\\Delta E$ nm, or use $\\frac1\\lambda = R(\\ldots)$ with $\\frac1R = 91.2$ nm. The first route is usually quicker and less error-prone.",
     },
+    { type: "heading", text: "Spectral series" },
     {
       type: "text",
       content:
-        "**Series.** Group the lines by the level they land on. All drops to $n_f = 1$ form the Lyman series, to $n_f = 2$ the Balmer series, and so on. In each series the *first line* (longest wavelength) comes from the smallest jump, $n_i = n_f + 1$, and the *series limit* (shortest wavelength) from $n_i \\to \\infty$.",
+        "Group the lines by the level they land on. All drops to $n_f = 1$ form the Lyman series, to $n_f = 2$ the Balmer series, and so on. In each series the *first line* (longest wavelength) comes from the smallest jump, $n_i = n_f + 1$, and the *series limit* (shortest wavelength) from $n_i \\to \\infty$.",
     },
     {
       type: "table",
@@ -420,10 +563,11 @@ const lesson03: LessonSeed = {
       content:
         "What you should have seen: $3 \\to 2$ gives 656 nm (red, H$_\\alpha$), $4 \\to 2$ gives 486 nm, and higher starting levels crowd towards the Balmer limit. Every Lyman line lies in the ultraviolet because even the smallest drop to $n = 1$ is 10.2 eV. Absorption uses the same gaps with the arrow reversed.",
     },
+    { type: "heading", text: "How many lines?" },
     {
       type: "text",
       content:
-        "**How many lines?** Hydrogen atoms excited to level $n$ can drop by any route. Each line is a *pair* of levels, and there are $\\binom n2 = \\dfrac{n(n-1)}{2}$ pairs among $n$ levels, so a gas of many atoms shows that many lines. A *single* atom follows one path down and emits at most $n - 1$ photons (one level at a time).",
+        "Hydrogen atoms excited to level $n$ can drop by any route. Each line is a *pair* of levels, and there are $\\binom n2 = \\dfrac{n(n-1)}{2}$ pairs among $n$ levels, so a gas of many atoms shows that many lines. A *single* atom follows one path down and emits at most $n - 1$ photons (one level at a time).",
     },
     {
       type: "callout",
@@ -432,15 +576,69 @@ const lesson03: LessonSeed = {
       content:
         "First excitation energy: $E_2 - E_1 = 10.2$ eV (first excitation potential 10.2 V). Second: $E_3 - E_1 = 12.09$ eV. Ionisation energy: $13.6$ eV (ionisation potential 13.6 V). An electron that collides with a ground-state atom can excite it only if the electron carries at least 10.2 eV.",
     },
+    { type: "heading", text: "Worked examples: Balmer and He⁺ transitions" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (Hα, JEE Main).**\n\n1. $\\Delta E = 13.6\\left(\\dfrac14 - \\dfrac19\\right) = 13.6\\times\\dfrac{5}{36} = 1.89$ eV. *Why this step:* the photon's energy is the gap between the two levels.\n2. $\\lambda = \\dfrac{1240}{1.89} \\approx 656$ nm: the red line.\n\n**Worked example 2 (shortest Balmer wavelength).**\n\n1. Series limit: $n_i \\to \\infty$, so $\\Delta E = 13.6/4 = 3.4$ eV.\n2. $\\lambda = 1240/3.4 \\approx 365$ nm (just into the ultraviolet).\n\n**Worked example 3 (ratio of longest wavelengths of Lyman and Balmer).**\n\n1. Lyman first line: $\\dfrac1\\lambda = R\\left(1 - \\dfrac14\\right) = \\dfrac{3R}{4}$.\n2. Balmer first line: $\\dfrac1\\lambda = R\\left(\\dfrac14 - \\dfrac19\\right) = \\dfrac{5R}{36}$.\n3. $\\dfrac{\\lambda_L}{\\lambda_B} = \\dfrac{5/36}{3/4} = \\dfrac{5}{27}$. *Why this step:* in a ratio $R$ cancels, so never plug in its value.",
+      type: "worked-example",
+      id: "omp4-3-we1",
+      title: "Worked example 1 (Hα, JEE Main)",
+      problem:
+        "Find the wavelength of Hα, the hydrogen line emitted in the jump from $n = 3$ to $n = 2$.",
+      steps: [
+        { text: "$\\Delta E = 13.6\\left(\\dfrac14 - \\dfrac19\\right) = 13.6\\times\\dfrac{5}{36} = 1.89$ eV. *Why this step:* the photon's energy is the gap between the two levels." },
+        { text: "$\\lambda = \\dfrac{1240}{1.89} \\approx 656$ nm: the red line." },
+      ],
+      answer: "$\\lambda \\approx 656$ nm (red)",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (He⁺ photon ionising hydrogen).** A photon from the $n = 2 \\to 1$ transition in He⁺ strikes a ground-state hydrogen atom. What is the kinetic energy of the ejected electron?\n\n1. He⁺ photon: $13.6\\times2^2\\left(1 - \\dfrac14\\right) = 54.4\\times\\dfrac34 = 40.8$ eV.\n2. Ionising hydrogen costs 13.6 eV. *Why this step:* this is a photoelectric process on an atom; the ionisation energy plays the role of the work function.\n3. $K = 40.8 - 13.6 = 27.2$ eV.\n\n**Worked example 5 (recoil, JEE Advanced flavour).** A hydrogen atom at rest emits a Lyman-α photon (10.2 eV). Find its recoil speed.\n\n1. Momentum conservation: the atom recoils with the photon's momentum, $Mv = E/c$.\n2. $v = \\dfrac{E}{Mc} = \\dfrac{E}{Mc^2}\\,c = \\dfrac{10.2\\ \\text{eV}}{938\\ \\text{MeV}}\\times3\\times10^8 \\approx 3.3$ m/s. *Why this step:* writing $Mc^2 = 938$ MeV for a hydrogen atom avoids converting to kilograms.\n3. The recoil kinetic energy, $\\tfrac12Mv^2 \\approx 5.5\\times10^{-8}$ eV, is taken from the photon, so the photon's energy is very slightly less than the level gap. Usually negligible.",
+      type: "worked-example",
+      id: "omp4-3-we2",
+      title: "Worked example 2 (shortest Balmer wavelength)",
+      problem:
+        "Find the shortest wavelength in hydrogen's Balmer series.",
+      steps: [
+        { text: "Series limit: $n_i \\to \\infty$, so $\\Delta E = 13.6/4 = 3.4$ eV." },
+        { text: "$\\lambda = 1240/3.4 \\approx 365$ nm (just into the ultraviolet)." },
+      ],
+      answer: "$\\lambda \\approx 365$ nm",
+    },
+    {
+      type: "worked-example",
+      id: "omp4-3-we3",
+      title: "Worked example 3 (ratio of longest wavelengths of Lyman and Balmer)",
+      problem:
+        "Find the ratio of the longest wavelength in the Lyman series to the longest in the Balmer series.",
+      steps: [
+        { text: "Lyman first line: $\\dfrac1\\lambda = R\\left(1 - \\dfrac14\\right) = \\dfrac{3R}{4}$." },
+        { text: "Balmer first line: $\\dfrac1\\lambda = R\\left(\\dfrac14 - \\dfrac19\\right) = \\dfrac{5R}{36}$." },
+        { text: "$\\dfrac{\\lambda_L}{\\lambda_B} = \\dfrac{5/36}{3/4} = \\dfrac{5}{27}$. *Why this step:* in a ratio $R$ cancels, so never plug in its value." },
+      ],
+      answer: "$\\lambda_L/\\lambda_B = 5/27$",
+    },
+    {
+      type: "worked-example",
+      id: "omp4-3-we4",
+      title: "Worked example 4 (He⁺ photon ionising hydrogen)",
+      problem:
+        "A photon from the $n = 2 \\to 1$ transition in He⁺ strikes a ground-state hydrogen atom. What is the kinetic energy of the ejected electron?",
+      steps: [
+        { text: "He⁺ photon: $13.6\\times2^2\\left(1 - \\dfrac14\\right) = 54.4\\times\\dfrac34 = 40.8$ eV." },
+        { text: "Ionising hydrogen costs 13.6 eV. *Why this step:* this is a photoelectric process on an atom; the ionisation energy plays the role of the work function." },
+        { text: "$K = 40.8 - 13.6 = 27.2$ eV." },
+      ],
+      answer: "$K = 27.2$ eV",
+    },
+    {
+      type: "worked-example",
+      id: "omp4-3-we5",
+      title: "Worked example 5 (recoil, JEE Advanced flavour)",
+      problem:
+        "A hydrogen atom at rest emits a Lyman-α photon (10.2 eV). Find its recoil speed.",
+      steps: [
+        { text: "Momentum conservation: the atom recoils with the photon's momentum, $Mv = E/c$." },
+        { text: "$v = \\dfrac{E}{Mc} = \\dfrac{E}{Mc^2}\\,c = \\dfrac{10.2\\ \\text{eV}}{938\\ \\text{MeV}}\\times3\\times10^8 \\approx 3.3$ m/s. *Why this step:* writing $Mc^2 = 938$ MeV for a hydrogen atom avoids converting to kilograms." },
+        { text: "The recoil kinetic energy, $\\tfrac12Mv^2 \\approx 5.5\\times10^{-8}$ eV, is taken from the photon, so the photon's energy is very slightly less than the level gap. Usually negligible." },
+      ],
+      answer: "$v \\approx 3.3$ m/s",
     },
     {
       type: "callout",
@@ -456,28 +654,35 @@ const lesson03: LessonSeed = {
       content:
         "At room temperature almost every hydrogen atom sits in $n = 1$, so it can only absorb photons that lift it *from* $n = 1$: the Lyman lines. The Balmer lines appear in absorption only when many atoms are already in $n = 2$, as in hot stellar atmospheres.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp4-3-q1",
       variant: "practice",
-      question: "What is the wavelength of the photon emitted in the $4 \\to 2$ transition of hydrogen? ($hc = 1240$ eV·nm)",
-      options: [
-        { text: "About 656 nm", feedback: "That is the $3 \\to 2$ line." },
-        { text: "About 97 nm", feedback: "That is $4 \\to 1$, a Lyman line." },
-        { text: "About 486 nm", correct: true, feedback: "$\\Delta E = 13.6\\left(\\frac14 - \\frac1{16}\\right) = 2.55$ eV; $1240/2.55 \\approx 486$ nm." },
-        { text: "About 1876 nm", feedback: "That is the $4 \\to 3$ Paschen line." },
+      question: "What is the wavelength, in nm, of the photon emitted in the $4 \\to 2$ transition of hydrogen? ($hc = 1240$ eV·nm)",
+      answer: 486,
+      relTolerance: 0.01,
+      unit: "nm",
+      hint: "Find $\\Delta E = 13.6\\left(\\frac{1}{n_f^2} - \\frac{1}{n_i^2}\\right)$ eV, then $\\lambda = 1240/\\Delta E$ nm.",
+      solution: "$\\Delta E = 13.6\\left(\\dfrac14 - \\dfrac1{16}\\right) = 13.6\\times\\dfrac{3}{16} = 2.55$ eV.\n\n$\\lambda = \\dfrac{1240}{2.55} \\approx 486$ nm, the blue-green H$_\\beta$ line of the Balmer series.",
+      commonMistakes: [
+        { answer: 656, feedback: "That is the $3 \\to 2$ line." },
+        { answer: 97.3, feedback: "That is $4 \\to 1$, a Lyman line." },
+        { answer: 1876, feedback: "That is the $4 \\to 3$ Paschen line." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp4-3-q2",
       variant: "practice",
       question: "A gas of hydrogen atoms is excited to $n = 5$. How many different spectral lines can it emit?",
-      options: [
-        { text: "4", feedback: "That is the most one atom can emit. The gas shows every possible pair of levels." },
-        { text: "5", feedback: "Count pairs of levels, not levels: $\\binom52$." },
-        { text: "15", feedback: "That is $\\binom62$; there are only five levels up to $n = 5$." },
-        { text: "10", correct: true, feedback: "$\\binom52 = \\frac{5\\times4}{2} = 10$." },
+      answer: 10,
+      hint: "Each line joins a pair of levels. Count the pairs among levels 1 to 5.",
+      solution: "Every pair of the five levels gives one line: $\\dbinom52 = \\dfrac{5\\times4}{2} = 10$.",
+      commonMistakes: [
+        { answer: 4, feedback: "That is the most one atom can emit. The gas shows every possible pair of levels." },
+        { answer: 5, feedback: "Count pairs of levels, not levels: $\\binom52$." },
+        { answer: 15, feedback: "That is $\\binom62$; there are only five levels up to $n = 5$." },
       ],
     },
     {
@@ -491,6 +696,7 @@ const lesson03: LessonSeed = {
         { text: "The $n = 1$ level is the highest energy level.", feedback: "It is the lowest (most negative) level." },
         { text: "Ultraviolet photons are absorbed less.", feedback: "Absorption does not decide where emission lines fall." },
       ],
+      hint: "Find the energy of the smallest Lyman drop, $n = 2 \\to 1$, and compare it with the photon energies of visible light.",
     },
     {
       type: "quiz",
@@ -503,6 +709,7 @@ const lesson03: LessonSeed = {
         { text: "$1 : 4$", correct: true, feedback: "Series limits are $n_f^2/R$: $\\frac1R : \\frac4R = 1 : 4$." },
         { text: "$1 : 2$", feedback: "Series limits go as $n_f^2$, not $n_f$." },
       ],
+      hint: "The shortest line of a series comes from $n = \\infty$ dropping to that series' lower level. Use $\\dfrac1\\lambda = R\\left(\\dfrac1{n_1^2} - \\dfrac1{n_2^2}\\right)$.",
     },
     {
       type: "quiz",
@@ -515,6 +722,21 @@ const lesson03: LessonSeed = {
         { text: "They cannot excite the atoms because 11 eV is not exactly a level gap.", feedback: "A colliding electron can give up *part* of its energy and keep the rest; unlike a photon, it does not need an exact match." },
         { text: "They can excite atoms to $n = 3$, giving the red H$_\\alpha$ line.", feedback: "Reaching $n = 3$ needs 12.09 eV." },
       ],
+      hint: "List the energies needed for $1 \\to 2$, for $1 \\to 3$ and for ionisation, and compare each with 11 eV. A colliding electron can hand over just part of its energy.",
+    },
+    {
+      type: "quiz",
+      id: "omp4-3-q6",
+      variant: "practice",
+      multiple: true,
+      question: "Photons of the energies below fall on hydrogen atoms in the ground state. Select every photon energy that the atoms can absorb.",
+      options: [
+        { text: "10.2 eV", correct: true, feedback: "Exactly $E_2 - E_1$: the photon lifts the atom to $n = 2$." },
+        { text: "12.75 eV", correct: true, feedback: "$13.6\\left(1 - \\frac1{16}\\right) = 12.75$ eV $= E_4 - E_1$." },
+        { text: "11.0 eV", feedback: "No level sits 11.0 eV above the ground state. A photon is absorbed whole or not at all, so it must match a gap exactly (unlike a colliding electron)." },
+        { text: "15.0 eV", correct: true, feedback: "Anything above 13.6 eV can ionise the atom; the extra 1.4 eV becomes the freed electron's kinetic energy." },
+      ],
+      hint: "A photon gives up all its energy. It must match a level gap exactly, or exceed the 13.6 eV ionisation energy.",
     },
   ]),
 };
@@ -529,15 +751,17 @@ const lesson04: LessonSeed = {
       content:
         "Run the photoelectric effect backwards. There, a photon's energy went into one electron. In an X-ray tube, an electron's energy goes into photons. Electrons are accelerated through tens of kilovolts and slammed into a metal target; as they are stopped, they emit radiation so energetic it passes through flesh but not bone.",
     },
+    { type: "heading", text: "The Coolidge tube" },
     {
       type: "text",
       content:
-        "**The Coolidge tube.** A heated filament (the cathode) boils off electrons. A potential difference $V$ of 20–100 kV accelerates them to the target (the anode, usually tungsten or molybdenum, set in a cooled copper block because about 99% of the energy becomes heat). The filament current controls *how many* electrons arrive, so the **intensity** of the X-rays. The voltage controls *how energetic* each electron is, so the **penetrating power** (\"hardness\") of the X-rays.",
+        "A heated filament (the cathode) boils off electrons. A potential difference $V$ of 20–100 kV accelerates them to the target (the anode, usually tungsten or molybdenum, set in a cooled copper block because about 99% of the energy becomes heat). The filament current controls *how many* electrons arrive, so the **intensity** of the X-rays. The voltage controls *how energetic* each electron is, so the **penetrating power** (\"hardness\") of the X-rays.",
     },
+    { type: "heading", text: "The continuous spectrum and its sharp cut-off" },
     {
       type: "text",
       content:
-        "**The continuous spectrum and its sharp cut-off (derivation).** Each electron arrives with kinetic energy $eV$. As it decelerates in the target it can emit photons of any energy up to that amount (this is *bremsstrahlung*, \"braking radiation\"). The most energetic photon possible takes the electron's whole energy in one go:",
+        "Each electron arrives with kinetic energy $eV$. As it decelerates in the target it can emit photons of any energy up to that amount (this is *bremsstrahlung*, \"braking radiation\"). The most energetic photon possible takes the electron's whole energy in one go:",
     },
     {
       type: "math",
@@ -570,10 +794,11 @@ const lesson04: LessonSeed = {
       content:
         "What you should have seen: at 30 kV, $\\lambda_{\\min} \\approx 0.041$ nm; doubling the voltage halves the cut-off. X-ray wavelengths are around 0.01–1 nm, the size of atomic spacings, which is why crystals diffract them.",
     },
+    { type: "heading", text: "Characteristic lines" },
     {
       type: "text",
       content:
-        "**Characteristic lines.** On top of the smooth spectrum sit sharp peaks whose wavelengths depend on the *target element*. An incoming electron knocks out an inner (K-shell, $n = 1$) electron of a target atom. An electron from the L shell ($n = 2$) drops into the hole, emitting a $K_\\alpha$ photon; one from the M shell ($n = 3$) gives $K_\\beta$ (more energetic). These are Bohr-like transitions in a heavy atom, where the nuclear charge seen by the falling electron is about $(Z - 1)e$ (one K electron remains to screen it).",
+        "On top of the smooth spectrum sit sharp peaks whose wavelengths depend on the *target element*. An incoming electron knocks out an inner (K-shell, $n = 1$) electron of a target atom. An electron from the L shell ($n = 2$) drops into the hole, emitting a $K_\\alpha$ photon; one from the M shell ($n = 3$) gives $K_\\beta$ (more energetic). These are Bohr-like transitions in a heavy atom, where the nuclear charge seen by the falling electron is about $(Z - 1)e$ (one K electron remains to screen it).",
     },
     {
       type: "math",
@@ -585,9 +810,51 @@ const lesson04: LessonSeed = {
         "Moseley (1913) measured $K_\\alpha$ lines for dozens of elements and found $\\sqrt\\nu$ exactly linear in $Z$. That put the periodic table in order of atomic number rather than mass, and predicted missing elements (43, 61, 72, 75) from gaps in the line.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (cut-off at 30 kV, JEE Main).**\n\n1. $\\lambda_{\\min} = \\dfrac{1240}{30\\,000}$ nm $\\approx 0.0413$ nm $= 0.413$ Å. *Why this step:* $eV$ in eV is just $V$ in volts, so $1240/V$ gives nm directly.\n\n**Worked example 2 (doubling the voltage).** A tube runs at 20 kV; the target's $K_\\alpha$ line is at 0.071 nm. The voltage is raised to 40 kV.\n\n1. $\\lambda_{\\min}$: $0.062$ nm $\\to 0.031$ nm (halved).\n2. $K_\\alpha$: unchanged at 0.071 nm. It is fixed by the energy levels of the target atom, and the voltage does not change those. *Why this step:* separate what the *electron beam* controls from what the *target atom* controls.\n3. So $\\lambda_{K\\alpha} - \\lambda_{\\min}$ increases.\n\n**Worked example 3 (Moseley estimate for copper, Z = 29).**\n\n1. $E_{K\\alpha} \\approx 10.2\\times28^2 = 10.2\\times784 \\approx 8.0$ keV.\n2. $\\lambda = \\dfrac{1240}{8000}$ nm $\\approx 0.155$ nm. (Measured: 0.154 nm. The simple screening model does remarkably well.)\n\n**Worked example 4 (ratio for two elements).** Find $\\nu_1/\\nu_2$ for the $K_\\alpha$ lines of elements with $Z = 11$ and $Z = 21$.\n\n1. $\\nu \\propto (Z - 1)^2$, so $\\dfrac{\\nu_1}{\\nu_2} = \\left(\\dfrac{10}{20}\\right)^2 = \\dfrac14$. *Why this step:* use $Z - 1$, not $Z$; $(11/21)^2 \\approx 0.27$ is a common wrong answer.",
+      type: "worked-example",
+      id: "omp4-4-we1",
+      title: "Worked example 1 (cut-off at 30 kV, JEE Main)",
+      problem:
+        "An X-ray tube runs at 30 kV. Find the cut-off (minimum) wavelength of the X-rays.",
+      steps: [
+        { text: "$\\lambda_{\\min} = \\dfrac{1240}{30\\,000}$ nm $\\approx 0.0413$ nm $= 0.413$ Å. *Why this step:* $eV$ in eV is just $V$ in volts, so $1240/V$ gives nm directly." },
+      ],
+      answer: "$\\lambda_{\\min} \\approx 0.0413$ nm $= 0.413$ Å",
+    },
+    {
+      type: "worked-example",
+      id: "omp4-4-we2",
+      title: "Worked example 2 (doubling the voltage)",
+      problem:
+        "A tube runs at 20 kV; the target's $K_\\alpha$ line is at 0.071 nm. The voltage is raised to 40 kV. What happens to the cut-off wavelength $\\lambda_{\\min}$, to the $K_\\alpha$ wavelength, and to the gap between them?",
+      steps: [
+        { text: "$\\lambda_{\\min}$: $0.062$ nm $\\to 0.031$ nm (halved)." },
+        { text: "$K_\\alpha$: unchanged at 0.071 nm. It is fixed by the energy levels of the target atom, and the voltage does not change those. *Why this step:* separate what the *electron beam* controls from what the *target atom* controls." },
+        { text: "So $\\lambda_{K\\alpha} - \\lambda_{\\min}$ increases." },
+      ],
+      answer: "$\\lambda_{\\min}$ halves (0.062 nm to 0.031 nm); $K_\\alpha$ stays at 0.071 nm, so the gap increases.",
+    },
+    {
+      type: "worked-example",
+      id: "omp4-4-we3",
+      title: "Worked example 3 (Moseley estimate for copper, Z = 29)",
+      problem:
+        "Use Moseley's law to estimate the energy and wavelength of copper's $K_\\alpha$ line ($Z = 29$).",
+      steps: [
+        { text: "$E_{K\\alpha} \\approx 10.2\\times28^2 = 10.2\\times784 \\approx 8.0$ keV." },
+        { text: "$\\lambda = \\dfrac{1240}{8000}$ nm $\\approx 0.155$ nm. (Measured: 0.154 nm. The simple screening model does remarkably well.)" },
+      ],
+      answer: "$E_{K\\alpha} \\approx 8.0$ keV, $\\lambda \\approx 0.155$ nm",
+    },
+    {
+      type: "worked-example",
+      id: "omp4-4-we4",
+      title: "Worked example 4 (ratio for two elements)",
+      problem:
+        "Find $\\nu_1/\\nu_2$ for the $K_\\alpha$ lines of elements with $Z = 11$ and $Z = 21$.",
+      steps: [
+        { text: "$\\nu \\propto (Z - 1)^2$, so $\\dfrac{\\nu_1}{\\nu_2} = \\left(\\dfrac{10}{20}\\right)^2 = \\dfrac14$. *Why this step:* use $Z - 1$, not $Z$; $(11/21)^2 \\approx 0.27$ is a common wrong answer." },
+      ],
+      answer: "$\\nu_1/\\nu_2 = 1/4$",
     },
     {
       type: "callout",
@@ -603,40 +870,49 @@ const lesson04: LessonSeed = {
       content:
         "Characteristic lines are fingerprints of the target's inner energy levels. Raising the voltage makes them *appear* (once $eV$ exceeds the K-shell binding energy) and grow brighter, but never moves them.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp4-4-q1",
       variant: "practice",
-      question: "An X-ray tube operates at 20 kV. What is the cut-off wavelength?",
-      options: [
-        { text: "$62$ nm", feedback: "That uses 20 V. The voltage is 20 kV $= 20\\,000$ V." },
-        { text: "$0.62$ nm", feedback: "Power-of-ten slip: $1240/20\\,000 = 0.062$." },
-        { text: "$0.062$ nm", correct: true, feedback: "$1240/20\\,000 = 0.062$ nm." },
-        { text: "It depends on the target.", feedback: "The cut-off depends only on the voltage." },
+      question: "An X-ray tube operates at 20 kV. What is the cut-off wavelength, in nm? ($hc = 1240$ eV·nm)",
+      answer: 0.062,
+      relTolerance: 0.02,
+      unit: "nm",
+      hint: "The shortest wavelength carries one electron's whole energy $eV$: $\\lambda_{\\min} = 1240/V$ nm with $V$ in volts.",
+      solution: "$\\lambda_{\\min} = \\dfrac{1240}{20\\,000} = 0.062$ nm, whatever the target.",
+      commonMistakes: [
+        { answer: 62, feedback: "That uses 20 V. The voltage is 20 kV $= 20\\,000$ V." },
+        { answer: 0.62, feedback: "Power-of-ten slip: $1240/20\\,000 = 0.062$." },
       ],
     },
     {
       type: "quiz",
       id: "omp4-4-q2",
       variant: "concept",
-      question: "The filament current of an X-ray tube is increased at fixed voltage. What changes?",
+      multiple: true,
+      question: "The filament current of an X-ray tube is increased at fixed voltage. Select every correct statement.",
       options: [
-        { text: "The intensity rises; $\\lambda_{\\min}$ and the characteristic lines stay the same.", correct: true, feedback: "More electrons per second, each with the same $eV$." },
-        { text: "$\\lambda_{\\min}$ decreases.", feedback: "$\\lambda_{\\min}$ depends on the energy per electron, $eV$, which is unchanged." },
+        { text: "The intensity of the X-rays rises.", correct: true, feedback: "More electrons strike the target per second, so more photons come out." },
+        { text: "$\\lambda_{\\min}$ stays the same.", correct: true, feedback: "$\\lambda_{\\min}$ depends on the energy per electron, $eV$, which is unchanged." },
         { text: "The characteristic lines shift to shorter wavelengths.", feedback: "Those are set by the target's energy levels." },
         { text: "The X-rays become more penetrating.", feedback: "Penetrating power (hardness) is controlled by the voltage." },
       ],
+      hint: "Decide what the filament current controls at the target, then test each statement against $\\lambda_{\\min} = hc/eV$ and the origin of the characteristic lines.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp4-4-q3",
       variant: "practice",
-      question: "Copper ($Z = 29$) has a $K_\\alpha$ wavelength of about 0.155 nm. Which element has a $K_\\alpha$ wavelength four times longer?",
-      options: [
-        { text: "$Z = 8$", feedback: "That quarters $Z - 1$ (to 7). The wavelength goes as the inverse *square*, so halve $Z - 1$." },
-        { text: "$Z = 14.5$", feedback: "That halves $Z$ instead of $Z - 1$ (and $Z$ must be a whole number)." },
-        { text: "$Z = 57$", feedback: "A larger $Z$ gives a *shorter* $K_\\alpha$ wavelength." },
-        { text: "$Z = 15$", correct: true, feedback: "$\\lambda \\propto 1/(Z-1)^2$; four times the wavelength needs half of $Z - 1$: $14$, so $Z = 15$." },
+      question: "Copper ($Z = 29$) has a $K_\\alpha$ wavelength of about 0.155 nm. What is the atomic number $Z$ of the element whose $K_\\alpha$ wavelength is four times longer?",
+      answer: 15,
+      hint: "Moseley: $\\sqrt\\nu \\propto Z - 1$, so $\\lambda \\propto 1/(Z - 1)^2$.",
+      solution: "$\\lambda \\propto \\dfrac{1}{(Z-1)^2}$. Four times the wavelength needs $(Z - 1)^2$ to be a quarter as big, so $Z - 1$ halves: $28/2 = 14$, giving $Z = 15$ (phosphorus).",
+      commonMistakes: [
+        { answer: 8, feedback: "That quarters $Z - 1$ (to 7). The wavelength goes as the inverse *square*, so halve $Z - 1$." },
+        { answer: 14.5, feedback: "That halves $Z$ instead of $Z - 1$ (and $Z$ must be a whole number)." },
+        { answer: 14, feedback: "That is $Z - 1$. Add the 1 back: $Z = 15$." },
+        { answer: 57, feedback: "A larger $Z$ gives a *shorter* $K_\\alpha$ wavelength." },
       ],
     },
     {
@@ -650,6 +926,7 @@ const lesson04: LessonSeed = {
         { text: "Electrons cannot go faster than light.", feedback: "The electrons are well below $c$; the limit is energy conservation." },
         { text: "It is where the $K_\\beta$ line sits.", feedback: "Characteristic lines depend on the target; the cut-off does not." },
       ],
+      hint: "Recall how one electron's kinetic energy $eV$ can be shared among the photons it produces (4.4), and how photon energy relates to wavelength.",
     },
   ]),
 };
@@ -671,6 +948,7 @@ const lesson05: LessonSeed = {
       content:
         "A nucleus $^A_Z\\text{X}$ has $Z$ protons and $N = A - Z$ neutrons ($A$ = mass number, nucleons in total).\n**Isotopes:** same $Z$, different $A$ ($^{12}$C, $^{14}$C). **Isobars:** same $A$ ($^{14}$C, $^{14}$N). **Isotones:** same $N$ ($^{13}$C, $^{14}$N).\n**Atomic mass unit:** $1$ u $= \\frac{1}{12}$ of the mass of a $^{12}$C atom $= 1.66\\times10^{-27}$ kg, equivalent to $931.5$ MeV.",
     },
+    { type: "heading", text: "Nuclear size and density" },
     {
       type: "text",
       content:
@@ -706,15 +984,17 @@ const lesson05: LessonSeed = {
       content:
         "What you should have seen: the curve rises steeply for light nuclei and flattens for heavy ones. Iron-56 ($x = 5.6$) has $R \\approx 4.6$ fm; uranium-238 ($x = 23.8$) only about 7.4 fm. About four times the nucleons makes the radius only about 1.6 times larger ($4.25^{1/3} \\approx 1.62$); it takes eight times the nucleons to double it.",
     },
+    { type: "heading", text: "The nuclear force" },
     {
       type: "text",
       content:
-        "**The nuclear force.** Protons repel each other with enormous Coulomb forces at femtometre distances, so something stronger must hold the nucleus together. The nuclear (strong) force is: *strongly attractive* at about 1–2.5 fm and repulsive below about 0.8 fm; *short range* (negligible beyond a few fm); *charge independent* (p–p, n–n and p–n pull equally); and *saturating* (each nucleon bonds only with its nearest neighbours, which is why density and binding per nucleon are nearly constant).",
+        "Protons repel each other with enormous Coulomb forces at femtometre distances, so something stronger must hold the nucleus together. The nuclear (strong) force is: *strongly attractive* at about 1–2.5 fm and repulsive below about 0.8 fm; *short range* (negligible beyond a few fm); *charge independent* (p–p, n–n and p–n pull equally); and *saturating* (each nucleon bonds only with its nearest neighbours, which is why density and binding per nucleon are nearly constant).",
     },
+    { type: "heading", text: "Mass defect and binding energy" },
     {
       type: "text",
       content:
-        "**Mass defect and binding energy.** To pull a nucleus apart into free nucleons you must supply energy, the binding energy $BE$. By $E = mc^2$, the free nucleons then have more mass than the nucleus did, by $BE/c^2$:",
+        "To pull a nucleus apart into free nucleons you must supply energy, the binding energy $BE$. By $E = mc^2$, the free nucleons then have more mass than the nucleus did, by $BE/c^2$:",
     },
     {
       type: "math",
@@ -753,15 +1033,56 @@ const lesson05: LessonSeed = {
       type: "math",
       latex: "Q = \\big(\\text{mass of reactants} - \\text{mass of products}\\big)c^2 = BE_{\\text{products}} - BE_{\\text{reactants}}",
     },
+    { type: "heading", text: "Worked examples: radii and Q-values" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (ratio of radii, JEE Main).** Compare the radii of $^{27}$Al and $^{64}$Cu.\n\n1. $R \\propto A^{1/3}$, so $\\dfrac{R_{\\text{Al}}}{R_{\\text{Cu}}} = \\left(\\dfrac{27}{64}\\right)^{1/3} = \\dfrac34$. *Why this step:* both are perfect cubes, the classic JEE giveaway.\n2. Actual values: $3.6$ fm and $4.8$ fm. Their densities are equal.\n\n**Worked example 2 (binding energy of helium-4).** $m_{\\text{H}} = 1.007825$ u, $m_n = 1.008665$ u, $M(^4\\text{He}) = 4.002603$ u.\n\n1. Parts: $2(1.007825) + 2(1.008665) = 4.032980$ u.\n2. $\\Delta m = 4.032980 - 4.002603 = 0.030377$ u.\n3. $BE = 0.030377\\times931.5 \\approx 28.3$ MeV, so $BE/A \\approx 7.07$ MeV. *Why this step:* multiplying by 931.5 converts u directly to MeV without passing through kilograms.",
+      type: "worked-example",
+      id: "omp4-5-we1",
+      title: "Worked example 1 (ratio of radii, JEE Main)",
+      problem:
+        "Compare the radii of $^{27}$Al and $^{64}$Cu.",
+      steps: [
+        { text: "$R \\propto A^{1/3}$, so $\\dfrac{R_{\\text{Al}}}{R_{\\text{Cu}}} = \\left(\\dfrac{27}{64}\\right)^{1/3} = \\dfrac34$. *Why this step:* both are perfect cubes, the classic JEE giveaway." },
+        { text: "Actual values: $3.6$ fm and $4.8$ fm. Their densities are equal." },
+      ],
+      answer: "$R_{\\text{Al}}/R_{\\text{Cu}} = 3/4$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (Q-value from BE/A).** A nucleus with $A = 240$ and $BE/A = 7.6$ MeV splits into two equal fragments with $BE/A = 8.5$ MeV. Find the energy released.\n\n1. $BE$ before: $240\\times7.6 = 1824$ MeV.\n2. $BE$ after: $2\\times120\\times8.5 = 2040$ MeV.\n3. $Q = 2040 - 1824 = 216$ MeV released. *Why this step:* more binding energy after means the products sit lower; the difference comes out as kinetic energy of the fragments. Shortcut: $Q = 240\\times(8.5 - 7.6)$.\n\n**Worked example 4 (deuterium).** $M(^2\\text{H}) = 2.014102$ u.\n\n1. $\\Delta m = 1.007825 + 1.008665 - 2.014102 = 0.002388$ u.\n2. $BE = 0.002388\\times931.5 \\approx 2.22$ MeV, just 1.11 MeV per nucleon. A 2.22 MeV gamma ray can split a deuteron: this is how the number was first measured.",
+      type: "worked-example",
+      id: "omp4-5-we2",
+      title: "Worked example 2 (binding energy of helium-4)",
+      problem:
+        "$m_{\\text{H}} = 1.007825$ u, $m_n = 1.008665$ u, $M(^4\\text{He}) = 4.002603$ u. Find the binding energy of $^4$He and its binding energy per nucleon.",
+      steps: [
+        { text: "Parts: $2(1.007825) + 2(1.008665) = 4.032980$ u." },
+        { text: "$\\Delta m = 4.032980 - 4.002603 = 0.030377$ u." },
+        { text: "$BE = 0.030377\\times931.5 \\approx 28.3$ MeV, so $BE/A \\approx 7.07$ MeV. *Why this step:* multiplying by 931.5 converts u directly to MeV without passing through kilograms." },
+      ],
+      answer: "$BE \\approx 28.3$ MeV, $BE/A \\approx 7.07$ MeV",
+    },
+    {
+      type: "worked-example",
+      id: "omp4-5-we3",
+      title: "Worked example 3 (Q-value from BE/A)",
+      problem:
+        "A nucleus with $A = 240$ and $BE/A = 7.6$ MeV splits into two equal fragments with $BE/A = 8.5$ MeV. Find the energy released.",
+      steps: [
+        { text: "$BE$ before: $240\\times7.6 = 1824$ MeV." },
+        { text: "$BE$ after: $2\\times120\\times8.5 = 2040$ MeV." },
+        { text: "$Q = 2040 - 1824 = 216$ MeV released. *Why this step:* more binding energy after means the products sit lower; the difference comes out as kinetic energy of the fragments. Shortcut: $Q = 240\\times(8.5 - 7.6)$." },
+      ],
+      answer: "$Q = 216$ MeV",
+    },
+    {
+      type: "worked-example",
+      id: "omp4-5-we4",
+      title: "Worked example 4 (deuterium)",
+      problem:
+        "$M(^2\\text{H}) = 2.014102$ u (with $m_{\\text{H}}$ and $m_n$ as in Worked example 2). Find the binding energy of the deuteron and its binding energy per nucleon.",
+      steps: [
+        { text: "$\\Delta m = 1.007825 + 1.008665 - 2.014102 = 0.002388$ u." },
+        { text: "$BE = 0.002388\\times931.5 \\approx 2.22$ MeV, just 1.11 MeV per nucleon. A 2.22 MeV gamma ray can split a deuteron: this is how the number was first measured." },
+      ],
+      answer: "$BE \\approx 2.22$ MeV, 1.11 MeV per nucleon",
     },
     {
       type: "callout",
@@ -777,16 +1098,21 @@ const lesson05: LessonSeed = {
       content:
         "Total binding energy grows with $A$, but binding *per nucleon* peaks near iron and then falls. Uranium's nucleons are less tightly held than iron's, which is exactly why splitting uranium releases energy.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp4-5-q1",
       variant: "practice",
-      question: "A nucleus with mass number $A = 8$ has radius 2.4 fm. What is the radius of a nucleus with $A = 216$?",
-      options: [
-        { text: "$64.8$ fm", feedback: "That scales $R$ with $A$. The radius goes as $A^{1/3}$." },
-        { text: "$7.2$ fm", correct: true, feedback: "$(216/8)^{1/3} = 27^{1/3} = 3$, so $R = 3\\times2.4 = 7.2$ fm." },
-        { text: "$12.5$ fm", feedback: "That uses $\\sqrt{27}$. The exponent is $\\frac13$." },
-        { text: "$2.4$ fm", feedback: "It is the density that is the same for all nuclei, not the radius." },
+      question: "A nucleus with mass number $A = 8$ has radius 2.4 fm. What is the radius, in fm, of a nucleus with $A = 216$?",
+      answer: 7.2,
+      relTolerance: 0.01,
+      unit: "fm",
+      hint: "$R = R_0A^{1/3}$, so radii scale as the cube root of the mass number.",
+      solution: "$\\dfrac{R}{2.4} = \\left(\\dfrac{216}{8}\\right)^{1/3} = 27^{1/3} = 3$, so $R = 3\\times2.4 = 7.2$ fm.",
+      commonMistakes: [
+        { answer: 64.8, feedback: "That scales $R$ with $A$. The radius goes as $A^{1/3}$." },
+        { answer: 12.5, feedback: "That uses $\\sqrt{27}$. The exponent is $\\frac13$." },
+        { answer: 2.4, feedback: "It is the density that is the same for all nuclei, not the radius." },
       ],
     },
     {
@@ -800,6 +1126,7 @@ const lesson05: LessonSeed = {
         { text: "The Coulomb force compresses heavy nuclei more.", feedback: "Coulomb repulsion pushes protons apart; it does not compress the nucleus." },
         { text: "Volume grows as $R^3 \\propto A$, the same way mass does, because the nuclear force saturates.", correct: true, feedback: "$A$ cancels in $\\rho = Am_u/(\\frac43\\pi R_0^3A)$." },
       ],
+      hint: "Use $R = R_0A^{1/3}$: how do the volume and the mass each scale with $A$?",
     },
     {
       type: "quiz",
@@ -812,17 +1139,22 @@ const lesson05: LessonSeed = {
         { text: "$9.315$ MeV", feedback: "Decimal slip: $0.1\\times931.5 = 93.15$." },
         { text: "$1.5\\times10^{-11}$ MeV", feedback: "$1.5\\times10^{-11}$ is about the answer in *joules*; in MeV it is 93.15." },
       ],
+      hint: "Recall the energy equivalent of 1 u from 4.5, and scale it.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp4-5-q4",
       variant: "practice",
-      question: "Two deuterons ($BE/A = 1.1$ MeV) fuse into helium-4 ($BE/A = 7.0$ MeV). Find the energy released.",
-      options: [
-        { text: "$5.9$ MeV", feedback: "That is the gain *per nucleon*, $7.0 - 1.1$. Multiply by 4 nucleons." },
-        { text: "$32.4$ MeV", feedback: "Binding energies are subtracted: $Q = BE_{\\text{after}} - BE_{\\text{before}}$." },
-        { text: "$23.6$ MeV", correct: true, feedback: "$BE$ after $= 4\\times7.0 = 28$ MeV; before $= 2\\times2\\times1.1 = 4.4$ MeV; $Q = 23.6$ MeV." },
-        { text: "$25.8$ MeV", feedback: "That subtracts only one deuteron's binding energy. There are two, $2\\times2.2 = 4.4$ MeV." },
+      question: "Two deuterons ($BE/A = 1.1$ MeV) fuse into helium-4 ($BE/A = 7.0$ MeV). Find the energy released, in MeV.",
+      answer: 23.6,
+      relTolerance: 0.01,
+      unit: "MeV",
+      hint: "$Q = BE_{\\text{after}} - BE_{\\text{before}}$. Total binding energy is $A\\times(BE/A)$.",
+      solution: "After: $4\\times7.0 = 28$ MeV. Before: two deuterons, $2\\times(2\\times1.1) = 4.4$ MeV.\n\n$Q = 28 - 4.4 = 23.6$ MeV.",
+      commonMistakes: [
+        { answer: 5.9, feedback: "That is the gain *per nucleon*, $7.0 - 1.1$. Multiply by 4 nucleons." },
+        { answer: 32.4, feedback: "Binding energies are subtracted: $Q = BE_{\\text{after}} - BE_{\\text{before}}$." },
+        { answer: 25.8, feedback: "That subtracts only one deuteron's binding energy. There are two, $2\\times2.2 = 4.4$ MeV." },
       ],
     },
     {
@@ -836,19 +1168,37 @@ const lesson05: LessonSeed = {
         { text: "$^{2}$H", feedback: "Deuterium is very loosely bound, 1.11 MeV per nucleon." },
         { text: "$^{56}$Fe", correct: true, feedback: "The BE/A curve peaks near iron at about 8.8 MeV." },
       ],
+      hint: "Recall the binding-energy-per-nucleon curve in 4.5: where does it peak?",
+    },
+    {
+      type: "numeric",
+      id: "omp4-5-q6",
+      variant: "practice",
+      question: "Find the Q-value, in MeV, of $^2\\text{H} + {}^3\\text{H} \\to {}^4\\text{He} + n$ from the masses: $^2$H 2.014102 u, $^3$H 3.016049 u, $^4$He 4.002603 u, $n$ 1.008665 u. (1 u $= 931.5$ MeV; a positive Q means energy is released.)",
+      answer: 17.6,
+      relTolerance: 0.01,
+      unit: "MeV",
+      hint: "Add the masses on each side, subtract products from reactants, then multiply by 931.5 MeV/u.",
+      solution: "Reactants: $2.014102 + 3.016049 = 5.030151$ u. Products: $4.002603 + 1.008665 = 5.011268$ u.\n\n$\\Delta m = 0.018883$ u, so $Q = 0.018883\\times931.5 \\approx 17.6$ MeV, released.",
+      commonMistakes: [
+        { answer: 957, feedback: "That leaves out the neutron's mass on the product side. Every product counts." },
+        { answer: -17.6, feedback: "The sign is reversed: $Q = (m_{\\text{reactants}} - m_{\\text{products}})c^2$, and the reactants are heavier, so energy is released." },
+        { answer: 0.0189, tolerance: 0.001, feedback: "$0.018883$ is the mass difference in u. Multiply by 931.5 to get MeV." },
+      ],
     },
     {
       type: "quiz",
-      id: "omp4-5-q6",
-      variant: "practice",
-      question: "Find the Q-value of $^2\\text{H} + {}^3\\text{H} \\to {}^4\\text{He} + n$ from the masses: $^2$H 2.014102 u, $^3$H 3.016049 u, $^4$He 4.002603 u, $n$ 1.008665 u.",
+      id: "omp4-5-q7",
+      variant: "concept",
+      multiple: true,
+      question: "Select every correct statement about nuclear binding energy.",
       options: [
-        { text: "About $957$ MeV", feedback: "That leaves out the neutron's mass on the product side. Every product counts." },
-        { text: "$17.6$ MeV", correct: true, feedback: "$\\Delta m = 5.030151 - 5.011268 = 0.018883$ u; $Q = 0.018883\\times931.5 \\approx 17.6$ MeV, released." },
-        { text: "$-17.6$ MeV", feedback: "The sign is reversed: $Q = (m_{\\text{reactants}} - m_{\\text{products}})c^2$, and the reactants are heavier, so energy is released." },
-        { text: "$0.019$ MeV", feedback: "$0.018883$ is the mass difference in u. Multiply by 931.5 to get MeV." },
+        { text: "Binding energy per nucleon is largest for nuclei near iron-56.", correct: true, feedback: "The BE/A curve peaks near iron at about 8.8 MeV per nucleon." },
+        { text: "Splitting a very heavy nucleus into two medium-mass nuclei releases energy.", correct: true, feedback: "The fragments sit higher on the BE/A curve, so the products are more tightly bound: that is fission." },
+        { text: "A nucleus has more mass than its separate protons and neutrons.", feedback: "It has *less*: the missing mass, the mass defect, is the binding energy divided by $c^2$." },
+        { text: "Nuclear density increases with mass number.", feedback: "$R \\propto A^{1/3}$ makes volume $\\propto A$, the same as mass, so all nuclei have about the same density." },
       ],
-      hint: "Add the masses on each side, subtract products from reactants, then multiply by 931.5 MeV/u.",
+      hint: "Picture the BE/A curve: it rises steeply, peaks near iron and falls slowly.",
     },
   ]),
 };
@@ -863,6 +1213,7 @@ const lesson06: LessonSeed = {
       content:
         "Pick one radon-222 nucleus. When will it decay? Nobody can say; not in principle, not with any instrument. But take a billion of them and you can say, very precisely, that half will have decayed after 3.8 days. Radioactivity is the cleanest example in physics of individual randomness producing collective certainty.",
     },
+    { type: "heading", text: "Alpha, beta and gamma decay" },
     {
       type: "table",
       headers: ["Decay", "What leaves", "Change in $A$", "Change in $Z$", "Example"],
@@ -878,10 +1229,11 @@ const lesson06: LessonSeed = {
       content:
         "**Why the neutrino?** In alpha decay every alpha from a given nucleus has the same energy, as a two-body break-up must (momentum and energy conservation fix it). Beta electrons come out with every energy from zero up to a maximum. If only two bodies were involved, energy would seem to vanish. Pauli proposed (1930) a third, neutral, almost massless particle carrying the missing energy: the neutrino, detected in 1956.",
     },
+    { type: "heading", text: "Deriving the decay law" },
     {
       type: "text",
       content:
-        "**The decay law (derivation).** Each nucleus has the same probability $\\lambda$ per second of decaying, independent of its age or its neighbours. With $N$ nuclei present, the expected number decaying per second is $\\lambda N$:",
+        "Each nucleus has the same probability $\\lambda$ per second of decaying, independent of its age or its neighbours. With $N$ nuclei present, the expected number decaying per second is $\\lambda N$:",
     },
     {
       type: "math",
@@ -924,15 +1276,67 @@ const lesson06: LessonSeed = {
       content:
         "What you should have seen: with $T = 2$ the curve passes 5 at $t = 2$, 2.5 at $t = 4$, 1.25 at $t = 6$. Every half-life the amount halves, wherever you start the clock. The curve never touches zero; halving $N_0$ just scales the whole curve down.",
     },
+    { type: "heading", text: "Worked examples: fractions and decay chains" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (fraction left).** What fraction remains after 3 half-lives, and what fraction has decayed?\n\n1. $N/N_0 = (1/2)^3 = 1/8 = 12.5\\%$ remains.\n2. Decayed: $1 - 1/8 = 7/8$. *Why this step:* JEE often asks for the decayed fraction; read the question twice.\n\n**Worked example 2 (activity falling, JEE Main).** The activity of a sample falls from 800 Bq to 50 Bq in 20 days. Find the half-life.\n\n1. $800/50 = 16 = 2^4$, so 4 half-lives have passed. *Why this step:* activity is proportional to $N$, so it halves on the same clock.\n2. $T_{1/2} = 20/4 = 5$ days.\n\n**Worked example 3 (activity from N).** A sample contains $2\\times10^{20}$ nuclei with $T_{1/2} = 693$ s.\n\n1. $\\lambda = 0.693/693 = 1\\times10^{-3}$ s⁻¹.\n2. $A = \\lambda N = 10^{-3}\\times2\\times10^{20} = 2\\times10^{17}$ Bq $\\approx 5.4\\times10^{6}$ Ci.",
+      type: "worked-example",
+      id: "omp4-6-we1",
+      title: "Worked example 1 (fraction left)",
+      problem:
+        "What fraction remains after 3 half-lives, and what fraction has decayed?",
+      steps: [
+        { text: "$N/N_0 = (1/2)^3 = 1/8 = 12.5\\%$ remains." },
+        { text: "Decayed: $1 - 1/8 = 7/8$. *Why this step:* JEE often asks for the decayed fraction; read the question twice." },
+      ],
+      answer: "$1/8$ (12.5%) remains; $7/8$ has decayed.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (counting decays in a chain).** How many $\\alpha$ and $\\beta^-$ decays turn $^{238}_{92}$U into $^{206}_{82}$Pb?\n\n1. Only $\\alpha$ changes $A$ (by 4): $\\Delta A = 238 - 206 = 32$, so $32/4 = 8$ alphas. *Why this step:* start with the decay that alone controls one of the two numbers.\n2. Eight alphas lower $Z$ by 16: $92 - 16 = 76$. Lead has $Z = 82$, so $Z$ must rise by 6: six $\\beta^-$ decays.\n3. Answer: 8 $\\alpha$, 6 $\\beta^-$.\n\n**Worked example 5 (dating a rock).** A rock contains 7 daughter atoms for every parent atom still present (all daughters came from the parent). The parent's half-life is $1.3\\times10^{9}$ years. How old is the rock?\n\n1. If $N$ parents remain, $7N$ have decayed, so $N_0 = 8N$ and $N/N_0 = 1/8$.\n2. $1/8 = (1/2)^3$: 3 half-lives, so the age is $3.9\\times10^{9}$ years. *Why this step:* the daughter count tells you how many parents *there used to be*.",
+      type: "worked-example",
+      id: "omp4-6-we2",
+      title: "Worked example 2 (activity falling, JEE Main)",
+      problem:
+        "The activity of a sample falls from 800 Bq to 50 Bq in 20 days. Find the half-life.",
+      steps: [
+        { text: "$800/50 = 16 = 2^4$, so 4 half-lives have passed. *Why this step:* activity is proportional to $N$, so it halves on the same clock." },
+        { text: "$T_{1/2} = 20/4 = 5$ days." },
+      ],
+      answer: "$T_{1/2} = 5$ days",
+    },
+    {
+      type: "worked-example",
+      id: "omp4-6-we3",
+      title: "Worked example 3 (activity from N)",
+      problem:
+        "A sample contains $2\\times10^{20}$ nuclei with $T_{1/2} = 693$ s. Find the decay constant and the activity.",
+      steps: [
+        { text: "$\\lambda = 0.693/693 = 1\\times10^{-3}$ s⁻¹." },
+        { text: "$A = \\lambda N = 10^{-3}\\times2\\times10^{20} = 2\\times10^{17}$ Bq $\\approx 5.4\\times10^{6}$ Ci." },
+      ],
+      answer: "$\\lambda = 10^{-3}$ s⁻¹, $A = 2\\times10^{17}$ Bq ($\\approx 5.4\\times10^6$ Ci)",
+    },
+    {
+      type: "worked-example",
+      id: "omp4-6-we4",
+      title: "Worked example 4 (counting decays in a chain)",
+      problem:
+        "How many $\\alpha$ and $\\beta^-$ decays turn $^{238}_{92}$U into $^{206}_{82}$Pb?",
+      steps: [
+        { text: "Only $\\alpha$ changes $A$ (by 4): $\\Delta A = 238 - 206 = 32$, so $32/4 = 8$ alphas. *Why this step:* start with the decay that alone controls one of the two numbers." },
+        { text: "Eight alphas lower $Z$ by 16: $92 - 16 = 76$. Lead has $Z = 82$, so $Z$ must rise by 6: six $\\beta^-$ decays." },
+        { text: "**Combine.** 8 $\\alpha$ decays and 6 $\\beta^-$ decays." },
+      ],
+      answer: "8 $\\alpha$ and 6 $\\beta^-$ decays",
+    },
+    {
+      type: "worked-example",
+      id: "omp4-6-we5",
+      title: "Worked example 5 (dating a rock)",
+      problem:
+        "A rock contains 7 daughter atoms for every parent atom still present (all daughters came from the parent). The parent's half-life is $1.3\\times10^{9}$ years. How old is the rock?",
+      steps: [
+        { text: "If $N$ parents remain, $7N$ have decayed, so $N_0 = 8N$ and $N/N_0 = 1/8$." },
+        { text: "$1/8 = (1/2)^3$: 3 half-lives, so the age is $3.9\\times10^{9}$ years. *Why this step:* the daughter count tells you how many parents *there used to be*." },
+      ],
+      answer: "$3.9\\times10^9$ years",
     },
     {
       type: "callout",
@@ -948,6 +1352,7 @@ const lesson06: LessonSeed = {
       content:
         "Decay is a nuclear process governed by energies of MeV. Temperature, pressure and chemical bonding involve eV or less and leave $\\lambda$ unchanged. That constancy is what makes radioactive dating reliable.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "omp4-6-q1",
@@ -959,6 +1364,7 @@ const lesson06: LessonSeed = {
         { text: "$15/16$", correct: true, feedback: "$1/16$ remains, so $15/16$ has decayed." },
         { text: "All of it", feedback: "Four half-lives leave $1/16$ of the sample." },
       ],
+      hint: "After each half-life, half of what remains survives. Find the fraction still undecayed first.",
     },
     {
       type: "quiz",
@@ -971,6 +1377,7 @@ const lesson06: LessonSeed = {
         { text: "$\\tau = T_{1/2} = 30$ days", feedback: "Half-life and mean life differ by the factor $\\ln 2$." },
         { text: "$\\tau \\approx 0.023$ days, $T_{1/2} \\approx 0.016$ days", feedback: "That multiplies by $\\lambda$ instead of dividing." },
       ],
+      hint: "Recall from 4.6 how the mean life and the half-life each relate to $\\lambda$, and watch which one carries the factor $\\ln 2$.",
     },
     {
       type: "quiz",
@@ -983,6 +1390,7 @@ const lesson06: LessonSeed = {
         { text: "6 $\\alpha$ and 4 $\\beta^-$", correct: true, feedback: "$\\Delta A = 24 \\Rightarrow 6\\alpha$, which lowers $Z$ to 78; four $\\beta^-$ raise it to 82." },
         { text: "8 $\\alpha$ and 6 $\\beta^-$", feedback: "That is the U-238 → Pb-206 chain. Here $\\Delta A = 24$." },
       ],
+      hint: "Only $\\alpha$ decay changes $A$ (by 4 each time), so the drop in mass number fixes the number of $\\alpha$s. Then balance $Z$ with $\\beta^-$ decays.",
     },
     {
       type: "quiz",
@@ -995,18 +1403,36 @@ const lesson06: LessonSeed = {
         { text: "$Z$ decreases by 2; $A$ decreases by 4", feedback: "That is alpha decay." },
         { text: "Neither changes", feedback: "That is gamma decay." },
       ],
+      hint: "Write down what happens to the nucleons in $\\beta^+$ decay (4.6), then track $Z$ and $A$.",
+    },
+    {
+      type: "numeric",
+      id: "omp4-6-q5",
+      variant: "practice",
+      question: "A sample's activity is 3200 Bq. Its half-life is 2 hours. What is its activity, in Bq, 10 hours later?",
+      answer: 100,
+      unit: "Bq",
+      hint: "Count the half-lives in 10 hours; the activity halves once per half-life.",
+      solution: "10 h is $10/2 = 5$ half-lives, so the activity is $\\dfrac{3200}{2^5} = \\dfrac{3200}{32} = 100$ Bq.",
+      commonMistakes: [
+        { answer: 640, feedback: "That divides by 5, the number of half-lives, instead of by $2^5$." },
+        { answer: 200, feedback: "That is 4 half-lives. $10/2 = 5$." },
+        { answer: 0, feedback: "Activity falls by a factor of 2 each half-life, never to zero." },
+      ],
     },
     {
       type: "quiz",
-      id: "omp4-6-q5",
-      variant: "practice",
-      question: "A sample's activity is 3200 Bq. Its half-life is 2 hours. What is its activity 10 hours later?",
+      id: "omp4-6-q6",
+      variant: "concept",
+      multiple: true,
+      question: "A radioactive sample has half-life $T$. Select every correct statement.",
       options: [
-        { text: "$640$ Bq", feedback: "That divides by 5, the number of half-lives, instead of by $2^5$." },
-        { text: "$200$ Bq", feedback: "That is 4 half-lives. $10/2 = 5$." },
-        { text: "Zero", feedback: "Activity falls by a factor of 2 each half-life, never to zero." },
-        { text: "$100$ Bq", correct: true, feedback: "10 h = 5 half-lives; $3200/2^5 = 100$ Bq." },
+        { text: "After a time $2T$, one quarter of the original nuclei remain undecayed.", correct: true, feedback: "$N = N_0(1/2)^2 = N_0/4$." },
+        { text: "The mean life of a nucleus is about $1.44\\,T$.", correct: true, feedback: "$\\tau = 1/\\lambda$ and $T = 0.693/\\lambda$, so $\\tau = T/0.693 \\approx 1.44\\,T$." },
+        { text: "Heating the sample strongly shortens its half-life.", feedback: "Decay is a nuclear (MeV) process; heating and chemistry (eV or less) leave $\\lambda$ unchanged." },
+        { text: "Doubling the amount of sample doubles its half-life.", feedback: "Doubling $N$ doubles the *activity* $\\lambda N$, but $\\lambda$ and so $T$ are unchanged." },
       ],
+      hint: "$T$ depends only on $\\lambda$, and $\\lambda$ is a property of the nuclide.",
     },
   ]),
 };
@@ -1021,10 +1447,11 @@ const lesson07: LessonSeed = {
       content:
         "One kilogram of coal, burned, gives about 30 MJ. One kilogram of uranium-235, fissioned, gives about 80 million MJ. One kilogram of deuterium, fused, gives several times more again. The factor of millions is the ratio of MeV (nuclear binding) to eV (chemical bonds). The binding-energy curve from 4.5 tells you the two routes: split something heavy, or join things light.",
     },
+    { type: "heading", text: "Fission of uranium-235" },
     {
       type: "text",
       content:
-        "**Fission.** A slow neutron is absorbed by $^{235}$U, making $^{236}$U in a highly excited state. It wobbles like a liquid drop, stretches into a dumb-bell, and the Coulomb repulsion between the two ends tears it apart. A typical outcome:",
+        "A slow neutron is absorbed by $^{235}$U, making $^{236}$U in a highly excited state. It wobbles like a liquid drop, stretches into a dumb-bell, and the Coulomb repulsion between the two ends tears it apart. A typical outcome:",
     },
     {
       type: "math",
@@ -1035,10 +1462,11 @@ const lesson07: LessonSeed = {
       content:
         "Check the bookkeeping: mass numbers $235 + 1 = 141 + 92 + 3 = 236$ ✓; charges $92 = 56 + 36$ ✓. The 200 MeV follows from the BE/A curve: about 236 nucleons each gaining roughly 0.9 MeV of binding (7.6 → 8.5 MeV). Most of it appears as kinetic energy of the fragments, which becomes heat.",
     },
+    { type: "heading", text: "Chain reactions and reactors" },
     {
       type: "text",
       content:
-        "**Chain reaction.** Each fission releases 2–3 neutrons, and each could cause another fission. If on average more than one does, the rate grows exponentially (a bomb); exactly one, it stays steady (a reactor); fewer, it dies out. Neutrons escape through the surface, so a small lump loses too many; the **critical mass** is the smallest amount that sustains the chain.",
+        "Each fission releases 2–3 neutrons, and each could cause another fission. If on average more than one does, the rate grows exponentially (a bomb); exactly one, it stays steady (a reactor); fewer, it dies out. Neutrons escape through the surface, so a small lump loses too many; the **critical mass** is the smallest amount that sustains the chain.",
     },
     {
       type: "table",
@@ -1081,24 +1509,65 @@ const lesson07: LessonSeed = {
       content:
         "What you should have seen: 1 g gives $5.1\\times10^{23}$ MeV $= 5.1\\times10^{23}\\times1.6\\times10^{-13}$ J $\\approx 8.2\\times10^{10}$ J. At 30 MJ/kg, that is the energy of about 2.7 tonnes of coal. The output is exactly proportional to the mass: every nucleus gives the same 200 MeV.",
     },
+    { type: "heading", text: "Fusion and the Coulomb barrier" },
     {
       type: "text",
       content:
-        "**Fusion.** Joining two light nuclei climbs the steep left side of the BE/A curve. The obstacle is the Coulomb barrier: two deuterons must come within a few femtometres, where their repulsion is $\\dfrac{1.44\\ \\text{MeV·fm}}{4\\ \\text{fm}} \\approx 0.36$ MeV. Getting nuclei that close takes temperatures of millions of kelvin (hence *thermonuclear*); quantum tunnelling lets the reaction proceed well below the classical estimate. In the Sun's core (about $1.5\\times10^7$ K) the proton–proton chain turns four protons into helium:",
+        "Joining two light nuclei climbs the steep left side of the BE/A curve. The obstacle is the Coulomb barrier: two deuterons must come within a few femtometres, where their repulsion is $\\dfrac{1.44\\ \\text{MeV·fm}}{4\\ \\text{fm}} \\approx 0.36$ MeV. Getting nuclei that close takes temperatures of millions of kelvin (hence *thermonuclear*); quantum tunnelling lets the reaction proceed well below the classical estimate. In the Sun's core (about $1.5\\times10^7$ K) the proton–proton chain turns four protons into helium:",
     },
     {
       type: "math",
       latex: "4\\,{}^1_1\\text{H} \\;\\to\\;{}^4_2\\text{He} + 2e^+ + 2\\nu + 26.7\\ \\text{MeV}",
     },
+    { type: "heading", text: "Worked examples: fission rates and fusion Q" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (fissions per second, JEE Main).** A reactor produces 200 MW. Each fission releases 200 MeV. How many fissions occur per second?\n\n1. Energy per fission: $200\\ \\text{MeV} = 200\\times10^6\\times1.6\\times10^{-19} = 3.2\\times10^{-11}$ J. *Why this step:* power is in joules per second, so each event must be in joules.\n2. Rate: $\\dfrac{2\\times10^8}{3.2\\times10^{-11}} = 6.25\\times10^{18}$ fissions per second.\n\n**Worked example 2 (fusing 1 g of deuterium).** Take the reaction $^2\\text{H} + {}^2\\text{H} \\to {}^4\\text{He}$ with $Q = 23.9$ MeV.\n\n1. Number of deuterons in 1 g: $\\dfrac{6.02\\times10^{23}}{2} = 3.01\\times10^{23}$.\n2. Each reaction uses two: $1.505\\times10^{23}$ reactions.\n3. Energy: $1.505\\times10^{23}\\times23.9 = 3.6\\times10^{24}$ MeV $\\approx 5.8\\times10^{11}$ J, about seven times the 1 g of uranium above. *Why this step:* per nucleon, fusion gives $23.9/4 \\approx 6$ MeV against fission's $200/236 \\approx 0.85$ MeV.",
+      type: "worked-example",
+      id: "omp4-7-we1",
+      title: "Worked example 1 (fissions per second, JEE Main)",
+      problem:
+        "A reactor produces 200 MW. Each fission releases 200 MeV. How many fissions occur per second?",
+      steps: [
+        { text: "Energy per fission: $200\\ \\text{MeV} = 200\\times10^6\\times1.6\\times10^{-19} = 3.2\\times10^{-11}$ J. *Why this step:* power is in joules per second, so each event must be in joules." },
+        { text: "Rate: $\\dfrac{2\\times10^8}{3.2\\times10^{-11}} = 6.25\\times10^{18}$ fissions per second." },
+      ],
+      answer: "$6.25\\times10^{18}$ fissions per second",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (Q-value from binding energies).** $BE(^2\\text{H}) = 2.22$ MeV and $BE(^4\\text{He}) = 28.3$ MeV. Find $Q$ for $^2\\text{H} + {}^2\\text{H} \\to {}^4\\text{He}$.\n\n1. $Q = BE_{\\text{products}} - BE_{\\text{reactants}} = 28.3 - 2\\times2.22 = 23.86 \\approx 23.9$ MeV.\n2. Positive $Q$: energy released. *Why this step:* the products are more tightly bound; the extra binding is the energy set free.\n\n**Worked example 4 (a moderator in numbers).** A 2 MeV neutron collides head-on with carbon-12 nuclei. How much energy does it keep after one collision? After how many head-on collisions is it below 0.1 MeV?\n\n1. Fraction kept per collision: $(11/13)^2 = 0.716$. After one: $1.43$ MeV.\n2. After $n$ collisions: $2\\times0.716^n < 0.1$ needs $0.716^n < 0.05$, so $n > \\dfrac{\\ln 0.05}{\\ln 0.716} = 8.97$, i.e. 9 collisions. (Glancing collisions transfer less, so real neutrons need more.)",
+      type: "worked-example",
+      id: "omp4-7-we2",
+      title: "Worked example 2 (fusing 1 g of deuterium)",
+      problem:
+        "Take the reaction $^2\\text{H} + {}^2\\text{H} \\to {}^4\\text{He}$ with $Q = 23.9$ MeV. How much energy is released by fusing 1 g of deuterium?",
+      steps: [
+        { text: "Number of deuterons in 1 g: $\\dfrac{6.02\\times10^{23}}{2} = 3.01\\times10^{23}$." },
+        { text: "Each reaction uses two: $1.505\\times10^{23}$ reactions." },
+        { text: "Energy: $1.505\\times10^{23}\\times23.9 = 3.6\\times10^{24}$ MeV $\\approx 5.8\\times10^{11}$ J, about seven times the 1 g of uranium above. *Why this step:* per nucleon, fusion gives $23.9/4 \\approx 6$ MeV against fission's $200/236 \\approx 0.85$ MeV." },
+      ],
+      answer: "About $3.6\\times10^{24}$ MeV $\\approx 5.8\\times10^{11}$ J",
+    },
+    {
+      type: "worked-example",
+      id: "omp4-7-we3",
+      title: "Worked example 3 (Q-value from binding energies)",
+      problem:
+        "$BE(^2\\text{H}) = 2.22$ MeV and $BE(^4\\text{He}) = 28.3$ MeV. Find $Q$ for $^2\\text{H} + {}^2\\text{H} \\to {}^4\\text{He}$.",
+      steps: [
+        { text: "$Q = BE_{\\text{products}} - BE_{\\text{reactants}} = 28.3 - 2\\times2.22 = 23.86 \\approx 23.9$ MeV." },
+        { text: "Positive $Q$: energy released. *Why this step:* the products are more tightly bound; the extra binding is the energy set free." },
+      ],
+      answer: "$Q \\approx 23.9$ MeV (released)",
+    },
+    {
+      type: "worked-example",
+      id: "omp4-7-we4",
+      title: "Worked example 4 (a moderator in numbers)",
+      problem:
+        "A 2 MeV neutron collides head-on with carbon-12 nuclei. How much energy does it keep after one collision? After how many head-on collisions is it below 0.1 MeV?",
+      steps: [
+        { text: "Fraction kept per collision: $(11/13)^2 = 0.716$. After one: $1.43$ MeV." },
+        { text: "After $n$ collisions: $2\\times0.716^n < 0.1$ needs $0.716^n < 0.05$, so $n > \\dfrac{\\ln 0.05}{\\ln 0.716} = 8.97$, i.e. 9 collisions. (Glancing collisions transfer less, so real neutrons need more.)" },
+      ],
+      answer: "It keeps 1.43 MeV after one collision; 9 head-on collisions bring it below 0.1 MeV.",
     },
     {
       type: "callout",
@@ -1114,16 +1583,21 @@ const lesson07: LessonSeed = {
       content:
         "Absorbing neutrons is the control rods' job. A moderator slows neutrons by elastic collisions with light nuclei, and a good moderator absorbs as *few* neutrons as possible; that is why heavy water beats ordinary water, whose hydrogen captures some neutrons.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp4-7-q1",
       variant: "practice",
-      question: "A 100 MW reactor releases 200 MeV per fission. How many fissions occur per second?",
-      options: [
-        { text: "$5\\times10^{5}$", feedback: "That divides watts by MeV without converting MeV to joules." },
-        { text: "$3.1\\times10^{18}$", correct: true, feedback: "$10^8/(3.2\\times10^{-11}) = 3.125\\times10^{18}$." },
-        { text: "$6.25\\times10^{18}$", feedback: "That is for 200 MW." },
-        { text: "$3.2\\times10^{-3}$", feedback: "That multiplies power by energy per fission. Divide instead." },
+      question: "A 100 MW reactor releases 200 MeV per fission. How many fissions occur per second? (1 MeV $= 1.6\\times10^{-13}$ J; scientific notation such as 2e18 is fine.)",
+      answer: 3.125e18,
+      relTolerance: 0.02,
+      unit: "fissions per second",
+      hint: "Convert 200 MeV to joules, then divide the power (J/s) by the energy per fission.",
+      solution: "Energy per fission: $200\\times1.6\\times10^{-13} = 3.2\\times10^{-11}$ J.\n\nFissions per second: $\\dfrac{10^8}{3.2\\times10^{-11}} = 3.125\\times10^{18}$.",
+      commonMistakes: [
+        { answer: 5e5, feedback: "That divides watts by MeV without converting MeV to joules." },
+        { answer: 6.25e18, feedback: "That is for 200 MW." },
+        { answer: 3.2e-3, feedback: "That multiplies power by energy per fission. Divide instead." },
       ],
     },
     {
@@ -1137,6 +1611,7 @@ const lesson07: LessonSeed = {
         { text: "Light nuclei undergo fission easily.", feedback: "Moderator nuclei do not fission at all." },
         { text: "They speed neutrons up so they can reach the fuel.", feedback: "$^{235}$U captures *slow* neutrons best; the moderator slows them down." },
       ],
+      hint: "In an elastic collision, how much energy does a moving ball lose to a stationary ball of equal mass, compared with one of much larger mass?",
     },
     {
       type: "quiz",
@@ -1149,6 +1624,7 @@ const lesson07: LessonSeed = {
         { text: "High temperatures increase the mass defect.", feedback: "The mass defect is a property of the nuclei, not of temperature." },
         { text: "The nuclei must have enough kinetic energy to get close despite their Coulomb repulsion.", correct: true, feedback: "Only then can the short-range nuclear force take over (tunnelling helps)." },
       ],
+      hint: "Recall which force acts between two nuclei before they are close enough for the nuclear force (4.7), and what it takes to overcome it.",
     },
     {
       type: "quiz",
@@ -1161,6 +1637,7 @@ const lesson07: LessonSeed = {
         { text: "$A = 91$, $Z = 36$", feedback: "You forgot the incoming neutron on the left: the total is 236, not 235." },
         { text: "$A = 89$, $Z = 33$", feedback: "Neutrons carry no charge, so $Z = 92 - 56 = 36$." },
       ],
+      hint: "Balance the mass numbers and the charge numbers on both sides, remembering the three neutrons.",
     },
     {
       type: "quiz",
@@ -1173,6 +1650,7 @@ const lesson07: LessonSeed = {
         { text: "Fusion releases several times more energy per kilogram.", correct: true, feedback: "About 6 MeV per nucleon against about 0.85 MeV per nucleon." },
         { text: "Fusion releases no net energy; it only balances the Coulomb barrier.", feedback: "The Q-value of D + D → He-4 is about +24 MeV." },
       ],
+      hint: "Compare the energy released per nucleon of fuel in each process, not per reaction.",
     },
   ]),
 };
@@ -1195,15 +1673,19 @@ const lessonMastery: LessonSeed = {
         "No formula sheet below. Use $hc = 1240$ eV·nm, $e^2/4\\pi\\varepsilon_0 = 1.44$ MeV·fm, $1$ u $= 931.5$ MeV.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp4-8-q1",
       variant: "mastery",
-      question: "A 4 MeV alpha particle heads straight for a silver nucleus ($Z = 47$). How close does it get?",
-      options: [
-        { text: "About 17 fm", feedback: "That forgets the alpha's charge $2e$." },
-        { text: "About 135 fm", feedback: "That is $2Z\\times1.44$ MeV·fm without dividing by $K = 4$ MeV." },
-        { text: "About 68 fm", feedback: "That is the answer for 2 MeV. Check the division." },
-        { text: "About 34 fm", correct: true, feedback: "$r_0 = 2\\times47\\times1.44/4 \\approx 33.8$ fm." },
+      question: "A 4 MeV alpha particle heads straight for a silver nucleus ($Z = 47$). How close does it get, in fm?",
+      answer: 33.84,
+      relTolerance: 0.02,
+      unit: "fm",
+      hint: "Set the kinetic energy equal to the Coulomb energy of charges $2e$ and $Ze$.",
+      solution: "$r_0 = \\dfrac{2Z\\,(e^2/4\\pi\\varepsilon_0)}{K} = \\dfrac{2\\times47\\times1.44}{4} \\approx 33.8$ fm.",
+      commonMistakes: [
+        { answer: 16.92, feedback: "That forgets the alpha's charge $2e$." },
+        { answer: 135.4, feedback: "That is $2Z\\times1.44$ MeV·fm without dividing by $K = 4$ MeV." },
+        { answer: 67.68, feedback: "That is the answer for 2 MeV. Check the division." },
       ],
     },
     {
@@ -1217,6 +1699,7 @@ const lessonMastery: LessonSeed = {
         { text: "$n = 9$", feedback: "That matches $Z^2$ with $n$ rather than $n^2$: $-13.6\\times9/81 = -1.51$ eV." },
         { text: "No state matches.", feedback: "$n = 3$ gives $Z^2/n^2 = 1$ exactly." },
       ],
+      hint: "Energy levels of hydrogen-like ions (4.2): $E_n \\propto Z^2/n^2$.",
     },
     {
       type: "quiz",
@@ -1229,17 +1712,22 @@ const lessonMastery: LessonSeed = {
         { text: "$n = 2$", correct: true, feedback: "$v \\propto Z/n$; $2/2 = 1/1$. (Its energy, $-13.6\\times4/4$ eV, matches too.)" },
         { text: "No state of He⁺ matches.", feedback: "$n = 2$ gives $Z/n = 1$, exactly matching." },
       ],
+      hint: "Orbital speed in the Bohr model (4.2): $v_n \\propto Z/n$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp4-8-q4",
       variant: "mastery",
-      question: "A photon from the $n = 3 \\to 2$ transition in He⁺ falls on potassium ($\\phi = 2.3$ eV). Find the stopping potential of the photoelectrons.",
-      options: [
-        { text: "About 5.26 V", correct: true, feedback: "$E = 54.4\\left(\\frac14 - \\frac19\\right) = 7.56$ eV; $7.56 - 2.3 = 5.26$ eV." },
-        { text: "Zero: no electrons are emitted", feedback: "That would be true for hydrogen's $3 \\to 2$ photon (1.89 eV, below 2.3 eV). He⁺ levels are $Z^2 = 4$ times deeper, so its photon carries 7.56 eV." },
-        { text: "About 7.56 V", feedback: "That is the photon energy. Subtract the work function." },
-        { text: "About 1.48 V", feedback: "That scales hydrogen's 1.89 eV by $Z = 2$ instead of $Z^2 = 4$: $3.78 - 2.3$." },
+      question: "A photon from the $n = 3 \\to 2$ transition in He⁺ falls on potassium ($\\phi = 2.3$ eV). Find the stopping potential of the photoelectrons, in volts.",
+      answer: 5.26,
+      relTolerance: 0.01,
+      unit: "V",
+      hint: "He⁺ levels are $-13.6\\,Z^2/n^2$ eV with $Z = 2$. Then use Einstein's equation $eV_0 = h\\nu - \\phi$.",
+      solution: "$E_{\\text{photon}} = 13.6\\times4\\left(\\dfrac14 - \\dfrac19\\right) = 54.4\\times\\dfrac{5}{36} \\approx 7.56$ eV.\n\n$eV_0 = 7.56 - 2.3 = 5.26$ eV, so $V_0 \\approx 5.26$ V.",
+      commonMistakes: [
+        { answer: 0, tolerance: 0, feedback: "That would be true for hydrogen's $3 \\to 2$ photon (1.89 eV, below 2.3 eV). He⁺ levels are $Z^2 = 4$ times deeper, so its photon carries 7.56 eV." },
+        { answer: 7.56, feedback: "That is the photon energy. Subtract the work function." },
+        { answer: 1.48, feedback: "That scales hydrogen's 1.89 eV by $Z = 2$ instead of $Z^2 = 4$: $3.78 - 2.3$." },
       ],
     },
     {
@@ -1253,6 +1741,7 @@ const lessonMastery: LessonSeed = {
         { text: "5 photons; 15 lines", correct: true, feedback: "One atom steps down at most one level at a time: 5 photons. A gas shows every pair: $\\binom62 = 15$." },
         { text: "6 photons; 21 lines", feedback: "There are 6 levels (1 to 6): 5 steps and $\\binom62 = 15$ pairs." },
       ],
+      hint: "Counting spectral lines (4.3): one atom versus many atoms.",
     },
     {
       type: "quiz",
@@ -1265,6 +1754,7 @@ const lessonMastery: LessonSeed = {
         { text: "$\\lambda_{\\min}$ doubles; $\\lambda_{K\\alpha}$ is unchanged.", feedback: "Higher voltage means more energetic photons, so a *shorter* cut-off." },
         { text: "Neither changes.", feedback: "$\\lambda_{\\min} = hc/eV$ depends directly on $V$." },
       ],
+      hint: "Continuous and characteristic X-rays (4.4).",
     },
     {
       type: "quiz",
@@ -1277,17 +1767,21 @@ const lessonMastery: LessonSeed = {
         { text: "Radii $\\sqrt8 : \\sqrt{125}$; densities $1 : 1$", feedback: "The exponent is $\\frac13$, not $\\frac12$." },
         { text: "Radii $2 : 5$; densities $1 : 1$", correct: true, feedback: "$R \\propto A^{1/3}$: $2 : 5$. Density is independent of $A$." },
       ],
+      hint: "Nuclear radius and density (4.5): $R = R_0A^{1/3}$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp4-8-q8",
       variant: "mastery",
-      question: "A nucleus with $A = 200$ and $BE/A = 7.8$ MeV splits into two nuclei of $A = 100$ with $BE/A = 8.6$ MeV. Find the energy released.",
-      options: [
-        { text: "$0.8$ MeV", feedback: "That is the gain per nucleon. Multiply by 200 nucleons." },
-        { text: "$160$ MeV", correct: true, feedback: "$200\\times(8.6 - 7.8) = 160$ MeV." },
-        { text: "$80$ MeV", feedback: "That counts only one fragment's nucleons. Both fragments, 200 nucleons in all, gain 0.8 MeV each." },
-        { text: "$3280$ MeV", feedback: "That adds binding energies. Release is the *difference*, after minus before." },
+      question: "A nucleus with $A = 200$ and $BE/A = 7.8$ MeV splits into two nuclei of $A = 100$ with $BE/A = 8.6$ MeV. Find the energy released, in MeV.",
+      answer: 160,
+      unit: "MeV",
+      hint: "$Q = BE_{\\text{after}} - BE_{\\text{before}}$; every one of the 200 nucleons gains the same amount.",
+      solution: "Before: $200\\times7.8 = 1560$ MeV. After: $2\\times100\\times8.6 = 1720$ MeV.\n\n$Q = 1720 - 1560 = 160$ MeV, i.e. $200\\times(8.6 - 7.8)$.",
+      commonMistakes: [
+        { answer: 0.8, feedback: "That is the gain per nucleon. Multiply by 200 nucleons." },
+        { answer: 80, feedback: "That counts only one fragment's nucleons. Both fragments, 200 nucleons in all, gain 0.8 MeV each." },
+        { answer: 3280, feedback: "That adds binding energies. Release is the *difference*, after minus before." },
       ],
     },
     {
@@ -1304,15 +1798,19 @@ const lessonMastery: LessonSeed = {
       hint: "Find each remaining fraction, then remember $A = \\lambda N$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp4-8-q10",
       variant: "mastery",
-      question: "A hydrogen atom at rest emits a photon in the $n = 2 \\to 1$ transition. Roughly what is the atom's recoil speed? ($m_{\\text H}c^2 \\approx 938$ MeV)",
-      options: [
-        { text: "About $3\\times10^8$ m/s", feedback: "That is the photon's speed. The heavy atom recoils very slowly." },
-        { text: "About $1.1\\times10^{-8}$ m/s", feedback: "That is $E/Mc^2$, a dimensionless ratio. Multiply by $c$." },
-        { text: "Zero, because photons have no mass", feedback: "The photon carries momentum $E/c$, and momentum is conserved." },
-        { text: "About 3.3 m/s", correct: true, feedback: "$v = E/(Mc) = \\frac{10.2}{938\\times10^6}\\times3\\times10^8 \\approx 3.3$ m/s." },
+      question: "A hydrogen atom at rest emits a photon in the $n = 2 \\to 1$ transition. What is the atom's recoil speed, in m/s? ($m_{\\text H}c^2 \\approx 938$ MeV, $c = 3\\times10^8$ m/s)",
+      answer: 3.26,
+      relTolerance: 0.02,
+      unit: "m/s",
+      hint: "The photon carries momentum $E/c$; the atom recoils with equal and opposite momentum $Mv$.",
+      solution: "$E = 10.2$ eV. Momentum conservation: $Mv = E/c$, so $v = \\dfrac{E}{Mc^2}\\,c = \\dfrac{10.2}{938\\times10^6}\\times3\\times10^8 \\approx 3.3$ m/s.",
+      commonMistakes: [
+        { answer: 3e8, feedback: "That is the photon's speed. The heavy atom recoils very slowly." },
+        { answer: 1.09e-8, feedback: "That is $E/Mc^2$, a dimensionless ratio. Multiply by $c$." },
+        { answer: 0, tolerance: 0, feedback: "The photon carries momentum $E/c$, and momentum is conserved, so the atom must recoil." },
       ],
     },
     {
@@ -1326,18 +1824,22 @@ const lessonMastery: LessonSeed = {
         { text: "700 million years", feedback: "One half-life gives a daughter:parent ratio of 1:1." },
         { text: "About 1.1 billion years", feedback: "That uses $N/N_0 = 1/3$. The original number is parent *plus* daughters, $1 + 3 = 4$." },
       ],
+      hint: "Half-life and radioactive dating (4.6): find the fraction of the parent that is left.",
     },
     {
       type: "quiz",
       id: "omp4-8-q12",
       variant: "mastery",
-      question: "$^{A}_{Z}$X emits one $\\alpha$, then two $\\beta^-$. What is the final nucleus relative to X?",
+      multiple: true,
+      question: "$^{A}_{Z}$X emits one $\\alpha$, then two $\\beta^-$. Select every correct description of the final nucleus relative to X.",
       options: [
         { text: "An isobar of X", feedback: "The mass number fell by 4, so it is not an isobar." },
         { text: "The element two places below X in the periodic table", feedback: "The two $\\beta^-$ decays restore $Z$." },
-        { text: "An isotope of X with mass number $A - 4$", correct: true, feedback: "$\\alpha$: $(A-4, Z-2)$; two $\\beta^-$: $(A-4, Z)$. Same $Z$, so same element." },
+        { text: "An isotope of X", correct: true, feedback: "$\\alpha$: $(A-4, Z-2)$; two $\\beta^-$: $(A-4, Z)$. Same $Z$, so same element." },
+        { text: "Its mass number is $A - 4$", correct: true, feedback: "Only the alpha changes $A$ (by 4); $\\beta^-$ decay leaves $A$ unchanged." },
         { text: "X itself", feedback: "The mass number dropped by 4; it is a lighter isotope." },
       ],
+      hint: "How $\\alpha$ and $\\beta^-$ decays change $Z$ and $A$ (4.6). Track both numbers, then test each description.",
     },
     {
       type: "callout",

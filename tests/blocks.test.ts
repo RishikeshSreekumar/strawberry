@@ -32,6 +32,19 @@ describe("lesson block schemas", () => {
     expect(() => parseLessonBlocks([{ type: "video", src: "" }])).toThrow();
   });
 
+  it("accepts heading blocks with an optional level 2 or 3", () => {
+    const blocks = [
+      { type: "heading", text: "Worked examples" },
+      { type: "heading", text: "The case $x = 0$", level: 3 },
+    ];
+    expect(parseLessonBlocks(blocks)).toEqual(blocks);
+    expect(() => parseLessonBlocks([{ type: "heading", text: "   " }])).toThrow();
+    expect(() => parseLessonBlocks([{ type: "heading", text: "" }])).toThrow();
+    expect(() =>
+      parseLessonBlocks([{ type: "heading", text: "Deep", level: 4 }]),
+    ).toThrow();
+  });
+
   it("rejects empty content", () => {
     expect(() => parseLessonBlocks([{ type: "text", content: "" }])).toThrow();
     expect(() => parseLessonBlocks([{ type: "math", latex: "" }])).toThrow();

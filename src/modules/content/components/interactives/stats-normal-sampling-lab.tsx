@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import type { z } from "zod";
 import type { statsNormalSamplingLabSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { fmt, mulberry32, niceStep, normalPdf, phi, randNormal, snapTo, ticks } from "./stats-math";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 
@@ -653,7 +654,7 @@ export function StatsNormalSamplingLab({ config }: { config: Config }) {
       {config.mode === "area" && <AreaMode config={config} />}
       {config.mode === "sampling" && <SamplingMode config={config} />}
       {config.mode === "intervals" && <IntervalsMode config={config} />}
-      <p className="text-center text-xs text-muted-foreground">{caption}</p>
+      <p className="text-center text-xs text-muted-foreground"><RichText text={caption} /></p>
     </InteractiveFrame>
   );
 }

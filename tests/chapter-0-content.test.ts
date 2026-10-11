@@ -25,12 +25,15 @@ describe("chapter 0 content", () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it("every quiz has exactly one correct option", () => {
+  it("every quiz has exactly one correct option (at least one if multiple)", () => {
     for (const lesson of chapterLessons) {
       for (const block of lesson.blocks) {
         if (block.type !== "quiz") continue;
         const correct = block.options.filter((o) => o.correct).length;
-        expect(correct, `${lesson.slug}: "${block.question}"`).toBe(1);
+        // Select-all quizzes (multiple: true) need at least one.
+        expect(correct, `${lesson.slug}: "${block.question}"`).toBe(
+          block.multiple ? Math.max(1, correct) : 1,
+        );
       }
     }
   });

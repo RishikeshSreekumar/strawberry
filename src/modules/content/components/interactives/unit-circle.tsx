@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { z } from "zod";
 import type { unitCircleSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { formatNumber } from "./function-plot";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 
@@ -170,8 +171,8 @@ export function UnitCircle({ config }: { config: Config }) {
       </div>
 
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ??
-          "The blue leg is cos, the green leg is sin, and the point is (cos, sin). Drag past 90°, past 360°, and into negatives."}
+        <RichText text={config.caption ??
+          "The blue leg is cos, the green leg is sin, and the point is (cos, sin). Drag past 90°, past 360°, and into negatives."} />
       </p>
     </InteractiveFrame>
   );

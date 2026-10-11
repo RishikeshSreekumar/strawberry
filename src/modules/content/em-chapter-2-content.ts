@@ -23,6 +23,14 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/em-2-capacitors.mp4",
+      poster: "/videos/em-2-capacitors.jpg",
+      title: "Chapter 2 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "A camera flash charges for a few seconds and then dumps its energy into the bulb in a thousandth of a second. A defibrillator does the same to restart a heart. Somewhere inside, charge is being stored and released on demand. The device is a **capacitor**: two conductors, close together, carrying equal and opposite charges.",
@@ -39,6 +47,7 @@ const lesson01: LessonSeed = {
       content:
         "For a pair of conductors carrying $+Q$ and $-Q$ with potential difference $V$ between them:\n$C = \\dfrac{Q}{V}$\nFor a single isolated conductor, $V$ is its potential (the other \"plate\" is at infinity). Unit: the farad, $1\\ \\text{F} = 1\\ \\text{C/V}$. Practical capacitors are measured in μF, nF and pF.",
     },
+    { type: "heading", text: "Capacitance of a sphere and plates" },
     {
       type: "text",
       content:
@@ -94,20 +103,44 @@ const lesson01: LessonSeed = {
       content:
         "What you should have seen: at 1 mm the capacitance is 88.5 pF; at 2 mm it halves to 44.25 pF; at 0.5 mm it doubles to 177 pF. $C \\propto 1/d$. That is why real capacitors use very thin insulating films rolled up into a small can: huge area, tiny gap.",
     },
+    { type: "heading", text: "Worked examples: parallel-plate capacitors" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (how big is a farad?).** What plate area gives a 1 F parallel-plate capacitor with a 1 mm air gap?\n\n1. $A = \\dfrac{Cd}{\\varepsilon_0} = \\dfrac{1\\times10^{-3}}{8.85\\times10^{-12}} \\approx 1.1\\times10^8$ m².\n2. That is a square about 10.6 km on a side. *Why this step:* a number this silly is the best way to remember that practical capacitors are μF or smaller (supercapacitors cheat with nanometre gaps and porous carbon of enormous area).",
+      type: "worked-example",
+      id: "em2-1-we1",
+      title: "Worked example 1: how big is a farad?",
+      problem:
+        "What plate area gives a 1 F parallel-plate capacitor with a 1 mm air gap?",
+      steps: [
+        { text: "$A = \\dfrac{Cd}{\\varepsilon_0} = \\dfrac{1\\times10^{-3}}{8.85\\times10^{-12}} \\approx 1.1\\times10^8$ m²." },
+        { text: "That is a square about 10.6 km on a side. *Why this step:* a number this silly is the best way to remember that practical capacitors are μF or smaller (supercapacitors cheat with nanometre gaps and porous carbon of enormous area)." },
+      ],
+      answer: "$A \\approx 1.1\\times10^8$ m², a square about 10.6 km on a side",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (scaling).** A parallel-plate capacitor has $C = 20$ pF. Find $C$ if (a) the gap is doubled, (b) the area is doubled, (c) both are doubled.\n\n1. (a) $C \\propto 1/d$: 10 pF.\n2. (b) $C \\propto A$: 40 pF.\n3. (c) The two changes cancel: 20 pF. *Why this step:* reason with proportions; there is no need to know $A$ or $d$.",
+      type: "worked-example",
+      id: "em2-1-we2",
+      title: "Worked example 2: scaling",
+      problem:
+        "A parallel-plate capacitor has $C = 20$ pF. Find $C$ if (a) the gap is doubled, (b) the area is doubled, (c) both are doubled.",
+      steps: [
+        { text: "(a) $C \\propto 1/d$: 10 pF." },
+        { text: "(b) $C \\propto A$: 40 pF." },
+        { text: "(c) The two changes cancel: 20 pF. *Why this step:* reason with proportions; there is no need to know $A$ or $d$." },
+      ],
+      answer: "(a) 10 pF, (b) 40 pF, (c) 20 pF",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (charge on the plates).** A capacitor with $A = 100$ cm² and $d = 1$ mm is connected to a 100 V battery. Find $C$, the charge, and the field between the plates.\n\n1. $C = 88.5$ pF (from the machine above).\n2. $Q = CV = 88.5\\times10^{-12}\\times100 = 8.85\\times10^{-9}$ C $= 8.85$ nC.\n3. $E = V/d = 100/10^{-3} = 10^5$ V/m. Check with the sheet formula: $\\sigma/\\varepsilon_0 = (8.85\\times10^{-9}/0.01)/8.85\\times10^{-12} = 10^5$ V/m. ✓",
+      type: "worked-example",
+      id: "em2-1-we3",
+      title: "Worked example 3: charge on the plates",
+      problem:
+        "A capacitor with $A = 100$ cm² and $d = 1$ mm is connected to a 100 V battery. Find $C$, the charge, and the field between the plates.",
+      steps: [
+        { text: "$C = 88.5$ pF (from the machine above)." },
+        { text: "$Q = CV = 88.5\\times10^{-12}\\times100 = 8.85\\times10^{-9}$ C $= 8.85$ nC." },
+        { text: "$E = V/d = 100/10^{-3} = 10^5$ V/m. Check with the sheet formula: $\\sigma/\\varepsilon_0 = (8.85\\times10^{-9}/0.01)/8.85\\times10^{-12} = 10^5$ V/m. ✓" },
+      ],
+      answer: "$C = 88.5$ pF, $Q = 8.85$ nC, $E = 10^5$ V/m",
     },
     {
       type: "callout",
@@ -116,15 +149,21 @@ const lesson01: LessonSeed = {
       content:
         "$C = Q/V$ looks as if more $Q$ means more $C$, but adding charge raises $V$ in exact proportion, so the ratio is unchanged. Capacitance is fixed by geometry and material, like the volume of a bucket. A bucket's volume does not change with how much water is in it; what changes is the \"pressure\" (voltage) needed to hold that much.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em2-1-q1",
       variant: "practice",
-      question: "What is the capacitance of an isolated metal sphere of radius 9 cm?",
-      options: [
-        { text: "$10\\ \\mu$F", feedback: "Check the power of ten: $0.09/9\\times10^9 = 10^{-11}$ F, which is 10 pF." },
-        { text: "$10$ pF", correct: true, feedback: "$C = R/k = 0.09/(9\\times10^9) = 10^{-11}$ F." },
-        { text: "$1$ pF", feedback: "Convert 9 cm to 0.09 m, not 0.009 m." },
+      question: "What is the capacitance of an isolated metal sphere of radius 9 cm? Take $k = 9\\times10^9$ N m²/C². Give your answer in pF.",
+      answer: 10,
+      relTolerance: 0.01,
+      unit: "pF",
+      hint: "Use $C = 4\\pi\\varepsilon_0R = R/k$ with $R$ in metres, then convert farads to picofarads.",
+      solution: "$C = 4\\pi\\varepsilon_0R = \\dfrac{R}{k} = \\dfrac{0.09}{9\\times10^9} = 10^{-11}$ F $= 10$ pF.",
+      commonMistakes: [
+        { answer: 1, feedback: "Convert 9 cm to 0.09 m, not 0.009 m." },
+        { answer: 1e-11, feedback: "That is the capacitance in farads. The question asks for picofarads: $10^{-11}$ F $= 10$ pF." },
+        { answer: 1e7, feedback: "Check the power of ten: $10^{-11}$ F is 10 pF, not 10 μF." },
       ],
     },
     {
@@ -137,6 +176,7 @@ const lesson01: LessonSeed = {
         { text: "$0.177$ pF", feedback: "Divide by $d = 10^{-3}$ m, which multiplies by 1000." },
         { text: "$17.7$ pF", feedback: "Recheck: $8.85\\times0.02 = 0.177$, then $\\div10^{-3}$ gives $177$ (in pF)." },
       ],
+      hint: "Use $C = \\varepsilon_0A/d$ with $d$ in metres and $\\varepsilon_0 = 8.85\\times10^{-12}$ F/m. Watch the powers of ten when converting to pF.",
     },
     {
       type: "quiz",
@@ -148,6 +188,7 @@ const lesson01: LessonSeed = {
         { text: "Both double", feedback: "If both doubled, $Q = CV$ would quadruple." },
         { text: "$C$ unchanged, $V$ doubles", correct: true, feedback: "$V = Q/C$ rises in step with $Q$." },
       ],
+      hint: "Recall the misconception box: does $C$ depend on the charge you put on it? Then use $Q = CV$.",
     },
     {
       type: "quiz",
@@ -160,17 +201,38 @@ const lesson01: LessonSeed = {
         { text: "$C/4$", feedback: "A smaller gap raises $C$, it does not lower it." },
         { text: "$4C$", correct: true, feedback: "$\\times2$ for the area and $\\times2$ for the gap." },
       ],
+      hint: "Use $C = \\varepsilon_0A/d$ and scale each factor, as in Worked example 2.",
+    },
+    {
+      type: "numeric",
+      id: "em2-1-q5",
+      variant: "practice",
+      question: "A spherical capacitor has radii 9 cm and 10 cm. Take $k = 9\\times10^9$ N m²/C². What is its capacitance? Give your answer in pF.",
+      answer: 100,
+      relTolerance: 0.01,
+      unit: "pF",
+      hint: "Use the spherical-capacitor formula $C = \\dfrac{ab}{k(b - a)}$ with both radii in metres.",
+      solution: "$C = \\dfrac{ab}{k(b - a)} = \\dfrac{0.09\\times0.1}{9\\times10^9\\times0.01} = \\dfrac{0.009}{9\\times10^7} = 10^{-10}$ F $= 100$ pF.",
+      commonMistakes: [
+        { answer: 10, feedback: "That is the isolated 9 cm sphere. The nearby outer shell multiplies it by $b/(b - a) = 10$." },
+        { answer: 1000, feedback: "Check $b - a$: 10 cm $-$ 9 cm $= 1$ cm $= 0.01$ m, not 1 mm." },
+        { answer: 1e-10, feedback: "That is the capacitance in farads. The question asks for picofarads: $10^{-10}$ F $= 100$ pF." },
+      ],
     },
     {
       type: "quiz",
-      id: "em2-1-q5",
-      variant: "practice",
-      question: "A spherical capacitor has radii 9 cm and 10 cm. Its capacitance is",
+      id: "em2-1-q6",
+      variant: "concept",
+      question: "Which of these change the capacitance of an isolated parallel-plate capacitor? Select all that apply.",
+      multiple: true,
       options: [
-        { text: "$10$ pF", feedback: "That is the isolated 9 cm sphere. The nearby outer shell multiplies it by $b/(b - a) = 10$." },
-        { text: "$100$ pF", correct: true, feedback: "$\\dfrac{ab}{k(b - a)} = \\dfrac{0.009}{9\\times10^9\\times0.01} = 10^{-10}$ F." },
-        { text: "$1$ nF", feedback: "Check $b - a$: 10 cm $-$ 9 cm $= 1$ cm $= 0.01$ m, not 1 mm." },
+        { text: "Doubling the area of each plate", correct: true, feedback: "$C = \\varepsilon_0A/d$ is proportional to $A$, so $C$ doubles." },
+        { text: "Doubling the charge on the plates", feedback: "$V$ doubles with $Q$, so $C = Q/V$ is unchanged. Capacitance is set by geometry and material." },
+        { text: "Increasing the gap between the plates", correct: true, feedback: "$C \\propto 1/d$, so a wider gap lowers $C$." },
+        { text: "Filling the gap with a dielectric", correct: true, feedback: "A dielectric of constant $K$ multiplies $C$ by $K$." },
+        { text: "Connecting it to a battery of higher voltage", feedback: "A higher $V$ just puts more charge on it in proportion; $C = Q/V$ stays the same." },
       ],
+      hint: "Write $C$ for a parallel-plate capacitor and ask, for each change, whether it alters the geometry or the material between the plates.",
     },
   ]),
 };
@@ -185,6 +247,7 @@ const lesson02: LessonSeed = {
       content:
         "You need 5 μF and the drawer has only 2 μF and 3 μF capacitors. Or you need a capacitor that survives 1000 V and yours are rated 500 V. Both problems are solved by combining capacitors, and two ideas from earlier chapters decide how: **charge is conserved**, and **potential is single-valued** (going round any loop brings you back to the same potential).",
     },
+    { type: "heading", text: "Parallel and series rules" },
     {
       type: "text",
       content:
@@ -212,25 +275,58 @@ const lesson02: LessonSeed = {
         ["Shares", "$V_i \\propto 1/C_i$", "$Q_i \\propto C_i$"],
       ],
     },
+    { type: "heading", text: "Worked examples: networks and voltage ratings" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (2, 3 and 6 μF).** Find the equivalent capacitance in series and in parallel.\n\n1. Series: $\\dfrac1C = \\dfrac12 + \\dfrac13 + \\dfrac16 = \\dfrac{3 + 2 + 1}{6} = 1$, so $C = 1\\ \\mu$F. Less than the smallest (2 μF). ✓\n2. Parallel: $C = 2 + 3 + 6 = 11\\ \\mu$F.",
+      type: "worked-example",
+      id: "em2-2-we1",
+      title: "Worked example 1: 2, 3 and 6 μF",
+      problem:
+        "Find the equivalent capacitance in series and in parallel.",
+      steps: [
+        { text: "Series: $\\dfrac1C = \\dfrac12 + \\dfrac13 + \\dfrac16 = \\dfrac{3 + 2 + 1}{6} = 1$, so $C = 1\\ \\mu$F. Less than the smallest (2 μF). ✓" },
+        { text: "Parallel: $C = 2 + 3 + 6 = 11\\ \\mu$F." },
+      ],
+      answer: "Series $1\\ \\mu$F; parallel $11\\ \\mu$F",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (a mixed network).** A 3 μF capacitor is in series with a parallel pair of 2 μF and 4 μF, across 12 V. Find the charge and voltage on each.\n\n1. Parallel pair: $2 + 4 = 6\\ \\mu$F. *Why this step:* reduce the innermost group first, then work outwards.\n2. With the 3 μF in series: $C = \\dfrac{3\\times6}{3 + 6} = 2\\ \\mu$F.\n3. Total charge: $Q = CV = 2\\times12 = 24\\ \\mu$C. This flows through the series chain, so the 3 μF has $24\\ \\mu$C and $V_3 = 24/3 = 8$ V.\n4. The pair has $12 - 8 = 4$ V across it (check: $24/6 = 4$ V ✓). So the 2 μF holds $8\\ \\mu$C and the 4 μF holds $16\\ \\mu$C. *Why this step:* going back out, each parallel member gets the pair's voltage, and the charges add to $24\\ \\mu$C.",
+      type: "worked-example",
+      id: "em2-2-we2",
+      title: "Worked example 2: a mixed network",
+      problem:
+        "A 3 μF capacitor is in series with a parallel pair of 2 μF and 4 μF, across 12 V. Find the charge and voltage on each.",
+      steps: [
+        { text: "Parallel pair: $2 + 4 = 6\\ \\mu$F. *Why this step:* reduce the innermost group first, then work outwards." },
+        { text: "With the 3 μF in series: $C = \\dfrac{3\\times6}{3 + 6} = 2\\ \\mu$F." },
+        { text: "Total charge: $Q = CV = 2\\times12 = 24\\ \\mu$C. This flows through the series chain, so the 3 μF has $24\\ \\mu$C and $V_3 = 24/3 = 8$ V." },
+        { text: "The pair has $12 - 8 = 4$ V across it (check: $24/6 = 4$ V ✓). So the 2 μF holds $8\\ \\mu$C and the 4 μF holds $16\\ \\mu$C. *Why this step:* going back out, each parallel member gets the pair's voltage, and the charges add to $24\\ \\mu$C." },
+      ],
+      answer: "3 μF: $24\\ \\mu$C at 8 V; 2 μF: $8\\ \\mu$C at 4 V; 4 μF: $16\\ \\mu$C at 4 V",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (a balanced bridge).** Between A and B: an upper branch of 2 μF then 4 μF in series, a lower branch of 1 μF then 2 μF in series, and a 5 μF capacitor joining the midpoints of the two branches. Find $C_{AB}$.\n\n1. Check whether the midpoints are at the same potential. In series, $V_i \\propto 1/C_i$. Upper: the 2 μF takes $\\tfrac{4}{6} = \\tfrac23$ of $V$. Lower: the 1 μF takes $\\tfrac23$ of $V$ too. *Why this step:* a bridge is balanced when the ratios match, $C_1/C_2 = C_3/C_4$ ($2/4 = 1/2$).\n2. Equal potentials at the midpoints mean the 5 μF has no voltage across it and no charge. Remove it.\n3. Upper: $\\dfrac{2\\times4}{6} = \\dfrac43\\ \\mu$F. Lower: $\\dfrac{1\\times2}{3} = \\dfrac23\\ \\mu$F. In parallel: $C_{AB} = 2\\ \\mu$F.",
+      type: "worked-example",
+      id: "em2-2-we3",
+      title: "Worked example 3: a balanced bridge",
+      problem:
+        "Between A and B: an upper branch of 2 μF then 4 μF in series, a lower branch of 1 μF then 2 μF in series, and a 5 μF capacitor joining the midpoints of the two branches. Find $C_{AB}$.",
+      steps: [
+        { text: "Check whether the midpoints are at the same potential. In series, $V_i \\propto 1/C_i$. Upper: the 2 μF takes $\\tfrac{4}{6} = \\tfrac23$ of $V$. Lower: the 1 μF takes $\\tfrac23$ of $V$ too. *Why this step:* a bridge is balanced when the ratios match, $C_1/C_2 = C_3/C_4$ ($2/4 = 1/2$)." },
+        { text: "Equal potentials at the midpoints mean the 5 μF has no voltage across it and no charge. Remove it." },
+        { text: "Upper: $\\dfrac{2\\times4}{6} = \\dfrac43\\ \\mu$F. Lower: $\\dfrac{1\\times2}{3} = \\dfrac23\\ \\mu$F. In parallel: $C_{AB} = 2\\ \\mu$F." },
+      ],
+      answer: "$C_{AB} = 2\\ \\mu$F",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (voltage rating).** Two 4 μF capacitors, each rated at 500 V, are joined in series. What is the combination's capacitance and safe working voltage?\n\n1. $C = \\dfrac{4\\times4}{8} = 2\\ \\mu$F.\n2. Equal capacitors in series share the voltage equally, so the pair survives $2\\times500 = 1000$ V. *Why this step:* this is the practical reason to connect in series; you trade capacitance for voltage.\n3. With **unequal** capacitors the smaller one takes more voltage, and it fails first.",
+      type: "worked-example",
+      id: "em2-2-we4",
+      title: "Worked example 4: voltage rating",
+      problem:
+        "Two 4 μF capacitors, each rated at 500 V, are joined in series. What is the combination's capacitance and safe working voltage?",
+      steps: [
+        { text: "$C = \\dfrac{4\\times4}{8} = 2\\ \\mu$F." },
+        { text: "Equal capacitors in series share the voltage equally, so the pair survives $2\\times500 = 1000$ V. *Why this step:* this is the practical reason to connect in series; you trade capacitance for voltage." },
+        { text: "With **unequal** capacitors the smaller one takes more voltage, and it fails first." },
+      ],
+      answer: "$2\\ \\mu$F, safe up to 1000 V",
     },
     {
       type: "callout",
@@ -239,16 +335,20 @@ const lesson02: LessonSeed = {
       content:
         "They share the **charge** equally. The voltage splits as $1/C$: across 12 V, a 2 μF and a 4 μF in series get 8 V and 4 V. The smaller capacitor takes the bigger share, opposite to what intuition from resistors (where the bigger resistor takes more) might suggest.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em2-2-q1",
       variant: "practice",
-      question: "2 μF and 3 μF in series. The equivalent capacitance is",
-      options: [
-        { text: "$5\\ \\mu$F", feedback: "That is the parallel combination." },
-        { text: "$6\\ \\mu$F", feedback: "That is the product without dividing by the sum." },
-        { text: "$2.5\\ \\mu$F", feedback: "That is the average, which is not a combination rule for capacitors." },
-        { text: "$1.2\\ \\mu$F", correct: true, feedback: "$\\dfrac{2\\times3}{2 + 3} = 1.2$." },
+      question: "A 2 μF and a 3 μF capacitor are joined in series. What is the equivalent capacitance? Give your answer in μF.",
+      answer: 1.2,
+      unit: "μF",
+      hint: "In series the reciprocals add: $1/C = 1/C_1 + 1/C_2$. The result must be smaller than the smaller capacitor.",
+      solution: "$C = \\dfrac{C_1C_2}{C_1 + C_2} = \\dfrac{2\\times3}{2 + 3} = 1.2\\ \\mu$F, less than the smaller capacitor, as series combinations must be.",
+      commonMistakes: [
+        { answer: 5, feedback: "That is the parallel combination. In series the reciprocals add." },
+        { answer: 6, feedback: "That is the product without dividing by the sum." },
+        { answer: 2.5, feedback: "That is the average, which is not a combination rule for capacitors." },
       ],
     },
     {
@@ -261,6 +361,7 @@ const lesson02: LessonSeed = {
         { text: "$4$ V", feedback: "That is the 4 μF's share. The smaller capacitor takes the larger voltage." },
         { text: "$6$ V", feedback: "Equal sharing only happens for equal capacitors." },
       ],
+      hint: "Capacitors in series carry the same charge, so the voltage across each goes as $1/C$. Recall the misconception box on sharing voltage.",
     },
     {
       type: "quiz",
@@ -272,17 +373,22 @@ const lesson02: LessonSeed = {
         { text: "$1$", feedback: "Parallel adds; series is smaller than any one. They cannot be equal for $n > 1$." },
         { text: "$n^2$", correct: true, feedback: "$nC$ divided by $C/n$." },
       ],
+      hint: "Apply the parallel rule (capacitances add) and the series rule (reciprocals add) to $n$ copies of $C$, then divide.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em2-2-q4",
       variant: "practice",
-      question: "A 6 μF capacitor is in series with a parallel pair of 1 μF and 2 μF, across 9 V. The charge on the 6 μF is",
-      options: [
-        { text: "$54\\ \\mu$C", feedback: "That uses $6\\times9$, as if the full 9 V were across the 6 μF alone." },
-        { text: "$81\\ \\mu$C", feedback: "That adds everything as if in parallel ($9\\ \\mu$F)." },
-        { text: "$6\\ \\mu$C", feedback: "That is the charge on the 1 μF (6 V across the pair)." },
-        { text: "$18\\ \\mu$C", correct: true, feedback: "Pair $= 3\\ \\mu$F; with 6 μF in series: $2\\ \\mu$F; $Q = 2\\times9 = 18\\ \\mu$C." },
+      question: "A 6 μF capacitor is in series with a parallel pair of 1 μF and 2 μF, across 9 V. What is the charge on the 6 μF capacitor? Give your answer in μC.",
+      answer: 18,
+      unit: "μC",
+      hint: "Reduce the parallel pair first, then the series chain. Every element of a series chain carries the same charge.",
+      solution: "The parallel pair is $1 + 2 = 3\\ \\mu$F.\n\nIn series with the 6 μF: $C = \\dfrac{6\\times3}{6 + 3} = 2\\ \\mu$F.\n\nThe whole series chain carries the same charge: $Q = CV = 2\\times9 = 18\\ \\mu$C. (The 6 μF then has 3 V and the pair 6 V.)",
+      commonMistakes: [
+        { answer: 54, feedback: "That uses $6\\times9$, as if the full 9 V were across the 6 μF alone." },
+        { answer: 81, feedback: "That adds everything as if in parallel ($9\\ \\mu$F)." },
+        { answer: 6, feedback: "That is the charge on the 1 μF (6 V across the pair). The 6 μF carries the full series charge." },
+        { answer: 12, feedback: "That is the charge on the 2 μF of the pair. The 6 μF carries the full series charge, the sum of the pair's charges." },
       ],
     },
     {
@@ -295,6 +401,7 @@ const lesson02: LessonSeed = {
         { text: "Its two ends are at the same potential, so it holds no charge.", correct: true, feedback: "Balance means the voltage divides in the same ratio in both branches." },
         { text: "It is in series with the others, so it does not matter.", feedback: "It is neither in series nor parallel; it is removable only in the balanced case." },
       ],
+      hint: "As in Worked example 3: compare the potentials of the two midpoints when the ratios match. What makes a capacitor take up charge?",
     },
   ]),
 };
@@ -309,6 +416,7 @@ const lesson03: LessonSeed = {
       content:
         "Michael Faraday charged a capacitor, disconnected it, and slid a slab of glass between the plates. The voltage across the plates **dropped**, even though no charge could have left. Take the glass out and the voltage came back. The glass was not a conductor, yet it was doing something to the field. Filling a capacitor with an insulator (a **dielectric**) raises its capacitance, which is why every real capacitor has one.",
     },
+    { type: "heading", text: "How a dielectric weakens the field" },
     {
       type: "text",
       content:
@@ -321,6 +429,7 @@ const lesson03: LessonSeed = {
         "(Air $K \\approx 1.0006$, paper about 3.5, glass 5 to 10, water 80.) This is the same $K$ that weakened Coulomb's law in 0.2: a medium's bound charges partly screen any charge placed in it. For a filled capacitor with free charge density $\\sigma$ on the plates, the net field $(\\sigma - \\sigma_b)/\\varepsilon_0$ must equal $\\sigma/K\\varepsilon_0$, so the bound charge density on the slab faces is $\\sigma_b = \\sigma\\left(1 - \\dfrac1K\\right)$: always less than $\\sigma$, and zero for $K = 1$.\n\n**Completely filled.** With the same free charge $Q$, the field and hence $V = Ed$ drop by $K$, so",
     },
     { type: "math", latex: "C = \\frac{Q}{V} = K\\frac{\\varepsilon_0A}{d} = KC_0" },
+    { type: "heading", text: "Slabs and mixed dielectrics" },
     {
       type: "text",
       content:
@@ -368,20 +477,45 @@ const lesson03: LessonSeed = {
         ["$U$", "$\\times K$ ($\\tfrac12CV^2$)", "$\\div K$ ($Q^2/2C$)"],
       ],
     },
+    { type: "heading", text: "Worked examples: slabs and batteries" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (a half slab).** A slab of thickness $d/2$ and $K = 4$ is placed in a parallel-plate capacitor of capacitance $C_0$. Find $C$.\n\n1. $d - t + t/K = d - \\dfrac d2 + \\dfrac{d}{8} = \\dfrac{5d}{8}$.\n2. $C = \\dfrac{\\varepsilon_0A}{5d/8} = \\dfrac85C_0 = 1.6C_0$. *Why this step:* writing the effective gap first keeps the fractions tidy.\n3. A metal slab of the same thickness would give $\\dfrac{\\varepsilon_0A}{d/2} = 2C_0$.",
+      type: "worked-example",
+      id: "em2-3-we1",
+      title: "Worked example 1: a half slab",
+      problem:
+        "A slab of thickness $d/2$ and $K = 4$ is placed in a parallel-plate capacitor of capacitance $C_0$. Find $C$.",
+      steps: [
+        { text: "$d - t + t/K = d - \\dfrac d2 + \\dfrac{d}{8} = \\dfrac{5d}{8}$." },
+        { text: "$C = \\dfrac{\\varepsilon_0A}{5d/8} = \\dfrac85C_0 = 1.6C_0$. *Why this step:* writing the effective gap first keeps the fractions tidy." },
+        { text: "A metal slab of the same thickness would give $\\dfrac{\\varepsilon_0A}{d/2} = 2C_0$." },
+      ],
+      answer: "$C = 1.6C_0$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (two dielectrics).** A capacitor ($C_0$ in air) is filled with two materials, $K_1 = 2$ and $K_2 = 6$, each filling half. Find $C$ when they are (a) side by side, (b) stacked.\n\n1. (a) Parallel halves: each has half the area, so $K_1\\dfrac{C_0}{2} + K_2\\dfrac{C_0}{2} = (1 + 3)C_0 = 4C_0$.\n2. (b) Series layers: $2K_1C_0 = 4C_0$ and $2K_2C_0 = 12C_0$; $C = \\dfrac{4\\times12}{16}C_0 = 3C_0$.\n3. Side by side gives more. *Why this step:* in series the weaker layer drags the result down; in parallel the stronger one pulls it up.",
+      type: "worked-example",
+      id: "em2-3-we2",
+      title: "Worked example 2: two dielectrics",
+      problem:
+        "A capacitor ($C_0$ in air) is filled with two materials, $K_1 = 2$ and $K_2 = 6$, each filling half. Find $C$ when they are (a) side by side, (b) stacked.",
+      steps: [
+        { text: "(a) Parallel halves: each has half the area, so $K_1\\dfrac{C_0}{2} + K_2\\dfrac{C_0}{2} = (1 + 3)C_0 = 4C_0$." },
+        { text: "(b) Series layers: $2K_1C_0 = 4C_0$ and $2K_2C_0 = 12C_0$; $C = \\dfrac{4\\times12}{16}C_0 = 3C_0$." },
+        { text: "Side by side gives more. *Why this step:* in series the weaker layer drags the result down; in parallel the stronger one pulls it up." },
+      ],
+      answer: "(a) $4C_0$, (b) $3C_0$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (battery on or off).** A 10 μF air capacitor is charged to 100 V. A dielectric with $K = 5$ then fills it. Compare the two cases.\n\n1. **Disconnected first:** $Q = 1$ mC stays. $C = 50\\ \\mu$F, so $V = Q/C = 20$ V. $U$ falls from $\\tfrac12(10^{-5})(100)^2 = 0.05$ J to $\\dfrac{(10^{-3})^2}{2\\times5\\times10^{-5}} = 0.01$ J.\n2. **Still connected:** $V = 100$ V stays. $Q = 50\\times10^{-6}\\times100 = 5$ mC (the battery pushes 4 mC more). $U = \\tfrac12(5\\times10^{-5})(100)^2 = 0.25$ J.\n3. *Why this step:* always ask first what is held fixed. Everything else follows from $C \\to KC$.",
+      type: "worked-example",
+      id: "em2-3-we3",
+      title: "Worked example 3: battery on or off",
+      problem:
+        "A 10 μF air capacitor is charged to 100 V. A dielectric with $K = 5$ then fills it. Compare the two cases.",
+      steps: [
+        { text: "**Disconnected first:** $Q = 1$ mC stays. $C = 50\\ \\mu$F, so $V = Q/C = 20$ V. $U$ falls from $\\tfrac12(10^{-5})(100)^2 = 0.05$ J to $\\dfrac{(10^{-3})^2}{2\\times5\\times10^{-5}} = 0.01$ J." },
+        { text: "**Still connected:** $V = 100$ V stays. $Q = 50\\times10^{-6}\\times100 = 5$ mC (the battery pushes 4 mC more). $U = \\tfrac12(5\\times10^{-5})(100)^2 = 0.25$ J." },
+        { text: "*Why this step:* always ask first what is held fixed. Everything else follows from $C \\to KC$." },
+      ],
+      answer: "Disconnected: $V = 20$ V, $U = 0.01$ J. Connected: $Q = 5$ mC, $U = 0.25$ J",
     },
     {
       type: "callout",
@@ -390,16 +524,20 @@ const lesson03: LessonSeed = {
       content:
         "With the battery connected it does ($U \\to KU$). With the battery disconnected, $Q$ is fixed and $U = Q^2/2C$ **falls** to $U/K$. The missing energy went into pulling the slab in: the fringing field at the edges attracts the polarised slab into the gap. Push a slab into an isolated charged capacitor and it is sucked in.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em2-3-q1",
       variant: "practice",
-      question: "A slab of thickness $d/2$ and $K = 2$ is placed between plates $d$ apart. $C/C_0$ is",
-      options: [
-        { text: "$2$", feedback: "$KC_0$ needs the gap completely filled." },
-        { text: "$\\dfrac32$", feedback: "That is the average of 1 and 2, which assumes the halves are in parallel. A slab across the gap is in series with the air." },
-        { text: "$\\dfrac43$", correct: true, feedback: "Effective gap $d/2 + d/4 = 3d/4$, so $C = 4C_0/3$." },
-        { text: "$\\dfrac34$", feedback: "A dielectric can only increase $C$." },
+      question: "A slab of thickness $d/2$ and $K = 2$ is placed between plates $d$ apart. Find $C/C_0$, where $C_0$ is the air capacitance. Give your answer as a decimal or a fraction.",
+      answer: 4 / 3,
+      relTolerance: 0.01,
+      hint: "The slab acts like air of thickness $t/K$: the effective gap is $d - t + t/K$.",
+      solution: "Effective gap $d - \\dfrac d2 + \\dfrac{d/2}{2} = \\dfrac d2 + \\dfrac d4 = \\dfrac{3d}{4}$.\n\nSo $C = \\dfrac{\\varepsilon_0A}{3d/4} = \\dfrac43C_0$, and $C/C_0 = 4/3 \\approx 1.33$.",
+      commonMistakes: [
+        { answer: 2, feedback: "$KC_0$ needs the gap completely filled. Here half the gap is still air." },
+        { answer: 1.5, feedback: "That is the average of 1 and 2, which assumes the halves are in parallel. A slab across the gap is in series with the air." },
+        { answer: 0.75, feedback: "That is $C_0/C$, upside down. A dielectric can only increase $C$." },
       ],
     },
     {
@@ -413,6 +551,7 @@ const lesson03: LessonSeed = {
         { text: "$C_0$", feedback: "A metal slab removes its thickness from the gap." },
         { text: "Infinite, the plates are shorted", feedback: "The slab does not touch the plates, so there are still two air gaps." },
       ],
+      hint: "A conductor has $E = 0$ inside, so the slab simply removes its thickness from the gap. Use $C = \\varepsilon_0A/d_{\\text{eff}}$.",
     },
     {
       type: "quiz",
@@ -425,16 +564,20 @@ const lesson03: LessonSeed = {
         { text: "The charge $Q$", correct: true, feedback: "Nowhere for charge to go." },
         { text: "The field between the plates", feedback: "The field falls by $K$: $E = E_0/K$." },
       ],
+      hint: "With the battery removed, which quantity has nowhere to go? Then see how $V$, $E$ and $U$ follow from it.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em2-3-q4",
       variant: "practice",
-      question: "A capacitor is filled with $K_1 = 3$ and $K_2 = 6$, each filling half the **gap** (stacked, full area). $C/C_0$ is",
-      options: [
-        { text: "$4.5$", feedback: "That is the side-by-side (parallel) arrangement, $(3 + 6)/2$." },
-        { text: "$4$", correct: true, feedback: "Layers $6C_0$ and $12C_0$ in series: $\\dfrac{72}{18} = 4$." },
-        { text: "$2$", feedback: "Each half-gap layer has capacitance $2KC_0$, not $KC_0/2$." },
+      question: "A capacitor ($C_0$ in air) is filled with $K_1 = 3$ and $K_2 = 6$, each filling half the **gap** (stacked, full area). Find $C/C_0$.",
+      answer: 4,
+      hint: "Stacked layers carry the same charge, so treat them as two capacitors in series, each with gap $d/2$ and its own $K$.",
+      solution: "Stacked layers carry the same charge, so they are in series. Each half-gap layer is $\\dfrac{K\\varepsilon_0A}{d/2} = 2KC_0$: $6C_0$ and $12C_0$.\n\n$C = \\dfrac{6\\times12}{6 + 12}C_0 = \\dfrac{72}{18}C_0 = 4C_0$.",
+      commonMistakes: [
+        { answer: 4.5, feedback: "That is the side-by-side (parallel) arrangement, $(3 + 6)/2$. Stacked layers are in series." },
+        { answer: 2, feedback: "That treats each layer as $KC_0$ ($3C_0$ and $6C_0$ in series). A layer filling half the gap has capacitance $2KC_0$." },
+        { answer: 9, feedback: "That adds the layers as if in parallel. Stacked layers carry the same charge, so they are in series." },
       ],
     },
     {
@@ -447,6 +590,22 @@ const lesson03: LessonSeed = {
         { text: "falls by $K$", feedback: "That is the isolated case. Here the battery supplies extra charge." },
         { text: "rises by $K$", feedback: "$V$ and $d$ are both fixed, so $E = V/d$ is too." },
       ],
+      hint: "Ask what the battery holds fixed, then relate the field between the plates to that quantity and the gap $d$.",
+    },
+    {
+      type: "quiz",
+      id: "em2-3-q6",
+      variant: "practice",
+      question: "A parallel-plate capacitor stays connected to a battery while a dielectric of constant $K$ is slid in to fill it completely. Which quantities become $K$ times larger? Select all that apply.",
+      multiple: true,
+      options: [
+        { text: "The capacitance $C$", correct: true, feedback: "Filling the gap gives $C = KC_0$, whatever the battery does." },
+        { text: "The charge $Q$ on the plates", correct: true, feedback: "$V$ is fixed, so $Q = CV$ rises with $C$: the battery pushes on the extra charge." },
+        { text: "The stored energy $U$", correct: true, feedback: "$U = \\tfrac12CV^2$ with $V$ fixed rises by $K$." },
+        { text: "The voltage across the plates", feedback: "The battery holds $V$ fixed." },
+        { text: "The field between the plates", feedback: "$E = V/d$ with both $V$ and $d$ fixed, so the field is unchanged." },
+      ],
+      hint: "With the battery connected, ask what stays fixed. Then check each quantity using $Q = CV$, $U = \\tfrac12CV^2$ and $E = V/d$.",
     },
   ]),
 };
@@ -461,6 +620,7 @@ const lesson04: LessonSeed = {
       content:
         "A camera flash capacitor of about 100 μF at 300 V delivers a few joules in a millisecond: a power of several kilowatts, from two AA cells. The cells cannot deliver that power, but they can slowly fill the capacitor, and the capacitor can empty fast. How much energy does a charged capacitor hold, and where is it?",
     },
+    { type: "heading", text: "Work to charge a capacitor" },
     {
       type: "text",
       content:
@@ -482,10 +642,11 @@ const lesson04: LessonSeed = {
       content:
         "$U = \\dfrac{Q^2}{2C} = \\tfrac12CV^2 = \\tfrac12QV$.\nThe energy is stored in the **field**, with energy per unit volume\n$u = \\tfrac12\\varepsilon_0E^2$ (in a dielectric, $\\tfrac12K\\varepsilon_0E^2$).",
     },
+    { type: "heading", text: "Where the energy lives" },
     {
       type: "text",
       content:
-        "**Where the energy lives.** For parallel plates, $C = \\varepsilon_0A/d$ and $V = Ed$, so $U = \\tfrac12\\dfrac{\\varepsilon_0A}{d}E^2d^2 = \\tfrac12\\varepsilon_0E^2\\,(Ad)$. $Ad$ is the volume between the plates, where the field is. The energy per volume is $\\tfrac12\\varepsilon_0E^2$, and this turns out to be true for every electric field, not only in capacitors. It is the first sign that fields are physical things that carry energy (Chapter 5 ends with fields carrying energy across space as light).\n\n**Force between the plates.** Hold $Q$ fixed and pull the plates apart by $dx$. The field $E = \\sigma/\\varepsilon_0$ does not change, but the volume filled with it grows by $A\\,dx$, so the energy grows by $\\tfrac12\\varepsilon_0E^2A\\,dx$. That energy came from your pull, so",
+        "For parallel plates, $C = \\varepsilon_0A/d$ and $V = Ed$, so $U = \\tfrac12\\dfrac{\\varepsilon_0A}{d}E^2d^2 = \\tfrac12\\varepsilon_0E^2\\,(Ad)$. $Ad$ is the volume between the plates, where the field is. The energy per volume is $\\tfrac12\\varepsilon_0E^2$, and this turns out to be true for every electric field, not only in capacitors. It is the first sign that fields are physical things that carry energy (Chapter 5 ends with fields carrying energy across space as light).\n\n**Force between the plates.** Hold $Q$ fixed and pull the plates apart by $dx$. The field $E = \\sigma/\\varepsilon_0$ does not change, but the volume filled with it grows by $A\\,dx$, so the energy grows by $\\tfrac12\\varepsilon_0E^2A\\,dx$. That energy came from your pull, so",
     },
     {
       type: "math",
@@ -496,25 +657,57 @@ const lesson04: LessonSeed = {
       content:
         "Not $QE$: each plate feels only the field of the **other** plate, which is $\\sigma/2\\varepsilon_0 = E/2$. A plate cannot push itself.\n\n**The battery's bill.** A battery of emf $V$ charging an empty capacitor moves charge $Q = CV$ through a potential difference $V$, doing work $QV = CV^2$. Only $\\tfrac12CV^2$ ends up stored. The other half is turned into heat in the connecting resistance (and a little radiation) whatever the resistance is: a big $R$ gives a small current for a long time, a small $R$ a big current for a short time, and the heat comes out the same (2.6 checks this by integrating $i^2R$).",
     },
+    { type: "heading", text: "Worked examples: energy bookkeeping" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (a 10 μF capacitor at 100 V).** Find the stored energy and the battery's work.\n\n1. $U = \\tfrac12CV^2 = \\tfrac12\\times10\\times10^{-6}\\times10^4 = 0.05$ J.\n2. Battery: $QV = (10^{-3})(100) = 0.1$ J. The other 0.05 J became heat. *Why this step:* the factor 2 between battery work and stored energy is the check that you have not mixed up $QV$ and $\\tfrac12QV$.",
+      type: "worked-example",
+      id: "em2-4-we1",
+      title: "Worked example 1: a 10 μF capacitor at 100 V",
+      problem:
+        "Find the stored energy and the battery's work.",
+      steps: [
+        { text: "$U = \\tfrac12CV^2 = \\tfrac12\\times10\\times10^{-6}\\times10^4 = 0.05$ J." },
+        { text: "Battery: $QV = (10^{-3})(100) = 0.1$ J. The other 0.05 J became heat. *Why this step:* the factor 2 between battery work and stored energy is the check that you have not mixed up $QV$ and $\\tfrac12QV$." },
+      ],
+      answer: "$U = 0.05$ J; the battery does $0.1$ J of work",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (energy density).** The field between two plates is $10^6$ V/m. How much energy is stored per cubic metre?\n\n1. $u = \\tfrac12\\varepsilon_0E^2 = \\tfrac12\\times8.85\\times10^{-12}\\times10^{12} \\approx 4.4$ J/m³.\n2. Tiny. Air breaks down near $3\\times10^6$ V/m, so an air capacitor cannot store much more than about 40 J/m³. That is why good capacitors need dielectrics that survive strong fields (and add the factor $K$).",
+      type: "worked-example",
+      id: "em2-4-we2",
+      title: "Worked example 2: energy density",
+      problem:
+        "The field between two plates is $10^6$ V/m. How much energy is stored per cubic metre?",
+      steps: [
+        { text: "$u = \\tfrac12\\varepsilon_0E^2 = \\tfrac12\\times8.85\\times10^{-12}\\times10^{12} \\approx 4.4$ J/m³." },
+        { text: "Tiny. Air breaks down near $3\\times10^6$ V/m, so an air capacitor cannot store much more than about 40 J/m³. That is why good capacitors need dielectrics that survive strong fields (and add the factor $K$)." },
+      ],
+      answer: "$u \\approx 4.4$ J/m³",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (pulling the plates apart).** A 10 μF parallel-plate capacitor is charged to 100 V and disconnected. Its gap is then doubled. How much work does this take?\n\n1. $Q = 1$ mC is fixed (disconnected). *Why this step:* use $U = Q^2/2C$, the form with the fixed quantity.\n2. Before: $U_1 = \\dfrac{(10^{-3})^2}{2\\times10^{-5}} = 0.05$ J. After: $C = 5\\ \\mu$F, $U_2 = \\dfrac{10^{-6}}{10^{-5}} = 0.1$ J.\n3. Work $= U_2 - U_1 = 0.05$ J. The voltage has doubled to 200 V.\n4. Check with the force: $F = \\tfrac12QE$ is constant as the gap widens (with $Q$ fixed, $E$ stays the same), so $W = F\\,\\Delta d = \\tfrac12Q(E\\,\\Delta d) = \\tfrac12\\times10^{-3}\\times100 = 0.05$ J. ✓ (Here $E\\,\\Delta d = E d = 100$ V, the original voltage.)",
+      type: "worked-example",
+      id: "em2-4-we3",
+      title: "Worked example 3: pulling the plates apart",
+      problem:
+        "A 10 μF parallel-plate capacitor is charged to 100 V and disconnected. Its gap is then doubled. How much work does this take?",
+      steps: [
+        { text: "$Q = 1$ mC is fixed (disconnected). *Why this step:* use $U = Q^2/2C$, the form with the fixed quantity." },
+        { text: "Before: $U_1 = \\dfrac{(10^{-3})^2}{2\\times10^{-5}} = 0.05$ J. After: $C = 5\\ \\mu$F, $U_2 = \\dfrac{10^{-6}}{10^{-5}} = 0.1$ J." },
+        { text: "Work $= U_2 - U_1 = 0.05$ J. The voltage has doubled to 200 V." },
+        { text: "Check with the force: $F = \\tfrac12QE$ is constant as the gap widens (with $Q$ fixed, $E$ stays the same), so $W = F\\,\\Delta d = \\tfrac12Q(E\\,\\Delta d) = \\tfrac12\\times10^{-3}\\times100 = 0.05$ J. ✓ (Here $E\\,\\Delta d = E d = 100$ V, the original voltage.)" },
+      ],
+      answer: "$0.05$ J",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (energy bookkeeping for a slab).** Take 2.3's Worked example 3: a 10 μF capacitor at 100 V, and a $K = 5$ slab slid in.\n\n1. **Disconnected:** $U$ falls from 0.05 J to 0.01 J. The 0.04 J went into the slab: the field pulled it in, and whoever held it back (or friction) took that energy.\n2. **Connected:** $U$ rises from 0.05 J to 0.25 J, a gain of 0.2 J. The battery pushed an extra 4 mC through 100 V: 0.4 J. *Why this step:* in the connected case you must include the battery's work, or energy seems to appear from nowhere.\n3. So $0.4 = 0.2 + 0.2$: the other 0.2 J again went into pulling the slab in (it is attracted in both cases).",
+      type: "worked-example",
+      id: "em2-4-we4",
+      title: "Worked example 4: energy bookkeeping for a slab",
+      problem:
+        "Take 2.3's Worked example 3: a 10 μF capacitor at 100 V, and a $K = 5$ slab slid in.",
+      steps: [
+        { text: "**Disconnected:** $U$ falls from 0.05 J to 0.01 J. The 0.04 J went into the slab: the field pulled it in, and whoever held it back (or friction) took that energy." },
+        { text: "**Connected:** $U$ rises from 0.05 J to 0.25 J, a gain of 0.2 J. The battery pushed an extra 4 mC through 100 V: 0.4 J. *Why this step:* in the connected case you must include the battery's work, or energy seems to appear from nowhere." },
+        { text: "So $0.4 = 0.2 + 0.2$: the other 0.2 J again went into pulling the slab in (it is attracted in both cases)." },
+      ],
+      answer: "Disconnected: 0.04 J goes into the slab. Connected: battery 0.4 J = 0.2 J stored + 0.2 J into the slab",
     },
     {
       type: "callout",
@@ -523,15 +716,20 @@ const lesson04: LessonSeed = {
       content:
         "The battery does $QV$; the capacitor stores $\\tfrac12QV$. Exactly half is lost as heat in the wires and internal resistance while charging, independent of their resistance. Making $R$ smaller does not help; it only makes the loss happen faster.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em2-4-q1",
       variant: "practice",
-      question: "A 4 μF capacitor is charged to 50 V. The stored energy is",
-      options: [
-        { text: "$5$ mJ", correct: true, feedback: "$\\tfrac12\\times4\\times10^{-6}\\times2500 = 5\\times10^{-3}$ J." },
-        { text: "$10$ mJ", feedback: "That is $CV^2$, the battery's work. Stored energy has the $\\tfrac12$." },
-        { text: "$0.1$ mJ", feedback: "That is $\\tfrac12CV$, missing a factor of $V$." },
+      question: "A 4 μF capacitor is charged to 50 V. What is the stored energy? Give your answer in mJ.",
+      answer: 5,
+      unit: "mJ",
+      hint: "Use $U = \\tfrac12CV^2$ with $C$ in farads, then convert joules to millijoules.",
+      solution: "$U = \\tfrac12CV^2 = \\tfrac12\\times4\\times10^{-6}\\times2500 = 5\\times10^{-3}$ J $= 5$ mJ.",
+      commonMistakes: [
+        { answer: 10, feedback: "That is $CV^2$, the battery's work. Stored energy has the $\\tfrac12$." },
+        { answer: 0.1, feedback: "That is $\\tfrac12CV$, missing a factor of $V$." },
+        { answer: 0.005, feedback: "That is the energy in joules. The question asks for millijoules: $5\\times10^{-3}$ J $= 5$ mJ." },
       ],
     },
     {
@@ -544,16 +742,21 @@ const lesson04: LessonSeed = {
         { text: "One half, whatever the resistance", correct: true, feedback: "$QV$ supplied, $\\tfrac12QV$ stored." },
         { text: "It depends on the capacitance", feedback: "Both $QV = CV^2$ and $\\tfrac12CV^2$ scale with $C$, so the fraction is fixed." },
       ],
+      hint: "Compare the battery's work, $QV$ (charge $Q$ pushed through a fixed emf), with the energy the capacitor stores. Does $R$ appear in either?",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em2-4-q3",
       variant: "practice",
-      question: "The field in a region is $2\\times10^5$ V/m. The energy density is about",
-      options: [
-        { text: "$0.35$ J/m³", feedback: "You left out the $\\tfrac12$." },
-        { text: "$8.85\\times10^{-7}$ J/m³", feedback: "Square the field: $E^2 = 4\\times10^{10}$." },
-        { text: "$0.18$ J/m³", correct: true, feedback: "$\\tfrac12\\times8.85\\times10^{-12}\\times4\\times10^{10} \\approx 0.177$ J/m³." },
+      question: "The electric field in a region of air is $2\\times10^5$ V/m. Take $\\varepsilon_0 = 8.85\\times10^{-12}$ F/m. What is the energy density? Give your answer in J/m³, to two significant figures.",
+      answer: 0.177,
+      relTolerance: 0.02,
+      unit: "J/m³",
+      hint: "Use $u = \\tfrac12\\varepsilon_0E^2$, and square the field carefully.",
+      solution: "$u = \\tfrac12\\varepsilon_0E^2 = \\tfrac12\\times8.85\\times10^{-12}\\times(2\\times10^5)^2 = \\tfrac12\\times8.85\\times10^{-12}\\times4\\times10^{10} \\approx 0.177$ J/m³.",
+      commonMistakes: [
+        { answer: 0.354, feedback: "You left out the $\\tfrac12$." },
+        { answer: 8.85e-7, feedback: "Square the field: $E^2 = 4\\times10^{10}$." },
       ],
     },
     {
@@ -566,6 +769,7 @@ const lesson04: LessonSeed = {
         { text: "increases, because you do work against the attraction", correct: true, feedback: "$Q$ fixed, $C$ falls, $U = Q^2/2C$ rises by exactly the work you did." },
         { text: "stays the same, because $Q$ is fixed", feedback: "$U$ depends on $C$ as well as $Q$." },
       ],
+      hint: "With the battery gone, $Q$ is fixed. Use $U = Q^2/2C$ and ask how $C$ changes as the gap widens.",
     },
     {
       type: "quiz",
@@ -577,6 +781,22 @@ const lesson04: LessonSeed = {
         { text: "$\\dfrac{kQ^2}{d^2}$", feedback: "Coulomb's point-charge law does not apply to large flat plates close together." },
         { text: "$\\dfrac{Q^2}{2\\varepsilon_0A}$", correct: true, feedback: "Each plate sits in the other's field $\\sigma/2\\varepsilon_0$." },
       ],
+      hint: "A plate cannot push on itself. Find the field produced by the other plate alone, then multiply by $Q$.",
+    },
+    {
+      type: "quiz",
+      id: "em2-4-q6",
+      variant: "practice",
+      question: "A parallel-plate capacitor $C$ (plate area $A$, gap $d$, air) holds charge $Q$ at voltage $V$, with field $E$ between the plates. Which expressions equal the energy it stores? Select all that apply.",
+      multiple: true,
+      options: [
+        { text: "$\\tfrac12QV$", correct: true, feedback: "The charge was moved, on average, through $V/2$." },
+        { text: "$\\dfrac{Q^2}{2C}$", correct: true, feedback: "Substitute $V = Q/C$ into $\\tfrac12QV$. Use this form when $Q$ is held fixed." },
+        { text: "$QV$", feedback: "That is the battery's work in charging it. Only half of that is stored; the rest is heat." },
+        { text: "$\\tfrac12\\varepsilon_0E^2Ad$", correct: true, feedback: "Energy density $\\tfrac12\\varepsilon_0E^2$ times the volume $Ad$ between the plates, where the field is." },
+        { text: "$\\tfrac12Q^2C$", feedback: "Check the units: $Q^2C$ is not an energy. The capacitance belongs in the denominator, $Q^2/2C$." },
+      ],
+      hint: "Start from $U = \\tfrac12CV^2$ and substitute $Q = CV$, $V = Ed$ and $C = \\varepsilon_0A/d$. Checking units also rules some out.",
     },
   ]),
 };
@@ -591,6 +811,7 @@ const lesson05: LessonSeed = {
       content:
         "Take a charged capacitor off its battery and connect it to an empty one: positive plate to positive plate, negative to negative. Charge flows until both sit at the same voltage. No battery is involved, charge cannot be created or destroyed, and yet, when you count, energy has gone missing. Where?",
     },
+    { type: "heading", text: "Common potential and energy lost" },
     {
       type: "text",
       content:
@@ -621,10 +842,11 @@ const lesson05: LessonSeed = {
       content:
         "Like plates joined: $V = \\dfrac{C_1V_1 + C_2V_2}{C_1 + C_2}$, $\\Delta U = \\dfrac{C_1C_2(V_1 - V_2)^2}{2(C_1 + C_2)}$.\nOpposite plates joined: $V = \\dfrac{|C_1V_1 - C_2V_2|}{C_1 + C_2}$, $\\Delta U = \\dfrac{C_1C_2(V_1 + V_2)^2}{2(C_1 + C_2)}$.\nCharge is conserved; energy is not (it leaves as heat and radiation).",
     },
+    { type: "heading", text: "Where the energy goes" },
     {
       type: "text",
       content:
-        "**Where the energy goes.** The connecting wires have some resistance $R$, and the current that flows while the voltages equalise heats them. As with charging (2.4), the heat does not depend on $R$: with a tiny $R$ the current surges and the connection sparks, radiating some energy as electromagnetic waves. Either way the loss is exactly $\\Delta U$.\n\nThe machine below takes a 2 μF capacitor at 100 V and joins it to an uncharged $C_2$. Then $\\Delta U = \\dfrac{2C_2}{2(2 + C_2)}\\times100^2$ μJ $= \\dfrac{10C_2}{2 + C_2}$ mJ.",
+        "The connecting wires have some resistance $R$, and the current that flows while the voltages equalise heats them. As with charging (2.4), the heat does not depend on $R$: with a tiny $R$ the current surges and the connection sparks, radiating some energy as electromagnetic waves. Either way the loss is exactly $\\Delta U$.\n\nThe machine below takes a 2 μF capacitor at 100 V and joins it to an uncharged $C_2$. Then $\\Delta U = \\dfrac{2C_2}{2(2 + C_2)}\\times100^2$ μJ $= \\dfrac{10C_2}{2 + C_2}$ mJ.",
     },
     {
       type: "interactive",
@@ -646,20 +868,45 @@ const lesson05: LessonSeed = {
       content:
         "What you should have seen: the first capacitor starts with $\\tfrac12\\times2\\times10^{-6}\\times10^4 = 10$ mJ. With an equal partner ($C_2 = 2\\ \\mu$F) half of it, 5 mJ, is lost. As $C_2$ grows the loss creeps towards the full 10 mJ: a huge empty capacitor drains almost all the charge and leaves almost no voltage, so almost no energy survives. With $C_2 = 0$ nothing happens and nothing is lost.",
     },
+    { type: "heading", text: "Worked examples: joining charged capacitors" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (equal capacitors).** A 2 μF capacitor at 100 V is joined to an uncharged 2 μF capacitor. Find the common voltage and the energy lost.\n\n1. $V = \\dfrac{2\\times100 + 0}{4} = 50$ V.\n2. Before: 10 mJ. After: $\\tfrac12\\times4\\times10^{-6}\\times2500 = 5$ mJ. Lost: 5 mJ. *Why this step:* computing before and after directly is a good check on the formula.\n3. Formula: $\\dfrac{2\\times2}{2\\times4}\\times100^2$ μJ $= 5000$ μJ $= 5$ mJ. ✓",
+      type: "worked-example",
+      id: "em2-5-we1",
+      title: "Worked example 1: equal capacitors",
+      problem:
+        "A 2 μF capacitor at 100 V is joined to an uncharged 2 μF capacitor. Find the common voltage and the energy lost.",
+      steps: [
+        { text: "$V = \\dfrac{2\\times100 + 0}{4} = 50$ V." },
+        { text: "Before: 10 mJ. After: $\\tfrac12\\times4\\times10^{-6}\\times2500 = 5$ mJ. Lost: 5 mJ. *Why this step:* computing before and after directly is a good check on the formula." },
+        { text: "Formula: $\\dfrac{2\\times2}{2\\times4}\\times100^2$ μJ $= 5000$ μJ $= 5$ mJ. ✓" },
+      ],
+      answer: "$V = 50$ V; 5 mJ lost",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (both charged, same polarity).** $C_1 = 4\\ \\mu$F at 50 V and $C_2 = 2\\ \\mu$F at 20 V are joined + to +.\n\n1. Charges: $200\\ \\mu$C and $40\\ \\mu$C. Total $240\\ \\mu$C on $6\\ \\mu$F: $V = 40$ V.\n2. Energy before: $5$ mJ $+ 0.4$ mJ $= 5.4$ mJ. After: $\\tfrac12\\times6\\times10^{-6}\\times1600 = 4.8$ mJ.\n3. Lost: 0.6 mJ. Formula: $\\dfrac{8}{12}\\times30^2 = 600$ μJ. ✓",
+      type: "worked-example",
+      id: "em2-5-we2",
+      title: "Worked example 2: both charged, same polarity",
+      problem:
+        "$C_1 = 4\\ \\mu$F at 50 V and $C_2 = 2\\ \\mu$F at 20 V are joined + to +.",
+      steps: [
+        { text: "Charges: $200\\ \\mu$C and $40\\ \\mu$C. Total $240\\ \\mu$C on $6\\ \\mu$F: $V = 40$ V." },
+        { text: "Energy before: $5$ mJ $+ 0.4$ mJ $= 5.4$ mJ. After: $\\tfrac12\\times6\\times10^{-6}\\times1600 = 4.8$ mJ." },
+        { text: "Lost: 0.6 mJ. Formula: $\\dfrac{8}{12}\\times30^2 = 600$ μJ. ✓" },
+      ],
+      answer: "$V = 40$ V; 0.6 mJ lost",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (opposite polarity).** The same two capacitors, but + of one is joined to − of the other.\n\n1. Net charge on each joined pair of plates: $200 - 40 = 160\\ \\mu$C. *Why this step:* the positive plate of one meets the negative plate of the other; their charges partly cancel.\n2. $V = 160/6 \\approx 26.7$ V.\n3. After: $\\tfrac12\\times6\\times10^{-6}\\times(26.67)^2 \\approx 2.13$ mJ. Lost: $5.4 - 2.13 \\approx 3.27$ mJ. Formula: $\\dfrac{8}{12}\\times70^2 \\approx 3267$ μJ. ✓ More than five times the same-polarity loss.",
+      type: "worked-example",
+      id: "em2-5-we3",
+      title: "Worked example 3: opposite polarity",
+      problem:
+        "The same two capacitors, but + of one is joined to − of the other.",
+      steps: [
+        { text: "Net charge on each joined pair of plates: $200 - 40 = 160\\ \\mu$C. *Why this step:* the positive plate of one meets the negative plate of the other; their charges partly cancel." },
+        { text: "$V = 160/6 \\approx 26.7$ V." },
+        { text: "After: $\\tfrac12\\times6\\times10^{-6}\\times(26.67)^2 \\approx 2.13$ mJ. Lost: $5.4 - 2.13 \\approx 3.27$ mJ. Formula: $\\dfrac{8}{12}\\times70^2 \\approx 3267$ μJ. ✓ More than five times the same-polarity loss." },
+      ],
+      answer: "$V \\approx 26.7$ V; about 3.27 mJ lost",
     },
     {
       type: "callout",
@@ -668,28 +915,36 @@ const lesson05: LessonSeed = {
       content:
         "Charge is conserved; energy is not, at least not as stored energy. Whenever charge flows between two capacitors at different voltages, energy is dissipated in the path. The only lossless case is $V_1 = V_2$, where nothing flows at all.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em2-5-q1",
       variant: "practice",
-      question: "A 3 μF capacitor at 120 V is joined to an uncharged 1 μF capacitor (like plates together). The common voltage is",
-      options: [
-        { text: "$60$ V", feedback: "Equal sharing of voltage would need equal capacitors." },
-        { text: "$120$ V", feedback: "Some charge flows to the empty capacitor, so the voltage drops." },
-        { text: "$30$ V", feedback: "That is $120/4$. Divide the charge, not the voltage, by the total capacitance." },
-        { text: "$90$ V", correct: true, feedback: "$360\\ \\mu$C shared over $4\\ \\mu$F." },
+      question: "A 3 μF capacitor at 120 V is joined to an uncharged 1 μF capacitor (like plates together). What is the common voltage? Give your answer in V.",
+      answer: 90,
+      unit: "V",
+      hint: "Charge is conserved. Find the total charge, then share it over the combined capacitance, since the two end up in parallel.",
+      solution: "Charge is conserved: $Q = 3\\times120 = 360\\ \\mu$C, shared over $3 + 1 = 4\\ \\mu$F.\n\n$V = \\dfrac{360}{4} = 90$ V.",
+      commonMistakes: [
+        { answer: 60, feedback: "Equal sharing of voltage would need equal capacitors." },
+        { answer: 120, feedback: "Some charge flows to the empty capacitor, so the voltage drops." },
+        { answer: 30, feedback: "That is $120/4$. Divide the charge, not the voltage, by the total capacitance." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em2-5-q2",
       variant: "practice",
-      question: "For the previous question, the energy lost is",
-      options: [
-        { text: "$21.6$ mJ", feedback: "That is the initial energy, not the loss." },
-        { text: "$0$", feedback: "Energy is lost whenever charge flows between unequal voltages." },
-        { text: "$10.8$ mJ", feedback: "Half the initial energy is lost only for equal capacitors." },
-        { text: "$5.4$ mJ", correct: true, feedback: "$\\dfrac{3\\times1}{2\\times4}\\times120^2$ μJ $= 5400$ μJ. Check: $21.6 - 16.2 = 5.4$ mJ." },
+      question: "A 3 μF capacitor at 120 V is joined to an uncharged 1 μF capacitor (like plates together). How much energy is lost? Give your answer in mJ.",
+      answer: 5.4,
+      unit: "mJ",
+      hint: "Find the energy before and after using the common voltage, or use $\\Delta U = \\dfrac{C_1C_2}{2(C_1 + C_2)}(V_1 - V_2)^2$ directly.",
+      solution: "$\\Delta U = \\dfrac{C_1C_2}{2(C_1 + C_2)}(V_1 - V_2)^2 = \\dfrac{3\\times1}{2\\times4}\\times120^2$ μJ $= 5400$ μJ $= 5.4$ mJ.\n\nCheck: before $\\tfrac12\\times3\\times10^{-6}\\times120^2 = 21.6$ mJ; after $\\tfrac12\\times4\\times10^{-6}\\times90^2 = 16.2$ mJ; lost $21.6 - 16.2 = 5.4$ mJ.",
+      commonMistakes: [
+        { answer: 21.6, feedback: "That is the initial energy, not the loss." },
+        { answer: 0, feedback: "Energy is lost whenever charge flows between unequal voltages." },
+        { answer: 10.8, feedback: "Half the initial energy is lost only for equal capacitors." },
+        { answer: 16.2, feedback: "That is the energy that remains after sharing. The loss is what is missing: $21.6 - 16.2$." },
       ],
     },
     {
@@ -702,16 +957,20 @@ const lesson05: LessonSeed = {
         { text: "All of it", feedback: "Energy is dissipated in the connecting wires." },
         { text: "One quarter", feedback: "Each capacitor has a quarter of the original energy, but there are two of them." },
       ],
+      hint: "Charge is conserved but energy is not. Find the common voltage, then compare $\\tfrac12CV^2$ before with the total afterwards.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em2-5-q4",
       variant: "practice",
-      question: "$C_1 = 2\\ \\mu$F at 100 V and $C_2 = 2\\ \\mu$F at 40 V are joined with **opposite** polarity. The common voltage is",
-      options: [
-        { text: "$70$ V", feedback: "That is the same-polarity result, $(200 + 80)/4$." },
-        { text: "$60$ V", feedback: "Divide the net charge $120\\ \\mu$C by the **total** capacitance 4 μF." },
-        { text: "$30$ V", correct: true, feedback: "$(200 - 80)/4 = 30$ V." },
+      question: "$C_1 = 2\\ \\mu$F at 100 V and $C_2 = 2\\ \\mu$F at 40 V are joined with **opposite** polarity (positive plate of each to the negative plate of the other). What is the common voltage? Give your answer in V.",
+      answer: 30,
+      unit: "V",
+      hint: "With opposite polarity, each joined pair of plates holds the difference of the two charges. Share that net charge over the total capacitance.",
+      solution: "Charges: $200\\ \\mu$C and $80\\ \\mu$C. Opposite plates meet, so the net charge on each joined pair is $200 - 80 = 120\\ \\mu$C.\n\nShared over $2 + 2 = 4\\ \\mu$F: $V = 120/4 = 30$ V.",
+      commonMistakes: [
+        { answer: 70, feedback: "That is the same-polarity result, $(200 + 80)/4$. With opposite polarity the charges partly cancel." },
+        { answer: 60, feedback: "Divide the net charge $120\\ \\mu$C by the **total** capacitance 4 μF." },
       ],
     },
     {
@@ -724,6 +983,22 @@ const lesson05: LessonSeed = {
         { text: "It is stored in the connecting wires as charge.", feedback: "Wires hold negligible charge; the energy leaves the system." },
         { text: "Nowhere; it reappears when the capacitors are separated.", feedback: "Separating them does not return any energy; the charges stay as they are." },
       ],
+      hint: "Charge must flow through the connecting wires to be shared. What does a current through any resistance do to energy? Recall the misconception box.",
+    },
+    {
+      type: "quiz",
+      id: "em2-5-q6",
+      variant: "practice",
+      question: "A 4 μF capacitor charged to 60 V is joined, like plates together, to an uncharged 2 μF capacitor. Which statements are true once charge stops flowing? Select all that apply.",
+      multiple: true,
+      options: [
+        { text: "Both capacitors are at 40 V.", correct: true, feedback: "$240\\ \\mu$C over $6\\ \\mu$F gives 40 V. Joined plate to plate, they must share one voltage." },
+        { text: "The total charge on the joined positive plates is still $240\\ \\mu$C.", correct: true, feedback: "The joined plates form an isolated conductor, so charge is conserved." },
+        { text: "The two capacitors hold equal charges.", feedback: "They share the voltage, not the charge: $160\\ \\mu$C on the 4 μF and $80\\ \\mu$C on the 2 μF." },
+        { text: "The total stored energy is unchanged.", feedback: "It falls from 7.2 mJ to 4.8 mJ. The 2.4 mJ difference is lost as heat and radiation." },
+        { text: "The energy lost would be the same with thicker (lower-resistance) connecting wires.", correct: true, feedback: "$\\Delta U = \\dfrac{C_1C_2}{2(C_1 + C_2)}(V_1 - V_2)^2$ contains no $R$: lower resistance only makes the loss happen faster." },
+      ],
+      hint: "Find the common voltage by charge conservation, then check each statement with $Q = CV$ and $U = \\tfrac12CV^2$. For the last one, see whether $R$ appears in the energy-loss formula.",
     },
   ]),
 };
@@ -738,6 +1013,7 @@ const lesson06: LessonSeed = {
       content:
         "So far capacitors have charged instantly. In reality the charge arrives through wires with resistance, and the resistor sets the pace. Close a switch on a battery, a resistor and an empty capacitor: the current starts large and dies away, while the capacitor's voltage rises quickly at first and then creeps towards the battery's. This slow approach is behind camera-flash recharge times, the delay in a car's courtesy light, and the blinking rate of a hazard lamp.",
     },
+    { type: "heading", text: "Charging through a resistor" },
     {
       type: "text",
       content:
@@ -763,6 +1039,7 @@ const lesson06: LessonSeed = {
       content:
         "$\\tau = RC$ (ohms × farads = seconds).\nCharging: $q = Q_0(1 - e^{-t/\\tau})$, $i = i_0e^{-t/\\tau}$ with $Q_0 = CE$, $i_0 = E/R$.\nDischarging through $R$: $q = Q_0e^{-t/\\tau}$, $i = i_0e^{-t/\\tau}$ (current reversed).\nAfter one $\\tau$: charging reaches $1 - e^{-1} \\approx 63\\%$; discharging falls to $e^{-1} \\approx 37\\%$.",
     },
+    { type: "heading", text: "Capacitor at switch-on and steady state" },
     {
       type: "text",
       content:
@@ -798,25 +1075,57 @@ const lesson06: LessonSeed = {
       content:
         "What you should have seen: doubling $R$ or doubling $C$ stretches the curve to twice the time, and it does not matter which you double; only the product $RC$ counts. At $t = \\tau$ the charging curve is at 63% of its final value and the discharging curve at 37%. After about $5\\tau$ both are within 1% of the end: in practice, \"done\".",
     },
+    { type: "heading", text: "Worked examples: charging and discharging" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (time constant).** $R = 100\\ \\Omega$, $C = 10\\ \\mu$F, $E = 10$ V. Find $\\tau$, the initial current, and the charge after $\\tau$.\n\n1. $\\tau = RC = 100\\times10^{-5} = 10^{-3}$ s $= 1$ ms.\n2. $i_0 = E/R = 0.1$ A. *Why this step:* at $t = 0$ the empty capacitor is a wire.\n3. $Q_0 = CE = 100\\ \\mu$C, so after 1 ms $q = 100(1 - e^{-1}) \\approx 63\\ \\mu$C.",
+      type: "worked-example",
+      id: "em2-6-we1",
+      title: "Worked example 1: time constant",
+      problem:
+        "$R = 100\\ \\Omega$, $C = 10\\ \\mu$F, $E = 10$ V. Find $\\tau$, the initial current, and the charge after $\\tau$.",
+      steps: [
+        { text: "$\\tau = RC = 100\\times10^{-5} = 10^{-3}$ s $= 1$ ms." },
+        { text: "$i_0 = E/R = 0.1$ A. *Why this step:* at $t = 0$ the empty capacitor is a wire." },
+        { text: "$Q_0 = CE = 100\\ \\mu$C, so after 1 ms $q = 100(1 - e^{-1}) \\approx 63\\ \\mu$C." },
+      ],
+      answer: "$\\tau = 1$ ms, $i_0 = 0.1$ A, $q \\approx 63\\ \\mu$C after $\\tau$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (time to reach a fraction).** How long does the same capacitor take to reach 90% of full charge? And 50%?\n\n1. $1 - e^{-t/\\tau} = 0.9 \\Rightarrow e^{-t/\\tau} = 0.1 \\Rightarrow t = \\tau\\ln10 \\approx 2.30\\tau = 2.30$ ms.\n2. Half: $e^{-t/\\tau} = 0.5 \\Rightarrow t = \\tau\\ln2 \\approx 0.693$ ms. *Why this step:* isolate the exponential first, then take logs; do not try to take the log of $1 - e^{-t/\\tau}$ directly.",
+      type: "worked-example",
+      id: "em2-6-we2",
+      title: "Worked example 2: time to reach a fraction",
+      problem:
+        "How long does the same capacitor take to reach 90% of full charge? And 50%?",
+      steps: [
+        { text: "$1 - e^{-t/\\tau} = 0.9 \\Rightarrow e^{-t/\\tau} = 0.1 \\Rightarrow t = \\tau\\ln10 \\approx 2.30\\tau = 2.30$ ms." },
+        { text: "Half: $e^{-t/\\tau} = 0.5 \\Rightarrow t = \\tau\\ln2 \\approx 0.693$ ms. *Why this step:* isolate the exponential first, then take logs; do not try to take the log of $1 - e^{-t/\\tau}$ directly." },
+      ],
+      answer: "90%: $\\approx 2.30$ ms; 50%: $\\approx 0.693$ ms",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (a capacitor in a resistor network, JEE classic).** A 12 V battery drives $R_1 = 2\\ \\Omega$ and $R_2 = 4\\ \\Omega$ in series. A 5 μF capacitor, initially uncharged, sits across $R_2$. Find the battery current just after the switch closes and at steady state, and the final charge.\n\n1. **Just after closing:** the capacitor acts as a wire, shorting out $R_2$. Current $= 12/2 = 6$ A, all through $R_1$ and the capacitor. *Why this step:* replace each capacitor by the element it mimics in each limit.\n2. **Steady state:** the capacitor is a break. The current flows through $R_1$ and $R_2$: $12/6 = 2$ A.\n3. The capacitor has the voltage of $R_2$: $2\\times4 = 8$ V, so $Q = 5\\times8 = 40\\ \\mu$C.\n4. (The time constant uses the resistance the capacitor \"sees\" with the battery replaced by a wire: $R_1 \\parallel R_2 = \\tfrac43\\ \\Omega$, so $\\tau \\approx 6.7\\ \\mu$s.)",
+      type: "worked-example",
+      id: "em2-6-we3",
+      title: "Worked example 3: a capacitor in a resistor network, JEE classic",
+      problem:
+        "A 12 V battery drives $R_1 = 2\\ \\Omega$ and $R_2 = 4\\ \\Omega$ in series. A 5 μF capacitor, initially uncharged, sits across $R_2$. Find the battery current just after the switch closes and at steady state, and the final charge.",
+      steps: [
+        { text: "**Just after closing:** the capacitor acts as a wire, shorting out $R_2$. Current $= 12/2 = 6$ A, all through $R_1$ and the capacitor. *Why this step:* replace each capacitor by the element it mimics in each limit." },
+        { text: "**Steady state:** the capacitor is a break. The current flows through $R_1$ and $R_2$: $12/6 = 2$ A." },
+        { text: "The capacitor has the voltage of $R_2$: $2\\times4 = 8$ V, so $Q = 5\\times8 = 40\\ \\mu$C." },
+        { text: "(The time constant uses the resistance the capacitor \"sees\" with the battery replaced by a wire: $R_1 \\parallel R_2 = \\tfrac43\\ \\Omega$, so $\\tau \\approx 6.7\\ \\mu$s.)" },
+      ],
+      answer: "6 A just after closing, 2 A at steady state; $Q = 40\\ \\mu$C",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (discharge).** A 10 μF capacitor at 100 V discharges through 1 kΩ. When has its charge halved? When has its energy halved?\n\n1. $\\tau = 10^3\\times10^{-5} = 10$ ms. Charge halves at $\\tau\\ln2 \\approx 6.9$ ms.\n2. Energy $U \\propto q^2 \\propto e^{-2t/\\tau}$, so it halves at $\\tfrac{\\tau}{2}\\ln2 \\approx 3.5$ ms. *Why this step:* energy decays twice as fast as charge, because it goes as the square.",
+      type: "worked-example",
+      id: "em2-6-we4",
+      title: "Worked example 4: discharge",
+      problem:
+        "A 10 μF capacitor at 100 V discharges through 1 kΩ. When has its charge halved? When has its energy halved?",
+      steps: [
+        { text: "$\\tau = 10^3\\times10^{-5} = 10$ ms. Charge halves at $\\tau\\ln2 \\approx 6.9$ ms." },
+        { text: "Energy $U \\propto q^2 \\propto e^{-2t/\\tau}$, so it halves at $\\tfrac{\\tau}{2}\\ln2 \\approx 3.5$ ms. *Why this step:* energy decays twice as fast as charge, because it goes as the square." },
+      ],
+      answer: "Charge halves at $\\approx 6.9$ ms; energy halves at $\\approx 3.5$ ms",
     },
     {
       type: "callout",
@@ -825,15 +1134,20 @@ const lesson06: LessonSeed = {
       content:
         "After one $\\tau$ it has only 63%. Each further $\\tau$ removes 63% of what is left: 86% after $2\\tau$, 95% after $3\\tau$, 99.3% after $5\\tau$. In principle it never quite finishes; in practice engineers call $5\\tau$ \"fully charged\".",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em2-6-q1",
       variant: "practice",
-      question: "A 50 μF capacitor charges through a 2 kΩ resistor. The time constant is",
-      options: [
-        { text: "$100$ s", feedback: "Convert: 50 μF $= 5\\times10^{-5}$ F." },
-        { text: "$0.1$ s", correct: true, feedback: "$2000\\times50\\times10^{-6} = 0.1$ s." },
-        { text: "$10^{-4}$ s", feedback: "You used $R = 2$ instead of $2000\\ \\Omega$. Convert kΩ to Ω." },
+      question: "A 50 μF capacitor charges through a 2 kΩ resistor. What is the time constant? Give your answer in seconds.",
+      answer: 0.1,
+      unit: "s",
+      hint: "Use $\\tau = RC$ in SI units: ohms times farads gives seconds.",
+      solution: "$\\tau = RC = 2000\\ \\Omega\\times50\\times10^{-6}$ F $= 0.1$ s.",
+      commonMistakes: [
+        { answer: 100, feedback: "That is $2\\times50$ with the prefixes left on: kΩ × μF gives milliseconds. 100 ms $= 0.1$ s." },
+        { answer: 1e5, feedback: "Convert: 50 μF $= 5\\times10^{-5}$ F, not 50 F." },
+        { answer: 1e-4, feedback: "You used $R = 2$ instead of $2000\\ \\Omega$. Convert kΩ to Ω." },
       ],
     },
     {
@@ -847,16 +1161,22 @@ const lesson06: LessonSeed = {
         { text: "about 14%", feedback: "That is $e^{-2}$, the fraction remaining when **discharging**." },
         { text: "about 86%", correct: true, feedback: "$1 - e^{-2} \\approx 1 - 0.135 = 0.865$." },
       ],
+      hint: "Put $t = 2\\tau$ into $q = Q(1 - e^{-t/\\tau})$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em2-6-q3",
       variant: "practice",
-      question: "With $\\tau = 2$ ms, how long does the charging current take to fall to 10% of its initial value?",
-      options: [
-        { text: "about $0.21$ ms", feedback: "That is $\\tau\\ln(10/9)$, the time for the current to fall by 10%, not to 10%." },
-        { text: "about $4.6$ ms", correct: true, feedback: "$e^{-t/\\tau} = 0.1 \\Rightarrow t = \\tau\\ln10 \\approx 2\\times2.30$." },
-        { text: "$20$ ms", feedback: "The decay is exponential, not linear: $\\tau\\ln10$, not $10\\tau$." },
+      question: "With $\\tau = 2$ ms, how long does the charging current take to fall to 10% of its initial value? Give your answer in ms, to two significant figures.",
+      answer: 2 * Math.LN10,
+      relTolerance: 0.02,
+      unit: "ms",
+      hint: "The charging current is $i = i_0e^{-t/\\tau}$. Isolate the exponential, then take logs.",
+      solution: "$e^{-t/\\tau} = 0.1 \\Rightarrow t = \\tau\\ln10 \\approx 2\\times2.30 \\approx 4.6$ ms.",
+      commonMistakes: [
+        { answer: 0.21, feedback: "That is $\\tau\\ln(10/9)$, the time for the current to fall by 10%, not to 10%." },
+        { answer: 20, feedback: "The decay is exponential, not linear: $\\tau\\ln10$, not $10\\tau$." },
+        { answer: 2.3, feedback: "That is $\\ln10$ alone. Multiply by $\\tau = 2$ ms." },
       ],
     },
     {
@@ -869,17 +1189,21 @@ const lesson06: LessonSeed = {
         { text: "$0$", feedback: "An empty capacitor passes current freely at first; it is a full one that blocks it." },
         { text: "$2$ A", correct: true, feedback: "The empty capacitor shorts $R_2$: $10/5$." },
       ],
+      hint: "At switch-on an uncharged capacitor has no voltage across it, so it acts like a plain wire. What does that do to $R_2$?",
     },
     {
       type: "quiz",
       id: "em2-6-q5",
       variant: "concept",
-      question: "In an RC circuit, which quantity **cannot** change instantly when a switch is thrown?",
+      question: "In an RC circuit, which quantities **cannot** change instantly when a switch is thrown? Select all that apply.",
+      multiple: true,
       options: [
-        { text: "The voltage across the capacitor", correct: true, feedback: "A sudden jump in $q$ would need infinite current." },
+        { text: "The voltage across the capacitor", correct: true, feedback: "$V_C = q/C$, and a sudden jump in $q$ would need infinite current." },
+        { text: "The charge on the capacitor", correct: true, feedback: "Charge arrives at the finite rate $i = dq/dt$, so $q$ is continuous." },
         { text: "The current through the capacitor", feedback: "The current jumps: from 0 to $E/R$ at the instant of closing." },
         { text: "The voltage across the resistor", feedback: "It jumps from 0 to $E$ at the instant of closing, because it follows the current." },
       ],
+      hint: "Ask which quantities would need an infinite current to jump: charge can change only by current flowing for some time. Then use $V_C = q/C$.",
     },
     {
       type: "quiz",
@@ -891,6 +1215,7 @@ const lesson06: LessonSeed = {
         { text: "$2\\tau\\ln2$", feedback: "Energy falls faster than charge, not slower." },
         { text: "$\\dfrac{\\tau\\ln2}{2}$", correct: true, feedback: "$U \\propto e^{-2t/\\tau}$; set it to $\\tfrac12$." },
       ],
+      hint: "Express the stored energy in terms of the charge, then use the exponential decay of $q$.",
     },
   ]),
 };
@@ -922,17 +1247,21 @@ const lessonMastery: LessonSeed = {
         { text: "$1\\ \\mu$F", feedback: "Recheck the powers: $10^{-13}/10^{-4} = 10^{-9}$." },
         { text: "$1$ pF", feedback: "Divide by the gap in metres, $8.85\\times10^{-4}$, which multiplies by about 1130." },
       ],
+      hint: "Parallel-plate capacitance (lesson 2.1), in SI units.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em2-7-q2",
       variant: "mastery",
-      question: "A 4 μF capacitor is in series with a parallel pair of two 2 μF capacitors, across 10 V. The charge on **one** of the 2 μF capacitors is",
-      options: [
-        { text: "$20\\ \\mu$C", feedback: "That is the total, which splits between the two parallel capacitors." },
-        { text: "$5\\ \\mu$C", feedback: "The pair has 5 V across it, so each 2 μF has $2\\times5 = 10\\ \\mu$C." },
-        { text: "$40\\ \\mu$C", feedback: "That uses the full 10 V across the 4 μF alone." },
-        { text: "$10\\ \\mu$C", correct: true, feedback: "Pair $= 4\\ \\mu$F; total $2\\ \\mu$F; $Q = 20\\ \\mu$C; pair voltage $5$ V; each 2 μF holds $10\\ \\mu$C." },
+      question: "A 4 μF capacitor is in series with a parallel pair of two 2 μF capacitors, across 10 V. What is the charge on **one** of the 2 μF capacitors? Give your answer in μC.",
+      answer: 10,
+      unit: "μC",
+      hint: "Series–parallel reduction (lesson 2.2, Worked example 2).",
+      solution: "The pair is $2 + 2 = 4\\ \\mu$F. In series with the 4 μF: $C = \\dfrac{4\\times4}{8} = 2\\ \\mu$F.\n\nTotal charge $Q = 2\\times10 = 20\\ \\mu$C, so the pair has $20/4 = 5$ V across it.\n\nEach 2 μF holds $2\\times5 = 10\\ \\mu$C.",
+      commonMistakes: [
+        { answer: 20, feedback: "That is the total, which splits between the two parallel capacitors." },
+        { answer: 5, feedback: "That is the pair's voltage in volts. Each 2 μF then has $2\\times5 = 10\\ \\mu$C." },
+        { answer: 40, feedback: "That uses the full 10 V across the 4 μF alone." },
       ],
     },
     {
@@ -946,6 +1275,7 @@ const lessonMastery: LessonSeed = {
         { text: "$\\dfrac52$", feedback: "That treats the slab as metal ($K\\to\\infty$): gap $5 - 3 = 2$ mm." },
         { text: "$\\dfrac53$", correct: true, feedback: "Effective gap $5 - 3 + 3/3 = 3$ mm, so $C = 5C_0/3$." },
       ],
+      hint: "A partial dielectric slab (lesson 2.3, Worked example 1).",
     },
     {
       type: "quiz",
@@ -958,6 +1288,7 @@ const lessonMastery: LessonSeed = {
         { text: "quarters", feedback: "Only one factor of $K$ appears in $Q^2/2C$." },
         { text: "halves", correct: true, feedback: "$Q$ fixed, $C$ doubles, $U = Q^2/2C$ halves." },
       ],
+      hint: "Battery off or on (lesson 2.3, Worked example 3): which quantity stays fixed?",
     },
     {
       type: "quiz",
@@ -970,17 +1301,22 @@ const lessonMastery: LessonSeed = {
         { text: "$32\\ \\mu$J", feedback: "That is the 4 μF's energy ($256/8$). In series the smaller capacitor stores more." },
         { text: "$96\\ \\mu$J", feedback: "That is the total stored, $\\tfrac12\\times\\tfrac43\\times144$." },
       ],
+      hint: "Series capacitors share the same charge (lesson 2.2); then stored energy (lesson 2.4).",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em2-7-q6",
       variant: "mastery",
-      question: "A 6 μF capacitor at 200 V is joined to an uncharged 3 μF capacitor. The energy lost is",
-      options: [
-        { text: "$60$ mJ", feedback: "Half is lost only for equal capacitors." },
-        { text: "$120$ mJ", feedback: "That is the starting energy." },
-        { text: "$40$ mJ", correct: true, feedback: "$\\dfrac{6\\times3}{2\\times9}\\times200^2$ μJ $= 40\\,000$ μJ. Check: $120 - 80 = 40$ mJ." },
-        { text: "$0$", feedback: "Charge flows between unequal voltages, so energy is lost." },
+      question: "A 6 μF capacitor at 200 V is joined to an uncharged 3 μF capacitor. How much energy is lost? Give your answer in mJ.",
+      answer: 40,
+      unit: "mJ",
+      hint: "Charge sharing and the energy lost (lesson 2.5).",
+      solution: "$\\Delta U = \\dfrac{C_1C_2}{2(C_1 + C_2)}V^2 = \\dfrac{6\\times3}{2\\times9}\\times200^2$ μJ $= 40\\,000$ μJ $= 40$ mJ.\n\nCheck: before $\\tfrac12\\times6\\times10^{-6}\\times200^2 = 120$ mJ. Common voltage $1200/9 \\approx 133.3$ V, so after $\\tfrac12\\times9\\times10^{-6}\\times133.3^2 = 80$ mJ. Lost $120 - 80 = 40$ mJ.",
+      commonMistakes: [
+        { answer: 60, feedback: "Half is lost only for equal capacitors." },
+        { answer: 120, feedback: "That is the starting energy." },
+        { answer: 80, feedback: "That is the energy that remains after sharing, not the loss." },
+        { answer: 0, feedback: "Charge flows between unequal voltages, so energy is lost." },
       ],
     },
     {
@@ -994,6 +1330,7 @@ const lessonMastery: LessonSeed = {
         { text: "$\\tau\\ln\\tfrac43 \\approx 0.29\\tau$", feedback: "That is when it has fallen **by** 25%, to 75%." },
         { text: "$0.25\\tau$", feedback: "Take logs: $t = \\tau\\ln(1/0.25)$." },
       ],
+      hint: "Exponential discharge (lesson 2.6): the current decays like the charge.",
     },
     {
       type: "quiz",
@@ -1006,6 +1343,7 @@ const lessonMastery: LessonSeed = {
         { text: "$40\\ \\mu$C", feedback: "That uses $R_1$'s 4 V. The capacitor is across $R_2$." },
         { text: "$60\\ \\mu$C", correct: true, feedback: "Steady current $10/5 = 2$ A; $V_{R_2} = 6$ V; $Q = 10\\times6$." },
       ],
+      hint: "A capacitor in a resistor network at steady state (lesson 2.6, Worked example 3).",
     },
     {
       type: "quiz",
@@ -1018,17 +1356,21 @@ const lessonMastery: LessonSeed = {
         { text: "$0$", feedback: "The 2 μF is already at 12 V, but the empty 4 μF must be charged through the resistor, and half the energy is lost doing it." },
         { text: "$96\\ \\mu$J", feedback: "That treats it as charge sharing with no battery. The battery holds the voltage at 12 V." },
       ],
+      hint: "Energy bookkeeping with the battery connected (lessons 2.4 and 2.5): battery work versus stored energy.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em2-7-q10",
       variant: "mastery",
-      question: "(JEE Advanced style) $C_1 = 2\\ \\mu$F charged to 100 V and $C_2 = 3\\ \\mu$F charged to 50 V are joined with the positive plate of each connected to the negative plate of the other. Find the heat produced.",
-      options: [
-        { text: "$1.5$ mJ", feedback: "That uses $(V_1 - V_2)^2$, the same-polarity loss." },
-        { text: "$13.5$ mJ", correct: true, feedback: "$\\dfrac{C_1C_2}{2(C_1 + C_2)}(V_1 + V_2)^2 = \\dfrac{6}{10}\\times150^2$ μJ. Check: before $10 + 3.75 = 13.75$ mJ; after $V = 50/5 = 10$ V, $0.25$ mJ." },
-        { text: "$13.75$ mJ", feedback: "That is the whole initial energy. The common voltage is 10 V, not 0, so $0.25$ mJ survives." },
-        { text: "$27$ mJ", feedback: "You dropped the 2 in the denominator: the loss is $\\dfrac{C_1C_2}{2(C_1 + C_2)}(V_1 + V_2)^2 = \\tfrac12(1.2\\ \\mu\\text{F})(150)^2$. It cannot exceed the 13.75 mJ you started with." },
+      question: "(JEE Advanced style) $C_1 = 2\\ \\mu$F charged to 100 V and $C_2 = 3\\ \\mu$F charged to 50 V are joined with the positive plate of each connected to the negative plate of the other. Find the heat produced. Give your answer in mJ.",
+      answer: 13.5,
+      unit: "mJ",
+      hint: "Charge sharing with opposite polarity (lesson 2.5, Worked example 3).",
+      solution: "Opposite plates joined, so the loss has $(V_1 + V_2)^2$:\n\n$\\Delta U = \\dfrac{C_1C_2}{2(C_1 + C_2)}(V_1 + V_2)^2 = \\dfrac{2\\times3}{2\\times5}\\times150^2$ μJ $= 13\\,500$ μJ $= 13.5$ mJ.\n\nCheck: before $\\tfrac12(2)(100^2) + \\tfrac12(3)(50^2) = 10\\,000 + 3750$ μJ $= 13.75$ mJ. Net charge $200 - 150 = 50\\ \\mu$C on $5\\ \\mu$F gives $V = 10$ V, so after $\\tfrac12(5)(10^2) = 250$ μJ. Heat $= 13.75 - 0.25 = 13.5$ mJ.",
+      commonMistakes: [
+        { answer: 1.5, feedback: "That uses $(V_1 - V_2)^2$, the same-polarity loss. Here the charges partly cancel, so use $(V_1 + V_2)^2$." },
+        { answer: 13.75, feedback: "That is the whole initial energy. The common voltage is 10 V, not 0, so $0.25$ mJ survives." },
+        { answer: 27, feedback: "You dropped the 2 in the denominator: the loss is $\\dfrac{C_1C_2}{2(C_1 + C_2)}(V_1 + V_2)^2 = \\tfrac12(1.2\\ \\mu\\text{F})(150)^2$. It cannot exceed the 13.75 mJ you started with." },
       ],
     },
     {
@@ -1042,6 +1384,22 @@ const lessonMastery: LessonSeed = {
         { text: "$8 : 9$", correct: true, feedback: "Stacked: $\\dfrac{2\\cdot2\\cdot4}{6}C_0 = \\tfrac83C_0$. Side: $\\dfrac{2+4}{2}C_0 = 3C_0$. Ratio $\\tfrac{8}{9}$." },
         { text: "$4 : 9$", feedback: "Each stacked layer is $2KC_0$ (half the gap doubles $C$), not $KC_0$." },
       ],
+      hint: "Mixed dielectrics (lesson 2.3, Worked example 2): decide series or parallel for each arrangement.",
+    },
+    {
+      type: "quiz",
+      id: "em2-7-q12",
+      variant: "mastery",
+      question: "(JEE Advanced style) A capacitor $C$, charged to $V_0$, discharges through a resistor $R$ from $t = 0$. Which statements are correct? Select all that apply.",
+      multiple: true,
+      options: [
+        { text: "The current at $t = 0$ is $V_0/R$.", correct: true, feedback: "At $t = 0$ the full capacitor voltage $V_0$ is across $R$." },
+        { text: "At $t = RC$ the charge is about 37% of its initial value.", correct: true, feedback: "$q = Q_0e^{-t/\\tau}$, and $e^{-1} \\approx 0.37$." },
+        { text: "The stored energy halves at $t = \\tfrac12RC\\ln2$.", correct: true, feedback: "$U \\propto q^2 \\propto e^{-2t/\\tau}$; set $e^{-2t/\\tau} = \\tfrac12$." },
+        { text: "The total heat produced in $R$ depends on $R$.", feedback: "All the stored energy $\\tfrac12CV_0^2$ ends up as heat, whatever $R$ is. $R$ only sets how fast." },
+        { text: "Doubling both $R$ and $C$ doubles the time constant.", feedback: "$\\tau = RC$ is a product, so doubling both multiplies it by 4." },
+      ],
+      hint: "RC discharge (lesson 2.6): test each statement with $q = Q_0e^{-t/RC}$ and energy bookkeeping.",
     },
     {
       type: "callout",

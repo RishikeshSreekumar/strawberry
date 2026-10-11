@@ -23,10 +23,19 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/mfe-1-motion-in-a-straight-line.mp4",
+      poster: "/videos/mfe-1-motion-in-a-straight-line.jpg",
+      title: "Chapter 1 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "You drive 5 km east to a friend's house, realise you forgot the gift, and drive 3 km back west to a shop. The odometer says you have driven 8 km. Yet you are only 2 km from home, to the east. Both numbers are correct; they answer different questions. Physics gives them different names, **distance** and **displacement**, and mixing them up is the first trap in kinematics.",
     },
+    { type: "heading", text: "Frame of reference and displacement" },
     {
       type: "text",
       content:
@@ -39,6 +48,7 @@ const lesson01: LessonSeed = {
       content:
         "**Displacement** is the change in position, $\\Delta x = x_{\\text{final}} - x_{\\text{initial}}$. It has a sign (a direction) and depends only on the end points.\n**Distance** is the total length of path actually travelled. It is never negative and never decreases.\nAlways $\\text{distance} \\ge |\\text{displacement}|$, with equality only if the particle never turns back.",
     },
+    { type: "heading", text: "Average speed and average velocity" },
     {
       type: "text",
       content:
@@ -74,16 +84,45 @@ const lesson01: LessonSeed = {
       content:
         "What you should have seen: the particle stops at $t = 5$ s at $x = 25$ m and then returns. Up to 5 s, distance and displacement are equal. After that, displacement falls while distance keeps climbing. At $t = 10$ s the particle is back at $x = 0$: displacement 0, distance 50 m, so its average velocity over the 10 s is zero while its average speed is 5 m/s.",
     },
+    { type: "heading", text: "Average speed over two legs" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (equal distances).** A cyclist rides from A to B at 40 km/h and returns along the same road at 60 km/h. Find the average speed for the round trip.\n\n1. Let AB $= d$. Time out $= \\dfrac{d}{40}$, time back $= \\dfrac{d}{60}$. *Why this step:* the speeds apply to equal **distances**, so they are held for unequal times. Work from the definition, not from intuition.\n2. Total distance $2d$, total time $\\dfrac{d}{40} + \\dfrac{d}{60} = \\dfrac{3d + 2d}{120} = \\dfrac{d}{24}$.\n3. Average speed $= \\dfrac{2d}{d/24} = 48$ km/h.\n4. In general, for equal distances at $v_1$ and $v_2$ the average speed is the **harmonic mean**:",
+      type: "worked-example",
+      id: "mfe1-1-we1",
+      title: "Worked example 1: equal distances",
+      problem:
+        "A cyclist rides from A to B at 40 km/h and returns along the same road at 60 km/h. Find the average speed for the round trip.",
+      steps: [
+        { text: "Let AB $= d$. Time out $= \\dfrac{d}{40}$, time back $= \\dfrac{d}{60}$. *Why this step:* the speeds apply to equal **distances**, so they are held for unequal times. Work from the definition, not from intuition." },
+        { text: "Total distance $2d$, total time $\\dfrac{d}{40} + \\dfrac{d}{60} = \\dfrac{3d + 2d}{120} = \\dfrac{d}{24}$." },
+        { text: "Average speed $= \\dfrac{2d}{d/24} = 48$ km/h." },
+        { text: "In general, for equal distances at $v_1$ and $v_2$ the average speed is the **harmonic mean**:", latex: "\\bar v = \\frac{2d}{d/v_1 + d/v_2} = \\frac{2v_1v_2}{v_1 + v_2}" },
+        { text: "Average velocity for the round trip is zero: it ends where it began." },
+      ],
+      answer: "Average speed $= 48$ km/h (the harmonic mean); average velocity $= 0$.",
     },
-    { type: "math", latex: "\\bar v = \\frac{2d}{d/v_1 + d/v_2} = \\frac{2v_1v_2}{v_1 + v_2}" },
     {
-      type: "text",
-      content:
-        "5. Average velocity for the round trip is zero: it ends where it began.\n\n**Worked example 2 (equal times).** The same cyclist rides for half an hour at 40 km/h, then half an hour at 60 km/h.\n\n1. Distances: $40 \\times 0.5 = 20$ km and $60 \\times 0.5 = 30$ km.\n2. Average speed $= \\dfrac{50}{1} = 50$ km/h, the ordinary **arithmetic mean** $\\frac{v_1 + v_2}{2}$. *Why this step:* with equal times each speed gets equal weight; with equal distances the slower speed is held for longer and drags the average down, which is why 48 < 50.\n\n**Worked example 3 (a track).** An athlete runs one full lap of a 400 m track in 50 s.\n\n1. Distance $= 400$ m, so average speed $= 8$ m/s.\n2. She ends where she started, so displacement $= 0$ and average velocity $= 0$.",
+      type: "worked-example",
+      id: "mfe1-1-we2",
+      title: "Worked example 2: equal times",
+      problem:
+        "The same cyclist rides for half an hour at 40 km/h, then half an hour at 60 km/h. Find the average speed.",
+      steps: [
+        { text: "Distances: $40 \\times 0.5 = 20$ km and $60 \\times 0.5 = 30$ km." },
+        { text: "Average speed $= \\dfrac{50}{1} = 50$ km/h, the ordinary **arithmetic mean** $\\frac{v_1 + v_2}{2}$. *Why this step:* with equal times each speed gets equal weight; with equal distances the slower speed is held for longer and drags the average down, which is why 48 < 50." },
+      ],
+      answer: "Average speed $= 50$ km/h (the arithmetic mean).",
+    },
+    {
+      type: "worked-example",
+      id: "mfe1-1-we3",
+      title: "Worked example 3: a track",
+      problem:
+        "An athlete runs one full lap of a 400 m track in 50 s. Find her average speed and average velocity.",
+      steps: [
+        { text: "Distance $= 400$ m, so average speed $= 8$ m/s." },
+        { text: "She ends where she started, so displacement $= 0$ and average velocity $= 0$." },
+      ],
+      answer: "Average speed $= 8$ m/s; average velocity $= 0$.",
     },
     {
       type: "callout",
@@ -99,16 +138,20 @@ const lesson01: LessonSeed = {
       content:
         "Average speed is total distance over total time, always. $\\frac{v_1 + v_2}{2}$ is right only when equal **times** are spent at each speed. For equal distances it is the harmonic mean, which is smaller.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mfe1-1-q1",
       variant: "practice",
-      question: "A car covers the first half of a distance at 20 m/s and the second half at 30 m/s. Its average speed is",
-      options: [
-        { text: "$25$ m/s", feedback: "That is the arithmetic mean, correct only for equal **times**. Here the distances are equal." },
-        { text: "$24$ m/s", correct: true, feedback: "$\\frac{2(20)(30)}{20 + 30} = \\frac{1200}{50} = 24$ m/s." },
-        { text: "$50$ m/s", feedback: "Speeds do not add. That is the sum, not an average." },
-        { text: "$26$ m/s", feedback: "The average must be closer to the slower speed, since more time is spent at it." },
+      question: "A car covers the first half of a distance at 20 m/s and the second half at 30 m/s. What is its average speed for the whole trip? Give your answer in m/s.",
+      answer: 24,
+      unit: "m/s",
+      hint: "Call the whole distance $2d$ and add up the times for the two halves.",
+      solution: "Time for the two halves: $\\frac{d}{20} + \\frac{d}{30} = \\frac{d}{12}$. Average speed $= \\frac{2d}{d/12} = 24$ m/s.\n\nThis is the harmonic mean $\\frac{2(20)(30)}{20 + 30} = \\frac{1200}{50} = 24$ m/s.",
+      commonMistakes: [
+        { answer: 25, feedback: "That is the arithmetic mean, correct only for equal **times**. Here the distances are equal." },
+        { answer: 50, feedback: "Speeds do not add. That is the sum, not an average." },
+        { answer: 26, feedback: "The average must be closer to the slower speed, since more time is spent at it." },
       ],
     },
     {
@@ -121,6 +164,7 @@ const lesson01: LessonSeed = {
         { text: "$24$ m/s", feedback: "That is the equal-distance answer. With equal times, each speed carries equal weight." },
         { text: "$50$ m/s", feedback: "That is the sum of the speeds." },
       ],
+      hint: "Equal **times**, not equal distances: find the total distance, then divide by the total time.",
     },
     {
       type: "quiz",
@@ -132,19 +176,22 @@ const lesson01: LessonSeed = {
         { text: "Average speed $=$ magnitude of average velocity.", feedback: "Not if the particle turns back: the 400 m lap gives 8 m/s and 0." },
         { text: "Average speed $\\le$ magnitude of average velocity.", feedback: "Distance can never be less than the size of the displacement." },
       ],
+      hint: "Compare the path length with the straight-line displacement between the same two points. Which one can never be the larger?",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mfe1-1-q4",
       variant: "practice",
-      question: "A particle starts at $x = 0$ with $u = 10$ m/s and $a = -2$ m/s². It turns round at $t = 5$ s ($x = 25$ m) and is at $x = 16$ m at $t = 8$ s. What distance has it covered in 8 s?",
-      options: [
-        { text: "$16$ m", feedback: "That is the displacement. The particle went out to 25 m and came back 9 m." },
-        { text: "$41$ m", feedback: "You added 25 and 16. The return leg is $25 - 16 = 9$ m, not 16 m." },
-        { text: "$34$ m", correct: true, feedback: "$25$ m out, then $25 - 16 = 9$ m back: $25 + 9 = 34$ m." },
-        { text: "$25$ m", feedback: "That is only the outward leg." },
-      ],
+      question: "A particle starts at $x = 0$ with $u = 10$ m/s and $a = -2$ m/s². It turns round at $t = 5$ s ($x = 25$ m) and is at $x = 16$ m at $t = 8$ s. What distance has it covered in 8 s? Give your answer in metres.",
+      answer: 34,
+      unit: "m",
       hint: "Split the motion at the turnaround.",
+      solution: "Out to the turnaround: $25$ m. Back from $x = 25$ m to $x = 16$ m: $25 - 16 = 9$ m.\n\nDistance $= 25 + 9 = 34$ m (while the displacement is only 16 m).",
+      commonMistakes: [
+        { answer: 16, feedback: "That is the displacement. The particle went out to 25 m and came back 9 m." },
+        { answer: 41, feedback: "You added 25 and 16. The return leg is $25 - 16 = 9$ m, not 16 m." },
+        { answer: 25, feedback: "That is only the outward leg." },
+      ],
     },
     {
       type: "quiz",
@@ -157,6 +204,21 @@ const lesson01: LessonSeed = {
         { text: "$0.5$ m/s north", correct: true, feedback: "Displacement $= 30 - 10 = 20$ m north, in 40 s: $0.5$ m/s north." },
         { text: "$0.5$ m/s south", feedback: "You end 20 m **north** of the start, so the average velocity points north." },
       ],
+      hint: "Average velocity uses the net displacement (north minus south) divided by the total time, not the total distance.",
+    },
+    {
+      type: "quiz",
+      id: "mfe1-1-q6",
+      variant: "practice",
+      multiple: true,
+      question: "Over a 10 s interval, a particle moving along a straight line has zero average velocity. Which of the following **must** be true? Select all that apply.",
+      options: [
+        { text: "It ends the interval at the same position where it started.", correct: true, feedback: "Zero average velocity means zero displacement: final position equals initial position." },
+        { text: "The distance it covers in the interval is zero.", feedback: "Not necessarily. Going 10 m out and 10 m back gives zero displacement but 20 m of distance." },
+        { text: "Its average speed over the interval is zero.", feedback: "Average speed uses distance, which can be large even when the displacement is zero: 10 m out and 10 m back in 10 s is an average speed of 2 m/s." },
+        { text: "If it moved at all, it reversed direction at least once during the interval.", correct: true, feedback: "On a line, a particle that leaves its starting point can only get back by turning round." },
+      ],
+      hint: "Zero average velocity means zero net displacement. For each statement, ask whether a particle could go out and come back and still violate it.",
     },
   ]),
 };
@@ -171,6 +233,7 @@ const lesson02: LessonSeed = {
       content:
         "A speedometer does not show your average speed for the whole journey. It shows how fast you are going **right now**. But \"right now\" is a single instant, and in a single instant you travel zero distance in zero time. What does $\\frac{0}{0}$ mean? The answer is the most important idea in kinematics, and it is easiest to see on a graph of $x$ against $t$.",
     },
+    { type: "heading", text: "From chord slope to tangent slope" },
     {
       type: "text",
       content:
@@ -218,9 +281,30 @@ const lesson02: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (the limit by algebra).** Find the velocity at $t = 1$ s for $x = 5t^2$.\n\n1. Over a short interval $h$: $\\dfrac{x(1 + h) - x(1)}{h} = \\dfrac{5(1 + 2h + h^2) - 5}{h} = \\dfrac{10h + 5h^2}{h}$.\n2. Cancel $h$ (allowed, since $h \\ne 0$): $10 + 5h$. *Why this step:* the troublesome $\\frac{0}{0}$ disappears once the common factor is cancelled; only then do we let $h$ shrink.\n3. As $h \\to 0$, this tends to $10$. So $v(1) = 10$ m/s, matching the table.\n4. Repeating at a general time $t$ gives $v = 10t$, which is the derivative $\\frac{d}{dt}(5t^2)$.\n\n**Worked example 2 (from a straight graph).** An $x$-$t$ graph is a straight line from $(0\\text{ s}, 4\\text{ m})$ to $(4\\text{ s}, 20\\text{ m})$.\n\n1. A straight line has the same slope everywhere, so velocity is constant.\n2. $v = \\dfrac{20 - 4}{4 - 0} = 4$ m/s. The starting value 4 m is the initial position, not the velocity.",
+      type: "worked-example",
+      id: "mfe1-2-we1",
+      title: "Worked example 1: the limit by algebra",
+      problem:
+        "Find the velocity at $t = 1$ s for $x = 5t^2$.",
+      steps: [
+        { text: "Over a short interval $h$: $\\dfrac{x(1 + h) - x(1)}{h} = \\dfrac{5(1 + 2h + h^2) - 5}{h} = \\dfrac{10h + 5h^2}{h}$." },
+        { text: "Cancel $h$ (allowed, since $h \\ne 0$): $10 + 5h$. *Why this step:* the troublesome $\\frac{0}{0}$ disappears once the common factor is cancelled; only then do we let $h$ shrink." },
+        { text: "As $h \\to 0$, this tends to $10$. So $v(1) = 10$ m/s, matching the table." },
+        { text: "Repeating at a general time $t$ gives $v = 10t$, which is the derivative $\\frac{d}{dt}(5t^2)$." },
+      ],
+      answer: "$v(1) = 10$ m/s (and $v = 10t$ in general).",
+    },
+    {
+      type: "worked-example",
+      id: "mfe1-2-we2",
+      title: "Worked example 2: from a straight graph",
+      problem:
+        "An $x$-$t$ graph is a straight line from $(0\\text{ s}, 4\\text{ m})$ to $(4\\text{ s}, 20\\text{ m})$. Find the velocity.",
+      steps: [
+        { text: "A straight line has the same slope everywhere, so velocity is constant." },
+        { text: "$v = \\dfrac{20 - 4}{4 - 0} = 4$ m/s. The starting value 4 m is the initial position, not the velocity." },
+      ],
+      answer: "$v = 4$ m/s, constant.",
     },
     {
       type: "text",
@@ -249,6 +333,7 @@ const lesson02: LessonSeed = {
       content:
         "What you should have seen: the tangent's slope is 10 m/s at 1 s, 20 m/s at 2 s, 30 m/s at 3 s, the velocity growing steadily. With $u = 10$, $a = -10$, the curve rises, flattens at $t = 1$ s and falls: a horizontal tangent means the particle is momentarily at rest.",
     },
+    { type: "heading", text: "Reading an $x$-$t$ graph" },
     {
       type: "table",
       headers: ["Feature of the $x$-$t$ graph", "What the motion is doing"],
@@ -263,9 +348,18 @@ const lesson02: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (which graphs are impossible?).** Four students sketch $x$-$t$ graphs. Which cannot describe a real particle?\n\n1. A graph with a **vertical** segment: the particle would change position in zero time, an infinite velocity. Impossible.\n2. A graph that loops back so that one $t$ has two values of $x$: the particle would be in two places at once. Impossible. *Why this step:* $x(t)$ is a function of time, so each vertical line may cut the graph at most once.\n3. A graph with a sharp corner: the velocity jumps instantly, which needs an infinite force. It is an idealisation (a perfectly hard bounce), allowed in problems but not strictly real.\n4. A smooth graph that goes down and then up: perfectly fine; the particle reverses.",
+      type: "worked-example",
+      id: "mfe1-2-we3",
+      title: "Worked example 3: which graphs are impossible?",
+      problem:
+        "Four students sketch $x$-$t$ graphs. Which cannot describe a real particle?",
+      steps: [
+        { text: "A graph with a **vertical** segment: the particle would change position in zero time, an infinite velocity. Impossible." },
+        { text: "A graph that loops back so that one $t$ has two values of $x$: the particle would be in two places at once. Impossible. *Why this step:* $x(t)$ is a function of time, so each vertical line may cut the graph at most once." },
+        { text: "A graph with a sharp corner: the velocity jumps instantly, which needs an infinite force. It is an idealisation (a perfectly hard bounce), allowed in problems but not strictly real." },
+        { text: "A smooth graph that goes down and then up: perfectly fine; the particle reverses." },
+      ],
+      answer: "Impossible: a vertical segment and a graph with two $x$ values at one $t$. A sharp corner is an idealisation; a smooth down-then-up graph is fine.",
     },
     {
       type: "callout",
@@ -274,16 +368,20 @@ const lesson02: LessonSeed = {
       content:
         "The particle moves along a straight line. The curve on an $x$-$t$ graph is a record of *where* it was *when*, not a picture of its route. A parabola on the $x$-$t$ graph of a ball rolling down a straight ramp does not mean the ball moves in a parabola.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mfe1-2-q1",
       variant: "practice",
-      question: "An $x$-$t$ graph is a straight line from $(0\\text{ s}, 30\\text{ m})$ to $(6\\text{ s}, 0\\text{ m})$. What is the velocity?",
-      options: [
-        { text: "$-5$ m/s", correct: true, feedback: "Slope $= \\frac{0 - 30}{6 - 0} = -5$ m/s: moving towards the origin at 5 m/s." },
-        { text: "$5$ m/s", feedback: "The size is right but the slope is negative: position decreases with time." },
-        { text: "$30$ m/s", feedback: "30 m is the starting position, not a velocity." },
-        { text: "$-0.2$ m/s", feedback: "That is run over rise, $6/(-30)$. Velocity is $\\Delta x / \\Delta t$." },
+      question: "An $x$-$t$ graph is a straight line from $(0\\text{ s}, 30\\text{ m})$ to $(6\\text{ s}, 0\\text{ m})$. What is the velocity (with its sign, taking increasing $x$ as positive)? Give your answer in m/s.",
+      answer: -5,
+      unit: "m/s",
+      hint: "Velocity is the slope, $\\frac{\\Delta x}{\\Delta t}$. Is $x$ rising or falling?",
+      solution: "Slope $= \\frac{0 - 30}{6 - 0} = -5$ m/s: the particle moves towards the origin at 5 m/s.",
+      commonMistakes: [
+        { answer: 5, feedback: "The size is right but the slope is negative: position decreases with time." },
+        { answer: 30, feedback: "30 m is the starting position, not a velocity." },
+        { answer: -0.2, feedback: "That is run over rise, $6/(-30)$. Velocity is $\\Delta x / \\Delta t$." },
       ],
     },
     {
@@ -296,6 +394,7 @@ const lesson02: LessonSeed = {
         { text: "has zero acceleration.", feedback: "Not necessarily: at the top of a throw, $v = 0$ but $a = -g$. The slope is zero, not the curvature." },
         { text: "is at the origin.", feedback: "The height of the graph gives position; the slope gives velocity. A flat tangent says nothing about where." },
       ],
+      hint: "The slope of the $x$-$t$ graph is the velocity. What is the slope of a horizontal tangent, and does that say anything about how the slope is changing?",
     },
     {
       type: "quiz",
@@ -308,17 +407,21 @@ const lesson02: LessonSeed = {
         { text: "$10$ m/s", feedback: "That is the instantaneous velocity at $t = 1$ s." },
         { text: "$30$ m/s", feedback: "That is the instantaneous velocity at $t = 3$ s." },
       ],
+      hint: "Average velocity is the chord slope: $\\dfrac{x(3) - x(1)}{3 - 1}$. Evaluate $x$ at both ends first.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mfe1-2-q4",
       variant: "practice",
-      question: "For $x = 3t^2 + 2t$ (metres, seconds), what is the instantaneous velocity at $t = 2$ s?",
-      options: [
-        { text: "$14$ m/s", correct: true, feedback: "$\\frac{x(2 + h) - x(2)}{h} = 14 + 3h \\to 14$. Or $v = 6t + 2 = 14$." },
-        { text: "$16$ m/s", feedback: "That is $x(2)$, the position. Velocity is the slope." },
-        { text: "$8$ m/s", feedback: "That is the average velocity over the first 2 s, $16/2$." },
-        { text: "$12$ m/s", feedback: "You dropped the $2t$ term, whose slope adds 2 m/s." },
+      question: "For $x = 3t^2 + 2t$ (metres, seconds), what is the instantaneous velocity at $t = 2$ s? Give your answer in m/s.",
+      answer: 14,
+      unit: "m/s",
+      hint: "Find the chord slope from $t = 2$ to $t = 2 + h$, then let $h \\to 0$, or differentiate.",
+      solution: "$\\frac{x(2 + h) - x(2)}{h} = \\frac{3(4 + 4h + h^2) + 2(2 + h) - 16}{h} = 14 + 3h \\to 14$ m/s.\n\nOr directly: $v = \\frac{dx}{dt} = 6t + 2 = 14$ m/s.",
+      commonMistakes: [
+        { answer: 16, feedback: "That is $x(2)$, the position. Velocity is the slope." },
+        { answer: 8, feedback: "That is the average velocity over the first 2 s, $16/2$." },
+        { answer: 12, feedback: "You dropped the $2t$ term, whose slope adds 2 m/s." },
       ],
     },
     {
@@ -331,6 +434,22 @@ const lesson02: LessonSeed = {
         { text: "They collide head-on.", feedback: "They are level, but they may be moving the same way (overtaking)." },
         { text: "They are at the same position at $t = 4$ s.", correct: true, feedback: "Equal $x$ at the same $t$: the cars are side by side." },
       ],
+      hint: "An $x$-$t$ graph plots position against time. At a crossing point, which quantity do the two graphs share?",
+    },
+    {
+      type: "quiz",
+      id: "mfe1-2-q6",
+      variant: "practice",
+      multiple: true,
+      question: "A particle moves along a line with $x = 8t - 2t^2$ (metres, seconds). Select all the statements that are true.",
+      options: [
+        { text: "It is momentarily at rest at $t = 2$ s.", correct: true, feedback: "$v = 8 - 4t = 0$ at $t = 2$ s: the $x$-$t$ graph has a horizontal tangent there." },
+        { text: "Its acceleration is zero at $t = 2$ s.", feedback: "$v = 0$ there, but $v$ is still changing: $a = -4$ m/s² throughout." },
+        { text: "Its average velocity from $t = 0$ to $t = 4$ s is zero.", correct: true, feedback: "$x(4) = 32 - 32 = 0 = x(0)$: zero displacement, so zero average velocity." },
+        { text: "Its speed at $t = 3$ s is 4 m/s.", correct: true, feedback: "$v(3) = 8 - 12 = -4$ m/s: moving in the negative direction at 4 m/s." },
+        { text: "Its $x$-$t$ graph has a horizontal tangent at $t = 4$ s.", feedback: "At $t = 4$ s the particle is back at $x = 0$, but moving: $v(4) = -8$ m/s. The graph crosses the axis there; it is not flat." },
+      ],
+      hint: "Differentiate to get $v(t)$, then test each statement.",
     },
   ]),
 };
@@ -352,10 +471,11 @@ const lesson03: LessonSeed = {
       content:
         "Average acceleration $= \\dfrac{\\Delta v}{\\Delta t}$; instantaneous acceleration $a = \\dfrac{dv}{dt}$, the slope of the tangent to the $v$-$t$ graph. Unit m/s², dimensions $[LT^{-2}]$.",
     },
+    { type: "heading", text: "Why area gives displacement" },
     {
       type: "text",
       content:
-        "**Why area gives displacement.** Over a tiny interval $dt$ the velocity is nearly constant, so the particle moves $dx = v\\,dt$: a thin strip of height $v$ and width $dt$ under the $v$-$t$ graph. Adding all the strips from $t_1$ to $t_2$ gives",
+        "Over a tiny interval $dt$ the velocity is nearly constant, so the particle moves $dx = v\\,dt$: a thin strip of height $v$ and width $dt$ under the $v$-$t$ graph. Adding all the strips from $t_1$ to $t_2$ gives",
     },
     { type: "math", latex: "\\Delta x = \\int_{t_1}^{t_2} v\\,dt = \\text{signed area under the } v\\text{-}t \\text{ graph}" },
     {
@@ -385,10 +505,11 @@ const lesson03: LessonSeed = {
       content:
         "What you should have seen: $v$ crosses zero at $t = 3$ s. The area from 0 to 3 s is a triangle of $\\tfrac12 \\times 3 \\times (-6) = -9$ m. From 3 s to 6 s another triangle of $+9$ m cancels it, so at $t = 6$ s the particle is back at the start (displacement 0, distance 18 m). By $t = 8$ s the positive triangle is $\\tfrac12 \\times 5 \\times 10 = 25$ m: displacement $-9 + 25 = 16$ m, distance $9 + 25 = 34$ m. Throughout, the $a$-$t$ graph is a flat line at $+2$.",
     },
+    { type: "heading", text: "Speeding up or slowing down?" },
     {
       type: "text",
       content:
-        "**Speeding up or slowing down?** In the lab the acceleration was always positive, yet the particle first slowed down (from 6 m/s to 0) and then sped up. The sign of $a$ alone does not decide. What matters is whether $a$ and $v$ point the same way:",
+        "In the lab the acceleration was always positive, yet the particle first slowed down (from 6 m/s to 0) and then sped up. The sign of $a$ alone does not decide. What matters is whether $a$ and $v$ point the same way:",
     },
     {
       type: "callout",
@@ -397,16 +518,44 @@ const lesson03: LessonSeed = {
       content:
         "A particle **speeds up** when $v$ and $a$ have the **same sign** and **slows down** when they have **opposite signs**. On a $v$-$t$ graph: speeding up means the graph is moving away from the time axis; slowing down means it is heading towards it.",
     },
+    { type: "heading", text: "Using slopes and areas together" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (a car trip, trapezium graph).** A car starts from rest, accelerates uniformly to 20 m/s in 10 s, cruises at 20 m/s for 20 s, then brakes uniformly to rest in 5 s.\n\n1. Accelerations are slopes: $\\frac{20}{10} = 2$ m/s², then $0$, then $\\frac{0 - 20}{5} = -4$ m/s².\n2. Displacement is the area of the trapezium: split into a triangle, a rectangle and a triangle. *Why this step:* areas of simple shapes are exact for straight-line graphs; no formula to remember.",
+      type: "worked-example",
+      id: "mfe1-3-we1",
+      title: "Worked example 1: a car trip, trapezium graph",
+      problem:
+        "A car starts from rest, accelerates uniformly to 20 m/s in 10 s, cruises at 20 m/s for 20 s, then brakes uniformly to rest in 5 s. Find the accelerations in each stage, the displacement, the distance and the average velocity.",
+      steps: [
+        { text: "Accelerations are slopes: $\\frac{20}{10} = 2$ m/s², then $0$, then $\\frac{0 - 20}{5} = -4$ m/s²." },
+        { text: "Displacement is the area of the trapezium: split into a triangle, a rectangle and a triangle. *Why this step:* areas of simple shapes are exact for straight-line graphs; no formula to remember.", latex: "\\Delta x = \\tfrac12(10)(20) + (20)(20) + \\tfrac12(5)(20) = 100 + 400 + 50 = 550\\text{ m}" },
+        { text: "The graph never goes below the axis, so distance is also 550 m. Average velocity $= \\frac{550}{35} \\approx 15.7$ m/s." },
+      ],
+      answer: "$a = 2$, $0$, $-4$ m/s²; displacement $=$ distance $= 550$ m; average velocity $\\approx 15.7$ m/s.",
     },
-    { type: "math", latex: "\\Delta x = \\tfrac12(10)(20) + (20)(20) + \\tfrac12(5)(20) = 100 + 400 + 50 = 550\\text{ m}" },
     {
-      type: "text",
-      content:
-        "3. The graph never goes below the axis, so distance is also 550 m. Average velocity $= \\frac{550}{35} \\approx 15.7$ m/s.\n\n**Worked example 2 (through zero).** A ball's velocity changes uniformly from $+10$ m/s to $-10$ m/s in 4 s.\n\n1. Slope: $a = \\dfrac{-10 - 10}{4} = -5$ m/s².\n2. $v = 0$ at $t = 2$ s. Area 0–2 s $= \\tfrac12(2)(10) = +10$ m; area 2–4 s $= -10$ m.\n3. Displacement $= 0$; distance $= 20$ m. *Why this step:* whenever $v$ changes sign, split the area at the crossing, or distance will be wrong.\n\n**Worked example 3** (from an $a$-$t$ graph). Starting from rest, $a = 2$ m/s² for 3 s, then $a = -1$ m/s² for the next 4 s.\n\n1. Area under $a$-$t$ from 0 to 3 s: $2 \\times 3 = 6$, so $v(3) = 0 + 6 = 6$ m/s.\n2. From 3 to 7 s: $-1 \\times 4 = -4$, so $v(7) = 6 - 4 = 2$ m/s. The car is still moving forward, just more slowly.",
+      type: "worked-example",
+      id: "mfe1-3-we2",
+      title: "Worked example 2: through zero",
+      problem:
+        "A ball's velocity changes uniformly from $+10$ m/s to $-10$ m/s in 4 s. Find the acceleration, the displacement and the distance covered in the 4 s.",
+      steps: [
+        { text: "Slope: $a = \\dfrac{-10 - 10}{4} = -5$ m/s²." },
+        { text: "$v = 0$ at $t = 2$ s. Area 0–2 s $= \\tfrac12(2)(10) = +10$ m; area 2–4 s $= -10$ m." },
+        { text: "Displacement $= 0$; distance $= 20$ m. *Why this step:* whenever $v$ changes sign, split the area at the crossing, or distance will be wrong." },
+      ],
+      answer: "$a = -5$ m/s²; displacement $= 0$; distance $= 20$ m.",
+    },
+    {
+      type: "worked-example",
+      id: "mfe1-3-we3",
+      title: "Worked example 3: from an $a$-$t$ graph",
+      problem:
+        "Starting from rest, $a = 2$ m/s² for 3 s, then $a = -1$ m/s² for the next 4 s. Find the velocity at 3 s and at 7 s.",
+      steps: [
+        { text: "Area under $a$-$t$ from 0 to 3 s: $2 \\times 3 = 6$, so $v(3) = 0 + 6 = 6$ m/s." },
+        { text: "From 3 to 7 s: $-1 \\times 4 = -4$, so $v(7) = 6 - 4 = 2$ m/s. The car is still moving forward, just more slowly." },
+      ],
+      answer: "$v(3) = 6$ m/s and $v(7) = 2$ m/s.",
     },
     {
       type: "callout",
@@ -422,6 +571,7 @@ const lesson03: LessonSeed = {
       content:
         "At the top of a vertical throw, and at the turnaround in the lab ($t = 3$ s), the velocity is zero but it is still **changing**: the slope of $v$-$t$ is $+2$ m/s² there. If $a$ were zero at that instant, the particle would stay stuck. Zero velocity and zero acceleration are unrelated.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mfe1-3-q1",
@@ -432,17 +582,21 @@ const lesson03: LessonSeed = {
         { text: "speeding up, because $v$ and $a$ have the same sign.", correct: true, feedback: "Both point in the negative direction, so the speed grows." },
         { text: "at rest, because the signs cancel.", feedback: "Velocity is $-4$ m/s, not zero." },
       ],
+      hint: "Use the speeding-up rule: compare the signs of $v$ and $a$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mfe1-3-q2",
       variant: "practice",
-      question: "A body starts from rest, accelerates uniformly to 12 m/s in 4 s, then moves at 12 m/s for 2 s. What is its displacement in the 6 s?",
-      options: [
-        { text: "$72$ m", feedback: "That treats the whole 6 s as 12 m/s. The first 4 s is a triangle, not a rectangle." },
-        { text: "$36$ m", feedback: "Triangle $24$ m is right; the cruising part is $12 \\times 2 = 24$ m, not 12 m." },
-        { text: "$24$ m", feedback: "That is only the accelerating phase." },
-        { text: "$48$ m", correct: true, feedback: "Triangle $\\tfrac12(4)(12) = 24$ plus rectangle $12 \\times 2 = 24$: 48 m." },
+      question: "A body starts from rest, accelerates uniformly to 12 m/s in 4 s, then moves at 12 m/s for 2 s. What is its displacement in the 6 s? Give your answer in metres.",
+      answer: 48,
+      unit: "m",
+      hint: "Sketch the $v$-$t$ graph and add the areas of a triangle and a rectangle.",
+      solution: "Triangle (0 to 4 s): $\\tfrac12(4)(12) = 24$ m. Rectangle (4 to 6 s): $12 \\times 2 = 24$ m.\n\nDisplacement $= 24 + 24 = 48$ m.",
+      commonMistakes: [
+        { answer: 72, feedback: "That treats the whole 6 s as 12 m/s. The first 4 s is a triangle, not a rectangle." },
+        { answer: 36, feedback: "Triangle $24$ m is right; the cruising part is $12 \\times 2 = 24$ m, not 12 m." },
+        { answer: 24, feedback: "That is only the accelerating phase." },
       ],
     },
     {
@@ -456,6 +610,7 @@ const lesson03: LessonSeed = {
         { text: "Displacement 2 m, distance 2 m", feedback: "Distance counts the backward 6 m as positive." },
         { text: "Displacement 14 m, distance 14 m", feedback: "The area below the axis is negative displacement." },
       ],
+      hint: "Displacement is the signed area under the $v$-$t$ graph; distance adds the magnitudes of the areas on each side of the axis.",
     },
     {
       type: "quiz",
@@ -467,6 +622,7 @@ const lesson03: LessonSeed = {
         { text: "$20$ m/s", feedback: "The acceleration stops at 3 s. After that, the area under $a$-$t$ adds nothing." },
         { text: "$0$", feedback: "$a = 0$ means constant velocity, not zero velocity." },
       ],
+      hint: "Find the velocity reached at the end of the accelerating phase with $v = u + at$. What happens to it once $a = 0$?",
     },
     {
       type: "quiz",
@@ -478,6 +634,22 @@ const lesson03: LessonSeed = {
         { text: "$0$, because the particle is at rest.", feedback: "Zero velocity is not zero acceleration. The $v$-$t$ line still has slope 2 there." },
         { text: "$-2$ m/s²", feedback: "The acceleration never changes sign here; only the velocity does." },
       ],
+      hint: "What is the slope of the $v$–$t$ line, and does it change at the instant $v = 0$?",
+    },
+    {
+      type: "quiz",
+      id: "mfe1-3-q6",
+      variant: "practice",
+      multiple: true,
+      question: "A particle starts at $x = 0$ with $u = -6$ m/s and a constant $a = +2$ m/s². Select all the statements that are true.",
+      options: [
+        { text: "It slows down between $t = 0$ and $t = 3$ s.", correct: true, feedback: "$v$ is negative and $a$ positive: opposite signs, so the speed falls from 6 m/s to 0." },
+        { text: "It speeds up between $t = 3$ s and $t = 6$ s.", correct: true, feedback: "Now $v$ is positive and so is $a$: same signs, so the speed grows from 0 to 6 m/s." },
+        { text: "Its displacement at $t = 6$ s is zero.", correct: true, feedback: "The triangles of $-9$ m and $+9$ m under the $v$-$t$ graph cancel: it is back at the start." },
+        { text: "The distance it covers in the first 6 s is 9 m.", feedback: "Distance adds both triangles as positive: $9 + 9 = 18$ m." },
+        { text: "Its acceleration changes sign at $t = 3$ s.", feedback: "Only the velocity changes sign. The acceleration is $+2$ m/s² throughout." },
+      ],
+      hint: "Use the speeding-up rule, and split the $v$-$t$ area where $v$ crosses zero.",
     },
   ]),
 };
@@ -492,6 +664,7 @@ const lesson04: LessonSeed = {
       content:
         "A driver on a highway at 72 km/h (20 m/s) sees a stalled truck and brakes hard. Will the car stop in time? If the deceleration is constant, one straight-line $v$-$t$ graph answers every question about the stop. Constant acceleration is the single most common situation in mechanics: free fall, braking, a block sliding on a slope. So it pays to squeeze everything out of one graph.",
     },
+    { type: "heading", text: "Deriving the equations from the $v$-$t$ graph" },
     {
       type: "text",
       content:
@@ -523,10 +696,11 @@ const lesson04: LessonSeed = {
       content:
         "For constant $a$ along a line: $v = u + at$; $s = ut + \\tfrac12 at^2$; $v^2 = u^2 + 2as$; $s = \\frac{u + v}{2}t$. Here $s$ is the **displacement** (not distance) and every quantity carries its sign.\nEach equation leaves out one of $v$, $s$, $t$, $a$: pick the one that omits what you neither know nor want.",
     },
+    { type: "heading", text: "Displacement in the $n$th second" },
     {
       type: "text",
       content:
-        "**Displacement in the nth second.** The distance covered *during* the $n$th second is $s(n) - s(n - 1)$:",
+        "The distance covered *during* the $n$th second is $s(n) - s(n - 1)$:",
     },
     {
       type: "math",
@@ -558,15 +732,71 @@ const lesson04: LessonSeed = {
       content:
         "What you should have seen: the car stops at $t = 4$ s after 40 m, and $v^2 - u^2 = 0 - 400 = -400 = 2(-5)(40)$ at the end. The $v$-$t$ line is straight and the $x$-$t$ curve is a parabola that flattens exactly where the car stops.",
     },
+    { type: "heading", text: "Braking distances and chases" },
     {
-      type: "text",
-      content:
-        "**Worked example 1** (braking distance ∝ $u^2$). A car at 20 m/s brakes at 5 m/s². How far does it go? What if it were doing 40 m/s?\n\n1. We know $u$, $v = 0$, $a$ and want $s$; time is irrelevant, so use (4). *Why this step:* choosing the equation that omits $t$ saves a step.\n2. $0 = 20^2 - 2(5)s \\Rightarrow s = \\dfrac{400}{10} = 40$ m.\n3. At 40 m/s: $s = \\dfrac{1600}{10} = 160$ m. Doubling the speed **quadruples** the stopping distance, because $s = \\dfrac{u^2}{2|a|}$.\n\n**Worked example 2 (reaction time).** Same car at 20 m/s, but the driver takes 0.5 s to react before braking.\n\n1. During the reaction time the car still moves at 20 m/s: $20 \\times 0.5 = 10$ m. *Why this step:* the brakes are not yet on, so there is no acceleration in this phase; it is a separate uniform-motion stage.\n2. Braking distance as before: 40 m.\n3. Total stopping distance: $10 + 40 = 50$ m.",
+      type: "worked-example",
+      id: "mfe1-4-we1",
+      title: "Worked example 1: braking distance ∝ $u^2$",
+      problem:
+        "A car at 20 m/s brakes at 5 m/s². How far does it go? What if it were doing 40 m/s?",
+      steps: [
+        { text: "We know $u$, $v = 0$, $a$ and want $s$; time is irrelevant, so use (4). *Why this step:* choosing the equation that omits $t$ saves a step." },
+        { text: "$0 = 20^2 - 2(5)s \\Rightarrow s = \\dfrac{400}{10} = 40$ m." },
+        { text: "At 40 m/s: $s = \\dfrac{1600}{10} = 160$ m. Doubling the speed **quadruples** the stopping distance, because $s = \\dfrac{u^2}{2|a|}$." },
+      ],
+      answer: "40 m at 20 m/s; 160 m at 40 m/s.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (a chase).** Car A starts from rest at a signal with $a = 2$ m/s² just as car B passes it at a steady 10 m/s. When and where does A catch B?\n\n1. Positions from the signal: $x_A = \\tfrac12(2)t^2 = t^2$ and $x_B = 10t$.\n2. Meeting means equal positions: $t^2 = 10t \\Rightarrow t = 0$ or $t = 10$ s. *Why this step:* $t = 0$ is the start (they are level then too), so the catch-up is at 10 s.\n3. Where: $x = 100$ m. A's speed then: $v = 2 \\times 10 = 20$ m/s, twice B's.\n4. Bonus: the gap is largest when their speeds are equal ($2t = 10$, $t = 5$ s): $x_B - x_A = 50 - 25 = 25$ m.\n\n**Worked example 4 (a bullet, JEE classic).** A bullet loses half its speed after penetrating 3 cm into a block. How much further will it go, assuming constant retardation?\n\n1. First 3 cm: $\\left(\\tfrac u2\\right)^2 = u^2 - 2a(3)$, so $2a(3) = \\tfrac34 u^2$, giving $2a = \\tfrac{u^2}{4}$ (per cm).\n2. From $\\tfrac u2$ to rest: $0 = \\tfrac{u^2}{4} - 2a\\,x \\Rightarrow x = \\dfrac{u^2/4}{u^2/4} = 1$ cm. *Why this step:* we never needed $u$ or $a$ numerically; the ratio did everything.\n3. So it penetrates only 1 cm more. Kinetic energy explains it: losing half the speed already removed three quarters of the energy.\n\n**Worked example 5** ($n$th second). A body falls from rest with $a = 10$ m/s². How far does it fall during the 3rd second?\n\n1. $s_3 = 0 + \\dfrac{10}{2}(2 \\cdot 3 - 1) = 5 \\times 5 = 25$ m.\n2. Check: $s(3) - s(2) = 45 - 20 = 25$ m. ✓",
+      type: "worked-example",
+      id: "mfe1-4-we2",
+      title: "Worked example 2: reaction time",
+      problem:
+        "Same car at 20 m/s, but the driver takes 0.5 s to react before braking. Find the total stopping distance.",
+      steps: [
+        { text: "During the reaction time the car still moves at 20 m/s: $20 \\times 0.5 = 10$ m. *Why this step:* the brakes are not yet on, so there is no acceleration in this phase; it is a separate uniform-motion stage." },
+        { text: "Braking distance as before: 40 m." },
+        { text: "Total stopping distance: $10 + 40 = 50$ m." },
+      ],
+      answer: "Total stopping distance $= 50$ m (10 m reacting + 40 m braking).",
+    },
+    {
+      type: "worked-example",
+      id: "mfe1-4-we3",
+      title: "Worked example 3: a chase",
+      problem:
+        "Car A starts from rest at a signal with $a = 2$ m/s² just as car B passes it at a steady 10 m/s. When and where does A catch B, and what is the largest gap between them before that?",
+      steps: [
+        { text: "Positions from the signal: $x_A = \\tfrac12(2)t^2 = t^2$ and $x_B = 10t$." },
+        { text: "Meeting means equal positions: $t^2 = 10t \\Rightarrow t = 0$ or $t = 10$ s. *Why this step:* $t = 0$ is the start (they are level then too), so the catch-up is at 10 s." },
+        { text: "Where: $x = 100$ m. A's speed then: $v = 2 \\times 10 = 20$ m/s, twice B's." },
+        { text: "The gap is largest when their speeds are equal ($2t = 10$, $t = 5$ s): $x_B - x_A = 50 - 25 = 25$ m." },
+      ],
+      answer: "A catches B after 10 s, 100 m from the signal (A then at 20 m/s); the largest gap is 25 m, at 5 s.",
+    },
+    {
+      type: "worked-example",
+      id: "mfe1-4-we4",
+      title: "Worked example 4: a bullet, JEE classic",
+      problem:
+        "A bullet loses half its speed after penetrating 3 cm into a block. How much further will it go, assuming constant retardation?",
+      steps: [
+        { text: "First 3 cm: $\\left(\\tfrac u2\\right)^2 = u^2 - 2a(3)$, so $2a(3) = \\tfrac34 u^2$, giving $2a = \\tfrac{u^2}{4}$ (per cm)." },
+        { text: "From $\\tfrac u2$ to rest: $0 = \\tfrac{u^2}{4} - 2a\\,x \\Rightarrow x = \\dfrac{u^2/4}{u^2/4} = 1$ cm. *Why this step:* we never needed $u$ or $a$ numerically; the ratio did everything." },
+        { text: "So it penetrates only 1 cm more. Kinetic energy explains it: losing half the speed already removed three quarters of the energy." },
+      ],
+      answer: "1 cm further.",
+    },
+    {
+      type: "worked-example",
+      id: "mfe1-4-we5",
+      title: "Worked example 5: $n$th second",
+      problem:
+        "A body falls from rest with $a = 10$ m/s². How far does it fall during the 3rd second?",
+      steps: [
+        { text: "$s_3 = 0 + \\dfrac{10}{2}(2 \\cdot 3 - 1) = 5 \\times 5 = 25$ m." },
+        { text: "Check: $s(3) - s(2) = 45 - 20 = 25$ m. ✓" },
+      ],
+      answer: "25 m.",
     },
     {
       type: "callout",
@@ -575,28 +805,34 @@ const lesson04: LessonSeed = {
       content:
         "They were derived from a **straight** $v$-$t$ line, so they hold only when $a$ is constant. For a car whose acceleration changes, or a particle with $a = -kv$, you must go back to $v = \\frac{dx}{dt}$ and $a = \\frac{dv}{dt}$ (lesson 1.6). Using $v^2 = u^2 + 2as$ there gives wrong answers with complete confidence.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mfe1-4-q1",
       variant: "practice",
-      question: "A body has $u = 2$ m/s and $a = 4$ m/s². How far does it travel in the 5th second?",
-      options: [
-        { text: "$60$ m", feedback: "That is the displacement in the first 5 s, not in the 5th second." },
-        { text: "$24$ m", feedback: "Use $(2n - 1) = 9$, not $2n + 1 = 11$." },
-        { text: "$20$ m", correct: true, feedback: "$s_5 = 2 + \\frac42(2 \\cdot 5 - 1) = 2 + 18 = 20$ m. Check: $s(5) - s(4) = 60 - 40 = 20$ m." },
-        { text: "$11$ m", feedback: "The factor is $\\frac a2 = 2$, and $2 \\times 9 = 18$; then add $u = 2$." },
+      question: "A body has $u = 2$ m/s and $a = 4$ m/s². How far does it travel in the 5th second? Give your answer in metres.",
+      answer: 20,
+      unit: "m",
+      hint: "Use $s_n = u + \\frac a2(2n - 1)$, or subtract $s(4)$ from $s(5)$.",
+      solution: "$s_5 = 2 + \\frac42(2 \\cdot 5 - 1) = 2 + 18 = 20$ m.\n\nCheck: $s(5) - s(4) = 60 - 40 = 20$ m.",
+      commonMistakes: [
+        { answer: 60, feedback: "That is the displacement in the first 5 s, not in the 5th second." },
+        { answer: 24, feedback: "Use $(2n - 1) = 9$, not $2n + 1 = 11$." },
+        { answer: 11, feedback: "You left out the factor $\\frac a2 = 2$: it multiplies $(2n - 1) = 9$ to give 18, and then you add $u = 2$." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mfe1-4-q2",
       variant: "practice",
-      question: "A particle with $u = 10$ m/s and $a = 2$ m/s² moves 24 m. What is its speed then?",
-      options: [
-        { text: "$\\sqrt{148}$ m/s", feedback: "You used $u^2 + as$; the factor 2 is part of the equation: $v^2 = u^2 + 2as$." },
-        { text: "$196$ m/s", feedback: "That is $v^2$ (in m²/s²). Take the square root: $v = 14$ m/s." },
-        { text: "$14$ m/s", correct: true, feedback: "$v^2 = 100 + 2(2)(24) = 196$, so $v = 14$ m/s." },
-        { text: "$12$ m/s", feedback: "Recompute: $v^2 = 196$." },
+      question: "A particle with $u = 10$ m/s and $a = 2$ m/s² moves 24 m. What is its speed then? Give your answer in m/s.",
+      answer: 14,
+      unit: "m/s",
+      hint: "Time is neither given nor asked for, so use the equation without $t$.",
+      solution: "$v^2 = u^2 + 2as = 100 + 2(2)(24) = 196$, so $v = 14$ m/s.",
+      commonMistakes: [
+        { answer: 12.166, tolerance: 0.01, feedback: "That is $\\sqrt{148}$: you used $u^2 + as$. The factor 2 is part of the equation: $v^2 = u^2 + 2as$." },
+        { answer: 196, feedback: "That is $v^2$ (in m²/s²). Take the square root." },
       ],
     },
     {
@@ -609,6 +845,7 @@ const lesson04: LessonSeed = {
         { text: "2", feedback: "Stopping distance goes as $u^2$, not $u$." },
         { text: "$\\sqrt2$", feedback: "That would be the ratio of speeds for a doubled distance, the inverse question." },
       ],
+      hint: "Same brakes means the same deceleration. From $v^2 = u^2 + 2as$ with $v = 0$, how does the stopping distance scale with $u$ (Worked example 1)?",
     },
     {
       type: "quiz",
@@ -621,29 +858,37 @@ const lesson04: LessonSeed = {
         { text: "$20$ m", feedback: "Recompute: average speed 10 m/s for 4 s." },
         { text: "$40$ m", correct: true, feedback: "$u = 20$ m/s, $s = \\frac{u + v}{2}t = \\frac{20 + 0}{2} \\times 4 = 40$ m." },
       ],
+      hint: "Convert to m/s first, then with uniform deceleration the distance is the average velocity $\\frac{u + v}{2}$ times the time.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mfe1-4-q5",
       variant: "practice",
-      question: "Starting from rest with uniform acceleration, a body covers 20 m in the first 2 s. How far does it go in the **next** 2 s?",
-      options: [
-        { text: "$20$ m", feedback: "It is speeding up, so it covers more in the next 2 s." },
-        { text: "$60$ m", correct: true, feedback: "$20 = \\tfrac12 a (4) \\Rightarrow a = 10$. $s(4) = 80$ m, so the next 2 s gives $80 - 20 = 60$ m (ratio 1 : 3)." },
-        { text: "$80$ m", feedback: "That is the total in 4 s. Subtract the first 20 m." },
-        { text: "$40$ m", feedback: "Distance does not grow in proportion to time under acceleration; it grows as $t^2$." },
+      question: "Starting from rest with uniform acceleration, a body covers 20 m in the first 2 s. How far does it go in the **next** 2 s? Give your answer in metres.",
+      answer: 60,
+      unit: "m",
+      hint: "Find $a$ from the first 2 s, then compute $s(4) - s(2)$.",
+      solution: "$20 = \\tfrac12 a (2)^2 \\Rightarrow a = 10$ m/s². Then $s(4) = \\tfrac12(10)(16) = 80$ m, so the next 2 s gives $80 - 20 = 60$ m.\n\nFrom rest, equal time intervals give distances in the ratio $1 : 3 : 5 : \\dots$, so $3 \\times 20 = 60$ m.",
+      commonMistakes: [
+        { answer: 20, feedback: "It is speeding up, so it covers more in the next 2 s." },
+        { answer: 80, feedback: "That is the total in 4 s. Subtract the first 20 m." },
+        { answer: 40, feedback: "Distance does not grow in proportion to time under acceleration; it grows as $t^2$." },
       ],
     },
     {
       type: "quiz",
       id: "mfe1-4-q6",
       variant: "concept",
-      question: "For which motion can you **not** use $v^2 = u^2 + 2as$?",
+      multiple: true,
+      question: "For which of these motions can you **not** use $v^2 = u^2 + 2as$? Select all that apply.",
       options: [
         { text: "A boat whose deceleration is proportional to its speed, $a = -kv$.", correct: true, feedback: "$a$ changes as $v$ changes, so the constant-$a$ equations fail. Integrate instead (1.6)." },
         { text: "A stone in free fall (no air resistance).", feedback: "Constant $a = g$: the equation applies." },
         { text: "A car braking with constant deceleration.", feedback: "Constant $a$: the equation applies." },
+        { text: "A rocket sled whose acceleration grows steadily with time, $a = 2t$.", correct: true, feedback: "$a$ is not constant, so the equation fails. Integrate $a(t)$ twice instead (1.6)." },
+        { text: "A ball thrown straight up, on its way down again.", feedback: "The acceleration is $-g$ on the way up, at the top and on the way down: constant, so the equation applies to the whole flight." },
       ],
+      hint: "The equations of uniformly accelerated motion need $a$ to be **constant**. Check each motion: is its acceleration fixed in size and direction throughout?",
     },
   ]),
 };
@@ -665,16 +910,18 @@ const lesson05: LessonSeed = {
       content:
         "Pick **up as positive** and put the origin at the launch point. Then $a = -g = -10$ m/s² for the whole flight, on the way up and on the way down. Positions below the launch point are negative, and downward velocities are negative. The four equations of 1.4 then work in a single line, with no need to split the motion.",
     },
+    { type: "heading", text: "Galileo's odd-number rule" },
     {
       type: "text",
       content:
-        "**Galileo's odd-number rule.** Dropped from rest ($u = 0$, $a = g$ downward), the distance fallen in the $n$th second is $s_n = \\frac g2(2n - 1) = 5(2n - 1)$ m: 5, 15, 25, 35 m, in the ratio $1 : 3 : 5 : 7$. The total after $n$ seconds is $5n^2$: 5, 20, 45, 80 m, the sums of odd numbers being perfect squares.\n\n**A vertical throw.** Throw up with speed $u$ (up positive, $a = -g$).",
+        "Dropped from rest ($u = 0$, $a = g$ downward), the distance fallen in the $n$th second is $s_n = \\frac g2(2n - 1) = 5(2n - 1)$ m: 5, 15, 25, 35 m, in the ratio $1 : 3 : 5 : 7$. The total after $n$ seconds is $5n^2$: 5, 20, 45, 80 m, the sums of odd numbers being perfect squares.\n\n**A vertical throw.** Throw up with speed $u$ (up positive, $a = -g$).",
     },
     {
       type: "math",
       latex:
         "\\text{top: } v = 0 \\Rightarrow t_{\\uparrow} = \\frac{u}{g}, \\quad H = \\frac{u^2}{2g}\\; \\qquad \\text{back to start: } 0 = ut - \\tfrac12 gt^2 \\Rightarrow T = \\frac{2u}{g}",
     },
+    { type: "heading", text: "Symmetry of an upward throw" },
     {
       type: "text",
       content:
@@ -699,15 +946,46 @@ const lesson05: LessonSeed = {
       content:
         "What you should have seen: the ball rises for 2 s to a height of 20 m, turns round, and is back at the launch point at 4 s, moving down at 20 m/s. The $v$-$t$ graph is one straight line of slope $-10$ from $+20$ to $-20$; nothing special happens to it at the top. The $a$-$t$ graph is flat at $-10$ the whole time.",
     },
+    { type: "heading", text: "Throws from towers and balloons" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (a throw from a tower).** A ball is thrown up at 20 m/s from the top of a 25 m tower. When does it hit the ground, and how fast?\n\n1. Up positive, origin at the throw. The ground is at $y = -25$ m. *Why this step:* with a fixed origin and sign, the whole up-and-down flight is one equation.\n2. $y = ut - \\tfrac12 gt^2$: $-25 = 20t - 5t^2$, i.e. $t^2 - 4t - 5 = 0$, so $(t - 5)(t + 1) = 0$.\n3. $t = 5$ s or $t = -1$ s. Reject $-1$ s: the ball was not thrown until $t = 0$. (It is when a ball on this same parabola would have had to leave the ground to arrive at the tower top at 20 m/s.)\n4. Speed: $v = 20 - 10(5) = -30$ m/s, so 30 m/s downward. Check with $v^2 = u^2 + 2as = 400 + 2(-10)(-25) = 900$. ✓",
+      type: "worked-example",
+      id: "mfe1-5-we1",
+      title: "Worked example 1: a throw from a tower",
+      problem:
+        "A ball is thrown up at 20 m/s from the top of a 25 m tower. When does it hit the ground, and how fast?",
+      steps: [
+        { text: "Up positive, origin at the throw. The ground is at $y = -25$ m. *Why this step:* with a fixed origin and sign, the whole up-and-down flight is one equation." },
+        { text: "$y = ut - \\tfrac12 gt^2$: $-25 = 20t - 5t^2$, i.e. $t^2 - 4t - 5 = 0$, so $(t - 5)(t + 1) = 0$." },
+        { text: "$t = 5$ s or $t = -1$ s. Reject $-1$ s: the ball was not thrown until $t = 0$. (It is when a ball on this same parabola would have had to leave the ground to arrive at the tower top at 20 m/s.)" },
+        { text: "Speed: $v = 20 - 10(5) = -30$ m/s, so 30 m/s downward. Check with $v^2 = u^2 + 2as = 400 + 2(-10)(-25) = 900$. ✓" },
+      ],
+      answer: "It lands after 5 s, at 30 m/s downward.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (released from a rising balloon).** A balloon rises steadily at 10 m/s. At a height of 40 m a stone is released from it. How long does the stone take to reach the ground?\n\n1. The stone shares the balloon's velocity at release: $u = +10$ m/s, **upward**. *Why this step:* \"released\" or \"dropped\" from a moving object means zero velocity relative to the object, not relative to the ground.\n2. $-40 = 10t - 5t^2 \\Rightarrow t^2 - 2t - 8 = 0 \\Rightarrow (t - 4)(t + 2) = 0$, so $t = 4$ s.\n3. It first rises 5 m for 1 s, then falls 45 m in 3 s. Treating it as dropped from rest would give $\\sqrt{8} \\approx 2.83$ s, wrong.\n\n**Worked example 3 (two balls at an interval).** Ball A is thrown up at 20 m/s. One second later ball B is thrown up from the same point at 20 m/s. When and where do they meet?\n\n1. $y_A = 20t - 5t^2$ and $y_B = 20(t - 1) - 5(t - 1)^2$ for $t \\ge 1$. *Why this step:* B's clock starts 1 s late, so replace $t$ by $t - 1$ in its equation.\n2. Set equal: $20t - 5t^2 = 20t - 20 - 5t^2 + 10t - 5$, which gives $10t = 25$, so $t = 2.5$ s.\n3. Height: $y = 50 - 31.25 = 18.75$ m. Symmetry confirms it: A is 0.5 s past its top (2 s) while B is 0.5 s before its top.",
+      type: "worked-example",
+      id: "mfe1-5-we2",
+      title: "Worked example 2: released from a rising balloon",
+      problem:
+        "A balloon rises steadily at 10 m/s. At a height of 40 m a stone is released from it. How long does the stone take to reach the ground?",
+      steps: [
+        { text: "The stone shares the balloon's velocity at release: $u = +10$ m/s, **upward**. *Why this step:* \"released\" or \"dropped\" from a moving object means zero velocity relative to the object, not relative to the ground." },
+        { text: "$-40 = 10t - 5t^2 \\Rightarrow t^2 - 2t - 8 = 0 \\Rightarrow (t - 4)(t + 2) = 0$, so $t = 4$ s." },
+        { text: "It first rises 5 m for 1 s, then falls 45 m in 3 s. Treating it as dropped from rest would give $\\sqrt{8} \\approx 2.83$ s, wrong." },
+      ],
+      answer: "$t = 4$ s.",
+    },
+    {
+      type: "worked-example",
+      id: "mfe1-5-we3",
+      title: "Worked example 3: two balls at an interval",
+      problem:
+        "Ball A is thrown up at 20 m/s. One second later ball B is thrown up from the same point at 20 m/s. When and where do they meet?",
+      steps: [
+        { text: "$y_A = 20t - 5t^2$ and $y_B = 20(t - 1) - 5(t - 1)^2$ for $t \\ge 1$. *Why this step:* B's clock starts 1 s late, so replace $t$ by $t - 1$ in its equation." },
+        { text: "Set equal: $20t - 5t^2 = 20t - 20 - 5t^2 + 10t - 5$, which gives $10t = 25$, so $t = 2.5$ s." },
+        { text: "Height: $y = 50 - 31.25 = 18.75$ m. Symmetry confirms it: A is 0.5 s past its top (2 s) while B is 0.5 s before its top." },
+      ],
+      answer: "They meet at $t = 2.5$ s (after A is thrown), 18.75 m above the point of projection.",
     },
     {
       type: "callout",
@@ -723,16 +1001,20 @@ const lesson05: LessonSeed = {
       content:
         "Without air resistance, all bodies fall with the same $g$ (Chapter 3 shows why: the pull of gravity is proportional to mass, and so is the inertia it must overcome). A feather falls slowly in air because of drag, not because it is light; in a vacuum tube it falls alongside a coin.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mfe1-5-q1",
       variant: "practice",
-      question: "A ball is thrown vertically up at 30 m/s. What is its maximum height?",
-      options: [
-        { text: "$90$ m", feedback: "You forgot the 2 in $2g$." },
-        { text: "$3$ m", feedback: "That is $u/g$, which is the **time** to the top (3 s), not the height." },
-        { text: "$45$ m", correct: true, feedback: "$H = \\frac{u^2}{2g} = \\frac{900}{20} = 45$ m." },
-        { text: "$30$ m", feedback: "Recompute with $v^2 = u^2 - 2gH$ and $v = 0$ at the top." },
+      question: "A ball is thrown vertically up at 30 m/s. Taking $g = 10$ m/s², what is its maximum height above the launch point? Give your answer in metres.",
+      answer: 45,
+      unit: "m",
+      hint: "At the top $v = 0$. Use the equation that leaves out time.",
+      solution: "$0 = u^2 - 2gH \\Rightarrow H = \\frac{u^2}{2g} = \\frac{900}{20} = 45$ m.",
+      commonMistakes: [
+        { answer: 90, feedback: "You forgot the 2 in $2g$." },
+        { answer: 3, feedback: "That is $u/g$, which is the **time** to the top (3 s), not the height." },
+        { answer: 30, feedback: "30 m/s is the launch speed, not a height." },
       ],
     },
     {
@@ -746,17 +1028,21 @@ const lesson05: LessonSeed = {
         { text: "$16$ s", feedback: "That is $t^2$; take the square root." },
         { text: "$2\\sqrt2$ s", feedback: "That uses $h = gt^2$ without the $\\tfrac12$." },
       ],
+      hint: "Dropped from rest means $u = 0$, so use $h = \\tfrac12 g t^2$ with $g = 10$ m/s² and solve for $t$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mfe1-5-q3",
       variant: "practice",
-      question: "A body falls from rest. How far does it fall **during** the 4th second?",
-      options: [
-        { text: "$80$ m", feedback: "That is the total in 4 s. The 4th second alone is $s(4) - s(3)$." },
-        { text: "$40$ m", feedback: "Use $(2n - 1) = 7$: $5 \\times 7 = 35$ m." },
-        { text: "$45$ m", feedback: "That is the total after 3 s." },
-        { text: "$35$ m", correct: true, feedback: "$s_4 = 5(2 \\cdot 4 - 1) = 35$ m, or $80 - 45 = 35$ m." },
+      question: "A body falls from rest ($g = 10$ m/s²). How far does it fall **during** the 4th second? Give your answer in metres.",
+      answer: 35,
+      unit: "m",
+      hint: "The 4th second runs from $t = 3$ s to $t = 4$ s.",
+      solution: "$s_4 = \\frac g2(2 \\cdot 4 - 1) = 5 \\times 7 = 35$ m.\n\nCheck: $s(4) - s(3) = 80 - 45 = 35$ m.",
+      commonMistakes: [
+        { answer: 80, feedback: "That is the total in 4 s. The 4th second alone is $s(4) - s(3)$." },
+        { answer: 40, feedback: "Use $(2n - 1) = 7$, not $2n = 8$: $5 \\times 7 = 35$ m." },
+        { answer: 45, feedback: "That is the total after 3 s." },
       ],
     },
     {
@@ -769,6 +1055,7 @@ const lesson05: LessonSeed = {
         { text: "$v = 0$, $a = g$ downward", correct: true, feedback: "Gravity acts throughout; only the velocity passes through zero." },
         { text: "$v = u$ upward, $a = g$ downward", feedback: "At the top the ball has stopped rising." },
       ],
+      hint: "Treat velocity and acceleration separately: what is the vertical velocity at the turning point, and what forces still act on the ball there?",
     },
     {
       type: "quiz",
@@ -781,18 +1068,37 @@ const lesson05: LessonSeed = {
         { text: "It never reaches 15 m.", feedback: "Its maximum height is $400/20 = 20$ m, above 15 m." },
         { text: "$t = 1$ s and $t = 3$ s", correct: true, feedback: "$15 = 20t - 5t^2 \\Rightarrow t^2 - 4t + 3 = 0 \\Rightarrow t = 1, 3$ s: up and down, symmetric about the top at 2 s." },
       ],
+      hint: "Put $s = 15$ m into $s = ut - \\tfrac12 g t^2$ and solve the quadratic in $t$. How many positive roots does it have, and what does each mean?",
+    },
+    {
+      type: "numeric",
+      id: "mfe1-5-q6",
+      variant: "practice",
+      question: "A helicopter rising at 5 m/s releases a packet when it is 30 m above the ground. Taking $g = 10$ m/s², how long does the packet take to land? Give your answer in seconds.",
+      answer: 3,
+      unit: "s",
+      hint: "The packet leaves with the helicopter's velocity. Up positive, origin at the release point: the ground is at $y = -30$ m.",
+      solution: "$u = +5$ m/s, $a = -10$ m/s²: $-30 = 5t - 5t^2 \\Rightarrow t^2 - t - 6 = 0 \\Rightarrow (t - 3)(t + 2) = 0$.\n\nReject $t = -2$ s: the packet lands at $t = 3$ s.",
+      commonMistakes: [
+        { answer: 2.449, tolerance: 0.01, feedback: "That is $\\sqrt6$: it treats the packet as dropped from rest. It starts with the helicopter's 5 m/s upward." },
+        { answer: 2, feedback: "That is the magnitude of the rejected root, from the wrong sign convention. Check: $5(2) - 5(4) = -10 \\ne -30$." },
+        { answer: 6, feedback: "That is the product of the roots, not a root." },
+      ],
     },
     {
       type: "quiz",
-      id: "mfe1-5-q6",
+      id: "mfe1-5-q7",
       variant: "practice",
-      question: "A helicopter rising at 5 m/s releases a packet when it is 30 m above the ground. How long does the packet take to land?",
+      multiple: true,
+      question: "A ball is thrown straight up at 20 m/s ($g = 10$ m/s², no air resistance). Select all the statements that are true.",
       options: [
-        { text: "$3$ s", correct: true, feedback: "$-30 = 5t - 5t^2 \\Rightarrow t^2 - t - 6 = 0 \\Rightarrow (t - 3)(t + 2) = 0$, so $t = 3$ s." },
-        { text: "$\\sqrt6 \\approx 2.45$ s", feedback: "That treats the packet as dropped from rest. It starts with the helicopter's 5 m/s upward." },
-        { text: "$2$ s", feedback: "That is the magnitude of the rejected root, from the wrong sign convention. Check: $5(2) - 5(4) = -10 \\ne -30$." },
-        { text: "$6$ s", feedback: "That is the product of the roots, not a root." },
+        { text: "It rises 20 m above the launch point.", correct: true, feedback: "$H = \\frac{u^2}{2g} = \\frac{400}{20} = 20$ m." },
+        { text: "Its acceleration is zero at the highest point.", feedback: "Only the velocity is zero there. The acceleration is $g$ downward throughout the flight." },
+        { text: "It is back at the launch point after 4 s, moving down at 20 m/s.", correct: true, feedback: "$T = \\frac{2u}{g} = 4$ s, and by symmetry it returns with the speed it left with." },
+        { text: "At 15 m above the launch point its speed is 10 m/s, both going up and coming down.", correct: true, feedback: "$v^2 = u^2 - 2gy = 400 - 300 = 100$, fixed by the height alone: 10 m/s up, then 10 m/s down." },
+        { text: "It takes longer to come down than to go up.", feedback: "Without air resistance the motion is symmetric: 2 s up and 2 s down." },
       ],
+      hint: "Test each statement with the constant-$a$ equations ($v^2 = u^2 - 2gh$ for heights and speeds, $s = ut - \\tfrac12 gt^2$ for times) and the symmetry of an upward throw.",
     },
   ]),
 };
@@ -807,6 +1113,7 @@ const lesson06: LessonSeed = {
       content:
         "A lift starts smoothly, a boat coasts to a stop in water, a mass bobs on a spring. In none of these is the acceleration constant, so the equations of 1.4 are useless. But the definitions never change: $v$ is the slope of $x$, $a$ is the slope of $v$. Calculus is simply the machine that computes slopes and areas exactly.",
     },
+    { type: "heading", text: "Differentiating down, integrating up" },
     {
       type: "callout",
       variant: "definition",
@@ -814,10 +1121,26 @@ const lesson06: LessonSeed = {
       content:
         "Down (differentiate): $v = \\dfrac{dx}{dt}$, $a = \\dfrac{dv}{dt} = \\dfrac{d^2x}{dt^2}$.\nUp (integrate): $v = u + \\displaystyle\\int_0^t a\\,dt$, $x = x_0 + \\displaystyle\\int_0^t v\\,dt$.\nWhen $a$ depends on position, use the chain rule: $a = \\dfrac{dv}{dt} = \\dfrac{dv}{dx}\\dfrac{dx}{dt} = v\\dfrac{dv}{dx}$.",
     },
+    { type: "heading", text: "Full analysis of a cubic motion" },
+    {
+      type: "worked-example",
+      id: "mfe1-6-we1",
+      title: "Worked example 1: a full analysis",
+      problem:
+        "A particle moves with $x(t) = t^3 - 6t^2 + 9t$ (metres, seconds). Find its velocity, acceleration, turning points, and the distance covered in the first 4 s.",
+      steps: [
+        { text: "Differentiate: $v = 3t^2 - 12t + 9 = 3(t - 1)(t - 3)$ and $a = 6t - 12$." },
+        { text: "Turning points where $v = 0$: $t = 1$ s and $t = 3$ s. *Why this step:* a particle can only reverse where its velocity passes through zero; those instants split the path into one-way legs." },
+        { text: "Positions: $x(0) = 0$, $x(1) = 1 - 6 + 9 = 4$, $x(3) = 27 - 54 + 27 = 0$, $x(4) = 64 - 96 + 36 = 4$ m." },
+        { text: "Legs: $0 \\to 4$ (4 m), $4 \\to 0$ (4 m), $0 \\to 4$ (4 m). Distance $= 12$ m, displacement $= 4$ m." },
+        { text: "$a = 0$ at $t = 2$ s: there the velocity is at its most negative, $v(2) = 12 - 24 + 9 = -3$ m/s." },
+      ],
+      answer: "$v = 3(t - 1)(t - 3)$, $a = 6t - 12$; turning points at 1 s and 3 s; distance in 4 s $= 12$ m.",
+    },
     {
       type: "text",
       content:
-        "**Worked example 1 (a full analysis).** A particle moves with $x(t) = t^3 - 6t^2 + 9t$ (metres, seconds). Find its velocity, acceleration, turning points, and the distance covered in the first 4 s.\n\n1. Differentiate: $v = 3t^2 - 12t + 9 = 3(t - 1)(t - 3)$ and $a = 6t - 12$.\n2. Turning points where $v = 0$: $t = 1$ s and $t = 3$ s. *Why this step:* a particle can only reverse where its velocity passes through zero; those instants split the path into one-way legs.\n3. Positions: $x(0) = 0$, $x(1) = 1 - 6 + 9 = 4$, $x(3) = 27 - 54 + 27 = 0$, $x(4) = 64 - 96 + 36 = 4$ m.\n4. Legs: $0 \\to 4$ (4 m), $4 \\to 0$ (4 m), $0 \\to 4$ (4 m). Distance $= 12$ m, displacement $= 4$ m.\n5. $a = 0$ at $t = 2$ s: there the velocity is at its most negative, $v(2) = 12 - 24 + 9 = -3$ m/s.\n\nIn the explorer, $x$ on the horizontal axis stands for $t$, and the curve is the position $x(t)$. Drag the point to $t = 1$ and $t = 3$.",
+        "In the explorer, $x$ on the horizontal axis stands for $t$, and the curve is the position $x(t)$. Drag the point to $t = 1$ and $t = 3$.",
     },
     {
       type: "interactive",
@@ -851,20 +1174,47 @@ const lesson06: LessonSeed = {
       content:
         "What you should have seen: at $c = 0$ the solid $v$ curve crosses zero exactly at $t = 1$ and $t = 3$, beneath the peak and trough of $x$. It is negative between them, precisely where $x$ is falling. Move $c$ away from 0 and the zeros of $v$ slide off the turning points: only the true derivative lines them up.",
     },
+    { type: "heading", text: "When $a$ depends on $t$, $v$ or $x$" },
     {
-      type: "text",
-      content:
-        "**Worked example 2** (integrating $a(t)$). $a = 6t$ m/s², with $v = 2$ m/s and $x = 0$ at $t = 0$. Find $v$ and $x$ at $t = 2$ s.\n\n1. $v = 2 + \\int_0^t 6t\\,dt = 2 + 3t^2$. *Why this step:* the initial velocity is the constant of integration; without it you would get the change in $v$, not $v$.\n2. $x = 0 + \\int_0^t (2 + 3t^2)\\,dt = 2t + t^3$.\n3. At $t = 2$: $v = 14$ m/s and $x = 12$ m. (The constant-$a$ formula $s = ut + \\frac12 at^2$ with $a(2) = 12$ would give $28$ m, badly wrong.)",
+      type: "worked-example",
+      id: "mfe1-6-we2",
+      title: "Worked example 2: integrating $a(t)$",
+      problem:
+        "$a = 6t$ m/s², with $v = 2$ m/s and $x = 0$ at $t = 0$. Find $v$ and $x$ at $t = 2$ s.",
+      steps: [
+        { text: "$v = 2 + \\int_0^t 6t\\,dt = 2 + 3t^2$. *Why this step:* the initial velocity is the constant of integration; without it you would get the change in $v$, not $v$." },
+        { text: "$x = 0 + \\int_0^t (2 + 3t^2)\\,dt = 2t + t^3$." },
+        { text: "At $t = 2$: $v = 14$ m/s and $x = 12$ m. (The constant-$a$ formula $s = ut + \\frac12 at^2$ with $a(2) = 12$ would give $28$ m, badly wrong.)" },
+      ],
+      answer: "$v = 14$ m/s and $x = 12$ m at $t = 2$ s.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3** ($a$ as a function of $v$: $a = -kv$). A motor boat cuts its engine at speed $u$; water drag gives $a = -kv$.\n\n1. $\\dfrac{dv}{dt} = -kv \\Rightarrow \\dfrac{dv}{v} = -k\\,dt$. *Why this step:* separating the variables puts all the $v$'s on one side and all the $t$'s on the other, so each side can be integrated.\n2. $\\displaystyle\\int_u^v \\frac{dv}{v} = -k\\int_0^t dt \\Rightarrow \\ln\\frac vu = -kt \\Rightarrow v = ue^{-kt}$.\n3. Integrate again: $x = \\displaystyle\\int_0^t ue^{-kt}\\,dt = \\frac uk\\left(1 - e^{-kt}\\right)$.\n4. As $t \\to \\infty$, $x \\to \\dfrac uk$. The boat never quite stops in finite time, yet it travels only a finite distance.\n5. Same result via $v\\frac{dv}{dx} = -kv$: $\\frac{dv}{dx} = -k$, so $v = u - kx$, which reaches zero at $x = \\frac uk$. ✓",
+      type: "worked-example",
+      id: "mfe1-6-we3",
+      title: "Worked example 3: $a$ as a function of $v$: $a = -kv$",
+      problem:
+        "A motor boat cuts its engine at speed $u$; water drag gives $a = -kv$. Find $v(t)$, $x(t)$ and the total distance it coasts.",
+      steps: [
+        { text: "$\\dfrac{dv}{dt} = -kv \\Rightarrow \\dfrac{dv}{v} = -k\\,dt$. *Why this step:* separating the variables puts all the $v$'s on one side and all the $t$'s on the other, so each side can be integrated." },
+        { text: "$\\displaystyle\\int_u^v \\frac{dv}{v} = -k\\int_0^t dt \\Rightarrow \\ln\\frac vu = -kt \\Rightarrow v = ue^{-kt}$." },
+        { text: "Integrate again: $x = \\displaystyle\\int_0^t ue^{-kt}\\,dt = \\frac uk\\left(1 - e^{-kt}\\right)$." },
+        { text: "As $t \\to \\infty$, $x \\to \\dfrac uk$. The boat never quite stops in finite time, yet it travels only a finite distance." },
+        { text: "Same result via $v\\frac{dv}{dx} = -kv$: $\\frac{dv}{dx} = -k$, so $v = u - kx$, which reaches zero at $x = \\frac uk$. ✓" },
+      ],
+      answer: "$v = ue^{-kt}$, $x = \\dfrac uk\\left(1 - e^{-kt}\\right)$; total distance $\\dfrac uk$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4** ($a$ as a function of $x$: $a = -\\omega^2 x$). A particle attached to a spring has $a = -\\omega^2x$ and is released from rest at $x = A$. Find $v$ as a function of $x$.\n\n1. $a$ depends on $x$, so use $a = v\\dfrac{dv}{dx}$: $v\\,dv = -\\omega^2 x\\,dx$. *Why this step:* $a$ is given in terms of $x$, so we need an equation linking $v$ and $x$ directly, with $t$ eliminated.\n2. Integrate from ($x = A$, $v = 0$): $\\tfrac12 v^2 = -\\tfrac12\\omega^2(x^2 - A^2)$.\n3. $v^2 = \\omega^2(A^2 - x^2)$. The speed is greatest ($\\omega A$) at $x = 0$ and zero at $x = \\pm A$: the particle oscillates. This is simple harmonic motion, the subject of the Oscillations course.",
+      type: "worked-example",
+      id: "mfe1-6-we4",
+      title: "Worked example 4: $a$ as a function of $x$: $a = -\\omega^2 x$",
+      problem:
+        "A particle attached to a spring has $a = -\\omega^2x$ and is released from rest at $x = A$. Find $v$ as a function of $x$.",
+      steps: [
+        { text: "$a$ depends on $x$, so use $a = v\\dfrac{dv}{dx}$: $v\\,dv = -\\omega^2 x\\,dx$. *Why this step:* $a$ is given in terms of $x$, so we need an equation linking $v$ and $x$ directly, with $t$ eliminated." },
+        { text: "Integrate from ($x = A$, $v = 0$): $\\tfrac12 v^2 = -\\tfrac12\\omega^2(x^2 - A^2)$." },
+        { text: "$v^2 = \\omega^2(A^2 - x^2)$. The speed is greatest ($\\omega A$) at $x = 0$ and zero at $x = \\pm A$: the particle oscillates. This is simple harmonic motion, the subject of the Oscillations course." },
+      ],
+      answer: "$v^2 = \\omega^2(A^2 - x^2)$, greatest speed $\\omega A$ at $x = 0$.",
     },
     {
       type: "callout",
@@ -880,16 +1230,20 @@ const lesson06: LessonSeed = {
       content:
         "It is the same $a = \\frac{dv}{dt}$, rewritten with the chain rule: $\\frac{dv}{dt} = \\frac{dv}{dx}\\cdot\\frac{dx}{dt} = \\frac{dv}{dx}\\cdot v$. It is just the convenient form when $a$ is known as a function of position.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mfe1-6-q1",
       variant: "practice",
-      question: "A particle moves with $x = 2t^3 - 3t^2$ (SI). What is its acceleration at $t = 2$ s?",
-      options: [
-        { text: "$12$ m/s²", feedback: "That is $v(2) = 24 - 12$. Differentiate once more." },
-        { text: "$4$ m/s²", feedback: "That is $x(2) = 16 - 12$, the position." },
-        { text: "$18$ m/s²", correct: true, feedback: "$v = 6t^2 - 6t$, $a = 12t - 6 = 18$ m/s²." },
-        { text: "$24$ m/s²", feedback: "You dropped the $-3t^2$ term, whose second derivative is $-6$." },
+      question: "A particle moves with $x = 2t^3 - 3t^2$ (SI). What is its acceleration at $t = 2$ s? Give your answer in m/s².",
+      answer: 18,
+      unit: "m/s²",
+      hint: "Differentiate twice.",
+      solution: "$v = \\frac{dx}{dt} = 6t^2 - 6t$ and $a = \\frac{dv}{dt} = 12t - 6$.\n\nAt $t = 2$ s: $a = 24 - 6 = 18$ m/s².",
+      commonMistakes: [
+        { answer: 12, feedback: "That is $v(2) = 24 - 12$. Differentiate once more." },
+        { answer: 4, feedback: "That is $x(2) = 16 - 12$, the position." },
+        { answer: 24, feedback: "You dropped the $-3t^2$ term, whose second derivative is $-6$." },
       ],
     },
     {
@@ -903,6 +1257,7 @@ const lesson06: LessonSeed = {
         { text: "$8$ m", correct: true, feedback: "It turns at $t = 1$ ($x = 4$): 4 m out, 4 m back." },
         { text: "$12$ m", feedback: "That is the distance up to $t = 4$ s." },
       ],
+      hint: "Distance needs the turning points: solve $v = \\frac{dx}{dt} = 0$, then add the magnitudes of the displacement on each leg (Worked example 1).",
     },
     {
       type: "quiz",
@@ -918,15 +1273,17 @@ const lesson06: LessonSeed = {
       hint: "Use $a = v\\frac{dv}{dx}$ and integrate from $x = 0$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mfe1-6-q4",
       variant: "practice",
-      question: "A body moving at 10 m/s has retardation $a = -2v$ (SI). How far does it travel before (effectively) stopping?",
-      options: [
-        { text: "$25$ m", feedback: "That is $u^2/2k$, the constant-retardation formula with $a = 2$. Here $a$ changes with $v$." },
-        { text: "Infinite, since it never stops", feedback: "It never stops in finite **time**, but the distance converges to $u/k = 5$ m." },
-        { text: "$20$ m", feedback: "That is $u \\cdot k$. Distance is $u/k$." },
-        { text: "$5$ m", correct: true, feedback: "$v\\frac{dv}{dx} = -2v \\Rightarrow v = 10 - 2x$, zero at $x = 5$ m." },
+      question: "A body moving at 10 m/s has retardation given by $a = -2v$ (SI). It never stops in finite time, but the distance it travels approaches a limit. What is that total distance? Give your answer in metres.",
+      answer: 5,
+      unit: "m",
+      hint: "$a$ depends on $v$ and you want a distance: use $a = v\\frac{dv}{dx}$.",
+      solution: "$v\\frac{dv}{dx} = -2v \\Rightarrow \\frac{dv}{dx} = -2 \\Rightarrow v = 10 - 2x$.\n\nThe speed reaches zero at $x = 5$ m, which is $u/k$. (In time, $v = 10e^{-2t}$ never quite reaches zero, but the distance converges to 5 m.)",
+      commonMistakes: [
+        { answer: 25, feedback: "That is $u^2/2k$, the constant-retardation formula with $a = 2$. Here $a$ changes with $v$." },
+        { answer: 20, feedback: "That is $u \\cdot k$. Distance is $u/k$." },
       ],
     },
     {
@@ -939,6 +1296,22 @@ const lesson06: LessonSeed = {
         { text: "It removes $t$, giving a separable equation in $v$ and $x$.", correct: true, feedback: "With $a(x)$ known, $v\\,dv = a(x)\\,dx$ integrates directly." },
         { text: "Because $\\frac{dv}{dt}$ is undefined when $a$ depends on $x$.", feedback: "$\\frac{dv}{dt}$ is perfectly defined; it is just hard to integrate when $a$ is a function of $x$." },
       ],
+      hint: "Think about what you need to separate the variables when $a$ is a function of $x$: the chain rule $\\frac{dv}{dt} = \\frac{dv}{dx}\\frac{dx}{dt}$ changes which variables appear.",
+    },
+    {
+      type: "quiz",
+      id: "mfe1-6-q6",
+      variant: "practice",
+      multiple: true,
+      question: "A particle moves with $x = t^3 - 6t^2 + 9t$ (SI), as in worked example 1. Select all the statements that are true.",
+      options: [
+        { text: "It is momentarily at rest at $t = 1$ s and at $t = 3$ s.", correct: true, feedback: "$v = 3(t - 1)(t - 3)$ vanishes at both instants: these are the turning points." },
+        { text: "Its acceleration is zero at $t = 2$ s.", correct: true, feedback: "$a = 6t - 12 = 0$ at $t = 2$ s, where the velocity is at its most negative." },
+        { text: "It slows down throughout $1 < t < 3$ s.", feedback: "For $1 < t < 2$, $v < 0$ and $a < 0$: same signs, so it speeds up. It slows down only for $2 < t < 3$." },
+        { text: "Its greatest speed between $t = 1$ s and $t = 3$ s is 3 m/s.", correct: true, feedback: "The speed peaks where $a = 0$: $|v(2)| = |12 - 24 + 9| = 3$ m/s." },
+        { text: "Its displacement in the first 4 s is 12 m.", feedback: "12 m is the distance. The displacement is $x(4) - x(0) = 4$ m." },
+      ],
+      hint: "Get $v(t)$ and $a(t)$ first, then use the speeding-up rule.",
     },
   ]),
 };
@@ -971,29 +1344,36 @@ const lessonMastery: LessonSeed = {
         { text: "$13.3$ km/h", feedback: "That is the equal-distance harmonic mean of 10 and 20. Here the distances are unequal." },
         { text: "$30$ km/h", feedback: "Speeds do not add." },
       ],
+      hint: "Lesson 1.1: unequal distances, so average speed is total distance over total time, not the mean of the speeds.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mfe1-7-q2",
       variant: "mastery",
-      question: "A body starting from rest covers 10 m during the 3rd second. Its acceleration is",
-      options: [
-        { text: "$\\frac{20}{9}$ m/s²", feedback: "That uses $s = \\frac12at^2$ with $s = 10$, $t = 3$, treating 10 m as the total in 3 s." },
-        { text: "$\\frac{10}{3}$ m/s²", feedback: "Use $(2n - 1) = 5$, not $2n = 6$." },
-        { text: "$4$ m/s²", correct: true, feedback: "$s_3 = \\frac a2(2 \\cdot 3 - 1) = \\frac{5a}{2} = 10 \\Rightarrow a = 4$ m/s²." },
-        { text: "$2$ m/s²", feedback: "Recompute: $\\frac a2 \\times 5 = 10$." },
+      question: "A body starting from rest with uniform acceleration covers 10 m during the 3rd second. What is its acceleration? Give your answer in m/s².",
+      answer: 4,
+      unit: "m/s²",
+      hint: "The 3rd second runs from $t = 2$ s to $t = 3$ s: use $s_n = u + \\frac a2(2n - 1)$.",
+      solution: "$s_3 = 0 + \\frac a2(2 \\cdot 3 - 1) = \\frac{5a}{2} = 10 \\Rightarrow a = 4$ m/s².\n\nCheck: $s(3) - s(2) = 18 - 8 = 10$ m.",
+      commonMistakes: [
+        { answer: 2.222, tolerance: 0.01, feedback: "That is $\\frac{20}{9}$: it uses $s = \\frac12at^2$ with $s = 10$, $t = 3$, treating 10 m as the total in 3 s." },
+        { answer: 3.333, tolerance: 0.01, feedback: "That is $\\frac{10}{3}$. Use $(2n - 1) = 5$, not $2n = 6$." },
+        { answer: 2, feedback: "You dropped the $\\frac12$: $\\frac a2 \\times 5 = 10$ gives $a = 4$." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mfe1-7-q3",
       variant: "mastery",
-      question: "A driver at 30 m/s has a reaction time of 0.4 s, and the brakes give $6$ m/s² of retardation. What is the total stopping distance?",
-      options: [
-        { text: "$75$ m", feedback: "That is the braking distance only. The car moves $30 \\times 0.4 = 12$ m before the brakes act." },
-        { text: "$87$ m", correct: true, feedback: "$12$ m during the reaction, plus $\\frac{900}{12} = 75$ m braking." },
-        { text: "$162$ m", feedback: "You used $u^2/|a|$ without the 2. Braking distance is $\\frac{u^2}{2|a|} = 75$ m." },
-        { text: "$81$ m", feedback: "The reaction phase is at full speed, $30 \\times 0.4 = 12$ m, not $\\frac12 \\times 30 \\times 0.4 = 6$ m." },
+      question: "A driver at 30 m/s has a reaction time of 0.4 s, and the brakes give $6$ m/s² of retardation. What is the total stopping distance? Give your answer in metres.",
+      answer: 87,
+      unit: "m",
+      hint: "Two stages: uniform motion during the reaction time, then constant retardation.",
+      solution: "Reaction: the brakes are not yet on, so the car moves $30 \\times 0.4 = 12$ m.\n\nBraking: $s = \\frac{u^2}{2|a|} = \\frac{900}{12} = 75$ m.\n\nTotal: $12 + 75 = 87$ m.",
+      commonMistakes: [
+        { answer: 75, feedback: "That is the braking distance only. The car moves $30 \\times 0.4 = 12$ m before the brakes act." },
+        { answer: 162, feedback: "You used $u^2/|a|$ without the 2. Braking distance is $\\frac{u^2}{2|a|} = 75$ m." },
+        { answer: 81, feedback: "The reaction phase is at full speed, $30 \\times 0.4 = 12$ m, not $\\frac12 \\times 30 \\times 0.4 = 6$ m." },
       ],
     },
     {
@@ -1007,6 +1387,7 @@ const lessonMastery: LessonSeed = {
         { text: "$2$ s", feedback: "That is the time to return to roof level. It still has 15 m to fall." },
         { text: "$3$ s", correct: true, feedback: "$-15 = 10t - 5t^2 \\Rightarrow t^2 - 2t - 3 = 0 \\Rightarrow t = 3$ s." },
       ],
+      hint: "Throws from a height (lesson 1.5): mind the sign of the final displacement.",
     },
     {
       type: "quiz",
@@ -1019,6 +1400,7 @@ const lessonMastery: LessonSeed = {
         { text: "After 2 s, 50 m above the ground", feedback: "They do not meet halfway; B slows while A speeds up. Use the relative velocity 25 m/s." },
         { text: "After 5 s, at ground level", feedback: "B would be back at the ground at 5 s, but they meet earlier." },
       ],
+      hint: "Both balls have the same acceleration $g$. How does the gap between them change with time?",
     },
     {
       type: "quiz",
@@ -1031,18 +1413,20 @@ const lessonMastery: LessonSeed = {
         { text: "$1 : 1$", feedback: "The body speeds up, so it covers more in the second interval." },
         { text: "$1 : 3$", correct: true, feedback: "$s(3) = 45$ m, $s(6) - s(3) = 180 - 45 = 135$ m: $45 : 135 = 1 : 3$." },
       ],
+      hint: "Distances fallen from rest in successive equal times (lesson 1.5).",
     },
     {
       type: "quiz",
       id: "mfe1-7-q7",
       variant: "mastery",
-      question: "A particle moves with $x = t^3 - 6t^2 + 9t$ (SI). What distance does it cover in the first 4 s?",
+      question: "A particle moves with $x = t^3 - 9t^2 + 24t$ (SI). What distance does it cover in the first 5 s?",
       options: [
-        { text: "$12$ m", correct: true, feedback: "Turning points at $t = 1$ ($x = 4$) and $t = 3$ ($x = 0$): $4 + 4 + 4 = 12$ m." },
-        { text: "$4$ m", feedback: "That is the displacement $x(4) - x(0)$." },
-        { text: "$8$ m", feedback: "That covers only up to $t = 3$ s; from 3 to 4 s it goes another 4 m." },
-        { text: "$20$ m", feedback: "Check $x(3) = 27 - 54 + 27 = 0$, not negative." },
+        { text: "$28$ m", correct: true, feedback: "$v = 3(t - 2)(t - 4)$, so it turns at $t = 2$ ($x = 20$) and $t = 4$ ($x = 16$), and $x(5) = 20$: $20 + 4 + 4 = 28$ m." },
+        { text: "$20$ m", feedback: "That is the displacement $x(5) - x(0)$." },
+        { text: "$24$ m", feedback: "That covers only up to $t = 4$ s; from 4 to 5 s it goes another 4 m." },
+        { text: "$56$ m", feedback: "You added the positions $x(2) + x(4) + x(5)$. Add the distances between them instead." },
       ],
+      hint: "Distance is not displacement: find when the particle turns round in the first 5 s and add the distance on each leg.",
     },
     {
       type: "quiz",
@@ -1055,6 +1439,7 @@ const lessonMastery: LessonSeed = {
         { text: "$40$ m", correct: true, feedback: "$v\\frac{dv}{dx} = -0.5v \\Rightarrow v = 20 - 0.5x$, which reaches zero at $x = 40$ m." },
         { text: "It coasts forever.", feedback: "It never stops in finite time, but the total distance is finite: $u/k$." },
       ],
+      hint: "Acceleration as a function of velocity (lesson 1.6).",
     },
     {
       type: "quiz",
@@ -1067,19 +1452,22 @@ const lessonMastery: LessonSeed = {
         { text: "$4$ m", correct: true, feedback: "$v^2 = 144 - 9x^2$, zero when $x^2 = 16$, so $x = 4$ m." },
         { text: "$8$ m", feedback: "Recompute: $9x^2 = 144$ gives $x^2 = 16$." },
       ],
+      hint: "Acceleration as a function of position (lesson 1.6).",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mfe1-7-q10",
       variant: "mastery",
-      question: "A bullet moving through air has $a = -kv^2$ with $k = 0.01$ m⁻¹. Over what distance does its speed halve? ($\\ln 2 \\approx 0.693$)",
-      options: [
-        { text: "$69.3$ m", correct: true, feedback: "$v\\frac{dv}{dx} = -kv^2 \\Rightarrow \\frac{dv}{v} = -k\\,dx \\Rightarrow v = ue^{-kx}$. Half speed when $kx = \\ln 2$: $x = 69.3$ m, independent of $u$." },
-        { text: "$50$ m", feedback: "That assumes the speed falls linearly with distance. With $a \\propto v^2$ it falls exponentially." },
-        { text: "$100$ m", feedback: "That is $1/k$, where the speed has dropped to $u/e$, not $u/2$." },
-        { text: "It depends on the initial speed.", feedback: "Surprisingly not: $v = ue^{-kx}$, so the halving distance $\\frac{\\ln 2}{k}$ has no $u$ in it." },
-      ],
+      question: "A bullet moving through air has $a = -kv^2$ with $k = 0.01$ m⁻¹. Over what distance does its speed halve? ($\\ln 2 \\approx 0.693$) Give your answer in metres.",
+      answer: 69.3,
+      relTolerance: 0.01,
+      unit: "m",
       hint: "Use $a = v\\frac{dv}{dx}$ and separate the variables.",
+      solution: "$v\\frac{dv}{dx} = -kv^2 \\Rightarrow \\frac{dv}{v} = -k\\,dx \\Rightarrow v = ue^{-kx}$.\n\nHalf speed when $e^{-kx} = \\frac12$, i.e. $kx = \\ln 2$: $x = \\frac{0.693}{0.01} = 69.3$ m. Surprisingly, this does not depend on the initial speed $u$.",
+      commonMistakes: [
+        { answer: 50, feedback: "That assumes the speed falls linearly with distance. With $a \\propto v^2$ it falls exponentially." },
+        { answer: 100, feedback: "That is $1/k$, where the speed has dropped to $u/e$, not $u/2$." },
+      ],
     },
     {
       type: "quiz",
@@ -1092,18 +1480,37 @@ const lessonMastery: LessonSeed = {
         { text: "It depends on the lift's speed.", feedback: "Relative to the lift the bolt starts from rest whatever the lift's speed; only accelerations matter." },
         { text: "$\\sqrt{0.5} \\approx 0.71$ s", correct: true, feedback: "Relative to the lift, the bolt starts at rest and the floor rushes up to meet it: relative acceleration $g + a = 12$ m/s². $3 = \\frac12(12)t^2 \\Rightarrow t^2 = 0.5$." },
       ],
+      hint: "Measure everything relative to the lift floor: what are the bolt's initial velocity and acceleration relative to it?",
+    },
+    {
+      type: "numeric",
+      id: "mfe1-7-q12",
+      variant: "mastery",
+      question: "A particle starts from rest. Its acceleration is $2$ m/s² for 5 s, then $-1$ m/s² until it stops. What is its total displacement? Give your answer in metres.",
+      answer: 75,
+      unit: "m",
+      hint: "Sketch the $v$-$t$ graph: it is a single triangle.",
+      solution: "After 5 s, $v_{\\max} = 2 \\times 5 = 10$ m/s. At $-1$ m/s² it then takes 10 s to stop, so the motion lasts 15 s.\n\nArea of the $v$-$t$ triangle $= \\frac12 \\times 15 \\times 10 = 75$ m.",
+      commonMistakes: [
+        { answer: 25, feedback: "That is only the accelerating phase, $\\frac12 \\times 5 \\times 10$." },
+        { answer: 50, feedback: "That is only the slowing phase, $\\frac12 \\times 10 \\times 10$." },
+        { answer: 150, feedback: "That is base × height without the $\\frac12$ for the triangle." },
+      ],
     },
     {
       type: "quiz",
-      id: "mfe1-7-q12",
+      id: "mfe1-7-q13",
       variant: "mastery",
-      question: "A particle starts from rest. Its acceleration is $2$ m/s² for 5 s, then $-1$ m/s² until it stops. What is its total displacement?",
+      multiple: true,
+      question: "A particle's $v$-$t$ graph is a straight line from $v = +12$ m/s at $t = 0$ to $v = -12$ m/s at $t = 6$ s. Select all the statements that are true.",
       options: [
-        { text: "$25$ m", feedback: "That is only the accelerating phase, $\\frac12 \\times 5 \\times 10$." },
-        { text: "$75$ m", correct: true, feedback: "$v_{\\max} = 10$ m/s. It then takes 10 s to stop. Area of the $v$-$t$ triangle $= \\frac12 \\times 15 \\times 10 = 75$ m." },
-        { text: "$50$ m", feedback: "That is only the slowing phase, $\\frac12 \\times 10 \\times 10$." },
-        { text: "$150$ m", feedback: "That is base × height without the $\\frac12$ for the triangle." },
+        { text: "Its acceleration is $-4$ m/s² throughout.", correct: true, feedback: "Slope $= \\frac{-12 - 12}{6} = -4$ m/s², the same at every instant of a straight line." },
+        { text: "It turns round at $t = 3$ s.", correct: true, feedback: "The line crosses $v = 0$ halfway, at $t = 3$ s: the velocity changes sign there." },
+        { text: "Its displacement over the 6 s is zero.", correct: true, feedback: "The triangle above the axis ($+18$ m) and the one below ($-18$ m) cancel." },
+        { text: "The distance it covers in the 6 s is 18 m.", feedback: "That is one triangle. Distance counts both as positive: $18 + 18 = 36$ m." },
+        { text: "Its acceleration is zero at $t = 3$ s.", feedback: "Only the velocity is zero at $t = 3$ s. The slope of the $v$-$t$ line is still $-4$ m/s² there." },
       ],
+      hint: "Lesson 1.3: slope of the $v$-$t$ graph for acceleration, signed area for displacement, unsigned area for distance.",
     },
     {
       type: "callout",

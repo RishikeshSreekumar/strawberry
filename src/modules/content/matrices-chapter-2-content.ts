@@ -61,6 +61,7 @@ const lesson01: LessonSeed = {
           "The shaded parallelogram is the image of the unit square, and its area is the determinant readout. Try the presets: the rotation and the shear keep the area at 1, the stretch multiplies it by 6, and the two flips change the shading colour.",
       },
     },
+    { type: "heading", text: "Boxing the parallelogram to find $ad - bc$" },
     {
       type: "text",
       content:
@@ -89,6 +90,7 @@ const lesson01: LessonSeed = {
       content:
         "$\\det A = |A| = \\begin{vmatrix}a&b\\\\c&d\\end{vmatrix} = ad - bc$.\n\nIt is a **number**, not a matrix. $|\\det A|$ is the factor by which $A$ scales every area. Its **sign** says whether $A$ keeps the plane's orientation (positive) or flips it over (negative).",
     },
+    { type: "heading", text: "Negative determinants flip orientation" },
     {
       type: "text",
       content:
@@ -101,20 +103,55 @@ const lesson01: LessonSeed = {
       content:
         "The determinant is a **signed** area. A negative value is not a mistake. It gives two pieces of information together: the area factor $|\\det A|$, and the fact that the plane was flipped. When a problem asks for an area, take the modulus.",
     },
+    { type: "heading", text: "Every shape scales by $|\\det A|$" },
     {
       type: "text",
       content:
         "**Why every shape scales by the same factor.** Fill any shape with tiny grid squares. Each square becomes a copy of the same small parallelogram, scaled by $|\\det A|$. So the total area is scaled by $|\\det A|$ too, whether the shape is a triangle, a circle or a map outline.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** $A = \\begin{pmatrix}3&1\\\\1&2\\end{pmatrix}$.\n\n1. $\\det A = 3\\cdot2 - 1\\cdot1 = 5$.\n2. The unit square (area 1) becomes a parallelogram of area 5.\n3. A square of side 2 (area 4) becomes a parallelogram of area $4 \\times 5 = 20$.\n4. The unit circle (area $\\pi$) becomes an ellipse of area $5\\pi$.\n5. $5 > 0$, so orientation is kept.",
+      type: "worked-example",
+      id: "mx2-1-we1",
+      title: "Worked example 1",
+      problem:
+        "$A = \\begin{pmatrix}3&1\\\\1&2\\end{pmatrix}$. Find $\\det A$ and say what $A$ does to areas (the unit square, a square of side 2, the unit circle) and to orientation.",
+      steps: [
+        {
+          text: "$\\det A = 3\\cdot2 - 1\\cdot1 = 5$.",
+        },
+        {
+          text: "The unit square (area 1) becomes a parallelogram of area 5.",
+        },
+        {
+          text: "A square of side 2 (area 4) becomes a parallelogram of area $4 \\times 5 = 20$.",
+        },
+        {
+          text: "The unit circle (area $\\pi$) becomes an ellipse of area $5\\pi$.",
+        },
+        {
+          text: "$5 > 0$, so orientation is kept.",
+        },
+      ],
+      answer: "$\\det A = 5$: every area is multiplied by 5 and orientation is kept.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2.** $B = \\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}$.\n\n1. $\\det B = 1\\cdot4 - 2\\cdot3 = 4 - 6 = -2$.\n2. Areas are doubled: $|{-2}| = 2$.\n3. The sign is negative, so the plane is flipped. Column 1 is $(1, 3)$ and column 2 is $(2, 4)$. Going from $(1,3)$ to $(2,4)$ turns clockwise, the opposite of $\\hat{\\imath} \\to \\hat{\\jmath}$.",
+      type: "worked-example",
+      id: "mx2-1-we2",
+      title: "Worked example 2",
+      problem:
+        "$B = \\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}$. Find $\\det B$ and say what $B$ does to areas and orientation.",
+      steps: [
+        {
+          text: "$\\det B = 1\\cdot4 - 2\\cdot3 = 4 - 6 = -2$.",
+        },
+        {
+          text: "Areas are doubled: $|{-2}| = 2$.",
+        },
+        {
+          text: "The sign is negative, so the plane is flipped. Column 1 is $(1, 3)$ and column 2 is $(2, 4)$. Going from $(1,3)$ to $(2,4)$ turns clockwise, the opposite of $\\hat{\\imath} \\to \\hat{\\jmath}$.",
+        },
+      ],
+      answer: "$\\det B = -2$: areas double and the plane is flipped.",
     },
     {
       type: "table",
@@ -127,19 +164,59 @@ const lesson01: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (application): printing a warped sticker.** A design app applies $T = \\begin{pmatrix}2&-1\\\\1&3\\end{pmatrix}$ to a rectangular sticker 4 cm wide and 3 cm tall. How much vinyl does the warped sticker need?\n\n1. Original area: $4 \\times 3 = 12\\ \\text{cm}^2$.\n2. $\\det T = 2\\cdot3 - (-1)\\cdot1 = 6 + 1 = 7$. *Why this step:* the determinant is the one number that tells us how every area changes, so we never need the coordinates of the new corners.\n3. New area: $12 \\times |7| = 84\\ \\text{cm}^2$. *Why the modulus:* vinyl is a real area, so we use the size of the factor. Here $7 > 0$ anyway, so the sticker is not printed mirror-image.",
+      type: "worked-example",
+      id: "mx2-1-we3",
+      title: "Worked example 3 (application): printing a warped sticker",
+      problem:
+        "A design app applies $T = \\begin{pmatrix}2&-1\\\\1&3\\end{pmatrix}$ to a rectangular sticker 4 cm wide and 3 cm tall. How much vinyl does the warped sticker need?",
+      steps: [
+        {
+          text: "Original area: $4 \\times 3 = 12\\ \\text{cm}^2$.",
+        },
+        {
+          text: "$\\det T = 2\\cdot3 - (-1)\\cdot1 = 6 + 1 = 7$. *Why this step:* the determinant is the one number that tells us how every area changes, so we never need the coordinates of the new corners.",
+        },
+        {
+          text: "New area: $12 \\times |7| = 84\\ \\text{cm}^2$. *Why the modulus:* vinyl is a real area, so we use the size of the factor. Here $7 > 0$ anyway, so the sticker is not printed mirror-image.",
+        },
+        {
+          latex:
+            "\\text{new area} = |\\det T| \\times \\text{old area} = 7 \\times 12 = 84\\ \\text{cm}^2",
+        },
+      ],
+      answer: "$84\\ \\text{cm}^2$ of vinyl.",
     },
     {
-      type: "math",
-      latex: "\\text{new area} = |\\det T| \\times \\text{old area} = 7 \\times 12 = 84\\ \\text{cm}^2",
+      type: "worked-example",
+      id: "mx2-1-we4",
+      title: "Worked example 4 (exam style)",
+      problem:
+        "Find all real $\\lambda$ for which $M = \\begin{pmatrix}\\lambda&2\\\\3&\\lambda+1\\end{pmatrix}$ multiplies every area by 6 **and** keeps the orientation of the plane.",
+      steps: [
+        {
+          text: "Compute the determinant: $\\det M = \\lambda(\\lambda + 1) - 2\\cdot3 = \\lambda^2 + \\lambda - 6$.",
+        },
+        {
+          text: "Translate the words. \"Multiplies areas by 6\" says $|\\det M| = 6$. \"Keeps orientation\" says $\\det M > 0$. Together: $\\det M = +6$. *Why this step:* the two conditions pin down both the size and the sign of the determinant.",
+        },
+        {
+          text: "Solve $\\lambda^2 + \\lambda - 6 = 6$, i.e. $\\lambda^2 + \\lambda - 12 = 0$, so $(\\lambda + 4)(\\lambda - 3) = 0$.",
+        },
+        {
+          text: "$\\lambda = 3$ or $\\lambda = -4$.",
+        },
+        {
+          text: "Check $\\lambda = 3$: $3\\cdot4 - 6 = 6$. Check $\\lambda = -4$: $(-4)(-3) - 6 = 6$. Both work.",
+        },
+      ],
+      answer: "$\\lambda = 3$ or $\\lambda = -4$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 4 (exam style).** Find all real $\\lambda$ for which $M = \\begin{pmatrix}\\lambda&2\\\\3&\\lambda+1\\end{pmatrix}$ multiplies every area by 6 **and** keeps the orientation of the plane.\n\n1. Compute the determinant: $\\det M = \\lambda(\\lambda + 1) - 2\\cdot3 = \\lambda^2 + \\lambda - 6$.\n2. Translate the words. \"Multiplies areas by 6\" says $|\\det M| = 6$. \"Keeps orientation\" says $\\det M > 0$. Together: $\\det M = +6$. *Why this step:* the two conditions pin down both the size and the sign of the determinant.\n3. Solve $\\lambda^2 + \\lambda - 6 = 6$, i.e. $\\lambda^2 + \\lambda - 12 = 0$, so $(\\lambda + 4)(\\lambda - 3) = 0$.\n4. $\\lambda = 3$ or $\\lambda = -4$.\n5. Check $\\lambda = 3$: $3\\cdot4 - 6 = 6$. Check $\\lambda = -4$: $(-4)(-3) - 6 = 6$. Both work.\n\nIf the question had said only \"multiplies areas by 6\", you would also need $\\det M = -6$: $\\lambda^2 + \\lambda = 0$, giving $\\lambda = 0$ or $\\lambda = -1$. Those two matrices scale area by 6 but flip the plane.",
+        "If the question had said only \"multiplies areas by 6\", you would also need $\\det M = -6$: $\\lambda^2 + \\lambda = 0$, giving $\\lambda = 0$ or $\\lambda = -1$. Those two matrices scale area by 6 but flip the plane.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx2-1-q1",
@@ -276,6 +353,7 @@ const lesson02: LessonSeed = {
           "Drag the tip of the second column towards the line through the first column. As the two columns line up, the shaded area shrinks to 0 and the whole grid collapses onto that line.",
       },
     },
+    { type: "heading", text: "Zero area means parallel columns" },
     {
       type: "text",
       content:
@@ -298,10 +376,28 @@ const lesson02: LessonSeed = {
       content:
         "A square matrix with $\\det A = 0$ is **singular**. It squashes the plane down to a line (or to the origin itself). A matrix with $\\det A \\ne 0$ is **non-singular**: the plane stays a plane.\n\nIn 3D, $\\det A = 0$ means the three columns lie in one plane, so space is flattened (onto a plane, a line or the origin).",
     },
+    { type: "heading", text: "Where a singular matrix sends the plane" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** $A = \\begin{pmatrix}2&4\\\\1&2\\end{pmatrix}$.\n\n1. $\\det A = 2\\cdot2 - 4\\cdot1 = 0$, so $A$ is singular.\n2. The columns are $(2, 1)$ and $(4, 2)$, and the second is twice the first.\n3. Any input goes to $A\\begin{pmatrix}x\\\\y\\end{pmatrix} = x\\begin{pmatrix}2\\\\1\\end{pmatrix} + y\\begin{pmatrix}4\\\\2\\end{pmatrix} = (x + 2y)\\begin{pmatrix}2\\\\1\\end{pmatrix}$.\n4. So the whole plane lands on the line through the origin in direction $(2, 1)$, which is the line $y = \\frac{x}{2}$.",
+      type: "worked-example",
+      id: "mx2-2-we1",
+      title: "Worked example 1",
+      problem:
+        "$A = \\begin{pmatrix}2&4\\\\1&2\\end{pmatrix}$. Find $\\det A$ and describe where $A$ sends the plane.",
+      steps: [
+        {
+          text: "$\\det A = 2\\cdot2 - 4\\cdot1 = 0$, so $A$ is singular.",
+        },
+        {
+          text: "The columns are $(2, 1)$ and $(4, 2)$, and the second is twice the first.",
+        },
+        {
+          text: "Any input goes to $A\\begin{pmatrix}x\\\\y\\end{pmatrix} = x\\begin{pmatrix}2\\\\1\\end{pmatrix} + y\\begin{pmatrix}4\\\\2\\end{pmatrix} = (x + 2y)\\begin{pmatrix}2\\\\1\\end{pmatrix}$.",
+        },
+        {
+          text: "So the whole plane lands on the line through the origin in direction $(2, 1)$, which is the line $y = \\frac{x}{2}$.",
+        },
+      ],
+      answer: "$\\det A = 0$, and the plane lands on the line $y = \\frac{x}{2}$.",
     },
     {
       type: "callout",
@@ -311,19 +407,74 @@ const lesson02: LessonSeed = {
         "In worked example 1, every point with $x + 2y = 3$ (for instance $(3, 0)$, $(1, 1)$ and $(-1, 2)$) lands on the same output $(6, 3)$. Given only the output, you cannot tell which input it came from. No transformation can un-squash a line back into a plane. Chapter 3 turns this into the rule that **a matrix has an inverse exactly when $\\det A \\ne 0$**.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (find $k$).** For which $k$ is $\\begin{pmatrix}k&2\\\\8&k\\end{pmatrix}$ singular?\n\n1. Set the determinant to zero: $k \\cdot k - 2 \\cdot 8 = 0$.\n2. $k^2 = 16$, so $k = 4$ or $k = -4$.\n3. Check $k = 4$: the columns are $(4, 8)$ and $(2, 4)$, and the first is twice the second. Check $k = -4$: the columns are $(-4, 8)$ and $(2, -4)$, and the first is $-2$ times the second. Both are parallel pairs.",
+      type: "worked-example",
+      id: "mx2-2-we2",
+      title: "Worked example 2 (find $k$)",
+      problem: "For which $k$ is $\\begin{pmatrix}k&2\\\\8&k\\end{pmatrix}$ singular?",
+      steps: [
+        {
+          text: "Set the determinant to zero: $k \\cdot k - 2 \\cdot 8 = 0$.",
+        },
+        {
+          text: "$k^2 = 16$, so $k = 4$ or $k = -4$.",
+        },
+        {
+          text: "Check $k = 4$: the columns are $(4, 8)$ and $(2, 4)$, and the first is twice the second. Check $k = -4$: the columns are $(-4, 8)$ and $(2, -4)$, and the first is $-2$ times the second. Both are parallel pairs.",
+        },
+      ],
+      answer: "$k = 4$ or $k = -4$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx2-2-we3",
+      title: "Worked example 3 (application): shadows",
+      problem:
+        "Evening sunlight falls along the direction $(1, 1)$ onto flat ground, the $x$-axis. A point $(x, y)$ at height $y$ slides down along $(-1, -1)$ until it hits the ground, landing at $(x - y, 0)$. Write the shadow map as a matrix $S$, find $\\det S$, and say what it means for shadows.",
+      steps: [
+        {
+          text: "Write the shadow map as a matrix: $S\\begin{pmatrix}x\\\\y\\end{pmatrix} = \\begin{pmatrix}x - y\\\\0\\end{pmatrix}$, so $S = \\begin{pmatrix}1&-1\\\\0&0\\end{pmatrix}$. *Why:* column 1 is where $\\hat{\\imath}$ lands, $(1, 0)$, and column 2 is where $\\hat{\\jmath}$ lands, $(-1, 0)$.",
+        },
+        {
+          text: "$\\det S = 1\\cdot0 - (-1)\\cdot0 = 0$. The columns $(1, 0)$ and $(-1, 0)$ are parallel, so the plane is flattened onto the ground line.",
+        },
+        {
+          text: "Consequence: the points $(3, 1)$, $(4, 2)$ and $(5, 3)$ all cast the shadow $(2, 0)$. A short post near the wall and a tall post further away can have the same shadow.",
+        },
+      ],
+      answer:
+        "$S = \\begin{pmatrix}1&-1\\\\0&0\\end{pmatrix}$ with $\\det S = 0$, so many points share one shadow.",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 (application): shadows.** Evening sunlight falls along the direction $(1, 1)$ onto flat ground, the $x$-axis. A point $(x, y)$ at height $y$ slides down along $(-1, -1)$ until it hits the ground, landing at $(x - y, 0)$.\n\n1. Write the shadow map as a matrix: $S\\begin{pmatrix}x\\\\y\\end{pmatrix} = \\begin{pmatrix}x - y\\\\0\\end{pmatrix}$, so $S = \\begin{pmatrix}1&-1\\\\0&0\\end{pmatrix}$. *Why:* column 1 is where $\\hat{\\imath}$ lands, $(1, 0)$, and column 2 is where $\\hat{\\jmath}$ lands, $(-1, 0)$.\n2. $\\det S = 1\\cdot0 - (-1)\\cdot0 = 0$. The columns $(1, 0)$ and $(-1, 0)$ are parallel, so the plane is flattened onto the ground line.\n3. Consequence: the points $(3, 1)$, $(4, 2)$ and $(5, 3)$ all cast the shadow $(2, 0)$. A short post near the wall and a tall post further away can have the same shadow.\n\nThis is why one shadow, or one X-ray photograph, cannot tell you the full shape of an object: the map from object to image is singular, and information about depth is lost. CT scanners combine many projections from different angles for exactly this reason.",
+        "This is why one shadow, or one X-ray photograph, cannot tell you the full shape of an object: the map from object to image is singular, and information about depth is lost. CT scanners combine many projections from different angles for exactly this reason.",
+    },
+    {
+      type: "worked-example",
+      id: "mx2-2-we4",
+      title: "Worked example 4 (exam style)",
+      problem:
+        "Find all $k$ for which $A = \\begin{pmatrix}k-1&2\\\\3&k-2\\end{pmatrix}$ is singular, and for each value name the line onto which $A$ squashes the plane.",
+      steps: [
+        {
+          text: "$\\det A = (k-1)(k-2) - 2\\cdot3 = k^2 - 3k + 2 - 6 = k^2 - 3k - 4$.",
+        },
+        {
+          text: "Set it to zero: $(k - 4)(k + 1) = 0$, so $k = 4$ or $k = -1$. *Why:* singular means zero area scale factor, and nothing else.",
+        },
+        {
+          text: "$k = 4$: $A = \\begin{pmatrix}3&2\\\\3&2\\end{pmatrix}$. The columns $(3, 3)$ and $(2, 2)$ both point along $(1, 1)$, so the plane lands on the line $y = x$.",
+        },
+        {
+          text: "$k = -1$: $A = \\begin{pmatrix}-2&2\\\\3&-3\\end{pmatrix}$. Column 2 is $-1$ times column 1, and both point along $(2, -3)$, so the plane lands on $y = -\\frac{3}{2}x$.",
+        },
+      ],
+      answer: "$k = 4$ (onto $y = x$) or $k = -1$ (onto $y = -\\frac{3}{2}x$).",
     },
     {
       type: "text",
       content:
-        "**Worked example 4 (exam style).** Find all $k$ for which $A = \\begin{pmatrix}k-1&2\\\\3&k-2\\end{pmatrix}$ is singular, and for each value name the line onto which $A$ squashes the plane.\n\n1. $\\det A = (k-1)(k-2) - 2\\cdot3 = k^2 - 3k + 2 - 6 = k^2 - 3k - 4$.\n2. Set it to zero: $(k - 4)(k + 1) = 0$, so $k = 4$ or $k = -1$. *Why:* singular means zero area scale factor, and nothing else.\n3. $k = 4$: $A = \\begin{pmatrix}3&2\\\\3&2\\end{pmatrix}$. The columns $(3, 3)$ and $(2, 2)$ both point along $(1, 1)$, so the plane lands on the line $y = x$.\n4. $k = -1$: $A = \\begin{pmatrix}-2&2\\\\3&-3\\end{pmatrix}$. Column 2 is $-1$ times column 1, and both point along $(2, -3)$, so the plane lands on $y = -\\frac{3}{2}x$.\n\n*Why step 3 and 4 use the columns:* every output $A\\mathbf{v}$ is a combination of the columns, so when the columns are parallel the outputs all lie along their common direction.",
+        "*Why step 3 and 4 use the columns:* every output $A\\mathbf{v}$ is a combination of the columns, so when the columns are parallel the outputs all lie along their common direction.",
     },
     {
       type: "table",
@@ -334,6 +485,7 @@ const lesson02: LessonSeed = {
         ["$0$ with $A = O$", "The single point $O$", "$\\begin{pmatrix}0&0\\\\0&0\\end{pmatrix}$"],
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx2-2-q1",
@@ -451,6 +603,7 @@ const lesson03: LessonSeed = {
           "The three arrows are the columns (2, 0, 5), (1, 4, 2) and (3, −1, 1) of the matrix in Worked example 1 below: the unit cube's edges î, ĵ, k̂ land on them, and the cube becomes this slanted box. Drag to rotate. The readout's bracket notation comes from Vector Algebra; here it is just det A = −53. The size 53 is the box's volume, and the minus sign says the three edges are in left-handed order.",
       },
     },
+    { type: "heading", text: "Minors and cofactors" },
     {
       type: "text",
       content:
@@ -469,6 +622,7 @@ const lesson03: LessonSeed = {
         "The sign $(-1)^{i+j}$ is $+$ when $i + j$ is even and $-$ when it is odd. It makes a checkerboard that starts with $+$ in the top-left corner:",
     },
     { type: "math", latex: "\\begin{pmatrix}+&-&+\\\\-&+&-\\\\+&-&+\\end{pmatrix}" },
+    { type: "heading", text: "Expanding along any row or column" },
     {
       type: "callout",
       variant: "definition",
@@ -497,14 +651,29 @@ const lesson03: LessonSeed = {
         "Expanding along row 1, as in the formula above, gives the same number. Rows can play the role of edges too, because $\\det A^T = \\det A$, which 2.4 shows. The worked example below checks both routes.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** $A = \\begin{pmatrix}2&1&3\\\\0&4&-1\\\\5&2&1\\end{pmatrix}$, expanded along row 1.\n\n1. $a_{11} = 2$ with sign $+$: $M_{11} = \\begin{vmatrix}4&-1\\\\2&1\\end{vmatrix} = 4 + 2 = 6$.\n2. $a_{12} = 1$ with sign $-$: $M_{12} = \\begin{vmatrix}0&-1\\\\5&1\\end{vmatrix} = 0 + 5 = 5$, so $C_{12} = -5$.\n3. $a_{13} = 3$ with sign $+$: $M_{13} = \\begin{vmatrix}0&4\\\\5&2\\end{vmatrix} = 0 - 20 = -20$.\n4. $\\det A = 2(6) + 1(-5) + 3(-20) = 12 - 5 - 60 = -53$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Check along column 1.** Column 1 is $(2, 0, 5)$, and its zero removes a term.\n\n1. $2 \\cdot C_{11} = 2 \\cdot 6 = 12$.\n2. $0 \\cdot C_{21} = 0$, so there is nothing to compute.\n3. $5 \\cdot C_{31}$, where $C_{31} = +\\begin{vmatrix}1&3\\\\4&-1\\end{vmatrix} = -1 - 12 = -13$.\n4. $\\det A = 12 + 0 + 5(-13) = 12 - 65 = -53$. It matches.",
+      type: "worked-example",
+      id: "mx2-3-we1",
+      title: "Worked example 1",
+      problem:
+        "Find $\\det A$ for $A = \\begin{pmatrix}2&1&3\\\\0&4&-1\\\\5&2&1\\end{pmatrix}$, expanded along row 1, then check it by expanding along column 1.",
+      steps: [
+        {
+          text: "$a_{11} = 2$ with sign $+$: $M_{11} = \\begin{vmatrix}4&-1\\\\2&1\\end{vmatrix} = 4 + 2 = 6$.",
+        },
+        {
+          text: "$a_{12} = 1$ with sign $-$: $M_{12} = \\begin{vmatrix}0&-1\\\\5&1\\end{vmatrix} = 0 + 5 = 5$, so $C_{12} = -5$.",
+        },
+        {
+          text: "$a_{13} = 3$ with sign $+$: $M_{13} = \\begin{vmatrix}0&4\\\\5&2\\end{vmatrix} = 0 - 20 = -20$.",
+        },
+        {
+          text: "$\\det A = 2(6) + 1(-5) + 3(-20) = 12 - 5 - 60 = -53$.",
+        },
+        {
+          text: "**Check along column 1.** Column 1 is $(2, 0, 5)$, and its zero removes a term.\n\n- $2 \\cdot C_{11} = 2 \\cdot 6 = 12$.\n- $0 \\cdot C_{21} = 0$, so there is nothing to compute.\n- $5 \\cdot C_{31}$, where $C_{31} = +\\begin{vmatrix}1&3\\\\4&-1\\end{vmatrix} = -1 - 12 = -13$.\n- $\\det A = 12 + 0 + 5(-13) = 12 - 65 = -53$. It matches.",
+        },
+      ],
+      answer: "$\\det A = -53$.",
     },
     {
       type: "callout",
@@ -514,15 +683,64 @@ const lesson03: LessonSeed = {
         "Every zero entry removes a whole $2\\times2$ determinant from the work. Scan all six rows and columns first and pick the one with the most zeros. Also, for a **triangular** matrix (all zeros above or below the diagonal), the determinant is just the product of the diagonal entries. (Expand down column 1 for an upper triangular matrix, or along row 1 for a lower triangular one, where only $a_{11}$ is non-zero. The minor is triangular again, so repeat: only the diagonal entries survive.)",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2.** $B = \\begin{pmatrix}3&0&2\\\\1&0&-4\\\\2&5&1\\end{pmatrix}$. Column 2 holds two zeros, so expand along it.\n\n1. Only $a_{32} = 5$ survives. Position $(3,2)$ has $i + j = 5$, which is odd, so the sign is $-$.\n2. $M_{32}$: delete row 3 and column 2, leaving $\\begin{vmatrix}3&2\\\\1&-4\\end{vmatrix} = -12 - 2 = -14$.\n3. $C_{32} = -(-14) = 14$.\n4. $\\det B = 5 \\times 14 = 70$.\n\nExpanding along row 1 instead gives $3(0 + 20) - 0 + 2(5 - 0) = 60 + 10 = 70$.",
+      type: "worked-example",
+      id: "mx2-3-we2",
+      title: "Worked example 2",
+      problem:
+        "$B = \\begin{pmatrix}3&0&2\\\\1&0&-4\\\\2&5&1\\end{pmatrix}$. Column 2 holds two zeros, so expand along it. Find $\\det B$.",
+      steps: [
+        {
+          text: "Only $a_{32} = 5$ survives. Position $(3,2)$ has $i + j = 5$, which is odd, so the sign is $-$.",
+        },
+        {
+          text: "$M_{32}$: delete row 3 and column 2, leaving $\\begin{vmatrix}3&2\\\\1&-4\\end{vmatrix} = -12 - 2 = -14$.",
+        },
+        {
+          text: "$C_{32} = -(-14) = 14$.",
+        },
+        {
+          text: "$\\det B = 5 \\times 14 = 70$.",
+        },
+        {
+          text: "Expanding along row 1 instead gives $3(0 + 20) - 0 + 2(5 - 0) = 60 + 10 = 70$.",
+        },
+      ],
+      answer: "$\\det B = 70$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx2-3-we3",
+      title: "Worked example 3 (application): the volume of a crystal cell",
+      problem:
+        "In a crystal, atoms repeat in a slanted box called the unit cell. For one (made-up) triclinic crystal the three edge vectors, in ångströms, are $(2, 1, 0)$, $(0, 3, 1)$ and $(1, 0, 2)$. What is the volume of the cell?",
+      steps: [
+        {
+          text: "Put the edges in as columns: $A = \\begin{pmatrix}2&0&1\\\\1&3&0\\\\0&1&2\\end{pmatrix}$. *Why:* the unit cube's edges go to the columns, so $|\\det A|$ is the box's volume.",
+        },
+        {
+          text: "Row 1 has a zero in the middle, so expand along it (signs $+\\,-\\,+$).",
+        },
+        {
+          text: "$a_{11} = 2$: $M_{11} = \\begin{vmatrix}3&0\\\\1&2\\end{vmatrix} = 6$, giving $+2 \\cdot 6 = 12$.",
+        },
+        {
+          text: "$a_{12} = 0$: nothing to compute.",
+        },
+        {
+          text: "$a_{13} = 1$: $M_{13} = \\begin{vmatrix}1&3\\\\0&1\\end{vmatrix} = 1$, giving $+1 \\cdot 1 = 1$.",
+        },
+        {
+          text: "$\\det A = 12 + 1 = 13$, so the cell's volume is $13\\ \\text{Å}^3$. The sign is positive, so the three edges, taken in this order, form a right-handed set.",
+        },
+      ],
+      answer: "$13\\ \\text{Å}^3$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 (application): the volume of a crystal cell.** In a crystal, atoms repeat in a slanted box called the unit cell. For one (made-up) triclinic crystal the three edge vectors, in ångströms, are $(2, 1, 0)$, $(0, 3, 1)$ and $(1, 0, 2)$. What is the volume of the cell?\n\n1. Put the edges in as columns: $A = \\begin{pmatrix}2&0&1\\\\1&3&0\\\\0&1&2\\end{pmatrix}$. *Why:* the unit cube's edges go to the columns, so $|\\det A|$ is the box's volume.\n2. Row 1 has a zero in the middle, so expand along it (signs $+\\,-\\,+$).\n3. $a_{11} = 2$: $M_{11} = \\begin{vmatrix}3&0\\\\1&2\\end{vmatrix} = 6$, giving $+2 \\cdot 6 = 12$.\n4. $a_{12} = 0$: nothing to compute.\n5. $a_{13} = 1$: $M_{13} = \\begin{vmatrix}1&3\\\\0&1\\end{vmatrix} = 1$, giving $+1 \\cdot 1 = 1$.\n6. $\\det A = 12 + 1 = 13$, so the cell's volume is $13\\ \\text{Å}^3$. The sign is positive, so the three edges, taken in this order, form a right-handed set.\n\nChemists use exactly this number to compute a crystal's density: the mass of the atoms in one cell divided by its volume.",
+        "Chemists use exactly this number to compute a crystal's density: the mass of the atoms in one cell divided by its volume.",
     },
+    { type: "heading", text: "Sarrus' diagonal shortcut and its limits" },
     {
       type: "text",
       content:
@@ -535,20 +753,73 @@ const lesson03: LessonSeed = {
       content:
         "A $3\\times3$ determinant has $3! = 6$ terms, and Sarrus' six diagonals happen to list exactly those. A $4\\times4$ determinant has $4! = 24$ terms, but the diagonal pattern only produces 8. For $4\\times4$ and larger, use cofactor expansion (or the row operations of 2.4).",
     },
+    { type: "heading", text: "Exam problems: equations and mismatched cofactors" },
+    {
+      type: "worked-example",
+      id: "mx2-3-we4",
+      title: "Worked example 4 (exam style): solve a determinant equation",
+      problem:
+        "Find all real $x$ with $\\begin{vmatrix}1&x&2\\\\2&1&x\\\\x&2&1\\end{vmatrix} = 0$.",
+      steps: [
+        {
+          text: "No row or column has a zero, so expand along row 1 (signs $+\\,-\\,+$).",
+        },
+        {
+          text: "$M_{11} = \\begin{vmatrix}1&x\\\\2&1\\end{vmatrix} = 1 - 2x$.",
+        },
+        {
+          text: "$M_{12} = \\begin{vmatrix}2&x\\\\x&1\\end{vmatrix} = 2 - x^2$, and it enters with a minus sign: $-x(2 - x^2) = x^3 - 2x$.",
+        },
+        {
+          text: "$M_{13} = \\begin{vmatrix}2&1\\\\x&2\\end{vmatrix} = 4 - x$, giving $+2(4 - x) = 8 - 2x$.",
+        },
+        {
+          text: "Add: $(1 - 2x) + (x^3 - 2x) + (8 - 2x) = x^3 - 6x + 9$.",
+        },
+        {
+          text: "Try small integer roots (they must divide 9). $x = -3$: $-27 + 18 + 9 = 0$. So $(x + 3)$ is a factor: $x^3 - 6x + 9 = (x + 3)(x^2 - 3x + 3)$.",
+        },
+        {
+          text: "The quadratic has discriminant $9 - 12 = -3 < 0$, so it has no real roots. *Why check:* a cubic can have up to three real roots, and an exam answer that lists only one needs a reason.",
+          latex: "x^3 - 6x + 9 = (x + 3)(x^2 - 3x + 3) = 0 \\implies x = -3",
+        },
+        {
+          text: "Check it: at $x = -3$ the rows are $(1, -3, 2)$, $(2, 1, -3)$, $(-3, 2, 1)$, and they add to $(0, 0, 0)$, so the three row vectors lie in one plane.",
+        },
+      ],
+      answer: "$x = -3$ is the only real solution.",
+    },
+    {
+      type: "worked-example",
+      id: "mx2-3-we5",
+      title: "Worked example 5 (exam style): the wrong cofactors give zero",
+      problem:
+        "A CBSE favourite: for $A = \\begin{pmatrix}2&1&3\\\\0&4&-1\\\\5&2&1\\end{pmatrix}$ from Worked example 1, compute $a_{11}C_{21} + a_{12}C_{22} + a_{13}C_{23}$ (row 1 entries with row 2 cofactors).",
+      steps: [
+        {
+          text: "$C_{21} = -\\begin{vmatrix}1&3\\\\2&1\\end{vmatrix} = -(1 - 6) = 5$.",
+        },
+        {
+          text: "$C_{22} = +\\begin{vmatrix}2&3\\\\5&1\\end{vmatrix} = 2 - 15 = -13$.",
+        },
+        {
+          text: "$C_{23} = -\\begin{vmatrix}2&1\\\\5&2\\end{vmatrix} = -(4 - 5) = 1$.",
+        },
+        {
+          text: "Row 2's own entries give the determinant: $0(5) + 4(-13) + (-1)(1) = -53$. It matches.",
+        },
+        {
+          text: "Row 1's entries instead: $2(5) + 1(-13) + 3(1) = 10 - 13 + 3 = 0$.",
+        },
+      ],
+      answer: "$a_{11}C_{21} + a_{12}C_{22} + a_{13}C_{23} = 0$.",
+    },
     {
       type: "text",
       content:
-        "**Worked example 4 (exam style): solve a determinant equation.** Find all real $x$ with $\\begin{vmatrix}1&x&2\\\\2&1&x\\\\x&2&1\\end{vmatrix} = 0$.\n\n1. No row or column has a zero, so expand along row 1 (signs $+\\,-\\,+$).\n2. $M_{11} = \\begin{vmatrix}1&x\\\\2&1\\end{vmatrix} = 1 - 2x$.\n3. $M_{12} = \\begin{vmatrix}2&x\\\\x&1\\end{vmatrix} = 2 - x^2$, and it enters with a minus sign: $-x(2 - x^2) = x^3 - 2x$.\n4. $M_{13} = \\begin{vmatrix}2&1\\\\x&2\\end{vmatrix} = 4 - x$, giving $+2(4 - x) = 8 - 2x$.\n5. Add: $(1 - 2x) + (x^3 - 2x) + (8 - 2x) = x^3 - 6x + 9$.\n6. Try small integer roots (they must divide 9). $x = -3$: $-27 + 18 + 9 = 0$. So $(x + 3)$ is a factor: $x^3 - 6x + 9 = (x + 3)(x^2 - 3x + 3)$.\n7. The quadratic has discriminant $9 - 12 = -3 < 0$, so it has no real roots. *Why check:* a cubic can have up to three real roots, and an exam answer that lists only one needs a reason.\n\nAnswer: $x = -3$ is the only real solution. Check it: at $x = -3$ the rows are $(1, -3, 2)$, $(2, 1, -3)$, $(-3, 2, 1)$, and they add to $(0, 0, 0)$, so the three row vectors lie in one plane.",
+        "*Why zero?* The cofactors of row 2 never look at row 2 itself. So $a_{11}C_{21} + a_{12}C_{22} + a_{13}C_{23}$ is the expansion of the matrix you get by overwriting row 2 with a copy of row 1. That matrix has two equal rows, a flat box, and 2.4 shows its determinant is 0. This fact is the engine behind the inverse formula in Chapter 3.",
     },
-    {
-      type: "math",
-      latex: "x^3 - 6x + 9 = (x + 3)(x^2 - 3x + 3) = 0 \\implies x = -3",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (exam style): the wrong cofactors give zero.** A CBSE favourite: for $A = \\begin{pmatrix}2&1&3\\\\0&4&-1\\\\5&2&1\\end{pmatrix}$ from Worked example 1, compute $a_{11}C_{21} + a_{12}C_{22} + a_{13}C_{23}$ (row 1 entries with row 2 cofactors).\n\n1. $C_{21} = -\\begin{vmatrix}1&3\\\\2&1\\end{vmatrix} = -(1 - 6) = 5$.\n2. $C_{22} = +\\begin{vmatrix}2&3\\\\5&1\\end{vmatrix} = 2 - 15 = -13$.\n3. $C_{23} = -\\begin{vmatrix}2&1\\\\5&2\\end{vmatrix} = -(4 - 5) = 1$.\n4. Row 2's own entries give the determinant: $0(5) + 4(-13) + (-1)(1) = -53$. It matches.\n5. Row 1's entries instead: $2(5) + 1(-13) + 3(1) = 10 - 13 + 3 = 0$.\n\n*Why zero?* The cofactors of row 2 never look at row 2 itself. So $a_{11}C_{21} + a_{12}C_{22} + a_{13}C_{23}$ is the expansion of the matrix you get by overwriting row 2 with a copy of row 1. That matrix has two equal rows, a flat box, and 2.4 shows its determinant is 0. This fact is the engine behind the inverse formula in Chapter 3.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx2-3-q1",
@@ -666,6 +937,7 @@ const lesson04: LessonSeed = {
       content:
         "and every property below that mentions rows holds for columns too.",
     },
+    { type: "heading", text: "Row operations as parallelogram moves" },
     {
       type: "text",
       content:
@@ -696,6 +968,7 @@ const lesson04: LessonSeed = {
       content:
         "**4. Two equal rows give 0.** Swap the two equal rows. The matrix does not change, but property 1 says the determinant changes sign. So $D = -D$, which forces $D = 0$. Geometrically, two identical edges span a flat shape.\n\n**5. Proportional rows give 0.** Take the factor $k$ out (property 2) and you have two equal rows.\n\n**6. A row of zeros gives 0.** One edge has length zero, so the box is flat.\n\n**7. A row that is a sum splits the determinant.** Volume is linear in each edge:\n$\\begin{vmatrix}a_1 + b_1 & a_2 + b_2\\\\c&d\\end{vmatrix} = \\begin{vmatrix}a_1&a_2\\\\c&d\\end{vmatrix} + \\begin{vmatrix}b_1&b_2\\\\c&d\\end{vmatrix}$.",
     },
+    { type: "heading", text: "Products, multiples and skew-symmetric matrices" },
     {
       type: "text",
       content:
@@ -733,35 +1006,118 @@ const lesson04: LessonSeed = {
         ["$A^T = -A$, $n$ odd", "$= 0$", "Skew-symmetric of odd order"],
       ],
     },
+    { type: "heading", text: "Using the properties without expanding" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** $A$ is $3\\times3$ with $\\det A = 4$.\n\n1. $\\det(2A) = 2^3 \\cdot 4 = 32$.\n2. $\\det(-A) = (-1)^3 \\cdot 4 = -4$.\n3. $\\det(A^T) = 4$.\n4. $\\det(A^2) = 4^2 = 16$.",
+      type: "worked-example",
+      id: "mx2-4-we1",
+      title: "Worked example 1",
+      problem:
+        "$A$ is $3\\times3$ with $\\det A = 4$. Find $\\det(2A)$, $\\det(-A)$, $\\det(A^T)$ and $\\det(A^2)$.",
+      steps: [
+        {
+          text: "$\\det(2A) = 2^3 \\cdot 4 = 32$.",
+        },
+        {
+          text: "$\\det(-A) = (-1)^3 \\cdot 4 = -4$.",
+        },
+        {
+          text: "$\\det(A^T) = 4$.",
+        },
+        {
+          text: "$\\det(A^2) = 4^2 = 16$.",
+        },
+      ],
+      answer: "$\\det(2A) = 32$, $\\det(-A) = -4$, $\\det(A^T) = 4$, $\\det(A^2) = 16$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx2-4-we2",
+      title: "Worked example 2",
+      problem:
+        "Suppose $\\begin{vmatrix}a&b&c\\\\d&e&f\\\\g&h&i\\end{vmatrix} = 5$. Find $\\begin{vmatrix}d&e&f\\\\a&b&c\\\\2g&2h&2i\\end{vmatrix}$ and $\\begin{vmatrix}a&b&c\\\\d+2a&e+2b&f+2c\\\\g&h&i\\end{vmatrix}$.",
+      steps: [
+        {
+          text: "$\\begin{vmatrix}d&e&f\\\\a&b&c\\\\2g&2h&2i\\end{vmatrix}$: one swap ($\\times(-1)$) and one row scaled by 2 ($\\times 2$), giving $5 \\times (-1) \\times 2 = -10$.",
+        },
+        {
+          text: "$\\begin{vmatrix}a&b&c\\\\d+2a&e+2b&f+2c\\\\g&h&i\\end{vmatrix}$: this is $R_2 \\to R_2 + 2R_1$, a shear, so the value stays $5$.",
+        },
+      ],
+      answer: "$-10$ and $5$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx2-4-we3",
+      title: "Worked example 3 (routine): chaining the rules",
+      problem:
+        "$A$ and $B$ are $3\\times3$ with $\\det A = 3$ and $\\det B = -2$. Find $\\det(2AB^T)$, $\\det(A^{-1}B^2)$ and $\\det\\big((AB)^{-1}\\big)$.",
+      steps: [
+        {
+          text: "$\\det(2AB^T) = 2^3 \\cdot \\det A \\cdot \\det B^T = 8 \\cdot 3 \\cdot (-2) = -48$. *Why $2^3$:* the scalar 2 stretches all three rows. *Why $\\det B^T = \\det B$:* transposing never changes a determinant.",
+        },
+        {
+          text: "$\\det(A^{-1}B^2) = \\frac{1}{\\det A} \\cdot (\\det B)^2 = \\frac{1}{3} \\cdot 4 = \\frac{4}{3}$. *Why:* the inverse undoes $A$'s scaling, and $B$ applied twice scales by $(-2)^2$.",
+        },
+        {
+          text: "$\\det\\big((AB)^{-1}\\big) = \\frac{1}{\\det A \\det B} = \\frac{1}{-6} = -\\frac{1}{6}$. Undoing a flip is still a flip, so the sign stays negative.",
+        },
+      ],
+      answer: "$-48$, $\\frac{4}{3}$ and $-\\frac{1}{6}$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx2-4-we4",
+      title: "Worked example 4 (application): a growing game sprite",
+      problem:
+        "A game applies $T = \\begin{pmatrix}1&2\\\\-1&1\\end{pmatrix}$ to a sprite of area $5$ square units once every frame. What is the area after 4 frames? On which frame does it first exceed $10\\,000$?",
+      steps: [
+        {
+          text: "$\\det T = 1\\cdot1 - 2\\cdot(-1) = 3$, so each frame multiplies the area by 3.",
+        },
+        {
+          text: "After 4 frames the matrix applied is $T^4$, and $\\det(T^4) = 3^4 = 81$. The area is $5 \\times 81 = 405$. *Why this is quicker:* we never compute $T^4$ itself; the product rule lets the scale factors multiply.",
+        },
+        {
+          text: "When does the area first pass $10\\,000$? Need $5 \\cdot 3^n > 10\\,000$, i.e. $3^n > 2000$. Since $3^6 = 729$ and $3^7 = 2187$, it happens on frame $n = 7$.",
+        },
+      ],
+      answer: "Area $405$ after 4 frames; it first passes $10\\,000$ on frame $7$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 2.** Suppose $\\begin{vmatrix}a&b&c\\\\d&e&f\\\\g&h&i\\end{vmatrix} = 5$.\n\n1. $\\begin{vmatrix}d&e&f\\\\a&b&c\\\\2g&2h&2i\\end{vmatrix}$: one swap ($\\times(-1)$) and one row scaled by 2 ($\\times 2$), giving $5 \\times (-1) \\times 2 = -10$.\n2. $\\begin{vmatrix}a&b&c\\\\d+2a&e+2b&f+2c\\\\g&h&i\\end{vmatrix}$: this is $R_2 \\to R_2 + 2R_1$, a shear, so the value stays $5$.",
+        "The same reasoning is how graphics engines sanity-check a chain of transformations: if the product of the determinants is 0 somewhere, a model has been flattened and will vanish from the screen.",
+    },
+    {
+      type: "worked-example",
+      id: "mx2-4-we5",
+      title: "Worked example 5 (exam style): a trap with simultaneous operations",
+      problem:
+        "$A$ is $3\\times3$ with rows $R_1, R_2, R_3$ and $\\det A = 5$. Find the determinant $D$ of the matrix with rows $R_1 + 2R_3,\\ 3R_2,\\ R_3 - R_1$.\n\nThe tempting answer is \"two shears and one scaling, so $3 \\times 5 = 15$\". That is wrong. Both new rows are built from the **original** rows, so they are not two shears applied one after the other. Work step by step instead, using only honest row operations:",
+      steps: [
+        {
+          text: "Take the 3 out of row 2: $D = 3 \\cdot \\det(R_1 + 2R_3,\\ R_2,\\ R_3 - R_1)$.",
+        },
+        {
+          text: "Add row 3 to row 1 (a genuine shear, value unchanged): $(R_1 + 2R_3) + (R_3 - R_1) = 3R_3$. So $D = 3 \\cdot \\det(3R_3,\\ R_2,\\ R_3 - R_1)$.",
+        },
+        {
+          text: "Take the 3 out of row 1: $D = 9 \\cdot \\det(R_3,\\ R_2,\\ R_3 - R_1)$.",
+        },
+        {
+          text: "Subtract row 1 from row 3 (a shear): $(R_3 - R_1) - R_3 = -R_1$. So $D = 9 \\cdot \\det(R_3,\\ R_2,\\ -R_1)$.",
+        },
+        {
+          text: "Take out the $-1$, then swap rows 1 and 3: $D = 9 \\cdot (-1) \\cdot (-1) \\cdot \\det(R_1, R_2, R_3) = 9 \\cdot 5 = 45$.",
+          latex: "\\det(R_1 + 2R_3,\\ 3R_2,\\ R_3 - R_1) = 9\\det(R_1, R_2, R_3) = 45",
+        },
+      ],
+      answer: "$D = 45$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 (routine): chaining the rules.** $A$ and $B$ are $3\\times3$ with $\\det A = 3$ and $\\det B = -2$.\n\n1. $\\det(2AB^T) = 2^3 \\cdot \\det A \\cdot \\det B^T = 8 \\cdot 3 \\cdot (-2) = -48$. *Why $2^3$:* the scalar 2 stretches all three rows. *Why $\\det B^T = \\det B$:* transposing never changes a determinant.\n2. $\\det(A^{-1}B^2) = \\frac{1}{\\det A} \\cdot (\\det B)^2 = \\frac{1}{3} \\cdot 4 = \\frac{4}{3}$. *Why:* the inverse undoes $A$'s scaling, and $B$ applied twice scales by $(-2)^2$.\n3. $\\det\\big((AB)^{-1}\\big) = \\frac{1}{\\det A \\det B} = \\frac{1}{-6} = -\\frac{1}{6}$. Undoing a flip is still a flip, so the sign stays negative.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (application): a growing game sprite.** A game applies $T = \\begin{pmatrix}1&2\\\\-1&1\\end{pmatrix}$ to a sprite of area $5$ square units once every frame.\n\n1. $\\det T = 1\\cdot1 - 2\\cdot(-1) = 3$, so each frame multiplies the area by 3.\n2. After 4 frames the matrix applied is $T^4$, and $\\det(T^4) = 3^4 = 81$. The area is $5 \\times 81 = 405$. *Why this is quicker:* we never compute $T^4$ itself; the product rule lets the scale factors multiply.\n3. When does the area first pass $10\\,000$? Need $5 \\cdot 3^n > 10\\,000$, i.e. $3^n > 2000$. Since $3^6 = 729$ and $3^7 = 2187$, it happens on frame $n = 7$.\n\nThe same reasoning is how graphics engines sanity-check a chain of transformations: if the product of the determinants is 0 somewhere, a model has been flattened and will vanish from the screen.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (exam style): a trap with simultaneous operations.** $A$ is $3\\times3$ with rows $R_1, R_2, R_3$ and $\\det A = 5$. Find the determinant $D$ of the matrix with rows $R_1 + 2R_3,\\ 3R_2,\\ R_3 - R_1$.\n\nThe tempting answer is \"two shears and one scaling, so $3 \\times 5 = 15$\". That is wrong. Both new rows are built from the **original** rows, so they are not two shears applied one after the other. Work step by step instead, using only honest row operations:\n\n1. Take the 3 out of row 2: $D = 3 \\cdot \\det(R_1 + 2R_3,\\ R_2,\\ R_3 - R_1)$.\n2. Add row 3 to row 1 (a genuine shear, value unchanged): $(R_1 + 2R_3) + (R_3 - R_1) = 3R_3$. So $D = 3 \\cdot \\det(3R_3,\\ R_2,\\ R_3 - R_1)$.\n3. Take the 3 out of row 1: $D = 9 \\cdot \\det(R_3,\\ R_2,\\ R_3 - R_1)$.\n4. Subtract row 1 from row 3 (a shear): $(R_3 - R_1) - R_3 = -R_1$. So $D = 9 \\cdot \\det(R_3,\\ R_2,\\ -R_1)$.\n5. Take out the $-1$, then swap rows 1 and 3: $D = 9 \\cdot (-1) \\cdot (-1) \\cdot \\det(R_1, R_2, R_3) = 9 \\cdot 5 = 45$.\n\n*Why step 2 is allowed:* at that moment row 3 really is $R_3 - R_1$, so adding it to row 1 is a single shear of the current matrix. Each step changes one row using the rows as they currently stand.",
-    },
-    {
-      type: "math",
-      latex:
-        "\\det(R_1 + 2R_3,\\ 3R_2,\\ R_3 - R_1) = 9\\det(R_1, R_2, R_3) = 45",
+        "*Why step 2 is allowed:* at that moment row 3 really is $R_3 - R_1$, so adding it to row 1 is a single shear of the current matrix. Each step changes one row using the rows as they currently stand.",
     },
     {
       type: "text",
@@ -783,6 +1139,7 @@ const lesson04: LessonSeed = {
           "Try R₁ ↔ R₂, then R₃ → R₃ − 2R₁, then clear below the second pivot. Once the matrix is triangular, det A = (product of the diagonal) ÷ (the running factor).",
       },
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx2-4-q1",
@@ -914,25 +1271,66 @@ const lesson05: LessonSeed = {
       content:
         "$\\begin{vmatrix}6&9\\\\1&4\\end{vmatrix} = 3\\begin{vmatrix}2&3\\\\1&4\\end{vmatrix}$. The factor comes out **in front** as a multiplier, because the original row really is 3 times the smaller one. Check: $24 - 9 = 15$ and $3(8 - 3) = 15$. Also, a factor comes out of **one row at a time**. Taking 3 out of the whole matrix would give $3^n$, not 3.",
     },
+    { type: "heading", text: "Numerical warm-ups and the Vandermonde determinant" },
     {
-      type: "text",
-      content:
-        "**Warm-up example (routine): the toolkit on numbers.** Evaluate $\\begin{vmatrix}2&4&6\\\\3&7&10\\\\5&9&17\\end{vmatrix}$.\n\n1. Row 1 has the common factor 2. Take it out: $2\\begin{vmatrix}1&2&3\\\\3&7&10\\\\5&9&17\\end{vmatrix}$. *Why:* a leading 1 makes the next step clean, with no fractions.\n2. $R_2 \\to R_2 - 3R_1$ gives $(0, 1, 1)$, and $R_3 \\to R_3 - 5R_1$ gives $(0, -1, 2)$. *Why:* shears are free, and they empty column 1 below the leading 1.\n3. Expand along column 1, where only the top 1 survives: $2 \\cdot 1 \\cdot \\begin{vmatrix}1&1\\\\-1&2\\end{vmatrix} = 2(2 + 1) = 6$.\n\nCheck by full expansion: $2(119 - 90) - 4(51 - 50) + 6(27 - 35) = 58 - 4 - 48 = 6$. The smart route used one $2\\times2$ determinant instead of three.",
+      type: "worked-example",
+      id: "mx2-5-we1",
+      title: "Warm-up example (routine): the toolkit on numbers",
+      problem: "Evaluate $\\begin{vmatrix}2&4&6\\\\3&7&10\\\\5&9&17\\end{vmatrix}$.",
+      steps: [
+        {
+          text: "Row 1 has the common factor 2. Take it out: $2\\begin{vmatrix}1&2&3\\\\3&7&10\\\\5&9&17\\end{vmatrix}$. *Why:* a leading 1 makes the next step clean, with no fractions.",
+        },
+        {
+          text: "$R_2 \\to R_2 - 3R_1$ gives $(0, 1, 1)$, and $R_3 \\to R_3 - 5R_1$ gives $(0, -1, 2)$. *Why:* shears are free, and they empty column 1 below the leading 1.",
+        },
+        {
+          text: "Expand along column 1, where only the top 1 survives: $2 \\cdot 1 \\cdot \\begin{vmatrix}1&1\\\\-1&2\\end{vmatrix} = 2(2 + 1) = 6$.",
+        },
+        {
+          text: "Check by full expansion: $2(119 - 90) - 4(51 - 50) + 6(27 - 35) = 58 - 4 - 48 = 6$. The smart route used one $2\\times2$ determinant instead of three.",
+        },
+      ],
+      answer: "$6$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1: spot it first.** $\\begin{vmatrix}102&18&36\\\\1&3&4\\\\17&3&6\\end{vmatrix}$.\n\n1. Compare $R_1$ with $R_3$: $102 = 6\\cdot17$, $18 = 6\\cdot3$, $36 = 6\\cdot6$.\n2. So $R_1 = 6R_3$, and proportional rows give determinant $0$. There is nothing to expand.",
+      type: "worked-example",
+      id: "mx2-5-we2",
+      title: "Worked example 1: spot it first",
+      problem: "Evaluate $\\begin{vmatrix}102&18&36\\\\1&3&4\\\\17&3&6\\end{vmatrix}$.",
+      steps: [
+        {
+          text: "Compare $R_1$ with $R_3$: $102 = 6\\cdot17$, $18 = 6\\cdot3$, $36 = 6\\cdot6$.",
+        },
+        {
+          text: "So $R_1 = 6R_3$, and proportional rows give determinant $0$. There is nothing to expand.",
+        },
+      ],
+      answer: "$0$, because $R_1 = 6R_3$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2: the Vandermonde determinant.** Show that $\\begin{vmatrix}1&a&a^2\\\\1&b&b^2\\\\1&c&c^2\\end{vmatrix} = (a-b)(b-c)(c-a)$.\n\n1. $R_2 \\to R_2 - R_1$ and $R_3 \\to R_3 - R_1$ (shears, value unchanged). The new rows are $(0,\\; b-a,\\; b^2-a^2)$ and $(0,\\; c-a,\\; c^2-a^2)$.\n2. Use $b^2 - a^2 = (b-a)(b+a)$. Take $(b-a)$ out of $R_2$ and $(c-a)$ out of $R_3$. The rows become $(0, 1, b+a)$ and $(0, 1, c+a)$.\n3. Expand along column 1, whose only non-zero entry is the 1 at the top: $1 \\cdot \\begin{vmatrix}1&b+a\\\\1&c+a\\end{vmatrix} = (c + a) - (b + a) = c - b$.\n4. Total: $(b-a)(c-a)(c-b)$. Rewrite $(b - a) = -(a-b)$ and $(c - b) = -(b - c)$. The two minus signs cancel, giving $(a-b)(b-c)(c-a)$.",
-    },
-    {
-      type: "math",
-      latex:
-        "\\begin{vmatrix}1&a&a^2\\\\1&b&b^2\\\\1&c&c^2\\end{vmatrix} = (a-b)(b-c)(c-a)",
+      type: "worked-example",
+      id: "mx2-5-we3",
+      title: "Worked example 2: the Vandermonde determinant",
+      problem:
+        "Show that $\\begin{vmatrix}1&a&a^2\\\\1&b&b^2\\\\1&c&c^2\\end{vmatrix} = (a-b)(b-c)(c-a)$.",
+      steps: [
+        {
+          text: "$R_2 \\to R_2 - R_1$ and $R_3 \\to R_3 - R_1$ (shears, value unchanged). The new rows are $(0,\\; b-a,\\; b^2-a^2)$ and $(0,\\; c-a,\\; c^2-a^2)$.",
+        },
+        {
+          text: "Use $b^2 - a^2 = (b-a)(b+a)$. Take $(b-a)$ out of $R_2$ and $(c-a)$ out of $R_3$. The rows become $(0, 1, b+a)$ and $(0, 1, c+a)$.",
+        },
+        {
+          text: "Expand along column 1, whose only non-zero entry is the 1 at the top: $1 \\cdot \\begin{vmatrix}1&b+a\\\\1&c+a\\end{vmatrix} = (c + a) - (b + a) = c - b$.",
+        },
+        {
+          text: "Total: $(b-a)(c-a)(c-b)$. Rewrite $(b - a) = -(a-b)$ and $(c - b) = -(b - c)$. The two minus signs cancel, giving $(a-b)(b-c)(c-a)$.",
+          latex:
+            "\\begin{vmatrix}1&a&a^2\\\\1&b&b^2\\\\1&c&c^2\\end{vmatrix} = (a-b)(b-c)(c-a)",
+        },
+      ],
+      answer: "The determinant equals $(a-b)(b-c)(c-a)$.",
     },
     {
       type: "text",
@@ -954,40 +1352,186 @@ const lesson05: LessonSeed = {
           "Start with R₂ → R₂ − R₁ and R₃ → R₃ − R₁, exactly as in the derivation. Then clear the last entry below the diagonal. The diagonal product should come out as 6.",
       },
     },
+    { type: "heading", text: "Adding rows or columns to expose a factor" },
     {
-      type: "text",
-      content:
-        "**Worked example 3: pulling out $a + b + c$.** Show that $\\begin{vmatrix}a-b-c&2a&2a\\\\2b&b-c-a&2b\\\\2c&2c&c-a-b\\end{vmatrix} = (a+b+c)^3$.\n\n1. $R_1 \\to R_1 + R_2 + R_3$. Each column sums to $a + b + c$: for example, $(a-b-c) + 2b + 2c = a + b + c$. Row 1 becomes $(a+b+c,\\ a+b+c,\\ a+b+c)$.\n2. Take $(a + b + c)$ out of row 1, leaving the row $(1, 1, 1)$.\n3. $C_2 \\to C_2 - C_1$ and $C_3 \\to C_3 - C_1$. Row 1 becomes $(1, 0, 0)$. Row 2 becomes $(2b,\\ -(a+b+c),\\ 0)$ and row 3 becomes $(2c,\\ 0,\\ -(a+b+c))$.\n4. The matrix is now lower triangular, so the determinant is the product of the diagonal: $1 \\cdot (-(a+b+c))^2 = (a+b+c)^2$.\n5. Total: $(a+b+c) \\cdot (a+b+c)^2 = (a+b+c)^3$.",
+      type: "worked-example",
+      id: "mx2-5-we4",
+      title: "Worked example 3: pulling out $a + b + c$",
+      problem:
+        "Show that $\\begin{vmatrix}a-b-c&2a&2a\\\\2b&b-c-a&2b\\\\2c&2c&c-a-b\\end{vmatrix} = (a+b+c)^3$.",
+      steps: [
+        {
+          text: "$R_1 \\to R_1 + R_2 + R_3$. Each column sums to $a + b + c$: for example, $(a-b-c) + 2b + 2c = a + b + c$. Row 1 becomes $(a+b+c,\\ a+b+c,\\ a+b+c)$.",
+        },
+        {
+          text: "Take $(a + b + c)$ out of row 1, leaving the row $(1, 1, 1)$.",
+        },
+        {
+          text: "$C_2 \\to C_2 - C_1$ and $C_3 \\to C_3 - C_1$. Row 1 becomes $(1, 0, 0)$. Row 2 becomes $(2b,\\ -(a+b+c),\\ 0)$ and row 3 becomes $(2c,\\ 0,\\ -(a+b+c))$.",
+        },
+        {
+          text: "The matrix is now lower triangular, so the determinant is the product of the diagonal: $1 \\cdot (-(a+b+c))^2 = (a+b+c)^2$.",
+        },
+        {
+          text: "Total: $(a+b+c) \\cdot (a+b+c)^2 = (a+b+c)^3$.",
+        },
+      ],
+      answer: "The determinant equals $(a+b+c)^3$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx2-5-we5",
+      title: "Worked example 4: an identity with no expansion",
+      problem: "Show $\\begin{vmatrix}1&a&b+c\\\\1&b&c+a\\\\1&c&a+b\\end{vmatrix} = 0$.",
+      steps: [
+        {
+          text: "$C_3 \\to C_3 + C_2$. Every entry of column 3 becomes $a + b + c$.",
+        },
+        {
+          text: "Column 3 is now $(a+b+c)$ times column 1, and proportional columns give 0.",
+        },
+      ],
+      answer: "The determinant is $0$: after $C_3 \\to C_3 + C_2$, column 3 is $(a+b+c)$ times column 1.",
+    },
+    {
+      type: "worked-example",
+      id: "mx2-5-we6",
+      title: "Worked example 5: solving $\\det = 0$",
+      problem:
+        "Solve $\\begin{vmatrix}x+a&x&x\\\\x&x+a&x\\\\x&x&x+a\\end{vmatrix} = 0$, where $a \\ne 0$.",
+      steps: [
+        {
+          text: "$C_1 \\to C_1 + C_2 + C_3$. Every entry of column 1 becomes $3x + a$. Take it out, leaving column 1 as $(1, 1, 1)$.",
+        },
+        {
+          text: "$R_2 \\to R_2 - R_1$ and $R_3 \\to R_3 - R_1$. The rows become $(1, x, x)$, $(0, a, 0)$ and $(0, 0, a)$.",
+        },
+        {
+          text: "That is upper triangular, so it equals $1 \\cdot a \\cdot a = a^2$.",
+        },
+        {
+          text: "The determinant is $a^2(3x + a) = 0$. Since $a \\ne 0$, $x = -\\frac{a}{3}$.",
+        },
+        {
+          text: "Check with $x = a = 1$: $\\begin{vmatrix}2&1&1\\\\1&2&1\\\\1&1&2\\end{vmatrix} = 2(3) - 1(1) + 1(-1) = 4$, and $a^2(3x + a) = 4$.",
+        },
+      ],
+      answer: "$x = -\\frac{a}{3}$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 4: an identity with no expansion.** Show $\\begin{vmatrix}1&a&b+c\\\\1&b&c+a\\\\1&c&a+b\\end{vmatrix} = 0$.\n\n1. $C_3 \\to C_3 + C_2$. Every entry of column 3 becomes $a + b + c$.\n2. Column 3 is now $(a+b+c)$ times column 1, and proportional columns give 0.",
+        "Surprise: the determinant looks cubic in $x$, but it is only linear. Every $x^2$ and $x^3$ term cancels, which the column trick shows at once.",
+    },
+    { type: "heading", text: "The factor theorem and cyclic identities" },
+    {
+      type: "worked-example",
+      id: "mx2-5-we7",
+      title: "Worked example 6: the factor theorem",
+      problem:
+        "Here is a second route to the Vandermonde result, which works without any row operations. Call the determinant $D$ and think of it as a polynomial in $a$, $b$, $c$. Show again that $D = (a-b)(b-c)(c-a)$.",
+      steps: [
+        {
+          text: "Put $a = b$. Then rows 1 and 2 are equal, so $D = 0$. A polynomial that vanishes whenever $a = b$ has $(a - b)$ as a factor.",
+        },
+        {
+          text: "In the same way, $b = c$ makes $R_2 = R_3$ and $c = a$ makes $R_3 = R_1$, so $(b - c)$ and $(c - a)$ are factors too.",
+        },
+        {
+          text: "Degree count: every term of the expansion is a product $1 \\cdot (\\text{a letter}) \\cdot (\\text{a letter})^2$, of total degree 3. The product $(a-b)(b-c)(c-a)$ already has degree 3, so only a constant is left: $D = k(a-b)(b-c)(c-a)$.",
+        },
+        {
+          text: "Fix $k$ by comparing one coefficient. The main diagonal gives the term $1 \\cdot b \\cdot c^2 = bc^2$ in $D$. In $k(a-b)(b-c)(c-a)$, the only way to get $bc^2$ is $(-b)(-c)(c)$, with coefficient $k$. So $k = 1$.",
+        },
+      ],
+      answer: "$k = 1$, so $D = (a-b)(b-c)(c-a)$.",
+      tryFirst: false,
     },
     {
       type: "text",
       content:
-        "**Worked example 5: solving $\\det = 0$.** Solve $\\begin{vmatrix}x+a&x&x\\\\x&x+a&x\\\\x&x&x+a\\end{vmatrix} = 0$, where $a \\ne 0$.\n\n1. $C_1 \\to C_1 + C_2 + C_3$. Every entry of column 1 becomes $3x + a$. Take it out, leaving column 1 as $(1, 1, 1)$.\n2. $R_2 \\to R_2 - R_1$ and $R_3 \\to R_3 - R_1$. The rows become $(1, x, x)$, $(0, a, 0)$ and $(0, 0, a)$.\n3. That is upper triangular, so it equals $1 \\cdot a \\cdot a = a^2$.\n4. The determinant is $a^2(3x + a) = 0$. Since $a \\ne 0$, $x = -\\frac{a}{3}$.\n\nSurprise: the determinant looks cubic in $x$, but it is only linear. Every $x^2$ and $x^3$ term cancels, which the column trick shows at once.\n\nCheck with $x = a = 1$: $\\begin{vmatrix}2&1&1\\\\1&2&1\\\\1&1&2\\end{vmatrix} = 2(3) - 1(1) + 1(-1) = 4$, and $a^2(3x + a) = 4$.",
+        "The method is general: set two letters equal, spot two equal rows, and read off a factor. Then count degrees to see what is left.",
+    },
+    {
+      type: "worked-example",
+      id: "mx2-5-we8",
+      title: "Worked example 7: the circulant",
+      problem:
+        "Show that $\\begin{vmatrix}a&b&c\\\\b&c&a\\\\c&a&b\\end{vmatrix} = -(a+b+c)(a^2+b^2+c^2-ab-bc-ca) = -(a^3+b^3+c^3-3abc)$.",
+      steps: [
+        {
+          text: "$R_1 \\to R_1 + R_2 + R_3$. Each column holds $a$, $b$ and $c$ once, so row 1 becomes $(a+b+c,\\ a+b+c,\\ a+b+c)$. Take $(a + b + c)$ out, leaving row 1 as $(1, 1, 1)$.",
+        },
+        {
+          text: "$C_2 \\to C_2 - C_1$ and $C_3 \\to C_3 - C_1$. The rows become $(1, 0, 0)$, $(b,\\ c-b,\\ a-b)$ and $(c,\\ a-c,\\ b-c)$.",
+        },
+        {
+          text: "Expand along row 1: $(c-b)(b-c) - (a-b)(a-c) = -(b-c)^2 - (a^2 - ab - ac + bc)$.",
+        },
+        {
+          text: "Multiply out: $-(b^2 - 2bc + c^2) - a^2 + ab + ac - bc = -(a^2 + b^2 + c^2 - ab - bc - ca)$.",
+        },
+        {
+          text: "Total: $-(a+b+c)(a^2+b^2+c^2-ab-bc-ca)$, and the identity $a^3+b^3+c^3-3abc = (a+b+c)(a^2+b^2+c^2-ab-bc-ca)$ gives the second form.",
+        },
+        {
+          text: "Check with $a = 1,\\ b = c = 0$: the matrix is $\\begin{pmatrix}1&0&0\\\\0&0&1\\\\0&1&0\\end{pmatrix}$, a single swap of the identity's last two rows, with determinant $-1$. The formula gives $-(1 + 0 + 0 - 0) = -1$.",
+        },
+      ],
+      answer: "The determinant equals $-(a+b+c)(a^2+b^2+c^2-ab-bc-ca) = -(a^3+b^3+c^3-3abc)$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx2-5-we9",
+      title: "Worked example 8 (exam style): a Vandermonde cousin",
+      problem:
+        "Prove that $\\begin{vmatrix}1&1&1\\\\a&b&c\\\\a^3&b^3&c^3\\end{vmatrix} = (a-b)(b-c)(c-a)(a+b+c)$.",
+      steps: [
+        {
+          text: "$C_2 \\to C_2 - C_1$ and $C_3 \\to C_3 - C_1$ (shears, value unchanged). Row 1 becomes $(1, 0, 0)$, row 2 becomes $(a,\\ b-a,\\ c-a)$ and row 3 becomes $(a^3,\\ b^3-a^3,\\ c^3-a^3)$.",
+        },
+        {
+          text: "Factor: $b^3 - a^3 = (b-a)(b^2+ab+a^2)$ and $c^3 - a^3 = (c-a)(c^2+ca+a^2)$. Take $(b-a)$ out of column 2 and $(c-a)$ out of column 3. *Why:* the answer is a product, so we pull factors out as soon as they appear.",
+        },
+        {
+          text: "Expand along row 1: $(b-a)(c-a)\\begin{vmatrix}1&1\\\\b^2+ab+a^2&c^2+ca+a^2\\end{vmatrix}$.",
+        },
+        {
+          text: "The $2\\times2$ is $(c^2 + ca + a^2) - (b^2 + ab + a^2) = (c^2 - b^2) + a(c - b) = (c - b)(c + b + a)$.",
+        },
+        {
+          text: "Total: $(b-a)(c-a)(c-b)(a+b+c)$. Writing $(b-a) = -(a-b)$ and $(c-b) = -(b-c)$, the two minus signs cancel: $(a-b)(b-c)(c-a)(a+b+c)$.",
+        },
+        {
+          text: "Check with $a, b, c = 1, 2, 3$: direct expansion of $\\begin{vmatrix}1&1&1\\\\1&2&3\\\\1&8&27\\end{vmatrix}$ gives $1(54 - 24) - 1(27 - 3) + 1(8 - 2) = 12$, and the formula gives $(-1)(-1)(2)(6) = 12$.",
+        },
+      ],
+      answer: "The determinant equals $(a-b)(b-c)(c-a)(a+b+c)$.",
+    },
+    { type: "heading", text: "Larger determinants: reduce, don't expand" },
+    {
+      type: "worked-example",
+      id: "mx2-5-we10",
+      title: "Worked example 9 (application): why computers never expand",
+      problem:
+        "Evaluate the $4\\times4$ determinant $\\begin{vmatrix}1&2&0&1\\\\2&5&1&3\\\\0&1&3&2\\\\1&3&2&4\\end{vmatrix}$.",
+      steps: [
+        {
+          text: "$R_2 \\to R_2 - 2R_1$ gives $(0, 1, 1, 1)$, and $R_4 \\to R_4 - R_1$ gives $(0, 1, 2, 3)$. Row 3 already starts with 0.",
+        },
+        {
+          text: "Expand down column 1 (only the top 1 survives): $\\begin{vmatrix}1&1&1\\\\1&3&2\\\\1&2&3\\end{vmatrix}$.",
+        },
+        {
+          text: "$R_2 \\to R_2 - R_1$ gives $(0, 2, 1)$ and $R_3 \\to R_3 - R_1$ gives $(0, 1, 2)$. Expand again: $\\begin{vmatrix}2&1\\\\1&2\\end{vmatrix} = 4 - 1 = 3$.",
+        },
+      ],
+      answer: "The determinant is $3$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 6: the factor theorem.** Here is a second route to the Vandermonde result, which works without any row operations. Call the determinant $D$ and think of it as a polynomial in $a$, $b$, $c$.\n\n1. Put $a = b$. Then rows 1 and 2 are equal, so $D = 0$. A polynomial that vanishes whenever $a = b$ has $(a - b)$ as a factor.\n2. In the same way, $b = c$ makes $R_2 = R_3$ and $c = a$ makes $R_3 = R_1$, so $(b - c)$ and $(c - a)$ are factors too.\n3. Degree count: every term of the expansion is a product $1 \\cdot (\\text{a letter}) \\cdot (\\text{a letter})^2$, of total degree 3. The product $(a-b)(b-c)(c-a)$ already has degree 3, so only a constant is left: $D = k(a-b)(b-c)(c-a)$.\n4. Fix $k$ by comparing one coefficient. The main diagonal gives the term $1 \\cdot b \\cdot c^2 = bc^2$ in $D$. In $k(a-b)(b-c)(c-a)$, the only way to get $bc^2$ is $(-b)(-c)(c)$, with coefficient $k$. So $k = 1$.\n\nThe method is general: set two letters equal, spot two equal rows, and read off a factor. Then count degrees to see what is left.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 7: the circulant.** Show that $\\begin{vmatrix}a&b&c\\\\b&c&a\\\\c&a&b\\end{vmatrix} = -(a+b+c)(a^2+b^2+c^2-ab-bc-ca) = -(a^3+b^3+c^3-3abc)$.\n\n1. $R_1 \\to R_1 + R_2 + R_3$. Each column holds $a$, $b$ and $c$ once, so row 1 becomes $(a+b+c,\\ a+b+c,\\ a+b+c)$. Take $(a + b + c)$ out, leaving row 1 as $(1, 1, 1)$.\n2. $C_2 \\to C_2 - C_1$ and $C_3 \\to C_3 - C_1$. The rows become $(1, 0, 0)$, $(b,\\ c-b,\\ a-b)$ and $(c,\\ a-c,\\ b-c)$.\n3. Expand along row 1: $(c-b)(b-c) - (a-b)(a-c) = -(b-c)^2 - (a^2 - ab - ac + bc)$.\n4. Multiply out: $-(b^2 - 2bc + c^2) - a^2 + ab + ac - bc = -(a^2 + b^2 + c^2 - ab - bc - ca)$.\n5. Total: $-(a+b+c)(a^2+b^2+c^2-ab-bc-ca)$, and the identity $a^3+b^3+c^3-3abc = (a+b+c)(a^2+b^2+c^2-ab-bc-ca)$ gives the second form.\n\nCheck with $a = 1,\\ b = c = 0$: the matrix is $\\begin{pmatrix}1&0&0\\\\0&0&1\\\\0&1&0\\end{pmatrix}$, a single swap of the identity's last two rows, with determinant $-1$. The formula gives $-(1 + 0 + 0 - 0) = -1$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 8 (exam style): a Vandermonde cousin.** Prove that $\\begin{vmatrix}1&1&1\\\\a&b&c\\\\a^3&b^3&c^3\\end{vmatrix} = (a-b)(b-c)(c-a)(a+b+c)$.\n\n1. $C_2 \\to C_2 - C_1$ and $C_3 \\to C_3 - C_1$ (shears, value unchanged). Row 1 becomes $(1, 0, 0)$, row 2 becomes $(a,\\ b-a,\\ c-a)$ and row 3 becomes $(a^3,\\ b^3-a^3,\\ c^3-a^3)$.\n2. Factor: $b^3 - a^3 = (b-a)(b^2+ab+a^2)$ and $c^3 - a^3 = (c-a)(c^2+ca+a^2)$. Take $(b-a)$ out of column 2 and $(c-a)$ out of column 3. *Why:* the answer is a product, so we pull factors out as soon as they appear.\n3. Expand along row 1: $(b-a)(c-a)\\begin{vmatrix}1&1\\\\b^2+ab+a^2&c^2+ca+a^2\\end{vmatrix}$.\n4. The $2\\times2$ is $(c^2 + ca + a^2) - (b^2 + ab + a^2) = (c^2 - b^2) + a(c - b) = (c - b)(c + b + a)$.\n5. Total: $(b-a)(c-a)(c-b)(a+b+c)$. Writing $(b-a) = -(a-b)$ and $(c-b) = -(b-c)$, the two minus signs cancel: $(a-b)(b-c)(c-a)(a+b+c)$.\n\nCheck with $a, b, c = 1, 2, 3$: direct expansion of $\\begin{vmatrix}1&1&1\\\\1&2&3\\\\1&8&27\\end{vmatrix}$ gives $1(54 - 24) - 1(27 - 3) + 1(8 - 2) = 12$, and the formula gives $(-1)(-1)(2)(6) = 12$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 9 (application): why computers never expand.** Evaluate the $4\\times4$ determinant $\\begin{vmatrix}1&2&0&1\\\\2&5&1&3\\\\0&1&3&2\\\\1&3&2&4\\end{vmatrix}$.\n\n1. $R_2 \\to R_2 - 2R_1$ gives $(0, 1, 1, 1)$, and $R_4 \\to R_4 - R_1$ gives $(0, 1, 2, 3)$. Row 3 already starts with 0.\n2. Expand down column 1 (only the top 1 survives): $\\begin{vmatrix}1&1&1\\\\1&3&2\\\\1&2&3\\end{vmatrix}$.\n3. $R_2 \\to R_2 - R_1$ gives $(0, 2, 1)$ and $R_3 \\to R_3 - R_1$ gives $(0, 1, 2)$. Expand again: $\\begin{vmatrix}2&1\\\\1&2\\end{vmatrix} = 4 - 1 = 3$.\n\nSo the determinant is 3. *Why this matters:* full cofactor expansion of an $n\\times n$ determinant has $n!$ terms. For $n = 20$ that is $20! \\approx 2.4 \\times 10^{18}$ products, which would take a computer doing a billion per second about 77 years. Clearing columns with shears takes roughly $\\frac{n^3}{3} \\approx 2700$ operations, a tiny fraction of a second. Every spreadsheet and scientific library computes determinants this way.",
+        "*Why this matters:* full cofactor expansion of an $n\\times n$ determinant has $n!$ terms. For $n = 20$ that is $20! \\approx 2.4 \\times 10^{18}$ products, which would take a computer doing a billion per second about 77 years. Clearing columns with shears takes roughly $\\frac{n^3}{3} \\approx 2700$ operations, a tiny fraction of a second. Every spreadsheet and scientific library computes determinants this way.",
     },
     {
       type: "callout",
@@ -996,6 +1540,7 @@ const lesson05: LessonSeed = {
       content:
         "When solving $\\det = 0$, a factor you take out, such as $(3x + a)$ or $(x - 3)$, is part of the answer. Setting each factor to zero gives every root. Dividing the equation by a factor that contains $x$ throws roots away.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx2-5-q1",
@@ -1102,6 +1647,7 @@ const lesson06: LessonSeed = {
       content:
         "A triangle with vertices $P_1(x_1, y_1)$, $P_2(x_2, y_2)$, $P_3(x_3, y_3)$ is half of a parallelogram. In 2.1 we learned how to find a parallelogram's area from a determinant. The only obstacle is that the triangle need not have a corner at the origin.",
     },
+    { type: "heading", text: "Deriving the triangle area formula" },
     {
       type: "text",
       content:
@@ -1153,16 +1699,53 @@ const lesson06: LessonSeed = {
       content:
         "$\\Delta = \\frac{1}{2}\\left|\\begin{vmatrix}x_1&y_1&1\\\\x_2&y_2&1\\\\x_3&y_3&1\\end{vmatrix}\\right|$.\n\nThe modulus is essential. The determinant is positive when the vertices are listed anticlockwise and negative when they are listed clockwise.",
     },
+    { type: "heading", text: "Computing triangle and field areas" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** The triangle $(1, 0)$, $(6, 0)$, $(4, 3)$.\n\n1. $\\begin{vmatrix}1&0&1\\\\6&0&1\\\\4&3&1\\end{vmatrix} = 1(0 - 3) - 0 + 1(18 - 0) = -3 + 18 = 15$.\n2. $\\Delta = \\frac{1}{2} \\cdot 15 = 7.5$.\n3. Check with base and height: the base from $(1,0)$ to $(6,0)$ is 5, the height is 3, and $\\frac{1}{2} \\cdot 5 \\cdot 3 = 7.5$.",
+      type: "worked-example",
+      id: "mx2-6-we1",
+      title: "Worked example 1",
+      problem: "Find the area of the triangle with vertices $(1, 0)$, $(6, 0)$, $(4, 3)$.",
+      steps: [
+        {
+          text: "$\\begin{vmatrix}1&0&1\\\\6&0&1\\\\4&3&1\\end{vmatrix} = 1(0 - 3) - 0 + 1(18 - 0) = -3 + 18 = 15$.",
+        },
+        {
+          text: "$\\Delta = \\frac{1}{2} \\cdot 15 = 7.5$.",
+        },
+        {
+          text: "Check with base and height: the base from $(1,0)$ to $(6,0)$ is 5, the height is 3, and $\\frac{1}{2} \\cdot 5 \\cdot 3 = 7.5$.",
+        },
+      ],
+      answer: "$\\Delta = 7.5$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx2-6-we2",
+      title: "Worked example 1b (application): surveying a field",
+      problem:
+        "A surveyor marks the corners of a four-sided field, in metres, at $A(0, 0)$, $B(8, 0)$, $C(10, 6)$ and $D(2, 8)$, going round anticlockwise. What is its area?",
+      steps: [
+        {
+          text: "Cut along the diagonal $AC$ into triangles $ABC$ and $ACD$. *Why:* the formula handles triangles, and any convex polygon splits into triangles from one corner.",
+        },
+        {
+          text: "$ABC$: $\\begin{vmatrix}0&0&1\\\\8&0&1\\\\10&6&1\\end{vmatrix}$. Row 1 has two zeros, so expand along it: $+1 \\cdot \\begin{vmatrix}8&0\\\\10&6\\end{vmatrix} = 48$. Area $24\\ \\text{m}^2$.",
+        },
+        {
+          text: "$ACD$: $\\begin{vmatrix}0&0&1\\\\10&6&1\\\\2&8&1\\end{vmatrix} = +1 \\cdot \\begin{vmatrix}10&6\\\\2&8\\end{vmatrix} = 80 - 12 = 68$. Area $34\\ \\text{m}^2$.",
+        },
+        {
+          text: "Total: $24 + 34 = 58\\ \\text{m}^2$.",
+        },
+      ],
+      answer: "$58\\ \\text{m}^2$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 1b (application): surveying a field.** A surveyor marks the corners of a four-sided field, in metres, at $A(0, 0)$, $B(8, 0)$, $C(10, 6)$ and $D(2, 8)$, going round anticlockwise. What is its area?\n\n1. Cut along the diagonal $AC$ into triangles $ABC$ and $ACD$. *Why:* the formula handles triangles, and any convex polygon splits into triangles from one corner.\n2. $ABC$: $\\begin{vmatrix}0&0&1\\\\8&0&1\\\\10&6&1\\end{vmatrix}$. Row 1 has two zeros, so expand along it: $+1 \\cdot \\begin{vmatrix}8&0\\\\10&6\\end{vmatrix} = 48$. Area $24\\ \\text{m}^2$.\n3. $ACD$: $\\begin{vmatrix}0&0&1\\\\10&6&1\\\\2&8&1\\end{vmatrix} = +1 \\cdot \\begin{vmatrix}10&6\\\\2&8\\end{vmatrix} = 80 - 12 = 68$. Area $34\\ \\text{m}^2$.\n4. Total: $24 + 34 = 58\\ \\text{m}^2$.\n\n*Why both determinants came out positive:* both triangles were listed anticlockwise, in the same direction as the field. Surveyors' software (the \"shoelace formula\") is exactly this sum of signed triangle areas, which is why it works for any simple polygon listed in order.",
+        "*Why both determinants came out positive:* both triangles were listed anticlockwise, in the same direction as the field. Surveyors' software (the \"shoelace formula\") is exactly this sum of signed triangle areas, which is why it works for any simple polygon listed in order.",
     },
+    { type: "heading", text: "Collinearity and the line through two points" },
     {
       type: "callout",
       variant: "info",
@@ -1171,14 +1754,46 @@ const lesson06: LessonSeed = {
         "Three points lie on one line exactly when the triangle they form has zero area:\n$\\begin{vmatrix}x_1&y_1&1\\\\x_2&y_2&1\\\\x_3&y_3&1\\end{vmatrix} = 0$.\nThis is the same idea as 2.2: the edges $\\mathbf{u}$ and $\\mathbf{v}$ are parallel.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (collinear).** Are $(1, 2)$, $(3, 6)$, $(-2, -4)$ collinear?\n\n$\\begin{vmatrix}1&2&1\\\\3&6&1\\\\-2&-4&1\\end{vmatrix} = 1(6 + 4) - 2(3 + 2) + 1(-12 + 12) = 10 - 10 + 0 = 0$. Yes, they all lie on $y = 2x$.",
+      type: "worked-example",
+      id: "mx2-6-we3",
+      title: "Worked example 2",
+      problem: "Are $(1, 2)$, $(3, 6)$, $(-2, -4)$ collinear?",
+      steps: [
+        {
+          text: "$\\begin{vmatrix}1&2&1\\\\3&6&1\\\\-2&-4&1\\end{vmatrix} = 1(6 + 4) - 2(3 + 2) + 1(-12 + 12) = 10 - 10 + 0 = 0$.",
+        },
+      ],
+      answer: "Yes, they all lie on $y = 2x$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx2-6-we4",
+      title: "Worked example 2b (exam style)",
+      problem:
+        "Find $k$ if the points $(k,\\ 2 - 2k)$, $(1 - k,\\ 2k)$ and $(-4 - k,\\ 6 - 2k)$ are collinear.",
+      steps: [
+        {
+          text: "Set the coordinate determinant to zero. Expanding directly is messy, so first apply $R_2 \\to R_2 - R_1$ and $R_3 \\to R_3 - R_1$. *Why:* shears keep the value and clear the column of 1s.",
+        },
+        {
+          text: "The new rows are $(1 - 2k,\\ 4k - 2,\\ 0)$ and $(-4 - 2k,\\ 4,\\ 0)$. Expand along column 3, where only the top 1 survives (sign $+$): $\\begin{vmatrix}1-2k&4k-2\\\\-4-2k&4\\end{vmatrix} =4(1 - 2k) + (4k - 2)(4 + 2k) = 4 - 8k + 8k^2 + 12k - 8 = 8k^2 + 4k - 4$.",
+        },
+        {
+          text: "$8k^2 + 4k - 4 = 4(2k - 1)(k + 1) = 0$, so $k = \\frac{1}{2}$ or $k = -1$.",
+        },
+        {
+          text: "Check $k = -1$: the points are $(-1, 4)$, $(2, -2)$, $(-3, 8)$. The slopes from $(-1, 4)$ are $\\frac{-6}{3} = -2$ and $\\frac{4}{-2} = -2$. Collinear.",
+        },
+        {
+          text: "Check $k = \\frac{1}{2}$: the points are $(\\frac{1}{2}, 1)$, $(\\frac{1}{2}, 1)$, $(-\\frac{9}{2}, 5)$. Two of them coincide, so they are collinear only trivially.",
+        },
+      ],
+      answer: "$k = \\frac{1}{2}$ or $k = -1$ (only $k = -1$ gives three distinct points).",
     },
     {
       type: "text",
       content:
-        "**Worked example 2b (exam style).** Find $k$ if the points $(k,\\ 2 - 2k)$, $(1 - k,\\ 2k)$ and $(-4 - k,\\ 6 - 2k)$ are collinear.\n\n1. Set the coordinate determinant to zero. Expanding directly is messy, so first apply $R_2 \\to R_2 - R_1$ and $R_3 \\to R_3 - R_1$. *Why:* shears keep the value and clear the column of 1s.\n2. The new rows are $(1 - 2k,\\ 4k - 2,\\ 0)$ and $(-4 - 2k,\\ 4,\\ 0)$. Expand along column 3, where only the top 1 survives (sign $+$):\n3. $\\begin{vmatrix}1-2k&4k-2\\\\-4-2k&4\\end{vmatrix} = 4(1 - 2k) + (4k - 2)(4 + 2k) = 4 - 8k + 8k^2 + 12k - 8 = 8k^2 + 4k - 4$.\n4. $8k^2 + 4k - 4 = 4(2k - 1)(k + 1) = 0$, so $k = \\frac{1}{2}$ or $k = -1$.\n5. Check $k = -1$: the points are $(-1, 4)$, $(2, -2)$, $(-3, 8)$. The slopes from $(-1, 4)$ are $\\frac{-6}{3} = -2$ and $\\frac{4}{-2} = -2$. Collinear.\n6. Check $k = \\frac{1}{2}$: the points are $(\\frac{1}{2}, 1)$, $(\\frac{1}{2}, 1)$, $(-\\frac{9}{2}, 5)$. Two of them coincide, so they are collinear only trivially.\n\nMost answer keys list both values. If the question insists on three **distinct** points, only $k = -1$ survives. Checking your roots is what exposes this.",
+        "Most answer keys list both values. If the question insists on three **distinct** points, only $k = -1$ survives. Checking your roots is what exposes this.",
     },
     {
       type: "text",
@@ -1190,14 +1805,47 @@ const lesson06: LessonSeed = {
       latex: "\\begin{vmatrix}x&y&1\\\\x_1&y_1&1\\\\x_2&y_2&1\\end{vmatrix} = 0",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3.** The line through $(2, 1)$ and $(4, 5)$.\n\n1. $\\begin{vmatrix}x&y&1\\\\2&1&1\\\\4&5&1\\end{vmatrix} = x(1 - 5) - y(2 - 4) + 1(10 - 4) = -4x + 2y + 6$.\n2. Set it to zero: $2y = 4x - 6$, so $y = 2x - 3$.\n3. Check: $(2, 1)$ gives $4 - 3 = 1$, and $(4, 5)$ gives $8 - 3 = 5$.",
+      type: "worked-example",
+      id: "mx2-6-we5",
+      title: "Worked example 3",
+      problem: "Find the equation of the line through $(2, 1)$ and $(4, 5)$.",
+      steps: [
+        {
+          text: "$\\begin{vmatrix}x&y&1\\\\2&1&1\\\\4&5&1\\end{vmatrix} = x(1 - 5) - y(2 - 4) + 1(10 - 4) = -4x + 2y + 6$.",
+        },
+        {
+          text: "Set it to zero: $2y = 4x - 6$, so $y = 2x - 3$.",
+        },
+        {
+          text: "Check: $(2, 1)$ gives $4 - 3 = 1$, and $(4, 5)$ gives $8 - 3 = 5$.",
+        },
+      ],
+      answer: "$y = 2x - 3$.",
     },
+    { type: "heading", text: "Working backwards from a given area" },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (find $k$ from an area).** The triangle $(k, 0)$, $(4, 0)$, $(0, 2)$ has area 4. Find $k$.\n\n1. $\\begin{vmatrix}k&0&1\\\\4&0&1\\\\0&2&1\\end{vmatrix} = k(0 - 2) - 0 + 1(8 - 0) = 8 - 2k$.\n2. $\\frac{1}{2}|8 - 2k| = 4$, so $|8 - 2k| = 8$.\n3. The modulus gives **two** equations: $8 - 2k = 8$ or $8 - 2k = -8$.\n4. $k = 0$ or $k = 8$.\n\nBoth are genuine. $(0,0), (4,0), (0,2)$ and $(8,0), (4,0), (0,2)$ each have base 4 on the x-axis and height 2.",
+      type: "worked-example",
+      id: "mx2-6-we6",
+      title: "Worked example 4 (find $k$ from an area)",
+      problem: "The triangle $(k, 0)$, $(4, 0)$, $(0, 2)$ has area 4. Find $k$.",
+      steps: [
+        {
+          text: "$\\begin{vmatrix}k&0&1\\\\4&0&1\\\\0&2&1\\end{vmatrix} = k(0 - 2) - 0 + 1(8 - 0) = 8 - 2k$.",
+        },
+        {
+          text: "$\\frac{1}{2}|8 - 2k| = 4$, so $|8 - 2k| = 8$.",
+        },
+        {
+          text: "The modulus gives **two** equations: $8 - 2k = 8$ or $8 - 2k = -8$.",
+        },
+        {
+          text: "$k = 0$ or $k = 8$.",
+        },
+        {
+          text: "Both are genuine. $(0,0), (4,0), (0,2)$ and $(8,0), (4,0), (0,2)$ each have base 4 on the x-axis and height 2.",
+        },
+      ],
+      answer: "$k = 0$ or $k = 8$.",
     },
     {
       type: "callout",
@@ -1206,6 +1854,7 @@ const lesson06: LessonSeed = {
       content:
         "Writing $\\frac{1}{2}(8 - 2k) = 4$ finds only $k = 0$ and misses the triangle on the other side. An area condition almost always produces two values, one for each orientation of the vertices.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx2-6-q1",

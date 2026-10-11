@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { z } from "zod";
 import type { rightTriangleExplorerSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { formatNumber } from "./function-plot";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 
@@ -161,8 +162,8 @@ export function RightTriangleExplorer({ config }: { config: Config }) {
       </div>
 
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ??
-          "Move the size slider: every length changes, and every ratio stays put. Move the angle: only then do the ratios move."}
+        <RichText text={config.caption ??
+          "Move the size slider: every length changes, and every ratio stays put. Move the angle: only then do the ratios move."} />
       </p>
     </InteractiveFrame>
   );

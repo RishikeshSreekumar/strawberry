@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { z } from "zod";
 import type { mrgRollingLabSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { InteractiveFrame, Latex } from "./ui";
 import {
   G,
@@ -200,8 +201,8 @@ function VelocitiesLab({ config }: { config: Config }) {
         )}
       </ReadoutBox>
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ??
-          "Every point's velocity is the centre's velocity plus ω × r. Find the ω that makes the bottom point stop: that is rolling without slipping."}
+        <RichText text={config.caption ??
+          "Every point's velocity is the centre's velocity plus ω × r. Find the ω that makes the bottom point stop: that is rolling without slipping."} />
       </p>
     </InteractiveFrame>
   );
@@ -369,7 +370,7 @@ function InclineLab({ config }: { config: Config }) {
         <ReadoutLine latex={`\\text{slope length } L = ${fmt(L)}\\ \\text{m}, \\quad t = \\sqrt{2L/a}`} />
       </ReadoutBox>
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ?? "Mass and radius cancel: only the shape (k²/R²) decides the order. The smaller the share of energy locked in spin, the faster the body."}
+        <RichText text={config.caption ?? "Mass and radius cancel: only the shape (k²/R²) decides the order. The smaller the share of energy locked in spin, the faster the body."} />
       </p>
     </InteractiveFrame>
   );
@@ -466,7 +467,7 @@ function SlipLab({ config }: { config: Config }) {
         {config.showEnergy && Ki > 1e-12 && <ReadoutLine latex={`\\frac{K_f}{K_i} = ${fmt(Kf / Ki)}`} note="the rest is lost to kinetic friction while slipping" />}
       </ReadoutBox>
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ?? "Friction slows the centre and spins the ball up (or down) until v = ωR. After that it has nothing to do."}
+        <RichText text={config.caption ?? "Friction slows the centre and spins the ball up (or down) until v = ωR. After that it has nothing to do."} />
       </p>
     </InteractiveFrame>
   );

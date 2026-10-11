@@ -23,14 +23,23 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
-      type: "text",
-      content:
-        "Stand in front of a bathroom mirror that is only half as tall as you, hung at the right height, and you can see yourself from the top of your head to your shoes. Step back and you still see all of you, no more and no less. That sounds like a trick, but it follows from one rule about how light bounces, plus the fact that light travels in straight lines. By the end of this lesson you will be able to prove it with two pairs of similar triangles.",
+      type: "video",
+      src: "/videos/omp-0-reflection-and-refraction.mp4",
+      poster: "/videos/omp-0-reflection-and-refraction.jpg",
+      title: "Chapter 0 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
     },
     {
       type: "text",
       content:
-        "**The ray model.** Light is a wave with a wavelength of about $400$ to $700$ nm. Mirrors, lenses, people and rooms are millions of times bigger than that. When every object in the problem is much larger than the wavelength, the wave behaves as if its energy travels along straight lines called **rays**. A ray is the direction the light is going; a narrow beam from a torch is a good picture of a bundle of rays. Rays fail only when slits, films or apertures shrink to a few wavelengths, and that is the business of Chapter 2 (wave optics).",
+        "Stand in front of a bathroom mirror that is only half as tall as you, hung at the right height, and you can see yourself from the top of your head to your shoes. Step back and you still see all of you, no more and no less. That sounds like a trick, but it follows from one rule about how light bounces, plus the fact that light travels in straight lines. By the end of this lesson you will be able to prove it with two pairs of similar triangles.",
+    },
+    { type: "heading", text: "The ray model" },
+    {
+      type: "text",
+      content:
+        "Light is a wave with a wavelength of about $400$ to $700$ nm. Mirrors, lenses, people and rooms are millions of times bigger than that. When every object in the problem is much larger than the wavelength, the wave behaves as if its energy travels along straight lines called **rays**. A ray is the direction the light is going; a narrow beam from a torch is a good picture of a bundle of rays. Rays fail only when slits, films or apertures shrink to a few wavelengths, and that is the business of Chapter 2 (wave optics).",
     },
     {
       type: "callout",
@@ -39,10 +48,11 @@ const lesson01: LessonSeed = {
       content:
         "At the point where a ray meets a mirror, draw the **normal** (the line perpendicular to the surface). Measure angles from the normal, not from the surface.\n1. The incident ray, the reflected ray and the normal lie in one plane.\n2. The angle of reflection equals the angle of incidence: $r = i$.\nThese hold for every mirror, flat or curved, because a small enough patch of a curved mirror is flat.",
     },
+    { type: "heading", text: "How a plane mirror makes an image" },
     {
       type: "text",
       content:
-        "**How a plane mirror makes an image.** Take a point object O at distance $x$ in front of a mirror. Rays leave O in all directions; each obeys $r = i$. Draw two of them. The reflected rays spread apart (diverge), so they never actually meet in front of the mirror. But if your eye catches them and traces them straight back, they appear to come from a single point I behind the mirror. The triangle made by O, the point where a ray strikes, and the foot of the perpendicular is congruent to the triangle made with I (same angle, shared side), so I is exactly as far behind the mirror as O is in front.",
+        "Take a point object O at distance $x$ in front of a mirror. Rays leave O in all directions; each obeys $r = i$. Draw two of them. The reflected rays spread apart (diverge), so they never actually meet in front of the mirror. But if your eye catches them and traces them straight back, they appear to come from a single point I behind the mirror. The triangle made by O, the point where a ray strikes, and the foot of the perpendicular is congruent to the triangle made with I (same angle, shared side), so I is exactly as far behind the mirror as O is in front.",
     },
     {
       type: "callout",
@@ -71,6 +81,7 @@ const lesson01: LessonSeed = {
       content:
         "What you should have seen: the reflected rays always diverge, their extensions always meet behind the mirror, and the readout always shows $v = -u$ with magnification $+1$. Moving the object 5 cm closer moves the image 5 cm closer from the other side, so object and image approach each other by 10 cm.",
     },
+    { type: "heading", text: "Three plane-mirror results" },
     {
       type: "text",
       content:
@@ -112,20 +123,71 @@ const lesson01: LessonSeed = {
         ["$\\theta = 0$ (parallel mirrors)", "anywhere", "infinitely many"],
       ],
     },
+    { type: "heading", text: "Worked examples: rotation and image speed" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (rotation of the reflected ray).** A ray strikes a plane mirror at $i = 30^\\circ$. The mirror is turned by $10^\\circ$ so that the angle of incidence becomes $40^\\circ$. Through what angle does the reflected ray turn?\n\n1. Old deviation: $\\delta_1 = 180^\\circ - 2(30^\\circ) = 120^\\circ$. *Why this step:* the deviation tells you where the reflected ray points relative to the fixed incident ray.\n2. New deviation: $\\delta_2 = 180^\\circ - 2(40^\\circ) = 100^\\circ$.\n3. The reflected ray has turned by $120^\\circ - 100^\\circ = 20^\\circ = 2 \\times 10^\\circ$. ✓\n\n**Worked example 2 (the mirror you need).** A girl 1.60 m tall has her eyes 10 cm below the top of her head. Find the shortest plane mirror in which she can see her full image, and where its lower edge must be.\n\n1. Eyes at $e = 1.50$ m. The top edge sits at the midpoint of eye and head: $\\frac{1.50 + 1.60}{2} = 1.55$ m. *Why this step:* the ray from the top of her head must reflect halfway (in height) between the head and the eye.\n2. The lower edge sits at the midpoint of eye and feet: $\\frac{1.50 + 0}{2} = 0.75$ m above the floor.\n3. Length $= 1.55 - 0.75 = 0.80$ m $= H/2$. ✓ Any distance from the mirror works.",
+      type: "worked-example",
+      id: "omp0-1-we1",
+      title: "Worked example 1 (rotation of the reflected ray)",
+      problem:
+        "A ray strikes a plane mirror at $i = 30^\\circ$. The mirror is turned by $10^\\circ$ so that the angle of incidence becomes $40^\\circ$. Through what angle does the reflected ray turn?",
+      steps: [
+        { text: "Old deviation: $\\delta_1 = 180^\\circ - 2(30^\\circ) = 120^\\circ$. *Why this step:* the deviation tells you where the reflected ray points relative to the fixed incident ray." },
+        { text: "New deviation: $\\delta_2 = 180^\\circ - 2(40^\\circ) = 100^\\circ$." },
+        { text: "The reflected ray has turned by $120^\\circ - 100^\\circ = 20^\\circ = 2 \\times 10^\\circ$. ✓" },
+      ],
+      answer: "The reflected ray turns through $20^\\circ$, twice the mirror's rotation.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (speed of an image).** Put the mirror along a vertical line at position $x_M$ and the object at $x_O$. The image is as far behind as the object is in front, so\n\n1. $x_I - x_M = x_M - x_O$, giving $x_I = 2x_M - x_O$. *Why this step:* a position equation can be differentiated; a sentence cannot.\n2. Differentiate: $v_I = 2v_M - v_O$ for the velocity components **perpendicular** to the mirror. Components parallel to the mirror are copied unchanged.\n3. (a) A man stands still and the mirror moves away from him at 2 m/s: $v_I = 2(2) - 0 = 4$ m/s away from him. The image moves at **twice** the mirror's speed.\n4. (b) The mirror is fixed and the man walks towards it at 3 m/s: $v_I = 0 - 3 = -3$, so the image walks towards the mirror at 3 m/s from the other side. Relative to the man it approaches at $3 + 3 = 6$ m/s.",
+      type: "worked-example",
+      id: "omp0-1-we2",
+      title: "Worked example 2 (the mirror you need)",
+      problem:
+        "A girl 1.60 m tall has her eyes 10 cm below the top of her head. Find the shortest plane mirror in which she can see her full image, and where its lower edge must be.",
+      steps: [
+        { text: "Eyes at $e = 1.50$ m. The top edge sits at the midpoint of eye and head: $\\frac{1.50 + 1.60}{2} = 1.55$ m. *Why this step:* the ray from the top of her head must reflect halfway (in height) between the head and the eye." },
+        { text: "The lower edge sits at the midpoint of eye and feet: $\\frac{1.50 + 0}{2} = 0.75$ m above the floor." },
+        { text: "Length $= 1.55 - 0.75 = 0.80$ m $= H/2$. ✓ Any distance from the mirror works." },
+      ],
+      answer: "A mirror 0.80 m long ($H/2$), top edge 1.55 m and lower edge 0.75 m above the floor.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (a velocity vector, JEE Main style).** A plane mirror lies along the y-axis. An insect in front of it moves with velocity $(3\\hat i + 4\\hat j)$ m/s. Find the velocity of its image and the image's speed relative to the insect.\n\n1. The x-component is perpendicular to the mirror, so it flips: $-3\\hat i$. The y-component is parallel, so it stays: $4\\hat j$. *Why this step:* reflection reverses only the front–back direction.\n2. $\\vec v_I = (-3\\hat i + 4\\hat j)$ m/s, speed 5 m/s, the same as the insect's.\n3. Relative velocity: $\\vec v_I - \\vec v_O = -6\\hat i$, so 6 m/s straight towards (or away from) the insect along the normal.\n\n**Worked example 5 (counting images).** (a) Mirrors at $60^\\circ$: $m = 360/60 = 6$, even, so $6 - 1 = 5$ images wherever the object is. (b) Mirrors at $72^\\circ$: $m = 5$, odd, so 4 images if the object is on the bisector and 5 if it is not. *Why this step:* when $m$ is odd, the last two images coincide only when the object is placed symmetrically.",
+      type: "worked-example",
+      id: "omp0-1-we3",
+      title: "Worked example 3 (speed of an image)",
+      problem:
+        "Put the mirror along a vertical line at position $x_M$ and the object at $x_O$. Find the velocity of the image in terms of the velocities of the mirror and the object. Then find the image's velocity when (a) a man stands still and the mirror moves away from him at 2 m/s, and (b) the mirror is fixed and the man walks towards it at 3 m/s.",
+      steps: [
+        { text: "The image is as far behind as the object is in front, so $x_I - x_M = x_M - x_O$, giving $x_I = 2x_M - x_O$. *Why this step:* a position equation can be differentiated; a sentence cannot." },
+        { text: "Differentiate: $v_I = 2v_M - v_O$ for the velocity components **perpendicular** to the mirror. Components parallel to the mirror are copied unchanged." },
+        { text: "(a) A man stands still and the mirror moves away from him at 2 m/s: $v_I = 2(2) - 0 = 4$ m/s away from him. The image moves at **twice** the mirror's speed." },
+        { text: "(b) The mirror is fixed and the man walks towards it at 3 m/s: $v_I = 0 - 3 = -3$, so the image walks towards the mirror at 3 m/s from the other side. Relative to the man it approaches at $3 + 3 = 6$ m/s." },
+      ],
+      answer: "$v_I = 2v_M - v_O$: (a) 4 m/s away from the man; (b) 3 m/s towards the mirror, closing on the man at 6 m/s.",
+    },
+    {
+      type: "worked-example",
+      id: "omp0-1-we4",
+      title: "Worked example 4 (a velocity vector, JEE Main style)",
+      problem:
+        "A plane mirror lies along the y-axis. An insect in front of it moves with velocity $(3\\hat i + 4\\hat j)$ m/s. Find the velocity of its image and the image's speed relative to the insect.",
+      steps: [
+        { text: "The x-component is perpendicular to the mirror, so it flips: $-3\\hat i$. The y-component is parallel, so it stays: $4\\hat j$. *Why this step:* reflection reverses only the front–back direction." },
+        { text: "$\\vec v_I = (-3\\hat i + 4\\hat j)$ m/s, speed 5 m/s, the same as the insect's." },
+        { text: "Relative velocity: $\\vec v_I - \\vec v_O = -6\\hat i$, so 6 m/s straight towards (or away from) the insect along the normal." },
+      ],
+      answer: "$\\vec v_I = (-3\\hat i + 4\\hat j)$ m/s (speed 5 m/s); relative to the insect, 6 m/s along the normal.",
+    },
+    {
+      type: "worked-example",
+      id: "omp0-1-we5",
+      title: "Worked example 5 (counting images)",
+      problem:
+        "How many images do two plane mirrors form when they are inclined at (a) $60^\\circ$, (b) $72^\\circ$?",
+      steps: [
+        { text: "(a) Mirrors at $60^\\circ$: $m = 360/60 = 6$, even, so $6 - 1 = 5$ images wherever the object is." },
+        { text: "(b) Mirrors at $72^\\circ$: $m = 5$, odd, so 4 images if the object is on the bisector and 5 if it is not. *Why this step:* when $m$ is odd, the last two images coincide only when the object is placed symmetrically." },
+      ],
+      answer: "(a) 5 images; (b) 4 images with the object on the bisector, 5 otherwise.",
     },
     {
       type: "callout",
@@ -141,6 +203,7 @@ const lesson01: LessonSeed = {
       content:
         "The image is behind the mirror, as far behind as the object is in front. Focus a camera on the dust on a mirror and your reflection is blurred; focus on your reflection and the dust blurs. They are at different distances.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "omp0-1-q1",
@@ -152,6 +215,7 @@ const lesson01: LessonSeed = {
         { text: "0.425 m", feedback: "You halved twice. The top edge sits at the head–eye midpoint and the bottom edge at the eye–feet midpoint: the gap is $H/2$." },
         { text: "It depends on how far he stands from the mirror.", feedback: "The distance cancels out in the similar-triangle argument. Stepping back shows more of the room, not more of you." },
       ],
+      hint: "Draw the rays from his head and from his feet that reflect into his eye, and use the law of reflection to find where each meets the mirror.",
     },
     {
       type: "quiz",
@@ -163,29 +227,34 @@ const lesson01: LessonSeed = {
         { text: "$7.5^\\circ$", feedback: "It is the other way round: the ray turns by double the mirror's rotation, not half." },
         { text: "$30^\\circ$", correct: true, feedback: "The deviation $180^\\circ - 2i$ changes by $2\\theta = 30^\\circ$." },
       ],
+      hint: "Rotating the mirror by $\\theta$ turns its normal by $\\theta$, so both $i$ and $r$ change. Track the angle between the incident and reflected rays.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-1-q3",
       variant: "practice",
       question: "How many images of a coin placed between two plane mirrors inclined at $90^\\circ$ can be seen?",
-      options: [
-        { text: "3", correct: true, feedback: "$m = 4$ is even, so there are $m - 1 = 3$ images." },
-        { text: "4", feedback: "$360/90 = 4$ is $m$. For even $m$ the number of images is $m - 1$, because two of the images coincide." },
-        { text: "2", feedback: "Two are the direct images in each mirror. The third is the image of an image, seen in the corner." },
-        { text: "Infinitely many", feedback: "Infinitely many images need parallel mirrors ($\\theta = 0$)." },
+      answer: 3,
+      hint: "Find $m = 360^\\circ/\\theta$ first, then ask whether it is even or odd.",
+      solution: "$m = \\dfrac{360^\\circ}{90^\\circ} = 4$ is even, so there are $m - 1 = 3$ images: one direct image in each mirror, plus the image of an image seen in the corner.",
+      commonMistakes: [
+        { answer: 4, feedback: "$360/90 = 4$ is $m$. For even $m$ the number of images is $m - 1$, because two of the images coincide." },
+        { answer: 2, feedback: "Two are the direct images in each mirror. The third is the image of an image, seen in the corner." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-1-q4",
       variant: "practice",
-      question: "A boy walks towards a fixed plane mirror at 3 m/s. How fast does his image approach him?",
-      options: [
-        { text: "3 m/s", feedback: "That is the image's speed relative to the ground (or the mirror). Relative to the boy, both are closing in." },
-        { text: "0", feedback: "The image moves: it always stays as far behind the mirror as the boy is in front." },
-        { text: "1.5 m/s", feedback: "Nothing gets halved here. Use $x_I = 2x_M - x_O$ with the mirror fixed." },
-        { text: "6 m/s", correct: true, feedback: "The image comes towards the mirror at 3 m/s from the other side, so the gap closes at $3 + 3 = 6$ m/s." },
+      question: "A boy walks towards a fixed plane mirror at 3 m/s. How fast does his image approach him, in m/s?",
+      answer: 6,
+      unit: "m/s",
+      hint: "The image stays as far behind the mirror as the boy is in front. Both distances shrink together.",
+      solution: "The boy approaches the mirror at 3 m/s, and his image approaches the mirror from the other side at 3 m/s. The gap between them closes at $3 + 3 = 6$ m/s.",
+      commonMistakes: [
+        { answer: 3, feedback: "That is the image's speed relative to the ground (or the mirror). Relative to the boy, both are closing in." },
+        { answer: 0, feedback: "The image moves: it always stays as far behind the mirror as the boy is in front." },
+        { answer: 1.5, feedback: "Nothing gets halved here. Use $x_I = 2x_M - x_O$ with the mirror fixed." },
       ],
     },
     {
@@ -198,6 +267,7 @@ const lesson01: LessonSeed = {
         { text: "80 cm behind the mirror.", feedback: "The image is 40 cm behind the mirror. 80 cm is its distance from the candle." },
         { text: "40 cm behind the mirror, so 80 cm from the candle.", correct: true, feedback: "The image is as far behind the mirror as the object is in front." },
       ],
+      hint: "The camera must focus on the point the reflected rays appear to come from, not on the glass. Where does a plane mirror put that image?",
     },
     {
       type: "quiz",
@@ -209,6 +279,21 @@ const lesson01: LessonSeed = {
         { text: "4", correct: true, feedback: "$m = 360/72 = 5$ is odd and the object is symmetric, so $m - 1 = 4$." },
         { text: "6", feedback: "The number of images never exceeds $m = 5$ here." },
       ],
+      hint: "Work out $360^\\circ/\\theta$, then recall from 0.1 how the count depends on whether that number is even or odd and where the object sits.",
+    },
+    {
+      type: "quiz",
+      id: "omp0-1-q7",
+      variant: "concept",
+      multiple: true,
+      question: "You stand in front of a plane mirror. Select every correct statement about your image.",
+      options: [
+        { text: "It is virtual: no light actually reaches the point behind the mirror where it appears.", correct: true, feedback: "The reflected rays only appear to diverge from behind the glass; their extensions meet there." },
+        { text: "It is laterally inverted: your raised right hand appears as the image's left hand.", correct: true, feedback: "Front and back are reversed along the normal, which we read as left–right inversion." },
+        { text: "It is the same size as you, wherever you stand.", correct: true, feedback: "A plane mirror always gives $m = +1$. It only *looks* smaller when you step back because it is farther away." },
+        { text: "It lies on the surface of the mirror.", feedback: "The image is as far behind the mirror as you are in front, not on the glass." },
+      ],
+      hint: "Recall $v = -u$ and $m = +1$ for a plane mirror.",
     },
   ]),
 };
@@ -230,10 +315,11 @@ const lesson02: LessonSeed = {
       content:
         "A spherical mirror is a piece cut from a reflecting sphere.\n- **Pole P**: the centre of the mirror's surface.\n- **Centre of curvature C**: the centre of the sphere; radius of curvature $R = PC$.\n- **Principal axis**: the line through P and C.\n- **Principal focus F**: where rays arriving parallel to the axis meet after reflection (concave), or appear to diverge from (convex). Focal length $f = PF$.\n**Concave** mirrors reflect from the inside of the sphere (C in front); **convex** mirrors reflect from the outside (C behind).",
     },
+    { type: "heading", text: "Why $f = R/2$ for paraxial rays" },
     {
       type: "text",
       content:
-        "**Derivation: $f = R/2$.** Send a ray parallel to the axis at height $h$. It hits a concave mirror at M. The radius CM is the normal there. Call the angle of incidence $\\theta$ (between the ray and CM). Because the incoming ray is parallel to the axis, the angle MCP between the radius and the axis is also $\\theta$ (alternate angles). The reflected ray leaves at $\\theta$ on the other side of CM and crosses the axis at F. In triangle CFM, the angles at C and at M are both $\\theta$, so the triangle is **isosceles**: $FC = FM$.",
+        "Send a ray parallel to the axis at height $h$. It hits a concave mirror at M. The radius CM is the normal there. Call the angle of incidence $\\theta$ (between the ray and CM). Because the incoming ray is parallel to the axis, the angle MCP between the radius and the axis is also $\\theta$ (alternate angles). The reflected ray leaves at $\\theta$ on the other side of CM and crosses the axis at F. In triangle CFM, the angles at C and at M are both $\\theta$, so the triangle is **isosceles**: $FC = FM$.",
     },
     {
       type: "text",
@@ -246,6 +332,7 @@ const lesson02: LessonSeed = {
       content:
         "For rays close to the axis (**paraxial** rays, small $h$ and small $\\theta$), $\\cos\\theta \\approx 1$ and every parallel ray passes through the same point, $f = R/2$. Rays far from the axis cross closer to the mirror. That blur is called **spherical aberration**, and it is why big searchlights use parabolic rather than spherical mirrors.",
     },
+    { type: "heading", text: "Signs and principal rays" },
     {
       type: "callout",
       variant: "definition",
@@ -304,20 +391,51 @@ const lesson02: LessonSeed = {
       content:
         "What you should have seen: with the concave mirror, the three rays meet in front of the mirror (real image, $v < 0$) while the object is beyond F, and only their extensions meet behind (virtual image, $v > 0$) once the object comes inside F. With the convex mirror, however you move the object or change $f$, the image stays behind the mirror, upright and smaller, trapped between P and F. That is the car mirror: a wide field of view with shrunken images.",
     },
+    { type: "heading", text: "Worked examples: signs and ray diagrams" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (writing the signs).** (a) A concave mirror of radius 30 cm with an object 20 cm in front. (b) A convex mirror of radius 40 cm.\n\n1. (a) The object is to the left of P, the side the incident light comes from, so $u = -20$ cm. *Why this step:* the sign depends only on which side of P the point lies, measured against the direction of the **incident** light; the reflected light going back leftwards does not change it.\n2. C of a concave mirror is in front (left): $R = -30$ cm, so $f = R/2 = -15$ cm.\n3. (b) C of a convex mirror is behind (right): $R = +40$ cm, $f = +20$ cm.",
+      type: "worked-example",
+      id: "omp0-2-we1",
+      title: "Worked example 1 (writing the signs)",
+      problem:
+        "(a) A concave mirror of radius 30 cm with an object 20 cm in front. (b) A convex mirror of radius 40 cm. Write down the signed values of $u$, $R$ and $f$ in (a), and of $R$ and $f$ in (b).",
+      steps: [
+        { text: "(a) The object is to the left of P, the side the incident light comes from, so $u = -20$ cm. *Why this step:* the sign depends only on which side of P the point lies, measured against the direction of the **incident** light; the reflected light going back leftwards does not change it." },
+        { text: "C of a concave mirror is in front (left): $R = -30$ cm, so $f = R/2 = -15$ cm." },
+        { text: "(b) C of a convex mirror is behind (right): $R = +40$ cm, $f = +20$ cm." },
+      ],
+      answer: "(a) $u = -20$ cm, $R = -30$ cm, $f = -15$ cm; (b) $R = +40$ cm, $f = +20$ cm.",
+    },
+    {
+      type: "worked-example",
+      id: "omp0-2-we2",
+      title: "Worked example 2 (how paraxial is paraxial?)",
+      problem:
+        "A concave mirror has $|R| = 20$ cm. Where does a ray parallel to the axis cross it after reflection if its height is (a) 1 cm, (b) 12 cm?",
+      steps: [
+        { text: "$\\sin\\theta = h/|R|$, because the radius to the hit point has length $|R|$ and the hit point is $h$ above the axis." },
+        { text: "(a) $\\sin\\theta = 0.05$, $\\cos\\theta = 0.99875$, $FC = \\frac{20}{2(0.99875)} = 10.01$ cm, so $PF = 20 - 10.01 = 9.99$ cm: essentially $R/2$." },
+        { text: "(b) $\\sin\\theta = 0.6$, $\\cos\\theta = 0.8$, $FC = \\frac{20}{1.6} = 12.5$ cm, so $PF = 7.5$ cm. *Why this step:* the exact triangle shows how badly $f = R/2$ fails once rays are far from the axis." },
+        { text: "The 12 cm ray crosses 2.5 cm nearer the mirror. (Even a 6 cm ray, with $\\sin\\theta = 0.3$, crosses at $PF \\approx 9.5$ cm.) Every formula in this chapter assumes paraxial rays." },
+      ],
+      answer: "(a) $PF \\approx 9.99$ cm, essentially $R/2$; (b) $PF = 7.5$ cm, 2.5 cm nearer the mirror.",
+    },
+    {
+      type: "worked-example",
+      id: "omp0-2-we3",
+      title: "Worked example 3 (an image from two rays)",
+      problem:
+        "An object of height $h$ stands at the centre of curvature C of a concave mirror. Locate the image without any formula.",
+      steps: [
+        { text: "Ray to the pole: it reflects symmetrically, so after travelling back a distance $|R|$ it is at height $-h$. *Why this step:* equal angles above and below the axis mean equal and opposite heights at equal distances." },
+        { text: "Ray from the tip through F (at $|R|/2$): the line from height $h$ at C to height 0 at F reaches the mirror at height $-h$ (similar triangles, F is the midpoint). It reflects parallel to the axis at height $-h$." },
+        { text: "The two reflected rays meet at distance $|R|$ from P, height $-h$: the image is at C, real, inverted and the same size." },
+      ],
+      answer: "The image is at C: real, inverted and the same size.",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 (how paraxial is paraxial?).** A concave mirror has $|R| = 20$ cm. Where does a ray parallel to the axis cross it after reflection if its height is (a) 1 cm, (b) 12 cm?\n\n1. $\\sin\\theta = h/|R|$, because the radius to the hit point has length $|R|$ and the hit point is $h$ above the axis.\n2. (a) $\\sin\\theta = 0.05$, $\\cos\\theta = 0.99875$, $FC = \\frac{20}{2(0.99875)} = 10.01$ cm, so $PF = 20 - 10.01 = 9.99$ cm: essentially $R/2$.\n3. (b) $\\sin\\theta = 0.6$, $\\cos\\theta = 0.8$, $FC = \\frac{20}{1.6} = 12.5$ cm, so $PF = 7.5$ cm. *Why this step:* the exact triangle shows how badly $f = R/2$ fails once rays are far from the axis.\n4. The 12 cm ray crosses 2.5 cm nearer the mirror. (Even a 6 cm ray, with $\\sin\\theta = 0.3$, crosses at $PF \\approx 9.5$ cm.) Every formula in this chapter assumes paraxial rays.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 (an image from two rays).** An object of height $h$ stands at the centre of curvature C of a concave mirror. Locate the image without any formula.\n\n1. Ray to the pole: it reflects symmetrically, so after travelling back a distance $|R|$ it is at height $-h$. *Why this step:* equal angles above and below the axis mean equal and opposite heights at equal distances.\n2. Ray from the tip through F (at $|R|/2$): the line from height $h$ at C to height 0 at F reaches the mirror at height $-h$ (similar triangles, F is the midpoint). It reflects parallel to the axis at height $-h$.\n3. The two reflected rays meet at distance $|R|$ from P, height $-h$: the image is at C, real, inverted and the same size.\n\n**Worked example 4 (why the car mirror is convex, qualitatively).** For a convex mirror every ray from the object reflects outwards, away from the axis, so reflected rays can never meet in front. Tracing them back, the parallel ray seems to come from F behind, and the pole ray seems to come from a point below-behind. They meet between P and F, upright, and smaller the farther the object. A small mirror therefore shows a wide scene, at the price of objects looking farther than they are.",
+        "**Worked example 4 (why the car mirror is convex, qualitatively).** For a convex mirror every ray from the object reflects outwards, away from the axis, so reflected rays can never meet in front. Tracing them back, the parallel ray seems to come from F behind, and the pole ray seems to come from a point below-behind. They meet between P and F, upright, and smaller the farther the object. A small mirror therefore shows a wide scene, at the price of objects looking farther than they are.",
     },
     {
       type: "callout",
@@ -333,16 +451,20 @@ const lesson02: LessonSeed = {
       content:
         "In the New Cartesian convention, distances carry a sign set by direction. A real object sits on the side the light comes from, to the left of P, so $u$ is **negative** every time. Writing $u = +20$ cm in the mirror formula gives a wrong image, not just a wrong sign.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-2-q1",
       variant: "practice",
-      question: "What is the focal length, with its sign, of a convex mirror of radius of curvature 24 cm?",
-      options: [
-        { text: "$+12$ cm", correct: true, feedback: "$f = R/2 = +24/2$; C and F lie behind the mirror, along the incident light." },
-        { text: "$-12$ cm", feedback: "That is the sign for a concave mirror. A convex mirror's focus is behind it, on the positive side." },
-        { text: "$+24$ cm", feedback: "24 cm is the radius. The focus is halfway to C: $f = R/2$." },
-        { text: "$-24$ cm", feedback: "Both the sign and the factor of 2 are off: $f = R/2$, and it is positive for convex." },
+      question: "A convex mirror has radius of curvature 24 cm. Using the New Cartesian convention (incident light left to right, distances from the pole), what is its focal length $f$? Include the sign.",
+      answer: 12,
+      unit: "cm",
+      hint: "Where are C and F for a convex mirror: in front of it or behind it?",
+      solution: "C and F of a convex mirror lie behind it, along the incident light, so $R = +24$ cm and $f = \\dfrac{R}{2} = +12$ cm.",
+      commonMistakes: [
+        { answer: -12, feedback: "That is the sign for a concave mirror. A convex mirror's focus is behind it, on the positive side." },
+        { answer: 24, feedback: "24 cm is the radius. The focus is halfway to C: $f = R/2$." },
+        { answer: -24, feedback: "Both the sign and the factor of 2 are off: $f = R/2$, and it is positive for convex." },
       ],
     },
     {
@@ -355,6 +477,7 @@ const lesson02: LessonSeed = {
         { text: "$+15$ cm for either mirror", feedback: "Distances against the incident light are negative, and a real object sits against it." },
         { text: "$-15$ cm for either mirror", correct: true, feedback: "The object is on the side the light comes from, to the left of P: negative." },
       ],
+      hint: "In the New Cartesian convention distances are measured from the pole, positive along the incident light. Which side of the mirror is a real object on?",
     },
     {
       type: "quiz",
@@ -366,6 +489,7 @@ const lesson02: LessonSeed = {
         { text: "Because it travels along a radius, which is the normal, so $i = 0$ and $r = 0$.", correct: true, feedback: "Every radius of a sphere is perpendicular to its surface." },
         { text: "Because it is parallel to the principal axis.", feedback: "A ray through C (from an off-axis point) is generally not parallel to the axis; the parallel ray reflects through F." },
       ],
+      hint: "Recall what the normal to a spherical mirror is at any point (0.2), then apply the law of reflection to a ray travelling along that line.",
     },
     {
       type: "quiz",
@@ -377,6 +501,7 @@ const lesson02: LessonSeed = {
         { text: "Sunlight is not parallel.", feedback: "The Sun is far enough away that its rays are effectively parallel. The problem is the sphere's shape." },
         { text: "Rays far from the axis cross it closer to the mirror than $R/2$ (spherical aberration).", correct: true, feedback: "$PF = R - \\frac{R}{2\\cos\\theta}$ shrinks as $\\theta$ grows." },
       ],
+      hint: "Recall the approximation behind $f = R/2$ (0.2), and check which rays striking a wide mirror satisfy it.",
     },
     {
       type: "quiz",
@@ -388,6 +513,21 @@ const lesson02: LessonSeed = {
         { text: "$R = -50$ cm, $f = -25$ cm", correct: true, feedback: "C and F are in front, on the side the light comes from, so both are negative." },
         { text: "$R = -50$ cm, $f = -100$ cm", feedback: "The focus lies halfway to C, $f = R/2$, not twice as far." },
       ],
+      hint: "The centre of curvature of a concave mirror lies on the side the light comes from. What sign does that side carry? Then use $f = R/2$.",
+    },
+    {
+      type: "quiz",
+      id: "omp0-2-q6",
+      variant: "concept",
+      multiple: true,
+      question: "Incident light travels left to right (New Cartesian convention). Select every quantity that is **negative**.",
+      options: [
+        { text: "The object distance $u$ of a real object in front of a convex mirror", correct: true, feedback: "A real object always sits on the side the light comes from, so $u < 0$ whatever the mirror." },
+        { text: "The focal length of a concave mirror", correct: true, feedback: "A concave mirror's F lies in front, against the incident light: $f < 0$." },
+        { text: "The radius of curvature of a convex mirror", feedback: "A convex mirror's C lies behind it, along the incident light: $R > 0$." },
+        { text: "The image distance $v$ of the image in a convex mirror", feedback: "A convex mirror's image of a real object is always virtual and behind it: $v > 0$." },
+      ],
+      hint: "For each point, ask: is it on the side the light comes from (negative) or behind the mirror (positive)?",
     },
   ]),
 };
@@ -402,6 +542,7 @@ const lesson03: LessonSeed = {
       content:
         "Ray diagrams tell you roughly where an image is. The mirror formula tells you exactly, and with the sign convention it also tells you whether the image is real or virtual, upright or inverted, without a drawing. We derive it from two pairs of similar triangles.",
     },
+    { type: "heading", text: "Deriving the mirror formula" },
     {
       type: "text",
       content:
@@ -446,6 +587,7 @@ const lesson03: LessonSeed = {
       content:
         "The magnification comes from pair 1: $\\frac{|h'|}{h} = \\frac{-v}{-u} = \\frac vu$, and the image in that picture is inverted ($h' < 0$), so $m = -\\frac vu$.",
     },
+    { type: "heading", text: "Image positions, case by case" },
     {
       type: "text",
       content:
@@ -489,6 +631,7 @@ const lesson03: LessonSeed = {
           "Convex mirror, f = +15 cm. Drag the object anywhere: v stays positive and smaller than f, and m stays between 0 and 1.",
       },
     },
+    { type: "heading", text: "The graph of $v$ against $u$" },
     {
       type: "text",
       content:
@@ -510,15 +653,50 @@ const lesson03: LessonSeed = {
       content:
         "The graph has a vertical asymptote at $u = -1$ (object at F, image at infinity) and a horizontal one at $v = -1$ (object at infinity, image at F). The point $(-2, -2)$ is the object at C imaged onto itself. For $-1 < u < 0$ the curve jumps to positive $v$: the virtual images.",
     },
+    { type: "heading", text: "Worked examples: images and moving objects" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** An object is 30 cm in front of a concave mirror of radius 40 cm. Find the image.\n\n1. Signs: $u = -30$ cm, $R = -40$ cm, so $f = -20$ cm. *Why this step:* the formula is only as right as the signs you feed it.\n2. $\\frac1v = \\frac1f - \\frac1u = -\\frac1{20} + \\frac1{30} = \\frac{-3 + 2}{60} = -\\frac1{60}$, so $v = -60$ cm.\n3. $m = -\\frac vu = -\\frac{-60}{-30} = -2$.\n4. Read the signs: real (in front, $v < 0$), inverted ($m < 0$), twice as tall. It is the \"between C and F\" row, as it should be.\n\n**Worked example 2.** A convex mirror has $f = 20$ cm. An object is 20 cm in front.\n\n1. $u = -20$ cm, $f = +20$ cm.\n2. $\\frac1v = \\frac1{20} + \\frac1{20} = \\frac1{10}$, so $v = +10$ cm: 10 cm behind the mirror.\n3. $m = -\\frac{10}{-20} = +0.5$: virtual, erect, half size.",
+      type: "worked-example",
+      id: "omp0-3-we1",
+      title: "Worked example 1",
+      problem:
+        "An object is 30 cm in front of a concave mirror of radius 40 cm. Find the image.",
+      steps: [
+        { text: "Signs: $u = -30$ cm, $R = -40$ cm, so $f = -20$ cm. *Why this step:* the formula is only as right as the signs you feed it." },
+        { text: "$\\frac1v = \\frac1f - \\frac1u = -\\frac1{20} + \\frac1{30} = \\frac{-3 + 2}{60} = -\\frac1{60}$, so $v = -60$ cm." },
+        { text: "$m = -\\frac vu = -\\frac{-60}{-30} = -2$." },
+        { text: "Read the signs: real (in front, $v < 0$), inverted ($m < 0$), twice as tall. It is the \"between C and F\" row, as it should be." },
+      ],
+      answer: "$v = -60$ cm, $m = -2$: real, inverted, twice as tall, 60 cm in front of the mirror.",
+    },
+    {
+      type: "worked-example",
+      id: "omp0-3-we2",
+      title: "Worked example 2",
+      problem:
+        "A convex mirror has $f = 20$ cm. An object is 20 cm in front. Find the position, magnification and nature of the image.",
+      steps: [
+        { text: "$u = -20$ cm, $f = +20$ cm." },
+        { text: "$\\frac1v = \\frac1{20} + \\frac1{20} = \\frac1{10}$, so $v = +10$ cm: 10 cm behind the mirror." },
+        { text: "$m = -\\frac{10}{-20} = +0.5$: virtual, erect, half size." },
+      ],
+      answer: "$v = +10$ cm, $m = +0.5$: virtual, erect, half size, 10 cm behind the mirror.",
+    },
+    {
+      type: "worked-example",
+      id: "omp0-3-we3",
+      title: "Worked example 3 (a shaving mirror)",
+      problem:
+        "A concave mirror of focal length 15 cm is held 10 cm from a face. Find the position, magnification and nature of the image.",
+      steps: [
+        { text: "$u = -10$, $f = -15$. $\\frac1v = -\\frac1{15} + \\frac1{10} = \\frac{-2 + 3}{30} = \\frac1{30}$, so $v = +30$ cm." },
+        { text: "$m = -\\frac{30}{-10} = +3$: virtual, erect, three times larger, 30 cm behind the mirror. *Why this step:* a positive $v$ is the formula's way of saying \"behind the mirror, so virtual\"." },
+      ],
+      answer: "$v = +30$ cm, $m = +3$: virtual, erect, three times larger, 30 cm behind the mirror.",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 (a shaving mirror).** A concave mirror of focal length 15 cm is held 10 cm from a face.\n\n1. $u = -10$, $f = -15$. $\\frac1v = -\\frac1{15} + \\frac1{10} = \\frac{-2 + 3}{30} = \\frac1{30}$, so $v = +30$ cm.\n2. $m = -\\frac{30}{-10} = +3$: virtual, erect, three times larger, 30 cm behind the mirror. *Why this step:* a positive $v$ is the formula's way of saying \"behind the mirror, so virtual\".\n\n**Worked example 4 (velocity of the image, JEE Main).** Differentiate the mirror formula with respect to time, with $f$ fixed:",
+        "Differentiate the mirror formula with respect to time, with $f$ fixed:",
     },
     {
       type: "math",
@@ -526,9 +704,18 @@ const lesson03: LessonSeed = {
         "-\\frac{1}{v^2}\\frac{dv}{dt} - \\frac{1}{u^2}\\frac{du}{dt} = 0 \\;\\Longrightarrow\\; \\frac{dv}{dt} = -\\frac{v^2}{u^2}\\frac{du}{dt} = -m^2\\,\\frac{du}{dt}",
     },
     {
-      type: "text",
-      content:
-        "The object in Worked example 1 ($u = -30$ cm, $f = -20$ cm, $m = -2$) moves towards the mirror at 2 cm/s.\n\n1. Moving towards the mirror means $u$ goes from $-30$ towards 0, so $\\frac{du}{dt} = +2$ cm/s. *Why this step:* the velocity must carry the same sign convention as the positions.\n2. $\\frac{dv}{dt} = -(-2)^2(2) = -8$ cm/s.\n3. $v$ is becoming more negative: the image races **away** from the mirror at 8 cm/s. That matches the table: as the object approaches F, the image heads off to infinity.\n4. Motion perpendicular to the axis is different: with $u$ fixed, heights scale as $h' = mh$, so the image's transverse velocity is $m$ times the object's ($-2$ times here: twice as fast, in the opposite direction).",
+      type: "worked-example",
+      id: "omp0-3-we4",
+      title: "Worked example 4 (velocity of the image, JEE Main)",
+      problem:
+        "The object in Worked example 1 ($u = -30$ cm, $f = -20$ cm, $m = -2$) moves towards the mirror at 2 cm/s. Find the velocity of the image along the axis. How does a velocity of the object perpendicular to the axis carry over to the image?",
+      steps: [
+        { text: "Moving towards the mirror means $u$ goes from $-30$ towards 0, so $\\frac{du}{dt} = +2$ cm/s. *Why this step:* the velocity must carry the same sign convention as the positions." },
+        { text: "$\\frac{dv}{dt} = -(-2)^2(2) = -8$ cm/s." },
+        { text: "$v$ is becoming more negative: the image races **away** from the mirror at 8 cm/s. That matches the table: as the object approaches F, the image heads off to infinity." },
+        { text: "Motion perpendicular to the axis is different: with $u$ fixed, heights scale as $h' = mh$, so the image's transverse velocity is $m$ times the object's ($-2$ times here: twice as fast, in the opposite direction)." },
+      ],
+      answer: "$\\frac{dv}{dt} = -8$ cm/s: the image moves away from the mirror at 8 cm/s; transverse velocities are multiplied by $m = -2$.",
     },
     {
       type: "callout",
@@ -544,18 +731,21 @@ const lesson03: LessonSeed = {
       content:
         "Size and reality are separate questions. $|m|$ tells you size; the **sign** of $m$ (or of $v$) tells you nature. For a single mirror, $m < 0$ goes with real and inverted, $m > 0$ with virtual and erect. The shaving mirror gives $m = +3$: magnified and virtual.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-3-q1",
       variant: "practice",
-      question: "An object is 15 cm in front of a concave mirror of focal length 10 cm. Where is the image, and what is $m$?",
-      options: [
-        { text: "$v = -30$ cm, $m = -2$", correct: true, feedback: "$\\frac1v = -\\frac1{10} + \\frac1{15} = -\\frac1{30}$; $m = -\\frac{-30}{-15} = -2$. Real, inverted, magnified." },
-        { text: "$v = +30$ cm, $m = +2$", feedback: "A sign slip: with $f = -10$ and $u = -15$, $\\frac1v$ comes out negative." },
-        { text: "$v = -6$ cm, $m = -0.4$", feedback: "That is $\\frac1v = \\frac1f + \\frac1u$ with both negative. Solve for $\\frac1v = \\frac1f - \\frac1u$." },
-        { text: "$v = +6$ cm, $m = +0.4$", feedback: "You used $f = +10$ (a convex mirror's sign) and added. A concave mirror has $f < 0$." },
-      ],
+      question: "An object is 15 cm in front of a concave mirror of focal length 10 cm. Using the New Cartesian convention (incident light left to right, distances from the pole), find the image distance $v$, including its sign.",
+      answer: -30,
+      unit: "cm",
       hint: "$u = -15$, $f = -10$, and $\\frac1v = \\frac1f - \\frac1u$.",
+      solution: "$\\dfrac1v = \\dfrac1f - \\dfrac1u = -\\dfrac1{10} + \\dfrac1{15} = -\\dfrac1{30}$, so $v = -30$ cm.\n\nThen $m = -\\dfrac vu = -\\dfrac{-30}{-15} = -2$: real, inverted, magnified, 30 cm in front of the mirror.",
+      commonMistakes: [
+        { answer: 30, feedback: "A sign slip: with $f = -10$ and $u = -15$, $\\frac1v$ comes out negative. The image is in front of the mirror." },
+        { answer: -6, feedback: "That is $\\frac1v = \\frac1f + \\frac1u$ with both negative. Solve for $\\frac1v = \\frac1f - \\frac1u$." },
+        { answer: 6, feedback: "You used $f = +10$ (a convex mirror's sign). A concave mirror has $f < 0$." },
+      ],
     },
     {
       type: "quiz",
@@ -567,6 +757,7 @@ const lesson03: LessonSeed = {
         { text: "Virtual, erect, 20 cm behind, $m = +2$", correct: true, feedback: "$v = +20$ cm and $m = -\\frac{20}{-10} = +2$. The object is inside F." },
         { text: "Virtual, erect, 6.7 cm behind, $m = +0.67$", feedback: "That is a convex mirror's result. Recheck the sign of $f$." },
       ],
+      hint: "Use $\\dfrac1v + \\dfrac1u = \\dfrac1f$ with $u$ and $f$ both negative for a concave mirror, then $m = -v/u$.",
     },
     {
       type: "quiz",
@@ -578,6 +769,7 @@ const lesson03: LessonSeed = {
         { text: "$v = -10$ cm, $m = -\\frac13$", feedback: "A convex mirror never gives a real image of a real object; $v$ must be positive." },
         { text: "$v = +10$ cm, $m = +\\frac13$", correct: true, feedback: "$\\frac1v = \\frac1{15} + \\frac1{30} = \\frac1{10}$ and $m = -\\frac{10}{-30}$." },
       ],
+      hint: "For a convex mirror $f$ is positive. Use the mirror formula, then $m = -v/u$.",
     },
     {
       type: "quiz",
@@ -589,6 +781,7 @@ const lesson03: LessonSeed = {
         { text: "Real and magnified", feedback: "For one mirror, positive $m$ means erect, and erect goes with virtual." },
         { text: "Virtual and erect; the mirror must be convex", feedback: "A convex mirror always has $0 < m < 1$. It never magnifies." },
       ],
+      hint: "What does the sign of $m$ tell you about orientation, and for a real object what does that imply? Then ask which mirror can magnify.",
     },
     {
       type: "quiz",
@@ -612,6 +805,21 @@ const lesson03: LessonSeed = {
         { text: "A plane mirror", feedback: "A plane mirror gives a virtual image of the same size." },
         { text: "Only a concave mirror", correct: true, feedback: "A real image needs converging reflected rays. A concave mirror with the object beyond C gives a diminished real image." },
       ],
+      hint: "Ask which mirrors can form a real image of a real object at all, and then whether that image can be smaller than the object.",
+    },
+    {
+      type: "quiz",
+      id: "omp0-3-q7",
+      variant: "practice",
+      multiple: true,
+      question: "An object is placed between the focus F and the centre of curvature C of a concave mirror. Select every correct description of the image.",
+      options: [
+        { text: "It is real.", correct: true, feedback: "The object is beyond F, so the reflected rays converge in front of the mirror: $v < 0$." },
+        { text: "It is inverted.", correct: true, feedback: "A real image formed by one mirror is inverted: $m = -v/u < 0$." },
+        { text: "It is larger than the object.", correct: true, feedback: "The image forms beyond C, farther from the mirror than the object, so $|m| = |v/u| > 1$. (Try $u = -15$, $f = -10$: $v = -30$, $m = -2$.)" },
+        { text: "It forms between F and C.", feedback: "Swap object and image: an object between F and C gives an image *beyond* C. An object beyond C gives one between F and C." },
+      ],
+      hint: "Test a case: $f = -10$ cm with the object at $u = -15$ cm.",
     },
   ]),
 };
@@ -633,6 +841,7 @@ const lesson04: LessonSeed = {
       content:
         "The (absolute) refractive index of a medium is $n = \\dfrac{c}{v}$, the speed of light in vacuum divided by its speed in the medium. Air $\\approx 1.00$, water $\\approx 1.33 = \\frac43$, glass $\\approx 1.5$, diamond $\\approx 2.42$.\nThe **relative** index of medium 2 with respect to medium 1 is $n_{21} = \\dfrac{n_2}{n_1} = \\dfrac{v_1}{v_2}$. A larger $n$ is called **optically denser** (slower light), whatever the material's mass density.",
     },
+    { type: "heading", text: "Why light bends: Snell's law" },
     {
       type: "text",
       content:
@@ -645,10 +854,11 @@ const lesson04: LessonSeed = {
       content:
         "$n_1\\sin i = n_2\\sin r$, with both angles measured from the **normal**.\nThe incident ray, the refracted ray and the normal lie in one plane. Going into a denser medium ($n_2 > n_1$), $r < i$: the ray bends towards the normal. Going into a rarer medium, it bends away. At normal incidence, $i = 0$ gives $r = 0$: no bending at all.",
     },
+    { type: "heading", text: "Frequency is fixed, wavelength is not" },
     {
       type: "text",
       content:
-        "**Frequency is fixed, wavelength is not.** The source sets how many wave crests arrive at the boundary per second, and crests cannot pile up or vanish there, so the frequency $\\nu$ is the same on both sides. Since $v = \\nu\\lambda$ and $v$ drops by a factor $n$, the wavelength drops by the same factor:",
+        "The source sets how many wave crests arrive at the boundary per second, and crests cannot pile up or vanish there, so the frequency $\\nu$ is the same on both sides. Since $v = \\nu\\lambda$ and $v$ drops by a factor $n$, the wavelength drops by the same factor:",
     },
     { type: "math", latex: "\\lambda_{\\text{medium}} = \\frac{v}{\\nu} = \\frac{c/n}{\\nu} = \\frac{\\lambda_{\\text{vacuum}}}{n}" },
     {
@@ -656,6 +866,7 @@ const lesson04: LessonSeed = {
       content:
         "Colour is tied to frequency, which is why red light stays red underwater even though its wavelength has shrunk.",
     },
+    { type: "heading", text: "Bending into and out of glass" },
     {
       type: "interactive",
       config: {
@@ -696,15 +907,55 @@ const lesson04: LessonSeed = {
         "**Lateral shift through a glass slab.** A ray enters a parallel-sided slab of thickness $t$ at incidence $i$ and refracts to $r$. At the far face it meets the same pair of indices in reverse, so by Snell it leaves at angle $i$ again: the **emergent ray is parallel to the incident ray**, only shifted sideways. Inside the slab the ray travels a length $L = \\dfrac{t}{\\cos r}$ (hypotenuse of the right triangle with side $t$). The original line of the ray and the path inside make angle $i - r$, so the perpendicular gap between the incident line and the emergent ray is",
     },
     { type: "math", latex: "d = L\\sin(i - r) = \\frac{t\\,\\sin(i - r)}{\\cos r}" },
+    { type: "heading", text: "Worked examples: angles and wavelengths" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (angle of refraction).** Light in air meets glass of $n = \\sqrt2$ at $45^\\circ$.\n\n1. Snell: $1 \\cdot \\sin 45^\\circ = \\sqrt2\\sin r$. *Why this step:* air is $n_1 = 1$, glass is $n_2$.\n2. $\\sin r = \\frac{1/\\sqrt2}{\\sqrt2} = \\frac12$, so $r = 30^\\circ$. Towards the normal, as expected.\n\n**Worked example 2 (lateral shift, JEE Main).** A slab of thickness 6 cm and $n = \\sqrt3$; incidence $60^\\circ$.\n\n1. $\\sin r = \\frac{\\sin 60^\\circ}{\\sqrt3} = \\frac{\\sqrt3/2}{\\sqrt3} = \\frac12$, so $r = 30^\\circ$.\n2. $d = \\frac{6\\sin(60^\\circ - 30^\\circ)}{\\cos 30^\\circ} = \\frac{6 \\times \\frac12}{\\frac{\\sqrt3}2} = \\frac{6}{\\sqrt3} = 2\\sqrt3 \\approx 3.46$ cm. *Why this step:* the shift uses the angle between the undeviated line and the actual path, $i - r$, not $i$ itself.",
+      type: "worked-example",
+      id: "omp0-4-we1",
+      title: "Worked example 1 (angle of refraction)",
+      problem:
+        "Light in air meets glass of $n = \\sqrt2$ at $45^\\circ$. Find the angle of refraction.",
+      steps: [
+        { text: "Snell: $1 \\cdot \\sin 45^\\circ = \\sqrt2\\sin r$. *Why this step:* air is $n_1 = 1$, glass is $n_2$." },
+        { text: "$\\sin r = \\frac{1/\\sqrt2}{\\sqrt2} = \\frac12$, so $r = 30^\\circ$. Towards the normal, as expected." },
+      ],
+      answer: "$r = 30^\\circ$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (what changes and what does not).** Light of wavelength 600 nm in air enters water ($n = \\frac43$). Find its frequency, speed and wavelength in water.\n\n1. Frequency in air: $\\nu = \\frac{c}{\\lambda} = \\frac{3\\times10^8}{600\\times10^{-9}} = 5\\times10^{14}$ Hz. It stays the same in water. *Why this step:* frequency is set by the source.\n2. Speed: $v = \\frac cn = \\frac{3\\times10^8}{4/3} = 2.25\\times10^8$ m/s.\n3. Wavelength: $\\lambda_w = \\frac{600}{4/3} = 450$ nm. Check: $\\nu\\lambda_w = 5\\times10^{14} \\times 450\\times10^{-9} = 2.25\\times10^8$ m/s. ✓\n\n**Worked example 4 (between two media).** A ray in water ($n = \\frac43$) meets a glass plate ($n = \\frac32$) at $30^\\circ$.\n\n1. $\\frac43\\sin 30^\\circ = \\frac32\\sin r$, so $\\sin r = \\frac{(4/3)(1/2)}{3/2} = \\frac{2/3}{3/2} = \\frac49$.\n2. $r = \\sin^{-1}\\frac49 \\approx 26.4^\\circ$. Only a small bend, because the relative index $n_{gw} = \\frac{3/2}{4/3} = \\frac98$ is close to 1. *Why this step:* bending depends on the **ratio** of indices, not on each index alone.",
+      type: "worked-example",
+      id: "omp0-4-we2",
+      title: "Worked example 2 (lateral shift, JEE Main)",
+      problem:
+        "A slab of thickness 6 cm and $n = \\sqrt3$; incidence $60^\\circ$. Find the lateral shift of the emerging ray.",
+      steps: [
+        { text: "$\\sin r = \\frac{\\sin 60^\\circ}{\\sqrt3} = \\frac{\\sqrt3/2}{\\sqrt3} = \\frac12$, so $r = 30^\\circ$." },
+        { text: "$d = \\frac{6\\sin(60^\\circ - 30^\\circ)}{\\cos 30^\\circ} = \\frac{6 \\times \\frac12}{\\frac{\\sqrt3}2} = \\frac{6}{\\sqrt3} = 2\\sqrt3 \\approx 3.46$ cm. *Why this step:* the shift uses the angle between the undeviated line and the actual path, $i - r$, not $i$ itself." },
+      ],
+      answer: "$d = 2\\sqrt3 \\approx 3.46$ cm",
+    },
+    {
+      type: "worked-example",
+      id: "omp0-4-we3",
+      title: "Worked example 3 (what changes and what does not)",
+      problem:
+        "Light of wavelength 600 nm in air enters water ($n = \\frac43$). Find its frequency, speed and wavelength in water.",
+      steps: [
+        { text: "Frequency in air: $\\nu = \\frac{c}{\\lambda} = \\frac{3\\times10^8}{600\\times10^{-9}} = 5\\times10^{14}$ Hz. It stays the same in water. *Why this step:* frequency is set by the source." },
+        { text: "Speed: $v = \\frac cn = \\frac{3\\times10^8}{4/3} = 2.25\\times10^8$ m/s." },
+        { text: "Wavelength: $\\lambda_w = \\frac{600}{4/3} = 450$ nm. Check: $\\nu\\lambda_w = 5\\times10^{14} \\times 450\\times10^{-9} = 2.25\\times10^8$ m/s. ✓" },
+      ],
+      answer: "$\\nu = 5\\times10^{14}$ Hz (unchanged), $v = 2.25\\times10^8$ m/s, $\\lambda_w = 450$ nm.",
+    },
+    {
+      type: "worked-example",
+      id: "omp0-4-we4",
+      title: "Worked example 4 (between two media)",
+      problem:
+        "A ray in water ($n = \\frac43$) meets a glass plate ($n = \\frac32$) at $30^\\circ$. Find the angle of refraction in the glass.",
+      steps: [
+        { text: "$\\frac43\\sin 30^\\circ = \\frac32\\sin r$, so $\\sin r = \\frac{(4/3)(1/2)}{3/2} = \\frac{2/3}{3/2} = \\frac49$." },
+        { text: "$r = \\sin^{-1}\\frac49 \\approx 26.4^\\circ$. Only a small bend, because the relative index $n_{gw} = \\frac{3/2}{4/3} = \\frac98$ is close to 1. *Why this step:* bending depends on the **ratio** of indices, not on each index alone." },
+      ],
+      answer: "$r = \\sin^{-1}\\frac49 \\approx 26.4^\\circ$",
     },
     {
       type: "callout",
@@ -720,27 +971,33 @@ const lesson04: LessonSeed = {
       content:
         "Speed and wavelength change by the factor $n$; frequency does not change at all. Anything that depends on frequency (colour, photon energy $h\\nu$ in Chapter 3) is the same inside the glass as outside.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-4-q1",
       variant: "practice",
       question: "Light travels at $2\\times10^8$ m/s in a glass. What is the refractive index of the glass? ($c = 3\\times10^8$ m/s)",
-      options: [
-        { text: "0.67", feedback: "That is $v/c$. The index compares vacuum speed to medium speed, so it is at least 1." },
-        { text: "1.5", correct: true, feedback: "$n = c/v = 3/2$." },
-        { text: "2", feedback: "2 is the speed in units of $10^8$ m/s, not the index." },
+      answer: 1.5,
+      hint: "The index compares the speed in vacuum with the speed in the medium.",
+      solution: "$n = \\dfrac{c}{v} = \\dfrac{3\\times10^8}{2\\times10^8} = 1.5$.",
+      commonMistakes: [
+        { answer: 0.667, tolerance: 0.005, feedback: "That is $v/c$. The index compares vacuum speed to medium speed, so it is at least 1." },
+        { answer: 2, feedback: "2 is the speed in units of $10^8$ m/s, not the index." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-4-q2",
       variant: "practice",
-      question: "A ray in air meets a medium of index $\\sqrt3$ at an angle of incidence of $60^\\circ$. What is the angle of refraction?",
-      options: [
-        { text: "$30^\\circ$", correct: true, feedback: "$\\sin r = \\frac{\\sin 60^\\circ}{\\sqrt3} = \\frac12$." },
-        { text: "$60^\\circ$", feedback: "Only normal incidence passes undeviated. At $60^\\circ$ into a denser medium, the ray bends." },
-        { text: "$90^\\circ$", feedback: "You multiplied instead of divided: $\\sin r = \\sqrt3\\sin 60^\\circ$ would exceed 1. Here $\\sin r = \\sin i/n$." },
-        { text: "$45^\\circ$", feedback: "$\\sin 45^\\circ = 0.707$, but $\\frac{\\sin 60^\\circ}{\\sqrt3} = 0.5$." },
+      question: "A ray in air meets a medium of index $\\sqrt3$ at an angle of incidence of $60^\\circ$. What is the angle of refraction, in degrees?",
+      answer: 30,
+      unit: "°",
+      hint: "Snell's law: $\\sin r = \\dfrac{\\sin i}{n}$.",
+      solution: "$\\sin r = \\dfrac{\\sin 60^\\circ}{\\sqrt3} = \\dfrac{\\sqrt3/2}{\\sqrt3} = \\dfrac12$, so $r = 30^\\circ$.",
+      commonMistakes: [
+        { answer: 60, feedback: "Only normal incidence passes undeviated. At $60^\\circ$ into a denser medium, the ray bends towards the normal." },
+        { answer: 90, feedback: "You multiplied instead of divided: $\\sin r = \\sqrt3\\sin 60^\\circ$ would exceed 1. Here $\\sin r = \\sin i/n$." },
+        { answer: 45, feedback: "$\\sin 45^\\circ = 0.707$, but $\\frac{\\sin 60^\\circ}{\\sqrt3} = 0.5$." },
       ],
     },
     {
@@ -753,6 +1010,7 @@ const lesson04: LessonSeed = {
         { text: "$6\\times10^{14}$ Hz and 750 nm", feedback: "The wavelength shrinks in a denser medium: divide by $n$, do not multiply." },
         { text: "$6\\times10^{14}$ Hz and 333 nm", correct: true, feedback: "$\\nu = c/\\lambda = 6\\times10^{14}$ Hz, unchanged; $\\lambda = 500/1.5 \\approx 333$ nm." },
       ],
+      hint: "The frequency is set by the source and does not change on refraction. Get it from $c = f\\lambda$ in air, then use $\\lambda_{\\text{glass}} = \\lambda/n$.",
     },
     {
       type: "quiz",
@@ -764,16 +1022,20 @@ const lesson04: LessonSeed = {
         { text: "It bends away from the normal, so $r > 20^\\circ$.", correct: true, feedback: "$1.5\\sin 20^\\circ = \\sin r$ gives $\\sin r \\approx 0.51$, $r \\approx 31^\\circ$." },
         { text: "It goes straight on because the angle is small.", feedback: "Only $i = 0$ exactly goes straight on." },
       ],
+      hint: "Going from a denser to a rarer medium, use $n_1\\sin i = n_2\\sin r$ with $n_1 > n_2$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-4-q5",
       variant: "practice",
-      question: "What is the refractive index of glass ($n = \\frac32$) relative to water ($n = \\frac43$)?",
-      options: [
-        { text: "$\\frac89$", feedback: "That is water relative to glass, $n_w/n_g$." },
-        { text: "$2$", feedback: "That multiplies the two indices. A relative index is a ratio." },
-        { text: "$\\frac98$", correct: true, feedback: "$n_{gw} = \\frac{n_g}{n_w} = \\frac{3/2}{4/3} = \\frac98$." },
+      question: "What is the refractive index of glass ($n = \\frac32$) relative to water ($n = \\frac43$)? A fraction such as 5/4 or a decimal is fine.",
+      answer: 1.125,
+      tolerance: 0.005,
+      hint: "A relative index is a ratio: the medium named first over the reference medium.",
+      solution: "$n_{gw} = \\dfrac{n_g}{n_w} = \\dfrac{3/2}{4/3} = \\dfrac98 = 1.125$.",
+      commonMistakes: [
+        { answer: 0.8889, tolerance: 0.001, feedback: "That is water relative to glass, $n_w/n_g = \\frac89$." },
+        { answer: 2, feedback: "That multiplies the two indices. A relative index is a ratio." },
       ],
     },
     {
@@ -786,6 +1048,21 @@ const lesson04: LessonSeed = {
         { text: "Zero", correct: true, feedback: "$i = r = 0$, so $\\sin(i - r) = 0$ and $d = 0$." },
         { text: "Equal to the slab thickness", feedback: "A normal ray does not bend at either face, so it is not displaced sideways at all." },
       ],
+      hint: "The lateral shift is $t\\,\\dfrac{\\sin(i - r)}{\\cos r}$. What are $i$ and $r$ at normal incidence?",
+    },
+    {
+      type: "quiz",
+      id: "omp0-4-q7",
+      variant: "concept",
+      multiple: true,
+      question: "Monochromatic light passes from air into glass ($n = 1.5$). Select every quantity that changes.",
+      options: [
+        { text: "Its speed", correct: true, feedback: "It drops to $c/n = 2\\times10^8$ m/s." },
+        { text: "Its wavelength", correct: true, feedback: "$\\lambda = v/\\nu$ falls with the speed, to $\\lambda_0/n$." },
+        { text: "Its frequency", feedback: "The frequency is set by the source; each wavefront crossing the boundary must continue as one wavefront, so $\\nu$ is unchanged." },
+        { text: "Its colour (and the energy of each photon)", feedback: "Colour and photon energy $h\\nu$ depend on frequency, which does not change." },
+      ],
+      hint: "One of $v = \\nu\\lambda$'s three quantities is fixed by the source.",
     },
   ]),
 };
@@ -800,6 +1077,7 @@ const lesson05: LessonSeed = {
       content:
         "Look down into a clear swimming pool and the bottom seems within easy reach; jump in and it is a metre deeper than you thought. Every year people misjudge rivers and pools this way. The bottom is not where it looks, because the light from it bends away from the normal as it leaves the water. Snell's law with small angles tells us exactly where it seems to be.",
     },
+    { type: "heading", text: "Deriving apparent depth" },
     {
       type: "text",
       content:
@@ -823,6 +1101,7 @@ const lesson05: LessonSeed = {
       content:
         "$d' = d\\,\\dfrac{n_{\\text{observer}}}{n_{\\text{object}}}$, measured from the surface.\nFor an object in water seen from air, $d' = \\dfrac{d}{n}$: the object seems **raised** by $d - d' = d\\left(1 - \\dfrac1n\\right)$.\nFor an object in air seen from water, $d' = n\\,d$: it seems **farther** away.",
     },
+    { type: "heading", text: "Viewing at an angle" },
     {
       type: "text",
       content:
@@ -846,10 +1125,11 @@ const lesson05: LessonSeed = {
       content:
         "What you should have seen: looking almost straight down, the image sits at about 15 cm, right on the $d/n$ mark. Tilt the view to $60^\\circ$ and it rises to about 10 cm. So $d/n$ is the near-normal value, and slant viewing always makes the bottom look even shallower. Changing the real depth scales everything in proportion.",
     },
+    { type: "heading", text: "Normal shift through a slab" },
     {
       type: "text",
       content:
-        "**Normal shift through a slab.** Put a glass slab of thickness $t$ and index $n$ on top of a mark and look straight down. Inside the slab the mark appears at depth $t/n$ below the top face instead of $t$, so it seems lifted by",
+        "Put a glass slab of thickness $t$ and index $n$ on top of a mark and look straight down. Inside the slab the mark appears at depth $t/n$ below the top face instead of $t$, so it seems lifted by",
     },
     { type: "math", latex: "\\Delta = t - \\frac tn = t\\left(1 - \\frac1n\\right)" },
     {
@@ -857,15 +1137,57 @@ const lesson05: LessonSeed = {
       content:
         "The shift does not depend on how far the object is below the slab, or on where the observer is: every paraxial ray is displaced by the same amount along the normal. Several slabs stacked together simply add their shifts, and the apparent depth under several layers is the sum of $t_k/n_k$ for each layer (viewed from air).",
     },
+    { type: "heading", text: "Worked examples: coins and microscopes" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (the coin).** A coin lies at the bottom of a beaker of water 20 cm deep ($n = \\frac43$). How deep does it look from directly above?\n\n1. Observer in air, object in water: $d' = d\\,\\frac{n_1}{n_2} = 20 \\times \\frac{1}{4/3}$.\n2. $d' = 15$ cm. The coin seems raised by 5 cm. *Why this step:* check with $d(1 - \\frac1n) = 20 \\times \\frac14 = 5$ cm. ✓\n\n**Worked example 2 (two layers).** An ink spot is at the bottom of a 4 cm layer of water ($n = \\frac43$), and a glass slab 3 cm thick ($n = 1.5$) lies on top of the water. How far below the top of the glass does the spot appear?\n\n1. Each layer contributes its thickness divided by its index: glass $\\frac{3}{1.5} = 2$ cm, water $\\frac{4}{4/3} = 3$ cm. *Why this step:* the image formed by the lower surface acts as the object for the next surface up, and each flat surface just rescales depth.\n2. Apparent depth $= 2 + 3 = 5$ cm, against a real depth of 7 cm.\n3. Check with shifts: $3(1 - \\frac23) + 4(1 - \\frac34) = 1 + 1 = 2$ cm, and $7 - 2 = 5$. ✓",
+      type: "worked-example",
+      id: "omp0-5-we1",
+      title: "Worked example 1 (the coin)",
+      problem:
+        "A coin lies at the bottom of a beaker of water 20 cm deep ($n = \\frac43$). How deep does it look from directly above?",
+      steps: [
+        { text: "Observer in air, object in water: $d' = d\\,\\frac{n_1}{n_2} = 20 \\times \\frac{1}{4/3}$." },
+        { text: "$d' = 15$ cm. The coin seems raised by 5 cm. *Why this step:* check with $d(1 - \\frac1n) = 20 \\times \\frac14 = 5$ cm. ✓" },
+      ],
+      answer: "It looks 15 cm deep: raised by 5 cm.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (measuring $n$ with a microscope, practical exam).** A travelling microscope is focused on a mark on the bench: reading 12.00 cm. A glass slab is placed over the mark; the microscope must be raised to 12.80 cm to see the mark sharply again, and to 14.40 cm to focus on a speck on the top of the slab.\n\n1. Real thickness: $t = 14.40 - 12.00 = 2.40$ cm.\n2. Apparent thickness (top of slab down to the image of the mark): $14.40 - 12.80 = 1.60$ cm.\n3. $n = \\frac{\\text{real}}{\\text{apparent}} = \\frac{2.40}{1.60} = 1.5$. *Why this step:* $d' = d/n$ rearranged. The raise of 0.80 cm is the normal shift, $2.40(1 - \\frac1{1.5}) = 0.80$ cm. ✓\n\n**Worked example 4 (bird and fish, both ways).** A kingfisher hovers 6 m above a pond; a fish is 4 m below the surface ($n = \\frac43$). Viewing is near the vertical.\n\n1. Fish as seen by the bird: object in water, observer in air, $d' = 4 \\times \\frac34 = 3$ m below the surface, so the fish appears $6 + 3 = 9$ m away.\n2. Bird as seen by the fish: object in air, observer in water, $d' = 6 \\times \\frac{4/3}{1} = 8$ m above the surface, so the bird appears $8 + 4 = 12$ m away. *Why this step:* $d' = d\\,\\frac{n_{\\text{observer}}}{n_{\\text{object}}}$ covers both directions; do not memorise \"divide by $n$\".\n3. The two answers differ, and $12 = \\frac43 \\times 9$: each is just the other seen through a different medium.",
+      type: "worked-example",
+      id: "omp0-5-we2",
+      title: "Worked example 2 (two layers)",
+      problem:
+        "An ink spot is at the bottom of a 4 cm layer of water ($n = \\frac43$), and a glass slab 3 cm thick ($n = 1.5$) lies on top of the water. How far below the top of the glass does the spot appear?",
+      steps: [
+        { text: "Each layer contributes its thickness divided by its index: glass $\\frac{3}{1.5} = 2$ cm, water $\\frac{4}{4/3} = 3$ cm. *Why this step:* the image formed by the lower surface acts as the object for the next surface up, and each flat surface just rescales depth." },
+        { text: "Apparent depth $= 2 + 3 = 5$ cm, against a real depth of 7 cm." },
+        { text: "Check with shifts: $3(1 - \\frac23) + 4(1 - \\frac34) = 1 + 1 = 2$ cm, and $7 - 2 = 5$. ✓" },
+      ],
+      answer: "5 cm below the top of the glass (real depth 7 cm).",
+    },
+    {
+      type: "worked-example",
+      id: "omp0-5-we3",
+      title: "Worked example 3 (measuring $n$ with a microscope, practical exam)",
+      problem:
+        "A travelling microscope is focused on a mark on the bench: reading 12.00 cm. A glass slab is placed over the mark; the microscope must be raised to 12.80 cm to see the mark sharply again, and to 14.40 cm to focus on a speck on the top of the slab. Find the refractive index of the glass.",
+      steps: [
+        { text: "Real thickness: $t = 14.40 - 12.00 = 2.40$ cm." },
+        { text: "Apparent thickness (top of slab down to the image of the mark): $14.40 - 12.80 = 1.60$ cm." },
+        { text: "$n = \\frac{\\text{real}}{\\text{apparent}} = \\frac{2.40}{1.60} = 1.5$. *Why this step:* $d' = d/n$ rearranged. The raise of 0.80 cm is the normal shift, $2.40(1 - \\frac1{1.5}) = 0.80$ cm. ✓" },
+      ],
+      answer: "$n = 1.5$",
+    },
+    {
+      type: "worked-example",
+      id: "omp0-5-we4",
+      title: "Worked example 4 (bird and fish, both ways)",
+      problem:
+        "A kingfisher hovers 6 m above a pond; a fish is 4 m below the surface ($n = \\frac43$). Viewing is near the vertical. How far away does the fish appear to the bird, and how far away does the bird appear to the fish?",
+      steps: [
+        { text: "Fish as seen by the bird: object in water, observer in air, $d' = 4 \\times \\frac34 = 3$ m below the surface, so the fish appears $6 + 3 = 9$ m away." },
+        { text: "Bird as seen by the fish: object in air, observer in water, $d' = 6 \\times \\frac{4/3}{1} = 8$ m above the surface, so the bird appears $8 + 4 = 12$ m away. *Why this step:* $d' = d\\,\\frac{n_{\\text{observer}}}{n_{\\text{object}}}$ covers both directions; do not memorise \"divide by $n$\"." },
+        { text: "The two answers differ, and $12 = \\frac43 \\times 9$: each is just the other seen through a different medium." },
+      ],
+      answer: "The bird sees the fish 9 m away; the fish sees the bird 12 m away.",
     },
     {
       type: "callout",
@@ -881,6 +1203,7 @@ const lesson05: LessonSeed = {
       content:
         "It looks **farther**. The rule is $d' = d\\,n_{\\text{observer}}/n_{\\text{object}}$: with the observer in the denser medium the ratio exceeds 1. The fish sees the bird at 8 m, not 4.5 m.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "omp0-5-q1",
@@ -891,28 +1214,34 @@ const lesson05: LessonSeed = {
         { text: "16 cm", feedback: "You multiplied by $n$. That is the rule for an object in air seen from water." },
         { text: "3 cm", feedback: "3 cm is the shift, $12(1 - \\frac34)$, not the apparent depth." },
       ],
+      hint: "Recall the apparent-depth relation for viewing from directly above (0.5): does the bottom look nearer or farther, and by what factor?",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-5-q2",
       variant: "practice",
-      question: "A glass slab 6 cm thick ($n = 1.5$) is placed over a printed dot. By how much does the dot appear to rise?",
-      options: [
-        { text: "4 cm", feedback: "4 cm is the apparent thickness $t/n$, not the rise." },
-        { text: "2 cm", correct: true, feedback: "$\\Delta = 6(1 - \\frac{1}{1.5}) = 6 \\times \\frac13 = 2$ cm." },
-        { text: "3 cm", feedback: "That uses $\\Delta = t/2$. The shift is $t(1 - 1/n)$." },
-        { text: "It depends on how far the eye is above the slab.", feedback: "For near-normal viewing the shift depends only on $t$ and $n$." },
+      question: "A glass slab 6 cm thick ($n = 1.5$) is placed over a printed dot. Viewed from directly above, by how much does the dot appear to rise, in cm?",
+      answer: 2,
+      unit: "cm",
+      hint: "The normal shift through a slab is $t(1 - 1/n)$, whatever the distance of the eye.",
+      solution: "$\\Delta = t\\left(1 - \\dfrac1n\\right) = 6\\left(1 - \\dfrac{1}{1.5}\\right) = 6\\times\\dfrac13 = 2$ cm.",
+      commonMistakes: [
+        { answer: 4, feedback: "4 cm is the apparent thickness $t/n$, not the rise." },
+        { answer: 3, feedback: "That uses $\\Delta = t/2$. The shift is $t(1 - 1/n)$." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-5-q3",
       variant: "practice",
-      question: "A bird flies 3 m above a lake ($n = \\frac43$). How high above the surface does it appear to a fish just below the surface, looking up?",
-      options: [
-        { text: "2.25 m", feedback: "You divided by $n$. The observer is in the denser medium, so the ratio $n_{\\text{obs}}/n_{\\text{obj}}$ is $\\frac43$." },
-        { text: "3 m", feedback: "The surface does change the apparent position: the fish looks through a boundary." },
-        { text: "4 m", correct: true, feedback: "$d' = 3 \\times \\frac{4/3}{1} = 4$ m: the bird looks farther away." },
+      question: "A bird flies 3 m above a lake ($n = \\frac43$). How high above the surface does it appear to a fish just below the surface, looking up? Give your answer in m.",
+      answer: 4,
+      unit: "m",
+      hint: "$d' = d\\,\\dfrac{n_{\\text{observer}}}{n_{\\text{object}}}$. Which medium is the observer in?",
+      solution: "The observer (fish) is in water and the object (bird) in air:\n\n$d' = 3\\times\\dfrac{4/3}{1} = 4$ m. The bird looks *farther* away.",
+      commonMistakes: [
+        { answer: 2.25, feedback: "You divided by $n$. The observer is in the denser medium, so the ratio $n_{\\text{obs}}/n_{\\text{obj}}$ is $\\frac43$." },
+        { answer: 3, feedback: "The surface does change the apparent position: the fish looks through a boundary." },
       ],
     },
     {
@@ -925,17 +1254,21 @@ const lesson05: LessonSeed = {
         { text: "It stays $d/n$.", feedback: "$d/n$ is only the near-normal value." },
         { text: "It increases: the bottom looks deeper at a slant.", feedback: "The ray bends more strongly at larger angles, lifting the image further." },
       ],
+      hint: "The $d/n$ rule holds only for near-normal viewing (0.5). Follow a ray leaving the water at a large angle and see where it appears to come from.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-5-q5",
       variant: "practice",
-      question: "A 6 cm layer of oil ($n = 1.5$) floats on 10 cm of water ($n = \\frac43$). How deep does a coin at the bottom appear from above?",
-      options: [
-        { text: "10.7 cm", feedback: "You divided the total depth 16 cm by 1.5. Each layer is rescaled by its own index." },
-        { text: "12 cm", feedback: "You divided 16 cm by $\\frac43$. Each layer needs its own index." },
-        { text: "4.5 cm", feedback: "4.5 cm is the total shift, $16 - 11.5$." },
-        { text: "11.5 cm", correct: true, feedback: "$\\frac{6}{1.5} + \\frac{10}{4/3} = 4 + 7.5 = 11.5$ cm." },
+      question: "A 6 cm layer of oil ($n = 1.5$) floats on 10 cm of water ($n = \\frac43$). Viewed from directly above, how deep does a coin at the bottom appear, in cm?",
+      answer: 11.5,
+      unit: "cm",
+      hint: "Each layer looks thinner by its own index; add the apparent thicknesses.",
+      solution: "$d' = \\dfrac{6}{1.5} + \\dfrac{10}{4/3} = 4 + 7.5 = 11.5$ cm.",
+      commonMistakes: [
+        { answer: 10.67, tolerance: 0.01, feedback: "You divided the total depth 16 cm by 1.5. Each layer is rescaled by its own index." },
+        { answer: 12, feedback: "You divided 16 cm by $\\frac43$. Each layer needs its own index." },
+        { answer: 4.5, feedback: "4.5 cm is the total shift, $16 - 11.5$, not the apparent depth." },
       ],
     },
   ]),
@@ -951,6 +1284,7 @@ const lesson06: LessonSeed = {
       content:
         "A cut diamond flashes far more brilliantly than a glass copy of the same shape, and an optical fibre carries light round corners for kilometres with hardly any loss. Both rely on something the refraction bench hinted at in 0.4: when light tries to leave a dense medium at too steep an angle, it cannot get out at all, and **all** of it is reflected.",
     },
+    { type: "heading", text: "The critical angle" },
     {
       type: "text",
       content:
@@ -989,6 +1323,7 @@ const lesson06: LessonSeed = {
       content:
         "What you should have seen: as $i$ rises, the refracted ray swings towards the surface and gets fainter while the reflected ray gets brighter. At $\\theta_c$ ($41.8^\\circ$ for $n_1 = 1.5$) the refracted ray lies along the surface; one degree more and it is gone. Raising $n_1$ to 2.42 drops $\\theta_c$ to about $24^\\circ$, so a much wider cone of rays inside is trapped.",
     },
+    { type: "heading", text: "Diamonds, fibres and the circle of light" },
     {
       type: "text",
       content:
@@ -1010,15 +1345,56 @@ const lesson06: LessonSeed = {
         "**Derivation: the circle of light.** A small lamp sits at depth $h$ in water. Rays reaching the surface at more than $\\theta_c$ from the vertical are totally reflected, so light escapes only through a disc of radius $R = h\\tan\\theta_c$. With $\\sin\\theta_c = \\frac1n$, $\\cos\\theta_c = \\frac{\\sqrt{n^2 - 1}}{n}$ and $\\tan\\theta_c = \\frac{1}{\\sqrt{n^2 - 1}}$:",
     },
     { type: "math", latex: "R = h\\tan\\theta_c = \\frac{h}{\\sqrt{n^2 - 1}}" },
+    { type: "heading", text: "Worked examples: critical angles and fibres" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (critical angle, glass to water).** Light in glass ($n = 1.5$) meets a glass–water boundary ($n = \\frac43$).\n\n1. Denser to rarer? $1.5 > 1.33$, yes, so TIR is possible. *Why this step:* without that, there is no critical angle to find.\n2. $\\sin\\theta_c = \\frac{n_2}{n_1} = \\frac{4/3}{3/2} = \\frac89 \\approx 0.889$, so $\\theta_c \\approx 62.7^\\circ$.\n3. Compared with $41.8^\\circ$ for glass–air, TIR is much harder here because the two indices are close.\n\n**Worked example 2 (the lit circle, JEE Main).** A small bulb is 4 m below the surface of a pool ($n = \\frac43$). Find the radius of the circle through which light leaves.\n\n1. $n^2 - 1 = \\frac{16}{9} - 1 = \\frac79$, so $\\sqrt{n^2 - 1} = \\frac{\\sqrt7}{3}$.\n2. $R = \\frac{4}{\\sqrt7/3} = \\frac{12}{\\sqrt7} \\approx 4.54$ m. *Why this step:* the edge of the disc is where the ray meets the surface exactly at $\\theta_c$.",
+      type: "worked-example",
+      id: "omp0-6-we1",
+      title: "Worked example 1 (critical angle, glass to water)",
+      problem:
+        "Light in glass ($n = 1.5$) meets a glass–water boundary ($n = \\frac43$). Is total internal reflection possible, and if so, what is the critical angle?",
+      steps: [
+        { text: "Denser to rarer? $1.5 > 1.33$, yes, so TIR is possible. *Why this step:* without that, there is no critical angle to find." },
+        { text: "$\\sin\\theta_c = \\frac{n_2}{n_1} = \\frac{4/3}{3/2} = \\frac89 \\approx 0.889$, so $\\theta_c \\approx 62.7^\\circ$." },
+        { text: "Compared with $41.8^\\circ$ for glass–air, TIR is much harder here because the two indices are close." },
+      ],
+      answer: "Yes: $\\theta_c \\approx 62.7^\\circ$ ($\\sin\\theta_c = \\frac89$).",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (fibre acceptance).** A fibre has core index 1.3 and cladding index 1.2, in air.\n\n1. $\\sin\\alpha_{\\max} = \\sqrt{1.3^2 - 1.2^2} = \\sqrt{1.69 - 1.44} = \\sqrt{0.25} = 0.5$.\n2. $\\alpha_{\\max} = 30^\\circ$. Rays entering within a $30^\\circ$ cone of the axis are guided; steeper ones leak into the cladding. *Why this step:* the condition at the side wall, not the entry face, decides whether the ray is trapped.\n\n**Worked example 4 (totally reflecting prism).** What is the least index for which a right-angled isosceles prism totally reflects a ray entering one short face normally?\n\n1. The ray goes straight through the first face and meets the hypotenuse at $45^\\circ$.\n2. Need $45^\\circ \\ge \\theta_c$, i.e. $\\sin\\theta_c = \\frac1n \\le \\sin 45^\\circ = \\frac{1}{\\sqrt2}$.\n3. So $n \\ge \\sqrt2 \\approx 1.414$. Ordinary glass (1.5) qualifies.",
+      type: "worked-example",
+      id: "omp0-6-we2",
+      title: "Worked example 2 (the lit circle, JEE Main)",
+      problem:
+        "A small bulb is 4 m below the surface of a pool ($n = \\frac43$). Find the radius of the circle through which light leaves.",
+      steps: [
+        { text: "$n^2 - 1 = \\frac{16}{9} - 1 = \\frac79$, so $\\sqrt{n^2 - 1} = \\frac{\\sqrt7}{3}$." },
+        { text: "$R = \\frac{4}{\\sqrt7/3} = \\frac{12}{\\sqrt7} \\approx 4.54$ m. *Why this step:* the edge of the disc is where the ray meets the surface exactly at $\\theta_c$." },
+      ],
+      answer: "$R = \\frac{12}{\\sqrt7} \\approx 4.54$ m",
+    },
+    {
+      type: "worked-example",
+      id: "omp0-6-we3",
+      title: "Worked example 3 (fibre acceptance)",
+      problem:
+        "A fibre has core index 1.3 and cladding index 1.2, in air. Find the largest angle to the axis at which a ray can enter the fibre and still be guided.",
+      steps: [
+        { text: "$\\sin\\alpha_{\\max} = \\sqrt{1.3^2 - 1.2^2} = \\sqrt{1.69 - 1.44} = \\sqrt{0.25} = 0.5$." },
+        { text: "$\\alpha_{\\max} = 30^\\circ$. Rays entering within a $30^\\circ$ cone of the axis are guided; steeper ones leak into the cladding. *Why this step:* the condition at the side wall, not the entry face, decides whether the ray is trapped." },
+      ],
+      answer: "$\\alpha_{\\max} = 30^\\circ$",
+    },
+    {
+      type: "worked-example",
+      id: "omp0-6-we4",
+      title: "Worked example 4 (totally reflecting prism)",
+      problem:
+        "What is the least index for which a right-angled isosceles prism totally reflects a ray entering one short face normally?",
+      steps: [
+        { text: "The ray goes straight through the first face and meets the hypotenuse at $45^\\circ$." },
+        { text: "Need $45^\\circ \\ge \\theta_c$, i.e. $\\sin\\theta_c = \\frac1n \\le \\sin 45^\\circ = \\frac{1}{\\sqrt2}$." },
+        { text: "So $n \\ge \\sqrt2 \\approx 1.414$. Ordinary glass (1.5) qualifies." },
+      ],
+      answer: "$n \\ge \\sqrt2 \\approx 1.414$",
     },
     {
       type: "callout",
@@ -1034,6 +1410,7 @@ const lesson06: LessonSeed = {
       content:
         "At exactly $\\theta_c$ the refracted ray grazes along the surface (with vanishing intensity). Total reflection is for $i > \\theta_c$. Questions that say \"just at the critical angle\" expect the grazing ray, $r = 90^\\circ$.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "omp0-6-q1",
@@ -1044,18 +1421,22 @@ const lesson06: LessonSeed = {
         { text: "$63.4^\\circ$", feedback: "That is $\\tan^{-1}2$, which is Brewster's angle (2.7), not the critical angle." },
         { text: "$30^\\circ$", correct: true, feedback: "$\\sin\\theta_c = \\frac12$." },
       ],
+      hint: "At the critical angle the refracted ray grazes the surface. Put that into Snell's law.",
     },
     {
       type: "quiz",
       id: "omp0-6-q2",
       variant: "concept",
-      question: "In which case can total internal reflection occur?",
+      multiple: true,
+      question: "Take $n_{\\text{glass}} = 1.5$ and $n_{\\text{water}} = \\frac43$. In which cases does total internal reflection occur? Select all that apply.",
       options: [
         { text: "Light going from air into water at $80^\\circ$", feedback: "Rarer into denser: a refracted ray always exists." },
         { text: "Light going from glass into air at $50^\\circ$", correct: true, feedback: "Denser to rarer, and $50^\\circ > 41.8^\\circ$." },
+        { text: "Light going from water into air at $60^\\circ$", correct: true, feedback: "Denser to rarer, and water's critical angle is $\\sin^{-1}\\frac34 \\approx 48.6^\\circ < 60^\\circ$." },
         { text: "Light going from glass into air at $30^\\circ$", feedback: "Denser to rarer, but $30^\\circ$ is below the critical angle of $41.8^\\circ$." },
         { text: "Light going from water into glass at $70^\\circ$", feedback: "Water is rarer than glass, so the ray enters the glass and bends towards the normal." },
       ],
+      hint: "TIR needs light going from a denser to a rarer medium *and* incidence above the critical angle for that pair. Test each case for both conditions.",
     },
     {
       type: "quiz",
@@ -1067,29 +1448,35 @@ const lesson06: LessonSeed = {
         { text: "$\\frac{1}{\\sqrt2}$", feedback: "That is $\\sin\\theta_c$ itself. The index is its reciprocal." },
         { text: "$1$", feedback: "That is $\\tan 45^\\circ$. The condition uses the sine." },
       ],
+      hint: "At the critical angle the refracted ray grazes the surface. Put that into Snell's law and solve for $n$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-6-q4",
       variant: "practice",
-      question: "A small bulb is $\\sqrt7 \\approx 2.65$ m below the surface of water ($n = \\frac43$). What is the radius of the bright circle on the surface?",
-      options: [
-        { text: "$\\sqrt7$ m", feedback: "That would need $\\theta_c = 45^\\circ$. For water, $\\tan\\theta_c = \\frac{3}{\\sqrt7}$." },
-        { text: "$\\frac73 \\approx 2.33$ m", feedback: "You used $\\tan\\theta_c = \\frac{\\sqrt7}{3}$, which is $\\cot\\theta_c$." },
-        { text: "3.53 m", feedback: "That is $h \\times \\frac43$. The radius is $h\\tan\\theta_c$." },
-        { text: "3 m", correct: true, feedback: "$R = \\frac{h}{\\sqrt{n^2 - 1}} = \\frac{\\sqrt7}{\\sqrt7/3} = 3$ m." },
+      question: "A small bulb is $\\sqrt7 \\approx 2.65$ m below the surface of water ($n = \\frac43$). What is the radius of the bright circle on the surface, in m?",
+      answer: 3,
+      unit: "m",
+      hint: "$\\sin\\theta_c = \\frac34$; find $\\tan\\theta_c$. The radius is $h\\tan\\theta_c$.",
+      solution: "$\\sin\\theta_c = \\dfrac34$, so $\\cos\\theta_c = \\dfrac{\\sqrt7}{4}$ and $\\tan\\theta_c = \\dfrac{3}{\\sqrt7}$.\n\n$R = h\\tan\\theta_c = \\dfrac{h}{\\sqrt{n^2 - 1}} = \\dfrac{\\sqrt7}{\\sqrt7/3} = 3$ m.",
+      commonMistakes: [
+        { answer: 2.646, tolerance: 0.01, feedback: "That would need $\\theta_c = 45^\\circ$. For water, $\\tan\\theta_c = \\frac{3}{\\sqrt7}$." },
+        { answer: 2.333, tolerance: 0.01, feedback: "You used $\\tan\\theta_c = \\frac{\\sqrt7}{3}$, which is $\\cot\\theta_c$." },
+        { answer: 3.528, tolerance: 0.01, feedback: "That is $h \\times \\frac43$. The radius is $h\\tan\\theta_c$." },
       ],
-      hint: "$\\sin\\theta_c = \\frac34$; find $\\tan\\theta_c$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-6-q5",
       variant: "practice",
       question: "An optical fibre has core index 1.5 and cladding index 1.2. What is the sine of its maximum acceptance angle in air?",
-      options: [
-        { text: "0.8", feedback: "0.8 is $\\sin\\theta_c = n_2/n_1$ at the core–cladding wall, not the acceptance at the entry face." },
-        { text: "0.9", correct: true, feedback: "$\\sqrt{1.5^2 - 1.2^2} = \\sqrt{2.25 - 1.44} = \\sqrt{0.81} = 0.9$." },
-        { text: "0.3", feedback: "You subtracted the indices, $1.5 - 1.2$. The result is $\\sqrt{n_1^2 - n_2^2}$." },
+      answer: 0.9,
+      hint: "For a fibre in air, $\\sin\\theta_{\\max} = \\sqrt{n_1^2 - n_2^2}$.",
+      solution: "$\\sin\\theta_{\\max} = \\sqrt{n_1^2 - n_2^2} = \\sqrt{1.5^2 - 1.2^2} = \\sqrt{2.25 - 1.44} = \\sqrt{0.81} = 0.9$.",
+      commonMistakes: [
+        { answer: 0.8, feedback: "0.8 is $\\sin\\theta_c = n_2/n_1$ at the core–cladding wall, not the acceptance at the entry face." },
+        { answer: 0.3, feedback: "You subtracted the indices, $1.5 - 1.2$. The result is $\\sqrt{n_1^2 - n_2^2}$." },
+        { answer: 0.81, feedback: "That is $n_1^2 - n_2^2$. Take the square root." },
       ],
     },
     {
@@ -1102,6 +1489,7 @@ const lesson06: LessonSeed = {
         { text: "The ray passes straight through undeviated.", feedback: "Only normal incidence passes undeviated." },
         { text: "The refracted ray grazes along the surface, $r = 90^\\circ$.", correct: true, feedback: "That is the definition of the critical angle." },
       ],
+      hint: "Put $i = \\theta_c$ into Snell's law: what is $\\sin r$?",
     },
   ]),
 };
@@ -1116,6 +1504,7 @@ const lesson07: LessonSeed = {
       content:
         "A goldfish in a round bowl looks fatter than it is, and a glass marble held close to print makes the letters swim into view upside down. Both are refraction at a **curved** boundary. One formula handles every such surface, and it is the building block for lenses in Chapter 1: a lens is just two of these surfaces back to back.",
     },
+    { type: "heading", text: "Deriving the refraction formula" },
     {
       type: "text",
       content:
@@ -1147,6 +1536,7 @@ const lesson07: LessonSeed = {
       content:
         "$\\dfrac{n_2}{v} - \\dfrac{n_1}{u} = \\dfrac{n_2 - n_1}{R}$, with $n_1$ the medium the light comes **from** and $n_2$ the medium it goes **into**.\n$R$ is positive when C lies on the side the light goes into (to the right of P), negative when C is on the incident side.\nLateral magnification: $m = \\dfrac{h'}{h} = \\dfrac{n_1 v}{n_2 u}$.",
     },
+    { type: "heading", text: "Magnification and consistency checks" },
     {
       type: "text",
       content:
@@ -1159,20 +1549,60 @@ const lesson07: LessonSeed = {
       content:
         "**Flat surface.** Let $R \\to \\infty$: $\\frac{n_2}{v} = \\frac{n_1}{u}$, so $v = u\\,\\frac{n_2}{n_1}$. An object at depth $d$ in water ($n_1 = \\frac43$) seen from air ($n_2 = 1$) has $v = -\\frac34 d$: apparent depth from 0.5, recovered. ✓\n**Mirror.** Put $n_2 = -n_1$ (reflection reverses the light's direction): $-\\frac{n_1}{v} - \\frac{n_1}{u} = \\frac{-2n_1}{R}$, i.e. $\\frac1v + \\frac1u = \\frac2R$, the mirror formula. A curious trick, not something to rely on in an exam.",
     },
+    { type: "heading", text: "Worked examples: glass surfaces and fish bowls" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (a convex glass surface).** An object in air is 20 cm in front of a convex glass surface, $|R| = 10$ cm, $n = 1.5$.\n\n1. Signs: $n_1 = 1$, $n_2 = 1.5$, $u = -20$ cm. The surface bulges towards the object, so C is inside the glass, on the far side: $R = +10$ cm. *Why this step:* the sign of $R$ is fixed by where C is, measured along the incident light.\n2. $\\frac{1.5}{v} = \\frac{n_2 - n_1}{R} + \\frac{n_1}{u} = \\frac{0.5}{10} - \\frac{1}{20} = 0.05 - 0.05 = 0$.\n3. $v = \\infty$: the refracted rays are **parallel**. The object is at this surface's first focal point, $f_1 = -\\frac{n_1 R}{n_2 - n_1} = -20$ cm.\n4. Move the object back to 40 cm: $\\frac{1.5}{v} = 0.05 - 0.025 = 0.025$, so $v = 60$ cm inside the glass, and $m = \\frac{n_1 v}{n_2 u} = \\frac{1 \\times 60}{1.5 \\times (-40)} = -1$: real, inverted, same size.",
+      type: "worked-example",
+      id: "omp0-7-we1",
+      title: "Worked example 1 (a convex glass surface)",
+      problem:
+        "An object in air is 20 cm in front of a convex glass surface, $|R| = 10$ cm, $n = 1.5$. Find the image. Then find the image and its magnification when the object is moved back to 40 cm.",
+      steps: [
+        { text: "Signs: $n_1 = 1$, $n_2 = 1.5$, $u = -20$ cm. The surface bulges towards the object, so C is inside the glass, on the far side: $R = +10$ cm. *Why this step:* the sign of $R$ is fixed by where C is, measured along the incident light." },
+        { text: "$\\frac{1.5}{v} = \\frac{n_2 - n_1}{R} + \\frac{n_1}{u} = \\frac{0.5}{10} - \\frac{1}{20} = 0.05 - 0.05 = 0$." },
+        { text: "$v = \\infty$: the refracted rays are **parallel**. The object is at this surface's first focal point, $f_1 = -\\frac{n_1 R}{n_2 - n_1} = -20$ cm." },
+        { text: "Move the object back to 40 cm: $\\frac{1.5}{v} = 0.05 - 0.025 = 0.025$, so $v = 60$ cm inside the glass, and $m = \\frac{n_1 v}{n_2 u} = \\frac{1 \\times 60}{1.5 \\times (-40)} = -1$: real, inverted, same size." },
+      ],
+      answer: "At 20 cm: $v = \\infty$ (parallel rays; the object is at the first focal point). At 40 cm: $v = +60$ cm in the glass, $m = -1$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (the fish bowl, JEE Main).** A fish is 10 cm from the near wall of a spherical bowl of radius 15 cm filled with water ($n = \\frac43$). Where does an observer outside, looking along the diameter through that wall, see it? Ignore the thin glass.\n\n1. Light goes from the fish (water, $n_1 = \\frac43$) into air ($n_2 = 1$). Draw it travelling left to right: fish on the left, wall at P. *Why this step:* fixing the direction of light fixes every sign.\n2. $u = -10$ cm. The centre of the bowl is inside the water, on the incident side: $R = -15$ cm.\n3. $\\frac{1}{v} = \\frac{n_2 - n_1}{R} + \\frac{n_1}{u} = \\frac{-1/3}{-15} + \\frac{4/3}{-10} = \\frac{1}{45} - \\frac{2}{15} = \\frac{1 - 6}{45} = -\\frac19$.\n4. $v = -9$ cm: a virtual image 9 cm inside the bowl, 1 cm nearer the wall than the fish.\n5. $m = \\frac{n_1 v}{n_2 u} = \\frac{(4/3)(-9)}{1 \\times (-10)} = 1.2$: erect and 20% bigger. That is the fat goldfish.",
+      type: "worked-example",
+      id: "omp0-7-we2",
+      title: "Worked example 2 (the fish bowl, JEE Main)",
+      problem:
+        "A fish is 10 cm from the near wall of a spherical bowl of radius 15 cm filled with water ($n = \\frac43$). Where does an observer outside, looking along the diameter through that wall, see it? Ignore the thin glass.",
+      steps: [
+        { text: "Light goes from the fish (water, $n_1 = \\frac43$) into air ($n_2 = 1$). Draw it travelling left to right: fish on the left, wall at P. *Why this step:* fixing the direction of light fixes every sign." },
+        { text: "$u = -10$ cm. The centre of the bowl is inside the water, on the incident side: $R = -15$ cm." },
+        { text: "$\\frac{1}{v} = \\frac{n_2 - n_1}{R} + \\frac{n_1}{u} = \\frac{-1/3}{-15} + \\frac{4/3}{-10} = \\frac{1}{45} - \\frac{2}{15} = \\frac{1 - 6}{45} = -\\frac19$." },
+        { text: "$v = -9$ cm: a virtual image 9 cm inside the bowl, 1 cm nearer the wall than the fish." },
+        { text: "$m = \\frac{n_1 v}{n_2 u} = \\frac{(4/3)(-9)}{1 \\times (-10)} = 1.2$: erect and 20% bigger. That is the fat goldfish." },
+      ],
+      answer: "$v = -9$ cm: a virtual, erect image 9 cm inside the bowl, magnified $m = 1.2$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (fish at the centre).** Same bowl, fish at the centre: $u = -15$ cm, $R = -15$ cm.\n\n1. $\\frac1v = \\frac{1}{45} + \\frac{4/3}{-15} = \\frac{1}{45} - \\frac{4}{45} = -\\frac{3}{45} = -\\frac1{15}$, so $v = -15$ cm: the image is at the centre.\n2. $m = \\frac{(4/3)(-15)}{1 \\times (-15)} = \\frac43 = n$. *Why this step:* every ray from C meets the surface along a radius (the normal) and is not bent, so the image must be at C; only its size changes.\n\n**Worked example 4 (a mark on a glass sphere).** A small mark on the surface of a glass sphere ($n = 1.5$, radius 10 cm) is viewed through the sphere from the diametrically opposite side.\n\n1. Light starts at the mark and crosses the glass to the far surface: $u = -20$ cm, $n_1 = 1.5$, $n_2 = 1$. The centre is on the incident side: $R = -10$ cm.\n2. $\\frac1v = \\frac{1 - 1.5}{-10} + \\frac{1.5}{-20} = 0.05 - 0.075 = -0.025$, so $v = -40$ cm.\n3. The image is virtual, 40 cm behind the viewing surface, i.e. 20 cm beyond the mark itself, with $m = \\frac{1.5 \\times (-40)}{1 \\times (-20)} = 3$.",
+      type: "worked-example",
+      id: "omp0-7-we3",
+      title: "Worked example 3 (fish at the centre)",
+      problem:
+        "Same bowl, fish at the centre: $u = -15$ cm, $R = -15$ cm. Where does the observer see the fish, and with what magnification?",
+      steps: [
+        { text: "$\\frac1v = \\frac{1}{45} + \\frac{4/3}{-15} = \\frac{1}{45} - \\frac{4}{45} = -\\frac{3}{45} = -\\frac1{15}$, so $v = -15$ cm: the image is at the centre." },
+        { text: "$m = \\frac{(4/3)(-15)}{1 \\times (-15)} = \\frac43 = n$. *Why this step:* every ray from C meets the surface along a radius (the normal) and is not bent, so the image must be at C; only its size changes." },
+      ],
+      answer: "At the centre ($v = -15$ cm), magnified $m = \\frac43$.",
+    },
+    {
+      type: "worked-example",
+      id: "omp0-7-we4",
+      title: "Worked example 4 (a mark on a glass sphere)",
+      problem:
+        "A small mark on the surface of a glass sphere ($n = 1.5$, radius 10 cm) is viewed through the sphere from the diametrically opposite side. Where is its image, and what is its magnification?",
+      steps: [
+        { text: "Light starts at the mark and crosses the glass to the far surface: $u = -20$ cm, $n_1 = 1.5$, $n_2 = 1$. The centre is on the incident side: $R = -10$ cm." },
+        { text: "$\\frac1v = \\frac{1 - 1.5}{-10} + \\frac{1.5}{-20} = 0.05 - 0.075 = -0.025$, so $v = -40$ cm." },
+        { text: "The image is virtual, 40 cm behind the viewing surface, i.e. 20 cm beyond the mark itself, with $m = \\frac{1.5 \\times (-40)}{1 \\times (-20)} = 3$." },
+      ],
+      answer: "$v = -40$ cm: virtual, 20 cm beyond the mark, $m = 3$.",
     },
     {
       type: "callout",
@@ -1188,6 +1618,7 @@ const lesson07: LessonSeed = {
       content:
         "It works both ways, provided $n_1$ is always the medium the light is **leaving**. In the fish bowl and the glass sphere, $n_1 > n_2$ and the formula gave the right answers without any change.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "omp0-7-q1",
@@ -1198,17 +1629,21 @@ const lesson07: LessonSeed = {
         { text: "Negative, because C is on the incident (air) side", correct: true, feedback: "C lies against the direction of the incident light, so $R < 0$." },
         { text: "It depends on the object distance.", feedback: "$R$ is a property of the surface and the light's direction, not of the object." },
       ],
+      hint: "The sign of $R$ is the sign of the distance from the pole to the centre of curvature C, measured along the incident light. Which side is C on for a hollowed surface?",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-7-q2",
       variant: "practice",
-      question: "An object in air is 30 cm from a convex glass surface ($R = +10$ cm, $n = 1.5$). Where is the image?",
-      options: [
-        { text: "90 cm inside the glass", correct: true, feedback: "$\\frac{1.5}{v} = \\frac{0.5}{10} - \\frac1{30} = \\frac1{60}$, so $v = 90$ cm." },
-        { text: "60 cm inside the glass", feedback: "That is $\\frac1v = \\frac1{60}$; you forgot the $n_2 = 1.5$ on the left: $v = \\frac{1.5}{1/60}$." },
-        { text: "30 cm inside the glass", feedback: "Check $\\frac{n_2 - n_1}{R} + \\frac{n_1}{u} = 0.05 - 0.0333$." },
-        { text: "90 cm in front of the surface (virtual)", feedback: "$v$ comes out positive, so the image is on the far side, real." },
+      question: "An object in air is 30 cm from a convex glass surface ($R = +10$ cm, $n = 1.5$). Using the New Cartesian convention (incident light left to right, distances from the pole), find the image distance $v$, including its sign.",
+      answer: 90,
+      unit: "cm",
+      hint: "$\\dfrac{n_2}{v} - \\dfrac{n_1}{u} = \\dfrac{n_2 - n_1}{R}$ with $u = -30$ cm.",
+      solution: "$\\dfrac{1.5}{v} = \\dfrac{1.5 - 1}{10} + \\dfrac{1}{-30} = \\dfrac{1}{20} - \\dfrac{1}{30} = \\dfrac1{60}$, so $v = 1.5\\times60 = +90$ cm: a real image 90 cm inside the glass.",
+      commonMistakes: [
+        { answer: 60, feedback: "That is $\\frac1v = \\frac1{60}$; you forgot the $n_2 = 1.5$ on the left: $v = \\frac{1.5}{1/60}$." },
+        { answer: 30, feedback: "That is $1.5 \\div \\frac{1}{20}$: you dropped the $\\frac{n_1}{u}$ term, which treats the object as if it were at infinity. Include it: $\\frac{1.5}{v} = \\frac1{20} - \\frac1{30} = \\frac1{60}$." },
+        { answer: -90, feedback: "$v$ comes out positive, so the image is on the far side (inside the glass), real." },
       ],
     },
     {
@@ -1221,6 +1656,7 @@ const lesson07: LessonSeed = {
         { text: "At the centre, magnified by $n$", correct: true, feedback: "Rays from C cross the wall along radii and do not bend; $m = \\frac{n_1 v}{n_2 u} = n$." },
         { text: "At the centre, same size", feedback: "The position is right but $m = \\frac{n_1 v}{n_2 u} = \\frac43$, not 1." },
       ],
+      hint: "Rays from the centre of a sphere travel along radii. How do they bend at the surface? Then use the single-surface formula with $|u| = R$ for the magnification.",
     },
     {
       type: "quiz",
@@ -1232,16 +1668,19 @@ const lesson07: LessonSeed = {
         { text: "Snell's law with $i = r$", feedback: "The formula already assumes Snell; letting $R \\to \\infty$ gives image positions, not angles." },
         { text: "The apparent-depth relation $v = u\\,\\frac{n_2}{n_1}$", correct: true, feedback: "A flat surface: $\\frac{n_2}{v} = \\frac{n_1}{u}$." },
       ],
+      hint: "Put $1/R = 0$ in $\\dfrac{n_2}{v} - \\dfrac{n_1}{u} = \\dfrac{n_2 - n_1}{R}$ and simplify.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-7-q5",
       variant: "practice",
-      question: "An object in air 40 cm from a convex glass surface ($R = +10$ cm, $n = 1.5$) forms an image at $v = 60$ cm. What is the magnification?",
-      options: [
-        { text: "$-1$", correct: true, feedback: "$m = \\frac{n_1 v}{n_2 u} = \\frac{60}{1.5 \\times (-40)} = -1$." },
-        { text: "$-1.5$", feedback: "That is $\\frac vu$ without the index ratio $\\frac{n_1}{n_2}$." },
-        { text: "$+1$", feedback: "$u$ is negative and $v$ positive, so $m$ is negative: inverted." },
+      question: "An object in air 40 cm from a convex glass surface ($R = +10$ cm, $n = 1.5$) forms an image at $v = +60$ cm. What is the magnification $m$, including its sign?",
+      answer: -1,
+      hint: "For a refracting surface, $m = \\dfrac{n_1 v}{n_2 u}$, with $u = -40$ cm.",
+      solution: "$m = \\dfrac{n_1 v}{n_2 u} = \\dfrac{1\\times60}{1.5\\times(-40)} = -1$: inverted and the same size.",
+      commonMistakes: [
+        { answer: -1.5, feedback: "That is $\\frac vu$ without the index ratio $\\frac{n_1}{n_2}$." },
+        { answer: 1, feedback: "$u$ is negative and $v$ positive, so $m$ is negative: inverted." },
       ],
     },
   ]),
@@ -1274,6 +1713,7 @@ const lessonMastery: LessonSeed = {
         { text: "9", feedback: "The number of images never exceeds $360^\\circ/\\theta$." },
         { text: "7", correct: true, feedback: "$m = 8$ is even, so $8 - 1 = 7$." },
       ],
+      hint: "Number of images formed by inclined mirrors (0.1): is $360^\\circ/\\theta$ even or odd?",
     },
     {
       type: "quiz",
@@ -1285,6 +1725,7 @@ const lessonMastery: LessonSeed = {
         { text: "$6^\\circ$", feedback: "The factor is 2 the other way: the ray turns more than the mirror." },
         { text: "$24^\\circ$", correct: true, feedback: "Rotating the mirror by $\\theta$ turns the reflected ray by $2\\theta$." },
       ],
+      hint: "Turning a mirror (0.1).",
     },
     {
       type: "quiz",
@@ -1297,17 +1738,22 @@ const lessonMastery: LessonSeed = {
         { text: "Real, inverted, 11.1 cm in front, diminished", feedback: "That is $\\frac1v = \\frac1f + \\frac1u$. Solve for $\\frac1v = \\frac1f - \\frac1u$." },
         { text: "Real, inverted, 100 cm in front, 4 times smaller", feedback: "$|m| = |v/u| = 100/25 = 4$: bigger, not smaller." },
       ],
+      hint: "The mirror formula and magnification (0.3).",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-8-q4",
       variant: "mastery",
-      question: "A convex mirror of focal length 30 cm forms an image one-third the size of the object. How far is the object from the mirror?",
-      options: [
-        { text: "60 cm", correct: true, feedback: "$m = +\\frac13 = -\\frac vu$ gives $v = -\\frac u3$; then $-\\frac3u + \\frac1u = \\frac1{30}$, so $u = -60$ cm. Check: $v = +20$ cm." },
-        { text: "90 cm", feedback: "Try it: $u = -90$ gives $\\frac1v = \\frac1{30} + \\frac1{90} = \\frac4{90}$, $v = 22.5$, $m = \\frac14$." },
-        { text: "20 cm", feedback: "20 cm is the image distance, behind the mirror." },
-        { text: "The mirror cannot do this; a convex mirror always gives $m = 1$.", feedback: "Only a plane mirror has $m = 1$. A convex mirror always diminishes." },
+      question: "A convex mirror of focal length 30 cm forms an image one-third the size of the object. Find the object distance $u$ in the New Cartesian convention, including its sign.",
+      answer: -60,
+      unit: "cm",
+      hint: "A convex mirror's image is erect, so $m = +\\frac13$. Write $v$ in terms of $u$ and substitute into the mirror formula.",
+      solution: "$m = +\\dfrac13 = -\\dfrac vu$ gives $v = -\\dfrac u3$.\n\nWith $f = +30$ cm: $\\dfrac1v + \\dfrac1u = -\\dfrac3u + \\dfrac1u = -\\dfrac2u = \\dfrac1{30}$, so $u = -60$ cm.\n\nCheck: $v = +20$ cm (virtual, behind the mirror) and $m = -\\dfrac{20}{-60} = +\\dfrac13$.",
+      commonMistakes: [
+        { answer: 60, feedback: "The size is right, but a real object sits on the side the light comes from: $u$ is negative." },
+        { answer: -90, feedback: "Try it: $u = -90$ gives $\\frac1v = \\frac1{30} + \\frac1{90} = \\frac4{90}$, $v = 22.5$, $m = \\frac14$." },
+        { answer: 20, feedback: "20 cm is the image distance, behind the mirror." },
+        { answer: -20, feedback: "20 cm is the image distance (and it is behind the mirror, $v = +20$ cm). Find $u$." },
       ],
     },
     {
@@ -1321,6 +1767,7 @@ const lessonMastery: LessonSeed = {
         { text: "4 cm/s, away from the mirror", feedback: "Equal speeds need $|m| = 1$ (object at C). Here the object is beyond C." },
         { text: "1 cm/s, away from the mirror", correct: true, feedback: "$v = -15$ cm, $m = -\\frac12$, $\\dot v = -m^2\\dot u = -\\frac14 \\times 4 = -1$ cm/s: towards more negative $v$, away." },
       ],
+      hint: "Image velocity: differentiate the mirror formula with respect to time.",
     },
     {
       type: "quiz",
@@ -1333,29 +1780,36 @@ const lessonMastery: LessonSeed = {
         { text: "$3\\sqrt3$ cm", feedback: "That uses $\\sin i$ instead of $\\sin(i - r)$." },
         { text: "$3\\sqrt3 - 3 \\approx 2.2$ cm", feedback: "That is the normal shift $t(1 - 1/n)$ of an image seen through the slab, not the sideways shift of an oblique ray." },
       ],
+      hint: "Lateral shift through a slab (0.4): find the angle of refraction first.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-8-q7",
       variant: "mastery",
-      question: "A tank holds 12 cm of water ($n = \\frac43$) with 9 cm of oil ($n = 1.5$) floating on it. How deep does a mark on the bottom appear, viewed from above?",
-      options: [
-        { text: "14 cm", feedback: "You divided the total 21 cm by 1.5. Each layer is scaled by its own index." },
-        { text: "6 cm", feedback: "6 cm is the total shift, $21 - 15$." },
-        { text: "15 cm", correct: true, feedback: "$\\frac{9}{1.5} + \\frac{12}{4/3} = 6 + 9 = 15$ cm." },
-        { text: "15.75 cm", feedback: "You divided the total 21 cm by $\\frac43$." },
+      question: "A tank holds 12 cm of water ($n = \\frac43$) with 9 cm of oil ($n = 1.5$) floating on it. Viewed from directly above, how deep does a mark on the bottom appear, in cm?",
+      answer: 15,
+      unit: "cm",
+      hint: "Rescale each layer by its own index and add.",
+      solution: "$d' = \\dfrac{9}{1.5} + \\dfrac{12}{4/3} = 6 + 9 = 15$ cm.",
+      commonMistakes: [
+        { answer: 14, feedback: "You divided the total 21 cm by 1.5. Each layer is scaled by its own index." },
+        { answer: 6, feedback: "6 cm is the total shift, $21 - 15$, not the apparent depth." },
+        { answer: 15.75, feedback: "You divided the total 21 cm by $\\frac43$." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-8-q8",
       variant: "mastery",
-      question: "A point source is 6 cm below the surface of a liquid of index $\\frac54$. What is the radius of the circle through which light escapes?",
-      options: [
-        { text: "4.5 cm", feedback: "You used $\\cot\\theta_c = \\frac34$ instead of $\\tan\\theta_c$." },
-        { text: "7.5 cm", feedback: "That is $h \\times n$. The radius is $h\\tan\\theta_c = \\frac{h}{\\sqrt{n^2 - 1}}$." },
-        { text: "10 cm", feedback: "That is $h/\\cos\\theta_c$, the slant length to the edge of the disc." },
-        { text: "8 cm", correct: true, feedback: "$\\sin\\theta_c = 0.8$, $\\tan\\theta_c = \\frac43$, $R = 6 \\times \\frac43 = 8$ cm." },
+      question: "A point source is 6 cm below the surface of a liquid of index $\\frac54$. What is the radius of the circle through which light escapes, in cm?",
+      answer: 8,
+      unit: "cm",
+      hint: "Rays escape only where $i < \\theta_c$; the radius is $h\\tan\\theta_c$.",
+      solution: "$\\sin\\theta_c = \\dfrac1n = 0.8$, so $\\cos\\theta_c = 0.6$ and $\\tan\\theta_c = \\dfrac43$.\n\n$R = h\\tan\\theta_c = 6\\times\\dfrac43 = 8$ cm.",
+      commonMistakes: [
+        { answer: 4.5, feedback: "You used $\\cot\\theta_c = \\frac34$ instead of $\\tan\\theta_c$." },
+        { answer: 7.5, feedback: "That is $h \\times n$. The radius is $h\\tan\\theta_c = \\frac{h}{\\sqrt{n^2 - 1}}$." },
+        { answer: 10, feedback: "That is $h/\\cos\\theta_c$, the slant length to the edge of the disc." },
       ],
     },
     {
@@ -1369,6 +1823,7 @@ const lessonMastery: LessonSeed = {
         { text: "It is totally reflected, since $65^\\circ > 41.8^\\circ$.", feedback: "The conclusion is right but the critical angle is wrong: $41.8^\\circ$ is for glass–air." },
         { text: "It refracts, since TIR is impossible into a liquid.", feedback: "TIR only needs a rarer second medium; water is rarer than glass." },
       ],
+      hint: "Critical angle between two media (0.6): use the ratio of the indices.",
     },
     {
       type: "quiz",
@@ -1381,19 +1836,22 @@ const lessonMastery: LessonSeed = {
         { text: "10 m", feedback: "10 m is the real distance. The fish is seen through the water surface." },
         { text: "11.3 m", feedback: "You multiplied the depth by $\\frac43$. Seen from air, depths shrink." },
       ],
+      hint: "Apparent depth (0.5): find where the fish appears to be first.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp0-8-q11",
       variant: "mastery",
-      question: "A parallel beam falls on a glass sphere ($n = 1.5$, radius 10 cm). Where does it come to a focus? (JEE Advanced style: two surfaces in turn.)",
-      options: [
-        { text: "10 cm beyond the back surface", feedback: "That is the first surface alone. The converging rays refract again leaving the glass." },
-        { text: "15 cm beyond the back surface", feedback: "15 cm is measured from the **centre** ($\\frac{nR}{2(n - 1)}$), which is 5 cm past the back surface." },
-        { text: "5 cm beyond the back surface", correct: true, feedback: "First surface: $\\frac{1.5}{v} = \\frac{0.5}{10}$, $v = 30$ cm (10 cm past the back). Second: $u = +10$, $R = -10$, $\\frac1v = \\frac{-0.5}{-10} + \\frac{1.5}{10} = 0.2$, $v = 5$ cm." },
-        { text: "At the back surface", feedback: "That would need $n = 2$. For $n = 1.5$ the first surface alone focuses 10 cm past the back." },
-      ],
+      question: "A parallel beam falls on a glass sphere ($n = 1.5$, radius 10 cm). How far beyond the back surface of the sphere does it come to a focus, in cm? (JEE Advanced style: two surfaces in turn.)",
+      answer: 5,
+      unit: "cm",
       hint: "The image of the first surface is a (virtual) object for the second, 10 cm beyond it. Take $R = -10$ cm for the exit surface.",
+      solution: "First surface ($u = -\\infty$, $R = +10$ cm): $\\dfrac{1.5}{v_1} = \\dfrac{0.5}{10}$, so $v_1 = 30$ cm, which is 10 cm past the back surface.\n\nSecond surface (from the back pole): $u = +10$ cm, $R = -10$ cm, $n_1 = 1.5$, $n_2 = 1$:\n$\\dfrac1v = \\dfrac{1 - 1.5}{-10} + \\dfrac{1.5}{10} = 0.05 + 0.15 = 0.2$, so $v = 5$ cm beyond the back surface.",
+      commonMistakes: [
+        { answer: 10, feedback: "That is the first surface alone. The converging rays refract again leaving the glass." },
+        { answer: 15, feedback: "15 cm is measured from the **centre** ($\\frac{nR}{2(n - 1)}$), which is 5 cm past the back surface." },
+        { answer: 0, feedback: "Focusing at the back surface would need $n = 2$. For $n = 1.5$ the first surface alone focuses 10 cm past the back." },
+      ],
     },
     {
       type: "quiz",
@@ -1407,6 +1865,20 @@ const lessonMastery: LessonSeed = {
         { text: "Behind the mirror (virtual)", feedback: "The apparent object is 60 cm from the mirror, beyond C (40 cm), so the mirror forms a real image in front." },
       ],
       hint: "Refraction in, reflection, refraction out: three steps, each image the next object. The mirror formula does not care that it is under water.",
+    },
+    {
+      type: "quiz",
+      id: "omp0-8-q13",
+      variant: "mastery",
+      multiple: true,
+      question: "A ray inside a glass block ($n = 1.5$) meets a flat face at $50^\\circ$ incidence. The block is immersed in different media in turn. Select every medium for which the ray is totally internally reflected.",
+      options: [
+        { text: "Air ($n = 1$)", correct: true, feedback: "$\\sin\\theta_c = \\frac{1}{1.5}$, $\\theta_c \\approx 41.8^\\circ < 50^\\circ$: total reflection." },
+        { text: "A liquid of index 1.1", correct: true, feedback: "$\\sin\\theta_c = \\frac{1.1}{1.5} \\approx 0.733$, $\\theta_c \\approx 47.2^\\circ < 50^\\circ$: still total reflection." },
+        { text: "Water ($n = \\frac43$)", feedback: "$\\sin\\theta_c = \\frac{4/3}{3/2} = \\frac89$, $\\theta_c \\approx 62.7^\\circ > 50^\\circ$: the ray refracts into the water." },
+        { text: "An oil of index 1.4", feedback: "$\\sin\\theta_c = \\frac{1.4}{1.5}$, $\\theta_c \\approx 69^\\circ$: far above $50^\\circ$, so the ray escapes." },
+      ],
+      hint: "For each medium find $\\sin\\theta_c = n_2/n_1$ and compare $\\theta_c$ with $50^\\circ$.",
     },
   ]),
 };

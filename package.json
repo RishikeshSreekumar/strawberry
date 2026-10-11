@@ -26,7 +26,16 @@
     "db:seed:oscillations-waves-thermal": "tsx scripts/seed-oscillations-waves-thermal.ts",
     "db:seed:electricity-and-magnetism": "tsx scripts/seed-electricity-and-magnetism.ts",
     "db:seed:optics-and-modern-physics": "tsx scripts/seed-optics-and-modern-physics.ts",
-    "db:seed:physics": "pnpm run db:seed:motion-forces-energy && pnpm run db:seed:momentum-rotation-gravitation && pnpm run db:seed:oscillations-waves-thermal && pnpm run db:seed:electricity-and-magnetism && pnpm run db:seed:optics-and-modern-physics"
+    "db:seed:calculus": "tsx scripts/seed-calculus.ts",
+    "db:seed:sets-relations-functions": "tsx scripts/seed-sets-relations-functions.ts",
+    "db:seed:complex-numbers-quadratics": "tsx scripts/seed-complex-numbers-quadratics.ts",
+    "db:seed:sequences-series": "tsx scripts/seed-sequences-series.ts",
+    "db:seed:integral-calculus": "tsx scripts/seed-integral-calculus.ts",
+    "db:seed:straight-lines-circles": "tsx scripts/seed-straight-lines-circles.ts",
+    "db:seed:conic-sections": "tsx scripts/seed-conic-sections.ts",
+    "db:seed:three-dimensional-geometry": "tsx scripts/seed-three-dimensional-geometry.ts",
+    "db:seed:jee-maths": "pnpm run db:seed:calculus && pnpm run db:seed:sets-relations-functions && pnpm run db:seed:complex-numbers-quadratics && pnpm run db:seed:sequences-series && pnpm run db:seed:integral-calculus && pnpm run db:seed:straight-lines-circles && pnpm run db:seed:conic-sections && pnpm run db:seed:three-dimensional-geometry",
+    "db:seed:physics":"pnpm run db:seed:motion-forces-energy && pnpm run db:seed:momentum-rotation-gravitation && pnpm run db:seed:oscillations-waves-thermal && pnpm run db:seed:electricity-and-magnetism && pnpm run db:seed:optics-and-modern-physics"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

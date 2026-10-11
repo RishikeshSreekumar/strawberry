@@ -45,6 +45,7 @@ const lesson01: LessonSeed = {
       content:
         "Look at the right-hand side. It uses two vectors, their lengths and the angle between them, and it gives back a single number. That combination turns up so often in geometry and physics that it gets its own name and symbol.",
     },
+    { type: "heading", text: "Defining the dot product" },
     {
       type: "callout",
       variant: "definition",
@@ -52,6 +53,7 @@ const lesson01: LessonSeed = {
       content:
         "For vectors $\\vec a$ and $\\vec b$ with angle $\\theta$ between them ($0 \\le \\theta \\le \\pi$): $\\vec a \\cdot \\vec b = |\\vec a|\\,|\\vec b|\\cos\\theta$.\nThe angle is measured with the two vectors drawn **tail to tail**. If either vector is $\\vec 0$, the product is 0.",
     },
+    { type: "heading", text: "The dot product as a shadow" },
     {
       type: "text",
       content:
@@ -98,27 +100,83 @@ const lesson01: LessonSeed = {
       content:
         "The shadow picture works in either direction. $|\\vec a||\\vec b|\\cos\\theta$ is also $|\\vec b|$ times the shadow of $\\vec a$ on $\\vec b$, so it does not matter which vector casts the shadow. That is why $\\vec a\\cdot\\vec b = \\vec b\\cdot\\vec a$.",
     },
+    { type: "heading", text: "Computing dot products and work" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** $|\\vec a| = 3$, $|\\vec b| = 4$, and the angle between them is $60^\\circ$.\n\n1. Write the definition: $\\vec a\\cdot\\vec b = |\\vec a||\\vec b|\\cos\\theta$.\n2. Substitute: $3 \\times 4 \\times \\cos 60^\\circ = 12 \\times \\tfrac12$.\n3. So $\\vec a\\cdot\\vec b = 6$.\n\n**Worked example 2.** $|\\vec a| = 2$, $|\\vec b| = 5$, angle $120^\\circ$.\n\n1. $\\cos 120^\\circ = -\\tfrac12$, because the angle is obtuse.\n2. $\\vec a\\cdot\\vec b = 2 \\times 5 \\times (-\\tfrac12) = -5$.\n3. The minus sign is information: the shadow of $\\vec b$ falls behind $\\vec a$.\n\n**Worked example 3 (the sled).** You pull with 50 N along a rope at $60^\\circ$ to the ground and the sled moves 10 m forward.\n\n1. $W = \\vec F\\cdot\\vec d = |\\vec F||\\vec d|\\cos\\theta$.\n2. $W = 50 \\times 10 \\times \\cos 60^\\circ = 500 \\times \\tfrac12 = 250$ J.\n3. Only half of your pull is going into moving the sled. Pull at $0^\\circ$ and all 500 J would.",
+      type: "worked-example",
+      id: "va3-1-we1",
+      title: "Worked example 1",
+      problem: "$|\\vec a| = 3$, $|\\vec b| = 4$, and the angle between them is $60^\\circ$. Find $\\vec a\\cdot\\vec b$.",
+      steps: [
+        { text: "Write the definition: $\\vec a\\cdot\\vec b = |\\vec a||\\vec b|\\cos\\theta$." },
+        { text: "Substitute: $3 \\times 4 \\times \\cos 60^\\circ = 12 \\times \\tfrac12$." },
+      ],
+      answer: "$\\vec a\\cdot\\vec b = 6$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (a box sliding down a ramp).** A 10 kg box slides 4 m down a smooth ramp inclined at $30^\\circ$ to the horizontal. Take $g = 10$ m/s². How much work does gravity do?\n\n1. The force is the weight, $|\\vec F| = mg = 100$ N, pointing straight down.\n2. The displacement is 4 m **down the slope**. *Why this step:* work pairs the force with the actual path, not with the vertical drop or the horizontal run.\n3. The angle between them is not $30^\\circ$. The slope makes $30^\\circ$ with the horizontal, so it makes $90^\\circ - 30^\\circ = 60^\\circ$ with the vertical. *Why this step:* the dot product needs the angle between the two arrows placed tail to tail, and those arrows are \"straight down\" and \"down the slope\".\n4. Substitute:",
+      type: "worked-example",
+      id: "va3-1-we2",
+      title: "Worked example 2",
+      problem: "$|\\vec a| = 2$, $|\\vec b| = 5$, angle $120^\\circ$. Find $\\vec a\\cdot\\vec b$.",
+      steps: [
+        { text: "$\\cos 120^\\circ = -\\tfrac12$, because the angle is obtuse." },
+        { text: "$\\vec a\\cdot\\vec b = 2 \\times 5 \\times (-\\tfrac12) = -5$." },
+        { text: "The minus sign is information: the shadow of $\\vec b$ falls behind $\\vec a$." },
+      ],
+      answer: "$\\vec a\\cdot\\vec b = -5$",
     },
-    { type: "math", latex: "W = |\\vec F||\\vec d|\\cos 60^\\circ = 100 \\times 4 \\times \\tfrac12 = 200\\text{ J}" },
     {
-      type: "text",
-      content:
-        "5. Sanity check with $mgh$: the box drops $h = 4\\sin 30^\\circ = 2$ m, and $100 \\times 2 = 200$ J. ✓ The dot product automatically kept only the part of the path that goes *with* gravity.\n\n**Worked example 5 (running the definition backwards, CBSE style).** $|\\vec a| = 4$, $|\\vec b| = 3$ and $\\vec a\\cdot\\vec b = -6\\sqrt2$. Find the angle between $\\vec a$ and $\\vec b$.\n\n1. Solve the definition for the cosine. *Why this step:* the definition links four quantities; knowing three fixes the fourth.",
+      type: "worked-example",
+      id: "va3-1-we3",
+      title: "Worked example 3 (the sled)",
+      problem: "You pull with 50 N along a rope at $60^\\circ$ to the ground and the sled moves 10 m forward. How much work do you do?",
+      steps: [
+        { text: "$W = \\vec F\\cdot\\vec d = |\\vec F||\\vec d|\\cos\\theta$." },
+        { text: "$W = 50 \\times 10 \\times \\cos 60^\\circ = 500 \\times \\tfrac12 = 250$ J." },
+        { text: "Only half of your pull is going into moving the sled. Pull at $0^\\circ$ and all 500 J would." },
+      ],
+      answer: "$W = 250$ J",
     },
-    { type: "math", latex: "\\cos\\theta = \\frac{\\vec a\\cdot\\vec b}{|\\vec a||\\vec b|} = \\frac{-6\\sqrt2}{12} = -\\frac{\\sqrt2}{2}" },
     {
-      type: "text",
-      content:
-        "2. The cosine is negative, so the angle is obtuse. *Why this step:* on $[0^\\circ, 180^\\circ]$ each cosine value belongs to exactly one angle, and the sign tells you which half to look in.\n3. $\\cos 45^\\circ = \\frac{\\sqrt2}{2}$, so $\\theta = 180^\\circ - 45^\\circ = 135^\\circ$.",
+      type: "worked-example",
+      id: "va3-1-we4",
+      title: "Worked example 4 (a box sliding down a ramp)",
+      problem:
+        "A 10 kg box slides 4 m down a smooth ramp inclined at $30^\\circ$ to the horizontal. Take $g = 10$ m/s². How much work does gravity do?",
+      steps: [
+        { text: "The force is the weight, $|\\vec F| = mg = 100$ N, pointing straight down." },
+        {
+          text: "The displacement is 4 m **down the slope**. *Why this step:* work pairs the force with the actual path, not with the vertical drop or the horizontal run.",
+        },
+        {
+          text: "The angle between them is not $30^\\circ$. The slope makes $30^\\circ$ with the horizontal, so it makes $90^\\circ - 30^\\circ = 60^\\circ$ with the vertical. *Why this step:* the dot product needs the angle between the two arrows placed tail to tail, and those arrows are \"straight down\" and \"down the slope\".",
+        },
+        {
+          text: "Substitute:",
+          latex: "W = |\\vec F||\\vec d|\\cos 60^\\circ = 100 \\times 4 \\times \\tfrac12 = 200\\text{ J}",
+        },
+        {
+          text: "Sanity check with $mgh$: the box drops $h = 4\\sin 30^\\circ = 2$ m, and $100 \\times 2 = 200$ J. ✓ The dot product automatically kept only the part of the path that goes *with* gravity.",
+        },
+      ],
+      answer: "$W = 200$ J",
+    },
+    {
+      type: "worked-example",
+      id: "va3-1-we5",
+      title: "Worked example 5 (running the definition backwards, CBSE style)",
+      problem:
+        "$|\\vec a| = 4$, $|\\vec b| = 3$ and $\\vec a\\cdot\\vec b = -6\\sqrt2$. Find the angle between $\\vec a$ and $\\vec b$.",
+      steps: [
+        {
+          text: "Solve the definition for the cosine. *Why this step:* the definition links four quantities; knowing three fixes the fourth.",
+          latex: "\\cos\\theta = \\frac{\\vec a\\cdot\\vec b}{|\\vec a||\\vec b|} = \\frac{-6\\sqrt2}{12} = -\\frac{\\sqrt2}{2}",
+        },
+        {
+          text: "The cosine is negative, so the angle is obtuse. *Why this step:* on $[0^\\circ, 180^\\circ]$ each cosine value belongs to exactly one angle, and the sign tells you which half to look in.",
+        },
+        { text: "$\\cos 45^\\circ = \\frac{\\sqrt2}{2}$, so $\\theta = 180^\\circ - 45^\\circ = 135^\\circ$." },
+      ],
+      answer: "$\\theta = 135^\\circ$",
     },
     {
       type: "callout",
@@ -134,6 +192,7 @@ const lesson01: LessonSeed = {
       content:
         "It takes in two vectors and gives out a **number**. It has a size and a sign but no direction, which is why it is also called the *scalar product*. Writing $\\vec a\\cdot\\vec b = 6\\hat i$, or putting an arrow over the answer, is always wrong. Work, a dot product, is a scalar too: energy has no direction.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va3-1-q1",
@@ -235,6 +294,7 @@ const lesson02: LessonSeed = {
       content:
         "The definition $|\\vec a||\\vec b|\\cos\\theta$ is beautiful but awkward to use. Given $\\vec a = 2\\hat i - \\hat j + 3\\hat k$ and $\\vec b = \\hat i + 4\\hat j + 2\\hat k$, nobody tells you the angle between them. You would have to find it first. We want a formula that uses only the components, and we will derive it from something you already trust: the law of cosines.",
     },
+    { type: "heading", text: "Deriving it from the law of cosines" },
     {
       type: "text",
       content:
@@ -296,6 +356,7 @@ const lesson02: LessonSeed = {
       content:
         "$\\vec a\\cdot\\vec b = a_1b_1 + a_2b_2 + a_3b_3$\nMultiply matching components and **add**. In the plane, drop the third term: $a_1b_1 + a_2b_2$.",
     },
+    { type: "heading", text: "A second route via $\\hat i$, $\\hat j$, $\\hat k$" },
     {
       type: "text",
       content:
@@ -315,31 +376,82 @@ const lesson02: LessonSeed = {
       content:
         "If the dot product distributes over addition, then multiplying out $(a_1\\hat i + a_2\\hat j + a_3\\hat k)\\cdot(b_1\\hat i + b_2\\hat j + b_3\\hat k)$ gives nine terms. The six mixed ones such as $a_1b_2\\,\\hat i\\cdot\\hat j$ are zero, and the three matched ones leave $a_1b_1 + a_2b_2 + a_3b_3$. This is a consistency check rather than a second proof: distributivity itself is justified by the shadow picture (the shadows of $\\vec b$ and $\\vec c$ on $\\vec a$ add up to the shadow of $\\vec b + \\vec c$), which 3.4 shows.",
     },
+    { type: "heading", text: "Computing with the component formula" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** $\\vec a = 2\\hat i - \\hat j + 3\\hat k$, $\\vec b = \\hat i + 4\\hat j + 2\\hat k$.\n\n1. Pair the components: $(2)(1)$, $(-1)(4)$, $(3)(2)$.\n2. Multiply: $2$, $-4$, $6$.\n3. Add: $\\vec a\\cdot\\vec b = 2 - 4 + 6 = 4$.\n\n**Worked example 2.** $\\vec a = 3\\hat i + 2\\hat j - \\hat k$, $\\vec b = \\hat i - 2\\hat j + 5\\hat k$.\n\n1. Products: $3 \\cdot 1 = 3$, $2 \\cdot (-2) = -4$, $(-1)\\cdot 5 = -5$.\n2. Sum: $3 - 4 - 5 = -6$. Negative, so the angle between them is obtuse.\n\n**Worked example 3 (both formulas agree).** $\\vec a = (4, 0)$, $\\vec b = (2, 2)$.\n\n1. Components: $4\\cdot2 + 0\\cdot2 = 8$.\n2. Geometry: $|\\vec a| = 4$, $|\\vec b| = 2\\sqrt2$, and $\\vec b$ makes $45^\\circ$ with the x-axis, which is the direction of $\\vec a$.\n3. $4 \\cdot 2\\sqrt2 \\cdot \\tfrac{\\sqrt2}{2} = 8$. Same answer.",
+      type: "worked-example",
+      id: "va3-2-we1",
+      title: "Worked example 1",
+      problem: "$\\vec a = 2\\hat i - \\hat j + 3\\hat k$, $\\vec b = \\hat i + 4\\hat j + 2\\hat k$. Find $\\vec a\\cdot\\vec b$.",
+      steps: [
+        { text: "Pair the components: $(2)(1)$, $(-1)(4)$, $(3)(2)$." },
+        { text: "Multiply: $2$, $-4$, $6$." },
+        { text: "Add: $\\vec a\\cdot\\vec b = 2 - 4 + 6 = 4$." },
+      ],
+      answer: "$\\vec a\\cdot\\vec b = 4$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (a grocery bill is a dot product).** At a kirana shop you buy 3 kg of rice, 2 kg of dal and 5 kg of sugar. The prices are ₹60, ₹120 and ₹45 per kg. Put the quantities in one vector and the prices in another:\n\n1. $\\vec q = (3, 2, 5)$ (kg) and $\\vec p = (60, 120, 45)$ (₹/kg). *Why this step:* matching positions must mean the same item, exactly as matching components mean the same axis.\n2. Each item costs quantity times price, and the bill adds the three costs. That is precisely \"multiply matching components, then add\":",
-    },
-    { type: "math", latex: "\\vec q\\cdot\\vec p = 3(60) + 2(120) + 5(45) = 180 + 240 + 225 = 645" },
-    {
-      type: "text",
-      content:
-        "3. The bill is ₹645, one number, not a list of three. Spreadsheets, shop billing and a neural network's \"weighted sum\" all run on this same formula; the angle picture is a bonus you get for free.\n\n**Worked example 5 (combinations first, exam style).** $\\vec a = \\hat i + 2\\hat j - \\hat k$ and $\\vec b = 3\\hat i - \\hat j + 2\\hat k$. Find $(2\\vec a - \\vec b)\\cdot(\\vec a + 3\\vec b)$.\n\n1. Build each bracket as a single vector. *Why this step:* one dot product of two known vectors is less error-prone than expanding four terms.",
-    },
-    {
-      type: "math",
-      latex:
-        "\\begin{aligned} 2\\vec a - \\vec b &= (2-3,\\ 4+1,\\ -2-2) = (-1, 5, -4) \\\\ \\vec a + 3\\vec b &= (1+9,\\ 2-3,\\ -1+6) = (10, -1, 5) \\end{aligned}",
+      type: "worked-example",
+      id: "va3-2-we2",
+      title: "Worked example 2",
+      problem: "$\\vec a = 3\\hat i + 2\\hat j - \\hat k$, $\\vec b = \\hat i - 2\\hat j + 5\\hat k$. Find $\\vec a\\cdot\\vec b$, and say whether the angle between them is acute or obtuse.",
+      steps: [
+        { text: "Products: $3 \\cdot 1 = 3$, $2 \\cdot (-2) = -4$, $(-1)\\cdot 5 = -5$." },
+        { text: "Sum: $3 - 4 - 5 = -6$. Negative, so the angle between them is obtuse." },
+      ],
+      answer: "$\\vec a\\cdot\\vec b = -6$; the angle is obtuse.",
     },
     {
-      type: "text",
-      content:
-        "2. Dot them: $(-1)(10) + (5)(-1) + (-4)(5) = -10 - 5 - 20 = -35$.\n3. Cross-check by expanding (the rules are proved in 3.4): the product is $2|\\vec a|^2 + 5\\,\\vec a\\cdot\\vec b - 3|\\vec b|^2$. With $|\\vec a|^2 = 6$, $|\\vec b|^2 = 14$ and $\\vec a\\cdot\\vec b = 3 - 2 - 2 = -1$, that is $12 - 5 - 42 = -35$. ✓ *Why this step:* two independent routes to the same number is the cheapest insurance against a sign slip.",
+      type: "worked-example",
+      id: "va3-2-we3",
+      title: "Worked example 3 (both formulas agree)",
+      problem: "$\\vec a = (4, 0)$, $\\vec b = (2, 2)$. Find $\\vec a\\cdot\\vec b$ from the components, then again from $|\\vec a||\\vec b|\\cos\\theta$.",
+      steps: [
+        { text: "Components: $4\\cdot2 + 0\\cdot2 = 8$." },
+        {
+          text: "Geometry: $|\\vec a| = 4$, $|\\vec b| = 2\\sqrt2$, and $\\vec b$ makes $45^\\circ$ with the x-axis, which is the direction of $\\vec a$.",
+        },
+        { text: "$4 \\cdot 2\\sqrt2 \\cdot \\tfrac{\\sqrt2}{2} = 8$. Same answer." },
+      ],
+      answer: "Both formulas give $\\vec a\\cdot\\vec b = 8$.",
+    },
+    {
+      type: "worked-example",
+      id: "va3-2-we4",
+      title: "Worked example 4 (a grocery bill is a dot product)",
+      problem:
+        "At a kirana shop you buy 3 kg of rice, 2 kg of dal and 5 kg of sugar. The prices are ₹60, ₹120 and ₹45 per kg. Put the quantities in one vector and the prices in another:",
+      steps: [
+        {
+          text: "$\\vec q = (3, 2, 5)$ (kg) and $\\vec p = (60, 120, 45)$ (₹/kg). *Why this step:* matching positions must mean the same item, exactly as matching components mean the same axis.",
+        },
+        {
+          text: "Each item costs quantity times price, and the bill adds the three costs. That is precisely \"multiply matching components, then add\":",
+          latex: "\\vec q\\cdot\\vec p = 3(60) + 2(120) + 5(45) = 180 + 240 + 225 = 645",
+        },
+        {
+          text: "The bill is ₹645, one number, not a list of three. Spreadsheets, shop billing and a neural network's \"weighted sum\" all run on this same formula; the angle picture is a bonus you get for free.",
+        },
+      ],
+      answer: "₹645",
+    },
+    {
+      type: "worked-example",
+      id: "va3-2-we5",
+      title: "Worked example 5 (combinations first, exam style)",
+      problem:
+        "$\\vec a = \\hat i + 2\\hat j - \\hat k$ and $\\vec b = 3\\hat i - \\hat j + 2\\hat k$. Find $(2\\vec a - \\vec b)\\cdot(\\vec a + 3\\vec b)$.",
+      steps: [
+        {
+          text: "Build each bracket as a single vector. *Why this step:* one dot product of two known vectors is less error-prone than expanding four terms.",
+          latex:
+            "\\begin{aligned} 2\\vec a - \\vec b &= (2-3,\\ 4+1,\\ -2-2) = (-1, 5, -4) \\\\ \\vec a + 3\\vec b &= (1+9,\\ 2-3,\\ -1+6) = (10, -1, 5) \\end{aligned}",
+        },
+        { text: "Dot them: $(-1)(10) + (5)(-1) + (-4)(5) = -10 - 5 - 20 = -35$." },
+        {
+          text: "Cross-check by expanding (the rules are proved in 3.4): the product is $2|\\vec a|^2 + 5\\,\\vec a\\cdot\\vec b - 3|\\vec b|^2$. With $|\\vec a|^2 = 6$, $|\\vec b|^2 = 14$ and $\\vec a\\cdot\\vec b = 3 - 2 - 2 = -1$, that is $12 - 5 - 42 = -35$. ✓ *Why this step:* two independent routes to the same number is the cheapest insurance against a sign slip.",
+        },
+      ],
+      answer: "$(2\\vec a - \\vec b)\\cdot(\\vec a + 3\\vec b) = -35$",
     },
     {
       type: "callout",
@@ -355,6 +467,7 @@ const lesson02: LessonSeed = {
       content:
         "$\\vec a = 3\\hat i + \\hat k$ has no $\\hat j$ part, so $a_2 = 0$. Write the zero in before pairing, or you will pair the wrong components.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va3-2-q1",
@@ -450,6 +563,7 @@ const lesson03: LessonSeed = {
       content:
         "We now have two expressions for the same number: $|\\vec a||\\vec b|\\cos\\theta$ from geometry and $a_1b_1 + a_2b_2 + a_3b_3$ from components. Set them equal and you can recover an angle you cannot see. That works even in three dimensions, where drawing the angle is hard.",
     },
+    { type: "heading", text: "Finding angles from components" },
     {
       type: "callout",
       variant: "definition",
@@ -463,9 +577,30 @@ const lesson03: LessonSeed = {
         "\\cos\\theta = \\frac{a_1b_1 + a_2b_2 + a_3b_3}{\\sqrt{a_1^2+a_2^2+a_3^2}\\,\\sqrt{b_1^2+b_2^2+b_3^2}}",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** The angle between $\\vec a = \\hat i + \\hat j$ and $\\vec b = \\hat j + \\hat k$.\n\n1. $\\vec a\\cdot\\vec b = 0 + 1 + 0 = 1$.\n2. $|\\vec a| = \\sqrt2$, $|\\vec b| = \\sqrt2$.\n3. $\\cos\\theta = \\dfrac{1}{\\sqrt2\\cdot\\sqrt2} = \\dfrac12$, so $\\theta = 60^\\circ$.\n\n**Worked example 2.** $\\vec a = \\hat i + 2\\hat j + 2\\hat k$, $\\vec b = 2\\hat i - \\hat j + 2\\hat k$.\n\n1. $\\vec a\\cdot\\vec b = 2 - 2 + 4 = 4$.\n2. $|\\vec a| = \\sqrt{1+4+4} = 3$ and $|\\vec b| = \\sqrt{4+1+4} = 3$.\n3. $\\cos\\theta = \\dfrac49$, so $\\theta = \\arccos\\dfrac49 \\approx 63.6^\\circ$. Not a table angle, and that is fine: leave it as $\\arccos\\frac49$.",
+      type: "worked-example",
+      id: "va3-3-we1",
+      title: "Worked example 1",
+      problem: "Find the angle between $\\vec a = \\hat i + \\hat j$ and $\\vec b = \\hat j + \\hat k$.",
+      steps: [
+        { text: "$\\vec a\\cdot\\vec b = 0 + 1 + 0 = 1$." },
+        { text: "$|\\vec a| = \\sqrt2$, $|\\vec b| = \\sqrt2$." },
+        { text: "$\\cos\\theta = \\dfrac{1}{\\sqrt2\\cdot\\sqrt2} = \\dfrac12$, so $\\theta = 60^\\circ$." },
+      ],
+      answer: "$\\theta = 60^\\circ$",
+    },
+    {
+      type: "worked-example",
+      id: "va3-3-we2",
+      title: "Worked example 2",
+      problem: "$\\vec a = \\hat i + 2\\hat j + 2\\hat k$, $\\vec b = 2\\hat i - \\hat j + 2\\hat k$. Find the angle between them.",
+      steps: [
+        { text: "$\\vec a\\cdot\\vec b = 2 - 2 + 4 = 4$." },
+        { text: "$|\\vec a| = \\sqrt{1+4+4} = 3$ and $|\\vec b| = \\sqrt{4+1+4} = 3$." },
+        {
+          text: "$\\cos\\theta = \\dfrac49$, so $\\theta = \\arccos\\dfrac49 \\approx 63.6^\\circ$. Not a table angle, and that is fine: leave it as $\\arccos\\frac49$.",
+        },
+      ],
+      answer: "$\\theta = \\arccos\\frac49 \\approx 63.6^\\circ$",
     },
     {
       type: "interactive",
@@ -480,6 +615,7 @@ const lesson03: LessonSeed = {
           "Find a grid point for b that makes the dot product exactly 0. Every such point lies on one line through the origin: the line perpendicular to a.",
       },
     },
+    { type: "heading", text: "Perpendicular means zero dot product" },
     {
       type: "text",
       content:
@@ -489,7 +625,21 @@ const lesson03: LessonSeed = {
     {
       type: "text",
       content:
-        "This turns a geometric condition (a right angle) into one linear equation in the components, and that is why exam problems love it.\n\n**Worked example 3.** Find $\\lambda$ so that $\\vec a = 2\\hat i + \\lambda\\hat j + \\hat k$ is perpendicular to $\\vec b = \\hat i - 2\\hat j + 3\\hat k$.\n\n1. Perpendicular means $\\vec a\\cdot\\vec b = 0$.\n2. $\\vec a\\cdot\\vec b = 2 - 2\\lambda + 3 = 5 - 2\\lambda$.\n3. $5 - 2\\lambda = 0 \\Rightarrow \\lambda = \\dfrac52$.\n4. Check: $(2, \\tfrac52, 1)\\cdot(1, -2, 3) = 2 - 5 + 3 = 0$. ✓",
+        "This turns a geometric condition (a right angle) into one linear equation in the components, and that is why exam problems love it.",
+    },
+    {
+      type: "worked-example",
+      id: "va3-3-we3",
+      title: "Worked example 3",
+      problem:
+        "Find $\\lambda$ so that $\\vec a = 2\\hat i + \\lambda\\hat j + \\hat k$ is perpendicular to $\\vec b = \\hat i - 2\\hat j + 3\\hat k$.",
+      steps: [
+        { text: "Perpendicular means $\\vec a\\cdot\\vec b = 0$." },
+        { text: "$\\vec a\\cdot\\vec b = 2 - 2\\lambda + 3 = 5 - 2\\lambda$." },
+        { text: "$5 - 2\\lambda = 0 \\Rightarrow \\lambda = \\dfrac52$." },
+        { text: "Check: $(2, \\tfrac52, 1)\\cdot(1, -2, 3) = 2 - 5 + 3 = 0$. ✓" },
+      ],
+      answer: "$\\lambda = \\dfrac52$",
     },
     {
       type: "table",
@@ -501,10 +651,32 @@ const lesson03: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (a right-angled triangle, NCERT).** Show that $A(2, -1, 1)$, $B(1, -3, -5)$ and $C(3, -4, -4)$ are the vertices of a right-angled triangle.\n\n1. Side vectors: $\\overrightarrow{AB} = (-1, -2, -6)$, $\\overrightarrow{BC} = (2, -1, 1)$, $\\overrightarrow{CA} = (-1, 3, 5)$. (Check: they add to $\\vec 0$, as the sides of a closed triangle must.)\n2. Test each pair: $\\overrightarrow{AB}\\cdot\\overrightarrow{BC} = -2 + 2 - 6 = -6$, $\\overrightarrow{BC}\\cdot\\overrightarrow{CA} = -2 - 3 + 5 = 0$.\n3. $\\overrightarrow{BC} \\perp \\overrightarrow{CA}$, and those are the two sides meeting at $C$. So the triangle is right-angled at $C$.\n4. Cross-check with Pythagoras: $|\\overrightarrow{BC}|^2 + |\\overrightarrow{CA}|^2 = 6 + 35 = 41 = |\\overrightarrow{AB}|^2$. ✓\n\nNo drawing needed: one zero dot product finds the right angle and tells you where it is.",
+      type: "worked-example",
+      id: "va3-3-we4",
+      title: "Worked example 4 (a right-angled triangle, NCERT)",
+      problem:
+        "Show that $A(2, -1, 1)$, $B(1, -3, -5)$ and $C(3, -4, -4)$ are the vertices of a right-angled triangle.",
+      steps: [
+        {
+          text: "Side vectors: $\\overrightarrow{AB} = (-1, -2, -6)$, $\\overrightarrow{BC} = (2, -1, 1)$, $\\overrightarrow{CA} = (-1, 3, 5)$. (Check: they add to $\\vec 0$, as the sides of a closed triangle must.)",
+        },
+        {
+          text: "Test each pair: $\\overrightarrow{AB}\\cdot\\overrightarrow{BC} = -2 + 2 - 6 = -6$, $\\overrightarrow{BC}\\cdot\\overrightarrow{CA} = -2 - 3 + 5 = 0$.",
+        },
+        {
+          text: "$\\overrightarrow{BC} \\perp \\overrightarrow{CA}$, and those are the two sides meeting at $C$. So the triangle is right-angled at $C$.",
+        },
+        {
+          text: "Cross-check with Pythagoras: $|\\overrightarrow{BC}|^2 + |\\overrightarrow{CA}|^2 = 6 + 35 = 41 = |\\overrightarrow{AB}|^2$. ✓",
+        },
+      ],
+      answer: "The triangle is right-angled at $C$.",
     },
+    {
+      type: "text",
+      content: "No drawing needed: one zero dot product finds the right angle and tells you where it is.",
+    },
+    { type: "heading", text: "Angles via direction cosines" },
     {
       type: "text",
       content:
@@ -517,26 +689,73 @@ const lesson03: LessonSeed = {
         "So two lines are perpendicular exactly when $l_1l_2 + m_1m_2 + n_1n_2 = 0$. If you are given direction ratios instead, divide each set by its length first, or use the full formula above.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (the diagonals of a cube).** Take the unit cube with one corner at the origin and edges along the axes. The body diagonal from $O$ to $(1,1,1)$ has direction $\\vec d_1 = (1, 1, 1)$. The body diagonal from $(1, 0, 0)$ to $(0, 1, 1)$ has direction $\\vec d_2 = (-1, 1, 1)$.\n\n1. $\\vec d_1\\cdot\\vec d_2 = -1 + 1 + 1 = 1$.\n2. $|\\vec d_1| = |\\vec d_2| = \\sqrt3$.\n3. $\\cos\\theta = \\dfrac{1}{3}$, so $\\theta = \\arccos\\dfrac13 \\approx 70.5^\\circ$.\n\nThe same method gives the angle between a body diagonal and an edge, $(1,1,1)\\cdot(1,0,0) = 1$: $\\cos\\theta = \\frac{1}{\\sqrt3}$, $\\theta \\approx 54.7^\\circ$. Drawing these angles would be hard; computing them takes three lines.",
+      type: "worked-example",
+      id: "va3-3-we5",
+      title: "Worked example 5 (the diagonals of a cube)",
+      problem:
+        "Take the unit cube with one corner at the origin and edges along the axes. The body diagonal from $O$ to $(1,1,1)$ has direction $\\vec d_1 = (1, 1, 1)$. The body diagonal from $(1, 0, 0)$ to $(0, 1, 1)$ has direction $\\vec d_2 = (-1, 1, 1)$. Find the angle between these two diagonals.",
+      steps: [
+        { text: "$\\vec d_1\\cdot\\vec d_2 = -1 + 1 + 1 = 1$." },
+        { text: "$|\\vec d_1| = |\\vec d_2| = \\sqrt3$." },
+        { text: "$\\cos\\theta = \\dfrac{1}{3}$, so $\\theta = \\arccos\\dfrac13 \\approx 70.5^\\circ$." },
+      ],
+      answer: "$\\theta = \\arccos\\dfrac13 \\approx 70.5^\\circ$",
     },
     {
       type: "text",
       content:
-        "**Worked example 6 (how steep is the trail?).** A trekking path leaves camp in the direction $\\vec d = (4, 3, 5)$, measured in metres east, north and up. At what angle does it climb above the horizontal ground?\n\n1. \"The angle with the ground\" means the angle between $\\vec d$ and its shadow on the ground, $\\vec s = (4, 3, 0)$. *Why this step:* a line meets a plane at the angle it makes with its own projection onto that plane; the vertical part is exactly what the shadow throws away.\n2. $\\vec d\\cdot\\vec s = 16 + 9 + 0 = 25$, $|\\vec d| = \\sqrt{16 + 9 + 25} = 5\\sqrt2$, $|\\vec s| = 5$.",
+        "The same method gives the angle between a body diagonal and an edge, $(1,1,1)\\cdot(1,0,0) = 1$: $\\cos\\theta = \\frac{1}{\\sqrt3}$, $\\theta \\approx 54.7^\\circ$. Drawing these angles would be hard; computing them takes three lines.",
     },
-    { type: "math", latex: "\\cos\\theta = \\frac{25}{5\\sqrt2 \\cdot 5} = \\frac{1}{\\sqrt2} \\quad\\Rightarrow\\quad \\theta = 45^\\circ" },
+    {
+      type: "worked-example",
+      id: "va3-3-we6",
+      title: "Worked example 6 (how steep is the trail?)",
+      problem:
+        "A trekking path leaves camp in the direction $\\vec d = (4, 3, 5)$, measured in metres east, north and up. At what angle does it climb above the horizontal ground?",
+      steps: [
+        {
+          text: "\"The angle with the ground\" means the angle between $\\vec d$ and its shadow on the ground, $\\vec s = (4, 3, 0)$. *Why this step:* a line meets a plane at the angle it makes with its own projection onto that plane; the vertical part is exactly what the shadow throws away.",
+        },
+        {
+          text: "$\\vec d\\cdot\\vec s = 16 + 9 + 0 = 25$, $|\\vec d| = \\sqrt{16 + 9 + 25} = 5\\sqrt2$, $|\\vec s| = 5$.",
+          latex: "\\cos\\theta = \\frac{25}{5\\sqrt2 \\cdot 5} = \\frac{1}{\\sqrt2} \\quad\\Rightarrow\\quad \\theta = 45^\\circ",
+        },
+        {
+          text: "Check another way: the angle with the vertical $\\hat k$ has $\\cos\\phi = \\dfrac{5}{5\\sqrt2} = \\dfrac{1}{\\sqrt2}$, so $\\phi = 45^\\circ$ too, and $45^\\circ + 45^\\circ = 90^\\circ$. ✓ *Why this step:* the angle above the ground and the angle from the vertical always add to $90^\\circ$, which catches a wrong choice of reference vector.",
+        },
+      ],
+      answer: "$\\theta = 45^\\circ$",
+    },
     {
       type: "text",
       content:
-        "3. Check another way: the angle with the vertical $\\hat k$ has $\\cos\\phi = \\dfrac{5}{5\\sqrt2} = \\dfrac{1}{\\sqrt2}$, so $\\phi = 45^\\circ$ too, and $45^\\circ + 45^\\circ = 90^\\circ$. ✓ *Why this step:* the angle above the ground and the angle from the vertical always add to $90^\\circ$, which catches a wrong choice of reference vector.\n\nThis is a seriously steep path: every metre you walk along the ground, you also climb about a metre.\n\n**Worked example 7 (equally inclined, JEE/CBSE classic).** $\\vec a$, $\\vec b$, $\\vec c$ are mutually perpendicular and all have the same length $k$. Show that $\\vec a + \\vec b + \\vec c$ makes equal angles with $\\vec a$, $\\vec b$ and $\\vec c$, and find that angle.\n\n1. Write down what you know as dot products: $\\vec a\\cdot\\vec b = \\vec b\\cdot\\vec c = \\vec c\\cdot\\vec a = 0$ and $\\vec a\\cdot\\vec a = \\vec b\\cdot\\vec b = \\vec c\\cdot\\vec c = k^2$. *Why this step:* \"perpendicular\" and \"same length\" become equations only once they are written as dot products.\n2. Numerator: $(\\vec a + \\vec b + \\vec c)\\cdot\\vec a = k^2 + 0 + 0 = k^2$. The same happens with $\\vec b$ and with $\\vec c$.\n3. Length: $|\\vec a + \\vec b + \\vec c|^2 = k^2 + k^2 + k^2 + 2(0 + 0 + 0) = 3k^2$, so the length is $\\sqrt3\\,k$. *Why this step:* the only way to get the length of a sum is to square it and expand.",
+        "This is a seriously steep path: every metre you walk along the ground, you also climb about a metre.",
     },
-    { type: "math", latex: "\\cos\\theta = \\frac{k^2}{\\sqrt3\\,k \\cdot k} = \\frac{1}{\\sqrt3} \\quad\\Rightarrow\\quad \\theta = \\arccos\\frac{1}{\\sqrt3} \\approx 54.7^\\circ" },
     {
-      type: "text",
-      content:
-        "4. The numerator and the lengths are identical for all three, so all three angles are equal. Picture it: $\\vec a$, $\\vec b$, $\\vec c$ are three edges of a cube from one corner and $\\vec a + \\vec b + \\vec c$ is the body diagonal, the same $54.7^\\circ$ you met in Worked example 5.",
+      type: "worked-example",
+      id: "va3-3-we7",
+      title: "Worked example 7 (equally inclined, JEE/CBSE classic)",
+      problem:
+        "$\\vec a$, $\\vec b$, $\\vec c$ are mutually perpendicular and all have the same length $k$. Show that $\\vec a + \\vec b + \\vec c$ makes equal angles with $\\vec a$, $\\vec b$ and $\\vec c$, and find that angle.",
+      steps: [
+        {
+          text: "Write down what you know as dot products: $\\vec a\\cdot\\vec b = \\vec b\\cdot\\vec c = \\vec c\\cdot\\vec a = 0$ and $\\vec a\\cdot\\vec a = \\vec b\\cdot\\vec b = \\vec c\\cdot\\vec c = k^2$. *Why this step:* \"perpendicular\" and \"same length\" become equations only once they are written as dot products.",
+        },
+        {
+          text: "Numerator: $(\\vec a + \\vec b + \\vec c)\\cdot\\vec a = k^2 + 0 + 0 = k^2$. The same happens with $\\vec b$ and with $\\vec c$.",
+        },
+        {
+          text: "Length: $|\\vec a + \\vec b + \\vec c|^2 = k^2 + k^2 + k^2 + 2(0 + 0 + 0) = 3k^2$, so the length is $\\sqrt3\\,k$. *Why this step:* the only way to get the length of a sum is to square it and expand.",
+        },
+        {
+          latex:
+            "\\cos\\theta = \\frac{k^2}{\\sqrt3\\,k \\cdot k} = \\frac{1}{\\sqrt3} \\quad\\Rightarrow\\quad \\theta = \\arccos\\frac{1}{\\sqrt3} \\approx 54.7^\\circ",
+        },
+        {
+          text: "The numerator and the lengths are identical for all three, so all three angles are equal. Picture it: $\\vec a$, $\\vec b$, $\\vec c$ are three edges of a cube from one corner and $\\vec a + \\vec b + \\vec c$ is the body diagonal, the same $54.7^\\circ$ you met in Worked example 5.",
+        },
+      ],
+      answer: "Each angle is $\\theta = \\arccos\\frac{1}{\\sqrt3} \\approx 54.7^\\circ$.",
     },
     {
       type: "callout",
@@ -552,6 +771,7 @@ const lesson03: LessonSeed = {
       content:
         "The angle in $|\\vec a||\\vec b|\\cos\\theta$ is between the vectors placed **tail to tail**. In an equilateral triangle $ABC$, $\\overrightarrow{AB}$ and $\\overrightarrow{BC}$ meet head to tail at $B$, where the interior angle is $60^\\circ$. Slide $\\overrightarrow{BC}$ so its tail sits on the tail of $\\overrightarrow{AB}$, and the angle between them is $180^\\circ - 60^\\circ = 120^\\circ$. With side $s$, $\\overrightarrow{AB}\\cdot\\overrightarrow{BC} = s^2\\cos 120^\\circ = -\\tfrac{s^2}{2}$.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va3-3-q1",
@@ -695,6 +915,7 @@ const lesson04: LessonSeed = {
           "Make |a| = |b| (a rhombus) and watch the diagonals meet at a right angle; compare |a+b| with |a|+|b|.",
       },
     },
+    { type: "heading", text: "Expanding brackets with dot products" },
     {
       type: "text",
       content:
@@ -723,33 +944,86 @@ const lesson04: LessonSeed = {
     {
       type: "text",
       content:
-        "The $|\\vec a - \\vec b|^2$ line is the law of cosines again, now proved in one line of algebra. The middle terms of the first line merged only because the product is commutative.\n\n**Worked example 1.** $|\\vec a| = 3$, $|\\vec b| = 4$, angle $60^\\circ$. Find $|\\vec a + \\vec b|$ and $|\\vec a - \\vec b|$.\n\n1. $\\vec a\\cdot\\vec b = 3\\cdot4\\cdot\\tfrac12 = 6$.\n2. $|\\vec a + \\vec b|^2 = 9 + 2(6) + 16 = 37$, so $|\\vec a + \\vec b| = \\sqrt{37}$.\n3. $|\\vec a - \\vec b|^2 = 9 - 12 + 16 = 13$, so $|\\vec a - \\vec b| = \\sqrt{13}$.\n\n**Worked example 2.** $|\\vec a| = 2$, $|\\vec b| = 1$, $\\vec a\\cdot\\vec b = 1$. Find $(2\\vec a + 3\\vec b)\\cdot(\\vec a - \\vec b)$.\n\n1. Expand: $2\\,\\vec a\\cdot\\vec a - 2\\,\\vec a\\cdot\\vec b + 3\\,\\vec b\\cdot\\vec a - 3\\,\\vec b\\cdot\\vec b$.\n2. Collect: $2|\\vec a|^2 + \\vec a\\cdot\\vec b - 3|\\vec b|^2$.\n3. Substitute: $2(4) + 1 - 3(1) = 6$.",
+        "The $|\\vec a - \\vec b|^2$ line is the law of cosines again, now proved in one line of algebra. The middle terms of the first line merged only because the product is commutative.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (two tugboats).** Two tugs tow a ship out of Mumbai harbour. One rope pulls with $|\\vec F_1| = 3000$ N, the other with $|\\vec F_2| = 5000$ N, and the ropes make $60^\\circ$ with each other. How hard is the ship pulled overall, and in what direction?\n\n1. The ship feels the resultant $\\vec R = \\vec F_1 + \\vec F_2$. *Why this step:* forces on one body add as vectors, so the question is really \"how long is a sum?\"\n2. Square and expand, working in kN to keep the numbers small:",
+      type: "worked-example",
+      id: "va3-4-we1",
+      title: "Worked example 1",
+      problem:
+        "$|\\vec a| = 3$, $|\\vec b| = 4$, angle $60^\\circ$. Find $|\\vec a + \\vec b|$ and $|\\vec a - \\vec b|$.",
+      steps: [
+        { text: "$\\vec a\\cdot\\vec b = 3\\cdot4\\cdot\\tfrac12 = 6$." },
+        { text: "$|\\vec a + \\vec b|^2 = 9 + 2(6) + 16 = 37$, so $|\\vec a + \\vec b| = \\sqrt{37}$." },
+        { text: "$|\\vec a - \\vec b|^2 = 9 - 12 + 16 = 13$, so $|\\vec a - \\vec b| = \\sqrt{13}$." },
+      ],
+      answer: "$|\\vec a + \\vec b| = \\sqrt{37}$, $|\\vec a - \\vec b| = \\sqrt{13}$",
     },
     {
-      type: "math",
-      latex:
-        "|\\vec R|^2 = |\\vec F_1|^2 + 2\\,\\vec F_1\\cdot\\vec F_2 + |\\vec F_2|^2 = 9 + 2(3)(5)\\cos 60^\\circ + 25 = 9 + 15 + 25 = 49",
+      type: "worked-example",
+      id: "va3-4-we2",
+      title: "Worked example 2",
+      problem:
+        "$|\\vec a| = 2$, $|\\vec b| = 1$, $\\vec a\\cdot\\vec b = 1$. Find $(2\\vec a + 3\\vec b)\\cdot(\\vec a - \\vec b)$.",
+      steps: [
+        {
+          text: "Expand: $2\\,\\vec a\\cdot\\vec a - 2\\,\\vec a\\cdot\\vec b + 3\\,\\vec b\\cdot\\vec a - 3\\,\\vec b\\cdot\\vec b$.",
+        },
+        { text: "Collect: $2|\\vec a|^2 + \\vec a\\cdot\\vec b - 3|\\vec b|^2$." },
+        { text: "Substitute: $2(4) + 1 - 3(1) = 6$." },
+      ],
+      answer: "$(2\\vec a + 3\\vec b)\\cdot(\\vec a - \\vec b) = 6$",
+    },
+    { type: "heading", text: "Resultants and chord lengths" },
+    {
+      type: "worked-example",
+      id: "va3-4-we3",
+      title: "Worked example 3 (two tugboats)",
+      problem:
+        "Two tugs tow a ship out of Mumbai harbour. One rope pulls with $|\\vec F_1| = 3000$ N, the other with $|\\vec F_2| = 5000$ N, and the ropes make $60^\\circ$ with each other. How hard is the ship pulled overall, and in what direction?",
+      steps: [
+        {
+          text: "The ship feels the resultant $\\vec R = \\vec F_1 + \\vec F_2$. *Why this step:* forces on one body add as vectors, so the question is really \"how long is a sum?\"",
+        },
+        {
+          text: "Square and expand, working in kN to keep the numbers small:",
+          latex:
+            "|\\vec R|^2 = |\\vec F_1|^2 + 2\\,\\vec F_1\\cdot\\vec F_2 + |\\vec F_2|^2 = 9 + 2(3)(5)\\cos 60^\\circ + 25 = 9 + 15 + 25 = 49",
+        },
+        {
+          text: "So $|\\vec R| = 7$ kN. Less than $3 + 5 = 8$ kN, because the ropes do not pull in exactly the same direction; the triangle inequality in action.",
+        },
+        {
+          text: "Direction: dot $\\vec R$ with $\\vec F_2$. $\\vec R\\cdot\\vec F_2 = \\vec F_1\\cdot\\vec F_2 + |\\vec F_2|^2 = 7.5 + 25 = 32.5$, so $\\cos\\alpha = \\dfrac{32.5}{7 \\times 5} = \\dfrac{13}{14}$ and $\\alpha \\approx 21.8^\\circ$ from the stronger rope. *Why this step:* the resultant leans toward the stronger pull, and the dot product measures by how much, without any coordinates.",
+        },
+      ],
+      answer: "$|\\vec R| = 7$ kN, at $\\alpha \\approx 21.8^\\circ$ from the stronger rope",
     },
     {
-      type: "text",
-      content:
-        "3. So $|\\vec R| = 7$ kN. Less than $3 + 5 = 8$ kN, because the ropes do not pull in exactly the same direction; the triangle inequality in action.\n4. Direction: dot $\\vec R$ with $\\vec F_2$. $\\vec R\\cdot\\vec F_2 = \\vec F_1\\cdot\\vec F_2 + |\\vec F_2|^2 = 7.5 + 25 = 32.5$, so $\\cos\\alpha = \\dfrac{32.5}{7 \\times 5} = \\dfrac{13}{14}$ and $\\alpha \\approx 21.8^\\circ$ from the stronger rope. *Why this step:* the resultant leans toward the stronger pull, and the dot product measures by how much, without any coordinates.\n\n**Worked example 4 (a CBSE favourite).** $\\hat a$ and $\\hat b$ are unit vectors with angle $\\theta$ between them. Show that $|\\hat a - \\hat b| = 2\\sin\\dfrac{\\theta}{2}$.\n\n1. Work with the square, since that is what expands. *Why this step:* $|\\vec v|$ has a square root in it; $|\\vec v|^2 = \\vec v\\cdot\\vec v$ does not.",
+      type: "worked-example",
+      id: "va3-4-we4",
+      title: "Worked example 4 (a CBSE favourite)",
+      problem:
+        "$\\hat a$ and $\\hat b$ are unit vectors with angle $\\theta$ between them. Show that $|\\hat a - \\hat b| = 2\\sin\\dfrac{\\theta}{2}$.",
+      steps: [
+        {
+          text: "Work with the square, since that is what expands. *Why this step:* $|\\vec v|$ has a square root in it; $|\\vec v|^2 = \\vec v\\cdot\\vec v$ does not.",
+          latex:
+            "|\\hat a - \\hat b|^2 = |\\hat a|^2 - 2\\,\\hat a\\cdot\\hat b + |\\hat b|^2 = 1 - 2\\cos\\theta + 1 = 2(1 - \\cos\\theta)",
+        },
+        {
+          text: "Use the half-angle identity $1 - \\cos\\theta = 2\\sin^2\\dfrac{\\theta}{2}$, so $|\\hat a - \\hat b|^2 = 4\\sin^2\\dfrac{\\theta}{2}$. *Why this step:* the target has $\\sin\\frac{\\theta}{2}$ in it, and this identity is the bridge from $\\cos\\theta$.",
+        },
+        {
+          text: "Take the square root. Since $0 \\le \\theta \\le \\pi$, $\\frac{\\theta}{2}$ lies in $[0, \\frac{\\pi}{2}]$ and $\\sin\\frac{\\theta}{2} \\ge 0$, so no $\\pm$ is needed: $|\\hat a - \\hat b| = 2\\sin\\dfrac{\\theta}{2}$. *Why this step:* a length cannot be negative, and the angle's range guarantees the right-hand side is not either.",
+        },
+        {
+          text: "Picture: $\\hat a$ and $\\hat b$ are two radii of a unit circle, and $\\hat a - \\hat b$ is the chord joining their tips. Chord $= 2r\\sin\\frac{\\theta}{2}$ is the familiar circle fact, now proved by dot product.",
+        },
+      ],
+      answer: "$|\\hat a - \\hat b| = 2\\sin\\dfrac{\\theta}{2}$",
     },
-    {
-      type: "math",
-      latex:
-        "|\\hat a - \\hat b|^2 = |\\hat a|^2 - 2\\,\\hat a\\cdot\\hat b + |\\hat b|^2 = 1 - 2\\cos\\theta + 1 = 2(1 - \\cos\\theta)",
-    },
-    {
-      type: "text",
-      content:
-        "2. Use the half-angle identity $1 - \\cos\\theta = 2\\sin^2\\dfrac{\\theta}{2}$, so $|\\hat a - \\hat b|^2 = 4\\sin^2\\dfrac{\\theta}{2}$. *Why this step:* the target has $\\sin\\frac{\\theta}{2}$ in it, and this identity is the bridge from $\\cos\\theta$.\n3. Take the square root. Since $0 \\le \\theta \\le \\pi$, $\\frac{\\theta}{2}$ lies in $[0, \\frac{\\pi}{2}]$ and $\\sin\\frac{\\theta}{2} \\ge 0$, so no $\\pm$ is needed: $|\\hat a - \\hat b| = 2\\sin\\dfrac{\\theta}{2}$. *Why this step:* a length cannot be negative, and the angle's range guarantees the right-hand side is not either.\n4. Picture: $\\hat a$ and $\\hat b$ are two radii of a unit circle, and $\\hat a - \\hat b$ is the chord joining their tips. Chord $= 2r\\sin\\frac{\\theta}{2}$ is the familiar circle fact, now proved by dot product.",
-    },
+    { type: "heading", text: "Geometry pay-offs from expanding squares" },
     {
       type: "text",
       content:
@@ -762,10 +1036,26 @@ const lesson04: LessonSeed = {
         "In words: the squares of the two diagonals add up to the squares of all four sides. Check with Worked example 1: $37 + 13 = 50 = 2(9 + 16)$. ✓",
     },
     {
+      type: "worked-example",
+      id: "va3-4-we5",
+      title: "Geometry pay-off 3: when three vectors add to zero (NCERT classic)",
+      problem:
+        "$|\\vec a| = 3$, $|\\vec b| = 4$, $|\\vec c| = 5$ and $\\vec a + \\vec b + \\vec c = \\vec 0$. Find $S = \\vec a\\cdot\\vec b + \\vec b\\cdot\\vec c + \\vec c\\cdot\\vec a$.",
+      steps: [
+        { text: "The trick is to square the zero: $|\\vec a + \\vec b + \\vec c|^2 = 0$." },
+        {
+          text: "Expand like $(x + y + z)^2$: $|\\vec a|^2 + |\\vec b|^2 + |\\vec c|^2 + 2(\\vec a\\cdot\\vec b + \\vec b\\cdot\\vec c + \\vec c\\cdot\\vec a) = 0$.",
+        },
+        { text: "Substitute: $9 + 16 + 25 + 2S = 0$, so $S = -25$." },
+      ],
+      answer: "$S = -25$",
+    },
+    {
       type: "text",
       content:
-        "**Geometry pay-off 3: when three vectors add to zero (NCERT classic).** $|\\vec a| = 3$, $|\\vec b| = 4$, $|\\vec c| = 5$ and $\\vec a + \\vec b + \\vec c = \\vec 0$. Find $S = \\vec a\\cdot\\vec b + \\vec b\\cdot\\vec c + \\vec c\\cdot\\vec a$.\n\n1. The trick is to square the zero: $|\\vec a + \\vec b + \\vec c|^2 = 0$.\n2. Expand like $(x + y + z)^2$: $|\\vec a|^2 + |\\vec b|^2 + |\\vec c|^2 + 2(\\vec a\\cdot\\vec b + \\vec b\\cdot\\vec c + \\vec c\\cdot\\vec a) = 0$.\n3. Substitute: $9 + 16 + 25 + 2S = 0$, so $S = -25$.\n\nThe picture: the three vectors placed head to tail close up into a 3-4-5 triangle. Each pair meets tail to tail at an obtuse or right angle, which is why every term, and so the sum, is negative or zero.",
+        "The picture: the three vectors placed head to tail close up into a 3-4-5 triangle. Each pair meets tail to tail at an obtuse or right angle, which is why every term, and so the sum, is negative or zero.",
     },
+    { type: "heading", text: "Cauchy–Schwarz and the triangle inequality" },
     {
       type: "text",
       content:
@@ -775,7 +1065,23 @@ const lesson04: LessonSeed = {
     {
       type: "text",
       content:
-        "Equality holds exactly when $\\cos\\theta = \\pm1$, that is, when the vectors are parallel. In components this is a statement about any six real numbers: $(a_1b_1 + a_2b_2 + a_3b_3)^2 \\le (a_1^2 + a_2^2 + a_3^2)(b_1^2 + b_2^2 + b_3^2)$.\n\n**Worked example 5.** Find the largest value of $2x + 3y + 6z$ when $x^2 + y^2 + z^2 = 1$.\n\n1. Read $2x + 3y + 6z$ as $(2, 3, 6)\\cdot(x, y, z)$, where $(x, y, z)$ is a unit vector.\n2. Cauchy–Schwarz: $(2,3,6)\\cdot(x,y,z) \\le |(2, 3, 6)|\\cdot 1 = \\sqrt{4 + 9 + 36} = 7$.\n3. Equality when $(x, y, z)$ points along $(2, 3, 6)$, i.e. $(x,y,z) = (\\tfrac27, \\tfrac37, \\tfrac67)$. The maximum is $7$.",
+        "Equality holds exactly when $\\cos\\theta = \\pm1$, that is, when the vectors are parallel. In components this is a statement about any six real numbers: $(a_1b_1 + a_2b_2 + a_3b_3)^2 \\le (a_1^2 + a_2^2 + a_3^2)(b_1^2 + b_2^2 + b_3^2)$.",
+    },
+    {
+      type: "worked-example",
+      id: "va3-4-we6",
+      title: "Worked example 5",
+      problem: "Find the largest value of $2x + 3y + 6z$ when $x^2 + y^2 + z^2 = 1$.",
+      steps: [
+        { text: "Read $2x + 3y + 6z$ as $(2, 3, 6)\\cdot(x, y, z)$, where $(x, y, z)$ is a unit vector." },
+        {
+          text: "Cauchy–Schwarz: $(2,3,6)\\cdot(x,y,z) \\le |(2, 3, 6)|\\cdot 1 = \\sqrt{4 + 9 + 36} = 7$.",
+        },
+        {
+          text: "Equality when $(x, y, z)$ points along $(2, 3, 6)$, i.e. $(x,y,z) = (\\tfrac27, \\tfrac37, \\tfrac67)$.",
+        },
+      ],
+      answer: "The maximum is $7$.",
     },
     {
       type: "text",
@@ -806,6 +1112,7 @@ const lesson04: LessonSeed = {
       content:
         "$\\vec a\\cdot\\vec b\\cdot\\vec c$ means nothing: $\\vec a\\cdot\\vec b$ is a number, and you cannot dot a number with a vector. $(\\vec a\\cdot\\vec b)\\,\\vec c$ does make sense (a number times a vector), but it is usually different from $\\vec a\\,(\\vec b\\cdot\\vec c)$, because one points along $\\vec c$ and the other along $\\vec a$.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va3-4-q1",
@@ -929,6 +1236,7 @@ const lesson05: LessonSeed = {
       content:
         "Dividing by $|\\vec b|$ turns $\\vec b$ into the unit vector $\\hat b = \\vec b / |\\vec b|$, which points the same way. Dotting with a unit vector removes the extra length factor and leaves only the shadow: $\\vec a\\cdot\\hat b = |\\vec a|\\cdot 1\\cdot\\cos\\theta$.",
     },
+    { type: "heading", text: "Scalar and vector projections" },
     {
       type: "callout",
       variant: "definition",
@@ -968,27 +1276,82 @@ const lesson05: LessonSeed = {
       latex:
         "\\Big(\\vec a - \\tfrac{\\vec a\\cdot\\vec b}{|\\vec b|^2}\\vec b\\Big)\\cdot\\vec b = \\vec a\\cdot\\vec b - \\tfrac{\\vec a\\cdot\\vec b}{|\\vec b|^2}|\\vec b|^2 = 0",
     },
+    { type: "heading", text: "Splitting vectors along a direction" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Split $\\vec a = 3\\hat i + \\hat j + 2\\hat k$ along $\\vec b = \\hat i + 2\\hat j + 2\\hat k$.\n\n1. $\\vec a\\cdot\\vec b = 3 + 2 + 4 = 9$ and $|\\vec b| = \\sqrt{1 + 4 + 4} = 3$.\n2. Scalar projection: $\\dfrac{9}{3} = 3$.\n3. Vector projection: $\\dfrac{9}{9}\\,\\vec b = \\hat i + 2\\hat j + 2\\hat k$.\n4. Perpendicular part: $\\vec a - \\vec b = 2\\hat i - \\hat j$.\n5. Check: $(2, -1, 0)\\cdot(1, 2, 2) = 2 - 2 + 0 = 0$. ✓\n\n**Worked example 2 (in the plane).** Split $\\vec a = (2, 1)$ along $\\vec b = (3, 4)$.\n\n1. $\\vec a\\cdot\\vec b = 6 + 4 = 10$ and $|\\vec b| = 5$, so the scalar projection is $2$.\n2. Vector projection: $\\dfrac{10}{25}(3, 4) = \\left(\\tfrac65, \\tfrac85\\right)$.\n3. Perpendicular part: $(2, 1) - \\left(\\tfrac65, \\tfrac85\\right) = \\left(\\tfrac45, -\\tfrac35\\right)$.\n4. Check: $\\tfrac45\\cdot3 - \\tfrac35\\cdot4 = 0$. ✓",
+      type: "worked-example",
+      id: "va3-5-we1",
+      title: "Worked example 1",
+      problem: "Split $\\vec a = 3\\hat i + \\hat j + 2\\hat k$ along $\\vec b = \\hat i + 2\\hat j + 2\\hat k$.",
+      steps: [
+        { text: "$\\vec a\\cdot\\vec b = 3 + 2 + 4 = 9$ and $|\\vec b| = \\sqrt{1 + 4 + 4} = 3$." },
+        { text: "Scalar projection: $\\dfrac{9}{3} = 3$." },
+        { text: "Vector projection: $\\dfrac{9}{9}\\,\\vec b = \\hat i + 2\\hat j + 2\\hat k$." },
+        { text: "Perpendicular part: $\\vec a - \\vec b = 2\\hat i - \\hat j$." },
+        { text: "Check: $(2, -1, 0)\\cdot(1, 2, 2) = 2 - 2 + 0 = 0$. ✓" },
+      ],
+      answer: "Scalar projection $3$; $\\vec a = (\\hat i + 2\\hat j + 2\\hat k) + (2\\hat i - \\hat j)$, the part along $\\vec b$ plus the perpendicular part.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (wind on a sailing boat).** A boat is heading in the direction $\\vec b = (3, 4)$ (east, north). The wind pushes on the sail with force $\\vec F = (10, 5)$ N. How much of the push drives the boat forward, and how much shoves it sideways?\n\n1. The forward drive is the scalar projection of $\\vec F$ on the heading. *Why this step:* only the part of the force along the direction of travel speeds the boat up.",
+      type: "worked-example",
+      id: "va3-5-we2",
+      title: "Worked example 2 (in the plane)",
+      problem: "Split $\\vec a = (2, 1)$ along $\\vec b = (3, 4)$.",
+      steps: [
+        { text: "$\\vec a\\cdot\\vec b = 6 + 4 = 10$ and $|\\vec b| = 5$, so the scalar projection is $2$." },
+        { text: "Vector projection: $\\dfrac{10}{25}(3, 4) = \\left(\\tfrac65, \\tfrac85\\right)$." },
+        {
+          text: "Perpendicular part: $(2, 1) - \\left(\\tfrac65, \\tfrac85\\right) = \\left(\\tfrac45, -\\tfrac35\\right)$.",
+        },
+        { text: "Check: $\\tfrac45\\cdot3 - \\tfrac35\\cdot4 = 0$. ✓" },
+      ],
+      answer: "$(2, 1) = \\left(\\tfrac65, \\tfrac85\\right) + \\left(\\tfrac45, -\\tfrac35\\right)$",
     },
-    { type: "math", latex: "\\vec F\\cdot\\hat b = \\frac{\\vec F\\cdot\\vec b}{|\\vec b|} = \\frac{30 + 20}{5} = 10\\text{ N}" },
     {
-      type: "text",
-      content:
-        "2. As an arrow, the forward part is $\\dfrac{50}{25}(3, 4) = (6, 8)$ N.\n3. The sideways part is what is left: $(10, 5) - (6, 8) = (4, -3)$ N, of size 5 N. *Why this step:* subtracting the projection always leaves a piece perpendicular to the heading; check $(4, -3)\\cdot(3, 4) = 12 - 12 = 0$. ✓\n4. Sanity check with Pythagoras: $10^2 + 5^2 = 125 = |\\vec F|^2$. ✓ That 5 N sideways push is what a boat's keel is built to resist; without it the boat would drift crabwise.\n\n**Worked example 4 (distance from a point to a line, JEE style).** Find the perpendicular distance from $P(4, 5, 6)$ to the line through $A(1, 2, 0)$ with direction $\\vec b = (2, 1, 2)$, and the foot of the perpendicular.\n\n1. Move to the line's own starting point: $\\overrightarrow{AP} = (3, 3, 6)$. *Why this step:* projection splits a vector that starts on the line; position vectors from the origin would split the wrong thing.\n2. Scalar projection on the line: $\\dfrac{\\overrightarrow{AP}\\cdot\\vec b}{|\\vec b|} = \\dfrac{6 + 3 + 12}{3} = 7$. This is how far along the line the foot sits from $A$.\n3. $\\overrightarrow{AP}$ is the hypotenuse of a right triangle whose legs are the shadow (7) and the distance $h$. *Why this step:* the along-part and the perpendicular part meet at a right angle, so Pythagoras applies.",
+      type: "worked-example",
+      id: "va3-5-we3",
+      title: "Worked example 3 (wind on a sailing boat)",
+      problem:
+        "A boat is heading in the direction $\\vec b = (3, 4)$ (east, north). The wind pushes on the sail with force $\\vec F = (10, 5)$ N. How much of the push drives the boat forward, and how much shoves it sideways?",
+      steps: [
+        {
+          text: "The forward drive is the scalar projection of $\\vec F$ on the heading. *Why this step:* only the part of the force along the direction of travel speeds the boat up.",
+          latex: "\\vec F\\cdot\\hat b = \\frac{\\vec F\\cdot\\vec b}{|\\vec b|} = \\frac{30 + 20}{5} = 10\\text{ N}",
+        },
+        { text: "As an arrow, the forward part is $\\dfrac{50}{25}(3, 4) = (6, 8)$ N." },
+        {
+          text: "The sideways part is what is left: $(10, 5) - (6, 8) = (4, -3)$ N, of size 5 N. *Why this step:* subtracting the projection always leaves a piece perpendicular to the heading; check $(4, -3)\\cdot(3, 4) = 12 - 12 = 0$. ✓",
+        },
+        {
+          text: "Sanity check with Pythagoras: $10^2 + 5^2 = 125 = |\\vec F|^2$. ✓ That 5 N sideways push is what a boat's keel is built to resist; without it the boat would drift crabwise.",
+        },
+      ],
+      answer: "10 N drives the boat forward and 5 N shoves it sideways.",
     },
-    { type: "math", latex: "h^2 = |\\overrightarrow{AP}|^2 - 7^2 = (9 + 9 + 36) - 49 = 5 \\quad\\Rightarrow\\quad h = \\sqrt5" },
     {
-      type: "text",
-      content:
-        "4. Foot: $F = A + \\dfrac{21}{9}\\vec b = (1, 2, 0) + \\tfrac73(2, 1, 2) = \\left(\\tfrac{17}{3}, \\tfrac{13}{3}, \\tfrac{14}{3}\\right)$.\n5. Check: $\\overrightarrow{PF} = F - P = \\left(\\tfrac53, -\\tfrac23, -\\tfrac43\\right)$. Its dot with $\\vec b$ is $\\tfrac{10}{3} - \\tfrac23 - \\tfrac83 = 0$ ✓ and its length squared is $\\tfrac{25 + 4 + 16}{9} = 5$ ✓.",
+      type: "worked-example",
+      id: "va3-5-we4",
+      title: "Worked example 4 (distance from a point to a line, JEE style)",
+      problem:
+        "Find the perpendicular distance from $P(4, 5, 6)$ to the line through $A(1, 2, 0)$ with direction $\\vec b = (2, 1, 2)$, and the foot of the perpendicular.",
+      steps: [
+        {
+          text: "Move to the line's own starting point: $\\overrightarrow{AP} = (3, 3, 6)$. *Why this step:* projection splits a vector that starts on the line; position vectors from the origin would split the wrong thing.",
+        },
+        {
+          text: "Scalar projection on the line: $\\dfrac{\\overrightarrow{AP}\\cdot\\vec b}{|\\vec b|} = \\dfrac{6 + 3 + 12}{3} = 7$. This is how far along the line the foot sits from $A$.",
+        },
+        {
+          text: "$\\overrightarrow{AP}$ is the hypotenuse of a right triangle whose legs are the shadow (7) and the distance $h$. *Why this step:* the along-part and the perpendicular part meet at a right angle, so Pythagoras applies.",
+          latex: "h^2 = |\\overrightarrow{AP}|^2 - 7^2 = (9 + 9 + 36) - 49 = 5 \\quad\\Rightarrow\\quad h = \\sqrt5",
+        },
+        {
+          text: "Foot: $F = A + \\dfrac{21}{9}\\vec b = (1, 2, 0) + \\tfrac73(2, 1, 2) = \\left(\\tfrac{17}{3}, \\tfrac{13}{3}, \\tfrac{14}{3}\\right)$.",
+        },
+        {
+          text: "Check: $\\overrightarrow{PF} = F - P = \\left(\\tfrac53, -\\tfrac23, -\\tfrac43\\right)$. Its dot with $\\vec b$ is $\\tfrac{10}{3} - \\tfrac23 - \\tfrac83 = 0$ ✓ and its length squared is $\\tfrac{25 + 4 + 16}{9} = 5$ ✓.",
+        },
+      ],
+      answer: "Distance $h = \\sqrt5$, foot $F = \\left(\\tfrac{17}{3}, \\tfrac{13}{3}, \\tfrac{14}{3}\\right)$",
     },
     {
       type: "callout",
@@ -997,10 +1360,27 @@ const lesson05: LessonSeed = {
       content:
         "The projection of $\\vec a$ on $\\vec b$ is usually not the projection of $\\vec b$ on $\\vec a$. The numerators match, but the denominators do not: $\\dfrac{\\vec a\\cdot\\vec b}{|\\vec b|}$ against $\\dfrac{\\vec a\\cdot\\vec b}{|\\vec a|}$. In Worked example 1 the projection of $\\vec a$ on $\\vec b$ is $3$, while the projection of $\\vec b$ on $\\vec a$ is $\\dfrac{9}{\\sqrt{14}} \\approx 2.41$. A tall pole's shadow on the ground is not the ground's shadow on the pole. They agree only when $|\\vec a| = |\\vec b|$ (or the product is 0).",
     },
+    { type: "heading", text: "Work as a dot product" },
     {
       type: "text",
       content:
-        "**Work.** A constant force $\\vec F$ moving its point of application through displacement $\\vec d$ does work $W = \\vec F\\cdot\\vec d$: the force's scalar projection on the path, times the path length. With several forces, the total work is the work of the resultant, by distributivity: $\\vec F_1\\cdot\\vec d + \\vec F_2\\cdot\\vec d = (\\vec F_1 + \\vec F_2)\\cdot\\vec d$.\n\n**Worked example 5.** Forces $4\\hat i + \\hat j - 3\\hat k$ and $3\\hat i + \\hat j - \\hat k$ act on a particle that moves from $A(1, 2, 3)$ to $B(5, 4, 1)$. Find the total work.\n\n1. Displacement: $\\vec d = \\overrightarrow{AB} = (5-1,\\ 4-2,\\ 1-3) = (4, 2, -2)$.\n2. Resultant: $\\vec R = (7, 2, -4)$.\n3. $W = \\vec R\\cdot\\vec d = 28 + 4 + 8 = 40$ units.\n4. Check force by force: $(4,1,-3)\\cdot(4,2,-2) = 16 + 2 + 6 = 24$ and $(3,1,-1)\\cdot(4,2,-2) = 12 + 2 + 2 = 16$. $24 + 16 = 40$. ✓",
+        "**Work.** A constant force $\\vec F$ moving its point of application through displacement $\\vec d$ does work $W = \\vec F\\cdot\\vec d$: the force's scalar projection on the path, times the path length. With several forces, the total work is the work of the resultant, by distributivity: $\\vec F_1\\cdot\\vec d + \\vec F_2\\cdot\\vec d = (\\vec F_1 + \\vec F_2)\\cdot\\vec d$.",
+    },
+    {
+      type: "worked-example",
+      id: "va3-5-we5",
+      title: "Worked example 5",
+      problem:
+        "Forces $4\\hat i + \\hat j - 3\\hat k$ and $3\\hat i + \\hat j - \\hat k$ act on a particle that moves from $A(1, 2, 3)$ to $B(5, 4, 1)$. Find the total work.",
+      steps: [
+        { text: "Displacement: $\\vec d = \\overrightarrow{AB} = (5-1,\\ 4-2,\\ 1-3) = (4, 2, -2)$." },
+        { text: "Resultant: $\\vec R = (7, 2, -4)$." },
+        { text: "$W = \\vec R\\cdot\\vec d = 28 + 4 + 8 = 40$ units." },
+        {
+          text: "Check force by force: $(4,1,-3)\\cdot(4,2,-2) = 16 + 2 + 6 = 24$ and $(3,1,-1)\\cdot(4,2,-2) = 12 + 2 + 2 = 16$. $24 + 16 = 40$. ✓",
+        },
+      ],
+      answer: "$W = 40$ units",
     },
     {
       type: "callout",
@@ -1009,11 +1389,13 @@ const lesson05: LessonSeed = {
       content:
         "The displacement is $\\overrightarrow{AB} = \\vec b - \\vec a$, where $\\vec a$, $\\vec b$ are the position vectors of $A$ and $B$, not the position vector of $B$ alone. Work depends on how far the particle moves, not on where it ends up relative to the origin.",
     },
+    { type: "heading", text: "The angle in a semicircle" },
     {
       type: "text",
       content:
         "**Geometry pay-off 1: the angle in a semicircle is a right angle.** Put the origin at the centre $O$ of a circle of radius $r$. Let the diameter be $AB$, where $A$ and $B$ have position vectors $-\\vec a$ and $\\vec a$, and let $P$ be any other point on the circle, so $|\\vec p| = |\\vec a| = r$.\n\n1. $\\overrightarrow{PA} = -\\vec a - \\vec p$ and $\\overrightarrow{PB} = \\vec a - \\vec p$.\n2. $\\overrightarrow{PA}\\cdot\\overrightarrow{PB} = -(\\vec a + \\vec p)\\cdot(\\vec a - \\vec p) = -\\big(|\\vec a|^2 - |\\vec p|^2\\big)$.\n3. Both lengths equal $r$, so this is $0$, and $\\angle APB = 90^\\circ$.\n\n**Geometry pay-off 2: the three altitudes of a triangle meet at a point.** Let the altitudes from $A$ and $B$ meet at $H$, and put the origin at $H$.\n\n1. $HA \\perp BC$: $\\vec a\\cdot(\\vec c - \\vec b) = 0$, so $\\vec a\\cdot\\vec c = \\vec a\\cdot\\vec b$.\n2. $HB \\perp CA$: $\\vec b\\cdot(\\vec c - \\vec a) = 0$, so $\\vec b\\cdot\\vec c = \\vec a\\cdot\\vec b$.\n3. Then $\\vec c\\cdot(\\vec a - \\vec b) = \\vec a\\cdot\\vec c - \\vec b\\cdot\\vec c = \\vec a\\cdot\\vec b - \\vec a\\cdot\\vec b = 0$.\n4. So $HC \\perp AB$: the third altitude passes through $H$ too.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va3-5-q1",

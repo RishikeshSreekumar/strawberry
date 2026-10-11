@@ -65,6 +65,7 @@ const lesson01: LessonSeed = {
       content:
         "P divides the segment AB **internally** in the ratio $m : n$ (with $m, n > 0$) when P lies between A and B and $\\dfrac{AP}{PB} = \\dfrac{m}{n}$. Then P is the fraction $\\dfrac{m}{m+n}$ of the way from A to B.",
     },
+    { type: "heading", text: "Deriving the internal section formula" },
     {
       type: "text",
       content:
@@ -91,6 +92,7 @@ const lesson01: LessonSeed = {
       content:
         "If P divides AB internally in the ratio $m : n$, then $\\vec p = \\dfrac{n\\,\\vec a + m\\,\\vec b}{m+n}$. In components this works coordinate by coordinate, in 2D and in 3D alike.",
     },
+    { type: "heading", text: "The formula as a weighted average" },
     {
       type: "text",
       content:
@@ -123,50 +125,101 @@ const lesson01: LessonSeed = {
         ["$m : n$", "fraction $\\frac{m}{m+n}$ from A", "$\\dfrac{n\\vec a + m\\vec b}{m+n}$"],
       ],
     },
+    { type: "heading", text: "Worked examples: locating dividing points" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** A and B have position vectors $\\vec a = \\hat i + 2\\hat j$ and $\\vec b = 7\\hat i - 4\\hat j$. Find P dividing AB internally in the ratio $1 : 2$.\n\n**Step 1.** Here $m = 1$ and $n = 2$, so A gets weight 2 and B gets weight 1: $\\vec p = \\dfrac{2\\vec a + \\vec b}{3}$.\n\n**Step 2.** $2\\vec a + \\vec b = (2 + 7)\\hat i + (4 - 4)\\hat j = 9\\hat i$.\n\n**Step 3.** $\\vec p = 3\\hat i$, the point $(3, 0)$.\n\n**Check.** $\\overrightarrow{AP} = 2\\hat i - 2\\hat j$ and $\\overrightarrow{AB} = 6\\hat i - 6\\hat j$. So AP is exactly one-third of AB, as a $1 : 2$ split requires.",
+      type: "worked-example",
+      id: "va2-1-we1",
+      title: "Worked example 1",
+      problem:
+        "A and B have position vectors $\\vec a = \\hat i + 2\\hat j$ and $\\vec b = 7\\hat i - 4\\hat j$. Find P dividing AB internally in the ratio $1 : 2$.",
+      steps: [
+        {
+          text: "Here $m = 1$ and $n = 2$, so A gets weight 2 and B gets weight 1: $\\vec p = \\dfrac{2\\vec a + \\vec b}{3}$.",
+        },
+        { text: "$2\\vec a + \\vec b = (2 + 7)\\hat i + (4 - 4)\\hat j = 9\\hat i$." },
+        { text: "$\\vec p = 3\\hat i$, the point $(3, 0)$." },
+        {
+          text: "**Check.** $\\overrightarrow{AP} = 2\\hat i - 2\\hat j$ and $\\overrightarrow{AB} = 6\\hat i - 6\\hat j$. So AP is exactly one-third of AB, as a $1 : 2$ split requires.",
+        },
+      ],
+      answer: "$\\vec p = 3\\hat i$, the point $(3, 0)$",
+    },
+    {
+      type: "worked-example",
+      id: "va2-1-we2",
+      title: "Worked example 2 (3D)",
+      problem: "A is $(2, -1, 3)$ and B is $(5, 5, -3)$. Find the point dividing AB internally in the ratio $2 : 1$.",
+      steps: [
+        { text: "$m = 2$, $n = 1$, so $\\vec p = \\dfrac{1\\cdot\\vec a + 2\\vec b}{3}$." },
+        { text: "$\\vec a + 2\\vec b = (2 + 10,\\ -1 + 10,\\ 3 - 6) = (12, 9, -3)$." },
+        { text: "$\\vec p = (4, 3, -1)$." },
+        {
+          text: "**Check.** $\\overrightarrow{AP} = (2, 4, -4)$ and $\\overrightarrow{PB} = (1, 2, -2)$. The first is twice the second: $2 : 1$, same direction, so P is between A and B.",
+        },
+      ],
+      answer: "$(4, 3, -1)$",
+    },
+    {
+      type: "worked-example",
+      id: "va2-1-we3",
+      title: "Worked example 3 (running it backwards)",
+      problem: "M$(3, 1)$ is the midpoint of AB and A is $(1, -2)$. Find B.",
+      steps: [
+        { text: "$\\vec m = \\frac{\\vec a + \\vec b}{2}$, so $\\vec b = 2\\vec m - \\vec a$." },
+        { text: "$\\vec b = (6 - 1,\\ 2 + 2) = (5, 4)$." },
+      ],
+      answer: "B is $(5, 4)$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 (3D).** A is $(2, -1, 3)$ and B is $(5, 5, -3)$. Find the point dividing AB internally in the ratio $2 : 1$.\n\n**Step 1.** $m = 2$, $n = 1$, so $\\vec p = \\dfrac{1\\cdot\\vec a + 2\\vec b}{3}$.\n\n**Step 2.** $\\vec a + 2\\vec b = (2 + 10,\\ -1 + 10,\\ 3 - 6) = (12, 9, -3)$.\n\n**Step 3.** $\\vec p = (4, 3, -1)$.\n\n**Check.** $\\overrightarrow{AP} = (2, 4, -4)$ and $\\overrightarrow{PB} = (1, 2, -2)$. The first is twice the second: $2 : 1$, same direction, so P is between A and B.",
+        "The section formula is one vector equation. Any one of $\\vec a$, $\\vec b$, $\\vec p$ can be found from the other two.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (running it backwards).** M$(3, 1)$ is the midpoint of AB and A is $(1, -2)$. Find B.\n\n**Step 1.** $\\vec m = \\frac{\\vec a + \\vec b}{2}$, so $\\vec b = 2\\vec m - \\vec a$.\n\n**Step 2.** $\\vec b = (6 - 1,\\ 2 + 2) = (5, 4)$.\n\nThe section formula is one vector equation. Any one of $\\vec a$, $\\vec b$, $\\vec p$ can be found from the other two.",
+      type: "worked-example",
+      id: "va2-1-we4",
+      title: "Worked example 4 (application: a zip-line)",
+      problem:
+        "A zip-line runs straight from a platform at A$(0, 0, 20)$ to a landing point B$(60, 80, 5)$, in metres, with the last coordinate the height. A safety marker is fixed two-fifths of the way down the line, so $AP : PB = 2 : 3$. Where is the marker, and how high is it?",
+      steps: [
+        {
+          text: "**Set up the weights.** $m = 2$ and $n = 3$. *Why this step:* the marker is nearer A, so A must carry the bigger weight, 3. Deciding which end is nearer before you write anything stops the weights from getting crossed.",
+          latex: "\\vec p = \\frac{3\\vec a + 2\\vec b}{5}",
+        },
+        {
+          text: "**Compute.** $3\\vec a + 2\\vec b = (0 + 120,\\ 0 + 160,\\ 60 + 10) = (120, 160, 70)$, so $\\vec p = (24, 32, 14)$. *Why this step:* the section formula works on each coordinate separately. The height is just the third coordinate, so you get it for free.",
+        },
+        {
+          text: "**Check.** $\\overrightarrow{AB} = (60, 80, -15)$ and $\\frac25\\overrightarrow{AB} = (24, 32, -6) = \\overrightarrow{AP}$ ✓. The height makes sense too: the rider drops 15 m in all, two-fifths of that is 6 m, and $20 - 6 = 14$.",
+        },
+      ],
+      answer: "The marker is at $(24, 32, 14)$, 14 m above the ground.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (application: a zip-line).** A zip-line runs straight from a platform at A$(0, 0, 20)$ to a landing point B$(60, 80, 5)$, in metres, with the last coordinate the height. A safety marker is fixed two-fifths of the way down the line, so $AP : PB = 2 : 3$. Where is the marker, and how high is it?\n\n**Step 1 (set up the weights).** $m = 2$ and $n = 3$. *Why this step:* the marker is nearer A, so A must carry the bigger weight, 3. Deciding which end is nearer before you write anything stops the weights from getting crossed.",
+      type: "worked-example",
+      id: "va2-1-we5",
+      title: "Worked example 5 (exam style: chaining the formula)",
+      problem:
+        "P divides AB internally in the ratio $3 : 1$, and Q is the midpoint of AP. Find $\\vec q$ in terms of $\\vec a$ and $\\vec b$, and find the ratio in which Q divides AB.",
+      steps: [
+        {
+          text: "$\\vec p = \\dfrac{1\\cdot\\vec a + 3\\vec b}{4}$. *Why this step:* P is three-quarters of the way along, nearer B, so B carries the weight 3.",
+        },
+        {
+          text: "Q is the midpoint of AP, so average $\\vec a$ and $\\vec p$ and put everything over one denominator. *Why this step:* written over a single denominator, the weights can be read straight off.",
+          latex:
+            "\\vec q = \\frac12\\left(\\vec a + \\frac{\\vec a + 3\\vec b}{4}\\right) = \\frac{4\\vec a + \\vec a + 3\\vec b}{8} = \\frac{5\\vec a + 3\\vec b}{8}",
+        },
+        {
+          text: "**Read the formula backwards.** The weights $\\frac58$ and $\\frac38$ are positive and add to 1, so Q lies between A and B. The weight on $\\vec b$ is $m$ and the weight on $\\vec a$ is $n$, so $AQ : QB = 3 : 5$. *Why this step:* $\\frac{n\\vec a + m\\vec b}{m+n}$ has a unique ratio once its weights add to 1, so the ratio can be read off.",
+        },
+        {
+          text: "**Check by lengths.** P is $\\frac34$ of the way from A, so halfway to P is $\\frac38$ of the way. That leaves $\\frac58$ for QB, and $\\frac38 : \\frac58 = 3 : 5$ ✓.",
+        },
+      ],
+      answer: "$\\vec q = \\dfrac{5\\vec a + 3\\vec b}{8}$, and $AQ : QB = 3 : 5$",
     },
-    {
-      type: "math",
-      latex: "\\vec p = \\frac{3\\vec a + 2\\vec b}{5}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 2 (compute).** $3\\vec a + 2\\vec b = (0 + 120,\\ 0 + 160,\\ 60 + 10) = (120, 160, 70)$, so $\\vec p = (24, 32, 14)$. *Why this step:* the section formula works on each coordinate separately. The height is just the third coordinate, so you get it for free.\n\n**Step 3 (answer).** The marker is at $(24, 32, 14)$, 14 m above the ground.\n\n**Check.** $\\overrightarrow{AB} = (60, 80, -15)$ and $\\frac25\\overrightarrow{AB} = (24, 32, -6) = \\overrightarrow{AP}$ ✓. The height makes sense too: the rider drops 15 m in all, two-fifths of that is 6 m, and $20 - 6 = 14$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (exam style: chaining the formula).** P divides AB internally in the ratio $3 : 1$, and Q is the midpoint of AP. Find $\\vec q$ in terms of $\\vec a$ and $\\vec b$, and find the ratio in which Q divides AB.\n\n**Step 1.** $\\vec p = \\dfrac{1\\cdot\\vec a + 3\\vec b}{4}$. *Why this step:* P is three-quarters of the way along, nearer B, so B carries the weight 3.\n\n**Step 2.** Q is the midpoint of AP, so average $\\vec a$ and $\\vec p$ and put everything over one denominator. *Why this step:* written over a single denominator, the weights can be read straight off.",
-    },
-    {
-      type: "math",
-      latex:
-        "\\vec q = \\frac12\\left(\\vec a + \\frac{\\vec a + 3\\vec b}{4}\\right) = \\frac{4\\vec a + \\vec a + 3\\vec b}{8} = \\frac{5\\vec a + 3\\vec b}{8}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3 (read the formula backwards).** The weights $\\frac58$ and $\\frac38$ are positive and add to 1, so Q lies between A and B. The weight on $\\vec b$ is $m$ and the weight on $\\vec a$ is $n$, so $AQ : QB = 3 : 5$. *Why this step:* $\\frac{n\\vec a + m\\vec b}{m+n}$ has a unique ratio once its weights add to 1, so the ratio can be read off.\n\n**Check by lengths.** P is $\\frac34$ of the way from A, so halfway to P is $\\frac38$ of the way. That leaves $\\frac58$ for QB, and $\\frac38 : \\frac58 = 3 : 5$ ✓.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va2-1-q1",
@@ -395,6 +448,7 @@ const lesson02: LessonSeed = {
       content:
         "P divides AB **externally** in the ratio $m : n$ (with $m \\neq n$) when P lies on the line AB, outside the segment, and $\\dfrac{AP}{PB} = \\dfrac{m}{n}$.",
     },
+    { type: "heading", text: "Deriving the external section formula" },
     {
       type: "text",
       content:
@@ -424,16 +478,36 @@ const lesson02: LessonSeed = {
       content:
         "The formula would divide by $m - n = 0$. Geometrically, $AP = PB$ means P is the same distance from A and from B. Such points lie on the perpendicular bisector of AB, and it crosses the line AB only once, at the midpoint, which is *inside*. On the slider, as $m/n$ creeps towards 1 the external point runs off to infinity.",
     },
+    { type: "heading", text: "Locating external points" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** A is $(1, 2)$ and B is $(3, 5)$. Find P dividing AB externally in the ratio $2 : 1$.\n\n**Step 1.** $\\vec p = \\dfrac{2\\vec b - \\vec a}{2 - 1} = 2\\vec b - \\vec a$.\n\n**Step 2.** $\\vec p = (6 - 1,\\ 10 - 2) = (5, 8)$.\n\n**Check.** $\\overrightarrow{AP} = (4, 6)$ and $\\overrightarrow{PB} = (-2, -3)$. Lengths are in the ratio $2 : 1$, and P lies beyond B as $m > n$ predicts.",
+      type: "worked-example",
+      id: "va2-2-we1",
+      title: "Worked example 1",
+      problem: "A is $(1, 2)$ and B is $(3, 5)$. Find P dividing AB externally in the ratio $2 : 1$.",
+      steps: [
+        { text: "$\\vec p = \\dfrac{2\\vec b - \\vec a}{2 - 1} = 2\\vec b - \\vec a$." },
+        { text: "$\\vec p = (6 - 1,\\ 10 - 2) = (5, 8)$." },
+        {
+          text: "**Check.** $\\overrightarrow{AP} = (4, 6)$ and $\\overrightarrow{PB} = (-2, -3)$. Lengths are in the ratio $2 : 1$, and P lies beyond B as $m > n$ predicts.",
+        },
+      ],
+      answer: "P is $(5, 8)$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (m < n).** A is $(4, 1)$ and B is $(6, 3)$. Find P dividing AB externally in the ratio $1 : 3$.\n\n**Step 1.** $\\vec p = \\dfrac{1\\cdot\\vec b - 3\\vec a}{1 - 3} = \\dfrac{\\vec b - 3\\vec a}{-2}$.\n\n**Step 2.** $\\vec b - 3\\vec a = (6 - 12,\\ 3 - 3) = (-6, 0)$, so $\\vec p = (3, 0)$.\n\n**Check.** $\\overrightarrow{AP} = (-1, -1)$ and $\\overrightarrow{PB} = (3, 3)$. The lengths are in the ratio $1 : 3$, and P is behind A.",
+      type: "worked-example",
+      id: "va2-2-we2",
+      title: "Worked example 2 (m < n)",
+      problem: "A is $(4, 1)$ and B is $(6, 3)$. Find P dividing AB externally in the ratio $1 : 3$.",
+      steps: [
+        { text: "$\\vec p = \\dfrac{1\\cdot\\vec b - 3\\vec a}{1 - 3} = \\dfrac{\\vec b - 3\\vec a}{-2}$." },
+        { text: "$\\vec b - 3\\vec a = (6 - 12,\\ 3 - 3) = (-6, 0)$, so $\\vec p = (3, 0)$." },
+        {
+          text: "**Check.** $\\overrightarrow{AP} = (-1, -1)$ and $\\overrightarrow{PB} = (3, 3)$. The lengths are in the ratio $1 : 3$, and P is behind A.",
+        },
+      ],
+      answer: "P is $(3, 0)$.",
     },
+    { type: "heading", text: "Finding the ratio from a given point" },
     {
       type: "text",
       content:
@@ -451,59 +525,108 @@ const lesson02: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3.** In what ratio does P$(8, -9)$ divide the segment joining A$(2, 3)$ and B$(6, -5)$?\n\n**Step 1.** x-coordinate: $\\dfrac{2 + 6\\lambda}{1 + \\lambda} = 8 \\Rightarrow 2 + 6\\lambda = 8 + 8\\lambda \\Rightarrow \\lambda = -3$.\n\n**Step 2.** Check with y: $\\dfrac{3 + (-5)(-3)}{1 - 3} = \\dfrac{18}{-2} = -9$. ✓ (If the y-check failed, P would not be on line AB at all.)\n\n**Step 3.** $\\lambda = -3 < -1$: P divides AB **externally**, in the ratio $3 : 1$, beyond B. The external formula agrees: $\\frac{3\\vec b - \\vec a}{2} = \\frac{(16, -18)}{2} = (8, -9)$.",
+      type: "worked-example",
+      id: "va2-2-we3",
+      title: "Worked example 3",
+      problem: "In what ratio does P$(8, -9)$ divide the segment joining A$(2, 3)$ and B$(6, -5)$?",
+      steps: [
+        {
+          text: "x-coordinate: $\\dfrac{2 + 6\\lambda}{1 + \\lambda} = 8 \\Rightarrow 2 + 6\\lambda = 8 + 8\\lambda \\Rightarrow \\lambda = -3$.",
+        },
+        {
+          text: "Check with y: $\\dfrac{3 + (-5)(-3)}{1 - 3} = \\dfrac{18}{-2} = -9$. ✓ (If the y-check failed, P would not be on line AB at all.)",
+        },
+        {
+          text: "$\\lambda = -3 < -1$: P divides AB **externally**, in the ratio $3 : 1$, beyond B. The external formula agrees: $\\frac{3\\vec b - \\vec a}{2} = \\frac{(16, -18)}{2} = (8, -9)$.",
+        },
+      ],
+      answer: "Externally, in the ratio $3 : 1$, beyond B",
+    },
+    {
+      type: "worked-example",
+      id: "va2-2-we4",
+      title: "Worked example 4 (a coordinate plane divides a segment)",
+      problem: "In what ratio does the yz-plane divide the segment joining $(-2, 4, 7)$ and $(3, -5, 8)$?",
+      steps: [
+        {
+          text: "Points on the yz-plane have $x = 0$. So $\\dfrac{-2 + 3\\lambda}{1 + \\lambda} = 0 \\Rightarrow \\lambda = \\dfrac23$.",
+        },
+        {
+          text: "$\\lambda > 0$: the plane divides the segment **internally**, in the ratio $2 : 3$. This makes sense, because the endpoints have x-coordinates of opposite signs, so they are on opposite sides of the plane.",
+        },
+      ],
+      answer: "Internally, in the ratio $2 : 3$",
+    },
+    { type: "heading", text: "Applying external division" },
+    {
+      type: "worked-example",
+      id: "va2-2-we5",
+      title: "Worked example 5 (no coordinates at all)",
+      problem:
+        "P and Q have position vectors $2\\vec a + \\vec b$ and $\\vec a - 3\\vec b$. R divides PQ externally in the ratio $1 : 2$. Find $\\vec r$, and show that P is the midpoint of RQ.",
+      steps: [
+        {
+          text: "The external formula with $m = 1$, $n = 2$: $\\vec r = \\dfrac{1\\cdot\\vec q - 2\\vec p}{1 - 2} = 2\\vec p - \\vec q$.",
+        },
+        { text: "$\\vec r = 2(2\\vec a + \\vec b) - (\\vec a - 3\\vec b) = 3\\vec a + 5\\vec b$." },
+        {
+          text: "Midpoint of RQ: $\\dfrac{\\vec r + \\vec q}{2} = \\dfrac{(3\\vec a + 5\\vec b) + (\\vec a - 3\\vec b)}{2} = 2\\vec a + \\vec b = \\vec p$. ∎",
+        },
+      ],
+      answer: "$\\vec r = 3\\vec a + 5\\vec b$, and the midpoint of RQ is $\\vec p$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 4 (a coordinate plane divides a segment).** In what ratio does the yz-plane divide the segment joining $(-2, 4, 7)$ and $(3, -5, 8)$?\n\n**Step 1.** Points on the yz-plane have $x = 0$. So $\\dfrac{-2 + 3\\lambda}{1 + \\lambda} = 0 \\Rightarrow \\lambda = \\dfrac23$.\n\n**Step 2.** $\\lambda > 0$: the plane divides the segment **internally**, in the ratio $2 : 3$. This makes sense, because the endpoints have x-coordinates of opposite signs, so they are on opposite sides of the plane.",
+        "The formulas never needed components. Position vectors written in terms of $\\vec a$ and $\\vec b$ are handled exactly like numbers. This is the form NCERT and board papers use most.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (no coordinates at all).** P and Q have position vectors $2\\vec a + \\vec b$ and $\\vec a - 3\\vec b$. R divides PQ externally in the ratio $1 : 2$. Find $\\vec r$, and show that P is the midpoint of RQ.\n\n**Step 1.** The external formula with $m = 1$, $n = 2$: $\\vec r = \\dfrac{1\\cdot\\vec q - 2\\vec p}{1 - 2} = 2\\vec p - \\vec q$.\n\n**Step 2.** $\\vec r = 2(2\\vec a + \\vec b) - (\\vec a - 3\\vec b) = 3\\vec a + 5\\vec b$.\n\n**Step 3.** Midpoint of RQ: $\\dfrac{\\vec r + \\vec q}{2} = \\dfrac{(3\\vec a + 5\\vec b) + (\\vec a - 3\\vec b)}{2} = 2\\vec a + \\vec b = \\vec p$. ∎\n\nThe formulas never needed components. Position vectors written in terms of $\\vec a$ and $\\vec b$ are handled exactly like numbers. This is the form NCERT and board papers use most.",
+      type: "worked-example",
+      id: "va2-2-we6",
+      title: "Worked example 6 (application: extending a fence line)",
+      problem:
+        "Fence posts stand at A$(1, 2)$ and B$(5, 4)$, in metres. A gate post C must continue the same straight line past B and be three times as far from A as from B. Where does C go?",
+      steps: [
+        {
+          text: "**Internal or external?** C is on line AB but outside the segment, with $AC : CB = 3 : 1$. That is **external** division with $m = 3$, $n = 1$. *Why this step:* the words \"past B\" put C outside the segment. Since $m > n$, the formula will also place C beyond B, which agrees with the words.",
+          latex:
+            "\\vec c = \\frac{3\\vec b - 1\\cdot\\vec a}{3 - 1} = \\frac{(15, 12) - (1, 2)}{2} = \\frac{(14, 10)}{2} = (7, 5)",
+        },
+        {
+          text: "**Check it.** $\\overrightarrow{AB} = (4, 2)$ and $\\overrightarrow{AC} = (6, 3) = \\frac32\\overrightarrow{AB}$, so C is on the line, beyond B. $\\overrightarrow{CB} = (-2, -1)$, and $\\overrightarrow{AC} = -3\\,\\overrightarrow{CB}$, so $AC = 3\\,CB$ ✓. *Why this step:* a sign slip in the external formula lands you behind A instead, and this check catches it straight away.",
+        },
+      ],
+      answer: "C goes at $(7, 5)$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 6 (application: extending a fence line).** Fence posts stand at A$(1, 2)$ and B$(5, 4)$, in metres. A gate post C must continue the same straight line past B and be three times as far from A as from B. Where does C go?\n\n**Step 1 (internal or external?).** C is on line AB but outside the segment, with $AC : CB = 3 : 1$. That is **external** division with $m = 3$, $n = 1$. *Why this step:* the words \"past B\" put C outside the segment. Since $m > n$, the formula will also place C beyond B, which agrees with the words.",
+      type: "worked-example",
+      id: "va2-2-we7",
+      title: "Worked example 7 (exam style: internal and external together)",
+      problem:
+        "P and Q divide AB internally and externally in the same ratio $m : n$, with $m > n$. Prove that $\\dfrac{1}{AP} + \\dfrac{1}{AQ} = \\dfrac{2}{AB}$. In words, AB is the **harmonic mean** of AP and AQ. P and Q are called **harmonic conjugates** with respect to A and B.",
+      steps: [
+        {
+          text: "**Origin at A.** Take $\\vec a = \\vec 0$. *Why this step:* every length in the statement is measured from A, and this choice removes $\\vec a$ from both formulas.",
+        },
+        {
+          text: "**Both section formulas.** With $\\vec a = \\vec 0$ they collapse to multiples of $\\vec b$:",
+          latex: "\\vec p = \\frac{m}{m+n}\\,\\vec b, \\qquad \\vec q = \\frac{m}{m-n}\\,\\vec b",
+        },
+        {
+          text: "**Lengths.** Both multipliers are positive because $m > n$, so $AP = \\frac{m}{m+n}AB$ and $AQ = \\frac{m}{m-n}AB$. *Why this step:* the length of $k\\vec b$ is $\\lvert k\\rvert\\,\\lvert\\vec b\\rvert$, and $\\lvert\\vec b\\rvert = AB$ when the origin is at A.",
+        },
+        {
+          text: "**Add the reciprocals.**",
+          latex:
+            "\\frac{1}{AP} + \\frac{1}{AQ} = \\frac{m+n}{m\\,AB} + \\frac{m-n}{m\\,AB} = \\frac{2m}{m\\,AB} = \\frac{2}{AB} \\quad \\blacksquare",
+        },
+        {
+          text: "**Numerical check.** Take $AB = 6$ and the ratio $2 : 1$. Then $AP = 4$ and $AQ = 12$, and $\\frac14 + \\frac1{12} = \\frac{4}{12} = \\frac13 = \\frac26$ ✓.",
+        },
+      ],
+      answer: "$\\dfrac{1}{AP} + \\dfrac{1}{AQ} = \\dfrac{2}{AB}$: AB is the harmonic mean of AP and AQ.",
     },
-    {
-      type: "math",
-      latex:
-        "\\vec c = \\frac{3\\vec b - 1\\cdot\\vec a}{3 - 1} = \\frac{(15, 12) - (1, 2)}{2} = \\frac{(14, 10)}{2} = (7, 5)",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 2 (check it).** $\\overrightarrow{AB} = (4, 2)$ and $\\overrightarrow{AC} = (6, 3) = \\frac32\\overrightarrow{AB}$, so C is on the line, beyond B. $\\overrightarrow{CB} = (-2, -1)$, and $\\overrightarrow{AC} = -3\\,\\overrightarrow{CB}$, so $AC = 3\\,CB$ ✓. *Why this step:* a sign slip in the external formula lands you behind A instead, and this check catches it straight away.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 7 (exam style: internal and external together).** P and Q divide AB internally and externally in the same ratio $m : n$, with $m > n$. Prove that $\\dfrac{1}{AP} + \\dfrac{1}{AQ} = \\dfrac{2}{AB}$. In words, AB is the **harmonic mean** of AP and AQ. P and Q are called **harmonic conjugates** with respect to A and B.\n\n**Step 1 (origin at A).** Take $\\vec a = \\vec 0$. *Why this step:* every length in the statement is measured from A, and this choice removes $\\vec a$ from both formulas.\n\n**Step 2 (both section formulas).** With $\\vec a = \\vec 0$ they collapse to multiples of $\\vec b$:",
-    },
-    {
-      type: "math",
-      latex: "\\vec p = \\frac{m}{m+n}\\,\\vec b, \\qquad \\vec q = \\frac{m}{m-n}\\,\\vec b",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3 (lengths).** Both multipliers are positive because $m > n$, so $AP = \\frac{m}{m+n}AB$ and $AQ = \\frac{m}{m-n}AB$. *Why this step:* the length of $k\\vec b$ is $\\lvert k\\rvert\\,\\lvert\\vec b\\rvert$, and $\\lvert\\vec b\\rvert = AB$ when the origin is at A.\n\n**Step 4 (add the reciprocals).**",
-    },
-    {
-      type: "math",
-      latex:
-        "\\frac{1}{AP} + \\frac{1}{AQ} = \\frac{m+n}{m\\,AB} + \\frac{m-n}{m\\,AB} = \\frac{2m}{m\\,AB} = \\frac{2}{AB} \\quad \\blacksquare",
-    },
-    {
-      type: "text",
-      content:
-        "**Numerical check.** Take $AB = 6$ and the ratio $2 : 1$. Then $AP = 4$ and $AQ = 12$, and $\\frac14 + \\frac1{12} = \\frac{4}{12} = \\frac13 = \\frac26$ ✓.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va2-2-q1",
@@ -749,6 +872,7 @@ const lesson03: LessonSeed = {
           "Drag any vertex. The three medians always meet at one point G. It always sits two-thirds of the way down each median from the vertex.",
       },
     },
+    { type: "heading", text: "Deriving the centroid formula" },
     {
       type: "text",
       content:
@@ -778,6 +902,7 @@ const lesson03: LessonSeed = {
       content:
         "The centroid is **closer to the side** than to the vertex. From the vertex it is $AG : GD = 2 : 1$, so $AG = \\frac23 AD$. If you place it one-third of the way from the vertex, you get $\\frac{2\\vec a + \\vec d}{3} = \\frac{4\\vec a + \\vec b + \\vec c}{6}$. That is not symmetric in A, B, C, so it cannot be the common point of all three medians.",
     },
+    { type: "heading", text: "Vectors from the centroid sum to zero" },
     {
       type: "text",
       content:
@@ -793,51 +918,90 @@ const lesson03: LessonSeed = {
       content:
         "This is the balance point in vector language: equal masses at the vertices pull on G with total zero. In particular, if the centroid is taken as the origin, then $\\vec a + \\vec b + \\vec c = \\vec 0$.",
     },
+    { type: "heading", text: "Worked examples: centroids and medians" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Find the centroid of the triangle with vertices A$(2, -1, 4)$, B$(-3, 5, 1)$ and C$(4, 2, -2)$.\n\n**Step 1.** Add the vertices: $(2 - 3 + 4,\\ -1 + 5 + 2,\\ 4 + 1 - 2) = (3, 6, 3)$.\n\n**Step 2.** Divide by 3: G is $(1, 2, 1)$.",
+      type: "worked-example",
+      id: "va2-3-we1",
+      title: "Worked example 1",
+      problem: "Find the centroid of the triangle with vertices A$(2, -1, 4)$, B$(-3, 5, 1)$ and C$(4, 2, -2)$.",
+      steps: [
+        { text: "Add the vertices: $(2 - 3 + 4,\\ -1 + 5 + 2,\\ 4 + 1 - 2) = (3, 6, 3)$." },
+        { text: "Divide by 3: G is $(1, 2, 1)$." },
+      ],
+      answer: "G is $(1, 2, 1)$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (missing vertex).** The centroid of triangle ABC is G$(2, 1)$, with A$(1, 3)$ and B$(4, -2)$. Find C.\n\n**Step 1.** $\\vec a + \\vec b + \\vec c = 3\\vec g$, so $\\vec c = 3\\vec g - \\vec a - \\vec b$.\n\n**Step 2.** $\\vec c = (6 - 1 - 4,\\ 3 - 3 + 2) = (1, 2)$.\n\n**Check.** $\\frac{(1,3) + (4,-2) + (1,2)}{3} = \\frac{(6, 3)}{3} = (2, 1)$ ✓.",
+      type: "worked-example",
+      id: "va2-3-we2",
+      title: "Worked example 2 (missing vertex)",
+      problem: "The centroid of triangle ABC is G$(2, 1)$, with A$(1, 3)$ and B$(4, -2)$. Find C.",
+      steps: [
+        { text: "$\\vec a + \\vec b + \\vec c = 3\\vec g$, so $\\vec c = 3\\vec g - \\vec a - \\vec b$." },
+        { text: "$\\vec c = (6 - 1 - 4,\\ 3 - 3 + 2) = (1, 2)$." },
+        { text: "**Check.** $\\frac{(1,3) + (4,-2) + (1,2)}{3} = \\frac{(6, 3)}{3} = (2, 1)$ ✓." },
+      ],
+      answer: "C is $(1, 2)$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (median lengths).** Median AD has length 12. How far is the centroid from A, and from D?\n\n**Step 1.** $AG : GD = 2 : 1$ splits 12 into $2 + 1 = 3$ parts of 4.\n\n**Step 2.** $AG = 8$ and $GD = 4$.",
+      type: "worked-example",
+      id: "va2-3-we3",
+      title: "Worked example 3 (median lengths)",
+      problem: "Median AD has length 12. How far is the centroid from A, and from D?",
+      steps: [
+        { text: "$AG : GD = 2 : 1$ splits 12 into $2 + 1 = 3$ parts of 4." },
+        { text: "$AG$ takes 2 of those parts and $GD$ takes 1: $AG = 2 \\times 4$, $GD = 1 \\times 4$." },
+      ],
+      answer: "$AG = 8$ and $GD = 4$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (application: hanging a plate level).** A uniform triangular steel plate has corners A$(0, 0)$, B$(12, 0)$ and C$(3, 9)$, in cm. A hole drilled at the centroid lets the plate hang level from a hook. Where should the hole go? Confirm that it is two-thirds of the way down the median from A.\n\n**Step 1 (average the corners).** $\\vec g = \\frac{(0 + 12 + 3,\\ 0 + 0 + 9)}{3} = \\frac{(15, 9)}{3} = (5, 3)$. *Why this step:* a uniform plate balances where equal masses at its three corners would balance, and that is the plain average of the corners.\n\n**Step 2 (the median's foot).** D, the midpoint of BC, is $\\left(\\frac{15}{2}, \\frac92\\right)$. *Why this step:* the median from A ends at the midpoint of the side opposite A.\n\n**Step 3 (compare).**",
+      type: "worked-example",
+      id: "va2-3-we4",
+      title: "Worked example 4 (application: hanging a plate level)",
+      problem:
+        "A uniform triangular steel plate has corners A$(0, 0)$, B$(12, 0)$ and C$(3, 9)$, in cm. A hole drilled at the centroid lets the plate hang level from a hook. Where should the hole go? Confirm that it is two-thirds of the way down the median from A.",
+      steps: [
+        {
+          text: "**Average the corners.** $\\vec g = \\frac{(0 + 12 + 3,\\ 0 + 0 + 9)}{3} = \\frac{(15, 9)}{3} = (5, 3)$. *Why this step:* a uniform plate balances where equal masses at its three corners would balance, and that is the plain average of the corners.",
+        },
+        {
+          text: "**The median's foot.** D, the midpoint of BC, is $\\left(\\frac{15}{2}, \\frac92\\right)$. *Why this step:* the median from A ends at the midpoint of the side opposite A.",
+        },
+        {
+          text: "**Compare.** *Why check at all:* if you had placed G one-third of the way down the median, this comparison would fail.",
+          latex:
+            "\\tfrac23\\,\\overrightarrow{AD} = \\tfrac23\\left(\\tfrac{15}{2}, \\tfrac92\\right) = (5, 3) = \\overrightarrow{AG} \\;\\checkmark",
+        },
+      ],
+      answer: "The hole goes at $(5, 3)$, two-thirds of the way from A to D.",
     },
     {
-      type: "math",
-      latex:
-        "\\tfrac23\\,\\overrightarrow{AD} = \\tfrac23\\left(\\tfrac{15}{2}, \\tfrac92\\right) = (5, 3) = \\overrightarrow{AG} \\;\\checkmark",
+      type: "worked-example",
+      id: "va2-3-we5",
+      title: "Worked example 5 (exam style: triangle from its midpoints)",
+      problem:
+        "The midpoints of sides BC, CA and AB of triangle ABC are D$(1, 2, -3)$, E$(3, 0, 1)$ and F$(-1, 1, -4)$. Find the centroid of ABC and its vertices.",
+      steps: [
+        {
+          text: "**Add the midpoints.** Each vertex appears in exactly two of the three midpoints. *Why this step:* adding the midpoints therefore counts every vertex twice, and the $\\frac12$ cancels that.",
+          latex:
+            "\\vec d + \\vec e + \\vec f = \\frac{(\\vec b + \\vec c) + (\\vec c + \\vec a) + (\\vec a + \\vec b)}{2} = \\vec a + \\vec b + \\vec c",
+        },
+        {
+          text: "**Centroid.** $\\vec g = \\frac{\\vec d + \\vec e + \\vec f}{3} = \\frac{(3, 3, -6)}{3} = (1, 1, -2)$. So the midpoint triangle DEF has **the same centroid** as ABC.",
+        },
+        {
+          text: "**Vertices.** $\\vec e + \\vec f = \\frac{\\vec c + \\vec a}{2} + \\frac{\\vec a + \\vec b}{2} = \\vec a + \\frac{\\vec b + \\vec c}{2} = \\vec a + \\vec d$, so $\\vec a = \\vec e + \\vec f - \\vec d$. *Why this step:* AFDE is a parallelogram (by the midpoint theorem, proved in 2.5), so this is the same as finding its fourth vertex.",
+        },
+        {
+          text: "$\\vec a = (3 - 1 - 1,\\ 0 + 1 - 2,\\ 1 - 4 + 3) = (1, -1, 0)$. In the same way, $\\vec b = \\vec d + \\vec f - \\vec e = (-3, 3, -8)$ and $\\vec c = \\vec d + \\vec e - \\vec f = (5, 1, 2)$.",
+        },
+        {
+          text: "**Check.** $\\frac{\\vec b + \\vec c}{2} = \\frac{(2, 4, -6)}{2} = (1, 2, -3) = \\vec d$ ✓, and $\\frac{\\vec a + \\vec b + \\vec c}{3} = \\frac{(3, 3, -6)}{3} = (1, 1, -2)$ ✓.",
+        },
+      ],
+      answer: "Centroid $(1, 1, -2)$, vertices A$(1, -1, 0)$, B$(-3, 3, -8)$, C$(5, 1, 2)$",
     },
-    {
-      type: "text",
-      content:
-        "So the hole goes at $(5, 3)$, two-thirds of the way from A to D. *Why check at all:* if you had placed G one-third of the way down the median, this comparison would fail.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (exam style: triangle from its midpoints).** The midpoints of sides BC, CA and AB of triangle ABC are D$(1, 2, -3)$, E$(3, 0, 1)$ and F$(-1, 1, -4)$. Find the centroid of ABC and its vertices.\n\n**Step 1 (add the midpoints).** Each vertex appears in exactly two of the three midpoints. *Why this step:* adding the midpoints therefore counts every vertex twice, and the $\\frac12$ cancels that.",
-    },
-    {
-      type: "math",
-      latex:
-        "\\vec d + \\vec e + \\vec f = \\frac{(\\vec b + \\vec c) + (\\vec c + \\vec a) + (\\vec a + \\vec b)}{2} = \\vec a + \\vec b + \\vec c",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 2 (centroid).** $\\vec g = \\frac{\\vec d + \\vec e + \\vec f}{3} = \\frac{(3, 3, -6)}{3} = (1, 1, -2)$. So the midpoint triangle DEF has **the same centroid** as ABC.\n\n**Step 3 (vertices).** $\\vec e + \\vec f = \\frac{\\vec c + \\vec a}{2} + \\frac{\\vec a + \\vec b}{2} = \\vec a + \\frac{\\vec b + \\vec c}{2} = \\vec a + \\vec d$, so $\\vec a = \\vec e + \\vec f - \\vec d$. *Why this step:* AFDE is a parallelogram (by the midpoint theorem, proved in 2.5), so this is the same as finding its fourth vertex.\n\n$\\vec a = (3 - 1 - 1,\\ 0 + 1 - 2,\\ 1 - 4 + 3) = (1, -1, 0)$. In the same way, $\\vec b = \\vec d + \\vec f - \\vec e = (-3, 3, -8)$ and $\\vec c = \\vec d + \\vec e - \\vec f = (5, 1, 2)$.\n\n**Check.** $\\frac{\\vec b + \\vec c}{2} = \\frac{(2, 4, -6)}{2} = (1, 2, -3) = \\vec d$ ✓, and $\\frac{\\vec a + \\vec b + \\vec c}{3} = \\frac{(3, 3, -6)}{3} = (1, 1, -2)$ ✓.",
-    },
+    { type: "heading", text: "Extensions: incentre and tetrahedron" },
     {
       type: "callout",
       variant: "tip",
@@ -861,6 +1025,7 @@ const lesson03: LessonSeed = {
         ["Tetrahedron ABCD", "$\\dfrac{\\vec a + \\vec b + \\vec c + \\vec d}{4}$", "$3 : 1$ to the opposite face's centroid"],
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va2-3-q1",
@@ -1093,6 +1258,7 @@ const lesson04: LessonSeed = {
           "x·a + y·b: slide x to stretch along a and y to stretch along b. The two directions together cover the whole plane. (x = 2, y = 1 lands on (3, 4); x = −1, y = 2 lands on (−4, 3); x = 2, y = −1 lands on (5, 0).)",
       },
     },
+    { type: "heading", text: "Two non-collinear vectors span the plane" },
     {
       type: "text",
       content:
@@ -1145,10 +1311,18 @@ const lesson04: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Write $\\vec r = (5, 3)$ as a combination of $\\vec a = (1, 2)$ and $\\vec b = (3, -1)$.\n\n**Step 1.** $x(1, 2) + y(3, -1) = (5, 3)$ gives two equations: $x + 3y = 5$ and $2x - y = 3$.\n\n**Step 2.** From the second, $y = 2x - 3$. Substituting, $x + 6x - 9 = 5$, so $x = 2$ and $y = 1$.\n\n**Check.** $2(1, 2) + (3, -1) = (5, 3)$ ✓. So $\\vec r = 2\\vec a + \\vec b$.",
+      type: "worked-example",
+      id: "va2-4-we1",
+      title: "Worked example 1",
+      problem: "Write $\\vec r = (5, 3)$ as a combination of $\\vec a = (1, 2)$ and $\\vec b = (3, -1)$.",
+      steps: [
+        { text: "$x(1, 2) + y(3, -1) = (5, 3)$ gives two equations: $x + 3y = 5$ and $2x - y = 3$." },
+        { text: "From the second, $y = 2x - 3$. Substituting, $x + 6x - 9 = 5$, so $x = 2$ and $y = 1$." },
+        { text: "**Check.** $2(1, 2) + (3, -1) = (5, 3)$ ✓." },
+      ],
+      answer: "$\\vec r = 2\\vec a + \\vec b$.",
     },
+    { type: "heading", text: "Testing three points for collinearity" },
     {
       type: "text",
       content:
@@ -1160,15 +1334,43 @@ const lesson04: LessonSeed = {
         "A, B, C \\text{ collinear} \\iff \\overrightarrow{AB} = \\lambda\\,\\overrightarrow{AC} \\text{ for some scalar } \\lambda",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2.** Are A$(1, 2, -1)$, B$(3, 5, 1)$ and C$(7, 11, 5)$ collinear?\n\n**Step 1.** $\\overrightarrow{AB} = (2, 3, 2)$ and $\\overrightarrow{AC} = (6, 9, 6)$.\n\n**Step 2.** $\\overrightarrow{AC} = 3\\,\\overrightarrow{AB}$, so the two arrows are parallel and share the point A. The points are collinear, and B is a third of the way from A to C.\n\nChange C to $(7, 11, 6)$: now $\\overrightarrow{AC} = (6, 9, 7)$. The ratios $\\frac62 = \\frac93 \\neq \\frac72$, so the points are not collinear.",
+      type: "worked-example",
+      id: "va2-4-we2",
+      title: "Worked example 2",
+      problem: "Are A$(1, 2, -1)$, B$(3, 5, 1)$ and C$(7, 11, 5)$ collinear?",
+      steps: [
+        { text: "$\\overrightarrow{AB} = (2, 3, 2)$ and $\\overrightarrow{AC} = (6, 9, 6)$." },
+        {
+          text: "$\\overrightarrow{AC} = 3\\,\\overrightarrow{AB}$, so the two arrows are parallel and share the point A. The points are collinear, and B is a third of the way from A to C.",
+        },
+      ],
+      answer: "Yes, collinear, with B a third of the way from A to C.",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 (application: will the laser hit?).** On a lab bench a laser at A$(1, 2)$ shines through a pinhole at B$(4, 6)$, in cm. Will the beam hit a target at C$(10, 14)$? What about a target at D$(13, 17)$?\n\n**Step 1.** The beam's direction is $\\overrightarrow{AB} = (3, 4)$. *Why this step:* the beam is the line through A along $\\overrightarrow{AB}$, so the test is whether $\\overrightarrow{AC}$ is a multiple of it.\n\n**Step 2 (target C).** $\\overrightarrow{AC} = (9, 12) = 3\\,\\overrightarrow{AB}$. The multiplier is 3, positive and bigger than 1, so C is on the beam **beyond** the pinhole. It is hit.\n\n**Step 3 (target D).** $\\overrightarrow{AD} = (12, 15)$. The x-components give $\\frac{12}{3} = 4$, but the y-components give $\\frac{15}{4} = 3.75$. They do not match, so D is missed. *Why check every component:* one matching ratio only says D is at the right x-position. The line test needs the **same** multiplier in every component.",
+        "Change C to $(7, 11, 6)$: now $\\overrightarrow{AC} = (6, 9, 7)$. The ratios $\\frac62 = \\frac93 \\neq \\frac72$, so the points are not collinear.",
     },
+    {
+      type: "worked-example",
+      id: "va2-4-we3",
+      title: "Worked example 3 (application: will the laser hit?)",
+      problem:
+        "On a lab bench a laser at A$(1, 2)$ shines through a pinhole at B$(4, 6)$, in cm. Will the beam hit a target at C$(10, 14)$? What about a target at D$(13, 17)$?",
+      steps: [
+        {
+          text: "The beam's direction is $\\overrightarrow{AB} = (3, 4)$. *Why this step:* the beam is the line through A along $\\overrightarrow{AB}$, so the test is whether $\\overrightarrow{AC}$ is a multiple of it.",
+        },
+        {
+          text: "**Target C.** $\\overrightarrow{AC} = (9, 12) = 3\\,\\overrightarrow{AB}$. The multiplier is 3, positive and bigger than 1, so C is on the beam **beyond** the pinhole. It is hit.",
+        },
+        {
+          text: "**Target D.** $\\overrightarrow{AD} = (12, 15)$. The x-components give $\\frac{12}{3} = 4$, but the y-components give $\\frac{15}{4} = 3.75$. They do not match, so D is missed. *Why check every component:* one matching ratio only says D is at the right x-position. The line test needs the **same** multiplier in every component.",
+        },
+      ],
+      answer: "C is hit; D is missed.",
+    },
+    { type: "heading", text: "Coefficients that add to zero" },
     {
       type: "text",
       content:
@@ -1192,23 +1394,44 @@ const lesson04: LessonSeed = {
         "Why must the coefficients add to zero? Collinearity is a fact about the points, so it cannot depend on where you put the origin. Move the origin to a point Q and every position vector drops by $\\vec q$. The relation then picks up an extra $-(\\alpha + \\beta + \\gamma)\\vec q$. That extra term is zero for every choice of origin only when the coefficients add to zero. A relation like $\\vec a + \\vec b + \\vec c = \\vec 0$ (sum 3) is different: it says the origin is the centroid, a statement about O, not about the line.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4.** $\\vec u, \\vec v, \\vec w$ are non-coplanar. Show that the points with position vectors $\\vec u - 2\\vec v + 3\\vec w$, $2\\vec u + 3\\vec v - 4\\vec w$ and $-7\\vec v + 10\\vec w$ are collinear.\n\n**Step 1.** $\\overrightarrow{AB} = (2\\vec u + 3\\vec v - 4\\vec w) - (\\vec u - 2\\vec v + 3\\vec w) = \\vec u + 5\\vec v - 7\\vec w$.\n\n**Step 2.** $\\overrightarrow{AC} = (-7\\vec v + 10\\vec w) - (\\vec u - 2\\vec v + 3\\vec w) = -\\vec u - 5\\vec v + 7\\vec w$.\n\n**Step 3.** $\\overrightarrow{AC} = -\\overrightarrow{AB}$, so the two are parallel and share A. The points are collinear, with A the midpoint of BC.",
+      type: "worked-example",
+      id: "va2-4-we4",
+      title: "Worked example 4",
+      problem:
+        "$\\vec u, \\vec v, \\vec w$ are non-coplanar. Show that the points with position vectors $\\vec u - 2\\vec v + 3\\vec w$, $2\\vec u + 3\\vec v - 4\\vec w$ and $-7\\vec v + 10\\vec w$ are collinear.",
+      steps: [
+        {
+          text: "$\\overrightarrow{AB} = (2\\vec u + 3\\vec v - 4\\vec w) - (\\vec u - 2\\vec v + 3\\vec w) = \\vec u + 5\\vec v - 7\\vec w$.",
+        },
+        {
+          text: "$\\overrightarrow{AC} = (-7\\vec v + 10\\vec w) - (\\vec u - 2\\vec v + 3\\vec w) = -\\vec u - 5\\vec v + 7\\vec w$.",
+        },
+        {
+          text: "$\\overrightarrow{AC} = -\\overrightarrow{AB}$, so the two are parallel and share A. The points are collinear, with A the midpoint of BC.",
+        },
+      ],
+      answer: "Collinear, with A the midpoint of BC",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (exam style: collinear vectors with a parameter).** $\\vec a$ and $\\vec b$ are not collinear. Find $x$ so that $\\vec u = (x - 2)\\vec a + \\vec b$ and $\\vec v = (3 + 2x)\\vec a - 2\\vec b$ are collinear.\n\n**Step 1 (translate).** $\\vec u \\neq \\vec 0$, because its $\\vec b$-coefficient is 1. So collinear means $\\vec v = k\\,\\vec u$ for some scalar $k$. *Why this step:* parallel vectors are scalar multiples of each other, and writing one as $k$ times the other turns the geometry into an equation.",
-    },
-    {
-      type: "math",
-      latex: "(3 + 2x)\\,\\vec a - 2\\,\\vec b = k(x - 2)\\,\\vec a + k\\,\\vec b",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 2 (compare coefficients).** $\\vec b$: $-2 = k$. $\\vec a$: $3 + 2x = k(x - 2)$. *Why this step is allowed:* $\\vec a$ and $\\vec b$ are not collinear, so every vector has exactly one pair of coefficients along them.\n\n**Step 3 (solve).** $3 + 2x = -2(x - 2) = -2x + 4$, so $4x = 1$ and $x = \\frac14$.\n\n**Check.** $\\vec u = -\\frac74\\vec a + \\vec b$ and $\\vec v = \\frac72\\vec a - 2\\vec b = -2\\vec u$ ✓. The two vectors are parallel but point in opposite directions.",
+      type: "worked-example",
+      id: "va2-4-we5",
+      title: "Worked example 5 (exam style: collinear vectors with a parameter)",
+      problem:
+        "$\\vec a$ and $\\vec b$ are not collinear. Find $x$ so that $\\vec u = (x - 2)\\vec a + \\vec b$ and $\\vec v = (3 + 2x)\\vec a - 2\\vec b$ are collinear.",
+      steps: [
+        {
+          text: "**Translate.** $\\vec u \\neq \\vec 0$, because its $\\vec b$-coefficient is 1. So collinear means $\\vec v = k\\,\\vec u$ for some scalar $k$. *Why this step:* parallel vectors are scalar multiples of each other, and writing one as $k$ times the other turns the geometry into an equation.",
+          latex: "(3 + 2x)\\,\\vec a - 2\\,\\vec b = k(x - 2)\\,\\vec a + k\\,\\vec b",
+        },
+        {
+          text: "**Compare coefficients.** $\\vec b$: $-2 = k$. $\\vec a$: $3 + 2x = k(x - 2)$. *Why this step is allowed:* $\\vec a$ and $\\vec b$ are not collinear, so every vector has exactly one pair of coefficients along them.",
+        },
+        { text: "**Solve.** $3 + 2x = -2(x - 2) = -2x + 4$, so $4x = 1$ and $x = \\frac14$." },
+        {
+          text: "**Check.** $\\vec u = -\\frac74\\vec a + \\vec b$ and $\\vec v = \\frac72\\vec a - 2\\vec b = -2\\vec u$ ✓. The two vectors are parallel but point in opposite directions.",
+        },
+      ],
+      answer: "$x = \\frac14$",
     },
     {
       type: "callout",
@@ -1217,6 +1440,7 @@ const lesson04: LessonSeed = {
       content:
         "In space, two non-collinear vectors build only a **plane** of combinations. A third vector $\\vec c$ is **coplanar** with $\\vec a$ and $\\vec b$ exactly when $\\vec c = x\\vec a + y\\vec b$. Three non-coplanar vectors build all of space. Chapter 5 turns this into a single number, the scalar triple product, which is zero exactly for coplanar vectors.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va2-4-q1",
@@ -1418,54 +1642,152 @@ const lesson05: LessonSeed = {
       content:
         "You may choose the origin anywhere, and a good choice removes a variable. With the origin at A, $\\vec a = \\vec 0$ and every other point is measured from A. Put it at the vertex that appears most often in the hypothesis.",
     },
+    { type: "heading", text: "Parallelogram diagonals and the midpoint theorem" },
     {
       type: "text",
       content:
         "**Proof 1: the diagonals of a parallelogram bisect each other.**\n\n**Step 1 (translate).** ABCD is a parallelogram, so $\\overrightarrow{AB} = \\overrightarrow{DC}$, that is $\\vec b - \\vec a = \\vec c - \\vec d$.\n\n**Step 2 (rearrange).** $\\vec a + \\vec c = \\vec b + \\vec d$.\n\n**Step 3 (divide by 2).** $\\frac{\\vec a + \\vec c}{2} = \\frac{\\vec b + \\vec d}{2}$.\n\n**Step 4 (translate back).** The left side is the midpoint of diagonal AC and the right side is the midpoint of diagonal BD. They are the same point, so each diagonal passes through the other's midpoint. ∎\n\nEvery step reverses, so the converse holds too: a quadrilateral whose diagonals bisect each other is a parallelogram.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (using Proof 1 on numbers).** Show that A$(1, 1)$, B$(4, 2)$, C$(5, 5)$, D$(2, 4)$ form a parallelogram. Then decide whether it is a rhombus.\n\n**Step 1 (test the diagonals).** $\\vec a + \\vec c = (6, 6)$ and $\\vec b + \\vec d = (6, 6)$. They are equal, so the diagonals share the midpoint $(3, 3)$, and ABCD is a parallelogram by the converse of Proof 1. *Why this test:* it is one addition per diagonal, and it does not depend on which sides you compare.\n\n**Step 2 (cross-check with sides).** $\\overrightarrow{AB} = (3, 1)$ and $\\overrightarrow{DC} = (5 - 2,\\ 5 - 4) = (3, 1)$ ✓.\n\n**Step 3 (rhombus?).** $\\overrightarrow{AD} = (1, 3)$. So $AB = \\sqrt{9 + 1} = \\sqrt{10}$ and $AD = \\sqrt{1 + 9} = \\sqrt{10}$. Adjacent sides are equal, so ABCD is a **rhombus**. *Why this step:* a parallelogram with two equal adjacent sides has all four sides equal.",
+      type: "worked-example",
+      id: "va2-5-we1",
+      title: "Using Proof 1 on numbers",
+      problem:
+        "Show that A$(1, 1)$, B$(4, 2)$, C$(5, 5)$, D$(2, 4)$ form a parallelogram. Then decide whether it is a rhombus.",
+      steps: [
+        {
+          text: "**Test the diagonals.** $\\vec a + \\vec c = (6, 6)$ and $\\vec b + \\vec d = (6, 6)$. They are equal, so the diagonals share the midpoint $(3, 3)$, and ABCD is a parallelogram by the converse of Proof 1. *Why this test:* it is one addition per diagonal, and it does not depend on which sides you compare.",
+        },
+        {
+          text: "**Cross-check with sides.** $\\overrightarrow{AB} = (3, 1)$ and $\\overrightarrow{DC} = (5 - 2,\\ 5 - 4) = (3, 1)$ ✓.",
+        },
+        {
+          text: "**Rhombus?** $\\overrightarrow{AD} = (1, 3)$. So $AB = \\sqrt{9 + 1} = \\sqrt{10}$ and $AD = \\sqrt{1 + 9} = \\sqrt{10}$. Adjacent sides are equal, so ABCD is a **rhombus**. *Why this step:* a parallelogram with two equal adjacent sides has all four sides equal.",
+        },
+      ],
+      answer: "ABCD is a parallelogram, and in fact a rhombus.",
+    },
+    {
+      type: "worked-example",
+      id: "va2-5-we3",
+      title: "Proof 2: the midpoint theorem",
+      problem:
+        "In triangle ABC, D and E are the midpoints of AB and AC. Show that $DE \\parallel BC$ and $DE = \\frac12 BC$.",
+      steps: [
+        { text: "**Origin at A.** $\\vec a = \\vec 0$, so $\\vec d = \\frac12\\vec b$ and $\\vec e = \\frac12\\vec c$." },
+        { text: "**Tip minus tail.** $\\overrightarrow{DE} = \\vec e - \\vec d = \\frac12(\\vec c - \\vec b)$." },
+        { text: "**Recognise.** $\\vec c - \\vec b = \\overrightarrow{BC}$, so $\\overrightarrow{DE} = \\frac12\\overrightarrow{BC}$." },
+        {
+          text: "**Translate back.** One vector is a positive multiple of the other, so DE is parallel to BC, points the same way, and is half as long. ∎",
+        },
+      ],
+      answer: "$\\overrightarrow{DE} = \\frac12\\overrightarrow{BC}$, so $DE \\parallel BC$ and $DE = \\frac12 BC$.",
+    },
+    { type: "heading", text: "Midpoints of diagonals, medians and trisection" },
+    {
+      type: "worked-example",
+      id: "va2-5-we4",
+      title: "Proof 3: the midpoints of a trapezium's diagonals",
+      problem:
+        "ABCD is a trapezium with $AB \\parallel DC$. M and N are the midpoints of diagonals AC and BD. Show that $MN \\parallel AB$ and $MN = \\frac12\\lvert AB - DC\\rvert$ (half the difference of the parallel sides).",
+      steps: [
+        {
+          text: "**Origin at A, translate.** $\\vec a = \\vec 0$. Parallel sides pointing the same way: $\\overrightarrow{DC} = k\\,\\overrightarrow{AB}$ with $k > 0$, that is $\\vec c - \\vec d = k\\vec b$.",
+        },
+        { text: "**Midpoints.** $\\vec m = \\frac12\\vec c$ and $\\vec n = \\frac12(\\vec b + \\vec d)$." },
+        {
+          text: "**Compute.** $\\overrightarrow{MN} = \\vec n - \\vec m = \\frac12(\\vec b - (\\vec c - \\vec d)) = \\frac12(\\vec b - k\\vec b) = \\frac{1 - k}{2}\\,\\vec b$.",
+        },
+        {
+          text: "**Translate back.** $\\overrightarrow{MN}$ is a multiple of $\\overrightarrow{AB}$, so $MN \\parallel AB$. Its length is $\\frac{\\lvert 1 - k\\rvert}{2}AB = \\frac12\\lvert AB - DC\\rvert$, because $DC = k\\cdot AB$. ∎",
+        },
+      ],
+      answer: "$\\overrightarrow{MN} = \\frac{1 - k}{2}\\,\\overrightarrow{AB}$, so $MN \\parallel AB$ and $MN = \\frac12\\lvert AB - DC\\rvert$.",
     },
     {
       type: "text",
       content:
-        "**Proof 2: the midpoint theorem.** In triangle ABC, D and E are the midpoints of AB and AC. Show that $DE \\parallel BC$ and $DE = \\frac12 BC$.\n\n**Step 1 (origin at A).** $\\vec a = \\vec 0$, so $\\vec d = \\frac12\\vec b$ and $\\vec e = \\frac12\\vec c$.\n\n**Step 2 (tip minus tail).** $\\overrightarrow{DE} = \\vec e - \\vec d = \\frac12(\\vec c - \\vec b)$.\n\n**Step 3 (recognise).** $\\vec c - \\vec b = \\overrightarrow{BC}$, so $\\overrightarrow{DE} = \\frac12\\overrightarrow{BC}$.\n\n**Step 4 (translate back).** One vector is a positive multiple of the other, so DE is parallel to BC, points the same way, and is half as long. ∎",
+        "In 2.3 you *guessed* the $2 : 1$ point and checked it was symmetric. The next proof assumes nothing about the ratio. It uses the comparing-coefficients rule from 2.4.",
     },
     {
-      type: "text",
-      content:
-        "**Proof 3: the midpoints of a trapezium's diagonals.** ABCD is a trapezium with $AB \\parallel DC$. M and N are the midpoints of diagonals AC and BD. Show that $MN \\parallel AB$ and $MN = \\frac12\\lvert AB - DC\\rvert$ (half the difference of the parallel sides).\n\n**Step 1 (origin at A, translate).** $\\vec a = \\vec 0$. Parallel sides pointing the same way: $\\overrightarrow{DC} = k\\,\\overrightarrow{AB}$ with $k > 0$, that is $\\vec c - \\vec d = k\\vec b$.\n\n**Step 2 (midpoints).** $\\vec m = \\frac12\\vec c$ and $\\vec n = \\frac12(\\vec b + \\vec d)$.\n\n**Step 3 (compute).** $\\overrightarrow{MN} = \\vec n - \\vec m = \\frac12(\\vec b - (\\vec c - \\vec d)) = \\frac12(\\vec b - k\\vec b) = \\frac{1 - k}{2}\\,\\vec b$.\n\n**Step 4 (translate back).** $\\overrightarrow{MN}$ is a multiple of $\\overrightarrow{AB}$, so $MN \\parallel AB$. Its length is $\\frac{\\lvert 1 - k\\rvert}{2}AB = \\frac12\\lvert AB - DC\\rvert$, because $DC = k\\cdot AB$. ∎",
+      type: "worked-example",
+      id: "va2-5-we5",
+      title: "Proof 4: the medians meet in the ratio 2 : 1",
+      problem:
+        "In triangle ABC, the medians AD and BE meet at G. Without assuming the ratio, show that each median is cut in the ratio $2 : 1$ from its vertex.",
+      steps: [
+        {
+          text: "**Origin at C.** $\\vec c = \\vec 0$. D, the midpoint of BC, is $\\frac12\\vec b$. E, the midpoint of CA, is $\\frac12\\vec a$.",
+        },
+        {
+          text: "**Unknown ratios.** G is on AD, so $\\vec g = \\vec a + s(\\vec d - \\vec a) = (1 - s)\\vec a + \\frac{s}{2}\\vec b$. G is also on BE, so $\\vec g = \\vec b + t(\\vec e - \\vec b) = \\frac{t}{2}\\vec a + (1 - t)\\vec b$.",
+        },
+        {
+          text: "**Compare coefficients.** $\\vec a = \\overrightarrow{CA}$ and $\\vec b = \\overrightarrow{CB}$ are not collinear, because ABC is a genuine triangle. So $1 - s = \\frac{t}{2}$ and $\\frac{s}{2} = 1 - t$.",
+        },
+        {
+          text: "**Solve.** From the second equation $t = 1 - \\frac{s}{2}$. Substituting, $1 - s = \\frac12 - \\frac{s}{4}$, so $s = \\frac23$, and then $t = \\frac23$.",
+        },
+        {
+          text: "**Translate back.** $AG = \\frac23 AD$ and $BG = \\frac23 BE$: each median is cut in the ratio $2 : 1$ from its vertex. ∎",
+        },
+      ],
+      answer: "$AG = \\frac23 AD$ and $BG = \\frac23 BE$: each median is cut $2 : 1$ from its vertex.",
     },
     {
-      type: "text",
-      content:
-        "**Proof 4: the medians meet in the ratio 2 : 1.** In 2.3 you *guessed* the $2 : 1$ point and checked it was symmetric. Here is a proof that assumes nothing about the ratio. It uses the comparing-coefficients rule from 2.4.\n\n**Step 1 (origin at C).** $\\vec c = \\vec 0$. D, the midpoint of BC, is $\\frac12\\vec b$. E, the midpoint of CA, is $\\frac12\\vec a$.\n\n**Step 2 (unknown ratios).** Let medians AD and BE meet at G. G is on AD, so $\\vec g = \\vec a + s(\\vec d - \\vec a) = (1 - s)\\vec a + \\frac{s}{2}\\vec b$. G is also on BE, so $\\vec g = \\vec b + t(\\vec e - \\vec b) = \\frac{t}{2}\\vec a + (1 - t)\\vec b$.\n\n**Step 3 (compare coefficients).** $\\vec a = \\overrightarrow{CA}$ and $\\vec b = \\overrightarrow{CB}$ are not collinear, because ABC is a genuine triangle. So $1 - s = \\frac{t}{2}$ and $\\frac{s}{2} = 1 - t$.\n\n**Step 4 (solve).** From the second equation $t = 1 - \\frac{s}{2}$. Substituting, $1 - s = \\frac12 - \\frac{s}{4}$, so $s = \\frac23$, and then $t = \\frac23$.\n\n**Step 5 (translate back).** $AG = \\frac23 AD$ and $BG = \\frac23 BE$: each median is cut in the ratio $2 : 1$ from its vertex. ∎",
+      type: "worked-example",
+      id: "va2-5-we6",
+      title: "Proof 5 (exam style): a line from a vertex trisects the diagonal",
+      problem:
+        "ABCD is a parallelogram and E is the midpoint of CD. AE meets the diagonal BD at P. Show that $BP : PD = 2 : 1$, so P is a point of trisection of BD. Show also that $AP : PE = 2 : 1$.",
+      steps: [
+        {
+          text: "**Origin at A.** Let $\\vec b = \\overrightarrow{AB}$ and $\\vec d = \\overrightarrow{AD}$, so $\\vec c = \\vec b + \\vec d$. *Why this step:* A lies on the line AE, and the two sides from A, $\\vec b$ and $\\vec d$, are not collinear. Every other point can be written in terms of them.",
+        },
+        { text: "**The midpoint.** $\\vec e = \\frac{\\vec c + \\vec d}{2} = \\frac12\\vec b + \\vec d$." },
+        {
+          text: "**P on both lines, with unknown ratios.** P is on AE, so $\\vec p = s\\,\\vec e$. P is on BD, so $\\vec p = (1 - t)\\vec b + t\\,\\vec d$. *Why this step:* we do not assume where P is. Each line gives a one-parameter description of P, and the two descriptions must agree.",
+          latex: "\\frac{s}{2}\\,\\vec b + s\\,\\vec d = (1 - t)\\,\\vec b + t\\,\\vec d",
+        },
+        {
+          text: "**Compare coefficients.** $\\frac{s}{2} = 1 - t$ and $s = t$. *Why this step is allowed:* $\\vec b$ and $\\vec d$ are not collinear. Substituting, $\\frac{t}{2} = 1 - t$, so $t = \\frac23$ and $s = \\frac23$.",
+        },
+        {
+          text: "**Translate back.** $t = \\frac23$ means $BP = \\frac23 BD$, so $BP : PD = 2 : 1$. $s = \\frac23$ means $AP = \\frac23 AE$, so $AP : PE = 2 : 1$. ∎",
+        },
+        {
+          text: "**Another view.** In triangle ACD, AE is a median, and so is DB, since it passes through the midpoint of AC. So P is the centroid of ACD, and both $2 : 1$ ratios follow from 2.3. Check: $\\frac{\\vec 0 + (\\vec b + \\vec d) + \\vec d}{3} = \\frac13\\vec b + \\frac23\\vec d$, which is $\\vec p$ with $t = \\frac23$ ✓.",
+        },
+      ],
+      answer: "$BP : PD = 2 : 1$ and $AP : PE = 2 : 1$.",
     },
-    {
-      type: "text",
-      content:
-        "**Proof 5 (exam style): a line from a vertex trisects the diagonal.** ABCD is a parallelogram and E is the midpoint of CD. AE meets the diagonal BD at P. Show that $BP : PD = 2 : 1$, so P is a point of trisection of BD. Show also that $AP : PE = 2 : 1$.\n\n**Step 1 (origin at A).** Let $\\vec b = \\overrightarrow{AB}$ and $\\vec d = \\overrightarrow{AD}$, so $\\vec c = \\vec b + \\vec d$. *Why this step:* A lies on the line AE, and the two sides from A, $\\vec b$ and $\\vec d$, are not collinear. Every other point can be written in terms of them.\n\n**Step 2 (the midpoint).** $\\vec e = \\frac{\\vec c + \\vec d}{2} = \\frac12\\vec b + \\vec d$.\n\n**Step 3 (P on both lines, with unknown ratios).** P is on AE, so $\\vec p = s\\,\\vec e$. P is on BD, so $\\vec p = (1 - t)\\vec b + t\\,\\vec d$. *Why this step:* we do not assume where P is. Each line gives a one-parameter description of P, and the two descriptions must agree.",
-    },
-    {
-      type: "math",
-      latex: "\\frac{s}{2}\\,\\vec b + s\\,\\vec d = (1 - t)\\,\\vec b + t\\,\\vec d",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4 (compare coefficients).** $\\frac{s}{2} = 1 - t$ and $s = t$. *Why this step is allowed:* $\\vec b$ and $\\vec d$ are not collinear. Substituting, $\\frac{t}{2} = 1 - t$, so $t = \\frac23$ and $s = \\frac23$.\n\n**Step 5 (translate back).** $t = \\frac23$ means $BP = \\frac23 BD$, so $BP : PD = 2 : 1$. $s = \\frac23$ means $AP = \\frac23 AE$, so $AP : PE = 2 : 1$. ∎\n\n**Another view.** In triangle ACD, AE is a median, and so is DB, since it passes through the midpoint of AC. So P is the centroid of ACD, and both $2 : 1$ ratios follow from 2.3. Check: $\\frac{\\vec 0 + (\\vec b + \\vec d) + \\vec d}{3} = \\frac13\\vec b + \\frac23\\vec d$, which is $\\vec p$ with $t = \\frac23$ ✓.",
-    },
+    { type: "heading", text: "Varignon's theorem and a garden plot" },
     {
       type: "text",
       content:
         "**Bonus (Varignon).** Join the midpoints of the sides of *any* quadrilateral ABCD and you get a parallelogram. With P, Q, R, S the midpoints of AB, BC, CD, DA: $\\overrightarrow{PQ} = \\frac{\\vec b + \\vec c}{2} - \\frac{\\vec a + \\vec b}{2} = \\frac{\\vec c - \\vec a}{2}$ and $\\overrightarrow{SR} = \\frac{\\vec c + \\vec d}{2} - \\frac{\\vec d + \\vec a}{2} = \\frac{\\vec c - \\vec a}{2}$. So one pair of opposite sides is equal and parallel, and PQRS is a parallelogram. Both sides are also half the diagonal AC.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (application: a flower bed inside a plot).** An irregular plot of land has corners A$(0, 0)$, B$(8, 2)$, C$(10, 8)$, D$(1, 7)$, in metres. A gardener pegs the midpoints of the four sides and ropes them off as a flower bed. Show that the bed is a parallelogram.\n\n**Step 1 (is the plot itself a parallelogram?).** $\\vec a + \\vec c = (10, 8)$ but $\\vec b + \\vec d = (9, 9)$, so it is not. *Why this step:* it shows that Varignon's theorem does not rely on the outer shape being special.\n\n**Step 2 (midpoints).** P$(4, 1)$ on AB, Q$(9, 5)$ on BC, R$\\left(\\frac{11}{2}, \\frac{15}{2}\\right)$ on CD, S$\\left(\\frac12, \\frac72\\right)$ on DA.\n\n**Step 3 (opposite sides).** $\\overrightarrow{PQ} = (5, 4)$ and $\\overrightarrow{SR} = (5, 4)$. Also $\\overrightarrow{PS} = \\left(-\\frac72, \\frac52\\right)$ and $\\overrightarrow{QR} = \\left(-\\frac72, \\frac52\\right)$. Both pairs are equal, so PQRS is a parallelogram ✓.\n\n**Step 4 (link to the proof).** $\\frac{\\vec c - \\vec a}{2} = (5, 4)$ and $\\frac{\\vec d - \\vec b}{2} = \\left(-\\frac72, \\frac52\\right)$. The bed's sides are half the plot's diagonals, just as the general proof predicts. *Why this step:* the numbers confirm the proof, and the proof explains the numbers.",
+      type: "worked-example",
+      id: "va2-5-we2",
+      title: "Application: a flower bed inside a plot",
+      problem:
+        "An irregular plot of land has corners A$(0, 0)$, B$(8, 2)$, C$(10, 8)$, D$(1, 7)$, in metres. A gardener pegs the midpoints of the four sides and ropes them off as a flower bed. Show that the bed is a parallelogram.",
+      steps: [
+        {
+          text: "**Is the plot itself a parallelogram?** $\\vec a + \\vec c = (10, 8)$ but $\\vec b + \\vec d = (9, 9)$, so it is not. *Why this step:* it shows that Varignon's theorem does not rely on the outer shape being special.",
+        },
+        {
+          text: "**Midpoints.** P$(4, 1)$ on AB, Q$(9, 5)$ on BC, R$\\left(\\frac{11}{2}, \\frac{15}{2}\\right)$ on CD, S$\\left(\\frac12, \\frac72\\right)$ on DA.",
+        },
+        {
+          text: "**Opposite sides.** $\\overrightarrow{PQ} = (5, 4)$ and $\\overrightarrow{SR} = (5, 4)$. Also $\\overrightarrow{PS} = \\left(-\\frac72, \\frac52\\right)$ and $\\overrightarrow{QR} = \\left(-\\frac72, \\frac52\\right)$. Both pairs are equal, so PQRS is a parallelogram ✓.",
+        },
+        {
+          text: "**Link to the proof.** $\\frac{\\vec c - \\vec a}{2} = (5, 4)$ and $\\frac{\\vec d - \\vec b}{2} = \\left(-\\frac72, \\frac52\\right)$. The bed's sides are half the plot's diagonals, just as the general proof predicts. *Why this step:* the numbers confirm the proof, and the proof explains the numbers.",
+        },
+      ],
+      answer: "PQRS is a parallelogram, with sides half the plot's diagonals.",
     },
     {
       type: "callout",
@@ -1474,6 +1796,7 @@ const lesson05: LessonSeed = {
       content:
         "**Reversed arrows:** $\\overrightarrow{PQ}$ is $\\vec q - \\vec p$ (tip minus tail), never $\\vec p - \\vec q$.\n**Illegal coefficient matching:** you may compare coefficients only of **non-collinear** vectors.\n**Splitting a sum:** $\\vec a + \\vec c = \\vec b + \\vec d$ does **not** give $\\vec a = \\vec b$ and $\\vec c = \\vec d$.\n**Losing direction:** $AB \\parallel DC$ gives $\\overrightarrow{DC} = k\\overrightarrow{AB}$, not $\\overrightarrow{DC} = \\overrightarrow{AB}$. Equality would also force equal lengths.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va2-5-q1",

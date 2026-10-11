@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { z } from "zod";
 import type { mrgCollisionLabSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { InteractiveFrame, Latex } from "./ui";
 import {
   G,
@@ -389,7 +390,7 @@ function CartsLab({ config }: { config: Config }) {
       {series.length > 0 && <MiniGraph series={series} t0={t0} t1={t1} cursor={t} xLabel="t (s)" yLabel={graphMeta.y} />}
       {sliders}
       {lines.length > 0 && <ReadoutBox>{lines}</ReadoutBox>}
-      <p className="text-center text-xs text-muted-foreground">{config.caption ?? CAPTIONS[config.mode]}</p>
+      <p className="text-center text-xs text-muted-foreground"><RichText text={config.caption ?? CAPTIONS[config.mode]} /></p>
     </InteractiveFrame>
   );
 }
@@ -539,7 +540,7 @@ function WallLab({ config }: { config: Config }) {
       />
       {sliders}
       {lines.length > 0 && <ReadoutBox>{lines}</ReadoutBox>}
-      <p className="text-center text-xs text-muted-foreground">{config.caption ?? CAPTIONS.wall}</p>
+      <p className="text-center text-xs text-muted-foreground"><RichText text={config.caption ?? CAPTIONS.wall} /></p>
     </InteractiveFrame>
   );
 }

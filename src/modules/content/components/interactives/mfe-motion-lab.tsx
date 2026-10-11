@@ -3,6 +3,7 @@
 import { useEffect, useId, useState } from "react";
 import type { z } from "zod";
 import type { mfeMotionLabSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { formatNumber } from "./function-plot";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 import { ArrowSvg, SvgLatex } from "./vec-canvas-2d";
@@ -145,7 +146,7 @@ export function Notes({ notes }: { notes: string[] }) {
 export function CaptionRow({ caption, onReset }: { caption: string; onReset: () => void }) {
   return (
     <div className="flex items-start justify-between gap-3">
-      <p className="text-xs text-muted-foreground">{caption}</p>
+      <p className="text-xs text-muted-foreground"><RichText text={caption} /></p>
       <button type="button" onClick={onReset} className="shrink-0 rounded-md border bg-background px-2 py-1 text-xs">
         Reset
       </button>

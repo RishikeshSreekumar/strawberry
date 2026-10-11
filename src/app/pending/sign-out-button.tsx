@@ -1,17 +1,19 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { signOut } from "@/modules/auth/client";
 
 export function SignOutButton() {
-  const router = useRouter();
   return (
     <Button
       variant="outline"
       onClick={async () => {
         await signOut();
-        router.push("/sign-in");
+        // A full page load, not a router push: it drops the client router
+        // cache and in-memory state (e.g. lib/session-progress.ts), so
+        // nothing from this account carries over to the next sign-in.
+        // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- deliberate hard navigation (see above)
+        window.location.assign("/sign-in");
       }}
     >
       Sign out

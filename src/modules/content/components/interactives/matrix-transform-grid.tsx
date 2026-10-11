@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { z } from "zod";
 import type { matrixTransformGridSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { formatNumber } from "./function-plot";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 import { ArrowSvg, SvgLatex } from "./vec-canvas-2d";
@@ -682,7 +683,7 @@ export function MatrixTransformGrid({ config }: { config: Config }) {
 
       <div className="flex items-start justify-between gap-3">
         <p className="text-xs text-muted-foreground">
-          {config.caption ?? DEFAULT_CAPTIONS[mode]}
+          <RichText text={config.caption ?? DEFAULT_CAPTIONS[mode]} />
           {config.editable && mode !== "compose" && !showingA ? " (Set t = 1 to drag the column tips.)" : ""}
         </p>
         <button type="button" onClick={reset} className="shrink-0 rounded-md border bg-background px-2 py-1 text-xs">

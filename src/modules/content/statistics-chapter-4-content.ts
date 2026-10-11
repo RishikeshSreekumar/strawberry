@@ -101,6 +101,7 @@ const lesson01: LessonSeed = {
       content:
         "A graph of paired data $(x_1, y_1), (x_2, y_2), \\dots, (x_n, y_n)$ with one point per individual. The **explanatory variable** $x$ (the one we think might influence or predict) goes on the horizontal axis; the **response variable** $y$ (the one we want to explain or predict) goes on the vertical axis.",
     },
+    { type: "heading", text: "Describing a scatter plot" },
     {
       type: "text",
       content:
@@ -124,27 +125,47 @@ const lesson01: LessonSeed = {
         "Positive association does not mean every extra hour raises the mark. Look at the students at $x = 5$: one scored 55, the other 66, and the 55 is lower than the 58 at $x = 4$. Association describes the *overall drift* of the cloud, and individual pairs can go against it.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (routine): reading a table as a scatter plot.** A juice stall records the afternoon temperature and the number of cups sold on six days.",
-    },
-    {
-      type: "table",
-      headers: ["Temperature $x$ (°C)", "24", "26", "28", "30", "32", "34"],
-      rows: [
-        ["Cups sold $y$", "120", "135", "160", "170", "200", "215"],
-        ["Change in $y$ per 2 °C step", "", "$+15$", "$+25$", "$+10$", "$+30$", "$+15$"],
+      type: "worked-example",
+      id: "st4-1-we1",
+      title: "Worked example 1 (routine): reading a table as a scatter plot",
+      problem:
+        "A juice stall records the afternoon temperature and the number of cups sold on six days. Describe the association: direction, form, strength and any outliers.",
+      problemTable: {
+        headers: ["Temperature $x$ (°C)", "24", "26", "28", "30", "32", "34"],
+        rows: [
+          ["Cups sold $y$", "120", "135", "160", "170", "200", "215"],
+        ],
+      },
+      steps: [
+        { text: "**Roles.** Temperature comes first and plausibly drives sales, so temperature is $x$. *Why this step:* the axes are fixed by the question you want to answer, not by the numbers." },
+        { text: "**Direction.** As $x$ rises, $y$ rises in every step: **positive**. *Why:* direction is the overall drift, so read the table left to right." },
+        {
+          text: "**Form.** The increases per 2 °C are $15, 25, 10, 30, 15$: they wobble around an average of $\\frac{95}{5} = 19$ cups but show no steady growth or shrinkage. So the form is roughly **linear**. *Why:* a straight line means equal steps in $x$ give roughly equal steps in $y$; a curve would show the steps growing or shrinking steadily.",
+          table: {
+            headers: ["Temperature $x$ (°C)", "24", "26", "28", "30", "32", "34"],
+            rows: [
+              ["Cups sold $y$", "120", "135", "160", "170", "200", "215"],
+              ["Change in $y$ per 2 °C step", "", "$+15$", "$+25$", "$+10$", "$+30$", "$+15$"],
+            ],
+          },
+        },
+        { text: "**Strength and outliers.** The wobble ($10$ to $30$) is modest compared with the total rise of $95$ cups, and no day breaks the pattern: **strong, no outliers**." },
+        { text: "**Summary sentence:** a strong, positive, roughly linear association between temperature and cups sold, with no outliers." },
       ],
+      answer: "Strong, positive, roughly linear, with no outliers",
     },
     {
-      type: "text",
-      content:
-        "**Step 1: roles.** Temperature comes first and plausibly drives sales, so temperature is $x$. *Why this step:* the axes are fixed by the question you want to answer, not by the numbers.\n\n**Step 2: direction.** As $x$ rises, $y$ rises in every step: **positive**. *Why:* direction is the overall drift, so read the table left to right.\n\n**Step 3: form.** The increases per 2 °C are $15, 25, 10, 30, 15$: they wobble around an average of $\\frac{95}{5} = 19$ cups but show no steady growth or shrinkage. So the form is roughly **linear**. *Why:* a straight line means equal steps in $x$ give roughly equal steps in $y$; a curve would show the steps growing or shrinking steadily.\n\n**Step 4: strength and outliers.** The wobble ($10$ to $30$) is modest compared with the total rise of $95$ cups, and no day breaks the pattern: **strong, no outliers**.\n\n**Summary sentence:** a strong, positive, roughly linear association between temperature and cups sold, with no outliers.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2 (application): spotting an outlier.** Eight students report daily screen time $x$ (hours) and sleep $y$ (hours): $(1, 8.5), (2, 8), (3, 7.5), (4, 7), (5, 6), (6, 6), (7, 5), (3, 4)$.\n\n**Step 1: the main pattern.** Seven of the points fall steadily, from 8.5 hours of sleep at 1 hour of screen time to 5 hours at 7: about $\\frac{3.5}{6} \\approx 0.6$ hours (35 minutes) less sleep per extra hour of screen time. That is a **negative, linear, strong** pattern. *Why this step:* describe the bulk of the data first, then look for what does not fit.\n\n**Step 2: the misfit.** The point $(3, 4)$ sits far below the others at $x = 3$ (its neighbour is $(3, 7.5)$). That is an **outlier**. *Why:* an outlier is judged against the pattern, not against the range of $y$; 4 hours is not the smallest $y$ in some absolute sense, but it is 3.5 hours below what the pattern predicts at $x = 3$.\n\n**Step 3: report, do not delete.** \"Strong negative linear association between screen time and sleep, with one outlier at $(3, 4)$\". Perhaps that student was ill or had an exam that night; find out before removing the point.",
+      type: "worked-example",
+      id: "st4-1-we2",
+      title: "Worked example 2 (application): screen time and sleep",
+      problem:
+        "Eight students report daily screen time $x$ (hours) and sleep $y$ (hours): $(1, 8.5), (2, 8), (3, 7.5), (4, 7), (5, 6), (6, 6), (7, 5), (3, 4)$. Describe the association and identify any outlier.",
+      steps: [
+        { text: "**The main pattern.** Seven of the points fall steadily, from 8.5 hours of sleep at 1 hour of screen time to 5 hours at 7: about $\\frac{3.5}{6} \\approx 0.6$ hours (35 minutes) less sleep per extra hour of screen time. That is a **negative, linear, strong** pattern. *Why this step:* describe the bulk of the data first, then look for what does not fit." },
+        { text: "**The misfit.** The point $(3, 4)$ sits far below the others at $x = 3$ (its neighbour is $(3, 7.5)$). That is an **outlier**. *Why:* an outlier is judged against the pattern, not against the range of $y$; 4 hours is not the smallest $y$ in some absolute sense, but it is 3.5 hours below what the pattern predicts at $x = 3$." },
+        { text: "**Report, do not delete.** \"Strong negative linear association between screen time and sleep, with one outlier at $(3, 4)$\". Perhaps that student was ill or had an exam that night; find out before removing the point." },
+      ],
+      answer: "Strong negative linear association, with one outlier at $(3, 4)$",
     },
     {
       type: "quiz",
@@ -169,10 +190,11 @@ const lesson01: LessonSeed = {
       ],
       hint: "Read the table left to right: what happens to rent at each step?",
     },
+    { type: "heading", text: "Which variable goes on which axis?" },
     {
       type: "text",
       content:
-        "**Which variable goes on which axis?** Ask which one you would use to *predict* the other, or which one comes first in time. Rainfall explains crop yield, not the other way round, so rainfall is $x$. Sometimes neither variable explains the other (height and arm span of the same person); then the choice is arbitrary, and you are only describing association.",
+        "Ask which one you would use to *predict* the other, or which one comes first in time. Rainfall explains crop yield, not the other way round, so rainfall is $x$. Sometimes neither variable explains the other (height and arm span of the same person); then the choice is arbitrary, and you are only describing association.",
     },
     {
       type: "quiz",
@@ -196,6 +218,7 @@ const lesson01: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "Relationships that are not straight" },
     {
       type: "text",
       content:
@@ -248,6 +271,7 @@ const lesson01: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "Classifying associations in words" },
     {
       type: "quiz",
       id: "st4-1-q3",
@@ -292,25 +316,27 @@ const lesson01: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (exam-style, CBSE Class 11 Economics): classify the association.** State whether each pair shows positive, negative or no (linear) correlation, with a reason.",
-    },
-    {
-      type: "table",
-      headers: ["Pair", "Verdict", "Why"],
-      rows: [
-        ["(a) Price of a good and quantity demanded", "Negative", "Law of demand: as price rises, buyers purchase less"],
-        ["(b) Family income and expenditure on food", "Positive", "Richer families spend more in rupees, even if a smaller share"],
-        ["(c) Temperature and sales of woollen clothes", "Negative", "Warmer days mean fewer sweaters sold"],
-        ["(d) Height of students and their marks in Maths", "No correlation", "No plausible link; tall and short students score across the range"],
-        ["(e) Speed of a car and its fuel efficiency over 20 to 120 km/h", "No single direction (curved)", "Efficiency rises then falls, a hump shape, so linear correlation is weak even though the relationship is real"],
+      type: "worked-example",
+      id: "st4-1-we3",
+      title: "Worked example 3 (exam-style, CBSE Class 11 Economics): classify the association",
+      problem:
+        "State whether each pair shows positive, negative or no (linear) correlation, with a reason.\n\n(a) Price of a good and quantity demanded\n(b) Family income and expenditure on food\n(c) Temperature and sales of woollen clothes\n(d) Height of students and their marks in Maths\n(e) Speed of a car and its fuel efficiency over 20 to 120 km/h",
+      steps: [
+        {
+          table: {
+            headers: ["Pair", "Verdict", "Why"],
+            rows: [
+              ["(a) Price of a good and quantity demanded", "Negative", "Law of demand: as price rises, buyers purchase less"],
+              ["(b) Family income and expenditure on food", "Positive", "Richer families spend more in rupees, even if a smaller share"],
+              ["(c) Temperature and sales of woollen clothes", "Negative", "Warmer days mean fewer sweaters sold"],
+              ["(d) Height of students and their marks in Maths", "No correlation", "No plausible link; tall and short students score across the range"],
+              ["(e) Speed of a car and its fuel efficiency over 20 to 120 km/h", "No single direction (curved)", "Efficiency rises then falls, a hump shape, so linear correlation is weak even though the relationship is real"],
+            ],
+          },
+        },
+        { text: "**How to answer.** For each pair, *imagine the scatter plot*: pick a low and a high value of $x$ and ask which way $y$ moves. *Why this step:* it turns a vague word question into a concrete picture. Part (e) is the trap: \"no correlation\" is wrong there, because the variables *are* related; the honest answer is \"curved relationship, so $r$ would be close to zero\"." },
       ],
-    },
-    {
-      type: "text",
-      content:
-        "**How to answer.** For each pair, *imagine the scatter plot*: pick a low and a high value of $x$ and ask which way $y$ moves. *Why this step:* it turns a vague word question into a concrete picture. Part (e) is the trap: \"no correlation\" is wrong there, because the variables *are* related; the honest answer is \"curved relationship, so $r$ would be close to zero\".",
+      answer: "(a) negative, (b) positive, (c) negative, (d) no correlation, (e) curved, so $r$ close to zero",
     },
     {
       type: "quiz",
@@ -410,37 +436,38 @@ const lesson02: LessonSeed = {
       content:
         "Notice the family resemblance: $\\operatorname{Cov}(x, x) = \\frac{1}{n}\\sum (x_i - \\bar{x})^2 = \\sigma_x^2$. Variance is just the covariance of a variable with itself, and the rectangles become squares.",
     },
+    { type: "heading", text: "Covariance from the definition" },
     {
-      type: "text",
-      content:
-        "**Worked example 1: covariance from the definition.** Take the five points in the interactive: $(1, 2), (2, 4), (3, 3), (4, 6), (5, 5)$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: means.** $\\bar{x} = \\frac{15}{5} = 3$, $\\bar{y} = \\frac{20}{5} = 4$.\n\n**Step 2: deviations and their products.**",
-    },
-    {
-      type: "table",
-      headers: ["$x$", "$y$", "$x - \\bar{x}$", "$y - \\bar{y}$", "$(x - \\bar{x})(y - \\bar{y})$"],
-      rows: [
-        ["1", "2", "$-2$", "$-2$", "$4$"],
-        ["2", "4", "$-1$", "$0$", "$0$"],
-        ["3", "3", "$0$", "$-1$", "$0$"],
-        ["4", "6", "$1$", "$2$", "$2$"],
-        ["5", "5", "$2$", "$1$", "$2$"],
-        ["", "", "", "Total", "$8$"],
+      type: "worked-example",
+      id: "st4-2-we1",
+      title: "Worked example 1: covariance from the definition",
+      problem:
+        "Take the five points in the interactive: $(1, 2), (2, 4), (3, 3), (4, 6), (5, 5)$.",
+      steps: [
+        { text: "**Means.** $\\bar{x} = \\frac{15}{5} = 3$, $\\bar{y} = \\frac{20}{5} = 4$." },
+        {
+          text: "**Deviations and their products.**",
+          table: {
+            headers: ["$x$", "$y$", "$x - \\bar{x}$", "$y - \\bar{y}$", "$(x - \\bar{x})(y - \\bar{y})$"],
+            rows: [
+              ["1", "2", "$-2$", "$-2$", "$4$"],
+              ["2", "4", "$-1$", "$0$", "$0$"],
+              ["3", "3", "$0$", "$-1$", "$0$"],
+              ["4", "6", "$1$", "$2$", "$2$"],
+              ["5", "5", "$2$", "$1$", "$2$"],
+              ["", "", "", "Total", "$8$"],
+            ],
+          },
+        },
+        { text: "**Average.** $\\operatorname{Cov}(x, y) = \\frac{8}{5} = 1.6$. Positive, as the rising cloud suggested. Two points sit on a mean line, so their rectangles have zero area and contribute nothing." },
       ],
+      answer: "$\\operatorname{Cov}(x, y) = 1.6$",
     },
+    { type: "heading", text: "A shortcut, derived" },
     {
       type: "text",
       content:
-        "**Step 3: average.** $\\operatorname{Cov}(x, y) = \\frac{8}{5} = 1.6$. Positive, as the rising cloud suggested. Two points sit on a mean line, so their rectangles have zero area and contribute nothing.",
-    },
-    {
-      type: "text",
-      content:
-        "**A shortcut, derived.** Deviations get messy when the means are not whole numbers. Expand the product:",
+        "Deviations get messy when the means are not whole numbers. Expand the product:",
     },
     {
       type: "math",
@@ -457,36 +484,72 @@ const lesson02: LessonSeed = {
         "\"Mean of the products minus product of the means\", the exact twin of $\\sigma^2 = \\frac{\\sum x^2}{n} - \\bar{x}^2$. Check it on the five points: $\\sum xy = 2 + 8 + 9 + 24 + 25 = 68$, so $\\operatorname{Cov} = \\frac{68}{5} - 3 \\times 4 = 13.6 - 12 = 1.6$. Same answer.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2: a negative covariance with the shortcut.** Pairs $(2, 10), (4, 8), (6, 6), (8, 2)$.\n\n**Step 1.** $\\bar{x} = \\frac{20}{4} = 5$, $\\bar{y} = \\frac{26}{4} = 6.5$.\n\n**Step 2.** $\\sum xy = 20 + 32 + 36 + 16 = 104$, so $\\frac{\\sum xy}{n} = 26$.\n\n**Step 3.** $\\operatorname{Cov} = 26 - 5 \\times 6.5 = 26 - 32.5 = -6.5$. Negative: as $x$ rises, $y$ falls.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 (application): rainfall and crop yield.** Over five seasons a farmer records monsoon rainfall $x$ (in tens of cm, so $10$ means 100 cm) and wheat yield $y$ (quintals per acre).",
-    },
-    {
-      type: "table",
-      headers: ["$x$", "$y$", "$x - 14$", "$y - 24$", "Product"],
-      rows: [
-        ["10", "20", "$-4$", "$-4$", "$16$"],
-        ["12", "23", "$-2$", "$-1$", "$2$"],
-        ["14", "22", "$0$", "$-2$", "$0$"],
-        ["16", "27", "$2$", "$3$", "$6$"],
-        ["18", "28", "$4$", "$4$", "$16$"],
-        ["", "", "", "Total", "$40$"],
+      type: "worked-example",
+      id: "st4-2-we2",
+      title: "Worked example 2: covariance with the shortcut",
+      problem:
+        "Pairs $(2, 10), (4, 8), (6, 6), (8, 2)$. Find the covariance using the shortcut.",
+      steps: [
+        { text: "$\\bar{x} = \\frac{20}{4} = 5$, $\\bar{y} = \\frac{26}{4} = 6.5$." },
+        { text: "$\\sum xy = 20 + 32 + 36 + 16 = 104$, so $\\frac{\\sum xy}{n} = 26$." },
+        { text: "$\\operatorname{Cov} = 26 - 5 \\times 6.5 = 26 - 32.5 = -6.5$. Negative: as $x$ rises, $y$ falls." },
       ],
+      answer: "$\\operatorname{Cov} = -6.5$",
+    },
+    {
+      type: "worked-example",
+      id: "st4-2-we3",
+      title: "Worked example 3 (application): rainfall and crop yield",
+      problem:
+        "Over five seasons a farmer records monsoon rainfall $x$ (in tens of cm, so $10$ means 100 cm) and wheat yield $y$ (quintals per acre). Find the covariance.",
+      problemTable: {
+        headers: ["$x$", "$y$"],
+        rows: [
+          ["10", "20"],
+          ["12", "23"],
+          ["14", "22"],
+          ["16", "27"],
+          ["18", "28"],
+        ],
+      },
+      steps: [
+        { text: "**Means.** $\\bar{x} = \\frac{70}{5} = 14$, $\\bar{y} = \\frac{120}{5} = 24$. *Why this step:* every rectangle is measured from the point of means, so they come first." },
+        {
+          text: "**Co-deviations.** From the table the products sum to $40$. Notice that no product is negative: every season is either above average in both or below average in both (or on a mean line). *Why:* reading the signs tells you the answer's sign before any division.",
+          table: {
+            headers: ["$x$", "$y$", "$x - 14$", "$y - 24$", "Product"],
+            rows: [
+              ["10", "20", "$-4$", "$-4$", "$16$"],
+              ["12", "23", "$-2$", "$-1$", "$2$"],
+              ["14", "22", "$0$", "$-2$", "$0$"],
+              ["16", "27", "$2$", "$3$", "$6$"],
+              ["18", "28", "$4$", "$4$", "$16$"],
+              ["", "", "", "Total", "$40$"],
+            ],
+          },
+        },
+        { text: "**Average.** $\\operatorname{Cov} = \\frac{40}{5} = 8$, in units of (tens of cm) × (quintals per acre)." },
+        { text: "**Check with the shortcut.** $\\sum xy = 200 + 276 + 308 + 432 + 504 = 1720$, so $\\operatorname{Cov} = \\frac{1720}{5} - 14 \\times 24 = 344 - 336 = 8$. Both routes agree." },
+      ],
+      answer: "$\\operatorname{Cov} = 8$",
+    },
+    {
+      type: "worked-example",
+      id: "st4-2-we4",
+      title: "Worked example 4 (exam-style): a miscopied pair",
+      problem:
+        "For 10 pairs, $\\sum x = 60$, $\\sum y = 40$, $\\sum xy = 260$. Later it is found that the pair $(8, 6)$ was copied as $(6, 8)$. Find the correct covariance.",
+      steps: [
+        { text: "**The wrong value (for comparison).** $\\bar{x} = 6$, $\\bar{y} = 4$, $\\operatorname{Cov} = 26 - 24 = 2$." },
+        { text: "**Repair each sum.** Remove the wrong pair and add the right one.\n- $\\sum x = 60 - 6 + 8 = 62$\n- $\\sum y = 40 - 8 + 6 = 38$\n- $\\sum xy = 260 - 48 + 48 = 260$\n\n*Why this step:* sums are easy to repair one term at a time; means and covariances are not." },
+        { text: "**Recompute.** $\\bar{x} = 6.2$, $\\bar{y} = 3.8$, so $\\operatorname{Cov} = \\frac{260}{10} - 6.2 \\times 3.8 = 26 - 23.56 = 2.44$." },
+      ],
+      answer: "$\\operatorname{Cov} = 2.44$ (not 2)",
     },
     {
       type: "text",
       content:
-        "**Step 1: means.** $\\bar{x} = \\frac{70}{5} = 14$, $\\bar{y} = \\frac{120}{5} = 24$. *Why this step:* every rectangle is measured from the point of means, so they come first.\n\n**Step 2: co-deviations.** From the table the products sum to $40$. Notice that no product is negative: every season is either above average in both or below average in both (or on a mean line). *Why:* reading the signs tells you the answer's sign before any division.\n\n**Step 3: average.** $\\operatorname{Cov} = \\frac{40}{5} = 8$, in units of (tens of cm) × (quintals per acre).\n\n**Check with the shortcut.** $\\sum xy = 200 + 276 + 308 + 432 + 504 = 1720$, so $\\operatorname{Cov} = \\frac{1720}{5} - 14 \\times 24 = 344 - 336 = 8$. Both routes agree.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (exam-style): a miscopied pair.** For 10 pairs, $\\sum x = 60$, $\\sum y = 40$, $\\sum xy = 260$. Later it is found that the pair $(8, 6)$ was copied as $(6, 8)$. Find the correct covariance.\n\n**Step 1: the wrong value (for comparison).** $\\bar{x} = 6$, $\\bar{y} = 4$, $\\operatorname{Cov} = 26 - 24 = 2$.\n\n**Step 2: repair each sum.** Remove the wrong pair and add the right one.\n- $\\sum x = 60 - 6 + 8 = 62$\n- $\\sum y = 40 - 8 + 6 = 38$\n- $\\sum xy = 260 - 48 + 48 = 260$\n\n*Why this step:* sums are easy to repair one term at a time; means and covariances are not.\n\n**Step 3: recompute.** $\\bar{x} = 6.2$, $\\bar{y} = 3.8$, so $\\operatorname{Cov} = \\frac{260}{10} - 6.2 \\times 3.8 = 26 - 23.56 = 2.44$.\n\nThe trap: $\\sum xy$ did not change ($6 \\times 8 = 8 \\times 6$), so it is tempting to say the covariance did not change either. But the *means* moved, and so did the answer.",
+        "The trap: $\\sum xy$ did not change ($6 \\times 8 = 8 \\times 6$), so it is tempting to say the covariance did not change either. But the *means* moved, and so did the answer.",
     },
     {
       type: "quiz",
@@ -564,10 +627,11 @@ const lesson02: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "The flaw in covariance: units" },
     {
       type: "text",
       content:
-        "**The flaw in covariance: units.** Covariance carries the units of $x$ times the units of $y$. Measure the heights of the same people in centimetres instead of metres and every $x - \\bar{x}$ is 100 times bigger, so every rectangle and the covariance are 100 times bigger. The people have not changed at all.",
+        "Covariance carries the units of $x$ times the units of $y$. Measure the heights of the same people in centimetres instead of metres and every $x - \\bar{x}$ is 100 times bigger, so every rectangle and the covariance are 100 times bigger. The people have not changed at all.",
     },
     {
       type: "math",
@@ -579,9 +643,17 @@ const lesson02: LessonSeed = {
         "Why: adding $b$ shifts every $x$ and $\\bar{x}$ by the same amount, so deviations do not change; multiplying by $a$ multiplies every deviation by $a$. The same happens on the $y$ side. Shifts do nothing and scalings multiply.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (exam-style): covariance after a change of origin and scale.** $\\operatorname{Cov}(x, y) = -6$. Find $\\operatorname{Cov}(u, v)$ where $u = 3x - 2$ and $v = \\frac{5 - y}{2}$.\n\n**Step 1: write each new variable as (multiplier) × old + (constant).** $u = 3x + (-2)$, so $a = 3$. $v = -\\frac{1}{2}y + \\frac{5}{2}$, so $c = -\\frac{1}{2}$. *Why this step:* only the multipliers matter; the constants are shifts, which leave every deviation unchanged.\n\n**Step 2: multiply.** $\\operatorname{Cov}(u, v) = ac\\,\\operatorname{Cov}(x, y) = 3 \\times \\left(-\\frac{1}{2}\\right) \\times (-6) = 9$.\n\n**Step 3: sanity check the sign.** $x$ and $y$ move in opposite directions. $u$ moves with $x$, but $v$ moves *against* $y$, so $u$ and $v$ move together: positive covariance, as found.",
+      type: "worked-example",
+      id: "st4-2-we5",
+      title: "Worked example 5 (exam-style): covariance after a change of origin and scale",
+      problem:
+        "$\\operatorname{Cov}(x, y) = -6$. Find $\\operatorname{Cov}(u, v)$ where $u = 3x - 2$ and $v = \\frac{5 - y}{2}$.",
+      steps: [
+        { text: "**Write each new variable as (multiplier) × old + (constant).** $u = 3x + (-2)$, so $a = 3$. $v = -\\frac{1}{2}y + \\frac{5}{2}$, so $c = -\\frac{1}{2}$. *Why this step:* only the multipliers matter; the constants are shifts, which leave every deviation unchanged." },
+        { text: "**Multiply.** $\\operatorname{Cov}(u, v) = ac\\,\\operatorname{Cov}(x, y) = 3 \\times \\left(-\\frac{1}{2}\\right) \\times (-6) = 9$." },
+        { text: "**Sanity check the sign.** $x$ and $y$ move in opposite directions. $u$ moves with $x$, but $v$ moves *against* $y$, so $u$ and $v$ move together: positive covariance, as found." },
+      ],
+      answer: "$\\operatorname{Cov}(u, v) = 9$",
     },
     {
       type: "quiz",
@@ -661,6 +733,7 @@ const lesson02: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st4-2-q5",
@@ -751,36 +824,45 @@ const lesson03: LessonSeed = {
         ["$r = -1$", "Every point exactly on a falling straight line"],
       ],
     },
+    { type: "heading", text: "Computing $r$ step by step" },
     {
-      type: "text",
-      content:
-        "**Worked example 1: r from a table, in steps.** The five points $(1, 2), (2, 4), (3, 3), (4, 6), (5, 5)$ from 4.2.",
-    },
-    {
-      type: "table",
-      headers: ["$x$", "$y$", "$d_x = x - 3$", "$d_y = y - 4$", "$d_x^2$", "$d_y^2$", "$d_x d_y$"],
-      rows: [
-        ["1", "2", "$-2$", "$-2$", "4", "4", "4"],
-        ["2", "4", "$-1$", "$0$", "1", "0", "0"],
-        ["3", "3", "$0$", "$-1$", "0", "1", "0"],
-        ["4", "6", "$1$", "$2$", "1", "4", "2"],
-        ["5", "5", "$2$", "$1$", "4", "1", "2"],
-        ["", "", "", "Totals", "10", "10", "8"],
+      type: "worked-example",
+      id: "st4-3-we1",
+      title: "Worked example 1: r from a table, in steps",
+      problem:
+        "The five points $(1, 2), (2, 4), (3, 3), (4, 6), (5, 5)$ from 4.2. Find Pearson's $r$.",
+      steps: [
+        {
+          table: {
+            headers: ["$x$", "$y$", "$d_x = x - 3$", "$d_y = y - 4$", "$d_x^2$", "$d_y^2$", "$d_x d_y$"],
+            rows: [
+              ["1", "2", "$-2$", "$-2$", "4", "4", "4"],
+              ["2", "4", "$-1$", "$0$", "1", "0", "0"],
+              ["3", "3", "$0$", "$-1$", "0", "1", "0"],
+              ["4", "6", "$1$", "$2$", "1", "4", "2"],
+              ["5", "5", "$2$", "$1$", "4", "1", "2"],
+              ["", "", "", "Totals", "10", "10", "8"],
+            ],
+          },
+          latex: "r = \\frac{\\sum d_x d_y}{\\sqrt{\\sum d_x^2}\\sqrt{\\sum d_y^2}} = \\frac{8}{\\sqrt{10}\\,\\sqrt{10}} = \\frac{8}{10} = 0.8",
+        },
+        { text: "Equivalently $\\sigma_x^2 = \\sigma_y^2 = \\frac{10}{5} = 2$ and $\\operatorname{Cov} = 1.6$, so $r = \\frac{1.6}{\\sqrt{2}\\sqrt{2}} = 0.8$." },
       ],
+      answer: "$r = 0.8$",
     },
     {
-      type: "math",
-      latex: "r = \\frac{\\sum d_x d_y}{\\sqrt{\\sum d_x^2}\\sqrt{\\sum d_y^2}} = \\frac{8}{\\sqrt{10}\\,\\sqrt{10}} = \\frac{8}{10} = 0.8",
-    },
-    {
-      type: "text",
-      content:
-        "Equivalently $\\sigma_x^2 = \\sigma_y^2 = \\frac{10}{5} = 2$ and $\\operatorname{Cov} = 1.6$, so $r = \\frac{1.6}{\\sqrt{2}\\sqrt{2}} = 0.8$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2: r from sums.** For $n = 10$ pairs: $\\sum x = 50$, $\\sum y = 80$, $\\sum x^2 = 290$, $\\sum y^2 = 680$, $\\sum xy = 430$.\n\n**Step 1: means.** $\\bar{x} = 5$, $\\bar{y} = 8$.\n\n**Step 2: variances.** $\\sigma_x^2 = \\frac{290}{10} - 25 = 4$, so $\\sigma_x = 2$. $\\sigma_y^2 = \\frac{680}{10} - 64 = 4$, so $\\sigma_y = 2$.\n\n**Step 3: covariance.** $\\operatorname{Cov} = \\frac{430}{10} - 5 \\times 8 = 43 - 40 = 3$.\n\n**Step 4.** $r = \\frac{3}{2 \\times 2} = 0.75$.",
+      type: "worked-example",
+      id: "st4-3-we2",
+      title: "Worked example 2: r from sums",
+      problem:
+        "For $n = 10$ pairs: $\\sum x = 50$, $\\sum y = 80$, $\\sum x^2 = 290$, $\\sum y^2 = 680$, $\\sum xy = 430$. Find $r$.",
+      steps: [
+        { text: "**Means.** $\\bar{x} = 5$, $\\bar{y} = 8$." },
+        { text: "**Variances.** $\\sigma_x^2 = \\frac{290}{10} - 25 = 4$, so $\\sigma_x = 2$. $\\sigma_y^2 = \\frac{680}{10} - 64 = 4$, so $\\sigma_y = 2$." },
+        { text: "**Covariance.** $\\operatorname{Cov} = \\frac{430}{10} - 5 \\times 8 = 43 - 40 = 3$." },
+        { text: "$r = \\frac{3}{2 \\times 2} = 0.75$." },
+      ],
+      answer: "$r = 0.75$",
     },
     {
       type: "quiz",
@@ -809,38 +891,45 @@ const lesson03: LessonSeed = {
       ],
       hint: "Find $\\bar{x}$, $\\bar{y}$, then $\\sigma_x^2 = \\frac{\\sum x^2}{n} - \\bar{x}^2$, and so on.",
     },
+    { type: "heading", text: "The step-deviation method" },
     {
-      type: "text",
-      content:
-        "**Worked example 3: the step-deviation method.** Board exams love realistic data with awkward numbers. Heights $x$ (cm) and weights $y$ (kg) of six students:",
-    },
-    {
-      type: "table",
-      headers: ["$x$ (cm)", "$y$ (kg)", "$u = \\frac{x - 165}{5}$", "$v = \\frac{y - 60}{2}$", "$u^2$", "$v^2$", "$uv$"],
-      rows: [
-        ["155", "52", "$-2$", "$-4$", "4", "16", "8"],
-        ["160", "54", "$-1$", "$-3$", "1", "9", "3"],
-        ["165", "62", "$0$", "$1$", "0", "1", "0"],
-        ["165", "64", "$0$", "$2$", "0", "4", "0"],
-        ["170", "62", "$1$", "$1$", "1", "1", "1"],
-        ["175", "66", "$2$", "$3$", "4", "9", "6"],
-        ["", "Totals", "$0$", "$0$", "10", "40", "18"],
+      type: "worked-example",
+      id: "st4-3-we3",
+      title: "Worked example 3: the step-deviation method",
+      problem:
+        "Board exams love realistic data with awkward numbers. Heights $x$ (cm) and weights $y$ (kg) of six students. Find $r$ by the step-deviation method.",
+      problemTable: {
+        headers: ["$x$ (cm)", "$y$ (kg)"],
+        rows: [
+          ["155", "52"],
+          ["160", "54"],
+          ["165", "62"],
+          ["165", "64"],
+          ["170", "62"],
+          ["175", "66"],
+        ],
+      },
+      steps: [
+        {
+          text: "**Choose an assumed mean and a step.** Take $A = 165$, $h = 5$ for heights and $B = 60$, $k = 2$ for weights. The new numbers $u, v$ are small integers.",
+          table: {
+            headers: ["$x$ (cm)", "$y$ (kg)", "$u = \\frac{x - 165}{5}$", "$v = \\frac{y - 60}{2}$", "$u^2$", "$v^2$", "$uv$"],
+            rows: [
+              ["155", "52", "$-2$", "$-4$", "4", "16", "8"],
+              ["160", "54", "$-1$", "$-3$", "1", "9", "3"],
+              ["165", "62", "$0$", "$1$", "0", "1", "0"],
+              ["165", "64", "$0$", "$2$", "0", "4", "0"],
+              ["170", "62", "$1$", "$1$", "1", "1", "1"],
+              ["175", "66", "$2$", "$3$", "4", "9", "6"],
+              ["", "Totals", "$0$", "$0$", "10", "40", "18"],
+            ],
+          },
+        },
+        { text: "**The sums.** From the table, $\\sum u = 0$, $\\sum v = 0$, $\\sum u^2 = 10$, $\\sum v^2 = 40$, $\\sum uv = 18$, $n = 6$." },
+        { text: "**The sums formula.** Multiply the covariance and variances by $n^2$ to clear fractions:", latex: "r_{uv} = \\frac{n\\sum uv - \\sum u \\sum v}{\\sqrt{n\\sum u^2 - \\left(\\sum u\\right)^2}\\,\\sqrt{n\\sum v^2 - \\left(\\sum v\\right)^2}} = \\frac{6(18) - 0}{\\sqrt{60}\\,\\sqrt{240}} = \\frac{108}{120} = 0.9" },
+        { text: "**Go back to x and y.** $u$ and $v$ are shifts and positive rescalings of $x$ and $y$, so by Property 2 below, $r_{xy} = r_{uv} = 0.9$. There is nothing to convert back, which is the whole point of the method. (Here the assumed means happen to be the true means, so $\\sum u = \\sum v = 0$. They need not be; the formula handles any $A$ and $B$.)" },
       ],
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: choose an assumed mean and a step.** Take $A = 165$, $h = 5$ for heights and $B = 60$, $k = 2$ for weights. The new numbers $u, v$ are small integers.\n\n**Step 2: the sums.** From the table, $\\sum u = 0$, $\\sum v = 0$, $\\sum u^2 = 10$, $\\sum v^2 = 40$, $\\sum uv = 18$, $n = 6$.\n\n**Step 3: the sums formula.** Multiply the covariance and variances by $n^2$ to clear fractions:",
-    },
-    {
-      type: "math",
-      latex:
-        "r_{uv} = \\frac{n\\sum uv - \\sum u \\sum v}{\\sqrt{n\\sum u^2 - \\left(\\sum u\\right)^2}\\,\\sqrt{n\\sum v^2 - \\left(\\sum v\\right)^2}} = \\frac{6(18) - 0}{\\sqrt{60}\\,\\sqrt{240}} = \\frac{108}{120} = 0.9",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4: go back to x and y.** $u$ and $v$ are shifts and positive rescalings of $x$ and $y$, so by Property 2 below, $r_{xy} = r_{uv} = 0.9$. There is nothing to convert back, which is the whole point of the method. (Here the assumed means happen to be the true means, so $\\sum u = \\sum v = 0$. They need not be; the formula handles any $A$ and $B$.)",
+      answer: "$r = 0.9$",
     },
     {
       type: "quiz",
@@ -865,41 +954,57 @@ const lesson03: LessonSeed = {
       ],
       hint: "Use $r = \\frac{n\\sum uv - \\sum u\\sum v}{\\sqrt{n\\sum u^2 - (\\sum u)^2}\\sqrt{n\\sum v^2 - (\\sum v)^2}}$ on $u, v$.",
     },
+    { type: "heading", text: "Interpreting $r$ and working backwards" },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (application): advertising and sales.** A shop tracks monthly advertising spend $x$ (₹ thousand) and sales $y$ (₹ lakh) for five months. Is the link strong?",
-    },
-    {
-      type: "table",
-      headers: ["$x$", "$y$", "$d_x = x - 6$", "$d_y = y - 7$", "$d_x^2$", "$d_y^2$", "$d_x d_y$"],
-      rows: [
-        ["2", "5", "$-4$", "$-2$", "16", "4", "8"],
-        ["4", "7", "$-2$", "$0$", "4", "0", "0"],
-        ["6", "6", "$0$", "$-1$", "0", "1", "0"],
-        ["8", "8", "$2$", "$1$", "4", "1", "2"],
-        ["10", "9", "$4$", "$2$", "16", "4", "8"],
-        ["", "", "", "Totals", "40", "10", "18"],
+      type: "worked-example",
+      id: "st4-3-we4",
+      title: "Worked example 4 (application): advertising and sales",
+      problem:
+        "A shop tracks monthly advertising spend $x$ (₹ thousand) and sales $y$ (₹ lakh) for five months. Is the link strong?",
+      problemTable: {
+        headers: ["$x$", "$y$"],
+        rows: [
+          ["2", "5"],
+          ["4", "7"],
+          ["6", "6"],
+          ["8", "8"],
+          ["10", "9"],
+        ],
+      },
+      steps: [
+        { text: "**Means.** $\\bar{x} = \\frac{30}{5} = 6$, $\\bar{y} = \\frac{35}{5} = 7$. Both are whole numbers, so the deviation method is the quickest. *Why this step:* when the means are integers, deviations stay small and there is no need for $\\sum x^2$ or $\\sum xy$." },
+        {
+          text: "**The three column totals.** $\\sum d_x^2 = 40$, $\\sum d_y^2 = 10$, $\\sum d_x d_y = 18$.",
+          table: {
+            headers: ["$x$", "$y$", "$d_x = x - 6$", "$d_y = y - 7$", "$d_x^2$", "$d_y^2$", "$d_x d_y$"],
+            rows: [
+              ["2", "5", "$-4$", "$-2$", "16", "4", "8"],
+              ["4", "7", "$-2$", "$0$", "4", "0", "0"],
+              ["6", "6", "$0$", "$-1$", "0", "1", "0"],
+              ["8", "8", "$2$", "$1$", "4", "1", "2"],
+              ["10", "9", "$4$", "$2$", "16", "4", "8"],
+              ["", "", "", "Totals", "40", "10", "18"],
+            ],
+          },
+        },
+        { text: "**Combine.**", latex: "r = \\frac{18}{\\sqrt{40}\\,\\sqrt{10}} = \\frac{18}{\\sqrt{400}} = \\frac{18}{20} = 0.9" },
+        { text: "**Interpret.** A strong positive linear association: months with more advertising had clearly higher sales. *Why this step:* a number without a sentence earns no marks. Note what $r$ does **not** say: it does not say advertising *caused* the sales (perhaps the shop advertised more during festival months, when sales rise anyway). That is the subject of 4.4." },
       ],
+      answer: "$r = 0.9$: a strong positive linear association",
     },
     {
-      type: "text",
-      content:
-        "**Step 1: means.** $\\bar{x} = \\frac{30}{5} = 6$, $\\bar{y} = \\frac{35}{5} = 7$. Both are whole numbers, so the deviation method is the quickest. *Why this step:* when the means are integers, deviations stay small and there is no need for $\\sum x^2$ or $\\sum xy$.\n\n**Step 2: the three column totals.** $\\sum d_x^2 = 40$, $\\sum d_y^2 = 10$, $\\sum d_x d_y = 18$.\n\n**Step 3: combine.**",
-    },
-    {
-      type: "math",
-      latex: "r = \\frac{18}{\\sqrt{40}\\,\\sqrt{10}} = \\frac{18}{\\sqrt{400}} = \\frac{18}{20} = 0.9",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4: interpret.** A strong positive linear association: months with more advertising had clearly higher sales. *Why this step:* a number without a sentence earns no marks. Note what $r$ does **not** say: it does not say advertising *caused* the sales (perhaps the shop advertised more during festival months, when sales rise anyway). That is the subject of 4.4.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (exam-style, CBSE): working backwards from r.** The coefficient of correlation between $x$ and $y$ is $0.4$, their covariance is $6$, and the variance of $x$ is $9$. Find the standard deviation of $y$.\n\n**Step 1: write the definition and fill in what is known.** $r = \\frac{\\operatorname{Cov}}{\\sigma_x\\sigma_y}$, so $0.4 = \\frac{6}{\\sigma_x \\sigma_y}$.\n\n**Step 2: variance to SD.** $\\sigma_x = \\sqrt{9} = 3$. *Why this step:* the formula uses standard deviations, and the question deliberately gives a variance. This is the most common slip.\n\n**Step 3: solve.** $0.4 = \\frac{6}{3\\sigma_y}$ gives $\\sigma_y = \\frac{6}{1.2} = 5$.\n\n**Step 4: check.** $r = \\frac{6}{3 \\times 5} = 0.4$. ✓",
+      type: "worked-example",
+      id: "st4-3-we5",
+      title: "Worked example 5 (exam-style, CBSE): working backwards from r",
+      problem:
+        "The coefficient of correlation between $x$ and $y$ is $0.4$, their covariance is $6$, and the variance of $x$ is $9$. Find the standard deviation of $y$.",
+      steps: [
+        { text: "**Write the definition and fill in what is known.** $r = \\frac{\\operatorname{Cov}}{\\sigma_x\\sigma_y}$, so $0.4 = \\frac{6}{\\sigma_x \\sigma_y}$." },
+        { text: "**Variance to SD.** $\\sigma_x = \\sqrt{9} = 3$. *Why this step:* the formula uses standard deviations, and the question deliberately gives a variance. This is the most common slip." },
+        { text: "**Solve.** $0.4 = \\frac{6}{3\\sigma_y}$ gives $\\sigma_y = \\frac{6}{1.2} = 5$." },
+        { text: "**Check.** $r = \\frac{6}{3 \\times 5} = 0.4$. ✓" },
+      ],
+      answer: "$\\sigma_y = 5$",
     },
     {
       type: "quiz",
@@ -955,6 +1060,7 @@ const lesson03: LessonSeed = {
       ],
       hint: "Convert the variance of $x$ to a standard deviation first.",
     },
+    { type: "heading", text: "Why $r$ lies between $-1$ and $1$" },
     {
       type: "text",
       content:
@@ -1008,6 +1114,7 @@ const lesson03: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "What $r$ does not tell you" },
     {
       type: "text",
       content:
@@ -1082,6 +1189,7 @@ const lesson03: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st4-3-q5",
@@ -1139,6 +1247,7 @@ const lesson04: LessonSeed = {
       content:
         "A variable not included in the analysis that influences both $x$ and $y$, creating an association between them. Temperature is the lurking variable behind ice cream and drowning.",
     },
+    { type: "heading", text: "Four explanations for a strong $r$" },
     {
       type: "text",
       content:
@@ -1155,9 +1264,16 @@ const lesson04: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Among children aged 5 to 12, shoe size and reading score have $r \\approx 0.8$. Would bigger shoes improve reading? No. Older children have bigger feet *and* more years of reading practice. If you compared only children of the *same age*, the correlation would largely disappear. Holding the lurking variable fixed is the standard test.",
+      type: "worked-example",
+      id: "st4-4-we1",
+      title: "Worked example 1",
+      problem:
+        "Among children aged 5 to 12, shoe size and reading score have $r \\approx 0.8$. Would bigger shoes improve reading?",
+      steps: [
+        { text: "No. Older children have bigger feet *and* more years of reading practice." },
+        { text: "If you compared only children of the *same age*, the correlation would largely disappear. Holding the lurking variable fixed is the standard test." },
+      ],
+      answer: "No: age is a lurking variable behind both",
     },
     {
       type: "text",
@@ -1172,9 +1288,19 @@ const lesson04: LessonSeed = {
         "Correlation measures how two variables move *together* in the data you have. It says nothing about *why*. Evidence for causation needs a controlled, randomised experiment, or at least careful control of plausible lurking variables, plus a believable mechanism.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (routine): the four-question checklist.** A survey finds that students who eat breakfast every day score higher in board exams ($r = 0.4$ between breakfast days per week and marks). A headline says \"Breakfast boosts marks\". Test the claim.\n\n**Q1. Is there a lurking variable?** Families with regular routines (and often more income) are more likely to serve breakfast *and* to support study habits, tuition and sleep. Plausible. *Why this step:* this is the most common alternative, so check it first.\n\n**Q2. Could causation run backwards?** Could high marks make a student eat breakfast? Unlikely here, but always ask; in other examples (police and crime) it is the answer.\n\n**Q3. Could it be coincidence?** With $r = 0.4$ from a large survey, chance alone is an unlikely explanation.\n\n**Q4. Was it an experiment?** No: nobody *assigned* breakfast. It is observational, so lurking variables were not controlled.\n\n**Verdict:** the data show an association, not an effect. A fair headline: \"Students who eat breakfast tend to score higher\". To test the causal claim, randomly assign a school breakfast programme to some classes and compare.",
+      type: "worked-example",
+      id: "st4-4-we3",
+      title: "Worked example 3 (routine): the four-question checklist",
+      problem:
+        "A survey finds that students who eat breakfast every day score higher in board exams ($r = 0.4$ between breakfast days per week and marks). A headline says \"Breakfast boosts marks\". Test the claim.",
+      steps: [
+        { text: "**Q1. Is there a lurking variable?** Families with regular routines (and often more income) are more likely to serve breakfast *and* to support study habits, tuition and sleep. Plausible. *Why this step:* this is the most common alternative, so check it first." },
+        { text: "**Q2. Could causation run backwards?** Could high marks make a student eat breakfast? Unlikely here, but always ask; in other examples (police and crime) it is the answer." },
+        { text: "**Q3. Could it be coincidence?** With $r = 0.4$ from a large survey, chance alone is an unlikely explanation." },
+        { text: "**Q4. Was it an experiment?** No: nobody *assigned* breakfast. It is observational, so lurking variables were not controlled." },
+        { text: "**Verdict:** the data show an association, not an effect. A fair headline: \"Students who eat breakfast tend to score higher\". To test the causal claim, randomly assign a school breakfast programme to some classes and compare." },
+      ],
+      answer: "The data show an association, not an effect: \"Students who eat breakfast tend to score higher\"",
     },
     {
       type: "quiz",
@@ -1243,33 +1369,37 @@ const lesson04: LessonSeed = {
       ],
       hint: "Ask which comes first: the low marks or the coaching.",
     },
+    { type: "heading", text: "Watching a lurking variable create $r$" },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (exam-style, numerical): watching a lurking variable create r.** Foot length $x$ (cm) and reading score $y$ for six children, three aged 6 and three aged 11:",
-    },
-    {
-      type: "table",
-      headers: ["Group", "Pairs $(x, y)$", "Means", "$r$ within group"],
-      rows: [
-        ["Age 6", "$(15, 21), (16, 18), (17, 21)$", "$\\bar{x} = 16$, $\\bar{y} = 20$", "$0$"],
-        ["Age 11", "$(21, 41), (22, 38), (23, 41)$", "$\\bar{x} = 22$, $\\bar{y} = 40$", "$0$"],
-        ["All six", "pooled", "$\\bar{x} = 19$, $\\bar{y} = 30$", "$\\approx 0.96$"],
+      type: "worked-example",
+      id: "st4-4-we4",
+      title: "Worked example 4 (exam-style, numerical): watching a lurking variable create r",
+      problem:
+        "Foot length $x$ (cm) and reading score $y$ for six children, three aged 6 and three aged 11. Find $r$ within each age group and for all six children together.",
+      problemTable: {
+        headers: ["Group", "Pairs $(x, y)$"],
+        rows: [
+          ["Age 6", "$(15, 21), (16, 18), (17, 21)$"],
+          ["Age 11", "$(21, 41), (22, 38), (23, 41)$"],
+        ],
+      },
+      steps: [
+        { text: "**Within each age group.** In the age-6 group the deviations are $d_x = -1, 0, 1$ and $d_y = 1, -2, 1$, so $\\sum d_x d_y = -1 + 0 + 1 = 0$ and $r = 0$. The age-11 group has the same pattern. *Why this step:* holding the lurking variable (age) fixed is the standard test; if the link vanishes, age was doing the work." },
+        { text: "**Pool all six.** $\\bar{x} = \\frac{114}{6} = 19$, $\\bar{y} = \\frac{180}{6} = 30$. Now $d_x = -4, -3, -2, 2, 3, 4$ and $d_y = -9, -12, -9, 11, 8, 11$." },
+        { text: "**The sums.** $\\sum d_x d_y = 36 + 36 + 18 + 22 + 24 + 44 = 180$, $\\sum d_x^2 = 58$, $\\sum d_y^2 = 612$.", latex: "r = \\frac{180}{\\sqrt{58}\\,\\sqrt{612}} = \\frac{180}{\\sqrt{35\\,496}} \\approx \\frac{180}{188.4} \\approx 0.96" },
+        {
+          text: "**Read the result.** Inside each age group, foot length tells you nothing about reading. The strong pooled $r$ comes entirely from the *gap between the groups*: older children sit top-right, younger ones bottom-left. Every point's rectangle is positive because of which group it belongs to. That is exactly what a lurking variable looks like in numbers.",
+          table: {
+            headers: ["Group", "Pairs $(x, y)$", "Means", "$r$ within group"],
+            rows: [
+              ["Age 6", "$(15, 21), (16, 18), (17, 21)$", "$\\bar{x} = 16$, $\\bar{y} = 20$", "$0$"],
+              ["Age 11", "$(21, 41), (22, 38), (23, 41)$", "$\\bar{x} = 22$, $\\bar{y} = 40$", "$0$"],
+              ["All six", "pooled", "$\\bar{x} = 19$, $\\bar{y} = 30$", "$\\approx 0.96$"],
+            ],
+          },
+        },
       ],
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: within each age group.** In the age-6 group the deviations are $d_x = -1, 0, 1$ and $d_y = 1, -2, 1$, so $\\sum d_x d_y = -1 + 0 + 1 = 0$ and $r = 0$. The age-11 group has the same pattern. *Why this step:* holding the lurking variable (age) fixed is the standard test; if the link vanishes, age was doing the work.\n\n**Step 2: pool all six.** $\\bar{x} = \\frac{114}{6} = 19$, $\\bar{y} = \\frac{180}{6} = 30$. Now $d_x = -4, -3, -2, 2, 3, 4$ and $d_y = -9, -12, -9, 11, 8, 11$.\n\n**Step 3: the sums.** $\\sum d_x d_y = 36 + 36 + 18 + 22 + 24 + 44 = 180$, $\\sum d_x^2 = 58$, $\\sum d_y^2 = 612$.",
-    },
-    {
-      type: "math",
-      latex: "r = \\frac{180}{\\sqrt{58}\\,\\sqrt{612}} = \\frac{180}{\\sqrt{35\\,496}} \\approx \\frac{180}{188.4} \\approx 0.96",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4: read the result.** Inside each age group, foot length tells you nothing about reading. The strong pooled $r$ comes entirely from the *gap between the groups*: older children sit top-right, younger ones bottom-left. Every point's rectangle is positive because of which group it belongs to. That is exactly what a lurking variable looks like in numbers.",
+      answer: "$r = 0$ within each age group, $r \\approx 0.96$ pooled",
     },
     {
       type: "quiz",
@@ -1293,10 +1423,11 @@ const lesson04: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "Influential points" },
     {
       type: "text",
       content:
-        "**Influential points.** Because $r$ is built from rectangle *areas*, a single point far from the rest makes a huge rectangle and can dominate the sum. Below, eight points form a shapeless cluster ($r \\approx 0.18$ on its own). One extra point at $(12, 12)$, far out along the diagonal, lifts $r$ to about $0.89$. Drag that point down to $(12, 1)$ and watch $r$ swing the other way.",
+        "Because $r$ is built from rectangle *areas*, a single point far from the rest makes a huge rectangle and can dominate the sum. Below, eight points form a shapeless cluster ($r \\approx 0.18$ on its own). One extra point at $(12, 12)$, far out along the diagonal, lifts $r$ to about $0.89$. Drag that point down to $(12, 1)$ and watch $r$ swing the other way.",
     },
     {
       type: "interactive",
@@ -1318,9 +1449,18 @@ const lesson04: LessonSeed = {
         "Recompute $r$ with and without the suspect point. If the conclusion changes, say so. Never silently delete a point just because it is inconvenient; find out *why* it is different.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (application): measuring one point's influence.** Four shops report staff count $x$ and daily customers $y$ (in hundreds): $(1, 2), (2, 1), (3, 3), (4, 2)$. A large supermarket $(10, 10)$ is then added.\n\n**Step 1: without the supermarket.** $\\bar{x} = 2.5$, $\\bar{y} = 2$. $d_x = -1.5, -0.5, 0.5, 1.5$ and $d_y = 0, -1, 1, 0$, so $\\sum d_x d_y = 0 + 0.5 + 0.5 + 0 = 1$, $\\sum d_x^2 = 5$, $\\sum d_y^2 = 2$. Then $r = \\frac{1}{\\sqrt{10}} \\approx 0.32$: weak.\n\n**Step 2: with it.** Now $n = 5$, $\\bar{x} = 4$, $\\bar{y} = 3.6$. $d_x = -3, -2, -1, 0, 6$ and $d_y = -1.6, -2.6, -0.6, -1.6, 6.4$.\n\n- $\\sum d_x d_y = 4.8 + 5.2 + 0.6 + 0 + 38.4 = 49$\n- $\\sum d_x^2 = 9 + 4 + 1 + 0 + 36 = 50$\n- $\\sum d_y^2 = 2.56 + 6.76 + 0.36 + 2.56 + 40.96 = 53.2$\n\nSo $r = \\frac{49}{\\sqrt{50 \\times 53.2}} = \\frac{49}{\\sqrt{2660}} \\approx \\frac{49}{51.6} \\approx 0.95$.\n\n**Step 3: find the culprit.** The supermarket's rectangle alone is $6 \\times 6.4 = 38.4$ out of $49$, about 78% of the total. *Why this step:* looking at each point's share of $\\sum d_x d_y$ shows *where* the correlation comes from. Here one point that belongs to a different kind of business manufactures most of it.\n\n**Step 4: report.** \"$r \\approx 0.32$ for the four small shops; $r \\approx 0.95$ when the supermarket is included, almost entirely because of that one store.\"",
+      type: "worked-example",
+      id: "st4-4-we5",
+      title: "Worked example 5 (application): measuring one point's influence",
+      problem:
+        "Four shops report staff count $x$ and daily customers $y$ (in hundreds): $(1, 2), (2, 1), (3, 3), (4, 2)$. A large supermarket $(10, 10)$ is then added. Find $r$ without and with the supermarket, and measure how much of $r$ that one store supplies.",
+      steps: [
+        { text: "**Without the supermarket.** $\\bar{x} = 2.5$, $\\bar{y} = 2$. $d_x = -1.5, -0.5, 0.5, 1.5$ and $d_y = 0, -1, 1, 0$, so $\\sum d_x d_y = 0 + 0.5 + 0.5 + 0 = 1$, $\\sum d_x^2 = 5$, $\\sum d_y^2 = 2$. Then $r = \\frac{1}{\\sqrt{10}} \\approx 0.32$: weak." },
+        { text: "**With it.** Now $n = 5$, $\\bar{x} = 4$, $\\bar{y} = 3.6$. $d_x = -3, -2, -1, 0, 6$ and $d_y = -1.6, -2.6, -0.6, -1.6, 6.4$.\n\n- $\\sum d_x d_y = 4.8 + 5.2 + 0.6 + 0 + 38.4 = 49$\n- $\\sum d_x^2 = 9 + 4 + 1 + 0 + 36 = 50$\n- $\\sum d_y^2 = 2.56 + 6.76 + 0.36 + 2.56 + 40.96 = 53.2$\n\nSo $r = \\frac{49}{\\sqrt{50 \\times 53.2}} = \\frac{49}{\\sqrt{2660}} \\approx \\frac{49}{51.6} \\approx 0.95$." },
+        { text: "**Find the culprit.** The supermarket's rectangle alone is $6 \\times 6.4 = 38.4$ out of $49$, about 78% of the total. *Why this step:* looking at each point's share of $\\sum d_x d_y$ shows *where* the correlation comes from. Here one point that belongs to a different kind of business manufactures most of it." },
+        { text: "**Report.** \"$r \\approx 0.32$ for the four small shops; $r \\approx 0.95$ when the supermarket is included, almost entirely because of that one store.\"" },
+      ],
+      answer: "$r \\approx 0.32$ without the supermarket, $r \\approx 0.95$ with it; that one store supplies about 78% of $\\sum d_x d_y$",
     },
     {
       type: "quiz",
@@ -1344,10 +1484,11 @@ const lesson04: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "Restricted range" },
     {
       type: "text",
       content:
-        "**Restricted range.** The study-hours data have $r \\approx 0.95$ over 1 to 8 hours. Keep only the students who studied 3 to 6 hours and $r$ drops to about $0.87$: with a narrow spread of $x$, the random scatter in $y$ becomes relatively larger. This is why entrance-exam scores often correlate only weakly with later grades *among admitted students*: the low scorers were never admitted, so the range is restricted.",
+        "The study-hours data have $r \\approx 0.95$ over 1 to 8 hours. Keep only the students who studied 3 to 6 hours and $r$ drops to about $0.87$: with a narrow spread of $x$, the random scatter in $y$ becomes relatively larger. This is why entrance-exam scores often correlate only weakly with later grades *among admitted students*: the low scorers were never admitted, so the range is restricted.",
     },
     {
       type: "interactive",
@@ -1362,6 +1503,7 @@ const lesson04: LessonSeed = {
           "Only the 3–6 hour students: r drops to about 0.87. Compare with r ≈ 0.95 for all ten in 4.3.",
       },
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st4-4-q3",
@@ -1484,36 +1626,40 @@ const lesson05: LessonSeed = {
       content:
         "For the judges: $\\sum d^2 = 6$ and $n = 6$, so $\\rho = 1 - \\frac{6 \\times 6}{6 \\times 35} = 1 - \\frac{36}{210} = \\frac{29}{35} \\approx 0.83$. Strong agreement.",
     },
+    { type: "heading", text: "Computing $\\rho$ from raw marks" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (routine): from raw marks to ρ.** Seven students' marks in Maths and Science. Find the rank correlation.",
-    },
-    {
-      type: "table",
-      headers: ["Student", "A", "B", "C", "D", "E", "F", "G"],
-      rows: [
-        ["Maths", "78", "65", "90", "55", "70", "82", "60"],
-        ["Science", "72", "60", "85", "58", "75", "80", "50"],
-        ["Rank $u$ (Maths)", "3", "5", "1", "7", "4", "2", "6"],
-        ["Rank $v$ (Science)", "4", "5", "1", "6", "3", "2", "7"],
-        ["$d = u - v$", "$-1$", "0", "0", "1", "1", "0", "$-1$"],
-        ["$d^2$", "1", "0", "0", "1", "1", "0", "1"],
+      type: "worked-example",
+      id: "st4-5-we1",
+      title: "Worked example 1 (routine): from raw marks to ρ",
+      problem:
+        "Seven students' marks in Maths and Science. Find the rank correlation.",
+      problemTable: {
+        headers: ["Student", "A", "B", "C", "D", "E", "F", "G"],
+        rows: [
+          ["Maths", "78", "65", "90", "55", "70", "82", "60"],
+          ["Science", "72", "60", "85", "58", "75", "80", "50"],
+        ],
+      },
+      steps: [
+        {
+          text: "**Rank each subject separately**, 1 for the highest. Maths in order: $90, 82, 78, 70, 65, 60, 55$, so C is 1, F is 2, A is 3, and so on. *Why this step:* Spearman uses only order, so the raw marks are replaced by positions within their own column.",
+          table: {
+            headers: ["Student", "A", "B", "C", "D", "E", "F", "G"],
+            rows: [
+              ["Maths", "78", "65", "90", "55", "70", "82", "60"],
+              ["Science", "72", "60", "85", "58", "75", "80", "50"],
+              ["Rank $u$ (Maths)", "3", "5", "1", "7", "4", "2", "6"],
+              ["Rank $v$ (Science)", "4", "5", "1", "6", "3", "2", "7"],
+              ["$d = u - v$", "$-1$", "0", "0", "1", "1", "0", "$-1$"],
+              ["$d^2$", "1", "0", "0", "1", "1", "0", "1"],
+            ],
+          },
+        },
+        { text: "**Differences.** $d = u - v$ for each student. Check: $\\sum d = -1 + 0 + 0 + 1 + 1 + 0 - 1 = 0$. *Why:* both columns are the numbers 1 to 7, so the differences must sum to zero; if they do not, a rank is wrong." },
+        { text: "**Substitute.** $\\sum d^2 = 4$, $n = 7$, $n(n^2 - 1) = 7 \\times 48 = 336$.", latex: "\\rho = 1 - \\frac{6 \\times 4}{336} = 1 - \\frac{24}{336} = 1 - \\frac{1}{14} = \\frac{13}{14} \\approx 0.93" },
+        { text: "**Interpret.** Very strong agreement: students who rank high in Maths tend to rank high in Science." },
       ],
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: rank each subject separately**, 1 for the highest. Maths in order: $90, 82, 78, 70, 65, 60, 55$, so C is 1, F is 2, A is 3, and so on. *Why this step:* Spearman uses only order, so the raw marks are replaced by positions within their own column.\n\n**Step 2: differences.** $d = u - v$ for each student. Check: $\\sum d = -1 + 0 + 0 + 1 + 1 + 0 - 1 = 0$. *Why:* both columns are the numbers 1 to 7, so the differences must sum to zero; if they do not, a rank is wrong.\n\n**Step 3: substitute.** $\\sum d^2 = 4$, $n = 7$, $n(n^2 - 1) = 7 \\times 48 = 336$.",
-    },
-    {
-      type: "math",
-      latex: "\\rho = 1 - \\frac{6 \\times 4}{336} = 1 - \\frac{24}{336} = 1 - \\frac{1}{14} = \\frac{13}{14} \\approx 0.93",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4: interpret.** Very strong agreement: students who rank high in Maths tend to rank high in Science.",
+      answer: "$\\rho = \\frac{13}{14} \\approx 0.93$",
     },
     {
       type: "quiz",
@@ -1542,6 +1688,7 @@ const lesson05: LessonSeed = {
       ],
       hint: "Rank each tester's scores separately, then tabulate $d$ and $d^2$. Here $n(n^2 - 1) = 120$.",
     },
+    { type: "heading", text: "Pearson's $r$ on the ranks" },
     {
       type: "text",
       content:
@@ -1644,30 +1791,43 @@ const lesson05: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "A negative $\\rho$" },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (application): a negative ρ.** A consumer magazine ranks six phone models by price (1 = most expensive) and by battery life (1 = longest).",
-    },
-    {
-      type: "table",
-      headers: ["Model", "P", "Q", "R", "S", "T", "U"],
-      rows: [
-        ["Price rank $u$", "1", "2", "3", "4", "5", "6"],
-        ["Battery rank $v$", "5", "6", "3", "4", "1", "2"],
-        ["$d$", "$-4$", "$-4$", "0", "0", "4", "4"],
-        ["$d^2$", "16", "16", "0", "0", "16", "16"],
+      type: "worked-example",
+      id: "st4-5-we2",
+      title: "Worked example 2 (application): a negative ρ",
+      problem:
+        "A consumer magazine ranks six phone models by price (1 = most expensive) and by battery life (1 = longest). Find Spearman's $\\rho$.",
+      problemTable: {
+        headers: ["Model", "P", "Q", "R", "S", "T", "U"],
+        rows: [
+          ["Price rank $u$", "1", "2", "3", "4", "5", "6"],
+          ["Battery rank $v$", "5", "6", "3", "4", "1", "2"],
+        ],
+      },
+      steps: [
+        {
+          table: {
+            headers: ["Model", "P", "Q", "R", "S", "T", "U"],
+            rows: [
+              ["Price rank $u$", "1", "2", "3", "4", "5", "6"],
+              ["Battery rank $v$", "5", "6", "3", "4", "1", "2"],
+              ["$d$", "$-4$", "$-4$", "0", "0", "4", "4"],
+              ["$d^2$", "16", "16", "0", "0", "16", "16"],
+            ],
+          },
+        },
+        { text: "$\\sum d = 0$ (check passed) and $\\sum d^2 = 64$." },
+        { text: "$n(n^2 - 1) = 6 \\times 35 = 210$, so $\\rho = 1 - \\frac{6 \\times 64}{210} = 1 - \\frac{384}{210} = -\\frac{174}{210} = -\\frac{29}{35} \\approx -0.83$.\n\n*Why the answer can be negative:* $\\frac{6\\sum d^2}{n(n^2-1)}$ exceeds 1 whenever the rankings disagree more than chance would suggest. The largest possible value, for fully reversed rankings, is exactly 2, giving $\\rho = -1$." },
+        { text: "**Interpret.** Strong negative rank correlation: in this group, the pricier phones tend to have *shorter* battery life (perhaps because they spend power on bigger, brighter screens)." },
       ],
+      answer: "$\\rho = -\\frac{29}{35} \\approx -0.83$",
     },
+    { type: "heading", text: "Tied ranks" },
     {
       type: "text",
       content:
-        "**Step 1.** $\\sum d = 0$ (check passed) and $\\sum d^2 = 64$.\n\n**Step 2.** $n(n^2 - 1) = 6 \\times 35 = 210$, so $\\rho = 1 - \\frac{6 \\times 64}{210} = 1 - \\frac{384}{210} = -\\frac{174}{210} = -\\frac{29}{35} \\approx -0.83$.\n\n*Why the answer can be negative:* $\\frac{6\\sum d^2}{n(n^2-1)}$ exceeds 1 whenever the rankings disagree more than chance would suggest. The largest possible value, for fully reversed rankings, is exactly 2, giving $\\rho = -1$.\n\n**Step 3: interpret.** Strong negative rank correlation: in this group, the pricier phones tend to have *shorter* battery life (perhaps because they spend power on bigger, brighter screens).",
-    },
-    {
-      type: "text",
-      content:
-        "**Tied ranks.** When raw values are tied, give each tied value the *average* of the positions they occupy. Marks $70, 60, 50, 50, 40$ (rank 1 = highest) occupy positions 1 to 5; the two 50s share positions 3 and 4, so each gets rank $3.5$, and the 40 still gets rank 5.",
+        "When raw values are tied, give each tied value the *average* of the positions they occupy. Marks $70, 60, 50, 50, 40$ (rank 1 = highest) occupy positions 1 to 5; the two 50s share positions 3 and 4, so each gets rank $3.5$, and the 40 still gets rank 5.",
     },
     {
       type: "text",
@@ -1679,26 +1839,42 @@ const lesson05: LessonSeed = {
       latex: "\\rho = 1 - \\frac{6\\left[\\sum d^2 + \\sum \\frac{m(m^2 - 1)}{12}\\right]}{n(n^2 - 1)}",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (ties).** Five students' marks in two tests:",
-    },
-    {
-      type: "table",
-      headers: ["Student", "P", "Q", "R", "S", "T"],
-      rows: [
-        ["Test 1 marks", "40", "50", "50", "60", "70"],
-        ["Test 2 marks", "30", "45", "55", "50", "65"],
-        ["Rank $u$ (Test 1)", "5", "3.5", "3.5", "2", "1"],
-        ["Rank $v$ (Test 2)", "5", "4", "2", "3", "1"],
-        ["$d$", "0", "$-0.5$", "$1.5$", "$-1$", "0"],
-        ["$d^2$", "0", "0.25", "2.25", "1", "0"],
+      type: "worked-example",
+      id: "st4-5-we4",
+      title: "Worked example: ties",
+      problem:
+        "Five students' marks in two tests. Find the rank correlation, correcting for the tie.",
+      problemTable: {
+        headers: ["Student", "P", "Q", "R", "S", "T"],
+        rows: [
+          ["Test 1 marks", "40", "50", "50", "60", "70"],
+          ["Test 2 marks", "30", "45", "55", "50", "65"],
+        ],
+      },
+      steps: [
+        {
+          table: {
+            headers: ["Student", "P", "Q", "R", "S", "T"],
+            rows: [
+              ["Test 1 marks", "40", "50", "50", "60", "70"],
+              ["Test 2 marks", "30", "45", "55", "50", "65"],
+              ["Rank $u$ (Test 1)", "5", "3.5", "3.5", "2", "1"],
+              ["Rank $v$ (Test 2)", "5", "4", "2", "3", "1"],
+              ["$d$", "0", "$-0.5$", "$1.5$", "$-1$", "0"],
+              ["$d^2$", "0", "0.25", "2.25", "1", "0"],
+            ],
+          },
+        },
+        { text: "$\\sum d^2 = 3.5$." },
+        { text: "One tie of $m = 2$ values: correction $\\frac{2(4 - 1)}{12} = 0.5$." },
+        { text: "$\\rho = 1 - \\frac{6(3.5 + 0.5)}{5 \\times 24} = 1 - \\frac{24}{120} = 0.8$." },
       ],
+      answer: "$\\rho = 0.8$",
     },
     {
       type: "text",
       content:
-        "**Step 1.** $\\sum d^2 = 3.5$.\n\n**Step 2.** One tie of $m = 2$ values: correction $\\frac{2(4 - 1)}{12} = 0.5$.\n\n**Step 3.** $\\rho = 1 - \\frac{6(3.5 + 0.5)}{5 \\times 24} = 1 - \\frac{24}{120} = 0.8$.\n\n(Without the correction you would get $1 - \\frac{21}{120} = 0.825$; Pearson's $r$ on the average ranks is about $0.82$. With ties all three are close, and exam questions expect the corrected version.)",
+        "(Without the correction you would get $1 - \\frac{21}{120} = 0.825$; Pearson's $r$ on the average ranks is about $0.82$. With ties all three are close, and exam questions expect the corrected version.)",
     },
     {
       type: "quiz",
@@ -1722,6 +1898,7 @@ const lesson05: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "Working backwards from $\\rho$" },
     {
       type: "quiz",
       id: "st4-5-q6",
@@ -1750,9 +1927,18 @@ const lesson05: LessonSeed = {
       hint: "Work backwards from $\\rho = 0.5$ to the wrong $\\sum d^2$, then swap $7^2$ for $3^2$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (exam-style): find the number of individuals.** The rank correlation between two judges' rankings is $\\frac{2}{3}$ and $\\sum d^2 = 55$. How many contestants were there?\n\n**Step 1: substitute what is known.** $\\frac{2}{3} = 1 - \\frac{6 \\times 55}{n(n^2 - 1)}$, so $\\frac{330}{n(n^2 - 1)} = \\frac{1}{3}$.\n\n**Step 2: isolate the cubic.** $n(n^2 - 1) = 990$. *Why this step:* rather than solving a cubic, notice that $n(n^2 - 1) = (n - 1)\\,n\\,(n + 1)$ is a product of three consecutive integers.\n\n**Step 3: spot the product.** $990 = 9 \\times 10 \\times 11$, so $n = 10$.\n\n**Step 4: check.** $1 - \\frac{330}{990} = 1 - \\frac{1}{3} = \\frac{2}{3}$. ✓",
+      type: "worked-example",
+      id: "st4-5-we3",
+      title: "Worked example 3 (exam-style): find the number of individuals",
+      problem:
+        "The rank correlation between two judges' rankings is $\\frac{2}{3}$ and $\\sum d^2 = 55$. How many contestants were there?",
+      steps: [
+        { text: "**Substitute what is known.** $\\frac{2}{3} = 1 - \\frac{6 \\times 55}{n(n^2 - 1)}$, so $\\frac{330}{n(n^2 - 1)} = \\frac{1}{3}$." },
+        { text: "**Isolate the cubic.** $n(n^2 - 1) = 990$. *Why this step:* rather than solving a cubic, notice that $n(n^2 - 1) = (n - 1)\\,n\\,(n + 1)$ is a product of three consecutive integers." },
+        { text: "**Spot the product.** $990 = 9 \\times 10 \\times 11$, so $n = 10$." },
+        { text: "**Check.** $1 - \\frac{330}{990} = 1 - \\frac{1}{3} = \\frac{2}{3}$. ✓" },
+      ],
+      answer: "$n = 10$ contestants",
     },
     {
       type: "quiz",
@@ -1781,10 +1967,11 @@ const lesson05: LessonSeed = {
       ],
       hint: "Rearrange to $n(n^2 - 1) = \\frac{6\\sum d^2}{1 - \\rho}$.",
     },
+    { type: "heading", text: "Monotone but curved" },
     {
       type: "text",
       content:
-        "**Monotone but curved.** Ranks only care about *order*. Take the five points $(1, 1), (2, 8), (3, 27), (4, 64), (5, 125)$ on $y = x^3$. As $x$ increases, $y$ always increases, so the ranks agree perfectly: $\\rho = 1$. But the points bend away from any straight line, so Pearson's $r \\approx 0.94 < 1$.",
+        "Ranks only care about *order*. Take the five points $(1, 1), (2, 8), (3, 27), (4, 64), (5, 125)$ on $y = x^3$. As $x$ increases, $y$ always increases, so the ranks agree perfectly: $\\rho = 1$. But the points bend away from any straight line, so Pearson's $r \\approx 0.94 < 1$.",
     },
     {
       type: "interactive",
@@ -1845,6 +2032,7 @@ const lesson06: LessonSeed = {
       content:
         "Correlation tells you *how strongly* the cloud follows a line. Now we want the line itself, so we can predict: \"a student who studies 5.5 hours should score about ...\". Many lines look reasonable. We need a rule for *best*.",
     },
+    { type: "heading", text: "Residuals drawn as squares" },
     {
       type: "text",
       content:
@@ -1880,6 +2068,7 @@ const lesson06: LessonSeed = {
       type: "math",
       latex: "b_{yx} = \\frac{\\operatorname{Cov}(x, y)}{\\sigma_x^2}, \\qquad a = \\bar{y} - b_{yx}\\bar{x}",
     },
+    { type: "heading", text: "Deriving the best line" },
     {
       type: "text",
       content:
@@ -1913,32 +2102,46 @@ const lesson06: LessonSeed = {
       content:
         "Put this $b$ back in and the minimum is $\\text{SSE}_{\\min} = n\\sigma_y^2\\left(1 - \\frac{\\operatorname{Cov}^2}{\\sigma_x^2\\sigma_y^2}\\right) = n\\sigma_y^2(1 - r^2)$. It is zero exactly when $r = \\pm 1$, which matches 4.3. We will use this in 4.7.",
     },
+    { type: "heading", text: "Fitting the line in practice" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** The five points: $\\bar{x} = 3$, $\\bar{y} = 4$, $\\operatorname{Cov} = 1.6$, $\\sigma_x^2 = 2$.\n\n**Step 1.** $b = \\frac{1.6}{2} = 0.8$.\n\n**Step 2.** $a = 4 - 0.8 \\times 3 = 1.6$. So $\\hat{y} = 1.6 + 0.8x$.\n\n**Step 3: check the SSE.**",
-    },
-    {
-      type: "table",
-      headers: ["$x$", "$y$", "$\\hat{y} = 1.6 + 0.8x$", "$e = y - \\hat{y}$", "$e^2$"],
-      rows: [
-        ["1", "2", "2.4", "$-0.4$", "0.16"],
-        ["2", "4", "3.2", "$0.8$", "0.64"],
-        ["3", "3", "4.0", "$-1.0$", "1.00"],
-        ["4", "6", "4.8", "$1.2$", "1.44"],
-        ["5", "5", "5.6", "$-0.6$", "0.36"],
-        ["", "", "", "Total $0$", "3.60"],
+      type: "worked-example",
+      id: "st4-6-we1",
+      title: "Worked example 1",
+      problem:
+        "The five points: $\\bar{x} = 3$, $\\bar{y} = 4$, $\\operatorname{Cov} = 1.6$, $\\sigma_x^2 = 2$. Find the least-squares line of $y$ on $x$.",
+      steps: [
+        { text: "$b = \\frac{1.6}{2} = 0.8$." },
+        { text: "$a = 4 - 0.8 \\times 3 = 1.6$. So $\\hat{y} = 1.6 + 0.8x$." },
+        {
+          text: "**Check the SSE.**",
+          table: {
+            headers: ["$x$", "$y$", "$\\hat{y} = 1.6 + 0.8x$", "$e = y - \\hat{y}$", "$e^2$"],
+            rows: [
+              ["1", "2", "2.4", "$-0.4$", "0.16"],
+              ["2", "4", "3.2", "$0.8$", "0.64"],
+              ["3", "3", "4.0", "$-1.0$", "1.00"],
+              ["4", "6", "4.8", "$1.2$", "1.44"],
+              ["5", "5", "5.6", "$-0.6$", "0.36"],
+              ["", "", "", "Total $0$", "3.60"],
+            ],
+          },
+        },
+        { text: "$\\text{SSE} = 3.6 = n\\sigma_y^2(1 - r^2) = 5 \\times 2 \\times (1 - 0.64)$. The residuals also sum to zero: a line through $(\\bar{x}, \\bar{y})$ always balances its misses above and below." },
       ],
+      answer: "$\\hat{y} = 1.6 + 0.8x$",
     },
     {
-      type: "text",
-      content:
-        "$\\text{SSE} = 3.6 = n\\sigma_y^2(1 - r^2) = 5 \\times 2 \\times (1 - 0.64)$. The residuals also sum to zero: a line through $(\\bar{x}, \\bar{y})$ always balances its misses above and below.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2: from sums.** $n = 10$, $\\sum x = 50$, $\\sum y = 80$, $\\sum x^2 = 290$, $\\sum xy = 430$.\n\n**Step 1.** $\\bar{x} = 5$, $\\bar{y} = 8$, $\\sigma_x^2 = 29 - 25 = 4$, $\\operatorname{Cov} = 43 - 40 = 3$.\n\n**Step 2.** $b = \\frac{3}{4} = 0.75$, $a = 8 - 0.75 \\times 5 = 4.25$.\n\n**Step 3.** $\\hat{y} = 4.25 + 0.75x$. At $x = 6$: $\\hat{y} = 4.25 + 4.5 = 8.75$.",
+      type: "worked-example",
+      id: "st4-6-we2",
+      title: "Worked example 2: from sums",
+      problem:
+        "$n = 10$, $\\sum x = 50$, $\\sum y = 80$, $\\sum x^2 = 290$, $\\sum xy = 430$. Find the regression line of $y$ on $x$ and predict $y$ at $x = 6$.",
+      steps: [
+        { text: "$\\bar{x} = 5$, $\\bar{y} = 8$, $\\sigma_x^2 = 29 - 25 = 4$, $\\operatorname{Cov} = 43 - 40 = 3$." },
+        { text: "$b = \\frac{3}{4} = 0.75$, $a = 8 - 0.75 \\times 5 = 4.25$." },
+        { text: "$\\hat{y} = 4.25 + 0.75x$. At $x = 6$: $\\hat{y} = 4.25 + 4.5 = 8.75$." },
+      ],
+      answer: "$\\hat{y} = 4.25 + 0.75x$; $\\hat{y}(6) = 8.75$",
     },
     {
       type: "quiz",
@@ -1974,10 +2177,11 @@ const lesson06: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "Interpreting the line in context" },
     {
       type: "text",
       content:
-        "**Interpreting the line in context.** A dealer fits $\\hat{y} = 8.5 - 0.9x$ for price $y$ (lakh ₹) against age $x$ (years) of one car model, using cars aged 1 to 8 years.\n\n- **Slope:** each extra year of age is associated with a price about ₹0.9 lakh lower, *on average*.\n- **Intercept:** the predicted price at age 0 is ₹8.5 lakh. That is meaningful only if age 0 is near the data; here it is just outside, so treat it with caution. Often the intercept has no real-world meaning at all (height at age 0 years from adult data, for instance).",
+        "A dealer fits $\\hat{y} = 8.5 - 0.9x$ for price $y$ (lakh ₹) against age $x$ (years) of one car model, using cars aged 1 to 8 years.\n\n- **Slope:** each extra year of age is associated with a price about ₹0.9 lakh lower, *on average*.\n- **Intercept:** the predicted price at age 0 is ₹8.5 lakh. That is meaningful only if age 0 is near the data; here it is just outside, so treat it with caution. Often the intercept has no real-world meaning at all (height at age 0 years from adult data, for instance).",
     },
     {
       type: "quiz",
@@ -2001,10 +2205,21 @@ const lesson06: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "More worked examples and practice" },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (application): a sales forecast.** Return to the shop from 4.3: advertising $x$ (₹ thousand) $= 2, 4, 6, 8, 10$ and sales $y$ (₹ lakh) $= 5, 7, 6, 8, 9$. The owner plans to spend ₹7 thousand next month. Forecast the sales.\n\n**Step 1: reuse the deviation table.** From 4.3, $\\bar{x} = 6$, $\\bar{y} = 7$, $\\sum d_x d_y = 18$, $\\sum d_x^2 = 40$. *Why this step:* the slope needs exactly the same sums as $r$, so a good table does double duty.\n\n**Step 2: slope.** $b_{yx} = \\frac{\\sum d_x d_y}{\\sum d_x^2} = \\frac{18}{40} = 0.45$. (The $\\frac{1}{n}$ in $\\operatorname{Cov}$ and $\\sigma_x^2$ cancels.)\n\n**Step 3: intercept, through the point of means.** $a = 7 - 0.45 \\times 6 = 7 - 2.7 = 4.3$. So $\\hat{y} = 4.3 + 0.45x$.\n\n**Step 4: forecast.** $\\hat{y}(7) = 4.3 + 3.15 = 7.45$, about ₹7.45 lakh. $x = 7$ lies inside the observed range 2 to 10, so this is a reasonable interpolation.\n\n**Step 5: interpret the slope in units.** Each extra ₹1 thousand of advertising is associated with about ₹0.45 lakh (₹45 000) more sales, on average. The intercept $4.3$ is the predicted sales with no advertising at all; $x = 0$ is outside the data, so treat it cautiously.",
+      type: "worked-example",
+      id: "st4-6-we3",
+      title: "Worked example 3 (application): a sales forecast",
+      problem:
+        "Return to the shop from 4.3: advertising $x$ (₹ thousand) $= 2, 4, 6, 8, 10$ and sales $y$ (₹ lakh) $= 5, 7, 6, 8, 9$. The owner plans to spend ₹7 thousand next month. Forecast the sales.",
+      steps: [
+        { text: "**Reuse the deviation table.** From 4.3, $\\bar{x} = 6$, $\\bar{y} = 7$, $\\sum d_x d_y = 18$, $\\sum d_x^2 = 40$. *Why this step:* the slope needs exactly the same sums as $r$, so a good table does double duty." },
+        { text: "**Slope.** $b_{yx} = \\frac{\\sum d_x d_y}{\\sum d_x^2} = \\frac{18}{40} = 0.45$. (The $\\frac{1}{n}$ in $\\operatorname{Cov}$ and $\\sigma_x^2$ cancels.)" },
+        { text: "**Intercept, through the point of means.** $a = 7 - 0.45 \\times 6 = 7 - 2.7 = 4.3$. So $\\hat{y} = 4.3 + 0.45x$." },
+        { text: "**Forecast.** $\\hat{y}(7) = 4.3 + 3.15 = 7.45$, about ₹7.45 lakh. $x = 7$ lies inside the observed range 2 to 10, so this is a reasonable interpolation." },
+        { text: "**Interpret the slope in units.** Each extra ₹1 thousand of advertising is associated with about ₹0.45 lakh (₹45 000) more sales, on average. The intercept $4.3$ is the predicted sales with no advertising at all; $x = 0$ is outside the data, so treat it cautiously." },
+      ],
+      answer: "$\\hat{y} = 4.3 + 0.45x$; forecast about ₹7.45 lakh",
     },
     {
       type: "quiz",
@@ -2074,9 +2289,19 @@ const lesson06: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (exam-style): the regression line by step deviations.** Use the six students of 4.3 (heights $x$ in cm, weights $y$ in kg), coded as $u = \\frac{x - 165}{5}$, $v = \\frac{y - 60}{2}$, with $n = 6$, $\\sum u = 0$, $\\sum v = 0$, $\\sum u^2 = 10$, $\\sum uv = 18$. Find the regression line of $y$ on $x$ and estimate the weight of a student 172 cm tall.\n\n**Step 1: slope in coded units.** Since $\\sum u = \\sum v = 0$, $b_{vu} = \\frac{n\\sum uv - \\sum u\\sum v}{n\\sum u^2 - (\\sum u)^2} = \\frac{108}{60} = 1.8$.\n\n**Step 2: undo the scaling.** A rise of 1 in $v$ is 2 kg and a run of 1 in $u$ is 5 cm, so $b_{yx} = \\frac{k}{h}\\,b_{vu} = \\frac{2}{5} \\times 1.8 = 0.72$ kg per cm. *Why this step:* unlike $r$, a slope carries units, so the step sizes do not cancel. (The shifts 165 and 60 still have no effect.)\n\n**Step 3: the means.** $\\bar{x} = 165 + 5\\bar{u} = 165$ and $\\bar{y} = 60 + 2\\bar{v} = 60$.\n\n**Step 4: the line.** $\\hat{y} - 60 = 0.72(x - 165)$, that is $\\hat{y} = 0.72x - 58.8$.\n\n**Step 5: predict.** $\\hat{y}(172) = 60 + 0.72 \\times 7 = 65.04$ kg, about 65 kg. 172 cm is inside the observed range 155 to 175 cm.",
+      type: "worked-example",
+      id: "st4-6-we4",
+      title: "Worked example 4 (exam-style): the regression line by step deviations",
+      problem:
+        "Use the six students of 4.3 (heights $x$ in cm, weights $y$ in kg), coded as $u = \\frac{x - 165}{5}$, $v = \\frac{y - 60}{2}$, with $n = 6$, $\\sum u = 0$, $\\sum v = 0$, $\\sum u^2 = 10$, $\\sum uv = 18$. Find the regression line of $y$ on $x$ and estimate the weight of a student 172 cm tall.",
+      steps: [
+        { text: "**Slope in coded units.** Since $\\sum u = \\sum v = 0$, $b_{vu} = \\frac{n\\sum uv - \\sum u\\sum v}{n\\sum u^2 - (\\sum u)^2} = \\frac{108}{60} = 1.8$." },
+        { text: "**Undo the scaling.** A rise of 1 in $v$ is 2 kg and a run of 1 in $u$ is 5 cm, so $b_{yx} = \\frac{k}{h}\\,b_{vu} = \\frac{2}{5} \\times 1.8 = 0.72$ kg per cm. *Why this step:* unlike $r$, a slope carries units, so the step sizes do not cancel. (The shifts 165 and 60 still have no effect.)" },
+        { text: "**The means.** $\\bar{x} = 165 + 5\\bar{u} = 165$ and $\\bar{y} = 60 + 2\\bar{v} = 60$." },
+        { text: "**The line.** $\\hat{y} - 60 = 0.72(x - 165)$, that is $\\hat{y} = 0.72x - 58.8$." },
+        { text: "**Predict.** $\\hat{y}(172) = 60 + 0.72 \\times 7 = 65.04$ kg, about 65 kg. 172 cm is inside the observed range 155 to 175 cm." },
+      ],
+      answer: "$\\hat{y} = 0.72x - 58.8$; about 65 kg at 172 cm",
     },
     {
       type: "quiz",
@@ -2148,27 +2373,50 @@ const lesson07: LessonSeed = {
           "Both lines meet at (x̄, ȳ). As |r| approaches 1 they merge into one; with a round cloud (r near 0) they open out towards the two mean lines.",
       },
     },
+    { type: "heading", text: "Both lines from data and summaries" },
+    {
+      type: "worked-example",
+      id: "st4-7-we1",
+      title: "Worked example 1: the five points",
+      problem:
+        "$\\bar{x} = 3$, $\\bar{y} = 4$, $\\operatorname{Cov} = 1.6$, $\\sigma_x^2 = \\sigma_y^2 = 2$. Find both regression lines and estimate $x$ when $y = 6$.",
+      steps: [
+        { text: "- $y$ on $x$: $b_{yx} = 0.8$, so $\\hat{y} = 4 + 0.8(x - 3) = 1.6 + 0.8x$.\n- $x$ on $y$: $b_{xy} = \\frac{1.6}{2} = 0.8$, so $\\hat{x} = 3 + 0.8(y - 4) = 0.8y - 0.2$." },
+        { text: "To estimate $x$ when $y = 6$, use the x-on-y line: $\\hat{x} = 4.8 - 0.2 = 4.6$. If you wrongly rearranged the y-on-x line to $x = \\frac{y - 1.6}{0.8}$ you would get $5.5$: a different, worse answer." },
+        { text: "**Misconception: x-on-y is just y-on-x rearranged.** Solving $\\hat{y} = 1.6 + 0.8x$ for $x$ gives $x = 1.25y - 2$: the *same* line, slope $0.8$ on the $xy$-axes. The x-on-y line $\\hat{x} = 0.8y - 0.2$, redrawn with $y$ up the page, is $y = 1.25x + 0.25$, with slope $1.25$: a *different* line. In general the x-on-y line has slope $\\frac{1}{b_{xy}}$ on the $xy$-axes, and $\\frac{1}{b_{xy}} = b_{yx}$ only when $b_{yx}b_{xy} = r^2 = 1$. The two lines minimise different misses (vertical vs horizontal), so they coincide only for a perfect straight-line cloud." },
+      ],
+      answer: "$\\hat{y} = 1.6 + 0.8x$ and $\\hat{x} = 0.8y - 0.2$; $\\hat{x} = 4.6$ at $y = 6$",
+    },
+    {
+      type: "worked-example",
+      id: "st4-7-we2",
+      title: "Worked example 2 (routine): both lines from summary statistics",
+      problem:
+        "$\\bar{x} = 20$, $\\bar{y} = 30$, $\\sigma_x = 4$, $\\sigma_y = 6$, $r = 0.6$. Find both regression lines, estimate $y$ at $x = 25$ and $x$ at $y = 36$.",
+      steps: [
+        { text: "**The two slopes.** $b_{yx} = r\\frac{\\sigma_y}{\\sigma_x} = 0.6 \\times \\frac{6}{4} = 0.9$ and $b_{xy} = r\\frac{\\sigma_x}{\\sigma_y} = 0.6 \\times \\frac{4}{6} = 0.4$. *Why this step:* the slope for predicting a variable has *that* variable's SD on top." },
+        { text: "**Check.** $b_{yx}b_{xy} = 0.36 = r^2$. ✓" },
+        { text: "**Y on x.** $\\hat{y} - 30 = 0.9(x - 20)$, so $\\hat{y} = 0.9x + 12$. At $x = 25$: $\\hat{y} = 22.5 + 12 = 34.5$." },
+        { text: "**X on y.** $\\hat{x} - 20 = 0.4(y - 30)$, so $\\hat{x} = 0.4y + 8$. At $y = 36$: $\\hat{x} = 14.4 + 8 = 22.4$. *Why a separate line:* we are now predicting $x$, so we need the line that minimises errors in $x$." },
+      ],
+      answer: "$\\hat{y} = 0.9x + 12$ (34.5 at $x = 25$); $\\hat{x} = 0.4y + 8$ (22.4 at $y = 36$)",
+    },
+    {
+      type: "worked-example",
+      id: "st4-7-we3",
+      title: "Worked example 3 (application, CBSE-style): marks in two subjects",
+      problem:
+        "In a class, Economics marks $x$ have mean $40$ and SD $10$; Statistics marks $y$ have mean $45$ and SD $16$; $r = 0.5$. (a) Estimate the Statistics marks of a student who scored 50 in Economics. (b) Estimate the Economics marks of a student who scored 55 in Statistics.",
+      steps: [
+        { text: "**(a) Predicting $y$, so use y on x.** $b_{yx} = 0.5 \\times \\frac{16}{10} = 0.8$. $\\hat{y} = 45 + 0.8(50 - 40) = 45 + 8 = 53$." },
+        { text: "**(b) Predicting $x$, so use x on y.** $b_{xy} = 0.5 \\times \\frac{10}{16} = 0.3125$. $\\hat{x} = 40 + 0.3125(55 - 45) = 40 + 3.125 \\approx 43.1$." },
+      ],
+      answer: "(a) 53, (b) about 43.1",
+    },
     {
       type: "text",
       content:
-        "**Worked example 1: the five points.** $\\bar{x} = 3$, $\\bar{y} = 4$, $\\operatorname{Cov} = 1.6$, $\\sigma_x^2 = \\sigma_y^2 = 2$.\n\n- $y$ on $x$: $b_{yx} = 0.8$, so $\\hat{y} = 4 + 0.8(x - 3) = 1.6 + 0.8x$.\n- $x$ on $y$: $b_{xy} = \\frac{1.6}{2} = 0.8$, so $\\hat{x} = 3 + 0.8(y - 4) = 0.8y - 0.2$.\n\nTo estimate $x$ when $y = 6$, use the x-on-y line: $\\hat{x} = 4.8 - 0.2 = 4.6$. If you wrongly rearranged the y-on-x line to $x = \\frac{y - 1.6}{0.8}$ you would get $5.5$: a different, worse answer.",
-    },
-    {
-      type: "callout",
-      variant: "warning",
-      title: "Misconception: x-on-y is just y-on-x rearranged",
-      content:
-        "Solving $\\hat{y} = 1.6 + 0.8x$ for $x$ gives $x = 1.25y - 2$: the *same* line, slope $0.8$ on the $xy$-axes. The x-on-y line $\\hat{x} = 0.8y - 0.2$, redrawn with $y$ up the page, is $y = 1.25x + 0.25$, with slope $1.25$: a *different* line. In general the x-on-y line has slope $\\frac{1}{b_{xy}}$ on the $xy$-axes, and $\\frac{1}{b_{xy}} = b_{yx}$ only when $b_{yx}b_{xy} = r^2 = 1$. The two lines minimise different misses (vertical vs horizontal), so they coincide only for a perfect straight-line cloud.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2 (routine): both lines from summary statistics.** $\\bar{x} = 20$, $\\bar{y} = 30$, $\\sigma_x = 4$, $\\sigma_y = 6$, $r = 0.6$. Find both regression lines, estimate $y$ at $x = 25$ and $x$ at $y = 36$.\n\n**Step 1: the two slopes.** $b_{yx} = r\\frac{\\sigma_y}{\\sigma_x} = 0.6 \\times \\frac{6}{4} = 0.9$ and $b_{xy} = r\\frac{\\sigma_x}{\\sigma_y} = 0.6 \\times \\frac{4}{6} = 0.4$. *Why this step:* the slope for predicting a variable has *that* variable's SD on top.\n\n**Step 2: check.** $b_{yx}b_{xy} = 0.36 = r^2$. ✓\n\n**Step 3: y on x.** $\\hat{y} - 30 = 0.9(x - 20)$, so $\\hat{y} = 0.9x + 12$. At $x = 25$: $\\hat{y} = 22.5 + 12 = 34.5$.\n\n**Step 4: x on y.** $\\hat{x} - 20 = 0.4(y - 30)$, so $\\hat{x} = 0.4y + 8$. At $y = 36$: $\\hat{x} = 14.4 + 8 = 22.4$. *Why a separate line:* we are now predicting $x$, so we need the line that minimises errors in $x$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 (application, CBSE-style): marks in two subjects.** In a class, Economics marks $x$ have mean $40$ and SD $10$; Statistics marks $y$ have mean $45$ and SD $16$; $r = 0.5$. (a) Estimate the Statistics marks of a student who scored 50 in Economics. (b) Estimate the Economics marks of a student who scored 55 in Statistics.\n\n**(a) Predicting $y$, so use y on x.** $b_{yx} = 0.5 \\times \\frac{16}{10} = 0.8$. $\\hat{y} = 45 + 0.8(50 - 40) = 45 + 8 = 53$.\n\n**(b) Predicting $x$, so use x on y.** $b_{xy} = 0.5 \\times \\frac{10}{16} = 0.3125$. $\\hat{x} = 40 + 0.3125(55 - 45) = 40 + 3.125 \\approx 43.1$.\n\n**Why the answers are not symmetric.** A student 10 marks above average in Economics (1 SD) is predicted only $0.5$ SD above average in Statistics, and vice versa. Both predictions are pulled back towards the mean by the factor $r$. This is **regression to the mean**, the effect that gave regression its name.",
+        "**Why the answers are not symmetric.** A student 10 marks above average in Economics (1 SD) is predicted only $0.5$ SD above average in Statistics, and vice versa. Both predictions are pulled back towards the mean by the factor $r$. This is **regression to the mean**, the effect that gave regression its name.",
     },
     {
       type: "quiz",
@@ -2197,10 +2445,11 @@ const lesson07: LessonSeed = {
       ],
       hint: "Which variable are you predicting? Its SD goes in the numerator of the slope.",
     },
+    { type: "heading", text: "The product rule" },
     {
       type: "text",
       content:
-        "**The product rule.** Multiply the two slopes:",
+        "Multiply the two slopes:",
     },
     {
       type: "math",
@@ -2223,9 +2472,17 @@ const lesson07: LessonSeed = {
       latex: "\\tan\\theta = \\frac{1 - r^2}{|r|}\\cdot\\frac{\\sigma_x\\,\\sigma_y}{\\sigma_x^2 + \\sigma_y^2}",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (exam-style): the angle between the lines, two ways.** $r = 0.5$, $\\sigma_x = 3$, $\\sigma_y = 4$. Find the acute angle between the regression lines.\n\n**Route 1: the formula.** $\\frac{1 - r^2}{|r|} = \\frac{0.75}{0.5} = 1.5$ and $\\frac{\\sigma_x\\sigma_y}{\\sigma_x^2 + \\sigma_y^2} = \\frac{12}{25} = 0.48$, so $\\tan\\theta = 1.5 \\times 0.48 = 0.72$.\n\n**Route 2: from the slopes (a check).** On the $xy$-axes, y on x has slope $m_1 = b_{yx} = 0.5 \\times \\frac{4}{3} = \\frac{2}{3}$. The x-on-y line has $b_{xy} = 0.5 \\times \\frac{3}{4} = \\frac{3}{8}$, so on the $xy$-axes its slope is $m_2 = \\frac{8}{3}$. *Why the reciprocal:* $\\hat{x} = \\bar{x} + b_{xy}(y - \\bar{y})$ rises $1$ in $y$ for every $b_{xy}$ in $x$.\n\n$\\tan\\theta = \\left|\\frac{m_2 - m_1}{1 + m_1 m_2}\\right| = \\frac{\\frac{8}{3} - \\frac{2}{3}}{1 + \\frac{16}{9}} = \\frac{2}{\\frac{25}{9}} = \\frac{18}{25} = 0.72$. ✓\n\n**Answer.** $\\theta = \\tan^{-1}(0.72) \\approx 35.8^\\circ$. A moderate $r$ leaves the scissors half open.",
+      type: "worked-example",
+      id: "st4-7-we4",
+      title: "Worked example 4 (exam-style): the angle between the lines, two ways",
+      problem:
+        "$r = 0.5$, $\\sigma_x = 3$, $\\sigma_y = 4$. Find the acute angle between the regression lines.",
+      steps: [
+        { text: "**Route 1: the formula.** $\\frac{1 - r^2}{|r|} = \\frac{0.75}{0.5} = 1.5$ and $\\frac{\\sigma_x\\sigma_y}{\\sigma_x^2 + \\sigma_y^2} = \\frac{12}{25} = 0.48$, so $\\tan\\theta = 1.5 \\times 0.48 = 0.72$." },
+        { text: "**Route 2: from the slopes (a check).** On the $xy$-axes, y on x has slope $m_1 = b_{yx} = 0.5 \\times \\frac{4}{3} = \\frac{2}{3}$. The x-on-y line has $b_{xy} = 0.5 \\times \\frac{3}{4} = \\frac{3}{8}$, so on the $xy$-axes its slope is $m_2 = \\frac{8}{3}$. *Why the reciprocal:* $\\hat{x} = \\bar{x} + b_{xy}(y - \\bar{y})$ rises $1$ in $y$ for every $b_{xy}$ in $x$." },
+        { text: "$\\tan\\theta = \\left|\\frac{m_2 - m_1}{1 + m_1 m_2}\\right| = \\frac{\\frac{8}{3} - \\frac{2}{3}}{1 + \\frac{16}{9}} = \\frac{2}{\\frac{25}{9}} = \\frac{18}{25} = 0.72$. ✓" },
+      ],
+      answer: "$\\theta = \\tan^{-1}(0.72) \\approx 35.8^\\circ$. A moderate $r$ leaves the scissors half open.",
     },
     {
       type: "quiz",
@@ -2296,15 +2553,20 @@ const lesson07: LessonSeed = {
         { text: "$1.0$", feedback: "$|r| = 1$ would need $b_{yx}b_{xy} = 1$, but here the product is $0.64$." },
       ],
     },
+    { type: "heading", text: "Which line is which?" },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (exam-style): which line is which?** The two regression lines are $3x + 2y = 26$ and $6x + y = 31$. Find $\\bar{x}$, $\\bar{y}$ and $r$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: means from the intersection.** From the second, $y = 31 - 6x$. Substitute: $3x + 62 - 12x = 26$, so $x = 4$ and $y = 7$. Hence $\\bar{x} = 4$, $\\bar{y} = 7$.\n\n**Step 2: try an assignment.** Suppose $3x + 2y = 26$ is $y$ on $x$: $y = 13 - 1.5x$, so $b_{yx} = -1.5$. Then $6x + y = 31$ is $x$ on $y$: $x = \\frac{31 - y}{6}$, so $b_{xy} = -\\frac{1}{6}$. Product $= 0.25 \\le 1$. Valid.\n\n**Step 3: check the other assignment.** If $6x + y = 31$ were $y$ on $x$, $b_{yx} = -6$ and $b_{xy} = -\\frac{2}{3}$, product $4 > 1$. Impossible, so rejected.\n\n**Step 4.** $r^2 = 0.25$, both slopes negative, so $r = -0.5$.",
+      type: "worked-example",
+      id: "st4-7-we5",
+      title: "Worked example 5 (exam-style): which line is which?",
+      problem:
+        "The two regression lines are $3x + 2y = 26$ and $6x + y = 31$. Find $\\bar{x}$, $\\bar{y}$ and $r$.",
+      steps: [
+        { text: "**Means from the intersection.** From the second, $y = 31 - 6x$. Substitute: $3x + 62 - 12x = 26$, so $x = 4$ and $y = 7$. Hence $\\bar{x} = 4$, $\\bar{y} = 7$." },
+        { text: "**Try an assignment.** Suppose $3x + 2y = 26$ is $y$ on $x$: $y = 13 - 1.5x$, so $b_{yx} = -1.5$. Then $6x + y = 31$ is $x$ on $y$: $x = \\frac{31 - y}{6}$, so $b_{xy} = -\\frac{1}{6}$. Product $= 0.25 \\le 1$. Valid." },
+        { text: "**Check the other assignment.** If $6x + y = 31$ were $y$ on $x$, $b_{yx} = -6$ and $b_{xy} = -\\frac{2}{3}$, product $4 > 1$. Impossible, so rejected." },
+        { text: "$r^2 = 0.25$, both slopes negative, so $r = -0.5$." },
+      ],
+      answer: "$\\bar{x} = 4$, $\\bar{y} = 7$, $r = -0.5$",
     },
     {
       type: "callout",
@@ -2362,10 +2624,11 @@ const lesson07: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "How good is the fit? $r^2$" },
     {
       type: "text",
       content:
-        "**How good is the fit? r².** Before using $x$, the best guess for every $y$ is $\\bar{y}$, with total squared error $\\sum (y_i - \\bar{y})^2 = n\\sigma_y^2$. After fitting the line, the leftover error is $\\text{SSE} = n\\sigma_y^2(1 - r^2)$ (4.6). So the fraction of the variation removed by the line is",
+        "Before using $x$, the best guess for every $y$ is $\\bar{y}$, with total squared error $\\sum (y_i - \\bar{y})^2 = n\\sigma_y^2$. After fitting the line, the leftover error is $\\text{SSE} = n\\sigma_y^2(1 - r^2)$ (4.6). So the fraction of the variation removed by the line is",
     },
     {
       type: "math",
@@ -2387,10 +2650,11 @@ const lesson07: LessonSeed = {
         { text: "$51\\%$", feedback: "That is $1 - r^2$, the *unexplained* fraction." },
       ],
     },
+    { type: "heading", text: "Extrapolation" },
     {
       type: "text",
       content:
-        "**Extrapolation.** A line fitted to children aged 3 to 10 might be $\\hat{h} = 80 + 6t$ (height in cm, age in years). Inside that range it predicts well. At $t = 40$ it predicts $320$ cm. Nothing in the data says the straight-line pattern continues outside the range of $x$ you observed, and here it clearly does not: children stop growing.",
+        "A line fitted to children aged 3 to 10 might be $\\hat{h} = 80 + 6t$ (height in cm, age in years). Inside that range it predicts well. At $t = 40$ it predicts $320$ cm. Nothing in the data says the straight-line pattern continues outside the range of $x$ you observed, and here it clearly does not: children stop growing.",
     },
     {
       type: "callout",
@@ -2421,6 +2685,7 @@ const lesson07: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st4-7-q6",

@@ -186,9 +186,21 @@ const lesson01: LessonSeed = {
       hint: "Hunt for one input that could produce two different outputs.",
     },
     {
+      type: "worked-example",
+      id: "what-is-a-function-we1",
+      title: "Checking a list of pairs",
+      problem: "Is $(1, 5), (2, 5), (3, 7), (2, 9)$ a function?",
+      steps: [
+        { text: "List the inputs — $1, 2, 3, 2$." },
+        { text: "Look for a repeated input — $2$ appears twice." },
+        { text: "Compare its outputs — $2 \\to 5$ and $2 \\to 9$. Two different answers for the same input." },
+      ],
+      answer: "Verdict: not a function.",
+    },
+    {
       type: "text",
       content:
-        "**Worked example — checking a list of pairs.** Is $(1, 5), (2, 5), (3, 7), (2, 9)$ a function?\n\nStep 1: List the inputs — $1, 2, 3, 2$.\nStep 2: Look for a repeated input — $2$ appears twice.\nStep 3: Compare its outputs — $2 \\to 5$ and $2 \\to 9$. Two different answers for the same input.\n\nVerdict: not a function. Notice the contrast: the output $5$ appearing twice (for inputs 1 and 2) was never a problem. Only a repeated *input* with disagreeing outputs breaks the rule.",
+        "Notice the contrast: the output $5$ appearing twice (for inputs 1 and 2) was never a problem. Only a repeated *input* with disagreeing outputs breaks the rule.",
     },
     {
       type: "quiz",
@@ -340,15 +352,24 @@ const lesson02: LessonSeed = {
         "Later you will meet $f(x+h)$ in the definition of the derivative. It's the same move you just made: substitute the whole expression $x+h$ wherever the input variable appears. No panic required.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example — a negative input.** With $f(x) = x^2 - 3x$, find $f(-2)$.\n\nStep 1: Substitute $-2$ everywhere $x$ appears, *keeping the parentheses*:",
+      type: "worked-example",
+      id: "function-notation-we1",
+      title: "A negative input",
+      problem: "With $f(x) = x^2 - 3x$, find $f(-2)$.",
+      steps: [
+        {
+          text: "Substitute $-2$ everywhere $x$ appears, *keeping the parentheses*:",
+          latex: "f(-2) = (-2)^2 - 3(-2)",
+        },
+        { text: "Evaluate each piece: $(-2)^2 = 4$ (a negative squared is positive) and $-3(-2) = +6$." },
+        { text: "Combine: $f(-2) = 4 + 6 = 10$." },
+      ],
+      answer: "$f(-2) = 10$",
     },
-    { type: "math", latex: "f(-2) = (-2)^2 - 3(-2)" },
     {
       type: "text",
       content:
-        "Step 2: Evaluate each piece: $(-2)^2 = 4$ (a negative squared is positive) and $-3(-2) = +6$.\n\nStep 3: Combine: $f(-2) = 4 + 6 = 10$.\n\nThe classic mistake is dropping the parentheses and computing $-2^2 = -4$. Substituting means the *whole* input, sign included, goes into every slot.",
+        "The classic mistake is dropping the parentheses and computing $-2^2 = -4$. Substituting means the *whole* input, sign included, goes into every slot.",
     },
     {
       type: "quiz",
@@ -515,15 +536,21 @@ const lesson03: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example — both suspects at once.** Find the domain of",
+      type: "worked-example",
+      id: "domain-and-range-we1",
+      title: "Both suspects at once",
+      problem: "Find the domain of\n\n$$f(x) = \\frac{\\sqrt{x - 1}}{x - 4}$$",
+      steps: [
+        { text: "The square root demands $x - 1 \\ge 0$, so $x \\ge 1$." },
+        { text: "The division demands $x - 4 \\ne 0$, so $x \\ne 4$." },
+        { text: "Both conditions must hold at once." },
+      ],
+      answer: "Domain: $x \\ge 1$ and $x \\ne 4$.",
     },
-    { type: "math", latex: "f(x) = \\frac{\\sqrt{x - 1}}{x - 4}" },
     {
       type: "text",
       content:
-        "Step 1: The square root demands $x - 1 \\ge 0$, so $x \\ge 1$.\n\nStep 2: The division demands $x - 4 \\ne 0$, so $x \\ne 4$.\n\nStep 3: Both conditions must hold at once. Domain: $x \\ge 1$ and $x \\ne 4$.\n\nThe method is always the same: interrogate each suspect separately, then intersect the verdicts.",
+        "The method is always the same: interrogate each suspect separately, then intersect the verdicts.",
     },
     {
       type: "quiz",
@@ -711,9 +738,18 @@ const lesson04: LessonSeed = {
       hint: "Read the graph like a story, left to right. Falling curve = decreasing.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example — the two directions of reading.** Same graph, $f(x) = x^2$. Two questions that look similar and aren't:\n\n*Question A: what is $f(3)$?* Start on the x-axis at 3, ride up to the curve, read the height: $9$. One input → one answer, always.\n\n*Question B: where is $f(x) = 9$?* Start on the y-axis at height 9, slide horizontally, and mark every place you cross the curve: $x = 3$ and $x = -3$. Two answers — and that's fine, because this is the reverse question. A function promises one output per input, not one input per output.",
+      type: "worked-example",
+      id: "reading-functions-from-graphs-we1",
+      title: "The two directions of reading",
+      problem:
+        "Same graph, $f(x) = x^2$. Two questions that look similar and aren't:\n\n*Question A: what is $f(3)$?*\n\n*Question B: where is $f(x) = 9$?*",
+      steps: [
+        { text: "Start on the x-axis at 3, ride up to the curve, read the height: $9$. One input → one answer, always." },
+        {
+          text: "Start on the y-axis at height 9, slide horizontally, and mark every place you cross the curve: $x = 3$ and $x = -3$. Two answers — and that's fine, because this is the reverse question. A function promises one output per input, not one input per output.",
+        },
+      ],
+      answer: "A: $f(3) = 9$. B: $x = 3$ and $x = -3$.",
     },
     {
       type: "quiz",
@@ -883,24 +919,46 @@ const lesson05: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example — building a change table.** How does $f(x) = 2^x$ change? Compute outputs, then the jumps between them:",
-    },
-    {
-      type: "table",
-      headers: ["$x$", "$f(x)$", "change"],
-      rows: [
-        ["$1$", "$2$", ""],
-        ["$2$", "$4$", "$+2$"],
-        ["$3$", "$8$", "$+4$"],
-        ["$4$", "$16$", "$+8$"],
+      type: "worked-example",
+      id: "how-functions-change-we1",
+      title: "Building a change table",
+      problem:
+        "How does $f(x) = 2^x$ change? Compute outputs for $x = 1, 2, 3, 4$, then the jumps between them.",
+      steps: [
+        {
+          text: "Fill the output column.",
+          table: {
+            headers: ["$x$", "$f(x)$"],
+            rows: [
+              ["$1$", "$2$"],
+              ["$2$", "$4$"],
+              ["$3$", "$8$"],
+              ["$4$", "$16$"],
+            ],
+          },
+        },
+        {
+          text: "Subtract neighbours to get each change.",
+          table: {
+            headers: ["$x$", "$f(x)$", "change"],
+            rows: [
+              ["$1$", "$2$", ""],
+              ["$2$", "$4$", "$+2$"],
+              ["$3$", "$8$", "$+4$"],
+              ["$4$", "$16$", "$+8$"],
+            ],
+          },
+        },
+        {
+          text: "Read the pattern in the change column — here every change *doubles*. Compare with $x^2$, whose changes went $+3, +5, +7$: growing, but only by 2 each time.",
+        },
       ],
+      answer: "The changes are $+2, +4, +8$: every change doubles.",
     },
     {
       type: "text",
       content:
-        "Step 1: fill the output column. Step 2: subtract neighbours to get each change. Step 3: read the pattern in the change column — here every change *doubles*. Compare with $x^2$, whose changes went $+3, +5, +7$: growing, but only by 2 each time. The change column is a fingerprint; different function families leave different prints. (That column, taken to its logical extreme, is the derivative.)",
+        "The change column is a fingerprint; different function families leave different prints. (That column, taken to its logical extreme, is the derivative.)",
     },
     {
       type: "quiz",
@@ -1061,9 +1119,22 @@ const lesson06: LessonSeed = {
       ],
     },
     {
+      type: "worked-example",
+      id: "transforming-functions-we1",
+      title: "Decoding a dressed-up formula",
+      problem:
+        "Describe $y = -2(x - 3)^2 + 4$ as transformations of $y = x^2$. Read it from the inside out.",
+      steps: [
+        { text: "$(x - 3)$ inside — shift right 3 (the backwards one)." },
+        { text: "The factor $2$ — stretch vertically by 2 (twice as steep)." },
+        { text: "The minus sign — flip upside down." },
+        { text: "$+4$ outside — shift up 4." },
+      ],
+      answer: "Result: an upside-down, extra-steep parabola with its peak at $(3, 4)$.",
+    },
+    {
       type: "text",
-      content:
-        "**Worked example — decoding a dressed-up formula.** Describe $y = -2(x - 3)^2 + 4$ as transformations of $y = x^2$. Read it from the inside out:\n\nStep 1: $(x - 3)$ inside — shift right 3 (the backwards one).\nStep 2: the factor $2$ — stretch vertically by 2 (twice as steep).\nStep 3: the minus sign — flip upside down.\nStep 4: $+4$ outside — shift up 4.\n\nResult: an upside-down, extra-steep parabola with its peak at $(3, 4)$. Four knobs, each with one job — no memorized \"vertex form\" needed.",
+      content: "Four knobs, each with one job — no memorized \"vertex form\" needed.",
     },
     {
       type: "quiz",
@@ -1211,9 +1282,23 @@ const lesson07: LessonSeed = {
       ],
     },
     {
+      type: "worked-example",
+      id: "function-families-we1",
+      title: "Identifying a family from clues",
+      problem:
+        "A function is described: *it repeats the same wave forever, and its outputs never leave $[-1, 1]$.*",
+      steps: [
+        { text: "\"Repeats forever\" — only sine and cosine are periodic in the gallery." },
+        {
+          text: "Need to split the tie. Extra clue: *its value at $x = 0$ is $1$.* Then $\\sin 0 = 0$ but $\\cos 0 = 1$ — it's cosine.",
+        },
+      ],
+      answer: "Cosine.",
+    },
+    {
       type: "text",
       content:
-        "**Worked example — identifying a family from clues.** A function is described: *it repeats the same wave forever, and its outputs never leave $[-1, 1]$.*\n\nStep 1: \"repeats forever\" — only sine and cosine are periodic in the gallery.\nStep 2: need to split the tie. Extra clue: *its value at $x = 0$ is $1$.* Then $\\sin 0 = 0$ but $\\cos 0 = 1$ — it's cosine.\n\nThis is how the families earn their keep: each one has behaviours no other family can fake.",
+        "This is how the families earn their keep: each one has behaviours no other family can fake.",
     },
     {
       type: "quiz",
@@ -1381,9 +1466,22 @@ const lesson08: LessonSeed = {
       ],
     },
     {
+      type: "worked-example",
+      id: "combining-functions-we1",
+      title: "Composing formulas, not just numbers",
+      problem:
+        "With $g(x) = x + 1$ and $f(x) = x^2$, find a single formula for $f(g(x))$.",
+      steps: [
+        { text: "Write the outer function with a blank slot: $f(\\square) = \\square^2$." },
+        { text: "Fill the slot with ALL of $g(x)$: $f(g(x)) = (x + 1)^2$." },
+        { text: "Sanity-check with a number from the machine above: $x = 2$ gives $(2+1)^2 = 9$. ✓" },
+      ],
+      answer: "$f(g(x)) = (x + 1)^2$",
+    },
+    {
       type: "text",
       content:
-        "**Worked example — composing formulas, not just numbers.** With $g(x) = x + 1$ and $f(x) = x^2$, find a single formula for $f(g(x))$.\n\nStep 1: Write the outer function with a blank slot: $f(\\square) = \\square^2$.\nStep 2: Fill the slot with ALL of $g(x)$: $f(g(x)) = (x + 1)^2$.\nStep 3: Sanity-check with a number from the machine above: $x = 2$ gives $(2+1)^2 = 9$. ✓\n\nAnd the other order? $g(f(x)) = f(x) + 1 = x^2 + 1$. Different pipeline, different formula — $(x+1)^2$ versus $x^2 + 1$ — confirming that order matters not just for single values but everywhere at once.",
+        "And the other order? $g(f(x)) = f(x) + 1 = x^2 + 1$. Different pipeline, different formula — $(x+1)^2$ versus $x^2 + 1$ — confirming that order matters not just for single values but everywhere at once.",
     },
     {
       type: "quiz",
@@ -1554,19 +1652,24 @@ const lesson09: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example — three pieces, three checks.** An electricity tariff charges by usage $u$ (in units):",
+      type: "worked-example",
+      id: "piecewise-functions-we1",
+      title: "Three pieces, three checks",
+      problem:
+        "An electricity tariff charges by usage $u$ (in units):\n\n$$C(u) = \\begin{cases} 3u & u \\le 100 \\\\ 5u & 100 < u \\le 200 \\\\ 8u & u > 200 \\end{cases}$$\n\nFind $C(100)$, $C(150)$ and $C(250)$.",
+      steps: [
+        {
+          text: "$C(100)$: which condition holds? $100 \\le 100$ ✓ (the first, since $\\le$ includes equality). So $C(100) = 3(100) = 300$.",
+        },
+        { text: "$C(150)$: $150 \\le 100$? No. $100 < 150 \\le 200$? Yes. So $C(150) = 5(150) = 750$." },
+        { text: "$C(250)$: only $u > 200$ holds. $C(250) = 8(250) = 2000$." },
+      ],
+      answer: "$C(100) = 300$, $C(150) = 750$, $C(250) = 2000$",
     },
     {
-      type: "math",
-      latex:
-        "C(u) = \\begin{cases} 3u & u \\le 100 \\\\ 5u & 100 < u \\le 200 \\\\ 8u & u > 200 \\end{cases}",
-    },
-    {
       type: "text",
       content:
-        "Find $C(100)$, $C(150)$ and $C(250)$.\n\nStep 1 — $C(100)$: which condition holds? $100 \\le 100$ ✓ (the first, since $\\le$ includes equality). So $C(100) = 3(100) = 300$.\nStep 2 — $C(150)$: $150 \\le 100$? No. $100 < 150 \\le 200$? Yes. So $C(150) = 5(150) = 750$.\nStep 3 — $C(250)$: only $u > 200$ holds. $C(250) = 8(250) = 2000$.\n\nThe discipline: check conditions *before* touching any formula, and note carefully who owns each boundary.",
+        "The discipline: check conditions *before* touching any formula, and note carefully who owns each boundary.",
     },
     {
       type: "quiz",
@@ -1725,13 +1828,18 @@ const lesson10: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example — average rate of change, start to finish.** For $f(x) = x^3$, find the average rate of change between $x = 1$ and $x = 2$.\n\nStep 1: Evaluate at both ends: $f(1) = 1$, $f(2) = 8$.\nStep 2: Change in output: $8 - 1 = 7$.\nStep 3: Change in input: $2 - 1 = 1$.\nStep 4: Divide:",
-    },
-    {
-      type: "math",
-      latex: "\\frac{f(2) - f(1)}{2 - 1} = \\frac{8 - 1}{1} = 7",
+      type: "worked-example",
+      id: "from-functions-to-calculus-we1",
+      title: "Average rate of change, start to finish",
+      problem:
+        "For $f(x) = x^3$, find the average rate of change between $x = 1$ and $x = 2$.",
+      steps: [
+        { text: "Evaluate at both ends: $f(1) = 1$, $f(2) = 8$." },
+        { text: "Change in output: $8 - 1 = 7$." },
+        { text: "Change in input: $2 - 1 = 1$." },
+        { text: "Divide:", latex: "\\frac{f(2) - f(1)}{2 - 1} = \\frac{8 - 1}{1} = 7" },
+      ],
+      answer: "The average rate of change is $7$.",
     },
     {
       type: "text",

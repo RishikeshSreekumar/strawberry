@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import type { z } from "zod";
 import type { pncArrangementListerSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { InteractiveFrame, Latex } from "./ui";
 
 type Config = z.infer<typeof pncArrangementListerSchema>;
@@ -337,10 +338,10 @@ export function PncArrangementLister({ config }: { config: Config }) {
       </div>
 
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ??
+        <RichText text={config.caption ??
           (grouping
             ? "Same colour = counted once. Tap an arrangement to see everything that collapses into it."
-            : "Fill the first slot, then the next, and so on: every arrangement appears exactly once.")}
+            : "Fill the first slot, then the next, and so on: every arrangement appears exactly once.")} />
       </p>
     </InteractiveFrame>
   );

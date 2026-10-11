@@ -42,6 +42,7 @@ const lesson01: LessonSeed = {
       content:
         "Chapter 0 left us with pictures of a whole distribution. Often you need something smaller: **one number that stands for the lot**. What was a typical score, a typical wage, a typical commute? This chapter builds three different answers (the mean, the median and the mode) and shows that each one answers a different question.",
     },
+    { type: "heading", text: "Fair share and balance point" },
     {
       type: "text",
       content:
@@ -97,25 +98,27 @@ const lesson01: LessonSeed = {
       content:
         "The deviations from the mean always add to zero: $\\sum (x_i - \\bar{x}) = 0$. The mean is the **only** number with this property: if $\\sum(x_i - c) = 0$ then $\\sum x_i = nc$, so $c = \\bar{x}$. You will use this fact again for the assumed-mean method (1.2), for mean deviation (Chapter 2) and for the regression line (Chapter 4).",
     },
+    { type: "heading", text: "Guessing a mean, then correcting it" },
     {
-      type: "text",
-      content:
-        "**Worked example: guess, then correct.** Five parcels weigh 52, 55, 49, 58 and 61 kg. Find the mean weight without adding the raw numbers.\n\n**Step 1: guess a balance point.** Say 54 kg. *Why:* any guess will do; the deviations will tell us how far off it is.\n\n**Step 2: deviations from the guess.** $52 - 54 = -2$, $55 - 54 = 1$, $49 - 54 = -5$, $58 - 54 = 4$, $61 - 54 = 7$. They add to $-2 + 1 - 5 + 4 + 7 = 5$, not 0, so 54 is not the balance point.",
-    },
-    {
-      type: "math",
-      latex: "\\sum (x_i - 54) = \\sum x_i - 5(54) = 5 \\;\\Rightarrow\\; \\bar{x} = 54 + \\frac{5}{5} = 55",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3: correct the guess.** The leftover pull of $+5$, shared over 5 parcels, moves the balance point $1$ kg to the right: $\\bar{x} = 55$ kg. *Why it works:* the deviations about the true mean must add to zero, so the leftover sum measures exactly how far the guess missed, times $n$.\n\n**Check:** $52 + 55 + 49 + 58 + 61 = 275$ and $\\frac{275}{5} = 55$. ✓ This guess-and-correct trick is the assumed-mean method of 1.2 in miniature.",
+      type: "worked-example",
+      id: "st1-1-we4",
+      title: "Worked example: guess, then correct",
+      problem:
+        "Five parcels weigh 52, 55, 49, 58 and 61 kg. Find the mean weight without adding the raw numbers.",
+      steps: [
+        { text: "**Guess a balance point.** Say 54 kg. *Why:* any guess will do; the deviations will tell us how far off it is." },
+        { text: "**Deviations from the guess.** $52 - 54 = -2$, $55 - 54 = 1$, $49 - 54 = -5$, $58 - 54 = 4$, $61 - 54 = 7$. They add to $-2 + 1 - 5 + 4 + 7 = 5$, not 0, so 54 is not the balance point.", latex: "\\sum (x_i - 54) = \\sum x_i - 5(54) = 5 \\;\\Rightarrow\\; \\bar{x} = 54 + \\frac{5}{5} = 55" },
+        { text: "**Correct the guess.** The leftover pull of $+5$, shared over 5 parcels, moves the balance point $1$ kg to the right: $\\bar{x} = 55$ kg. *Why it works:* the deviations about the true mean must add to zero, so the leftover sum measures exactly how far the guess missed, times $n$." },
+        { text: "**Check:** $52 + 55 + 49 + 58 + 61 = 275$ and $\\frac{275}{5} = 55$. ✓ This guess-and-correct trick is the assumed-mean method of 1.2 in miniature." },
+      ],
+      answer: "$\\bar{x} = 55$ kg",
     },
     {
       type: "text",
       content:
         "Notice something in the example: the mean, 8, is **not one of the data values**. Nothing forces the balance point to sit on a weight. The average Indian family might have 2.4 children, and no family has 2.4 children. What the statement *does* guarantee is the total: 100 families with a mean of 2.4 have 240 children between them.",
     },
+    { type: "heading", text: "Missing values from a known mean" },
     {
       type: "callout",
       variant: "tip",
@@ -124,38 +127,45 @@ const lesson01: LessonSeed = {
         "Whenever a problem hands you a mean, turn it into a total straight away: $\\sum x_i = n\\bar{x}$. Almost every 'find the missing value' problem falls apart once you do.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** The mean of 7 numbers is 12. Six of them are 10, 14, 9, 15, 11 and 11. Find the seventh.\n\n**Step 1: total.** The seven numbers add to $7 \\times 12 = 84$.\n\n**Step 2: known part.** $10 + 14 + 9 + 15 + 11 + 11 = 70$.\n\n**Step 3: missing part.** The seventh number is $84 - 70 = 14$.\n\n**Check with balance:** deviations from 12 are $-2, 2, -3, 3, -1, -1, 2$, which add to $0$. ✓",
+      type: "worked-example",
+      id: "st1-1-we1",
+      title: "Worked example 1",
+      problem:
+        "The mean of 7 numbers is 12. Six of them are 10, 14, 9, 15, 11 and 11. Find the seventh.",
+      steps: [
+        { text: "**Total.** The seven numbers add to $7 \\times 12 = 84$." },
+        { text: "**Known part.** $10 + 14 + 9 + 15 + 11 + 11 = 70$." },
+        { text: "**Missing part.** The seventh number is $84 - 70 = 14$." },
+        { text: "**Check with balance:** deviations from 12 are $-2, 2, -3, 3, -1, -1, 2$, which add to $0$. ✓" },
+      ],
+      answer: "The seventh number is 14",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2.** A batter's mean score over 5 innings is 42. After a sixth innings the mean drops to 40. What did she score in the sixth innings?\n\n**Step 1:** total after 5 innings $= 5 \\times 42 = 210$.\n\n**Step 2:** total after 6 innings $= 6 \\times 40 = 240$.\n\n**Step 3:** sixth innings $= 240 - 210 = 30$.\n\nIn balance language: the new score sits $30 - 42 = -12$ below the old mean, and its pull of $-12$ is shared over 6 innings, moving the mean by $-12/6 = -2$.",
+      type: "worked-example",
+      id: "st1-1-we2",
+      title: "Worked example 2",
+      problem:
+        "A batter's mean score over 5 innings is 42. After a sixth innings the mean drops to 40. What did she score in the sixth innings?",
+      steps: [
+        { text: "Total after 5 innings $= 5 \\times 42 = 210$." },
+        { text: "Total after 6 innings $= 6 \\times 40 = 240$." },
+        { text: "Sixth innings $= 240 - 210 = 30$." },
+        { text: "In balance language: the new score sits $30 - 42 = -12$ below the old mean, and its pull of $-12$ is shared over 6 innings, moving the mean by $-12/6 = -2$." },
+      ],
+      answer: "30 runs",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (exam style: the overlapping middle).** The mean of 25 observations is 36. The mean of the first 13 observations is 32 and the mean of the last 13 is 39. Find the 13th observation.\n\n**Step 1: turn every mean into a total.** *Why:* totals can be added and subtracted; means cannot.",
-    },
-    {
-      type: "math",
-      latex:
-        "\\sum_{i=1}^{25} x_i = 25 \\times 36 = 900, \\qquad \\sum_{i=1}^{13} x_i = 13 \\times 32 = 416, \\qquad \\sum_{i=13}^{25} x_i = 13 \\times 39 = 507",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 2: spot the overlap.** 'The first 13' are positions 1–13 and 'the last 13' are positions 13–25. Together they name $13 + 13 = 26$ positions, but there are only 25, so position 13 is counted twice. *Why this matters:* adding the two partial totals gives the full total **plus one extra copy** of $x_{13}$.",
-    },
-    {
-      type: "math",
-      latex: "416 + 507 = 900 + x_{13} \\;\\Rightarrow\\; x_{13} = 923 - 900 = 23",
-    },
-    {
-      type: "text",
-      content:
-        "**Check:** positions 1–12 total $416 - 23 = 393$ and positions 14–25 total $507 - 23 = 484$. Then $393 + 23 + 484 = 900$. ✓",
+      type: "worked-example",
+      id: "st1-1-we3",
+      title: "Worked example 3 (exam style: the overlapping middle)",
+      problem:
+        "The mean of 25 observations is 36. The mean of the first 13 observations is 32 and the mean of the last 13 is 39. Find the 13th observation.",
+      steps: [
+        { text: "**Turn every mean into a total.** *Why:* totals can be added and subtracted; means cannot.", latex: "\\sum_{i=1}^{25} x_i = 25 \\times 36 = 900, \\qquad \\sum_{i=1}^{13} x_i = 13 \\times 32 = 416, \\qquad \\sum_{i=13}^{25} x_i = 13 \\times 39 = 507" },
+        { text: "**Spot the overlap.** 'The first 13' are positions 1–13 and 'the last 13' are positions 13–25. Together they name $13 + 13 = 26$ positions, but there are only 25, so position 13 is counted twice. *Why this matters:* adding the two partial totals gives the full total **plus one extra copy** of $x_{13}$.", latex: "416 + 507 = 900 + x_{13} \\;\\Rightarrow\\; x_{13} = 923 - 900 = 23" },
+        { text: "**Check:** positions 1–12 total $416 - 23 = 393$ and positions 14–25 total $507 - 23 = 484$. Then $393 + 23 + 484 = 900$. ✓" },
+      ],
+      answer: "$x_{13} = 23$",
     },
     {
       type: "callout",
@@ -164,6 +174,7 @@ const lesson01: LessonSeed = {
       content:
         "Moving a single value by $k$ moves the mean by $\\frac{k}{n}$. With 5 values, pushing one of them 20 units to the right shifts the mean 4 units right. The mean listens to every value, including the extreme ones. That is its strength and, as 1.6 will show, its weakness.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st1-1-q1",
@@ -300,6 +311,7 @@ const lesson02: LessonSeed = {
       content:
         "For the club: $\\sum fx = 0(3) + 1(5) + 2(6) + 3(4) + 4(2) = 0 + 5 + 12 + 12 + 8 = 37$ and $\\sum f = 20$, so $\\bar{x} = \\frac{37}{20} = 1.85$ goals per match.",
     },
+    { type: "heading", text: "Grouped data: the midpoint assumption" },
     {
       type: "text",
       content:
@@ -329,26 +341,40 @@ const lesson02: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example (direct method).** The daily wages of 50 workers:",
-    },
-    {
-      type: "table",
-      headers: ["Wage (₹)", "$f$", "Class mark $x$", "$fx$"],
-      rows: [
-        ["100–120", "12", "110", "1320"],
-        ["120–140", "14", "130", "1820"],
-        ["140–160", "8", "150", "1200"],
-        ["160–180", "6", "170", "1020"],
-        ["180–200", "10", "190", "1900"],
-        ["Total", "50", "", "7260"],
+      type: "worked-example",
+      id: "st1-2-we1",
+      title: "Worked example: direct method",
+      problem:
+        "The daily wages of 50 workers are given below. Estimate the mean wage.",
+      problemTable: {
+        headers: ["Wage (₹)", "$f$"],
+        rows: [
+          ["100–120", "12"],
+          ["120–140", "14"],
+          ["140–160", "8"],
+          ["160–180", "6"],
+          ["180–200", "10"],
+        ],
+      },
+      steps: [
+        {
+          table: {
+            headers: ["Wage (₹)", "$f$", "Class mark $x$", "$fx$"],
+            rows: [
+              ["100–120", "12", "110", "1320"],
+              ["120–140", "14", "130", "1820"],
+              ["140–160", "8", "150", "1200"],
+              ["160–180", "6", "170", "1020"],
+              ["180–200", "10", "190", "1900"],
+              ["Total", "50", "", "7260"],
+            ],
+          },
+        },
+        { text: "So $\\bar{x} = \\frac{7260}{50} = 145.2$. The estimated mean wage is ₹145.20." },
       ],
+      answer: "₹145.20",
     },
-    {
-      type: "text",
-      content: "So $\\bar{x} = \\frac{7260}{50} = 145.2$. The estimated mean wage is ₹145.20.",
-    },
+    { type: "heading", text: "Shortcuts: shift and scale" },
     {
       type: "text",
       content:
@@ -381,26 +407,36 @@ const lesson02: LessonSeed = {
         "Any $A$ works, because you add it back at the end. Choose a class mark near the middle of the table, preferably one with a large frequency, so the $d$ values are small and centred on 0. Choose $h$ as the common class width, so the $u$ values become small integers $\\ldots, -2, -1, 0, 1, 2, \\ldots$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (step deviation), same wages.** Take $A = 150$ and $h = 20$.\n\n**Step 1: compute $u = \\frac{x - 150}{20}$ for each class mark.**",
-    },
-    {
-      type: "table",
-      headers: ["Wage (₹)", "$f$", "$x$", "$u = \\frac{x-150}{20}$", "$fu$"],
-      rows: [
-        ["100–120", "12", "110", "$-2$", "$-24$"],
-        ["120–140", "14", "130", "$-1$", "$-14$"],
-        ["140–160", "8", "150", "$0$", "$0$"],
-        ["160–180", "6", "170", "$1$", "$6$"],
-        ["180–200", "10", "190", "$2$", "$20$"],
-        ["Total", "50", "", "", "$-12$"],
+      type: "worked-example",
+      id: "st1-2-we2",
+      title: "Worked example (step deviation), same wages",
+      problem:
+        "Take $A = 150$ and $h = 20$. Find the mean wage by the step-deviation method.",
+      steps: [
+        {
+          text: "**Compute $u = \\frac{x - 150}{20}$ for each class mark.**",
+          table: {
+            headers: ["Wage (₹)", "$f$", "$x$", "$u = \\frac{x-150}{20}$", "$fu$"],
+            rows: [
+              ["100–120", "12", "110", "$-2$", "$-24$"],
+              ["120–140", "14", "130", "$-1$", "$-14$"],
+              ["140–160", "8", "150", "$0$", "$0$"],
+              ["160–180", "6", "170", "$1$", "$6$"],
+              ["180–200", "10", "190", "$2$", "$20$"],
+              ["Total", "50", "", "", "$-12$"],
+            ],
+          },
+        },
+        { text: "**Mean of $u$.** $\\bar{u} = \\frac{-12}{50} = -0.24$." },
+        { text: "**Undo the scale.** Multiply by $h$: $20 \\times (-0.24) = -4.8$. That is $\\bar{x} - A$." },
+        { text: "**Undo the shift.** $\\bar{x} = 150 - 4.8 = 145.2$. The same answer as the direct method, with arithmetic you can do in your head." },
       ],
+      answer: "$\\bar{x} = 145.2$, as by the direct method",
     },
     {
       type: "text",
       content:
-        "**Step 2: mean of $u$.** $\\bar{u} = \\frac{-12}{50} = -0.24$.\n\n**Step 3: undo the scale.** Multiply by $h$: $20 \\times (-0.24) = -4.8$. That is $\\bar{x} - A$.\n\n**Step 4: undo the shift.** $\\bar{x} = 150 - 4.8 = 145.2$. The same answer as the direct method, with arithmetic you can do in your head.\n\nWith the assumed-mean method only ($A = 150$, no scaling), $d = -40, -20, 0, 20, 40$ and $\\sum fd = -480 - 280 + 0 + 120 + 400 = -240$, so $\\bar{x} = 150 - \\frac{240}{50} = 145.2$ again.",
+        "With the assumed-mean method only ($A = 150$, no scaling), $d = -40, -20, 0, 20, 40$ and $\\sum fd = -480 - 280 + 0 + 120 + 400 = -240$, so $\\bar{x} = 150 - \\frac{240}{50} = 145.2$ again.",
     },
     {
       type: "callout",
@@ -409,70 +445,82 @@ const lesson02: LessonSeed = {
       content:
         "Forgetting to multiply by $h$ at the end (writing $150 - 0.24$) and forgetting to add $A$ back (writing $-4.8$ as the mean). If your answer lies outside the range of the data, or is suspiciously close to $A$, check both.",
     },
+    { type: "heading", text: "Electricity bills and missing frequencies" },
     {
-      type: "text",
-      content:
-        "**Worked example (application: an electricity bill).** A housing society records last month's electricity use of its 40 flats. Estimate the mean consumption, and the average bill at ₹6 per unit.",
-    },
-    {
-      type: "table",
-      headers: ["Units", "$f$", "$x$", "$u = \\frac{x-225}{50}$", "$fu$"],
-      rows: [
-        ["100–150", "4", "125", "$-2$", "$-8$"],
-        ["150–200", "9", "175", "$-1$", "$-9$"],
-        ["200–250", "14", "225", "$0$", "$0$"],
-        ["250–300", "8", "275", "$1$", "$8$"],
-        ["300–350", "5", "325", "$2$", "$10$"],
-        ["Total", "40", "", "", "$1$"],
+      type: "worked-example",
+      id: "st1-2-we3",
+      title: "Worked example (application: an electricity bill)",
+      problem:
+        "A housing society records last month's electricity use of its 40 flats. Estimate the mean consumption, and the average bill at ₹6 per unit.",
+      problemTable: {
+        headers: ["Units", "$f$"],
+        rows: [
+          ["100–150", "4"],
+          ["150–200", "9"],
+          ["200–250", "14"],
+          ["250–300", "8"],
+          ["300–350", "5"],
+        ],
+      },
+      steps: [
+        {
+          text: "**Choose $A$ and $h$.** $A = 225$ is the central class mark and has the largest frequency; $h = 50$ is the class width. *Why:* the $u$ column becomes $-2, \\ldots, 2$, and every $fu$ is a one-digit product.",
+          table: {
+            headers: ["Units", "$f$", "$x$", "$u = \\frac{x-225}{50}$", "$fu$"],
+            rows: [
+              ["100–150", "4", "125", "$-2$", "$-8$"],
+              ["150–200", "9", "175", "$-1$", "$-9$"],
+              ["200–250", "14", "225", "$0$", "$0$"],
+              ["250–300", "8", "275", "$1$", "$8$"],
+              ["300–350", "5", "325", "$2$", "$10$"],
+              ["Total", "40", "", "", "$1$"],
+            ],
+          },
+        },
+        { text: "**Add the $fu$ column.** $-8 - 9 + 0 + 8 + 10 = 1$, so $\\bar{u} = \\frac{1}{40}$." },
+        { text: "**Undo the scale, then the shift.**", latex: "\\bar{x} = A + h\\,\\bar{u} = 225 + 50 \\times \\frac{1}{40} = 225 + 1.25 = 226.25 \\text{ units}" },
+        { text: "**Answer the question asked.** The estimated mean bill is $226.25 \\times 6 = 1357.50$, i.e. ₹1357.50. *Why multiplying the mean is allowed:* bill $= 6 \\times$ units for every flat, and multiplying every value by 6 multiplies the mean by 6. The society's total is $40 \\times 1357.50 = 54{,}300$, i.e. ₹54,300." },
+        { text: "**Check (direct method):** $\\sum fx = 500 + 1575 + 3150 + 2200 + 1625 = 9050$ and $\\frac{9050}{40} = 226.25$. ✓ The $\\sum fu$ of just 1 tells you at a glance that the mean sits barely above $A$." },
       ],
+      answer: "Mean 226.25 units; average bill ₹1357.50",
     },
     {
-      type: "text",
-      content:
-        "**Step 1: choose $A$ and $h$.** $A = 225$ is the central class mark and has the largest frequency; $h = 50$ is the class width. *Why:* the $u$ column becomes $-2, \\ldots, 2$, and every $fu$ is a one-digit product.\n\n**Step 2: add the $fu$ column.** $-8 - 9 + 0 + 8 + 10 = 1$, so $\\bar{u} = \\frac{1}{40}$.\n\n**Step 3: undo the scale, then the shift.**",
-    },
-    {
-      type: "math",
-      latex: "\\bar{x} = A + h\\,\\bar{u} = 225 + 50 \\times \\frac{1}{40} = 225 + 1.25 = 226.25 \\text{ units}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4: answer the question asked.** The estimated mean bill is $226.25 \\times 6 = 1357.50$, i.e. ₹1357.50. *Why multiplying the mean is allowed:* bill $= 6 \\times$ units for every flat, and multiplying every value by 6 multiplies the mean by 6. The society's total is $40 \\times 1357.50 = 54{,}300$, i.e. ₹54,300.\n\n**Check (direct method):** $\\sum fx = 500 + 1575 + 3150 + 2200 + 1625 = 9050$ and $\\frac{9050}{40} = 226.25$. ✓ The $\\sum fu$ of just 1 tells you at a glance that the mean sits barely above $A$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example (CBSE board style: missing frequencies).** The mean of the distribution below is 50 and the total frequency is 120. Find $f_1$ and $f_2$.",
-    },
-    {
-      type: "table",
-      headers: ["Class", "0–20", "20–40", "40–60", "60–80", "80–100"],
-      rows: [
-        ["$f$", "17", "$f_1$", "32", "$f_2$", "19"],
-        ["$u = \\frac{x - 50}{20}$", "$-2$", "$-1$", "$0$", "$1$", "$2$"],
+      type: "worked-example",
+      id: "st1-2-we4",
+      title: "Worked example (CBSE board style: missing frequencies)",
+      problem:
+        "The mean of the distribution below is 50 and the total frequency is 120. Find $f_1$ and $f_2$.",
+      problemTable: {
+        headers: ["Class", "0–20", "20–40", "40–60", "60–80", "80–100"],
+        rows: [
+          ["$f$", "17", "$f_1$", "32", "$f_2$", "19"],
+        ],
+      },
+      steps: [
+        { text: "**Use the total frequency.** $17 + f_1 + 32 + f_2 + 19 = 120$, so $f_1 + f_2 = 52$. *Why:* two unknowns need two equations, and this is the free one." },
+        {
+          text: "**Pick $A$ equal to the given mean.** With $A = 50$ and $h = 20$, the formula $\\bar{x} = A + h\\,\\bar{u}$ says $50 = 50 + 20\\,\\bar{u}$, so $\\bar{u} = 0$ and $\\sum fu = 0$. *Why this choice:* the balance property says deviations about the true mean add to zero, so centring on 50 makes the second equation as simple as possible.",
+          table: {
+            headers: ["Class", "0–20", "20–40", "40–60", "60–80", "80–100"],
+            rows: [
+              ["$f$", "17", "$f_1$", "32", "$f_2$", "19"],
+              ["$u = \\frac{x - 50}{20}$", "$-2$", "$-1$", "$0$", "$1$", "$2$"],
+            ],
+          },
+          latex: "\\sum fu = 17(-2) + f_1(-1) + 32(0) + f_2(1) + 19(2) = 4 - f_1 + f_2 = 0 \\;\\Rightarrow\\; f_1 - f_2 = 4",
+        },
+        { text: "**Solve.** Adding $f_1 + f_2 = 52$ and $f_1 - f_2 = 4$ gives $2f_1 = 56$, so $f_1 = 28$ and $f_2 = 24$." },
+        { text: "**Check (direct method):** $\\sum fx = 17(10) + 28(30) + 32(50) + 24(70) + 19(90) = 170 + 840 + 1600 + 1680 + 1710 = 6000$, and $\\frac{6000}{120} = 50$. ✓" },
       ],
+      answer: "$f_1 = 28$, $f_2 = 24$",
     },
+    { type: "heading", text: "How wrong can the midpoint assumption be?" },
     {
       type: "text",
       content:
-        "**Step 1: use the total frequency.** $17 + f_1 + 32 + f_2 + 19 = 120$, so $f_1 + f_2 = 52$. *Why:* two unknowns need two equations, and this is the free one.\n\n**Step 2: pick $A$ equal to the given mean.** With $A = 50$ and $h = 20$, the formula $\\bar{x} = A + h\\,\\bar{u}$ says $50 = 50 + 20\\,\\bar{u}$, so $\\bar{u} = 0$ and $\\sum fu = 0$. *Why this choice:* the balance property says deviations about the true mean add to zero, so centring on 50 makes the second equation as simple as possible.",
+        "Suppose the class 10–20 holds five values: 11, 12, 13, 18 and 19. Their true mean is $\\frac{73}{5} = 14.6$, but the grouped method counts all five at 15. Across a whole table these errors partly cancel (some classes lean left, some lean right), which is why grouped means are usually close. But 'usually close' is not 'exact'.",
     },
-    {
-      type: "math",
-      latex:
-        "\\sum fu = 17(-2) + f_1(-1) + 32(0) + f_2(1) + 19(2) = 4 - f_1 + f_2 = 0 \\;\\Rightarrow\\; f_1 - f_2 = 4",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3: solve.** Adding $f_1 + f_2 = 52$ and $f_1 - f_2 = 4$ gives $2f_1 = 56$, so $f_1 = 28$ and $f_2 = 24$.\n\n**Check (direct method):** $\\sum fx = 17(10) + 28(30) + 32(50) + 24(70) + 19(90) = 170 + 840 + 1600 + 1680 + 1710 = 6000$, and $\\frac{6000}{120} = 50$. ✓",
-    },
-    {
-      type: "text",
-      content:
-        "**How wrong can the midpoint assumption be?** Suppose the class 10–20 holds five values: 11, 12, 13, 18 and 19. Their true mean is $\\frac{73}{5} = 14.6$, but the grouped method counts all five at 15. Across a whole table these errors partly cancel (some classes lean left, some lean right), which is why grouped means are usually close. But 'usually close' is not 'exact'.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st1-2-q1",
@@ -617,6 +665,7 @@ const lesson03: LessonSeed = {
       content:
         "Section A has 30 students with a mean mark of 60. Section B has 20 students with a mean of 75. What is the mean of all 50 students? The tempting answer is $\\frac{60 + 75}{2} = 67.5$. It is wrong, and the balance picture shows why at once.",
     },
+    { type: "heading", text: "Combining groups by their sizes" },
     {
       type: "text",
       content:
@@ -653,19 +702,20 @@ const lesson03: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example (JEE style: running the formula backwards).** In a company the mean monthly salary of all employees is ₹50,000. The mean salary of the men is ₹52,000 and that of the women is ₹42,000. What percentage of the employees are men?\n\n**Step 1: name the unknown as a proportion.** Let a fraction $p$ of the employees be men, so $1 - p$ are women. *Why a fraction and not a head-count:* the question gives no total, and the combined mean depends only on the *ratio* of the group sizes.\n\n**Step 2: write the combined mean (₹ thousand).**",
+      type: "worked-example",
+      id: "st1-3-we1",
+      title: "Worked example (JEE style: running the formula backwards)",
+      problem:
+        "In a company the mean monthly salary of all employees is ₹50,000. The mean salary of the men is ₹52,000 and that of the women is ₹42,000. What percentage of the employees are men?",
+      steps: [
+        { text: "**Name the unknown as a proportion.** Let a fraction $p$ of the employees be men, so $1 - p$ are women. *Why a fraction and not a head-count:* the question gives no total, and the combined mean depends only on the *ratio* of the group sizes." },
+        { text: "**Write the combined mean (₹ thousand).**", latex: "52p + 42(1 - p) = 50 \\;\\Rightarrow\\; 42 + 10p = 50 \\;\\Rightarrow\\; p = 0.8" },
+        { text: "**Interpret.** 80% of the employees are men and 20% are women." },
+        { text: "**Balance-point check:** the overall mean 50 sits 2 below the men's mean and 8 above the women's. The balance point is closer to the heavier weight, and the distances $2 : 8 = 1 : 4$ are the inverse of the weights $80 : 20 = 4 : 1$. ✓ This 'lever rule' is the quickest way to answer such questions: the distances to the group means are inversely proportional to the group sizes." },
+      ],
+      answer: "80% of the employees are men (20% women)",
     },
-    {
-      type: "math",
-      latex: "52p + 42(1 - p) = 50 \\;\\Rightarrow\\; 42 + 10p = 50 \\;\\Rightarrow\\; p = 0.8",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3: interpret.** 80% of the employees are men and 20% are women.\n\n**Balance-point check:** the overall mean 50 sits 2 below the men's mean and 8 above the women's. The balance point is closer to the heavier weight, and the distances $2 : 8 = 1 : 4$ are the inverse of the weights $80 : 20 = 4 : 1$. ✓ This 'lever rule' is the quickest way to answer such questions: the distances to the group means are inversely proportional to the group sizes.",
-    },
+    { type: "heading", text: "Weighted means and CGPA" },
     {
       type: "text",
       content:
@@ -681,40 +731,59 @@ const lesson03: LessonSeed = {
         "The frequency formula $\\frac{\\sum fx}{\\sum f}$ from 1.2 and the combined-mean formula are both weighted means: frequencies and group sizes are the weights. The price index, CGPA from credits, and the average speed over stages of a journey (weight by time) all work this way.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (application: a semester CGPA).** A first-year engineering student's grade points and course credits:",
-    },
-    {
-      type: "table",
-      headers: ["Course", "Credits $w$", "Grade point $x$", "$wx$"],
-      rows: [
-        ["Mathematics", "4", "9", "36"],
-        ["Physics", "4", "8", "32"],
-        ["Chemistry", "3", "7", "21"],
-        ["English", "2", "10", "20"],
-        ["Workshop", "1", "6", "6"],
-        ["Total", "14", "", "115"],
+      type: "worked-example",
+      id: "st1-3-we2",
+      title: "Worked example (application: a semester CGPA)",
+      problem:
+        "A first-year engineering student's grade points and course credits are given below. Find the CGPA.",
+      problemTable: {
+        headers: ["Course", "Credits $w$", "Grade point $x$"],
+        rows: [
+          ["Mathematics", "4", "9"],
+          ["Physics", "4", "8"],
+          ["Chemistry", "3", "7"],
+          ["English", "2", "10"],
+          ["Workshop", "1", "6"],
+        ],
+      },
+      steps: [
+        {
+          text: "**Weight each grade by its credits.** *Why:* a 4-credit course takes twice the classroom hours of a 2-credit one, so it should count twice as much.",
+          table: {
+            headers: ["Course", "Credits $w$", "Grade point $x$", "$wx$"],
+            rows: [
+              ["Mathematics", "4", "9", "36"],
+              ["Physics", "4", "8", "32"],
+              ["Chemistry", "3", "7", "21"],
+              ["English", "2", "10", "20"],
+              ["Workshop", "1", "6", "6"],
+              ["Total", "14", "", "115"],
+            ],
+          },
+        },
+        { text: "**Divide by the total weight, not by the number of courses.**", latex: "\\text{CGPA} = \\frac{\\sum wx}{\\sum w} = \\frac{115}{14} \\approx 8.21" },
       ],
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: weight each grade by its credits.** *Why:* a 4-credit course takes twice the classroom hours of a 2-credit one, so it should count twice as much.\n\n**Step 2: divide by the total weight, not by the number of courses.**",
-    },
-    {
-      type: "math",
-      latex: "\\text{CGPA} = \\frac{\\sum wx}{\\sum w} = \\frac{115}{14} \\approx 8.21",
+      answer: "CGPA $\\approx 8.21$",
     },
     {
       type: "text",
       content:
         "**Compare:** the plain average of the five grades is $\\frac{40}{5} = 8$. The weighted mean is higher because the heavy courses (Maths, Physics) carry good grades, while the weakest grade (6) sits in the 1-credit Workshop and pulls only lightly.",
     },
+    { type: "heading", text: "Correcting and transforming a mean" },
     {
-      type: "text",
-      content:
-        "**Correcting a mean (a JEE favourite).** The mean of 20 observations was computed as 40. Later it was found that the value 53 had been copied as 35. Find the correct mean.\n\n**Step 1: total used.** $20 \\times 40 = 800$.\n\n**Step 2: remove the wrong value, insert the right one.** $800 - 35 + 53 = 818$.\n\n**Step 3: divide by the (unchanged) count.** $\\frac{818}{20} = 40.9$.\n\nShortcut in balance language: one value moved up by $53 - 35 = 18$, so the mean moves up by $\\frac{18}{20} = 0.9$.",
+      type: "worked-example",
+      id: "st1-3-we3",
+      title: "Correcting a mean (a JEE favourite)",
+      problem:
+        "The mean of 20 observations was computed as 40. Later it was found that the value 53 had been copied as 35. Find the correct mean.",
+      steps: [
+        { text: "**Total used.** $20 \\times 40 = 800$." },
+        { text: "**Remove the wrong value, insert the right one.** $800 - 35 + 53 = 818$." },
+        { text: "**Divide by the (unchanged) count.** $\\frac{818}{20} = 40.9$." },
+        { text: "Shortcut in balance language: one value moved up by $53 - 35 = 18$, so the mean moves up by $\\frac{18}{20} = 0.9$." },
+      ],
+      answer: "Correct mean 40.9",
     },
     {
       type: "text",
@@ -752,6 +821,7 @@ const lesson03: LessonSeed = {
       content:
         "Averaging group means without weights is right only for equal group sizes. A test: if one group is tiny, should its mean count as much as a huge group's? Clearly not, and the weighted formula is what stops it.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st1-3-q1",
@@ -946,10 +1016,11 @@ const lesson04: LessonSeed = {
       content:
         "The median is the middle of the *ordered* list. The middle of the list as written (21 in the first example) means nothing.",
     },
+    { type: "heading", text: "Discrete frequency tables" },
     {
       type: "text",
       content:
-        "**Discrete frequency tables.** You do not need to write out the list; cumulative frequency tells you which value sits in each position. Marks of 40 students on a 50-point quiz:",
+        "You do not need to write out the list; cumulative frequency tells you which value sits in each position. Marks of 40 students on a 50-point quiz:",
     },
     {
       type: "table",
@@ -967,10 +1038,11 @@ const lesson04: LessonSeed = {
       content:
         "$n = 40$ is even, so we need the 20th and 21st values. Both lie in positions 11–25, where every value is 30. The median is **30**.",
     },
+    { type: "heading", text: "Grouped data: interpolating the median" },
     {
       type: "text",
       content:
-        "**Grouped data.** Now we only know how many values fall in each class. Take the table below ($n = 50$). Half of 50 is 25, so the median is the value with 25 observations below it.",
+        "Now we only know how many values fall in each class. Take the table below ($n = 50$). Half of 50 is 25, so the median is the value with 25 observations below it.",
     },
     {
       type: "table",
@@ -1046,67 +1118,72 @@ const lesson04: LessonSeed = {
       content:
         "A common shortcut says 'the median class is 20–30, so the median is 25'. That ignores where inside the class the middle value falls. Here the 25th value is the 12th of 20 values in the class, which is 60% of the way through: 26, not 25.",
     },
+    { type: "heading", text: "Waiting times and missing frequencies" },
     {
-      type: "text",
-      content:
-        "**Worked example (application: a hospital queue).** A clinic records how long 80 patients waited before seeing a doctor. Find the median waiting time and say what it means.",
-    },
-    {
-      type: "table",
-      headers: ["Waiting time (min)", "$f$", "$cf$"],
-      rows: [
-        ["0–10", "6", "6"],
-        ["10–20", "14", "20"],
-        ["20–30", "25", "45"],
-        ["30–40", "20", "65"],
-        ["40–50", "10", "75"],
-        ["50–60", "5", "80"],
+      type: "worked-example",
+      id: "st1-4-we1",
+      title: "Worked example (application: a hospital queue)",
+      problem:
+        "A clinic records how long 80 patients waited before seeing a doctor. Find the median waiting time and say what it means.",
+      problemTable: {
+        headers: ["Waiting time (min)", "$f$"],
+        rows: [
+          ["0–10", "6"],
+          ["10–20", "14"],
+          ["20–30", "25"],
+          ["30–40", "20"],
+          ["40–50", "10"],
+          ["50–60", "5"],
+        ],
+      },
+      steps: [
+        { text: "**Locate the middle.** $n = 80$, so $\\frac{n}{2} = 40$. *Why $\\frac{n}{2}$ and not $\\frac{n+1}{2}$:* for grouped data we read the ogive at half the total height, where half the frequency lies below." },
+        {
+          text: "**Find the median class.** The $cf$ column passes 40 between 20 (at 20 min) and 45 (at 30 min), so the median class is 20–30. Read off $l = 20$, $cf = 20$ (the class **before**), $f = 25$, $h = 10$.",
+          table: {
+            headers: ["Waiting time (min)", "$f$", "$cf$"],
+            rows: [
+              ["0–10", "6", "6"],
+              ["10–20", "14", "20"],
+              ["20–30", "25", "45"],
+              ["30–40", "20", "65"],
+              ["40–50", "10", "75"],
+              ["50–60", "5", "80"],
+            ],
+          },
+        },
+        { text: "**Interpolate.** We need $40 - 20 = 20$ of the class's 25 patients, i.e. $\\frac{20}{25} = 80\\%$ of the way through the class.", latex: "\\text{Median} = 20 + \\frac{40 - 20}{25} \\times 10 = 20 + 8 = 28 \\text{ min}" },
+        { text: "**Interpret.** Half the patients waited less than about 28 minutes and half waited longer. The grouped mean of the same table is $\\frac{2290}{80} \\approx 28.6$ min, slightly above the median, a hint that a few long waits (the 50–60 class) stretch the right tail. A clinic setting a target such as 'most patients seen within half an hour' would quote the median, because a handful of very long waits cannot move it." },
       ],
+      answer: "Median 28 min",
     },
+    {
+      type: "worked-example",
+      id: "st1-4-we2",
+      title: "Worked example (CBSE board style: missing frequencies)",
+      problem:
+        "The median of the distribution below is 28.5 and the total frequency is 60. Find $x$ and $y$.",
+      problemTable: {
+        headers: ["Class", "0–10", "10–20", "20–30", "30–40", "40–50", "50–60"],
+        rows: [
+          ["$f$", "5", "$x$", "20", "15", "$y$", "5"],
+        ],
+      },
+      steps: [
+        { text: "**Total frequency.** $5 + x + 20 + 15 + y + 5 = 60$, so $x + y = 15$." },
+        { text: "**The median tells you the median class.** 28.5 lies in 20–30, so $l = 20$, $f = 20$, $h = 10$, and the cumulative frequency before this class is $cf = 5 + x$. *Why this is the key step:* the unknown $x$ sits inside $cf$, so the median formula becomes an equation in $x$. Note that $y$ comes after the median class and does not appear at all.", latex: "28.5 = 20 + \\frac{30 - (5 + x)}{20} \\times 10 \\;\\Rightarrow\\; 8.5 = \\frac{25 - x}{2} \\;\\Rightarrow\\; 25 - x = 17 \\;\\Rightarrow\\; x = 8" },
+        { text: "**Finish.** $y = 15 - 8 = 7$." },
+        { text: "**Check:** $cf$ becomes 5, 13, 33, 48, 55, 60. The 30th value lies in 20–30 (between 13 and 33), and $20 + \\frac{30 - 13}{20} \\times 10 = 20 + 8.5 = 28.5$. ✓" },
+      ],
+      answer: "$x = 8$, $y = 7$",
+    },
+    { type: "heading", text: "Why the median resists outliers" },
     {
       type: "text",
       content:
-        "**Step 1: locate the middle.** $n = 80$, so $\\frac{n}{2} = 40$. *Why $\\frac{n}{2}$ and not $\\frac{n+1}{2}$:* for grouped data we read the ogive at half the total height, where half the frequency lies below.\n\n**Step 2: find the median class.** The $cf$ column passes 40 between 20 (at 20 min) and 45 (at 30 min), so the median class is 20–30. Read off $l = 20$, $cf = 20$ (the class **before**), $f = 25$, $h = 10$.\n\n**Step 3: interpolate.** We need $40 - 20 = 20$ of the class's 25 patients, i.e. $\\frac{20}{25} = 80\\%$ of the way through the class.",
+        "Changing the largest value (or the smallest) does not change the order of the middle values, so the median does not move. The mean, which uses the size of every value, does. This is why incomes, house prices and waiting times are usually summarised by the median.",
     },
-    {
-      type: "math",
-      latex: "\\text{Median} = 20 + \\frac{40 - 20}{25} \\times 10 = 20 + 8 = 28 \\text{ min}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4: interpret.** Half the patients waited less than about 28 minutes and half waited longer. The grouped mean of the same table is $\\frac{2290}{80} \\approx 28.6$ min, slightly above the median, a hint that a few long waits (the 50–60 class) stretch the right tail. A clinic setting a target such as 'most patients seen within half an hour' would quote the median, because a handful of very long waits cannot move it.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example (CBSE board style: missing frequencies).** The median of the distribution below is 28.5 and the total frequency is 60. Find $x$ and $y$.",
-    },
-    {
-      type: "table",
-      headers: ["Class", "0–10", "10–20", "20–30", "30–40", "40–50", "50–60"],
-      rows: [["$f$", "5", "$x$", "20", "15", "$y$", "5"]],
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: total frequency.** $5 + x + 20 + 15 + y + 5 = 60$, so $x + y = 15$.\n\n**Step 2: the median tells you the median class.** 28.5 lies in 20–30, so $l = 20$, $f = 20$, $h = 10$, and the cumulative frequency before this class is $cf = 5 + x$. *Why this is the key step:* the unknown $x$ sits inside $cf$, so the median formula becomes an equation in $x$. Note that $y$ comes after the median class and does not appear at all.",
-    },
-    {
-      type: "math",
-      latex:
-        "28.5 = 20 + \\frac{30 - (5 + x)}{20} \\times 10 \\;\\Rightarrow\\; 8.5 = \\frac{25 - x}{2} \\;\\Rightarrow\\; 25 - x = 17 \\;\\Rightarrow\\; x = 8",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3: finish.** $y = 15 - 8 = 7$.\n\n**Check:** $cf$ becomes 5, 13, 33, 48, 55, 60. The 30th value lies in 20–30 (between 13 and 33), and $20 + \\frac{30 - 13}{20} \\times 10 = 20 + 8.5 = 28.5$. ✓",
-    },
-    {
-      type: "text",
-      content:
-        "**Why the median resists outliers.** Changing the largest value (or the smallest) does not change the order of the middle values, so the median does not move. The mean, which uses the size of every value, does. This is why incomes, house prices and waiting times are usually summarised by the median.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st1-4-q1",
@@ -1323,10 +1400,11 @@ const lesson05: LessonSeed = {
           "The tallest stack is the mode (7). Drag two dots onto 9 and watch the data become bimodal; drag one more and 9 takes over. Changing the highest values moves the mean but not the mode.",
       },
     },
+    { type: "heading", text: "Grouped data: locating the peak" },
     {
       type: "text",
       content:
-        "**Grouped data.** Here we only know the tallest bar, the **modal class**. The peak of the underlying distribution is somewhere inside it, and the neighbours tell us which way it leans. If the class before the modal class is almost as tall as the modal class and the class after is short, the peak must lean to the left.",
+        "Here we only know the tallest bar, the **modal class**. The peak of the underlying distribution is somewhere inside it, and the neighbours tell us which way it leans. If the class before the modal class is almost as tall as the modal class and the class after is short, the peak must lean to the left.",
     },
     {
       type: "text",
@@ -1357,14 +1435,25 @@ const lesson05: LessonSeed = {
       content:
         "Check that it behaves sensibly. If $f_0 = f_2$ (equal neighbours), the fraction is $\\frac{f_1 - f_0}{2(f_1 - f_0)} = \\frac{1}{2}$ and the mode is the midpoint of the class. If $f_0$ is nearly as big as $f_1$, the numerator is small and the mode leans left, toward the tall neighbour. That is the lean we predicted.",
     },
+    { type: "heading", text: "The mode formula at work" },
     {
-      type: "text",
-      content: "**Worked example.** Find the mode of this distribution ($n = 50$):",
-    },
-    {
-      type: "table",
-      headers: ["Class", "0–10", "10–20", "20–30", "30–40", "40–50"],
-      rows: [["$f$", "6", "10", "17", "12", "5"]],
+      type: "worked-example",
+      id: "st1-5-we1",
+      problem:
+        "Find the mode of this distribution ($n = 50$):",
+      problemTable: {
+        headers: ["Class", "0–10", "10–20", "20–30", "30–40", "40–50"],
+        rows: [
+          ["$f$", "6", "10", "17", "12", "5"],
+        ],
+      },
+      steps: [
+        { text: "**Modal class.** The largest frequency is 17, so the modal class is 20–30: $l = 20$, $h = 10$." },
+        { text: "**Neighbours.** $f_0 = 10$ (before), $f_1 = 17$, $f_2 = 12$ (after)." },
+        { text: "**Substitute.** $\\text{Mode} = 20 + \\frac{17 - 10}{34 - 10 - 12} \\times 10 = 20 + \\frac{7}{12}\\times 10 \\approx 25.83$." },
+        { text: "**Sense check:** the right neighbour (12) is taller than the left (10), so the mode should lean right of the midpoint 25. It does." },
+      ],
+      answer: "Mode $\\approx 25.83$",
     },
     {
       type: "interactive",
@@ -1379,13 +1468,8 @@ const lesson05: LessonSeed = {
         stats: [],
         editable: false,
         caption:
-          "The histogram of this table. Picture the two diagonals on the tallest bar (20–30, height 17): one from its top-left corner (20, 17) down to the top of the right neighbour at (30, 12), the other from the top of the left neighbour at (20, 10) up to the modal bar's top-right corner (30, 17). The step up on the left (7) is bigger than the step down on the right (5), so the crossing sits right of centre, at about 25.83. The chapter video animates this crossing.",
+          "The histogram of this table. Picture the two diagonals on the tallest bar (20–30, height 17): one from its top-left corner (20, 17) down to the top of the right neighbour at (30, 12), the other from the top of the left neighbour at (20, 10) up to the modal bar's top-right corner (30, 17). The step up on the left (7) is bigger than the step down on the right (5), so the crossing sits right of centre. The chapter video animates this crossing.",
       },
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: modal class.** The largest frequency is 17, so the modal class is 20–30: $l = 20$, $h = 10$.\n\n**Step 2: neighbours.** $f_0 = 10$ (before), $f_1 = 17$, $f_2 = 12$ (after).\n\n**Step 3: substitute.** $\\text{Mode} = 20 + \\frac{17 - 10}{34 - 10 - 12} \\times 10 = 20 + \\frac{7}{12}\\times 10 \\approx 25.83$.\n\n**Sense check:** the right neighbour (12) is taller than the left (10), so the mode should lean right of the midpoint 25. It does.",
     },
     {
       type: "callout",
@@ -1395,54 +1479,46 @@ const lesson05: LessonSeed = {
         "The modal class is the class with the **largest frequency**, not the largest class mark and not the last class. Also, the formula assumes equal class widths; with unequal widths, compare frequency densities (Chapter 0.4) to find the tallest bar. If the modal class is the first (or last) class, take $f_0 = 0$ (or $f_2 = 0$). If two classes tie for the largest frequency, the formula does not apply. With inclusive classes such as 20–29, use the lower boundary (19.5) as $l$, as for the median.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (application: food delivery times).** A delivery app logs 60 orders from one restaurant. It wants to tell customers the most typical delivery time.",
+      type: "worked-example",
+      id: "st1-5-we2",
+      title: "Worked example (application: food delivery times)",
+      problem:
+        "A delivery app logs 60 orders from one restaurant. It wants to tell customers the most typical delivery time. Find the mode.",
+      problemTable: {
+        headers: ["Time (min)", "10–15", "15–20", "20–25", "25–30", "30–35", "35–40"],
+        rows: [
+          ["Orders $f$", "5", "12", "20", "14", "6", "3"],
+        ],
+      },
+      steps: [
+        { text: "**Modal class.** The largest frequency is 20, so the modal class is 20–25: $l = 20$ and, note, $h = 5$. *Why check $h$ every time:* these classes are 5 minutes wide, and using 10 out of habit doubles the lean." },
+        { text: "**Neighbours.** $f_0 = 12$, $f_1 = 20$, $f_2 = 14$." },
+        { text: "**Substitute.**", latex: "\\text{Mode} = 20 + \\frac{20 - 12}{40 - 12 - 14} \\times 5 = 20 + \\frac{8}{14} \\times 5 = 20 + \\frac{40}{14} \\approx 22.86 \\text{ min}" },
+        { text: "**Sense check and interpret.** The step up from the left (8) is bigger than the step down to the right (6), so the peak leans right of the midpoint 22.5, and 22.86 does. The app can honestly say 'most orders arrive in about 23 minutes'. It should not quote this as a promise: the mode says nothing about the 9 orders that took over half an hour." },
+      ],
+      answer: "Mode $\\approx 22.86$ min",
     },
     {
-      type: "table",
-      headers: ["Time (min)", "10–15", "15–20", "20–25", "25–30", "30–35", "35–40"],
-      rows: [["Orders $f$", "5", "12", "20", "14", "6", "3"]],
+      type: "worked-example",
+      id: "st1-5-we3",
+      title: "Worked example (CBSE board style: missing frequency)",
+      problem:
+        "The mode of the distribution below is 36. Find the missing frequency $x$.",
+      problemTable: {
+        headers: ["Class", "0–10", "10–20", "20–30", "30–40", "40–50", "50–60", "60–70"],
+        rows: [
+          ["$f$", "8", "10", "$x$", "16", "12", "6", "7"],
+        ],
+      },
+      steps: [
+        { text: "**Which class is modal?** The mode 36 lies in 30–40, so that is the modal class: $l = 30$, $f_1 = 16$, $h = 10$. *Why we can say this before knowing $x$:* the mode formula always returns a value inside the modal class." },
+        { text: "**Identify the neighbours.** The class before is 20–30, so $f_0 = x$; the class after has $f_2 = 12$." },
+        { text: "**Set up and solve.**", latex: "36 = 30 + \\frac{16 - x}{32 - x - 12} \\times 10 \\;\\Rightarrow\\; 6(20 - x) = 10(16 - x) \\;\\Rightarrow\\; 120 - 6x = 160 - 10x \\;\\Rightarrow\\; x = 10" },
+        { text: "**Check:** with $x = 10$, 16 is still the largest frequency (so 30–40 really is modal), and $30 + \\frac{6}{32 - 10 - 12} \\times 10 = 30 + \\frac{6}{10} \\times 10 = 36$. ✓" },
+      ],
+      answer: "$x = 10$",
     },
-    {
-      type: "text",
-      content:
-        "**Step 1: modal class.** The largest frequency is 20, so the modal class is 20–25: $l = 20$ and, note, $h = 5$. *Why check $h$ every time:* these classes are 5 minutes wide, and using 10 out of habit doubles the lean.\n\n**Step 2: neighbours.** $f_0 = 12$, $f_1 = 20$, $f_2 = 14$.\n\n**Step 3: substitute.**",
-    },
-    {
-      type: "math",
-      latex: "\\text{Mode} = 20 + \\frac{20 - 12}{40 - 12 - 14} \\times 5 = 20 + \\frac{8}{14} \\times 5 = 20 + \\frac{40}{14} \\approx 22.86 \\text{ min}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4: sense check and interpret.** The step up from the left (8) is bigger than the step down to the right (6), so the peak leans right of the midpoint 22.5, and 22.86 does. The app can honestly say 'most orders arrive in about 23 minutes'. It should not quote this as a promise: the mode says nothing about the 9 orders that took over half an hour.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example (CBSE board style: missing frequency).** The mode of the distribution below is 36. Find the missing frequency $x$.",
-    },
-    {
-      type: "table",
-      headers: ["Class", "0–10", "10–20", "20–30", "30–40", "40–50", "50–60", "60–70"],
-      rows: [["$f$", "8", "10", "$x$", "16", "12", "6", "7"]],
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: which class is modal?** The mode 36 lies in 30–40, so that is the modal class: $l = 30$, $f_1 = 16$, $h = 10$. *Why we can say this before knowing $x$:* the mode formula always returns a value inside the modal class.\n\n**Step 2: identify the neighbours.** The class before is 20–30, so $f_0 = x$; the class after has $f_2 = 12$.\n\n**Step 3: set up and solve.**",
-    },
-    {
-      type: "math",
-      latex:
-        "36 = 30 + \\frac{16 - x}{32 - x - 12} \\times 10 \\;\\Rightarrow\\; 6(20 - x) = 10(16 - x) \\;\\Rightarrow\\; 120 - 6x = 160 - 10x \\;\\Rightarrow\\; x = 10",
-    },
-    {
-      type: "text",
-      content:
-        "**Check:** with $x = 10$, 16 is still the largest frequency (so 30–40 really is modal), and $30 + \\frac{6}{32 - 10 - 12} \\times 10 = 30 + \\frac{6}{10} \\times 10 = 36$. ✓",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st1-5-q1",
@@ -1594,6 +1670,7 @@ const lesson06: LessonSeed = {
       content:
         "Nine of the ten employees earn less than the advertised 'average', and seven of them earn less than half of it. The mean is not wrong; it is answering a different question: 'if the wage bill were shared equally, what would each person get?' The job-seeker's question is 'what does a typical employee earn?', and that is the median's question.",
     },
+    { type: "heading", text: "What each average answers" },
     {
       type: "callout",
       variant: "definition",
@@ -1621,10 +1698,20 @@ const lesson06: LessonSeed = {
         "The pattern you just saw is general. A long **right** tail (incomes, house prices, waiting times) drags the mean toward the tail, while the median barely moves and the mode stays at the peak: **mode < median < mean**. A long **left** tail (marks on an easy test, age at retirement) reverses it: **mean < median < mode**. In a symmetric, single-peaked distribution all three coincide.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (a left tail).** An easy 50-mark test gives these 11 scores: 40, 44, 45, 46, 46, 47, 48, 49, 49, 49, 50.\n\n**Step 1: mean.** $\\sum x = 513$, so $\\bar{x} = \\frac{513}{11} \\approx 46.64$.\n\n**Step 2: median.** The list is already sorted and $n = 11$ is odd, so the median is the 6th value, **47**.\n\n**Step 3: mode.** 49 occurs three times, more than any other score, so the mode is **49**.\n\n**Step 4: read the order.** $46.64 < 47 < 49$: mean < median < mode. *Why:* scores are capped at 50, so most students bunch near the top and the only room to spread is downward. The single 40 drags the mean left more than it moves the median, exactly the left-tail pattern.",
+      type: "worked-example",
+      id: "st1-6-we1",
+      title: "Worked example: an easy test",
+      problem:
+        "An easy 50-mark test gives these 11 scores: 40, 44, 45, 46, 46, 47, 48, 49, 49, 49, 50. Find the mean, median and mode, and describe the shape.",
+      steps: [
+        { text: "**Mean.** $\\sum x = 513$, so $\\bar{x} = \\frac{513}{11} \\approx 46.64$." },
+        { text: "**Median.** The list is already sorted and $n = 11$ is odd, so the median is the 6th value, **47**." },
+        { text: "**Mode.** 49 occurs three times, more than any other score, so the mode is **49**." },
+        { text: "**Read the order.** $46.64 < 47 < 49$: mean < median < mode. *Why:* scores are capped at 50, so most students bunch near the top and the only room to spread is downward. The single 40 drags the mean left more than it moves the median, exactly the left-tail pattern." },
+      ],
+      answer: "Mean $\\approx 46.64$, median 47, mode 49: mean < median < mode (a left tail)",
     },
+    { type: "heading", text: "Pearson's empirical relation" },
     {
       type: "text",
       content:
@@ -1639,48 +1726,54 @@ const lesson06: LessonSeed = {
         "This relation is a rule of thumb observed in real data, not a law that can be derived. It fails badly for strongly skewed or bimodal data. Use it when a problem asks for it, or for a quick estimate, never as a proof.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example.** A moderately skewed distribution has mean 45 and median 42. Estimate the mode.\n\n$\\text{Mode} \\approx 3(42) - 2(45) = 126 - 90 = 36$. Check the order: $36 < 42 < 45$, mode < median < mean, which fits a right skew.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example (exam style: all three from one table).** 50 students record how many minutes of homework they did last night. Find the mean, median and mode, compare the mode with Pearson's estimate, and decide which average to report.",
-    },
-    {
-      type: "table",
-      headers: ["Minutes", "$f$", "$x$", "$fx$", "$cf$"],
-      rows: [
-        ["0–10", "10", "5", "50", "10"],
-        ["10–20", "18", "15", "270", "28"],
-        ["20–30", "12", "25", "300", "40"],
-        ["30–40", "6", "35", "210", "46"],
-        ["40–50", "4", "45", "180", "50"],
-        ["Total", "50", "", "1010", ""],
+      type: "worked-example",
+      id: "st1-6-we2",
+      problem:
+        "A moderately skewed distribution has mean 45 and median 42. Estimate the mode.",
+      steps: [
+        { text: "$\\text{Mode} \\approx 3(42) - 2(45) = 126 - 90 = 36$." },
+        { text: "Check the order: $36 < 42 < 45$, mode < median < mean, which fits a right skew." },
       ],
+      answer: "Mode $\\approx 36$",
     },
+    { type: "heading", text: "All three from one table" },
     {
-      type: "text",
-      content:
-        "**Step 1: mean (balance point).** $\\bar{x} = \\frac{1010}{50} = 20.2$ min.\n\n**Step 2: median (middle).** $\\frac{n}{2} = 25$; the $cf$ passes 25 in 10–20, with $cf = 10$ before it and $f = 18$:",
-    },
-    {
-      type: "math",
-      latex: "\\text{Median} = 10 + \\frac{25 - 10}{18} \\times 10 = 10 + \\frac{150}{18} \\approx 18.33 \\text{ min}",
-    },
-    {
-      type: "text",
-      content: "**Step 3: mode (peak).** Modal class 10–20, with $f_0 = 10$, $f_1 = 18$, $f_2 = 12$:",
-    },
-    {
-      type: "math",
-      latex: "\\text{Mode} = 10 + \\frac{18 - 10}{36 - 10 - 12} \\times 10 = 10 + \\frac{80}{14} \\approx 15.71 \\text{ min}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4: compare with Pearson.** $3\\,\\text{Median} - 2\\,\\text{Mean} = 3 \\times \\frac{55}{3} - 2 \\times 20.2 = 55 - 40.4 = 14.6$. It is about a minute below the formula mode of 15.71: close enough for a quick estimate, not close enough to replace the calculation. *Why they differ at all:* Pearson's relation is only a rule of thumb, and it fits best when the skew is mild.\n\n**Step 5: read the shape and choose.** $15.71 < 18.33 < 20.2$: mode < median < mean, a right skew (a few students did 40+ minutes). To describe the typical student, report the **median**: half the class did less than about 18 minutes. If the school needs the class's *total* homework time, use the mean: $50 \\times 20.2 = 1010$ minutes.",
+      type: "worked-example",
+      id: "st1-6-we3",
+      title: "Worked example (exam style: all three from one table)",
+      problem:
+        "50 students record how many minutes of homework they did last night. Find the mean, median and mode, compare the mode with Pearson's estimate, and decide which average to report.",
+      problemTable: {
+        headers: ["Minutes", "$f$"],
+        rows: [
+          ["0–10", "10"],
+          ["10–20", "18"],
+          ["20–30", "12"],
+          ["30–40", "6"],
+          ["40–50", "4"],
+        ],
+      },
+      steps: [
+        {
+          table: {
+            headers: ["Minutes", "$f$", "$x$", "$fx$", "$cf$"],
+            rows: [
+              ["0–10", "10", "5", "50", "10"],
+              ["10–20", "18", "15", "270", "28"],
+              ["20–30", "12", "25", "300", "40"],
+              ["30–40", "6", "35", "210", "46"],
+              ["40–50", "4", "45", "180", "50"],
+              ["Total", "50", "", "1010", ""],
+            ],
+          },
+        },
+        { text: "**Mean (balance point).** $\\bar{x} = \\frac{1010}{50} = 20.2$ min." },
+        { text: "**Median (middle).** $\\frac{n}{2} = 25$; the $cf$ passes 25 in 10–20, with $cf = 10$ before it and $f = 18$:", latex: "\\text{Median} = 10 + \\frac{25 - 10}{18} \\times 10 = 10 + \\frac{150}{18} \\approx 18.33 \\text{ min}" },
+        { text: "**Mode (peak).** Modal class 10–20, with $f_0 = 10$, $f_1 = 18$, $f_2 = 12$:", latex: "\\text{Mode} = 10 + \\frac{18 - 10}{36 - 10 - 12} \\times 10 = 10 + \\frac{80}{14} \\approx 15.71 \\text{ min}" },
+        { text: "**Compare with Pearson.** $3\\,\\text{Median} - 2\\,\\text{Mean} = 3 \\times \\frac{55}{3} - 2 \\times 20.2 = 55 - 40.4 = 14.6$. It is about a minute below the formula mode of 15.71: close enough for a quick estimate, not close enough to replace the calculation. *Why they differ at all:* Pearson's relation is only a rule of thumb, and it fits best when the skew is mild." },
+        { text: "**Read the shape and choose.** $15.71 < 18.33 < 20.2$: mode < median < mean, a right skew (a few students did 40+ minutes). To describe the typical student, report the **median**: half the class did less than about 18 minutes. If the school needs the class's *total* homework time, use the mean: $50 \\times 20.2 = 1010$ minutes." },
+      ],
+      answer: "Mean 20.2, median $\\approx 18.33$, mode $\\approx 15.71$ min; report the median",
     },
     {
       type: "table",
@@ -1701,6 +1794,7 @@ const lesson06: LessonSeed = {
       content:
         "When mean and median differ a lot, that difference is itself information: it signals skew or outliers. Report both, and say which question each one answers.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st1-6-q1",

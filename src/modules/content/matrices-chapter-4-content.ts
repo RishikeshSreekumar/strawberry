@@ -40,6 +40,7 @@ const lesson01: LessonSeed = {
       content:
         "There are two completely different ways to picture the same system. Each one explains something the other hides, so you need both.",
     },
+    { type: "heading", text: "The row picture: lines that must meet" },
     {
       type: "callout",
       variant: "definition",
@@ -74,6 +75,7 @@ const lesson01: LessonSeed = {
       content:
         "Counting equations and unknowns tells you what *usually* happens, not what must happen. $x + 2y = 3$ and $2x + 4y = 1$ are two equations in two unknowns with **no** solution: double the first and you get $2x + 4y = 6$, which cannot also equal 1.",
     },
+    { type: "heading", text: "Classifying a system from its coefficients" },
     {
       type: "text",
       content:
@@ -96,24 +98,75 @@ const lesson01: LessonSeed = {
         "The ratio test breaks when a coefficient in the second equation is 0. For $x = 1$ and $x = 2$, $\\frac{b_1}{b_2} = \\frac{0}{0}$; for $x + y = 1$ and $y = 3$, $\\frac{a_1}{a_2} = \\frac{1}{0}$. The safe form is cross-multiplied: the lines are parallel or identical exactly when $a_1b_2 - a_2b_1 = 0$, which is the determinant $D$ of lesson 4.3. So $x = 1$, $x = 2$ has $D = 1\\cdot0 - 1\\cdot0 = 0$ (parallel vertical lines), while $x + y = 1$, $y = 3$ has $D = 1\\cdot1 - 0\\cdot1 = 1 \\ne 0$ (they cross at $(-2, 3)$).",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1: classify before you solve.**\n\n(a) $3x - y = 5$, $x + y = 3$. Ratios $\\frac{3}{1}$ and $\\frac{-1}{1}$ differ, so the lines cross: unique solution. Adding gives $4x = 8$, so $x = 2$, $y = 1$.\n\n(b) $x + 2y = 3$, $2x + 4y = 1$. $\\frac{1}{2} = \\frac{2}{4}$ but $\\frac{3}{1} \\ne \\frac{1}{2}$: parallel, no solution.\n\n(c) $x + 2y = 3$, $2x + 4y = 6$. All three ratios equal $\\frac{1}{2}$: the second equation is the first doubled, so there are infinitely many solutions, e.g. $(3, 0)$, $(1, 1)$, $(-1, 2)$, and in general $(3 - 2t,\\ t)$.",
+      type: "worked-example",
+      id: "mx4-1-we1",
+      title: "Worked example 1: classify before you solve",
+      problem:
+        "For each system, decide whether it has one solution, no solution or infinitely many, and give the solutions where they exist.\n\n(a) $3x - y = 5$, $x + y = 3$.\n\n(b) $x + 2y = 3$, $2x + 4y = 1$.\n\n(c) $x + 2y = 3$, $2x + 4y = 6$.",
+      steps: [
+        {
+          text: "**(a)** Ratios $\\frac{3}{1}$ and $\\frac{-1}{1}$ differ, so the lines cross: unique solution. Adding gives $4x = 8$, so $x = 2$, $y = 1$.",
+        },
+        {
+          text: "**(b)** $\\frac{1}{2} = \\frac{2}{4}$ but $\\frac{3}{1} \\ne \\frac{1}{2}$: parallel, no solution.",
+        },
+        {
+          text: "**(c)** All three ratios equal $\\frac{1}{2}$: the second equation is the first doubled, so there are infinitely many solutions, e.g. $(3, 0)$, $(1, 1)$, $(-1, 2)$, and in general $(3 - 2t,\\ t)$.",
+        },
+      ],
+      answer: "(a) unique: $x = 2$, $y = 1$. (b) no solution. (c) infinitely many: $(3 - 2t,\\ t)$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx4-1-we2",
+      title: "Worked example 2 (word problem): two cab plans",
+      problem:
+        "Cab company A charges ₹200 flat plus ₹10 per km. Company B charges ₹50 flat plus ₹15 per km. For what trip length do they cost the same, and what is that cost?",
+      steps: [
+        { text: "**Name the unknowns.** Let the trip be $x$ km and the fare ₹$y$." },
+        {
+          text: "**One line per plan.** A: $y = 200 + 10x$, i.e. $10x - y = -200$. B: $y = 50 + 15x$, i.e. $15x - y = -50$.\n\n*Why this step:* writing both in the form $ax + by = c$ lets you run the ratio test before doing any algebra.",
+        },
+        {
+          text: "**Classify.** $\\frac{10}{15} \\ne \\frac{-1}{-1}$, so the lines cross once: exactly one break-even point exists.",
+        },
+        {
+          text: "**Solve.** Set the fares equal: $200 + 10x = 50 + 15x$, so $5x = 150$, $x = 30$ km, and $y = 200 + 300 = 500$.",
+          latex: "\\text{A: } 10x - y = -200,\\qquad \\text{B: } 15x - y = -50 \\;\\Rightarrow\\; (x, y) = (30,\\ 500)",
+        },
+        {
+          text: "**Check with plan B.** $50 + 15(30) = 500$ ✓. Below 30 km, B is cheaper (smaller flat fee); beyond 30 km, A is cheaper (smaller per-km rate).",
+        },
+      ],
+      answer: "The fares are equal for a 30 km trip, costing ₹500.",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 (word problem): two cab plans.** Cab company A charges ₹200 flat plus ₹10 per km. Company B charges ₹50 flat plus ₹15 per km. For what trip length do they cost the same, and what is that cost?\n\n**Step 1. Name the unknowns.** Let the trip be $x$ km and the fare ₹$y$.\n\n**Step 2. One line per plan.** A: $y = 200 + 10x$, i.e. $10x - y = -200$. B: $y = 50 + 15x$, i.e. $15x - y = -50$.\n\n*Why this step:* writing both in the form $ax + by = c$ lets you run the ratio test before doing any algebra.\n\n**Step 3. Classify.** $\\frac{10}{15} \\ne \\frac{-1}{-1}$, so the lines cross once: exactly one break-even point exists.\n\n**Step 4. Solve.** Set the fares equal: $200 + 10x = 50 + 15x$, so $5x = 150$, $x = 30$ km, and $y = 200 + 300 = 500$.\n\n**Step 5. Check with plan B.** $50 + 15(30) = 500$ ✓. Below 30 km, B is cheaper (smaller flat fee); beyond 30 km, A is cheaper (smaller per-km rate).\n\n**Twist.** If B changed to ₹50 + ₹10 per km, both lines would have slope 10 but different intercepts: parallel, no solution. In real terms, B would be ₹150 cheaper on *every* trip, so the fares are never equal.",
+        "**Twist.** If B changed to ₹50 + ₹10 per km, both lines would have slope 10 but different intercepts: parallel, no solution. In real terms, B would be ₹150 cheaper on *every* trip, so the fares are never equal.",
     },
     {
-      type: "math",
-      latex: "\\text{A: } 10x - y = -200,\\qquad \\text{B: } 15x - y = -50 \\;\\Rightarrow\\; (x, y) = (30,\\ 500)",
+      type: "worked-example",
+      id: "mx4-1-we3",
+      title: "Worked example 3 (CBSE board style)",
+      problem:
+        "For which value of $k$ does the system $kx + 3y = k - 3$, $12x + ky = k$ have **no** solution?",
+      steps: [
+        {
+          text: "**Force parallel lines.** No solution needs $\\frac{a_1}{a_2} = \\frac{b_1}{b_2}$: $\\frac{k}{12} = \\frac{3}{k}$, so $k^2 = 36$ and $k = 6$ or $k = -6$.\n\n*Why this step:* if the slopes differ, the lines must cross, so only these two values are even candidates. (Equivalently, $D = k^2 - 36 = 0$.)",
+        },
+        {
+          text: "**Test each candidate against the constants.**\n\n$k = 6$: the equations are $6x + 3y = 3$ and $12x + 6y = 6$. The second is exactly twice the first: the **same** line, infinitely many solutions. Reject.\n\n$k = -6$: the equations are $-6x + 3y = -9$ and $12x - 6y = -6$. Multiply the first by $-2$: $12x - 6y = 18$, which cannot also equal $-6$. Parallel and distinct.",
+        },
+      ],
+      answer: "$k = -6$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 (CBSE board style).** For which value of $k$ does the system $kx + 3y = k - 3$, $12x + ky = k$ have **no** solution?\n\n**Step 1. Force parallel lines.** No solution needs $\\frac{a_1}{a_2} = \\frac{b_1}{b_2}$: $\\frac{k}{12} = \\frac{3}{k}$, so $k^2 = 36$ and $k = 6$ or $k = -6$.\n\n*Why this step:* if the slopes differ, the lines must cross, so only these two values are even candidates. (Equivalently, $D = k^2 - 36 = 0$.)\n\n**Step 2. Test each candidate against the constants.**\n\n$k = 6$: the equations are $6x + 3y = 3$ and $12x + 6y = 6$. The second is exactly twice the first: the **same** line, infinitely many solutions. Reject.\n\n$k = -6$: the equations are $-6x + 3y = -9$ and $12x - 6y = -6$. Multiply the first by $-2$: $12x - 6y = 18$, which cannot also equal $-6$. Parallel and distinct.\n\n**Answer:** $k = -6$.\n\n*Why step 2 matters:* a candidate from step 1 only says the lines are parallel **or** identical. Examiners pick numbers so that one candidate is a trap, exactly as here.",
+        "*Why step 2 matters:* a candidate from step 1 only says the lines are parallel **or** identical. Examiners pick numbers so that one candidate is a trap, exactly as here.",
     },
+    { type: "heading", text: "The column picture: combining columns" },
     {
       type: "callout",
       variant: "definition",
@@ -165,10 +218,21 @@ const lesson01: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4: solve by the column picture.** Find $x, y$ with $x\\begin{pmatrix}1\\\\2\\end{pmatrix} + y\\begin{pmatrix}3\\\\1\\end{pmatrix} = \\begin{pmatrix}5\\\\5\\end{pmatrix}$.\n\n**Step 1.** Read off the rows: $x + 3y = 5$ and $2x + y = 5$.\n\n**Step 2.** From the second, $y = 5 - 2x$. Substitute: $x + 15 - 6x = 5$, so $x = 2$, $y = 1$.\n\n**Step 3. Check in the column picture.** $2(1, 2) + 1(3, 1) = (2 + 3,\\ 4 + 1) = (5, 5)$. ✓",
+      type: "worked-example",
+      id: "mx4-1-we4",
+      title: "Worked example 4: solve by the column picture",
+      problem:
+        "Find $x, y$ with $x\\begin{pmatrix}1\\\\2\\end{pmatrix} + y\\begin{pmatrix}3\\\\1\\end{pmatrix} = \\begin{pmatrix}5\\\\5\\end{pmatrix}$.",
+      steps: [
+        { text: "Read off the rows: $x + 3y = 5$ and $2x + y = 5$." },
+        { text: "From the second, $y = 5 - 2x$. Substitute: $x + 15 - 6x = 5$, so $x = 2$, $y = 1$." },
+        {
+          text: "**Check in the column picture.** $2(1, 2) + 1(3, 1) = (2 + 3,\\ 4 + 1) = (5, 5)$. ✓",
+        },
+      ],
+      answer: "$x = 2$, $y = 1$.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx4-1-q1",
@@ -260,6 +324,7 @@ const lesson02: LessonSeed = {
       content:
         "If $A$ is a machine that sends inputs to outputs, then solving $AX = B$ means running the machine **backwards**: given the output $B$, recover the input $X$. Chapter 3 built exactly the tool for that, the inverse $A^{-1}$, the transformation that undoes $A$.",
     },
+    { type: "heading", text: "Writing a system as $AX = B$" },
     {
       type: "callout",
       variant: "definition",
@@ -274,6 +339,7 @@ const lesson02: LessonSeed = {
       content:
         "In $x + y = 3$, $y + z = 5$, $x + z = 4$, each equation skips one unknown. Keep the columns lined up by writing the skipped unknown with coefficient 0: $1x + 1y + 0z = 3$, and so on. The coefficient matrix is $\\begin{pmatrix} 1 & 1 & 0 \\\\ 0 & 1 & 1 \\\\ 1 & 0 & 1 \\end{pmatrix}$, not a jagged table.",
     },
+    { type: "heading", text: "Deriving $X = A^{-1}B$" },
     {
       type: "text",
       content:
@@ -304,15 +370,52 @@ const lesson02: LessonSeed = {
           "A = [[2, 1], [1, 1]]. From t = 0 to 1 the plane moves by A, carrying v = (1, 1) to Av = (3, 2). From 1 to 2, A⁻¹ carries everything back. Solving 2x + y = 3, x + y = 2 is that second half: start at B = (3, 2) and undo.",
       },
     },
+    { type: "heading", text: "Solving systems with the inverse" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (2 × 2).** Solve $2x + y = 3$, $x + y = 2$.\n\n**Step 1.** $A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 1 \\end{pmatrix}$, $B = \\begin{pmatrix} 3 \\\\ 2 \\end{pmatrix}$, $|A| = 2 - 1 = 1 \\ne 0$.\n\n**Step 2.** $A^{-1} = \\frac{1}{1}\\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix}$ (swap the diagonal, negate the off-diagonal, divide by the determinant).\n\n**Step 3.** $X = A^{-1}B = \\begin{pmatrix} 3 - 2 \\\\ -3 + 4 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$, so $x = 1$, $y = 1$. Check: $2 + 1 = 3$ ✓, $1 + 1 = 2$ ✓.",
+      type: "worked-example",
+      id: "mx4-2-we1",
+      title: "Worked example 1 (2 × 2)",
+      problem: "Solve $2x + y = 3$, $x + y = 2$.",
+      steps: [
+        {
+          text: "$A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 1 \\end{pmatrix}$, $B = \\begin{pmatrix} 3 \\\\ 2 \\end{pmatrix}$, $|A| = 2 - 1 = 1 \\ne 0$.",
+        },
+        {
+          text: "$A^{-1} = \\frac{1}{1}\\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix}$ (swap the diagonal, negate the off-diagonal, divide by the determinant).",
+        },
+        {
+          text: "$X = A^{-1}B = \\begin{pmatrix} 3 - 2 \\\\ -3 + 4 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$, so $x = 1$, $y = 1$.",
+        },
+        { text: "Check: $2 + 1 = 3$ ✓, $1 + 1 = 2$ ✓." },
+      ],
+      answer: "$x = 1$, $y = 1$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (3 × 3, the CBSE staple).** Solve $x - y + 2z = 7$, $3x + 4y - 5z = -5$, $2x - y + 3z = 12$.\n\n**Step 1. Set up.** $A = \\begin{pmatrix} 1 & -1 & 2 \\\\ 3 & 4 & -5 \\\\ 2 & -1 & 3 \\end{pmatrix}$, $B = \\begin{pmatrix} 7 \\\\ -5 \\\\ 12 \\end{pmatrix}$.\n\n**Step 2. Determinant** (expand along row 1): $|A| = 1(12 - 5) - (-1)(9 + 10) + 2(-3 - 8) = 7 + 19 - 22 = 4 \\ne 0$, so a unique solution exists.\n\n**Step 3. Cofactors.** Row 1: $C_{11} = 7$, $C_{12} = -19$, $C_{13} = -11$. Row 2: $C_{21} = 1$, $C_{22} = -1$, $C_{23} = -1$. Row 3: $C_{31} = -3$, $C_{32} = 11$, $C_{33} = 7$.\n\n**Step 4. Adjoint** (transpose of the cofactor matrix): $\\operatorname{adj}A = \\begin{pmatrix} 7 & 1 & -3 \\\\ -19 & -1 & 11 \\\\ -11 & -1 & 7 \\end{pmatrix}$.\n\n**Step 5. Multiply.** $X = \\frac{1}{4}\\operatorname{adj}A\\,B = \\frac{1}{4}\\begin{pmatrix} 49 - 5 - 36 \\\\ -133 + 5 + 132 \\\\ -77 + 5 + 84 \\end{pmatrix} = \\frac{1}{4}\\begin{pmatrix} 8 \\\\ 4 \\\\ 12 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 3 \\end{pmatrix}$.\n\n**Step 6. Check** in the original equations: $2 - 1 + 6 = 7$ ✓, $6 + 4 - 15 = -5$ ✓, $4 - 1 + 9 = 12$ ✓.",
+      type: "worked-example",
+      id: "mx4-2-we2",
+      title: "Worked example 2 (3 × 3, the CBSE staple)",
+      problem: "Solve $x - y + 2z = 7$, $3x + 4y - 5z = -5$, $2x - y + 3z = 12$.",
+      steps: [
+        {
+          text: "**Set up.** $A = \\begin{pmatrix} 1 & -1 & 2 \\\\ 3 & 4 & -5 \\\\ 2 & -1 & 3 \\end{pmatrix}$, $B = \\begin{pmatrix} 7 \\\\ -5 \\\\ 12 \\end{pmatrix}$.",
+        },
+        {
+          text: "**Determinant** (expand along row 1): $|A| = 1(12 - 5) - (-1)(9 + 10) + 2(-3 - 8) = 7 + 19 - 22 = 4 \\ne 0$, so a unique solution exists.",
+        },
+        {
+          text: "**Cofactors.** Row 1: $C_{11} = 7$, $C_{12} = -19$, $C_{13} = -11$. Row 2: $C_{21} = 1$, $C_{22} = -1$, $C_{23} = -1$. Row 3: $C_{31} = -3$, $C_{32} = 11$, $C_{33} = 7$.",
+        },
+        {
+          text: "**Adjoint** (transpose of the cofactor matrix): $\\operatorname{adj}A = \\begin{pmatrix} 7 & 1 & -3 \\\\ -19 & -1 & 11 \\\\ -11 & -1 & 7 \\end{pmatrix}$.",
+        },
+        {
+          text: "**Multiply.** $X = \\frac{1}{4}\\operatorname{adj}A\\,B = \\frac{1}{4}\\begin{pmatrix} 49 - 5 - 36 \\\\ -133 + 5 + 132 \\\\ -77 + 5 + 84 \\end{pmatrix} = \\frac{1}{4}\\begin{pmatrix} 8 \\\\ 4 \\\\ 12 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 3 \\end{pmatrix}$.",
+        },
+        {
+          text: "**Check** in the original equations: $2 - 1 + 6 = 7$ ✓, $6 + 4 - 15 = -5$ ✓, $4 - 1 + 9 = 12$ ✓.",
+        },
+      ],
+      answer: "$x = 2$, $y = 1$, $z = 3$.",
     },
     {
       type: "callout",
@@ -322,14 +425,43 @@ const lesson02: LessonSeed = {
         "One sign slip in a cofactor ruins the answer, and it costs ten seconds to substitute back. In an exam, a check that fails tells you to recompute the adjoint, which is where almost every error lives.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (given a product).** A favourite CBSE question hands you the inverse in disguise: show that $\\begin{pmatrix} 1 & -1 & 2 \\\\ 0 & 2 & -3 \\\\ 3 & -2 & 4 \\end{pmatrix}\\begin{pmatrix} -2 & 0 & 1 \\\\ 9 & 2 & -3 \\\\ 6 & 1 & -2 \\end{pmatrix} = I$, then solve $x - y + 2z = 1$, $2y - 3z = 1$, $3x - 2y + 4z = 2$.\n\n**Step 1.** Multiply out: row 1 · column 1 $= -2 - 9 + 12 = 1$, row 1 · column 2 $= 0 - 2 + 2 = 0$, and so on. The product is $I$, so the second matrix is $A^{-1}$ for the first.\n\n**Step 2.** The system is $AX = B$ with that first matrix as $A$ (note the 0 for the missing $x$ in equation 2) and $B = (1, 1, 2)$.\n\n**Step 3.** $X = A^{-1}B = \\begin{pmatrix} -2 + 0 + 2 \\\\ 9 + 2 - 6 \\\\ 6 + 1 - 4 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 5 \\\\ 3 \\end{pmatrix}$. Check: $0 - 5 + 6 = 1$ ✓, $10 - 9 = 1$ ✓, $0 - 10 + 12 = 2$ ✓.",
+      type: "worked-example",
+      id: "mx4-2-we3",
+      title: "Worked example 3 (given a product)",
+      problem:
+        "A favourite CBSE question hands you the inverse in disguise: show that $\\begin{pmatrix} 1 & -1 & 2 \\\\ 0 & 2 & -3 \\\\ 3 & -2 & 4 \\end{pmatrix}\\begin{pmatrix} -2 & 0 & 1 \\\\ 9 & 2 & -3 \\\\ 6 & 1 & -2 \\end{pmatrix} = I$, then solve $x - y + 2z = 1$, $2y - 3z = 1$, $3x - 2y + 4z = 2$.",
+      steps: [
+        {
+          text: "Multiply out: row 1 · column 1 $= -2 - 9 + 12 = 1$, row 1 · column 2 $= 0 - 2 + 2 = 0$, and so on. The product is $I$, so the second matrix is $A^{-1}$ for the first.",
+        },
+        {
+          text: "The system is $AX = B$ with that first matrix as $A$ (note the 0 for the missing $x$ in equation 2) and $B = (1, 1, 2)$.",
+        },
+        {
+          text: "$X = A^{-1}B = \\begin{pmatrix} -2 + 0 + 2 \\\\ 9 + 2 - 6 \\\\ 6 + 1 - 4 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 5 \\\\ 3 \\end{pmatrix}$.",
+        },
+        { text: "Check: $0 - 5 + 6 = 1$ ✓, $10 - 9 = 1$ ✓, $0 - 10 + 12 = 2$ ✓." },
+      ],
+      answer: "$x = 0$, $y = 5$, $z = 3$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (word problem).** A shop charges ₹60 for 4 kg onion, 3 kg wheat and 2 kg rice; ₹90 for 2 kg onion, 4 kg wheat and 6 kg rice; and ₹70 for 6 kg onion, 2 kg wheat and 3 kg rice. Find the price per kg of each.\n\n**Step 1. Name the unknowns.** Let the prices per kg be $x$ (onion), $y$ (wheat), $z$ (rice).\n\n**Step 2. One equation per sentence.** $4x + 3y + 2z = 60$, $2x + 4y + 6z = 90$, $6x + 2y + 3z = 70$.\n\n**Step 3.** $|A| = 4(12 - 12) - 3(6 - 36) + 2(4 - 24) = 0 + 90 - 40 = 50$.\n\n**Step 4.** $\\operatorname{adj}A = \\begin{pmatrix} 0 & -5 & 10 \\\\ 30 & 0 & -20 \\\\ -20 & 10 & 10 \\end{pmatrix}$, so $X = \\frac{1}{50}\\begin{pmatrix} 0 - 450 + 700 \\\\ 1800 + 0 - 1400 \\\\ -1200 + 900 + 700 \\end{pmatrix} = \\frac{1}{50}\\begin{pmatrix} 250 \\\\ 400 \\\\ 400 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 8 \\\\ 8 \\end{pmatrix}$.\n\nOnion ₹5/kg, wheat ₹8/kg, rice ₹8/kg. Check the first bill: $20 + 24 + 16 = 60$ ✓.",
+      type: "worked-example",
+      id: "mx4-2-we4",
+      title: "Worked example 4 (word problem)",
+      problem:
+        "A shop charges ₹60 for 4 kg onion, 3 kg wheat and 2 kg rice; ₹90 for 2 kg onion, 4 kg wheat and 6 kg rice; and ₹70 for 6 kg onion, 2 kg wheat and 3 kg rice. Find the price per kg of each.",
+      steps: [
+        { text: "**Name the unknowns.** Let the prices per kg be $x$ (onion), $y$ (wheat), $z$ (rice)." },
+        {
+          text: "**One equation per sentence.** $4x + 3y + 2z = 60$, $2x + 4y + 6z = 90$, $6x + 2y + 3z = 70$.",
+        },
+        { text: "$|A| = 4(12 - 12) - 3(6 - 36) + 2(4 - 24) = 0 + 90 - 40 = 50$." },
+        {
+          text: "$\\operatorname{adj}A = \\begin{pmatrix} 0 & -5 & 10 \\\\ 30 & 0 & -20 \\\\ -20 & 10 & 10 \\end{pmatrix}$, so $X = \\frac{1}{50}\\begin{pmatrix} 0 - 450 + 700 \\\\ 1800 + 0 - 1400 \\\\ -1200 + 900 + 700 \\end{pmatrix} = \\frac{1}{50}\\begin{pmatrix} 250 \\\\ 400 \\\\ 400 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 8 \\\\ 8 \\end{pmatrix}$.",
+        },
+        { text: "Check the first bill: $20 + 24 + 16 = 60$ ✓." },
+      ],
+      answer: "Onion ₹5/kg, wheat ₹8/kg, rice ₹8/kg.",
     },
     {
       type: "callout",
@@ -345,6 +477,7 @@ const lesson02: LessonSeed = {
       content:
         "If $|A| = 0$ there is no $A^{-1}$ and this method says nothing, neither \"no solution\" nor \"infinitely many\". The system might have either. Lesson 4.4 handles that case.",
     },
+    { type: "heading", text: "Practice: solving with the inverse" },
     {
       type: "quiz",
       id: "mx4-2-q1",
@@ -416,6 +549,7 @@ const lesson02: LessonSeed = {
       ],
       hint: "\"Together equal twice\" becomes $x - 2y + z = 0$. The second equation has no $y$, so its $y$-coefficient is 0.",
     },
+    { type: "heading", text: "The transpose trap: solving with $A^T$" },
     {
       type: "callout",
       variant: "tip",
@@ -424,29 +558,39 @@ const lesson02: LessonSeed = {
         "A common CBSE follow-up: \"find $A^{-1}$, hence solve\" a system whose coefficient matrix is not $A$ but $A^T$ (the equations are read down the **columns** of $A$). There is no need to invert again: $(A^T)^{-1} = (A^{-1})^T$, so $X = (A^{-1})^TB$. Always compare the system's coefficient matrix with $A$ entry by entry before multiplying.",
     },
     {
+      type: "worked-example",
+      id: "mx4-2-we5",
+      title: "Worked example 5 (CBSE board style, the transpose trap)",
+      problem:
+        "Find $A^{-1}$ for $A = \\begin{pmatrix} 1 & 1 & 1 \\\\ 0 & 1 & 2 \\\\ 1 & 0 & 1 \\end{pmatrix}$. Hence solve $x + z = 4$, $x + y = 3$, $x + 2y + z = 8$.",
+      steps: [
+        {
+          text: "**Determinant.** Expand along row 1: $|A| = 1(1 - 0) - 1(0 - 2) + 1(0 - 1) = 1 + 2 - 1 = 2 \\ne 0$.",
+        },
+        {
+          text: "**Cofactors and adjoint.** Row 1: $C_{11} = 1$, $C_{12} = 2$, $C_{13} = -1$. Row 2: $C_{21} = -1$, $C_{22} = 0$, $C_{23} = 1$. Row 3: $C_{31} = 1$, $C_{32} = -2$, $C_{33} = 1$. Transposing,",
+          latex:
+            "A^{-1} = \\frac{1}{2}\\operatorname{adj}A = \\frac{1}{2}\\begin{pmatrix} 1 & -1 & 1 \\\\ 2 & 0 & -2 \\\\ -1 & 1 & 1 \\end{pmatrix}",
+        },
+        {
+          text: "**Compare the system with $A$.** The system's coefficient matrix is $\\begin{pmatrix} 1 & 0 & 1 \\\\ 1 & 1 & 0 \\\\ 1 & 2 & 1 \\end{pmatrix}$. Its rows are the **columns** of $A$, so it is $A^T$, not $A$.\n\n*Why this step:* using $A^{-1}B$ here would solve a different system and give a wrong answer with no warning. Ten seconds of comparison saves the whole question.",
+        },
+        {
+          text: "**Use $(A^T)^{-1} = (A^{-1})^T$.** Transpose the inverse you already have and multiply by $B = (4, 3, 8)$:",
+          latex:
+            "X = \\frac{1}{2}\\begin{pmatrix} 1 & 2 & -1 \\\\ -1 & 0 & 1 \\\\ 1 & -2 & 1 \\end{pmatrix}\\begin{pmatrix} 4 \\\\ 3 \\\\ 8 \\end{pmatrix} = \\frac{1}{2}\\begin{pmatrix} 4 + 6 - 8 \\\\ -4 + 0 + 8 \\\\ 4 - 6 + 8 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 3 \\end{pmatrix}",
+        },
+        {
+          text: "**Check** in the original equations: $1 + 3 = 4$ ✓, $1 + 2 = 3$ ✓, $1 + 4 + 3 = 8$ ✓.",
+        },
+      ],
+      answer:
+        "$A^{-1} = \\frac{1}{2}\\begin{pmatrix} 1 & -1 & 1 \\\\ 2 & 0 & -2 \\\\ -1 & 1 & 1 \\end{pmatrix}$, and the system gives $x = 1$, $y = 2$, $z = 3$.",
+    },
+    {
       type: "text",
       content:
-        "**Worked example 5 (CBSE board style, the transpose trap).** Find $A^{-1}$ for $A = \\begin{pmatrix} 1 & 1 & 1 \\\\ 0 & 1 & 2 \\\\ 1 & 0 & 1 \\end{pmatrix}$. Hence solve $x + z = 4$, $x + y = 3$, $x + 2y + z = 8$.\n\n**Step 1. Determinant.** Expand along row 1: $|A| = 1(1 - 0) - 1(0 - 2) + 1(0 - 1) = 1 + 2 - 1 = 2 \\ne 0$.\n\n**Step 2. Cofactors and adjoint.** Row 1: $C_{11} = 1$, $C_{12} = 2$, $C_{13} = -1$. Row 2: $C_{21} = -1$, $C_{22} = 0$, $C_{23} = 1$. Row 3: $C_{31} = 1$, $C_{32} = -2$, $C_{33} = 1$. Transposing,",
-    },
-    {
-      type: "math",
-      latex:
-        "A^{-1} = \\frac{1}{2}\\operatorname{adj}A = \\frac{1}{2}\\begin{pmatrix} 1 & -1 & 1 \\\\ 2 & 0 & -2 \\\\ -1 & 1 & 1 \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3. Compare the system with $A$.** The system's coefficient matrix is $\\begin{pmatrix} 1 & 0 & 1 \\\\ 1 & 1 & 0 \\\\ 1 & 2 & 1 \\end{pmatrix}$. Its rows are the **columns** of $A$, so it is $A^T$, not $A$.\n\n*Why this step:* using $A^{-1}B$ here would solve a different system and give a wrong answer with no warning. Ten seconds of comparison saves the whole question.\n\n**Step 4. Use $(A^T)^{-1} = (A^{-1})^T$.** Transpose the inverse you already have and multiply by $B = (4, 3, 8)$:",
-    },
-    {
-      type: "math",
-      latex:
-        "X = \\frac{1}{2}\\begin{pmatrix} 1 & 2 & -1 \\\\ -1 & 0 & 1 \\\\ 1 & -2 & 1 \\end{pmatrix}\\begin{pmatrix} 4 \\\\ 3 \\\\ 8 \\end{pmatrix} = \\frac{1}{2}\\begin{pmatrix} 4 + 6 - 8 \\\\ -4 + 0 + 8 \\\\ 4 - 6 + 8 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 3 \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 5. Check** in the original equations: $1 + 3 = 4$ ✓, $1 + 2 = 3$ ✓, $1 + 4 + 3 = 8$ ✓. So $x = 1$, $y = 2$, $z = 3$.\n\n**A related shortcut.** Some papers give two matrices with $AB = kI$ (for example $AB = 6I$). Divide by $k$: $A\\left(\\frac{1}{k}B\\right) = I$, so $A^{-1} = \\frac{1}{k}B$ and no adjoint is needed at all.",
+        "**A related shortcut.** Some papers give two matrices with $AB = kI$ (for example $AB = 6I$). Divide by $k$: $A\\left(\\frac{1}{k}B\\right) = I$, so $A^{-1} = \\frac{1}{k}B$ and no adjoint is needed at all.",
     },
     {
       type: "quiz",
@@ -472,6 +616,7 @@ const lesson02: LessonSeed = {
         { text: "$X = BC$", feedback: "$AB = 6I$, not $I$, so $B$ is six times too big to be $A^{-1}$." },
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx4-2-q9",
@@ -498,6 +643,7 @@ const lesson03: LessonSeed = {
       content:
         "The inverse method gives you all the unknowns at once, but it makes you build the whole adjoint. Sometimes you only want **one** unknown, say just $y$. Cramer's rule gives any single unknown as a ratio of two determinants, and it has a lovely geometric meaning.",
     },
+    { type: "heading", text: "Deriving Cramer's rule by elimination" },
     {
       type: "text",
       content:
@@ -524,6 +670,7 @@ const lesson03: LessonSeed = {
       content:
         "If $D = |A| \\ne 0$, the system $AX = B$ has the unique solution $x_i = \\dfrac{D_i}{D}$, where $D_i$ is $|A|$ with **column $i$ replaced by $B$**. For three unknowns: $x = \\frac{D_1}{D}$, $y = \\frac{D_2}{D}$, $z = \\frac{D_3}{D}$.",
     },
+    { type: "heading", text: "Why it works: a ratio of areas" },
     {
       type: "text",
       content:
@@ -585,35 +732,93 @@ const lesson03: LessonSeed = {
           "The same system in the row picture, with D, Dₓ and D_y computed live. Change one coefficient and watch the intersection and the three determinants move together. Push D towards 0 and the formula blows up exactly when the lines turn parallel.",
       },
     },
+    { type: "heading", text: "Solving systems with Cramer's rule" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (2 × 2).** Solve $2x + 3y = 7$, $x - y = 1$.\n\n$D = \\begin{vmatrix} 2 & 3 \\\\ 1 & -1 \\end{vmatrix} = -2 - 3 = -5$.\n\n$D_x = \\begin{vmatrix} 7 & 3 \\\\ 1 & -1 \\end{vmatrix} = -7 - 3 = -10$, so $x = \\frac{-10}{-5} = 2$.\n\n$D_y = \\begin{vmatrix} 2 & 7 \\\\ 1 & 1 \\end{vmatrix} = 2 - 7 = -5$, so $y = \\frac{-5}{-5} = 1$.\n\nCheck: $4 + 3 = 7$ ✓, $2 - 1 = 1$ ✓.",
+      type: "worked-example",
+      id: "mx4-3-we1",
+      title: "Worked example 1 (2 × 2)",
+      problem: "Solve $2x + 3y = 7$, $x - y = 1$.",
+      steps: [
+        { text: "$D = \\begin{vmatrix} 2 & 3 \\\\ 1 & -1 \\end{vmatrix} = -2 - 3 = -5$." },
+        { text: "$D_x = \\begin{vmatrix} 7 & 3 \\\\ 1 & -1 \\end{vmatrix} = -7 - 3 = -10$, so $x = \\frac{-10}{-5} = 2$." },
+        { text: "$D_y = \\begin{vmatrix} 2 & 7 \\\\ 1 & 1 \\end{vmatrix} = 2 - 7 = -5$, so $y = \\frac{-5}{-5} = 1$." },
+        { text: "Check: $4 + 3 = 7$ ✓, $2 - 1 = 1$ ✓." },
+      ],
+      answer: "$x = 2$, $y = 1$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx4-3-we2",
+      title: "Worked example 2 (3 × 3)",
+      problem: "Solve $x + y + z = 6$, $2x - y + z = 3$, $x + 2y - z = 2$.",
+      steps: [
+        {
+          text: "$D = \\begin{vmatrix} 1 & 1 & 1 \\\\ 2 & -1 & 1 \\\\ 1 & 2 & -1 \\end{vmatrix} = 1(1 - 2) - 1(-2 - 1) + 1(4 + 1) = -1 + 3 + 5 = 7$.",
+        },
+        {
+          text: "Replace column 1 by $B = (6, 3, 2)$: $D_1 = \\begin{vmatrix} 6 & 1 & 1 \\\\ 3 & -1 & 1 \\\\ 2 & 2 & -1 \\end{vmatrix} = 6(1 - 2) - 1(-3 - 2) + 1(6 + 2) = -6 + 5 + 8 = 7$.",
+        },
+        {
+          text: "Replace column 2: $D_2 = \\begin{vmatrix} 1 & 6 & 1 \\\\ 2 & 3 & 1 \\\\ 1 & 2 & -1 \\end{vmatrix} = 1(-3 - 2) - 6(-2 - 1) + 1(4 - 3) = -5 + 18 + 1 = 14$.",
+        },
+        {
+          text: "Replace column 3: $D_3 = \\begin{vmatrix} 1 & 1 & 6 \\\\ 2 & -1 & 3 \\\\ 1 & 2 & 2 \\end{vmatrix} = 1(-2 - 6) - 1(4 - 3) + 6(4 + 1) = -8 - 1 + 30 = 21$.",
+        },
+        { text: "$x = \\frac{7}{7} = 1$, $y = \\frac{14}{7} = 2$, $z = \\frac{21}{7} = 3$." },
+        { text: "Check: $1 + 2 + 3 = 6$ ✓, $2 - 2 + 3 = 3$ ✓, $1 + 4 - 3 = 2$ ✓." },
+      ],
+      answer: "$x = 1$, $y = 2$, $z = 3$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx4-3-we3",
+      title: "Worked example 3 (word problem): ticket sales",
+      problem:
+        "A school play sold 300 tickets: adult tickets at ₹50 and student tickets at ₹20. The takings were ₹9600. How many of each were sold?",
+      steps: [
+        {
+          text: "**Set up.** Let $x$ = adult tickets, $y$ = student tickets. Count: $x + y = 300$. Money: $50x + 20y = 9600$.\n\n*Why two equations:* each sentence of information that is independent of the others gives one equation. Two unknowns need two.",
+        },
+        {
+          text: "**Three determinants.**",
+          latex:
+            "D = \\begin{vmatrix} 1 & 1 \\\\ 50 & 20 \\end{vmatrix} = -30,\\quad D_x = \\begin{vmatrix} 300 & 1 \\\\ 9600 & 20 \\end{vmatrix} = 6000 - 9600 = -3600,\\quad D_y = \\begin{vmatrix} 1 & 300 \\\\ 50 & 9600 \\end{vmatrix} = 9600 - 15000 = -5400",
+        },
+        {
+          text: "$x = \\frac{-3600}{-30} = 120$ adults and $y = \\frac{-5400}{-30} = 180$ students.\n\n*Why keep the signs:* $D$, $D_x$, $D_y$ are all negative here, and the negatives cancel. Dropping a sign halfway through is the most common way to get a negative number of tickets.",
+        },
+        { text: "**Check.** $120 + 180 = 300$ ✓ and $6000 + 3600 = 9600$ ✓." },
+      ],
+      answer: "120 adult tickets and 180 student tickets.",
+    },
+    {
+      type: "worked-example",
+      id: "mx4-3-we4",
+      title: "Worked example 4 (CBSE board style, reciprocal unknowns)",
+      problem:
+        "Solve $\\dfrac{2}{x} + \\dfrac{3}{y} + \\dfrac{10}{z} = 4$, $\\dfrac{4}{x} - \\dfrac{6}{y} + \\dfrac{5}{z} = 1$, $\\dfrac{6}{x} + \\dfrac{9}{y} - \\dfrac{20}{z} = 2$.",
+      steps: [
+        {
+          text: "**Make it linear.** Put $u = \\frac{1}{x}$, $v = \\frac{1}{y}$, $w = \\frac{1}{z}$: $2u + 3v + 10w = 4$, $4u - 6v + 5w = 1$, $6u + 9v - 20w = 2$.\n\n*Why this step:* the equations are not linear in $x, y, z$, but they are linear in the reciprocals. Every method in this chapter needs a linear system, so change the unknowns first.",
+        },
+        {
+          text: "**$D$** (expand along row 1): $D = 2(120 - 45) - 3(-80 - 30) + 10(36 + 36) = 150 + 330 + 720 = 1200$.",
+        },
+        {
+          text: "**Replace each column by $(4, 1, 2)$.**\n\n$D_u = \\begin{vmatrix} 4 & 3 & 10 \\\\ 1 & -6 & 5 \\\\ 2 & 9 & -20 \\end{vmatrix} = 4(75) - 3(-30) + 10(21) = 300 + 90 + 210 = 600$.\n\n$D_v = \\begin{vmatrix} 2 & 4 & 10 \\\\ 4 & 1 & 5 \\\\ 6 & 2 & -20 \\end{vmatrix} = 2(-30) - 4(-110) + 10(2) = -60 + 440 + 20 = 400$.\n\n$D_w = \\begin{vmatrix} 2 & 3 & 4 \\\\ 4 & -6 & 1 \\\\ 6 & 9 & 2 \\end{vmatrix} = 2(-21) - 3(2) + 4(72) = -42 - 6 + 288 = 240$.",
+        },
+        {
+          text: "$u = \\frac{600}{1200} = \\frac{1}{2}$, $v = \\frac{400}{1200} = \\frac{1}{3}$, $w = \\frac{240}{1200} = \\frac{1}{5}$.",
+        },
+        { text: "**Undo the substitution.** $x = 2$, $y = 3$, $z = 5$." },
+        { text: "Check equation 1: $1 + 1 + 2 = 4$ ✓." },
+      ],
+      answer: "$x = 2$, $y = 3$, $z = 5$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 (3 × 3).** Solve $x + y + z = 6$, $2x - y + z = 3$, $x + 2y - z = 2$.\n\n**Step 1.** $D = \\begin{vmatrix} 1 & 1 & 1 \\\\ 2 & -1 & 1 \\\\ 1 & 2 & -1 \\end{vmatrix} = 1(1 - 2) - 1(-2 - 1) + 1(4 + 1) = -1 + 3 + 5 = 7$.\n\n**Step 2.** Replace column 1 by $B = (6, 3, 2)$: $D_1 = \\begin{vmatrix} 6 & 1 & 1 \\\\ 3 & -1 & 1 \\\\ 2 & 2 & -1 \\end{vmatrix} = 6(1 - 2) - 1(-3 - 2) + 1(6 + 2) = -6 + 5 + 8 = 7$.\n\n**Step 3.** Replace column 2: $D_2 = \\begin{vmatrix} 1 & 6 & 1 \\\\ 2 & 3 & 1 \\\\ 1 & 2 & -1 \\end{vmatrix} = 1(-3 - 2) - 6(-2 - 1) + 1(4 - 3) = -5 + 18 + 1 = 14$.\n\n**Step 4.** Replace column 3: $D_3 = \\begin{vmatrix} 1 & 1 & 6 \\\\ 2 & -1 & 3 \\\\ 1 & 2 & 2 \\end{vmatrix} = 1(-2 - 6) - 1(4 - 3) + 6(4 + 1) = -8 - 1 + 30 = 21$.\n\n**Step 5.** $x = \\frac{7}{7} = 1$, $y = \\frac{14}{7} = 2$, $z = \\frac{21}{7} = 3$. Check: $1 + 2 + 3 = 6$ ✓, $2 - 2 + 3 = 3$ ✓, $1 + 4 - 3 = 2$ ✓.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 (word problem): ticket sales.** A school play sold 300 tickets: adult tickets at ₹50 and student tickets at ₹20. The takings were ₹9600. How many of each were sold?\n\n**Step 1. Set up.** Let $x$ = adult tickets, $y$ = student tickets. Count: $x + y = 300$. Money: $50x + 20y = 9600$.\n\n*Why two equations:* each sentence of information that is independent of the others gives one equation. Two unknowns need two.\n\n**Step 2. Three determinants.**",
-    },
-    {
-      type: "math",
-      latex:
-        "D = \\begin{vmatrix} 1 & 1 \\\\ 50 & 20 \\end{vmatrix} = -30,\\quad D_x = \\begin{vmatrix} 300 & 1 \\\\ 9600 & 20 \\end{vmatrix} = 6000 - 9600 = -3600,\\quad D_y = \\begin{vmatrix} 1 & 300 \\\\ 50 & 9600 \\end{vmatrix} = 9600 - 15000 = -5400",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3.** $x = \\frac{-3600}{-30} = 120$ adults and $y = \\frac{-5400}{-30} = 180$ students.\n\n*Why keep the signs:* $D$, $D_x$, $D_y$ are all negative here, and the negatives cancel. Dropping a sign halfway through is the most common way to get a negative number of tickets.\n\n**Step 4. Check.** $120 + 180 = 300$ ✓ and $6000 + 3600 = 9600$ ✓.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (CBSE board style, reciprocal unknowns).** Solve $\\dfrac{2}{x} + \\dfrac{3}{y} + \\dfrac{10}{z} = 4$, $\\dfrac{4}{x} - \\dfrac{6}{y} + \\dfrac{5}{z} = 1$, $\\dfrac{6}{x} + \\dfrac{9}{y} - \\dfrac{20}{z} = 2$.\n\n**Step 1. Make it linear.** Put $u = \\frac{1}{x}$, $v = \\frac{1}{y}$, $w = \\frac{1}{z}$: $2u + 3v + 10w = 4$, $4u - 6v + 5w = 1$, $6u + 9v - 20w = 2$.\n\n*Why this step:* the equations are not linear in $x, y, z$, but they are linear in the reciprocals. Every method in this chapter needs a linear system, so change the unknowns first.\n\n**Step 2. $D$** (expand along row 1): $D = 2(120 - 45) - 3(-80 - 30) + 10(36 + 36) = 150 + 330 + 720 = 1200$.\n\n**Step 3. Replace each column by $(4, 1, 2)$.**\n\n$D_u = \\begin{vmatrix} 4 & 3 & 10 \\\\ 1 & -6 & 5 \\\\ 2 & 9 & -20 \\end{vmatrix} = 4(75) - 3(-30) + 10(21) = 300 + 90 + 210 = 600$.\n\n$D_v = \\begin{vmatrix} 2 & 4 & 10 \\\\ 4 & 1 & 5 \\\\ 6 & 2 & -20 \\end{vmatrix} = 2(-30) - 4(-110) + 10(2) = -60 + 440 + 20 = 400$.\n\n$D_w = \\begin{vmatrix} 2 & 3 & 4 \\\\ 4 & -6 & 1 \\\\ 6 & 9 & 2 \\end{vmatrix} = 2(-21) - 3(2) + 4(72) = -42 - 6 + 288 = 240$.\n\n**Step 4.** $u = \\frac{600}{1200} = \\frac{1}{2}$, $v = \\frac{400}{1200} = \\frac{1}{3}$, $w = \\frac{240}{1200} = \\frac{1}{5}$.\n\n**Step 5. Undo the substitution.** $x = 2$, $y = 3$, $z = 5$. Check equation 1: $1 + 1 + 2 = 4$ ✓.\n\n*Why step 5 matters:* the most common lost mark is stopping at $u = \\frac{1}{2}$ and writing $x = \\frac{1}{2}$.",
+        "*Why step 5 matters:* the most common lost mark is stopping at $u = \\frac{1}{2}$ and writing $x = \\frac{1}{2}$.",
     },
     {
       type: "callout",
@@ -634,6 +839,7 @@ const lesson03: LessonSeed = {
         ["Number of equations ≠ number of unknowns", "Row reduction", "Determinants exist only for square $A$, so neither $A^{-1}$ nor Cramer applies"],
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx4-3-q1",
@@ -757,16 +963,31 @@ const lesson04: LessonSeed = {
           "Only the right-hand sides c₁ and c₂ have sliders, so D stays 0 in the first two presets. Move c₂ and the lines stay parallel. At exactly c₂ = 6 they snap together and Dₓ, D_y become 0 too.",
       },
     },
+    { type: "heading", text: "Two unknowns: parallel or identical lines" },
     {
       type: "text",
       content:
         "In two unknowns the picture is clean. $D = 0$ means the lines are parallel or the same. If $D_x$ or $D_y$ is non-zero, the right-hand sides are out of step and the lines are distinct: **no solution**. If $D = D_x = D_y = 0$ (and the equations are not both of the form $0 = c$), the lines coincide: **infinitely many**.",
     },
     {
-      type: "text",
-      content:
-        "**Warm-up example (2 × 2).** Classify $3x - 6y = 9$, $x - 2y = 4$.\n\n**Step 1.** $D = \\begin{vmatrix} 3 & -6 \\\\ 1 & -2 \\end{vmatrix} = -6 + 6 = 0$. So there is no unique solution.\n\n**Step 2.** $D_x = \\begin{vmatrix} 9 & -6 \\\\ 4 & -2 \\end{vmatrix} = -18 + 24 = 6 \\ne 0$.\n\n*Why this step:* $D = 0$ only says \"parallel or identical\". A single non-zero $D_x$ (or $D_y$) proves the right-hand sides are out of step, so the lines are distinct.\n\n**Conclusion: no solution.** The picture agrees: divide the first equation by 3 to get $x - 2y = 3$, while the second says $x - 2y = 4$. Same slope, different lines.",
+      type: "worked-example",
+      id: "mx4-4-we1",
+      title: "Warm-up example (2 × 2)",
+      problem: "Classify $3x - 6y = 9$, $x - 2y = 4$.",
+      steps: [
+        {
+          text: "$D = \\begin{vmatrix} 3 & -6 \\\\ 1 & -2 \\end{vmatrix} = -6 + 6 = 0$. So there is no unique solution.",
+        },
+        {
+          text: "$D_x = \\begin{vmatrix} 9 & -6 \\\\ 4 & -2 \\end{vmatrix} = -18 + 24 = 6 \\ne 0$.\n\n*Why this step:* $D = 0$ only says \"parallel or identical\". A single non-zero $D_x$ (or $D_y$) proves the right-hand sides are out of step, so the lines are distinct.",
+        },
+        {
+          text: "The picture agrees: divide the first equation by 3 to get $x - 2y = 3$, while the second says $x - 2y = 4$. Same slope, different lines.",
+        },
+      ],
+      answer: "No solution.",
     },
+    { type: "heading", text: "Three unknowns: the $(\\operatorname{adj}A)B$ test" },
     {
       type: "text",
       content:
@@ -791,21 +1012,50 @@ const lesson04: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (inconsistent).** Test $3x - y - 2z = 2$, $2y - z = -1$, $3x - 5y = 3$.\n\n**Step 1.** $A = \\begin{pmatrix} 3 & -1 & -2 \\\\ 0 & 2 & -1 \\\\ 3 & -5 & 0 \\end{pmatrix}$, $|A| = 3(0 - 5) - (-1)(0 + 3) + (-2)(0 - 6) = -15 + 3 + 12 = 0$.\n\n**Step 2.** $\\operatorname{adj}A = \\begin{pmatrix} -5 & 10 & 5 \\\\ -3 & 6 & 3 \\\\ -6 & 12 & 6 \\end{pmatrix}$.\n\n**Step 3.** $(\\operatorname{adj}A)B = \\begin{pmatrix} -10 - 10 + 15 \\\\ -6 - 6 + 9 \\\\ -12 - 12 + 18 \\end{pmatrix} = \\begin{pmatrix} -5 \\\\ -3 \\\\ -6 \\end{pmatrix} \\ne O$.\n\nSo the system is **inconsistent**. You can see it directly too: (equation 1) $-$ (equation 3) gives $4y - 2z = -1$, but twice equation 2 says $4y - 2z = -2$.",
+      type: "worked-example",
+      id: "mx4-4-we2",
+      title: "Worked example 1",
+      problem: "Test $3x - y - 2z = 2$, $2y - z = -1$, $3x - 5y = 3$ for consistency.",
+      steps: [
+        {
+          text: "$A = \\begin{pmatrix} 3 & -1 & -2 \\\\ 0 & 2 & -1 \\\\ 3 & -5 & 0 \\end{pmatrix}$, $|A| = 3(0 - 5) - (-1)(0 + 3) + (-2)(0 - 6) = -15 + 3 + 12 = 0$.",
+        },
+        {
+          text: "$\\operatorname{adj}A = \\begin{pmatrix} -5 & 10 & 5 \\\\ -3 & 6 & 3 \\\\ -6 & 12 & 6 \\end{pmatrix}$.",
+        },
+        {
+          text: "$(\\operatorname{adj}A)B = \\begin{pmatrix} -10 - 10 + 15 \\\\ -6 - 6 + 9 \\\\ -12 - 12 + 18 \\end{pmatrix} = \\begin{pmatrix} -5 \\\\ -3 \\\\ -6 \\end{pmatrix} \\ne O$.",
+        },
+        {
+          text: "You can see it directly too: (equation 1) $-$ (equation 3) gives $4y - 2z = -1$, but twice equation 2 says $4y - 2z = -2$.",
+        },
+      ],
+      answer: "The system is **inconsistent**: it has no solution.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (infinitely many).** Test $x + y + z = 6$, $x + 2y + 3z = 14$, $2x + 3y + 4z = 20$.\n\n**Step 1.** $|A| = 1(8 - 9) - 1(4 - 6) + 1(3 - 4) = -1 + 2 - 1 = 0$.\n\n**Step 2.** $\\operatorname{adj}A = \\begin{pmatrix} -1 & -1 & 1 \\\\ 2 & 2 & -2 \\\\ -1 & -1 & 1 \\end{pmatrix}$ and $(\\operatorname{adj}A)B = (-6 - 14 + 20,\\ 12 + 28 - 40,\\ -6 - 14 + 20) = (0, 0, 0)$.\n\n**Step 3. Confirm by solving.** Equation 3 is equation 1 + equation 2, so it adds nothing. Subtract equation 1 from equation 2: $y + 2z = 8$. Let $z = t$. Then $y = 8 - 2t$ and $x = 6 - y - z = t - 2$.\n\nSolution: $(x, y, z) = (t - 2,\\ 8 - 2t,\\ t)$ for every real $t$: a whole line of solutions where three planes share an edge.",
+      type: "worked-example",
+      id: "mx4-4-we3",
+      title: "Worked example 2",
+      problem:
+        "Test $x + y + z = 6$, $x + 2y + 3z = 14$, $2x + 3y + 4z = 20$ for consistency, and solve it if it is consistent.",
+      steps: [
+        { text: "$|A| = 1(8 - 9) - 1(4 - 6) + 1(3 - 4) = -1 + 2 - 1 = 0$." },
+        {
+          text: "$\\operatorname{adj}A = \\begin{pmatrix} -1 & -1 & 1 \\\\ 2 & 2 & -2 \\\\ -1 & -1 & 1 \\end{pmatrix}$ and $(\\operatorname{adj}A)B = (-6 - 14 + 20,\\ 12 + 28 - 40,\\ -6 - 14 + 20) = (0, 0, 0)$.",
+        },
+        {
+          text: "**Confirm by solving.** Equation 3 is equation 1 + equation 2, so it adds nothing. Subtract equation 1 from equation 2: $y + 2z = 8$. Let $z = t$. Then $y = 8 - 2t$ and $x = 6 - y - z = t - 2$.",
+        },
+      ],
+      answer:
+        "Solution: $(x, y, z) = (t - 2,\\ 8 - 2t,\\ t)$ for every real $t$: a whole line of solutions where three planes share an edge.",
     },
     {
       type: "callout",
       variant: "warning",
       title: "D = 0 does not mean \"no solution\"",
       content:
-        "$D = 0$ only says the solution, if there is one, is not unique. Example 2 has $D = 0$ and infinitely many solutions. Always run the second test before concluding anything.",
+        "$D = 0$ only says the solution, if there is one, is not unique. Coincident lines or planes have $D = 0$ and infinitely many solutions. Always run the second test before concluding anything.",
     },
     {
       type: "callout",
@@ -814,6 +1064,7 @@ const lesson04: LessonSeed = {
       content:
         "Take $x + y + z = 1$, $x + y + z = 2$, $x + y + z = 3$: three parallel planes, so obviously no solution. Yet $D = 0$ (equal rows), and every $D_i$ is 0 because it has two equal columns. Even $\\operatorname{adj}A = O$ here, so $(\\operatorname{adj}A)B = O$ as well. The determinant tests cannot see the difference. Row reduction can: $R_2 - R_1$ gives $0 = 1$.",
     },
+    { type: "heading", text: "Homogeneous systems and non-trivial solutions" },
     {
       type: "callout",
       variant: "definition",
@@ -827,29 +1078,82 @@ const lesson04: LessonSeed = {
         "The geometry makes this obvious. $AX = O$ asks which inputs get sent to the origin. If $A$ does not squash anything, only the origin goes there. If $A$ squashes space onto a plane or a line, a whole line (or plane) of inputs collapses onto the origin. For a homogeneous system the \"no solution\" case cannot happen, so $|A| = 0$ settles it.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (homogeneous with a parameter).** For which $k$ does $kx + y + z = 0$, $x + ky + z = 0$, $x + y + kz = 0$ have a non-trivial solution?\n\n**Step 1.** Need $|A| = 0$. Add all columns into column 1 (the value does not change): every entry of column 1 becomes $k + 2$, so\n\n$|A| = (k + 2)\\begin{vmatrix} 1 & 1 & 1 \\\\ 1 & k & 1 \\\\ 1 & 1 & k \\end{vmatrix}$.\n\n**Step 2.** Subtract row 1 from rows 2 and 3: the determinant becomes $(k + 2)\\begin{vmatrix} 1 & 1 & 1 \\\\ 0 & k - 1 & 0 \\\\ 0 & 0 & k - 1 \\end{vmatrix} = (k + 2)(k - 1)^2$.\n\n**Step 3.** Non-trivial solutions exist iff $k = 1$ or $k = -2$. Check $k = -2$: $(1, 1, 1)$ gives $-2 + 1 + 1 = 0$ in each equation ✓.\n\n**Step 4. Actually solve at each value.** The two singular cases collapse different amounts.\n\n$k = -2$: the equations are $-2x + y + z = 0$, $x - 2y + z = 0$, $x + y - 2z = 0$. Subtract the second from the third: $3y - 3z = 0$, so $y = z$. Then the second gives $x = 2y - z = z$. So $(x, y, z) = (t, t, t)$: a **line** of solutions, often written $x : y : z = 1 : 1 : 1$.\n\n$k = 1$: all three equations are the same, $x + y + z = 0$. Two unknowns are free: $(x, y, z) = (-s - t,\\ s,\\ t)$, a whole **plane** of solutions.\n\n$|A| = 0$ guarantees non-trivial solutions; how many free parameters you get is what Chapter 5's rank will measure.",
+      type: "worked-example",
+      id: "mx4-4-we4",
+      title: "Worked example 3 (homogeneous with a parameter)",
+      problem:
+        "For which $k$ does $kx + y + z = 0$, $x + ky + z = 0$, $x + y + kz = 0$ have a non-trivial solution?",
+      steps: [
+        {
+          text: "Need $|A| = 0$. Add all columns into column 1 (the value does not change): every entry of column 1 becomes $k + 2$, so\n\n$|A| = (k + 2)\\begin{vmatrix} 1 & 1 & 1 \\\\ 1 & k & 1 \\\\ 1 & 1 & k \\end{vmatrix}$.",
+        },
+        {
+          text: "Subtract row 1 from rows 2 and 3: the determinant becomes $(k + 2)\\begin{vmatrix} 1 & 1 & 1 \\\\ 0 & k - 1 & 0 \\\\ 0 & 0 & k - 1 \\end{vmatrix} = (k + 2)(k - 1)^2$.",
+        },
+        {
+          text: "Non-trivial solutions exist iff $k = 1$ or $k = -2$. Check $k = -2$: $(1, 1, 1)$ gives $-2 + 1 + 1 = 0$ in each equation ✓.",
+        },
+        {
+          text: "**Actually solve at each value.** The two singular cases collapse different amounts.\n\n$k = -2$: the equations are $-2x + y + z = 0$, $x - 2y + z = 0$, $x + y - 2z = 0$. Subtract the second from the third: $3y - 3z = 0$, so $y = z$. Then the second gives $x = 2y - z = z$. So $(x, y, z) = (t, t, t)$: a **line** of solutions, often written $x : y : z = 1 : 1 : 1$.",
+        },
+        {
+          text: "$k = 1$: all three equations are the same, $x + y + z = 0$. Two unknowns are free: $(x, y, z) = (-s - t,\\ s,\\ t)$, a whole **plane** of solutions.",
+        },
+      ],
+      answer: "$k = 1$ or $k = -2$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 4 (homogeneous, find the solutions).** Find $\\lambda$ so that $x + y + z = 0$, $2x + y - z = 0$, $3x + 2y + \\lambda z = 0$ has a non-trivial solution, and find all such solutions.\n\n**Step 1.** $|A| = 1(\\lambda + 2) - 1(2\\lambda + 3) + 1(4 - 3) = -\\lambda$. Non-trivial solutions need $|A| = 0$, so $\\lambda = 0$.\n\n*Why only $|A|$:* a homogeneous system is always consistent, so there is no \"none\" case to rule out. The determinant alone decides.\n\n**Step 2. Solve at $\\lambda = 0$.** Subtract equation 1 from equation 2: $x - 2z = 0$, so $x = 2z$. Then equation 1 gives $y = -x - z = -3z$. Let $z = t$:",
+        "$|A| = 0$ guarantees non-trivial solutions; how many free parameters you get is what Chapter 5's rank will measure.",
     },
     {
-      type: "math",
-      latex: "(x, y, z) = (2t,\\ -3t,\\ t),\\quad t \\in \\mathbb{R},\\qquad\\text{i.e. } x : y : z = 2 : -3 : 1",
+      type: "worked-example",
+      id: "mx4-4-we5",
+      title: "Worked example 4 (homogeneous, find the solutions)",
+      problem:
+        "Find $\\lambda$ so that $x + y + z = 0$, $2x + y - z = 0$, $3x + 2y + \\lambda z = 0$ has a non-trivial solution, and find all such solutions.",
+      steps: [
+        {
+          text: "$|A| = 1(\\lambda + 2) - 1(2\\lambda + 3) + 1(4 - 3) = -\\lambda$. Non-trivial solutions need $|A| = 0$, so $\\lambda = 0$.\n\n*Why only $|A|$:* a homogeneous system is always consistent, so there is no \"none\" case to rule out. The determinant alone decides.",
+        },
+        {
+          text: "**Solve at $\\lambda = 0$.** Subtract equation 1 from equation 2: $x - 2z = 0$, so $x = 2z$. Then equation 1 gives $y = -x - z = -3z$. Let $z = t$:",
+          latex: "(x, y, z) = (2t,\\ -3t,\\ t),\\quad t \\in \\mathbb{R},\\qquad\\text{i.e. } x : y : z = 2 : -3 : 1",
+        },
+        {
+          text: "**Check** in the equation you did not use: $3(2t) + 2(-3t) + 0 = 0$ ✓. (It had to work: at $\\lambda = 0$, equation 3 is equation 1 + equation 2.)",
+        },
+      ],
+      answer: "$\\lambda = 0$, with solutions $(x, y, z) = (2t,\\ -3t,\\ t)$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx4-4-we6",
+      title: "Worked example 5 (real world): balancing a chemical equation",
+      problem:
+        "Propane burns in oxygen: $a\\,\\mathrm{C_3H_8} + b\\,\\mathrm{O_2} \\to c\\,\\mathrm{CO_2} + d\\,\\mathrm{H_2O}$. Find the smallest whole-number coefficients.",
+      steps: [
+        {
+          text: "**One equation per element** (atoms in = atoms out).\n\nCarbon: $3a = c$. Hydrogen: $8a = 2d$. Oxygen: $2b = 2c + d$.",
+        },
+        {
+          text: "**Recognise the type.** Move everything to one side: $3a - c = 0$, $8a - 2d = 0$, $2b - 2c - d = 0$. Every constant is 0, so the system is **homogeneous**: $(0, 0, 0, 0)$ always works (burn nothing, get nothing). It has 3 equations in 4 unknowns, so at least one unknown is free and a non-trivial solution is guaranteed.",
+        },
+        { text: "**Solve with $a = t$.** $c = 3t$, $d = 4t$, and $2b = 6t + 4t$, so $b = 5t$." },
+        {
+          text: "**Pick the smallest whole numbers:** $t = 1$ gives $\\mathrm{C_3H_8} + 5\\,\\mathrm{O_2} \\to 3\\,\\mathrm{CO_2} + 4\\,\\mathrm{H_2O}$.",
+        },
+        { text: "Check oxygen: $10 = 6 + 4$ ✓." },
+      ],
+      answer: "$\\mathrm{C_3H_8} + 5\\,\\mathrm{O_2} \\to 3\\,\\mathrm{CO_2} + 4\\,\\mathrm{H_2O}$",
     },
     {
       type: "text",
       content:
-        "**Step 3. Check** in the equation you did not use: $3(2t) + 2(-3t) + 0 = 0$ ✓. (It had to work: at $\\lambda = 0$, equation 3 is equation 1 + equation 2.)",
+        "*Why the free parameter is physical:* doubling every coefficient (burning twice as much) balances just as well. The line of solutions $(t, 5t, 3t, 4t)$ is exactly that freedom.",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (real world): balancing a chemical equation.** Propane burns in oxygen: $a\\,\\mathrm{C_3H_8} + b\\,\\mathrm{O_2} \\to c\\,\\mathrm{CO_2} + d\\,\\mathrm{H_2O}$. Find the smallest whole-number coefficients.\n\n**Step 1. One equation per element** (atoms in = atoms out).\n\nCarbon: $3a = c$. Hydrogen: $8a = 2d$. Oxygen: $2b = 2c + d$.\n\n**Step 2. Recognise the type.** Move everything to one side: $3a - c = 0$, $8a - 2d = 0$, $2b - 2c - d = 0$. Every constant is 0, so the system is **homogeneous**: $(0, 0, 0, 0)$ always works (burn nothing, get nothing). It has 3 equations in 4 unknowns, so at least one unknown is free and a non-trivial solution is guaranteed.\n\n**Step 3. Solve with $a = t$.** $c = 3t$, $d = 4t$, and $2b = 6t + 4t$, so $b = 5t$.\n\n**Step 4. Pick the smallest whole numbers:** $t = 1$ gives $\\mathrm{C_3H_8} + 5\\,\\mathrm{O_2} \\to 3\\,\\mathrm{CO_2} + 4\\,\\mathrm{H_2O}$. Check oxygen: $10 = 6 + 4$ ✓.\n\n*Why the free parameter is physical:* doubling every coefficient (burning twice as much) balances just as well. The line of solutions $(t, 5t, 3t, 4t)$ is exactly that freedom.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx4-4-q1",
@@ -944,6 +1248,7 @@ const lesson05: LessonSeed = {
       content:
         "Determinant tests can leave you with \"infinitely many or none, check\". Row reduction is the check. It is the elimination you already do by hand, organised so that it always finishes and always tells you which of the three cases you are in. It also works when $D = 0$ and for any number of equations.",
     },
+    { type: "heading", text: "Augmented matrices and echelon form" },
     {
       type: "callout",
       variant: "definition",
@@ -958,20 +1263,23 @@ const lesson05: LessonSeed = {
       content:
         "A matrix is in **row echelon form** when (1) any all-zero rows are at the bottom, and (2) each non-zero row's first non-zero entry (its **pivot**) is strictly to the right of the pivot above. It is in **reduced** row echelon form if, in addition, every pivot is 1 and is the only non-zero entry in its column.",
     },
+    { type: "heading", text: "A unique solution by back-substitution" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (unique).** Solve $x + y + z = 6$, $2x - y + z = 3$, $x + 2y - z = 2$.",
-    },
-    {
-      type: "math",
-      latex:
-        "\\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\\\ 2 & -1 & 1 & 3 \\\\ 1 & 2 & -1 & 2 \\end{array}\\right] \\xrightarrow[R_3 \\to R_3 - R_1]{R_2 \\to R_2 - 2R_1} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\\\ 0 & -3 & -1 & -9 \\\\ 0 & 1 & -2 & -4 \\end{array}\\right] \\xrightarrow{R_2 \\leftrightarrow R_3} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\\\ 0 & 1 & -2 & -4 \\\\ 0 & -3 & -1 & -9 \\end{array}\\right] \\xrightarrow{R_3 \\to R_3 + 3R_2} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\\\ 0 & 1 & -2 & -4 \\\\ 0 & 0 & -7 & -21 \\end{array}\\right]",
-    },
-    {
-      type: "text",
-      content:
-        "**Back-substitute** from the bottom: $-7z = -21$ gives $z = 3$. Then $y - 2(3) = -4$ gives $y = 2$. Then $x + 2 + 3 = 6$ gives $x = 1$. The same $(1, 2, 3)$ that Cramer gave in lesson 4.3.",
+      type: "worked-example",
+      id: "mx4-5-we1",
+      title: "Worked example 1",
+      problem: "Solve $x + y + z = 6$, $2x - y + z = 3$, $x + 2y - z = 2$.",
+      steps: [
+        {
+          latex:
+            "\\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\\\ 2 & -1 & 1 & 3 \\\\ 1 & 2 & -1 & 2 \\end{array}\\right] \\xrightarrow[R_3 \\to R_3 - R_1]{R_2 \\to R_2 - 2R_1} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\\\ 0 & -3 & -1 & -9 \\\\ 0 & 1 & -2 & -4 \\end{array}\\right] \\xrightarrow{R_2 \\leftrightarrow R_3} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\\\ 0 & 1 & -2 & -4 \\\\ 0 & -3 & -1 & -9 \\end{array}\\right] \\xrightarrow{R_3 \\to R_3 + 3R_2} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\\\ 0 & 1 & -2 & -4 \\\\ 0 & 0 & -7 & -21 \\end{array}\\right]",
+        },
+        {
+          text: "**Back-substitute** from the bottom: $-7z = -21$ gives $z = 3$. Then $y - 2(3) = -4$ gives $y = 2$. Then $x + 2 + 3 = 6$ gives $x = 1$. The same $(1, 2, 3)$ that Cramer gave in lesson 4.3.",
+        },
+      ],
+      answer: "$x = 1$, $y = 2$, $z = 3$.",
+      tryFirst: false,
     },
     {
       type: "interactive",
@@ -989,35 +1297,47 @@ const lesson05: LessonSeed = {
           "Your turn. Clear column 1 below the pivot (R₂ → R₂ − 2R₁, R₃ → R₃ − R₁), then clear column 2. Your steps may differ from the worked example and still reach a valid echelon form. Keep going to reduced form and the tool writes out x, y, z.",
       },
     },
+    { type: "heading", text: "Spotting no solution or infinitely many" },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (no solution).** Solve $x + y + z = 2$, $x + 2y + 3z = 5$, $2x + 3y + 4z = 9$.",
+      type: "worked-example",
+      id: "mx4-5-we2",
+      title: "Worked example 2",
+      problem: "Solve $x + y + z = 2$, $x + 2y + 3z = 5$, $2x + 3y + 4z = 9$.",
+      steps: [
+        {
+          latex:
+            "\\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 2 & 3 & 5 \\\\ 2 & 3 & 4 & 9 \\end{array}\\right] \\xrightarrow[R_3 \\to R_3 - 2R_1]{R_2 \\to R_2 - R_1} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 1 & 2 & 3 \\\\ 0 & 1 & 2 & 5 \\end{array}\\right] \\xrightarrow{R_3 \\to R_3 - R_2} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 1 & 2 & 3 \\\\ 0 & 0 & 0 & 2 \\end{array}\\right]",
+        },
+        {
+          text: "The last row reads $0x + 0y + 0z = 2$, that is $0 = 2$. No choice of $x, y, z$ can make that true, so the system is **inconsistent**.",
+        },
+        {
+          text: "The reason is visible in the original: equation 1 + equation 2 gives $2x + 3y + 4z = 7$, but equation 3 demands 9.",
+        },
+      ],
+      answer: "No solution: the system is inconsistent.",
     },
     {
-      type: "math",
-      latex:
-        "\\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 1 & 2 & 3 & 5 \\\\ 2 & 3 & 4 & 9 \\end{array}\\right] \\xrightarrow[R_3 \\to R_3 - 2R_1]{R_2 \\to R_2 - R_1} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 1 & 2 & 3 \\\\ 0 & 1 & 2 & 5 \\end{array}\\right] \\xrightarrow{R_3 \\to R_3 - R_2} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 2 \\\\ 0 & 1 & 2 & 3 \\\\ 0 & 0 & 0 & 2 \\end{array}\\right]",
-    },
-    {
-      type: "text",
-      content:
-        "The last row reads $0x + 0y + 0z = 2$, that is $0 = 2$. No choice of $x, y, z$ can make that true, so the system is **inconsistent**. The reason is visible in the original: equation 1 + equation 2 gives $2x + 3y + 4z = 7$, but equation 3 demands 9.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 (infinitely many).** Solve $x + y + z = 6$, $x + 2y + 3z = 14$, $2x + 3y + 4z = 20$ (lesson 4.4's system).",
-    },
-    {
-      type: "math",
-      latex:
-        "\\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\\\ 1 & 2 & 3 & 14 \\\\ 2 & 3 & 4 & 20 \\end{array}\\right] \\xrightarrow[R_3 \\to R_3 - 2R_1]{R_2 \\to R_2 - R_1} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\\\ 0 & 1 & 2 & 8 \\\\ 0 & 1 & 2 & 8 \\end{array}\\right] \\xrightarrow{R_3 \\to R_3 - R_2} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\\\ 0 & 1 & 2 & 8 \\\\ 0 & 0 & 0 & 0 \\end{array}\\right]",
-    },
-    {
-      type: "text",
-      content:
-        "Now the last row reads $0 = 0$. It is always true, so it puts no restriction on anything. Only two real equations remain for three unknowns. Column 3 has no pivot, so $z$ is a **free variable**: call it $t$. Back-substitute:\n\n$y + 2t = 8 \\Rightarrow y = 8 - 2t$, and $x + (8 - 2t) + t = 6 \\Rightarrow x = t - 2$.\n\nThe **parametric solution** is $(x, y, z) = (t - 2,\\ 8 - 2t,\\ t)$, $t \\in \\mathbb{R}$. For example $t = 0$ gives $(-2, 8, 0)$ and $t = 4$ gives $(2, 0, 4)$. Both check in all three equations.",
+      type: "worked-example",
+      id: "mx4-5-we3",
+      title: "Worked example 3",
+      problem: "Solve $x + y + z = 6$, $x + 2y + 3z = 14$, $2x + 3y + 4z = 20$ (lesson 4.4's system).",
+      steps: [
+        {
+          latex:
+            "\\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\\\ 1 & 2 & 3 & 14 \\\\ 2 & 3 & 4 & 20 \\end{array}\\right] \\xrightarrow[R_3 \\to R_3 - 2R_1]{R_2 \\to R_2 - R_1} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\\\ 0 & 1 & 2 & 8 \\\\ 0 & 1 & 2 & 8 \\end{array}\\right] \\xrightarrow{R_3 \\to R_3 - R_2} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\\\ 0 & 1 & 2 & 8 \\\\ 0 & 0 & 0 & 0 \\end{array}\\right]",
+        },
+        {
+          text: "Now the last row reads $0 = 0$. It is always true, so it puts no restriction on anything. Only two real equations remain for three unknowns. Column 3 has no pivot, so $z$ is a **free variable**: call it $t$.",
+        },
+        {
+          text: "Back-substitute:\n\n$y + 2t = 8 \\Rightarrow y = 8 - 2t$, and $x + (8 - 2t) + t = 6 \\Rightarrow x = t - 2$.",
+        },
+        {
+          text: "The **parametric solution** is $(x, y, z) = (t - 2,\\ 8 - 2t,\\ t)$, $t \\in \\mathbb{R}$. For example $t = 0$ gives $(-2, 8, 0)$ and $t = 4$ gives $(2, 0, 4)$. Both check in all three equations.",
+        },
+      ],
+      answer: "Infinitely many: $(x, y, z) = (t - 2,\\ 8 - 2t,\\ t)$, $t \\in \\mathbb{R}$.",
     },
     {
       type: "interactive",
@@ -1032,7 +1352,7 @@ const lesson05: LessonSeed = {
         augmented: [[6], [14], [20]],
         target: "reduced",
         caption:
-          "Reduce this one all the way to reduced row echelon form. A zero row appears, z becomes free, and the tool writes x and y in terms of z. Compare with x = t − 2, y = 8 − 2t.",
+          "Reduce this one all the way to reduced row echelon form. The tool writes out the solution at the end. Compare it with your answer to Worked example 3.",
       },
     },
     {
@@ -1051,35 +1371,58 @@ const lesson05: LessonSeed = {
         ["No such row, and some column without a pivot", "Infinitely many (one parameter per free column)"],
       ],
     },
+    { type: "heading", text: "Word problems and non-square systems" },
+    {
+      type: "worked-example",
+      id: "mx4-5-we4",
+      title: "Worked example 4 (word problem): a jar of coins",
+      problem:
+        "A jar holds 30 coins of ₹1, ₹2 and ₹5, worth ₹80 in all. There are 2 more ₹1 coins than ₹5 coins. How many of each?",
+      steps: [
+        {
+          text: "**Equations.** Let $a, b, c$ be the numbers of ₹1, ₹2, ₹5 coins. Count: $a + b + c = 30$. Value: $a + 2b + 5c = 80$. Comparison: $a - c = 2$.\n\n*Why write $a - c = 2$ with a 0 for $b$:* the augmented matrix needs every row to have an entry in every column.",
+        },
+        {
+          text: "**Row-reduce.** Use row 1 as the pivot row to clear column 1, then clear column 2:",
+          latex:
+            "\\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 30 \\\\ 1 & 2 & 5 & 80 \\\\ 1 & 0 & -1 & 2 \\end{array}\\right] \\xrightarrow[R_3 \\to R_3 - R_1]{R_2 \\to R_2 - R_1} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 30 \\\\ 0 & 1 & 4 & 50 \\\\ 0 & -1 & -2 & -28 \\end{array}\\right] \\xrightarrow{R_3 \\to R_3 + R_2} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 30 \\\\ 0 & 1 & 4 & 50 \\\\ 0 & 0 & 2 & 22 \\end{array}\\right]",
+        },
+        {
+          text: "**Back-substitute.** $2c = 22$, so $c = 11$. Then $b + 44 = 50$, so $b = 6$. Then $a = 30 - 6 - 11 = 13$.\n\n*Why bottom-up:* echelon form leaves the last row with one unknown, and each row above adds exactly one new one.",
+        },
+        {
+          text: "**Check** all three facts: $13 + 6 + 11 = 30$ ✓, $13 + 12 + 55 = 80$ ✓, $13 - 11 = 2$ ✓.",
+        },
+      ],
+      answer: "13 one-rupee, 6 two-rupee and 11 five-rupee coins.",
+    },
+    {
+      type: "worked-example",
+      id: "mx4-5-we5",
+      title: "Worked example 5 (exam style): more equations than unknowns",
+      problem:
+        "For which value of $c$ is the system $x + y = 3$, $2x - y = 0$, $3x + 2y = c$ consistent? Solve it for that $c$.",
+      steps: [
+        {
+          text: "**Why not determinants?** The coefficient matrix is $3 \\times 2$, so it has no determinant. Three lines in a plane usually have no common point; the question is when all three pass through one point.",
+        },
+        {
+          text: "**Row-reduce with $c$ left as a letter.**",
+          latex:
+            "\\left[\\begin{array}{cc|c} 1 & 1 & 3 \\\\ 2 & -1 & 0 \\\\ 3 & 2 & c \\end{array}\\right] \\xrightarrow[R_3 \\to R_3 - 3R_1]{R_2 \\to R_2 - 2R_1} \\left[\\begin{array}{cc|c} 1 & 1 & 3 \\\\ 0 & -3 & -6 \\\\ 0 & -1 & c - 9 \\end{array}\\right] \\xrightarrow{R_3 \\to R_3 - \\frac{1}{3}R_2} \\left[\\begin{array}{cc|c} 1 & 1 & 3 \\\\ 0 & -3 & -6 \\\\ 0 & 0 & c - 7 \\end{array}\\right]",
+        },
+        {
+          text: "**Read the last row.** It says $0 = c - 7$. If $c \\ne 7$ that is a contradiction: no solution. If $c = 7$ it is $0 = 0$, and the system is consistent.",
+        },
+        { text: "**Solve at $c = 7$.** $-3y = -6$ gives $y = 2$, then $x = 1$." },
+        { text: "Check the third line: $3 + 4 = 7$ ✓." },
+      ],
+      answer: "$c = 7$, and then $x = 1$, $y = 2$.",
+    },
     {
       type: "text",
       content:
-        "**Worked example 4 (word problem): a jar of coins.** A jar holds 30 coins of ₹1, ₹2 and ₹5, worth ₹80 in all. There are 2 more ₹1 coins than ₹5 coins. How many of each?\n\n**Step 1. Equations.** Let $a, b, c$ be the numbers of ₹1, ₹2, ₹5 coins. Count: $a + b + c = 30$. Value: $a + 2b + 5c = 80$. Comparison: $a - c = 2$.\n\n*Why write $a - c = 2$ with a 0 for $b$:* the augmented matrix needs every row to have an entry in every column.\n\n**Step 2. Row-reduce.** Use row 1 as the pivot row to clear column 1, then clear column 2:",
-    },
-    {
-      type: "math",
-      latex:
-        "\\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 30 \\\\ 1 & 2 & 5 & 80 \\\\ 1 & 0 & -1 & 2 \\end{array}\\right] \\xrightarrow[R_3 \\to R_3 - R_1]{R_2 \\to R_2 - R_1} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 30 \\\\ 0 & 1 & 4 & 50 \\\\ 0 & -1 & -2 & -28 \\end{array}\\right] \\xrightarrow{R_3 \\to R_3 + R_2} \\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 30 \\\\ 0 & 1 & 4 & 50 \\\\ 0 & 0 & 2 & 22 \\end{array}\\right]",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3. Back-substitute.** $2c = 22$, so $c = 11$. Then $b + 44 = 50$, so $b = 6$. Then $a = 30 - 6 - 11 = 13$.\n\n*Why bottom-up:* echelon form leaves the last row with one unknown, and each row above adds exactly one new one.\n\n**Step 4. Check** all three facts: $13 + 6 + 11 = 30$ ✓, $13 + 12 + 55 = 80$ ✓, $13 - 11 = 2$ ✓. So 13 one-rupee, 6 two-rupee and 11 five-rupee coins.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (exam style): more equations than unknowns.** For which value of $c$ is the system $x + y = 3$, $2x - y = 0$, $3x + 2y = c$ consistent? Solve it for that $c$.\n\n**Step 1. Why not determinants?** The coefficient matrix is $3 \\times 2$, so it has no determinant. Three lines in a plane usually have no common point; the question is when all three pass through one point.\n\n**Step 2. Row-reduce with $c$ left as a letter.**",
-    },
-    {
-      type: "math",
-      latex:
-        "\\left[\\begin{array}{cc|c} 1 & 1 & 3 \\\\ 2 & -1 & 0 \\\\ 3 & 2 & c \\end{array}\\right] \\xrightarrow[R_3 \\to R_3 - 3R_1]{R_2 \\to R_2 - 2R_1} \\left[\\begin{array}{cc|c} 1 & 1 & 3 \\\\ 0 & -3 & -6 \\\\ 0 & -1 & c - 9 \\end{array}\\right] \\xrightarrow{R_3 \\to R_3 - \\frac{1}{3}R_2} \\left[\\begin{array}{cc|c} 1 & 1 & 3 \\\\ 0 & -3 & -6 \\\\ 0 & 0 & c - 7 \\end{array}\\right]",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3. Read the last row.** It says $0 = c - 7$. If $c \\ne 7$ that is a contradiction: no solution. If $c = 7$ it is $0 = 0$, and the system is consistent.\n\n**Step 4. Solve at $c = 7$.** $-3y = -6$ gives $y = 2$, then $x = 1$. Check the third line: $3 + 4 = 7$ ✓.\n\n*Why this works:* the first two lines always meet at $(1, 2)$. The third line passes through that point only when $c = 3(1) + 2(2) = 7$. Row reduction found that without drawing anything.",
+        "*Why this works:* the first two lines always meet at $(1, 2)$. The third line passes through that point only when $c = 3(1) + 2(2) = 7$. Row reduction found that without drawing anything.",
     },
     {
       type: "callout",
@@ -1088,6 +1431,7 @@ const lesson05: LessonSeed = {
       content:
         "Each operation can be undone (swap back, scale by $\\frac{1}{k}$, subtract what you added), so no solution is ever created or lost. And the process always finishes: work column by column. Once a column has its pivot and zeros beneath it, later steps never disturb it, so after at most one pass per column you reach echelon form. Row reduction is the same elimination from Class 9, done in an order that always terminates.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx4-5-q1",
@@ -1184,6 +1528,7 @@ const lesson06: LessonSeed = {
       content:
         "JEE loves a system with letters in it: \"find $\\lambda$ and $\\mu$ so that the system has no solution\". It looks like a new topic, but it is lesson 4.4 and 4.5 run in order: **first** find where $D = 0$, **then** row-reduce at those values to split \"none\" from \"infinitely many\".",
     },
+    { type: "heading", text: "Classifying systems with parameters" },
     {
       type: "callout",
       variant: "tip",
@@ -1192,18 +1537,33 @@ const lesson06: LessonSeed = {
         "**Step 1.** Compute $D$ as a function of the parameter(s). Every value with $D \\ne 0$ gives a **unique** solution.\n\n**Step 2.** At each value with $D = 0$, substitute and row-reduce $[A \\mid B]$. A row $0 = c$ with $c \\ne 0$ gives **none**; otherwise you get **infinitely many**.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (the classic).** For $x + y + z = 6$, $x + 2y + 3z = 10$, $x + 2y + \\lambda z = \\mu$, find the conditions for a unique solution, no solution, and infinitely many.\n\n**Step 1.** $D = \\begin{vmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 3 \\\\ 1 & 2 & \\lambda \\end{vmatrix} = 1(2\\lambda - 6) - 1(\\lambda - 3) + 1(2 - 2) = \\lambda - 3$.\n\nSo $\\lambda \\ne 3$ gives a **unique** solution, whatever $\\mu$ is.\n\n**Step 2.** At $\\lambda = 3$, equations 2 and 3 have identical left sides. $R_3 \\to R_3 - R_2$ gives the row $[\\,0\\;0\\;0 \\mid \\mu - 10\\,]$.\n\n$\\mu \\ne 10$: the row reads $0 = \\mu - 10 \\ne 0$, so **no solution**.\n\n$\\mu = 10$: the row is $0 = 0$, so **infinitely many**.",
-    },
-    {
-      type: "table",
-      headers: ["Condition", "Solutions"],
-      rows: [
-        ["$\\lambda \\ne 3$ (any $\\mu$)", "Unique"],
-        ["$\\lambda = 3,\\ \\mu \\ne 10$", "None"],
-        ["$\\lambda = 3,\\ \\mu = 10$", "Infinitely many"],
+      type: "worked-example",
+      id: "mx4-6-we1",
+      title: "Worked example 1 (the classic)",
+      problem:
+        "For $x + y + z = 6$, $x + 2y + 3z = 10$, $x + 2y + \\lambda z = \\mu$, find the conditions for a unique solution, no solution, and infinitely many.",
+      steps: [
+        {
+          text: "$D = \\begin{vmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 3 \\\\ 1 & 2 & \\lambda \\end{vmatrix} = 1(2\\lambda - 6) - 1(\\lambda - 3) + 1(2 - 2) = \\lambda - 3$.\n\nSo $\\lambda \\ne 3$ gives a **unique** solution, whatever $\\mu$ is.",
+        },
+        {
+          text: "At $\\lambda = 3$, equations 2 and 3 have identical left sides. $R_3 \\to R_3 - R_2$ gives the row $[\\,0\\;0\\;0 \\mid \\mu - 10\\,]$.",
+        },
+        { text: "$\\mu \\ne 10$: the row reads $0 = \\mu - 10 \\ne 0$, so **no solution**." },
+        {
+          text: "$\\mu = 10$: the row is $0 = 0$, so **infinitely many**.",
+          table: {
+            headers: ["Condition", "Solutions"],
+            rows: [
+              ["$\\lambda \\ne 3$ (any $\\mu$)", "Unique"],
+              ["$\\lambda = 3,\\ \\mu \\ne 10$", "None"],
+              ["$\\lambda = 3,\\ \\mu = 10$", "Infinitely many"],
+            ],
+          },
+        },
       ],
+      answer:
+        "Unique for $\\lambda \\ne 3$; none for $\\lambda = 3$, $\\mu \\ne 10$; infinitely many for $\\lambda = 3$, $\\mu = 10$.",
     },
     {
       type: "interactive",
@@ -1218,48 +1578,137 @@ const lesson06: LessonSeed = {
         augmented: [[6], [10], [12]],
         target: "echelon",
         caption:
-          "Worked example 1 at λ = 3, μ = 12. Reduce it and watch the 0 = 2 row appear. Then imagine μ = 10: the same steps leave 0 = 0 instead.",
+          "Worked example 1 at λ = 3, μ = 12. Reduce it and watch what the last row becomes. Then predict what the same steps give when μ = 10.",
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (2 × 2 with the parameter everywhere).** For which $k$ does $(k + 1)x + 8y = 4k$, $kx + (k + 3)y = 3k - 1$ have no solution?\n\n**Step 1.** $D = (k + 1)(k + 3) - 8k = k^2 - 4k + 3 = (k - 1)(k - 3)$. Unique unless $k = 1$ or $k = 3$.\n\n**Step 2a.** $k = 1$: $2x + 8y = 4$ and $x + 4y = 2$. The first is twice the second: the same line, **infinitely many**.\n\n**Step 2b.** $k = 3$: $4x + 8y = 12$, i.e. $x + 2y = 3$, and $3x + 6y = 8$, i.e. $x + 2y = \\frac{8}{3}$. Parallel and distinct: **no solution**.\n\nAnswer: $k = 3$. Notice that $D = 0$ alone would have given you two candidates, and only one of them is correct.",
+      type: "worked-example",
+      id: "mx4-6-we2",
+      title: "Worked example 2 (2 × 2 with the parameter everywhere)",
+      problem: "For which $k$ does $(k + 1)x + 8y = 4k$, $kx + (k + 3)y = 3k - 1$ have no solution?",
+      steps: [
+        {
+          text: "$D = (k + 1)(k + 3) - 8k = k^2 - 4k + 3 = (k - 1)(k - 3)$. Unique unless $k = 1$ or $k = 3$.",
+        },
+        {
+          text: "$k = 1$: $2x + 8y = 4$ and $x + 4y = 2$. The first is twice the second: the same line, **infinitely many**.",
+        },
+        {
+          text: "$k = 3$: $4x + 8y = 12$, i.e. $x + 2y = 3$, and $3x + 6y = 8$, i.e. $x + 2y = \\frac{8}{3}$. Parallel and distinct: **no solution**.",
+        },
+      ],
+      answer: "$k = 3$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 (JEE Main style: a case that never happens).** Discuss the system $x + y + z = 2$, $2x + 3y + 2z = 5$, $2x + 3y + (a^2 - 1)z = a + 1$ for all real $a$.\n\n**Step 1. Compute $D$ the smart way.** Rows 2 and 3 differ only in the $z$-coefficient. $R_3 \\to R_3 - R_2$ (which does not change $D$) turns row 3 into $(0,\\ 0,\\ a^2 - 3)$. Expand along that row:",
+        "Notice that $D = 0$ alone would have given you two candidates, and only one of them is correct.",
     },
     {
-      type: "math",
-      latex:
-        "D = (a^2 - 3)\\begin{vmatrix} 1 & 1 \\\\ 2 & 3 \\end{vmatrix} = (a^2 - 3)(3 - 2) = a^2 - 3",
+      type: "worked-example",
+      id: "mx4-6-we3",
+      title: "Worked example 3 (JEE Main style: a case that never happens)",
+      problem:
+        "Discuss the system $x + y + z = 2$, $2x + 3y + 2z = 5$, $2x + 3y + (a^2 - 1)z = a + 1$ for all real $a$.",
+      steps: [
+        {
+          text: "**Compute $D$ the smart way.** Rows 2 and 3 differ only in the $z$-coefficient. $R_3 \\to R_3 - R_2$ (which does not change $D$) turns row 3 into $(0,\\ 0,\\ a^2 - 3)$. Expand along that row:",
+          latex:
+            "D = (a^2 - 3)\\begin{vmatrix} 1 & 1 \\\\ 2 & 3 \\end{vmatrix} = (a^2 - 3)(3 - 2) = a^2 - 3",
+        },
+        {
+          text: "*Why not expand directly:* you could, but a row operation that creates two zeros first turns a nine-term expansion into one product and removes the chance of a sign slip.\n\n$a^2 \\ne 3$: $D \\ne 0$, **unique** solution.",
+        },
+        {
+          text: "**At $a^2 = 3$, row-reduce the augmented matrix.** The same move $R_3 \\to R_3 - R_2$ now gives the row $[\\,0\\;0\\;0 \\mid (a + 1) - 5\\,] = [\\,0\\;0\\;0 \\mid a - 4\\,]$.",
+        },
+        {
+          text: "**Read it.** At $a = \\sqrt{3}$ or $a = -\\sqrt{3}$, $a - 4 \\ne 0$, so the row says $0 = $ (non-zero): **no solution**.",
+        },
+        {
+          text: "*Why this is a favourite:* an option like \"infinitely many solutions for $a = 4$\" looks tempting, because it makes the constant vanish. But at $a = 4$, $D = 13 \\ne 0$, so the solution is unique.",
+        },
+      ],
+      answer:
+        "Unique for $|a| \\ne \\sqrt{3}$; no solution for $|a| = \\sqrt{3}$; **infinitely many for no value of $a$**. That would need $a = 4$ *and* $a^2 = 3$ at once, which is impossible.",
+    },
+    { type: "heading", text: "Applications: mixtures, money and traffic" },
+    {
+      type: "worked-example",
+      id: "mx4-6-we4",
+      title: "Application 1: mixture",
+      problem:
+        "How many litres of a 10% acid solution and a 25% acid solution make 30 L of a 20% solution?",
+      steps: [
+        {
+          text: "Let $x$, $y$ be the litres used. Volume: $x + y = 30$. Acid: $0.10x + 0.25y = 0.20 \\times 30 = 6$, i.e. $2x + 5y = 120$.",
+        },
+        {
+          text: "Cramer: $D = 5 - 2 = 3$, $D_x = 150 - 120 = 30$, $D_y = 120 - 60 = 60$. So $x = \\frac{30}{3} = 10$ and $y = \\frac{60}{3} = 20$.",
+        },
+        { text: "Check the acid: $1 + 5 = 6$ ✓." },
+      ],
+      answer: "$x = 10$ L of the 10% solution and $y = 20$ L of the 25% solution.",
+    },
+    {
+      type: "worked-example",
+      id: "mx4-6-we5",
+      title: "Application 2: investment",
+      problem:
+        "₹10,000 is split among schemes paying 5%, 8% and 10% a year. The yearly interest is ₹780, and the amount in the 10% scheme equals the other two combined. Find each amount.",
+      steps: [
+        { text: "**Set up.** $x + y + z = 10000$, $5x + 8y + 10z = 78000$ (interest × 100), $x + y - z = 0$." },
+        {
+          text: "**Row-reduce** (it is the fastest here): $R_3 \\to R_3 - R_1$ gives $-2z = -10000$, so $z = 5000$. Then $x + y = 5000$ and $5x + 8y = 28000$. Substituting $x = 5000 - y$: $25000 + 3y = 28000$, so $y = 1000$ and $x = 4000$.",
+        },
+        { text: "Check the interest: $200 + 80 + 500 = 780$ ✓." },
+      ],
+      answer: "₹4000 at 5%, ₹1000 at 8% and ₹5000 at 10%.",
+    },
+    {
+      type: "worked-example",
+      id: "mx4-6-we6",
+      title: "Application 3: a traffic network",
+      problem:
+        "Three one-way roads form a loop: $x_1$ cars/hour from junction P to Q, $x_2$ from Q to R, $x_3$ from R to P. At each junction, cars in = cars out. External roads: 400 enter and 100 leave at P, 200 enter and 600 leave at Q, 500 enter and 400 leave at R. Find all possible flows $x_1$, $x_2$, $x_3$, and the smallest flows that work.",
+      steps: [
+        {
+          text: "**P:** $400 + x_3 = x_1 + 100$, i.e. $x_1 - x_3 = 300$. **Q:** $x_1 + 200 = x_2 + 600$, i.e. $x_1 - x_2 = 400$. **R:** $x_2 + 500 = x_3 + 400$, i.e. $x_3 - x_2 = 100$.",
+        },
+        {
+          text: "$D = \\begin{vmatrix} 1 & 0 & -1 \\\\ 1 & -1 & 0 \\\\ 0 & -1 & 1 \\end{vmatrix} = 1(-1) - 0 + (-1)(-1) = 0$, and (Q) $-$ (P) is exactly (R), so the system is consistent with **infinitely many** solutions. Let $x_2 = t$: then $x_1 = t + 400$ and $x_3 = t + 100$.",
+        },
+        {
+          text: "The free parameter means something real: any number of extra cars can circle the loop without changing a junction count. Traffic cannot flow backwards on a one-way road, so $t \\ge 0$, and the minimum flows are $x_1 = 400$, $x_2 = 0$, $x_3 = 100$.",
+        },
+      ],
+      answer:
+        "$x_1 = t + 400$, $x_2 = t$, $x_3 = t + 100$ with $t \\ge 0$; the smallest flows are $x_1 = 400$, $x_2 = 0$, $x_3 = 100$.",
+    },
+    { type: "heading", text: "When the system is not square" },
+    {
+      type: "worked-example",
+      id: "mx4-6-we7",
+      title: "Worked example 4 (fewer equations than unknowns)",
+      problem: "Solve $x + y + z = 3$, $x + 2y + 3z = 4$.",
+      steps: [
+        {
+          text: "Here $A = \\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 3 \\end{pmatrix}$ is $2 \\times 3$. It has no determinant and no inverse, so neither $A^{-1}B$ nor Cramer can even start. Row reduction does not care about the shape.",
+        },
+        {
+          text: "$R_2 \\to R_2 - R_1$: $\\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 3 \\\\ 0 & 1 & 2 & 1 \\end{array}\\right]$.",
+        },
+        {
+          text: "Column 3 has no pivot, so $z = t$ is free. Then $y = 1 - 2t$ and $x = 3 - y - z = 2 + t$.",
+        },
+        { text: "Check equation 2: $(2 + t) + 2(1 - 2t) + 3t = 4$ ✓." },
+      ],
+      answer: "Solution: $(x, y, z) = (2 + t,\\ 1 - 2t,\\ t)$.",
     },
     {
       type: "text",
       content:
-        "*Why not expand directly:* you could, but a row operation that creates two zeros first turns a nine-term expansion into one product and removes the chance of a sign slip.\n\n**Step 2.** $a^2 \\ne 3$: $D \\ne 0$, **unique** solution.\n\n**Step 3. At $a^2 = 3$, row-reduce the augmented matrix.** The same move $R_3 \\to R_3 - R_2$ now gives the row $[\\,0\\;0\\;0 \\mid (a + 1) - 5\\,] = [\\,0\\;0\\;0 \\mid a - 4\\,]$.\n\n**Step 4. Read it.** At $a = \\sqrt{3}$ or $a = -\\sqrt{3}$, $a - 4 \\ne 0$, so the row says $0 = $ (non-zero): **no solution**.\n\n**Conclusion.** Unique for $|a| \\ne \\sqrt{3}$; no solution for $|a| = \\sqrt{3}$; **infinitely many for no value of $a$**. That would need $a = 4$ *and* $a^2 = 3$ at once, which is impossible.\n\n*Why this is a favourite:* an option like \"infinitely many solutions for $a = 4$\" looks tempting, because it makes the constant vanish. But at $a = 4$, $D = 13 \\ne 0$, so the solution is unique.",
-    },
-    {
-      type: "text",
-      content:
-        "**Application 1: mixture.** How many litres of a 10% acid solution and a 25% acid solution make 30 L of a 20% solution?\n\nLet $x$, $y$ be the litres used. Volume: $x + y = 30$. Acid: $0.10x + 0.25y = 0.20 \\times 30 = 6$, i.e. $2x + 5y = 120$.\n\nCramer: $D = 5 - 2 = 3$, $D_x = 150 - 120 = 30$, $D_y = 120 - 60 = 60$. So $x = 10$ L and $y = 20$ L. Check the acid: $1 + 5 = 6$ ✓.",
-    },
-    {
-      type: "text",
-      content:
-        "**Application 2: investment.** ₹10,000 is split among schemes paying 5%, 8% and 10% a year. The yearly interest is ₹780, and the amount in the 10% scheme equals the other two combined. Find each amount.\n\n**Set up.** $x + y + z = 10000$, $5x + 8y + 10z = 78000$ (interest × 100), $x + y - z = 0$.\n\n**Row-reduce** (it is the fastest here): $R_3 \\to R_3 - R_1$ gives $-2z = -10000$, so $z = 5000$. Then $x + y = 5000$ and $5x + 8y = 28000$. Substituting $x = 5000 - y$: $25000 + 3y = 28000$, so $y = 1000$ and $x = 4000$.\n\nCheck the interest: $200 + 80 + 500 = 780$ ✓.",
-    },
-    {
-      type: "text",
-      content:
-        "**Application 3: a traffic network.** Three one-way roads form a loop: $x_1$ cars/hour from junction P to Q, $x_2$ from Q to R, $x_3$ from R to P. At each junction, cars in = cars out. External roads: 400 enter and 100 leave at P, 200 enter and 600 leave at Q, 500 enter and 400 leave at R.\n\n**P:** $400 + x_3 = x_1 + 100$, i.e. $x_1 - x_3 = 300$. **Q:** $x_1 + 200 = x_2 + 600$, i.e. $x_1 - x_2 = 400$. **R:** $x_2 + 500 = x_3 + 400$, i.e. $x_3 - x_2 = 100$.\n\n$D = \\begin{vmatrix} 1 & 0 & -1 \\\\ 1 & -1 & 0 \\\\ 0 & -1 & 1 \\end{vmatrix} = 1(-1) - 0 + (-1)(-1) = 0$, and (Q) $-$ (P) is exactly (R), so the system is consistent with **infinitely many** solutions. Let $x_2 = t$: then $x_1 = t + 400$ and $x_3 = t + 100$.\n\nThe free parameter means something real: any number of extra cars can circle the loop without changing a junction count. Traffic cannot flow backwards on a one-way road, so $t \\ge 0$, and the minimum flows are $x_1 = 400$, $x_2 = 0$, $x_3 = 100$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (fewer equations than unknowns).** Solve $x + y + z = 3$, $x + 2y + 3z = 4$.\n\nHere $A = \\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 3 \\end{pmatrix}$ is $2 \\times 3$. It has no determinant and no inverse, so neither $A^{-1}B$ nor Cramer can even start. Row reduction does not care about the shape.\n\n**Step 1.** $R_2 \\to R_2 - R_1$: $\\left[\\begin{array}{ccc|c} 1 & 1 & 1 & 3 \\\\ 0 & 1 & 2 & 1 \\end{array}\\right]$.\n\n**Step 2.** Column 3 has no pivot, so $z = t$ is free. Then $y = 1 - 2t$ and $x = 3 - y - z = 2 + t$.\n\nSolution: $(x, y, z) = (2 + t,\\ 1 - 2t,\\ t)$. Check equation 2: $(2 + t) + 2(1 - 2t) + 3t = 4$ ✓. Two planes in space that are not parallel meet in a line, and that is exactly this one-parameter family.",
+        "Two planes in space that are not parallel meet in a line, and that is exactly this one-parameter family.",
     },
     {
       type: "callout",
@@ -1279,6 +1728,7 @@ const lesson06: LessonSeed = {
         ["is homogeneous", "$|A| = 0$ ⇔ non-trivial", "It is always consistent"],
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx4-6-q1",

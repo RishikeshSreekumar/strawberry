@@ -62,6 +62,7 @@ const lesson01: LessonSeed = {
           "Rank 2: the square becomes a genuine parallelogram and the whole plane is still covered. Rank 1: both columns lie on one line, so every output lands on that line. Rank 0: every vector goes to the origin.",
       },
     },
+    { type: "heading", text: "Rank counts independent columns" },
     {
       type: "text",
       content:
@@ -91,10 +92,11 @@ const lesson01: LessonSeed = {
       content:
         "An $n \\times n$ matrix has full rank $n$ exactly when nothing is squashed, i.e. when $\\det A \\ne 0$. So $\\det A \\ne 0 \\iff \\operatorname{rank} A = n \\iff A^{-1}$ exists. Rank refines the determinant: when $\\det A = 0$, the rank says *how much* was lost.",
     },
+    { type: "heading", text: "Method 1: row reduce to echelon form" },
     {
       type: "text",
       content:
-        "### Method 1: row reduce to echelon form\n\nRow operations never change the rank. Swapping rows reorders them, scaling by a non-zero number keeps the same line, and adding a multiple of one row to another never creates or destroys independence. So reduce to echelon form, where independence is visible at a glance, and count.",
+        "Row operations never change the rank. Swapping rows reorders them, scaling by a non-zero number keeps the same line, and adding a multiple of one row to another never creates or destroys independence. So reduce to echelon form, where independence is visible at a glance, and count.",
     },
     {
       type: "callout",
@@ -109,18 +111,26 @@ const lesson01: LessonSeed = {
         "**Why pivots count columns too.** A row operation never changes which combinations of the columns give zero, because it applies the same operation to every column's entries. So a set of columns is independent before reduction exactly when it is independent after. In echelon form the pivot columns are clearly independent, and every other column is built from them. So the number of independent columns is the number of pivots, which is also the number of non-zero rows. Row rank = column rank.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Find the rank of $A = \\begin{pmatrix}1&2&3\\\\2&4&6\\\\1&0&1\\end{pmatrix}$.\n\n**Step 1.** $R_2 \\to R_2 - 2R_1$ gives $(0, 0, 0)$. Row 2 was secretly twice row 1.\n\n**Step 2.** $R_3 \\to R_3 - R_1$ gives $(0, -2, -2)$.\n\n**Step 3.** Swap $R_2 \\leftrightarrow R_3$ to put the zero row at the bottom:",
+      type: "worked-example",
+      id: "mx5-1-we1",
+      title: "Worked example 1",
+      problem: "Find the rank of $A = \\begin{pmatrix}1&2&3\\\\2&4&6\\\\1&0&1\\end{pmatrix}$.",
+      steps: [
+        { text: "$R_2 \\to R_2 - 2R_1$ gives $(0, 0, 0)$. Row 2 was secretly twice row 1." },
+        { text: "$R_3 \\to R_3 - R_1$ gives $(0, -2, -2)$." },
+        {
+          text: "Swap $R_2 \\leftrightarrow R_3$ to put the zero row at the bottom:",
+          latex: "\\begin{pmatrix}1&2&3\\\\0&-2&-2\\\\0&0&0\\end{pmatrix} \\quad\\Rightarrow\\quad \\operatorname{rank} A = 2",
+        },
+        {
+          text: "Notice that the original matrix had **three** non-zero rows. The rank is 2 because one row depended on the others, which only showed up after elimination.",
+        },
+      ],
+      answer: "$\\operatorname{rank} A = 2$",
     },
     {
-      type: "math",
-      latex: "\\begin{pmatrix}1&2&3\\\\0&-2&-2\\\\0&0&0\\end{pmatrix} \\quad\\Rightarrow\\quad \\operatorname{rank} A = 2",
-    },
-    {
       type: "text",
-      content:
-        "Notice that the original matrix had **three** non-zero rows. The rank is 2 because one row depended on the others, which only showed up after elimination. Try it yourself below.",
+      content: "Try it yourself below.",
     },
     {
       type: "interactive",
@@ -144,57 +154,98 @@ const lesson01: LessonSeed = {
       content:
         "Only in **echelon** form do the non-zero rows count the rank. In the original matrix a row can be non-zero but still dependent on the others, like $(2,4,6) = 2(1,2,3)$. Reduce first, then count.",
     },
+    { type: "heading", text: "Method 2: the largest non-zero minor" },
     {
       type: "text",
       content:
-        "### Method 2: the largest non-zero minor\n\nThe classical textbook definition (used in many Indian boards and older NCERT texts) goes through determinants: $\\operatorname{rank} A = r$ if some $r \\times r$ minor of $A$ is non-zero and every $(r+1) \\times (r+1)$ minor is zero. It is the same number, seen another way. A non-zero $r \\times r$ minor picks out $r$ rows and $r$ columns that span a genuine $r$-dimensional box.",
+        "The classical textbook definition (used in many Indian boards and older NCERT texts) goes through determinants: $\\operatorname{rank} A = r$ if some $r \\times r$ minor of $A$ is non-zero and every $(r+1) \\times (r+1)$ minor is zero. It is the same number, seen another way. A non-zero $r \\times r$ minor picks out $r$ rows and $r$ columns that span a genuine $r$-dimensional box.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2.** Find the rank of $B = \\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$.\n\n**Step 1: the only $3\\times3$ minor.** $\\det B = 1(45-48) - 2(36-42) + 3(32-35) = -3 + 12 - 9 = 0$. So $\\operatorname{rank} B < 3$.\n\n**Step 2: look for a non-zero $2\\times2$ minor.** Rows 1–2, columns 1–2: $\\begin{vmatrix}1&2\\\\4&5\\end{vmatrix} = 5 - 8 = -3 \\ne 0$.\n\n**Conclusion.** $\\operatorname{rank} B = 2$. The whole of space is flattened onto a plane. (Indeed $R_3 = 2R_2 - R_1$.)",
+      type: "worked-example",
+      id: "mx5-1-we2",
+      title: "Worked example 2",
+      problem: "Find the rank of $B = \\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$.",
+      steps: [
+        {
+          text: "**The only $3\\times3$ minor.** $\\det B = 1(45-48) - 2(36-42) + 3(32-35) = -3 + 12 - 9 = 0$. So $\\operatorname{rank} B < 3$.",
+        },
+        {
+          text: "**Look for a non-zero $2\\times2$ minor.** Rows 1–2, columns 1–2: $\\begin{vmatrix}1&2\\\\4&5\\end{vmatrix} = 5 - 8 = -3 \\ne 0$.",
+        },
+        {
+          text: "**Conclusion.** $\\operatorname{rank} B = 2$. The whole of space is flattened onto a plane. (Indeed $R_3 = 2R_2 - R_1$.)",
+        },
+      ],
+      answer: "$\\operatorname{rank} B = 2$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (a $2 \\times 3$).** Find the rank of $C = \\begin{pmatrix}1&-1&2\\\\-2&2&-4\\end{pmatrix}$.\n\nThe maximum possible is $\\min(2,3) = 2$. But $R_2 = -2R_1$, so $R_2 \\to R_2 + 2R_1$ gives a zero row and $\\operatorname{rank} C = 1$. Check with minors: all three $2\\times2$ minors are $0$, for example $\\begin{vmatrix}1&-1\\\\-2&2\\end{vmatrix} = 2 - 2 = 0$, and there is a non-zero $1\\times1$ minor (the entry 1).",
+      type: "worked-example",
+      id: "mx5-1-we3",
+      title: "Worked example 3 (a $2 \\times 3$)",
+      problem: "Find the rank of $C = \\begin{pmatrix}1&-1&2\\\\-2&2&-4\\end{pmatrix}$.",
+      steps: [
+        { text: "The maximum possible is $\\min(2,3) = 2$." },
+        { text: "But $R_2 = -2R_1$, so $R_2 \\to R_2 + 2R_1$ gives a zero row and $\\operatorname{rank} C = 1$." },
+        {
+          text: "Check with minors: all three $2\\times2$ minors are $0$, for example $\\begin{vmatrix}1&-1\\\\-2&2\\end{vmatrix} = 2 - 2 = 0$, and there is a non-zero $1\\times1$ minor (the entry 1).",
+        },
+      ],
+      answer: "$\\operatorname{rank} C = 1$",
+    },
+    { type: "heading", text: "Rank in word problems and with parameters" },
+    {
+      type: "worked-example",
+      id: "mx5-1-we4",
+      title: "Worked example 4 (application: redundant gift packs)",
+      problem:
+        "A sweet shop sells three gift packs. Pack P contains 2 chocolates, 1 cookie and 3 candies; pack Q contains 1, 2, 0; pack R contains 4, 5, 3. The owner wonders whether R is a genuinely new product, or whether a customer could build it from P's and Q's. How many *independent* packs are there?",
+      steps: [
+        {
+          text: "**Turn the packs into rows.** Each pack is a vector (chocolates, cookies, candies). Stack them:",
+          latex: "\\begin{pmatrix}2&1&3\\\\1&2&0\\\\4&5&3\\end{pmatrix} \\xrightarrow{R_1 \\leftrightarrow R_2} \\begin{pmatrix}1&2&0\\\\2&1&3\\\\4&5&3\\end{pmatrix}",
+        },
+        { text: "*Why this step:* a leading 1 makes the eliminations use whole numbers. Swapping rows never changes the rank." },
+        {
+          text: "**Eliminate below the pivot.** $R_2 \\to R_2 - 2R_1$ gives $(0, -3, 3)$, and $R_3 \\to R_3 - 4R_1$ gives $(0, -3, 3)$.",
+        },
+        {
+          text: "**Eliminate again.** $R_3 \\to R_3 - R_2$ gives $(0, 0, 0)$.",
+          latex: "\\begin{pmatrix}1&2&0\\\\0&-3&3\\\\0&0&0\\end{pmatrix} \\quad\\Rightarrow\\quad \\operatorname{rank} = 2",
+        },
+        {
+          text: "**Interpretation.** Only two packs are independent. Indeed $R = P + 2Q$: $(2,1,3) + 2(1,2,0) = (4, 5, 3)$. ✓ Buying one P and two Q's gives exactly the contents of an R.",
+        },
+        {
+          text: "In picture terms, the set of all mixes you can make from these packs is a **plane** in 3D (chocolate, cookie, candy) space, not all of space. A customer who wants, say, only candies can never get them, whatever packs they combine.",
+        },
+      ],
+      answer: "Two independent packs: $R = P + 2Q$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (application: redundant gift packs).** A sweet shop sells three gift packs. Pack P contains 2 chocolates, 1 cookie and 3 candies; pack Q contains 1, 2, 0; pack R contains 4, 5, 3. The owner wonders whether R is a genuinely new product, or whether a customer could build it from P's and Q's. How many *independent* packs are there?\n\n**Step 1: turn the packs into rows.** Each pack is a vector (chocolates, cookies, candies). Stack them:",
-    },
-    {
-      type: "math",
-      latex: "\\begin{pmatrix}2&1&3\\\\1&2&0\\\\4&5&3\\end{pmatrix} \\xrightarrow{R_1 \\leftrightarrow R_2} \\begin{pmatrix}1&2&0\\\\2&1&3\\\\4&5&3\\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* a leading 1 makes the eliminations use whole numbers. Swapping rows never changes the rank.\n\n**Step 2: eliminate below the pivot.** $R_2 \\to R_2 - 2R_1$ gives $(0, -3, 3)$, and $R_3 \\to R_3 - 4R_1$ gives $(0, -3, 3)$.\n\n**Step 3: eliminate again.** $R_3 \\to R_3 - R_2$ gives $(0, 0, 0)$.",
-    },
-    {
-      type: "math",
-      latex: "\\begin{pmatrix}1&2&0\\\\0&-3&3\\\\0&0&0\\end{pmatrix} \\quad\\Rightarrow\\quad \\operatorname{rank} = 2",
-    },
-    {
-      type: "text",
-      content:
-        "**Interpretation.** Only two packs are independent. Indeed $R = P + 2Q$: $(2,1,3) + 2(1,2,0) = (4, 5, 3)$. ✓ Buying one P and two Q's gives exactly the contents of an R. In picture terms, the set of all mixes you can make from these packs is a **plane** in 3D (chocolate, cookie, candy) space, not all of space. A customer who wants, say, only candies can never get them, whatever packs they combine.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (JEE pattern).** For which real $k$ is $\\operatorname{rank}\\begin{pmatrix}1&1&1\\\\1&k&1\\\\1&1&k\\end{pmatrix}$ equal to 3, 2 or 1?\n\n**Step 1: eliminate with the first row.** $R_2 \\to R_2 - R_1$ gives $(0, k - 1, 0)$, and $R_3 \\to R_3 - R_1$ gives $(0, 0, k - 1)$.",
-    },
-    {
-      type: "math",
-      latex: "\\begin{pmatrix}1&1&1\\\\0&k-1&0\\\\0&0&k-1\\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* the first row has a 1 in every place, so subtracting it clears column 1 without creating fractions, and the parameter $k$ is left sitting on the diagonal.\n\n**Step 2: split into cases on $k - 1$.**\n- $k \\ne 1$: three pivots, so $\\operatorname{rank} = 3$. (Check: $\\det = (k - 1)^2 \\ne 0$.)\n- $k = 1$: rows 2 and 3 vanish and $\\operatorname{rank} = 1$. All three rows are $(1, 1, 1)$.\n\n**Conclusion.** The rank is **never** 2. That is the trap in the exam question: the answer to \"for which $k$ is the rank 2?\" is \"no value of $k$\". The determinant $(k - 1)^2$ only says $k = 1$ is singular. The echelon form says *how* singular.",
+      type: "worked-example",
+      id: "mx5-1-we5",
+      title: "Worked example 5 (JEE pattern)",
+      problem:
+        "For which real $k$ is $\\operatorname{rank}\\begin{pmatrix}1&1&1\\\\1&k&1\\\\1&1&k\\end{pmatrix}$ equal to 3, 2 or 1?",
+      steps: [
+        {
+          text: "**Eliminate with the first row.** $R_2 \\to R_2 - R_1$ gives $(0, k - 1, 0)$, and $R_3 \\to R_3 - R_1$ gives $(0, 0, k - 1)$.",
+          latex: "\\begin{pmatrix}1&1&1\\\\0&k-1&0\\\\0&0&k-1\\end{pmatrix}",
+        },
+        {
+          text: "*Why this step:* the first row has a 1 in every place, so subtracting it clears column 1 without creating fractions, and the parameter $k$ is left sitting on the diagonal.",
+        },
+        {
+          text: "**Split into cases on $k - 1$.**\n- $k \\ne 1$: three pivots, so $\\operatorname{rank} = 3$. (Check: $\\det = (k - 1)^2 \\ne 0$.)\n- $k = 1$: rows 2 and 3 vanish and $\\operatorname{rank} = 1$. All three rows are $(1, 1, 1)$.",
+        },
+        {
+          text: "**Conclusion.** The rank is **never** 2.",
+        },
+        {
+          text: "That is the trap in the exam question: the answer to \"for which $k$ is the rank 2?\" is \"no value of $k$\". The determinant $(k - 1)^2$ only says $k = 1$ is singular. The echelon form says *how* singular.",
+        },
+      ],
+      answer: "Rank 3 for $k \\ne 1$, rank 1 for $k = 1$, and never rank 2.",
     },
     {
       type: "table",
@@ -205,6 +256,7 @@ const lesson01: LessonSeed = {
         ["Spot dependence by eye", "Rows or columns that are obvious multiples", "Dependence can involve three rows at once, e.g. R₃ = R₁ + R₂"],
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx5-1-q1",
@@ -301,6 +353,7 @@ const lesson02: LessonSeed = {
       content:
         "Chapter 4 classified systems $AX = B$ with a patchwork of tests: $D \\ne 0$, then $(\\operatorname{adj} A)B$, then a warning that even $D = D_1 = D_2 = D_3 = 0$ does not settle it. Rank replaces the patchwork with one clean rule.",
     },
+    { type: "heading", text: "Comparing $\\operatorname{rank} A$ with $\\operatorname{rank}[A \\mid B]$" },
     {
       type: "text",
       content:
@@ -328,19 +381,26 @@ const lesson02: LessonSeed = {
         ["rank A = rank [A | B] = n − 2", "two free variables", "Infinitely many, 2 parameters", "All three equations are the same plane"],
       ],
     },
+    { type: "heading", text: "Reading the solution count from ranks" },
     {
-      type: "text",
-      content:
-        "**Worked example 1: infinitely many.** Solve $x + y + z = 6$, $x + 2y + 3z = 14$, $x + 4y + 7z = 30$.\n\n**Step 1.** $R_2 \\to R_2 - R_1$ and $R_3 \\to R_3 - R_1$:\n$[0\\;1\\;2 \\mid 8]$ and $[0\\;3\\;6 \\mid 24]$.\n\n**Step 2.** $R_3 \\to R_3 - 3R_2$ gives $[0\\;0\\;0 \\mid 0]$.",
-    },
-    {
-      type: "math",
-      latex: "\\left[\\begin{array}{ccc|c}1&1&1&6\\\\0&1&2&8\\\\0&0&0&0\\end{array}\\right] \\qquad \\operatorname{rank} A = \\operatorname{rank}[A \\mid B] = 2 < 3",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3.** One free parameter ($3 - 2 = 1$). Let $z = t$. Then $y = 8 - 2t$ and $x = 6 - y - z = -2 + t$.\n\n**Check** in the third equation: $(-2 + t) + 4(8 - 2t) + 7t = -2 + 32 + (t - 8t + 7t) = 30$. ✓ The three planes share a whole line.",
+      type: "worked-example",
+      id: "mx5-2-we1",
+      title: "Worked example 1",
+      problem: "Solve $x + y + z = 6$, $x + 2y + 3z = 14$, $x + 4y + 7z = 30$.",
+      steps: [
+        {
+          text: "$R_2 \\to R_2 - R_1$ and $R_3 \\to R_3 - R_1$:\n$[0\\;1\\;2 \\mid 8]$ and $[0\\;3\\;6 \\mid 24]$.",
+        },
+        {
+          text: "$R_3 \\to R_3 - 3R_2$ gives $[0\\;0\\;0 \\mid 0]$.",
+          latex: "\\left[\\begin{array}{ccc|c}1&1&1&6\\\\0&1&2&8\\\\0&0&0&0\\end{array}\\right] \\qquad \\operatorname{rank} A = \\operatorname{rank}[A \\mid B] = 2 < 3",
+        },
+        { text: "One free parameter ($3 - 2 = 1$). Let $z = t$. Then $y = 8 - 2t$ and $x = 6 - y - z = -2 + t$." },
+        {
+          text: "**Check** in the third equation: $(-2 + t) + 4(8 - 2t) + 7t = -2 + 32 + (t - 8t + 7t) = 30$. ✓ The three planes share a whole line.",
+        },
+      ],
+      answer: "Infinitely many: $(x, y, z) = (-2 + t, 8 - 2t, t)$ for any real $t$.",
     },
     {
       type: "interactive",
@@ -359,14 +419,26 @@ const lesson02: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2: none.** Change only the last right-hand side: $x + 4y + 7z = 31$. The same steps give a last row of $[0\\;0\\;0 \\mid 1]$, which says $0 = 1$. Now $\\operatorname{rank} A = 2$ but $\\operatorname{rank}[A \\mid B] = 3$: inconsistent. The coefficient side is exactly as before, and only $B$ moved off the output plane.",
+      type: "worked-example",
+      id: "mx5-2-we2",
+      title: "Worked example 2: one right-hand side changed",
+      problem:
+        "Keep $x + y + z = 6$ and $x + 2y + 3z = 14$ from Worked example 1, but change only the last right-hand side: $x + 4y + 7z = 31$. Solve the system.",
+      steps: [
+        { text: "The same steps give a last row of $[0\\;0\\;0 \\mid 1]$, which says $0 = 1$." },
+        { text: "Now $\\operatorname{rank} A = 2$ but $\\operatorname{rank}[A \\mid B] = 3$: inconsistent." },
+      ],
+      answer: "No solution.",
     },
     {
       type: "text",
+      content: "The coefficient side is exactly as before, and only $B$ moved off the output plane.",
+    },
+    { type: "heading", text: "Settling the three-parallel-planes puzzle" },
+    {
+      type: "text",
       content:
-        "### Settling the three-parallel-planes puzzle\n\nIn 4.4 we met $x + y + z = 1$, $x + y + z = 2$, $x + y + z = 3$. Here $D = 0$, and $D_1 = D_2 = D_3 = 0$ as well, because each $D_i$ still has two equal columns. Cramer's test was silent, yet the planes are parallel and never meet. Rank settles it at once:",
+        "In 4.4 we met $x + y + z = 1$, $x + y + z = 2$, $x + y + z = 3$. Here $D = 0$, and $D_1 = D_2 = D_3 = 0$ as well, because each $D_i$ still has two equal columns. Cramer's test was silent, yet the planes are parallel and never meet. Rank settles it at once:",
     },
     {
       type: "math",
@@ -378,42 +450,70 @@ const lesson02: LessonSeed = {
         "$\\operatorname{rank} A = 1$ but $\\operatorname{rank}[A \\mid B] = 2$. Inconsistent, with no guesswork. The determinants only see $A$ being squashed; rank also sees *where $B$ is* relative to the squashed output.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3: rank 1, two parameters.** Compare $x + y + z = 2$, $2x + 2y + 2z = 4$, $3x + 3y + 3z = 6$. Every row, right-hand side included, is a multiple of the first, so $\\operatorname{rank} A = \\operatorname{rank}[A \\mid B] = 1$. Consistent, with $3 - 1 = 2$ free parameters: $y = s$, $z = t$, $x = 2 - s - t$. All three equations describe the same plane, which is the last row of the table above.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (JEE pattern).** For which $\\lambda, \\mu$ does the system $x + y + z = 6$, $x + 2y + 3z = 10$, $x + 2y + \\lambda z = \\mu$ have (a) a unique solution, (b) no solution, (c) infinitely many?\n\n**Step 1.** $R_2 - R_1$: $[0\\;1\\;2 \\mid 4]$. $R_3 - R_1$: $[0\\;1\\;\\lambda - 1 \\mid \\mu - 6]$.\n\n**Step 2.** $R_3 - R_2$: $[0\\;0\\;\\lambda - 3 \\mid \\mu - 10]$.\n\n**Step 3: read the last row.**\n(a) $\\lambda \\ne 3$: pivot in every column, rank 3 = 3 unknowns, **unique**, whatever $\\mu$ is.\n(b) $\\lambda = 3$, $\\mu \\ne 10$: the row is $0 = \\mu - 10 \\ne 0$, so $\\operatorname{rank} A = 2 < 3 = \\operatorname{rank}[A \\mid B]$: **none**.\n(c) $\\lambda = 3$, $\\mu = 10$: zero row, both ranks 2 < 3: **infinitely many**, one parameter.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (application: a purse of coins).** A purse holds 10 coins, all ₹1, ₹2 or ₹5, worth ₹26 in total. How many of each could there be?\n\n**Step 1: set up the system.** Let $x, y, z$ be the numbers of ₹1, ₹2 and ₹5 coins. Counting coins gives $x + y + z = 10$; counting rupees gives $x + 2y + 5z = 26$.\n\n**Step 2: reduce the augmented matrix.** $R_2 \\to R_2 - R_1$:",
-    },
-    {
-      type: "math",
-      latex: "\\left[\\begin{array}{ccc|c}1&1&1&10\\\\1&2&5&26\\end{array}\\right] \\to \\left[\\begin{array}{ccc|c}1&1&1&10\\\\0&1&4&16\\end{array}\\right] \\qquad \\operatorname{rank} A = \\operatorname{rank}[A \\mid B] = 2 < 3",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* before hunting for answers, rank tells us what kind of answer to expect. Equal ranks: consistent. Rank 2 with 3 unknowns: exactly $3 - 2 = 1$ free parameter, a whole line of solutions.\n\n**Step 3: solve in terms of the free unknown.** Let $z = t$. Row 2 gives $y = 16 - 4t$, and row 1 gives $x = 10 - y - z = -6 + 3t$.\n\n**Step 4: let the real world cut the line down.** Coin counts must be whole numbers $\\ge 0$. $x \\ge 0$ needs $t \\ge 2$, and $y \\ge 0$ needs $t \\le 4$. So $t = 2, 3, 4$:",
-    },
-    {
-      type: "table",
-      headers: ["z = t", "y = 16 − 4t", "x = 3t − 6", "Check: x + 2y + 5z"],
-      rows: [
-        ["2", "8", "0", "0 + 16 + 10 = 26 ✓"],
-        ["3", "4", "3", "3 + 8 + 15 = 26 ✓"],
-        ["4", "0", "6", "6 + 0 + 20 = 26 ✓"],
+      type: "worked-example",
+      id: "mx5-2-we3",
+      title: "Worked example 3",
+      problem:
+        "Compare $x + y + z = 2$, $2x + 2y + 2z = 4$, $3x + 3y + 3z = 6$. How many solutions are there, and what are they?",
+      steps: [
+        {
+          text: "Every row, right-hand side included, is a multiple of the first, so $\\operatorname{rank} A = \\operatorname{rank}[A \\mid B] = 1$.",
+        },
+        { text: "Consistent, with $3 - 1 = 2$ free parameters: $y = s$, $z = t$, $x = 2 - s - t$." },
+        { text: "All three equations describe the same plane, which is the last row of the table above." },
       ],
+      answer: "Infinitely many, two parameters: $x = 2 - s - t$, $y = s$, $z = t$.",
     },
     {
-      type: "text",
-      content:
-        "**Interpretation.** The algebra gives infinitely many solutions (a line in space), and the physical constraints pick out exactly three points on that line. The rank told you the purse cannot be pinned down from two facts alone: you would need a third, independent piece of information, such as \"there are 4 ₹2 coins\".",
+      type: "worked-example",
+      id: "mx5-2-we4",
+      title: "Worked example 4 (JEE pattern)",
+      problem:
+        "For which $\\lambda, \\mu$ does the system $x + y + z = 6$, $x + 2y + 3z = 10$, $x + 2y + \\lambda z = \\mu$ have (a) a unique solution, (b) no solution, (c) infinitely many?",
+      steps: [
+        { text: "$R_2 - R_1$: $[0\\;1\\;2 \\mid 4]$. $R_3 - R_1$: $[0\\;1\\;\\lambda - 1 \\mid \\mu - 6]$." },
+        { text: "$R_3 - R_2$: $[0\\;0\\;\\lambda - 3 \\mid \\mu - 10]$." },
+        {
+          text: "**Read the last row.**\n(a) $\\lambda \\ne 3$: pivot in every column, rank 3 = 3 unknowns, **unique**, whatever $\\mu$ is.\n(b) $\\lambda = 3$, $\\mu \\ne 10$: the row is $0 = \\mu - 10 \\ne 0$, so $\\operatorname{rank} A = 2 < 3 = \\operatorname{rank}[A \\mid B]$: **none**.\n(c) $\\lambda = 3$, $\\mu = 10$: zero row, both ranks 2 < 3: **infinitely many**, one parameter.",
+        },
+      ],
+      answer: "(a) $\\lambda \\ne 3$; (b) $\\lambda = 3$, $\\mu \\ne 10$; (c) $\\lambda = 3$, $\\mu = 10$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx5-2-we5",
+      title: "Worked example 5 (application: a purse of coins)",
+      problem: "A purse holds 10 coins, all ₹1, ₹2 or ₹5, worth ₹26 in total. How many of each could there be?",
+      steps: [
+        {
+          text: "**Set up the system.** Let $x, y, z$ be the numbers of ₹1, ₹2 and ₹5 coins. Counting coins gives $x + y + z = 10$; counting rupees gives $x + 2y + 5z = 26$.",
+        },
+        {
+          text: "**Reduce the augmented matrix.** $R_2 \\to R_2 - R_1$:",
+          latex: "\\left[\\begin{array}{ccc|c}1&1&1&10\\\\1&2&5&26\\end{array}\\right] \\to \\left[\\begin{array}{ccc|c}1&1&1&10\\\\0&1&4&16\\end{array}\\right] \\qquad \\operatorname{rank} A = \\operatorname{rank}[A \\mid B] = 2 < 3",
+        },
+        {
+          text: "*Why this step:* before hunting for answers, rank tells us what kind of answer to expect. Equal ranks: consistent. Rank 2 with 3 unknowns: exactly $3 - 2 = 1$ free parameter, a whole line of solutions.",
+        },
+        {
+          text: "**Solve in terms of the free unknown.** Let $z = t$. Row 2 gives $y = 16 - 4t$, and row 1 gives $x = 10 - y - z = -6 + 3t$.",
+        },
+        {
+          text: "**Let the real world cut the line down.** Coin counts must be whole numbers $\\ge 0$. $x \\ge 0$ needs $t \\ge 2$, and $y \\ge 0$ needs $t \\le 4$. So $t = 2, 3, 4$:",
+          table: {
+            headers: ["z = t", "y = 16 − 4t", "x = 3t − 6", "Check: x + 2y + 5z"],
+            rows: [
+              ["2", "8", "0", "0 + 16 + 10 = 26 ✓"],
+              ["3", "4", "3", "3 + 8 + 15 = 26 ✓"],
+              ["4", "0", "6", "6 + 0 + 20 = 26 ✓"],
+            ],
+          },
+        },
+        {
+          text: "**Interpretation.** The algebra gives infinitely many solutions (a line in space), and the physical constraints pick out exactly three points on that line. The rank told you the purse cannot be pinned down from two facts alone: you would need a third, independent piece of information, such as \"there are 4 ₹2 coins\".",
+        },
+      ],
+      answer: "Three possibilities: $(x, y, z) = (0, 8, 2)$, $(3, 4, 3)$ or $(6, 0, 4)$.",
     },
     {
       type: "callout",
@@ -422,6 +522,7 @@ const lesson02: LessonSeed = {
       content:
         "Equal ranks mean the system is **consistent**, and nothing more. Uniqueness needs the common rank to equal the number of unknowns. In worked example 1 the ranks are equal (both 2), and there are infinitely many solutions.",
     },
+    { type: "heading", text: "Homogeneous systems and rank" },
     {
       type: "callout",
       variant: "tip",
@@ -430,19 +531,32 @@ const lesson02: LessonSeed = {
         "Appending a column of zeros never raises the rank, so $\\operatorname{rank}[A \\mid O] = \\operatorname{rank} A$ always. Homogeneous systems are always consistent ($X = O$ works). There are non-trivial solutions exactly when $\\operatorname{rank} A < n$. For square $A$ that means $\\det A = 0$, the same result as 4.4.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 6 (JEE Main).** The system $x + ky + 3z = 0$, $3x + ky - 2z = 0$, $2x + 4y - 3z = 0$ has a non-zero solution $(x, y, z)$. Find $k$, and then find $\\dfrac{xz}{y^2}$.\n\n**Step 1: non-trivial solutions need rank below 3.** So $\\det A = 0$. Expand along row 1:",
+      type: "worked-example",
+      id: "mx5-2-we6",
+      title: "Worked example 6 (JEE Main)",
+      problem:
+        "The system $x + ky + 3z = 0$, $3x + ky - 2z = 0$, $2x + 4y - 3z = 0$ has a non-zero solution $(x, y, z)$. Find $k$, and then find $\\dfrac{xz}{y^2}$.",
+      steps: [
+        {
+          text: "**Non-trivial solutions need rank below 3.** So $\\det A = 0$. Expand along row 1:",
+          latex: "\\begin{vmatrix}1&k&3\\\\3&k&-2\\\\2&4&-3\\end{vmatrix} = 1(-3k + 8) - k(-9 + 4) + 3(12 - 2k) = -4k + 44 = 0 \\;\\Rightarrow\\; k = 11",
+        },
+        {
+          text: "*Why this step:* a homogeneous system is always consistent, so the only question is whether the solution is unique ($X = O$) or a whole line. That is decided by $\\operatorname{rank} A < 3$, i.e. $\\det A = 0$.",
+        },
+        {
+          text: "**Find the line of solutions.** With $k = 11$, subtract equation 1 from equation 2: $2x - 5z = 0$, so $x = \\frac{5}{2}z$. Put this into equation 3: $5z + 4y - 3z = 0$, so $y = -\\frac{1}{2}z$.\n\n*Why this step:* subtracting the first two equations kills $y$ in one move, because both have $11y$.",
+        },
+        {
+          text: "**Check in equation 1.** $\\frac{5}{2}z - \\frac{11}{2}z + 3z = -3z + 3z = 0$. ✓ The rank is exactly 2, and the solutions form the line through $(5, -1, 2)$.",
+        },
+        {
+          text: "**The ratio.** $\\dfrac{xz}{y^2} = \\dfrac{\\frac{5}{2}z \\cdot z}{\\frac{1}{4}z^2} = 10$. The free parameter $z$ cancels, which is why the question can ask for a single number even though there are infinitely many solutions.",
+        },
+      ],
+      answer: "$k = 11$ and $\\dfrac{xz}{y^2} = 10$.",
     },
-    {
-      type: "math",
-      latex: "\\begin{vmatrix}1&k&3\\\\3&k&-2\\\\2&4&-3\\end{vmatrix} = 1(-3k + 8) - k(-9 + 4) + 3(12 - 2k) = -4k + 44 = 0 \\;\\Rightarrow\\; k = 11",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* a homogeneous system is always consistent, so the only question is whether the solution is unique ($X = O$) or a whole line. That is decided by $\\operatorname{rank} A < 3$, i.e. $\\det A = 0$.\n\n**Step 2: find the line of solutions.** With $k = 11$, subtract equation 1 from equation 2: $2x - 5z = 0$, so $x = \\frac{5}{2}z$. Put this into equation 3: $5z + 4y - 3z = 0$, so $y = -\\frac{1}{2}z$.\n\n*Why this step:* subtracting the first two equations kills $y$ in one move, because both have $11y$.\n\n**Step 3: check in equation 1.** $\\frac{5}{2}z - \\frac{11}{2}z + 3z = -3z + 3z = 0$. ✓ The rank is exactly 2, and the solutions form the line through $(5, -1, 2)$.\n\n**Step 4: the ratio.** $\\dfrac{xz}{y^2} = \\dfrac{\\frac{5}{2}z \\cdot z}{\\frac{1}{4}z^2} = 10$. The free parameter $z$ cancels, which is why the question can ask for a single number even though there are infinitely many solutions.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx5-2-q1",
@@ -610,6 +724,7 @@ const lesson03: LessonSeed = {
           "The thin dashed arrow is v; the coloured dashed lines are the eigen-lines, each labelled with its stretch factor λ. Try each preset and predict its eigen-lines before you click.",
       },
     },
+    { type: "heading", text: "Defining eigenvectors and eigenvalues" },
     {
       type: "callout",
       variant: "definition",
@@ -626,6 +741,7 @@ const lesson03: LessonSeed = {
       content:
         "Two consequences follow straight from linearity.\n\n**Eigenvectors come in whole lines.** If $A\\mathbf{v} = \\lambda\\mathbf{v}$ then $A(k\\mathbf{v}) = kA\\mathbf{v} = \\lambda(k\\mathbf{v})$. Any non-zero multiple works too, which is why the picture shows eigen-*lines*, not single arrows.\n\n**The zero vector is excluded on purpose.** $A\\mathbf{0} = \\lambda\\mathbf{0}$ holds for *every* $\\lambda$ and every $A$. If $\\mathbf{0}$ counted, every number would be an eigenvalue of every matrix, and the idea would say nothing.",
     },
+    { type: "heading", text: "Eigenvectors across the transformation gallery" },
     {
       type: "text",
       content:
@@ -663,15 +779,37 @@ const lesson03: LessonSeed = {
       content:
         "$\\lambda = 0$ is an eigenvalue $\\iff$ some non-zero $\\mathbf{v}$ has $A\\mathbf{v} = \\mathbf{0}$ $\\iff$ $A$ squashes a direction $\\iff$ $\\det A = 0$ $\\iff$ rank $< n$. The projection is the example: its y-axis is the crushed direction.",
     },
+    { type: "heading", text: "Testing whether a vector is an eigenvector" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Check that $(1,1)$ and $(1,-2)$ are eigenvectors of $A = \\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}$, and find their eigenvalues.\n\n**Step 1.** $A\\begin{pmatrix}1\\\\1\\end{pmatrix} = \\begin{pmatrix}4 + 1\\\\2 + 3\\end{pmatrix} = \\begin{pmatrix}5\\\\5\\end{pmatrix} = 5\\begin{pmatrix}1\\\\1\\end{pmatrix}$, so $\\lambda = 5$.\n\n**Step 2.** $A\\begin{pmatrix}1\\\\-2\\end{pmatrix} = \\begin{pmatrix}4 - 2\\\\2 - 6\\end{pmatrix} = \\begin{pmatrix}2\\\\-4\\end{pmatrix} = 2\\begin{pmatrix}1\\\\-2\\end{pmatrix}$, so $\\lambda = 2$.",
+      type: "worked-example",
+      id: "mx5-3-we1",
+      title: "Worked example 1",
+      problem:
+        "Check that $(1,1)$ and $(1,-2)$ are eigenvectors of $A = \\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}$, and find their eigenvalues.",
+      steps: [
+        {
+          text: "$A\\begin{pmatrix}1\\\\1\\end{pmatrix} = \\begin{pmatrix}4 + 1\\\\2 + 3\\end{pmatrix} = \\begin{pmatrix}5\\\\5\\end{pmatrix} = 5\\begin{pmatrix}1\\\\1\\end{pmatrix}$, so $\\lambda = 5$.",
+        },
+        {
+          text: "$A\\begin{pmatrix}1\\\\-2\\end{pmatrix} = \\begin{pmatrix}4 - 2\\\\2 - 6\\end{pmatrix} = \\begin{pmatrix}2\\\\-4\\end{pmatrix} = 2\\begin{pmatrix}1\\\\-2\\end{pmatrix}$, so $\\lambda = 2$.",
+        },
+      ],
+      answer: "Both are eigenvectors: $\\lambda = 5$ for $(1,1)$ and $\\lambda = 2$ for $(1,-2)$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2.** Which of $(1, 2)$, $(1, -2)$, $(1, 0)$ are eigenvectors of $B = \\begin{pmatrix}1&1\\\\4&1\\end{pmatrix}$?\n\n**$(1,2)$:** $B\\mathbf{v} = (1 + 2,\\; 4 + 2) = (3, 6) = 3(1,2)$. Eigenvector, $\\lambda = 3$.\n\n**$(1,-2)$:** $B\\mathbf{v} = (1 - 2,\\; 4 - 2) = (-1, 2) = -1\\,(1,-2)$. Eigenvector, $\\lambda = -1$: flipped along its own line.\n\n**$(1,0)$:** $B\\mathbf{v} = (1, 4)$, which is not a multiple of $(1, 0)$. Not an eigenvector.",
+      type: "worked-example",
+      id: "mx5-3-we2",
+      title: "Worked example 2",
+      problem:
+        "Which of $(1, 2)$, $(1, -2)$, $(1, 0)$ are eigenvectors of $B = \\begin{pmatrix}1&1\\\\4&1\\end{pmatrix}$?",
+      steps: [
+        { text: "**$(1,2)$:** $B\\mathbf{v} = (1 + 2,\\; 4 + 2) = (3, 6) = 3(1,2)$. Eigenvector, $\\lambda = 3$." },
+        {
+          text: "**$(1,-2)$:** $B\\mathbf{v} = (1 - 2,\\; 4 - 2) = (-1, 2) = -1\\,(1,-2)$. Eigenvector, $\\lambda = -1$: flipped along its own line.",
+        },
+        { text: "**$(1,0)$:** $B\\mathbf{v} = (1, 4)$, which is not a multiple of $(1, 0)$. Not an eigenvector." },
+      ],
+      answer: "$(1, 2)$ with $\\lambda = 3$ and $(1, -2)$ with $\\lambda = -1$. $(1, 0)$ is not an eigenvector.",
     },
     {
       type: "text",
@@ -681,22 +819,55 @@ const lesson03: LessonSeed = {
     {
       type: "text",
       content:
-        "**Worked example 3 (application: city and suburbs).** Each year 10% of a city's residents move to the suburbs and 20% of suburban residents move to the city; everyone else stays. If $(c, s)$ are this year's populations (in lakhs), next year's are $M\\begin{pmatrix}c\\\\s\\end{pmatrix}$ with",
+        "Each year 10% of a city's residents move to the suburbs and 20% of suburban residents move to the city; everyone else stays. If $(c, s)$ are this year's populations (in lakhs), next year's are $M\\begin{pmatrix}c\\\\s\\end{pmatrix}$ with",
     },
     {
       type: "math",
       latex: "M = \\begin{pmatrix}0.9 & 0.2\\\\ 0.1 & 0.8\\end{pmatrix} \\qquad \\begin{aligned} c_{\\text{new}} &= 0.9c + 0.2s \\\\ s_{\\text{new}} &= 0.1c + 0.8s \\end{aligned}",
     },
     {
-      type: "text",
-      content:
-        "Show that $(2, 1)$ and $(1, -1)$ are eigenvectors, and explain what they mean for the long run.\n\n**Step 1: test $(2, 1)$.** $M(2, 1) = (1.8 + 0.2,\\; 0.2 + 0.8) = (2, 1)$. Eigenvector with $\\lambda = 1$.\n\n*Why it matters:* a population split $2 : 1$ between city and suburbs is **unchanged** by a year of moving. The 0.2 lakh leaving the city is exactly replaced by the 0.2 lakh arriving. It is a steady state.\n\n**Step 2: test $(1, -1)$.** $M(1, -1) = (0.9 - 0.2,\\; 0.1 - 0.8) = (0.7, -0.7) = 0.7\\,(1, -1)$. Eigenvector with $\\lambda = 0.7$.\n\n*Why it matters:* $(1, -1)$ is not a population (it has a negative entry), but it is a *correction*: moving people from one region to the other without changing the total. Each year that correction shrinks to 70% of its size.\n\n**Step 3: the long run.** Suppose the region starts with 3 lakh people, all in the city: $(3, 0) = 1\\cdot(2, 1) + 1\\cdot(1, -1)$. After $n$ years this becomes $(2, 1) + 0.7^n(1, -1)$. As $0.7^n \\to 0$, the populations settle to 2 lakh in the city and 1 lakh in the suburbs, whatever the starting split. The eigenvector with $\\lambda = 1$ is the future; the one with $\\lambda < 1$ fades away.",
+      type: "worked-example",
+      id: "mx5-3-we3",
+      title: "Worked example 3 (application: city and suburbs)",
+      problem:
+        "Show that $(2, 1)$ and $(1, -1)$ are eigenvectors of $M$, and explain what they mean for the long run.",
+      steps: [
+        {
+          text: "**Test $(2, 1)$.** $M(2, 1) = (1.8 + 0.2,\\; 0.2 + 0.8) = (2, 1)$. Eigenvector with $\\lambda = 1$.\n\n*Why it matters:* a population split $2 : 1$ between city and suburbs is **unchanged** by a year of moving. The 0.2 lakh leaving the city is exactly replaced by the 0.2 lakh arriving. It is a steady state.",
+        },
+        {
+          text: "**Test $(1, -1)$.** $M(1, -1) = (0.9 - 0.2,\\; 0.1 - 0.8) = (0.7, -0.7) = 0.7\\,(1, -1)$. Eigenvector with $\\lambda = 0.7$.\n\n*Why it matters:* $(1, -1)$ is not a population (it has a negative entry), but it is a *correction*: moving people from one region to the other without changing the total. Each year that correction shrinks to 70% of its size.",
+        },
+        {
+          text: "**The long run.** Suppose the region starts with 3 lakh people, all in the city: $(3, 0) = 1\\cdot(2, 1) + 1\\cdot(1, -1)$. After $n$ years this becomes $(2, 1) + 0.7^n(1, -1)$. As $0.7^n \\to 0$, the populations settle to 2 lakh in the city and 1 lakh in the suburbs, whatever the starting split. The eigenvector with $\\lambda = 1$ is the future; the one with $\\lambda < 1$ fades away.",
+        },
+      ],
+      answer:
+        "$\\lambda = 1$ for $(2, 1)$ (the steady state) and $\\lambda = 0.7$ for $(1, -1)$ (a correction that fades), so the populations settle to 2 lakh in the city and 1 lakh in the suburbs.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (JEE/CBSE pattern).** Let $A = \\begin{pmatrix}3&1&1\\\\0&4&1\\\\2&1&2\\end{pmatrix}$. (a) Show $(1, 1, 1)$ is an eigenvector. (b) Find $A^3\\begin{pmatrix}1\\\\1\\\\1\\end{pmatrix}$. (c) Given $\\det A = 15$, find the sum of all nine entries of $A^{-1}$.\n\n**(a)** $A(1, 1, 1)$ adds up each row: $(3 + 1 + 1,\\; 0 + 4 + 1,\\; 2 + 1 + 2) = (5, 5, 5) = 5(1, 1, 1)$. So $\\lambda = 5$.\n\n*Why this works:* multiplying by $(1, 1, 1)$ always gives the row sums. If every row sums to the same number $s$, then $(1, 1, 1)$ is an eigenvector with eigenvalue $s$. Spot equal row sums and you get an eigenvalue for free.\n\n**(b)** Apply $A$ three times; each time the vector is multiplied by 5: $A^3(1, 1, 1) = 5^3(1, 1, 1) = (125, 125, 125)$. No matrix cubing needed.\n\n**(c)** $\\det A = 15 \\ne 0$, so $A^{-1}$ exists. Apply $A^{-1}$ to $A(1,1,1) = 5(1,1,1)$ and divide by 5: $A^{-1}(1, 1, 1) = \\frac{1}{5}(1, 1, 1)$. So every row of $A^{-1}$ sums to $\\frac{1}{5}$, and the three rows together sum to $\\frac{3}{5}$.\n\n*Why this step:* \"sum of all entries\" is the sum of the row sums, and the row sums are exactly what $A^{-1}(1,1,1)$ computes.\n\n**Check** with cofactors: the nine cofactors of $A$ add up to $7 + 2 - 8 - 1 + 4 - 1 - 3 - 3 + 12 = 9$, and $\\frac{9}{15} = \\frac{3}{5}$. ✓",
+      type: "worked-example",
+      id: "mx5-3-we4",
+      title: "Worked example 4 (JEE/CBSE pattern)",
+      problem:
+        "Let $A = \\begin{pmatrix}3&1&1\\\\0&4&1\\\\2&1&2\\end{pmatrix}$. (a) Show $(1, 1, 1)$ is an eigenvector. (b) Find $A^3\\begin{pmatrix}1\\\\1\\\\1\\end{pmatrix}$. (c) Given $\\det A = 15$, find the sum of all nine entries of $A^{-1}$.",
+      steps: [
+        {
+          text: "**(a)** $A(1, 1, 1)$ adds up each row: $(3 + 1 + 1,\\; 0 + 4 + 1,\\; 2 + 1 + 2) = (5, 5, 5) = 5(1, 1, 1)$. So $\\lambda = 5$.\n\n*Why this works:* multiplying by $(1, 1, 1)$ always gives the row sums. If every row sums to the same number $s$, then $(1, 1, 1)$ is an eigenvector with eigenvalue $s$. Spot equal row sums and you get an eigenvalue for free.",
+        },
+        {
+          text: "**(b)** Apply $A$ three times; each time the vector is multiplied by 5: $A^3(1, 1, 1) = 5^3(1, 1, 1) = (125, 125, 125)$. No matrix cubing needed.",
+        },
+        {
+          text: "**(c)** $\\det A = 15 \\ne 0$, so $A^{-1}$ exists. Apply $A^{-1}$ to $A(1,1,1) = 5(1,1,1)$ and divide by 5: $A^{-1}(1, 1, 1) = \\frac{1}{5}(1, 1, 1)$. So every row of $A^{-1}$ sums to $\\frac{1}{5}$, and the three rows together sum to $\\frac{3}{5}$.\n\n*Why this step:* \"sum of all entries\" is the sum of the row sums, and the row sums are exactly what $A^{-1}(1,1,1)$ computes.",
+        },
+        {
+          text: "**Check** with cofactors: the nine cofactors of $A$ add up to $7 + 2 - 8 - 1 + 4 - 1 - 3 - 3 + 12 = 9$, and $\\frac{9}{15} = \\frac{3}{5}$. ✓",
+        },
+      ],
+      answer: "(a) $\\lambda = 5$; (b) $(125, 125, 125)$; (c) $\\frac{3}{5}$.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx5-3-q1",
@@ -791,6 +962,7 @@ const lesson04: LessonSeed = {
       content:
         "Sweeping a probe works in 2D, but you cannot sweep your way through a $3\\times3$ matrix. We need an equation. Luckily, every piece of it has already been built in earlier chapters.",
     },
+    { type: "heading", text: "Deriving the characteristic equation" },
     {
       type: "text",
       content:
@@ -814,10 +986,11 @@ const lesson04: LessonSeed = {
       content:
         "In picture terms: subtracting $\\lambda I$ is a family of transformations, one for each $\\lambda$. Most members of the family are invertible. The eigenvalues are the special values of $\\lambda$ where $A - \\lambda I$ collapses the plane.",
     },
+    { type: "heading", text: "The 2×2 formula" },
     {
       type: "text",
       content:
-        "### The 2×2 formula\n\nFor $A = \\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$, expand the determinant:",
+        "For $A = \\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$, expand the determinant:",
     },
     {
       type: "math",
@@ -833,9 +1006,25 @@ const lesson04: LessonSeed = {
         "Here $\\operatorname{tr}A = a + d$ is the **trace**, the sum of the diagonal. So a $2\\times2$ characteristic equation can be written straight from two numbers.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Find the eigenvalues and eigenvectors of $A = \\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}$.\n\n**Step 1: the characteristic equation.** $\\operatorname{tr}A = 7$ and $\\det A = 12 - 2 = 10$, so $\\lambda^2 - 7\\lambda + 10 = 0$, i.e. $(\\lambda - 5)(\\lambda - 2) = 0$. The eigenvalues are $\\lambda = 5, 2$.\n\n**Step 2: $\\lambda = 5$.** $A - 5I = \\begin{pmatrix}-1&1\\\\2&-2\\end{pmatrix}$. Both rows say $-x + y = 0$, so $y = x$ and $\\mathbf{v} = (1, 1)$.\n\n**Step 3: $\\lambda = 2$.** $A - 2I = \\begin{pmatrix}2&1\\\\2&1\\end{pmatrix}$. Both rows say $2x + y = 0$, so $\\mathbf{v} = (1, -2)$.\n\nThese are the vectors checked in 5.3. The rows of $A - \\lambda I$ always come out parallel at an eigenvalue. That is the collapse, and it is a built-in arithmetic check: if the rows are not parallel, you have made an error.",
+      type: "worked-example",
+      id: "mx5-4-we1",
+      title: "Worked example 1",
+      problem: "Find the eigenvalues and eigenvectors of $A = \\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}$.",
+      steps: [
+        {
+          text: "**The characteristic equation.** $\\operatorname{tr}A = 7$ and $\\det A = 12 - 2 = 10$, so $\\lambda^2 - 7\\lambda + 10 = 0$, i.e. $(\\lambda - 5)(\\lambda - 2) = 0$. The eigenvalues are $\\lambda = 5, 2$.",
+        },
+        {
+          text: "**$\\lambda = 5$.** $A - 5I = \\begin{pmatrix}-1&1\\\\2&-2\\end{pmatrix}$. Both rows say $-x + y = 0$, so $y = x$ and $\\mathbf{v} = (1, 1)$.",
+        },
+        {
+          text: "**$\\lambda = 2$.** $A - 2I = \\begin{pmatrix}2&1\\\\2&1\\end{pmatrix}$. Both rows say $2x + y = 0$, so $\\mathbf{v} = (1, -2)$.",
+        },
+        {
+          text: "These are the vectors checked in 5.3. The rows of $A - \\lambda I$ always come out parallel at an eigenvalue. That is the collapse, and it is a built-in arithmetic check: if the rows are not parallel, you have made an error.",
+        },
+      ],
+      answer: "$\\lambda = 5$ with $\\mathbf{v} = (1, 1)$, and $\\lambda = 2$ with $\\mathbf{v} = (1, -2)$.",
     },
     {
       type: "text",
@@ -873,19 +1062,46 @@ const lesson04: LessonSeed = {
         "The level slider shows the three possible cases for a $2\\times 2$ matrix, sorted by the discriminant $(\\operatorname{tr}A)^2 - 4\\det A$:\n\n- **Positive:** two distinct real eigenvalues and two eigen-lines.\n- **Zero:** one repeated eigenvalue. This happens with the shear, $(1 - \\lambda)^2 = 0$.\n- **Negative:** no real eigenvalues. For the $90^\\circ$ rotation, $\\lambda^2 + 1 = 0$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2: the shear.** $A = \\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ has $\\operatorname{tr} = 2$, $\\det = 1$, so $\\lambda^2 - 2\\lambda + 1 = (\\lambda - 1)^2 = 0$. The only eigenvalue is $\\lambda = 1$. Then $A - I = \\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$ forces $y = 0$, so the eigenvectors are $(1, 0)$ and its multiples. That is only **one** eigen-line, even though the root is repeated, which matches the picture.",
+      type: "worked-example",
+      id: "mx5-4-we2",
+      title: "Worked example 2: the shear",
+      problem: "Find the eigenvalues and eigenvectors of $A = \\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$.",
+      steps: [
+        {
+          text: "$A$ has $\\operatorname{tr} = 2$, $\\det = 1$, so $\\lambda^2 - 2\\lambda + 1 = (\\lambda - 1)^2 = 0$. The only eigenvalue is $\\lambda = 1$.",
+        },
+        {
+          text: "Then $A - I = \\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$ forces $y = 0$, so the eigenvectors are $(1, 0)$ and its multiples.",
+        },
+        { text: "That is only **one** eigen-line, even though the root is repeated, which matches the picture." },
+      ],
+      answer: "$\\lambda = 1$ (repeated), with a single eigen-line: the multiples of $(1, 0)$.",
     },
+    { type: "heading", text: "Triangular matrices and a 3×3 example" },
     {
       type: "text",
       content:
-        "### Triangular matrices and a 3×3 example\n\nIf $A$ is triangular, so is $A - \\lambda I$, and the determinant of a triangular matrix is the product of its diagonal. So $\\det(A - \\lambda I) = (a_{11} - \\lambda)(a_{22} - \\lambda)\\cdots$, and **the eigenvalues are the diagonal entries.**",
+        "If $A$ is triangular, so is $A - \\lambda I$, and the determinant of a triangular matrix is the product of its diagonal. So $\\det(A - \\lambda I) = (a_{11} - \\lambda)(a_{22} - \\lambda)\\cdots$, and **the eigenvalues are the diagonal entries.**",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3.** Find the eigenvalues and eigenvectors of $A = \\begin{pmatrix}2&1&0\\\\0&3&1\\\\0&0&5\\end{pmatrix}$.\n\n**Eigenvalues:** the matrix is upper triangular, so $\\lambda = 2, 3, 5$.\n\n**$\\lambda = 2$:** $A - 2I = \\begin{pmatrix}0&1&0\\\\0&1&1\\\\0&0&3\\end{pmatrix}$. Row 3 gives $z = 0$, then row 2 gives $y = 0$, and $x$ is free. $\\mathbf{v} = (1, 0, 0)$.\n\n**$\\lambda = 3$:** $A - 3I = \\begin{pmatrix}-1&1&0\\\\0&0&1\\\\0&0&2\\end{pmatrix}$. Then $z = 0$ and $-x + y = 0$, so $\\mathbf{v} = (1, 1, 0)$.\n\n**$\\lambda = 5$:** $A - 5I = \\begin{pmatrix}-3&1&0\\\\0&-2&1\\\\0&0&0\\end{pmatrix}$. Then $z = 2y$ and $y = 3x$, so $\\mathbf{v} = (1, 3, 6)$.\n\n**Check:** $A(1,3,6) = (2 + 3,\\; 9 + 6,\\; 30) = (5, 15, 30) = 5(1, 3, 6)$. ✓",
+      type: "worked-example",
+      id: "mx5-4-we3",
+      title: "Worked example 3",
+      problem: "Find the eigenvalues and eigenvectors of $A = \\begin{pmatrix}2&1&0\\\\0&3&1\\\\0&0&5\\end{pmatrix}$.",
+      steps: [
+        { text: "**Eigenvalues:** the matrix is upper triangular, so $\\lambda = 2, 3, 5$." },
+        {
+          text: "**$\\lambda = 2$:** $A - 2I = \\begin{pmatrix}0&1&0\\\\0&1&1\\\\0&0&3\\end{pmatrix}$. Row 3 gives $z = 0$, then row 2 gives $y = 0$, and $x$ is free. $\\mathbf{v} = (1, 0, 0)$.",
+        },
+        {
+          text: "**$\\lambda = 3$:** $A - 3I = \\begin{pmatrix}-1&1&0\\\\0&0&1\\\\0&0&2\\end{pmatrix}$. Then $z = 0$ and $-x + y = 0$, so $\\mathbf{v} = (1, 1, 0)$.",
+        },
+        {
+          text: "**$\\lambda = 5$:** $A - 5I = \\begin{pmatrix}-3&1&0\\\\0&-2&1\\\\0&0&0\\end{pmatrix}$. Then $z = 2y$ and $y = 3x$, so $\\mathbf{v} = (1, 3, 6)$.",
+        },
+        { text: "**Check:** $A(1,3,6) = (2 + 3,\\; 9 + 6,\\; 30) = (5, 15, 30) = 5(1, 3, 6)$. ✓" },
+      ],
+      answer: "$\\lambda = 2, 3, 5$ with $\\mathbf{v} = (1, 0, 0)$, $(1, 1, 0)$, $(1, 3, 6)$ respectively.",
     },
     {
       type: "callout",
@@ -895,9 +1111,26 @@ const lesson04: LessonSeed = {
         "$\\lambda^3 - (\\operatorname{tr}A)\\lambda^2 + S_2\\,\\lambda - \\det A = 0$, where $S_2$ is the sum of the three principal $2\\times2$ minors (the ones centred on the diagonal: delete row $i$ and column $i$). For the example above: $\\operatorname{tr} = 10$, $S_2 = 15 + 10 + 6 = 31$, $\\det = 30$, giving $\\lambda^3 - 10\\lambda^2 + 31\\lambda - 30 = (\\lambda - 2)(\\lambda - 3)(\\lambda - 5)$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (not triangular).** Find the eigenvalues and eigenvectors of $A = \\begin{pmatrix}2&1&1\\\\1&2&1\\\\1&1&2\\end{pmatrix}$.\n\n**Step 1: the three coefficients.** $\\operatorname{tr}A = 6$. Each principal $2\\times2$ minor is $\\begin{vmatrix}2&1\\\\1&2\\end{vmatrix} = 3$, so $S_2 = 3 + 3 + 3 = 9$. And $\\det A = 2(4 - 1) - 1(2 - 1) + 1(1 - 2) = 4$.\n\n**Step 2: the cubic.** $\\lambda^3 - 6\\lambda^2 + 9\\lambda - 4 = 0$. Try $\\lambda = 1$: $1 - 6 + 9 - 4 = 0$ ✓. Dividing out $(\\lambda - 1)$ leaves $\\lambda^2 - 5\\lambda + 4 = (\\lambda - 1)(\\lambda - 4)$, so the polynomial is $(\\lambda - 1)^2(\\lambda - 4)$. The eigenvalues are $1, 1, 4$.\n\n**Step 3: $\\lambda = 4$.** $A - 4I = \\begin{pmatrix}-2&1&1\\\\1&-2&1\\\\1&1&-2\\end{pmatrix}$. Row 1 minus row 2 gives $-3x + 3y = 0$, so $x = y$; similarly $y = z$. So $\\mathbf{v} = (1, 1, 1)$.\n\n**Step 4: $\\lambda = 1$.** $A - I = \\begin{pmatrix}1&1&1\\\\1&1&1\\\\1&1&1\\end{pmatrix}$ has rank 1, and every row says $x + y + z = 0$. That is a whole **plane** of eigenvectors, spanned for example by $(1, -1, 0)$ and $(1, 0, -1)$.\n\n**Check:** $1 + 1 + 4 = 6 = \\operatorname{tr}A$ and $1 \\times 1 \\times 4 = 4 = \\det A$. ✓",
+      type: "worked-example",
+      id: "mx5-4-we4",
+      title: "Worked example 4 (not triangular)",
+      problem: "Find the eigenvalues and eigenvectors of $A = \\begin{pmatrix}2&1&1\\\\1&2&1\\\\1&1&2\\end{pmatrix}$.",
+      steps: [
+        {
+          text: "**The three coefficients.** $\\operatorname{tr}A = 6$. Each principal $2\\times2$ minor is $\\begin{vmatrix}2&1\\\\1&2\\end{vmatrix} = 3$, so $S_2 = 3 + 3 + 3 = 9$. And $\\det A = 2(4 - 1) - 1(2 - 1) + 1(1 - 2) = 4$.",
+        },
+        {
+          text: "**The cubic.** $\\lambda^3 - 6\\lambda^2 + 9\\lambda - 4 = 0$. Try $\\lambda = 1$: $1 - 6 + 9 - 4 = 0$ ✓. Dividing out $(\\lambda - 1)$ leaves $\\lambda^2 - 5\\lambda + 4 = (\\lambda - 1)(\\lambda - 4)$, so the polynomial is $(\\lambda - 1)^2(\\lambda - 4)$. The eigenvalues are $1, 1, 4$.",
+        },
+        {
+          text: "**$\\lambda = 4$.** $A - 4I = \\begin{pmatrix}-2&1&1\\\\1&-2&1\\\\1&1&-2\\end{pmatrix}$. Row 1 minus row 2 gives $-3x + 3y = 0$, so $x = y$; similarly $y = z$. So $\\mathbf{v} = (1, 1, 1)$.",
+        },
+        {
+          text: "**$\\lambda = 1$.** $A - I = \\begin{pmatrix}1&1&1\\\\1&1&1\\\\1&1&1\\end{pmatrix}$ has rank 1, and every row says $x + y + z = 0$. That is a whole **plane** of eigenvectors, spanned for example by $(1, -1, 0)$ and $(1, 0, -1)$.",
+        },
+        { text: "**Check:** $1 + 1 + 4 = 6 = \\operatorname{tr}A$ and $1 \\times 1 \\times 4 = 4 = \\det A$. ✓" },
+      ],
+      answer: "$\\lambda = 4$ with $\\mathbf{v} = (1, 1, 1)$, and the double eigenvalue $\\lambda = 1$ with the whole plane $x + y + z = 0$.",
     },
     {
       type: "callout",
@@ -918,10 +1151,11 @@ const lesson04: LessonSeed = {
       ],
       hint: "For $\\lambda = 1$, every row of $A - I$ says $x + y + z = 0$.",
     },
+    { type: "heading", text: "Trace = sum, determinant = product" },
     {
       type: "text",
       content:
-        "### Trace = sum, determinant = product\n\nIf the eigenvalues are $\\lambda_1, \\lambda_2$, then the characteristic polynomial is $(\\lambda - \\lambda_1)(\\lambda - \\lambda_2) = \\lambda^2 - (\\lambda_1 + \\lambda_2)\\lambda + \\lambda_1\\lambda_2$. Match it with $\\lambda^2 - (\\operatorname{tr}A)\\lambda + \\det A$:",
+        "If the eigenvalues are $\\lambda_1, \\lambda_2$, then the characteristic polynomial is $(\\lambda - \\lambda_1)(\\lambda - \\lambda_2) = \\lambda^2 - (\\lambda_1 + \\lambda_2)\\lambda + \\lambda_1\\lambda_2$. Match it with $\\lambda^2 - (\\operatorname{tr}A)\\lambda + \\det A$:",
     },
     {
       type: "math",
@@ -944,37 +1178,77 @@ const lesson04: LessonSeed = {
       ],
     },
     {
+      type: "worked-example",
+      id: "mx5-4-we5",
+      title: "Worked example 5 (routine, with a negative eigenvalue)",
+      problem: "Find the eigenvalues and eigenvectors of $A = \\begin{pmatrix}1&4\\\\2&3\\end{pmatrix}$.",
+      steps: [
+        {
+          text: "$\\operatorname{tr}A = 4$ and $\\det A = 3 - 8 = -5$, so",
+          latex: "\\lambda^2 - 4\\lambda - 5 = (\\lambda - 5)(\\lambda + 1) = 0 \\;\\Rightarrow\\; \\lambda = 5,\\; -1",
+        },
+        {
+          text: "*Why this step:* a negative determinant forces the two eigenvalues to have opposite signs (their product is $-5$). So before factoring you already know one direction will be flipped.",
+        },
+        {
+          text: "**$\\lambda = 5$.** $A - 5I = \\begin{pmatrix}-4&4\\\\2&-2\\end{pmatrix}$. The rows are parallel (the built-in check) and both say $x = y$, so $\\mathbf{v} = (1, 1)$.",
+        },
+        {
+          text: "**$\\lambda = -1$.** $A + I = \\begin{pmatrix}2&4\\\\2&4\\end{pmatrix}$. Both rows say $x + 2y = 0$, so $\\mathbf{v} = (2, -1)$.",
+        },
+        {
+          text: "**Check.** $A(2, -1) = (2 - 4,\\; 4 - 3) = (-2, 1) = -1\\,(2, -1)$. ✓ And $5 + (-1) = 4 = \\operatorname{tr}A$, $5 \\times (-1) = -5 = \\det A$. ✓",
+        },
+      ],
+      answer: "$\\lambda = 5$ with $\\mathbf{v} = (1, 1)$, and $\\lambda = -1$ with $\\mathbf{v} = (2, -1)$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx5-4-we6",
+      title: "Worked example 6 (application: stretching a rubber sheet)",
+      problem:
+        "A square rubber sheet is pulled so that each point $(x, y)$ moves to $A(x, y)$ with $A = \\begin{pmatrix}3&1\\\\1&3\\end{pmatrix}$. Fibres pointing in most directions get rotated as well as stretched. Which fibre directions are only stretched, by how much, and by what factor does the area grow?",
+      steps: [
+        {
+          text: "**The characteristic equation.** $\\operatorname{tr}A = 6$, $\\det A = 9 - 1 = 8$, so $\\lambda^2 - 6\\lambda + 8 = (\\lambda - 4)(\\lambda - 2) = 0$.",
+        },
+        {
+          text: "**The directions.** For $\\lambda = 4$: $A - 4I = \\begin{pmatrix}-1&1\\\\1&-1\\end{pmatrix}$ gives $y = x$. For $\\lambda = 2$: $A - 2I = \\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$ gives $y = -x$.\n\n*Why this step:* these are the **principal stretch directions** that engineers look for when they test materials. Fibres along $y = x$ stretch to 4 times their length; fibres along $y = -x$ double. Every other fibre also turns, which is where shearing stress comes from.",
+        },
+        {
+          text: "**The area.** Area scales by $\\det A = 8$, which is $4 \\times 2$: the two principal stretches multiplied. A $10\\text{ cm} \\times 10\\text{ cm}$ patch becomes $800\\text{ cm}^2$.",
+        },
+      ],
+      answer: "Fibres along $y = x$ stretch by a factor of 4 and fibres along $y = -x$ by 2. The area grows by a factor of 8.",
+    },
+    {
       type: "text",
       content:
-        "**Worked example 5 (routine, with a negative eigenvalue).** Find the eigenvalues and eigenvectors of $A = \\begin{pmatrix}1&4\\\\2&3\\end{pmatrix}$.\n\n**Step 1.** $\\operatorname{tr}A = 4$ and $\\det A = 3 - 8 = -5$, so",
+        "Notice that the two eigen-lines of this symmetric matrix are **perpendicular**. That is true for every symmetric matrix, and it is why material scientists can always find a pair of perpendicular principal directions.",
     },
     {
-      type: "math",
-      latex: "\\lambda^2 - 4\\lambda - 5 = (\\lambda - 5)(\\lambda + 1) = 0 \\;\\Rightarrow\\; \\lambda = 5,\\; -1",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* a negative determinant forces the two eigenvalues to have opposite signs (their product is $-5$). So before factoring you already know one direction will be flipped.\n\n**Step 2: $\\lambda = 5$.** $A - 5I = \\begin{pmatrix}-4&4\\\\2&-2\\end{pmatrix}$. The rows are parallel (the built-in check) and both say $x = y$, so $\\mathbf{v} = (1, 1)$.\n\n**Step 3: $\\lambda = -1$.** $A + I = \\begin{pmatrix}2&4\\\\2&4\\end{pmatrix}$. Both rows say $x + 2y = 0$, so $\\mathbf{v} = (2, -1)$.\n\n**Check.** $A(2, -1) = (2 - 4,\\; 4 - 3) = (-2, 1) = -1\\,(2, -1)$. ✓ And $5 + (-1) = 4 = \\operatorname{tr}A$, $5 \\times (-1) = -5 = \\det A$. ✓",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 6 (application: stretching a rubber sheet).** A square rubber sheet is pulled so that each point $(x, y)$ moves to $A(x, y)$ with $A = \\begin{pmatrix}3&1\\\\1&3\\end{pmatrix}$. Fibres pointing in most directions get rotated as well as stretched. Which fibre directions are only stretched, by how much, and by what factor does the area grow?\n\n**Step 1: the characteristic equation.** $\\operatorname{tr}A = 6$, $\\det A = 9 - 1 = 8$, so $\\lambda^2 - 6\\lambda + 8 = (\\lambda - 4)(\\lambda - 2) = 0$.\n\n**Step 2: the directions.** For $\\lambda = 4$: $A - 4I = \\begin{pmatrix}-1&1\\\\1&-1\\end{pmatrix}$ gives $y = x$. For $\\lambda = 2$: $A - 2I = \\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$ gives $y = -x$.\n\n*Why this step:* these are the **principal stretch directions** that engineers look for when they test materials. Fibres along $y = x$ stretch to 4 times their length; fibres along $y = -x$ double. Every other fibre also turns, which is where shearing stress comes from.\n\n**Step 3: the area.** Area scales by $\\det A = 8$, which is $4 \\times 2$: the two principal stretches multiplied. A $10\\text{ cm} \\times 10\\text{ cm}$ patch becomes $800\\text{ cm}^2$.\n\nNotice that the two eigen-lines of this symmetric matrix are **perpendicular**. That is true for every symmetric matrix, and it is why material scientists can always find a pair of perpendicular principal directions.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 7 (JEE pattern).** A $3\\times3$ matrix $A$ has eigenvalues $1, -1, 2$. Find (a) $\\det A$, (b) $\\operatorname{tr}(A^2)$, (c) $\\det(A^2 + 2A - I)$, (d) $\\det(\\operatorname{adj}A)$.\n\n**(a)** Determinant = product of eigenvalues $= 1 \\cdot (-1) \\cdot 2 = -2$.\n\n**(b)** $A^2$ has eigenvalues $1^2, (-1)^2, 2^2 = 1, 1, 4$, so $\\operatorname{tr}(A^2) = 6$.\n\n*Why this step:* on an eigenvector, $A^2$ acts as $\\lambda^2$ (first row of the table). The trace is the sum of the eigenvalues of $A^2$, not the square of $\\operatorname{tr}A = 2$.\n\n**(c)** On an eigenvector, the matrix $A^2 + 2A - I$ acts as the number $q(\\lambda) = \\lambda^2 + 2\\lambda - 1$:",
-    },
-    {
-      type: "math",
-      latex: "q(1) = 2, \\quad q(-1) = 1 - 2 - 1 = -2, \\quad q(2) = 4 + 4 - 1 = 7 \\;\\Rightarrow\\; \\det(A^2 + 2A - I) = 2 \\cdot (-2) \\cdot 7 = -28",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* combining the \"powers\", \"scalar multiples\" and \"shift\" rows of the table, any polynomial in $A$ has eigenvalues $q(\\lambda_i)$. Then the determinant is their product.\n\n**(d)** From Chapter 3, $\\det(\\operatorname{adj}A) = (\\det A)^{n-1} = (-2)^2 = 4$. **Check** with eigenvalues: $\\operatorname{adj}A = (\\det A)\\,A^{-1}$ has eigenvalues $\\frac{-2}{\\lambda}$, i.e. $-2, 2, -1$, whose product is $4$. ✓",
+      type: "worked-example",
+      id: "mx5-4-we7",
+      title: "Worked example 7 (JEE pattern)",
+      problem:
+        "A $3\\times3$ matrix $A$ has eigenvalues $1, -1, 2$. Find (a) $\\det A$, (b) $\\operatorname{tr}(A^2)$, (c) $\\det(A^2 + 2A - I)$, (d) $\\det(\\operatorname{adj}A)$.",
+      steps: [
+        { text: "**(a)** Determinant = product of eigenvalues $= 1 \\cdot (-1) \\cdot 2 = -2$." },
+        {
+          text: "**(b)** $A^2$ has eigenvalues $1^2, (-1)^2, 2^2 = 1, 1, 4$, so $\\operatorname{tr}(A^2) = 6$.\n\n*Why this step:* on an eigenvector, $A^2$ acts as $\\lambda^2$ (first row of the table). The trace is the sum of the eigenvalues of $A^2$, not the square of $\\operatorname{tr}A = 2$.",
+        },
+        {
+          text: "**(c)** On an eigenvector, the matrix $A^2 + 2A - I$ acts as the number $q(\\lambda) = \\lambda^2 + 2\\lambda - 1$:",
+          latex: "q(1) = 2, \\quad q(-1) = 1 - 2 - 1 = -2, \\quad q(2) = 4 + 4 - 1 = 7 \\;\\Rightarrow\\; \\det(A^2 + 2A - I) = 2 \\cdot (-2) \\cdot 7 = -28",
+        },
+        {
+          text: "*Why this step:* combining the \"powers\", \"scalar multiples\" and \"shift\" rows of the table, any polynomial in $A$ has eigenvalues $q(\\lambda_i)$. Then the determinant is their product.",
+        },
+        {
+          text: "**(d)** From Chapter 3, $\\det(\\operatorname{adj}A) = (\\det A)^{n-1} = (-2)^2 = 4$. **Check** with eigenvalues: $\\operatorname{adj}A = (\\det A)\\,A^{-1}$ has eigenvalues $\\frac{-2}{\\lambda}$, i.e. $-2, 2, -1$, whose product is $4$. ✓",
+        },
+      ],
+      answer: "(a) $-2$; (b) $6$; (c) $-28$; (d) $4$.",
     },
     {
       type: "callout",
@@ -983,6 +1257,7 @@ const lesson04: LessonSeed = {
       content:
         "That shortcut works **only for triangular** (including diagonal) matrices. Take $\\begin{pmatrix}1&2\\\\3&2\\end{pmatrix}$: its diagonal entries are 1 and 2, but $\\operatorname{tr} = 3$ and $\\det = 2 - 6 = -4$, so $\\lambda^2 - 3\\lambda - 4 = (\\lambda - 4)(\\lambda + 1)$. The eigenvalues are $4$ and $-1$. The diagonal entries do still add up to the eigenvalues ($1 + 2 = 4 + (-1)$), but they are not the eigenvalues themselves.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx5-4-q1",
@@ -1105,6 +1380,7 @@ const lesson05: LessonSeed = {
       content:
         "If $p(\\lambda) = \\det(A - \\lambda I)$ is the characteristic polynomial of a square matrix $A$, then $p(A) = O$.\n\n$2\\times2$: $A^2 - (\\operatorname{tr}A)A + (\\det A)I = O$.\n\n$3\\times3$: $A^3 - (\\operatorname{tr}A)A^2 + S_2\\,A - (\\det A)I = O$, where $S_2$ is the sum of the principal $2\\times2$ minors.",
     },
+    { type: "heading", text: "Why every matrix satisfies its own polynomial" },
     {
       type: "text",
       content:
@@ -1126,10 +1402,11 @@ const lesson05: LessonSeed = {
       content:
         "That argument proves nothing, for two reasons.\n\n**Type mismatch:** $\\det(\\cdots)$ is a **number**, and $0$ is a number. The theorem claims a **matrix** equation, $p(A) = O$.\n\n**Illegal substitution:** $\\det(A - \\lambda I)$ is defined for scalar $\\lambda$. You must first expand it into the polynomial $\\lambda^2 - 7\\lambda + 10$ and only then substitute a matrix. Try the same trick on the trace: for a $2\\times2$, $\\operatorname{tr}(A - \\lambda I) = \\operatorname{tr}A - 2\\lambda$. Putting $\\lambda = A$ gives $\\operatorname{tr}(A - A) = 0$, which would \"prove\" $(\\operatorname{tr}A)I - 2A = O$. That is false for $A = \\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}$, since $7I - 2A = \\begin{pmatrix}-1&-2\\\\-4&1\\end{pmatrix} \\ne O$. Substituting a matrix into an unexpanded determinant or trace is not allowed.",
     },
+    { type: "heading", text: "Use 1: the inverse without the adjoint" },
     {
       type: "text",
       content:
-        "### Use 1: the inverse without the adjoint\n\nFrom $A^2 - 7A + 10I = O$: $A(A - 7I) = -10I$, so $A\\cdot\\frac{1}{10}(7I - A) = I$. Therefore",
+        "From $A^2 - 7A + 10I = O$: $A(A - 7I) = -10I$, so $A\\cdot\\frac{1}{10}(7I - A) = I$. Therefore",
     },
     {
       type: "math",
@@ -1140,10 +1417,11 @@ const lesson05: LessonSeed = {
       content:
         "This matches the $2\\times2$ formula from 3.2 (swap the diagonal, negate the off-diagonal, divide by $\\det = 10$). In general, $\\det A \\ne 0$ lets you divide the constant term out, and the inverse becomes a polynomial in $A$. When $\\det A = 0$ the constant term vanishes and there is nothing to divide by, just as you would expect.",
     },
+    { type: "heading", text: "Use 2: taming high powers" },
     {
       type: "text",
       content:
-        "### Use 2: taming high powers\n\nThe identity says $A^2 = 7A - 10I$, so any power can be rewritten in terms of $A$ and $I$ alone.\n\n$A^3 = A\\cdot A^2 = 7A^2 - 10A = 7(7A - 10I) - 10A = 39A - 70I$.\n\n**Check directly:** $39A - 70I = \\begin{pmatrix}156 - 70 & 39\\\\78 & 117 - 70\\end{pmatrix} = \\begin{pmatrix}86&39\\\\78&47\\end{pmatrix}$, and $A\\cdot A^2 = \\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}\\begin{pmatrix}18&7\\\\14&11\\end{pmatrix} = \\begin{pmatrix}86&39\\\\78&47\\end{pmatrix}$. ✓",
+        "The identity says $A^2 = 7A - 10I$, so any power can be rewritten in terms of $A$ and $I$ alone.\n\n$A^3 = A\\cdot A^2 = 7A^2 - 10A = 7(7A - 10I) - 10A = 39A - 70I$.\n\n**Check directly:** $39A - 70I = \\begin{pmatrix}156 - 70 & 39\\\\78 & 117 - 70\\end{pmatrix} = \\begin{pmatrix}86&39\\\\78&47\\end{pmatrix}$, and $A\\cdot A^2 = \\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}\\begin{pmatrix}18&7\\\\14&11\\end{pmatrix} = \\begin{pmatrix}86&39\\\\78&47\\end{pmatrix}$. ✓",
     },
     {
       type: "text",
@@ -1153,58 +1431,105 @@ const lesson05: LessonSeed = {
     {
       type: "text",
       content:
-        "**Worked example (application: Fibonacci's rabbits).** Each month, every adult pair of rabbits produces a new pair, and new pairs become adults after one month. If $(a_n, b_n)$ are the adult and baby pairs in month $n$, then $a_{n+1} = a_n + b_n$ and $b_{n+1} = a_n$, i.e.",
+        "Each month, every adult pair of rabbits produces a new pair, and new pairs become adults after one month. If $(a_n, b_n)$ are the adult and baby pairs in month $n$, then $a_{n+1} = a_n + b_n$ and $b_{n+1} = a_n$, i.e.",
     },
     {
       type: "math",
       latex: "\\begin{pmatrix}a_{n+1}\\\\b_{n+1}\\end{pmatrix} = F\\begin{pmatrix}a_n\\\\b_n\\end{pmatrix}, \\qquad F = \\begin{pmatrix}1&1\\\\1&0\\end{pmatrix}",
     },
     {
-      type: "text",
-      content:
-        "Find $F^5$, and hence the population after 5 months starting from one baby pair.\n\n**Step 1: Cayley–Hamilton.** $\\operatorname{tr}F = 1$ and $\\det F = 0 - 1 = -1$, so $F^2 - F - I = O$, i.e. $F^2 = F + I$.\n\n*Why this step:* this single identity lets us replace every $F^2$ by $F + I$, so each new power costs one substitution instead of a full matrix multiplication.\n\n**Step 2: climb the powers.**\n$F^3 = F\\cdot F^2 = F^2 + F = 2F + I$\n$F^4 = 2F^2 + F = 2(F + I) + F = 3F + 2I$\n$F^5 = 3F^2 + 2F = 3(F + I) + 2F = 5F + 3I$\n\nThe coefficients $1, 1, 2, 3, 5$ are the Fibonacci numbers: in general $F^n = f_n F + f_{n-1} I$.\n\n**Step 3: write out the matrix.**",
-    },
-    {
-      type: "math",
-      latex: "F^5 = 5\\begin{pmatrix}1&1\\\\1&0\\end{pmatrix} + 3\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix} = \\begin{pmatrix}8&5\\\\5&3\\end{pmatrix}, \\qquad F^5\\begin{pmatrix}0\\\\1\\end{pmatrix} = \\begin{pmatrix}5\\\\3\\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Interpretation.** After 5 months there are 5 adult pairs and 3 baby pairs, 8 in all. The eigenvalues of $F$ are the roots of $\\lambda^2 - \\lambda - 1 = 0$, i.e. $\\frac{1 \\pm \\sqrt{5}}{2}$. The larger one, the golden ratio $\\approx 1.618$, is the long-run monthly growth factor of the colony.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example (JEE pattern).** $A = \\begin{pmatrix}1&2\\\\2&1\\end{pmatrix}$. Using Cayley–Hamilton, find $A^{-1}$ and find $\\alpha, \\beta$ with $A^5 = \\alpha A + \\beta I$.\n\n**Step 1: the identity.** $\\operatorname{tr}A = 2$ and $\\det A = 1 - 4 = -3$, so $A^2 - 2A - 3I = O$. The eigenvalues are the roots of $\\lambda^2 - 2\\lambda - 3 = (\\lambda - 3)(\\lambda + 1)$: $\\lambda = 3, -1$.\n\n**Step 2: the inverse.** $A(A - 2I) = 3I$, so $A^{-1} = \\frac{1}{3}(A - 2I) = \\frac{1}{3}\\begin{pmatrix}-1&2\\\\2&-1\\end{pmatrix}$.\n\n*Why this step:* keep all terms containing $A$ on the left and factor $A$ out; the constant term, moved to the right, becomes the divisor.\n\n**Step 3: the power, using eigenvalues.** $A^5 = \\alpha A + \\beta I$ must hold on each eigenvector, so $\\lambda^5 = \\alpha\\lambda + \\beta$ for $\\lambda = 3$ and $\\lambda = -1$:",
-    },
-    {
-      type: "math",
-      latex: "\\begin{aligned} 243 &= 3\\alpha + \\beta \\\\ -1 &= -\\alpha + \\beta \\end{aligned} \\;\\Rightarrow\\; 4\\alpha = 244,\\; \\alpha = 61,\\; \\beta = 60",
+      type: "worked-example",
+      id: "mx5-5-we1",
+      title: "Application: Fibonacci's rabbits",
+      problem: "Find $F^5$, and hence the population after 5 months starting from one baby pair.",
+      steps: [
+        {
+          text: "**Cayley–Hamilton.** $\\operatorname{tr}F = 1$ and $\\det F = 0 - 1 = -1$, so $F^2 - F - I = O$, i.e. $F^2 = F + I$.\n\n*Why this step:* this single identity lets us replace every $F^2$ by $F + I$, so each new power costs one substitution instead of a full matrix multiplication.",
+        },
+        {
+          text: "**Climb the powers.**\n$F^3 = F\\cdot F^2 = F^2 + F = 2F + I$\n$F^4 = 2F^2 + F = 2(F + I) + F = 3F + 2I$\n$F^5 = 3F^2 + 2F = 3(F + I) + 2F = 5F + 3I$\n\nThe coefficients $1, 1, 2, 3, 5$ are the Fibonacci numbers: in general $F^n = f_n F + f_{n-1} I$.",
+        },
+        {
+          text: "**Write out the matrix.**",
+          latex: "F^5 = 5\\begin{pmatrix}1&1\\\\1&0\\end{pmatrix} + 3\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix} = \\begin{pmatrix}8&5\\\\5&3\\end{pmatrix}, \\qquad F^5\\begin{pmatrix}0\\\\1\\end{pmatrix} = \\begin{pmatrix}5\\\\3\\end{pmatrix}",
+        },
+        { text: "**Interpretation.** After 5 months there are 5 adult pairs and 3 baby pairs, 8 in all." },
+      ],
+      answer: "$F^5 = \\begin{pmatrix}8&5\\\\5&3\\end{pmatrix}$, giving 5 adult pairs and 3 baby pairs after 5 months.",
     },
     {
       type: "text",
       content:
-        "*Why this step:* two unknowns need two equations, and the two eigenvalues supply exactly two. This is much faster than climbing from $A^2$ to $A^5$ one power at a time.\n\n**Check.** $A^5 = 61A + 60I = \\begin{pmatrix}121&122\\\\122&121\\end{pmatrix}$. On the eigenvector $(1, 1)$: $A^5(1, 1) = (243, 243) = 3^5(1, 1)$. ✓",
+        "The eigenvalues of $F$ are the roots of $\\lambda^2 - \\lambda - 1 = 0$, i.e. $\\frac{1 \\pm \\sqrt{5}}{2}$. The larger one, the golden ratio $\\approx 1.618$, is the long-run monthly growth factor of the colony.",
+    },
+    {
+      type: "worked-example",
+      id: "mx5-5-we2",
+      title: "JEE pattern",
+      problem:
+        "$A = \\begin{pmatrix}1&2\\\\2&1\\end{pmatrix}$. Using Cayley–Hamilton, find $A^{-1}$ and find $\\alpha, \\beta$ with $A^5 = \\alpha A + \\beta I$.",
+      steps: [
+        {
+          text: "**The identity.** $\\operatorname{tr}A = 2$ and $\\det A = 1 - 4 = -3$, so $A^2 - 2A - 3I = O$. The eigenvalues are the roots of $\\lambda^2 - 2\\lambda - 3 = (\\lambda - 3)(\\lambda + 1)$: $\\lambda = 3, -1$.",
+        },
+        {
+          text: "**The inverse.** $A(A - 2I) = 3I$, so $A^{-1} = \\frac{1}{3}(A - 2I) = \\frac{1}{3}\\begin{pmatrix}-1&2\\\\2&-1\\end{pmatrix}$.\n\n*Why this step:* keep all terms containing $A$ on the left and factor $A$ out; the constant term, moved to the right, becomes the divisor.",
+        },
+        {
+          text: "**The power, using eigenvalues.** $A^5 = \\alpha A + \\beta I$ must hold on each eigenvector, so $\\lambda^5 = \\alpha\\lambda + \\beta$ for $\\lambda = 3$ and $\\lambda = -1$:",
+          latex: "\\begin{aligned} 243 &= 3\\alpha + \\beta \\\\ -1 &= -\\alpha + \\beta \\end{aligned} \\;\\Rightarrow\\; 4\\alpha = 244,\\; \\alpha = 61,\\; \\beta = 60",
+        },
+        {
+          text: "*Why this step:* two unknowns need two equations, and the two eigenvalues supply exactly two. This is much faster than climbing from $A^2$ to $A^5$ one power at a time.",
+        },
+        {
+          text: "**Check.** $A^5 = 61A + 60I = \\begin{pmatrix}121&122\\\\122&121\\end{pmatrix}$. On the eigenvector $(1, 1)$: $A^5(1, 1) = (243, 243) = 3^5(1, 1)$. ✓",
+        },
+      ],
+      answer: "$A^{-1} = \\frac{1}{3}\\begin{pmatrix}-1&2\\\\2&-1\\end{pmatrix}$, $\\alpha = 61$, $\\beta = 60$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx5-5-we3",
+      title: "CBSE/JEE",
+      problem: "$A = \\begin{pmatrix}3&1\\\\-1&2\\end{pmatrix}$. Show $A^2 - 5A + 7I = O$, then find $A^{-1}$ and $A^4$.",
+      steps: [
+        {
+          text: "$\\operatorname{tr}A = 5$ and $\\det A = 6 + 1 = 7$. Cayley–Hamilton gives $A^2 - 5A + 7I = O$ immediately. No multiplication is needed.",
+        },
+        {
+          text: "**The inverse.** $A(5I - A) = 7I$, so $A^{-1} = \\frac{1}{7}(5I - A) = \\frac{1}{7}\\begin{pmatrix}2&-1\\\\1&3\\end{pmatrix}$.",
+        },
+        {
+          text: "**Powers.** $A^2 = 5A - 7I$. Then $A^3 = 5A^2 - 7A = 5(5A - 7I) - 7A = 18A - 35I$, and $A^4 = 18A^2 - 35A = 18(5A - 7I) - 35A = 55A - 126I = \\begin{pmatrix}39&55\\\\-55&-16\\end{pmatrix}$.",
+        },
+      ],
+      answer: "$A^{-1} = \\frac{1}{7}\\begin{pmatrix}2&-1\\\\1&3\\end{pmatrix}$ and $A^4 = \\begin{pmatrix}39&55\\\\-55&-16\\end{pmatrix}$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx5-5-we4",
+      title: "3×3, JEE",
+      problem:
+        "Use Cayley–Hamilton to find $A^{-1}$ for $A = \\begin{pmatrix}2&1&1\\\\1&2&1\\\\1&1&2\\end{pmatrix}$, the matrix from worked example 4 in 5.4.",
+      steps: [
+        {
+          text: "**The characteristic polynomial.** From 5.4, $\\operatorname{tr}A = 6$, $S_2 = 9$, $\\det A = 4$. Cayley–Hamilton gives $A^3 - 6A^2 + 9A - 4I = O$.",
+        },
+        { text: "**Factor out $A$.** $A(A^2 - 6A + 9I) = 4I$, so $A^{-1} = \\frac{1}{4}(A^2 - 6A + 9I)$." },
+        {
+          text: "**Compute.** $A^2 = \\begin{pmatrix}6&5&5\\\\5&6&5\\\\5&5&6\\end{pmatrix}$ (row 1 times column 1 is $4 + 1 + 1 = 6$; row 1 times column 2 is $2 + 2 + 1 = 5$). Then",
+          latex: "A^{-1} = \\frac{1}{4}\\left[\\begin{pmatrix}6&5&5\\\\5&6&5\\\\5&5&6\\end{pmatrix} - \\begin{pmatrix}12&6&6\\\\6&12&6\\\\6&6&12\\end{pmatrix} + \\begin{pmatrix}9&0&0\\\\0&9&0\\\\0&0&9\\end{pmatrix}\\right] = \\frac{1}{4}\\begin{pmatrix}3&-1&-1\\\\-1&3&-1\\\\-1&-1&3\\end{pmatrix}",
+        },
+        {
+          text: "**Check.** Row 1 of $A$ times column 1 of $4A^{-1}$: $2(3) + 1(-1) + 1(-1) = 4$. Row 1 times column 2: $2(-1) + 1(3) + 1(-1) = 0$. So $A \\cdot 4A^{-1} = 4I$. ✓",
+        },
+      ],
+      answer: "$A^{-1} = \\frac{1}{4}\\begin{pmatrix}3&-1&-1\\\\-1&3&-1\\\\-1&-1&3\\end{pmatrix}$",
     },
     {
       type: "text",
-      content:
-        "**Worked example (CBSE/JEE).** $A = \\begin{pmatrix}3&1\\\\-1&2\\end{pmatrix}$. Show $A^2 - 5A + 7I = O$, then find $A^{-1}$ and $A^4$.\n\n**Step 1.** $\\operatorname{tr}A = 5$ and $\\det A = 6 + 1 = 7$. Cayley–Hamilton gives $A^2 - 5A + 7I = O$ immediately. No multiplication is needed.\n\n**Step 2: the inverse.** $A(5I - A) = 7I$, so $A^{-1} = \\frac{1}{7}(5I - A) = \\frac{1}{7}\\begin{pmatrix}2&-1\\\\1&3\\end{pmatrix}$.\n\n**Step 3: powers.** $A^2 = 5A - 7I$. Then $A^3 = 5A^2 - 7A = 5(5A - 7I) - 7A = 18A - 35I$, and $A^4 = 18A^2 - 35A = 18(5A - 7I) - 35A = 55A - 126I = \\begin{pmatrix}39&55\\\\-55&-16\\end{pmatrix}$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example (3×3, JEE).** Use Cayley–Hamilton to find $A^{-1}$ for $A = \\begin{pmatrix}2&1&1\\\\1&2&1\\\\1&1&2\\end{pmatrix}$, the matrix from worked example 4 in 5.4.\n\n**Step 1: the characteristic polynomial.** From 5.4, $\\operatorname{tr}A = 6$, $S_2 = 9$, $\\det A = 4$. Cayley–Hamilton gives $A^3 - 6A^2 + 9A - 4I = O$.\n\n**Step 2: factor out $A$.** $A(A^2 - 6A + 9I) = 4I$, so $A^{-1} = \\frac{1}{4}(A^2 - 6A + 9I)$.\n\n**Step 3: compute.** $A^2 = \\begin{pmatrix}6&5&5\\\\5&6&5\\\\5&5&6\\end{pmatrix}$ (row 1 times column 1 is $4 + 1 + 1 = 6$; row 1 times column 2 is $2 + 2 + 1 = 5$). Then",
-    },
-    {
-      type: "math",
-      latex: "A^{-1} = \\frac{1}{4}\\left[\\begin{pmatrix}6&5&5\\\\5&6&5\\\\5&5&6\\end{pmatrix} - \\begin{pmatrix}12&6&6\\\\6&12&6\\\\6&6&12\\end{pmatrix} + \\begin{pmatrix}9&0&0\\\\0&9&0\\\\0&0&9\\end{pmatrix}\\right] = \\frac{1}{4}\\begin{pmatrix}3&-1&-1\\\\-1&3&-1\\\\-1&-1&3\\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Check.** Row 1 of $A$ times column 1 of $4A^{-1}$: $2(3) + 1(-1) + 1(-1) = 4$. Row 1 times column 2: $2(-1) + 1(3) + 1(-1) = 0$. So $A \\cdot 4A^{-1} = 4I$. ✓ No cofactors, no adjoint: one matrix square and some arithmetic.",
+      content: "No cofactors, no adjoint: one matrix square and some arithmetic.",
     },
     {
       type: "quiz",
@@ -1220,18 +1545,26 @@ const lesson05: LessonSeed = {
       hint: "Keep the terms containing $A$ on one side and factor $A$ out.",
     },
     {
+      type: "worked-example",
+      id: "mx5-5-we5",
+      title: "Powers of $I + N$",
+      problem: "Find $(I + N)^n$ for $N = \\begin{pmatrix}2&-1\\\\4&-2\\end{pmatrix}$.",
+      steps: [
+        {
+          text: "$N$ has $\\operatorname{tr} = 0$ and $\\det = -4 + 4 = 0$, so Cayley–Hamilton says $N^2 = O$.",
+        },
+        {
+          text: "Then the binomial expansion of $(I + N)^n$ stops after two terms, because $I$ and $N$ commute and every higher power of $N$ is zero:",
+          latex: "(I + N)^n = I + nN + \\binom{n}{2}N^2 + \\cdots = I + nN = \\begin{pmatrix}1 + 2n & -n\\\\ 4n & 1 - 2n\\end{pmatrix}",
+        },
+      ],
+      answer: "$(I + N)^n = \\begin{pmatrix}1 + 2n & -n\\\\ 4n & 1 - 2n\\end{pmatrix}$",
+    },
+    { type: "heading", text: "Preview: diagonal matrices make powers trivial", level: 3 },
+    {
       type: "text",
       content:
-        "**Worked example (nilpotent).** $N = \\begin{pmatrix}2&-1\\\\4&-2\\end{pmatrix}$ has $\\operatorname{tr} = 0$ and $\\det = -4 + 4 = 0$, so Cayley–Hamilton says $N^2 = O$. Then the binomial expansion of $(I + N)^n$ stops after two terms, because $I$ and $N$ commute and every higher power of $N$ is zero:",
-    },
-    {
-      type: "math",
-      latex: "(I + N)^n = I + nN + \\binom{n}{2}N^2 + \\cdots = I + nN = \\begin{pmatrix}1 + 2n & -n\\\\ 4n & 1 - 2n\\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "### Preview: diagonal matrices make powers trivial\n\nFor a diagonal matrix, powers act on each axis separately: $\\begin{pmatrix}5&0\\\\0&2\\end{pmatrix}^n = \\begin{pmatrix}5^n&0\\\\0&2^n\\end{pmatrix}$. Our $A = \\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}$ *is* that diagonal matrix, seen through tilted axes: along $(1,1)$ it stretches by 5 and along $(1,-2)$ by 2. Put the eigenvectors in the columns of $P = \\begin{pmatrix}1&1\\\\1&-2\\end{pmatrix}$ and you get $A = PDP^{-1}$, so $A^n = PD^nP^{-1}$. This is **diagonalization**, the main idea of a first university linear algebra course. You have just seen why it works.",
+        "For a diagonal matrix, powers act on each axis separately: $\\begin{pmatrix}5&0\\\\0&2\\end{pmatrix}^n = \\begin{pmatrix}5^n&0\\\\0&2^n\\end{pmatrix}$. Our $A = \\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}$ *is* that diagonal matrix, seen through tilted axes: along $(1,1)$ it stretches by 5 and along $(1,-2)$ by 2. Put the eigenvectors in the columns of $P = \\begin{pmatrix}1&1\\\\1&-2\\end{pmatrix}$ and you get $A = PDP^{-1}$, so $A^n = PD^nP^{-1}$. This is **diagonalization**, the main idea of a first university linear algebra course. You have just seen why it works.",
     },
     {
       type: "interactive",
@@ -1253,6 +1586,7 @@ const lesson05: LessonSeed = {
           "A and D do the same thing: stretch by 5 along one line and by 2 along another. For D those lines are the axes; for A they are tilted. Drag the probe onto each eigen-line and compare.",
       },
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx5-5-q1",

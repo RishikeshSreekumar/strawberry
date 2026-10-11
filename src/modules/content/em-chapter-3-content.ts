@@ -23,6 +23,14 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/em-3-current-electricity.mp4",
+      poster: "/videos/em-3-current-electricity.jpg",
+      title: "Chapter 3 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "Flip a switch and the ceiling light comes on at once, even though the switch is several metres of wire away. You might picture electrons shooting out of the switch and racing to the bulb. They do not. In a typical household wire the electrons creep along at a fraction of a millimetre per second. An electron leaving the switch would take hours to reach the bulb.",
@@ -39,10 +47,11 @@ const lesson01: LessonSeed = {
       content:
         "The current through a surface is the rate at which charge crosses it: $I = \\dfrac{dq}{dt}$. Its SI unit is the ampere, $1\\text{ A} = 1\\text{ C/s}$.\nBy convention the direction of current is the direction positive charge would move. In a metal the carriers are electrons, so they actually drift **against** the current arrow. Current has a direction along the wire but it adds like a scalar at junctions, so it is not a vector.",
     },
+    { type: "heading", text: "Why electrons drift instead of racing" },
     {
       type: "text",
       content:
-        "**Why electrons drift instead of racing.** A free electron in copper already moves very fast, around $10^6$ m/s, but randomly, bouncing off vibrating ions. Averaged over the whole crowd, the random velocities cancel and there is no current. Switch on a field $\\vec E$ and each electron gains a small extra velocity $-\\dfrac{e\\vec E}{m}t$ between collisions, then loses that ordered part in the next collision. If the average time between collisions (the *relaxation time*) is $\\tau$, the average extra velocity is",
+        "A free electron in copper already moves very fast, around $10^6$ m/s, but randomly, bouncing off vibrating ions. Averaged over the whole crowd, the random velocities cancel and there is no current. Switch on a field $\\vec E$ and each electron gains a small extra velocity $-\\dfrac{e\\vec E}{m}t$ between collisions, then loses that ordered part in the next collision. If the average time between collisions (the *relaxation time*) is $\\tau$, the average extra velocity is",
     },
     { type: "math", latex: "\\vec v_d = -\\frac{e\\vec E}{m}\\,\\tau, \\qquad v_d = \\frac{eE\\tau}{m}" },
     {
@@ -50,10 +59,11 @@ const lesson01: LessonSeed = {
       content:
         "This slow, steady average is the **drift velocity**. It is tiny because $\\tau$ is tiny (about $2.5\\times10^{-14}$ s in copper): the electron is knocked off course long before it can pick up any real speed. The drift per unit field is called the **mobility**, $\\mu = v_d/E = e\\tau/m$.",
     },
+    { type: "heading", text: "From drift to current" },
     {
       type: "text",
       content:
-        "**From drift to current.** Take a wire of cross-section $A$ with $n$ free electrons per cubic metre, all drifting at $v_d$. In a time $\\Delta t$ each electron moves $v_d\\,\\Delta t$, so every electron within that distance behind a chosen cross-section gets through it. Those electrons fill a cylinder of volume $A\\,v_d\\,\\Delta t$:",
+        "Take a wire of cross-section $A$ with $n$ free electrons per cubic metre, all drifting at $v_d$. In a time $\\Delta t$ each electron moves $v_d\\,\\Delta t$, so every electron within that distance behind a chosen cross-section gets through it. Those electrons fill a cylinder of volume $A\\,v_d\\,\\Delta t$:",
     },
     {
       type: "math",
@@ -91,15 +101,70 @@ const lesson01: LessonSeed = {
       content:
         "What you should have seen: even 10 A, enough to run an electric heater, gives a drift of well under a millimetre per second. Doubling the current doubles the drift speed, because $n$, $e$ and $A$ are fixed for the wire. A snail outruns the electrons in your house wiring.",
     },
+    { type: "heading", text: "Worked examples: drift speed and charge" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (drift speed).** A copper wire of cross-section 1 mm² carries 1.5 A. Find the drift speed ($n = 8.5\\times10^{28}$ m⁻³).\n\n1. Start from $I = neAv_d$ and solve for $v_d$. *Why this step:* the current is the one quantity you can measure; drift is hidden inside it.\n2. $v_d = \\dfrac{1.5}{8.5\\times10^{28}\\times1.6\\times10^{-19}\\times10^{-6}} = \\dfrac{1.5}{1.36\\times10^{4}}$.\n3. $v_d \\approx 1.1\\times10^{-4}$ m/s $= 0.11$ mm/s.\n\n**Worked example 2 (how long to cross a room).** In the same wire, how long does one electron take to drift 1 m?\n\n1. $t = \\dfrac{1}{1.1\\times10^{-4}} \\approx 9.1\\times10^{3}$ s.\n2. That is about 2.5 hours. *Why this step:* it makes the point of the hook in numbers; the bulb lights in microseconds, so it cannot be waiting for these electrons.\n\n**Worked example 3 (counting electrons).** How many electrons pass a point each second when the current is 1 A?\n\n1. In one second, 1 C passes.\n2. Each electron carries $1.6\\times10^{-19}$ C, so the number is $\\dfrac{1}{1.6\\times10^{-19}} = 6.25\\times10^{18}$.\n3. Huge numbers, tiny speeds: the current is large because $n$ is enormous, not because anything moves fast.",
+      type: "worked-example",
+      id: "em3-1-we1",
+      title: "Worked example 1: drift speed",
+      problem:
+        "A copper wire of cross-section 1 mm² carries 1.5 A. Find the drift speed ($n = 8.5\\times10^{28}$ m⁻³).",
+      steps: [
+        { text: "Start from $I = neAv_d$ and solve for $v_d$. *Why this step:* the current is the one quantity you can measure; drift is hidden inside it." },
+        { text: "$v_d = \\dfrac{1.5}{8.5\\times10^{28}\\times1.6\\times10^{-19}\\times10^{-6}} = \\dfrac{1.5}{1.36\\times10^{4}}$." },
+        { text: "$v_d \\approx 1.1\\times10^{-4}$ m/s $= 0.11$ mm/s." },
+      ],
+      answer: "$v_d \\approx 1.1\\times10^{-4}$ m/s $= 0.11$ mm/s",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (a current that changes).** The current in a wire is $I = 2 + 3t$ amperes, with $t$ in seconds. How much charge passes in the first 2 s?\n\n1. Since $I = dq/dt$, the charge is the area under the $I$–$t$ graph: $q = \\int_0^2 (2 + 3t)\\,dt$. *Why this step:* $q = It$ only works when $I$ is constant; here it grows.\n2. $q = \\big[2t + 1.5t^2\\big]_0^2 = 4 + 6 = 10$ C.\n3. Check with the average: $I$ runs linearly from 2 A to 8 A, average 5 A, times 2 s is 10 C. ✓\n\n**Worked example 5 (a wire that narrows).** A wire's radius drops from $r$ to $r/2$ partway along. Compare the drift speeds in the two parts.\n\n1. The same current flows through both parts. *Why this step:* charge cannot pile up anywhere in a steady state, so what enters the thick part must leave the thin part.\n2. $v_d = I/(neA)$ with the same $I$, $n$ and $e$, so $v_d \\propto 1/A \\propto 1/r^2$.\n3. Halving the radius quarters the area, so the drift in the thin part is **4 times** faster. The current density $J = I/A$ is also 4 times larger there.",
+      type: "worked-example",
+      id: "em3-1-we2",
+      title: "Worked example 2: how long to cross a room",
+      problem:
+        "In the same wire, how long does one electron take to drift 1 m?",
+      steps: [
+        { text: "$t = \\dfrac{1}{1.1\\times10^{-4}} \\approx 9.1\\times10^{3}$ s." },
+        { text: "That is about 2.5 hours. *Why this step:* it makes the point of the hook in numbers; the bulb lights in microseconds, so it cannot be waiting for these electrons." },
+      ],
+      answer: "$t \\approx 9.1\\times10^{3}$ s, about 2.5 hours",
+    },
+    {
+      type: "worked-example",
+      id: "em3-1-we3",
+      title: "Worked example 3: counting electrons",
+      problem:
+        "How many electrons pass a point each second when the current is 1 A?",
+      steps: [
+        { text: "In one second, 1 C passes." },
+        { text: "Each electron carries $1.6\\times10^{-19}$ C, so the number is $\\dfrac{1}{1.6\\times10^{-19}} = 6.25\\times10^{18}$." },
+        { text: "Huge numbers, tiny speeds: the current is large because $n$ is enormous, not because anything moves fast." },
+      ],
+      answer: "$6.25\\times10^{18}$ electrons per second",
+    },
+    {
+      type: "worked-example",
+      id: "em3-1-we4",
+      title: "Worked example 4: a current that changes",
+      problem:
+        "The current in a wire is $I = 2 + 3t$ amperes, with $t$ in seconds. How much charge passes in the first 2 s?",
+      steps: [
+        { text: "Since $I = dq/dt$, the charge is the area under the $I$–$t$ graph: $q = \\int_0^2 (2 + 3t)\\,dt$. *Why this step:* $q = It$ only works when $I$ is constant; here it grows." },
+        { text: "$q = \\big[2t + 1.5t^2\\big]_0^2 = 4 + 6 = 10$ C." },
+        { text: "Check with the average: $I$ runs linearly from 2 A to 8 A, average 5 A, times 2 s is 10 C. ✓" },
+      ],
+      answer: "$q = 10$ C",
+    },
+    {
+      type: "worked-example",
+      id: "em3-1-we5",
+      title: "Worked example 5: a wire that narrows",
+      problem:
+        "A wire's radius drops from $r$ to $r/2$ partway along. Compare the drift speeds in the two parts.",
+      steps: [
+        { text: "The same current flows through both parts. *Why this step:* charge cannot pile up anywhere in a steady state, so what enters the thick part must leave the thin part." },
+        { text: "$v_d = I/(neA)$ with the same $I$, $n$ and $e$, so $v_d \\propto 1/A \\propto 1/r^2$." },
+        { text: "Halving the radius quarters the area, so the drift in the thin part is **4 times** faster. The current density $J = I/A$ is also 4 times larger there." },
+      ],
+      answer: "The drift in the thin part is 4 times faster",
     },
     {
       type: "callout",
@@ -115,6 +180,7 @@ const lesson01: LessonSeed = {
       content:
         "Put numbers in $v_d = eE\\tau/m$: with $E = 1$ V/m and $\\tau = 2.5\\times10^{-14}$ s, $v_d = \\dfrac{1.6\\times10^{-19}\\times1\\times2.5\\times10^{-14}}{9.1\\times10^{-31}} \\approx 4.4\\times10^{-3}$ m/s. Doubling the field doubles the drift: that proportionality is Ohm's law in disguise, as the next lesson shows.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "em3-1-q1",
@@ -130,19 +196,23 @@ const lesson01: LessonSeed = {
         },
         { text: "Current flows as positive charges, which are much faster than electrons.", feedback: "Conventional current is just a sign convention. In metals the carriers really are electrons." },
       ],
+      hint: "Recall the misconception about electrons racing round the circuit. Drift speeds are under a millimetre per second, so the electrons lighting the bulb can't have come from the switch. Why does the bulb still respond at once?",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-1-q2",
       variant: "practice",
-      question: "A copper wire of cross-section 2 mm² carries 5 A. Taking $n = 8.5\\times10^{28}$ m⁻³ and $e = 1.6\\times10^{-19}$ C, the drift speed is closest to",
-      options: [
-        { text: "$1.8\\times10^{-4}$ m/s", correct: true, feedback: "$v_d = \\dfrac{5}{8.5\\times10^{28}\\times1.6\\times10^{-19}\\times2\\times10^{-6}} = \\dfrac{5}{2.72\\times10^4} \\approx 1.8\\times10^{-4}$ m/s." },
-        { text: "$3.7\\times10^{-4}$ m/s", feedback: "That uses 1 mm² instead of 2 mm². A thicker wire needs a slower drift for the same current." },
-        { text: "$9.2\\times10^{-5}$ m/s", feedback: "Check the arithmetic: $neA = 2.72\\times10^4$ C/m, and $5/(2.72\\times10^4) \\approx 1.8\\times10^{-4}$." },
-        { text: "$3\\times10^8$ m/s", feedback: "That is the speed of light, the speed of the signal, not of the electrons." },
-      ],
+      question: "A copper wire of cross-section 2 mm² carries 5 A. Taking $n = 8.5\\times10^{28}$ m⁻³ and $e = 1.6\\times10^{-19}$ C, find the drift speed of the electrons. Give your answer in m/s (e.g. 2.5e-4).",
+      answer: 1.838e-4,
+      relTolerance: 0.03,
+      unit: "m/s",
       hint: "$v_d = I/(neA)$ with $A = 2\\times10^{-6}$ m².",
+      solution: "$v_d = \\dfrac{I}{neA} = \\dfrac{5}{8.5\\times10^{28}\\times1.6\\times10^{-19}\\times2\\times10^{-6}} = \\dfrac{5}{2.72\\times10^4} \\approx 1.8\\times10^{-4}$ m/s, a fraction of a millimetre per second.",
+      commonMistakes: [
+        { answer: 3.68e-4, feedback: "That uses 1 mm² instead of 2 mm². A thicker wire needs a slower drift for the same current." },
+        { answer: 9.19e-5, feedback: "That is half the answer. Check the arithmetic: $neA = 2.72\\times10^4$ C/m, and $5/(2.72\\times10^4) \\approx 1.8\\times10^{-4}$." },
+        { answer: 3e8, feedback: "That is the speed of light, the speed of the signal, not of the electrons." },
+      ],
     },
     {
       type: "quiz",
@@ -155,14 +225,21 @@ const lesson01: LessonSeed = {
         { text: "$6.25\\times10^{18}$", feedback: "That is the count for exactly 1 A, not 3.2 mA." },
         { text: "$2\\times10^{16}$", correct: true, feedback: "$\\dfrac{3.2\\times10^{-3}}{1.6\\times10^{-19}} = 2\\times10^{16}$ per second." },
       ],
+      hint: "Each electron carries $e = 1.6\\times10^{-19}$ C, so the number per second is $I/e$. Convert mA to A first.",
     },
     {
       type: "quiz",
       id: "em3-1-q4",
       variant: "concept",
-      question: "A wire carries a steady current. Its diameter at section X is twice its diameter at section Y. Which statement is true?",
+      question: "A wire carries a steady current. Its diameter at section X is twice its diameter at section Y. Which statements are true? Select all that apply.",
+      multiple: true,
       options: [
         { text: "The current at X is 4 times the current at Y.", feedback: "In a steady state charge cannot accumulate, so the current is the same at every section of a single wire." },
+        {
+          text: "The current density at X is one quarter of that at Y.",
+          correct: true,
+          feedback: "Right. The same current spreads over four times the area, so $j = I/A$ is four times smaller at X.",
+        },
         { text: "The drift speed at X is half that at Y.", feedback: "The area goes as the diameter squared. Twice the diameter is four times the area." },
         {
           text: "The drift speed at X is one quarter of that at Y.",
@@ -171,18 +248,21 @@ const lesson01: LessonSeed = {
         },
         { text: "The drift speed is the same at both, because it depends only on the material.", feedback: "Drift depends on the local field, which is weaker where the wire is thicker. $v_d = I/(neA)$ shows the $1/A$ dependence." },
       ],
+      hint: "In a steady current, charge conservation makes $I$ the same at every section. Then use $J = I/A$ and $v_d = I/(neA)$, with $A \\propto d^2$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-1-q5",
       variant: "practice",
-      question: "The current in a conductor varies as $I = 4t$ (amperes, $t$ in seconds). How much charge flows between $t = 0$ and $t = 3$ s?",
-      options: [
-        { text: "12 C", feedback: "That is $I(3) \\times 1$ s. You need the area under the $I$–$t$ graph, not the final current." },
-        { text: "36 C", feedback: "That uses the final current 12 A for the full 3 s. The current started at 0." },
-        { text: "18 C", correct: true, feedback: "$q = \\int_0^3 4t\\,dt = 2t^2\\big|_0^3 = 18$ C. The average current 6 A times 3 s agrees." },
-      ],
+      question: "The current in a conductor varies as $I = 4t$ (amperes, $t$ in seconds). How much charge flows between $t = 0$ and $t = 3$ s? Give your answer in coulombs.",
+      answer: 18,
+      unit: "C",
       hint: "$q = \\int I\\,dt$: the area of a triangle.",
+      solution: "$q = \\int_0^3 4t\\,dt = 2t^2\\big|_0^3 = 18$ C. The average current 6 A times 3 s agrees.",
+      commonMistakes: [
+        { answer: 12, feedback: "That is $I(3) \\times 1$ s. You need the area under the $I$–$t$ graph, not the final current." },
+        { answer: 36, feedback: "That uses the final current 12 A for the full 3 s. The current started at 0." },
+      ],
     },
   ]),
 };
@@ -197,6 +277,7 @@ const lesson02: LessonSeed = {
       content:
         "The last lesson ended with a quiet result: the drift speed is proportional to the field, $v_d = eE\\tau/m$. Everything in this lesson follows from that one line. Push harder (more field) and the electrons drift proportionally faster, so the current rises in proportion to the voltage. That proportionality has a famous name.",
     },
+    { type: "heading", text: "Deriving Ohm's law from drift" },
     {
       type: "text",
       content:
@@ -227,6 +308,7 @@ const lesson02: LessonSeed = {
       content:
         "The formula $R = \\rho l/A$ matches common sense: a longer wire is a longer obstacle course (more collisions on the way), and a fatter wire is more lanes side by side. Check the relaxation time for copper: $\\tau = \\dfrac{m}{ne^2\\rho} = \\dfrac{9.1\\times10^{-31}}{8.5\\times10^{28}\\times(1.6\\times10^{-19})^2\\times1.7\\times10^{-8}} \\approx 2.5\\times10^{-14}$ s, the number quoted in 3.1.",
     },
+    { type: "heading", text: "How temperature and stretching change $R$" },
     {
       type: "text",
       content:
@@ -268,6 +350,7 @@ const lesson02: LessonSeed = {
       content:
         "What you should have seen: doubling the length gives 16 Ω, not 8 Ω, and tripling gives 36 Ω. The resistance climbs as the square because the same metal is being spread both longer and thinner.",
     },
+    { type: "heading", text: "Reading resistor colour codes" },
     {
       type: "table",
       headers: ["Colour", "Digit", "Multiplier", "Tolerance band"],
@@ -292,15 +375,69 @@ const lesson02: LessonSeed = {
       content:
         "Read a carbon resistor from the end with the bands bunched together: first digit, second digit, multiplier, tolerance. The memory line \"B B ROY of Great Britain has a Very Good Wife\" gives black to white in order.",
     },
+    { type: "heading", text: "Worked examples: wire resistance and temperature" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (resistance of a wire).** A copper wire is 10 m long with cross-section 1 mm². Find $R$ ($\\rho = 1.7\\times10^{-8}\\ \\Omega$ m).\n\n1. Convert the area to SI: $1\\text{ mm}^2 = 10^{-6}$ m². *Why this step:* mm² is the commonest slip in these questions; $1\\text{ mm}^2$ is $(10^{-3})^2$ m².\n2. $R = \\dfrac{\\rho l}{A} = \\dfrac{1.7\\times10^{-8}\\times10}{10^{-6}} = 0.17\\ \\Omega$.\n\n**Worked example 2 (stretching).** A 4 Ω wire is drawn out to twice its length. Find the new resistance.\n\n1. Volume is conserved, so $R \\propto l^2$. *Why this step:* the area is not given, but it is forced by the new length.\n2. $R' = 4 \\times 2^2 = 16\\ \\Omega$.\n\n**Worked example 3 (drawn thinner).** The same kind of wire is drawn until its radius is halved. By what factor does $R$ change?\n\n1. Area goes as $r^2$, so the area becomes $\\tfrac14$ of the original.\n2. Constant volume means the length becomes 4 times as long.\n3. $R = \\rho l/A$ rises by $4 \\times 4 = 16$. *Why this step:* in terms of radius at fixed volume, $R \\propto 1/r^4$.",
+      type: "worked-example",
+      id: "em3-2-we1",
+      title: "Worked example 1: resistance of a wire",
+      problem:
+        "A copper wire is 10 m long with cross-section 1 mm². Find $R$ ($\\rho = 1.7\\times10^{-8}\\ \\Omega$ m).",
+      steps: [
+        { text: "Convert the area to SI: $1\\text{ mm}^2 = 10^{-6}$ m². *Why this step:* mm² is the commonest slip in these questions; $1\\text{ mm}^2$ is $(10^{-3})^2$ m²." },
+        { text: "$R = \\dfrac{\\rho l}{A} = \\dfrac{1.7\\times10^{-8}\\times10}{10^{-6}} = 0.17\\ \\Omega$." },
+      ],
+      answer: "$R = 0.17\\ \\Omega$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (temperature).** A copper coil has $\\alpha = 4\\times10^{-3}$ °C⁻¹ and resistance $R_0$ at 20 °C. At what temperature has its resistance risen by 10%?\n\n1. $R = R_0(1 + \\alpha\\Delta T)$ with $R/R_0 = 1.10$. *Why this step:* a percentage rise gives the ratio directly; $R_0$ itself is never needed.\n2. $\\alpha\\,\\Delta T = 0.10$, so $\\Delta T = 0.10/0.004 = 25$ °C.\n3. The temperature is $20 + 25 = 45$ °C.\n\n**Worked example 5 (colour code).** Bands: brown, black, red, gold.\n\n1. Digits: brown 1, black 0, giving 10.\n2. Multiplier: red is $10^2$. So $R = 10\\times10^2 = 1000\\ \\Omega = 1$ kΩ.\n3. Gold tolerance: ±5%, so the true value lies between 950 Ω and 1050 Ω.",
+      type: "worked-example",
+      id: "em3-2-we2",
+      title: "Worked example 2: stretching",
+      problem:
+        "A 4 Ω wire is drawn out to twice its length. Find the new resistance.",
+      steps: [
+        { text: "Volume is conserved, so $R \\propto l^2$. *Why this step:* the area is not given, but it is forced by the new length." },
+        { text: "$R' = 4 \\times 2^2 = 16\\ \\Omega$." },
+      ],
+      answer: "$16\\ \\Omega$",
+    },
+    {
+      type: "worked-example",
+      id: "em3-2-we3",
+      title: "Worked example 3: drawn thinner",
+      problem:
+        "The same kind of wire is drawn until its radius is halved. By what factor does $R$ change?",
+      steps: [
+        { text: "Area goes as $r^2$, so the area becomes $\\tfrac14$ of the original." },
+        { text: "Constant volume means the length becomes 4 times as long." },
+        { text: "$R = \\rho l/A$ rises by $4 \\times 4 = 16$. *Why this step:* in terms of radius at fixed volume, $R \\propto 1/r^4$." },
+      ],
+      answer: "$R$ rises by a factor of 16",
+    },
+    {
+      type: "worked-example",
+      id: "em3-2-we4",
+      title: "Worked example 4: temperature",
+      problem:
+        "A copper coil has $\\alpha = 4\\times10^{-3}$ °C⁻¹ and resistance $R_0$ at 20 °C. At what temperature has its resistance risen by 10%?",
+      steps: [
+        { text: "$R = R_0(1 + \\alpha\\Delta T)$ with $R/R_0 = 1.10$. *Why this step:* a percentage rise gives the ratio directly; $R_0$ itself is never needed." },
+        { text: "$\\alpha\\,\\Delta T = 0.10$, so $\\Delta T = 0.10/0.004 = 25$ °C." },
+        { text: "The temperature is $20 + 25 = 45$ °C." },
+      ],
+      answer: "45 °C",
+    },
+    {
+      type: "worked-example",
+      id: "em3-2-we5",
+      title: "Worked example 5: colour code",
+      problem:
+        "Bands: brown, black, red, gold. Find the resistance and the range it may lie in.",
+      steps: [
+        { text: "Digits: brown 1, black 0, giving 10." },
+        { text: "Multiplier: red is $10^2$. So $R = 10\\times10^2 = 1000\\ \\Omega = 1$ kΩ." },
+        { text: "Gold tolerance: ±5%, so the true value lies between 950 Ω and 1050 Ω." },
+      ],
+      answer: "$1$ kΩ ± 5% (950 Ω to 1050 Ω)",
     },
     {
       type: "callout",
@@ -316,16 +453,20 @@ const lesson02: LessonSeed = {
       content:
         "$R = V/I$ can always be computed, but Ohm's law says it is **constant**. A filament bulb is not ohmic in practice: as the current grows the filament heats up and $R$ rises, so its $I$–$V$ graph bends towards the $V$ axis. A diode conducts easily one way and barely at all the other way, so its graph is not even symmetric. For these devices the resistance depends on where you are on the graph.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-2-q1",
       variant: "practice",
-      question: "A wire of resistance 10 Ω is stretched uniformly until its length is 3 times the original. Its new resistance is",
-      options: [
-        { text: "30 Ω", feedback: "That keeps the area fixed. Stretching also thins the wire by a factor of 3." },
-        { text: "90 Ω", correct: true, feedback: "At constant volume $R \\propto l^2$, so $R' = 10\\times3^2 = 90\\ \\Omega$." },
-        { text: "$10/3\\ \\Omega$", feedback: "A longer, thinner wire has more resistance, not less." },
-        { text: "270 Ω", feedback: "That is $R\\propto l^3$. The length contributes one factor of 3 and the area one more: $3^2$, not $3^3$." },
+      question: "A wire of resistance 10 Ω is stretched uniformly until its length is 3 times the original. Find its new resistance in ohms.",
+      answer: 90,
+      unit: "Ω",
+      hint: "The volume $lA$ stays the same, so tripling $l$ divides $A$ by 3.",
+      solution: "At constant volume $A \\propto 1/l$, so $R = \\rho l/A \\propto l^2$. Hence $R' = 10\\times3^2 = 90\\ \\Omega$.",
+      commonMistakes: [
+        { answer: 30, feedback: "That keeps the area fixed. Stretching also thins the wire by a factor of 3." },
+        { answer: 10 / 3, tolerance: 0.01, feedback: "A longer, thinner wire has more resistance, not less." },
+        { answer: 270, feedback: "That is $R\\propto l^3$. The length contributes one factor of 3 and the area one more: $3^2$, not $3^3$." },
       ],
     },
     {
@@ -342,16 +483,20 @@ const lesson02: LessonSeed = {
         { text: "The number of free electrons $n$ falls as the metal is heated.", feedback: "In a metal $n$ is essentially fixed by the atoms. The change is in how often electrons collide." },
         { text: "The electron mass increases with temperature.", feedback: "The electron mass does not change with temperature in any way that matters here." },
       ],
+      hint: "Look at which factor in $\\rho = m/(ne^2\\tau)$ actually changes with temperature in a metal. Think about what heating does to the lattice ions.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-2-q3",
       variant: "practice",
-      question: "A platinum resistance thermometer reads 10 Ω at 0 °C. With $\\alpha = 4\\times10^{-3}$ °C⁻¹, its resistance at 100 °C is",
-      options: [
-        { text: "10.4 Ω", feedback: "That is the rise for 10 °C. For 100 °C, $\\alpha\\Delta T = 0.4$." },
-        { text: "14 Ω", correct: true, feedback: "$R = 10(1 + 0.004\\times100) = 10\\times1.4 = 14\\ \\Omega$." },
-        { text: "4 Ω", feedback: "That is only the increase, $R_0\\alpha\\Delta T$. Add it to $R_0$." },
+      question: "A platinum resistance thermometer reads 10 Ω at 0 °C. With $\\alpha = 4\\times10^{-3}$ °C⁻¹, find its resistance at 100 °C in ohms.",
+      answer: 14,
+      unit: "Ω",
+      hint: "$R = R_0(1 + \\alpha\\Delta T)$.",
+      solution: "$R = 10(1 + 0.004\\times100) = 10\\times1.4 = 14\\ \\Omega$.",
+      commonMistakes: [
+        { answer: 10.4, feedback: "That is the rise for 10 °C. For 100 °C, $\\alpha\\Delta T = 0.4$." },
+        { answer: 4, feedback: "That is only the increase, $R_0\\alpha\\Delta T$. Add it to $R_0$." },
       ],
     },
     {
@@ -365,6 +510,7 @@ const lesson02: LessonSeed = {
         { text: "$47\\ \\text{k}\\Omega \\pm 10\\%$", correct: true, feedback: "Yellow 4, violet 7, orange $\\times10^3$: $47\\times10^3\\ \\Omega$. Silver is ±10%." },
         { text: "$4.7\\ \\text{k}\\Omega \\pm 10\\%$", feedback: "Orange is $10^3$, not $10^2$. Red would give 4.7 kΩ." },
       ],
+      hint: "The first two bands are digits, the third is the power-of-ten multiplier and the fourth is the tolerance. Use the colour order (black = 0, brown = 1, …) from the colour-code section.",
     },
     {
       type: "quiz",
@@ -379,6 +525,21 @@ const lesson02: LessonSeed = {
       ],
       hint: "$R = \\rho l/A$ and $A = \\pi d^2/4$.",
     },
+    {
+      type: "quiz",
+      id: "em3-2-q6",
+      variant: "practice",
+      question: "A metal wire is stretched uniformly to twice its length, its volume and temperature staying the same. Which statements are true? Select all that apply.",
+      multiple: true,
+      options: [
+        { text: "Its resistance becomes 4 times the original.", correct: true, feedback: "Right. The length doubles and the area halves, so $R = \\rho l/A$ rises by $2\\times2 = 4$." },
+        { text: "Its resistivity is unchanged.", correct: true, feedback: "Right. Resistivity is a property of the material and temperature, $\\rho = m/(ne^2\\tau)$; stretching changes the shape, not the metal." },
+        { text: "For the same current, the drift speed of the electrons doubles.", correct: true, feedback: "Right. $v_d = I/(neA)$ with $n$ unchanged and $A$ halved, so $v_d$ doubles." },
+        { text: "Its resistivity doubles.", feedback: "Resistivity does not depend on the dimensions. It is the resistance that changes." },
+        { text: "For the same applied voltage, the current halves.", feedback: "The resistance becomes 4 times larger, so the current falls to a quarter, not a half." },
+      ],
+      hint: "Stretching keeps the volume fixed, so $A$ shrinks as $l$ grows. Use $R = \\rho l/A$, remember $\\rho$ is a property of the material, and use $v_d = I/(neA)$.",
+    },
   ]),
 };
 
@@ -392,6 +553,7 @@ const lesson03: LessonSeed = {
       content:
         "Real circuits contain many resistors. The first job is to replace a tangle of them by a single equivalent resistor that draws the same current from the same voltage. Two simple patterns do most of the work, and both come straight from the two facts that run through this whole chapter: charge is conserved, and potential is a single-valued height.",
     },
+    { type: "heading", text: "Series and parallel" },
     {
       type: "text",
       content:
@@ -443,30 +605,76 @@ const lesson03: LessonSeed = {
         "What you should have seen: the answer is always below both 6 Ω and $R$. At $R = 6$ Ω it is exactly 3 Ω (two equal resistors halve). As $R$ grows the combination creeps up towards 6 Ω but never reaches it, and at $R = 0$ the short circuit takes everything and the combination is 0 Ω. Adding a parallel path always makes it easier for current to flow.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Resistors of 2, 3 and 6 Ω.\n\n1. Series: $2 + 3 + 6 = 11\\ \\Omega$.\n2. Parallel: $\\dfrac1{R_p} = \\dfrac12 + \\dfrac13 + \\dfrac16 = \\dfrac{3 + 2 + 1}{6} = 1$, so $R_p = 1\\ \\Omega$. *Why this step:* use a common denominator; adding the reciprocals and forgetting to flip at the end is the usual slip.\n\n**Worked example 2 (mixed network).** A 4 Ω resistor is in series with a parallel pair of 6 Ω and 3 Ω, across an ideal 12 V battery. Find every current.\n\n1. The pair: $\\dfrac{6\\times3}{6 + 3} = 2\\ \\Omega$. Total: $4 + 2 = 6\\ \\Omega$.\n2. Battery current: $I = 12/6 = 2$ A, all of it through the 4 Ω.\n3. Voltage across the pair: $2\\times2 = 4$ V. *Why this step:* both parallel resistors share this voltage, which is the key to splitting the current.\n4. $I_6 = 4/6 = \\tfrac23$ A and $I_3 = 4/3$ A. Check: $\\tfrac23 + \\tfrac43 = 2$ A. ✓ The smaller resistor takes the larger current.",
+      type: "worked-example",
+      id: "em3-3-we1",
+      title: "Worked example 1",
+      problem:
+        "Resistors of 2, 3 and 6 Ω. Find their combined resistance in series and in parallel.",
+      steps: [
+        { text: "Series: $2 + 3 + 6 = 11\\ \\Omega$." },
+        { text: "Parallel: $\\dfrac1{R_p} = \\dfrac12 + \\dfrac13 + \\dfrac16 = \\dfrac{3 + 2 + 1}{6} = 1$, so $R_p = 1\\ \\Omega$. *Why this step:* use a common denominator; adding the reciprocals and forgetting to flip at the end is the usual slip." },
+      ],
+      answer: "Series $11\\ \\Omega$; parallel $1\\ \\Omega$",
     },
+    {
+      type: "worked-example",
+      id: "em3-3-we2",
+      title: "Worked example 2: mixed network",
+      problem:
+        "A 4 Ω resistor is in series with a parallel pair of 6 Ω and 3 Ω, across an ideal 12 V battery. Find every current.",
+      steps: [
+        { text: "The pair: $\\dfrac{6\\times3}{6 + 3} = 2\\ \\Omega$. Total: $4 + 2 = 6\\ \\Omega$." },
+        { text: "Battery current: $I = 12/6 = 2$ A, all of it through the 4 Ω." },
+        { text: "Voltage across the pair: $2\\times2 = 4$ V. *Why this step:* both parallel resistors share this voltage, which is the key to splitting the current." },
+        { text: "$I_6 = 4/6 = \\tfrac23$ A and $I_3 = 4/3$ A. Check: $\\tfrac23 + \\tfrac43 = 2$ A. ✓ The smaller resistor takes the larger current." },
+      ],
+      answer: "2 A through the 4 Ω, $\\tfrac23$ A through the 6 Ω, $\\tfrac43$ A through the 3 Ω",
+    },
+    { type: "heading", text: "Symmetry, ladders and other networks" },
     {
       type: "text",
       content:
         "**Symmetry: points at the same potential.** If two points in a network are guaranteed by symmetry to be at the same potential, no current flows in a resistor joining them. You may remove that resistor, or join the two points with a wire, without changing anything. This is the tool that cracks networks which are neither series nor parallel.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (cube, body diagonal).** Twelve equal resistors $R$ form the edges of a cube. Find the resistance between opposite corners A and G.\n\n1. Send current $I$ in at A. The three edges from A are identical by symmetry, so each carries $I/3$. *Why this step:* the cube looks the same from A along each of its three edges, so nothing can prefer one.\n2. Each of those three corners passes its $I/3$ on through two edges, identical again: $I/6$ in each of the six middle edges.\n3. The six middle edges feed three corners next to G, each of which sends $I/3$ into G.\n4. Walk any path A → G: the potential drop is $\\dfrac{I}{3}R + \\dfrac{I}{6}R + \\dfrac{I}{3}R = \\dfrac{5}{6}IR$.\n5. So $R_{AG} = \\dfrac{5R}{6}$. (By similar symmetry arguments, one edge gives $\\tfrac{7R}{12}$ and a face diagonal gives $\\tfrac{3R}{4}$.)",
+      type: "worked-example",
+      id: "em3-3-we3",
+      title: "Worked example 3: cube, body diagonal",
+      problem:
+        "Twelve equal resistors $R$ form the edges of a cube. Find the resistance between opposite corners A and G.",
+      steps: [
+        { text: "Send current $I$ in at A. The three edges from A are identical by symmetry, so each carries $I/3$. *Why this step:* the cube looks the same from A along each of its three edges, so nothing can prefer one." },
+        { text: "Each of those three corners passes its $I/3$ on through two edges, identical again: $I/6$ in each of the six middle edges." },
+        { text: "The six middle edges feed three corners next to G, each of which sends $I/3$ into G." },
+        { text: "Walk any path A → G: the potential drop is $\\dfrac{I}{3}R + \\dfrac{I}{6}R + \\dfrac{I}{3}R = \\dfrac{5}{6}IR$." },
+        { text: "So $R_{AG} = \\dfrac{5R}{6}$. (By similar symmetry arguments, one edge gives $\\tfrac{7R}{12}$ and a face diagonal gives $\\tfrac{3R}{4}$.)" },
+      ],
+      answer: "$R_{AG} = \\dfrac{5R}{6}$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (infinite ladder).** A ladder has a series resistor $R$ followed by a shunt resistor $R$, repeated for ever. Find the input resistance $x$.\n\n1. Chop off the first rung. What remains is again an infinite ladder, so it also has resistance $x$. *Why this step:* self-similarity turns an infinite sum into one equation.\n2. So the whole ladder is $R$ in series with ($R$ in parallel with $x$):",
+      type: "worked-example",
+      id: "em3-3-we4",
+      title: "Worked example 4: infinite ladder",
+      problem:
+        "A ladder has a series resistor $R$ followed by a shunt resistor $R$, repeated for ever. Find the input resistance $x$.",
+      steps: [
+        { text: "Chop off the first rung. What remains is again an infinite ladder, so it also has resistance $x$. *Why this step:* self-similarity turns an infinite sum into one equation." },
+        { text: "So the whole ladder is $R$ in series with ($R$ in parallel with $x$):", latex: "x = R + \\frac{Rx}{R + x} \\;\\Rightarrow\\; x^2 - Rx - R^2 = 0 \\;\\Rightarrow\\; x = \\frac{1 + \\sqrt5}{2}R \\approx 1.62R" },
+        { text: "Keep the positive root: a resistance cannot be negative. The golden ratio turns up in a circuit." },
+      ],
+      answer: "$x = \\dfrac{1 + \\sqrt5}{2}R \\approx 1.62R$",
     },
-    { type: "math", latex: "x = R + \\frac{Rx}{R + x} \\;\\Rightarrow\\; x^2 - Rx - R^2 = 0 \\;\\Rightarrow\\; x = \\frac{1 + \\sqrt5}{2}R \\approx 1.62R" },
     {
-      type: "text",
-      content:
-        "3. Keep the positive root: a resistance cannot be negative. The golden ratio turns up in a circuit.\n\n**Worked example 5 (a triangle).** Three resistors $R$ form a triangle. Find the resistance between two corners.\n\n1. Between corners A and B there are two routes: the direct side ($R$), and the path through the third corner ($R + R = 2R$). *Why this step:* each route is a series chain; the two routes share both end nodes, so they are in parallel.\n2. $R_{AB} = \\dfrac{R\\cdot2R}{R + 2R} = \\dfrac{2R}{3}$.",
+      type: "worked-example",
+      id: "em3-3-we5",
+      title: "Worked example 5: a triangle",
+      problem:
+        "Three resistors $R$ form a triangle. Find the resistance between two corners.",
+      steps: [
+        { text: "Between corners A and B there are two routes: the direct side ($R$), and the path through the third corner ($R + R = 2R$). *Why this step:* each route is a series chain; the two routes share both end nodes, so they are in parallel." },
+        { text: "$R_{AB} = \\dfrac{R\\cdot2R}{R + 2R} = \\dfrac{2R}{3}$." },
+      ],
+      answer: "$R_{AB} = \\dfrac{2R}{3}$",
     },
     {
       type: "callout",
@@ -475,6 +683,7 @@ const lesson03: LessonSeed = {
       content:
         "Parallel is about **nodes**, not about how the drawing looks. Two resistors are in parallel only if each end of one is joined (by wire alone) to the corresponding end of the other. Two resistors drawn one above the other but connected at only one end, or with a third element in between, are not in parallel. When in doubt, label every node with a letter, merge points joined by bare wire, and redraw.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "em3-3-q1",
@@ -486,6 +695,7 @@ const lesson03: LessonSeed = {
         { text: "$\\tfrac12\\ \\Omega$", feedback: "That is $1/R_p$. Remember to flip the sum of reciprocals." },
         { text: "3 Ω", feedback: "That is two 6 Ω in parallel. A third path lowers it further." },
       ],
+      hint: "In parallel the reciprocals add: $1/R = 1/R_1 + 1/R_2 + 1/R_3$. For $n$ equal resistors this simplifies.",
     },
     {
       type: "quiz",
@@ -498,17 +708,21 @@ const lesson03: LessonSeed = {
         { text: "2 A", feedback: "Equal sharing needs equal resistors." },
         { text: "4 A", feedback: "The total current splits between both branches." },
       ],
+      hint: "Parallel branches share the same voltage, so the current divides in inverse proportion to resistance.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-3-q3",
       variant: "practice",
-      question: "Twelve resistors of 12 Ω each form the edges of a cube. The resistance between two diagonally opposite corners of the cube (the body diagonal) is",
-      options: [
-        { text: "9 Ω", feedback: "That is the face-diagonal value $\\tfrac34 R$." },
-        { text: "7 Ω", feedback: "That is the single-edge value $\\tfrac{7}{12}R$." },
-        { text: "36 Ω", feedback: "That is three edges in series, ignoring the parallel routes." },
-        { text: "10 Ω", correct: true, feedback: "$\\tfrac56\\times12 = 10\\ \\Omega$: currents $I/3$, $I/6$, $I/3$ along any path." },
+      question: "Twelve resistors of 12 Ω each form the edges of a cube. Find the resistance between two diagonally opposite corners of the cube (the body diagonal), in ohms.",
+      answer: 10,
+      unit: "Ω",
+      hint: "By symmetry, current $I$ entering a corner splits $I/3$ into each of three edges, then $I/6$ into each of six edges, then recombines $I/3$ per edge.",
+      solution: "Follow any path of three edges: $V = \\dfrac I3R + \\dfrac I6R + \\dfrac I3R = \\dfrac56 IR$. So $R_{\\text{eq}} = \\tfrac56\\times12 = 10\\ \\Omega$.",
+      commonMistakes: [
+        { answer: 9, feedback: "That is the face-diagonal value $\\tfrac34 R$." },
+        { answer: 7, feedback: "That is the single-edge value $\\tfrac{7}{12}R$." },
+        { answer: 36, feedback: "That is three edges in series, ignoring the parallel routes." },
       ],
     },
     {
@@ -525,19 +739,22 @@ const lesson03: LessonSeed = {
         { text: "The equivalent resistance rises, because a path has been removed.", feedback: "The path carried no current, so removing it changes nothing." },
         { text: "The equivalent resistance falls.", feedback: "Removing a resistor can never lower the equivalent resistance, and here it has no effect at all." },
       ],
+      hint: "If P and Q are at the same potential, what current does Ohm's law give through a resistor joining them? Recall the balanced-bridge idea.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-3-q5",
       variant: "practice",
-      question: "An infinite ladder has series resistors of 2 Ω and shunt resistors of 2 Ω. Its input resistance is",
-      options: [
-        { text: "Infinite, since there are infinitely many resistors", feedback: "Each new rung is in parallel with a shunt, so the extra resistance it adds shrinks rapidly. The total converges." },
-        { text: "4 Ω", feedback: "That is just the first series and shunt resistors added. The rest of the ladder is in parallel with the first shunt." },
-        { text: "$(1 + \\sqrt5)$ Ω $\\approx 3.24$ Ω", correct: true, feedback: "$x = \\tfrac{1 + \\sqrt5}{2}\\times2 = 1 + \\sqrt5\\ \\Omega$." },
-        { text: "$(\\sqrt5 - 1)$ Ω", feedback: "That is the other root in magnitude. Check: it is less than the 2 Ω series resistor alone, which is impossible." },
-      ],
+      question: "An infinite ladder has series resistors of 2 Ω and shunt resistors of 2 Ω. Find its input resistance in ohms, to two decimal places.",
+      answer: 3.236,
+      relTolerance: 0.01,
+      unit: "Ω",
       hint: "Chopping off the first rung leaves the same ladder: $x = 2 + \\dfrac{2x}{2 + x}$.",
+      solution: "Clearing the fraction: $x(2 + x) = 2(2 + x) + 2x$, so $x^2 - 2x - 4 = 0$ and $x = 1 + \\sqrt5 \\approx 3.24\\ \\Omega$ (the negative root is unphysical). The total converges because each new rung sits in parallel with a shunt.",
+      commonMistakes: [
+        { answer: 4, feedback: "That is just the first series and shunt resistors added. The rest of the ladder is in parallel with the first shunt." },
+        { answer: 1.236, feedback: "That is $\\sqrt5 - 1$, the other root in magnitude. Check: it is less than the 2 Ω series resistor alone, which is impossible." },
+      ],
     },
   ]),
 };
@@ -552,6 +769,7 @@ const lesson04: LessonSeed = {
       content:
         "Start a car with the headlights on and watch them dim for a moment as the starter motor turns. The battery has not changed, and nothing touched the headlight circuit. The dimming comes from inside the battery: it has resistance of its own, and when the starter draws a huge current, a lot of the battery's voltage is lost before it ever reaches the terminals.",
     },
+    { type: "heading", text: "EMF and internal resistance" },
     {
       type: "text",
       content:
@@ -573,10 +791,11 @@ const lesson04: LessonSeed = {
       content:
         "**EMF** $\\mathcal E$: work done by the cell per unit charge carried round the circuit.\n**Terminal voltage** when the cell supplies current $I$ (discharging): $V = \\mathcal E - Ir$.\nWhen a charger forces current **into** the + terminal (charging): $V = \\mathcal E + Ir$.\nOpen circuit ($I = 0$): $V = \\mathcal E$. Short circuit ($R = 0$): $I = \\mathcal E/r$, the largest current the cell can give.",
     },
+    { type: "heading", text: "Combining cells" },
     {
       type: "text",
       content:
-        "**Combining cells.** In series, emfs add (with signs) and so do internal resistances: $n$ identical cells give $n\\mathcal E$ and $nr$. A cell connected the wrong way round subtracts its emf but still adds its resistance. In parallel, treat the combination as one equivalent cell. Using the node method of 3.5 on two cells ($\\mathcal E_1, r_1$) and ($\\mathcal E_2, r_2$) joined + to + and − to −:",
+        "In series, emfs add (with signs) and so do internal resistances: $n$ identical cells give $n\\mathcal E$ and $nr$. A cell connected the wrong way round subtracts its emf but still adds its resistance. In parallel, treat the combination as one equivalent cell. Using the node method of 3.5 on two cells ($\\mathcal E_1, r_1$) and ($\\mathcal E_2, r_2$) joined + to + and − to −:",
     },
     {
       type: "math",
@@ -587,10 +806,11 @@ const lesson04: LessonSeed = {
       content:
         "The equivalent emf is a weighted average, weighted towards the cell with the smaller internal resistance. Identical cells in parallel keep the emf $\\mathcal E$ but divide the internal resistance: $n$ of them give $r/n$.",
     },
+    { type: "heading", text: "Maximum power transfer" },
     {
       type: "text",
       content:
-        "**Maximum power transfer.** How much power reaches the load $R$? With $I = \\mathcal E/(R + r)$,",
+        "How much power reaches the load $R$? With $I = \\mathcal E/(R + r)$,",
     },
     {
       type: "math",
@@ -616,15 +836,57 @@ const lesson04: LessonSeed = {
       content:
         "What you should have seen: the power is zero at $R = 0$ (all the voltage is lost inside the cell) and falls off slowly for large $R$ (too little current). The peak sits exactly at $R = 2$ Ω with $P = 12.5$ W $= 10^2/(4\\times2)$. At that peak the cell wastes as much power in $r$ as it delivers, so the efficiency is only 50%. Power companies deliberately do not operate at this point; audio amplifiers and antennas do.",
     },
+    { type: "heading", text: "Worked examples: emf and cell grouping" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (emf and $r$ from two readings).** A cell reads 8 V across its terminals when connected to a 4 Ω resistor, and 9 V when connected to a 9 Ω resistor. Find $\\mathcal E$ and $r$.\n\n1. Currents: $I_1 = 8/4 = 2$ A and $I_2 = 9/9 = 1$ A. *Why this step:* the terminal voltage is the voltage across $R$, so Ohm's law on $R$ gives $I$.\n2. Write $V = \\mathcal E - Ir$ twice: $8 = \\mathcal E - 2r$ and $9 = \\mathcal E - r$.\n3. Subtract: $1 = r$, so $r = 1\\ \\Omega$ and $\\mathcal E = 10$ V.\n\n**Worked example 2 (cells in parallel).** Cells of 2 V and 1 V, each with $r = 1\\ \\Omega$, are joined in parallel (+ to +) across a 1 Ω resistor. Find the current in the resistor.\n\n1. $\\mathcal E_{\\text{eq}} = \\dfrac{2/1 + 1/1}{1/1 + 1/1} = 1.5$ V and $r_{\\text{eq}} = 0.5\\ \\Omega$.\n2. $I = \\dfrac{1.5}{1 + 0.5} = 1$ A. *Why this step:* once the pair is replaced by one equivalent cell, the circuit is a single loop.",
+      type: "worked-example",
+      id: "em3-4-we1",
+      title: "Worked example 1: emf and $r$ from two readings",
+      problem:
+        "A cell reads 8 V across its terminals when connected to a 4 Ω resistor, and 9 V when connected to a 9 Ω resistor. Find $\\mathcal E$ and $r$.",
+      steps: [
+        { text: "Currents: $I_1 = 8/4 = 2$ A and $I_2 = 9/9 = 1$ A. *Why this step:* the terminal voltage is the voltage across $R$, so Ohm's law on $R$ gives $I$." },
+        { text: "Write $V = \\mathcal E - Ir$ twice: $8 = \\mathcal E - 2r$ and $9 = \\mathcal E - r$." },
+        { text: "Subtract: $1 = r$, so $r = 1\\ \\Omega$ and $\\mathcal E = 10$ V." },
+      ],
+      answer: "$\\mathcal E = 10$ V, $r = 1\\ \\Omega$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (best grouping).** Twelve cells, each of emf 1.5 V and internal resistance 0.5 Ω, are to drive a 1.5 Ω resistor. They are arranged in $m$ parallel rows of $n$ cells in series ($mn = 12$). Find the arrangement giving the largest current.\n\n1. Each row has emf $1.5n$ and resistance $0.5n$; $m$ rows in parallel give emf $1.5n$ and resistance $0.5n/m$.\n2. $I = \\dfrac{1.5n}{1.5 + 0.5n/m}$. This is largest when the internal resistance equals the external one: $0.5n/m = 1.5$, so $n = 3m$. *Why this step:* this is maximum power transfer again, since $I^2R$ is largest when $I$ is.\n3. With $mn = 12$: $3m^2 = 12$, so $m = 2$ and $n = 6$.\n4. $I = \\dfrac{9}{1.5 + 1.5} = 3$ A. (All 12 in series would give $18/7.5 = 2.4$ A; all in parallel would give $1.5/1.54 \\approx 0.97$ A.)\n\n**Worked example 4 (charging).** A 12 V battery with internal resistance 0.5 Ω is charged with a current of 2 A. What does a voltmeter across its terminals read?\n\n1. Current is forced into the + terminal, so the charger must overcome both the emf and the internal drop.\n2. $V = \\mathcal E + Ir = 12 + 2\\times0.5 = 13$ V.",
+      type: "worked-example",
+      id: "em3-4-we2",
+      title: "Worked example 2: cells in parallel",
+      problem:
+        "Cells of 2 V and 1 V, each with $r = 1\\ \\Omega$, are joined in parallel (+ to +) across a 1 Ω resistor. Find the current in the resistor.",
+      steps: [
+        { text: "$\\mathcal E_{\\text{eq}} = \\dfrac{2/1 + 1/1}{1/1 + 1/1} = 1.5$ V and $r_{\\text{eq}} = 0.5\\ \\Omega$." },
+        { text: "$I = \\dfrac{1.5}{1 + 0.5} = 1$ A. *Why this step:* once the pair is replaced by one equivalent cell, the circuit is a single loop." },
+      ],
+      answer: "$I = 1$ A",
+    },
+    {
+      type: "worked-example",
+      id: "em3-4-we3",
+      title: "Worked example 3: best grouping",
+      problem:
+        "Twelve cells, each of emf 1.5 V and internal resistance 0.5 Ω, are to drive a 1.5 Ω resistor. They are arranged in $m$ parallel rows of $n$ cells in series ($mn = 12$). Find the arrangement giving the largest current.",
+      steps: [
+        { text: "Each row has emf $1.5n$ and resistance $0.5n$; $m$ rows in parallel give emf $1.5n$ and resistance $0.5n/m$." },
+        { text: "$I = \\dfrac{1.5n}{1.5 + 0.5n/m}$. This is largest when the internal resistance equals the external one: $0.5n/m = 1.5$, so $n = 3m$. *Why this step:* this is maximum power transfer again, since $I^2R$ is largest when $I$ is." },
+        { text: "With $mn = 12$: $3m^2 = 12$, so $m = 2$ and $n = 6$." },
+        { text: "$I = \\dfrac{9}{1.5 + 1.5} = 3$ A. (All 12 in series would give $18/7.5 = 2.4$ A; all in parallel would give $1.5/1.54 \\approx 0.97$ A.)" },
+      ],
+      answer: "$m = 2$ rows of $n = 6$ cells, giving $I = 3$ A",
+    },
+    {
+      type: "worked-example",
+      id: "em3-4-we4",
+      title: "Worked example 4: charging",
+      problem:
+        "A 12 V battery with internal resistance 0.5 Ω is charged with a current of 2 A. What does a voltmeter across its terminals read?",
+      steps: [
+        { text: "Current is forced into the + terminal, so the charger must overcome both the emf and the internal drop." },
+        { text: "$V = \\mathcal E + Ir = 12 + 2\\times0.5 = 13$ V." },
+      ],
+      answer: "13 V",
     },
     {
       type: "callout",
@@ -633,6 +895,7 @@ const lesson04: LessonSeed = {
       content:
         "It reads the **terminal voltage** $\\mathcal E - Ir$. That equals $\\mathcal E$ only when no current flows through the cell (and an ideal voltmeter draws none). While the cell drives a circuit its terminal voltage is lower; while it is being charged it is higher. The headlights dimming during a car start is $Ir$ made visible.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "em3-4-q1",
@@ -644,17 +907,21 @@ const lesson04: LessonSeed = {
         { text: "10 V", correct: true, feedback: "$I = 12/6 = 2$ A and $V = 12 - 2\\times1 = 10$ V (equivalently $IR = 2\\times5$)." },
         { text: "14 V", feedback: "$\\mathcal E + Ir$ applies while charging. Here the cell is supplying current." },
       ],
+      hint: "Find the current from $I = \\mathcal E/(R + r)$, then the terminal voltage $V = \\mathcal E - Ir$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-4-q2",
       variant: "practice",
-      question: "For a cell of emf 6 V and internal resistance 3 Ω, the maximum power that can be delivered to an external resistor is",
-      options: [
-        { text: "3 W", correct: true, feedback: "At $R = r = 3\\ \\Omega$, $I = 1$ A and $P = I^2R = 3$ W, which is $\\mathcal E^2/4r$." },
-        { text: "12 W", feedback: "That is $\\mathcal E^2/r$, the total power at short circuit, all dissipated inside the cell." },
-        { text: "6 W", feedback: "That is the total power at the matched point, half of which is wasted in $r$." },
-        { text: "1.5 W", feedback: "Check: $\\mathcal E^2/(4r) = 36/12 = 3$ W." },
+      question: "A cell has emf 6 V and internal resistance 3 Ω. What is the maximum power it can deliver to an external resistor? Give your answer in watts.",
+      answer: 3,
+      unit: "W",
+      hint: "The load gets the most power when $R = r$.",
+      solution: "At $R = r = 3\\ \\Omega$, $I = \\dfrac{6}{3 + 3} = 1$ A and $P = I^2R = 3$ W, which is $\\dfrac{\\mathcal E^2}{4r} = \\dfrac{36}{12}$.",
+      commonMistakes: [
+        { answer: 12, feedback: "That is $\\mathcal E^2/r$, the total power at short circuit, all dissipated inside the cell." },
+        { answer: 6, feedback: "That is the total power at the matched point, half of which is wasted in $r$." },
+        { answer: 1.5, feedback: "That is half the right value. Check: $\\mathcal E^2/(4r) = 36/12 = 3$ W." },
       ],
     },
     {
@@ -668,6 +935,7 @@ const lesson04: LessonSeed = {
         { text: "emf $4\\mathcal E$, resistance $4r$", feedback: "That ignores the reversal. A reversed cell subtracts its emf." },
         { text: "emf $2\\mathcal E$, resistance $4r$", correct: true, feedback: "Three forward minus one back gives $2\\mathcal E$. The reversed cell's resistance still adds, so $4r$." },
       ],
+      hint: "Treat the reversed cell carefully: which of its two properties, emf or internal resistance, depends on which way round it is connected?",
     },
     {
       type: "quiz",
@@ -683,16 +951,34 @@ const lesson04: LessonSeed = {
       hint: "Write $\\mathcal E = I(R + r)$ for both readings and solve simultaneously.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-4-q5",
       variant: "practice",
-      question: "Two identical cells, each of emf 1.5 V and internal resistance 1 Ω, are joined in parallel and connected to a 2.5 Ω resistor. The current in the resistor is",
-      options: [
-        { text: "1 A", feedback: "That uses $\\mathcal E = 3$ V, the series value. In parallel the emf stays 1.5 V." },
-        { text: "0.43 A", feedback: "That uses $r = 1\\ \\Omega$. Two in parallel halve the internal resistance." },
-        { text: "0.67 A", feedback: "Check the total resistance: $2.5 + 0.5 = 3\\ \\Omega$." },
-        { text: "0.5 A", correct: true, feedback: "Parallel identical cells: $\\mathcal E = 1.5$ V, $r = 0.5\\ \\Omega$. $I = 1.5/(2.5 + 0.5) = 0.5$ A." },
+      question: "Two identical cells, each of emf 1.5 V and internal resistance 1 Ω, are joined in parallel and connected to a 2.5 Ω resistor. Find the current in the resistor in amperes.",
+      answer: 0.5,
+      unit: "A",
+      hint: "Identical cells in parallel keep the emf and divide the internal resistance.",
+      solution: "Parallel identical cells: $\\mathcal E = 1.5$ V, $r = 1/2 = 0.5\\ \\Omega$. $I = \\dfrac{1.5}{2.5 + 0.5} = 0.5$ A.",
+      commonMistakes: [
+        { answer: 1, feedback: "That uses $\\mathcal E = 3$ V, the series value. In parallel the emf stays 1.5 V." },
+        { answer: 0.4286, tolerance: 0.01, feedback: "That uses $r = 1\\ \\Omega$. Two in parallel halve the internal resistance." },
+        { answer: 0.6667, tolerance: 0.01, feedback: "That treats the cells as in series (3 V, 2 Ω). In parallel the emf stays 1.5 V and the total resistance is $2.5 + 0.5 = 3\\ \\Omega$." },
       ],
+    },
+    {
+      type: "quiz",
+      id: "em3-4-q6",
+      variant: "practice",
+      question: "A cell of emf $\\mathcal E$ and internal resistance $r$ drives a variable external resistor $R$. Which statements are true? Select all that apply.",
+      multiple: true,
+      options: [
+        { text: "The terminal voltage rises as $R$ is increased.", correct: true, feedback: "Right. $V = \\dfrac{\\mathcal E R}{R + r}$ climbs towards $\\mathcal E$ as $R$ grows, because the current and the $Ir$ drop fall." },
+        { text: "The power delivered to $R$ is largest when $R = r$.", correct: true, feedback: "Right. Setting $dP/dR = 0$ for $P = \\mathcal E^2R/(R + r)^2$ gives $R = r$." },
+        { text: "When the power delivered to $R$ is largest, the efficiency is 50%.", correct: true, feedback: "Right. At $R = r$ the same current flows through equal resistances, so $r$ wastes exactly as much power as $R$ receives." },
+        { text: "The current is largest when $R = r$.", feedback: "The current $\\mathcal E/(R + r)$ is largest at $R = 0$ (short circuit). $R = r$ maximises the power in $R$, not the current." },
+        { text: "When $R = r$, the terminal voltage equals $\\mathcal E$.", feedback: "At $R = r$ half the emf is lost inside the cell, so $V = \\mathcal E/2$. $V = \\mathcal E$ only when no current flows." },
+      ],
+      hint: "Use $I = \\mathcal E/(R + r)$, $V = IR$ and $P = I^2R$ to test each statement; for the power condition, see the maximum power transfer section.",
     },
   ]),
 };
@@ -714,6 +1000,7 @@ const lesson05: LessonSeed = {
       content:
         "**Junction law (KCL):** at any junction, the total current flowing in equals the total flowing out, $\\sum I_{\\text{in}} = \\sum I_{\\text{out}}$. This is charge conservation: in a steady state charge cannot pile up at a point.\n**Loop law (KVL):** around any closed loop, the potential changes add to zero, $\\sum\\Delta V = 0$. This says potential is single-valued: walk round a loop and you are back at the same height you started from.",
     },
+    { type: "heading", text: "Signs, loops and node potentials" },
     {
       type: "text",
       content:
@@ -734,16 +1021,21 @@ const lesson05: LessonSeed = {
       content:
         "If you guess a current's direction wrongly, nothing breaks: the algebra returns a negative value, which just means the current flows the other way. Two methods use these rules.\n\n**Loop method.** Give each branch an unknown current, apply KCL at the junctions to cut down the unknowns, then write KVL for enough independent loops.\n\n**Node-potential method (usually faster for JEE).** Pick one node as 0 V. Give every other node an unknown potential. Express each branch current as (potential difference plus any emfs) divided by the branch resistance, and apply KCL at each unknown node. KVL is automatically satisfied, because you worked with potentials from the start.",
     },
+    { type: "heading", text: "Solving a network by node potentials" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (two cells, three resistors).** Nodes A (top) and B (bottom) are joined by three branches: a 10 V cell (+ terminal towards A) with 2 Ω; a 4 Ω resistor alone; and a 4 V cell (+ towards A) with 2 Ω. Find every current.\n\n1. Take $V_B = 0$ and let $V_A = V$. *Why this step:* one unknown instead of three branch currents.\n2. Current flowing **out of** A through each branch: left $\\dfrac{V - 10}{2}$, middle $\\dfrac{V}{4}$, right $\\dfrac{V - 4}{2}$. *Why this step:* going from A down the left branch, you drop through the 2 Ω and then fall 10 V through the cell from + to −; the branch current is (potential available across the resistor)/R.\n3. KCL at A (total out is zero):",
-    },
-    { type: "math", latex: "\\frac{V - 10}{2} + \\frac{V}{4} + \\frac{V - 4}{2} = 0 \\;\\Rightarrow\\; 2V - 20 + V + 2V - 8 = 0 \\;\\Rightarrow\\; V = 5.6\\text{ V}" },
-    {
-      type: "text",
-      content:
-        "4. Currents: through the 10 V cell, $\\dfrac{10 - 5.6}{2} = 2.2$ A up into A; through the 4 Ω, $\\dfrac{5.6}{4} = 1.4$ A down; through the 4 V branch, $\\dfrac{5.6 - 4}{2} = 0.8$ A **down**, so the 4 V cell is being charged.\n5. Check KCL: $2.2 = 1.4 + 0.8$. ✓ Check KVL on the left loop: $10 - 2(2.2) - 4(1.4) = 10 - 4.4 - 5.6 = 0$. ✓",
+      type: "worked-example",
+      id: "em3-5-we1",
+      title: "Worked example 1: two cells, three resistors",
+      problem:
+        "Nodes A (top) and B (bottom) are joined by three branches: a 10 V cell (+ terminal towards A) with 2 Ω; a 4 Ω resistor alone; and a 4 V cell (+ towards A) with 2 Ω. Find every current.",
+      steps: [
+        { text: "Take $V_B = 0$ and let $V_A = V$. *Why this step:* one unknown instead of three branch currents." },
+        { text: "Current flowing **out of** A through each branch: left $\\dfrac{V - 10}{2}$, middle $\\dfrac{V}{4}$, right $\\dfrac{V - 4}{2}$. *Why this step:* going from A down the left branch, you drop through the 2 Ω and then fall 10 V through the cell from + to −; the branch current is (potential available across the resistor)/R." },
+        { text: "KCL at A (total out is zero):", latex: "\\frac{V - 10}{2} + \\frac{V}{4} + \\frac{V - 4}{2} = 0 \\;\\Rightarrow\\; 2V - 20 + V + 2V - 8 = 0 \\;\\Rightarrow\\; V = 5.6\\text{ V}" },
+        { text: "Currents: through the 10 V cell, $\\dfrac{10 - 5.6}{2} = 2.2$ A up into A; through the 4 Ω, $\\dfrac{5.6}{4} = 1.4$ A down; through the 4 V branch, $\\dfrac{5.6 - 4}{2} = 0.8$ A **down**, so the 4 V cell is being charged." },
+        { text: "Check KCL: $2.2 = 1.4 + 0.8$. ✓ Check KVL on the left loop: $10 - 2(2.2) - 4(1.4) = 10 - 4.4 - 5.6 = 0$. ✓" },
+      ],
+      answer: "2.2 A up through the 10 V cell, 1.4 A down through the 4 Ω, 0.8 A down through the 4 V cell (charging it)",
     },
     {
       type: "text",
@@ -770,15 +1062,44 @@ const lesson05: LessonSeed = {
       content:
         "What you should have seen: the 6 V cell's branch carries current $(6 - V_A)/2$. For $\\mathcal E_1 < 12$ V, $V_A < 6$ V and the 6 V cell discharges. At exactly $\\mathcal E_1 = 12$ V, $V_A = 6$ V and the 6 V cell carries **no current at all**. Push $\\mathcal E_1$ above 12 V and $V_A$ exceeds 6 V, so current is driven backwards into the 6 V cell: it is being charged. One slider, and the direction of a current you might have guessed flips.",
     },
+    { type: "heading", text: "Worked examples: loops and capacitors" },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (potentials round a single loop).** A 12 V cell (no internal resistance) drives current round a loop: from its + terminal through a 2 Ω resistor to point B, then into a 4 V cell at its + terminal, out of its − terminal to point C, then through a 6 Ω resistor back to the 12 V cell's − terminal D. Find $V_B - V_D$.\n\n1. Net emf: the 4 V cell opposes the 12 V one, so $I = \\dfrac{12 - 4}{2 + 6} = 1$ A. *Why this step:* a single loop needs only KVL once.\n2. Take $V_D = 0$. Walk the loop: $V_A = 12$ V (+ terminal), $V_B = 12 - 1\\times2 = 10$ V, $V_C = 10 - 4 = 6$ V (through the 4 V cell from + to −), and back to $6 - 1\\times6 = 0$ V at D. ✓\n3. $V_B - V_D = 10$ V.\n\n**Worked example 3 (a branch rule).** In a branch, current 1 A flows from A through a 2 Ω resistor and then through a 3 V cell entered at its − terminal, reaching B. Find $V_A - V_B$.\n\n1. Through the resistor with the current: drop 2 V. Through the cell from − to +: rise 3 V.\n2. $V_B = V_A - 2 + 3$, so $V_A - V_B = -1$ V. B is 1 V **higher** than A even though current flows from A to B through this branch. *Why this step:* current flows from high to low potential through a resistor, not through a whole branch containing a cell.",
+      type: "worked-example",
+      id: "em3-5-we2",
+      title: "Worked example 2: potentials round a single loop",
+      problem:
+        "A 12 V cell (no internal resistance) drives current round a loop: from its + terminal through a 2 Ω resistor to point B, then into a 4 V cell at its + terminal, out of its − terminal to point C, then through a 6 Ω resistor back to the 12 V cell's − terminal D. Find $V_B - V_D$.",
+      steps: [
+        { text: "Net emf: the 4 V cell opposes the 12 V one, so $I = \\dfrac{12 - 4}{2 + 6} = 1$ A. *Why this step:* a single loop needs only KVL once." },
+        { text: "Take $V_D = 0$. Walk the loop: $V_A = 12$ V (+ terminal), $V_B = 12 - 1\\times2 = 10$ V, $V_C = 10 - 4 = 6$ V (through the 4 V cell from + to −), and back to $6 - 1\\times6 = 0$ V at D. ✓" },
+        { text: "$V_B - V_D = 10$ V." },
+      ],
+      answer: "$V_B - V_D = 10$ V",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (capacitor in a steady-state network).** An ideal 12 V battery drives current through 4 Ω and 2 Ω resistors in series. A branch made of a 10 Ω resistor in series with a 5 μF capacitor is connected across the 4 Ω resistor. Find the charge on the capacitor once everything has settled.\n\n1. In steady state no current flows into a capacitor, so the 10 Ω branch carries nothing. *Why this step:* a fully charged capacitor behaves as a break in the circuit (2.6).\n2. The main current is $I = 12/(4 + 2) = 2$ A, and the voltage across the 4 Ω resistor is 8 V.\n3. With zero current, the 10 Ω resistor has no drop, so the capacitor sees the full 8 V: $Q = CV = 5\\times8 = 40\\ \\mu$C.",
+      type: "worked-example",
+      id: "em3-5-we3",
+      title: "Worked example 3: a branch rule",
+      problem:
+        "In a branch, current 1 A flows from A through a 2 Ω resistor and then through a 3 V cell entered at its − terminal, reaching B. Find $V_A - V_B$.",
+      steps: [
+        { text: "Through the resistor with the current: drop 2 V. Through the cell from − to +: rise 3 V." },
+        { text: "$V_B = V_A - 2 + 3$, so $V_A - V_B = -1$ V. B is 1 V **higher** than A even though current flows from A to B through this branch. *Why this step:* current flows from high to low potential through a resistor, not through a whole branch containing a cell." },
+      ],
+      answer: "$V_A - V_B = -1$ V",
+    },
+    {
+      type: "worked-example",
+      id: "em3-5-we4",
+      title: "Worked example 4: capacitor in a steady-state network",
+      problem:
+        "An ideal 12 V battery drives current through 4 Ω and 2 Ω resistors in series. A branch made of a 10 Ω resistor in series with a 5 μF capacitor is connected across the 4 Ω resistor. Find the charge on the capacitor once everything has settled.",
+      steps: [
+        { text: "In steady state no current flows into a capacitor, so the 10 Ω branch carries nothing. *Why this step:* a fully charged capacitor behaves as a break in the circuit (2.6)." },
+        { text: "The main current is $I = 12/(4 + 2) = 2$ A, and the voltage across the 4 Ω resistor is 8 V." },
+        { text: "With zero current, the 10 Ω resistor has no drop, so the capacitor sees the full 8 V: $Q = CV = 5\\times8 = 40\\ \\mu$C." },
+      ],
+      answer: "$Q = 40\\ \\mu$C",
     },
     {
       type: "callout",
@@ -787,6 +1108,7 @@ const lesson05: LessonSeed = {
       content:
         "What is used up is **energy**, not current. The same current enters and leaves every resistor (KCL). What falls is the potential: each coulomb arrives with more energy per charge than it leaves with, and the difference becomes heat. An ammeter placed before or after a bulb reads the same value.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "em3-5-q1",
@@ -798,6 +1120,7 @@ const lesson05: LessonSeed = {
         { text: "Ohm's law", feedback: "The junction law holds for any elements, ohmic or not." },
         { text: "Newton's third law", feedback: "It has nothing to do with forces. It counts charge in and out." },
       ],
+      hint: "Ask what quantity would pile up at a junction if more current flowed in than out.",
     },
     {
       type: "quiz",
@@ -810,17 +1133,21 @@ const lesson05: LessonSeed = {
         { text: "1 A flows out", correct: true, feedback: "In: 5 A. Out so far: 4 A. The fourth wire must carry 1 A out." },
         { text: "No current", feedback: "Then 5 A in would meet only 4 A out, and charge would pile up." },
       ],
+      hint: "Junction law: total current in equals total current out. Add up the known inflows and outflows first.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-5-q3",
       variant: "practice",
-      question: "In a branch, a current of 2 A flows from A through a 3 Ω resistor and then through a 5 V cell entered at its − terminal, arriving at B. $V_A - V_B$ equals",
-      options: [
-        { text: "$+1$ V", correct: true, feedback: "$V_B = V_A - 6 + 5$, so $V_A - V_B = 1$ V." },
-        { text: "$+11$ V", feedback: "You treated the cell as a drop. Crossing from − to + is a rise." },
-        { text: "$-1$ V", feedback: "Sign slip: $V_B = V_A - 1$, so $V_A - V_B = +1$ V." },
-        { text: "$+6$ V", feedback: "That includes only the resistor. The cell adds 5 V on the way to B." },
+      question: "In a branch, a current of 2 A flows from A through a 3 Ω resistor and then through a 5 V cell entered at its − terminal, arriving at B. Find $V_A - V_B$ in volts, with its sign.",
+      answer: 1,
+      unit: "V",
+      hint: "Walk from A to B: going along the current through a resistor is a drop of $IR$; crossing a cell from − to + is a rise of $\\mathcal E$.",
+      solution: "$V_B = V_A - 2\\times3 + 5 = V_A - 1$, so $V_A - V_B = +1$ V.",
+      commonMistakes: [
+        { answer: 11, feedback: "You treated the cell as a drop. Crossing from − to + is a rise." },
+        { answer: -1, feedback: "Sign slip: $V_B = V_A - 1$, so $V_A - V_B = +1$ V." },
+        { answer: 6, feedback: "That includes only the resistor. The cell adds 5 V on the way to B." },
       ],
     },
     {
@@ -837,15 +1164,18 @@ const lesson05: LessonSeed = {
       hint: "$V_A = \\dfrac{\\sum\\mathcal E_i/R_i}{\\sum 1/R_i}$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-5-q5",
       variant: "practice",
-      question: "An ideal 9 V battery drives current through 1 Ω and 2 Ω resistors in series. A 4 μF capacitor is connected across the 2 Ω resistor. In steady state its charge is",
-      options: [
-        { text: "36 μC", feedback: "That is $C\\times9$ V. The capacitor sees only the voltage across the 2 Ω resistor." },
-        { text: "12 μC", feedback: "That is the charge for the 1 Ω resistor's 3 V." },
-        { text: "0", feedback: "The capacitor carries no current in steady state, but it still holds charge at the voltage across it." },
-        { text: "24 μC", correct: true, feedback: "$I = 3$ A, $V_{2\\Omega} = 6$ V, $Q = 4\\times6 = 24\\ \\mu$C." },
+      question: "An ideal 9 V battery drives current through 1 Ω and 2 Ω resistors in series. A 4 μF capacitor is connected across the 2 Ω resistor. Find the charge on the capacitor in steady state, in microcoulombs.",
+      answer: 24,
+      unit: "μC",
+      hint: "In steady state the capacitor branch carries no current, so it simply takes the voltage across the 2 Ω resistor.",
+      solution: "$I = \\dfrac{9}{1 + 2} = 3$ A, so $V_{2\\Omega} = 6$ V and $Q = CV = 4\\times6 = 24\\ \\mu$C.",
+      commonMistakes: [
+        { answer: 36, feedback: "That is $C\\times9$ V. The capacitor sees only the voltage across the 2 Ω resistor." },
+        { answer: 12, feedback: "That is the charge for the 1 Ω resistor's 3 V." },
+        { answer: 0, feedback: "The capacitor carries no current in steady state, but it still holds charge at the voltage across it." },
       ],
     },
   ]),
@@ -861,6 +1191,7 @@ const lesson06: LessonSeed = {
       content:
         "How do you measure an unknown resistance precisely? An ammeter and voltmeter each disturb the circuit a little and each has its own error. The Wheatstone bridge avoids both: it compares the unknown with known resistors and looks only for **zero** current in a galvanometer. A zero reading is easy to judge, and at zero current the meter itself has no effect.",
     },
+    { type: "heading", text: "The balanced Wheatstone bridge" },
     {
       type: "text",
       content:
@@ -882,6 +1213,7 @@ const lesson06: LessonSeed = {
       content:
         "The bridge is **balanced** (no current through the galvanometer) when $\\dfrac{P}{Q} = \\dfrac{R}{S}$.\nThe balance condition does not involve the cell's emf or internal resistance, or the galvanometer's resistance. In any network containing a balanced bridge, the middle branch can be removed (or replaced by a wire) without changing anything.",
     },
+    { type: "heading", text: "The meter bridge" },
     {
       type: "text",
       content:
@@ -913,10 +1245,11 @@ const lesson06: LessonSeed = {
       content:
         "What you should have seen: at $l = 50$ cm, $X = R = 10$ Ω. Near the middle, a 1 cm change in $l$ changes $X$ only modestly. Near the ends the output races: from 90 cm to 95 cm, $X$ jumps from 90 Ω to 190 Ω. A small misreading of $l$ near an end gives a huge error in $X$.",
     },
+    { type: "heading", text: "Why aim for the middle" },
     {
       type: "text",
       content:
-        "**Why aim for the middle.** If $l$ is read with an uncertainty $\\Delta l$, the fractional error in $X$ is",
+        "If $l$ is read with an uncertainty $\\Delta l$, the fractional error in $X$ is",
     },
     {
       type: "math",
@@ -927,15 +1260,64 @@ const lesson06: LessonSeed = {
       content:
         "The product $l(100 - l)$ is largest at $l = 50$, so the error is smallest there. Choose $R$ close to the expected $X$ to bring the balance point near the centre. **End corrections:** the thick copper strips and contact points add a little extra resistance at each end, equivalent to extra lengths $\\alpha$ and $\\beta$ of wire, so strictly $\\dfrac{X}{R} = \\dfrac{l + \\alpha}{100 - l + \\beta}$. Swapping $X$ and $R$ and averaging reduces this error.",
     },
+    { type: "heading", text: "Worked examples: balancing bridges" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (find X).** With $R = 10\\ \\Omega$ in the right gap, balance is at 40 cm.\n\n1. $X = 10\\times\\dfrac{40}{60} = 6.67\\ \\Omega$.\n\n**Worked example 2 (swap).** Now $X$ and $R$ are interchanged. Where is the new balance point?\n\n1. With $R$ now in the left gap: $\\dfrac{R}{X} = \\dfrac{l'}{100 - l'}$, i.e. $\\dfrac{10}{6.67} = \\dfrac{l'}{100 - l'}$.\n2. $1.5(100 - l') = l'$, so $l' = 60$ cm $= 100 - 40$. *Why this step:* swapping the gaps simply mirrors the bridge, so the balance point mirrors too.\n\n**Worked example 3 (bridge inside a network).** $P = 2\\ \\Omega$, $Q = 4\\ \\Omega$, $R = 3\\ \\Omega$, $S = 6\\ \\Omega$, with a 5 Ω resistor between B and D. Find the resistance between A and C.\n\n1. Check balance: $P/Q = 2/4 = 0.5$ and $R/S = 3/6 = 0.5$. Balanced. *Why this step:* this check is the whole trick; if it holds, the 5 Ω resistor carries no current.\n2. Remove the middle branch: $(2 + 4) \\parallel (3 + 6) = 6\\parallel9 = \\dfrac{54}{15} = 3.6\\ \\Omega$.",
+      type: "worked-example",
+      id: "em3-6-we1",
+      title: "Worked example 1: find X",
+      problem:
+        "With $R = 10\\ \\Omega$ in the right gap, balance is at 40 cm.",
+      steps: [
+        { text: "$X = 10\\times\\dfrac{40}{60} = 6.67\\ \\Omega$." },
+      ],
+      answer: "$X = 6.67\\ \\Omega$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (make it balance).** $P = 10\\ \\Omega$, $Q = 20\\ \\Omega$ and $R = 15\\ \\Omega$. What $S$ balances the bridge?\n\n1. $S = R\\dfrac{Q}{P} = 15\\times2 = 30\\ \\Omega$.\n\n**Worked example 5 (errors).** The balance length can be read to $\\pm0.1$ cm. Compare the percentage errors in $X$ for balance at 50 cm and at 20 cm.\n\n1. At 50 cm: $\\dfrac{100\\times0.1}{50\\times50} = 0.004 = 0.4\\%$.\n2. At 20 cm: $\\dfrac{100\\times0.1}{20\\times80} = 0.00625 \\approx 0.63\\%$. *Why this step:* this puts a number on \"aim for the middle\".",
+      type: "worked-example",
+      id: "em3-6-we2",
+      title: "Worked example 2: swap",
+      problem:
+        "Now $X$ and $R$ are interchanged. Where is the new balance point?",
+      steps: [
+        { text: "With $R$ now in the left gap: $\\dfrac{R}{X} = \\dfrac{l'}{100 - l'}$, i.e. $\\dfrac{10}{6.67} = \\dfrac{l'}{100 - l'}$." },
+        { text: "$1.5(100 - l') = l'$, so $l' = 60$ cm $= 100 - 40$. *Why this step:* swapping the gaps simply mirrors the bridge, so the balance point mirrors too." },
+      ],
+      answer: "60 cm",
+    },
+    {
+      type: "worked-example",
+      id: "em3-6-we3",
+      title: "Worked example 3: bridge inside a network",
+      problem:
+        "$P = 2\\ \\Omega$, $Q = 4\\ \\Omega$, $R = 3\\ \\Omega$, $S = 6\\ \\Omega$, with a 5 Ω resistor between B and D. Find the resistance between A and C.",
+      steps: [
+        { text: "Check balance: $P/Q = 2/4 = 0.5$ and $R/S = 3/6 = 0.5$. Balanced. *Why this step:* this check is the whole trick; if it holds, the 5 Ω resistor carries no current." },
+        { text: "Remove the middle branch: $(2 + 4) \\parallel (3 + 6) = 6\\parallel9 = \\dfrac{54}{15} = 3.6\\ \\Omega$." },
+      ],
+      answer: "$3.6\\ \\Omega$",
+    },
+    {
+      type: "worked-example",
+      id: "em3-6-we4",
+      title: "Worked example 4: make it balance",
+      problem:
+        "$P = 10\\ \\Omega$, $Q = 20\\ \\Omega$ and $R = 15\\ \\Omega$. What $S$ balances the bridge?",
+      steps: [
+        { text: "$S = R\\dfrac{Q}{P} = 15\\times2 = 30\\ \\Omega$." },
+      ],
+      answer: "$S = 30\\ \\Omega$",
+    },
+    {
+      type: "worked-example",
+      id: "em3-6-we5",
+      title: "Worked example 5: errors",
+      problem:
+        "The balance length can be read to $\\pm0.1$ cm. Compare the percentage errors in $X$ for balance at 50 cm and at 20 cm.",
+      steps: [
+        { text: "At 50 cm: $\\dfrac{100\\times0.1}{50\\times50} = 0.004 = 0.4\\%$." },
+        { text: "At 20 cm: $\\dfrac{100\\times0.1}{20\\times80} = 0.00625 \\approx 0.63\\%$. *Why this step:* this puts a number on \"aim for the middle\"." },
+      ],
+      answer: "0.4% at 50 cm; about 0.63% at 20 cm",
     },
     {
       type: "callout",
@@ -944,28 +1326,33 @@ const lesson06: LessonSeed = {
       content:
         "At balance the galvanometer carries **no current**, so its resistance multiplies zero and drops out. The same is true of the cell's emf and internal resistance. They affect how sensitive the bridge is (how big the deflection is slightly off balance), but not where balance occurs.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-6-q1",
       variant: "practice",
-      question: "In a Wheatstone bridge $P = 10\\ \\Omega$, $Q = 20\\ \\Omega$ and $R = 25\\ \\Omega$. For balance, $S$ must be",
-      options: [
-        { text: "50 Ω", correct: true, feedback: "$S = R\\dfrac{Q}{P} = 25\\times2 = 50\\ \\Omega$." },
-        { text: "12.5 Ω", feedback: "That uses $S = RP/Q$. From $P/Q = R/S$, $S = RQ/P$." },
-        { text: "35 Ω", feedback: "Balance is a ratio condition, not a sum." },
-        { text: "8 Ω", feedback: "Check: $P/Q = 0.5$, so $S$ must be twice $R$." },
+      question: "In a Wheatstone bridge $P = 10\\ \\Omega$, $Q = 20\\ \\Omega$ and $R = 25\\ \\Omega$. What value of $S$ balances the bridge? Give your answer in ohms.",
+      answer: 50,
+      unit: "Ω",
+      hint: "Balance: $\\dfrac{P}{Q} = \\dfrac{R}{S}$.",
+      solution: "$S = R\\dfrac{Q}{P} = 25\\times\\dfrac{20}{10} = 50\\ \\Omega$.",
+      commonMistakes: [
+        { answer: 12.5, feedback: "That uses $S = RP/Q$. From $P/Q = R/S$, $S = RQ/P$." },
+        { answer: 35, feedback: "Balance is a ratio condition, not a sum." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-6-q2",
       variant: "practice",
-      question: "In a meter bridge the unknown $X$ is in the left gap and 12 Ω is in the right gap. Balance is found 25 cm from the left end. $X$ is",
-      options: [
-        { text: "36 Ω", feedback: "That puts the 25 cm segment with the 12 Ω. The left segment belongs to the left gap." },
-        { text: "3 Ω", feedback: "That uses $\\dfrac{25}{100}$. The ratio is $\\dfrac{l}{100 - l}$." },
-        { text: "4 Ω", correct: true, feedback: "$X = 12\\times\\dfrac{25}{75} = 4\\ \\Omega$." },
-        { text: "16 Ω", feedback: "$X/12 = 25/75 = 1/3$, so $X = 4\\ \\Omega$." },
+      question: "In a meter bridge the unknown $X$ is in the left gap and 12 Ω is in the right gap. Balance is found 25 cm from the left end. Find $X$ in ohms.",
+      answer: 4,
+      unit: "Ω",
+      hint: "$\\dfrac{X}{R} = \\dfrac{l}{100 - l}$, with $l$ measured from the end next to $X$.",
+      solution: "$X = 12\\times\\dfrac{25}{100 - 25} = 12\\times\\dfrac13 = 4\\ \\Omega$.",
+      commonMistakes: [
+        { answer: 36, feedback: "That puts the 25 cm segment with the 12 Ω. The left segment belongs to the left gap." },
+        { answer: 3, feedback: "That uses $\\dfrac{25}{100}$. The ratio is $\\dfrac{l}{100 - l}$." },
       ],
     },
     {
@@ -979,6 +1366,7 @@ const lesson06: LessonSeed = {
         { text: "75 cm", correct: true, feedback: "$l' = 100 - l = 75$ cm. Check: $12/4 = 75/25$." },
         { text: "33.3 cm", feedback: "Check with $\\dfrac{12}{4} = \\dfrac{l'}{100 - l'}$: $l' = 75$ cm." },
       ],
+      hint: "As in Worked example 2: when the two resistors swap gaps, the length ratio $l/(100 - l)$ must invert.",
     },
     {
       type: "quiz",
@@ -991,6 +1379,7 @@ const lesson06: LessonSeed = {
         { text: "1.5 Ω", feedback: "The bridge is balanced, so the middle 5 Ω has no effect. $(1 + 2)\\parallel(2 + 4) = 2\\ \\Omega$." },
         { text: "It cannot be found without Kirchhoff's laws.", feedback: "Check the balance condition first; here it holds, which makes the problem one line." },
       ],
+      hint: "Check whether $P/Q = R/S$ first. If the bridge is balanced, what current flows in the B–D resistor?",
     },
     {
       type: "quiz",
@@ -1007,6 +1396,22 @@ const lesson06: LessonSeed = {
           feedback: "A reading error of the same size matters least when both segments are long.",
         },
       ],
+      hint: "Work out the fractional error in $X$ caused by a fixed reading error $\\Delta l$ in the balance length, and ask where it is smallest (see \"Why aim for the middle\").",
+    },
+    {
+      type: "quiz",
+      id: "em3-6-q6",
+      variant: "concept",
+      question: "A Wheatstone bridge ($P$, $Q$, $R$, $S$, with a cell across A–C and a galvanometer across B–D) is balanced. Which statements are true? Select all that apply.",
+      multiple: true,
+      options: [
+        { text: "B and D are at the same potential.", correct: true, feedback: "Right. That is what balance means: no potential difference across the galvanometer, so no current through it." },
+        { text: "Replacing the galvanometer by a resistor of any value leaves the currents in $P$, $Q$, $R$ and $S$ unchanged.", correct: true, feedback: "Right. With B and D at the same potential, whatever sits between them carries no current, so it can be removed or replaced freely." },
+        { text: "Interchanging the cell and the galvanometer keeps the bridge balanced.", correct: true, feedback: "Right. With the cell across B–D, balance needs $\\dfrac{P}{R} = \\dfrac{Q}{S}$, which is the same condition as $\\dfrac{P}{Q} = \\dfrac{R}{S}$ rearranged." },
+        { text: "Doubling the emf of the cell upsets the balance.", feedback: "The balance condition $P/Q = R/S$ contains no emf. A bigger emf scales every current, and B and D stay at equal potentials." },
+        { text: "A galvanometer of higher resistance would balance at a different setting.", feedback: "At balance the galvanometer carries no current, so its resistance drops out. It changes the sensitivity, not the balance point." },
+      ],
+      hint: "Write the balance condition from the potentials at B and D and note which quantities it contains. Then ask whether each change alters any of them.",
     },
   ]),
 };
@@ -1021,10 +1426,11 @@ const lesson07: LessonSeed = {
       content:
         "A voltmeter connected across a cell always draws a little current, so it reads $\\mathcal E - Ir$, never quite the emf. Is there a way to measure an emf while drawing **no** current at all? Yes: balance the cell against a known, adjustable potential difference, and adjust until nothing flows. That instrument is the potentiometer.",
     },
+    { type: "heading", text: "How a potentiometer works" },
     {
       type: "text",
       content:
-        "**How it works.** A long uniform wire AB (often 4 to 10 m, folded onto a board) carries a steady current from a driver cell through a rheostat. Because the wire is uniform, the potential falls evenly along it. The fall per unit length is the **potential gradient**",
+        "A long uniform wire AB (often 4 to 10 m, folded onto a board) carries a steady current from a driver cell through a rheostat. Because the wire is uniform, the potential falls evenly along it. The fall per unit length is the **potential gradient**",
     },
     { type: "math", latex: "k = \\frac{V_{AB}}{L}\\quad(\\text{V/m}), \\qquad V(\\text{over length } l) = k\\,l" },
     {
@@ -1065,10 +1471,11 @@ const lesson07: LessonSeed = {
       content:
         "What you should have seen: when $l_2 = l_1 = 75$ cm the cell has no internal resistance (the terminal voltage did not drop at all when $R$ was connected). The further $l_2$ falls below $l_1$, the bigger $r$: a cell whose terminal voltage sags a lot under load has a large internal resistance.",
     },
+    { type: "heading", text: "Electric power" },
     {
       type: "text",
       content:
-        "**Electric power.** Moving charge $q$ through a potential difference $V$ transfers energy $qV$. Divide by time: the power delivered to any element is $P = VI$. For a resistor, use $V = IR$ to get the other two forms:",
+        "Moving charge $q$ through a potential difference $V$ transfers energy $qV$. Divide by time: the power delivered to any element is $P = VI$. For a resistor, use $V = IR$ to get the other two forms:",
     },
     { type: "math", latex: "P = VI = I^2R = \\frac{V^2}{R}, \\qquad H = I^2Rt\\ \\ (\\text{Joule heating})" },
     {
@@ -1076,15 +1483,68 @@ const lesson07: LessonSeed = {
       content:
         "Which form to use depends on what is shared. In **series** the current is common, so $P = I^2R$: the larger resistance gets more power. In **parallel** the voltage is common, so $P = V^2/R$: the smaller resistance gets more power. Electricity bills count energy in kilowatt-hours: $1\\text{ kWh} = 1000\\text{ W}\\times3600\\text{ s} = 3.6\\times10^6$ J (one \"unit\").",
     },
+    { type: "heading", text: "Worked examples: potentiometers and bulbs" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (gradient and balance).** A 4 m potentiometer wire of resistance 8 Ω is in series with a 2 V driver cell (negligible $r$) and a 2 Ω rheostat. Where does a 1.2 V cell balance?\n\n1. Current in the wire: $I = \\dfrac{2}{8 + 2} = 0.2$ A. *Why this step:* the rheostat takes part of the driver's voltage, so find the current first.\n2. Drop across the wire: $0.2\\times8 = 1.6$ V, so $k = 1.6/4 = 0.4$ V/m.\n3. $l = \\mathcal E/k = 1.2/0.4 = 3$ m.\n\n**Worked example 2 (comparing cells).** Two cells balance at 60 cm and 40 cm on the same potentiometer. The second is a 1.2 V standard cell.\n\n1. $\\dfrac{\\mathcal E_1}{\\mathcal E_2} = \\dfrac{60}{40} = 1.5$.\n2. $\\mathcal E_1 = 1.5\\times1.2 = 1.8$ V.\n\n**Worked example 3 (internal resistance).** A cell balances at 75 cm on open circuit and at 60 cm when shunted by an 8 Ω resistor.\n\n1. $r = R\\dfrac{l_1 - l_2}{l_2} = 8\\times\\dfrac{15}{60} = 2\\ \\Omega$. *Why this step:* $l_1$ measures the emf, $l_2$ the terminal voltage; their ratio is $(R + r)/R$.",
+      type: "worked-example",
+      id: "em3-7-we1",
+      title: "Worked example 1: gradient and balance",
+      problem:
+        "A 4 m potentiometer wire of resistance 8 Ω is in series with a 2 V driver cell (negligible $r$) and a 2 Ω rheostat. Where does a 1.2 V cell balance?",
+      steps: [
+        { text: "Current in the wire: $I = \\dfrac{2}{8 + 2} = 0.2$ A. *Why this step:* the rheostat takes part of the driver's voltage, so find the current first." },
+        { text: "Drop across the wire: $0.2\\times8 = 1.6$ V, so $k = 1.6/4 = 0.4$ V/m." },
+        { text: "$l = \\mathcal E/k = 1.2/0.4 = 3$ m." },
+      ],
+      answer: "$l = 3$ m",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (bulbs in series).** A 100 W bulb and a 60 W bulb, both rated for 220 V, are connected in series across 220 V. Which glows brighter?\n\n1. Rated values fix each filament's resistance: $R = V^2/P$. So $R_{100} = \\dfrac{220^2}{100} = 484\\ \\Omega$ and $R_{60} = \\dfrac{48400}{60} \\approx 807\\ \\Omega$. *Why this step:* the wattage label describes the bulb on its own at 220 V; in series it gets less, so work with the resistances.\n2. In series the current is common: $I = \\dfrac{220}{484 + 807} \\approx 0.170$ A.\n3. $P = I^2R$: $P_{100} \\approx 14.1$ W and $P_{60} \\approx 23.4$ W.\n4. The **60 W bulb glows brighter**, because its larger resistance takes the larger share of $I^2R$. Together they draw only 37.5 W. (In parallel across 220 V, each gets its rated power and the 100 W bulb is brighter.)\n\n**Worked example 5 (the bill).** A 1.5 kW heater runs 2 hours a day for 30 days at ₹6 per unit.\n\n1. Energy $= 1.5\\text{ kW}\\times60\\text{ h} = 90$ kWh.\n2. Cost $= 90\\times6 = ₹540$.",
+      type: "worked-example",
+      id: "em3-7-we2",
+      title: "Worked example 2: comparing cells",
+      problem:
+        "Two cells balance at 60 cm and 40 cm on the same potentiometer. The second is a 1.2 V standard cell.",
+      steps: [
+        { text: "$\\dfrac{\\mathcal E_1}{\\mathcal E_2} = \\dfrac{60}{40} = 1.5$." },
+        { text: "$\\mathcal E_1 = 1.5\\times1.2 = 1.8$ V." },
+      ],
+      answer: "$\\mathcal E_1 = 1.8$ V",
+    },
+    {
+      type: "worked-example",
+      id: "em3-7-we3",
+      title: "Worked example 3: internal resistance",
+      problem:
+        "A cell balances at 75 cm on open circuit and at 60 cm when shunted by an 8 Ω resistor.",
+      steps: [
+        { text: "$r = R\\dfrac{l_1 - l_2}{l_2} = 8\\times\\dfrac{15}{60} = 2\\ \\Omega$. *Why this step:* $l_1$ measures the emf, $l_2$ the terminal voltage; their ratio is $(R + r)/R$." },
+      ],
+      answer: "$r = 2\\ \\Omega$",
+    },
+    {
+      type: "worked-example",
+      id: "em3-7-we4",
+      title: "Worked example 4: bulbs in series",
+      problem:
+        "A 100 W bulb and a 60 W bulb, both rated for 220 V, are connected in series across 220 V. Which glows brighter?",
+      steps: [
+        { text: "Rated values fix each filament's resistance: $R = V^2/P$. So $R_{100} = \\dfrac{220^2}{100} = 484\\ \\Omega$ and $R_{60} = \\dfrac{48400}{60} \\approx 807\\ \\Omega$. *Why this step:* the wattage label describes the bulb on its own at 220 V; in series it gets less, so work with the resistances." },
+        { text: "In series the current is common: $I = \\dfrac{220}{484 + 807} \\approx 0.170$ A." },
+        { text: "$P = I^2R$: $P_{100} \\approx 14.1$ W and $P_{60} \\approx 23.4$ W." },
+        { text: "The **60 W bulb glows brighter**, because its larger resistance takes the larger share of $I^2R$. Together they draw only 37.5 W. (In parallel across 220 V, each gets its rated power and the 100 W bulb is brighter.)" },
+      ],
+      answer: "The 60 W bulb (about 23.4 W against 14.1 W)",
+    },
+    {
+      type: "worked-example",
+      id: "em3-7-we5",
+      title: "Worked example 5: the bill",
+      problem:
+        "A 1.5 kW heater runs 2 hours a day for 30 days at ₹6 per unit. Find the energy used and the monthly bill.",
+      steps: [
+        { text: "Energy $= 1.5\\text{ kW}\\times60\\text{ h} = 90$ kWh." },
+        { text: "Cost $= 90\\times6 =$ ₹540." },
+      ],
+      answer: "₹540",
     },
     {
       type: "callout",
@@ -1093,6 +1553,7 @@ const lesson07: LessonSeed = {
       content:
         "\"100 W\" means 100 W **at the rated voltage**, on its own. A higher wattage rating means a smaller filament resistance ($R = V^2/P$). In parallel, where both get the full voltage, the 100 W bulb wins. In series, where both get the same current, the bulb with the larger resistance, the 60 W one, dissipates more and glows brighter.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "em3-7-q1",
@@ -1104,17 +1565,20 @@ const lesson07: LessonSeed = {
         { text: "It uses a larger driver cell.", feedback: "The driver must exceed the test emf, but that is a condition, not the reason for accuracy." },
         { text: "A voltmeter measures current, not voltage.", feedback: "A voltmeter does measure potential difference, but it draws a small current while doing so." },
       ],
+      hint: "Compare the current a voltmeter draws from the test cell with the current at the potentiometer's balance point. Recall the misconception about a voltmeter across a cell (lesson 3.4).",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-7-q2",
       variant: "practice",
-      question: "On a potentiometer, a cell balances at 120 cm on open circuit and at 100 cm when a 5 Ω resistor is connected across it. The internal resistance of the cell is",
-      options: [
-        { text: "0.83 Ω", feedback: "You divided by $l_1$. The formula has $l_2$ (the shunted length) in the denominator." },
-        { text: "6 Ω", feedback: "That is $R\\,l_1/l_2$, which is $R + r$. Subtract $R$." },
-        { text: "4 Ω", feedback: "Check: $\\mathcal E/V = 1.2 = (5 + r)/5$, so $r = 1\\ \\Omega$." },
-        { text: "1 Ω", correct: true, feedback: "$r = 5\\times\\dfrac{120 - 100}{100} = 1\\ \\Omega$." },
+      question: "On a potentiometer, a cell balances at 120 cm on open circuit and at 100 cm when a 5 Ω resistor is connected across it. Find the internal resistance of the cell in ohms.",
+      answer: 1,
+      unit: "Ω",
+      hint: "$l_1$ measures the emf and $l_2$ the terminal voltage, and $\\dfrac{\\mathcal E}{V} = \\dfrac{R + r}{R}$.",
+      solution: "$r = R\\,\\dfrac{l_1 - l_2}{l_2} = 5\\times\\dfrac{120 - 100}{100} = 1\\ \\Omega$. Check: $\\mathcal E/V = 1.2 = (5 + 1)/5$.",
+      commonMistakes: [
+        { answer: 0.8333, tolerance: 0.01, feedback: "You divided by $l_1$. The formula has $l_2$ (the shunted length) in the denominator." },
+        { answer: 6, feedback: "That is $R\\,l_1/l_2$, which is $R + r$. Subtract $R$." },
       ],
     },
     {
@@ -1127,6 +1591,7 @@ const lesson07: LessonSeed = {
         { text: "3 m", correct: true, feedback: "$l = 1.5/0.5 = 3$ m." },
         { text: "30 cm", feedback: "Check the units: 1.5 V at 0.5 V per metre needs 3 metres." },
       ],
+      hint: "At balance, emf = potential gradient × balancing length.",
     },
     {
       type: "quiz",
@@ -1139,18 +1604,37 @@ const lesson07: LessonSeed = {
         { text: "2000 W", correct: true, feedback: "$R$ halves, so $V^2/R$ doubles to 2000 W (the coil may well burn out)." },
         { text: "4000 W", feedback: "Cutting the length in half halves $R$ (same cross-section), not quarters it." },
       ],
+      hint: "The coil's resistance is proportional to its length. With the voltage fixed, use $P = V^2/R$.",
+    },
+    {
+      type: "numeric",
+      id: "em3-7-q5",
+      variant: "practice",
+      question: "A 2 kW geyser runs 3 hours a day. At ₹5 per unit, what is the cost for 30 days? Give your answer in rupees.",
+      answer: 900,
+      unit: "₹",
+      hint: "One unit is 1 kWh: multiply power in kW by hours of use.",
+      solution: "Energy $= 2\\text{ kW}\\times3\\text{ h}\\times30 = 180$ kWh, and $180\\times5 =$ ₹900.",
+      commonMistakes: [
+        { answer: 30, feedback: "That is the cost of one day's 6 kWh. Multiply by 30." },
+        { answer: 450, feedback: "Check the energy: 2 kW for 90 hours is 180 kWh." },
+        { answer: 900000, feedback: "You used watts instead of kilowatts. A unit is 1 kWh." },
+      ],
     },
     {
       type: "quiz",
-      id: "em3-7-q5",
+      id: "em3-7-q6",
       variant: "practice",
-      question: "A 2 kW geyser runs 3 hours a day. At ₹5 per unit, the cost for 30 days is",
+      question: "A potentiometer wire is driven by a cell through a rheostat, and a test cell balances at length $l$. Which changes, made one at a time, make $l$ **longer**? Select all that apply.",
+      multiple: true,
       options: [
-        { text: "₹900", correct: true, feedback: "$2\\times3\\times30 = 180$ kWh, and $180\\times5 = ₹900$." },
-        { text: "₹30", feedback: "That is the cost of one day's 6 kWh. Multiply by 30." },
-        { text: "₹450", feedback: "Check the energy: 2 kW for 90 hours is 180 kWh." },
-        { text: "₹9,00,000", feedback: "You used watts instead of kilowatts. A unit is 1 kWh." },
+        { text: "Increasing the rheostat resistance in the driver circuit", correct: true, feedback: "Right. Less current flows in the wire, so the gradient $k$ falls and $l = \\mathcal E/k$ grows." },
+        { text: "Replacing the driver cell by one of smaller emf (still larger than the test emf)", correct: true, feedback: "Right. A smaller driver emf means less current in the wire and a smaller $k$, so a longer $l$." },
+        { text: "Using a longer wire of the same material and thickness, with the same driver cell and rheostat", correct: true, feedback: "Right. The longer wire has more resistance, so the current falls, and the drop per metre falls with it: $k = \\dfrac{\\mathcal E_0\\lambda}{\\lambda L + R_h}$ (with $\\lambda$ the resistance per metre) decreases as $L$ grows ($\\mathcal E_0$ is the driver emf and $R_h$ the rheostat)." },
+        { text: "Increasing the emf of the driver cell", feedback: "That raises the current in the wire and so the gradient $k$; the balance length gets shorter." },
+        { text: "Connecting a resistor across the test cell", feedback: "Then the cell supplies current and its terminal voltage $\\mathcal E - Ir$ is balanced instead of $\\mathcal E$. That is smaller, so $l$ gets shorter." },
       ],
+      hint: "The balance length is $l = \\mathcal E_{\\text{test}}/k$, where $k$ is the potential gradient of the wire. Test each change by asking whether it raises or lowers $k$, or changes the voltage being balanced.",
     },
   ]),
 };
@@ -1173,15 +1657,19 @@ const lessonMastery: LessonSeed = {
         "1. $I = dq/dt = neAv_d$; drift is slow, the field-signal is fast.\n2. $v_d = eE\\tau/m$ gives $J = \\sigma E$ and $R = \\rho l/A$ with $\\rho = m/ne^2\\tau$; metals: $R = R_0(1 + \\alpha\\Delta T)$.\n3. Stretching at constant volume: $R \\propto l^2$.\n4. Series adds $R$ (same $I$); parallel adds $1/R$ (same $V$); equipotential points can be joined or split.\n5. A cell: $V = \\mathcal E - Ir$ (supplying), $\\mathcal E + Ir$ (charging); maximum power to the load at $R = r$.\n6. KCL = charge conservation; KVL = potential single-valued. Node potentials are the fastest route.\n7. Balanced bridge $P/Q = R/S$; meter bridge $X = R\\,l/(100 - l)$; potentiometer $\\mathcal E = kl$, $r = R(l_1 - l_2)/l_2$.\n8. $P = VI = I^2R = V^2/R$: in series the bigger $R$ gets more power, in parallel the smaller.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-8-q1",
       variant: "mastery",
-      question: "A copper wire of cross-section 2 mm² carries 3 A ($n = 8.5\\times10^{28}$ m⁻³). The drift speed is about",
-      options: [
-        { text: "$2.2\\times10^{-4}$ m/s", feedback: "That uses 1 mm². The area is 2 mm²." },
-        { text: "$1.1\\times10^{-4}$ m/s", correct: true, feedback: "$\\dfrac{3}{8.5\\times10^{28}\\times1.6\\times10^{-19}\\times2\\times10^{-6}} = \\dfrac{3}{2.72\\times10^4} \\approx 1.1\\times10^{-4}$ m/s." },
-        { text: "$1.1\\times10^{-7}$ m/s", feedback: "You converted the area as if it were a length ($2\\times10^{-3}$ m²). $1\\text{ mm}^2 = (10^{-3}\\text{ m})^2 = 10^{-6}$ m²." },
-        { text: "$3\\times10^{8}$ m/s", feedback: "That is the speed of the signal, not of the electrons." },
+      question: "A copper wire of cross-section 2 mm² carries 3 A. Taking $n = 8.5\\times10^{28}$ m⁻³ and $e = 1.6\\times10^{-19}$ C, find the drift speed. Give your answer in m/s (e.g. 2.5e-4).",
+      answer: 1.103e-4,
+      relTolerance: 0.02,
+      unit: "m/s",
+      hint: "Drift speed from current (lesson 3.1, Worked example 1): $I = neAv_d$.",
+      solution: "$v_d = \\dfrac{I}{neA} = \\dfrac{3}{8.5\\times10^{28}\\times1.6\\times10^{-19}\\times2\\times10^{-6}} = \\dfrac{3}{2.72\\times10^4} \\approx 1.1\\times10^{-4}$ m/s.",
+      commonMistakes: [
+        { answer: 2.206e-4, feedback: "That uses 1 mm². The area is 2 mm²." },
+        { answer: 1.103e-7, feedback: "You converted the area as if it were a length ($2\\times10^{-3}$ m²). $1\\text{ mm}^2 = (10^{-3}\\text{ m})^2 = 10^{-6}$ m²." },
+        { answer: 3e8, feedback: "That is the speed of the signal, not of the electrons." },
       ],
     },
     {
@@ -1195,17 +1683,22 @@ const lessonMastery: LessonSeed = {
         { text: "40 Ω", feedback: "Check: $R \\propto l/A$, with $l\\times4$ and $A\\div4$: a factor of 16." },
         { text: "80 Ω", correct: true, feedback: "Area ÷4 and length ×4 give $R\\times16 = 80\\ \\Omega$." },
       ],
+      hint: "Drawing a wire thinner at constant volume (lesson 3.2, Worked example 3).",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-8-q3",
       variant: "mastery",
-      question: "A coil has resistance 50 Ω at 20 °C and 60 Ω at 70 °C. Its temperature coefficient of resistance (referred to 20 °C) is",
-      options: [
-        { text: "$4\\times10^{-3}$ °C⁻¹", correct: true, feedback: "$\\alpha = \\dfrac{\\Delta R}{R_0\\Delta T} = \\dfrac{10}{50\\times50} = 4\\times10^{-3}$ °C⁻¹." },
-        { text: "$2.9\\times10^{-3}$ °C⁻¹", feedback: "That divides by 70 °C, the final temperature. The rise is $\\Delta T = 70 - 20 = 50$ °C." },
-        { text: "$3.3\\times10^{-3}$ °C⁻¹", feedback: "That uses 60 Ω as the reference. The coefficient is referred to 20 °C here." },
-        { text: "$0.2$ °C⁻¹", feedback: "That is $\\Delta R/\\Delta T = 10/50$ (in Ω/°C), which also happens to equal the fractional change $\\Delta R/R_0$. Divide $\\Delta R$ by both $R_0$ and $\\Delta T$." },
+      question: "A coil has resistance 50 Ω at 20 °C and 60 Ω at 70 °C. Find its temperature coefficient of resistance, referred to 20 °C. Give your answer in °C⁻¹ (e.g. 0.005 or 5e-3).",
+      answer: 0.004,
+      tolerance: 0.0001,
+      unit: "°C⁻¹",
+      hint: "Temperature coefficient of resistance (lesson 3.2, Worked example 4).",
+      solution: "$\\alpha = \\dfrac{\\Delta R}{R_0\\Delta T} = \\dfrac{60 - 50}{50\\times(70 - 20)} = \\dfrac{10}{2500} = 4\\times10^{-3}$ °C⁻¹.",
+      commonMistakes: [
+        { answer: 0.002857, feedback: "That divides by 70 °C, the final temperature. The rise is $\\Delta T = 70 - 20 = 50$ °C." },
+        { answer: 0.003333, feedback: "That uses 60 Ω as the reference. The coefficient is referred to 20 °C here." },
+        { answer: 0.2, feedback: "That is $\\Delta R/\\Delta T = 10/50$ (in Ω/°C), which also happens to equal the fractional change $\\Delta R/R_0$. Divide $\\Delta R$ by both $R_0$ and $\\Delta T$." },
       ],
     },
     {
@@ -1219,6 +1712,7 @@ const lessonMastery: LessonSeed = {
         { text: "5 Ω", correct: true, feedback: "Currents $I/3$, $I/6$, $I/3$ along any path: $V = \\tfrac56 IR$, so $\\tfrac56\\times6 = 5\\ \\Omega$." },
         { text: "18 Ω", feedback: "That is one path of three edges, ignoring the other five paths in parallel." },
       ],
+      hint: "Cube across the body diagonal, by symmetry (lesson 3.3, Worked example 3).",
     },
     {
       type: "quiz",
@@ -1231,19 +1725,22 @@ const lessonMastery: LessonSeed = {
         { text: "8 V", correct: true, feedback: "$I = 9/4.5 = 2$ A, $V = 9 - 2\\times0.5 = 8$ V." },
         { text: "1 V", feedback: "That is the drop inside the battery, not the terminal reading." },
       ],
+      hint: "Terminal voltage of a cell with internal resistance (lesson 3.4).",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-8-q6",
       variant: "mastery",
-      question: "Nodes A and B are joined by three branches: a 12 V cell (+ towards A) with 3 Ω; a 6 V cell (+ towards A) with 6 Ω; and a 2 Ω resistor. The current in the 2 Ω resistor is",
-      options: [
-        { text: "2.5 A", correct: true, feedback: "$V_A\\left(\\tfrac13 + \\tfrac16 + \\tfrac12\\right) = \\tfrac{12}{3} + \\tfrac66$ gives $V_A = 5$ V, so $I = 5/2 = 2.5$ A." },
-        { text: "3 A", feedback: "That treats the two cells as simply adding their short-circuit currents. Solve for $V_A$ with KCL." },
-        { text: "4.5 A", feedback: "Check the node equation: $(V - 12)/3 + (V - 6)/6 + V/2 = 0$ gives $V = 5$ V." },
-        { text: "1.5 A", feedback: "Recheck: $6V = 30$, so $V = 5$ V and the current is 2.5 A." },
-      ],
+      question: "Nodes A and B are joined by three branches: a 12 V cell (+ towards A) with 3 Ω; a 6 V cell (+ towards A) with 6 Ω; and a 2 Ω resistor. Find the current in the 2 Ω resistor in amperes.",
+      answer: 2.5,
+      unit: "A",
       hint: "Set $V_B = 0$ and apply KCL at A.",
+      solution: "KCL at A: $\\dfrac{V - 12}{3} + \\dfrac{V - 6}{6} + \\dfrac V2 = 0$. Multiply by 6: $2V - 24 + V - 6 + 3V = 0$, so $6V = 30$ and $V_A = 5$ V. The current in the 2 Ω resistor is $5/2 = 2.5$ A.",
+      commonMistakes: [
+        { answer: 5, feedback: "That is $V_A$ in volts. The current through the 2 Ω resistor is $V_A/2$." },
+        { answer: 3, feedback: "That is 6 V across 2 Ω, as if the 6 V cell alone fixed the potential of A. Solve for $V_A$ with KCL, including both cells." },
+        { answer: 4.5, feedback: "Check the node equation: $(V - 12)/3 + (V - 6)/6 + V/2 = 0$ gives $V = 5$ V." },
+      ],
     },
     {
       type: "quiz",
@@ -1256,6 +1753,7 @@ const lessonMastery: LessonSeed = {
         { text: "$X = 2.1\\ \\Omega$; new balance at 70 cm", feedback: "That is $7\\times0.3$. The ratio is $\\tfrac{l}{100 - l}$, not $\\tfrac{l}{100}$." },
         { text: "$X = 3\\ \\Omega$; new balance at 70 cm", correct: true, feedback: "$X = 7\\times\\tfrac{30}{70} = 3\\ \\Omega$. Interchanging mirrors the bridge: $l' = 100 - 30 = 70$ cm." },
       ],
+      hint: "Meter-bridge balance and swapping the gaps (lesson 3.6, Worked examples 1 and 2).",
     },
     {
       type: "quiz",
@@ -1268,6 +1766,7 @@ const lessonMastery: LessonSeed = {
         { text: "12.5 Ω", feedback: "That is $R\\,l_1/l_2 = R + r$. Subtract $R$." },
         { text: "8 Ω", feedback: "Check the ratio: $\\mathcal E/V = 100/80 = 1.25 = (10 + r)/10$." },
       ],
+      hint: "Internal resistance with a potentiometer (lesson 3.7, Worked example 3).",
     },
     {
       type: "quiz",
@@ -1280,6 +1779,7 @@ const lessonMastery: LessonSeed = {
         { text: "The 40 W bulb glows brighter; power ratio $25:4$.", feedback: "That squares the ratio. In series $P \\propto R$, not $R^2$." },
         { text: "The 40 W bulb glows brighter; power ratio $P_{40}:P_{100} = 5:2$.", correct: true, feedback: "$R = V^2/P$ gives $R_{40}:R_{100} = 100:40$. With a common current, $P \\propto R$: $5:2$." },
       ],
+      hint: "Bulbs in series (lesson 3.7, Worked example 4): find each bulb's resistance from its rating.",
     },
     {
       type: "quiz",
@@ -1295,16 +1795,35 @@ const lessonMastery: LessonSeed = {
       hint: "An uncharged capacitor behaves like a wire at $t = 0$; use the node potential of P.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em3-8-q11",
       variant: "mastery",
-      question: "In the circuit of the previous question, what is the charge on the 3 μF capacitor long after the switch is closed?",
-      options: [
-        { text: "30 μC", feedback: "That adds 4 V and 6 V. The cell faces P with its + terminal, so its emf subtracts from $V_P$." },
-        { text: "12 μC", feedback: "That is $C\\times V_P$, ignoring the cell in the branch." },
-        { text: "6 μC", correct: true, feedback: "Steady state: no current in the branch, so $V_P = 12\\times\\tfrac26 = 4$ V. Walking P → cell (+ to −) drops 6 V, reaching −2 V at the capacitor, whose other plate is at 0 V. $|V_C| = 2$ V and $Q = 3\\times2 = 6\\ \\mu$C." },
-        { text: "18 μC", feedback: "That is $C\\times6$ V, ignoring the 4 V at P." },
+      question: "In the circuit of the previous question, what is the magnitude of the charge on the 3 μF capacitor long after the switch is closed? Give your answer in microcoulombs.",
+      answer: 6,
+      unit: "μC",
+      hint: "In steady state the capacitor branch carries no current, so $R_1$ and $R_2$ form a simple divider and $R_3$ has no drop across it.",
+      solution: "Steady state: no current in the branch, so $V_P = 12\\times\\tfrac26 = 4$ V. Walking P → $R_3$ (no drop) → cell (+ to −) drops 6 V, reaching −2 V at the capacitor, whose other plate is at 0 V. $|V_C| = 2$ V and $Q = 3\\times2 = 6\\ \\mu$C.",
+      commonMistakes: [
+        { answer: 30, feedback: "That adds 4 V and 6 V. The cell faces P with its + terminal, so its emf subtracts from $V_P$." },
+        { answer: 12, feedback: "That is $C\\times V_P$, ignoring the cell in the branch." },
+        { answer: 18, feedback: "That is $C\\times6$ V, ignoring the 4 V at P." },
+        { answer: 14.4, feedback: "That is $C\\times4.8$ V: it uses $V_P$ just after closing and also ignores the cell. Long after, $V_P = 4$ V and the cell's 6 V subtracts." },
       ],
+    },
+    {
+      type: "quiz",
+      id: "em3-8-q12",
+      variant: "mastery",
+      question: "Two identical cells, each of emf $\\mathcal E$ and internal resistance $r$, are to drive an external resistor $R$. Compare joining them in series with joining them in parallel. Which statements are true? Select all that apply.",
+      multiple: true,
+      options: [
+        { text: "If $R = r$, both groupings give the same current.", correct: true, feedback: "Right. Series: $\\dfrac{2\\mathcal E}{r + 2r} = \\dfrac{2\\mathcal E}{3r}$. Parallel: $\\dfrac{\\mathcal E}{r + r/2} = \\dfrac{2\\mathcal E}{3r}$. Equal." },
+        { text: "If $R \\gg r$, the series grouping gives nearly twice the current of the parallel grouping.", correct: true, feedback: "Right. The internal resistances hardly matter, so series gives about $2\\mathcal E/R$ and parallel about $\\mathcal E/R$." },
+        { text: "If $R \\ll r$, the parallel grouping gives nearly twice the current of the series grouping.", correct: true, feedback: "Right. Now $r$ dominates: series gives about $2\\mathcal E/2r = \\mathcal E/r$, parallel about $\\mathcal E/(r/2) = 2\\mathcal E/r$." },
+        { text: "The parallel grouping always gives the larger current, because it has the smaller internal resistance.", feedback: "Parallel halves the internal resistance but keeps the emf at $\\mathcal E$. For $R > r$ the series grouping, with emf $2\\mathcal E$, wins." },
+        { text: "The series grouping always doubles the current, because the emf doubles.", feedback: "The internal resistance doubles too. Series gives $\\dfrac{2\\mathcal E}{R + 2r}$, which is twice $\\dfrac{\\mathcal E}{R + r}$ only when $r = 0$." },
+      ],
+      hint: "Best grouping of cells (lesson 3.4, Worked example 3): write the current for each grouping and test each limit.",
     },
     {
       type: "callout",

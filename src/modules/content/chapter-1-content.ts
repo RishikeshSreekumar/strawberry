@@ -156,26 +156,36 @@ const lesson01: LessonSeed = {
       hint: "Which question does a limit answer: at the point, or near the point?",
     },
     {
-      type: "text",
-      content:
-        "**Worked example — estimating a limit from a table.** One of the most famous limits in mathematics: what is $\\lim_{x \\to 0} \\frac{\\sin x}{x}$? (Angle in radians.) Plugging in gives $\\frac{0}{0}$, so build a table instead:\n\nStep 1: pick inputs marching toward 0 from both sides.\nStep 2: compute the outputs.\nStep 3: read the trend.",
-    },
-    {
-      type: "table",
-      headers: ["$x$", "$\\frac{\\sin x}{x}$"],
-      rows: [
-        ["$-0.5$", "$0.9589$"],
-        ["$-0.1$", "$0.9983$"],
-        ["$-0.01$", "$0.99998$"],
-        ["$0.01$", "$0.99998$"],
-        ["$0.1$", "$0.9983$"],
-        ["$0.5$", "$0.9589$"],
+      type: "worked-example",
+      id: "the-idea-of-a-limit-we1",
+      title: "Estimating a limit from a table",
+      problem:
+        "One of the most famous limits in mathematics: what is $\\lim_{x \\to 0} \\frac{\\sin x}{x}$? (Angle in radians.) Plugging in gives $\\frac{0}{0}$, so build a table instead.",
+      steps: [
+        { text: "Pick inputs marching toward 0 from both sides: $x = \\pm 0.5, \\pm 0.1, \\pm 0.01$." },
+        {
+          text: "Compute the outputs.",
+          table: {
+            headers: ["$x$", "$\\frac{\\sin x}{x}$"],
+            rows: [
+              ["$-0.5$", "$0.9589$"],
+              ["$-0.1$", "$0.9983$"],
+              ["$-0.01$", "$0.99998$"],
+              ["$0.01$", "$0.99998$"],
+              ["$0.1$", "$0.9983$"],
+              ["$0.5$", "$0.9589$"],
+            ],
+          },
+        },
+        {
+          text: "Read the trend. Both columns squeeze in on 1 symmetrically. Conclusion: $\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$ — a limit no amount of plugging-in could ever find, read cleanly off the approach.",
+        },
       ],
+      answer: "$\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$",
     },
     {
       type: "text",
-      content:
-        "Both columns squeeze in on 1 symmetrically. Conclusion: $\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$ — a limit no amount of plugging-in could ever find, read cleanly off the approach. (This particular limit later becomes the engine behind the derivative of $\\sin$.)",
+      content: "This particular limit later becomes the engine behind the derivative of $\\sin$.",
     },
     {
       type: "quiz",
@@ -336,19 +346,26 @@ const lesson02: LessonSeed = {
       hint: "Think of the relocated-dot function.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example — reading all three quantities off one function.** Let",
+      type: "worked-example",
+      id: "limits-dont-care-we1",
+      title: "Reading all three quantities off one function",
+      problem:
+        "Let\n\n$$h(x) = \\begin{cases} x + 1 & x \\ne 0 \\\\ 5 & x = 0 \\end{cases}$$\n\nFind $h(0)$, $\\lim_{x \\to 0^-} h(x)$, and $\\lim_{x \\to 0} h(x)$.",
+      steps: [
+        { text: "The value: the $x = 0$ rule says $h(0) = 5$. Done; no limits involved." },
+        {
+          text: "The approach: for every $x \\ne 0$ (which is ALL the limit looks at), $h(x) = x + 1$. From the left: $0.9, 0.99, \\ldots \\to 1$.",
+        },
+        {
+          text: "The right side gives $1.1, 1.01, \\ldots \\to 1$ as well. Sides agree, so $\\lim_{x \\to 0} h(x) = 1$.",
+        },
+      ],
+      answer: "Summary: value 5, limit 1, and the two never interact.",
     },
     {
-      type: "math",
-      latex:
-        "h(x) = \\begin{cases} x + 1 & x \\ne 0 \\\\ 5 & x = 0 \\end{cases}",
-    },
-    {
       type: "text",
       content:
-        "Find $h(0)$, $\\lim_{x \\to 0^-} h(x)$, and $\\lim_{x \\to 0} h(x)$.\n\nStep 1 — the value: the $x = 0$ rule says $h(0) = 5$. Done; no limits involved.\nStep 2 — the approach: for every $x \\ne 0$ (which is ALL the limit looks at), $h(x) = x + 1$. From the left: $0.9, 0.99, \\ldots \\to 1$.\nStep 3 — the right side gives $1.1, 1.01, \\ldots \\to 1$ as well. Sides agree, so $\\lim_{x \\to 0} h(x) = 1$.\n\nSummary: value 5, limit 1, and the two never interact. When asked about a limit of a piecewise function, the rule *at* the point is the one piece of information you may completely ignore.",
+        "When asked about a limit of a piecewise function, the rule *at* the point is the one piece of information you may completely ignore.",
     },
     {
       type: "quiz",
@@ -517,19 +534,22 @@ const lesson03: LessonSeed = {
       hint: "Handle each side separately first, then compare.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example — when the sides DO agree.** Not every piecewise function jumps. Take",
+      type: "worked-example",
+      id: "one-sided-limits-we1",
+      title: "When the sides DO agree",
+      problem:
+        "Not every piecewise function jumps. Take\n\n$$f(x) = \\begin{cases} x^2 & x < 2 \\\\ 6 - x & x \\ge 2 \\end{cases}$$\n\nDoes $\\lim_{x \\to 2} f(x)$ exist?",
+      steps: [
+        { text: "Left side: for $x < 2$ the rule is $x^2$, so $\\lim_{x \\to 2^-} f(x) = 2^2 = 4$." },
+        { text: "Right side: for $x > 2$ the rule is $6 - x$, so $\\lim_{x \\to 2^+} f(x) = 6 - 2 = 4$." },
+        { text: "Compare: $4 = 4$. The sides agree, so $\\lim_{x \\to 2} f(x) = 4$." },
+      ],
+      answer: "Yes: $\\lim_{x \\to 2} f(x) = 4$.",
     },
     {
-      type: "math",
-      latex:
-        "f(x) = \\begin{cases} x^2 & x < 2 \\\\ 6 - x & x \\ge 2 \\end{cases}",
-    },
-    {
       type: "text",
       content:
-        "Does $\\lim_{x \\to 2} f(x)$ exist?\n\nStep 1 — left side: for $x < 2$ the rule is $x^2$, so $\\lim_{x \\to 2^-} f(x) = 2^2 = 4$.\nStep 2 — right side: for $x > 2$ the rule is $6 - x$, so $\\lim_{x \\to 2^+} f(x) = 6 - 2 = 4$.\nStep 3 — compare: $4 = 4$. The sides agree, so $\\lim_{x \\to 2} f(x) = 4$.\n\nTwo different formulas can still splice together seamlessly — the pieces happen to meet at height 4. A piecewise boundary is always a *question*, never automatically a jump. Run the two-sided check every time.",
+        "Two different formulas can still splice together seamlessly — the pieces happen to meet at height 4. A piecewise boundary is always a *question*, never automatically a jump. Run the two-sided check every time.",
     },
     {
       type: "quiz",
@@ -699,14 +719,20 @@ const lesson04: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example — a blow-up with a twist.** Classify $\\lim_{x \\to 0} \\frac{1}{x}$ (note: not $\\frac{1}{x^2}$).\n\nStep 1 — right side: $x = 0.1, 0.01, 0.001$ gives $10, 100, 1000$ — climbing to $+\\infty$.\nStep 2 — left side: $x = -0.1, -0.01$ gives $-10, -100$ — plunging to $-\\infty$.\nStep 3 — verdict: both sides blow up, but in *opposite directions*. There's a vertical asymptote at $x = 0$, yet we can't even write $= \\infty$ as a summary, because the sides can't agree on which infinity. The honest statement uses one-sided notation:",
-    },
-    {
-      type: "math",
-      latex:
-        "\\lim_{x \\to 0^-} \\frac{1}{x} = -\\infty \\qquad \\lim_{x \\to 0^+} \\frac{1}{x} = +\\infty",
+      type: "worked-example",
+      id: "when-limits-fail-we1",
+      title: "A blow-up with a twist",
+      problem: "Classify $\\lim_{x \\to 0} \\frac{1}{x}$ (note: not $\\frac{1}{x^2}$).",
+      steps: [
+        { text: "Right side: $x = 0.1, 0.01, 0.001$ gives $10, 100, 1000$ — climbing to $+\\infty$." },
+        { text: "Left side: $x = -0.1, -0.01$ gives $-10, -100$ — plunging to $-\\infty$." },
+        {
+          text: "Verdict: both sides blow up, but in *opposite directions*. There's a vertical asymptote at $x = 0$, yet we can't even write $= \\infty$ as a summary, because the sides can't agree on which infinity. The honest statement uses one-sided notation:",
+          latex:
+            "\\lim_{x \\to 0^-} \\frac{1}{x} = -\\infty \\qquad \\lim_{x \\to 0^+} \\frac{1}{x} = +\\infty",
+        },
+      ],
+      answer: "$\\lim_{x \\to 0^-} \\frac{1}{x} = -\\infty$ and $\\lim_{x \\to 0^+} \\frac{1}{x} = +\\infty$",
     },
     {
       type: "text",
@@ -887,14 +913,21 @@ const lesson05: LessonSeed = {
       hint: "Evaluate top and bottom separately at $x = 2$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example — a full computation, law by law.** Compute $\\lim_{x \\to 2} \\dfrac{x^3 - 2x + 1}{x + 3}$.\n\nStep 1 — triage the denominator: at $x = 2$ it's $5 \\ne 0$, so the quotient law applies and plugging in is licensed.\nStep 2 — numerator: $2^3 - 2(2) + 1 = 8 - 4 + 1 = 5$.\nStep 3 — assemble:",
-    },
-    {
-      type: "math",
-      latex:
-        "\\lim_{x \\to 2} \\frac{x^3 - 2x + 1}{x + 3} = \\frac{5}{5} = 1",
+      type: "worked-example",
+      id: "limit-laws-we1",
+      title: "A full computation, law by law",
+      problem: "Compute $\\lim_{x \\to 2} \\dfrac{x^3 - 2x + 1}{x + 3}$.",
+      steps: [
+        {
+          text: "Triage the denominator: at $x = 2$ it's $5 \\ne 0$, so the quotient law applies and plugging in is licensed.",
+        },
+        { text: "Numerator: $2^3 - 2(2) + 1 = 8 - 4 + 1 = 5$." },
+        {
+          text: "Assemble:",
+          latex: "\\lim_{x \\to 2} \\frac{x^3 - 2x + 1}{x + 3} = \\frac{5}{5} = 1",
+        },
+      ],
+      answer: "$\\lim_{x \\to 2} \\dfrac{x^3 - 2x + 1}{x + 3} = 1$",
     },
     {
       type: "text",
@@ -1087,14 +1120,22 @@ const lesson06: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example — when BOTH top and bottom need factoring.** Compute $\\lim_{x \\to 1} \\dfrac{x^2 + x - 2}{x^2 - 1}$.\n\nStep 1 — triage: at $x = 1$, top is $1 + 1 - 2 = 0$, bottom is $0$. A genuine $\\frac00$.\nStep 2 — factor both. Top: $x^2 + x - 2 = (x + 2)(x - 1)$. Bottom: $x^2 - 1 = (x - 1)(x + 1)$.\nStep 3 — cancel the shared cause of death, $(x - 1)$, and substitute:",
-    },
-    {
-      type: "math",
-      latex:
-        "\\lim_{x \\to 1} \\frac{(x+2)(x-1)}{(x-1)(x+1)} = \\lim_{x \\to 1} \\frac{x + 2}{x + 1} = \\frac{3}{2}",
+      type: "worked-example",
+      id: "zero-over-zero-we1",
+      title: "When BOTH top and bottom need factoring",
+      problem: "Compute $\\lim_{x \\to 1} \\dfrac{x^2 + x - 2}{x^2 - 1}$.",
+      steps: [
+        { text: "Triage: at $x = 1$, top is $1 + 1 - 2 = 0$, bottom is $0$. A genuine $\\frac00$." },
+        {
+          text: "Factor both. Top: $x^2 + x - 2 = (x + 2)(x - 1)$. Bottom: $x^2 - 1 = (x - 1)(x + 1)$.",
+        },
+        {
+          text: "Cancel the shared cause of death, $(x - 1)$, and substitute:",
+          latex:
+            "\\lim_{x \\to 1} \\frac{(x+2)(x-1)}{(x-1)(x+1)} = \\lim_{x \\to 1} \\frac{x + 2}{x + 1} = \\frac{3}{2}",
+        },
+      ],
+      answer: "$\\lim_{x \\to 1} \\dfrac{x^2 + x - 2}{x^2 - 1} = \\dfrac{3}{2}$",
     },
     {
       type: "text",
@@ -1317,9 +1358,28 @@ const lesson07: LessonSeed = {
       hint: "Divide numerator and denominator by $x^3$.",
     },
     {
+      type: "worked-example",
+      id: "limits-at-infinity-we1",
+      title: "The three degree cases, side by side",
+      problem:
+        "For a ratio of polynomials as $x \\to \\infty$, everything is decided by comparing the top and bottom degrees. One example of each: find $\\lim_{x \\to \\infty}$ of $\\frac{5x + 1}{x^2 + 3}$, $\\frac{3x^2 + x}{x^2 + 1}$ and $\\frac{x^3 + 1}{x^2 + 1}$.",
+      steps: [
+        {
+          text: "*Case 1 — bottom heavier:* $\\lim_{x \\to \\infty} \\frac{5x + 1}{x^2 + 3}$. Divide through by $x^2$: top becomes $\\frac{5}{x} + \\frac{1}{x^2} \\to 0$, bottom $\\to 1$. Limit: $0$. The heavier denominator crushes the fraction flat.",
+        },
+        {
+          text: "*Case 2 — equal degrees:* $\\lim_{x \\to \\infty} \\frac{3x^2 + x}{x^2 + 1} = 3$ (the lesson's example). Evenly matched heavyweights — the limit is the ratio of leading coefficients.",
+        },
+        {
+          text: "*Case 3 — top heavier:* $\\lim_{x \\to \\infty} \\frac{x^3 + 1}{x^2 + 1}$. The top outgrows the bottom without bound: the outputs run away, $= \\infty$, no horizontal asymptote.",
+        },
+      ],
+      answer: "$0$, $3$ and $\\infty$ (no finite limit), in that order.",
+      tryFirst: false,
+    },
+    {
       type: "text",
-      content:
-        "**Worked example — the three degree cases, side by side.** For a ratio of polynomials as $x \\to \\infty$, everything is decided by comparing the top and bottom degrees. One example of each:\n\n*Case 1 — bottom heavier:* $\\lim_{x \\to \\infty} \\frac{5x + 1}{x^2 + 3}$. Divide through by $x^2$: top becomes $\\frac{5}{x} + \\frac{1}{x^2} \\to 0$, bottom $\\to 1$. Limit: $0$. The heavier denominator crushes the fraction flat.\n\n*Case 2 — equal degrees:* $\\lim_{x \\to \\infty} \\frac{3x^2 + x}{x^2 + 1} = 3$ (the lesson's example). Evenly matched heavyweights — the limit is the ratio of leading coefficients.\n\n*Case 3 — top heavier:* $\\lim_{x \\to \\infty} \\frac{x^3 + 1}{x^2 + 1}$. The top outgrows the bottom without bound: the outputs run away, $= \\infty$, no horizontal asymptote.\n\nSummary worth keeping:",
+      content: "Summary worth keeping:",
     },
     {
       type: "table",
@@ -1521,19 +1581,24 @@ const lesson08: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example — the three-condition checklist, run in full.** Is",
+      type: "worked-example",
+      id: "continuity-we1",
+      title: "The three-condition checklist, run in full",
+      problem:
+        "Is\n\n$$f(x) = \\begin{cases} x^2 & x < 1 \\\\ 2 - x & x \\ge 1 \\end{cases}$$\n\ncontinuous at $x = 1$?",
+      steps: [
+        { text: "Condition 1 — does $f(1)$ exist? The $x \\ge 1$ rule owns it: $f(1) = 2 - 1 = 1$. ✓" },
+        {
+          text: "Condition 2 — does the limit exist? Left: $x^2 \\to 1$. Right: $2 - x \\to 1$. Sides agree: $\\lim_{x \\to 1} f(x) = 1$. ✓",
+        },
+        { text: "Condition 3 — are they equal? $1 = 1$. ✓" },
+      ],
+      answer: "All three hold: continuous.",
     },
     {
-      type: "math",
-      latex:
-        "f(x) = \\begin{cases} x^2 & x < 1 \\\\ 2 - x & x \\ge 1 \\end{cases}",
-    },
-    {
       type: "text",
       content:
-        "continuous at $x = 1$?\n\nCondition 1 — does $f(1)$ exist? The $x \\ge 1$ rule owns it: $f(1) = 2 - 1 = 1$. ✓\nCondition 2 — does the limit exist? Left: $x^2 \\to 1$. Right: $2 - x \\to 1$. Sides agree: $\\lim_{x \\to 1} f(x) = 1$. ✓\nCondition 3 — are they equal? $1 = 1$. ✓\n\nAll three hold: continuous. The two formulas splice without a seam — you could draw this graph without lifting your pen, corner and all. (A corner is perfectly continuous; it will cause trouble later, but for *derivatives*, not for continuity.)",
+        "The two formulas splice without a seam — you could draw this graph without lifting your pen, corner and all. (A corner is perfectly continuous; it will cause trouble later, but for *derivatives*, not for continuity.)",
     },
     {
       type: "quiz",
@@ -1616,6 +1681,7 @@ const lesson09: LessonSeed = {
       content:
         "Every time the skeptic narrows the horizontal band (the demand), a vertical band (your answer) still exists that funnels the curve through it. That endless supply of winning answers — not any single one of them — is the limit.",
     },
+    { type: "heading", text: "The formal ε–δ definition" },
     {
       type: "callout",
       variant: "definition",
@@ -1709,10 +1775,29 @@ const lesson09: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "Finding a winning δ for a given ε" },
+    {
+      type: "worked-example",
+      id: "epsilon-delta-we1",
+      title: "Answering a demand, with reasoning shown",
+      problem:
+        "Claim: $\\lim_{x \\to 1} 4x = 4$. The skeptic demands $\\varepsilon = 0.2$: keep the outputs within $0.2$ of $4$. Find a winning $\\delta$.",
+      steps: [
+        {
+          text: "Understand the machine: $f(x) = 4x$ multiplies every input-distance by 4. If $x$ sits within $\\delta$ of 1, then $4x$ sits within $4\\delta$ of 4.",
+        },
+        { text: "Set up the requirement: we need $4\\delta \\le 0.2$." },
+        { text: "Solve: $\\delta \\le 0.05$." },
+        {
+          text: "Verify with an edge case: $x = 1.05$ gives $f(x) = 4.2$, exactly on the boundary of the tolerance band. ✓",
+        },
+      ],
+      answer: "$\\delta = 0.05$ (or anything smaller).",
+    },
     {
       type: "text",
       content:
-        "**Worked example — answering a demand, with reasoning shown.** Claim: $\\lim_{x \\to 1} 4x = 4$. The skeptic demands $\\varepsilon = 0.2$: keep the outputs within $0.2$ of $4$. Find a winning $\\delta$.\n\nStep 1 — understand the machine: $f(x) = 4x$ multiplies every input-distance by 4. If $x$ sits within $\\delta$ of 1, then $4x$ sits within $4\\delta$ of 4.\nStep 2 — set up the requirement: we need $4\\delta \\le 0.2$.\nStep 3 — solve: $\\delta \\le 0.05$. Answer $\\delta = 0.05$ (or anything smaller).\nStep 4 — verify with an edge case: $x = 1.05$ gives $f(x) = 4.2$, exactly on the boundary of the tolerance band. ✓\n\nNotice the general pattern for a line of slope $m$: the winning answer is $\\delta = \\varepsilon / |m|$ — steeper functions demand proportionally tighter input control. That's the machinist's rule from the piston-ring shop, in symbols.",
+        "Notice the general pattern for a line of slope $m$: the winning answer is $\\delta = \\varepsilon / |m|$ — steeper functions demand proportionally tighter input control. That's the machinist's rule from the piston-ring shop, in symbols.",
     },
     {
       type: "quiz",
@@ -1886,36 +1971,35 @@ const lesson10: LessonSeed = {
       ],
     },
     {
+      type: "worked-example",
+      id: "limits-to-derivatives-we1",
+      title: "The slope at EVERY point at once",
+      problem:
+        "Instead of $x = 2$ or $x = 3$ one at a time, run the computation at a general point $x$ for $f(x) = x^2$.",
+      steps: [
+        {
+          text: "Set up the difference quotient:",
+          latex: "\\frac{f(x+h) - f(x)}{h} = \\frac{(x+h)^2 - x^2}{h}",
+        },
+        {
+          text: "Expand and cancel (the $x^2$'s kill each other):",
+          latex: "\\frac{x^2 + 2xh + h^2 - x^2}{h} = \\frac{h(2x + h)}{h} = 2x + h",
+        },
+        {
+          text: "Take the limit as the gap closes:",
+          latex: "f'(x) = \\lim_{h \\to 0} (2x + h) = 2x",
+        },
+        {
+          text: "Check it against everything you've computed: at $x=2$, slope 4 ✓; at $x=3$, slope 6 ✓.",
+        },
+      ],
+      answer:
+        "One computation, infinitely many answers: the slope of $x^2$ at any point $x$ is exactly $2x$.",
+    },
+    {
       type: "text",
       content:
-        "**Worked example — the slope at EVERY point at once.** Instead of $x = 2$ or $x = 3$ one at a time, run the computation at a general point $x$ for $f(x) = x^2$:\n\nStep 1 — set up the difference quotient:",
-    },
-    {
-      type: "math",
-      latex:
-        "\\frac{f(x+h) - f(x)}{h} = \\frac{(x+h)^2 - x^2}{h}",
-    },
-    {
-      type: "text",
-      content: "Step 2 — expand and cancel (the $x^2$'s kill each other):",
-    },
-    {
-      type: "math",
-      latex:
-        "\\frac{x^2 + 2xh + h^2 - x^2}{h} = \\frac{h(2x + h)}{h} = 2x + h",
-    },
-    {
-      type: "text",
-      content: "Step 3 — take the limit as the gap closes:",
-    },
-    {
-      type: "math",
-      latex: "f'(x) = \\lim_{h \\to 0} (2x + h) = 2x",
-    },
-    {
-      type: "text",
-      content:
-        "One computation, infinitely many answers: the slope of $x^2$ at any point $x$ is exactly $2x$. Check it against everything you've computed: at $x=2$, slope 4 ✓; at $x=3$, slope 6 ✓. The derivative isn't a number — it's a *function*, and this is the first entry in the table of derivatives Chapter 2 will fill.",
+        "The derivative isn't a number — it's a *function*, and this is the first entry in the table of derivatives Chapter 2 will fill.",
     },
     {
       type: "quiz",

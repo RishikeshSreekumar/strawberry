@@ -36,6 +36,7 @@ const lesson01: LessonSeed = {
       content:
         "Chapter 4 gave you the binomial theorem as a statement about counting:\n\n$\\displaystyle (1 + x)^n = \\binom{n}{0} + \\binom{n}{1}x + \\binom{n}{2}x^2 + \\cdots + \\binom{n}{n}x^n.$\n\nThis chapter treats that line as a **machine**. The left side is short and easy to evaluate. The right side is long but holds every coefficient. Feed a well-chosen number in for $x$, and the short side tells you something about the whole long side at once.\n\nFrom here on we write ${}^nC_r$ as $\\binom{n}{r}$ (the same number, as in 2.1) because the stacked form keeps long sums readable.",
     },
+    { type: "heading", text: "Putting $x = 1$: row sums" },
     {
       type: "text",
       content:
@@ -70,6 +71,7 @@ const lesson01: LessonSeed = {
       content:
         "You met this in 4.2: $\\binom{n}{r}$ counts the subsets of size $r$ of an $n$-element set, so adding over every $r$ counts *all* subsets. Each element is either in or out, which gives $2^n$. The substitution $x = 1$ is the algebraic version of the same fact.",
     },
+    { type: "heading", text: "Putting $x = -1$: even against odd" },
     {
       type: "text",
       content:
@@ -112,29 +114,79 @@ const lesson01: LessonSeed = {
       ],
     },
     {
+      type: "worked-example",
+      id: "pc5-1-we1",
+      title: "Worked example 1",
+      problem:
+        "Find $\\binom{10}{1} + \\binom{10}{3} + \\binom{10}{5} + \\binom{10}{7} + \\binom{10}{9}$.",
+      steps: [
+        {
+          text: "These are the odd-position entries of row 10.",
+        },
+        {
+          text: "The odd-position sum is $2^{n-1} = 2^9$.",
+        },
+      ],
+      answer: "$512$.",
+    },
+    {
+      type: "worked-example",
+      id: "pc5-1-we2",
+      title: "Worked example 2",
+      problem:
+        "A fruit bowl has 6 different fruits. In how many ways can you pick at least one?",
+      steps: [
+        {
+          text: "Any selection is a subset. There are $2^6 = 64$ subsets.",
+        },
+        {
+          text: "\"At least one\" removes only the empty subset, $\\binom{6}{0} = 1$.",
+        },
+      ],
+      answer: "$\\binom{6}{1} + \\binom{6}{2} + \\cdots + \\binom{6}{6} = 64 - 1 = 63$.",
+    },
+    {
+      type: "worked-example",
+      id: "pc5-1-we3",
+      title: "Worked example 2b (word problem)",
+      problem:
+        "A pizza place offers 8 different toppings. The chef has a rule: every pizza carries an **odd** number of toppings. How many different pizzas are possible?",
+      steps: [
+        {
+          text: "A pizza is a subset of the 8 toppings, and the rule keeps only the odd-sized subsets: $\\binom{8}{1} + \\binom{8}{3} + \\binom{8}{5} + \\binom{8}{7}$.\n*Why this step:* translating the story into \"which subsets?\" turns it into a row sum of Pascal's triangle.",
+        },
+        {
+          text: "Odd-position entries make up exactly half of row 8, so the sum is $2^{8-1} = 2^7$.\n*Why this step:* the Asha pairing (add or remove one fixed topping) matches every odd pizza with an even one, so the $2^8$ subsets split evenly.",
+        },
+      ],
+      answer: "$128$ pizzas. **Check:** $8 + 56 + 56 + 8 = 128$.",
+    },
+    { type: "heading", text: "Any polynomial, not just $(1 + x)^n$" },
+    {
       type: "text",
       content:
-        "**Worked example 1.** Find $\\binom{10}{1} + \\binom{10}{3} + \\binom{10}{5} + \\binom{10}{7} + \\binom{10}{9}$.\n\n**Step 1.** These are the odd-position entries of row 10.\n**Step 2.** The odd-position sum is $2^{n-1} = 2^9$.\n**Answer:** $512$.",
+        "The substitution idea works for **any** polynomial. If $P(x) = a_0 + a_1x + a_2x^2 + \\cdots + a_mx^m$, then:\n\n**Sum of all coefficients** $= a_0 + a_1 + \\cdots + a_m = P(1)$.\n**Alternating sum** $= a_0 - a_1 + a_2 - \\cdots = P(-1)$.\n**Constant term** $= a_0 = P(0)$.\n**Sum of even-power coefficients** $= \\dfrac{P(1) + P(-1)}{2}$, **odd-power** $= \\dfrac{P(1) - P(-1)}{2}$.\n\nNo expansion needed. You never have to find a single coefficient.",
+    },
+    {
+      type: "worked-example",
+      id: "pc5-1-we4",
+      title: "Worked example 3",
+      problem:
+        "Find the sum of the coefficients of $(3x - 2)^7$.",
+      steps: [
+        {
+          text: "Call it $P(x) = (3x - 2)^7$. The sum of coefficients is $P(1)$.",
+        },
+        {
+          text: "$P(1) = (3 - 2)^7 = 1^7$.",
+        },
+      ],
+      answer: "$1$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 2.** A fruit bowl has 6 different fruits. In how many ways can you pick at least one?\n\n**Step 1.** Any selection is a subset. There are $2^6 = 64$ subsets.\n**Step 2.** \"At least one\" removes only the empty subset, $\\binom{6}{0} = 1$.\n**Answer:** $\\binom{6}{1} + \\binom{6}{2} + \\cdots + \\binom{6}{6} = 64 - 1 = 63$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2b (word problem).** A pizza place offers 8 different toppings. The chef has a rule: every pizza carries an **odd** number of toppings. How many different pizzas are possible?\n\n**Step 1.** A pizza is a subset of the 8 toppings, and the rule keeps only the odd-sized subsets: $\\binom{8}{1} + \\binom{8}{3} + \\binom{8}{5} + \\binom{8}{7}$.\n*Why this step:* translating the story into \"which subsets?\" turns it into a row sum of Pascal's triangle.\n**Step 2.** Odd-position entries make up exactly half of row 8, so the sum is $2^{8-1} = 2^7$.\n*Why this step:* the Asha pairing (add or remove one fixed topping) matches every odd pizza with an even one, so the $2^8$ subsets split evenly.\n**Answer:** $128$ pizzas. **Check:** $8 + 56 + 56 + 8 = 128$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Any polynomial, not just (1 + x)ⁿ**\n\nThe substitution idea works for **any** polynomial. If $P(x) = a_0 + a_1x + a_2x^2 + \\cdots + a_mx^m$, then:\n\n**Sum of all coefficients** $= a_0 + a_1 + \\cdots + a_m = P(1)$.\n**Alternating sum** $= a_0 - a_1 + a_2 - \\cdots = P(-1)$.\n**Constant term** $= a_0 = P(0)$.\n**Sum of even-power coefficients** $= \\dfrac{P(1) + P(-1)}{2}$, **odd-power** $= \\dfrac{P(1) - P(-1)}{2}$.\n\nNo expansion needed. You never have to find a single coefficient.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3.** Find the sum of the coefficients of $(3x - 2)^7$.\n\n**Step 1.** Call it $P(x) = (3x - 2)^7$. The sum of coefficients is $P(1)$.\n**Step 2.** $P(1) = (3 - 2)^7 = 1^7$.\n**Answer:** $1$.\n\nThe individual coefficients are huge: the first is $(-2)^7 = -128$ and the last is $3^7 = 2187$. The positives and negatives cancel almost completely.",
+        "The individual coefficients are huge: the first is $(-2)^7 = -128$ and the last is $3^7 = 2187$. The positives and negatives cancel almost completely.",
     },
     {
       type: "callout",
@@ -144,15 +196,47 @@ const lesson01: LessonSeed = {
         "For $(3x - 2)^7$ many students answer $2^7 = 128$. That is the sum of the **binomial** coefficients $\\binom{7}{0} + \\cdots + \\binom{7}{7}$, which are only part of each coefficient. The actual coefficient of $x^r$ is $\\binom{7}{r}3^r(-2)^{7-r}$, and the 3 and the $-2$ change everything. The only safe method is to put $x = 1$ into the **whole expression**. The two answers agree only for $(1 + x)^n$ itself.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4.** For $(1 + 2x)^5$, find the sum of the coefficients of the even powers of $x$.\n\n**Step 1.** $P(1) = 3^5 = 243$ and $P(-1) = (-1)^5 = -1$.\n**Step 2.** Even-power sum $= \\dfrac{243 + (-1)}{2} = 121$.\n**Check by expanding:** $(1 + 2x)^5 = 1 + 10x + 40x^2 + 80x^3 + 80x^4 + 32x^5$, and $1 + 40 + 80 = 121$. The odd-power sum is $10 + 80 + 32 = 122 = \\dfrac{243 - (-1)}{2}$.",
+      type: "worked-example",
+      id: "pc5-1-we5",
+      title: "Worked example 4",
+      problem:
+        "For $(1 + 2x)^5$, find the sum of the coefficients of the even powers of $x$.",
+      steps: [
+        {
+          text: "$P(1) = 3^5 = 243$ and $P(-1) = (-1)^5 = -1$.",
+        },
+        {
+          text: "Even-power sum $= \\dfrac{243 + (-1)}{2} = 121$.",
+        },
+        {
+          text: "**Check by expanding:** $(1 + 2x)^5 = 1 + 10x + 40x^2 + 80x^3 + 80x^4 + 32x^5$, and $1 + 40 + 80 = 121$. The odd-power sum is $10 + 80 + 32 = 122 = \\dfrac{243 - (-1)}{2}$.",
+        },
+      ],
+      answer: "$121$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (JEE style).** Let $(1 + x + x^2)^n = a_0 + a_1x + a_2x^2 + \\cdots + a_{2n}x^{2n}$. Find $a_0 + a_2 + a_4 + \\cdots + a_{2n}$.\n\n**Step 1.** Call the left side $P(x)$. The wanted sum is the even-power sum, $\\dfrac{P(1) + P(-1)}{2}$.\n*Why this step:* the coefficients $a_r$ are not binomial coefficients, so no Pascal-row fact applies. The substitution rule works for any polynomial.\n**Step 2.** $P(1) = (1 + 1 + 1)^n = 3^n$ and $P(-1) = (1 - 1 + 1)^n = 1$.\n*Why this step:* at $x = -1$ the odd powers flip sign and the even powers do not, which is exactly what separates the two groups.\n**Step 3.** Even-power sum $= \\dfrac{3^n + 1}{2}$.\n**Answer:** $\\dfrac{3^n + 1}{2}$ (and the odd-power sum is $\\dfrac{3^n - 1}{2}$).\n**Check with $n = 2$:** $(1 + x + x^2)^2 = 1 + 2x + 3x^2 + 2x^3 + x^4$, and $1 + 3 + 1 = 5 = \\dfrac{9 + 1}{2}$.",
+      type: "worked-example",
+      id: "pc5-1-we6",
+      title: "Worked example 5 (JEE style)",
+      problem:
+        "Let $(1 + x + x^2)^n = a_0 + a_1x + a_2x^2 + \\cdots + a_{2n}x^{2n}$. Find $a_0 + a_2 + a_4 + \\cdots + a_{2n}$.",
+      steps: [
+        {
+          text: "Call the left side $P(x)$. The wanted sum is the even-power sum, $\\dfrac{P(1) + P(-1)}{2}$.\n*Why this step:* the coefficients $a_r$ are not binomial coefficients, so no Pascal-row fact applies. The substitution rule works for any polynomial.",
+        },
+        {
+          text: "$P(1) = (1 + 1 + 1)^n = 3^n$ and $P(-1) = (1 - 1 + 1)^n = 1$.\n*Why this step:* at $x = -1$ the odd powers flip sign and the even powers do not, which is exactly what separates the two groups.",
+        },
+        {
+          text: "Even-power sum $= \\dfrac{3^n + 1}{2}$.",
+        },
+        {
+          text: "**Check with $n = 2$:** $(1 + x + x^2)^2 = 1 + 2x + 3x^2 + 2x^3 + x^4$, and $1 + 3 + 1 = 5 = \\dfrac{9 + 1}{2}$.",
+        },
+      ],
+      answer: "$\\dfrac{3^n + 1}{2}$ (and the odd-power sum is $\\dfrac{3^n - 1}{2}$).",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc5-1-q1",
@@ -260,6 +344,7 @@ const lesson02: LessonSeed = {
       content:
         "Plain row sums were easy. Now weight each entry by its position:\n\n$\\displaystyle 1\\cdot\\binom{n}{1} + 2\\cdot\\binom{n}{2} + 3\\cdot\\binom{n}{3} + \\cdots + n\\cdot\\binom{n}{n} = \\;?$\n\nSubstituting a number for $x$ will not produce those multipliers $1, 2, 3, \\ldots$ directly. Instead, change what the term $r\\binom{n}{r}$ **counts**.",
     },
+    { type: "heading", text: "A committee with a chair" },
     {
       type: "text",
       content:
@@ -303,29 +388,95 @@ const lesson02: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 0 (word problem).** A class of 10 students must send a project team of any size (at least one student), and the team needs a leader chosen from its members. How many different (team, leader) choices are there?\n\n**Step 1.** Split by team size $r$: choose the team ($\\binom{10}{r}$ ways), then its leader ($r$ ways). Total $\\sum_{r=1}^{10} r\\binom{10}{r}$.\n*Why this step:* the sum is the honest, case-by-case count. It is correct but slow to add up.\n**Step 2.** Count leader first instead: 10 choices of leader, then each of the other 9 students is in or out, $2^9$ ways.\n*Why this step:* choosing the leader first removes the size cases entirely, because the rest of the team is just any subset of 9 people.\n**Step 3.** $10 \\times 2^9 = 10 \\times 512$.\n**Answer:** $5120$, which is $n2^{n-1}$ with $n = 10$.",
+      type: "worked-example",
+      id: "pc5-2-we1",
+      title: "Worked example 0 (word problem)",
+      problem:
+        "A class of 10 students must send a project team of any size (at least one student), and the team needs a leader chosen from its members. How many different (team, leader) choices are there?",
+      steps: [
+        {
+          text: "Split by team size $r$: choose the team ($\\binom{10}{r}$ ways), then its leader ($r$ ways). Total $\\sum_{r=1}^{10} r\\binom{10}{r}$.\n*Why this step:* the sum is the honest, case-by-case count. It is correct but slow to add up.",
+        },
+        {
+          text: "Count leader first instead: 10 choices of leader, then each of the other 9 students is in or out, $2^9$ ways.\n*Why this step:* choosing the leader first removes the size cases entirely, because the rest of the team is just any subset of 9 people.",
+        },
+        {
+          text: "$10 \\times 2^9 = 10 \\times 512$.",
+        },
+      ],
+      answer: "$5120$, which is $n2^{n-1}$ with $n = 10$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Evaluate $\\sum_{r=0}^{5}(r + 1)\\binom{5}{r}$.\n\n**Step 1.** Split the weight: $(r + 1)\\binom{5}{r} = r\\binom{5}{r} + \\binom{5}{r}$.\n**Step 2.** $\\sum r\\binom{5}{r} = 5\\cdot 2^4 = 80$ and $\\sum\\binom{5}{r} = 2^5 = 32$.\n**Answer:** $80 + 32 = 112$.\n**Check:** row 5 is $1, 5, 10, 10, 5, 1$, and $1\\cdot1 + 2\\cdot5 + 3\\cdot10 + 4\\cdot10 + 5\\cdot5 + 6\\cdot1 = 1 + 10 + 30 + 40 + 25 + 6 = 112$.",
+      type: "worked-example",
+      id: "pc5-2-we2",
+      title: "Worked example 1",
+      problem:
+        "Evaluate $\\sum_{r=0}^{5}(r + 1)\\binom{5}{r}$.",
+      steps: [
+        {
+          text: "Split the weight: $(r + 1)\\binom{5}{r} = r\\binom{5}{r} + \\binom{5}{r}$.",
+        },
+        {
+          text: "$\\sum r\\binom{5}{r} = 5\\cdot 2^4 = 80$ and $\\sum\\binom{5}{r} = 2^5 = 32$.",
+        },
+        {
+          text: "**Check:** row 5 is $1, 5, 10, 10, 5, 1$, and $1\\cdot1 + 2\\cdot5 + 3\\cdot10 + 4\\cdot10 + 5\\cdot5 + 6\\cdot1 = 1 + 10 + 30 + 40 + 25 + 6 = 112$.",
+        },
+      ],
+      answer: "$80 + 32 = 112$.",
     },
+    { type: "heading", text: "Dividing, reversing and squared weights" },
     {
       type: "text",
       content:
         "**Dividing instead of multiplying.** The committee-with-chair identity, read backwards, handles weights like $\\frac{1}{r+1}$. Put $n + 1$ in place of $n$ and $r + 1$ in place of $r$:\n\n$\\displaystyle (r + 1)\\binom{n+1}{r+1} = (n + 1)\\binom{n}{r} \\quad\\Longrightarrow\\quad \\frac{1}{r+1}\\binom{n}{r} = \\frac{1}{n+1}\\binom{n+1}{r+1}.$\n\nIn words: a committee of $r + 1$ from $n + 1$ people with a chair can be counted chair first, and the division by $r + 1$ just undoes the choice of chair.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1b.** Evaluate $\\sum_{r=0}^{n}\\dfrac{1}{r+1}\\binom{n}{r}$.\n\n**Step 1.** Replace each term: $\\dfrac{1}{r+1}\\binom{n}{r} = \\dfrac{1}{n+1}\\binom{n+1}{r+1}$.\n**Step 2.** As $r$ runs from $0$ to $n$, the bottom $r + 1$ runs from $1$ to $n + 1$. That is all of row $n + 1$ except $\\binom{n+1}{0} = 1$.\n**Step 3.** So the sum is $\\dfrac{1}{n+1}\\left(2^{n+1} - 1\\right)$.\n**Answer:** $\\dfrac{2^{n+1} - 1}{n + 1}$.\n**Check with $n = 3$:** $1 + \\frac{3}{2} + \\frac{3}{3} + \\frac{1}{4} = \\frac{15}{4}$, and $\\frac{2^4 - 1}{4} = \\frac{15}{4}$.",
+      type: "worked-example",
+      id: "pc5-2-we3",
+      title: "Worked example 1b",
+      problem:
+        "Evaluate $\\sum_{r=0}^{n}\\dfrac{1}{r+1}\\binom{n}{r}$.",
+      steps: [
+        {
+          text: "Replace each term: $\\dfrac{1}{r+1}\\binom{n}{r} = \\dfrac{1}{n+1}\\binom{n+1}{r+1}$.",
+        },
+        {
+          text: "As $r$ runs from $0$ to $n$, the bottom $r + 1$ runs from $1$ to $n + 1$. That is all of row $n + 1$ except $\\binom{n+1}{0} = 1$.",
+        },
+        {
+          text: "So the sum is $\\dfrac{1}{n+1}\\left(2^{n+1} - 1\\right)$.",
+        },
+        {
+          text: "**Check with $n = 3$:** $1 + \\frac{3}{2} + \\frac{3}{3} + \\frac{1}{4} = \\frac{15}{4}$, and $\\frac{2^4 - 1}{4} = \\frac{15}{4}$.",
+        },
+      ],
+      answer: "$\\dfrac{2^{n+1} - 1}{n + 1}$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1c (reverse and add).** Evaluate $S = \\binom{n}{0} + 3\\binom{n}{1} + 5\\binom{n}{2} + \\cdots + (2n + 1)\\binom{n}{n}$.\n\nThe weights $1, 3, 5, \\ldots$ go up in equal steps. That is the signal for Gauss's trick: write the sum forwards and backwards.\n\n**Step 1.** $S = \\sum_{r=0}^{n}(2r + 1)\\binom{n}{r}$.\n**Step 2.** Reverse the order, replacing $r$ by $n - r$ and using $\\binom{n}{n-r} = \\binom{n}{r}$: $S = \\sum_{r=0}^{n}(2n - 2r + 1)\\binom{n}{r}$.\n**Step 3.** Add the two lines. The weights in each position add to $(2r + 1) + (2n - 2r + 1) = 2n + 2$, the same for every $r$: $2S = (2n + 2)\\sum\\binom{n}{r} = (2n + 2)2^n$.\n**Answer:** $S = (n + 1)2^n$.\n**Check with $n = 2$:** $1\\cdot1 + 3\\cdot2 + 5\\cdot1 = 12 = 3 \\cdot 2^2$.",
+      type: "worked-example",
+      id: "pc5-2-we4",
+      title: "Worked example 1c (reverse and add)",
+      problem:
+        "Evaluate $S = \\binom{n}{0} + 3\\binom{n}{1} + 5\\binom{n}{2} + \\cdots + (2n + 1)\\binom{n}{n}$.",
+      steps: [
+        {
+          text: "The weights $1, 3, 5, \\ldots$ go up in equal steps. That is the signal for Gauss's trick: write the sum forwards and backwards.",
+        },
+        {
+          text: "$S = \\sum_{r=0}^{n}(2r + 1)\\binom{n}{r}$.",
+        },
+        {
+          text: "Reverse the order, replacing $r$ by $n - r$ and using $\\binom{n}{n-r} = \\binom{n}{r}$: $S = \\sum_{r=0}^{n}(2n - 2r + 1)\\binom{n}{r}$.",
+        },
+        {
+          text: "Add the two lines. The weights in each position add to $(2r + 1) + (2n - 2r + 1) = 2n + 2$, the same for every $r$: $2S = (2n + 2)\\sum\\binom{n}{r} = (2n + 2)2^n$.",
+        },
+        {
+          text: "**Check with $n = 2$:** $1\\cdot1 + 3\\cdot2 + 5\\cdot1 = 12 = 3 \\cdot 2^2$.",
+        },
+      ],
+      answer: "$S = (n + 1)2^n$.",
     },
     {
       type: "text",
@@ -339,10 +490,11 @@ const lesson02: LessonSeed = {
       content:
         "Once you know calculus, every sum in this lesson has a second proof. Differentiate $(1 + x)^n = \\sum\\binom{n}{r}x^r$ to get $n(1 + x)^{n-1} = \\sum r\\binom{n}{r}x^{r-1}$, then put $x = 1$ for $\\sum r\\binom{n}{r}$ or $x = -1$ for the alternating version. Integrate from 0 to 1 instead and you get $\\sum\\frac{1}{r+1}\\binom{n}{r} = \\frac{2^{n+1}-1}{n+1}$. Weights that multiply by $r$ mean differentiate; weights that divide by $r + 1$ mean integrate.",
     },
+    { type: "heading", text: "Squares of a row" },
     {
       type: "text",
       content:
-        "**Squares of a row**\n\nNext: $\\binom{n}{0}^2 + \\binom{n}{1}^2 + \\cdots + \\binom{n}{n}^2$. Row 3 gives $1 + 9 + 9 + 1 = 20$. Row 4 gives $1 + 16 + 36 + 16 + 1 = 70$. Those are $\\binom{6}{3}$ and $\\binom{8}{4}$. Why?\n\nPut $2n$ people in a room: team A has $n$, team B has $n$. Choose $n$ of them. Directly, that is $\\binom{2n}{n}$. Now split by how many come from team A. If $k$ come from A, the other $n - k$ come from B:",
+        "Next: $\\binom{n}{0}^2 + \\binom{n}{1}^2 + \\cdots + \\binom{n}{n}^2$. Row 3 gives $1 + 9 + 9 + 1 = 20$. Row 4 gives $1 + 16 + 36 + 16 + 1 = 70$. Those are $\\binom{6}{3}$ and $\\binom{8}{4}$. Why?\n\nPut $2n$ people in a room: team A has $n$, team B has $n$. Choose $n$ of them. Directly, that is $\\binom{2n}{n}$. Now split by how many come from team A. If $k$ come from A, the other $n - k$ come from B:",
     },
     {
       type: "math",
@@ -393,19 +545,70 @@ const lesson02: LessonSeed = {
         "The binomial theorem gives the same identity. $(1 + x)^m(1 + x)^n = (1 + x)^{m+n}$. On the right, the coefficient of $x^r$ is $\\binom{m+n}{r}$. On the left, an $x^r$ is made by taking $x^k$ from the first bracket and $x^{r-k}$ from the second, which contributes $\\binom{m}{k}\\binom{n}{r-k}$. Adding over $k$ gives Vandermonde.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2.** A club has 5 men and 4 women. Count 3-person committees by splitting into cases, and check against the direct count.\n\n**Step 1.** 0 men: $\\binom{5}{0}\\binom{4}{3} = 4$.\n**Step 2.** 1 man: $\\binom{5}{1}\\binom{4}{2} = 5 \\times 6 = 30$.\n**Step 3.** 2 men: $\\binom{5}{2}\\binom{4}{1} = 10 \\times 4 = 40$.\n**Step 4.** 3 men: $\\binom{5}{3}\\binom{4}{0} = 10$.\n**Total:** $4 + 30 + 40 + 10 = 84$, and directly $\\binom{9}{3} = 84$.",
+      type: "worked-example",
+      id: "pc5-2-we5",
+      title: "Worked example 2",
+      problem:
+        "A club has 5 men and 4 women. Count 3-person committees by splitting into cases, and check against the direct count.",
+      steps: [
+        {
+          text: "0 men: $\\binom{5}{0}\\binom{4}{3} = 4$.",
+        },
+        {
+          text: "1 man: $\\binom{5}{1}\\binom{4}{2} = 5 \\times 6 = 30$.",
+        },
+        {
+          text: "2 men: $\\binom{5}{2}\\binom{4}{1} = 10 \\times 4 = 40$.",
+        },
+        {
+          text: "3 men: $\\binom{5}{3}\\binom{4}{0} = 10$.",
+        },
+        {
+          text: "**Total:** $4 + 30 + 40 + 10 = 84$, and directly $\\binom{9}{3} = 84$.",
+        },
+      ],
+      answer: "$84$ committees, matching $\\binom{9}{3} = 84$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3.** Evaluate $\\sum_{r=0}^{n-1}\\binom{n}{r}\\binom{n}{r+1}$.\n\n**Step 1.** Rewrite the second factor with symmetry: $\\binom{n}{r+1} = \\binom{n}{n-r-1}$.\n**Step 2.** Now the bottom numbers add to $r + (n - r - 1) = n - 1$ in every term. That is Vandermonde with two teams of $n$ and committee size $n - 1$: $\\sum_k \\binom{n}{k}\\binom{n}{n-1-k} = \\binom{2n}{n-1}$.\n**Answer:** $\\binom{2n}{n-1}$, which also equals $\\binom{2n}{n+1}$.\n**Check with $n = 2$:** $\\binom{2}{0}\\binom{2}{1} + \\binom{2}{1}\\binom{2}{2} = 2 + 2 = 4 = \\binom{4}{1}$.",
+      type: "worked-example",
+      id: "pc5-2-we6",
+      title: "Worked example 3",
+      problem:
+        "Evaluate $\\sum_{r=0}^{n-1}\\binom{n}{r}\\binom{n}{r+1}$.",
+      steps: [
+        {
+          text: "Rewrite the second factor with symmetry: $\\binom{n}{r+1} = \\binom{n}{n-r-1}$.",
+        },
+        {
+          text: "Now the bottom numbers add to $r + (n - r - 1) = n - 1$ in every term. That is Vandermonde with two teams of $n$ and committee size $n - 1$: $\\sum_k \\binom{n}{k}\\binom{n}{n-1-k} = \\binom{2n}{n-1}$.",
+        },
+        {
+          text: "**Check with $n = 2$:** $\\binom{2}{0}\\binom{2}{1} + \\binom{2}{1}\\binom{2}{2} = 2 + 2 = 4 = \\binom{4}{1}$.",
+        },
+      ],
+      answer: "$\\binom{2n}{n-1}$, which also equals $\\binom{2n}{n+1}$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (JEE style).** Evaluate $\\sum_{r=1}^{n} r\\binom{n}{r}^2$.\n\n**Step 1.** Use the chair identity on **one** of the two factors: $r\\binom{n}{r}^2 = n\\binom{n-1}{r-1}\\binom{n}{r}$.\n*Why this step:* the weight $r$ is the obstacle to Vandermonde. The chair identity absorbs it and leaves a plain product of two binomial coefficients.\n**Step 2.** Flip the other factor: $\\binom{n}{r} = \\binom{n}{n-r}$. Now the bottoms are $r - 1$ and $n - r$, which add to $n - 1$ for every $r$.\n*Why this step:* Vandermonde needs the bottoms to add to a constant (see the warning just after this example).\n**Step 3.** Teams of $n - 1$ and $n$, committee of $n - 1$: $\\sum_{r}\\binom{n-1}{r-1}\\binom{n}{n-r} = \\binom{2n-1}{n-1}$.\n**Answer:** $n\\binom{2n-1}{n-1}$.\n**Check with $n = 3$:** $1 \\cdot 9 + 2 \\cdot 9 + 3 \\cdot 1 = 30$, and $3\\binom{5}{2} = 30$.",
+      type: "worked-example",
+      id: "pc5-2-we7",
+      title: "Worked example 4 (JEE style)",
+      problem:
+        "Evaluate $\\sum_{r=1}^{n} r\\binom{n}{r}^2$.",
+      steps: [
+        {
+          text: "Use the chair identity on **one** of the two factors: $r\\binom{n}{r}^2 = n\\binom{n-1}{r-1}\\binom{n}{r}$.\n*Why this step:* the weight $r$ is the obstacle to Vandermonde. The chair identity absorbs it and leaves a plain product of two binomial coefficients.",
+        },
+        {
+          text: "Flip the other factor: $\\binom{n}{r} = \\binom{n}{n-r}$. Now the bottoms are $r - 1$ and $n - r$, which add to $n - 1$ for every $r$.\n*Why this step:* Vandermonde needs the bottoms to add to a constant (see the warning just after this example).",
+        },
+        {
+          text: "Teams of $n - 1$ and $n$, committee of $n - 1$: $\\sum_{r}\\binom{n-1}{r-1}\\binom{n}{n-r} = \\binom{2n-1}{n-1}$.",
+        },
+        {
+          text: "**Check with $n = 3$:** $1 \\cdot 9 + 2 \\cdot 9 + 3 \\cdot 1 = 30$, and $3\\binom{5}{2} = 30$.",
+        },
+      ],
+      answer: "$n\\binom{2n-1}{n-1}$.",
     },
     {
       type: "callout",
@@ -414,6 +617,7 @@ const lesson02: LessonSeed = {
       content:
         "Vandermonde needs the two lower indices in each term to add to the **same** number. $\\binom{n}{r}\\binom{n}{r+1}$ does not look like that until you flip one factor with symmetry. When a product sum resists, try flipping one factor.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc5-2-q1",
@@ -571,6 +775,7 @@ const lesson03: LessonSeed = {
           "Pick a row n. Every term nCr · 7^(n−r) · 1^r with r < n has a factor of 7; only the last term, 1ⁿ = 1, does not. So (7 + 1)ⁿ is a multiple of 7, plus 1.",
       },
     },
+    { type: "heading", text: "Write the base as a multiple ± 1" },
     {
       type: "text",
       content:
@@ -583,20 +788,77 @@ const lesson03: LessonSeed = {
       content:
         "For whole numbers $m$ and $N \\ge 1$:\n$(m + 1)^N = (\\text{multiple of } m) + 1$ and $(m - 1)^N = (\\text{multiple of } m) + (-1)^N$.\nOne level deeper: $(m + 1)^N = (\\text{multiple of } m^2) + Nm + 1$.",
     },
+    { type: "heading", text: "Remainders, divisibility and last digits" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Find the remainder when $2^{100}$ is divided by 7.\n\n**Step 1.** Look for a power of 2 close to a multiple of 7. $2^3 = 8 = 7 + 1$.\n**Step 2.** $100 = 3 \\times 33 + 1$, so $2^{100} = 2 \\cdot (2^3)^{33} = 2(7 + 1)^{33}$.\n**Step 3.** $(7 + 1)^{33} = 7k + 1$ for some whole number $k$.\n**Step 4.** $2^{100} = 2(7k + 1) = 14k + 2$.\n**Answer:** remainder $2$.",
+      type: "worked-example",
+      id: "pc5-3-we1",
+      title: "Worked example 1",
+      problem:
+        "Find the remainder when $2^{100}$ is divided by 7.",
+      steps: [
+        {
+          text: "Look for a power of 2 close to a multiple of 7. $2^3 = 8 = 7 + 1$.",
+        },
+        {
+          text: "$100 = 3 \\times 33 + 1$, so $2^{100} = 2 \\cdot (2^3)^{33} = 2(7 + 1)^{33}$.",
+        },
+        {
+          text: "$(7 + 1)^{33} = 7k + 1$ for some whole number $k$.",
+        },
+        {
+          text: "$2^{100} = 2(7k + 1) = 14k + 2$.",
+        },
+      ],
+      answer: "remainder $2$.",
+    },
+    {
+      type: "worked-example",
+      id: "pc5-3-we2",
+      title: "Worked example 1b (word problem)",
+      problem:
+        "Today is Monday. What day of the week will it be $3^{100}$ days from today?",
+      steps: [
+        {
+          text: "Whole weeks bring you back to Monday, so only the remainder of $3^{100}$ on division by 7 matters.\n*Why this step:* it turns a calendar question into a remainder question.",
+        },
+        {
+          text: "Find a power of 3 next to a multiple of 7: $3^3 = 27 = 28 - 1$, and $28 = 4 \\times 7$.\n*Why this step:* a base of the form (multiple of 7) $\\pm 1$ is what makes the expansion collapse.",
+        },
+        {
+          text: "$100 = 3 \\times 33 + 1$, so $3^{100} = 3 \\cdot (28 - 1)^{33} = 3(28k - 1) = 84k - 3$.\n*Why this step:* $(28 - 1)^{33}$ is a multiple of 28 plus $(-1)^{33} = -1$.",
+        },
+        {
+          text: "$84k - 3 = 7(12k - 1) + 4$, so the remainder is $4$.\n*Why this step:* $-3$ is not a remainder; add 7 to land in $0, \\ldots, 6$.",
+        },
+      ],
+      answer: "4 days after Monday, which is **Friday**.",
+    },
+    {
+      type: "worked-example",
+      id: "pc5-3-we3",
+      title: "Worked example 2",
+      problem:
+        "Show that $9^n - 8n - 1$ is divisible by 64 for every $n \\ge 1$.",
+      steps: [
+        {
+          text: "Write $9 = 8 + 1$ and expand:\n$\\displaystyle 9^n = (1 + 8)^n = 1 + 8n + \\binom{n}{2}8^2 + \\binom{n}{3}8^3 + \\cdots + 8^n.$",
+        },
+        {
+          text: "Move the first two terms across:\n$\\displaystyle 9^n - 8n - 1 = 8^2\\left[\\binom{n}{2} + \\binom{n}{3}8 + \\cdots + 8^{n-2}\\right].$",
+        },
+        {
+          text: "The bracket is a whole number and $8^2 = 64$. Done.",
+        },
+        {
+          text: "**Check:** $n = 2$ gives $81 - 17 = 64$; $n = 3$ gives $729 - 25 = 704 = 64 \\times 11$.",
+        },
+      ],
+      answer: "$9^n - 8n - 1 = 64 \\times (\\text{a whole number})$, so it is divisible by 64.",
     },
     {
       type: "text",
       content:
-        "**Worked example 1b (word problem).** Today is Monday. What day of the week will it be $3^{100}$ days from today?\n\n**Step 1.** Whole weeks bring you back to Monday, so only the remainder of $3^{100}$ on division by 7 matters.\n*Why this step:* it turns a calendar question into a remainder question.\n**Step 2.** Find a power of 3 next to a multiple of 7: $3^3 = 27 = 28 - 1$, and $28 = 4 \\times 7$.\n*Why this step:* a base of the form (multiple of 7) $\\pm 1$ is what makes the expansion collapse.\n**Step 3.** $100 = 3 \\times 33 + 1$, so $3^{100} = 3 \\cdot (28 - 1)^{33} = 3(28k - 1) = 84k - 3$.\n*Why this step:* $(28 - 1)^{33}$ is a multiple of 28 plus $(-1)^{33} = -1$.\n**Step 4.** $84k - 3 = 7(12k - 1) + 4$, so the remainder is $4$.\n*Why this step:* $-3$ is not a remainder; add 7 to land in $0, \\ldots, 6$.\n**Answer:** 4 days after Monday, which is **Friday**.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2.** Show that $9^n - 8n - 1$ is divisible by 64 for every $n \\ge 1$.\n\n**Step 1.** Write $9 = 8 + 1$ and expand:\n$\\displaystyle 9^n = (1 + 8)^n = 1 + 8n + \\binom{n}{2}8^2 + \\binom{n}{3}8^3 + \\cdots + 8^n.$\n**Step 2.** Move the first two terms across:\n$\\displaystyle 9^n - 8n - 1 = 8^2\\left[\\binom{n}{2} + \\binom{n}{3}8 + \\cdots + 8^{n-2}\\right].$\n**Step 3.** The bracket is a whole number and $8^2 = 64$. Done.\n**Check:** $n = 2$ gives $81 - 17 = 64$; $n = 3$ gives $729 - 25 = 704 = 64 \\times 11$.\n\nLesson 4.3 proved the NCERT form of this fact, $9^{n+1} - 8n - 9$. It is the same statement with $n + 1$ written in place of $n$, since $8(n + 1) + 1 = 8n + 9$.",
+        "Lesson 4.3 proved the NCERT form of this fact, $9^{n+1} - 8n - 9$. It is the same statement with $n + 1$ written in place of $n$, since $8(n + 1) + 1 = 8n + 9$.",
     },
     {
       type: "callout",
@@ -606,14 +868,54 @@ const lesson03: LessonSeed = {
         "The first two terms of $(1 + 8)^n$ are $1 + 8n$. They are the only ones **not** divisible by $8^2$. Subtracting them leaves only terms with $8^2$ in them. When you see \"$a^n - bn - 1$ is divisible by $b^2$\" with $a = b + 1$, this is the whole argument.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3.** Find the last two digits of $7^{100}$.\n\n\"Last two digits\" means the remainder on division by 100.\n\n**Step 1.** $7^2 = 49 = 50 - 1$, so $7^{100} = 49^{50} = (50 - 1)^{50} = (1 - 50)^{50}$.\n**Step 2.** Expand: $(1 - 50)^{50} = 1 - \\binom{50}{1}50 + \\binom{50}{2}50^2 - \\cdots$\n**Step 3.** The second term is $50 \\times 50 = 2500$, a multiple of 100. Every later term contains $50^2 = 2500$. So everything after the 1 is a multiple of 100.\n**Answer:** $7^{100}$ ends in $01$.\n**A second route:** $7^4 = 2401 = 2400 + 1$, so $7^{100} = (2400 + 1)^{25} = (\\text{multiple of } 2400) + 1$. Same answer.",
+      type: "worked-example",
+      id: "pc5-3-we4",
+      title: "Worked example 3",
+      problem:
+        "Find the last two digits of $7^{100}$.",
+      steps: [
+        {
+          text: "\"Last two digits\" means the remainder on division by 100.",
+        },
+        {
+          text: "$7^2 = 49 = 50 - 1$, so $7^{100} = 49^{50} = (50 - 1)^{50} = (1 - 50)^{50}$.",
+        },
+        {
+          text: "Expand: $(1 - 50)^{50} = 1 - \\binom{50}{1}50 + \\binom{50}{2}50^2 - \\cdots$",
+        },
+        {
+          text: "The second term is $50 \\times 50 = 2500$, a multiple of 100. Every later term contains $50^2 = 2500$. So everything after the 1 is a multiple of 100.",
+        },
+        {
+          text: "**A second route:** $7^4 = 2401 = 2400 + 1$, so $7^{100} = (2400 + 1)^{25} = (\\text{multiple of } 2400) + 1$. Same answer.",
+        },
+      ],
+      answer: "$7^{100}$ ends in $01$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4.** Find the remainder when $5^{99}$ is divided by 13.\n\n**Step 1.** $5^2 = 25 = 26 - 1$, and $26 = 2 \\times 13$.\n**Step 2.** $5^{99} = 5 \\cdot (5^2)^{49} = 5(26 - 1)^{49}$.\n**Step 3.** $(26 - 1)^{49} = 26k + (-1)^{49} = 26k - 1$.\n**Step 4.** $5^{99} = 130k - 5$.\n**Step 5.** A remainder must lie between 0 and 12, and $-5$ does not. Borrow one 13: $130k - 5 = 13(10k - 1) + 8$.\n**Answer:** remainder $8$.",
+      type: "worked-example",
+      id: "pc5-3-we5",
+      title: "Worked example 4",
+      problem:
+        "Find the remainder when $5^{99}$ is divided by 13.",
+      steps: [
+        {
+          text: "$5^2 = 25 = 26 - 1$, and $26 = 2 \\times 13$.",
+        },
+        {
+          text: "$5^{99} = 5 \\cdot (5^2)^{49} = 5(26 - 1)^{49}$.",
+        },
+        {
+          text: "$(26 - 1)^{49} = 26k + (-1)^{49} = 26k - 1$.",
+        },
+        {
+          text: "$5^{99} = 130k - 5$.",
+        },
+        {
+          text: "A remainder must lie between 0 and 12, and $-5$ does not. Borrow one 13: $130k - 5 = 13(10k - 1) + 8$.",
+        },
+      ],
+      answer: "remainder $8$.",
     },
     {
       type: "callout",
@@ -623,24 +925,104 @@ const lesson03: LessonSeed = {
         "When the expansion ends in $-1$ or $-5$, you are not finished. The remainder on division by $d$ is always one of $0, 1, \\ldots, d - 1$. Add $d$ to a negative leftover (and take one $d$ from the multiple) until it lands in that range: $-5 \\to 8$ for $d = 13$.",
     },
     {
+      type: "worked-example",
+      id: "pc5-3-we6",
+      title: "Worked example 4b (JEE Main style)",
+      problem:
+        "Find the remainder when $7^{103}$ is divided by 25.",
+      steps: [
+        {
+          text: "$7^2 = 49 = 50 - 1$, and $50 = 2 \\times 25$.\n*Why this step:* 25 itself is not near a power of 7, but its multiple 50 is. Any multiple of the divisor works as the base.",
+        },
+        {
+          text: "$103 = 2 \\times 51 + 1$, so $7^{103} = 7 \\cdot 49^{51} = 7(50 - 1)^{51}$.",
+        },
+        {
+          text: "$(50 - 1)^{51} = 50k + (-1)^{51} = 50k - 1$, so $7^{103} = 350k - 7$.\n*Why this step:* the exponent 51 is odd, so the lone term without a 50 is $-1$, not $+1$.",
+        },
+        {
+          text: "$350k = 25 \\times 14k$ is a multiple of 25. The leftover $-7$ becomes $-7 + 25 = 18$.",
+        },
+        {
+          text: "**Check:** $7^4 = 2401 = 96 \\times 25 + 1$, so powers of 7 repeat every 4 steps mod 25; $103 = 4 \\times 25 + 3$ and $7^3 = 343 = 13 \\times 25 + 18$.",
+        },
+      ],
+      answer: "remainder $18$.",
+    },
+    { type: "heading", text: "Comparing giant numbers" },
+    {
+      type: "worked-example",
+      id: "pc5-3-we7",
+      title: "Worked example 5",
+      problem:
+        "Which is larger: $101^{50}$ or $100^{50} + 99^{50}$?",
+      steps: [
+        {
+          text: "Compare $101^{50} - 99^{50}$ with $100^{50}$. Write $101 = 100 + 1$ and $99 = 100 - 1$.",
+        },
+        {
+          text: "In $(100 + 1)^{50} - (100 - 1)^{50}$, the terms where the $\\pm 1$ carries an even power cancel, and those where it carries an odd power double:\n$\\displaystyle 101^{50} - 99^{50} = 2\\left[\\binom{50}{1}100^{49} + \\binom{50}{3}100^{47} + \\cdots + \\binom{50}{49}100\\right].$",
+        },
+        {
+          text: "The first term alone is $2 \\times 50 \\times 100^{49} = 100 \\times 100^{49} = 100^{50}$. Every other term is positive.",
+        },
+        {
+          text: "So $101^{50} - 99^{50} > 100^{50}$.",
+        },
+      ],
+      answer: "$101^{50}$ is larger.",
+    },
+    { type: "heading", text: "Cancel and double with surds" },
+    {
       type: "text",
       content:
-        "**Worked example 4b (JEE Main style).** Find the remainder when $7^{103}$ is divided by 25.\n\n**Step 1.** $7^2 = 49 = 50 - 1$, and $50 = 2 \\times 25$.\n*Why this step:* 25 itself is not near a power of 7, but its multiple 50 is. Any multiple of the divisor works as the base.\n**Step 2.** $103 = 2 \\times 51 + 1$, so $7^{103} = 7 \\cdot 49^{51} = 7(50 - 1)^{51}$.\n**Step 3.** $(50 - 1)^{51} = 50k + (-1)^{51} = 50k - 1$, so $7^{103} = 350k - 7$.\n*Why this step:* the exponent 51 is odd, so the lone term without a 50 is $-1$, not $+1$.\n**Step 4.** $350k = 25 \\times 14k$ is a multiple of 25. The leftover $-7$ becomes $-7 + 25 = 18$.\n**Answer:** remainder $18$.\n**Check:** $7^4 = 2401 = 96 \\times 25 + 1$, so powers of 7 repeat every 4 steps mod 25; $103 = 4 \\times 25 + 3$ and $7^3 = 343 = 13 \\times 25 + 18$.",
+        "The same \"subtract the mirror expansion\" idea evaluates surd expressions exactly. In $(a + b)^n$ and $(a - b)^n$ the terms with an even power of $b$ are identical, and the terms with an odd power of $b$ are opposite. So\n\n$(a + b)^n + (a - b)^n = 2 \\times$ (terms with even powers of $b$), and $(a + b)^n - (a - b)^n = 2 \\times$ (terms with odd powers of $b$).",
+    },
+    {
+      type: "worked-example",
+      id: "pc5-3-we8",
+      title: "Worked example 6",
+      problem:
+        "Evaluate $(\\sqrt3 + \\sqrt2)^4 - (\\sqrt3 - \\sqrt2)^4$.",
+      steps: [
+        {
+          text: "Take $a = \\sqrt3$, $b = \\sqrt2$, $n = 4$. Only the odd powers of $b$ survive, doubled:\n$\\displaystyle 2\\left[\\binom{4}{1}(\\sqrt3)^3\\sqrt2 + \\binom{4}{3}\\sqrt3(\\sqrt2)^3\\right].$",
+        },
+        {
+          text: "$(\\sqrt3)^3 = 3\\sqrt3$ and $(\\sqrt2)^3 = 2\\sqrt2$, so the bracket is $4 \\cdot 3\\sqrt6 + 4 \\cdot 2\\sqrt6 = 12\\sqrt6 + 8\\sqrt6 = 20\\sqrt6$.",
+        },
+      ],
+      answer: "$40\\sqrt6$.",
     },
     {
       type: "text",
       content:
-        "**Comparing giant numbers**\n\n**Worked example 5.** Which is larger: $101^{50}$ or $100^{50} + 99^{50}$?\n\n**Step 1.** Compare $101^{50} - 99^{50}$ with $100^{50}$. Write $101 = 100 + 1$ and $99 = 100 - 1$.\n**Step 2.** In $(100 + 1)^{50} - (100 - 1)^{50}$, the terms where the $\\pm 1$ carries an even power cancel, and those where it carries an odd power double:\n$\\displaystyle 101^{50} - 99^{50} = 2\\left[\\binom{50}{1}100^{49} + \\binom{50}{3}100^{47} + \\cdots + \\binom{50}{49}100\\right].$\n**Step 3.** The first term alone is $2 \\times 50 \\times 100^{49} = 100 \\times 100^{49} = 100^{50}$. Every other term is positive.\n**Step 4.** So $101^{50} - 99^{50} > 100^{50}$.\n**Answer:** $101^{50}$ is larger.",
+        "With a **plus** sign between the two powers, the odd powers of $b$ cancel instead. That is why $(2 + \\sqrt3)^n + (2 - \\sqrt3)^n$ is always a whole number: only even powers of $\\sqrt3$ survive, and those are whole numbers. Since $0 < 2 - \\sqrt3 < 1$, the power $(2 - \\sqrt3)^n$ is a small positive number, so $(2 + \\sqrt3)^n$ sits just below that whole number. This is how JEE problems about the integer and fractional parts of $(2 + \\sqrt3)^n$ are solved.",
     },
     {
-      type: "text",
-      content:
-        "**Cancel and double with surds**\n\nThe same \"subtract the mirror expansion\" idea evaluates surd expressions exactly. In $(a + b)^n$ and $(a - b)^n$ the terms with an even power of $b$ are identical, and the terms with an odd power of $b$ are opposite. So\n\n$(a + b)^n + (a - b)^n = 2 \\times$ (terms with even powers of $b$), and $(a + b)^n - (a - b)^n = 2 \\times$ (terms with odd powers of $b$).\n\n**Worked example 6.** Evaluate $(\\sqrt3 + \\sqrt2)^4 - (\\sqrt3 - \\sqrt2)^4$.\n\n**Step 1.** Take $a = \\sqrt3$, $b = \\sqrt2$, $n = 4$. Only the odd powers of $b$ survive, doubled:\n$\\displaystyle 2\\left[\\binom{4}{1}(\\sqrt3)^3\\sqrt2 + \\binom{4}{3}\\sqrt3(\\sqrt2)^3\\right].$\n**Step 2.** $(\\sqrt3)^3 = 3\\sqrt3$ and $(\\sqrt2)^3 = 2\\sqrt2$, so the bracket is $4 \\cdot 3\\sqrt6 + 4 \\cdot 2\\sqrt6 = 12\\sqrt6 + 8\\sqrt6 = 20\\sqrt6$.\n**Answer:** $40\\sqrt6$.\n\nWith a **plus** sign between the two powers, the odd powers of $b$ cancel instead. That is why $(2 + \\sqrt3)^n + (2 - \\sqrt3)^n$ is always a whole number: only even powers of $\\sqrt3$ survive, and those are whole numbers. Since $0 < 2 - \\sqrt3 < 1$, the power $(2 - \\sqrt3)^n$ is a small positive number, so $(2 + \\sqrt3)^n$ sits just below that whole number. This is how JEE problems about the integer and fractional parts of $(2 + \\sqrt3)^n$ are solved.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 6b (JEE Advanced style).** Let $R = (5\\sqrt5 + 11)^{2n+1}$ and let $f = R - \\lfloor R \\rfloor$ be its fractional part. Show that $Rf = 4^{2n+1}$.\n\n**Step 1.** Bring in the partner $G = (5\\sqrt5 - 11)^{2n+1}$. Since $5\\sqrt5 = \\sqrt{125} \\approx 11.18$, we have $0 < 5\\sqrt5 - 11 < 1$, so $0 < G < 1$.\n*Why this step:* a number strictly between 0 and 1 is the natural candidate for a fractional part.\n**Step 2.** Expand $R - G$ with $a = 5\\sqrt5$, $b = 11$ and odd exponent $m = 2n + 1$. Only the terms with odd powers of $b$ survive (doubled): $2\\binom{m}{r}(5\\sqrt5)^{m-r}11^r$ with $r$ odd.\n*Why this step:* we want the surds to disappear. With $m$ odd and $r$ odd, $m - r$ is even, so $(5\\sqrt5)^{m-r} = 125^{(m-r)/2}$ is a whole number.\n**Step 3.** So $R - G = I$, a whole number. Then $R = I + G$ with $0 < G < 1$, which means $\\lfloor R \\rfloor = I$ and $f = G$.\n**Step 4.** $Rf = RG = \\bigl[(5\\sqrt5 + 11)(5\\sqrt5 - 11)\\bigr]^{2n+1} = (125 - 121)^{2n+1} = 4^{2n+1}$.\n**Check with $n = 0$:** $R \\approx 22.18034$, $f \\approx 0.18034$, and $22.18034 \\times 0.18034 \\approx 4.000$.",
+      type: "worked-example",
+      id: "pc5-3-we9",
+      title: "Worked example 6b (JEE Advanced style)",
+      problem:
+        "Let $R = (5\\sqrt5 + 11)^{2n+1}$ and let $f = R - \\lfloor R \\rfloor$ be its fractional part. Show that $Rf = 4^{2n+1}$.",
+      steps: [
+        {
+          text: "Bring in the partner $G = (5\\sqrt5 - 11)^{2n+1}$. Since $5\\sqrt5 = \\sqrt{125} \\approx 11.18$, we have $0 < 5\\sqrt5 - 11 < 1$, so $0 < G < 1$.\n*Why this step:* a number strictly between 0 and 1 is the natural candidate for a fractional part.",
+        },
+        {
+          text: "Expand $R - G$ with $a = 5\\sqrt5$, $b = 11$ and odd exponent $m = 2n + 1$. Only the terms with odd powers of $b$ survive (doubled): $2\\binom{m}{r}(5\\sqrt5)^{m-r}11^r$ with $r$ odd.\n*Why this step:* we want the surds to disappear. With $m$ odd and $r$ odd, $m - r$ is even, so $(5\\sqrt5)^{m-r} = 125^{(m-r)/2}$ is a whole number.",
+        },
+        {
+          text: "So $R - G = I$, a whole number. Then $R = I + G$ with $0 < G < 1$, which means $\\lfloor R \\rfloor = I$ and $f = G$.",
+        },
+        {
+          text: "$Rf = RG = \\bigl[(5\\sqrt5 + 11)(5\\sqrt5 - 11)\\bigr]^{2n+1} = (125 - 121)^{2n+1} = 4^{2n+1}$.",
+        },
+        {
+          text: "**Check with $n = 0$:** $R \\approx 22.18034$, $f \\approx 0.18034$, and $22.18034 \\times 0.18034 \\approx 4.000$.",
+        },
+      ],
+      answer: "$Rf = RG = 4^{2n+1}$",
     },
     {
       type: "table",
@@ -652,6 +1034,7 @@ const lesson03: LessonSeed = {
         ["$5^{99} \\bmod 13$", "$5^2 = 26 - 1$", "$5 \\cdot (-1) = -5 \\to 8$"],
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc5-3-q1",
@@ -766,8 +1149,33 @@ const lesson04: LessonSeed = {
     {
       type: "text",
       content:
-        "**Exact first, then approximate.** For a whole-number power of a number near a round base, the binomial theorem gives the **exact** answer if you keep every term.\n\n**Worked example 0.** Evaluate $(99)^5$ exactly.\n\n**Step 1.** $99 = 100 - 1$, so $(99)^5 = (100 - 1)^5$.\n**Step 2.** $= 100^5 - 5\\cdot100^4 + 10\\cdot100^3 - 10\\cdot100^2 + 5\\cdot100 - 1$\n$= 10^{10} - 5\\cdot10^8 + 10\\cdot10^6 - 10\\cdot10^4 + 500 - 1$.\n**Step 3.** $10\\,000\\,000\\,000 - 500\\,000\\,000 + 10\\,000\\,000 - 100\\,000 + 500 - 1$.\n**Answer:** $9\\,509\\,900\\,499$.\n\nAll six terms were needed for the exact value. But look how fast they shrink: the first two already give $9\\,500\\,000\\,000$, within $0.1\\%$. The rest of this lesson is about when you can stop early and still be accurate enough.",
+        "**Exact first, then approximate.** For a whole-number power of a number near a round base, the binomial theorem gives the **exact** answer if you keep every term.",
     },
+    {
+      type: "worked-example",
+      id: "pc5-4-we1",
+      title: "Worked example 0",
+      problem:
+        "Evaluate $(99)^5$ exactly.",
+      steps: [
+        {
+          text: "$99 = 100 - 1$, so $(99)^5 = (100 - 1)^5$.",
+        },
+        {
+          text: "$= 100^5 - 5\\cdot100^4 + 10\\cdot100^3 - 10\\cdot100^2 + 5\\cdot100 - 1$\n$= 10^{10} - 5\\cdot10^8 + 10\\cdot10^6 - 10\\cdot10^4 + 500 - 1$.",
+        },
+        {
+          text: "$10\\,000\\,000\\,000 - 500\\,000\\,000 + 10\\,000\\,000 - 100\\,000 + 500 - 1$.",
+        },
+      ],
+      answer: "$9\\,509\\,900\\,499$.",
+    },
+    {
+      type: "text",
+      content:
+        "All six terms were needed for the exact value. But look how fast they shrink: the first two already give $9\\,500\\,000\\,000$, within $0.1\\%$. The rest of this lesson is about when you can stop early and still be accurate enough.",
+    },
+    { type: "heading", text: "Small $x$: keep the first few terms" },
     {
       type: "text",
       content:
@@ -825,10 +1233,25 @@ const lesson04: LessonSeed = {
         ["0.3", "13.78585", "4", "8.05"],
       ],
     },
+    { type: "heading", text: "Hitting a set number of decimal places" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Find $(1.02)^{10}$ correct to 3 decimal places.\n\n**Step 1.** Term by term with $x = 0.02$:\n$1$\n$10x = 0.2$\n$45x^2 = 45 \\times 0.0004 = 0.018$\n$120x^3 = 120 \\times 0.000008 = 0.00096$\n$210x^4 = 210 \\times 0.00000016 = 0.0000336$\n**Step 2.** The fifth term, $0.0000336$, is below $0.0005$, and later terms are smaller still, so nothing after it can change the third decimal place. We include it here only to show how small it is.\n**Step 3.** $1 + 0.2 + 0.018 + 0.00096 + 0.0000336 = 1.2189936$.\n**Answer:** $(1.02)^{10} \\approx 1.219$. (True value: $1.218994\\ldots$)",
+      type: "worked-example",
+      id: "pc5-4-we2",
+      title: "Worked example 1",
+      problem:
+        "Find $(1.02)^{10}$ correct to 3 decimal places.",
+      steps: [
+        {
+          text: "Term by term with $x = 0.02$:\n$1$\n$10x = 0.2$\n$45x^2 = 45 \\times 0.0004 = 0.018$\n$120x^3 = 120 \\times 0.000008 = 0.00096$\n$210x^4 = 210 \\times 0.00000016 = 0.0000336$",
+        },
+        {
+          text: "The fifth term, $0.0000336$, is below $0.0005$, and later terms are smaller still, so nothing after it can change the third decimal place. We include it here only to show how small it is.",
+        },
+        {
+          text: "$1 + 0.2 + 0.018 + 0.00096 + 0.0000336 = 1.2189936$.",
+        },
+      ],
+      answer: "$(1.02)^{10} \\approx 1.219$. (True value: $1.218994\\ldots$)",
     },
     {
       type: "callout",
@@ -838,14 +1261,48 @@ const lesson04: LessonSeed = {
         "For $d$ decimal places, keep adding terms until the next one is clearly smaller than half a unit in the last place ($0.0005$ for 3 d.p.). Each term is $\\frac{(n-r)x}{r+1}$ times the one before, which is at most $nx$, so when $nx$ is small the terms shrink fast.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2.** Find $(0.99)^5$ correct to 3 decimal places.\n\n**Step 1.** $(0.99)^5 = (1 - 0.01)^5 = 1 - 5(0.01) + 10(0.01)^2 - 10(0.01)^3 + \\cdots$\n**Step 2.** $= 1 - 0.05 + 0.001 - 0.00001 + \\cdots$\n**Step 3.** The fourth term is already far below 0.0005.\n**Step 4.** $1 - 0.05 + 0.001 - 0.00001 = 0.95099$.\n**Answer:** $(0.99)^5 \\approx 0.951$. With $x$ negative, the signs alternate.",
+      type: "worked-example",
+      id: "pc5-4-we3",
+      title: "Worked example 2",
+      problem:
+        "Find $(0.99)^5$ correct to 3 decimal places.",
+      steps: [
+        {
+          text: "$(0.99)^5 = (1 - 0.01)^5 = 1 - 5(0.01) + 10(0.01)^2 - 10(0.01)^3 + \\cdots$",
+        },
+        {
+          text: "$= 1 - 0.05 + 0.001 - 0.00001 + \\cdots$",
+        },
+        {
+          text: "The fourth term is already far below 0.0005.",
+        },
+        {
+          text: "$1 - 0.05 + 0.001 - 0.00001 = 0.95099$.",
+        },
+      ],
+      answer: "$(0.99)^5 \\approx 0.951$. With $x$ negative, the signs alternate.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2b (base not near 1).** Find $(2.01)^5$ correct to 3 decimal places.\n\n**Step 1.** Write $2.01 = 2 + 0.01$ and expand $(a + b)^5$ with $a = 2$, $b = 0.01$:\n$\\displaystyle 2^5 + \\binom{5}{1}2^4(0.01) + \\binom{5}{2}2^3(0.01)^2 + \\binom{5}{3}2^2(0.01)^3 + \\cdots$\n*Why this step:* the number is close to 2, not to 1. The big part $a$ can be anything easy to raise to a power, as long as $b$ is small next to it.\n**Step 2.** Term by term: $32$, $5 \\times 16 \\times 0.01 = 0.8$, $10 \\times 8 \\times 0.0001 = 0.008$, $10 \\times 4 \\times 0.000001 = 0.00004$.\n**Step 3.** The fourth term, $0.00004$, is well below $0.0005$, and the last two terms are smaller still.\n*Why this step:* this is the stopping rule from the tip above. Nothing left can move the third decimal place.\n**Step 4.** $32 + 0.8 + 0.008 + 0.00004 = 32.80804$.\n**Answer:** $(2.01)^5 \\approx 32.808$. (Exact value: $32.8080401\\ldots$)",
+      type: "worked-example",
+      id: "pc5-4-we4",
+      title: "Worked example 2b (base not near 1)",
+      problem:
+        "Find $(2.01)^5$ correct to 3 decimal places.",
+      steps: [
+        {
+          text: "Write $2.01 = 2 + 0.01$ and expand $(a + b)^5$ with $a = 2$, $b = 0.01$:\n$\\displaystyle 2^5 + \\binom{5}{1}2^4(0.01) + \\binom{5}{2}2^3(0.01)^2 + \\binom{5}{3}2^2(0.01)^3 + \\cdots$\n*Why this step:* the number is close to 2, not to 1. The big part $a$ can be anything easy to raise to a power, as long as $b$ is small next to it.",
+        },
+        {
+          text: "Term by term: $32$, $5 \\times 16 \\times 0.01 = 0.8$, $10 \\times 8 \\times 0.0001 = 0.008$, $10 \\times 4 \\times 0.000001 = 0.00004$.",
+        },
+        {
+          text: "The fourth term, $0.00004$, is well below $0.0005$, and the last two terms are smaller still.\n*Why this step:* this is the stopping rule from the tip above. Nothing left can move the third decimal place.",
+        },
+        {
+          text: "$32 + 0.8 + 0.008 + 0.00004 = 32.80804$.",
+        },
+      ],
+      answer: "$(2.01)^5 \\approx 32.808$. (Exact value: $32.8080401\\ldots$)",
     },
     {
       type: "callout",
@@ -854,26 +1311,81 @@ const lesson04: LessonSeed = {
       content:
         "It is tempting to \"apply the power to each part\". Try it on $(1.02)^{10}$: $1 + (0.02)^{10} = 1.0000000000000000102$, basically 1. The real answer is about 1.219. For small $x$, the term $x^n$ is the **smallest** term in the expansion, not the important one. The important term is $nx$, the second one. This is the same error as $(a + b)^n = a^n + b^n$ from 4.3.",
     },
+    { type: "heading", text: "When the approximation fails" },
     {
       type: "text",
       content:
-        "**When the approximation fails**\n\n\"$x$ small\" is not enough. What matters is that $nx$ is small. Each term is roughly $\\frac{(n - r)x}{r + 1}$ times the one before, so the terms keep growing while that ratio is above 1.\n\nTake $(1.01)^{100}$. Here $x = 0.01$ is small, but $nx = 1$. The straight-line guess is $1 + 1 = 2$. The true value is about $2.705$. The second term $\\binom{100}{2}(0.01)^2 = 0.495$ is nowhere near negligible.\n\nOr take $(1.1)^{20}$: $1 + nx = 3$, but the true value is about $6.727$.",
+        "\"$x$ small\" is not enough. What matters is that $nx$ is small. Each term is roughly $\\frac{(n - r)x}{r + 1}$ times the one before, so the terms keep growing while that ratio is above 1.\n\nTake $(1.01)^{100}$. Here $x = 0.01$ is small, but $nx = 1$. The straight-line guess is $1 + 1 = 2$. The true value is about $2.705$. The second term $\\binom{100}{2}(0.01)^2 = 0.495$ is nowhere near negligible.\n\nOr take $(1.1)^{20}$: $1 + nx = 3$, but the true value is about $6.727$.",
+    },
+    { type: "heading", text: "Prices, depreciation and huge powers" },
+    {
+      type: "worked-example",
+      id: "pc5-4-we5",
+      title: "Worked example 3",
+      problem:
+        "Prices rise 1% every month for a year. Estimate the total rise.",
+      steps: [
+        {
+          text: "The price is multiplied by $(1.01)^{12}$.",
+        },
+        {
+          text: "$(1 + 0.01)^{12} \\approx 1 + 12(0.01) + 66(0.0001) = 1 + 0.12 + 0.0066 = 1.1266$.",
+        },
+        {
+          text: "The next term is $220(0.000001) = 0.00022$, so the estimate is good to about 3 decimal places.",
+        },
+      ],
+      answer: "a rise of about $12.7\\%$, not $12\\%$. The extra $0.7\\%$ is interest on interest, the $\\binom{12}{2}x^2$ term.",
+    },
+    {
+      type: "worked-example",
+      id: "pc5-4-we6",
+      title: "Worked example 3b (depreciation)",
+      problem:
+        "A car bought for ₹6,00,000 loses 5% of its value every year. Estimate its value after 4 years.",
+      steps: [
+        {
+          text: "Each year the value is multiplied by $0.95$, so after 4 years it is $6{,}00{,}000 \\times (0.95)^4 = 6{,}00{,}000 \\times (1 - 0.05)^4$.\n*Why this step:* a percentage loss each year is repeated multiplication, which is exactly a power of $(1 + x)$ with $x = -0.05$.",
+        },
+        {
+          text: "Here $nx = 4 \\times 0.05 = 0.2$, small but not tiny, so keep a few terms:\n$1 - 4(0.05) + 6(0.05)^2 - 4(0.05)^3 = 1 - 0.2 + 0.015 - 0.0005 = 0.8145$.\n*Why this step:* the $x^2$ term, $0.015$, is worth ₹9,000 here, far too much to drop.",
+        },
+        {
+          text: "$6{,}00{,}000 \\times 0.8145 = 4{,}88{,}700$.",
+        },
+      ],
+      answer: "about ₹4,88,700. (The last term, $(0.05)^4 = 0.00000625$, adds only ₹3.75.)",
     },
     {
       type: "text",
       content:
-        "**Worked example 3.** Prices rise 1% every month for a year. Estimate the total rise.\n\n**Step 1.** The price is multiplied by $(1.01)^{12}$.\n**Step 2.** $(1 + 0.01)^{12} \\approx 1 + 12(0.01) + 66(0.0001) = 1 + 0.12 + 0.0066 = 1.1266$.\n**Step 3.** The next term is $220(0.000001) = 0.00022$, so the estimate is good to about 3 decimal places.\n**Answer:** a rise of about $12.7\\%$, not $12\\%$. The extra $0.7\\%$ is interest on interest, the $\\binom{12}{2}x^2$ term.",
+        "The tempting shortcut \"5% a year for 4 years is 20%\" gives ₹4,80,000. That is $1 + nx$ alone, and it undercounts because each year's loss is taken from a smaller value.",
+    },
+    {
+      type: "worked-example",
+      id: "pc5-4-we7",
+      title: "Worked example 4 (NCERT/CBSE style)",
+      problem:
+        "Which is larger, $(1.1)^{10000}$ or $1000$?",
+      steps: [
+        {
+          text: "Expand: $(1 + 0.1)^{10000} = 1 + 10000(0.1) + \\binom{10000}{2}(0.1)^2 + \\cdots$\n*Why this step:* we do not need the value, only a lower bound. Every term here is positive, so any two of them already give one.",
+        },
+        {
+          text: "The first two terms are $1 + 1000 = 1001$, and every remaining term is positive.",
+        },
+        {
+          text: "So $(1.1)^{10000} > 1001 > 1000$.",
+        },
+      ],
+      answer: "$(1.1)^{10000}$ is larger.",
     },
     {
       type: "text",
       content:
-        "**Worked example 3b (depreciation).** A car bought for ₹6,00,000 loses 5% of its value every year. Estimate its value after 4 years.\n\n**Step 1.** Each year the value is multiplied by $0.95$, so after 4 years it is $6{,}00{,}000 \\times (0.95)^4 = 6{,}00{,}000 \\times (1 - 0.05)^4$.\n*Why this step:* a percentage loss each year is repeated multiplication, which is exactly a power of $(1 + x)$ with $x = -0.05$.\n**Step 2.** Here $nx = 4 \\times 0.05 = 0.2$, small but not tiny, so keep a few terms:\n$1 - 4(0.05) + 6(0.05)^2 - 4(0.05)^3 = 1 - 0.2 + 0.015 - 0.0005 = 0.8145$.\n*Why this step:* the $x^2$ term, $0.015$, is worth ₹9,000 here, far too much to drop.\n**Step 3.** $6{,}00{,}000 \\times 0.8145 = 4{,}88{,}700$.\n**Answer:** about ₹4,88,700. (The last term, $(0.05)^4 = 0.00000625$, adds only ₹3.75.)\n\nThe tempting shortcut \"5% a year for 4 years is 20%\" gives ₹4,80,000. That is $1 + nx$ alone, and it undercounts because each year's loss is taken from a smaller value.",
+        "Notice that $1 + nx$ is a poor **estimate** here ($nx = 1000$ is huge), yet it is a perfectly valid **lower bound**. For $x > 0$ and whole $n$, $(1 + x)^n \\ge 1 + nx$ always.",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (NCERT/CBSE style).** Which is larger, $(1.1)^{10000}$ or $1000$?\n\n**Step 1.** Expand: $(1 + 0.1)^{10000} = 1 + 10000(0.1) + \\binom{10000}{2}(0.1)^2 + \\cdots$\n*Why this step:* we do not need the value, only a lower bound. Every term here is positive, so any two of them already give one.\n**Step 2.** The first two terms are $1 + 1000 = 1001$, and every remaining term is positive.\n**Step 3.** So $(1.1)^{10000} > 1001 > 1000$.\n**Answer:** $(1.1)^{10000}$ is larger.\n\nNotice that $1 + nx$ is a poor **estimate** here ($nx = 1000$ is huge), yet it is a perfectly valid **lower bound**. For $x > 0$ and whole $n$, $(1 + x)^n \\ge 1 + nx$ always.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc5-4-q1",
@@ -982,10 +1494,11 @@ const lesson05: LessonSeed = {
       content:
         "The coefficient $\\binom{n}{r}$ has a form that does not mention factorials of $n$ at all:\n\n$\\displaystyle \\binom{n}{r} = \\frac{n(n-1)(n-2)\\cdots(n-r+1)}{r!}.$\n\nThe top has $r$ factors, starting at $n$ and dropping by 1 each time. Nothing in that formula needs $n$ to be a whole number. You can put in $n = -1$ or $n = \\frac{1}{2}$ and get a perfectly good number. So what does $(1 + x)^{-1}$ or $(1 + x)^{1/2}$ expand into?",
     },
+    { type: "heading", text: "Why the series stops for whole $n$" },
     {
       type: "text",
       content:
-        "**Why the series stops for whole $n$.** With $n = 4$ and $r = 5$, the top is $4 \\cdot 3 \\cdot 2 \\cdot 1 \\cdot 0 = 0$. Once the factors reach zero, every later coefficient is 0 and the expansion ends at $x^n$.\n\nFor $n = -1$ the factors are $-1, -2, -3, \\ldots$ and they never reach zero. The series **never stops**.",
+        "With $n = 4$ and $r = 5$, the top is $4 \\cdot 3 \\cdot 2 \\cdot 1 \\cdot 0 = 0$. Once the factors reach zero, every later coefficient is 0 and the expansion ends at $x^n$.\n\nFor $n = -1$ the factors are $-1, -2, -3, \\ldots$ and they never reach zero. The series **never stops**.",
     },
     {
       type: "callout",
@@ -994,10 +1507,29 @@ const lesson05: LessonSeed = {
       content:
         "For any real $n$ and $|x| < 1$:\n$\\displaystyle (1 + x)^n = 1 + nx + \\frac{n(n-1)}{2!}x^2 + \\frac{n(n-1)(n-2)}{3!}x^3 + \\cdots$\nWhen $n$ is a whole number it stops after $x^n$ and holds for every $x$. Otherwise it is an infinite series and needs $|x| < 1$.",
     },
+    { type: "heading", text: "The geometric series and $|x| < 1$" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Expand $(1 - x)^{-1}$.\n\n**Step 1.** Use $n = -1$ and replace $x$ by $-x$.\n**Step 2.** Coefficient of $(-x)^r$: $\\dfrac{(-1)(-2)\\cdots(-r)}{r!} = \\dfrac{(-1)^r r!}{r!} = (-1)^r$.\n**Step 3.** So the term is $(-1)^r(-x)^r = x^r$.\n**Answer:** $\\dfrac{1}{1 - x} = 1 + x + x^2 + x^3 + \\cdots$, the geometric series.\n**Check without calculus:** $(1 - x)(1 + x + x^2 + \\cdots + x^k) = 1 - x^{k+1}$. When $|x| < 1$, $x^{k+1}$ shrinks to 0 as $k$ grows, so the partial sums approach $\\frac{1}{1 - x}$.",
+      type: "worked-example",
+      id: "pc5-5-we1",
+      title: "Worked example 1",
+      problem:
+        "Expand $(1 - x)^{-1}$.",
+      steps: [
+        {
+          text: "Use $n = -1$ and replace $x$ by $-x$.",
+        },
+        {
+          text: "Coefficient of $(-x)^r$: $\\dfrac{(-1)(-2)\\cdots(-r)}{r!} = \\dfrac{(-1)^r r!}{r!} = (-1)^r$.",
+        },
+        {
+          text: "So the term is $(-1)^r(-x)^r = x^r$.",
+        },
+        {
+          text: "**Check without calculus:** $(1 - x)(1 + x + x^2 + \\cdots + x^k) = 1 - x^{k+1}$. When $|x| < 1$, $x^{k+1}$ shrinks to 0 as $k$ grows, so the partial sums approach $\\frac{1}{1 - x}$.",
+        },
+      ],
+      answer: "$\\dfrac{1}{1 - x} = 1 + x + x^2 + x^3 + \\cdots$, the geometric series.",
+      tryFirst: false,
     },
     {
       type: "interactive",
@@ -1037,10 +1569,70 @@ const lesson05: LessonSeed = {
       content:
         "At $x = 2$ the formula says $\\frac{1}{1-2} = -1$, but the series $1 + 2 + 4 + 8 + \\cdots$ grows without end. Adding up positive numbers can never give $-1$. Outside $|x| < 1$ the powers $x^r$ grow instead of shrink, so the series does not settle on any value. For whole-number $n$ this question never came up, because the series stopped.",
     },
+    { type: "heading", text: "Square roots by series" },
+    {
+      type: "worked-example",
+      id: "pc5-5-we2",
+      title: "Worked example 2",
+      problem:
+        "Expand $\\sqrt{1 + x} = (1 + x)^{1/2}$ up to $x^3$.",
+      steps: [
+        {
+          text: "$n = \\frac{1}{2}$, so $nx = \\frac{1}{2}x$.",
+        },
+        {
+          text: "$\\dfrac{n(n-1)}{2!} = \\dfrac{\\frac{1}{2}\\cdot(-\\frac{1}{2})}{2} = -\\dfrac{1}{8}$.",
+        },
+        {
+          text: "$\\dfrac{n(n-1)(n-2)}{3!} = \\dfrac{\\frac{1}{2}\\cdot(-\\frac{1}{2})\\cdot(-\\frac{3}{2})}{6} = \\dfrac{3/8}{6} = \\dfrac{1}{16}$.",
+        },
+      ],
+      answer: "$\\sqrt{1 + x} = 1 + \\dfrac{x}{2} - \\dfrac{x^2}{8} + \\dfrac{x^3}{16} - \\cdots$",
+    },
+    {
+      type: "worked-example",
+      id: "pc5-5-we3",
+      title: "Worked example 3",
+      problem:
+        "Estimate $\\sqrt{1.02}$.",
+      steps: [
+        {
+          text: "$x = 0.02$.",
+        },
+        {
+          text: "$1 + \\frac{0.02}{2} - \\frac{(0.02)^2}{8} = 1 + 0.01 - 0.00005 = 1.00995$.",
+        },
+      ],
+      answer: "$\\sqrt{1.02} \\approx 1.01$ to 2 decimal places, or $1.00995$ with the correction. The true value is $1.0099505\\ldots$",
+    },
     {
       type: "text",
       content:
-        "**Worked example 2.** Expand $\\sqrt{1 + x} = (1 + x)^{1/2}$ up to $x^3$.\n\n**Step 1.** $n = \\frac{1}{2}$, so $nx = \\frac{1}{2}x$.\n**Step 2.** $\\dfrac{n(n-1)}{2!} = \\dfrac{\\frac{1}{2}\\cdot(-\\frac{1}{2})}{2} = -\\dfrac{1}{8}$.\n**Step 3.** $\\dfrac{n(n-1)(n-2)}{3!} = \\dfrac{\\frac{1}{2}\\cdot(-\\frac{1}{2})\\cdot(-\\frac{3}{2})}{6} = \\dfrac{3/8}{6} = \\dfrac{1}{16}$.\n**Answer:** $\\sqrt{1 + x} = 1 + \\dfrac{x}{2} - \\dfrac{x^2}{8} + \\dfrac{x^3}{16} - \\cdots$",
+        "This is the same rule as 5.4: $(1 + x)^n \\approx 1 + nx$, now with $n = \\frac{1}{2}$. A square root of \"1 plus a bit\" is \"1 plus half the bit\".",
+    },
+    {
+      type: "worked-example",
+      id: "pc5-5-we4",
+      title: "Worked example 3b (square root by hand)",
+      problem:
+        "Find $\\sqrt{99}$ to 4 decimal places.",
+      steps: [
+        {
+          text: "$99 = 100(1 - 0.01)$, so $\\sqrt{99} = 10(1 - 0.01)^{1/2}$.\n*Why this step:* the series needs the form $(1 + x)$ with $|x| < 1$, and small. Pulling out the nearest perfect square, 100, leaves $x = -0.01$.",
+        },
+        {
+          text: "$(1 - 0.01)^{1/2} \\approx 1 + \\dfrac{-0.01}{2} - \\dfrac{(0.01)^2}{8} = 1 - 0.005 - 0.0000125 = 0.9949875$.\n*Why this step:* the next term, $\\frac{x^3}{16}$, is about $-6 \\times 10^{-8}$, even after multiplying by 10 far too small to affect 4 decimal places.",
+        },
+        {
+          text: "Multiply back by 10: $9.949875$.",
+        },
+      ],
+      answer: "$\\sqrt{99} \\approx 9.9499$. (True value: $9.9498743\\ldots$)",
+    },
+    {
+      type: "text",
+      content:
+        "Writing $\\sqrt{99} = \\sqrt{81 + 18} = 9(1 + \\frac{2}{9})^{1/2}$ also works, but $x = \\frac{2}{9}$ is much larger, so you would need many more terms. Pick the base that makes $x$ smallest.",
     },
     {
       type: "interactive",
@@ -1055,30 +1647,60 @@ const lesson05: LessonSeed = {
         window: { xmin: -1.5, xmax: 3, ymin: -0.5, ymax: 2.5 },
       },
     },
+    { type: "heading", text: "Coefficients of negative powers" },
     {
-      type: "text",
-      content:
-        "**Worked example 3.** Estimate $\\sqrt{1.02}$.\n\n**Step 1.** $x = 0.02$.\n**Step 2.** $1 + \\frac{0.02}{2} - \\frac{(0.02)^2}{8} = 1 + 0.01 - 0.00005 = 1.00995$.\n**Answer:** $\\sqrt{1.02} \\approx 1.01$ to 2 decimal places, or $1.00995$ with the correction. The true value is $1.0099505\\ldots$\n\nThis is the same rule as 5.4: $(1 + x)^n \\approx 1 + nx$, now with $n = \\frac{1}{2}$. A square root of \"1 plus a bit\" is \"1 plus half the bit\".",
+      type: "worked-example",
+      id: "pc5-5-we5",
+      title: "Worked example 4",
+      problem:
+        "Find the coefficient of $x^r$ in $(1 + x)^{-2}$.",
+      steps: [
+        {
+          text: "$\\dfrac{(-2)(-3)(-4)\\cdots(-2 - r + 1)}{r!} = \\dfrac{(-1)^r\\,(2 \\cdot 3 \\cdots (r+1))}{r!} = (-1)^r\\dfrac{(r+1)!}{r!}$.",
+        },
+      ],
+      answer: "$(-1)^r(r + 1)$, so $(1 + x)^{-2} = 1 - 2x + 3x^2 - 4x^3 + \\cdots$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3b (square root by hand).** Find $\\sqrt{99}$ to 4 decimal places.\n\n**Step 1.** $99 = 100(1 - 0.01)$, so $\\sqrt{99} = 10(1 - 0.01)^{1/2}$.\n*Why this step:* the series needs the form $(1 + x)$ with $|x| < 1$, and small. Pulling out the nearest perfect square, 100, leaves $x = -0.01$.\n**Step 2.** $(1 - 0.01)^{1/2} \\approx 1 + \\dfrac{-0.01}{2} - \\dfrac{(0.01)^2}{8} = 1 - 0.005 - 0.0000125 = 0.9949875$.\n*Why this step:* the next term, $\\frac{x^3}{16}$, is about $-6 \\times 10^{-8}$, even after multiplying by 10 far too small to affect 4 decimal places.\n**Step 3.** Multiply back by 10: $9.949875$.\n**Answer:** $\\sqrt{99} \\approx 9.9499$. (True value: $9.9498743\\ldots$)\n\nWriting $\\sqrt{99} = \\sqrt{81 + 18} = 9(1 + \\frac{2}{9})^{1/2}$ also works, but $x = \\frac{2}{9}$ is much larger, so you would need many more terms. Pick the base that makes $x$ smallest.",
+      type: "worked-example",
+      id: "pc5-5-we6",
+      title: "Worked example 4b (routine)",
+      problem:
+        "Expand $(1 + x)^{-3}$ up to $x^3$.",
+      steps: [
+        {
+          text: "$n = -3$, so the $x$ coefficient is $n = -3$.",
+        },
+        {
+          text: "$\\dfrac{n(n-1)}{2!} = \\dfrac{(-3)(-4)}{2} = 6$.",
+        },
+        {
+          text: "$\\dfrac{n(n-1)(n-2)}{3!} = \\dfrac{(-3)(-4)(-5)}{6} = -10$.\n*Why these steps:* each new coefficient takes one more factor, dropping by 1, and one more factor in the factorial. The number of negative factors decides the sign.",
+        },
+      ],
+      answer: "$(1 + x)^{-3} = 1 - 3x + 6x^2 - 10x^3 + \\cdots$ for $|x| < 1$. The sizes $1, 3, 6, 10$ are the triangular numbers $\\binom{r+2}{2}$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4.** Find the coefficient of $x^r$ in $(1 + x)^{-2}$.\n\n**Step 1.** $\\dfrac{(-2)(-3)(-4)\\cdots(-2 - r + 1)}{r!} = \\dfrac{(-1)^r\\,(2 \\cdot 3 \\cdots (r+1))}{r!} = (-1)^r\\dfrac{(r+1)!}{r!}$.\n**Answer:** $(-1)^r(r + 1)$, so $(1 + x)^{-2} = 1 - 2x + 3x^2 - 4x^3 + \\cdots$",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4b (routine).** Expand $(1 + x)^{-3}$ up to $x^3$.\n\n**Step 1.** $n = -3$, so the $x$ coefficient is $n = -3$.\n**Step 2.** $\\dfrac{n(n-1)}{2!} = \\dfrac{(-3)(-4)}{2} = 6$.\n**Step 3.** $\\dfrac{n(n-1)(n-2)}{3!} = \\dfrac{(-3)(-4)(-5)}{6} = -10$.\n*Why these steps:* each new coefficient takes one more factor, dropping by 1, and one more factor in the factorial. The number of negative factors decides the sign.\n**Answer:** $(1 + x)^{-3} = 1 - 3x + 6x^2 - 10x^3 + \\cdots$ for $|x| < 1$. The sizes $1, 3, 6, 10$ are the triangular numbers $\\binom{r+2}{2}$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4c (JEE style).** Find the coefficient of $x^4$ in $\\dfrac{1 + x}{(1 - x)^2}$, for $|x| < 1$.\n\n**Step 1.** $(1 - x)^{-2} = 1 + 2x + 3x^2 + 4x^3 + 5x^4 + \\cdots$, the coefficient of $x^r$ being $r + 1$.\n*Why this step:* this is Worked example 4 with $x$ replaced by $-x$, which turns every sign positive.\n**Step 2.** Multiply by $(1 + x)$. An $x^4$ comes either from $1 \\times 5x^4$ or from $x \\times 4x^3$.\n*Why this step:* like Vandermonde, the coefficient of a product is found by listing the ways the powers can add up to 4.\n**Step 3.** $5 + 4 = 9$.\n**Answer:** $9$. In general the coefficient of $x^r$ is $(r + 1) + r = 2r + 1$.\n**Check:** $\\frac{1 + x}{(1 - x)^2}$ at $x = 0.1$ is $\\frac{1.1}{0.81} = 1.3580\\ldots$, and $1 + 3(0.1) + 5(0.01) + 7(0.001) + 9(0.0001) = 1.3579$.",
+      type: "worked-example",
+      id: "pc5-5-we7",
+      title: "Worked example 4c (JEE style)",
+      problem:
+        "Find the coefficient of $x^4$ in $\\dfrac{1 + x}{(1 - x)^2}$, for $|x| < 1$.",
+      steps: [
+        {
+          text: "$(1 - x)^{-2} = 1 + 2x + 3x^2 + 4x^3 + 5x^4 + \\cdots$, the coefficient of $x^r$ being $r + 1$.\n*Why this step:* this is Worked example 4 with $x$ replaced by $-x$, which turns every sign positive.",
+        },
+        {
+          text: "Multiply by $(1 + x)$. An $x^4$ comes either from $1 \\times 5x^4$ or from $x \\times 4x^3$.\n*Why this step:* like Vandermonde, the coefficient of a product is found by listing the ways the powers can add up to 4.",
+        },
+        {
+          text: "$5 + 4 = 9$.",
+        },
+        {
+          text: "**Check:** $\\frac{1 + x}{(1 - x)^2}$ at $x = 0.1$ is $\\frac{1.1}{0.81} = 1.3580\\ldots$, and $1 + 3(0.1) + 5(0.01) + 7(0.001) + 9(0.0001) = 1.3579$.",
+        },
+      ],
+      answer: "$9$. In general the coefficient of $x^r$ is $(r + 1) + r = 2r + 1$.",
     },
     {
       type: "table",
@@ -1091,6 +1713,7 @@ const lesson05: LessonSeed = {
         ["$(1 - x)^{-1/2}$", "$1 + \\frac{x}{2} + \\frac{3x^2}{8} + \\frac{5x^3}{16} + \\cdots$"],
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc5-5-q1",
@@ -1223,9 +1846,31 @@ const lessonMastery: LessonSeed = {
       ],
     },
     {
+      type: "worked-example",
+      id: "pc5-6-we1",
+      title: "One exam problem, start to finish",
+      problem:
+        "The sum of the coefficients in the expansion of $(1 + 2x)^n$ is $6561$. Find the middle term.",
+      steps: [
+        {
+          text: "Sum of coefficients $= P(1) = 3^n$, so $3^n = 6561$.\n*Why this step:* \"sum of coefficients\" always means substitute $x = 1$ into the whole expression (5.1), not $2^n$.",
+        },
+        {
+          text: "$3^8 = 6561$, so $n = 8$.",
+        },
+        {
+          text: "With $n = 8$ there are 9 terms, and the middle one is $T_5$, which has $r = 4$.\n*Why this step:* for even $n$ the single middle term is $T_{n/2 + 1}$ (Chapter 4).",
+        },
+        {
+          text: "$T_5 = \\binom{8}{4}(2x)^4 = 70 \\times 16x^4 = 1120x^4$.",
+        },
+      ],
+      answer: "$1120x^4$",
+    },
+    {
       type: "text",
       content:
-        "**One exam problem, start to finish.** The sum of the coefficients in the expansion of $(1 + 2x)^n$ is $6561$. Find the middle term.\n\n**Step 1.** Sum of coefficients $= P(1) = 3^n$, so $3^n = 6561$.\n*Why this step:* \"sum of coefficients\" always means substitute $x = 1$ into the whole expression (5.1), not $2^n$.\n**Step 2.** $3^8 = 6561$, so $n = 8$.\n**Step 3.** With $n = 8$ there are 9 terms, and the middle one is $T_5$, which has $r = 4$.\n*Why this step:* for even $n$ the single middle term is $T_{n/2 + 1}$ (Chapter 4).\n**Step 4.** $T_5 = \\binom{8}{4}(2x)^4 = 70 \\times 16x^4 = 1120x^4$.\n**Answer:** $1120x^4$.\n\nTwo chapters in one question: Chapter 5 found $n$, Chapter 4 found the term. Many of the questions below work the same way.",
+        "Two chapters in one question: Chapter 5 found $n$, Chapter 4 found the term. Many of the questions below work the same way.",
     },
     {
       type: "quiz",

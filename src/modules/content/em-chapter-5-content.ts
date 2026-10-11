@@ -23,6 +23,14 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/em-5-induction-and-ac.mp4",
+      poster: "/videos/em-5-induction-and-ac.jpg",
+      title: "Chapter 5 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "Drop a strong magnet down a vertical copper pipe. Copper is not magnetic, the magnet touches nothing, and yet it drifts down slowly, as if falling through honey. Drop an unmagnetised steel slug of the same size and it drops straight through. Something in the copper is pushing back on the moving magnet, and only while it moves.",
@@ -32,6 +40,7 @@ const lesson01: LessonSeed = {
       content:
         "In 1831 Michael Faraday found the reason. A steady magnetic field near a loop of wire does nothing. But a **changing** field through the loop drives a current round it, as if a cell had been placed in the loop. The falling magnet changes the field through each ring of the copper pipe, currents swirl round the pipe, and those currents make their own field that opposes the magnet's motion.",
     },
+    { type: "heading", text: "Magnetic flux and Faraday's law" },
     {
       type: "text",
       content:
@@ -45,16 +54,18 @@ const lesson01: LessonSeed = {
       content:
         "Magnetic flux $\\Phi_B = BA\\cos\\theta$ (for a uniform field), unit the **weber**, $1\\text{ Wb} = 1$ T m².\nThe emf induced in a coil of $N$ turns is\n$\\mathcal E = -N\\dfrac{d\\Phi_B}{dt}$.\nThe flux can change because $B$ changes, because the area changes, or because the angle $\\theta$ changes (a rotating coil). Any of the three works.",
     },
+    { type: "heading", text: "Lenz's law: the minus sign" },
     {
       type: "text",
       content:
-        "**Lenz's law: the minus sign.** The induced current flows in the direction that **opposes the change** in flux that produced it. Push a magnet's N pole towards a loop and the loop's face towards the magnet becomes an N pole, repelling it. Pull the magnet away and that face becomes an S pole, attracting it back. Either way, you have to do work to move the magnet, and that work is exactly the energy that appears as heat in the loop.",
+        "The induced current flows in the direction that **opposes the change** in flux that produced it. Push a magnet's N pole towards a loop and the loop's face towards the magnet becomes an N pole, repelling it. Pull the magnet away and that face becomes an S pole, attracting it back. Either way, you have to do work to move the magnet, and that work is exactly the energy that appears as heat in the loop.",
     },
     {
       type: "text",
       content:
         "Why must it be this way? Suppose the sign were reversed: the approaching N pole induces an S face that **attracts** it. The magnet speeds up, the flux changes faster, the current grows, the attraction grows... Kinetic energy and heat would appear from nothing. Lenz's law is energy conservation applied to induction. It is also why the magnet drifts down the copper pipe: gravity's work goes into heating the pipe instead of speeding up the magnet.",
     },
+    { type: "heading", text: "Induced charge and emf graphs" },
     {
       type: "text",
       content:
@@ -90,15 +101,55 @@ const lesson01: LessonSeed = {
       content:
         "What you should have seen: from 3 s to 5 s the flux rises from $-3$ to $5$ Wb, a secant slope of 4 Wb/s, so the average emf is $-4$ V. As the second point closes in on 3 s the slope settles to $\\Phi'(3) = 2(3) - 4 = 2$ Wb/s: the instantaneous emf at 3 s is $-2$ V. At $t = 2$ s the flux is at its most negative, $-4$ Wb, yet the slope there is zero, and so is the emf.",
     },
+    { type: "heading", text: "Worked examples: induced emf and its direction" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (a collapsing field).** A 100-turn coil of area 0.01 m² sits perpendicular to a 0.5 T field. The field falls to zero in 0.1 s. Find the average emf.\n\n1. Flux per turn falls from $0.5\\times0.01 = 5\\times10^{-3}$ Wb to 0. *Why this step:* the coil is perpendicular to $\\vec B$, so $\\cos\\theta = 1$.\n2. $|\\mathcal E| = N\\dfrac{\\Delta\\Phi}{\\Delta t} = 100\\times\\dfrac{5\\times10^{-3}}{0.1} = 5$ V.\n\n**Worked example 2 (flipping a coil).** A 50-turn coil of area 0.02 m² and resistance 10 Ω lies perpendicular to a 0.4 T field. It is turned over (rotated through $180^\\circ$). How much charge flows?\n\n1. The flux per turn goes from $+BA$ to $-BA$: $|\\Delta\\Phi| = 2BA = 2\\times0.4\\times0.02 = 0.016$ Wb. *Why this step:* flipping reverses the flux, so the change is twice the flux, not the flux.\n2. $\\Delta q = \\dfrac{N|\\Delta\\Phi|}{R} = \\dfrac{50\\times0.016}{10} = 0.08$ C, however fast the flip.\n\n**Worked example 3 (reading emf from $\\Phi(t)$).** $\\Phi = t^2 - 4t$ Wb through a single loop.\n\n1. $\\mathcal E = -\\dfrac{d\\Phi}{dt} = -(2t - 4) = 4 - 2t$.\n2. At $t = 1$ s: $\\mathcal E = 2$ V. At $t = 2$ s: $\\mathcal E = 0$, even though $|\\Phi| = 4$ Wb is largest there. At $t = 3$ s: $\\mathcal E = -2$ V (the current reverses).",
+      type: "worked-example",
+      id: "em5-1-we1",
+      title: "Worked example 1: a collapsing field",
+      problem:
+        "A 100-turn coil of area 0.01 m² sits perpendicular to a 0.5 T field. The field falls to zero in 0.1 s. Find the average emf.",
+      steps: [
+        { text: "Flux per turn falls from $0.5\\times0.01 = 5\\times10^{-3}$ Wb to 0. *Why this step:* the coil is perpendicular to $\\vec B$, so $\\cos\\theta = 1$." },
+        { text: "$|\\mathcal E| = N\\dfrac{\\Delta\\Phi}{\\Delta t} = 100\\times\\dfrac{5\\times10^{-3}}{0.1} = 5$ V." },
+      ],
+      answer: "$|\\mathcal E| = 5$ V",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (Lenz direction).** A bar magnet is pushed N pole first towards a horizontal loop from above. Which way does the induced current flow, seen from above?\n\n1. The downward flux through the loop (field lines leave N and point down into the loop) is increasing. *Why this step:* Lenz's law is about the change, so identify the flux direction and whether it grows or shrinks.\n2. The induced current must create an **upward** field inside the loop to oppose the increase.\n3. By the grip rule, an upward field through a horizontal loop needs an **anticlockwise** current seen from above. The top face acts as an N pole, repelling the approaching magnet. ✓",
+      type: "worked-example",
+      id: "em5-1-we2",
+      title: "Worked example 2: flipping a coil",
+      problem:
+        "A 50-turn coil of area 0.02 m² and resistance 10 Ω lies perpendicular to a 0.4 T field. It is turned over (rotated through $180^\\circ$). How much charge flows?",
+      steps: [
+        { text: "The flux per turn goes from $+BA$ to $-BA$: $|\\Delta\\Phi| = 2BA = 2\\times0.4\\times0.02 = 0.016$ Wb. *Why this step:* flipping reverses the flux, so the change is twice the flux, not the flux." },
+        { text: "$\\Delta q = \\dfrac{N|\\Delta\\Phi|}{R} = \\dfrac{50\\times0.016}{10} = 0.08$ C, however fast the flip." },
+      ],
+      answer: "$\\Delta q = 0.08$ C",
+    },
+    {
+      type: "worked-example",
+      id: "em5-1-we3",
+      title: "Worked example 3: reading emf from $\\Phi(t)$",
+      problem:
+        "$\\Phi = t^2 - 4t$ Wb through a single loop. Find the emf as a function of $t$, and its value at $t = 1$, 2 and 3 s.",
+      steps: [
+        { text: "$\\mathcal E = -\\dfrac{d\\Phi}{dt} = -(2t - 4) = 4 - 2t$." },
+        { text: "At $t = 1$ s: $\\mathcal E = 2$ V. At $t = 2$ s: $\\mathcal E = 0$, even though $|\\Phi| = 4$ Wb is largest there. At $t = 3$ s: $\\mathcal E = -2$ V (the current reverses)." },
+      ],
+      answer: "$\\mathcal E = 4 - 2t$: 2 V at 1 s, 0 at 2 s, $-2$ V at 3 s",
+    },
+    {
+      type: "worked-example",
+      id: "em5-1-we4",
+      title: "Worked example 4: Lenz direction",
+      problem:
+        "A bar magnet is pushed N pole first towards a horizontal loop from above. Which way does the induced current flow, seen from above?",
+      steps: [
+        { text: "The downward flux through the loop (field lines leave N and point down into the loop) is increasing. *Why this step:* Lenz's law is about the change, so identify the flux direction and whether it grows or shrinks." },
+        { text: "The induced current must create an **upward** field inside the loop to oppose the increase." },
+        { text: "By the grip rule, an upward field through a horizontal loop needs an **anticlockwise** current seen from above. The top face acts as an N pole, repelling the approaching magnet. ✓" },
+      ],
+      answer: "Anticlockwise, seen from above",
     },
     {
       type: "callout",
@@ -107,16 +158,20 @@ const lesson01: LessonSeed = {
       content:
         "Faraday's law involves $d\\Phi/dt$, not $\\Phi$. A coil sitting still in the strongest MRI field has an enormous flux and zero emf. A coil in a weak field that is switched on and off rapidly can have a large emf. Only change matters, as Worked example 3 showed: the emf was zero exactly where the flux was largest in size.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em5-1-q1",
       variant: "practice",
-      question: "A 50-turn coil of area 0.02 m² is perpendicular to a magnetic field that rises steadily from 0 to 0.4 T in 0.2 s. The induced emf is",
-      options: [
-        { text: "0.04 V", feedback: "That is the emf of a single turn. Multiply by 50." },
-        { text: "0.4 V", feedback: "That is $N\\Delta\\Phi$ without dividing by the time 0.2 s." },
-        { text: "2 V", correct: true, feedback: "$N\\dfrac{\\Delta(BA)}{\\Delta t} = 50\\times\\dfrac{0.4\\times0.02}{0.2} = 2$ V." },
-        { text: "20 V", feedback: "Check the flux change per turn: $0.4\\times0.02 = 0.008$ Wb." },
+      question: "A 50-turn coil of area 0.02 m² is perpendicular to a magnetic field that rises steadily from 0 to 0.4 T in 0.2 s. What is the magnitude of the induced emf? Give your answer in volts.",
+      answer: 2,
+      unit: "V",
+      hint: "Find the flux change per turn, $\\Delta(BA)$, then use $\\mathcal E = N\\,\\Delta\\Phi/\\Delta t$.",
+      solution: "Flux change per turn: $\\Delta\\Phi = \\Delta B\\,A = 0.4\\times0.02 = 0.008$ Wb.\n\n$\\mathcal E = N\\dfrac{\\Delta\\Phi}{\\Delta t} = 50\\times\\dfrac{0.008}{0.2} = 2$ V.",
+      commonMistakes: [
+        { answer: 0.04, feedback: "That is the emf of a single turn. Multiply by 50." },
+        { answer: 0.4, feedback: "That is $N\\Delta\\Phi$ without dividing by the time 0.2 s." },
+        { answer: 20, feedback: "Check the flux change per turn: $0.4\\times0.02 = 0.008$ Wb." },
       ],
     },
     {
@@ -130,6 +185,7 @@ const lesson01: LessonSeed = {
         { text: "0.1 C the fast time, 1 C the slow time", feedback: "Charge through the coil does not depend on the time taken at all." },
         { text: "0.001 C both times", feedback: "Include all 100 turns: $N\\Delta\\Phi = 0.5$ Wb-turns." },
       ],
+      hint: "The charge that flows is $Q = N\\,\\Delta\\Phi/R$. Does the time taken appear in this formula?",
     },
     {
       type: "quiz",
@@ -142,19 +198,22 @@ const lesson01: LessonSeed = {
         { text: "clockwise, making the near face an N pole that pushes it further away", feedback: "That would help the change, creating energy from nothing. Lenz's law says the induced effect opposes the change." },
         { text: "clockwise, making the near face an S pole that attracts the magnet back", correct: true, feedback: "The N pole's field threads the loop pointing away from you, and that flux is falling. The induced current tries to keep it up, so it makes its own field pointing away from you: clockwise as you look. That face is an S pole, which attracts the retreating magnet." },
       ],
+      hint: "Use Lenz's law: the induced current opposes the change in flux. Decide whether the loop should attract or repel the departing magnet, then use the right-hand grip rule for the current's sense.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em5-1-q4",
       variant: "practice",
-      question: "The flux through a loop is $\\Phi = 5t^2 - 3t + 2$ milliwebers ($t$ in s). The magnitude of the emf at $t = 2$ s is",
-      options: [
-        { text: "16 mV", feedback: "That is the flux itself at $t = 2$ s. The emf is its rate of change." },
-        { text: "17 mV", correct: true, feedback: "$\\dfrac{d\\Phi}{dt} = 10t - 3 = 17$ mWb/s at $t = 2$ s." },
-        { text: "7 mV", feedback: "That is the slope at $t = 1$ s (and also the average rate from 0 to 2 s). The emf at $t = 2$ s is the instantaneous slope there." },
-        { text: "20 mV", feedback: "That is $10t$ alone; the $-3t$ term contributes $-3$ to the derivative." },
-      ],
+      question: "The flux through a loop is $\\Phi = 5t^2 - 3t + 2$ milliwebers ($t$ in s). What is the magnitude of the emf at $t = 2$ s? Give your answer in millivolts.",
+      answer: 17,
+      unit: "mV",
       hint: "Differentiate, then substitute.",
+      solution: "$|\\mathcal E| = \\dfrac{d\\Phi}{dt} = 10t - 3$ mWb/s. At $t = 2$ s this is $20 - 3 = 17$ mWb/s, that is, 17 mV.",
+      commonMistakes: [
+        { answer: 16, feedback: "That is the flux itself at $t = 2$ s. The emf is its rate of change." },
+        { answer: 7, feedback: "That is the slope at $t = 1$ s (and also the average rate from 0 to 2 s). The emf at $t = 2$ s is the instantaneous slope there." },
+        { answer: 20, feedback: "That is $10t$ alone; the $-3t$ term contributes $-3$ to the derivative." },
+      ],
     },
     {
       type: "quiz",
@@ -167,6 +226,22 @@ const lesson01: LessonSeed = {
         { text: "Newton's first law", feedback: "The opposition is sometimes described as \"electrical inertia\", but the law itself follows from energy conservation." },
         { text: "conservation of energy", correct: true, feedback: "If the induced current aided the change, energy would be created from nothing." },
       ],
+      hint: "Imagine the induced current helped the change instead of opposing it. What would happen to the energy of the system?",
+    },
+    {
+      type: "quiz",
+      id: "em5-1-q6",
+      variant: "practice",
+      multiple: true,
+      question: "A flat circular loop lies in a **uniform** magnetic field perpendicular to its plane, and the field fills all the space the loop moves through. In which of these cases is an emf induced in the loop? Select all that apply.",
+      options: [
+        { text: "The field strength is steadily increased.", correct: true, feedback: "$B$ changes, so $\\Phi = BA\\cos\\theta$ changes." },
+        { text: "The loop is rotated about one of its diameters.", correct: true, feedback: "The angle $\\theta$ between the field and the loop's normal changes, so $\\cos\\theta$ and the flux change." },
+        { text: "The loop slides sideways in its own plane, without turning.", feedback: "In a uniform field every position gives the same $BA$. No flux change, no emf." },
+        { text: "The loop is squeezed so that its area shrinks.", correct: true, feedback: "$A$ changes, so the flux changes. Changing area is as good as changing field." },
+        { text: "The loop spins about the axis through its centre perpendicular to its plane.", feedback: "That axis is parallel to $\\vec B$. Spinning about it leaves $B$, $A$ and $\\theta$ all unchanged, so the flux stays constant." },
+      ],
+      hint: "List the three things in $\\Phi = BA\\cos\\theta$ and ask which of them each motion changes.",
     },
   ]),
 };
@@ -181,6 +256,7 @@ const lesson02: LessonSeed = {
       content:
         "A metal rod slides across two rails in a magnetic field. Nothing about the field changes, yet a bulb connected across the rails lights up. Faraday's law says the flux through the circuit is changing because its **area** is growing. But you can also see the emf directly, from the force on the charges riding along inside the rod.",
     },
+    { type: "heading", text: "Two derivations of $Bvl$" },
     {
       type: "text",
       content:
@@ -199,11 +275,13 @@ const lesson02: LessonSeed = {
       content:
         "A straight conductor of length $l$ moving with speed $v$, with $\\vec l$, $\\vec v$ and $\\vec B$ mutually perpendicular: $\\mathcal E = Bvl$.\nIn general $\\mathcal E = (\\vec v\\times\\vec B)\\cdot\\vec l$: only the velocity component across the field, and the rod component along $\\vec v\\times\\vec B$, count.\nA rod of length $l$ rotating at $\\omega$ about one end, in a field along the axis: $\\mathcal E = \\tfrac12 B\\omega l^2$.",
     },
+    { type: "heading", text: "The rotating rod" },
     {
       type: "text",
       content:
-        "**The rotating rod.** A piece of the rod at distance $r$ from the pivot moves at $v = \\omega r$, so a length $dr$ of it contributes $B\\omega r\\,dr$. Adding from 0 to $l$: $\\mathcal E = \\int_0^l B\\omega r\\,dr = \\tfrac12 B\\omega l^2$. A metal disc spinning about its axis (Faraday's disc) behaves like many such rods in parallel, with emf $\\tfrac12 B\\omega R^2$ between centre and rim.",
+        "A piece of the rod at distance $r$ from the pivot moves at $v = \\omega r$, so a length $dr$ of it contributes $B\\omega r\\,dr$. Adding from 0 to $l$: $\\mathcal E = \\int_0^l B\\omega r\\,dr = \\tfrac12 B\\omega l^2$. A metal disc spinning about its axis (Faraday's disc) behaves like many such rods in parallel, with emf $\\tfrac12 B\\omega R^2$ between centre and rim.",
     },
+    { type: "heading", text: "Magnetic braking: rails and eddy currents" },
     {
       type: "text",
       content:
@@ -240,15 +318,56 @@ const lesson02: LessonSeed = {
       content:
         "**Eddy currents.** In a solid sheet of metal moving through a field, there is no wire to guide the current, so induced currents swirl in closed loops within the metal: **eddy currents**. They heat the metal and, by Lenz's law, oppose the motion. Uses: magnetic braking in trains, damping the needle of a galvanometer, induction cooktops and furnaces. Nuisance: they waste energy in transformer cores, which is why cores are **laminated** (thin insulated sheets break up the eddy loops).",
     },
+    { type: "heading", text: "Worked examples: terminal and coasting rods" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (terminal speed).** A rod of mass 0.01 kg and length 0.2 m falls on vertical rails joined by a 1 Ω resistor in a horizontal 0.5 T field. ($g = 10$ m/s²)\n\n1. At terminal speed the magnetic force balances the weight: $\\dfrac{B^2l^2v_t}{R} = mg$. *Why this step:* terminal means no acceleration, so forces balance.\n2. $v_t = \\dfrac{0.01\\times10\\times1}{0.25\\times0.04} = \\dfrac{0.1}{0.01} = 10$ m/s.\n3. Energy check: $I = \\dfrac{Bv_tl}{R} = \\dfrac{0.5\\times10\\times0.2}{1} = 1$ A, so $I^2R = 1$ W, and gravity delivers $mgv_t = 0.1\\times10 = 1$ W. ✓\n\n**Worked example 2 (rotating rod).** A 1 m rod rotates at 50 rad/s about one end in a 0.2 T field parallel to the rotation axis.\n\n1. $\\mathcal E = \\tfrac12 B\\omega l^2 = \\tfrac12\\times0.2\\times50\\times1 = 5$ V between the pivot and the tip.",
+      type: "worked-example",
+      id: "em5-2-we1",
+      title: "Worked example 1: terminal speed",
+      problem:
+        "A rod of mass 0.01 kg and length 0.2 m falls on vertical rails joined by a 1 Ω resistor in a horizontal 0.5 T field. ($g = 10$ m/s²) Find its terminal speed.",
+      steps: [
+        { text: "At terminal speed the magnetic force balances the weight: $\\dfrac{B^2l^2v_t}{R} = mg$. *Why this step:* terminal means no acceleration, so forces balance." },
+        { text: "$v_t = \\dfrac{0.01\\times10\\times1}{0.25\\times0.04} = \\dfrac{0.1}{0.01} = 10$ m/s." },
+        { text: "Energy check: $I = \\dfrac{Bv_tl}{R} = \\dfrac{0.5\\times10\\times0.2}{1} = 1$ A, so $I^2R = 1$ W, and gravity delivers $mgv_t = 0.1\\times10 = 1$ W. ✓" },
+      ],
+      answer: "$v_t = 10$ m/s",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (a rod coasting to rest).** A rod of mass 0.1 kg is launched at $v_0 = 2$ m/s along horizontal rails 0.5 m apart, joined by a 2 Ω resistor, in a vertical 1 T field. How far does it travel?\n\n1. Newton's law: $m\\dfrac{dv}{dt} = -\\dfrac{B^2l^2v}{R}$.\n2. Write $\\dfrac{dv}{dt} = v\\dfrac{dv}{dx}$ and cancel $v$: $m\\,dv = -\\dfrac{B^2l^2}{R}\\,dx$. *Why this step:* the question asks for distance, so change the variable from time to position.\n3. Integrate from $v_0$ to 0: $x = \\dfrac{mv_0R}{B^2l^2} = \\dfrac{0.1\\times2\\times2}{1\\times0.25} = 1.6$ m.\n4. The heat generated is all the initial kinetic energy, $\\tfrac12\\times0.1\\times4 = 0.2$ J.\n\n**Worked example 4 (an aircraft).** An aircraft with a 30 m wingspan flies horizontally at 250 m/s where the vertical component of the Earth's field is $4\\times10^{-5}$ T.\n\n1. The wings cut the vertical component: $\\mathcal E = B_Vvl = 4\\times10^{-5}\\times250\\times30 = 0.3$ V between the wingtips.\n2. No current flows along the wings (there is no closed circuit), but the emf is real.",
+      type: "worked-example",
+      id: "em5-2-we2",
+      title: "Worked example 2: rotating rod",
+      problem:
+        "A 1 m rod rotates at 50 rad/s about one end in a 0.2 T field parallel to the rotation axis. Find the emf between the pivot and the tip.",
+      steps: [
+        { text: "$\\mathcal E = \\tfrac12 B\\omega l^2 = \\tfrac12\\times0.2\\times50\\times1 = 5$ V between the pivot and the tip." },
+      ],
+      answer: "$\\mathcal E = 5$ V between the pivot and the tip",
+    },
+    {
+      type: "worked-example",
+      id: "em5-2-we3",
+      title: "Worked example 3: a rod coasting to rest",
+      problem:
+        "A rod of mass 0.1 kg is launched at $v_0 = 2$ m/s along horizontal rails 0.5 m apart, joined by a 2 Ω resistor, in a vertical 1 T field. How far does it travel?",
+      steps: [
+        { text: "Newton's law: $m\\dfrac{dv}{dt} = -\\dfrac{B^2l^2v}{R}$." },
+        { text: "Write $\\dfrac{dv}{dt} = v\\dfrac{dv}{dx}$ and cancel $v$: $m\\,dv = -\\dfrac{B^2l^2}{R}\\,dx$. *Why this step:* the question asks for distance, so change the variable from time to position." },
+        { text: "Integrate from $v_0$ to 0: $x = \\dfrac{mv_0R}{B^2l^2} = \\dfrac{0.1\\times2\\times2}{1\\times0.25} = 1.6$ m." },
+        { text: "The heat generated is all the initial kinetic energy, $\\tfrac12\\times0.1\\times4 = 0.2$ J." },
+      ],
+      answer: "$x = 1.6$ m (and 0.2 J of heat)",
+    },
+    {
+      type: "worked-example",
+      id: "em5-2-we4",
+      title: "Worked example 4: an aircraft",
+      problem:
+        "An aircraft with a 30 m wingspan flies horizontally at 250 m/s where the vertical component of the Earth's field is $4\\times10^{-5}$ T. Find the emf between the wingtips.",
+      steps: [
+        { text: "The wings cut the vertical component: $\\mathcal E = B_Vvl = 4\\times10^{-5}\\times250\\times30 = 0.3$ V between the wingtips." },
+        { text: "No current flows along the wings (there is no closed circuit), but the emf is real." },
+      ],
+      answer: "$0.3$ V between the wingtips",
     },
     {
       type: "callout",
@@ -257,6 +376,7 @@ const lesson02: LessonSeed = {
       content:
         "The emf comes from $q\\vec v\\times\\vec B$ acting on the charges in the moving conductor, circuit or no circuit. In an isolated rod, charges pile up at the ends until their electric field balances the magnetic push; then a voltmeter across the ends reads $Bvl$. A closed circuit is needed only for a **steady current**.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "em5-2-q1",
@@ -268,29 +388,36 @@ const lesson02: LessonSeed = {
         { text: "0.5 V", feedback: "The factor $\\tfrac12$ belongs to a rotating rod. Every point of a sliding rod moves at the same speed." },
         { text: "Zero, since the rod is not part of a circuit", feedback: "The emf exists in the moving rod whether or not current flows." },
       ],
+      hint: "Use $\\mathcal E = Bvl$ for a rod, velocity and field that are mutually perpendicular. Recall the misconception box about closed circuits.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em5-2-q2",
       variant: "practice",
-      question: "A 0.5 m rod rotates about one end at 20 rad/s in a 0.4 T field parallel to the rotation axis. The emf between its ends is",
-      options: [
-        { text: "2 V", feedback: "You left out the $\\tfrac12$: different parts of the rod move at different speeds, averaging half the tip speed." },
-        { text: "4 V", feedback: "That is $B\\omega l = 0.4\\times20\\times0.5$. The length must appear squared (once in the tip speed $\\omega l$, once as the rod's length), with the factor $\\tfrac12$ from averaging the speed along the rod." },
-        { text: "1 V", correct: true, feedback: "$\\tfrac12 B\\omega l^2 = \\tfrac12\\times0.4\\times20\\times0.25 = 1$ V." },
-        { text: "0.5 V", feedback: "Check: $\\omega l^2 = 20\\times0.25 = 5$, and $\\tfrac12\\times0.4\\times5 = 1$ V." },
+      question: "A 0.5 m rod rotates about one end at 20 rad/s in a 0.4 T field parallel to the rotation axis. What is the emf between its ends? Give your answer in volts.",
+      answer: 1,
+      unit: "V",
+      hint: "Different points of the rod move at different speeds, from 0 at the pivot to $\\omega l$ at the tip.",
+      solution: "The speed along the rod averages half the tip speed, so $\\mathcal E = \\tfrac12 B\\omega l^2$.\n\n$\\mathcal E = \\tfrac12\\times0.4\\times20\\times0.5^2 = \\tfrac12\\times0.4\\times5 = 1$ V.",
+      commonMistakes: [
+        { answer: 2, feedback: "You left out the $\\tfrac12$: different parts of the rod move at different speeds, averaging half the tip speed." },
+        { answer: 4, feedback: "That is $B\\omega l = 0.4\\times20\\times0.5$. The length must appear squared (once in the tip speed $\\omega l$, once as the rod's length), with the factor $\\tfrac12$ from averaging the speed along the rod." },
+        { answer: 0.5, feedback: "Check: $\\omega l^2 = 20\\times0.25 = 5$, and $\\tfrac12\\times0.4\\times5 = 1$ V." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em5-2-q3",
       variant: "practice",
-      question: "A 0.2 m rod slides at a steady 5 m/s on rails joined by a 0.5 Ω resistor, in a 1 T field perpendicular to the plane. The force needed to keep it moving is",
-      options: [
-        { text: "0.4 N", correct: true, feedback: "$\\mathcal E = 1$ V, $I = 2$ A, $F = BIl = 1\\times2\\times0.2 = 0.4$ N. Check: $Fv = 2$ W $= I^2R$." },
-        { text: "Zero, since the speed is constant", feedback: "Constant speed means zero **net** force. The magnetic drag must be balanced by an applied force." },
-        { text: "2 N", feedback: "That is the current in amperes. Force is $BIl$." },
-        { text: "0.08 N", feedback: "Check the current: $I = \\mathcal E/R = 1/0.5 = 2$ A." },
+      question: "A 0.2 m rod slides at a steady 5 m/s on rails joined by a 0.5 Ω resistor, in a 1 T field perpendicular to the plane. What force is needed to keep it moving? Give your answer in newtons.",
+      answer: 0.4,
+      unit: "N",
+      hint: "Find the emf $Bvl$, then the current, then the magnetic drag $BIl$ that the applied force must balance.",
+      solution: "$\\mathcal E = Bvl = 1\\times5\\times0.2 = 1$ V, so $I = \\mathcal E/R = 1/0.5 = 2$ A.\n\nThe drag is $F = BIl = 1\\times2\\times0.2 = 0.4$ N, and at steady speed the applied force equals it. Check: $Fv = 2$ W $= I^2R$.",
+      commonMistakes: [
+        { answer: 0, feedback: "Constant speed means zero **net** force. The magnetic drag must be balanced by an applied force." },
+        { answer: 2, feedback: "That is the current in amperes. Force is $BIl$." },
+        { answer: 0.08, feedback: "Check the current: $I = \\mathcal E/R = 1/0.5 = 2$ A." },
       ],
     },
     {
@@ -304,6 +431,7 @@ const lesson02: LessonSeed = {
         { text: "twice as large", feedback: "A stronger field brakes harder, so the terminal speed drops." },
         { text: "unchanged", feedback: "The braking force depends on $B^2$." },
       ],
+      hint: "At terminal speed the magnetic force $B^2l^2v/R$ balances $mg$, as in Worked example 1. See how $v$ depends on $B$.",
     },
     {
       type: "quiz",
@@ -316,6 +444,7 @@ const lesson02: LessonSeed = {
         { text: "To increase hysteresis loss", feedback: "Hysteresis loss is reduced by choosing soft iron; nobody wants to increase it." },
         { text: "To break up eddy-current loops and reduce the heat they waste", correct: true, feedback: "Insulating layers cut the paths the eddy currents would take, shrinking the loss." },
       ],
+      hint: "Think about what a changing flux induces in a solid block of metal, and how cutting it into thin insulated sheets affects those induced current loops.",
     },
   ]),
 };
@@ -330,10 +459,11 @@ const lesson03: LessonSeed = {
       content:
         "Pull the plug of a vacuum cleaner while it is running and you may see a spark jump at the socket. The motor's coils were carrying a current, and that current made a magnetic field threading the coils themselves. When the current collapses, so does the flux, and by Faraday's law the collapsing flux induces a large emf in the very coil that produced it. A coil reacts to changes in its **own** current.",
     },
+    { type: "heading", text: "Self-inductance" },
     {
       type: "text",
       content:
-        "**Self-inductance.** A current $I$ in a coil makes a field proportional to $I$, so the total flux through its $N$ turns (the flux linkage) is also proportional to $I$. The constant is the coil's self-inductance $L$:",
+        "A current $I$ in a coil makes a field proportional to $I$, so the total flux through its $N$ turns (the flux linkage) is also proportional to $I$. The constant is the coil's self-inductance $L$:",
     },
     { type: "math", latex: "N\\Phi = LI \\quad\\Longrightarrow\\quad \\mathcal E = -\\frac{d(N\\Phi)}{dt} = -L\\,\\frac{dI}{dt}" },
     {
@@ -343,10 +473,11 @@ const lesson03: LessonSeed = {
       content:
         "**Self-inductance** $L$: flux linkage per unit current, $N\\Phi = LI$. The back emf is $\\mathcal E = -L\\,dI/dt$. Unit: the henry, $1\\text{ H} = 1$ Wb/A $= 1$ V s/A.\n**Mutual inductance** $M$: flux linked with coil 2 per unit current in coil 1, $N_2\\Phi_2 = MI_1$, so $\\mathcal E_2 = -M\\,dI_1/dt$. $M$ is the same whichever coil carries the current.\nLike capacitance, both depend only on geometry and the core material.",
     },
+    { type: "heading", text: "Inductance of a long solenoid" },
     {
       type: "text",
       content:
-        "**L of a long solenoid.** With $n = N/l$ turns per metre, cross-section $A$ and length $l$, the field inside is $B = \\mu_0 nI$ (4.4). The flux linkage is $N\\Phi = (nl)(\\mu_0 nI)A$, so",
+        "With $n = N/l$ turns per metre, cross-section $A$ and length $l$, the field inside is $B = \\mu_0 nI$ (4.4). The flux linkage is $N\\Phi = (nl)(\\mu_0 nI)A$, so",
     },
     { type: "math", latex: "L = \\mu_0 n^2 A l = \\frac{\\mu_0 N^2 A}{l}" },
     {
@@ -378,10 +509,11 @@ const lesson03: LessonSeed = {
       content:
         "What you should have seen: 500 turns give about 0.63 mH, and 1000 turns give about 2.5 mH, four times as much. Doubling the turns quadruples the inductance.",
     },
+    { type: "heading", text: "Energy stored in an inductor" },
     {
       type: "text",
       content:
-        "**Energy stored.** To build up the current, the source must push against the back emf $L\\,dI/dt$. The power it supplies is $P = \\mathcal E I = LI\\,\\dfrac{dI}{dt}$, so the work to go from 0 to $I$ is",
+        "To build up the current, the source must push against the back emf $L\\,dI/dt$. The power it supplies is $P = \\mathcal E I = LI\\,\\dfrac{dI}{dt}$, so the work to go from 0 to $I$ is",
     },
     { type: "math", latex: "U = \\int_0^I LI'\\,dI' = \\tfrac12 LI^2" },
     {
@@ -389,15 +521,63 @@ const lesson03: LessonSeed = {
       content:
         "This is the magnetic twin of $\\tfrac12 CV^2$ (and of $\\tfrac12 mv^2$: $L$ plays the part of mass, resisting changes in current as mass resists changes in velocity). For a solenoid, $\\tfrac12LI^2 = \\tfrac12\\mu_0n^2I^2(Al) = \\dfrac{B^2}{2\\mu_0}(Al)$, so the field itself stores energy with density $u_B = \\dfrac{B^2}{2\\mu_0}$, just as the electric field stores $\\tfrac12\\varepsilon_0E^2$.\n\n**Combinations** (no mutual coupling). In series the back emfs add, so $L = L_1 + L_2$. In parallel the same emf drives both and the rates of change add, so $\\dfrac1L = \\dfrac1{L_1} + \\dfrac1{L_2}$. Inductors combine like resistors.",
     },
+    { type: "heading", text: "Worked examples: solenoids and mutual inductance" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (a solenoid).** Find $L$ for a 500-turn air-cored solenoid, 0.5 m long, with cross-section $10^{-3}$ m².\n\n1. $L = \\dfrac{\\mu_0 N^2A}{l} = \\dfrac{4\\pi\\times10^{-7}\\times250\\,000\\times10^{-3}}{0.5}$.\n2. $250\\,000\\times10^{-3}/0.5 = 500$, so $L = 4\\pi\\times10^{-7}\\times500 \\approx 6.3\\times10^{-4}$ H $= 0.63$ mH. *Why this step:* grouping the powers of ten first keeps the arithmetic safe.\n\n**Worked example 2 (back emf).** The current in a 50 mH coil changes by 2 A in 1 ms.\n\n1. $|\\mathcal E| = L\\dfrac{\\Delta I}{\\Delta t} = 0.05\\times\\dfrac{2}{10^{-3}} = 100$ V. A small inductor and a quick change give a large voltage: the spark at the plug.\n\n**Worked example 3 (energy).** How much energy does the 50 mH coil store at 2 A?\n\n1. $U = \\tfrac12 LI^2 = \\tfrac12\\times0.05\\times4 = 0.1$ J.",
+      type: "worked-example",
+      id: "em5-3-we1",
+      title: "Worked example 1: a solenoid",
+      problem:
+        "Find $L$ for a 500-turn air-cored solenoid, 0.5 m long, with cross-section $10^{-3}$ m².",
+      steps: [
+        { text: "$L = \\dfrac{\\mu_0 N^2A}{l} = \\dfrac{4\\pi\\times10^{-7}\\times250\\,000\\times10^{-3}}{0.5}$." },
+        { text: "$250\\,000\\times10^{-3}/0.5 = 500$, so $L = 4\\pi\\times10^{-7}\\times500 \\approx 6.3\\times10^{-4}$ H $= 0.63$ mH. *Why this step:* grouping the powers of ten first keeps the arithmetic safe." },
+      ],
+      answer: "$L \\approx 0.63$ mH",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (mutual inductance).** A long solenoid with 1000 turns per metre is wound over a coaxial inner solenoid with 2000 turns per metre, cross-section $10^{-3}$ m² and length 0.5 m. Find $M$.\n\n1. $M = \\mu_0n_1n_2Al = 4\\pi\\times10^{-7}\\times1000\\times2000\\times10^{-3}\\times0.5$. *Why this step:* the outer field is uniform over the inner coil's area, and it threads every one of the inner coil's $n_2l$ turns.\n2. $n_1n_2Al = 2\\times10^6\\times10^{-3}\\times0.5 = 1000$, so $M = 4\\pi\\times10^{-4} \\approx 1.26$ mH.\n\n**Worked example 5 (energy density).** Find the energy density in a 1 T field.\n\n1. $u_B = \\dfrac{B^2}{2\\mu_0} = \\dfrac{1}{2\\times4\\pi\\times10^{-7}} \\approx 4.0\\times10^5$ J/m³. A strong magnetic field stores a lot of energy per cubic metre.",
+      type: "worked-example",
+      id: "em5-3-we2",
+      title: "Worked example 2: back emf",
+      problem:
+        "The current in a 50 mH coil changes by 2 A in 1 ms. Find the size of the back emf.",
+      steps: [
+        { text: "$|\\mathcal E| = L\\dfrac{\\Delta I}{\\Delta t} = 0.05\\times\\dfrac{2}{10^{-3}} = 100$ V. A small inductor and a quick change give a large voltage: the spark at the plug." },
+      ],
+      answer: "$|\\mathcal E| = 100$ V",
+    },
+    {
+      type: "worked-example",
+      id: "em5-3-we3",
+      title: "Worked example 3: energy",
+      problem:
+        "How much energy does the 50 mH coil store at 2 A?",
+      steps: [
+        { text: "$U = \\tfrac12 LI^2 = \\tfrac12\\times0.05\\times4 = 0.1$ J." },
+      ],
+      answer: "$U = 0.1$ J",
+    },
+    {
+      type: "worked-example",
+      id: "em5-3-we4",
+      title: "Worked example 4: mutual inductance",
+      problem:
+        "A long solenoid with 1000 turns per metre is wound over a coaxial inner solenoid with 2000 turns per metre, cross-section $10^{-3}$ m² and length 0.5 m. Find $M$.",
+      steps: [
+        { text: "$M = \\mu_0n_1n_2Al = 4\\pi\\times10^{-7}\\times1000\\times2000\\times10^{-3}\\times0.5$. *Why this step:* the outer field is uniform over the inner coil's area, and it threads every one of the inner coil's $n_2l$ turns." },
+        { text: "$n_1n_2Al = 2\\times10^6\\times10^{-3}\\times0.5 = 1000$, so $M = 4\\pi\\times10^{-4} \\approx 1.26$ mH." },
+      ],
+      answer: "$M \\approx 1.26$ mH",
+    },
+    {
+      type: "worked-example",
+      id: "em5-3-we5",
+      title: "Worked example 5: energy density",
+      problem:
+        "Find the energy density in a 1 T field.",
+      steps: [
+        { text: "$u_B = \\dfrac{B^2}{2\\mu_0} = \\dfrac{1}{2\\times4\\pi\\times10^{-7}} \\approx 4.0\\times10^5$ J/m³. A strong magnetic field stores a lot of energy per cubic metre." },
+      ],
+      answer: "$u_B \\approx 4.0\\times10^5$ J/m³",
     },
     {
       type: "callout",
@@ -406,6 +586,7 @@ const lesson03: LessonSeed = {
       content:
         "An ideal inductor has no resistance and happily carries any steady current with zero voltage across it. What it opposes is a **change** in current: $\\mathcal E = -L\\,dI/dt$ is zero when $I$ is constant. It resists speeding up the current and it resists slowing it down, which is why breaking an inductive circuit makes a spark.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "em5-3-q1",
@@ -417,17 +598,21 @@ const lesson03: LessonSeed = {
         { text: "0.25 J", feedback: "That is the energy $\\tfrac12 LI^2$ at 5 A, not an emf." },
         { text: "1000 V", feedback: "Check the units: 20 mH is 0.02 H." },
       ],
+      hint: "Use $\\mathcal E = L\\,|\\Delta I/\\Delta t|$ with $L$ in henries.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em5-3-q2",
       variant: "practice",
-      question: "A 0.4 H inductor carries 2 A. The energy stored in it is",
-      options: [
-        { text: "1.6 J", feedback: "You left out the $\\tfrac12$." },
-        { text: "0.4 J", feedback: "That uses $I$ instead of $I^2$." },
-        { text: "0.8 J", correct: true, feedback: "$\\tfrac12\\times0.4\\times2^2 = 0.8$ J." },
-        { text: "Zero, since the current is steady", feedback: "A steady current means no emf, but the magnetic field still stores energy." },
+      question: "A 0.4 H inductor carries a steady 2 A. How much energy is stored in it? Give your answer in joules.",
+      answer: 0.8,
+      unit: "J",
+      hint: "The magnetic energy of an inductor is $\\tfrac12 LI^2$.",
+      solution: "$U = \\tfrac12 LI^2 = \\tfrac12\\times0.4\\times2^2 = 0.8$ J.",
+      commonMistakes: [
+        { answer: 1.6, feedback: "You left out the $\\tfrac12$." },
+        { answer: 0.4, feedback: "That uses $I$ instead of $I^2$." },
+        { answer: 0, feedback: "A steady current means no emf, but the magnetic field still stores energy." },
       ],
     },
     {
@@ -441,6 +626,7 @@ const lesson03: LessonSeed = {
         { text: "four times as large", correct: true, feedback: "$L = \\mu_0 N^2A/l \\propto N^2$." },
         { text: "half as large", feedback: "More turns mean more flux linkage per ampere, so more inductance." },
       ],
+      hint: "Use $L = \\mu_0n^2Al$ (inductance of a long solenoid). How does $n$ change, and how does $L$ depend on it?",
     },
     {
       type: "quiz",
@@ -453,18 +639,37 @@ const lesson03: LessonSeed = {
         { text: "0.05 V", feedback: "Multiply by the rate of change, 40 A/s." },
         { text: "Zero, because the second coil carries no current", feedback: "The emf is induced whether or not the second coil is connected to anything." },
       ],
+      hint: "Use $\\mathcal E_2 = M\\,dI_1/dt$, as in Worked example 4.",
+    },
+    {
+      type: "numeric",
+      id: "em5-3-q5",
+      variant: "practice",
+      question: "Inductors of 2 mH and 3 mH, far apart (no mutual coupling), are connected in parallel. What is the equivalent inductance? Give your answer in millihenries.",
+      answer: 1.2,
+      unit: "mH",
+      hint: "Uncoupled inductors combine like resistors.",
+      solution: "In parallel, $\\dfrac{1}{L} = \\dfrac{1}{L_1} + \\dfrac{1}{L_2}$, so $L = \\dfrac{L_1L_2}{L_1 + L_2} = \\dfrac{2\\times3}{2 + 3} = 1.2$ mH.",
+      commonMistakes: [
+        { answer: 5, feedback: "That is the series combination." },
+        { answer: 0.83, tolerance: 0.01, feedback: "That is $\\tfrac12 + \\tfrac13$ without flipping: $1/L = 0.83$, so $L = 1.2$ mH." },
+        { answer: 6, feedback: "That is the product, not product over sum." },
+      ],
     },
     {
       type: "quiz",
-      id: "em5-3-q5",
+      id: "em5-3-q6",
       variant: "practice",
-      question: "Inductors of 2 mH and 3 mH, far apart (no mutual coupling), are connected in parallel. The equivalent inductance is",
+      multiple: true,
+      question: "The self-inductance of a long solenoid depends on which of these? Select all that apply.",
       options: [
-        { text: "5 mH", feedback: "That is the series combination." },
-        { text: "0.83 mH", feedback: "That is $\\tfrac12 + \\tfrac13$ without flipping: $1/L = 0.83$, so $L = 1.2$ mH." },
-        { text: "6 mH", feedback: "That is the product, not product over sum." },
-        { text: "1.2 mH", correct: true, feedback: "$\\dfrac{2\\times3}{2 + 3} = 1.2$ mH: inductors combine like resistors." },
+        { text: "The number of turns", correct: true, feedback: "$L = \\mu_0\\mu_r N^2A/l$ grows as $N^2$." },
+        { text: "Its cross-sectional area", correct: true, feedback: "A larger area links more flux per ampere: $L \\propto A$." },
+        { text: "The current flowing in it", feedback: "The flux is proportional to the current, so the ratio $L = N\\Phi/I$ does not depend on $I$ (for a core that is not saturated)." },
+        { text: "The rate at which the current changes", feedback: "$dI/dt$ sets the size of the back emf, $L\\,dI/dt$, not $L$ itself." },
+        { text: "The material of its core", correct: true, feedback: "An iron core replaces $\\mu_0$ by $\\mu_0\\mu_r$ and raises $L$ by hundreds or thousands." },
       ],
+      hint: "$L$ is fixed by geometry and material, like $C$ for a capacitor.",
     },
   ]),
 };
@@ -479,6 +684,7 @@ const lesson04: LessonSeed = {
       content:
         "In Chapter 2 you saw a capacitor charge through a resistor, its voltage rising along a curve with time constant $RC$. An inductor does the mirror-image thing with **current**. Switch on a battery in series with an inductor and a resistor, and the current cannot jump to $\\mathcal E/R$: the inductor's back emf holds it back, and it creeps up exponentially.",
     },
+    { type: "heading", text: "Growth and decay of current" },
     {
       type: "text",
       content:
@@ -536,10 +742,11 @@ const lesson04: LessonSeed = {
       content:
         "What you should have seen: the current does not drop to zero at once; the inductor's stored energy $\\tfrac12LI_0^2$ keeps it going, and it is dissipated in $R$ over a few $\\tau$. **Why opening a switch sparks:** if you simply break the circuit, there is no $R$ to carry the current; $di/dt$ becomes huge, so $L\\,di/dt$ becomes a very large voltage across the gap, enough to ionise the air.",
     },
+    { type: "heading", text: "LC oscillations" },
     {
       type: "text",
       content:
-        "**LC oscillations.** Charge a capacitor to $Q_0$ and connect it across an ideal inductor. The capacitor starts to discharge, but the inductor makes the current build up gradually; when the capacitor is empty the current is at its largest, and the inductor keeps it flowing, charging the capacitor the other way. KVL, with $i = dq/dt$:",
+        "Charge a capacitor to $Q_0$ and connect it across an ideal inductor. The capacitor starts to discharge, but the inductor makes the current build up gradually; when the capacitor is empty the current is at its largest, and the inductor keeps it flowing, charging the capacitor the other way. KVL, with $i = dq/dt$:",
     },
     {
       type: "math",
@@ -551,15 +758,55 @@ const lesson04: LessonSeed = {
         "This is simple harmonic motion: the equation of a mass on a spring, with $q \\leftrightarrow x$, $L \\leftrightarrow m$ and $1/C \\leftrightarrow k$. The current is $i = -\\omega Q_0\\sin\\omega t$, with amplitude $I_0 = \\omega Q_0$. The energy sloshes between the capacitor's electric field and the inductor's magnetic field, and the total stays fixed:",
     },
     { type: "math", latex: "\\frac{q^2}{2C} + \\frac12Li^2 = \\frac{Q_0^2}{2C} = \\frac12LI_0^2" },
+    { type: "heading", text: "Worked examples: LR growth and LC energy" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (growth).** A coil with $L = 0.5$ H and $R = 10\\ \\Omega$ is connected to a 20 V battery. Find $\\tau$, the final current, and the current after $2\\tau$.\n\n1. $\\tau = L/R = 0.05$ s $= 50$ ms. Final current $\\mathcal E/R = 2$ A.\n2. $i(2\\tau) = 2(1 - e^{-2}) = 2\\times0.865 \\approx 1.73$ A. *Why this step:* $e^{-2} \\approx 0.135$ is worth remembering, as is $e^{-1} \\approx 0.368$.\n\n**Worked example 2 (just after, long after).** An ideal 12 V battery is in series with $R_1 = 2\\ \\Omega$, followed by two parallel branches: $R_2 = 6\\ \\Omega$, and an ideal inductor in series with $R_3 = 3\\ \\Omega$. Find the battery current just after the switch closes and long after.\n\n1. Just after: the inductor carries no current (open circuit). The battery sees $2 + 6 = 8\\ \\Omega$: $I = 1.5$ A. *Why this step:* the inductor's current cannot jump from its value before the switch closed, which was zero.\n2. Long after: the inductor is a wire, so its branch is 3 Ω. $6\\parallel3 = 2\\ \\Omega$; total $4\\ \\Omega$; $I = 3$ A.\n3. The voltage across the parallel pair is then $3\\times2 = 6$ V, so the inductor branch carries $6/3 = 2$ A.",
+      type: "worked-example",
+      id: "em5-4-we1",
+      title: "Worked example 1: growth",
+      problem:
+        "A coil with $L = 0.5$ H and $R = 10\\ \\Omega$ is connected to a 20 V battery. Find $\\tau$, the final current, and the current after $2\\tau$.",
+      steps: [
+        { text: "$\\tau = L/R = 0.05$ s $= 50$ ms. Final current $\\mathcal E/R = 2$ A." },
+        { text: "$i(2\\tau) = 2(1 - e^{-2}) = 2\\times0.865 \\approx 1.73$ A. *Why this step:* $e^{-2} \\approx 0.135$ is worth remembering, as is $e^{-1} \\approx 0.368$." },
+      ],
+      answer: "$\\tau = 50$ ms, final current 2 A, $i(2\\tau) \\approx 1.73$ A",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (LC).** A 10 μF capacitor charged to 100 μC is connected to a 0.1 H inductor. Find $\\omega$, the maximum current and the energy.\n\n1. $\\omega = \\dfrac{1}{\\sqrt{0.1\\times10^{-5}}} = \\dfrac{1}{10^{-3}} = 1000$ rad/s ($f \\approx 159$ Hz).\n2. $I_0 = \\omega Q_0 = 1000\\times10^{-4} = 0.1$ A.\n3. Check by energy: $\\dfrac{Q_0^2}{2C} = \\dfrac{10^{-8}}{2\\times10^{-5}} = 5\\times10^{-4}$ J and $\\tfrac12LI_0^2 = \\tfrac12\\times0.1\\times0.01 = 5\\times10^{-4}$ J. ✓ *Why this step:* energy conservation is an independent route to $I_0$.\n\n**Worked example 4 (half-way time).** For the coil in Worked example 1, when is the current 1 A?\n\n1. $1 = 2(1 - e^{-t/\\tau})$ gives $e^{-t/\\tau} = \\tfrac12$, so $t = \\tau\\ln2 = 50\\times0.693 \\approx 34.7$ ms.",
+      type: "worked-example",
+      id: "em5-4-we2",
+      title: "Worked example 2: just after, long after",
+      problem:
+        "An ideal 12 V battery is in series with $R_1 = 2\\ \\Omega$, followed by two parallel branches: $R_2 = 6\\ \\Omega$, and an ideal inductor in series with $R_3 = 3\\ \\Omega$. Find the battery current just after the switch closes and long after.",
+      steps: [
+        { text: "Just after: the inductor carries no current (open circuit). The battery sees $2 + 6 = 8\\ \\Omega$: $I = 1.5$ A. *Why this step:* the inductor's current cannot jump from its value before the switch closed, which was zero." },
+        { text: "Long after: the inductor is a wire, so its branch is 3 Ω. $6\\parallel3 = 2\\ \\Omega$; total $4\\ \\Omega$; $I = 3$ A." },
+        { text: "The voltage across the parallel pair is then $3\\times2 = 6$ V, so the inductor branch carries $6/3 = 2$ A." },
+      ],
+      answer: "1.5 A just after closing, 3 A long after",
+    },
+    {
+      type: "worked-example",
+      id: "em5-4-we3",
+      title: "Worked example 3: LC",
+      problem:
+        "A 10 μF capacitor charged to 100 μC is connected to a 0.1 H inductor. Find $\\omega$, the maximum current and the energy.",
+      steps: [
+        { text: "$\\omega = \\dfrac{1}{\\sqrt{0.1\\times10^{-5}}} = \\dfrac{1}{10^{-3}} = 1000$ rad/s ($f \\approx 159$ Hz)." },
+        { text: "$I_0 = \\omega Q_0 = 1000\\times10^{-4} = 0.1$ A." },
+        { text: "Check by energy: $\\dfrac{Q_0^2}{2C} = \\dfrac{10^{-8}}{2\\times10^{-5}} = 5\\times10^{-4}$ J and $\\tfrac12LI_0^2 = \\tfrac12\\times0.1\\times0.01 = 5\\times10^{-4}$ J. ✓ *Why this step:* energy conservation is an independent route to $I_0$." },
+      ],
+      answer: "$\\omega = 1000$ rad/s, $I_0 = 0.1$ A, energy $5\\times10^{-4}$ J",
+    },
+    {
+      type: "worked-example",
+      id: "em5-4-we4",
+      title: "Worked example 4: half-way time",
+      problem:
+        "For the coil in Worked example 1, when is the current 1 A?",
+      steps: [
+        { text: "$1 = 2(1 - e^{-t/\\tau})$ gives $e^{-t/\\tau} = \\tfrac12$, so $t = \\tau\\ln2 = 50\\times0.693 \\approx 34.7$ ms." },
+      ],
+      answer: "$t \\approx 34.7$ ms",
     },
     {
       type: "callout",
@@ -568,6 +815,7 @@ const lesson04: LessonSeed = {
       content:
         "A sudden jump in current would mean $di/dt \\to \\infty$ and an infinite emf $L\\,di/dt$, which no circuit can supply. The inductor's current is continuous in time (just as a capacitor's **voltage** is). So in \"just after switching\" problems, first write down each inductor's current from just before, and keep it.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "em5-4-q1",
@@ -579,6 +827,7 @@ const lesson04: LessonSeed = {
         { text: "50 s", feedback: "That is $R/L$, which has units of 1/s, not seconds." },
         { text: "2 ms", feedback: "Check: $0.2/10 = 0.02$ s $= 20$ ms." },
       ],
+      hint: "Which combination of $L$ and $R$ has the units of time? (A henry is an ohm-second.)",
     },
     {
       type: "quiz",
@@ -591,29 +840,37 @@ const lesson04: LessonSeed = {
         { text: "$\\mathcal E/R$; $\\mathcal E$ across the inductor", feedback: "Both at once would break KVL: the resistor would also need $\\mathcal E$." },
         { text: "zero current; the full battery emf across the inductor", correct: true, feedback: "The current cannot jump, so it starts at zero; with no $iR$ drop, KVL puts all of $\\mathcal E$ across $L$." },
       ],
+      hint: "The current through an inductor cannot jump (recall the misconception box). With that current, use Kirchhoff's loop law to find the voltage across the inductor.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em5-4-q3",
       variant: "practice",
-      question: "A 10 μF capacitor holding 50 μC is connected across a 25 mH inductor. The maximum current is",
-      options: [
-        { text: "0.05 A", feedback: "That uses $\\omega = 1000$ rad/s from Worked example 3. Recompute $\\omega$ for these $L$ and $C$." },
-        { text: "0.1 A", correct: true, feedback: "$\\omega = 1/\\sqrt{0.025\\times10^{-5}} = 2000$ rad/s; $I_0 = \\omega Q_0 = 2000\\times5\\times10^{-5} = 0.1$ A." },
-        { text: "0.2 A", feedback: "Check $\\omega$: $LC = 2.5\\times10^{-7}$ s², so $\\omega = 2000$ rad/s." },
-        { text: "0.016 A", feedback: "That uses the frequency $f = \\omega/2\\pi$ instead of $\\omega$." },
+      question: "A 10 μF capacitor holding 50 μC is connected across a 25 mH inductor. What is the maximum current in the circuit? Give your answer in amperes.",
+      answer: 0.1,
+      unit: "A",
+      hint: "Find $\\omega = 1/\\sqrt{LC}$ for these values; the charge oscillates as $Q_0\\cos\\omega t$, so the peak current is $\\omega Q_0$.",
+      solution: "$LC = 0.025\\times10^{-5} = 2.5\\times10^{-7}$ s², so $\\omega = 1/\\sqrt{LC} = 2000$ rad/s.\n\n$I_0 = \\omega Q_0 = 2000\\times5\\times10^{-5} = 0.1$ A.",
+      commonMistakes: [
+        { answer: 0.05, feedback: "That uses $\\omega = 1000$ rad/s from Worked example 3. Recompute $\\omega$ for these $L$ and $C$." },
+        { answer: 0.2, feedback: "Check $\\omega$: $LC = 2.5\\times10^{-7}$ s², so $\\omega = 2000$ rad/s." },
+        { answer: 0.016, tolerance: 0.001, feedback: "That uses the frequency $f = \\omega/2\\pi$ instead of $\\omega$." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em5-4-q4",
       variant: "practice",
-      question: "An LR circuit with $\\tau = 50$ ms is switched on. The time for the current to reach half its final value is about",
-      options: [
-        { text: "25 ms", feedback: "The growth is exponential, not linear, so half-way is not at $\\tau/2$." },
-        { text: "50 ms", feedback: "At $t = \\tau$ the current is 63% of the final value, past half." },
-        { text: "35 ms", correct: true, feedback: "$t = \\tau\\ln2 = 50\\times0.693 \\approx 35$ ms." },
-        { text: "115 ms", feedback: "That is $\\tau\\ln10$, the time to reach 90%." },
+      question: "An LR circuit with $\\tau = 50$ ms is switched on. How long does the current take to reach half its final value? Give your answer in milliseconds.",
+      answer: 34.7,
+      relTolerance: 0.02,
+      unit: "ms",
+      hint: "Set $1 - e^{-t/\\tau} = \\tfrac12$ and solve for $t$.",
+      solution: "$i = I_0(1 - e^{-t/\\tau})$. Half the final value means $e^{-t/\\tau} = \\tfrac12$, so $t = \\tau\\ln2 = 50\\times0.693 \\approx 34.7$ ms.",
+      commonMistakes: [
+        { answer: 25, feedback: "The growth is exponential, not linear, so half-way is not at $\\tau/2$." },
+        { answer: 50, feedback: "At $t = \\tau$ the current is 63% of the final value, past half." },
+        { answer: 115, tolerance: 1, feedback: "That is $\\tau\\ln10$, the time to reach 90%." },
       ],
     },
     {
@@ -627,6 +884,22 @@ const lesson04: LessonSeed = {
         { text: "$\\tfrac14$", feedback: "That is the fraction in the capacitor." },
         { text: "0", feedback: "The inductor has zero energy only when the capacitor is fully charged." },
       ],
+      hint: "The total energy $Q_0^2/2C$ stays constant. Find the capacitor's share at charge $Q_0/2$; the inductor holds the rest.",
+    },
+    {
+      type: "quiz",
+      id: "em5-4-q6",
+      variant: "practice",
+      multiple: true,
+      question: "An ideal LC circuit (no resistance) oscillates with angular frequency $\\omega = 1/\\sqrt{LC}$. Which statements are true? Select all that apply.",
+      options: [
+        { text: "The capacitor's charge varies sinusoidally with angular frequency $\\omega$.", correct: true, feedback: "$q = Q_0\\cos\\omega t$ solves $L\\,\\ddot q + q/C = 0$." },
+        { text: "The energy stored in the capacitor varies with angular frequency $2\\omega$.", correct: true, feedback: "$U_E = \\dfrac{Q_0^2\\cos^2\\omega t}{2C} = \\dfrac{Q_0^2}{4C}(1 + \\cos2\\omega t)$: it peaks twice per cycle, once for each sign of the charge." },
+        { text: "When the current is greatest, the capacitor's charge is zero.", correct: true, feedback: "At that instant all the energy is magnetic, $\\tfrac12 LI_0^2$, and none is left in the capacitor." },
+        { text: "The current is greatest when the capacitor is fully charged.", feedback: "Reversed: with the capacitor fully charged, all the energy is electric and the current is momentarily zero." },
+        { text: "The total energy slowly decreases as the charge sloshes back and forth.", feedback: "With no resistance nothing dissipates energy: $\\dfrac{q^2}{2C} + \\tfrac12 Li^2$ stays constant." },
+      ],
+      hint: "Write $q = Q_0\\cos\\omega t$ and $i = dq/dt$, and track where the energy is at each instant.",
     },
   ]),
 };
@@ -648,6 +921,7 @@ const lesson05: LessonSeed = {
       content:
         "$v = V_0\\sin\\omega t$, with peak (amplitude) $V_0$, angular frequency $\\omega = 2\\pi f$ and period $T = 1/f$.\nThe **rms** (root-mean-square) value is $V_{\\text{rms}} = \\dfrac{V_0}{\\sqrt2}$: the steady voltage that would heat a resistor at the same average rate. Meters and ratings quote rms values: \"220 V mains\" means $V_{\\text{rms}} = 220$ V.",
     },
+    { type: "heading", text: "Mean and rms values" },
     {
       type: "text",
       content:
@@ -660,10 +934,11 @@ const lesson05: LessonSeed = {
         "Heating depends on $v^2$ (power $v^2/R$), which is never negative. Since $\\sin^2\\theta = \\tfrac12(1 - \\cos2\\theta)$ and the $\\cos2\\theta$ part averages to zero over a cycle, the mean of $\\sin^2$ is $\\tfrac12$:",
     },
     { type: "math", latex: "\\overline{v^2} = V_0^2\\,\\overline{\\sin^2\\omega t} = \\frac{V_0^2}{2} \\;\\Longrightarrow\\; V_{\\text{rms}} = \\sqrt{\\overline{v^2}} = \\frac{V_0}{\\sqrt2} \\approx 0.707\\,V_0" },
+    { type: "heading", text: "Phasors" },
     {
       type: "text",
       content:
-        "**Phasors.** Every sinusoid is the shadow of a rotating arrow. Draw an arrow of length $V_0$ from the origin, turning anticlockwise at $\\omega$; its vertical projection at time $t$ is $V_0\\sin\\omega t$. This arrow is a **phasor**. Two sinusoids of the same frequency are two arrows turning together, keeping a fixed angle between them: the **phase difference**. Adding sinusoids becomes adding arrows, the vector addition you already know.",
+        "Every sinusoid is the shadow of a rotating arrow. Draw an arrow of length $V_0$ from the origin, turning anticlockwise at $\\omega$; its vertical projection at time $t$ is $V_0\\sin\\omega t$. This arrow is a **phasor**. Two sinusoids of the same frequency are two arrows turning together, keeping a fixed angle between them: the **phase difference**. Adding sinusoids becomes adding arrows, the vector addition you already know.",
     },
     {
       type: "interactive",
@@ -678,6 +953,7 @@ const lesson05: LessonSeed = {
       content:
         "What you should have seen: as the arrow turns once, its height traces one full cycle of the sine wave. The angle of the arrow at any moment is the phase $\\omega t$.",
     },
+    { type: "heading", text: "Resistor, inductor and capacitor alone" },
     {
       type: "text",
       content:
@@ -722,15 +998,65 @@ const lesson05: LessonSeed = {
       content:
         "What you should have seen: for L and C the current amplitude depends on frequency, in opposite ways. An inductor passes low frequencies easily and blocks high ones (at DC it is a wire); a capacitor blocks low frequencies and passes high ones (at DC it is a break). Try the same with $R$ alone and the current does not care about $f$ at all.",
     },
+    { type: "heading", text: "Worked examples: peak, rms and mean" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (mains peak).** Indian mains is 220 V rms. Find the peak.\n\n1. $V_0 = \\sqrt2\\,V_{\\text{rms}} = 1.414\\times220 \\approx 311$ V. *Why this step:* the rating is always rms, so the wires actually swing between +311 V and −311 V.\n\n**Worked example 2 (reactances).** Find $X_L$ for 0.1 H and $X_C$ for 10 μF at 50 Hz.\n\n1. $\\omega = 2\\pi\\times50 \\approx 314$ rad/s.\n2. $X_L = \\omega L = 314\\times0.1 \\approx 31.4\\ \\Omega$.\n3. $X_C = \\dfrac{1}{\\omega C} = \\dfrac{1}{314\\times10^{-5}} \\approx 318\\ \\Omega$.\n\n**Worked example 3 (current through a capacitor).** The 10 μF capacitor is connected across the 220 V, 50 Hz mains.\n\n1. $I_{\\text{rms}} = \\dfrac{V_{\\text{rms}}}{X_C} = \\dfrac{220}{318} \\approx 0.69$ A. *Why this step:* reactance plays the part of resistance for rms (or peak) values, though not for instantaneous ones, because of the phase shift.",
+      type: "worked-example",
+      id: "em5-5-we1",
+      title: "Worked example 1: mains peak",
+      problem:
+        "Indian mains is 220 V rms. Find the peak.",
+      steps: [
+        { text: "$V_0 = \\sqrt2\\,V_{\\text{rms}} = 1.414\\times220 \\approx 311$ V. *Why this step:* the rating is always rms, so the wires actually swing between +311 V and −311 V." },
+      ],
+      answer: "$V_0 \\approx 311$ V",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (half-cycle mean).** Find the mean voltage of the mains over a half cycle.\n\n1. $\\bar v = \\dfrac{2V_0}{\\pi} = \\dfrac{2\\times311}{\\pi} \\approx 198$ V. Note the order: mean over a half cycle (198 V) < rms (220 V) < peak (311 V).\n\n**Worked example 5 (a current with a DC part).** A current is $i = 3 + 4\\sin\\omega t$ A. Find its rms value.\n\n1. $i^2 = 9 + 24\\sin\\omega t + 16\\sin^2\\omega t$.\n2. Average over a cycle: $9 + 0 + 16\\times\\tfrac12 = 17$. *Why this step:* the cross term is a pure sine and averages to zero; $\\sin^2$ averages to $\\tfrac12$.\n3. $I_{\\text{rms}} = \\sqrt{17} \\approx 4.12$ A. It is not $3 + 4/\\sqrt2 \\approx 5.83$ A; rms values do not simply add.",
+      type: "worked-example",
+      id: "em5-5-we2",
+      title: "Worked example 2: reactances",
+      problem:
+        "Find $X_L$ for 0.1 H and $X_C$ for 10 μF at 50 Hz.",
+      steps: [
+        { text: "$\\omega = 2\\pi\\times50 \\approx 314$ rad/s." },
+        { text: "$X_L = \\omega L = 314\\times0.1 \\approx 31.4\\ \\Omega$." },
+        { text: "$X_C = \\dfrac{1}{\\omega C} = \\dfrac{1}{314\\times10^{-5}} \\approx 318\\ \\Omega$." },
+      ],
+      answer: "$X_L \\approx 31.4\\ \\Omega$, $X_C \\approx 318\\ \\Omega$",
+    },
+    {
+      type: "worked-example",
+      id: "em5-5-we3",
+      title: "Worked example 3: current through a capacitor",
+      problem:
+        "The 10 μF capacitor is connected across the 220 V, 50 Hz mains.",
+      steps: [
+        { text: "$I_{\\text{rms}} = \\dfrac{V_{\\text{rms}}}{X_C} = \\dfrac{220}{318} \\approx 0.69$ A. *Why this step:* reactance plays the part of resistance for rms (or peak) values, though not for instantaneous ones, because of the phase shift." },
+      ],
+      answer: "$I_{\\text{rms}} \\approx 0.69$ A",
+    },
+    {
+      type: "worked-example",
+      id: "em5-5-we4",
+      title: "Worked example 4: half-cycle mean",
+      problem:
+        "Find the mean voltage of the mains over a half cycle.",
+      steps: [
+        { text: "$\\bar v = \\dfrac{2V_0}{\\pi} = \\dfrac{2\\times311}{\\pi} \\approx 198$ V. Note the order: mean over a half cycle (198 V) < rms (220 V) < peak (311 V)." },
+      ],
+      answer: "$\\bar v \\approx 198$ V",
+    },
+    {
+      type: "worked-example",
+      id: "em5-5-we5",
+      title: "Worked example 5: a current with a DC part",
+      problem:
+        "A current is $i = 3 + 4\\sin\\omega t$ A. Find its rms value.",
+      steps: [
+        { text: "$i^2 = 9 + 24\\sin\\omega t + 16\\sin^2\\omega t$." },
+        { text: "Average over a cycle: $9 + 0 + 16\\times\\tfrac12 = 17$. *Why this step:* the cross term is a pure sine and averages to zero; $\\sin^2$ averages to $\\tfrac12$." },
+        { text: "$I_{\\text{rms}} = \\sqrt{17} \\approx 4.12$ A. It is not $3 + 4/\\sqrt2 \\approx 5.83$ A; rms values do not simply add." },
+      ],
+      answer: "$I_{\\text{rms}} = \\sqrt{17} \\approx 4.12$ A",
     },
     {
       type: "callout",
@@ -739,6 +1065,7 @@ const lesson05: LessonSeed = {
       content:
         "Over a full cycle the average voltage is **zero**: the positive and negative halves cancel. $V_0/\\sqrt2$ is the **root mean square**, the square root of the average of $v^2$, which is the useful measure of heating. The half-cycle mean, $2V_0/\\pi$, is a third, different number.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "em5-5-q1",
@@ -750,17 +1077,22 @@ const lesson05: LessonSeed = {
         { text: "220 V, 100 Hz", feedback: "$\\omega = 100\\pi$ rad/s means $f = 50$ Hz." },
         { text: "198 V, 50 Hz", feedback: "That is the half-cycle mean $2V_0/\\pi$, not the rms." },
       ],
+      hint: "Compare with $v = V_0\\sin(2\\pi ft)$: read off $V_0$ and $f$, then use $V_{\\text{rms}} = V_0/\\sqrt2$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em5-5-q2",
       variant: "practice",
-      question: "The reactance of a 0.2 H inductor at 50 Hz is about",
-      options: [
-        { text: "10 Ω", feedback: "That is $fL$. The reactance uses $\\omega = 2\\pi f$." },
-        { text: "0.016 Ω", feedback: "That is $1/\\omega L$, the form for a capacitor." },
-        { text: "0.2 Ω", feedback: "Inductance in henries is not a reactance in ohms; multiply by $\\omega$." },
-        { text: "62.8 Ω", correct: true, feedback: "$X_L = 2\\pi fL = 2\\pi\\times50\\times0.2 \\approx 62.8\\ \\Omega$." },
+      question: "What is the reactance of a 0.2 H inductor at 50 Hz? Give your answer in ohms, to one decimal place.",
+      answer: 62.8,
+      relTolerance: 0.01,
+      unit: "Ω",
+      hint: "$X_L = \\omega L$, with $\\omega = 2\\pi f$.",
+      solution: "$X_L = 2\\pi fL = 2\\pi\\times50\\times0.2 = 20\\pi \\approx 62.8\\ \\Omega$.",
+      commonMistakes: [
+        { answer: 10, feedback: "That is $fL$. The reactance uses $\\omega = 2\\pi f$." },
+        { answer: 0.016, tolerance: 0.001, feedback: "That is $1/\\omega L$, the form for a capacitor." },
+        { answer: 0.2, feedback: "Inductance in henries is not a reactance in ohms; multiply by $\\omega$." },
       ],
     },
     {
@@ -774,17 +1106,22 @@ const lesson05: LessonSeed = {
         { text: "is unchanged", feedback: "That is true for a resistor only." },
         { text: "becomes zero", feedback: "Only at zero frequency (DC) does a capacitor block current completely." },
       ],
+      hint: "Capacitive reactance is $X_C = 1/(2\\pi fC)$, and $I_{\\text{rms}} = V_{\\text{rms}}/X_C$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em5-5-q4",
       variant: "practice",
-      question: "A current is $i = 2 + 2\\sqrt2\\sin\\omega t$ A. Its rms value is",
-      options: [
-        { text: "4 A", feedback: "That adds 2 A and the rms of the sine part, 2 A. Squares add, not the values." },
-        { text: "$2 + 2\\sqrt2$ A", feedback: "That is the peak current." },
-        { text: "$2\\sqrt2$ A $\\approx 2.83$ A", correct: true, feedback: "$\\overline{i^2} = 4 + \\tfrac12(8) = 8$, so $I_{\\text{rms}} = \\sqrt8 = 2\\sqrt2$ A." },
-        { text: "2 A", feedback: "That is the DC part alone; the sine part also heats." },
+      question: "A current is $i = 2 + 2\\sqrt2\\sin\\omega t$ A. What is its rms value? Give your answer in amperes, to two decimal places.",
+      answer: 2.83,
+      relTolerance: 0.01,
+      unit: "A",
+      hint: "Average $i^2$ over a cycle, as in Worked example 5: the cross term averages to zero and $\\sin^2$ to $\\tfrac12$.",
+      solution: "$i^2 = 4 + 8\\sqrt2\\sin\\omega t + 8\\sin^2\\omega t$.\n\nAveraged over a cycle: $\\overline{i^2} = 4 + 0 + \\tfrac12(8) = 8$.\n\n$I_{\\text{rms}} = \\sqrt8 = 2\\sqrt2 \\approx 2.83$ A.",
+      commonMistakes: [
+        { answer: 4, feedback: "That adds 2 A and the rms of the sine part, 2 A. Squares add, not the values." },
+        { answer: 4.83, feedback: "That is the peak current, $2 + 2\\sqrt2$ A." },
+        { answer: 2, feedback: "That is the DC part alone; the sine part also heats." },
       ],
     },
     {
@@ -798,6 +1135,7 @@ const lesson05: LessonSeed = {
         { text: "lags the voltage by $90^\\circ$", correct: true, feedback: "$v = L\\,di/dt$ peaks when $i$ is changing fastest, a quarter cycle before $i$ peaks." },
         { text: "lags the voltage by $180^\\circ$", feedback: "The shift for a pure inductor is exactly a quarter cycle." },
       ],
+      hint: "Use $v = L\\,di/dt$ with $i = I_0\\sin\\omega t$, then compare the phases of $v$ and $i$.",
     },
   ]),
 };
@@ -812,10 +1150,11 @@ const lesson06: LessonSeed = {
       content:
         "Turn the tuning knob on an old radio and one station comes in loud while all the others fade away. Inside is a coil and a capacitor in series: a circuit that responds strongly to one frequency and hardly at all to the rest. To see why, put R, L and C in series across an AC source and add their voltages the right way: as phasors.",
     },
+    { type: "heading", text: "Building the phasor diagram" },
     {
       type: "text",
       content:
-        "**Building the phasor diagram.** In series the **current** is common, so use it as the reference: draw $I_0$ along the horizontal axis. Then, from 5.5:\n\n1. $V_R = I_0R$ lies **along** the current.\n2. $V_L = I_0X_L$ points **up**, $90^\\circ$ ahead of the current.\n3. $V_C = I_0X_C$ points **down**, $90^\\circ$ behind the current.\n\n$V_L$ and $V_C$ point in opposite directions and partly cancel, leaving $V_L - V_C$ vertical. The source voltage is the vector sum, the hypotenuse:",
+        "In series the **current** is common, so use it as the reference: draw $I_0$ along the horizontal axis. Then, from 5.5:\n\n1. $V_R = I_0R$ lies **along** the current.\n2. $V_L = I_0X_L$ points **up**, $90^\\circ$ ahead of the current.\n3. $V_C = I_0X_C$ points **down**, $90^\\circ$ behind the current.\n\n$V_L$ and $V_C$ point in opposite directions and partly cancel, leaving $V_L - V_C$ vertical. The source voltage is the vector sum, the hypotenuse:",
     },
     {
       type: "math",
@@ -846,10 +1185,11 @@ const lesson06: LessonSeed = {
       content:
         "What you should have seen: at 50 Hz the downward $V_C$ phasor is much longer than the upward $V_L$, so the circuit is capacitive and the current leads. Raise $f$ and $V_L$ grows while $V_C$ shrinks; at about 159 Hz they are equal and cancel completely, and the source voltage lines up with $V_R$. That special frequency is resonance.",
     },
+    { type: "heading", text: "Resonance" },
     {
       type: "text",
       content:
-        "**Resonance.** When $X_L = X_C$, i.e. $\\omega L = \\dfrac{1}{\\omega C}$:",
+        "When $X_L = X_C$, i.e. $\\omega L = \\dfrac{1}{\\omega C}$:",
     },
     { type: "math", latex: "\\omega_0 = \\frac{1}{\\sqrt{LC}}, \\qquad f_0 = \\frac{1}{2\\pi\\sqrt{LC}}" },
     {
@@ -857,10 +1197,11 @@ const lesson06: LessonSeed = {
       content:
         "At resonance $Z = R$, its smallest possible value, so the current is **largest**, $I_0 = V_0/R$, and it is in phase with the voltage ($\\phi = 0$). The inductor and capacitor voltages are equal and opposite. Each is $I_0X_L$, which can be **much larger than the source voltage**: they cancel each other in the sum, so the source never has to supply them. The same frequency $1/\\sqrt{LC}$ is the natural frequency of LC oscillations (5.4): resonance means driving the circuit at its own natural rhythm.",
     },
+    { type: "heading", text: "Sharpness and the quality factor" },
     {
       type: "text",
       content:
-        "**Sharpness.** The **quality factor** $Q = \\dfrac{\\omega_0L}{R} = \\dfrac{1}{R}\\sqrt{\\dfrac LC}$ measures how sharp the peak is. At resonance $V_L = V_C = Q\\,V_{\\text{source}}$. The **half-power points** are the frequencies where the current falls to $I_{\\max}/\\sqrt2$ (so the power $I^2R$ halves); they are separated by the **bandwidth** $\\Delta\\omega = R/L$, and $Q = \\omega_0/\\Delta\\omega$. Small $R$ means a tall, narrow peak: a selective radio.",
+        "The **quality factor** $Q = \\dfrac{\\omega_0L}{R} = \\dfrac{1}{R}\\sqrt{\\dfrac LC}$ measures how sharp the peak is. At resonance $V_L = V_C = Q\\,V_{\\text{source}}$. The **half-power points** are the frequencies where the current falls to $I_{\\max}/\\sqrt2$ (so the power $I^2R$ halves); they are separated by the **bandwidth** $\\Delta\\omega = R/L$, and $Q = \\omega_0/\\Delta\\omega$. Small $R$ means a tall, narrow peak: a selective radio.",
     },
     {
       type: "interactive",
@@ -876,15 +1217,68 @@ const lesson06: LessonSeed = {
       content:
         "What you should have seen: the current peaks at $f_0 \\approx 159$ Hz whatever $R$ is, because $R$ does not appear in $1/\\sqrt{LC}$. Raise $R$ from 20 Ω towards 200 Ω and the peak collapses and broadens (the dashed ghost keeps the starting curve). Change $L$ or $C$ and the peak slides sideways.",
     },
+    { type: "heading", text: "Worked examples: impedance and resonance" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (a capacitive circuit).** $R = 100\\ \\Omega$, $L = 0.1$ H, $C = 10\\ \\mu$F across a 10 V peak, 50 Hz source. Find $Z$, $\\phi$ and $I_0$.\n\n1. $X_L = 31.4\\ \\Omega$, $X_C = 318.3\\ \\Omega$ (5.5), so $X_L - X_C = -286.9\\ \\Omega$.\n2. $Z = \\sqrt{100^2 + 286.9^2} = \\sqrt{10\\,000 + 82\\,300} \\approx 304\\ \\Omega$. *Why this step:* the resistive and reactive parts are at right angles, so they combine by Pythagoras, not by adding.\n3. $\\tan\\phi = -2.869$, so $\\phi \\approx -70.8^\\circ$: the current leads the voltage by $70.8^\\circ$ (capacitive).\n4. $I_0 = 10/304 \\approx 0.033$ A.\n5. Check: $V_R = 3.3$ V, $V_L = 1.0$ V, $V_C = 10.5$ V. $\\sqrt{3.3^2 + (1.0 - 10.5)^2} \\approx 10$ V. ✓ (But $3.3 + 1.0 + 10.5 = 14.8$ V: the plain sum is wrong.)",
+      type: "worked-example",
+      id: "em5-6-we1",
+      title: "Worked example 1: a capacitive circuit",
+      problem:
+        "$R = 100\\ \\Omega$, $L = 0.1$ H, $C = 10\\ \\mu$F across a 10 V peak, 50 Hz source. Find $Z$, $\\phi$ and $I_0$.",
+      steps: [
+        { text: "$X_L = 31.4\\ \\Omega$, $X_C = 318.3\\ \\Omega$ (5.5), so $X_L - X_C = -286.9\\ \\Omega$." },
+        { text: "$Z = \\sqrt{100^2 + 286.9^2} = \\sqrt{10\\,000 + 82\\,300} \\approx 304\\ \\Omega$. *Why this step:* the resistive and reactive parts are at right angles, so they combine by Pythagoras, not by adding." },
+        { text: "$\\tan\\phi = -2.869$, so $\\phi \\approx -70.8^\\circ$: the current leads the voltage by $70.8^\\circ$ (capacitive)." },
+        { text: "$I_0 = 10/304 \\approx 0.033$ A." },
+        { text: "Check: $V_R = 3.3$ V, $V_L = 1.0$ V, $V_C = 10.5$ V. $\\sqrt{3.3^2 + (1.0 - 10.5)^2} \\approx 10$ V. ✓ (But $3.3 + 1.0 + 10.5 = 14.8$ V: the plain sum is wrong.)" },
+      ],
+      answer: "$Z \\approx 304\\ \\Omega$, $\\phi \\approx -70.8^\\circ$ (current leads), $I_0 \\approx 0.033$ A",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (resonant frequency).** Same $L$ and $C$.\n\n1. $\\omega_0 = \\dfrac{1}{\\sqrt{0.1\\times10^{-5}}} = \\dfrac{1}{10^{-3}} = 1000$ rad/s, so $f_0 = \\dfrac{1000}{2\\pi} \\approx 159$ Hz.\n\n**Worked example 3 (voltages at resonance).** Now $R = 20\\ \\Omega$, same $L$ and $C$, 10 V peak at 159 Hz.\n\n1. $Z = R = 20\\ \\Omega$, so $I_0 = 10/20 = 0.5$ A.\n2. $X_L = \\omega_0L = 1000\\times0.1 = 100\\ \\Omega$ $= X_C$.\n3. $V_{L0} = V_{C0} = 0.5\\times100 = 50$ V, **five times** the source voltage. *Why this step:* this is $Q = \\omega_0L/R = 5$ at work.\n\n**Worked example 4 (bandwidth).** For the same circuit find $\\Delta\\omega$ and check $Q$.\n\n1. $\\Delta\\omega = R/L = 20/0.1 = 200$ rad/s ($\\Delta f \\approx 32$ Hz).\n2. $Q = \\omega_0/\\Delta\\omega = 1000/200 = 5$. ✓\n\n**Worked example 5 (meter readings).** In a series LCR circuit, voltmeters read $V_R = 30$ V, $V_L = 80$ V and $V_C = 40$ V (rms). Find the source voltage.\n\n1. $V = \\sqrt{30^2 + (80 - 40)^2} = \\sqrt{900 + 1600} = 50$ V, not $30 + 80 + 40 = 150$ V.",
+      type: "worked-example",
+      id: "em5-6-we2",
+      title: "Worked example 2: resonant frequency",
+      problem:
+        "Same $L$ and $C$. Find the resonant frequency.",
+      steps: [
+        { text: "$\\omega_0 = \\dfrac{1}{\\sqrt{0.1\\times10^{-5}}} = \\dfrac{1}{10^{-3}} = 1000$ rad/s, so $f_0 = \\dfrac{1000}{2\\pi} \\approx 159$ Hz." },
+      ],
+      answer: "$\\omega_0 = 1000$ rad/s, $f_0 \\approx 159$ Hz",
+    },
+    {
+      type: "worked-example",
+      id: "em5-6-we3",
+      title: "Worked example 3: voltages at resonance",
+      problem:
+        "Now $R = 20\\ \\Omega$, same $L$ and $C$, 10 V peak at 159 Hz. Find the peak current and the peak voltages across $L$ and $C$.",
+      steps: [
+        { text: "$Z = R = 20\\ \\Omega$, so $I_0 = 10/20 = 0.5$ A." },
+        { text: "$X_L = \\omega_0L = 1000\\times0.1 = 100\\ \\Omega$ $= X_C$." },
+        { text: "$V_{L0} = V_{C0} = 0.5\\times100 = 50$ V, **five times** the source voltage. *Why this step:* this is $Q = \\omega_0L/R = 5$ at work." },
+      ],
+      answer: "$I_0 = 0.5$ A; $V_{L0} = V_{C0} = 50$ V",
+    },
+    {
+      type: "worked-example",
+      id: "em5-6-we4",
+      title: "Worked example 4: bandwidth",
+      problem:
+        "For the same circuit find $\\Delta\\omega$ and check $Q$.",
+      steps: [
+        { text: "$\\Delta\\omega = R/L = 20/0.1 = 200$ rad/s ($\\Delta f \\approx 32$ Hz)." },
+        { text: "$Q = \\omega_0/\\Delta\\omega = 1000/200 = 5$. ✓" },
+      ],
+      answer: "$\\Delta\\omega = 200$ rad/s, $Q = 5$",
+    },
+    {
+      type: "worked-example",
+      id: "em5-6-we5",
+      title: "Worked example 5: meter readings",
+      problem:
+        "In a series LCR circuit, voltmeters read $V_R = 30$ V, $V_L = 80$ V and $V_C = 40$ V (rms). Find the source voltage.",
+      steps: [
+        { text: "$V = \\sqrt{30^2 + (80 - 40)^2} = \\sqrt{900 + 1600} = 50$ V, not $30 + 80 + 40 = 150$ V." },
+      ],
+      answer: "$V = 50$ V",
     },
     {
       type: "callout",
@@ -893,16 +1287,20 @@ const lesson06: LessonSeed = {
       content:
         "At every **instant** the three instantaneous voltages do add to the source's instantaneous voltage (KVL still holds). But their peaks occur at different moments, so the peak or rms values must be added as **phasors**: $V_L$ and $V_C$ subtract, and the result combines with $V_R$ at right angles. The meter readings can add up to far more than the source.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em5-6-q1",
       variant: "practice",
-      question: "In a series LCR circuit, rms voltages across R, L and C are 30 V, 80 V and 40 V. The rms source voltage is",
-      options: [
-        { text: "50 V", correct: true, feedback: "$\\sqrt{30^2 + (80 - 40)^2} = 50$ V." },
-        { text: "150 V", feedback: "That adds the readings as numbers. They are phasors at different angles." },
-        { text: "70 V", feedback: "That is $30 + (80 - 40)$: $V_R$ and $V_L - V_C$ are at right angles." },
-        { text: "94 V", feedback: "That is $\\sqrt{30^2 + 80^2 + 40^2}$. $V_L$ and $V_C$ point opposite ways, so subtract them first." },
+      question: "In a series LCR circuit, rms voltages across R, L and C are 24 V, 60 V and 42 V. What is the rms source voltage? Give your answer in volts.",
+      answer: 30,
+      unit: "V",
+      hint: "Add the readings as phasors: $V_L$ and $V_C$ point opposite ways, and their difference is at right angles to $V_R$.",
+      solution: "$V = \\sqrt{V_R^2 + (V_L - V_C)^2} = \\sqrt{24^2 + (60 - 42)^2} = \\sqrt{576 + 324} = \\sqrt{900} = 30$ V.",
+      commonMistakes: [
+        { answer: 126, feedback: "That adds the readings as numbers. They are phasors at different angles." },
+        { answer: 42, feedback: "That is $24 + (60 - 42)$: $V_R$ and $V_L - V_C$ are at right angles. (It is also just $V_C$; the source voltage needs all three.)" },
+        { answer: 77.1, tolerance: 0.5, feedback: "That is $\\sqrt{24^2 + 60^2 + 42^2}$. $V_L$ and $V_C$ point opposite ways, so subtract them first." },
       ],
     },
     {
@@ -916,6 +1314,7 @@ const lesson06: LessonSeed = {
         { text: "140 Ω, capacitive", feedback: "That adds $R$ and $|X_L - X_C|$ directly; they are at right angles." },
         { text: "100 Ω, capacitive (current leads)", correct: true, feedback: "$Z = \\sqrt{60^2 + 80^2} = 100\\ \\Omega$; $X_C > X_L$, so the current leads." },
       ],
+      hint: "Use $Z = \\sqrt{R^2 + (X_L - X_C)^2}$. Whichever reactance is larger decides the nature of the circuit.",
     },
     {
       type: "quiz",
@@ -928,30 +1327,36 @@ const lesson06: LessonSeed = {
         { text: "6283 Hz", feedback: "That multiplies by $2\\pi$ instead of dividing." },
         { text: "It depends on the resistance.", feedback: "$f_0 = 1/2\\pi\\sqrt{LC}$ contains no $R$; resistance only sets the height and width of the peak." },
       ],
+      hint: "Use $f_0 = \\dfrac{1}{2\\pi\\sqrt{LC}}$ with $C$ in farads.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em5-6-q4",
       variant: "practice",
-      question: "With the inductor and capacitor of the previous question and $R = 50\\ \\Omega$, the quality factor is",
-      options: [
-        { text: "0.2", feedback: "That is $R/\\omega_0L$, upside down." },
-        { text: "250", feedback: "That is $\\omega_0L$ in ohms. Divide by $R$." },
-        { text: "0.8", feedback: "That uses $f_0 \\approx 159$ Hz in place of $\\omega_0 = 1000$ rad/s." },
-        { text: "5", correct: true, feedback: "$Q = \\omega_0L/R = 1000\\times0.25/50 = 5$." },
+      question: "A 0.25 H inductor and a 4 μF capacitor are in series with $R = 50\\ \\Omega$. What is the quality factor $Q$? Give your answer as a pure number.",
+      answer: 5,
+      hint: "$Q = \\omega_0L/R$, with $\\omega_0$ in rad/s.",
+      solution: "$\\omega_0 = 1/\\sqrt{LC} = 1/\\sqrt{0.25\\times4\\times10^{-6}} = 1000$ rad/s.\n\n$Q = \\dfrac{\\omega_0L}{R} = \\dfrac{1000\\times0.25}{50} = 5$.",
+      commonMistakes: [
+        { answer: 0.2, feedback: "That is $R/\\omega_0L$, upside down." },
+        { answer: 250, feedback: "That is $\\omega_0L$ in ohms. Divide by $R$." },
+        { answer: 0.8, tolerance: 0.01, feedback: "That uses $f_0 \\approx 159$ Hz in place of $\\omega_0 = 1000$ rad/s." },
       ],
     },
     {
       type: "quiz",
       id: "em5-6-q5",
       variant: "concept",
-      question: "Which statement about a series LCR circuit at resonance is **false**?",
+      multiple: true,
+      question: "Which statements about a series LCR circuit at resonance are true? Select all that apply.",
       options: [
-        { text: "The impedance equals $R$.", feedback: "True: the reactances cancel." },
-        { text: "The current is in phase with the source voltage.", feedback: "True: $\\phi = 0$." },
-        { text: "The voltage across the inductor can never exceed the source voltage.", correct: true, feedback: "False, so this is the answer. $V_L = QV_{\\text{source}}$, which exceeds the source whenever $Q > 1$." },
-        { text: "The current has its maximum value.", feedback: "True: $Z$ is smallest, so $I = V/Z$ is largest." },
+        { text: "The impedance equals $R$.", correct: true, feedback: "True: the reactances cancel, $X_L = X_C$." },
+        { text: "The current is in phase with the source voltage.", correct: true, feedback: "True: $\\tan\\phi = (X_L - X_C)/R = 0$, so $\\phi = 0$." },
+        { text: "The voltage across the inductor can never exceed the source voltage.", feedback: "False. $V_L = QV_{\\text{source}}$, which exceeds the source whenever $Q > 1$." },
+        { text: "The current has its maximum value.", correct: true, feedback: "True: $Z$ is smallest, so $I = V/Z$ is largest." },
+        { text: "The voltages across the inductor and the capacitor are each zero.", feedback: "False. Their **sum** is zero because they are equal and opposite, but each one is $IX_L = IX_C$, which can be large." },
       ],
+      hint: "At resonance $X_L = X_C$. Test each statement using $Z$, the phase angle $\\tan\\phi = (X_L - X_C)/R$ and $V_L = IX_L$ (see Worked example 3).",
     },
   ]),
 };
@@ -966,10 +1371,11 @@ const lesson07: LessonSeed = {
       content:
         "Electricity reaches your home through a chain: a generator at perhaps 11 kV, a transformer stepping it up to 220 kV or more for the long-distance lines, more transformers stepping it down to 11 kV for the city and 220 V for the house. Why all the stepping up and down? The answer is in how AC power is counted, and in the one device that makes AC so convenient: the transformer.",
     },
+    { type: "heading", text: "Average power and power factor" },
     {
       type: "text",
       content:
-        "**Average power.** With $v = V_0\\sin\\omega t$ and $i = I_0\\sin(\\omega t - \\phi)$, the instantaneous power is $p = vi$. Expand $\\sin(\\omega t - \\phi)$:",
+        "With $v = V_0\\sin\\omega t$ and $i = I_0\\sin(\\omega t - \\phi)$, the instantaneous power is $p = vi$. Expand $\\sin(\\omega t - \\phi)$:",
     },
     {
       type: "math",
@@ -1007,10 +1413,11 @@ const lesson07: LessonSeed = {
       content:
         "What you should have seen: far from resonance the phase angle approaches $\\pm90^\\circ$, the power factor falls towards zero and very little power is drawn even though current flows. **Choke coil:** this is why a fluorescent lamp or fan regulator can use an inductor (a choke) instead of a resistor to limit current. The choke's reactance does the limiting, but it wastes almost no energy as heat.",
     },
+    { type: "heading", text: "The transformer" },
     {
       type: "text",
       content:
-        "**The transformer.** Two coils, a primary with $N_p$ turns and a secondary with $N_s$, are wound on a common soft-iron core that guides the same changing flux $\\Phi$ through every turn of both (mutual induction, 5.3). Each turn has the same emf $-d\\Phi/dt$, so the emfs are in the ratio of the turns. For an ideal (lossless) transformer the power in equals the power out, which fixes the currents:",
+        "Two coils, a primary with $N_p$ turns and a secondary with $N_s$, are wound on a common soft-iron core that guides the same changing flux $\\Phi$ through every turn of both (mutual induction, 5.3). Each turn has the same emf $-d\\Phi/dt$, so the emfs are in the ratio of the turns. For an ideal (lossless) transformer the power in equals the power out, which fixes the currents:",
     },
     {
       type: "math",
@@ -1021,10 +1428,11 @@ const lesson07: LessonSeed = {
       content:
         "A step-up transformer ($N_s > N_p$) raises the voltage and lowers the current in the same ratio. Real transformers lose a few per cent through **copper loss** ($I^2R$ in the windings; thick wire), **eddy currents** (laminated core), **hysteresis** (soft iron with a narrow loop) and **flux leakage** (coils wound on top of each other). Efficiency $\\eta = P_{\\text{out}}/P_{\\text{in}}$.\n\n**Why transmit at high voltage.** For a fixed power $P = VI$ sent down a line of resistance $R_\\ell$, the current is $I = P/V$ and the loss is $I^2R_\\ell = \\dfrac{P^2R_\\ell}{V^2}$. Raising the voltage 50 times cuts the loss 2500 times. That is the whole reason for the AC grid: transformers make changing voltage cheap, and they only work with changing current.",
     },
+    { type: "heading", text: "Electromagnetic waves in brief" },
     {
       type: "text",
       content:
-        "**Electromagnetic waves, briefly.** Faraday: a changing magnetic field makes an electric field. Maxwell noticed the reverse must also be true. Ampère's law fails for a charging capacitor: a loop round the wire encloses a current, but a surface through the gap does not. Maxwell added the **displacement current** $i_d = \\varepsilon_0\\dfrac{d\\Phi_E}{dt}$, which equals the conduction current in the wire and makes Ampère's law consistent. Now each changing field makes the other, and together they can travel through empty space as a wave. The theory predicts the speed:",
+        "Faraday: a changing magnetic field makes an electric field. Maxwell noticed the reverse must also be true. Ampère's law fails for a charging capacitor: a loop round the wire encloses a current, but a surface through the gap does not. Maxwell added the **displacement current** $i_d = \\varepsilon_0\\dfrac{d\\Phi_E}{dt}$, which equals the conduction current in the wire and makes Ampère's law consistent. Now each changing field makes the other, and together they can travel through empty space as a wave. The theory predicts the speed:",
     },
     { type: "math", latex: "c = \\frac{1}{\\sqrt{\\mu_0\\varepsilon_0}} = \\frac{1}{\\sqrt{4\\pi\\times10^{-7}\\times8.85\\times10^{-12}}} \\approx 3\\times10^8\\ \\text{m/s}" },
     {
@@ -1045,15 +1453,67 @@ const lesson07: LessonSeed = {
         ["Gamma rays", "< $10^{-3}$ nm", "cancer treatment, nuclear physics"],
       ],
     },
+    { type: "heading", text: "Worked examples: power and line loss" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (power in an LCR circuit).** A series circuit with $R = 30\\ \\Omega$ and $X_L - X_C = 40\\ \\Omega$ is connected to 200 V rms.\n\n1. $Z = \\sqrt{30^2 + 40^2} = 50\\ \\Omega$, so $I_{\\text{rms}} = 200/50 = 4$ A.\n2. Power factor $\\cos\\phi = R/Z = 0.6$.\n3. $P = V_{\\text{rms}}I_{\\text{rms}}\\cos\\phi = 200\\times4\\times0.6 = 480$ W. Check: $I^2R = 16\\times30 = 480$ W. ✓ *Why this step:* the two forms must agree, and $I^2R$ reminds you that only the resistor consumes power.\n\n**Worked example 2 (transformer).** A transformer has 2000 primary turns and 100 secondary turns and runs from 220 V. The secondary supplies 4 A.\n\n1. $V_s = 220\\times\\dfrac{100}{2000} = 11$ V.\n2. Ideal: $I_p = I_s\\dfrac{N_s}{N_p} = 4\\times\\dfrac{1}{20} = 0.2$ A. Power in $= 220\\times0.2 = 44$ W $=$ power out $= 11\\times4$. ✓",
+      type: "worked-example",
+      id: "em5-7-we1",
+      title: "Worked example 1: power in an LCR circuit",
+      problem:
+        "A series circuit with $R = 30\\ \\Omega$ and $X_L - X_C = 40\\ \\Omega$ is connected to 200 V rms.",
+      steps: [
+        { text: "$Z = \\sqrt{30^2 + 40^2} = 50\\ \\Omega$, so $I_{\\text{rms}} = 200/50 = 4$ A." },
+        { text: "Power factor $\\cos\\phi = R/Z = 0.6$." },
+        { text: "$P = V_{\\text{rms}}I_{\\text{rms}}\\cos\\phi = 200\\times4\\times0.6 = 480$ W. Check: $I^2R = 16\\times30 = 480$ W. ✓ *Why this step:* the two forms must agree, and $I^2R$ reminds you that only the resistor consumes power." },
+      ],
+      answer: "$I_{\\text{rms}} = 4$ A, $\\cos\\phi = 0.6$, $P = 480$ W",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (line loss).** A town needs 44 kW through lines of total resistance 2 Ω. Compare sending it at 220 V and at 11 kV.\n\n1. At 220 V: $I = 44\\,000/220 = 200$ A; loss $= 200^2\\times2 = 80$ kW, nearly double the power delivered. Impossible in practice. *Why this step:* the line would need to be fed 124 kW to deliver 44 kW.\n2. At 11 kV: $I = 4$ A; loss $= 16\\times2 = 32$ W, a tiny fraction.\n3. The ratio is $(11\\,000/220)^2 = 50^2 = 2500$.\n\n**Worked example 4 (wave fields).** A light wave has $E_0 = 60$ V/m. Find $B_0$.\n\n1. $B_0 = E_0/c = 60/(3\\times10^8) = 2\\times10^{-7}$ T.\n\n**Worked example 5 (displacement current).** A 2 μF capacitor's voltage is rising at 1000 V/s.\n\n1. Conduction current in the leads: $i = C\\,dV/dt = 2\\times10^{-6}\\times10^3 = 2$ mA.\n2. The displacement current in the gap is the same 2 mA: $\\varepsilon_0\\dfrac{d\\Phi_E}{dt} = \\varepsilon_0A\\dfrac{d}{dt}\\left(\\dfrac{V}{d}\\right) = C\\dfrac{dV}{dt}$.",
+      type: "worked-example",
+      id: "em5-7-we2",
+      title: "Worked example 2: transformer",
+      problem:
+        "A transformer has 2000 primary turns and 100 secondary turns and runs from 220 V. The secondary supplies 4 A. Find the secondary voltage and the primary current.",
+      steps: [
+        { text: "$V_s = 220\\times\\dfrac{100}{2000} = 11$ V." },
+        { text: "Ideal: $I_p = I_s\\dfrac{N_s}{N_p} = 4\\times\\dfrac{1}{20} = 0.2$ A. Power in $= 220\\times0.2 = 44$ W $=$ power out $= 11\\times4$. ✓" },
+      ],
+      answer: "$V_s = 11$ V, $I_p = 0.2$ A",
+    },
+    {
+      type: "worked-example",
+      id: "em5-7-we3",
+      title: "Worked example 3: line loss",
+      problem:
+        "A town needs 44 kW through lines of total resistance 2 Ω. Compare sending it at 220 V and at 11 kV.",
+      steps: [
+        { text: "At 220 V: $I = 44\\,000/220 = 200$ A; loss $= 200^2\\times2 = 80$ kW, nearly double the power delivered. Impossible in practice. *Why this step:* the line would need to be fed 124 kW to deliver 44 kW." },
+        { text: "At 11 kV: $I = 4$ A; loss $= 16\\times2 = 32$ W, a tiny fraction." },
+        { text: "The ratio is $(11\\,000/220)^2 = 50^2 = 2500$." },
+      ],
+      answer: "Loss 80 kW at 220 V against 32 W at 11 kV, a ratio of 2500",
+    },
+    {
+      type: "worked-example",
+      id: "em5-7-we4",
+      title: "Worked example 4: wave fields",
+      problem:
+        "A light wave has $E_0 = 60$ V/m. Find $B_0$.",
+      steps: [
+        { text: "$B_0 = E_0/c = 60/(3\\times10^8) = 2\\times10^{-7}$ T." },
+      ],
+      answer: "$B_0 = 2\\times10^{-7}$ T",
+    },
+    {
+      type: "worked-example",
+      id: "em5-7-we5",
+      title: "Worked example 5: displacement current",
+      problem:
+        "A 2 μF capacitor's voltage is rising at 1000 V/s.",
+      steps: [
+        { text: "Conduction current in the leads: $i = C\\,dV/dt = 2\\times10^{-6}\\times10^3 = 2$ mA." },
+        { text: "The displacement current in the gap is the same 2 mA: $\\varepsilon_0\\dfrac{d\\Phi_E}{dt} = \\varepsilon_0A\\dfrac{d}{dt}\\left(\\dfrac{V}{d}\\right) = C\\dfrac{dV}{dt}$." },
+      ],
+      answer: "2 mA, the same in the leads and across the gap",
     },
     {
       type: "callout",
@@ -1062,16 +1522,20 @@ const lesson07: LessonSeed = {
       content:
         "It increases **voltage**, and the current falls by the same factor, so $VI$ stays the same (or drops slightly, because of losses). A transformer cannot create energy. If it could, you could feed its output back to its input and run it for ever.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em5-7-q1",
       variant: "practice",
-      question: "A device draws 5 A rms from 220 V rms mains with a power factor of 0.8. Its average power consumption is",
-      options: [
-        { text: "1100 W", feedback: "That is the apparent power $V_{\\text{rms}}I_{\\text{rms}}$, ignoring the power factor." },
-        { text: "880 W", correct: true, feedback: "$220\\times5\\times0.8 = 880$ W." },
-        { text: "1375 W", feedback: "That divides by the power factor. Multiply." },
-        { text: "440 W", feedback: "That uses an extra $\\tfrac12$, which belongs with peak values only." },
+      question: "A device draws 5 A rms from 220 V rms mains with a power factor of 0.8. What is its average power consumption? Give your answer in watts.",
+      answer: 880,
+      unit: "W",
+      hint: "$P = V_{\\text{rms}}I_{\\text{rms}}\\cos\\phi$.",
+      solution: "$P = V_{\\text{rms}}I_{\\text{rms}}\\cos\\phi = 220\\times5\\times0.8 = 880$ W.",
+      commonMistakes: [
+        { answer: 1100, feedback: "That is the apparent power $V_{\\text{rms}}I_{\\text{rms}}$, ignoring the power factor." },
+        { answer: 1375, feedback: "That divides by the power factor. Multiply." },
+        { answer: 440, feedback: "That uses an extra $\\tfrac12$, which belongs with peak values only." },
       ],
     },
     {
@@ -1085,6 +1549,7 @@ const lesson07: LessonSeed = {
         { text: "zero, since the current and voltage are $90^\\circ$ out of phase", correct: true, feedback: "$\\cos90^\\circ = 0$: it takes energy for a quarter cycle and returns it the next." },
         { text: "infinite, since an ideal inductor has no resistance", feedback: "Its reactance limits the current, and no energy is dissipated at all." },
       ],
+      hint: "Use $P = V_{\\text{rms}}I_{\\text{rms}}\\cos\\phi$. What is the phase angle for a pure inductor?",
     },
     {
       type: "quiz",
@@ -1097,6 +1562,7 @@ const lesson07: LessonSeed = {
         { text: "44 V and 25 A", feedback: "That treats it as step-down. The secondary has more turns." },
         { text: "1100 V and 5 A", feedback: "The current cannot stay the same while the voltage rises five-fold." },
       ],
+      hint: "For an ideal transformer $V_s/V_p = N_s/N_p$, and power in equals power out.",
     },
     {
       type: "quiz",
@@ -1109,18 +1575,37 @@ const lesson07: LessonSeed = {
         { text: "100 times larger", feedback: "That uses $V^2/R$ with the full line voltage across the line, a common error: the line only drops $IR_\\ell$." },
         { text: "unchanged", feedback: "The current falls, so the $I^2R$ loss falls sharply." },
       ],
+      hint: "At fixed power $P = VI$, so raising $V$ lowers the line current. The loss is $I^2R$.",
+    },
+    {
+      type: "numeric",
+      id: "em5-7-q5",
+      variant: "practice",
+      question: "In an electromagnetic wave in vacuum, the magnetic field amplitude is $10^{-8}$ T. What is the electric field amplitude? Take $c = 3\\times10^8$ m/s and give your answer in V/m.",
+      answer: 3,
+      unit: "V/m",
+      hint: "In an EM wave the amplitudes are linked by $E_0 = cB_0$.",
+      solution: "$E_0 = cB_0 = 3\\times10^8\\times10^{-8} = 3$ V/m.",
+      commonMistakes: [
+        { answer: 3.33e-17, tolerance: 1e-18, feedback: "That divides by $c$. It is $E_0 = cB_0$." },
+        { answer: 1e-8, tolerance: 1e-10, feedback: "$E$ and $B$ are in different units; they are related by the speed $c$." },
+        { answer: 300, feedback: "Check the powers of ten: $10^8\\times10^{-8} = 1$." },
+      ],
     },
     {
       type: "quiz",
-      id: "em5-7-q5",
+      id: "em5-7-q6",
       variant: "practice",
-      question: "In an electromagnetic wave in vacuum, the magnetic field amplitude is $10^{-8}$ T. The electric field amplitude is",
+      multiple: true,
+      question: "Which of these design choices reduce the energy lost in a real transformer? Select all that apply.",
       options: [
-        { text: "$3.3\\times10^{-17}$ V/m", feedback: "That divides by $c$. It is $E_0 = cB_0$." },
-        { text: "$10^{-8}$ V/m", feedback: "$E$ and $B$ are in different units; they are related by the speed $c$." },
-        { text: "300 V/m", feedback: "Check the powers of ten: $10^8\\times10^{-8} = 1$." },
-        { text: "3 V/m", correct: true, feedback: "$E_0 = cB_0 = 3\\times10^8\\times10^{-8} = 3$ V/m." },
+        { text: "Building the core from thin insulated laminations", correct: true, feedback: "The insulating layers break up eddy-current loops, cutting eddy-current loss." },
+        { text: "Using soft iron, with a narrow hysteresis loop, for the core", correct: true, feedback: "Less energy is lost each time the core's magnetisation is reversed, so hysteresis loss falls." },
+        { text: "Winding the coils with thick copper wire", correct: true, feedback: "Thicker wire has lower resistance, so less copper loss, $I^2R$, in the windings." },
+        { text: "Making the core one solid block of iron", feedback: "A solid core gives the eddy currents large, low-resistance loops to circulate in: the loss rises." },
+        { text: "Winding the primary and secondary on opposite ends of the core, well apart", feedback: "Separating them lets more flux leak out without linking both coils. Winding one on top of the other reduces flux leakage." },
       ],
+      hint: "List the losses in a real transformer (copper, eddy-current, hysteresis and flux leakage), and ask which of them each design choice reduces or increases.",
     },
   ]),
 };
@@ -1143,15 +1628,18 @@ const lessonMastery: LessonSeed = {
         "1. $\\Phi = BA\\cos\\theta$; $\\mathcal E = -N\\,d\\Phi/dt$; Lenz: the induced current opposes the change (energy conservation); $\\Delta q = N\\Delta\\Phi/R$.\n2. Motional: $\\mathcal E = Bvl$; drag $B^2l^2v/R$; falling rod $v_t = mgR/B^2l^2$; rotating rod $\\tfrac12B\\omega l^2$.\n3. $N\\Phi = LI$, $\\mathcal E = -L\\,dI/dt$; solenoid $L = \\mu_0n^2Al$; $U = \\tfrac12LI^2$, $u = B^2/2\\mu_0$.\n4. LR: $\\tau = L/R$; the inductor current never jumps (open at switch-on, wire at steady state).\n5. LC: $\\omega = 1/\\sqrt{LC}$, energy swaps between $q^2/2C$ and $\\tfrac12Li^2$.\n6. AC: $V_{\\text{rms}} = V_0/\\sqrt2$; $X_L = \\omega L$ (I lags), $X_C = 1/\\omega C$ (I leads).\n7. Series LCR: $Z = \\sqrt{R^2 + (X_L - X_C)^2}$, $\\tan\\phi = (X_L - X_C)/R$; resonance $\\omega_0 = 1/\\sqrt{LC}$, $Q = \\omega_0L/R$.\n8. $P = V_{\\text{rms}}I_{\\text{rms}}\\cos\\phi$; transformer $V_s/V_p = N_s/N_p = I_p/I_s$; EM waves: $c = 1/\\sqrt{\\mu_0\\varepsilon_0}$, $E_0 = cB_0$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em5-8-q1",
       variant: "mastery",
-      question: "A 200-turn coil of area $5\\times10^{-3}$ m² and resistance 8 Ω is perpendicular to a field that falls from 0.6 T to 0.2 T. The charge that flows through the coil is",
-      options: [
-        { text: "0.05 C", correct: true, feedback: "$\\Delta\\Phi = 0.4\\times5\\times10^{-3} = 2\\times10^{-3}$ Wb; $\\Delta q = \\dfrac{200\\times2\\times10^{-3}}{8} = 0.05$ C." },
-        { text: "0.075 C", feedback: "That uses the initial flux (0.6 T) instead of the change." },
-        { text: "0.4 C", feedback: "That is $N\\Delta\\Phi$ in Wb-turns, without dividing by $R$." },
-        { text: "It cannot be found without the time taken.", feedback: "The time cancels: $\\Delta q = N\\Delta\\Phi/R$." },
+      question: "A 200-turn coil of area $5\\times10^{-3}$ m² and resistance 8 Ω is perpendicular to a field that falls from 0.6 T to 0.2 T. How much charge flows through the coil? (No time is given: decide whether you need one.) Give your answer in coulombs.",
+      answer: 0.05,
+      unit: "C",
+      hint: "$\\Delta q = \\int i\\,dt = \\dfrac{N\\Delta\\Phi}{R}$: the time taken cancels.",
+      solution: "Flux change per turn: $\\Delta\\Phi = \\Delta B\\,A = 0.4\\times5\\times10^{-3} = 2\\times10^{-3}$ Wb.\n\n$\\Delta q = \\dfrac{N\\Delta\\Phi}{R} = \\dfrac{200\\times2\\times10^{-3}}{8} = 0.05$ C, however quickly or slowly the field falls.",
+      commonMistakes: [
+        { answer: 0.075, feedback: "That uses the initial flux (0.6 T) instead of the change." },
+        { answer: 0.4, feedback: "That is $N\\Delta\\Phi$ in Wb-turns, without dividing by $R$." },
+        { answer: 0.025, feedback: "That uses the final field, 0.2 T, instead of the change, 0.4 T." },
       ],
     },
     {
@@ -1165,6 +1653,7 @@ const lessonMastery: LessonSeed = {
         { text: "0.1 N and 0.5 W", correct: true, feedback: "$\\mathcal E = 1$ V, $I = 0.5$ A, $F = BIl = 0.1$ N, $P = Fv = 0.5$ W $= I^2R$." },
         { text: "0.1 N and 0.1 W", feedback: "Power is force times speed: $0.1\\times5 = 0.5$ W." },
       ],
+      hint: "A rod on rails (lesson 5.2): emf $Bvl$, then the current and the force $IlB$.",
     },
     {
       type: "quiz",
@@ -1177,6 +1666,7 @@ const lessonMastery: LessonSeed = {
         { text: "clockwise", correct: true, feedback: "The near face becomes an S pole to attract the retreating N pole; a clockwise current (seen from that face) makes an S pole." },
         { text: "alternating", feedback: "The flux changes in one sense only, so the current flows one way." },
       ],
+      hint: "Lenz's law (lesson 5.1, Worked example 4).",
     },
     {
       type: "quiz",
@@ -1189,6 +1679,7 @@ const lessonMastery: LessonSeed = {
         { text: "4 A/s and 2 A", feedback: "2 A is the final current; after one $\\tau$ it has reached only 63% of that." },
         { text: "Zero and 2 A", feedback: "The current starts at zero but its rate of rise is largest at $t = 0$." },
       ],
+      hint: "Growth of current in an LR circuit (lesson 5.4, Worked example 1).",
     },
     {
       type: "quiz",
@@ -1201,6 +1692,7 @@ const lessonMastery: LessonSeed = {
         { text: "0", feedback: "That is the average over a cycle, not the rms." },
         { text: "$\\tfrac{5}{\\sqrt2}$ A $\\approx 3.54$ A", correct: true, feedback: "The two parts are $90^\\circ$ apart, so the amplitude is $\\sqrt{4^2 + 3^2} = 5$ A; rms $= 5/\\sqrt2$." },
       ],
+      hint: "Combine the sine and cosine into a single sinusoid (lesson 5.5, rms values).",
     },
     {
       type: "quiz",
@@ -1213,6 +1705,7 @@ const lessonMastery: LessonSeed = {
         { text: "210 Ω; in phase", feedback: "That adds all three. Reactances subtract, and combine with $R$ at right angles." },
         { text: "70 Ω; voltage leads by $53^\\circ$", feedback: "$40 + 30 = 70$ is not how impedance works; use Pythagoras. And $\\tan\\phi = 0.75$, not $4/3$." },
       ],
+      hint: "Impedance and phase in a series LCR circuit (lesson 5.6).",
     },
     {
       type: "quiz",
@@ -1225,17 +1718,21 @@ const lessonMastery: LessonSeed = {
         { text: "250 rad/s and 5", feedback: "Check $LC = 0.4\\times10^{-5} = 4\\times10^{-6}$, whose square root is $2\\times10^{-3}$." },
         { text: "500 rad/s and 10", correct: true, feedback: "$\\omega_0 = 1/\\sqrt{4\\times10^{-6}} = 500$ rad/s; $Q = \\omega_0L/R = 200/20 = 10$." },
       ],
+      hint: "Resonance and the quality factor (lesson 5.6).",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em5-8-q8",
       variant: "mastery",
-      question: "A step-down transformer converts 2000 V to 200 V and delivers 9 kW to a load with 90% efficiency. The primary current is",
-      options: [
-        { text: "4.5 A", feedback: "That ignores the losses: the primary must supply 10 kW, not 9 kW." },
-        { text: "5 A", correct: true, feedback: "Input power $= 9/0.9 = 10$ kW; $I_p = 10\\,000/2000 = 5$ A." },
-        { text: "45 A", feedback: "That is the secondary current, $9000/200$." },
-        { text: "50 A", feedback: "That is the primary power divided by the secondary voltage." },
+      question: "A step-down transformer converts 2000 V to 200 V and delivers 9 kW to a load with 90% efficiency. What is the primary current? Give your answer in amperes.",
+      answer: 5,
+      unit: "A",
+      hint: "Find the input power first: $P_{\\text{in}} = P_{\\text{out}}/\\eta$.",
+      solution: "Input power: $P_{\\text{in}} = \\dfrac{9\\text{ kW}}{0.9} = 10$ kW.\n\nPrimary current: $I_p = \\dfrac{P_{\\text{in}}}{V_p} = \\dfrac{10\\,000}{2000} = 5$ A.",
+      commonMistakes: [
+        { answer: 4.5, feedback: "That ignores the losses: the primary must supply 10 kW, not 9 kW." },
+        { answer: 45, feedback: "That is the secondary current, $9000/200$." },
+        { answer: 50, feedback: "That is the primary power divided by the secondary voltage." },
       ],
     },
     {
@@ -1249,19 +1746,22 @@ const lessonMastery: LessonSeed = {
         { text: "2.5 m/s and 1 A", correct: true, feedback: "$v_t = \\dfrac{mgR}{B^2l^2} = \\dfrac{0.2\\times0.5}{0.16\\times0.25} = 2.5$ m/s; $I = \\dfrac{Bv_tl}{R} = 1$ A. Check: $BIl = 0.2$ N $= mg$." },
         { text: "It never reaches a terminal speed.", feedback: "The drag grows with speed until it equals the weight: that speed is terminal." },
       ],
+      hint: "Terminal speed of a falling rod (lesson 5.2, Worked example 1).",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "em5-8-q10",
       variant: "mastery",
-      question: "The rod of the previous question is released from rest. When it has fallen 2 m it is moving at 2 m/s. How much heat has the resistor produced so far?",
-      options: [
-        { text: "0.36 J", correct: true, feedback: "Energy lost by gravity $mgh = 0.4$ J; kinetic energy gained $\\tfrac12mv^2 = 0.04$ J; the rest, 0.36 J, became heat." },
-        { text: "0.4 J", feedback: "Part of the gravitational energy is now kinetic energy of the rod." },
-        { text: "0.04 J", feedback: "That is the kinetic energy, not the heat." },
-        { text: "0.5 J", feedback: "That uses the power at terminal speed (0.5 W) as if it were an energy." },
-      ],
+      question: "The rod of the previous question (mass 0.02 kg, $g = 10$ m/s²) is released from rest. When it has fallen 2 m it is moving at 2 m/s. How much heat has the resistor produced so far? Give your answer in joules.",
+      answer: 0.36,
+      unit: "J",
       hint: "Energy bookkeeping: $mgh = \\tfrac12mv^2 + \\text{heat}$.",
+      solution: "Energy lost by gravity: $mgh = 0.02\\times10\\times2 = 0.4$ J.\n\nKinetic energy gained: $\\tfrac12mv^2 = \\tfrac12\\times0.02\\times2^2 = 0.04$ J.\n\nThe rest became heat in the resistor: $0.4 - 0.04 = 0.36$ J.",
+      commonMistakes: [
+        { answer: 0.4, feedback: "Part of the gravitational energy is now kinetic energy of the rod." },
+        { answer: 0.04, feedback: "That is the kinetic energy, not the heat." },
+        { answer: 0.5, feedback: "That uses the power at terminal speed (0.5 W) as if it were an energy." },
+      ],
     },
     {
       type: "quiz",
@@ -1274,6 +1774,7 @@ const lessonMastery: LessonSeed = {
         { text: "10 V", feedback: "The inductor voltage cannot be found by sharing the source voltage; use $V_L = IX_L$." },
         { text: "Zero, since $V_L$ and $V_C$ cancel", feedback: "Their **sum** is zero, but each one separately is 200 V." },
       ],
+      hint: "Voltages at resonance (lesson 5.6, Worked example 3).",
     },
     {
       type: "quiz",
@@ -1286,6 +1787,22 @@ const lessonMastery: LessonSeed = {
         { text: "It depends on the resistance.", feedback: "The resistance sets how fast the energy is released, not how much." },
         { text: "0.9 J", correct: true, feedback: "All the stored energy $\\tfrac12LI^2 = \\tfrac12\\times0.2\\times9 = 0.9$ J ends up as heat, whatever the resistance." },
       ],
+      hint: "Energy stored in an inductor (lesson 5.3, Worked example 3).",
+    },
+    {
+      type: "quiz",
+      id: "em5-8-q13",
+      variant: "mastery",
+      multiple: true,
+      question: "JEE Advanced style. A rod 0.5 m long is pushed at a steady 5 m/s along **frictionless** rails joined by a 2 Ω resistor, in a perpendicular 0.4 T field. Which statements are true? Select all that apply.",
+      options: [
+        { text: "The applied force equals the magnetic drag $BIl = 0.1$ N.", correct: true, feedback: "At constant velocity the net force is zero, so the push balances the drag: $\\mathcal E = 1$ V, $I = 0.5$ A, $BIl = 0.4\\times0.5\\times0.5 = 0.1$ N." },
+        { text: "The mechanical power supplied equals the rate of heating $I^2R$ in the resistor.", correct: true, feedback: "$Fv = 0.1\\times5 = 0.5$ W and $I^2R = 0.25\\times2 = 0.5$ W: the work done by the push all becomes heat." },
+        { text: "With a 4 Ω resistor instead, the force needed at the same speed is halved.", correct: true, feedback: "The drag is $\\dfrac{B^2l^2v}{R}$, so doubling $R$ halves it (0.05 N)." },
+        { text: "If the speed is doubled, the power needed doubles.", feedback: "Both the drag ($\\propto v$) and the speed double, so $P = \\dfrac{B^2l^2v^2}{R}$ becomes **four** times as large (2 W)." },
+        { text: "If the resistor is removed, leaving the rails unconnected, a force is still needed to keep the rod moving at 5 m/s.", feedback: "With an open circuit the emf is still 1 V but no current flows, so there is no drag. On frictionless rails the rod coasts at constant speed with no push." },
+      ],
+      hint: "Write the drag as $F = \\dfrac{B^2l^2v}{R}$ and the power as $Fv$, then ask what each change does to them.",
     },
     {
       type: "callout",

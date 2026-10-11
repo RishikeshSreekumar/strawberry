@@ -51,6 +51,7 @@ const lesson01: LessonSeed = {
           "Each flip is one Bernoulli trial with p = 0.3. The running proportion wanders early and then settles on p. Watch the streak readout too: a run of heads does not change what the next flip does.",
       },
     },
+    { type: "heading", text: "What counts as Bernoulli trials" },
     {
       type: "callout",
       variant: "definition",
@@ -87,10 +88,11 @@ const lesson01: LessonSeed = {
       content:
         "When the population is huge compared with the sample, removing a few items barely changes $p$. Picking 5 bulbs from a batch of 100,000 without replacement is not *exactly* Bernoulli, but it is so close that everyone models it that way. The misconception is treating a small deck or bag as if it were huge.",
     },
+    { type: "heading", text: "The Bernoulli random variable" },
     {
       type: "text",
       content:
-        "**The Bernoulli random variable.** For a single trial, let $X = 1$ on success and $X = 0$ on failure. That tiny variable is the building block of everything in this chapter, so compute its mean and variance straight from the definitions of Chapter 4.",
+        "For a single trial, let $X = 1$ on success and $X = 0$ on failure. That tiny variable is the building block of everything in this chapter, so compute its mean and variance straight from the definitions of Chapter 4.",
     },
     {
       type: "table",
@@ -114,44 +116,89 @@ const lesson01: LessonSeed = {
       content:
         "$X \\in \\{0, 1\\}$ with $P(X = 1) = p$. Mean $p$, variance $pq$.\n\nThe mean is the proportion of successes you expect. The variance $pq$ is zero when $p = 0$ or $p = 1$, since then there is no uncertainty at all. It is largest, $\\frac{1}{4}$, at $p = \\frac{1}{2}$, when the trial is hardest to predict.",
     },
+    { type: "heading", text: "Spotting and using Bernoulli trials" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** A die is rolled once. Let $X = 1$ if it shows a number greater than 4.\n\n*Step 1.* Success is $\\{5, 6\\}$, so $p = \\frac{2}{6} = \\frac{1}{3}$ and $q = \\frac{2}{3}$.\n\n*Step 2.* $E[X] = p = \\frac{1}{3}$.\n\n*Step 3.* $\\operatorname{Var}(X) = pq = \\frac{1}{3}\\cdot\\frac{2}{3} = \\frac{2}{9}$.",
+      type: "worked-example",
+      id: "pr5-1-we1",
+      title: "Worked example 1",
+      problem:
+        "A die is rolled once. Let $X = 1$ if it shows a number greater than 4. Find $p$, $E[X]$ and $\\operatorname{Var}(X)$.",
+      steps: [
+        {
+          text: "Success is $\\{5, 6\\}$, so $p = \\frac{2}{6} = \\frac{1}{3}$ and $q = \\frac{2}{3}$.",
+        },
+        {
+          text: "$E[X] = p = \\frac{1}{3}$.",
+        },
+        {
+          text: "$\\operatorname{Var}(X) = pq = \\frac{1}{3}\\cdot\\frac{2}{3} = \\frac{2}{9}$.",
+        },
+      ],
+      answer: "$p = \\frac{1}{3}$, $E[X] = \\frac{1}{3}$, $\\operatorname{Var}(X) = \\frac{2}{9}$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2.** A bag holds 4 red and 6 blue balls. Three balls are drawn and you count reds. Is this a sequence of Bernoulli trials?\n\n*With replacement:* yes. $n = 3$, $p = \\frac{4}{10} = 0.4$ on every draw, and the draws are independent.\n\n*Without replacement:* no. The first draw has $P(\\text{red}) = 0.4$, but given that a red was removed, the second has $P(\\text{red} \\mid \\text{1st red}) = \\frac{3}{9} = \\frac{1}{3}$. The success probability given the history changes, so independence fails.",
+      type: "worked-example",
+      id: "pr5-1-we2",
+      title: "Worked example 2",
+      problem:
+        "A bag holds 4 red and 6 blue balls. Three balls are drawn and you count reds. Is this a sequence of Bernoulli trials?",
+      steps: [
+        {
+          text: "*With replacement:* yes. $n = 3$, $p = \\frac{4}{10} = 0.4$ on every draw, and the draws are independent.",
+        },
+        {
+          text: "*Without replacement:* no. The first draw has $P(\\text{red}) = 0.4$, but given that a red was removed, the second has $P(\\text{red} \\mid \\text{1st red}) = \\frac{3}{9} = \\frac{1}{3}$. The success probability given the history changes, so independence fails.",
+        },
+      ],
+      answer: "With replacement, yes ($n = 3$, $p = 0.4$). Without replacement, no.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (an application).** A lottery ticket wins a prize with probability $0.01$. Ravi buys one ticket every week for a year, 52 weeks, and each week's draw is independent. Is \"did this week's ticket win?\" a Bernoulli trial, and what are the mean and variance of one week's indicator?\n\n*Step 1: check the four conditions.* $n = 52$ is fixed in advance. Each week has two outcomes, win or not. The chance is $0.01$ every week, and the draws are independent.\n\n*Why this step:* the formulas only apply once the story passes all four tests. Skipping the check is how the without-replacement trap catches people.\n\n*Step 2: one week's indicator.* Let $X = 1$ if the ticket wins. Then $X \\sim$ Bernoulli$(0.01)$:",
+      type: "worked-example",
+      id: "pr5-1-we3",
+      title: "Worked example 3 (an application)",
+      problem:
+        "A lottery ticket wins a prize with probability $0.01$. Ravi buys one ticket every week for a year, 52 weeks, and each week's draw is independent. Is \"did this week's ticket win?\" a Bernoulli trial, and what are the mean and variance of one week's indicator?",
+      steps: [
+        {
+          text: "*Check the four conditions.* $n = 52$ is fixed in advance. Each week has two outcomes, win or not. The chance is $0.01$ every week, and the draws are independent.\n\n*Why this step:* the formulas only apply once the story passes all four tests. Skipping the check is how the without-replacement trap catches people.",
+        },
+        {
+          text: "*One week's indicator.* Let $X = 1$ if the ticket wins. Then $X \\sim$ Bernoulli$(0.01)$:",
+          latex: "E[X] = p = 0.01, \\qquad \\operatorname{Var}(X) = pq = 0.01 \\times 0.99 = 0.0099",
+        },
+        {
+          text: "*Why this step:* the Bernoulli mean and variance come from its two-row table, so there is nothing new to compute. Just read off $p$ and $q$.",
+        },
+        {
+          text: "*A sense check.* The variance $0.0099$ is almost exactly the mean $0.01$. When $p$ is tiny, $q \\approx 1$ and so $pq \\approx p$. You will see this pattern again in 5.5, where rare events give a distribution whose variance *equals* its mean.",
+        },
+      ],
+      answer: "$E[X] = 0.01$, $\\operatorname{Var}(X) = 0.0099$",
     },
     {
-      type: "math",
-      latex: "E[X] = p = 0.01, \\qquad \\operatorname{Var}(X) = pq = 0.01 \\times 0.99 = 0.0099",
+      type: "worked-example",
+      id: "pr5-1-we4",
+      title: "Worked example 4 (exam style)",
+      problem:
+        "A Bernoulli variable $X$ has $\\operatorname{Var}(X) = \\frac{2}{9}$ and $P(X = 1) > P(X = 0)$. Find $p$ and $E[X]$.",
+      steps: [
+        {
+          text: "*Turn the variance into an equation in $p$.* ",
+          latex: "p(1 - p) = \\frac{2}{9} \\iff 9p^2 - 9p + 2 = 0 \\iff (3p - 1)(3p - 2) = 0",
+        },
+        {
+          text: "*Why this step:* the variance $pq$ is the only fact that involves $p$, and it is a quadratic. A quadratic has two roots, so expect two candidates.",
+        },
+        {
+          text: "*Use the extra condition.* The roots are $p = \\frac{1}{3}$ and $p = \\frac{2}{3}$. They give the same variance because $pq$ is symmetric: swapping success and failure doesn't change the spread. $P(X = 1) > P(X = 0)$ means $p > q$, so $p = \\frac{2}{3}$.\n\n*Why this step:* the variance alone cannot tell $p$ from $q$. The question adds the inequality exactly to break that tie.",
+        },
+        {
+          text: "$E[X] = p = \\frac{2}{3}$.",
+        },
+      ],
+      answer: "$p = \\frac{2}{3}$, $E[X] = \\frac{2}{3}$",
     },
-    {
-      type: "text",
-      content:
-        "*Why this step:* the Bernoulli mean and variance come from its two-row table, so there is nothing new to compute. Just read off $p$ and $q$.\n\n*Step 3: a sense check.* The variance $0.0099$ is almost exactly the mean $0.01$. When $p$ is tiny, $q \\approx 1$ and so $pq \\approx p$. You will see this pattern again in 5.5, where rare events give a distribution whose variance *equals* its mean.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (exam style).** A Bernoulli variable $X$ has $\\operatorname{Var}(X) = \\frac{2}{9}$ and $P(X = 1) > P(X = 0)$. Find $p$ and $E[X]$.\n\n*Step 1: turn the variance into an equation in $p$.*",
-    },
-    {
-      type: "math",
-      latex: "p(1 - p) = \\frac{2}{9} \\iff 9p^2 - 9p + 2 = 0 \\iff (3p - 1)(3p - 2) = 0",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* the variance $pq$ is the only fact that involves $p$, and it is a quadratic. A quadratic has two roots, so expect two candidates.\n\n*Step 2: use the extra condition.* The roots are $p = \\frac{1}{3}$ and $p = \\frac{2}{3}$. They give the same variance because $pq$ is symmetric: swapping success and failure doesn't change the spread. $P(X = 1) > P(X = 0)$ means $p > q$, so $p = \\frac{2}{3}$.\n\n*Why this step:* the variance alone cannot tell $p$ from $q$. The question adds the inequality exactly to break that tie.\n\n*Step 3.* $E[X] = p = \\frac{2}{3}$.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr5-1-q1",
@@ -320,6 +367,7 @@ const lesson02: LessonSeed = {
         "**Step 2: every path with 2 successes has the same probability.** SFS gives $0.6 \\times 0.4 \\times 0.6$ and FSS gives $0.4 \\times 0.6 \\times 0.6$. Multiplication doesn't care about order, so each is $p^2 q^1 = 0.144$. Where the successes fall changes nothing. Only *how many* there are matters.\n\n**Step 3: count those paths.** A path with exactly 2 successes is fixed by choosing *which* 2 of the 3 kicks were successes. That is $\\binom{3}{2} = 3$ ways, straight from the combinations chapter.\n\n**Step 4: add.** The paths are mutually exclusive, so add their probabilities:",
     },
     { type: "math", latex: "P(X = 2) = \\binom{3}{2}(0.6)^2(0.4)^1 = 3 \\times 0.144 = 0.432" },
+    { type: "heading", text: "From three kicks to $B(n, p)$" },
     {
       type: "text",
       content:
@@ -347,10 +395,11 @@ const lesson02: LessonSeed = {
         ["Total", "8", "", "1.000"],
       ],
     },
+    { type: "heading", text: "Why the name \"binomial\"?" },
     {
       type: "text",
       content:
-        "**Why the name \"binomial\"?** Expand $(q + p)^n$ with the binomial theorem. The general term is $\\binom{n}{k} p^k q^{n-k}$, which is exactly $P(X = k)$. So the whole distribution sits inside one expansion, and the total comes for free:",
+        "Expand $(q + p)^n$ with the binomial theorem. The general term is $\\binom{n}{k} p^k q^{n-k}$, which is exactly $P(X = k)$. So the whole distribution sits inside one expansion, and the total comes for free:",
     },
     {
       type: "math",
@@ -369,6 +418,7 @@ const lesson02: LessonSeed = {
       content:
         "Writing $P(\\text{exactly 2 heads in 4 tosses}) = \\left(\\tfrac{1}{2}\\right)^2\\left(\\tfrac{1}{2}\\right)^2 = \\tfrac{1}{16}$ computes the probability of **one particular arrangement**, such as HHTT. But HTHT, HTTH, THHT, THTH and TTHH also have exactly 2 heads. There are $\\binom{4}{2} = 6$ arrangements, so the answer is $\\frac{6}{16} = \\frac{3}{8}$. The $p^k q^{n-k}$ part is one path. The $\\binom{n}{k}$ counts the paths.",
     },
+    { type: "heading", text: "Exactly, at least, at most" },
     {
       type: "text",
       content:
@@ -385,83 +435,170 @@ const lesson02: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** A fair coin is tossed 6 times. Here $n = 6$, $p = q = \\frac{1}{2}$, so every path has probability $\\left(\\frac{1}{2}\\right)^6 = \\frac{1}{64}$ and only the path counts differ.\n\n*Exactly 4 heads:* $\\binom{6}{4}\\cdot\\frac{1}{64} = \\frac{15}{64}$.\n\n*At least 5 heads:* $P(5) + P(6) = \\frac{6 + 1}{64} = \\frac{7}{64}$.\n\n*At least one head:* $1 - P(0) = 1 - \\frac{1}{64} = \\frac{63}{64}$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2.** A die is rolled 4 times. Find the probability of at least one six.\n\n*Step 1.* $n = 4$, success = six, $p = \\frac{1}{6}$, $q = \\frac{5}{6}$.\n\n*Step 2.* \"At least one\" has four cases (1, 2, 3 or 4 sixes). Its complement has one: no sixes.\n\n*Step 3.* $P(X \\ge 1) = 1 - \\left(\\frac{5}{6}\\right)^4 = 1 - \\frac{625}{1296} = \\frac{671}{1296} \\approx 0.518$.\n\nSlightly better than even. This is the bet the Chevalier de Méré won in the 1650s.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3.** The probability that a bulb is defective is 0.05. In a pack of 10 bulbs, find the probability that at most one is defective.\n\n*Step 1.* Success = defective, $n = 10$, $p = 0.05$, $q = 0.95$.\n\n*Step 2.* $P(X \\le 1) = P(0) + P(1) = (0.95)^{10} + \\binom{10}{1}(0.05)(0.95)^9$.\n\n*Step 3.* $(0.95)^{10} \\approx 0.5987$ and $10 \\times 0.05 \\times (0.95)^9 \\approx 0.3151$, so $P(X \\le 1) \\approx 0.914$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (sports).** In a hurdle race an athlete must cross 10 hurdles. She clears each hurdle with probability $\\frac{5}{6}$, independently. Find the probability that she knocks down fewer than 2 hurdles.\n\n*Step 1: choose what to count.* The question is about hurdles knocked down, so call a knock-down a success: $n = 10$, $p = \\frac{1}{6}$, $q = \\frac{5}{6}$.\n\n*Why this step:* you could count clears instead, but then \"fewer than 2 knocked down\" becomes \"at least 9 cleared\". Labelling the counted outcome as success keeps the sum short and the arithmetic honest.\n\n*Step 2: translate the wording.* \"Fewer than 2\" means $X = 0$ or $X = 1$:",
-    },
-    {
-      type: "math",
-      latex:
-        "P(X \\le 1) = \\left(\\frac{5}{6}\\right)^{10} + \\binom{10}{1}\\frac{1}{6}\\left(\\frac{5}{6}\\right)^{9}",
-    },
-    {
-      type: "text",
-      content:
-        "*Step 3: factor before you calculate.* Both terms contain $\\left(\\frac{5}{6}\\right)^9$:",
-    },
-    {
-      type: "math",
-      latex:
-        "P(X \\le 1) = \\left(\\frac{5}{6}\\right)^{9}\\left(\\frac{5}{6} + \\frac{10}{6}\\right) = \\frac{5}{2}\\left(\\frac{5}{6}\\right)^{9} \\approx 2.5 \\times 0.1938 \\approx 0.485",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* pulling out the common power turns two awkward terms into one. Board exams often accept the answer left as $\\frac{5}{2}\\left(\\frac{5}{6}\\right)^9$, and factoring gets you there in one line.\n\nSo even a strong hurdler, clearing 5 in 6, has roughly an even chance of a clean-or-nearly-clean run over 10 hurdles.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5: a success that is itself a compound event.** A pair of dice is thrown 4 times. Let $X$ be the number of doublets. Find the distribution of $X$.\n\n*Step 1.* One throw of the pair is one trial. Success = a doublet: $(1,1), (2,2), \\ldots, (6,6)$, which is 6 of the 36 outcomes. So $p = \\frac{6}{36} = \\frac{1}{6}$ and $q = \\frac{5}{6}$.\n\n*Step 2.* The throws are independent and $n = 4$ is fixed, so $X \\sim B\\!\\left(4, \\frac{1}{6}\\right)$ and $P(X = k) = \\binom{4}{k}\\frac{5^{4-k}}{6^4} = \\binom{4}{k}\\frac{5^{4-k}}{1296}$.\n\n*Step 3.* Fill in $k = 0, \\ldots, 4$:",
-    },
-    {
-      type: "table",
-      headers: ["$k$ doublets", "0", "1", "2", "3", "4"],
-      rows: [
-        ["$\\binom{4}{k}\\,5^{4-k}$", "$1 \\cdot 625$", "$4 \\cdot 125$", "$6 \\cdot 25$", "$4 \\cdot 5$", "$1 \\cdot 1$"],
-        ["$P(X = k)$", "$\\frac{625}{1296}$", "$\\frac{500}{1296}$", "$\\frac{150}{1296}$", "$\\frac{20}{1296}$", "$\\frac{1}{1296}$"],
+      type: "worked-example",
+      id: "pr5-2-we1",
+      title: "Worked example 1",
+      problem:
+        "A fair coin is tossed 6 times. Find the probability of exactly 4 heads, of at least 5 heads, and of at least one head.",
+      steps: [
+        {
+          text: "Here $n = 6$, $p = q = \\frac{1}{2}$, so every path has probability $\\left(\\frac{1}{2}\\right)^6 = \\frac{1}{64}$ and only the path counts differ.",
+        },
+        {
+          text: "*Exactly 4 heads:* $\\binom{6}{4}\\cdot\\frac{1}{64} = \\frac{15}{64}$.",
+        },
+        {
+          text: "*At least 5 heads:* $P(5) + P(6) = \\frac{6 + 1}{64} = \\frac{7}{64}$.",
+        },
+        {
+          text: "*At least one head:* $1 - P(0) = 1 - \\frac{1}{64} = \\frac{63}{64}$.",
+        },
       ],
+      answer: "$\\frac{15}{64}$, $\\frac{7}{64}$ and $\\frac{63}{64}$",
+    },
+    {
+      type: "worked-example",
+      id: "pr5-2-we2",
+      title: "Worked example 2",
+      problem:
+        "A die is rolled 4 times. Find the probability of at least one six.",
+      steps: [
+        {
+          text: "$n = 4$, success = six, $p = \\frac{1}{6}$, $q = \\frac{5}{6}$.",
+        },
+        {
+          text: "\"At least one\" has four cases (1, 2, 3 or 4 sixes). Its complement has one: no sixes.",
+        },
+        {
+          text: "$P(X \\ge 1) = 1 - \\left(\\frac{5}{6}\\right)^4 = 1 - \\frac{625}{1296} = \\frac{671}{1296} \\approx 0.518$.\n\nSlightly better than even. This is the bet the Chevalier de Méré won in the 1650s.",
+        },
+      ],
+      answer: "$\\frac{671}{1296} \\approx 0.518$",
+    },
+    {
+      type: "worked-example",
+      id: "pr5-2-we3",
+      title: "Worked example 3",
+      problem:
+        "The probability that a bulb is defective is 0.05. In a pack of 10 bulbs, find the probability that at most one is defective.",
+      steps: [
+        {
+          text: "Success = defective, $n = 10$, $p = 0.05$, $q = 0.95$.",
+        },
+        {
+          text: "$P(X \\le 1) = P(0) + P(1) = (0.95)^{10} + \\binom{10}{1}(0.05)(0.95)^9$.",
+        },
+        {
+          text: "$(0.95)^{10} \\approx 0.5987$ and $10 \\times 0.05 \\times (0.95)^9 \\approx 0.3151$, so $P(X \\le 1) \\approx 0.914$.",
+        },
+      ],
+      answer: "$P(X \\le 1) \\approx 0.914$",
+    },
+    {
+      type: "worked-example",
+      id: "pr5-2-we4",
+      title: "Worked example 4 (sports)",
+      problem:
+        "In a hurdle race an athlete must cross 10 hurdles. She clears each hurdle with probability $\\frac{5}{6}$, independently. Find the probability that she knocks down fewer than 2 hurdles.",
+      steps: [
+        {
+          text: "*Choose what to count.* The question is about hurdles knocked down, so call a knock-down a success: $n = 10$, $p = \\frac{1}{6}$, $q = \\frac{5}{6}$.\n\n*Why this step:* you could count clears instead, but then \"fewer than 2 knocked down\" becomes \"at least 9 cleared\". Labelling the counted outcome as success keeps the sum short and the arithmetic honest.",
+        },
+        {
+          text: "*Translate the wording.* \"Fewer than 2\" means $X = 0$ or $X = 1$:",
+          latex: "P(X \\le 1) = \\left(\\frac{5}{6}\\right)^{10} + \\binom{10}{1}\\frac{1}{6}\\left(\\frac{5}{6}\\right)^{9}",
+        },
+        {
+          text: "*Factor before you calculate.* Both terms contain $\\left(\\frac{5}{6}\\right)^9$:",
+          latex: "P(X \\le 1) = \\left(\\frac{5}{6}\\right)^{9}\\left(\\frac{5}{6} + \\frac{10}{6}\\right) = \\frac{5}{2}\\left(\\frac{5}{6}\\right)^{9} \\approx 2.5 \\times 0.1938 \\approx 0.485",
+        },
+        {
+          text: "*Why this step:* pulling out the common power turns two awkward terms into one. Board exams often accept the answer left as $\\frac{5}{2}\\left(\\frac{5}{6}\\right)^9$, and factoring gets you there in one line.\n\nSo even a strong hurdler, clearing 5 in 6, has roughly an even chance of a clean-or-nearly-clean run over 10 hurdles.",
+        },
+      ],
+      answer: "$\\frac{5}{2}\\left(\\frac{5}{6}\\right)^{9} \\approx 0.485$",
+    },
+    { type: "heading", text: "Doublets, enough tosses and random walks" },
+    {
+      type: "worked-example",
+      id: "pr5-2-we5",
+      title: "Worked example 5: a success that is itself a compound event",
+      problem:
+        "A pair of dice is thrown 4 times. Let $X$ be the number of doublets. Find the distribution of $X$.",
+      steps: [
+        {
+          text: "One throw of the pair is one trial. Success = a doublet: $(1,1), (2,2), \\ldots, (6,6)$, which is 6 of the 36 outcomes. So $p = \\frac{6}{36} = \\frac{1}{6}$ and $q = \\frac{5}{6}$.",
+        },
+        {
+          text: "The throws are independent and $n = 4$ is fixed, so $X \\sim B\\!\\left(4, \\frac{1}{6}\\right)$ and $P(X = k) = \\binom{4}{k}\\frac{5^{4-k}}{6^4} = \\binom{4}{k}\\frac{5^{4-k}}{1296}$.",
+        },
+        {
+          text: "Fill in $k = 0, \\ldots, 4$:",
+          table: {
+            headers: ["$k$ doublets", "0", "1", "2", "3", "4"],
+            rows: [
+              ["$\\binom{4}{k}\\,5^{4-k}$", "$1 \\cdot 625$", "$4 \\cdot 125$", "$6 \\cdot 25$", "$4 \\cdot 5$", "$1 \\cdot 1$"],
+              ["$P(X = k)$", "$\\frac{625}{1296}$", "$\\frac{500}{1296}$", "$\\frac{150}{1296}$", "$\\frac{20}{1296}$", "$\\frac{1}{1296}$"],
+            ],
+          },
+        },
+        {
+          text: "**Check.** The numerators add to $625 + 500 + 150 + 20 + 1 = 1296$, as they must. The only new idea is that a \"success\" can be any event you define on a single trial, as long as it has the same probability every time.",
+        },
+      ],
+      answer: "$X \\sim B\\!\\left(4, \\frac{1}{6}\\right)$: $P(X = 0, 1, 2, 3, 4) = \\frac{625}{1296}, \\frac{500}{1296}, \\frac{150}{1296}, \\frac{20}{1296}, \\frac{1}{1296}$",
+    },
+    {
+      type: "worked-example",
+      id: "pr5-2-we6",
+      title: "Worked example 6: how many trials are enough?",
+      problem:
+        "How many tosses of a fair coin are needed so that $P(\\text{at least one head}) > 0.9$?",
+      steps: [
+        {
+          text: "$P(X \\ge 1) = 1 - \\left(\\frac{1}{2}\\right)^n$.",
+        },
+        {
+          text: "Need $1 - \\left(\\frac{1}{2}\\right)^n > 0.9$, that is, $\\left(\\frac{1}{2}\\right)^n < 0.1$, or $2^n > 10$.",
+        },
+        {
+          text: "$2^3 = 8$ is not enough, but $2^4 = 16$ is. So the minimum is $n = 4$, and then $P(X \\ge 1) = \\frac{15}{16} \\approx 0.94$.",
+        },
+      ],
+      answer: "$n = 4$ tosses.",
     },
     {
       type: "text",
       content:
-        "The numerators add to $625 + 500 + 150 + 20 + 1 = 1296$, as they must. The only new idea is that a \"success\" can be any event you define on a single trial, as long as it has the same probability every time.",
+        "The same move, solving $q^n < 1 - \\alpha$, handles every \"minimum $n$\" question.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 6: how many trials are enough?** How many tosses of a fair coin are needed so that $P(\\text{at least one head}) > 0.9$?\n\n*Step 1.* $P(X \\ge 1) = 1 - \\left(\\frac{1}{2}\\right)^n$.\n\n*Step 2.* Need $1 - \\left(\\frac{1}{2}\\right)^n > 0.9$, that is, $\\left(\\frac{1}{2}\\right)^n < 0.1$, or $2^n > 10$.\n\n*Step 3.* $2^3 = 8$ is not enough, but $2^4 = 16$ is. So the minimum is $n = 4$, and then $P(X \\ge 1) = \\frac{15}{16} \\approx 0.94$.\n\nThe same move, solving $q^n < 1 - \\alpha$, handles every \"minimum $n$\" question.",
+      type: "worked-example",
+      id: "pr5-2-we7",
+      title: "Worked example 7 (JEE style: a random walk)",
+      problem:
+        "A man takes a step forward with probability $0.4$ and a step backward with probability $0.6$, independently. Find the probability that after 11 steps he is exactly one step away from where he started.",
+      steps: [
+        {
+          text: "*Turn position into a count.* Let $X$ be the number of forward steps, so $X \\sim B(11, 0.4)$ and there are $11 - X$ backward steps. His final position is $X - (11 - X) = 2X - 11$.\n\n*Why this step:* the binomial counts successes, not positions. Rewriting the position in terms of $X$ turns a question about *where he ends up* into a question about *how many* forward steps he took.",
+        },
+        {
+          text: "*Solve for the counts.* One step away means $2X - 11 = \\pm 1$, so $X = 6$ or $X = 5$.\n\n*Why this step:* \"one step away\" has two directions, in front of the start or behind it. Missing one of them is the usual way to lose half the marks.",
+        },
+        {
+          text: "*Add the two binomial terms.* ",
+          latex: "P = \\binom{11}{6}(0.4)^6(0.6)^5 + \\binom{11}{5}(0.4)^5(0.6)^6 = \\binom{11}{5}(0.4)^5(0.6)^5\\,(0.4 + 0.6)",
+        },
+        {
+          text: "*Why this step:* $\\binom{11}{6} = \\binom{11}{5} = 462$, so the two terms share almost everything. Factoring leaves $(0.4 + 0.6) = 1$.",
+        },
+        {
+          text: "$P = 462\\,(0.4 \\times 0.6)^5 = 462\\,(0.24)^5 \\approx 462 \\times 0.000796 \\approx 0.368$.",
+        },
+      ],
+      answer: "$\\approx 0.368$",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 7 (JEE style: a random walk).** A man takes a step forward with probability $0.4$ and a step backward with probability $0.6$, independently. Find the probability that after 11 steps he is exactly one step away from where he started.\n\n*Step 1: turn position into a count.* Let $X$ be the number of forward steps, so $X \\sim B(11, 0.4)$ and there are $11 - X$ backward steps. His final position is $X - (11 - X) = 2X - 11$.\n\n*Why this step:* the binomial counts successes, not positions. Rewriting the position in terms of $X$ turns a question about *where he ends up* into a question about *how many* forward steps he took.\n\n*Step 2: solve for the counts.* One step away means $2X - 11 = \\pm 1$, so $X = 6$ or $X = 5$.\n\n*Why this step:* \"one step away\" has two directions, in front of the start or behind it. Missing one of them is the usual way to lose half the marks.\n\n*Step 3: add the two binomial terms.*",
-    },
-    {
-      type: "math",
-      latex:
-        "P = \\binom{11}{6}(0.4)^6(0.6)^5 + \\binom{11}{5}(0.4)^5(0.6)^6 = \\binom{11}{5}(0.4)^5(0.6)^5\\,(0.4 + 0.6)",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* $\\binom{11}{6} = \\binom{11}{5} = 462$, so the two terms share almost everything. Factoring leaves $(0.4 + 0.6) = 1$.\n\n*Step 4.* $P = 462\\,(0.4 \\times 0.6)^5 = 462\\,(0.24)^5 \\approx 462 \\times 0.000796 \\approx 0.368$.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr5-2-q1",
@@ -607,10 +744,11 @@ const lesson03: LessonSeed = {
           "The wedge marks the mean np, where the bars would balance. The band shows ±σ. The shaded bars are P(0 ≤ X ≤ 3). Set p = 0.5 and look at the symmetry, then slide p towards 0 or 1 and watch a tail stretch out.",
       },
     },
+    { type: "heading", text: "The mean via indicators" },
     {
       type: "text",
       content:
-        "**The mean via indicators.** You could compute $\\sum k\\binom{n}{k}p^kq^{n-k}$ directly, but there is a far cleaner route. Let $I_j = 1$ if trial $j$ is a success and $0$ otherwise. Then the total number of successes is just the sum of these indicators:",
+        "You could compute $\\sum k\\binom{n}{k}p^kq^{n-k}$ directly, but there is a far cleaner route. Let $I_j = 1$ if trial $j$ is a success and $0$ otherwise. Then the total number of successes is just the sum of these indicators:",
     },
     { type: "math", latex: "X = I_1 + I_2 + \\cdots + I_n" },
     {
@@ -644,10 +782,11 @@ const lesson03: LessonSeed = {
       content:
         "Linearity of expectation holds for *any* random variables. Draw 5 cards without replacement: the draws are dependent, but each position is an ace with probability $\\frac{4}{52}$, so the expected number of aces is still $5 \\times \\frac{4}{52} = \\frac{5}{13}$. The variance formula $npq$ would be wrong there, because it relies on independence.",
     },
+    { type: "heading", text: "Shape and the most likely value" },
     {
       type: "text",
       content:
-        "**Shape.** Play with the explorer and three facts show up.\n\n**Symmetric at $p = \\frac{1}{2}$.** $P(X = k) = P(X = n - k)$ because $\\binom{n}{k} = \\binom{n}{n-k}$ and $p = q$.\n\n**Skewed otherwise.** For $p < \\frac{1}{2}$ the bars pile up on the left and a tail stretches to the right. For $p > \\frac{1}{2}$ it is the mirror image.\n\n**Spread is largest at $p = \\frac{1}{2}$.** $npq = n\\,p(1 - p) \\le \\frac{n}{4}$, with equality only at $p = \\frac{1}{2}$.",
+        "Play with the explorer and three facts show up.\n\n**Symmetric at $p = \\frac{1}{2}$.** $P(X = k) = P(X = n - k)$ because $\\binom{n}{k} = \\binom{n}{n-k}$ and $p = q$.\n\n**Skewed otherwise.** For $p < \\frac{1}{2}$ the bars pile up on the left and a tail stretches to the right. For $p > \\frac{1}{2}$ it is the mirror image.\n\n**Spread is largest at $p = \\frac{1}{2}$.** $npq = n\\,p(1 - p) \\le \\frac{n}{4}$, with equality only at $p = \\frac{1}{2}$.",
     },
     {
       type: "text",
@@ -681,6 +820,7 @@ const lesson03: LessonSeed = {
       content:
         "$np$ is the **mean**, a balance point. It need not be a possible value at all: with $n = 5$, $p = \\frac{1}{2}$, $np = 2.5$ and you can't get 2.5 heads. The **mode** is a whole number within 1 of $np$, found from $(n+1)p$. The two agree when $np$ is a whole number, but not in general.",
     },
+    { type: "heading", text: "Finding $n$ and $p$ from mean and variance" },
     {
       type: "text",
       content:
@@ -688,63 +828,132 @@ const lesson03: LessonSeed = {
     },
     { type: "math", latex: "\\frac{\\operatorname{Var}(X)}{E[X]} = \\frac{npq}{np} = q" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** A binomial variable has mean 4 and variance 3. Find $n$, $p$ and $P(X = 1)$.\n\n*Step 1.* $q = \\frac{3}{4}$, so $p = \\frac{1}{4}$.\n\n*Step 2.* $np = 4 \\Rightarrow n = 16$.\n\n*Step 3.* $P(X = 1) = \\binom{16}{1}\\left(\\frac{1}{4}\\right)\\left(\\frac{3}{4}\\right)^{15} = 4\\left(\\frac{3}{4}\\right)^{15} \\approx 0.053$.\n\nIt is small because 1 is far below the mean of 4.",
+      type: "worked-example",
+      id: "pr5-3-we1",
+      title: "Worked example 1",
+      problem:
+        "A binomial variable has mean 4 and variance 3. Find $n$, $p$ and $P(X = 1)$.",
+      steps: [
+        {
+          text: "$q = \\frac{3}{4}$, so $p = \\frac{1}{4}$.",
+        },
+        {
+          text: "$np = 4 \\Rightarrow n = 16$.",
+        },
+        {
+          text: "$P(X = 1) = \\binom{16}{1}\\left(\\frac{1}{4}\\right)\\left(\\frac{3}{4}\\right)^{15} = 4\\left(\\frac{3}{4}\\right)^{15} \\approx 0.053$.\n\nIt is small because 1 is far below the mean of 4.",
+        },
+      ],
+      answer: "$n = 16$, $p = \\frac{1}{4}$, $P(X = 1) \\approx 0.053$",
+    },
+    {
+      type: "worked-example",
+      id: "pr5-3-we2",
+      title: "Worked example 2",
+      problem:
+        "Can a binomial variable have mean 3 and variance 4?",
+      steps: [
+        {
+          text: "$q = \\frac{4}{3} > 1$, which is impossible for a probability. So no. The quick test is that the variance of a binomial must be smaller than its mean.",
+        },
+      ],
+      answer: "No: it would need $q = \\frac{4}{3} > 1$.",
+    },
+    {
+      type: "worked-example",
+      id: "pr5-3-we3",
+      title: "Worked example 3 (JEE style)",
+      problem:
+        "For a binomial distribution, the sum of the mean and variance is 24 and their product is 128. Find $n$ and $p$.",
+      steps: [
+        {
+          text: "*Treat the mean and variance as two unknown numbers.* Their sum is 24 and their product is 128, so they are the roots of a quadratic:",
+          latex: "t^2 - 24t + 128 = 0 \\iff (t - 16)(t - 8) = 0 \\iff t = 16 \\text{ or } 8",
+        },
+        {
+          text: "*Why this step:* any two numbers with sum $S$ and product $P$ are the roots of $t^2 - St + P = 0$. This avoids juggling $n$, $p$ and $q$ in two messy equations.",
+        },
+        {
+          text: "*Decide which root is which.* A binomial's variance is smaller than its mean, so $np = 16$ and $npq = 8$.\n\n*Why this step:* the other assignment, mean 8 and variance 16, would force $q = 2$. The rule from worked example 2 settles it without trial and error.",
+        },
+        {
+          text: "*Divide, then back-substitute.* ",
+          latex: "q = \\frac{npq}{np} = \\frac{8}{16} = \\frac{1}{2}, \\qquad p = \\frac{1}{2}, \\qquad n = \\frac{16}{1/2} = 32",
+        },
+        {
+          text: "*Check.* $np = 16$, $npq = 32 \\cdot \\frac{1}{2} \\cdot \\frac{1}{2} = 8$. The sum is 24 and the product is 128.",
+        },
+      ],
+      answer: "$n = 32$, $p = \\frac{1}{2}$",
     },
     {
       type: "text",
       content:
-        "**Worked example 2.** Can a binomial variable have mean 3 and variance 4?\n\n$q = \\frac{4}{3} > 1$, which is impossible for a probability. So no. The quick test is that the variance of a binomial must be smaller than its mean.",
+        "**Another route to p: a relation between two probabilities.** Sometimes you are told how two binomial probabilities compare instead of the mean and variance. Write both out with the formula; the $\\binom{n}{k}$ factors and most powers cancel.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (JEE style).** For a binomial distribution, the sum of the mean and variance is 24 and their product is 128. Find $n$ and $p$.\n\n*Step 1: treat the mean and variance as two unknown numbers.* Their sum is 24 and their product is 128, so they are the roots of a quadratic:",
+      type: "worked-example",
+      id: "pr5-3-we4",
+      title: "Worked example 4",
+      problem:
+        "$X \\sim B(6, p)$ and $9P(X = 4) = P(X = 2)$. Find $p$.",
+      steps: [
+        {
+          text: "$P(X = 4) = \\binom{6}{4}p^4q^2 = 15p^4q^2$ and $P(X = 2) = \\binom{6}{2}p^2q^4 = 15p^2q^4$.",
+        },
+        {
+          text: "$9 \\cdot 15p^4q^2 = 15p^2q^4$. Divide both sides by $15p^2q^2$ (neither $p$ nor $q$ is 0): $9p^2 = q^2$.",
+        },
+        {
+          text: "Both are positive, so $3p = q = 1 - p$, giving $4p = 1$ and $p = \\frac{1}{4}$.",
+        },
+        {
+          text: "*Check.* $P(X = 4) = 15 \\cdot \\frac{1}{256} \\cdot \\frac{9}{16}$ and $P(X = 2) = 15 \\cdot \\frac{1}{16} \\cdot \\frac{81}{256}$. The second is $9$ times the first.",
+        },
+      ],
+      answer: "$p = \\frac{1}{4}$",
+    },
+    { type: "heading", text: "Using $\\sigma$ as a yardstick" },
+    {
+      type: "worked-example",
+      id: "pr5-3-we6",
+      title: "Worked example 5",
+      problem:
+        "A fair coin is tossed 100 times. Find the mean, variance and standard deviation of the number of heads $X$. Would 70 heads be surprising?",
+      steps: [
+        {
+          text: "$E[X] = 50$, $\\operatorname{Var}(X) = 100 \\cdot \\frac{1}{2} \\cdot \\frac{1}{2} = 25$ and $\\sigma = 5$.",
+        },
+        {
+          text: "Typical runs land within about 5 of 50. Getting 70 heads would be 4 standard deviations out and should make you suspect the coin.",
+        },
+      ],
+      answer: "$E[X] = 50$, $\\operatorname{Var}(X) = 25$, $\\sigma = 5$; 70 heads is 4 standard deviations out.",
     },
     {
-      type: "math",
-      latex: "t^2 - 24t + 128 = 0 \\iff (t - 16)(t - 8) = 0 \\iff t = 16 \\text{ or } 8",
+      type: "worked-example",
+      id: "pr5-3-we5",
+      title: "Worked example 6 (quality control)",
+      problem:
+        "A factory's process makes a defective chip 4% of the time, independently. Chips ship in boxes of 500. How many defectives should a box have on average, how much does that vary, and should a box with 35 defectives worry the manager?",
+      steps: [
+        {
+          text: "*Set up the model.* Success = defective, so $X \\sim B(500, 0.04)$.\n\n*Why this step:* a fixed box size, two outcomes per chip, the same 4% for every chip and independent production are exactly the four Bernoulli conditions.",
+        },
+        {
+          text: "*Mean, variance, spread.* ",
+          latex: "E[X] = 500 \\times 0.04 = 20, \\qquad \\operatorname{Var}(X) = 20 \\times 0.96 = 19.2, \\qquad \\sigma = \\sqrt{19.2} \\approx 4.38",
+        },
+        {
+          text: "*Why this step:* the mean alone says \"about 20\", but it can't say whether 35 is ordinary. The standard deviation gives the yardstick for \"normal wobble\".",
+        },
+        {
+          text: "*Measure 35 with that yardstick.* $\\frac{35 - 20}{4.38} \\approx 3.4$ standard deviations above the mean.\n\n*Why this step:* distances in units of $\\sigma$ are comparable across problems. Most boxes land within about 2 standard deviations of the mean, so 3.4 is a red flag. The manager should suspect that $p$ has risen, which means the machine may need checking.",
+        },
+      ],
+      answer: "About 20 defectives, with $\\sigma \\approx 4.38$; 35 is about 3.4 standard deviations above the mean, a red flag.",
     },
-    {
-      type: "text",
-      content:
-        "*Why this step:* any two numbers with sum $S$ and product $P$ are the roots of $t^2 - St + P = 0$. This avoids juggling $n$, $p$ and $q$ in two messy equations.\n\n*Step 2: decide which root is which.* A binomial's variance is smaller than its mean, so $np = 16$ and $npq = 8$.\n\n*Why this step:* the other assignment, mean 8 and variance 16, would force $q = 2$. The rule from worked example 2 settles it without trial and error.\n\n*Step 3: divide, then back-substitute.*",
-    },
-    {
-      type: "math",
-      latex: "q = \\frac{npq}{np} = \\frac{8}{16} = \\frac{1}{2}, \\qquad p = \\frac{1}{2}, \\qquad n = \\frac{16}{1/2} = 32",
-    },
-    {
-      type: "text",
-      content:
-        "*Check.* $np = 16$, $npq = 32 \\cdot \\frac{1}{2} \\cdot \\frac{1}{2} = 8$. The sum is 24 and the product is 128.",
-    },
-    {
-      type: "text",
-      content:
-        "**Another route to p: a relation between two probabilities.** Sometimes you are told how two binomial probabilities compare instead of the mean and variance. Write both out with the formula; the $\\binom{n}{k}$ factors and most powers cancel.\n\n**Worked example 4.** $X \\sim B(6, p)$ and $9P(X = 4) = P(X = 2)$. Find $p$.\n\n*Step 1.* $P(X = 4) = \\binom{6}{4}p^4q^2 = 15p^4q^2$ and $P(X = 2) = \\binom{6}{2}p^2q^4 = 15p^2q^4$.\n\n*Step 2.* $9 \\cdot 15p^4q^2 = 15p^2q^4$. Divide both sides by $15p^2q^2$ (neither $p$ nor $q$ is 0): $9p^2 = q^2$.\n\n*Step 3.* Both are positive, so $3p = q = 1 - p$, giving $4p = 1$ and $p = \\frac{1}{4}$.\n\n*Check.* $P(X = 4) = 15 \\cdot \\frac{1}{256} \\cdot \\frac{9}{16}$ and $P(X = 2) = 15 \\cdot \\frac{1}{16} \\cdot \\frac{81}{256}$. The second is $9$ times the first.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5.** A fair coin is tossed 100 times. Then $E[X] = 50$, $\\operatorname{Var}(X) = 100 \\cdot \\frac{1}{2} \\cdot \\frac{1}{2} = 25$ and $\\sigma = 5$. Typical runs land within about 5 of 50. Getting 70 heads would be 4 standard deviations out and should make you suspect the coin.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 6 (quality control).** A factory's process makes a defective chip 4% of the time, independently. Chips ship in boxes of 500. How many defectives should a box have on average, how much does that vary, and should a box with 35 defectives worry the manager?\n\n*Step 1: set up the model.* Success = defective, so $X \\sim B(500, 0.04)$.\n\n*Why this step:* a fixed box size, two outcomes per chip, the same 4% for every chip and independent production are exactly the four Bernoulli conditions.\n\n*Step 2: mean, variance, spread.*",
-    },
-    {
-      type: "math",
-      latex:
-        "E[X] = 500 \\times 0.04 = 20, \\qquad \\operatorname{Var}(X) = 20 \\times 0.96 = 19.2, \\qquad \\sigma = \\sqrt{19.2} \\approx 4.38",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* the mean alone says \"about 20\", but it can't say whether 35 is ordinary. The standard deviation gives the yardstick for \"normal wobble\".\n\n*Step 3: measure 35 with that yardstick.* $\\frac{35 - 20}{4.38} \\approx 3.4$ standard deviations above the mean.\n\n*Why this step:* distances in units of $\\sigma$ are comparable across problems. Most boxes land within about 2 standard deviations of the mean, so 3.4 is a red flag. The manager should suspect that $p$ has risen, which means the machine may need checking.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr5-3-q1",
@@ -905,10 +1114,11 @@ const lesson04: LessonSeed = {
           "Each leaf ending in S is \"first success on trial k\": 0.2, then 0.8 × 0.2, then 0.8² × 0.2. The shaded leaf is three failures in a row, with probability 0.8³ = 0.512.",
       },
     },
+    { type: "heading", text: "Deriving the pmf" },
     {
       type: "text",
       content:
-        "**Deriving the pmf.** For the first success to land on trial $k$, the path must be $k - 1$ failures followed by one success. There is exactly **one** such path, so no $\\binom{n}{k}$ factor appears:",
+        "For the first success to land on trial $k$, the path must be $k - 1$ failures followed by one success. There is exactly **one** such path, so no $\\binom{n}{k}$ factor appears:",
     },
     { type: "math", latex: "P(X = k) = q^{k-1}p, \\qquad k = 1, 2, 3, \\ldots" },
     {
@@ -924,6 +1134,7 @@ const lesson04: LessonSeed = {
         "**They add to 1.** It's a geometric series with first term $p$ and ratio $q$:",
     },
     { type: "math", latex: "\\sum_{k=1}^{\\infty} q^{k-1}p = \\frac{p}{1 - q} = \\frac{p}{p} = 1" },
+    { type: "heading", text: "Tail probabilities and the mean" },
     {
       type: "text",
       content:
@@ -984,10 +1195,11 @@ const lesson04: LessonSeed = {
       content:
         "Some books let $Y$ count the **failures before** the first success, so $Y = X - 1$, $P(Y = k) = q^k p$ for $k = 0, 1, 2, \\ldots$, and $E[Y] = \\frac{q}{p}$. Read the question carefully to see which one is meant. In this course $X$ counts trials, starting at 1.",
     },
+    { type: "heading", text: "Memorylessness" },
     {
       type: "text",
       content:
-        "**Memorylessness.** Suppose you have already failed $m$ times. What is the chance you need more than $n$ further trials?",
+        "Suppose you have already failed $m$ times. What is the chance you need more than $n$ further trials?",
     },
     {
       type: "math",
@@ -1006,59 +1218,110 @@ const lesson04: LessonSeed = {
       content:
         "This is the gambler's fallacy from Chapter 0, and memorylessness is the proof that it is wrong. With $p = 0.2$, after 10 misses in a row the next trial still succeeds with probability $0.2$, and the expected *remaining* wait is still $\\frac{1}{p} = 5$. The sequence doesn't owe you anything. The long-run proportion settles on $p$ because early streaks get diluted by later trials, not because they get compensated.",
     },
+    { type: "heading", text: "Dice, turns and sales calls" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** A die is rolled until a six appears. Find the probability that the first six comes on the 4th roll.\n\n*Step 1.* Three failures then a success: one path.\n\n*Step 2.* $P(X = 4) = \\left(\\frac{5}{6}\\right)^3 \\cdot \\frac{1}{6} = \\frac{125}{1296} \\approx 0.0965$.",
+      type: "worked-example",
+      id: "pr5-4-we1",
+      title: "Worked example 1",
+      problem:
+        "A die is rolled until a six appears. Find the probability that the first six comes on the 4th roll.",
+      steps: [
+        {
+          text: "Three failures then a success: one path.",
+        },
+        {
+          text: "$P(X = 4) = \\left(\\frac{5}{6}\\right)^3 \\cdot \\frac{1}{6} = \\frac{125}{1296} \\approx 0.0965$.",
+        },
+      ],
+      answer: "$\\frac{125}{1296} \\approx 0.0965$",
+    },
+    {
+      type: "worked-example",
+      id: "pr5-4-we2",
+      title: "Worked example 2 (a classic)",
+      problem:
+        "A and B take turns rolling a die, A first. The first to roll a six wins. Find $P(\\text{A wins})$. (You solved this in Lesson 2.5. Here it is again, now seen as a geometric waiting time split between two players.)",
+      steps: [
+        {
+          text: "A wins on roll 1, 3, 5, … of the combined sequence. Those probabilities are $\\frac{1}{6}$, $\\left(\\frac{5}{6}\\right)^2\\frac{1}{6}$, $\\left(\\frac{5}{6}\\right)^4\\frac{1}{6}$, and so on.",
+        },
+        {
+          text: "That's a geometric series with ratio $\\left(\\frac{5}{6}\\right)^2 = \\frac{25}{36}$:\n\n$P(\\text{A wins}) = \\dfrac{1/6}{1 - 25/36} = \\dfrac{1}{6} \\cdot \\dfrac{36}{11} = \\dfrac{6}{11}$.\n\nGoing first is worth something: $\\frac{6}{11} \\approx 0.545$ against $\\frac{5}{11}$ for B.",
+        },
+      ],
+      answer: "$\\frac{6}{11}$",
+    },
+    {
+      type: "worked-example",
+      id: "pr5-4-we3",
+      title: "Worked example 3",
+      problem:
+        "Two dice are rolled repeatedly until the sum is 7. On average, how many rolls does that take?",
+      steps: [
+        {
+          text: "$p = P(\\text{sum } 7) = \\frac{6}{36} = \\frac{1}{6}$, so $E[X] = 6$ rolls.",
+        },
+      ],
+      answer: "$6$ rolls.",
+    },
+    {
+      type: "worked-example",
+      id: "pr5-4-we4",
+      title: "Worked example 4 (sales calls)",
+      problem:
+        "A telemarketer makes a sale on each call with probability $0.1$, independently. (a) How many calls should she expect to make up to and including her first sale? (b) What is the probability that her first sale comes within her first 5 calls?",
+      steps: [
+        {
+          text: "*Spot the model.* She keeps calling *until* the first sale, so the number of calls $X$ is geometric with $p = 0.1$.\n\n*Why this step:* no fixed $n$ is given, and the question asks about a waiting time. That is the geometric signature, not the binomial one.",
+        },
+        {
+          text: "*The mean.* $E[X] = \\frac{1}{p} = \\frac{1}{0.1} = 10$ calls.",
+        },
+        {
+          text: "*\"within 5\" through the tail.* \"First sale within 5 calls\" is $X \\le 5$, the complement of $X > 5$, and $X > 5$ means the first 5 calls all failed:",
+          latex: "P(X \\le 5) = 1 - P(X > 5) = 1 - (0.9)^5 = 1 - 0.59049 = 0.40951 \\approx 0.41",
+        },
+        {
+          text: "*Why this step:* adding $P(X = 1) + \\cdots + P(X = 5)$ would take five terms. The tail $q^k$ is a single path, so the complement does it in one line.",
+        },
+      ],
+      answer: "(a) $10$ calls (b) $1 - (0.9)^5 \\approx 0.41$",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 (a classic).** A and B take turns rolling a die, A first. The first to roll a six wins. Find $P(\\text{A wins})$. (You solved this in Lesson 2.5. Here it is again, now seen as a geometric waiting time split between two players.)\n\n*Step 1.* A wins on roll 1, 3, 5, … of the combined sequence. Those probabilities are $\\frac{1}{6}$, $\\left(\\frac{5}{6}\\right)^2\\frac{1}{6}$, $\\left(\\frac{5}{6}\\right)^4\\frac{1}{6}$, and so on.\n\n*Step 2.* That's a geometric series with ratio $\\left(\\frac{5}{6}\\right)^2 = \\frac{25}{36}$:\n\n$P(\\text{A wins}) = \\dfrac{1/6}{1 - 25/36} = \\dfrac{1}{6} \\cdot \\dfrac{36}{11} = \\dfrac{6}{11}$.\n\nGoing first is worth something: $\\frac{6}{11} \\approx 0.545$ against $\\frac{5}{11}$ for B.",
+        "Notice the gap between the two answers: she *expects* to need 10 calls, yet has only about a 41% chance of a sale within 5. The long right tail of the geometric pulls the mean well past the typical early values.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3.** Two dice are rolled repeatedly until the sum is 7. On average, how many rolls does that take?\n\n$p = P(\\text{sum } 7) = \\frac{6}{36} = \\frac{1}{6}$, so $E[X] = 6$ rolls.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (sales calls).** A telemarketer makes a sale on each call with probability $0.1$, independently. (a) How many calls should she expect to make up to and including her first sale? (b) What is the probability that her first sale comes within her first 5 calls?\n\n*Step 1: spot the model.* She keeps calling *until* the first sale, so the number of calls $X$ is geometric with $p = 0.1$.\n\n*Why this step:* no fixed $n$ is given, and the question asks about a waiting time. That is the geometric signature, not the binomial one.\n\n*Step 2: the mean.* $E[X] = \\frac{1}{p} = \\frac{1}{0.1} = 10$ calls.\n\n*Step 3: \"within 5\" through the tail.* \"First sale within 5 calls\" is $X \\le 5$, the complement of $X > 5$, and $X > 5$ means the first 5 calls all failed:",
-    },
-    {
-      type: "math",
-      latex: "P(X \\le 5) = 1 - P(X > 5) = 1 - (0.9)^5 = 1 - 0.59049 = 0.40951 \\approx 0.41",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* adding $P(X = 1) + \\cdots + P(X = 5)$ would take five terms. The tail $q^k$ is a single path, so the complement does it in one line.\n\nNotice the gap between the two answers: she *expects* to need 10 calls, yet has only about a 41% chance of a sale within 5. The long right tail of the geometric pulls the mean well past the typical early values.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (CBSE/JEE classic: unequal targets).** A and B throw a pair of dice alternately, A first. A wins if he throws a sum of 6 before B throws a sum of 7, and B wins if he throws a 7 first. Find the probability that A wins.\n\n*Step 1: each player's success probability.* Sum 6 comes from $(1,5), (2,4), (3,3), (4,2), (5,1)$, so $p_A = \\frac{5}{36}$. Sum 7 has 6 outcomes, so $p_B = \\frac{6}{36} = \\frac{1}{6}$.\n\n*Why this step:* unlike worked example 2, the two players are chasing different events. Each needs his own $p$.\n\n*Step 2: one full round with no winner.* A misses and then B misses:",
-    },
-    {
-      type: "math",
-      latex: "r = \\frac{31}{36} \\cdot \\frac{5}{6} = \\frac{155}{216}",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* A can only win on his own turns, and to reach his next turn a whole round must pass with no winner. So the successive terms shrink by the factor $r$ each round, which gives a geometric series.\n\n*Step 3: sum the series.*",
-    },
-    {
-      type: "math",
-      latex:
-        "P(\\text{A wins}) = \\frac{5}{36}\\left(1 + r + r^2 + \\cdots\\right) = \\frac{5/36}{1 - 155/216} = \\frac{5}{36} \\cdot \\frac{216}{61} = \\frac{30}{61} \\approx 0.492",
+      type: "worked-example",
+      id: "pr5-4-we5",
+      title: "Worked example 5 (CBSE/JEE classic: unequal targets)",
+      problem:
+        "A and B throw a pair of dice alternately, A first. A wins if he throws a sum of 6 before B throws a sum of 7, and B wins if he throws a 7 first. Find the probability that A wins.",
+      steps: [
+        {
+          text: "*Each player's success probability.* Sum 6 comes from $(1,5), (2,4), (3,3), (4,2), (5,1)$, so $p_A = \\frac{5}{36}$. Sum 7 has 6 outcomes, so $p_B = \\frac{6}{36} = \\frac{1}{6}$.\n\n*Why this step:* unlike worked example 2, the two players are chasing different events. Each needs his own $p$.",
+        },
+        {
+          text: "*One full round with no winner.* A misses and then B misses:",
+          latex: "r = \\frac{31}{36} \\cdot \\frac{5}{6} = \\frac{155}{216}",
+        },
+        {
+          text: "*Why this step:* A can only win on his own turns, and to reach his next turn a whole round must pass with no winner. So the successive terms shrink by the factor $r$ each round, which gives a geometric series.",
+        },
+        {
+          text: "*Sum the series.* ",
+          latex: "P(\\text{A wins}) = \\frac{5}{36}\\left(1 + r + r^2 + \\cdots\\right) = \\frac{5/36}{1 - 155/216} = \\frac{5}{36} \\cdot \\frac{216}{61} = \\frac{30}{61} \\approx 0.492",
+        },
+      ],
+      answer: "$\\frac{30}{61} \\approx 0.492$",
     },
     {
       type: "text",
       content:
         "Going first is not quite enough here. A's target is harder to hit ($\\frac{5}{36} < \\frac{6}{36}$), and that outweighs the head start, so A is a slight underdog.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr5-4-q1",
@@ -1181,10 +1444,11 @@ const lesson05: LessonSeed = {
           "Bars are Binomial(n, λ/n). Dots are the Poisson(λ) limit. Push n from 10 towards 100 and watch the biggest gap shrink. The binomial settles onto a fixed shape that depends on λ alone.",
       },
     },
+    { type: "heading", text: "Where the formula comes from" },
     {
       type: "text",
       content:
-        "**Where the formula comes from.** Write the binomial term with $p = \\frac{\\lambda}{n}$ and split it into four pieces:",
+        "Write the binomial term with $p = \\frac{\\lambda}{n}$ and split it into four pieces:",
     },
     {
       type: "math",
@@ -1204,10 +1468,11 @@ const lesson05: LessonSeed = {
       content:
         "A count $X$ with the probabilities above has the **Poisson distribution** with parameter $\\lambda$. It models counts of rare, independent events over a stretch of time or space, where $\\lambda$ is the average count. It is the limit of $B(n, p)$ as $n \\to \\infty$ with $np = \\lambda$ held fixed.",
     },
+    { type: "heading", text: "Mean and variance from the limit" },
     {
       type: "text",
       content:
-        "**Mean and variance from the limit.** The binomial has mean $np = \\lambda$ and variance $npq = \\lambda\\left(1 - \\frac{\\lambda}{n}\\right) \\to \\lambda$. So for Poisson",
+        "The binomial has mean $np = \\lambda$ and variance $npq = \\lambda\\left(1 - \\frac{\\lambda}{n}\\right) \\to \\lambda$. So for Poisson",
     },
     { type: "math", latex: "E[X] = \\lambda, \\qquad \\operatorname{Var}(X) = \\lambda" },
     {
@@ -1222,49 +1487,109 @@ const lesson05: LessonSeed = {
       content:
         "Poisson is the binomial with the details blurred out. Each piece of $\\frac{e^{-\\lambda}\\lambda^k}{k!}$ has a source: $\\frac{\\lambda^k}{k!}$ comes from $\\binom{n}{k}p^k$, and $e^{-\\lambda}$ is the limit of $q^n$, the probability of no events. If you remember the derivation, you can't forget the formula, and you know when it applies: many independent chances, each rare.",
     },
+    { type: "heading", text: "Typos, defects, calls and screenings" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Typos average 2 per page. For a random page:\n\n*No typos:* $P(0) = e^{-2} \\approx 0.135$.\n\n*At most one:* $P(0) + P(1) = e^{-2}(1 + 2) = 3e^{-2} \\approx 0.406$.\n\n*At least two:* $1 - 3e^{-2} \\approx 0.594$.",
+      type: "worked-example",
+      id: "pr5-5-we1",
+      title: "Worked example 1",
+      problem:
+        "Typos average 2 per page. For a random page: find the probability of no typos, of at most one, and of at least two.",
+      steps: [
+        {
+          text: "*No typos:* $P(0) = e^{-2} \\approx 0.135$.",
+        },
+        {
+          text: "*At most one:* $P(0) + P(1) = e^{-2}(1 + 2) = 3e^{-2} \\approx 0.406$.",
+        },
+        {
+          text: "*At least two:* $1 - 3e^{-2} \\approx 0.594$.",
+        },
+      ],
+      answer: "$e^{-2} \\approx 0.135$, $3e^{-2} \\approx 0.406$, $1 - 3e^{-2} \\approx 0.594$",
+    },
+    {
+      type: "worked-example",
+      id: "pr5-5-we2",
+      title: "Worked example 2 (checking the approximation)",
+      problem:
+        "1% of items are defective. In a box of 200, find $P(\\text{no defectives})$.",
+      steps: [
+        {
+          text: "*Exact binomial:* $(0.99)^{200} \\approx 0.1340$.",
+        },
+        {
+          text: "*Poisson with $\\lambda = 200 \\times 0.01 = 2$:* $e^{-2} \\approx 0.1353$.",
+        },
+        {
+          text: "They agree to two decimal places, and the Poisson is much easier to compute by hand.",
+        },
+      ],
+      answer: "Exact $(0.99)^{200} \\approx 0.1340$; Poisson $e^{-2} \\approx 0.1353$.",
+    },
+    {
+      type: "worked-example",
+      id: "pr5-5-we5",
+      title: "Worked example 3",
+      problem:
+        "A help desk receives on average 3 calls a minute. Find the probability of exactly 2 calls in a given minute.",
+      steps: [
+        {
+          text: "Use the Poisson distribution with $\\lambda = 3$.",
+          latex: "P(2) = \\frac{e^{-3}3^2}{2!} = 4.5e^{-3} \\approx 0.224",
+        },
+      ],
+      answer: "$\\approx 0.224$",
+    },
+    {
+      type: "worked-example",
+      id: "pr5-5-we3",
+      title: "Worked example 4 (a health screening)",
+      problem:
+        "A rare condition affects 1 person in 1000. A town screens 3000 people. Find the probability that at least 2 cases are found.",
+      steps: [
+        {
+          text: "*Recognise the binomial, then pass to Poisson.* Strictly $X \\sim B(3000, 0.001)$. Here $n$ is large, $p$ is tiny and $\\lambda = np = 3$ is moderate.\n\n*Why this step:* the exact binomial would need $(0.999)^{3000}$ and $(0.999)^{2999}$ by hand. The Poisson limit replaces all of that with $e^{-3}$.",
+        },
+        {
+          text: "*\"at least 2\" through the complement.* ",
+          latex: "P(X \\ge 2) = 1 - P(0) - P(1) = 1 - e^{-3}\\left(1 + 3\\right) = 1 - 4e^{-3} \\approx 1 - 0.199 = 0.801",
+        },
+        {
+          text: "*Why this step:* \"at least 2\" has no upper limit under Poisson, so a direct sum would never end. The complement has just two terms.",
+        },
+        {
+          text: "*Check.* The exact binomial answer is also $0.801$ to three decimal places. The approximation is excellent because $p = 0.001$ is so small.",
+        },
+      ],
+      answer: "$1 - 4e^{-3} \\approx 0.801$",
+    },
+    {
+      type: "worked-example",
+      id: "pr5-5-we4",
+      title: "Worked example 5 (exam style)",
+      problem:
+        "A Poisson variable $X$ satisfies $P(X = 1) = P(X = 2)$. Find $\\lambda$ and $P(X = 0)$.",
+      steps: [
+        {
+          text: "*Write both sides with the formula.* ",
+          latex: "\\frac{e^{-\\lambda}\\lambda^1}{1!} = \\frac{e^{-\\lambda}\\lambda^2}{2!} \\iff \\lambda = \\frac{\\lambda^2}{2}",
+        },
+        {
+          text: "*Why this step:* $e^{-\\lambda}$ is never zero, so it cancels from both sides. What is left is a simple equation in $\\lambda$.",
+        },
+        {
+          text: "*Solve.* Divide by $\\lambda$, which is allowed because $\\lambda > 0$: $1 = \\frac{\\lambda}{2}$, so $\\lambda = 2$.\n\n*Why this step:* $\\lambda = 0$ also solves $\\lambda = \\frac{\\lambda^2}{2}$, but a Poisson rate must be positive. Say so in one line in an exam answer.",
+        },
+        {
+          text: "$P(X = 0) = e^{-2} \\approx 0.135$.",
+        },
+      ],
+      answer: "$\\lambda = 2$, $P(X = 0) = e^{-2} \\approx 0.135$",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 (checking the approximation).** 1% of items are defective. In a box of 200, find $P(\\text{no defectives})$.\n\n*Exact binomial:* $(0.99)^{200} \\approx 0.1340$.\n\n*Poisson with $\\lambda = 200 \\times 0.01 = 2$:* $e^{-2} \\approx 0.1353$.\n\nThey agree to two decimal places, and the Poisson is much easier to compute by hand.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3.** A help desk receives on average 3 calls a minute. The probability of exactly 2 calls in a given minute is $\\frac{e^{-3}3^2}{2!} = 4.5e^{-3} \\approx 0.224$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (a health screening).** A rare condition affects 1 person in 1000. A town screens 3000 people. Find the probability that at least 2 cases are found.\n\n*Step 1: recognise the binomial, then pass to Poisson.* Strictly $X \\sim B(3000, 0.001)$. Here $n$ is large, $p$ is tiny and $\\lambda = np = 3$ is moderate.\n\n*Why this step:* the exact binomial would need $(0.999)^{3000}$ and $(0.999)^{2999}$ by hand. The Poisson limit replaces all of that with $e^{-3}$.\n\n*Step 2: \"at least 2\" through the complement.*",
-    },
-    {
-      type: "math",
-      latex:
-        "P(X \\ge 2) = 1 - P(0) - P(1) = 1 - e^{-3}\\left(1 + 3\\right) = 1 - 4e^{-3} \\approx 1 - 0.199 = 0.801",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* \"at least 2\" has no upper limit under Poisson, so a direct sum would never end. The complement has just two terms.\n\n*Check.* The exact binomial answer is also $0.801$ to three decimal places. The approximation is excellent because $p = 0.001$ is so small.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (exam style).** A Poisson variable $X$ satisfies $P(X = 1) = P(X = 2)$. Find $\\lambda$ and $P(X = 0)$.\n\n*Step 1: write both sides with the formula.*",
-    },
-    {
-      type: "math",
-      latex: "\\frac{e^{-\\lambda}\\lambda^1}{1!} = \\frac{e^{-\\lambda}\\lambda^2}{2!} \\iff \\lambda = \\frac{\\lambda^2}{2}",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* $e^{-\\lambda}$ is never zero, so it cancels from both sides. What is left is a simple equation in $\\lambda$.\n\n*Step 2: solve.* Divide by $\\lambda$, which is allowed because $\\lambda > 0$: $1 = \\frac{\\lambda}{2}$, so $\\lambda = 2$.\n\n*Why this step:* $\\lambda = 0$ also solves $\\lambda = \\frac{\\lambda^2}{2}$, but a Poisson rate must be positive. Say so in one line in an exam answer.\n\n*Step 3.* $P(X = 0) = e^{-2} \\approx 0.135$.\n\nThe tie makes sense: the ratio of neighbouring Poisson terms is $\\frac{P(k)}{P(k-1)} = \\frac{\\lambda}{k}$, which equals 1 exactly when $k = \\lambda$. This is the Poisson version of the mode rule from 5.3.",
+        "The tie makes sense: the ratio of neighbouring Poisson terms is $\\frac{P(k)}{P(k-1)} = \\frac{\\lambda}{k}$, which equals 1 exactly when $k = \\lambda$. This is the Poisson version of the mode rule from 5.3.",
     },
     {
       type: "table",
@@ -1277,6 +1602,7 @@ const lesson05: LessonSeed = {
         ["Use Poisson for binomial when", "", "$n$ large, $p$ small, $np$ moderate"],
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr5-5-q1",
@@ -1398,6 +1724,7 @@ const lesson06: LessonSeed = {
         ["Rare events over time or space, only an average rate known?", "Count events", "Poisson$(\\lambda)$", "$\\dfrac{e^{-\\lambda}\\lambda^k}{k!}$"],
       ],
     },
+    { type: "heading", text: "Without replacement: the hypergeometric" },
     {
       type: "text",
       content:
@@ -1441,67 +1768,111 @@ const lesson06: LessonSeed = {
       content:
         "If the population is large compared with the sample (a common rule of thumb: the sample is at most 5% of the population), removing a few items barely changes $p$. Then the hypergeometric and the binomial agree closely, and the binomial is simpler to use. With 8 balls and 3 draws you are nowhere near that, which is why the two lines in the simulator are so far apart.",
     },
+    { type: "heading", text: "Sorting stories into models" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Five cards are dealt from a well-shuffled deck. Find the probability of exactly 2 aces.\n\n*Model check.* Dealing means without replacement, from a population of only 52. So use plain counting, not binomial.\n\n*Compute.* $\\dfrac{\\binom{4}{2}\\binom{48}{3}}{\\binom{52}{5}} = \\dfrac{6 \\times 17296}{2598960} \\approx 0.0399$.\n\n*The wrong model.* Binomial $\\binom{5}{2}\\left(\\frac{1}{13}\\right)^2\\left(\\frac{12}{13}\\right)^3 \\approx 0.0465$, about 17% too high.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2: five stories, sorted.**\n\n*The number of heads in 20 tosses:* fixed $n$, independent, so binomial $B(20, \\frac{1}{2})$.\n\n*The toss on which the first head appears:* geometric, $p = \\frac{1}{2}$.\n\n*Accidents at a junction in a month, averaging 1.5:* rare events in time, so Poisson(1.5).\n\n*Girls on a committee of 4 chosen from 6 girls and 5 boys:* without replacement from 11 people, so plain counting: $P(k) = \\frac{\\binom{6}{k}\\binom{5}{4-k}}{\\binom{11}{4}}$.\n\n*Defective phones among 10 picked from a day's output of 50,000 with a 3% defect rate:* technically without replacement, but the population is huge, so binomial $B(10, 0.03)$ is the sensible model.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 (one story, two models).** A student guesses on multiple-choice questions, each with 4 options and one correct answer, so each guess is right with probability $\\frac{1}{4}$, independently.\n\n(a) On a 5-question quiz, what is the probability she gets exactly 3 right?\n\n(b) On a long paper, she guesses question after question. What is the probability that her first correct guess is on question 3, and how many questions does she expect to get through up to her first correct one?\n\n*Step 1: read the question for its model.* Part (a) fixes $n = 5$ and counts correct answers: binomial. Part (b) has no fixed $n$ and asks *when* the first success comes: geometric.\n\n*Why this step:* the setting is identical in both parts, and only the question changes. The model belongs to the question, not to the story.\n\n*Step 2: part (a).*",
-    },
-    {
-      type: "math",
-      latex:
-        "P(X = 3) = \\binom{5}{3}\\left(\\frac{1}{4}\\right)^3\\left(\\frac{3}{4}\\right)^2 = 10 \\cdot \\frac{1}{64} \\cdot \\frac{9}{16} = \\frac{90}{1024} = \\frac{45}{512} \\approx 0.088",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* the $\\binom{5}{3}$ is there because the 3 correct answers can be any 3 of the 5 questions.\n\n*Step 3: part (b).* The first correct guess on question 3 means wrong, wrong, right: one path, no $\\binom{n}{k}$.",
-    },
-    {
-      type: "math",
-      latex: "P(Y = 3) = \\left(\\frac{3}{4}\\right)^2 \\cdot \\frac{1}{4} = \\frac{9}{64} \\approx 0.141, \\qquad E[Y] = \\frac{1}{p} = 4",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* here the position of the success is forced (it must be last), which is exactly why the geometric formula has no binomial coefficient.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (CBSE board style).** A lot of 30 bulbs contains 6 defectives. A sample of 4 bulbs is drawn **with replacement**. Find the probability distribution of the number of defective bulbs. Then compare $P(\\text{no defectives})$ with the answer when the sample is drawn without replacement.\n\n*Step 1: check the model.* With replacement, the lot is restored after each draw, so each draw is defective with probability $p = \\frac{6}{30} = \\frac{1}{5}$, independently. So $X \\sim B\\!\\left(4, \\frac{1}{5}\\right)$.\n\n*Why this step:* the phrase \"with replacement\" is the examiner telling you the binomial is exact. Always quote it as your justification.\n\n*Step 2: write the pmf with a common denominator.* $P(X = k) = \\binom{4}{k}\\left(\\frac{1}{5}\\right)^k\\left(\\frac{4}{5}\\right)^{4-k} = \\binom{4}{k}\\frac{4^{4-k}}{625}$.\n\n*Why this step:* the common denominator $5^4 = 625$ makes the table quick to fill and easy to check.",
-    },
-    {
-      type: "table",
-      headers: ["$k$ defective", "0", "1", "2", "3", "4"],
-      rows: [
-        ["$\\binom{4}{k}\\,4^{4-k}$", "$1 \\cdot 256$", "$4 \\cdot 64$", "$6 \\cdot 16$", "$4 \\cdot 4$", "$1 \\cdot 1$"],
-        ["$P(X = k)$", "$\\frac{256}{625}$", "$\\frac{256}{625}$", "$\\frac{96}{625}$", "$\\frac{16}{625}$", "$\\frac{1}{625}$"],
+      type: "worked-example",
+      id: "pr5-6-we1",
+      title: "Worked example 1",
+      problem:
+        "Five cards are dealt from a well-shuffled deck. Find the probability of exactly 2 aces.",
+      steps: [
+        {
+          text: "*Model check.* Dealing means without replacement, from a population of only 52. So use plain counting, not binomial.",
+        },
+        {
+          text: "*Compute.* $\\dfrac{\\binom{4}{2}\\binom{48}{3}}{\\binom{52}{5}} = \\dfrac{6 \\times 17296}{2598960} \\approx 0.0399$.",
+        },
+        {
+          text: "*The wrong model.* Binomial $\\binom{5}{2}\\left(\\frac{1}{13}\\right)^2\\left(\\frac{12}{13}\\right)^3 \\approx 0.0465$, about 17% too high.",
+        },
       ],
+      answer: "$\\approx 0.0399$",
     },
     {
-      type: "text",
-      content:
-        "*Step 3: check.* $256 + 256 + 96 + 16 + 1 = 625$, so the probabilities sum to 1.\n\n*Step 4: the without-replacement contrast.* Now all 4 bulbs must come from the 24 good ones:",
+      type: "worked-example",
+      id: "pr5-6-we2",
+      title: "Worked example 2: five stories, sorted",
+      problem:
+        "Name the right model for each of these five stories.\n\n- (a) The number of heads in 20 tosses.\n- (b) The toss on which the first head appears.\n- (c) Accidents at a junction in a month, averaging 1.5.\n- (d) Girls on a committee of 4 chosen from 6 girls and 5 boys.\n- (e) Defective phones among 10 picked from a day's output of 50,000 with a 3% defect rate.",
+      steps: [
+        {
+          text: "**(a)** Fixed $n$, independent, so binomial $B(20, \\frac{1}{2})$.",
+        },
+        {
+          text: "**(b)** Geometric, $p = \\frac{1}{2}$.",
+        },
+        {
+          text: "**(c)** Rare events in time, so Poisson(1.5).",
+        },
+        {
+          text: "**(d)** Without replacement from 11 people, so plain counting: $P(k) = \\frac{\\binom{6}{k}\\binom{5}{4-k}}{\\binom{11}{4}}$.",
+        },
+        {
+          text: "**(e)** Technically without replacement, but the population is huge, so binomial $B(10, 0.03)$ is the sensible model.",
+        },
+      ],
+      answer: "(a) binomial (b) geometric (c) Poisson (d) plain counting (e) binomial",
     },
     {
-      type: "math",
-      latex:
-        "\\text{without: } \\frac{\\binom{24}{4}}{\\binom{30}{4}} = \\frac{10626}{27405} \\approx 0.388, \\qquad \\text{with: } \\frac{256}{625} = 0.4096",
+      type: "worked-example",
+      id: "pr5-6-we3",
+      title: "Worked example 3 (one story, two models)",
+      problem:
+        "A student guesses on multiple-choice questions, each with 4 options and one correct answer, so each guess is right with probability $\\frac{1}{4}$, independently.\n\n(a) On a 5-question quiz, what is the probability she gets exactly 3 right?\n\n(b) On a long paper, she guesses question after question. What is the probability that her first correct guess is on question 3, and how many questions does she expect to get through up to her first correct one?",
+      steps: [
+        {
+          text: "*Read the question for its model.* Part (a) fixes $n = 5$ and counts correct answers: binomial. Part (b) has no fixed $n$ and asks *when* the first success comes: geometric.\n\n*Why this step:* the setting is identical in both parts, and only the question changes. The model belongs to the question, not to the story.",
+        },
+        {
+          text: "*Part (a).* ",
+          latex: "P(X = 3) = \\binom{5}{3}\\left(\\frac{1}{4}\\right)^3\\left(\\frac{3}{4}\\right)^2 = 10 \\cdot \\frac{1}{64} \\cdot \\frac{9}{16} = \\frac{90}{1024} = \\frac{45}{512} \\approx 0.088",
+        },
+        {
+          text: "*Why this step:* the $\\binom{5}{3}$ is there because the 3 correct answers can be any 3 of the 5 questions.",
+        },
+        {
+          text: "*Part (b).* The first correct guess on question 3 means wrong, wrong, right: one path, no $\\binom{n}{k}$.",
+          latex: "P(Y = 3) = \\left(\\frac{3}{4}\\right)^2 \\cdot \\frac{1}{4} = \\frac{9}{64} \\approx 0.141, \\qquad E[Y] = \\frac{1}{p} = 4",
+        },
+        {
+          text: "*Why this step:* here the position of the success is forced (it must be last), which is exactly why the geometric formula has no binomial coefficient.",
+        },
+      ],
+      answer: "(a) $\\frac{45}{512} \\approx 0.088$ (b) $\\frac{9}{64} \\approx 0.141$",
     },
+    { type: "heading", text: "With and without replacement compared" },
     {
-      type: "text",
-      content:
-        "*Why this step:* a sample of 4 from 30 is over 13% of the lot, far above the 5% rule of thumb, so the two models really do differ. Without replacement, each good bulb removed makes the next draw a little more likely to be defective, which is why no-defectives is less likely.",
+      type: "worked-example",
+      id: "pr5-6-we4",
+      title: "Worked example 4 (CBSE board style)",
+      problem:
+        "A lot of 30 bulbs contains 6 defectives. A sample of 4 bulbs is drawn **with replacement**. Find the probability distribution of the number of defective bulbs. Then compare $P(\\text{no defectives})$ with the answer when the sample is drawn without replacement.",
+      steps: [
+        {
+          text: "*Check the model.* With replacement, the lot is restored after each draw, so each draw is defective with probability $p = \\frac{6}{30} = \\frac{1}{5}$, independently. So $X \\sim B\\!\\left(4, \\frac{1}{5}\\right)$.\n\n*Why this step:* the phrase \"with replacement\" is the examiner telling you the binomial is exact. Always quote it as your justification.",
+        },
+        {
+          text: "*Write the pmf with a common denominator.* $P(X = k) = \\binom{4}{k}\\left(\\frac{1}{5}\\right)^k\\left(\\frac{4}{5}\\right)^{4-k} = \\binom{4}{k}\\frac{4^{4-k}}{625}$.\n\n*Why this step:* the common denominator $5^4 = 625$ makes the table quick to fill and easy to check.",
+          table: {
+            headers: ["$k$ defective", "0", "1", "2", "3", "4"],
+            rows: [
+              ["$\\binom{4}{k}\\,4^{4-k}$", "$1 \\cdot 256$", "$4 \\cdot 64$", "$6 \\cdot 16$", "$4 \\cdot 4$", "$1 \\cdot 1$"],
+              ["$P(X = k)$", "$\\frac{256}{625}$", "$\\frac{256}{625}$", "$\\frac{96}{625}$", "$\\frac{16}{625}$", "$\\frac{1}{625}$"],
+            ],
+          },
+        },
+        {
+          text: "*Check.* $256 + 256 + 96 + 16 + 1 = 625$, so the probabilities sum to 1.",
+        },
+        {
+          text: "*The without-replacement contrast.* Now all 4 bulbs must come from the 24 good ones:",
+          latex: "\\text{without: } \\frac{\\binom{24}{4}}{\\binom{30}{4}} = \\frac{10626}{27405} \\approx 0.388, \\qquad \\text{with: } \\frac{256}{625} = 0.4096",
+        },
+        {
+          text: "*Why this step:* a sample of 4 from 30 is over 13% of the lot, far above the 5% rule of thumb, so the two models really do differ. Without replacement, each good bulb removed makes the next draw a little more likely to be defective, which is why no-defectives is less likely.",
+        },
+      ],
+      answer: "$X \\sim B\\!\\left(4, \\frac{1}{5}\\right)$: $P(X = 0, 1, 2, 3, 4) = \\frac{256}{625}, \\frac{256}{625}, \\frac{96}{625}, \\frac{16}{625}, \\frac{1}{625}$",
     },
     {
       type: "callout",
@@ -1515,6 +1886,7 @@ const lesson06: LessonSeed = {
       content:
         "**A neat equivalence.** \"The first success comes after trial $k$\" is the same event as \"zero successes in the first $k$ trials\". So $P_{\\text{geo}}(X > k) = P_{\\text{bin}}(\\text{0 successes in } k) = q^k$. Both models give the same number for this one event. They part ways as soon as you ask about the expected wait or the first success landing on a particular trial, where only the geometric model applies.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr5-6-q1",

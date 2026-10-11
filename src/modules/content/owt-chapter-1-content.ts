@@ -22,6 +22,14 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/owt-1-waves-on-a-string.mp4",
+      poster: "/videos/owt-1-waves-on-a-string.jpg",
+      title: "Chapter 1 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "At a cricket stadium the crowd starts a Mexican wave. A bulge of standing, arm-waving people races round the ground at perhaps 20 seats a second, yet nobody leaves their seat: each person just stands up and sits down as the bulge reaches them. Something travels all the way round, but it is not people. It is a *pattern of motion*, and with it, energy.",
@@ -33,15 +41,17 @@ const lesson01: LessonSeed = {
       content:
         "A **wave** is a disturbance that travels through a medium while each part of the medium only oscillates about its own equilibrium position. A wave transports **energy and momentum**, not matter.\n**Transverse wave:** particles oscillate perpendicular to the direction of travel (a flicked rope, a guitar string).\n**Longitudinal wave:** particles oscillate along the direction of travel (a pushed slinky, sound in air).\n**Mechanical waves** need a medium with inertia and elasticity; **electromagnetic waves** (light, radio) need no medium.",
     },
+    { type: "heading", text: "Why a disturbance travels" },
     {
       type: "text",
       content:
         "Why does a disturbance travel at all? Tie one end of a rope to a wall and jerk the other end up once. The piece you moved pulls on its neighbour through the tension, which pulls on the next, and so on. Each piece copies the motion of the piece before it, a little later. Elasticity (the tension) passes the motion on; inertia (the rope's mass) makes each piece lag. Chapter 0's SHM, handed from particle to particle, is a wave.",
     },
+    { type: "heading", text: "Describing a moving shape" },
     {
       type: "text",
       content:
-        "**Describing a moving shape.** Suppose at $t = 0$ the rope has the shape $y = f(x)$, and the pulse moves to the right at speed $v$ without changing shape. At time $t$ the whole shape has shifted right by $vt$. The height now at position $x$ is the height that was at $x - vt$ at the start:",
+        "Suppose at $t = 0$ the rope has the shape $y = f(x)$, and the pulse moves to the right at speed $v$ without changing shape. At time $t$ the whole shape has shifted right by $vt$. The height now at position $x$ is the height that was at $x - vt$ at the start:",
     },
     { type: "math", latex: "y(x, t) = f(x - vt) \\quad\\text{(moving in } +x\\text{)}, \\qquad y(x, t) = f(x + vt) \\quad\\text{(moving in } -x\\text{)}" },
     {
@@ -68,15 +78,56 @@ const lesson01: LessonSeed = {
       content:
         "What you should have seen: the wave shape slides to the right, away from the ghost, but the probe particle P only moves straight up and down. It never drifts sideways. After one period it is back where it started, while the crest that was above it has moved on by one wavelength.",
     },
+    { type: "heading", text: "Is it a travelling wave?" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (reading a pulse).** Is $y = \\dfrac{2}{(x - 3t)^2 + 1}$ ($x, y$ in m, $t$ in s) a travelling wave? If so, which way and how fast?\n\n1. $x$ and $t$ appear only in the combination $x - 3t$, so $y = f(x - 3t)$ with $f(u) = \\dfrac{2}{u^2 + 1}$. *Why this step:* this is the test for a wave of fixed shape.\n2. The form $x - vt$ means motion in $+x$ with $v = 3$ m/s.\n3. The shape is a bump of height 2 m at $u = 0$: at time $t$ the peak is at $x = 3t$. At $t = 2$ s it is at $x = 6$ m.\n\n**Worked example 2 (watch the coefficients).** $y = \\dfrac{3}{4 + (2x + 8t)^2}$.\n\n1. Factor the coefficient of $x$: $2x + 8t = 2(x + 4t)$. *Why this step:* the speed is read from the form $x \\pm vt$, so the coefficient of $x$ must be 1 first.\n2. So $y = f(x + 4t)$: speed 4 m/s in the $-x$ direction, not 8 m/s.\n3. In general, $f(ax \\pm bt)$ moves at $v = b/a$.",
+      type: "worked-example",
+      id: "owt1-1-we1",
+      title: "Worked example 1 (reading a pulse)",
+      problem:
+        "Is $y = \\dfrac{2}{(x - 3t)^2 + 1}$ ($x, y$ in m, $t$ in s) a travelling wave? If so, which way and how fast?",
+      steps: [
+        { text: "$x$ and $t$ appear only in the combination $x - 3t$, so $y = f(x - 3t)$ with $f(u) = \\dfrac{2}{u^2 + 1}$. *Why this step:* this is the test for a wave of fixed shape." },
+        { text: "The form $x - vt$ means motion in $+x$ with $v = 3$ m/s." },
+        { text: "The shape is a bump of height 2 m at $u = 0$: at time $t$ the peak is at $x = 3t$. At $t = 2$ s it is at $x = 6$ m." },
+      ],
+      answer: "Yes: a pulse moving in $+x$ at 3 m/s.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (not every function is a wave).** Is $y = 0.1\\sin(2x)\\cos(5t)$ a travelling wave?\n\n1. Try to write it as a function of $x - vt$ or $x + vt$ alone. The factor $\\sin 2x$ fixes the shape in space and $\\cos 5t$ only scales it up and down. *Why this step:* a travelling wave's shape must move; here the zeros of $\\sin 2x$ stay at the same $x$ for all time.\n2. It is not a single travelling wave. It is a **standing wave**, the sum of two travelling waves going opposite ways, which you will build in 1.6.\n\n**Worked example 4 (a stadium wave, JEE Main flavour).** The Mexican wave moves at 20 seats per second and each spectator takes 1.5 s to stand and sit. How many seats wide is the wave?\n\n1. Each person's motion lasts 1.5 s, during which the disturbance moves on by $20 \\times 1.5 = 30$ seats. *Why this step:* width in space = speed × duration in time, the same relation as $\\lambda = vT$.\n2. About 30 people are up at any instant.",
+      type: "worked-example",
+      id: "owt1-1-we2",
+      title: "Worked example 2 (watch the coefficients)",
+      problem:
+        "Is $y = \\dfrac{3}{4 + (2x + 8t)^2}$ ($x, y$ in m, $t$ in s) a travelling wave? If so, which way and how fast?",
+      steps: [
+        { text: "Factor the coefficient of $x$: $2x + 8t = 2(x + 4t)$. *Why this step:* the speed is read from the form $x \\pm vt$, so the coefficient of $x$ must be 1 first." },
+        { text: "So $y = f(x + 4t)$: speed 4 m/s in the $-x$ direction, not 8 m/s." },
+        { text: "In general, $f(ax \\pm bt)$ moves at $v = b/a$." },
+      ],
+      answer: "Yes: 4 m/s in the $-x$ direction (not 8 m/s).",
+    },
+    {
+      type: "worked-example",
+      id: "owt1-1-we3",
+      title: "Worked example 3 (not every function is a wave)",
+      problem:
+        "Is $y = 0.1\\sin(2x)\\cos(5t)$ a travelling wave?",
+      steps: [
+        { text: "Try to write it as a function of $x - vt$ or $x + vt$ alone. The factor $\\sin 2x$ fixes the shape in space and $\\cos 5t$ only scales it up and down. *Why this step:* a travelling wave's shape must move; here the zeros of $\\sin 2x$ stay at the same $x$ for all time." },
+        { text: "It is not a single travelling wave. It is a **standing wave**, the sum of two travelling waves going opposite ways, which you will build in 1.6." },
+      ],
+      answer: "No: it is a standing wave.",
+    },
+    {
+      type: "worked-example",
+      id: "owt1-1-we4",
+      title: "Worked example 4 (a stadium wave, JEE Main flavour)",
+      problem:
+        "The Mexican wave moves at 20 seats per second and each spectator takes 1.5 s to stand and sit. How many seats wide is the wave?",
+      steps: [
+        { text: "Each person's motion lasts 1.5 s, during which the disturbance moves on by $20 \\times 1.5 = 30$ seats. *Why this step:* width in space = speed × duration in time, the same relation as $\\lambda = vT$." },
+        { text: "About 30 people are up at any instant." },
+      ],
+      answer: "About 30 seats wide.",
     },
     {
       type: "callout",
@@ -85,6 +136,7 @@ const lesson01: LessonSeed = {
       content:
         "A crest travels along the string, but the bits of string under it only move up and down. If the string itself travelled, a rope tied to a wall would pile up against the wall. What travels is the *shape*, together with the energy of the motion. Tie a ribbon to the string and it bobs in place as the waves pass under it.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "owt1-1-q1",
@@ -96,17 +148,20 @@ const lesson01: LessonSeed = {
         { text: "Moves in $-x$ at 0.5 m/s", feedback: "The speed is the coefficient of $t$ divided by that of $x$: $2/1 = 2$ m/s." },
         { text: "It does not travel.", feedback: "Any function of $x + vt$ alone is a travelling pulse." },
       ],
+      hint: "Rewrite the argument in the form $x \\pm vt$ (with $x$ having coefficient 1), then read off the sign for the direction and $v$ for the speed.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt1-1-q2",
       variant: "practice",
-      question: "What is the speed of the pulse $y = \\dfrac{1}{2 + (3x - 12t)^2}$ (SI)?",
-      options: [
-        { text: "12 m/s in $+x$", feedback: "Factor out the 3 first: $3(x - 4t)$." },
-        { text: "36 m/s in $+x$", feedback: "Divide the coefficients, don't multiply: $v = 12/3$." },
-        { text: "4 m/s in $-x$", feedback: "A minus sign between $x$ and $t$ means motion in $+x$." },
-        { text: "4 m/s in $+x$", correct: true, feedback: "$3x - 12t = 3(x - 4t)$, so $v = 12/3 = 4$ m/s, moving in $+x$." },
+      question: "The pulse $y = \\dfrac{1}{2 + (3x - 12t)^2}$ (SI) travels in the $+x$ direction. What is its speed, in m/s?",
+      answer: 4,
+      unit: "m/s",
+      hint: "Factor the coefficient of $x$ out of $3x - 12t$ so the argument reads $x - vt$.",
+      solution: "$3x - 12t = 3(x - 4t)$, so $y$ is a function of $x - 4t$ alone: $v = 12/3 = 4$ m/s, moving in $+x$.",
+      commonMistakes: [
+        { answer: 12, feedback: "12 is the coefficient of $t$. Factor out the 3 first: $3(x - 4t)$." },
+        { answer: 36, feedback: "Divide the coefficients, don't multiply: $v = 12/3$." },
       ],
     },
     {
@@ -119,6 +174,7 @@ const lesson01: LessonSeed = {
         { text: "It is carried outward with the ripples.", feedback: "The ripples carry energy, not water. The cork goes up and down as each ripple passes." },
         { text: "It stays perfectly still.", feedback: "The water under it oscillates, so the cork moves too; it just does not travel with the wave." },
       ],
+      hint: "Think about what a wave carries from place to place, and what the individual parcels of water do as it passes.",
     },
     {
       type: "quiz",
@@ -131,6 +187,7 @@ const lesson01: LessonSeed = {
         { text: "A wave on a plucked guitar string", feedback: "The string moves sideways while the wave runs along it: transverse." },
         { text: "Light from a bulb", feedback: "Light is an electromagnetic wave with transverse fields." },
       ],
+      hint: "Compare the direction in which the particles of the medium move with the direction in which the wave travels.",
     },
     {
       type: "quiz",
@@ -143,6 +200,21 @@ const lesson01: LessonSeed = {
         { text: "$y = e^{-(x + t)^2}$", feedback: "A function of $x + t$ alone: a bump moving left at 1 m/s." },
         { text: "$y = \\sin(2x - 6t)$", feedback: "$2x - 6t = 2(x - 3t)$: a sine wave moving right at 3 m/s." },
       ],
+      hint: "A wave of fixed shape depends on $x$ and $t$ only through a single combination $x \\pm vt$. Try to write each expression that way.",
+    },
+    {
+      type: "quiz",
+      id: "owt1-1-q6",
+      variant: "practice",
+      multiple: true,
+      question: "A pulse on a rope is $y = \\dfrac{4}{1 + (2x - 6t)^2}$ ($x, y$ in m, $t$ in s). Select every correct statement.",
+      options: [
+        { text: "The pulse moves in the $+x$ direction.", correct: true, feedback: "The argument is $2(x - 3t)$, a function of $x - vt$: motion in $+x$." },
+        { text: "The pulse moves at 3 m/s.", correct: true, feedback: "$2x - 6t = 2(x - 3t)$, so $v = 6/2 = 3$ m/s." },
+        { text: "The peak of the pulse is 4 m high.", correct: true, feedback: "The peak is where $2x - 6t = 0$, and there $y = 4/1 = 4$ m." },
+        { text: "At $t = 2$ s the peak is at $x = 12$ m.", feedback: "The peak is where $2x = 6t$, i.e. $x = 3t = 6$ m at $t = 2$ s. $12$ m uses $6t$ without dividing by the 2." },
+      ],
+      hint: "Rewrite the argument in the form $a(x \\pm vt)$ first.",
     },
   ]),
 };
@@ -157,6 +229,7 @@ const lesson02: LessonSeed = {
       content:
         "Hold the end of a long string and move your hand up and down in SHM, $y = A\\sin(\\omega t)$ (with a minus sign chosen below for convenience). Every point of the string repeats your motion, delayed by the time the disturbance takes to reach it. The result is the most important wave in physics: a sine wave marching along the string.",
     },
+    { type: "heading", text: "Building the sinusoidal wave" },
     {
       type: "text",
       content:
@@ -199,10 +272,11 @@ const lesson02: LessonSeed = {
       content:
         "What you should have seen: with $\\lambda$ fixed, raising $f$ speeds the wave up in proportion; the readout always satisfies $v = f\\lambda$. Flipping the direction changes $kx - \\omega t$ to $kx + \\omega t$. The probe's maximum speed readout $A\\omega$ has nothing to do with $v$: it grows with amplitude, while the wave speed does not.",
     },
+    { type: "heading", text: "Particle velocity and the slope rule" },
     {
       type: "text",
       content:
-        "**Particle velocity and the slope rule.** The velocity of the string element at $x$ is the time derivative at fixed $x$; the slope of the string is the space derivative at fixed $t$:",
+        "The velocity of the string element at $x$ is the time derivative at fixed $x$; the slope of the string is the space derivative at fixed $t$:",
     },
     {
       type: "math",
@@ -214,15 +288,57 @@ const lesson02: LessonSeed = {
       content:
         "(For any right-moving shape $f(x - vt)$ the same relation holds, by the chain rule.) It says: for a wave moving right, wherever the string slopes *upward* to the right the particle is moving *down*, and vice versa. Picture the shape sliding right: the part on the front of a crest (sloping down) is about to be lifted. Finally, differentiating twice gives $\\dfrac{\\partial^2 y}{\\partial t^2} = v^2\\dfrac{\\partial^2 y}{\\partial x^2}$, the **wave equation**. Any function that satisfies it with some constant $v$ is a wave of speed $v$, a quick check you can apply to any proposed expression.",
     },
+    { type: "heading", text: "Reading wave equations and phase differences" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (read everything, JEE Main).** $y = 0.02\\sin(30x - 240t)$ (SI). Find $A$, $\\lambda$, $f$, $v$ and the direction.\n\n1. $A = 0.02$ m.\n2. $k = 30$ rad/m, so $\\lambda = 2\\pi/30 \\approx 0.209$ m.\n3. $\\omega = 240$ rad/s, so $f = 240/2\\pi \\approx 38.2$ Hz.\n4. $v = \\omega/k = 240/30 = 8$ m/s. *Why this step:* $\\omega/k$ avoids rounding $\\lambda$ and $f$ first.\n5. The signs of $kx$ and $\\omega t$ are opposite, so the wave moves in $+x$.\n\n**Worked example 2 (particle speed vs wave speed).** For the same wave, find the maximum particle speed.\n\n1. $v_{p,\\max} = A\\omega = 0.02 \\times 240 = 4.8$ m/s.\n2. Compare with $v = 8$ m/s. The ratio is $A\\omega/(\\omega/k) = Ak = 0.6$. *Why this step:* $Ak$ is the maximum slope of the string, so particles outrun the wave only for very steep (large-amplitude, short-wavelength) waves.",
+      type: "worked-example",
+      id: "owt1-2-we1",
+      title: "Worked example 1 (read everything, JEE Main)",
+      problem:
+        "$y = 0.02\\sin(30x - 240t)$ (SI). Find $A$, $\\lambda$, $f$, $v$ and the direction.",
+      steps: [
+        { text: "$A = 0.02$ m." },
+        { text: "$k = 30$ rad/m, so $\\lambda = 2\\pi/30 \\approx 0.209$ m." },
+        { text: "$\\omega = 240$ rad/s, so $f = 240/2\\pi \\approx 38.2$ Hz." },
+        { text: "$v = \\omega/k = 240/30 = 8$ m/s. *Why this step:* $\\omega/k$ avoids rounding $\\lambda$ and $f$ first." },
+        { text: "The signs of $kx$ and $\\omega t$ are opposite, so the wave moves in $+x$." },
+      ],
+      answer: "$A = 0.02$ m, $\\lambda \\approx 0.209$ m, $f \\approx 38.2$ Hz, $v = 8$ m/s, moving in $+x$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (phase difference).** A wave of frequency 200 Hz travels at 300 m/s. What is the phase difference between two points 25 cm apart along it?\n\n1. $\\lambda = v/f = 300/200 = 1.5$ m.\n2. $\\Delta\\phi = \\dfrac{2\\pi}{\\lambda}\\Delta x = \\dfrac{2\\pi}{1.5} \\times 0.25 = \\dfrac{\\pi}{3}$. *Why this step:* a full wavelength is a full cycle, $2\\pi$; 25 cm is one sixth of 1.5 m.\n\n**Worked example 4 (direction from slope).** A wave moves in $+x$ at 8 m/s. At some point the string's slope is $+0.1$. How is that element moving?\n\n1. $v_p = -v\\,\\partial y/\\partial x = -8 \\times 0.1 = -0.8$ m/s.\n2. It is moving **down** at 0.8 m/s. Picture it: the string rises to the right of this point, so as the shape slides right, lower string arrives from the left.",
+      type: "worked-example",
+      id: "owt1-2-we2",
+      title: "Worked example 2 (particle speed vs wave speed)",
+      problem:
+        "For the same wave, find the maximum particle speed.",
+      steps: [
+        { text: "$v_{p,\\max} = A\\omega = 0.02 \\times 240 = 4.8$ m/s." },
+        { text: "Compare with $v = 8$ m/s. The ratio is $A\\omega/(\\omega/k) = Ak = 0.6$. *Why this step:* $Ak$ is the maximum slope of the string, so particles outrun the wave only for very steep (large-amplitude, short-wavelength) waves." },
+      ],
+      answer: "$v_{p,\\max} = 4.8$ m/s (0.6 of the wave speed)",
+    },
+    {
+      type: "worked-example",
+      id: "owt1-2-we3",
+      title: "Worked example 3 (phase difference)",
+      problem:
+        "A wave of frequency 200 Hz travels at 300 m/s. What is the phase difference between two points 25 cm apart along it?",
+      steps: [
+        { text: "$\\lambda = v/f = 300/200 = 1.5$ m." },
+        { text: "$\\Delta\\phi = \\dfrac{2\\pi}{\\lambda}\\Delta x = \\dfrac{2\\pi}{1.5} \\times 0.25 = \\dfrac{\\pi}{3}$. *Why this step:* a full wavelength is a full cycle, $2\\pi$; 25 cm is one sixth of 1.5 m." },
+      ],
+      answer: "$\\Delta\\phi = \\pi/3$",
+    },
+    {
+      type: "worked-example",
+      id: "owt1-2-we4",
+      title: "Worked example 4 (direction from slope)",
+      problem:
+        "A wave moves in $+x$ at 8 m/s. At some point the string's slope is $+0.1$. How is that element moving?",
+      steps: [
+        { text: "$v_p = -v\\,\\partial y/\\partial x = -8 \\times 0.1 = -0.8$ m/s." },
+        { text: "It is moving **down** at 0.8 m/s. Picture it: the string rises to the right of this point, so as the shape slides right, lower string arrives from the left." },
+      ],
+      answer: "Moving down at 0.8 m/s.",
     },
     {
       type: "callout",
@@ -231,6 +347,7 @@ const lesson02: LessonSeed = {
       content:
         "The wave speed $v = \\sqrt{T/\\mu}$ (1.3) is set by the string and is the same everywhere along it at all times. The particle speed $-A\\omega\\cos(kx - \\omega t)$ changes from point to point and moment to moment, is perpendicular to the travel, and scales with the amplitude. Shake harder and the particles move faster; the wave does not.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "owt1-2-q1",
@@ -242,29 +359,35 @@ const lesson02: LessonSeed = {
         { text: "$\\lambda = 2$ m, $f = 10$ Hz, $v = 20$ m/s in $-x$", feedback: "$\\lambda = 2\\pi/k = 2\\pi/4\\pi = 0.5$ m, not $4\\pi/2\\pi$." },
         { text: "$\\lambda = 0.5$ m, $f = 10$ Hz, $v = 5$ m/s in $-x$", correct: true, feedback: "$k = 4\\pi \\Rightarrow \\lambda = 0.5$ m; $\\omega = 20\\pi \\Rightarrow f = 10$ Hz; $v = 20\\pi/4\\pi = 5$ m/s. Same signs mean $-x$." },
       ],
+      hint: "Compare with $y = A\\sin(kx + \\omega t)$: use $k = 2\\pi/\\lambda$, $\\omega = 2\\pi f$, $v = \\omega/k$, and the relative sign of the $x$ and $t$ terms for the direction.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt1-2-q2",
       variant: "practice",
-      question: "For $y = 0.01\\sin(2x - 100t)$ (SI), what is the ratio of the maximum particle speed to the wave speed?",
-      options: [
-        { text: "$50$", feedback: "That is the inverse ratio, $v/(A\\omega)$." },
-        { text: "$0.01$", feedback: "That is $A$ alone. The ratio is $Ak = 0.01 \\times 2$." },
-        { text: "$0.02$", correct: true, feedback: "$A\\omega = 1$ m/s and $v = 100/2 = 50$ m/s, so the ratio is $0.02 = Ak$." },
-        { text: "$1$", feedback: "They are not equal: $A\\omega = 1$ m/s but $v = \\omega/k = 50$ m/s." },
+      question: "For $y = 0.01\\sin(2x - 100t)$ (SI), what is the ratio of the maximum particle speed to the wave speed? Give a pure number.",
+      answer: 0.02,
+      relTolerance: 0.01,
+      hint: "Maximum particle speed is $A\\omega$; wave speed is $\\omega/k$.",
+      solution: "$A\\omega = 0.01 \\times 100 = 1$ m/s and $v = \\omega/k = 100/2 = 50$ m/s, so the ratio is $1/50 = 0.02$. In general the ratio is $Ak$, the maximum slope of the string.",
+      commonMistakes: [
+        { answer: 50, feedback: "That is the inverse ratio, $v/(A\\omega)$." },
+        { answer: 0.01, feedback: "That is $A$ alone. The ratio is $Ak = 0.01 \\times 2$." },
+        { answer: 1, feedback: "1 m/s is the maximum particle speed $A\\omega$ itself. Divide by the wave speed $\\omega/k = 50$ m/s." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt1-2-q3",
       variant: "practice",
-      question: "A 500 Hz wave travels at 360 m/s. What is the phase difference between two points 12 cm apart?",
-      options: [
-        { text: "$0.12$ rad", feedback: "Multiply the distance by $k = 2\\pi/\\lambda$, not by 1." },
-        { text: "$\\pi/3$", correct: true, feedback: "$\\lambda = 0.72$ m; $\\Delta\\phi = 2\\pi \\times 0.12/0.72 = \\pi/3$." },
-        { text: "$\\pi/6$", feedback: "0.12/0.72 is $1/6$ of a wavelength, and a wavelength is $2\\pi$: so $2\\pi/6 = \\pi/3$." },
-        { text: "$2\\pi/3$", feedback: "Check $\\lambda = v/f = 0.72$ m, not 0.36 m." },
+      question: "A 500 Hz wave travels at 360 m/s. What is the phase difference between two points 12 cm apart along it, in degrees?",
+      answer: 60,
+      unit: "°",
+      hint: "Find $\\lambda = v/f$ first. A whole wavelength is a full cycle, $360^\\circ$.",
+      solution: "$\\lambda = 360/500 = 0.72$ m. The points are $0.12/0.72 = \\tfrac16$ of a wavelength apart, so $\\Delta\\phi = \\tfrac16 \\times 360^\\circ = 60^\\circ$ ($\\pi/3$ rad).",
+      commonMistakes: [
+        { answer: 30, feedback: "0.12/0.72 is $\\tfrac16$ of a wavelength, and a wavelength is a full $360^\\circ$ ($2\\pi$), not $180^\\circ$: $\\tfrac16 \\times 360^\\circ = 60^\\circ$." },
+        { answer: 120, feedback: "Check $\\lambda = v/f = 0.72$ m, not 0.36 m." },
       ],
     },
     {
@@ -290,6 +413,7 @@ const lesson02: LessonSeed = {
         { text: "The wavelength doubles.", feedback: "$\\lambda = v/f$, and neither $v$ nor $f$ has changed." },
         { text: "The maximum particle speed doubles; the wave speed is unchanged.", correct: true, feedback: "$v_{p,\\max} = A\\omega$ scales with $A$; the wave speed depends only on the string." },
       ],
+      hint: "Separate the two speeds: which one is fixed by the string's tension and mass per length, and which depends on how hard you shake it?",
     },
   ]),
 };
@@ -304,10 +428,11 @@ const lesson03: LessonSeed = {
       content:
         "Tighten a guitar string and its note rises; the thick bass strings sound lower than the thin ones. Both effects come from the wave speed on the string. A tighter string snaps back harder, so disturbances pass faster; a heavier string is more sluggish, so they pass slower. We now find the exact formula.",
     },
+    { type: "heading", text: "The derivation: ride with the pulse" },
     {
       type: "text",
       content:
-        "**The derivation: ride with the pulse.** Move along with a pulse at speed $v$. In this frame the pulse shape is frozen and the string streams backwards through it at speed $v$. Look at a tiny arc at the top of the pulse, of radius $R$, subtending angle $2\\delta\\theta$ at the centre of curvature. Its length is $2R\\,\\delta\\theta$ and its mass is $\\mu \\cdot 2R\\,\\delta\\theta$, where $\\mu$ is the mass per unit length.",
+        "Move along with a pulse at speed $v$. In this frame the pulse shape is frozen and the string streams backwards through it at speed $v$. Look at a tiny arc at the top of the pulse, of radius $R$, subtending angle $2\\delta\\theta$ at the centre of curvature. Its length is $2R\\,\\delta\\theta$ and its mass is $\\mu \\cdot 2R\\,\\delta\\theta$, where $\\mu$ is the mass per unit length.",
     },
     {
       type: "text",
@@ -350,10 +475,11 @@ const lesson03: LessonSeed = {
       content:
         "What you should have seen: at 25 N the speed is 50 m/s; at 100 N it is 100 m/s. Doubling the speed takes **four times** the tension, because the speed goes as the square root.",
     },
+    { type: "heading", text: "Energy carried by the wave" },
     {
       type: "text",
       content:
-        "**Energy carried by the wave.** Each element of length $dx$ performs SHM of amplitude $A$, so it carries energy $\\tfrac12(\\mu\\,dx)\\omega^2A^2$ (its maximum KE, from 0.3). The energy per unit length is $\\tfrac12\\mu\\omega^2A^2$, and this energy moves along at speed $v$. So the power carried past any point is",
+        "Each element of length $dx$ performs SHM of amplitude $A$, so it carries energy $\\tfrac12(\\mu\\,dx)\\omega^2A^2$ (its maximum KE, from 0.3). The energy per unit length is $\\tfrac12\\mu\\omega^2A^2$, and this energy moves along at speed $v$. So the power carried past any point is",
     },
     { type: "math", latex: "P = \\tfrac12\\,\\mu\\,\\omega^2 A^2\\, v" },
     {
@@ -361,15 +487,56 @@ const lesson03: LessonSeed = {
       content:
         "Power goes as the **square** of both amplitude and frequency. Intensity (power per area) matters for waves spreading in 3D, like sound in Chapter 2; for a string the power itself is the useful measure.",
     },
+    { type: "heading", text: "Wires and hanging ropes" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (JEE Main).** A 2 m wire of mass 20 g is held at a tension of 50 N. Find the speed of transverse waves on it.\n\n1. $\\mu = 0.020/2 = 0.01$ kg/m. *Why this step:* the formula needs mass **per length**, not total mass.\n2. $v = \\sqrt{50/0.01} = \\sqrt{5000} \\approx 70.7$ m/s.\n\n**Worked example 2 (two wires).** Two wires of the same material, under the same tension, have radii in the ratio 1:2. Find the ratio of wave speeds.\n\n1. $\\mu = \\rho\\pi r^2$, so $\\mu_1 : \\mu_2 = 1 : 4$.\n2. $v \\propto 1/\\sqrt\\mu \\propto 1/r$, so $v_1 : v_2 = 2 : 1$. *Why this step:* square-root dependence on $\\mu$ turns the $r^2$ into $r$.\n\n**Worked example 3 (power).** A string with $\\mu = 0.01$ kg/m and tension 100 N carries a 50 Hz wave of amplitude 1 cm. What power does it transmit?\n\n1. $v = \\sqrt{100/0.01} = 100$ m/s, $\\omega = 2\\pi \\times 50 = 100\\pi$ rad/s.\n2. $P = \\tfrac12 \\times 0.01 \\times (100\\pi)^2 \\times (0.01)^2 \\times 100 = \\tfrac12\\pi^2 \\approx 4.9$ W.",
+      type: "worked-example",
+      id: "owt1-3-we1",
+      title: "Worked example 1 (JEE Main)",
+      problem:
+        "A 2 m wire of mass 20 g is held at a tension of 50 N. Find the speed of transverse waves on it.",
+      steps: [
+        { text: "$\\mu = 0.020/2 = 0.01$ kg/m. *Why this step:* the formula needs mass **per length**, not total mass." },
+        { text: "$v = \\sqrt{50/0.01} = \\sqrt{5000} \\approx 70.7$ m/s." },
+      ],
+      answer: "$v \\approx 70.7$ m/s",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (hanging rope, JEE Advanced).** A uniform rope of length $L$ hangs from a ceiling. A pulse starts at the bottom. How long does it take to reach the top?\n\n1. At height $y$ above the free end, the tension supports the rope below: $T = \\mu g y$. *Why this step:* in a hanging rope the tension is not constant, so the speed varies along it.\n2. $v = \\sqrt{T/\\mu} = \\sqrt{gy}$, independent of $\\mu$.\n3. $dt = \\dfrac{dy}{\\sqrt{gy}}$, so $t = \\displaystyle\\int_0^L \\frac{dy}{\\sqrt{gy}} = \\frac{2\\sqrt L}{\\sqrt g} = 2\\sqrt{\\frac{L}{g}}$.\n4. For $L = 10$ m and $g = 10$ m/s²: $t = 2$ s. The pulse accelerates as it climbs into more tensioned rope.",
+      type: "worked-example",
+      id: "owt1-3-we2",
+      title: "Worked example 2 (two wires)",
+      problem:
+        "Two wires of the same material, under the same tension, have radii in the ratio 1:2. Find the ratio of wave speeds.",
+      steps: [
+        { text: "$\\mu = \\rho\\pi r^2$, so $\\mu_1 : \\mu_2 = 1 : 4$." },
+        { text: "$v \\propto 1/\\sqrt\\mu \\propto 1/r$, so $v_1 : v_2 = 2 : 1$. *Why this step:* square-root dependence on $\\mu$ turns the $r^2$ into $r$." },
+      ],
+      answer: "$v_1 : v_2 = 2 : 1$",
+    },
+    {
+      type: "worked-example",
+      id: "owt1-3-we3",
+      title: "Worked example 3 (power)",
+      problem:
+        "A string with $\\mu = 0.01$ kg/m and tension 100 N carries a 50 Hz wave of amplitude 1 cm. What power does it transmit?",
+      steps: [
+        { text: "$v = \\sqrt{100/0.01} = 100$ m/s, $\\omega = 2\\pi \\times 50 = 100\\pi$ rad/s." },
+        { text: "$P = \\tfrac12 \\times 0.01 \\times (100\\pi)^2 \\times (0.01)^2 \\times 100 = \\tfrac12\\pi^2 \\approx 4.9$ W." },
+      ],
+      answer: "$P \\approx 4.9$ W",
+    },
+    {
+      type: "worked-example",
+      id: "owt1-3-we4",
+      title: "Worked example 4 (hanging rope, JEE Advanced)",
+      problem:
+        "A uniform rope of length $L$ hangs from a ceiling. A pulse starts at the bottom. How long does it take to reach the top?",
+      steps: [
+        { text: "At height $y$ above the free end, the tension supports the rope below: $T = \\mu g y$. *Why this step:* in a hanging rope the tension is not constant, so the speed varies along it." },
+        { text: "$v = \\sqrt{T/\\mu} = \\sqrt{gy}$, independent of $\\mu$." },
+        { text: "$dt = \\dfrac{dy}{\\sqrt{gy}}$, so $t = \\displaystyle\\int_0^L \\frac{dy}{\\sqrt{gy}} = \\frac{2\\sqrt L}{\\sqrt g} = 2\\sqrt{\\frac{L}{g}}$." },
+        { text: "For $L = 10$ m and $g = 10$ m/s²: $t = 2$ s. The pulse accelerates as it climbs into more tensioned rope." },
+      ],
+      answer: "$t = 2\\sqrt{L/g}$ (2 s for a 10 m rope)",
     },
     {
       type: "callout",
@@ -378,28 +545,36 @@ const lesson03: LessonSeed = {
       content:
         "On a given string at a given tension, every frequency travels at the same $\\sqrt{T/\\mu}$. Shake faster and the waves come closer together ($\\lambda = v/f$ shrinks); they do not move faster. That is why the whole chord from a guitar string reaches your ear together.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt1-3-q1",
       variant: "practice",
-      question: "The tension in a string is increased from 40 N to 90 N. By what factor does the wave speed change?",
-      options: [
-        { text: "$0.67$", feedback: "More tension means a faster wave, not a slower one." },
-        { text: "$1.25$", feedback: "Take the square root of the tension ratio: $\\sqrt{2.25} = 1.5$." },
-        { text: "$1.5$", correct: true, feedback: "$v \\propto \\sqrt T$: $\\sqrt{90/40} = \\sqrt{2.25} = 1.5$." },
-        { text: "$2.25$", feedback: "That is the ratio of tensions. Speed goes as the square root." },
+      question: "The tension in a string is increased from 40 N to 90 N. By what factor does the wave speed change? (Give $v_{\\text{new}}/v_{\\text{old}}$.)",
+      answer: 1.5,
+      tolerance: 0.01,
+      hint: "$v = \\sqrt{T/\\mu}$, and $\\mu$ has not changed.",
+      solution: "$v \\propto \\sqrt T$, so $\\dfrac{v_{\\text{new}}}{v_{\\text{old}}} = \\sqrt{\\dfrac{90}{40}} = \\sqrt{2.25} = 1.5$.",
+      commonMistakes: [
+        { answer: 0.667, tolerance: 0.01, feedback: "More tension means a faster wave, not a slower one: you inverted the ratio." },
+        { answer: 1.25, feedback: "1.25 is the increase in tension over the original, $50/40$. The ratio is $90/40 = 2.25$, and $v$ goes as its square root: $1.5$." },
+        { answer: 2.25, feedback: "That is the ratio of tensions. Speed goes as the square root." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt1-3-q2",
       variant: "practice",
-      question: "A 50 cm string of mass 5 g is under a tension of 40 N. What is the wave speed on it?",
-      options: [
-        { text: "$4000$ m/s", feedback: "That is $T/\\mu$. Take the square root." },
-        { text: "$\\sqrt{4000} \\approx 63.2$ m/s", correct: true, feedback: "$\\mu = 0.005/0.5 = 0.01$ kg/m; $v = \\sqrt{40/0.01}$." },
-        { text: "$\\sqrt{8000} \\approx 89.4$ m/s", feedback: "You used $\\mu = 0.005$ kg/m, the total mass. Divide by the length 0.5 m." },
-        { text: "$\\sqrt{80} \\approx 8.9$ m/s", feedback: "5 g is 0.005 kg, and $\\mu = 0.01$ kg/m." },
+      question: "A 50 cm string of mass 5 g is under a tension of 40 N. What is the wave speed on it, in m/s?",
+      answer: 63.25,
+      relTolerance: 0.01,
+      unit: "m/s",
+      hint: "Find the mass per unit length in kg/m first.",
+      solution: "$\\mu = 0.005/0.5 = 0.01$ kg/m, so $v = \\sqrt{40/0.01} = \\sqrt{4000} \\approx 63.2$ m/s.",
+      commonMistakes: [
+        { answer: 4000, feedback: "That is $T/\\mu$. Take the square root." },
+        { answer: 89.44, feedback: "You used $\\mu = 0.005$ kg/m, the total mass. Divide by the length 0.5 m." },
+        { answer: 8.944, feedback: "You used $\\mu = 0.5$ kg/m. Mass per length is $0.005\\text{ kg} / 0.5\\text{ m} = 0.01$ kg/m." },
       ],
     },
     {
@@ -413,17 +588,21 @@ const lesson03: LessonSeed = {
         { text: "Double the speed, double the wavelength", feedback: "Neither: the speed stays, and the wavelength shrinks." },
         { text: "Same speed, double the wavelength", feedback: "More waves per second at the same speed must be closer together." },
       ],
+      hint: "The string, not your hand, sets the wave speed. Then use $v = f\\lambda$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt1-3-q4",
       variant: "practice",
-      question: "A steel wire (density 8000 kg/m³) is under a stress of $8 \\times 10^8$ Pa. What is the speed of transverse waves on it?",
-      options: [
-        { text: "$10^5$ m/s", feedback: "That is $\\text{stress}/\\rho$. Take the square root." },
-        { text: "It cannot be found without the radius.", feedback: "$T/\\mu = (T/A)/(\\mu/A) = \\text{stress}/\\rho$: the area cancels." },
-        { text: "about 3160 m/s", feedback: "$\\sqrt{10^5} \\approx 316$, not 3160." },
-        { text: "about 316 m/s", correct: true, feedback: "$v = \\sqrt{\\text{stress}/\\rho} = \\sqrt{10^5} \\approx 316$ m/s. The cross-section cancels." },
+      question: "A steel wire (density 8000 kg/m³) is under a stress of $8 \\times 10^8$ Pa. What is the speed of transverse waves on it, in m/s?",
+      answer: 316.2,
+      relTolerance: 0.01,
+      unit: "m/s",
+      hint: "You are not given the radius, and you don't need it: write $T/\\mu$ in terms of stress and density.",
+      solution: "$\\dfrac{T}{\\mu} = \\dfrac{T/A}{\\mu/A} = \\dfrac{\\text{stress}}{\\rho}$: the cross-section cancels.\n\n$v = \\sqrt{\\dfrac{8 \\times 10^8}{8000}} = \\sqrt{10^5} \\approx 316$ m/s.",
+      commonMistakes: [
+        { answer: 100000, feedback: "That is $\\text{stress}/\\rho$. Take the square root." },
+        { answer: 3162, feedback: "$\\sqrt{10^5} \\approx 316$, not 3160: check the power of ten." },
       ],
     },
     {
@@ -437,6 +616,21 @@ const lesson03: LessonSeed = {
         { text: "stays the same", correct: true, feedback: "$P \\propto \\omega^2A^2$: $(\\tfrac12)^2 \\times 2^2 = 1$." },
         { text: "doubles", feedback: "Both amplitude and frequency enter squared: $4 \\times \\tfrac14 = 1$." },
       ],
+      hint: "Use $P = \\tfrac12\\mu v\\,\\omega^2A^2$ and see how each factor changes.",
+    },
+    {
+      type: "quiz",
+      id: "owt1-3-q6",
+      variant: "practice",
+      multiple: true,
+      question: "A wire is stretched between two clamps. Select every change that, on its own, doubles the speed of transverse waves on it.",
+      options: [
+        { text: "Quadruple the tension.", correct: true, feedback: "$v \\propto \\sqrt T$, and $\\sqrt4 = 2$." },
+        { text: "Replace it with a wire of the same material and half the radius, at the same tension.", correct: true, feedback: "$\\mu = \\rho\\pi r^2$ falls to $\\tfrac14$, and $v \\propto 1/\\sqrt\\mu$ doubles." },
+        { text: "Shake the end at twice the frequency.", feedback: "The source sets the frequency, not the speed. The wavelength halves instead." },
+        { text: "Cut the wire to half its length, keeping the same tension.", feedback: "Halving the length halves the mass too, so the mass **per length** $\\mu$ is unchanged, and so is $v$." },
+      ],
+      hint: "Only $T$ and $\\mu$ (mass per unit length) appear in $v = \\sqrt{T/\\mu}$.",
     },
   ]),
 };
@@ -458,6 +652,7 @@ const lesson04: LessonSeed = {
       content:
         "When two or more waves overlap, the displacement at each point is the **sum** of the displacements each wave would cause on its own: $y = y_1 + y_2$. After overlapping, each wave continues unchanged.\nThis holds whenever the restoring force is proportional to displacement (small amplitudes), because then the wave equation is linear: the sum of two solutions is a solution.",
     },
+    { type: "heading", text: "Two waves of the same frequency" },
     {
       type: "text",
       content:
@@ -493,10 +688,11 @@ const lesson04: LessonSeed = {
       content:
         "What you should have seen: at $\\phi_2 = 0$ the sum is twice as tall; at $\\phi_2 = \\pi$ with equal amplitudes it vanishes everywhere; in between it takes intermediate heights. Make $A_2$ different from $A_1$ and destructive interference no longer gives zero, only $|A_1 - A_2|$.",
     },
+    { type: "heading", text: "Path difference becomes phase difference" },
     {
       type: "text",
       content:
-        "**Path difference becomes phase difference.** Two sources vibrating in phase send waves along different paths to a point. If one path is longer by $\\Delta x$, its wave arrives with extra phase $k\\,\\Delta x$:",
+        "Two sources vibrating in phase send waves along different paths to a point. If one path is longer by $\\Delta x$, its wave arrives with extra phase $k\\,\\Delta x$:",
     },
     { type: "math", latex: "\\delta = \\frac{2\\pi}{\\lambda}\\,\\Delta x \\qquad\\Longrightarrow\\qquad \\text{constructive: } \\Delta x = n\\lambda, \\quad \\text{destructive: } \\Delta x = \\left(n + \\tfrac12\\right)\\lambda" },
     {
@@ -505,10 +701,11 @@ const lesson04: LessonSeed = {
         "**Intensity.** The power a wave carries goes as $A^2$ (1.3), so intensity $I \\propto A^2$. Squaring the amplitude formula gives $I = I_1 + I_2 + 2\\sqrt{I_1I_2}\\cos\\delta$, and the ratio of the brightest to the dimmest combination is",
     },
     { type: "math", latex: "\\frac{I_{\\max}}{I_{\\min}} = \\left(\\frac{A_1 + A_2}{A_1 - A_2}\\right)^2 = \\left(\\frac{\\sqrt{I_1} + \\sqrt{I_2}}{\\sqrt{I_1} - \\sqrt{I_2}}\\right)^2" },
+    { type: "heading", text: "Unequal wavelengths" },
     {
       type: "text",
       content:
-        "**Unequal wavelengths.** If the two waves have different wavelengths (and so different frequencies on the same string), $\\delta$ changes from place to place and moment to moment. The sum is no longer a sine wave of fixed shape; it swells and shrinks as it moves. In time, at one point, this is the origin of **beats** (Chapter 2).",
+        "If the two waves have different wavelengths (and so different frequencies on the same string), $\\delta$ changes from place to place and moment to moment. The sum is no longer a sine wave of fixed shape; it swells and shrinks as it moves. In time, at one point, this is the origin of **beats** (Chapter 2).",
     },
     {
       type: "interactive",
@@ -531,14 +728,53 @@ const lesson04: LessonSeed = {
         "What you should have seen: groups of large oscillation separated by near-flat stretches, where the two waves are out of step. Move $\\lambda_2$ back to 1 m and the pattern becomes a clean sine wave again.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Two waves of amplitudes 3 mm and 4 mm, same frequency and direction, differ in phase by $\\pi/2$. Find the resultant amplitude.\n\n1. $A^2 = 9 + 16 + 2(3)(4)\\cos 90^\\circ = 25$.\n2. $A = 5$ mm. *Why this step:* at $\\delta = \\pi/2$ the reference arrows are perpendicular, so this is Pythagoras.\n\n**Worked example 2 (JEE Main favourite).** Two coherent waves have intensities in the ratio 9:1. Find $I_{\\max}/I_{\\min}$.\n\n1. Amplitudes go as $\\sqrt I$: $A_1 : A_2 = 3 : 1$. *Why this step:* the interference formula works with amplitudes; intensities must be square-rooted first.\n2. $\\dfrac{I_{\\max}}{I_{\\min}} = \\left(\\dfrac{3 + 1}{3 - 1}\\right)^2 = 4$, i.e. 4:1.\n\n**Worked example 3 (path difference).** Two sources in phase each send waves of amplitude $A$ and wavelength 0.4 m to a point P. The path difference is 0.3 m. Find the amplitude at P.\n\n1. $\\delta = \\dfrac{2\\pi}{0.4} \\times 0.3 = \\dfrac{3\\pi}{2}$.\n2. $A_R^2 = A^2 + A^2 + 2A^2\\cos\\dfrac{3\\pi}{2} = 2A^2$, so $A_R = \\sqrt2\\,A$.\n3. Intensity at P is $2I_0$, halfway between the maximum $4I_0$ and the minimum 0.",
+      type: "worked-example",
+      id: "owt1-4-we1",
+      title: "Worked example 1",
+      problem:
+        "Two waves of amplitudes 3 mm and 4 mm, same frequency and direction, differ in phase by $\\pi/2$. Find the resultant amplitude.",
+      steps: [
+        { text: "$A^2 = 9 + 16 + 2(3)(4)\\cos 90^\\circ = 25$." },
+        { text: "$A = 5$ mm. *Why this step:* at $\\delta = \\pi/2$ the reference arrows are perpendicular, so this is Pythagoras." },
+      ],
+      answer: "$A = 5$ mm",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (working backwards).** Two waves of equal amplitude $A$ superpose to give a wave of amplitude $A$. What is their phase difference?\n\n1. $A^2 = 2A^2 + 2A^2\\cos\\delta$, so $\\cos\\delta = -\\tfrac12$.\n2. $\\delta = 2\\pi/3$ (or $4\\pi/3$). *Why this step:* the arrows of two equal SHMs and their sum form an equilateral triangle, which forces a $120^\\circ$ angle between the two arrows.",
+      type: "worked-example",
+      id: "owt1-4-we2",
+      title: "Worked example 2 (JEE Main favourite)",
+      problem:
+        "Two coherent waves have intensities in the ratio 9:1. Find $I_{\\max}/I_{\\min}$.",
+      steps: [
+        { text: "Amplitudes go as $\\sqrt I$: $A_1 : A_2 = 3 : 1$. *Why this step:* the interference formula works with amplitudes; intensities must be square-rooted first." },
+        { text: "$\\dfrac{I_{\\max}}{I_{\\min}} = \\left(\\dfrac{3 + 1}{3 - 1}\\right)^2 = 4$, i.e. 4:1." },
+      ],
+      answer: "$I_{\\max}/I_{\\min} = 4$",
+    },
+    {
+      type: "worked-example",
+      id: "owt1-4-we3",
+      title: "Worked example 3 (path difference)",
+      problem:
+        "Two sources in phase each send waves of amplitude $A$ and wavelength 0.4 m to a point P. The path difference is 0.3 m. Find the amplitude at P.",
+      steps: [
+        { text: "$\\delta = \\dfrac{2\\pi}{0.4} \\times 0.3 = \\dfrac{3\\pi}{2}$." },
+        { text: "$A_R^2 = A^2 + A^2 + 2A^2\\cos\\dfrac{3\\pi}{2} = 2A^2$, so $A_R = \\sqrt2\\,A$." },
+        { text: "Intensity at P is $2I_0$, halfway between the maximum $4I_0$ and the minimum 0." },
+      ],
+      answer: "$A_R = \\sqrt2\\,A$",
+    },
+    {
+      type: "worked-example",
+      id: "owt1-4-we4",
+      title: "Worked example 4 (working backwards)",
+      problem:
+        "Two waves of equal amplitude $A$ superpose to give a wave of amplitude $A$. What is their phase difference?",
+      steps: [
+        { text: "$A^2 = 2A^2 + 2A^2\\cos\\delta$, so $\\cos\\delta = -\\tfrac12$." },
+        { text: "$\\delta = 2\\pi/3$ (or $4\\pi/3$). *Why this step:* the arrows of two equal SHMs and their sum form an equilateral triangle, which forces a $120^\\circ$ angle between the two arrows." },
+      ],
+      answer: "$\\delta = 2\\pi/3$ (or $4\\pi/3$)",
     },
     {
       type: "callout",
@@ -547,28 +783,33 @@ const lesson04: LessonSeed = {
       content:
         "At the instant two opposite pulses overlap and the rope is flat, the rope is still **moving**: all the energy is kinetic, and a moment later the pulses re-emerge. When interfering waves cancel in some places, they reinforce in others (at a maximum the intensity is $4I_0$, not $2I_0$), and the total energy is conserved. Interference redistributes energy; it never destroys it.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt1-4-q1",
       variant: "practice",
-      question: "Two waves of amplitudes 5 cm and 3 cm, same frequency and direction, superpose with phase difference $\\pi$. What is the resultant amplitude?",
-      options: [
-        { text: "$0$", feedback: "Complete cancellation needs equal amplitudes." },
-        { text: "$2$ cm", correct: true, feedback: "Opposite phases: $|5 - 3| = 2$ cm." },
-        { text: "$8$ cm", feedback: "That is the in-phase result, $\\delta = 0$." },
-        { text: "$\\sqrt{34}$ cm", feedback: "That is for $\\delta = \\pi/2$." },
+      question: "Two waves of amplitudes 5 cm and 3 cm, same frequency and direction, superpose with phase difference $\\pi$. What is the resultant amplitude, in cm?",
+      answer: 2,
+      unit: "cm",
+      hint: "$A^2 = A_1^2 + A_2^2 + 2A_1A_2\\cos\\delta$, with $\\cos\\pi = -1$.",
+      solution: "With $\\cos\\pi = -1$: $A^2 = 25 + 9 - 30 = 4$, so $A = |5 - 3| = 2$ cm.",
+      commonMistakes: [
+        { answer: 0, feedback: "Complete cancellation needs equal amplitudes." },
+        { answer: 8, feedback: "That is the in-phase result, $\\delta = 0$." },
+        { answer: 5.831, tolerance: 0.01, feedback: "That is $\\sqrt{34}$, the result for $\\delta = \\pi/2$." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt1-4-q2",
       variant: "practice",
       question: "Two coherent waves have amplitudes in the ratio 2:1. What is $I_{\\max}/I_{\\min}$?",
-      options: [
-        { text: "$9$", correct: true, feedback: "$\\left(\\frac{2 + 1}{2 - 1}\\right)^2 = 9$." },
-        { text: "$3$", feedback: "That is the ratio of amplitudes, $(2+1)/(2-1)$. Intensity goes as its square." },
-        { text: "$4$", feedback: "4 is the ratio of the two separate intensities. Interference gives $(A_1 + A_2)^2 : (A_1 - A_2)^2$." },
-        { text: "$\\infty$", feedback: "The minimum is zero only if the amplitudes are equal." },
+      answer: 9,
+      hint: "Add and subtract the amplitudes, then square: intensity goes as amplitude squared.",
+      solution: "$\\dfrac{I_{\\max}}{I_{\\min}} = \\left(\\dfrac{A_1 + A_2}{A_1 - A_2}\\right)^2 = \\left(\\dfrac{2 + 1}{2 - 1}\\right)^2 = 9$.",
+      commonMistakes: [
+        { answer: 3, feedback: "That is the ratio of the amplitudes, $(2+1)/(2-1)$. Intensity goes as its square." },
+        { answer: 4, feedback: "4 is the ratio of the two separate intensities. Interference gives $(A_1 + A_2)^2 : (A_1 - A_2)^2$." },
       ],
     },
     {
@@ -579,8 +820,9 @@ const lesson04: LessonSeed = {
       options: [
         { text: "Destructive interference", correct: true, feedback: "$1.25/0.5 = 2.5$ wavelengths, an odd number of half-wavelengths: $\\delta = 5\\pi$." },
         { text: "Constructive interference", feedback: "Constructive needs a whole number of wavelengths; 2.5 is a half-integer." },
-        { text: "Neither: the amplitude is $\\sqrt2 A$", feedback: "That needs a quarter-wavelength offset. Here it is exactly half a wavelength extra." },
+        { text: "Neither constructive nor destructive: the amplitude is $\\sqrt2 A$", feedback: "That needs a quarter-wavelength offset. Here it is exactly half a wavelength extra." },
       ],
+      hint: "Divide the path difference by $\\lambda$: whole numbers of wavelengths reinforce, odd numbers of half-wavelengths cancel.",
     },
     {
       type: "quiz",
@@ -593,18 +835,35 @@ const lesson04: LessonSeed = {
         { text: "All kinetic: the rope is flat but moving", correct: true, feedback: "The two pulses' velocities add even as their displacements cancel. The pulses re-emerge a moment later." },
         { text: "It has been destroyed and will be recreated", feedback: "Energy is never destroyed. The flat rope is moving." },
       ],
+      hint: "Energy is conserved through the overlap. Think about the velocities of the rope's elements at that instant, not just their displacements.",
+    },
+    {
+      type: "numeric",
+      id: "owt1-4-q5",
+      variant: "practice",
+      question: "Two waves of intensity $I_0$ each interfere with phase difference $\\pi/3$. The resultant intensity is $nI_0$. Find $n$.",
+      answer: 3,
+      hint: "$I = I_1 + I_2 + 2\\sqrt{I_1I_2}\\cos\\delta$.",
+      solution: "$I = I_0 + I_0 + 2I_0\\cos 60^\\circ = 2I_0 + I_0 = 3I_0$, so $n = 3$.",
+      commonMistakes: [
+        { answer: 1.732, tolerance: 0.01, feedback: "$\\sqrt3 A$ is the resultant amplitude; intensity is its square, $3I_0$." },
+        { answer: 2, feedback: "That ignores the interference term $2\\sqrt{I_1I_2}\\cos\\delta$, which is $I_0$ here." },
+        { answer: 4, feedback: "That is the fully constructive maximum, at $\\delta = 0$." },
+      ],
     },
     {
       type: "quiz",
-      id: "owt1-4-q5",
+      id: "owt1-4-q6",
       variant: "practice",
-      question: "Two waves of intensity $I_0$ each interfere with phase difference $\\pi/3$. What is the resultant intensity?",
+      multiple: true,
+      question: "Two sources vibrating in phase each send waves of amplitude $A$ and wavelength 0.4 m to a point P. Select every path difference for which the resultant amplitude at P is zero.",
       options: [
-        { text: "$\\sqrt3\\,I_0$", feedback: "$\\sqrt3 A$ would be the amplitude; intensity is its square, $3I_0$." },
-        { text: "$3I_0$", correct: true, feedback: "$I = I_0 + I_0 + 2I_0\\cos 60^\\circ = 3I_0$." },
-        { text: "$2I_0$", feedback: "That ignores the interference term $2\\sqrt{I_1I_2}\\cos\\delta$, which is $I_0$ here." },
-        { text: "$4I_0$", feedback: "That is the fully constructive maximum, at $\\delta = 0$." },
+        { text: "0.2 m", correct: true, feedback: "Half a wavelength: $\\delta = \\pi$, complete cancellation of equal amplitudes." },
+        { text: "0.6 m", correct: true, feedback: "$0.6/0.4 = 1.5$ wavelengths, an odd number of half-wavelengths: $\\delta = 3\\pi$." },
+        { text: "0.4 m", feedback: "A whole wavelength: $\\delta = 2\\pi$, constructive, amplitude $2A$." },
+        { text: "0.1 m", feedback: "A quarter wavelength: $\\delta = \\pi/2$, amplitude $\\sqrt2\\,A$, neither maximum nor zero." },
       ],
+      hint: "Destructive interference needs $\\Delta x = (n + \\tfrac12)\\lambda$.",
     },
   ]),
 };
@@ -619,6 +878,7 @@ const lesson05: LessonSeed = {
       content:
         "Flick an upward pulse along a rope tied firmly to a wall, and it comes back **upside down**. Tie the rope instead to a light ring that slides freely on a smooth vertical pole, and the pulse comes back **upright**. Join a thin rope to a thick one and part of the pulse bounces back while part carries on. All three facts follow from one question: what must happen at the end?",
     },
+    { type: "heading", text: "Fixed and free ends" },
     {
       type: "text",
       content:
@@ -629,10 +889,11 @@ const lesson05: LessonSeed = {
       content:
         "**Free end.** A massless ring on a smooth pole feels no vertical force except from the rope, so the rope must be horizontal at the end (zero slope), otherwise the ring would have infinite acceleration. The image pulse that keeps the slope zero is the mirror image **the right way up**. The reflected pulse is upright, with no phase change; the end itself swings to twice the height for an instant.",
     },
+    { type: "heading", text: "A junction between two strings" },
     {
       type: "text",
       content:
-        "**A junction between two strings.** Now the pulse meets a second string of different $\\mu$ (same tension, so different speed: $v_1$ then $v_2$). Two conditions hold at the junction: the strings stay joined (same displacement) and the knot is massless (same slope, since the tensions must balance). Solving them for a sinusoidal wave gives the reflected and transmitted amplitudes:",
+        "Now the pulse meets a second string of different $\\mu$ (same tension, so different speed: $v_1$ then $v_2$). Two conditions hold at the junction: the strings stay joined (same displacement) and the knot is massless (same slope, since the tensions must balance). Solving them for a sinusoidal wave gives the reflected and transmitted amplitudes:",
     },
     {
       type: "math",
@@ -660,15 +921,49 @@ const lesson05: LessonSeed = {
       content:
         "**Frequency never changes** when a wave crosses into a new medium; it is set by the source.\n**Speed** is set by the medium, so it changes, and the **wavelength** changes with it: $\\lambda = v/f$.\nReflection from a denser medium (slower waves) inverts the wave; reflection from a rarer medium does not.",
     },
+    { type: "heading", text: "From light to heavy and back" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (light to heavy, JEE Advanced).** A wave of amplitude $A$ travels on a string of mass per length $\\mu$ and meets a string of $4\\mu$ under the same tension. Find the reflected and transmitted amplitudes and wavelengths.\n\n1. $v \\propto 1/\\sqrt\\mu$, so $v_2 = v_1/2$. *Why this step:* the amplitude formulas need speeds, and equal tension makes the speed ratio a square root of the $\\mu$ ratio.\n2. $A_r = \\dfrac{v_1/2 - v_1}{v_1 + v_1/2}A = \\dfrac{-1/2}{3/2}A = -\\dfrac{A}{3}$: one third of the amplitude, inverted.\n3. $A_t = \\dfrac{2(v_1/2)}{3v_1/2}A = \\dfrac{2A}{3}$, upright.\n4. Wavelengths: reflected $\\lambda$ (same string), transmitted $\\lambda/2$ (half the speed, same frequency).\n5. Energy check: power $\\propto \\mu v A^2 = \\sqrt{T\\mu}\\,A^2$. Reflected fraction $(1/3)^2 = 1/9$; transmitted fraction $\\sqrt{4}\\times(2/3)^2 = 8/9$. Total 1. ✓ *Why this step:* a quick way to catch a slip in either formula.",
+      type: "worked-example",
+      id: "owt1-5-we1",
+      title: "Worked example 1 (light to heavy, JEE Advanced)",
+      problem:
+        "A wave of amplitude $A$ travels on a string of mass per length $\\mu$ and meets a string of $4\\mu$ under the same tension. Find the reflected and transmitted amplitudes and wavelengths.",
+      steps: [
+        { text: "$v \\propto 1/\\sqrt\\mu$, so $v_2 = v_1/2$. *Why this step:* the amplitude formulas need speeds, and equal tension makes the speed ratio a square root of the $\\mu$ ratio." },
+        { text: "$A_r = \\dfrac{v_1/2 - v_1}{v_1 + v_1/2}A = \\dfrac{-1/2}{3/2}A = -\\dfrac{A}{3}$: one third of the amplitude, inverted." },
+        { text: "$A_t = \\dfrac{2(v_1/2)}{3v_1/2}A = \\dfrac{2A}{3}$, upright." },
+        { text: "Wavelengths: reflected $\\lambda$ (same string), transmitted $\\lambda/2$ (half the speed, same frequency)." },
+        { text: "Energy check: power $\\propto \\mu v A^2 = \\sqrt{T\\mu}\\,A^2$. Reflected fraction $(1/3)^2 = 1/9$; transmitted fraction $\\sqrt{4}\\times(2/3)^2 = 8/9$. Total 1. ✓ *Why this step:* a quick way to catch a slip in either formula." },
+      ],
+      answer: "$A_r = -A/3$ (inverted), $A_t = 2A/3$; wavelengths $\\lambda$ and $\\lambda/2$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (heavy to light).** Same wave, now going from $\\mu$ into $\\mu/4$.\n\n1. $v_2 = 2v_1$.\n2. $A_r = \\dfrac{2v_1 - v_1}{3v_1}A = +\\dfrac{A}{3}$, upright.\n3. $A_t = \\dfrac{4v_1}{3v_1}A = \\dfrac{4A}{3}$: the transmitted wave is *taller* than the incident one.\n4. Energy: $\\tfrac19 + \\tfrac12 \\times \\tfrac{16}{9} = \\tfrac19 + \\tfrac89 = 1$. ✓ The light string carries the same power with a bigger amplitude because it has less mass moving.\n\n**Worked example 3 (writing the reflected wave).** The wave $y_i = 0.05\\sin(10x - 200t)$ (SI) travels in $+x$ towards a rigid wall at $x = 0$ (the string occupies $x < 0$). Write the reflected wave.\n\n1. The reflected wave travels in $-x$ with the same $A$, $k$, $\\omega$: $y_r = A'\\sin(10x + 200t + \\phi)$.\n2. At the wall, $y_i + y_r = 0$ for all $t$: $-0.05\\sin 200t + A'\\sin(200t + \\phi) = 0$. *Why this step:* the fixed end is a condition on the total displacement, and it must hold at every instant.\n3. This needs $A' = 0.05$, $\\phi = 0$: $y_r = 0.05\\sin(10x + 200t)$.\n4. At the wall, $y_i = -0.05\\sin 200t$ and $y_r = +0.05\\sin 200t$: always opposite, which is the phase change of $\\pi$. The total is $0.1\\sin(10x)\\cos(200t)$, a standing wave with a node at the wall, the subject of 1.6.",
+      type: "worked-example",
+      id: "owt1-5-we2",
+      title: "Worked example 2 (heavy to light)",
+      problem:
+        "The same wave (amplitude $A$) now goes from a string of mass per length $\\mu$ into one of $\\mu/4$, under the same tension. Find the reflected and transmitted amplitudes.",
+      steps: [
+        { text: "$v_2 = 2v_1$." },
+        { text: "$A_r = \\dfrac{2v_1 - v_1}{3v_1}A = +\\dfrac{A}{3}$, upright." },
+        { text: "$A_t = \\dfrac{4v_1}{3v_1}A = \\dfrac{4A}{3}$: the transmitted wave is *taller* than the incident one." },
+        { text: "Energy: $\\tfrac19 + \\tfrac12 \\times \\tfrac{16}{9} = \\tfrac19 + \\tfrac89 = 1$. ✓ The light string carries the same power with a bigger amplitude because it has less mass moving." },
+      ],
+      answer: "$A_r = +A/3$ (upright), $A_t = 4A/3$",
+    },
+    {
+      type: "worked-example",
+      id: "owt1-5-we3",
+      title: "Worked example 3 (writing the reflected wave)",
+      problem:
+        "The wave $y_i = 0.05\\sin(10x - 200t)$ (SI) travels in $+x$ towards a rigid wall at $x = 0$ (the string occupies $x < 0$). Write the reflected wave.",
+      steps: [
+        { text: "The reflected wave travels in $-x$ with the same $A$, $k$, $\\omega$: $y_r = A'\\sin(10x + 200t + \\phi)$." },
+        { text: "At the wall, $y_i + y_r = 0$ for all $t$: $-0.05\\sin 200t + A'\\sin(200t + \\phi) = 0$. *Why this step:* the fixed end is a condition on the total displacement, and it must hold at every instant." },
+        { text: "This needs $A' = 0.05$, $\\phi = 0$: $y_r = 0.05\\sin(10x + 200t)$." },
+        { text: "At the wall, $y_i = -0.05\\sin 200t$ and $y_r = +0.05\\sin 200t$: always opposite, which is the phase change of $\\pi$. The total is $0.1\\sin(10x)\\cos(200t)$, a standing wave with a node at the wall, the subject of 1.6." },
+      ],
+      answer: "$y_r = 0.05\\sin(10x + 200t)$ (SI)",
     },
     {
       type: "callout",
@@ -677,6 +972,7 @@ const lesson05: LessonSeed = {
       content:
         "The junction is one point, and one point can only oscillate at one frequency; it shakes the new string exactly as often as the old string shakes it. What changes is the speed (a property of each string), and so the wavelength. The same rule governs light entering glass and sound entering water.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "owt1-5-q1",
@@ -688,17 +984,20 @@ const lesson05: LessonSeed = {
         { text: "Wavelength", feedback: "$\\lambda = v/f$; the speed changes, so the wavelength does too." },
         { text: "Amplitude", feedback: "Part of the wave reflects, so the transmitted amplitude differs." },
       ],
+      hint: "For each listed quantity, ask what it depends on: the source, or the string the wave is travelling in?",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt1-5-q2",
       variant: "practice",
-      question: "A wave on a string of mass per length $\\mu$ meets a string of $9\\mu$ under the same tension. What is the reflected amplitude as a fraction of the incident amplitude $A$?",
-      options: [
-        { text: "$+A/2$", feedback: "Going into a slower (heavier) string inverts the reflection." },
-        { text: "$-4A/5$", feedback: "That uses the $\\mu$ ratio 9 in place of the speed ratio 3. Speeds go as $1/\\sqrt\\mu$." },
-        { text: "$-A$", feedback: "Total reflection happens only at a rigid wall; some wave does get into the $9\\mu$ string." },
-        { text: "$-A/2$ (inverted)", correct: true, feedback: "$v_2 = v_1/3$: $A_r = \\frac{1/3 - 1}{1 + 1/3}A = \\frac{-2/3}{4/3}A = -\\frac{A}{2}$." },
+      question: "A wave on a string of mass per length $\\mu$ meets a string of $9\\mu$ under the same tension. What is the reflected amplitude as a fraction of the incident amplitude, $A_r/A_i$? Give a negative value if the reflection is inverted.",
+      answer: -0.5,
+      hint: "Find $v_2/v_1$ from $v \\propto 1/\\sqrt\\mu$, then use $A_r = \\dfrac{v_2 - v_1}{v_1 + v_2}A_i$.",
+      solution: "$v_2 = v_1/3$, so $\\dfrac{A_r}{A_i} = \\dfrac{1/3 - 1}{1 + 1/3} = \\dfrac{-2/3}{4/3} = -\\dfrac12$: half the amplitude, inverted.",
+      commonMistakes: [
+        { answer: 0.5, feedback: "Right size, wrong sign. Going into a slower (heavier) string inverts the reflection." },
+        { answer: -0.8, feedback: "That uses the $\\mu$ ratio 9 in place of the speed ratio 3. Speeds go as $1/\\sqrt\\mu$." },
+        { answer: -1, feedback: "Total reflection happens only at a rigid wall; some wave does get into the $9\\mu$ string." },
       ],
     },
     {
@@ -712,6 +1011,7 @@ const lesson05: LessonSeed = {
         { text: "$\\lambda/3$", correct: true, feedback: "Same frequency, one third the speed, so one third the wavelength." },
         { text: "$\\lambda/9$", feedback: "Wavelength follows speed, which goes as $1/\\sqrt\\mu$, not $1/\\mu$." },
       ],
+      hint: "Frequency does not change at the junction. Find how $v = \\sqrt{T/\\mu}$ changes, then use $\\lambda = v/f$.",
     },
     {
       type: "quiz",
@@ -737,6 +1037,21 @@ const lesson05: LessonSeed = {
         { text: "Inverted, same size", feedback: "That is a rigid wall." },
         { text: "There is no reflected pulse.", feedback: "Any change in speed causes some reflection." },
       ],
+      hint: "A very light string acts almost like a free end. Recall from 1.5 which kind of boundary inverts the reflected pulse.",
+    },
+    {
+      type: "quiz",
+      id: "owt1-5-q6",
+      variant: "practice",
+      multiple: true,
+      question: "A sinusoidal wave of amplitude $A$ and wavelength $\\lambda$ travels on a string of mass per length $\\mu$ and meets a string of $\\mu/9$ under the same tension. Select every correct statement.",
+      options: [
+        { text: "The reflected wave is upright, with amplitude $A/2$.", correct: true, feedback: "$v_2 = 3v_1$: $A_r = \\frac{3 - 1}{1 + 3}A = +\\frac{A}{2}$. Reflection from a faster (lighter) string does not invert." },
+        { text: "The transmitted wave has amplitude $1.5A$, larger than the incident wave.", correct: true, feedback: "$A_t = \\frac{2 \\times 3}{1 + 3}A = \\frac32 A$. Heavy to light can make the transmitted wave taller." },
+        { text: "The transmitted wave carries more power than the incident wave, because its amplitude is larger.", feedback: "Power goes as $\\sqrt\\mu\\,A^2$: transmitted fraction $\\frac13 \\times \\frac94 = \\frac34$, reflected $\\frac14$. Energy is conserved, so it cannot exceed the incident power." },
+        { text: "The transmitted wavelength is $\\lambda/3$.", feedback: "Same frequency, three times the speed, so the wavelength is $3\\lambda$." },
+      ],
+      hint: "Find $v_2/v_1$ first, then use $A_r = \\frac{v_2 - v_1}{v_1 + v_2}A$ and $A_t = \\frac{2v_2}{v_1 + v_2}A$.",
     },
   ]),
 };
@@ -751,6 +1066,7 @@ const lesson06: LessonSeed = {
       content:
         "Pluck a guitar string and it does not show waves racing along it. It shimmers in a fixed blur, widest in the middle and still at the ends, and it sounds a definite note. That blur is a **standing wave**: the incident and reflected waves of 1.5 superposed, bouncing back and forth between the two fixed ends so fast that only their sum is visible.",
     },
+    { type: "heading", text: "Two opposite waves make a standing wave" },
     {
       type: "text",
       content:
@@ -793,15 +1109,17 @@ const lesson06: LessonSeed = {
       content:
         "What you should have seen: the two component waves slide through each other, but their sum never moves sideways. Harmonic $n$ fits exactly $n$ loops on the string, with nodes pinned at both ends. The frequency readout goes 50, 100, 150, ... Hz: whole-number multiples of the fundamental.",
     },
+    { type: "heading", text: "Boundaries pick the wavelengths" },
     {
       type: "text",
       content:
-        "**Boundaries pick the wavelengths.** A string fixed at $x = 0$ and $x = L$ needs a node at both ends: $\\sin kL = 0$, so $kL = n\\pi$, i.e. $L = n\\dfrac{\\lambda}{2}$. Only a whole number of loops fits. With $v = \\sqrt{T/\\mu}$ fixed by the string:",
+        "A string fixed at $x = 0$ and $x = L$ needs a node at both ends: $\\sin kL = 0$, so $kL = n\\pi$, i.e. $L = n\\dfrac{\\lambda}{2}$. Only a whole number of loops fits. With $v = \\sqrt{T/\\mu}$ fixed by the string:",
     },
     {
       type: "math",
       latex: "\\lambda_n = \\frac{2L}{n}, \\qquad f_n = \\frac{n v}{2L} = \\frac{n}{2L}\\sqrt{\\frac{T}{\\mu}}, \\qquad n = 1, 2, 3, \\ldots",
     },
+    { type: "heading", text: "A string with one end free" },
     {
       type: "text",
       content:
@@ -837,25 +1155,67 @@ const lesson06: LessonSeed = {
         ["$m$th overtone", "$(m + 1)f_1$", "$(2m + 1)f_1$"],
       ],
     },
+    { type: "heading", text: "Sonometer and Melde's experiment" },
     {
       type: "text",
       content:
         "**Experiments.** In a **sonometer**, a wire is stretched over two bridges by a hanging weight and the bridge gap is adjusted until the wire resonates with a tuning fork held against the box; then $f = \\frac{1}{2\\ell}\\sqrt{T/\\mu}$ checks the laws $f \\propto 1/\\ell$, $f \\propto \\sqrt T$, $f \\propto 1/\\sqrt\\mu$. In **Melde's experiment** a string is driven by a tuning fork and the tension adjusted until it vibrates in a clean number of loops; fewer loops appear as the tension rises, because each loop gets longer.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (JEE Main).** A 1 m string with $\\mu = 5$ g/m is under 80 N of tension, fixed at both ends. Find its first three frequencies.\n\n1. $v = \\sqrt{80/0.005} = \\sqrt{16000} \\approx 126.5$ m/s. *Why this step:* $\\mu$ must be in kg/m: 5 g/m = 0.005 kg/m.\n2. $f_1 = v/2L \\approx 63.2$ Hz.\n3. $f_2 = 2f_1 \\approx 126.5$ Hz, $f_3 = 3f_1 \\approx 189.7$ Hz.\n\n**Worked example 2.** A string fixed at both ends vibrates in 3 loops at 300 Hz. What is its fundamental?\n\n1. Three loops means $n = 3$. *Why this step:* each loop is $\\lambda/2$, and the number of loops is the harmonic number.\n2. $f_1 = 300/3 = 100$ Hz.",
+      type: "worked-example",
+      id: "owt1-6-we1",
+      title: "Worked example 1 (JEE Main)",
+      problem:
+        "A 1 m string with $\\mu = 5$ g/m is under 80 N of tension, fixed at both ends. Find its first three frequencies.",
+      steps: [
+        { text: "$v = \\sqrt{80/0.005} = \\sqrt{16000} \\approx 126.5$ m/s. *Why this step:* $\\mu$ must be in kg/m: 5 g/m = 0.005 kg/m." },
+        { text: "$f_1 = v/2L \\approx 63.2$ Hz." },
+        { text: "$f_2 = 2f_1 \\approx 126.5$ Hz, $f_3 = 3f_1 \\approx 189.7$ Hz." },
+      ],
+      answer: "$f_1 \\approx 63.2$ Hz, $f_2 \\approx 126.5$ Hz, $f_3 \\approx 189.7$ Hz",
+    },
+    {
+      type: "worked-example",
+      id: "owt1-6-we2",
+      title: "Worked example 2",
+      problem:
+        "A string fixed at both ends vibrates in 3 loops at 300 Hz. What is its fundamental?",
+      steps: [
+        { text: "Three loops means $n = 3$. *Why this step:* each loop is $\\lambda/2$, and the number of loops is the harmonic number." },
+        { text: "$f_1 = 300/3 = 100$ Hz." },
+      ],
+      answer: "$f_1 = 100$ Hz",
+    },
+    {
+      type: "worked-example",
+      id: "owt1-6-we3",
+      title: "Worked example 3 (adjacent resonances, JEE favourite)",
+      problem:
+        "A string fixed at both ends resonates at 420 Hz and at 490 Hz, with no resonance in between. The wave speed is 140 m/s. Find the fundamental and the length.",
+      steps: [
+        { text: "Adjacent harmonics differ by exactly $f_1$: $f_1 = 490 - 420 = 70$ Hz. *Why this step:* $f_{n+1} - f_n = f_1$ for a string with both ends fixed." },
+        { text: "Check: $420 = 6 \\times 70$ and $490 = 7 \\times 70$, whole numbers. ✓" },
+        { text: "$L = v/2f_1 = 140/140 = 1$ m." },
+      ],
+      answer: "$f_1 = 70$ Hz, $L = 1$ m",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 (adjacent resonances, JEE favourite).** A string fixed at both ends resonates at 420 Hz and at 490 Hz, with no resonance in between. The wave speed is 140 m/s. Find the fundamental and the length.\n\n1. Adjacent harmonics differ by exactly $f_1$: $f_1 = 490 - 420 = 70$ Hz. *Why this step:* $f_{n+1} - f_n = f_1$ for a string with both ends fixed.\n2. Check: $420 = 6 \\times 70$ and $490 = 7 \\times 70$, whole numbers. ✓\n3. $L = v/2f_1 = 140/140 = 1$ m.\n\nIf the numbers had been 450 Hz and 750 Hz with nothing between, the difference 300 Hz is $2f_1$ (only odd harmonics), $f_1 = 150$ Hz and $450 = 3f_1$, $750 = 5f_1$: the signature of one free end.",
+        "If the numbers had been 450 Hz and 750 Hz with nothing between, the difference 300 Hz is $2f_1$ (only odd harmonics), $f_1 = 150$ Hz and $450 = 3f_1$, $750 = 5f_1$: the signature of one free end.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (phases inside a standing wave).** In the 3rd harmonic of a string, are the points at $x = L/6$ and $x = L/2$ in phase?\n\n1. $\\lambda = 2L/3$, so nodes are at $0, L/3, 2L/3, L$.\n2. $x = L/6$ is in the first loop, $x = L/2$ in the second. Adjacent loops are separated by one node.\n3. Across a node $\\sin kx$ changes sign, so the two points move in **opposite** directions: phase difference $\\pi$. *Why this step:* in $2A\\sin kx\\cos\\omega t$ the only thing that can differ between points is the sign of $\\sin kx$.",
+      type: "worked-example",
+      id: "owt1-6-we4",
+      title: "Worked example 4 (phases inside a standing wave)",
+      problem:
+        "In the 3rd harmonic of a string, are the points at $x = L/6$ and $x = L/2$ in phase?",
+      steps: [
+        { text: "$\\lambda = 2L/3$, so nodes are at $0, L/3, 2L/3, L$." },
+        { text: "$x = L/6$ is in the first loop, $x = L/2$ in the second. Adjacent loops are separated by one node." },
+        { text: "Across a node $\\sin kx$ changes sign, so the two points move in **opposite** directions: phase difference $\\pi$. *Why this step:* in $2A\\sin kx\\cos\\omega t$ the only thing that can differ between points is the sign of $\\sin kx$." },
+      ],
+      answer: "No: they are in antiphase (phase difference $\\pi$).",
     },
     {
       type: "callout",
@@ -871,28 +1231,35 @@ const lesson06: LessonSeed = {
       content:
         "Every point within one loop moves up together and down together; they differ only in amplitude. This is quite unlike a travelling wave, where the phase changes steadily along the string. In a standing wave the phase jumps by $\\pi$ only when you cross a node.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt1-6-q1",
       variant: "practice",
-      question: "A 50 cm string fixed at both ends has wave speed 200 m/s. What is the frequency of its second overtone?",
-      options: [
-        { text: "$400$ Hz", feedback: "That is the second harmonic (first overtone)." },
-        { text: "$1000$ Hz", feedback: "That is the fifth harmonic, the second overtone for a string with one free end, not two fixed ends." },
-        { text: "$300$ Hz", feedback: "Recheck $f_1 = v/2L = 200$ Hz." },
-        { text: "$600$ Hz", correct: true, feedback: "$f_1 = 200/(2 \\times 0.5) = 200$ Hz. The second overtone is the third harmonic, $600$ Hz." },
+      question: "A 50 cm string fixed at both ends has wave speed 200 m/s. What is the frequency of its second overtone, in Hz?",
+      answer: 600,
+      unit: "Hz",
+      hint: "Find $f_1 = v/2L$. Then count: which harmonic is the second overtone?",
+      solution: "$f_1 = \\dfrac{200}{2 \\times 0.5} = 200$ Hz. Overtones count from the first frequency above the fundamental, so the second overtone is the third harmonic: $3 \\times 200 = 600$ Hz.",
+      commonMistakes: [
+        { answer: 400, feedback: "That is the second harmonic, which is the *first* overtone." },
+        { answer: 500, feedback: "That is the second overtone for a string with one end free ($5 \\times v/4L = 5 \\times 100$ Hz). Both ends are fixed here, so the second overtone is the 3rd harmonic, $3 \\times v/2L$." },
+        { answer: 300, feedback: "That is $3 \\times v/4L$, the one-end-free formula. With both ends fixed, $f_1 = v/2L = 200$ Hz, and the second overtone is $3 \\times 200$ Hz." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt1-6-q2",
       variant: "practice",
-      question: "A string fixed at both ends has consecutive resonant frequencies 375 Hz and 450 Hz. What is its fundamental?",
-      options: [
-        { text: "$412.5$ Hz", feedback: "The fundamental is the spacing, not the average." },
-        { text: "$150$ Hz", feedback: "$375/150$ is not a whole number." },
-        { text: "$75$ Hz", correct: true, feedback: "Adjacent harmonics differ by $f_1$: $450 - 375 = 75$ Hz ($375 = 5 \\times 75$, $450 = 6 \\times 75$)." },
-        { text: "$37.5$ Hz", feedback: "That would be for one free end, where adjacent modes differ by $2f_1$. But $375/37.5 = 10$ is even, which a one-free-end string cannot have." },
+      question: "A string fixed at both ends has consecutive resonant frequencies 375 Hz and 450 Hz. What is its fundamental, in Hz?",
+      answer: 75,
+      unit: "Hz",
+      hint: "For a string fixed at both ends, how far apart are adjacent harmonics?",
+      solution: "Adjacent harmonics differ by $f_1$: $f_1 = 450 - 375 = 75$ Hz. Check: $375 = 5 \\times 75$ and $450 = 6 \\times 75$, both whole numbers.",
+      commonMistakes: [
+        { answer: 412.5, feedback: "The fundamental is the spacing, not the average." },
+        { answer: 150, feedback: "$375/150 = 2.5$ is not a whole number, so 375 Hz could not be a harmonic of 150 Hz." },
+        { answer: 37.5, feedback: "That would be for one free end, where adjacent modes differ by $2f_1$. But $375/37.5 = 10$ is even, which a one-free-end string cannot have." },
       ],
     },
     {
@@ -906,17 +1273,21 @@ const lesson06: LessonSeed = {
         { text: "$\\lambda/2$", feedback: "That is node to node." },
         { text: "$\\lambda$", feedback: "That spans two loops." },
       ],
+      hint: "Sketch one loop of the standing wave and mark the spacing of adjacent nodes in terms of $\\lambda$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt1-6-q4",
       variant: "practice",
-      question: "The tension in a sonometer wire is increased by 44% (and nothing else changes). By what percentage does its fundamental frequency change?",
-      options: [
-        { text: "It rises by 20%.", correct: true, feedback: "$f \\propto \\sqrt T$: $\\sqrt{1.44} = 1.2$." },
-        { text: "It rises by 44%.", feedback: "Frequency goes as the square root of tension." },
-        { text: "It rises by 22%.", feedback: "Halving the percentage is only an approximation for small changes. Here $\\sqrt{1.44} = 1.2$ exactly." },
-        { text: "It falls by 20%.", feedback: "Tighter strings sound higher." },
+      question: "The tension in a sonometer wire is increased by 44% (and nothing else changes). By what percentage does its fundamental frequency change? Give a positive number for a rise, negative for a fall.",
+      answer: 20,
+      unit: "%",
+      hint: "$f = \\dfrac{1}{2\\ell}\\sqrt{T/\\mu}$: how does $f$ scale with $T$?",
+      solution: "$f \\propto \\sqrt T$, and the new tension is $1.44T$. So $f$ becomes $\\sqrt{1.44}\\,f = 1.2f$: a rise of 20%.",
+      commonMistakes: [
+        { answer: 44, feedback: "Frequency goes as the square root of tension, not in proportion to it." },
+        { answer: 22, feedback: "Halving the percentage is only an approximation for small changes. Here $\\sqrt{1.44} = 1.2$ exactly." },
+        { answer: -20, feedback: "Right size, wrong direction: tighter strings sound higher." },
       ],
     },
     {
@@ -930,6 +1301,21 @@ const lesson06: LessonSeed = {
         { text: "Their phase difference is $k\\Delta x$.", feedback: "That rule is for travelling waves. In a standing wave all points share the factor $\\cos\\omega t$." },
         { text: "They move in phase but may have different amplitudes.", correct: true, feedback: "Both follow $\\cos\\omega t$ with the same sign of $\\sin kx$ inside one loop." },
       ],
+      hint: "Split $y = 2A\\sin kx\\cos\\omega t$ into a position-dependent amplitude and a time factor, and ask which part carries the phase.",
+    },
+    {
+      type: "quiz",
+      id: "owt1-6-q6",
+      variant: "practice",
+      multiple: true,
+      question: "A string of length $L$, fixed at both ends, vibrates in its third harmonic. Select every correct statement.",
+      options: [
+        { text: "Apart from the two ends, there are exactly two nodes on the string.", correct: true, feedback: "Three loops of $L/3$ each: nodes at $0, L/3, 2L/3, L$, so two between the ends." },
+        { text: "The wavelength of the component waves is $2L/3$.", correct: true, feedback: "$L = 3\\cdot\\frac{\\lambda}{2}$ gives $\\lambda = 2L/3$." },
+        { text: "The points at $x = L/6$ and $x = 5L/6$ move in phase.", correct: true, feedback: "They sit in the first and third loops, two nodes apart. Each node flips the sign of $\\sin kx$, so two flips bring them back in phase: $\\sin(\\pi/2) = \\sin(5\\pi/2) = 1$." },
+        { text: "Its frequency is three times the frequency of the first overtone.", feedback: "The first overtone is the 2nd harmonic, $2f_1$. The third harmonic is $3f_1$, which is $1.5$ times the first overtone." },
+      ],
+      hint: "Sketch the three loops and mark the nodes. The phase flips by $\\pi$ each time you cross a node.",
     },
   ]),
 };
@@ -962,6 +1348,7 @@ const lessonMastery: LessonSeed = {
         { text: "$f = 5$ Hz, $\\lambda = 5$ m, $v = 25$ m/s in $+x$", correct: true, feedback: "$\\omega = 10\\pi$, $k = 0.4\\pi$: $f = 5$ Hz, $\\lambda = 2\\pi/0.4\\pi = 5$ m, $v = f\\lambda = 25$ m/s. The argument is $-(kx - \\omega t)$, still a $+x$ wave." },
         { text: "$f = 5$ Hz, $\\lambda = 0.2$ m, $v = 1$ m/s in $+x$", feedback: "0.2 is $1/\\lambda$ here: $2\\pi \\times 0.2 = k = 2\\pi/\\lambda$, so $\\lambda = 5$ m." },
       ],
+      hint: "Reading a wave equation (1.2): compare with $y = A\\sin(\\omega t - kx)$.",
     },
     {
       type: "quiz",
@@ -974,29 +1361,36 @@ const lessonMastery: LessonSeed = {
         { text: "downward", feedback: "That would be true if the wave moved in $+x$." },
         { text: "to the left, with the wave", feedback: "The string moves only transversely." },
       ],
+      hint: "Use 1.2's rule linking a particle's velocity to the slope of the snapshot and the direction of travel.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt1-7-q3",
       variant: "mastery",
-      question: "For $y = 0.05\\sin(4x - 60t)$ (SI), what is the particle speed at a point where the displacement is 0.03 m?",
-      options: [
-        { text: "$2.4$ m/s", correct: true, feedback: "Each point does SHM with $A = 0.05$, $\\omega = 60$: $v_p = 60\\sqrt{0.05^2 - 0.03^2} = 60 \\times 0.04 = 2.4$ m/s." },
-        { text: "$15$ m/s", feedback: "That is the wave speed $\\omega/k$, not the particle speed." },
-        { text: "$3$ m/s", feedback: "That is the maximum particle speed $A\\omega$, reached only at $y = 0$." },
-        { text: "$1.2$ m/s", feedback: "$60 \\times (0.05 - 0.03)$ is not the SHM formula. Use $\\omega\\sqrt{A^2 - y^2}$." },
+      question: "For $y = 0.05\\sin(4x - 60t)$ (SI), what is the particle speed at a point where the displacement is 0.03 m? Give your answer in m/s.",
+      answer: 2.4,
+      tolerance: 0.01,
+      unit: "m/s",
+      hint: "Each point of the string does SHM. What is the SHM speed at displacement $y$?",
+      solution: "Each point does SHM with $A = 0.05$ m and $\\omega = 60$ rad/s, so $v_p = \\omega\\sqrt{A^2 - y^2} = 60\\sqrt{0.05^2 - 0.03^2} = 60 \\times 0.04 = 2.4$ m/s.",
+      commonMistakes: [
+        { answer: 15, feedback: "That is the wave speed $\\omega/k$, not the particle speed." },
+        { answer: 3, feedback: "That is the maximum particle speed $A\\omega$, reached only at $y = 0$." },
+        { answer: 1.2, feedback: "$60 \\times (0.05 - 0.03)$ is not the SHM formula. Use $\\omega\\sqrt{A^2 - y^2}$." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt1-7-q4",
       variant: "mastery",
       question: "Wire A has twice the radius of wire B, both of the same material. A is under four times the tension of B. What is $v_A/v_B$?",
-      options: [
-        { text: "$2$", feedback: "You used the tension but not the extra mass per length: $\\mu \\propto r^2$ is 4 times too." },
-        { text: "$1/2$", feedback: "The tension also went up by 4, which cancels the mass factor." },
-        { text: "$4$", feedback: "Speed goes as a square root, and the $\\mu$ factor cancels the tension factor anyway." },
-        { text: "$1$", correct: true, feedback: "$v = \\sqrt{T/\\rho\\pi r^2}$: $\\sqrt{4/4} = 1$." },
+      answer: 1,
+      hint: "Write $\\mu = \\rho\\pi r^2$ and compare $v = \\sqrt{T/\\mu}$ for the two wires.",
+      solution: "$v = \\sqrt{\\dfrac{T}{\\rho\\pi r^2}}$. For A, $T$ is 4 times and $r^2$ is 4 times B's, so $\\dfrac{v_A}{v_B} = \\sqrt{\\dfrac{4}{4}} = 1$.",
+      commonMistakes: [
+        { answer: 2, feedback: "You used the tension but not the extra mass per length: $\\mu \\propto r^2$ is 4 times too." },
+        { answer: 0.5, feedback: "You used the extra mass per length but not the tension, which also went up by 4 and cancels it." },
+        { answer: 4, feedback: "Speed goes as a square root, and the $\\mu$ factor cancels the tension factor anyway." },
       ],
     },
     {
@@ -1010,6 +1404,7 @@ const lessonMastery: LessonSeed = {
         { text: "$2P$", correct: true, feedback: "$P = \\tfrac12\\mu\\omega^2A^2v$ and only $v$ changes: $v \\propto \\sqrt T$ doubles." },
         { text: "$4P$", feedback: "Power goes as $v$, and $v$ goes as $\\sqrt T$." },
       ],
+      hint: "Power carried by a wave (1.3): how does it depend on wave speed, and how does wave speed depend on tension?",
     },
     {
       type: "quiz",
@@ -1022,6 +1417,7 @@ const lessonMastery: LessonSeed = {
         { text: "$5I_0$ and $3I_0$", feedback: "Intensities do not add or subtract directly; amplitudes do." },
         { text: "$25I_0$ and $9I_0$", feedback: "You added the intensities as if they were amplitudes, then squared." },
       ],
+      hint: "Interference of unequal waves (1.4): combine amplitudes, not intensities.",
     },
     {
       type: "quiz",
@@ -1047,6 +1443,7 @@ const lessonMastery: LessonSeed = {
         { text: "$240$ Hz", feedback: "240 Hz is an even multiple of 60 Hz, impossible with one free end." },
         { text: "$300$ Hz", correct: true, feedback: "Only odd harmonics: 60, 180, 300 Hz. The second overtone is the fifth harmonic." },
       ],
+      hint: "Harmonics of a string fixed at one end and free at the other (1.6): which harmonics are allowed?",
     },
     {
       type: "quiz",
@@ -1059,31 +1456,37 @@ const lessonMastery: LessonSeed = {
         { text: "$150$ Hz, one end fixed and one free", correct: true, feedback: "If both ends were fixed, $f_1 = 300$ Hz and $450/300$ would not be whole. With odd harmonics only, $2f_1 = 300$, $f_1 = 150$ Hz, and $450 = 3f_1$, $750 = 5f_1$. ✓" },
         { text: "$300$ Hz, both ends fixed", feedback: "Check: $450/300 = 1.5$ is not a whole number, so 450 Hz could not be a harmonic." },
       ],
+      hint: "Successive resonances (1.6): what do their spacing and their ratio tell you about the ends?",
     },
     {
       type: "quiz",
       id: "owt1-7-q10",
       variant: "mastery",
-      question: "A standing wave on a string is $y = 0.04\\sin(5\\pi x)\\cos(200\\pi t)$ (SI). Find the wave speed of the component waves and the separation of adjacent nodes.",
+      multiple: true,
+      question: "A standing wave on a string is $y = 0.04\\sin(5\\pi x)\\cos(200\\pi t)$ (SI). Select every correct statement.",
       options: [
-        { text: "$20$ m/s, $0.1$ m", feedback: "Check $\\lambda = 2\\pi/k = 2/5 = 0.4$ m, and $v = 100 \\times 0.4$." },
-        { text: "$40$ m/s, $0.2$ m", correct: true, feedback: "$k = 5\\pi \\Rightarrow \\lambda = 0.4$ m, $f = 100$ Hz, $v = f\\lambda = 40$ m/s. Nodes are $\\lambda/2 = 0.2$ m apart." },
-        { text: "$40$ m/s, $0.4$ m", feedback: "0.4 m is the wavelength; nodes are half a wavelength apart." },
-        { text: "$125.7$ m/s, $0.2$ m", feedback: "$\\omega/k = 200\\pi/5\\pi = 40$ m/s, not $200\\pi/5$." },
+        { text: "The component travelling waves move at 40 m/s.", correct: true, feedback: "$v = \\omega/k = 200\\pi/5\\pi = 40$ m/s (or $f\\lambda = 100 \\times 0.4$)." },
+        { text: "Adjacent nodes are 0.2 m apart.", correct: true, feedback: "$\\lambda = 2\\pi/k = 0.4$ m, and nodes are $\\lambda/2 = 0.2$ m apart." },
+        { text: "Each component travelling wave has amplitude 0.04 m.", feedback: "The standing wave is $2A\\sin kx\\cos\\omega t$, so $2A = 0.04$ m and each component has $A = 0.02$ m." },
+        { text: "The point at $x = 0.1$ m oscillates with the largest amplitude, 0.04 m.", correct: true, feedback: "$\\sin(5\\pi \\times 0.1) = \\sin(\\pi/2) = 1$: an antinode." },
+        { text: "The point at $x = 0.3$ m is a node.", feedback: "$\\sin(5\\pi \\times 0.3) = \\sin(3\\pi/2) = -1$: another antinode. The nodes are at $x = 0, 0.2, 0.4, \\ldots$ m." },
       ],
+      hint: "Read $k$ and $\\omega$, then find where $\\sin 5\\pi x$ is $0$ and where it is $\\pm1$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt1-7-q11",
       variant: "mastery",
-      question: "Two wires are joined end to end and held at 100 N between fixed supports. Wire A: 0.5 m long, $\\mu = 0.01$ kg/m. Wire B: 0.3 m long, $\\mu = 0.04$ kg/m. What is the lowest frequency at which the composite wire resonates with a node at the junction?",
-      options: [
-        { text: "$500$ Hz", correct: true, feedback: "$v_A = 100$ m/s gives $f = 100n$; $v_B = 50$ m/s gives $f = \\frac{50m}{0.6} = \\frac{250m}{3}$. Equal when $6n = 5m$: $n = 5$, $m = 6$, $f = 500$ Hz." },
-        { text: "$100$ Hz", feedback: "That is wire A's own fundamental. Wire B must also fit a whole number of loops at the same frequency." },
-        { text: "$83.3$ Hz", feedback: "That is wire B's fundamental alone; wire A cannot resonate at it." },
-        { text: "$1000$ Hz", feedback: "This works, but it is the second common frequency, not the lowest." },
-      ],
+      question: "Two wires are joined end to end and held at 100 N between fixed supports. Wire A: 0.5 m long, $\\mu = 0.01$ kg/m. Wire B: 0.3 m long, $\\mu = 0.04$ kg/m. What is the lowest frequency, in Hz, at which the composite wire resonates with a node at the junction?",
+      answer: 500,
+      unit: "Hz",
       hint: "The junction is a node, so each wire must hold a whole number of loops at the same frequency.",
+      solution: "$v_A = \\sqrt{100/0.01} = 100$ m/s, so wire A resonates at $f = \\dfrac{100n}{2 \\times 0.5} = 100n$ Hz.\n\n$v_B = \\sqrt{100/0.04} = 50$ m/s, so wire B resonates at $f = \\dfrac{50m}{2 \\times 0.3} = \\dfrac{250m}{3}$ Hz.\n\nEqual when $300n = 250m$, i.e. $6n = 5m$: the smallest whole numbers are $n = 5$, $m = 6$, giving $f = 500$ Hz.",
+      commonMistakes: [
+        { answer: 100, feedback: "That is wire A's own fundamental. Wire B must also fit a whole number of loops at the same frequency." },
+        { answer: 83.33, tolerance: 0.05, feedback: "That is wire B's fundamental alone; wire A cannot resonate at it." },
+        { answer: 1000, feedback: "This works, but it is the second common frequency, not the lowest." },
+      ],
     },
     {
       type: "quiz",
@@ -1096,6 +1499,7 @@ const lessonMastery: LessonSeed = {
         { text: "$1$", feedback: "Any change in wave speed reflects something: here $\\frac19$ of the power." },
         { text: "$8/9$", correct: true, feedback: "$v_2 = 2v_1$: $A_t = \\frac{4}{3}A$, $A_r = \\frac13 A$. Reflected power $\\frac19$, so $\\frac89$ is transmitted (check: power $\\propto \\sqrt{\\mu}A^2$ gives $\\frac12 \\times \\frac{16}{9} = \\frac89$)." },
       ],
+      hint: "Use the transmission coefficient from 1.5, and remember that the power carried also depends on the string's $\\mu$.",
     },
     {
       type: "callout",

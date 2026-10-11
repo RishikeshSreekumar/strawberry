@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { z } from "zod";
 import type { pncCountingTreeSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { InteractiveFrame, Latex } from "./ui";
 
 type Config = z.infer<typeof pncCountingTreeSchema>;
@@ -312,10 +313,10 @@ export function PncCountingTree({ config }: { config: Config }) {
       </div>
 
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ??
+        <RichText text={config.caption ??
           (sum
             ? "The cases cannot happen together, so no outcome is in two trees: the leaf counts simply add. Tap a leaf to trace it."
-            : "Every node of one stage sprouts the same number of branches, so each new stage multiplies the leaf count. Tap a leaf to trace it.")}
+            : "Every node of one stage sprouts the same number of branches, so each new stage multiplies the leaf count. Tap a leaf to trace it.")} />
       </p>
     </InteractiveFrame>
   );

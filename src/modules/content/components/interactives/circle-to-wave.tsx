@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { z } from "zod";
 import type { circleToWaveSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { formatNumber } from "./function-plot";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 
@@ -124,8 +125,8 @@ export function CircleToWave({ config }: { config: Config }) {
       </div>
 
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ??
-          `Drag the angle: the green segment on the circle is the value being plotted, and the graph records it against θ. Height ${formatNumber(heightSource, 2)}.`}
+        <RichText text={config.caption ??
+          `Drag the angle: the green segment on the circle is the value being plotted, and the graph records it against θ. Height ${formatNumber(heightSource, 2)}.`} />
       </p>
     </InteractiveFrame>
   );

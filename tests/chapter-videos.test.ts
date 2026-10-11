@@ -39,6 +39,36 @@ import { vectorsChapter2Lessons } from "@/modules/content/vectors-chapter-2-cont
 import { vectorsChapter3Lessons } from "@/modules/content/vectors-chapter-3-content";
 import { vectorsChapter4Lessons } from "@/modules/content/vectors-chapter-4-content";
 import { vectorsChapter5Lessons } from "@/modules/content/vectors-chapter-5-content";
+import { mfeChapter0Lessons } from "@/modules/content/mfe-chapter-0-content";
+import { mfeChapter1Lessons } from "@/modules/content/mfe-chapter-1-content";
+import { mfeChapter2Lessons } from "@/modules/content/mfe-chapter-2-content";
+import { mfeChapter3Lessons } from "@/modules/content/mfe-chapter-3-content";
+import { mfeChapter4Lessons } from "@/modules/content/mfe-chapter-4-content";
+import { mfeChapter5Lessons } from "@/modules/content/mfe-chapter-5-content";
+import { mrgChapter0Lessons } from "@/modules/content/mrg-chapter-0-content";
+import { mrgChapter1Lessons } from "@/modules/content/mrg-chapter-1-content";
+import { mrgChapter2Lessons } from "@/modules/content/mrg-chapter-2-content";
+import { mrgChapter3Lessons } from "@/modules/content/mrg-chapter-3-content";
+import { mrgChapter4Lessons } from "@/modules/content/mrg-chapter-4-content";
+import { mrgChapter5Lessons } from "@/modules/content/mrg-chapter-5-content";
+import { owtChapter0Lessons } from "@/modules/content/owt-chapter-0-content";
+import { owtChapter1Lessons } from "@/modules/content/owt-chapter-1-content";
+import { owtChapter2Lessons } from "@/modules/content/owt-chapter-2-content";
+import { owtChapter3Lessons } from "@/modules/content/owt-chapter-3-content";
+import { owtChapter4Lessons } from "@/modules/content/owt-chapter-4-content";
+import { owtChapter5Lessons } from "@/modules/content/owt-chapter-5-content";
+import { emChapter0Lessons } from "@/modules/content/em-chapter-0-content";
+import { emChapter1Lessons } from "@/modules/content/em-chapter-1-content";
+import { emChapter2Lessons } from "@/modules/content/em-chapter-2-content";
+import { emChapter3Lessons } from "@/modules/content/em-chapter-3-content";
+import { emChapter4Lessons } from "@/modules/content/em-chapter-4-content";
+import { emChapter5Lessons } from "@/modules/content/em-chapter-5-content";
+import { ompChapter0Lessons } from "@/modules/content/omp-chapter-0-content";
+import { ompChapter1Lessons } from "@/modules/content/omp-chapter-1-content";
+import { ompChapter2Lessons } from "@/modules/content/omp-chapter-2-content";
+import { ompChapter3Lessons } from "@/modules/content/omp-chapter-3-content";
+import { ompChapter4Lessons } from "@/modules/content/omp-chapter-4-content";
+import { ompChapter5Lessons } from "@/modules/content/omp-chapter-5-content";
 
 const chapters = {
   "calculus chapter 0": chapterLessons,
@@ -79,6 +109,36 @@ const chapters = {
   "vectors chapter 3": vectorsChapter3Lessons,
   "vectors chapter 4": vectorsChapter4Lessons,
   "vectors chapter 5": vectorsChapter5Lessons,
+  "mfe chapter 0": mfeChapter0Lessons,
+  "mfe chapter 1": mfeChapter1Lessons,
+  "mfe chapter 2": mfeChapter2Lessons,
+  "mfe chapter 3": mfeChapter3Lessons,
+  "mfe chapter 4": mfeChapter4Lessons,
+  "mfe chapter 5": mfeChapter5Lessons,
+  "mrg chapter 0": mrgChapter0Lessons,
+  "mrg chapter 1": mrgChapter1Lessons,
+  "mrg chapter 2": mrgChapter2Lessons,
+  "mrg chapter 3": mrgChapter3Lessons,
+  "mrg chapter 4": mrgChapter4Lessons,
+  "mrg chapter 5": mrgChapter5Lessons,
+  "owt chapter 0": owtChapter0Lessons,
+  "owt chapter 1": owtChapter1Lessons,
+  "owt chapter 2": owtChapter2Lessons,
+  "owt chapter 3": owtChapter3Lessons,
+  "owt chapter 4": owtChapter4Lessons,
+  "owt chapter 5": owtChapter5Lessons,
+  "em chapter 0": emChapter0Lessons,
+  "em chapter 1": emChapter1Lessons,
+  "em chapter 2": emChapter2Lessons,
+  "em chapter 3": emChapter3Lessons,
+  "em chapter 4": emChapter4Lessons,
+  "em chapter 5": emChapter5Lessons,
+  "omp chapter 0": ompChapter0Lessons,
+  "omp chapter 1": ompChapter1Lessons,
+  "omp chapter 2": ompChapter2Lessons,
+  "omp chapter 3": ompChapter3Lessons,
+  "omp chapter 4": ompChapter4Lessons,
+  "omp chapter 5": ompChapter5Lessons,
 };
 
 const expectedVideo: Record<string, string> = {
@@ -112,6 +172,36 @@ const expectedVideo: Record<string, string> = {
   "vectors chapter 3": "va-3-dot-product",
   "vectors chapter 4": "va-4-cross-product",
   "vectors chapter 5": "va-5-triple-product-and-geometry",
+  "mfe chapter 0": "mfe-0-units-dimensions-measurement",
+  "mfe chapter 1": "mfe-1-motion-in-a-straight-line",
+  "mfe chapter 2": "mfe-2-motion-in-a-plane",
+  "mfe chapter 3": "mfe-3-newtons-laws-of-motion",
+  "mfe chapter 4": "mfe-4-friction-and-circular-dynamics",
+  "mfe chapter 5": "mfe-5-work-energy-and-power",
+  "mrg chapter 0": "mrg-0-centre-of-mass",
+  "mrg chapter 1": "mrg-1-momentum-impulse-collisions",
+  "mrg chapter 2": "mrg-2-rotational-kinematics-moment-of-inertia",
+  "mrg chapter 3": "mrg-3-torque-rotational-dynamics",
+  "mrg chapter 4": "mrg-4-angular-momentum-rolling",
+  "mrg chapter 5": "mrg-5-gravitation",
+  "owt chapter 0": "owt-0-simple-harmonic-motion",
+  "owt chapter 1": "owt-1-waves-on-a-string",
+  "owt chapter 2": "owt-2-sound-waves",
+  "owt chapter 3": "owt-3-properties-of-matter",
+  "owt chapter 4": "owt-4-heat-and-kinetic-theory",
+  "owt chapter 5": "owt-5-thermodynamics",
+  "em chapter 0": "em-0-electric-charge-and-field",
+  "em chapter 1": "em-1-gauss-law-and-potential",
+  "em chapter 2": "em-2-capacitors",
+  "em chapter 3": "em-3-current-electricity",
+  "em chapter 4": "em-4-magnetic-effects-of-current",
+  "em chapter 5": "em-5-induction-and-ac",
+  "omp chapter 0": "omp-0-reflection-and-refraction",
+  "omp chapter 1": "omp-1-lenses-prisms-and-instruments",
+  "omp chapter 2": "omp-2-wave-optics",
+  "omp chapter 3": "omp-3-dual-nature-of-radiation-and-matter",
+  "omp chapter 4": "omp-4-atoms-and-nuclei",
+  "omp chapter 5": "omp-5-semiconductor-electronics",
 };
 
 const publicDir = join(__dirname, "..", "public");

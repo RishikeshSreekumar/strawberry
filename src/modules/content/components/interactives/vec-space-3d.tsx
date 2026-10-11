@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import type { z } from "zod";
 import type { vecSpace3dSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 import { ArrowSvg, compLatex, fmt, magLatex, SvgLatex, type VecColor } from "./vec-canvas-2d";
 
@@ -493,7 +494,7 @@ export function VecSpace3d({ config }: { config: Config }) {
       </div>
 
       <div className="flex items-start justify-between gap-3">
-        <p className="text-xs text-muted-foreground">{config.caption ?? DEFAULT_CAPTIONS[mode]}</p>
+        <p className="text-xs text-muted-foreground"><RichText text={config.caption ?? DEFAULT_CAPTIONS[mode]} /></p>
         <button type="button" onClick={resetView} className="shrink-0 rounded-md border bg-background px-2 py-1 text-xs">
           Reset view
         </button>

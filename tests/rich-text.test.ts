@@ -1,7 +1,7 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { RichText } from "@/modules/content/components/rich-text";
+import { mathSpans, RichText } from "@/modules/content/components/rich-text";
 
 function render(text: string) {
   return renderToStaticMarkup(createElement(RichText, { text }));
@@ -22,6 +22,21 @@ describe("RichText", () => {
   it("keeps an unpaired marker as literal text", () => {
     expect(render("5 * 3 = 15")).toBe("5 * 3 = 15");
     expect(render("a ** b")).toBe("a ** b");
+  });
+
+  it("renders $$...$$ as display math with no stray dollar signs", () => {
+    const html = render("So\n$$x^2 = 4,$$\nand $y$ too.");
+    expect(html).not.toContain("$");
+    expect(html).toContain('<span class="block overflow-x-auto"><span class="katex-display">');
+    expect(html.match(/class="katex"/g)).toHaveLength(2);
+  });
+
+  it("lists math spans with their display mode", () => {
+    expect(mathSpans("a $$x$$ b $y$ and $$z$$")).toEqual([
+      { latex: "x", display: true },
+      { latex: "y", display: false },
+      { latex: "z", display: true },
+    ]);
   });
 
   it("ignores asterisks inside math", () => {

@@ -22,10 +22,19 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/owt-0-simple-harmonic-motion.mp4",
+      poster: "/videos/owt-0-simple-harmonic-motion.jpg",
+      title: "Chapter 0 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "Hold one end of a steel ruler flat on a desk, bend the free end down and let go. It flicks up, overshoots, comes back, overshoots again, and buzzes for a second or two. A child on a swing, a boat bobbing after a wave passes, a guitar string, the air inside a flute: all of them are pushed away from a resting position, come back, and cannot stop exactly there.",
     },
+    { type: "heading", text: "Stable equilibrium plus inertia" },
     {
       type: "text",
       content:
@@ -38,10 +47,11 @@ const lesson01: LessonSeed = {
       content:
         "**Periodic motion** repeats itself after a fixed time $T$, the **period** (the Earth round the Sun, a ceiling fan).\n**Oscillatory motion** is periodic motion to and fro about an equilibrium position (a swing, a ruler).\n**Simple harmonic motion (SHM)** is the special oscillation in which the restoring force is proportional to the displacement from equilibrium and opposite to it: $F = -kx$.\nEvery oscillation is periodic, but not every periodic motion is an oscillation, and not every oscillation is SHM.",
     },
+    { type: "heading", text: "Why F = −kx is everywhere" },
     {
       type: "text",
       content:
-        "**Why F = −kx is everywhere.** Recall the potential-energy curves from Mechanics I: the force is $F = -\\dfrac{dU}{dx}$, and a stable equilibrium sits at the bottom of a valley in $U(x)$. Zoom in on the bottom of *any* smooth valley at $x = 0$ and it looks like a parabola. Expanding $U$ about the minimum (Taylor series):",
+        "Recall the potential-energy curves from Mechanics I: the force is $F = -\\dfrac{dU}{dx}$, and a stable equilibrium sits at the bottom of a valley in $U(x)$. Zoom in on the bottom of *any* smooth valley at $x = 0$ and it looks like a parabola. Expanding $U$ about the minimum (Taylor series):",
     },
     {
       type: "math",
@@ -53,10 +63,11 @@ const lesson01: LessonSeed = {
       content:
         "The linear term vanishes because the slope is zero at the bottom, and $U''(0) > 0$ because it is a minimum. Then $F = -dU/dx = -kx$. So **every small oscillation about a stable equilibrium is SHM**, whatever the physics behind the valley: a spring, gravity on a pendulum, the electric force between atoms. That is why this one chapter pays off across the whole course.",
     },
+    { type: "heading", text: "From force to the SHM condition" },
     {
       type: "text",
       content:
-        "**From force to the SHM condition.** Put $F = -kx$ into Newton's second law for a mass $m$:",
+        "Put $F = -kx$ into Newton's second law for a mass $m$:",
     },
     {
       type: "math",
@@ -93,25 +104,64 @@ const lesson01: LessonSeed = {
       content:
         "What you should have seen: whenever the block is to the right of centre, $a$ is negative (pointing left), and whenever it is to the left, $a$ is positive. The acceleration is zero as the block passes through the middle and largest at the two ends, where the spring is most stretched or squashed. Doubling $\\omega$ multiplies the peak acceleration by four, because $a = -\\omega^2x$.",
     },
+    { type: "heading", text: "Spotting SHM from forces and potentials" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (which forces give SHM?).** A particle of mass 1 kg moves along the $x$-axis under each force below ($F$ in N, $x$ in m). Which motions are SHM, and what is $\\omega$?\n\n1. $F = -4x$: of the form $-kx$ with $k = 4$ N/m. SHM about $x = 0$ with $\\omega = \\sqrt{4/1} = 2$ rad/s.\n2. $F = -4x^3$: the force does point back towards $x = 0$, so the particle oscillates, but $F$ is not proportional to $x$. *Why this step:* the SHM test asks for $a \\propto -x$, not merely \"a force pointing back\". Oscillatory, **not** SHM.\n3. $F = -4(x - 2)$: put $X = x - 2$. Then $F = -4X$, so this is SHM about the point $x = 2$ with $\\omega = 2$ rad/s. *Why this step:* the equilibrium need not be at the origin; measure displacement from wherever the force vanishes.\n4. $F = +4x$: the force pushes the particle *away* from $x = 0$. The equilibrium is unstable and the particle runs off. No oscillation at all.",
+      type: "worked-example",
+      id: "owt0-1-we1",
+      title: "Worked example 1 (which forces give SHM?)",
+      problem:
+        "A particle of mass 1 kg moves along the $x$-axis under each force below ($F$ in N, $x$ in m). Which motions are SHM, and what is $\\omega$?",
+      steps: [
+        { text: "$F = -4x$: of the form $-kx$ with $k = 4$ N/m. SHM about $x = 0$ with $\\omega = \\sqrt{4/1} = 2$ rad/s." },
+        { text: "$F = -4x^3$: the force does point back towards $x = 0$, so the particle oscillates, but $F$ is not proportional to $x$. *Why this step:* the SHM test asks for $a \\propto -x$, not merely \"a force pointing back\". Oscillatory, **not** SHM." },
+        { text: "$F = -4(x - 2)$: put $X = x - 2$. Then $F = -4X$, so this is SHM about the point $x = 2$ with $\\omega = 2$ rad/s. *Why this step:* the equilibrium need not be at the origin; measure displacement from wherever the force vanishes." },
+        { text: "$F = +4x$: the force pushes the particle *away* from $x = 0$. The equilibrium is unstable and the particle runs off. No oscillation at all." },
+      ],
+      answer: "$-4x$: SHM, $\\omega = 2$ rad/s; $-4x^3$: oscillatory, not SHM; $-4(x - 2)$: SHM about $x = 2$, $\\omega = 2$ rad/s; $+4x$: no oscillation.",
+    },
+    {
+      type: "worked-example",
+      id: "owt0-1-we2",
+      title: "Worked example 2 (JEE Main style)",
+      problem:
+        "A 0.5 kg block on a smooth horizontal surface is attached to a spring of stiffness $k = 200$ N/m. Find its angular frequency, frequency and period.",
+      steps: [
+        { text: "$\\omega = \\sqrt{k/m} = \\sqrt{200/0.5} = \\sqrt{400} = 20$ rad/s. *Why this step:* the SHM condition gives $\\omega$ directly from the two things that matter, stiffness and inertia." },
+        { text: "$f = \\omega/2\\pi = 20/6.283 \\approx 3.18$ Hz." },
+        { text: "$T = 1/f = 2\\pi/20 = \\pi/10 \\approx 0.314$ s." },
+      ],
+      answer: "$\\omega = 20$ rad/s, $f \\approx 3.18$ Hz, $T \\approx 0.314$ s",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 (JEE Main style).** A 0.5 kg block on a smooth horizontal surface is attached to a spring of stiffness $k = 200$ N/m. Find its angular frequency, frequency and period.\n\n1. $\\omega = \\sqrt{k/m} = \\sqrt{200/0.5} = \\sqrt{400} = 20$ rad/s. *Why this step:* the SHM condition gives $\\omega$ directly from the two things that matter, stiffness and inertia.\n2. $f = \\omega/2\\pi = 20/6.283 \\approx 3.18$ Hz.\n3. $T = 1/f = 2\\pi/20 = \\pi/10 \\approx 0.314$ s.\n\nNo gravity is involved here; if a later example needs $g$, we take $g = 10$ m/s² (the JEE convention) and say so.",
+        "No gravity is involved here; if a later example needs $g$, we take $g = 10$ m/s² (the JEE convention) and say so.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (from a potential-energy curve).** A 2 kg particle moves in the potential $U(x) = x^4 - 2x^2$ (J, with $x$ in m). Find the equilibrium points and the period of small oscillations about the stable one.\n\n1. Equilibrium where $U'(x) = 4x^3 - 4x = 4x(x^2 - 1) = 0$: $x = 0$ or $x = \\pm1$. *Why this step:* equilibrium means zero force, and $F = -U'$.\n2. Curvature: $U''(x) = 12x^2 - 4$. At $x = 0$, $U'' = -4 < 0$ (a hilltop, unstable). At $x = \\pm1$, $U'' = 8 > 0$ (valleys, stable).\n3. Near $x = 1$ the valley behaves like a spring with $k = U''(1) = 8$ N/m. *Why this step:* this is exactly the Taylor argument above, $U \\approx U_{\\min} + \\tfrac12 k (x - 1)^2$.\n4. $\\omega = \\sqrt{8/2} = 2$ rad/s and $T = 2\\pi/2 = \\pi \\approx 3.14$ s.",
+      type: "worked-example",
+      id: "owt0-1-we3",
+      title: "Worked example 3 (from a potential-energy curve)",
+      problem:
+        "A 2 kg particle moves in the potential $U(x) = x^4 - 2x^2$ (J, with $x$ in m). Find the equilibrium points and the period of small oscillations about the stable one.",
+      steps: [
+        { text: "Equilibrium where $U'(x) = 4x^3 - 4x = 4x(x^2 - 1) = 0$: $x = 0$ or $x = \\pm1$. *Why this step:* equilibrium means zero force, and $F = -U'$." },
+        { text: "Curvature: $U''(x) = 12x^2 - 4$. At $x = 0$, $U'' = -4 < 0$ (a hilltop, unstable). At $x = \\pm1$, $U'' = 8 > 0$ (valleys, stable)." },
+        { text: "Near $x = 1$ the valley behaves like a spring with $k = U''(1) = 8$ N/m. *Why this step:* this is exactly the Taylor argument above, $U \\approx U_{\\min} + \\tfrac12 k (x - 1)^2$." },
+        { text: "$\\omega = \\sqrt{8/2} = 2$ rad/s and $T = 2\\pi/2 = \\pi \\approx 3.14$ s." },
+      ],
+      answer: "Equilibria at $x = 0$ (unstable) and $x = \\pm1$ m (stable); $T = \\pi \\approx 3.14$ s",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (reading ω from an acceleration law).** A particle's acceleration is $a = -16x$ (SI). Find the period.\n\n1. Compare with $a = -\\omega^2 x$: $\\omega^2 = 16$, so $\\omega = 4$ rad/s.\n2. $T = 2\\pi/\\omega = \\pi/2 \\approx 1.57$ s. *Why this step:* once the motion passes the SHM test, the coefficient of $-x$ is all you need; mass and force constant never appear separately.",
+      type: "worked-example",
+      id: "owt0-1-we4",
+      title: "Worked example 4 (reading ω from an acceleration law)",
+      problem:
+        "A particle's acceleration is $a = -16x$ (SI). Find the period.",
+      steps: [
+        { text: "Compare with $a = -\\omega^2 x$: $\\omega^2 = 16$, so $\\omega = 4$ rad/s." },
+        { text: "$T = 2\\pi/\\omega = \\pi/2 \\approx 1.57$ s. *Why this step:* once the motion passes the SHM test, the coefficient of $-x$ is all you need; mass and force constant never appear separately." },
+      ],
+      answer: "$T = \\pi/2 \\approx 1.57$ s",
     },
     {
       type: "callout",
@@ -127,6 +177,7 @@ const lesson01: LessonSeed = {
       content:
         "Displace by $x$ from equilibrium, write the net force (or torque), simplify to $-(\\text{something})\\,x$, and read off $\\omega^2 = \\text{something}/m$. You will use this for every oscillator in the chapter.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "owt0-1-q1",
@@ -138,19 +189,23 @@ const lesson01: LessonSeed = {
         { text: "$F = 5x$", feedback: "The force points away from equilibrium, so the particle runs away. Unstable, no oscillation." },
         { text: "$F = -5x^3$", feedback: "It restores, so there is oscillation, but $F$ is not proportional to $x$. The period would depend on amplitude." },
       ],
+      hint: "For each force, find the point where it vanishes, then ask whether the force is proportional to the displacement from that point and points back towards it (worked example 1).",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt0-1-q2",
       variant: "practice",
-      question: "A 2 kg block is attached to a spring of stiffness 800 N/m on a smooth floor. What is its period?",
-      options: [
-        { text: "$\\dfrac{\\pi}{10}$ s $\\approx 0.314$ s", correct: true, feedback: "$\\omega = \\sqrt{800/2} = 20$ rad/s, so $T = 2\\pi/20 = \\pi/10$ s." },
-        { text: "$20$ s", feedback: "20 is $\\omega$ in rad/s. The period is $2\\pi/\\omega$." },
-        { text: "$\\dfrac{\\pi}{200}$ s", feedback: "You used $\\omega = k/m = 400$ without the square root. $\\omega = \\sqrt{k/m}$." },
-        { text: "$\\dfrac{1}{20}$ s", feedback: "That is $1/\\omega$. The period needs the $2\\pi$: $T = 2\\pi/\\omega$." },
-      ],
+      question: "A 2 kg block is attached to a spring of stiffness 800 N/m on a smooth floor. What is its period? Give your answer in seconds, to three decimal places.",
+      answer: 0.314,
+      relTolerance: 0.02,
+      unit: "s",
       hint: "$\\omega = \\sqrt{k/m}$, then $T = 2\\pi/\\omega$.",
+      solution: "$\\omega = \\sqrt{800/2} = \\sqrt{400} = 20$ rad/s, so $T = 2\\pi/20 = \\pi/10 \\approx 0.314$ s.",
+      commonMistakes: [
+        { answer: 20, feedback: "20 is $\\omega$ in rad/s. The period is $2\\pi/\\omega$." },
+        { answer: 0.0157, feedback: "You used $\\omega = k/m = 400$ without the square root, giving $\\pi/200$ s. $\\omega = \\sqrt{k/m}$." },
+        { answer: 0.05, feedback: "That is $1/\\omega$. The period needs the $2\\pi$: $T = 2\\pi/\\omega$." },
+      ],
     },
     {
       type: "quiz",
@@ -162,19 +217,22 @@ const lesson01: LessonSeed = {
         { text: "It is the same everywhere, because $\\omega$ is constant.", feedback: "$\\omega$ is constant but $a = -\\omega^2 x$ still changes with $x$." },
         { text: "At the equilibrium position, where the speed is largest.", feedback: "At equilibrium the restoring force is zero, so the acceleration is zero there." },
       ],
+      hint: "Use the SHM test $a = -\\omega^2 x$: what does the size of the acceleration depend on?",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt0-1-q4",
       variant: "practice",
       question: "A 0.5 kg particle moves in the potential $U = 9x^2$ J ($x$ in m). What is the angular frequency of its oscillation?",
-      options: [
-        { text: "$3$ rad/s", feedback: "Check $k$: $U = \\tfrac12 kx^2 = 9x^2$ means $k = 18$, and $\\sqrt{18/0.5} = 6$." },
-        { text: "$3\\sqrt2$ rad/s", feedback: "That uses $k = 9$. Compare $U = 9x^2$ with $\\tfrac12 kx^2$: $k = 18$ N/m." },
-        { text: "$6$ rad/s", correct: true, feedback: "$\\tfrac12 k = 9$ gives $k = 18$ N/m, so $\\omega = \\sqrt{18/0.5} = \\sqrt{36} = 6$ rad/s." },
-        { text: "$36$ rad/s", feedback: "$36$ is $\\omega^2$. Take the square root." },
-      ],
+      answer: 6,
+      unit: "rad/s",
       hint: "Match $U = 9x^2$ with $U = \\tfrac12 kx^2$ first.",
+      solution: "$\\tfrac12 k = 9$ gives $k = 18$ N/m, so $\\omega = \\sqrt{18/0.5} = \\sqrt{36} = 6$ rad/s.",
+      commonMistakes: [
+        { answer: 3, feedback: "That is $\\sqrt9$: you treated the coefficient 9 as $\\omega^2$. Match $U = 9x^2$ with $\\tfrac12 kx^2$ to get $k = 18$ N/m, then $\\omega = \\sqrt{k/m} = \\sqrt{18/0.5} = 6$." },
+        { answer: 4.24, tolerance: 0.02, feedback: "That is $3\\sqrt2$, from $k = 9$. Compare $U = 9x^2$ with $\\tfrac12 kx^2$: $k = 18$ N/m." },
+        { answer: 36, feedback: "$36$ is $\\omega^2$. Take the square root." },
+      ],
     },
     {
       type: "quiz",
@@ -186,6 +244,21 @@ const lesson01: LessonSeed = {
         { text: "It isn't: a larger swing always takes longer.", feedback: "That is true for forces like $-kx^3$ (or a pendulum at large angles), but not for $F = -kx$." },
         { text: "Because a larger amplitude means a proportionally larger restoring force, so the particle covers the longer path proportionally faster.", correct: true, feedback: "Double $A$ and every force, acceleration and speed doubles too; the extra distance is covered at double speed, so the time is unchanged." },
       ],
+      hint: "Think about what happens to the restoring force, and so to the speeds along the path, when the amplitude is doubled.",
+    },
+    {
+      type: "quiz",
+      id: "owt0-1-q6",
+      variant: "practice",
+      multiple: true,
+      question: "A particle performs SHM about $x = 0$ under the force $F = -kx$. Select every statement that is true at all times.",
+      options: [
+        { text: "The acceleration points opposite to the displacement.", correct: true, feedback: "$a = -\\omega^2 x$: the minus sign is the whole definition of a restoring force." },
+        { text: "The speed is largest when the particle passes $x = 0$.", correct: true, feedback: "All the energy is kinetic at the centre, where the restoring force has done its full positive work." },
+        { text: "The velocity and the acceleration point in opposite directions.", feedback: "Only on the way out. On the way back towards $x = 0$ the particle speeds up, so $v$ and $a$ point the same way." },
+        { text: "Doubling the amplitude doubles the period.", feedback: "For $F = -kx$ the period $2\\pi\\sqrt{m/k}$ does not depend on the amplitude at all." },
+      ],
+      hint: "Think through one full cycle: the way out from the centre and the way back are different.",
     },
   ]),
 };
@@ -216,6 +289,7 @@ const lesson02: LessonSeed = {
           "The shadow of the turning arrow is x = A cos(ωt). The angle swept, ωt, runs along the horizontal axis of the graph.",
       },
     },
+    { type: "heading", text: "Amplitude, phase and period" },
     {
       type: "text",
       content:
@@ -229,10 +303,11 @@ const lesson02: LessonSeed = {
       content:
         "**Amplitude** $A$: the largest displacement (the radius of the reference circle).\n**Phase** $\\omega t + \\phi$: the angle of the reference arrow at time $t$. It tells you *where in the cycle* the particle is and which way it is moving.\n**Initial phase** (epoch) $\\phi$: the phase at $t = 0$.\n**Period** $T = \\dfrac{2\\pi}{\\omega}$: time for the arrow to turn once. **Frequency** $f = \\dfrac1T = \\dfrac{\\omega}{2\\pi}$ (Hz).",
     },
+    { type: "heading", text: "Velocity and acceleration, two ways" },
     {
       type: "text",
       content:
-        "**Velocity and acceleration, two ways.** Differentiating $x = A\\cos(\\omega t + \\phi)$:",
+        "Differentiating $x = A\\cos(\\omega t + \\phi)$:",
     },
     {
       type: "math",
@@ -263,10 +338,11 @@ const lesson02: LessonSeed = {
       content:
         "What you should have seen: the block always sits directly under the tip of the arrow. Changing $\\phi$ rotates where the arrow *starts*, which shifts the graph left or right in time; it does not move anything in space. Changing $\\omega$ spins the arrow faster and squeezes the graph. Changing $A$ enlarges the circle and stretches the graph vertically.",
     },
+    { type: "heading", text: "Finding A and φ from how the motion starts" },
     {
       type: "text",
       content:
-        "**Finding A and φ from how the motion starts.** At $t = 0$: $x_0 = A\\cos\\phi$ and $v_0 = -A\\omega\\sin\\phi$. Square and add (using $\\sin^2 + \\cos^2 = 1$):",
+        "At $t = 0$: $x_0 = A\\cos\\phi$ and $v_0 = -A\\omega\\sin\\phi$. Square and add (using $\\sin^2 + \\cos^2 = 1$):",
     },
     {
       type: "math",
@@ -297,20 +373,65 @@ const lesson02: LessonSeed = {
       content:
         "What you should have seen: the target needs $a = 2$ (amplitude 2), $b = 1$ ($\\omega = 1$ rad/s) and a shift of 0.5 to the right. In SHM language, $x = 2\\cos(t - 0.5)$ has $\\phi = -0.5$ rad: it reaches its maximum 0.5 s *later* than a motion with $\\phi = 0$. A negative initial phase is a delay.",
     },
+    { type: "heading", text: "Times, phase differences and initial conditions" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (from the end to half-way).** How long does a particle in SHM take to go from $x = A$ to $x = A/2$?\n\n1. Start the clock at $x = A$, so $x = A\\cos\\omega t$. *Why this step:* choosing $t = 0$ at a known point makes $\\phi = 0$.\n2. Set $A\\cos\\omega t = A/2$: $\\cos\\omega t = \\tfrac12$, so $\\omega t = \\pi/3$.\n3. $t = \\dfrac{\\pi/3}{2\\pi/T} = \\dfrac{T}{6}$.\n\nOn the reference circle the arrow turns through $60^\\circ$ out of $360^\\circ$, which is one sixth of a turn.\n\n**Worked example 2 (from the middle to half-way).** From $x = 0$ to $x = A/2$.\n\n1. Start at the centre: $x = A\\sin\\omega t$.\n2. $\\sin\\omega t = \\tfrac12 \\Rightarrow \\omega t = \\pi/6$, so $t = T/12$.\n3. Check: the two halves of the quarter-period must add to $T/4$, and $T/12 + T/6 = 3T/12 = T/4$. ✓ *Why this step:* the particle is fast near the middle, so the first half of the distance takes half as long as the second.",
+      type: "worked-example",
+      id: "owt0-2-we1",
+      title: "Worked example 1 (from the end to half-way)",
+      problem:
+        "How long does a particle in SHM take to go from $x = A$ to $x = A/2$?",
+      steps: [
+        { text: "Start the clock at $x = A$, so $x = A\\cos\\omega t$. *Why this step:* choosing $t = 0$ at a known point makes $\\phi = 0$." },
+        { text: "Set $A\\cos\\omega t = A/2$: $\\cos\\omega t = \\tfrac12$, so $\\omega t = \\pi/3$." },
+        { text: "$t = \\dfrac{\\pi/3}{2\\pi/T} = \\dfrac{T}{6}$." },
+      ],
+      answer: "$t = T/6$",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 (phase difference between two particles).** Two particles perform identical SHMs of amplitude $A$ along the same line. At some instant P is at $x = +A/2$ and Q is at $x = -A/2$, and both are moving in the $+x$ direction. Find their phase difference.\n\n1. Write each phase $\\theta$ from $x = A\\cos\\theta$ and $v = -A\\omega\\sin\\theta$. Moving in $+x$ means $v > 0$, so $\\sin\\theta < 0$. *Why this step:* the position gives $\\cos\\theta$, and only the direction of motion settles which of the two angles with that cosine is correct.\n2. P: $\\cos\\theta_P = \\tfrac12$ and $\\sin\\theta_P < 0$, so $\\theta_P = -\\pi/3$.\n3. Q: $\\cos\\theta_Q = -\\tfrac12$ and $\\sin\\theta_Q < 0$, so $\\theta_Q = -2\\pi/3$.\n4. Phase difference $= \\theta_P - \\theta_Q = -\\pi/3 + 2\\pi/3 = \\pi/3$. P leads Q by $60^\\circ$ even though they are a whole amplitude apart in space.",
+        "On the reference circle the arrow turns through $60^\\circ$ out of $360^\\circ$, which is one sixth of a turn.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (initial conditions, JEE Main style).** A particle performs SHM with $\\omega = 2$ rad/s. At $t = 0$ it is at $x_0 = 0.03$ m moving with $v_0 = -0.08$ m/s. Write its equation of motion.\n\n1. Amplitude: $A = \\sqrt{0.03^2 + (0.08/2)^2} = \\sqrt{0.0009 + 0.0016} = \\sqrt{0.0025} = 0.05$ m.\n2. $\\cos\\phi = 0.03/0.05 = 0.6$ and $\\sin\\phi = -v_0/(A\\omega) = 0.08/0.1 = 0.8$. *Why this step:* both signs are positive, so $\\phi$ is in the first quadrant.\n3. $\\phi = \\arctan(4/3) \\approx 0.927$ rad $(53^\\circ)$.\n4. $x = 0.05\\cos(2t + 0.927)$ m. Check: $v(0) = -0.05 \\times 2 \\times 0.8 = -0.08$ m/s. ✓",
+      type: "worked-example",
+      id: "owt0-2-we2",
+      title: "Worked example 2 (from the middle to half-way)",
+      problem:
+        "How long does a particle in SHM take to go from $x = 0$ to $x = A/2$?",
+      steps: [
+        { text: "Start at the centre: $x = A\\sin\\omega t$." },
+        { text: "$\\sin\\omega t = \\tfrac12 \\Rightarrow \\omega t = \\pi/6$, so $t = T/12$." },
+        { text: "Check: the two halves of the quarter-period must add to $T/4$, and $T/12 + T/6 = 3T/12 = T/4$. ✓ *Why this step:* the particle is fast near the middle, so the first half of the distance takes half as long as the second." },
+      ],
+      answer: "$t = T/12$",
+    },
+    {
+      type: "worked-example",
+      id: "owt0-2-we3",
+      title: "Worked example 3 (phase difference between two particles)",
+      problem:
+        "Two particles perform identical SHMs of amplitude $A$ along the same line. At some instant P is at $x = +A/2$ and Q is at $x = -A/2$, and both are moving in the $+x$ direction. Find their phase difference.",
+      steps: [
+        { text: "Write each phase $\\theta$ from $x = A\\cos\\theta$ and $v = -A\\omega\\sin\\theta$. Moving in $+x$ means $v > 0$, so $\\sin\\theta < 0$. *Why this step:* the position gives $\\cos\\theta$, and only the direction of motion settles which of the two angles with that cosine is correct." },
+        { text: "P: $\\cos\\theta_P = \\tfrac12$ and $\\sin\\theta_P < 0$, so $\\theta_P = -\\pi/3$." },
+        { text: "Q: $\\cos\\theta_Q = -\\tfrac12$ and $\\sin\\theta_Q < 0$, so $\\theta_Q = -2\\pi/3$." },
+        { text: "Phase difference $= \\theta_P - \\theta_Q = -\\pi/3 + 2\\pi/3 = \\pi/3$. P leads Q by $60^\\circ$ even though they are a whole amplitude apart in space." },
+      ],
+      answer: "$\\pi/3$ ($60^\\circ$), with P leading Q",
+    },
+    {
+      type: "worked-example",
+      id: "owt0-2-we4",
+      title: "Worked example 4 (initial conditions, JEE Main style)",
+      problem:
+        "A particle performs SHM with $\\omega = 2$ rad/s. At $t = 0$ it is at $x_0 = 0.03$ m moving with $v_0 = -0.08$ m/s. Write its equation of motion.",
+      steps: [
+        { text: "Amplitude: $A = \\sqrt{0.03^2 + (0.08/2)^2} = \\sqrt{0.0009 + 0.0016} = \\sqrt{0.0025} = 0.05$ m." },
+        { text: "$\\cos\\phi = 0.03/0.05 = 0.6$ and $\\sin\\phi = -v_0/(A\\omega) = 0.08/0.1 = 0.8$. *Why this step:* both signs are positive, so $\\phi$ is in the first quadrant." },
+        { text: "$\\phi = \\arctan(4/3) \\approx 0.927$ rad $(53^\\circ)$." },
+        { text: "$x = 0.05\\cos(2t + 0.927)$ m. Check: $v(0) = -0.05 \\times 2 \\times 0.8 = -0.08$ m/s. ✓" },
+      ],
+      answer: "$x = 0.05\\cos(2t + 0.927)$ m",
     },
     {
       type: "callout",
@@ -326,6 +447,7 @@ const lesson02: LessonSeed = {
       content:
         "The pendulum bob may swing through $10^\\circ$, and the block on a spring does not turn at all, yet both have a phase. Phase is the angle of the **imaginary reference arrow**: a measure of time within the cycle. A phase difference of $\\pi/3$ means one motion is one sixth of a period ahead of the other, nothing about where they are.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "owt0-2-q1",
@@ -337,19 +459,22 @@ const lesson02: LessonSeed = {
         { text: "$A = 5$ cm, $T = 2$ s, $x(0) = 5$ cm", feedback: "$x(0) = 5\\cos(\\pi/3)$, not $5\\cos 0$." },
         { text: "$A = 10$ cm, $T = 2$ s, $x(0) = 2.5$ cm", feedback: "The amplitude is the coefficient, 5 cm; the path length from end to end is 10 cm." },
       ],
+      hint: "Compare with $x = A\\cos(\\omega t + \\phi)$: read off $A$ and $\\omega$, use $T = 2\\pi/\\omega$, and put $t = 0$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt0-2-q2",
       variant: "practice",
-      question: "A particle in SHM with period $T$ starts at $x = +A$. How long does it take to first reach $x = -A/2$?",
-      options: [
-        { text: "$\\dfrac{3T}{8}$", feedback: "That treats the motion as uniform over the distance $1.5A$. Use the reference circle: equal angles, not equal distances, take equal times." },
-        { text: "$\\dfrac{T}{6}$", feedback: "$T/6$ gets you to $+A/2$. You need to go on through the centre to $-A/2$." },
-        { text: "$\\dfrac{5T}{12}$", feedback: "That is $T/4 + T/6$. From the centre to $-A/2$ takes only $T/12$, so the total is $T/4 + T/12 = T/3$." },
-        { text: "$\\dfrac{T}{3}$", correct: true, feedback: "$\\cos\\omega t = -\\tfrac12$ first at $\\omega t = 2\\pi/3$, which is a third of a turn." },
-      ],
+      question: "A particle in SHM with period 6 s starts at $x = +A$. How long does it take to first reach $x = -A/2$?",
+      answer: 2,
+      unit: "s",
       hint: "Solve $\\cos\\omega t = -\\tfrac12$ for the smallest positive $\\omega t$.",
+      solution: "Start the clock at $x = +A$, so $x = A\\cos\\omega t$. $\\cos\\omega t = -\\tfrac12$ first at $\\omega t = 2\\pi/3$, which is a third of a turn of the reference arrow.\n\nSo $t = T/3 = 6/3 = 2$ s.",
+      commonMistakes: [
+        { answer: 2.25, feedback: "That is $3T/8$, which treats the motion as uniform over the distance $1.5A$. Use the reference circle: equal angles, not equal distances, take equal times." },
+        { answer: 1, feedback: "That is $T/6$, which only gets you to $+A/2$. You need to go on through the centre to $-A/2$." },
+        { answer: 2.5, feedback: "That is $T/4 + T/6$. From the centre to $-A/2$ takes only $T/12$, so the total is $T/4 + T/12 = T/3$." },
+      ],
     },
     {
       type: "quiz",
@@ -362,18 +487,36 @@ const lesson02: LessonSeed = {
         { text: "$x_2$ reaches each maximum a quarter period after $x_1$.", correct: true, feedback: "A phase of $-\\pi/2$ is a delay of $\\frac{\\pi/2}{2\\pi}T = T/4$." },
         { text: "$x_2$ is displaced by $\\pi/2$ metres from $x_1$.", feedback: "Phase is not a distance. It measures where in the cycle each particle is." },
       ],
+      hint: "$\\cos\\theta$ peaks when $\\theta = 0$. Find the time at which each phase is zero and compare them.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt0-2-q4",
       variant: "practice",
       question: "A particle in SHM has $\\omega = 4$ rad/s. At $t = 0$ it is at $x = 3$ cm moving with speed 16 cm/s. What is its amplitude?",
-      options: [
-        { text: "$3$ cm", feedback: "It is moving at $x = 3$ cm, so it will go further out; 3 cm cannot be the amplitude." },
-        { text: "$5$ cm", correct: true, feedback: "$A = \\sqrt{3^2 + (16/4)^2} = \\sqrt{9 + 16} = 5$ cm." },
-        { text: "$7$ cm", feedback: "You added $3 + 4$. Displacement and $v/\\omega$ are perpendicular sides of the reference triangle; combine them with Pythagoras." },
-        { text: "$\\sqrt{265}$ cm", feedback: "You used $v_0 = 16$ without dividing by $\\omega$. The term is $(v_0/\\omega)^2 = 16$." },
+      answer: 5,
+      unit: "cm",
+      hint: "$A = \\sqrt{x_0^2 + (v_0/\\omega)^2}$.",
+      solution: "$A = \\sqrt{3^2 + (16/4)^2} = \\sqrt{9 + 16} = 5$ cm.",
+      commonMistakes: [
+        { answer: 3, feedback: "It is moving at $x = 3$ cm, so it will go further out; 3 cm cannot be the amplitude." },
+        { answer: 7, feedback: "You added $3 + 4$. Displacement and $v/\\omega$ are perpendicular sides of the reference triangle; combine them with Pythagoras." },
+        { answer: 16.28, tolerance: 0.05, feedback: "That is $\\sqrt{265}$: you used $v_0 = 16$ without dividing by $\\omega$. The term is $(v_0/\\omega)^2 = 16$." },
       ],
+    },
+    {
+      type: "quiz",
+      id: "owt0-2-q5",
+      variant: "practice",
+      multiple: true,
+      question: "A particle moves as $x = A\\cos(\\omega t - \\pi/3)$, with period $T$. Select every statement that is true.",
+      options: [
+        { text: "At $t = 0$ it is at $x = A/2$.", correct: true, feedback: "$x(0) = A\\cos(-\\pi/3) = A/2$." },
+        { text: "At $t = 0$ it is moving in the $+x$ direction.", correct: true, feedback: "$v(0) = -A\\omega\\sin(-\\pi/3) = +\\tfrac{\\sqrt3}{2}A\\omega > 0$, so it is heading out towards $+A$." },
+        { text: "At $t = 0$ its speed is $A\\omega/2$.", feedback: "At $x = A/2$ the speed is $\\omega\\sqrt{A^2 - A^2/4} = \\tfrac{\\sqrt3}{2}A\\omega$, not $A\\omega/2$." },
+        { text: "It first reaches $x = +A$ at $t = T/3$.", feedback: "The phase must grow from $-\\pi/3$ to $0$, a turn of $\\pi/3$, which is one sixth of a cycle: $t = T/6$." },
+      ],
+      hint: "Read $x(0)$ from $\\cos\\phi$ and the direction from the sign of $v(0) = -A\\omega\\sin\\phi$.",
     },
   ]),
 };
@@ -388,6 +531,7 @@ const lesson03: LessonSeed = {
       content:
         "A child on a swing is momentarily still at the top of each arc and moving fastest at the bottom. The swing's energy has not gone anywhere: at the top it is all stored (height, or for a spring, stretch), at the bottom it is all motion. This lesson turns that trade into formulas you can use at any point of the cycle.",
     },
+    { type: "heading", text: "Speed as a function of position" },
     {
       type: "text",
       content:
@@ -432,25 +576,77 @@ const lesson03: LessonSeed = {
       content:
         "What you should have seen: $v$ peaks a quarter period *before* $x$ does, so velocity **leads** displacement by $\\pi/2$. The acceleration graph is the displacement graph upside down: $a$ and $x$ are $\\pi$ out of phase. When $x$ is at an end, $v = 0$ and $|a|$ is largest; at the centre, $|v|$ is largest and $a = 0$. The KE bar fills and empties **twice** per period, as does the PE bar, while the total bar never moves.",
     },
+    { type: "heading", text: "Why energy oscillates at 2ω" },
     {
       type: "text",
       content:
-        "**Why energy oscillates at 2ω.** $KE = \\tfrac12 m A^2\\omega^2\\sin^2(\\omega t + \\phi) = \\tfrac14 m A^2\\omega^2\\big[1 - \\cos(2\\omega t + 2\\phi)\\big]$. The $\\cos 2\\theta$ identity doubles the frequency: KE is largest every time the block passes the centre, which happens twice per cycle (once each way). The same identity shows the average of $\\sin^2$ over a cycle is $\\tfrac12$, so the average KE and the average PE are both $E/2$.",
+        "$KE = \\tfrac12 m A^2\\omega^2\\sin^2(\\omega t + \\phi) = \\tfrac14 m A^2\\omega^2\\big[1 - \\cos(2\\omega t + 2\\phi)\\big]$. The $\\cos 2\\theta$ identity doubles the frequency: KE is largest every time the block passes the centre, which happens twice per cycle (once each way). The same identity shows the average of $\\sin^2$ over a cycle is $\\tfrac12$, so the average KE and the average PE are both $E/2$.",
+    },
+    { type: "heading", text: "Maxima, energy split and two snapshots" },
+    {
+      type: "worked-example",
+      id: "owt0-3-we1",
+      title: "Worked example 1 (maxima from A and T)",
+      problem:
+        "A particle performs SHM with amplitude 4 cm and period $\\pi/5$ s. Find its maximum speed and maximum acceleration.",
+      steps: [
+        { text: "$\\omega = 2\\pi/T = 2\\pi/(\\pi/5) = 10$ rad/s. *Why this step:* every SHM formula is written in $\\omega$, so convert the period first." },
+        { text: "$v_{\\max} = A\\omega = 0.04 \\times 10 = 0.4$ m/s." },
+        { text: "$a_{\\max} = A\\omega^2 = 0.04 \\times 100 = 4$ m/s²." },
+      ],
+      answer: "$v_{\\max} = 0.4$ m/s, $a_{\\max} = 4$ m/s²",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (maxima from A and T).** A particle performs SHM with amplitude 4 cm and period $\\pi/5$ s. Find its maximum speed and maximum acceleration.\n\n1. $\\omega = 2\\pi/T = 2\\pi/(\\pi/5) = 10$ rad/s. *Why this step:* every SHM formula is written in $\\omega$, so convert the period first.\n2. $v_{\\max} = A\\omega = 0.04 \\times 10 = 0.4$ m/s.\n3. $a_{\\max} = A\\omega^2 = 0.04 \\times 100 = 4$ m/s².\n\n**Worked example 2 (speed at a point).** Amplitude 10 cm, $\\omega = 4$ rad/s. Find the speed at $x = 6$ cm.\n\n1. $|v| = \\omega\\sqrt{A^2 - x^2} = 4\\sqrt{100 - 36} = 4 \\times 8 = 32$ cm/s.\n2. Compare with $v_{\\max} = 40$ cm/s: at 60% of the amplitude the particle still has 80% of its top speed. *Why this step:* a quick sense check; SHM is fast over most of its path and brakes hard near the ends.",
+      type: "worked-example",
+      id: "owt0-3-we2",
+      title: "Worked example 2 (speed at a point)",
+      problem:
+        "A particle performs SHM with amplitude 10 cm and $\\omega = 4$ rad/s. Find its speed at $x = 6$ cm.",
+      steps: [
+        { text: "$|v| = \\omega\\sqrt{A^2 - x^2} = 4\\sqrt{100 - 36} = 4 \\times 8 = 32$ cm/s." },
+        { text: "Compare with $v_{\\max} = 40$ cm/s: at 60% of the amplitude the particle still has 80% of its top speed. *Why this step:* a quick sense check; SHM is fast over most of its path and brakes hard near the ends." },
+      ],
+      answer: "32 cm/s",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (where is KE = PE?).**\n\n1. Set $\\tfrac12 k(A^2 - x^2) = \\tfrac12 kx^2$.\n2. $A^2 = 2x^2$, so $x = \\pm A/\\sqrt2 \\approx \\pm 0.707A$. *Why this step:* each form of energy then holds exactly half of the fixed total $E$.\n3. Not at $A/2$: at $x = A/2$ the PE is $\\tfrac12 k(A/2)^2 = E/4$, only a quarter, and the KE is $3E/4$.\n\n**Worked example 4 (energy numbers, JEE Main style).** A 0.2 kg block on a spring of $k = 20$ N/m oscillates with amplitude 10 cm. Find the total energy and the kinetic energy at $x = 5$ cm.\n\n1. $E = \\tfrac12 kA^2 = \\tfrac12 \\times 20 \\times 0.01 = 0.1$ J.\n2. $PE$ at 5 cm $= \\tfrac12 \\times 20 \\times 0.0025 = 0.025$ J.\n3. $KE = 0.1 - 0.025 = 0.075$ J, which is $\\tfrac34 E$, as Worked example 3 predicted for $x = A/2$.",
+      type: "worked-example",
+      id: "owt0-3-we3",
+      title: "Worked example 3",
+      problem:
+        "Where is KE = PE? (Is it at $x = A/2$?)",
+      steps: [
+        { text: "Set $\\tfrac12 k(A^2 - x^2) = \\tfrac12 kx^2$." },
+        { text: "$A^2 = 2x^2$, so $x = \\pm A/\\sqrt2 \\approx \\pm 0.707A$. *Why this step:* each form of energy then holds exactly half of the fixed total $E$." },
+        { text: "Not at $A/2$: at $x = A/2$ the PE is $\\tfrac12 k(A/2)^2 = E/4$, only a quarter, and the KE is $3E/4$." },
+      ],
+      answer: "At $x = \\pm A/\\sqrt2 \\approx \\pm0.707A$, not at $A/2$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (two snapshots fix the motion).** A particle in SHM has speed 8 cm/s at $x = 3$ cm and 6 cm/s at $x = 4$ cm. Find $\\omega$ and $A$.\n\n1. Write $v^2 = \\omega^2(A^2 - x^2)$ twice: $64 = \\omega^2(A^2 - 9)$ and $36 = \\omega^2(A^2 - 16)$.\n2. Subtract to eliminate $A$: $28 = \\omega^2 \\times 7$, so $\\omega = 2$ rad/s. *Why this step:* two equations, two unknowns; subtraction kills $A^2$ in one move.\n3. Back-substitute: $A^2 = 9 + 64/4 = 25$, so $A = 5$ cm.\n4. Check the second point: $2\\sqrt{25 - 16} = 6$ cm/s. ✓",
+      type: "worked-example",
+      id: "owt0-3-we4",
+      title: "Worked example 4 (energy numbers, JEE Main style)",
+      problem:
+        "A 0.2 kg block on a spring of $k = 20$ N/m oscillates with amplitude 10 cm. Find the total energy and the kinetic energy at $x = 5$ cm.",
+      steps: [
+        { text: "$E = \\tfrac12 kA^2 = \\tfrac12 \\times 20 \\times 0.01 = 0.1$ J." },
+        { text: "$PE$ at 5 cm $= \\tfrac12 \\times 20 \\times 0.0025 = 0.025$ J." },
+        { text: "$KE = 0.1 - 0.025 = 0.075$ J, which is $\\tfrac34 E$, as Worked example 3 predicted for $x = A/2$." },
+      ],
+      answer: "$E = 0.1$ J, $KE = 0.075$ J",
+    },
+    {
+      type: "worked-example",
+      id: "owt0-3-we5",
+      title: "Worked example 5 (two snapshots fix the motion)",
+      problem:
+        "A particle in SHM has speed 8 cm/s at $x = 3$ cm and 6 cm/s at $x = 4$ cm. Find $\\omega$ and $A$.",
+      steps: [
+        { text: "Write $v^2 = \\omega^2(A^2 - x^2)$ twice: $64 = \\omega^2(A^2 - 9)$ and $36 = \\omega^2(A^2 - 16)$." },
+        { text: "Subtract to eliminate $A$: $28 = \\omega^2 \\times 7$, so $\\omega = 2$ rad/s. *Why this step:* two equations, two unknowns; subtraction kills $A^2$ in one move." },
+        { text: "Back-substitute: $A^2 = 9 + 64/4 = 25$, so $A = 5$ cm." },
+        { text: "Check the second point: $2\\sqrt{25 - 16} = 6$ cm/s. ✓" },
+      ],
+      answer: "$\\omega = 2$ rad/s, $A = 5$ cm",
     },
     {
       type: "table",
@@ -476,16 +672,20 @@ const lesson03: LessonSeed = {
       content:
         "KE depends on $v^2$, and $v^2$ does not care about direction. It peaks at every pass through the centre, twice per period, so KE (and PE) oscillate at $2\\omega$, with period $T/2$. If $x$ has frequency 5 Hz, KE has frequency 10 Hz.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt0-3-q1",
       variant: "practice",
       question: "A particle in SHM has amplitude 5 cm and period $0.2\\pi$ s. What is its maximum acceleration?",
-      options: [
-        { text: "$5$ m/s²", correct: true, feedback: "$\\omega = 2\\pi/(0.2\\pi) = 10$ rad/s and $a_{\\max} = 0.05 \\times 100 = 5$ m/s²." },
-        { text: "$50$ m/s²", feedback: "Check the units: 5 cm is 0.05 m, not 0.5 m." },
-        { text: "$0.05$ m/s²", feedback: "That is just the amplitude. Multiply by $\\omega^2 = 100$." },
-        { text: "$0.5$ m/s²", feedback: "That is $v_{\\max} = A\\omega$. Acceleration needs $\\omega^2$." },
+      answer: 5,
+      unit: "m/s²",
+      hint: "Convert the period to $\\omega$, then $a_{\\max} = A\\omega^2$ with $A$ in metres.",
+      solution: "$\\omega = 2\\pi/(0.2\\pi) = 10$ rad/s and $a_{\\max} = A\\omega^2 = 0.05 \\times 100 = 5$ m/s².",
+      commonMistakes: [
+        { answer: 50, feedback: "Check the units: 5 cm is 0.05 m, not 0.5 m." },
+        { answer: 0.05, feedback: "That is just the amplitude. Multiply by $\\omega^2 = 100$." },
+        { answer: 0.5, feedback: "That is $v_{\\max} = A\\omega$. Acceleration needs $\\omega^2$." },
       ],
     },
     {
@@ -512,17 +712,20 @@ const lesson03: LessonSeed = {
         { text: "8 Hz", correct: true, feedback: "KE peaks at every pass through the centre, twice per period, so its frequency is $2f$." },
         { text: "KE does not oscillate; it is constant.", feedback: "The *total* energy is constant. KE and PE trade back and forth." },
       ],
+      hint: "Write $KE = \\tfrac12 m\\omega^2A^2\\sin^2\\omega t$ and use $\\sin^2\\theta = \\tfrac12(1 - \\cos 2\\theta)$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt0-3-q4",
       variant: "practice",
       question: "A 0.5 kg block on a spring oscillates with amplitude 0.2 m and total energy 1 J. What is its maximum speed?",
-      options: [
-        { text: "$0.4$ m/s", feedback: "The amplitude is not needed here; set all of $E$ equal to KE at the centre." },
-        { text: "$2$ m/s", correct: true, feedback: "At the centre all the energy is kinetic: $\\tfrac12 \\times 0.5 \\times v^2 = 1$, so $v = 2$ m/s." },
-        { text: "$4$ m/s", feedback: "$\\tfrac12 m v^2 = 1$ gives $v^2 = 4$, so $v = 2$, not 4." },
-        { text: "$\\sqrt2$ m/s", feedback: "You dropped the $\\tfrac12$: $mv^2 = 1$ would give $\\sqrt2$. Use $\\tfrac12 mv^2 = 1$." },
+      answer: 2,
+      unit: "m/s",
+      hint: "Where in the cycle is all of the energy kinetic?",
+      solution: "At the centre all the energy is kinetic: $\\tfrac12 \\times 0.5 \\times v^2 = 1$, so $v^2 = 4$ and $v_{\\max} = 2$ m/s. The amplitude is not needed.",
+      commonMistakes: [
+        { answer: 4, feedback: "$\\tfrac12 m v^2 = 1$ gives $v^2 = 4$, so $v = 2$, not 4." },
+        { answer: 1.41, tolerance: 0.01, feedback: "That is $\\sqrt2$: you dropped the $\\tfrac12$. Use $\\tfrac12 mv^2 = 1$." },
       ],
     },
     {
@@ -536,6 +739,21 @@ const lesson03: LessonSeed = {
         { text: "Out of phase by $\\pi$", feedback: "That is the relation between acceleration and displacement." },
         { text: "In phase", feedback: "At maximum displacement the velocity is zero, so they cannot peak together." },
       ],
+      hint: "Differentiate $x = A\\sin\\omega t$ and rewrite the result as a sine with a phase. Is that phase added or subtracted?",
+    },
+    {
+      type: "quiz",
+      id: "owt0-3-q6",
+      variant: "practice",
+      multiple: true,
+      question: "A particle performs SHM with amplitude $A$, total energy $E$, maximum speed $v_{\\max}$ and maximum acceleration $a_{\\max}$. When it is at $x = A/2$, select every statement that is true.",
+      options: [
+        { text: "Its kinetic energy is $\\tfrac34 E$.", correct: true, feedback: "$PE = \\tfrac12 k(A/2)^2 = E/4$, so $KE = E - E/4 = \\tfrac34 E$." },
+        { text: "Its speed is $\\tfrac{\\sqrt3}{2}v_{\\max}$.", correct: true, feedback: "$|v| = \\omega\\sqrt{A^2 - A^2/4} = \\tfrac{\\sqrt3}{2}A\\omega$. Equivalently, KE $= \\tfrac34$ of its maximum, and speed goes as $\\sqrt{KE}$." },
+        { text: "The magnitude of its acceleration is $\\tfrac14 a_{\\max}$.", feedback: "Acceleration is linear in $x$: $|a| = \\omega^2 (A/2) = \\tfrac12 a_{\\max}$. The factor $\\tfrac14$ belongs to the PE." },
+        { text: "Its potential energy is $\\tfrac12 E$.", feedback: "PE goes as $x^2$: at half the amplitude it is a quarter of $E$. PE $= E/2$ happens at $x = A/\\sqrt2$." },
+      ],
+      hint: "Which quantities go as $x$, and which as $x^2$?",
     },
   ]),
 };
@@ -550,10 +768,11 @@ const lesson04: LessonSeed = {
       content:
         "Car suspensions put springs side by side; a long spring can be thought of as two short ones end to end; a toy on a bungee hangs vertically. Every such system still gives $T = 2\\pi\\sqrt{m/k}$. The whole skill is finding the right $k$, the **effective spring constant**, and this lesson builds it from two ideas: \"same force\" and \"same extension\".",
     },
+    { type: "heading", text: "A vertical spring" },
     {
       type: "text",
       content:
-        "**A vertical spring.** Hang mass $m$ on a spring. At equilibrium the spring is stretched by $x_0$ with $kx_0 = mg$. Now measure displacement $y$ downward from that *new* equilibrium. The net force is",
+        "Hang mass $m$ on a spring. At equilibrium the spring is stretched by $x_0$ with $kx_0 = mg$. Now measure displacement $y$ downward from that *new* equilibrium. The net force is",
     },
     { type: "math", latex: "F = mg - k(x_0 + y) = \\underbrace{mg - kx_0}_{=\\,0} - ky = -ky" },
     {
@@ -561,6 +780,7 @@ const lesson04: LessonSeed = {
       content:
         "Gravity has only moved the centre of the oscillation; the restoring force about that centre is still $-ky$, so $T = 2\\pi\\sqrt{m/k}$ exactly as on a table. A neat corollary: since $m/k = x_0/g$, the period is $T = 2\\pi\\sqrt{x_0/g}$, readable from the static stretch alone.",
     },
+    { type: "heading", text: "Springs in parallel and series" },
     {
       type: "text",
       content:
@@ -587,6 +807,7 @@ const lesson04: LessonSeed = {
       content:
         "**Why cutting stiffens.** Think of a spring of length $\\ell$ as two halves in series. The same force stretches each half by half the total, so each half has twice the stiffness: $k_{\\text{half}} = 2k$ (check: two $2k$ springs in series give $k$). In general $k \\propto 1/\\ell$.",
     },
+    { type: "heading", text: "Two bodies on one spring" },
     {
       type: "text",
       content:
@@ -616,19 +837,68 @@ const lesson04: LessonSeed = {
         "What you should have seen: however far you pull the block, the period stays the same. With $\\omega$ held fixed, changing the mass changes the stored energy (since $k = m\\omega^2$ changes) but not the timing. The period is set by $m$ and $k$ alone, never by $A$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (vertical spring, JEE Main).** A block hung from a spring stretches it by 5 cm at equilibrium. It is pulled down a little and released. Find the period. Take $g = 10$ m/s².\n\n1. At equilibrium $kx_0 = mg$, so $m/k = x_0/g = 0.05/10 = 0.005$ s². *Why this step:* neither $m$ nor $k$ is given, but only their ratio matters.\n2. $T = 2\\pi\\sqrt{0.005} = 2\\pi \\times 0.0707 \\approx 0.444$ s.\n\n**Worked example 2 (series and parallel).** Springs of 200 N/m and 300 N/m carry a 2 kg block. Find the period (a) in parallel, (b) in series.\n\n1. Parallel: $k = 500$ N/m, $T = 2\\pi\\sqrt{2/500} = 2\\pi \\times 0.0632 \\approx 0.397$ s.\n2. Series: $k = \\dfrac{200 \\times 300}{500} = 120$ N/m, $T = 2\\pi\\sqrt{2/120} = 2\\pi \\times 0.129 \\approx 0.811$ s.\n3. Ratio of periods $\\sqrt{500/120} \\approx 2.04$. *Why this step:* the series pair is softer, so it must be slower; a check on which formula went where.",
+      type: "worked-example",
+      id: "owt0-4-we1",
+      title: "Worked example 1 (vertical spring, JEE Main)",
+      problem:
+        "A block hung from a spring stretches it by 5 cm at equilibrium. It is pulled down a little and released. Find the period. Take $g = 10$ m/s².",
+      steps: [
+        { text: "At equilibrium $kx_0 = mg$, so $m/k = x_0/g = 0.05/10 = 0.005$ s². *Why this step:* neither $m$ nor $k$ is given, but only their ratio matters." },
+        { text: "$T = 2\\pi\\sqrt{0.005} = 2\\pi \\times 0.0707 \\approx 0.444$ s." },
+      ],
+      answer: "$T \\approx 0.444$ s",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (block between two springs).** A 0.5 kg block on a smooth table is attached to two walls by springs of 100 N/m each, one on either side. Find $T$.\n\n1. Push the block right by $x$: the left spring stretches by $x$ and pulls left with $100x$; the right spring compresses by $x$ and pushes left with $100x$.\n2. Net force $-200x$, so $k_{\\text{eff}} = 200$ N/m. *Why this step:* both springs share the same displacement, the signature of a parallel arrangement, even though they sit on opposite sides.\n3. $\\omega = \\sqrt{200/0.5} = 20$ rad/s and $T = 2\\pi/20 \\approx 0.314$ s.\n\n**Worked example 4 (spring cut in the ratio 1:2).** A spring of stiffness 90 N/m is cut into two pieces with lengths in the ratio 1:2. Find their stiffnesses, and the stiffness when the pieces are used in parallel.\n\n1. Lengths $\\ell/3$ and $2\\ell/3$. With $k\\ell$ constant: $k_1 = 3 \\times 90 = 270$ N/m and $k_2 = \\tfrac32 \\times 90 = 135$ N/m.\n2. Check: in series, $\\dfrac{270 \\times 135}{405} = 90$ N/m, the original. ✓\n3. In parallel: $270 + 135 = 405$ N/m, $4.5$ times the original.",
+      type: "worked-example",
+      id: "owt0-4-we2",
+      title: "Worked example 2 (series and parallel)",
+      problem:
+        "Springs of 200 N/m and 300 N/m carry a 2 kg block. Find the period (a) in parallel, (b) in series.",
+      steps: [
+        { text: "Parallel: $k = 500$ N/m, $T = 2\\pi\\sqrt{2/500} = 2\\pi \\times 0.0632 \\approx 0.397$ s." },
+        { text: "Series: $k = \\dfrac{200 \\times 300}{500} = 120$ N/m, $T = 2\\pi\\sqrt{2/120} = 2\\pi \\times 0.129 \\approx 0.811$ s." },
+        { text: "Ratio of periods $\\sqrt{500/120} \\approx 2.04$. *Why this step:* the series pair is softer, so it must be slower; a check on which formula went where." },
+      ],
+      answer: "(a) $T \\approx 0.397$ s; (b) $T \\approx 0.811$ s",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (two blocks, JEE Advanced).** Blocks of 1 kg and 2 kg on a smooth floor are joined by a spring of 300 N/m, pulled apart and released. Find the period.\n\n1. Reduced mass $\\mu = \\dfrac{1 \\times 2}{1 + 2} = \\dfrac23$ kg. *Why this step:* each block feels the same spring force, and the stretch changes at the rate set by both inertias together.\n2. $\\omega = \\sqrt{300/(2/3)} = \\sqrt{450} \\approx 21.2$ rad/s.\n3. $T = 2\\pi/21.2 \\approx 0.296$ s. Sanity check: if the 2 kg block were bolted down ($m_2 \\to \\infty$), $\\mu \\to 1$ kg and $T = 2\\pi\\sqrt{1/300} = 0.363$ s, slower, as expected.",
+      type: "worked-example",
+      id: "owt0-4-we3",
+      title: "Worked example 3 (block between two springs)",
+      problem:
+        "A 0.5 kg block on a smooth table is attached to two walls by springs of 100 N/m each, one on either side. Find $T$.",
+      steps: [
+        { text: "Push the block right by $x$: the left spring stretches by $x$ and pulls left with $100x$; the right spring compresses by $x$ and pushes left with $100x$." },
+        { text: "Net force $-200x$, so $k_{\\text{eff}} = 200$ N/m. *Why this step:* both springs share the same displacement, the signature of a parallel arrangement, even though they sit on opposite sides." },
+        { text: "$\\omega = \\sqrt{200/0.5} = 20$ rad/s and $T = 2\\pi/20 \\approx 0.314$ s." },
+      ],
+      answer: "$T \\approx 0.314$ s",
+    },
+    {
+      type: "worked-example",
+      id: "owt0-4-we4",
+      title: "Worked example 4 (spring cut in the ratio 1:2)",
+      problem:
+        "A spring of stiffness 90 N/m is cut into two pieces with lengths in the ratio 1:2. Find their stiffnesses, and the stiffness when the pieces are used in parallel.",
+      steps: [
+        { text: "Lengths $\\ell/3$ and $2\\ell/3$. With $k\\ell$ constant: $k_1 = 3 \\times 90 = 270$ N/m and $k_2 = \\tfrac32 \\times 90 = 135$ N/m." },
+        { text: "Check: in series, $\\dfrac{270 \\times 135}{405} = 90$ N/m, the original. ✓" },
+        { text: "In parallel: $270 + 135 = 405$ N/m, $4.5$ times the original." },
+      ],
+      answer: "$k_1 = 270$ N/m, $k_2 = 135$ N/m; in parallel 405 N/m",
+    },
+    {
+      type: "worked-example",
+      id: "owt0-4-we5",
+      title: "Worked example 5 (two blocks, JEE Advanced)",
+      problem:
+        "Blocks of 1 kg and 2 kg on a smooth floor are joined by a spring of 300 N/m, pulled apart and released. Find the period.",
+      steps: [
+        { text: "Reduced mass $\\mu = \\dfrac{1 \\times 2}{1 + 2} = \\dfrac23$ kg. *Why this step:* each block feels the same spring force, and the stretch changes at the rate set by both inertias together." },
+        { text: "$\\omega = \\sqrt{300/(2/3)} = \\sqrt{450} \\approx 21.2$ rad/s." },
+        { text: "$T = 2\\pi/21.2 \\approx 0.296$ s. Sanity check: if the 2 kg block were bolted down ($m_2 \\to \\infty$), $\\mu \\to 1$ kg and $T = 2\\pi\\sqrt{1/300} = 0.363$ s, slower, as expected." },
+      ],
+      answer: "$T \\approx 0.296$ s",
     },
     {
       type: "callout",
@@ -637,6 +907,7 @@ const lesson04: LessonSeed = {
       content:
         "Gravity is a constant force. A constant force shifts the equilibrium (by $mg/k$) but adds nothing proportional to the displacement, so it cannot change $k$ and cannot change $T$. The same is true on a smooth incline: the block oscillates about a shifted point with the same $T = 2\\pi\\sqrt{m/k}$, whatever the angle.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "owt0-4-q1",
@@ -648,6 +919,7 @@ const lesson04: LessonSeed = {
         { text: "$\\sqrt2 : 1$", feedback: "Each arrangement differs from a single spring by $\\sqrt2$ in period, so they differ from each other by 2." },
         { text: "$2 : 1$", correct: true, feedback: "Series gives $k/2$, parallel gives $2k$. $T \\propto 1/\\sqrt{k}$, so the ratio is $\\sqrt{2k/(k/2)} = \\sqrt4 = 2$." },
       ],
+      hint: "Find $k_{\\text{eff}}$ for each arrangement, then use $T \\propto 1/\\sqrt{k_{\\text{eff}}}$.",
     },
     {
       type: "quiz",
@@ -660,6 +932,7 @@ const lesson04: LessonSeed = {
         { text: "$6k$", correct: true, feedback: "Each piece has $3k$; in parallel, $3k + 3k = 6k$." },
         { text: "$\\tfrac23 k$", feedback: "That treats each piece as having $k/3$. Shorter springs are *stiffer*: $k\\ell$ is constant." },
       ],
+      hint: "Stiffness is inversely proportional to length ($kL$ = const), so find each piece's stiffness first, then combine in parallel.",
     },
     {
       type: "quiz",
@@ -671,30 +944,51 @@ const lesson04: LessonSeed = {
         { text: "$0.5/\\sqrt6$ s", feedback: "Gravity sets only the equilibrium position of a spring, not its period." },
         { text: "0.5 s", correct: true, feedback: "$T = 2\\pi\\sqrt{m/k}$ has no $g$ in it. The equilibrium stretch is smaller on the Moon, but the period is unchanged." },
       ],
+      hint: "Recall the vertical-spring result in 0.4: does gravity change the stiffness, or only where the equilibrium sits?",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt0-4-q4",
       variant: "practice",
-      question: "Hanging a mass on a spring stretches it by 10 cm. What is the period of vertical oscillations? ($g = 10$ m/s²)",
-      options: [
-        { text: "$\\dfrac{\\pi}{5}$ s $\\approx 0.63$ s", correct: true, feedback: "$T = 2\\pi\\sqrt{x_0/g} = 2\\pi\\sqrt{0.01} = 2\\pi \\times 0.1 = \\pi/5$ s." },
-        { text: "$2\\pi$ s", feedback: "Convert 10 cm to 0.1 m: $\\sqrt{0.1/10} = 0.1$." },
-        { text: "$0.1$ s", feedback: "$\\sqrt{x_0/g} = 0.1$ s is only part of it; multiply by $2\\pi$." },
-        { text: "It cannot be found without the mass.", feedback: "$m/k = x_0/g$, so the stretch alone fixes the period." },
+      question: "Hanging a mass on a spring stretches it by 10 cm. What is the period of vertical oscillations? ($g = 10$ m/s²) Give your answer in seconds, to two decimal places.",
+      answer: 0.628,
+      relTolerance: 0.02,
+      unit: "s",
+      hint: "At equilibrium $kx_0 = mg$, so $m/k = x_0/g$. You do not need the mass.",
+      solution: "$m/k = x_0/g$, so $T = 2\\pi\\sqrt{x_0/g} = 2\\pi\\sqrt{0.1/10} = 2\\pi \\times 0.1 = \\pi/5 \\approx 0.63$ s.",
+      commonMistakes: [
+        { answer: 6.28, tolerance: 0.05, feedback: "That is $2\\pi$ s. Convert 10 cm to 0.1 m: $\\sqrt{0.1/10} = 0.1$." },
+        { answer: 0.1, feedback: "$\\sqrt{x_0/g} = 0.1$ s is only part of it; multiply by $2\\pi$." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt0-4-q5",
       variant: "practice",
       question: "Two 1 kg blocks on a smooth floor are joined by a spring of stiffness 200 N/m. What is the angular frequency of their oscillation?",
-      options: [
-        { text: "$10$ rad/s", feedback: "That uses $m = 2$ kg, the total mass. The right inertia is the reduced mass, 0.5 kg." },
-        { text: "$\\sqrt{200} \\approx 14.1$ rad/s", feedback: "That treats one block as fixed. When both move, the effective mass is $\\mu = 0.5$ kg." },
-        { text: "$400$ rad/s", feedback: "$400$ is $\\omega^2$. Take the square root." },
-        { text: "$20$ rad/s", correct: true, feedback: "$\\mu = \\tfrac{1 \\times 1}{2} = 0.5$ kg and $\\omega = \\sqrt{200/0.5} = 20$ rad/s." },
+      answer: 20,
+      unit: "rad/s",
+      hint: "Both blocks move. Use the reduced mass $\\mu = \\dfrac{m_1m_2}{m_1 + m_2}$.",
+      solution: "$\\mu = \\dfrac{1 \\times 1}{1 + 1} = 0.5$ kg and $\\omega = \\sqrt{k/\\mu} = \\sqrt{200/0.5} = 20$ rad/s.",
+      commonMistakes: [
+        { answer: 10, feedback: "That uses $m = 2$ kg, the total mass. The right inertia is the reduced mass, 0.5 kg." },
+        { answer: 14.14, tolerance: 0.05, feedback: "That is $\\sqrt{200}$, which treats one block as fixed. When both move, the effective mass is $\\mu = 0.5$ kg." },
+        { answer: 400, feedback: "$400$ is $\\omega^2$. Take the square root." },
       ],
+    },
+    {
+      type: "quiz",
+      id: "owt0-4-q6",
+      variant: "practice",
+      multiple: true,
+      question: "A block hangs from a vertical spring and oscillates with period $T$. Select every change that alters the period.",
+      options: [
+        { text: "Replacing the block with one of twice the mass.", correct: true, feedback: "$T = 2\\pi\\sqrt{m/k}$: doubling $m$ multiplies $T$ by $\\sqrt2$." },
+        { text: "Cutting the spring in half and hanging the block from one half.", correct: true, feedback: "Half the length means twice the stiffness, so $T$ falls to $T/\\sqrt2$." },
+        { text: "Taking the whole set-up to the Moon.", feedback: "Weaker gravity only reduces the equilibrium stretch. $T = 2\\pi\\sqrt{m/k}$ has no $g$ in it." },
+        { text: "Pulling the block further down before releasing it.", feedback: "That raises the amplitude, and the period of SHM does not depend on amplitude." },
+      ],
+      hint: "Only $m$ and $k$ appear in $T = 2\\pi\\sqrt{m/k}$.",
     },
   ]),
 };
@@ -709,6 +1003,7 @@ const lesson05: LessonSeed = {
       content:
         "Galileo is said to have timed a swinging chandelier in Pisa cathedral against his pulse and found that big swings and small swings took the same time. Grandfather clocks rely on it. But a pendulum has no spring, so where does its $k$ come from? From gravity, and only for small swings, which is exactly the Taylor argument of 0.1 in a new setting.",
     },
+    { type: "heading", text: "Deriving the pendulum period" },
     {
       type: "text",
       content:
@@ -727,10 +1022,11 @@ const lesson05: LessonSeed = {
       content:
         "$T = 2\\pi\\sqrt{\\dfrac{L}{g}}$, independent of the mass and (for small angles) of the amplitude.\nA **seconds pendulum** has $T = 2$ s (one second per swing): $L = gT^2/4\\pi^2 \\approx 0.99$ m with $g = 9.8$ m/s², about a metre.",
     },
+    { type: "heading", text: "How small is small?" },
     {
       type: "text",
       content:
-        "**How small is small?** The approximation replaces $\\sin\\theta$ by $\\theta$ (in radians). The table shows how good that is.",
+        "The approximation replaces $\\sin\\theta$ by $\\theta$ (in radians). The table shows how good that is.",
     },
     {
       type: "table",
@@ -767,10 +1063,11 @@ const lesson05: LessonSeed = {
       content:
         "What you should have seen: the mass slider changes the energy readouts but not the period. The amplitude slider does not change it either: the lab uses the small-angle model, and in a real pendulum a $10^\\circ$ or $20^\\circ$ swing is slower by well under 1%. Only the length does, and quadrupling $L$ doubles $T$.",
     },
+    { type: "heading", text: "Effective gravity" },
     {
       type: "text",
       content:
-        "**Effective gravity.** The pendulum's restoring force comes from whatever steady force would make it hang still. In an accelerating frame add the pseudo-force $-m\\vec a$ to gravity and use $g_{\\text{eff}} = |\\vec g - \\vec a|$, where the bob hangs along $\\vec g_{\\text{eff}}$:",
+        "The pendulum's restoring force comes from whatever steady force would make it hang still. In an accelerating frame add the pseudo-force $-m\\vec a$ to gravity and use $g_{\\text{eff}} = |\\vec g - \\vec a|$, where the bob hangs along $\\vec g_{\\text{eff}}$:",
     },
     {
       type: "table",
@@ -782,10 +1079,11 @@ const lesson05: LessonSeed = {
         ["Bob of density $\\rho$ in a liquid of density $\\sigma$", "$g\\left(1 - \\sigma/\\rho\\right)$ (buoyancy)", "longer"],
       ],
     },
+    { type: "heading", text: "The physical pendulum" },
     {
       type: "text",
       content:
-        "**The physical pendulum.** A rigid body swinging about a pivot at distance $d$ from its centre of mass feels torque $-mgd\\sin\\theta \\approx -mgd\\,\\theta$. With moment of inertia $I$ about the pivot, $I\\ddot\\theta = -mgd\\,\\theta$, so",
+        "A rigid body swinging about a pivot at distance $d$ from its centre of mass feels torque $-mgd\\sin\\theta \\approx -mgd\\,\\theta$. With moment of inertia $I$ about the pivot, $I\\ddot\\theta = -mgd\\,\\theta$, so",
     },
     { type: "math", latex: "T = 2\\pi\\sqrt{\\frac{I}{mgd}}" },
     {
@@ -794,19 +1092,79 @@ const lesson05: LessonSeed = {
         "For a simple pendulum $I = mL^2$, $d = L$, and this reduces to $2\\pi\\sqrt{L/g}$. ✓ (Moments of inertia are Mechanics II material; here you only need the result for a uniform rod about one end, $I = \\tfrac13 mL^2$.)",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (basic period).** Find the period of a 1 m pendulum. Take $g = 10$ m/s².\n\n1. $T = 2\\pi\\sqrt{1/10} = 2\\pi \\times 0.316 \\approx 1.99$ s. Very nearly a seconds pendulum.\n\n**Worked example 2 (pendulum in a lift, JEE Main).** The same pendulum is in a lift accelerating upward at 2 m/s². Find the new period.\n\n1. In the lift frame the bob feels $mg$ down and a pseudo-force $ma$ down, so $g_{\\text{eff}} = 10 + 2 = 12$ m/s². *Why this step:* the tension at rest must now balance $m(g + a)$, so gravity is effectively stronger.\n2. $T' = 2\\pi\\sqrt{1/12} \\approx 1.81$ s.\n3. Ratio $T'/T = \\sqrt{10/12} \\approx 0.913$: the clock runs fast.",
+      type: "worked-example",
+      id: "owt0-5-we1",
+      title: "Worked example 1 (basic period)",
+      problem:
+        "Find the period of a 1 m pendulum. Take $g = 10$ m/s².",
+      steps: [
+        { text: "$T = 2\\pi\\sqrt{1/10} = 2\\pi \\times 0.316 \\approx 1.99$ s. Very nearly a seconds pendulum." },
+      ],
+      answer: "$T \\approx 1.99$ s",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (accelerating car).** A 1 m pendulum hangs in a car accelerating at 7.5 m/s² on a level road. Find the tilt of the string at rest and the period ($g = 10$ m/s²).\n\n1. In the car frame: $g$ down and $a = 7.5$ backward. $g_{\\text{eff}} = \\sqrt{10^2 + 7.5^2} = \\sqrt{156.25} = 12.5$ m/s².\n2. The string hangs along $\\vec g_{\\text{eff}}$, tilted back at $\\tan^{-1}(7.5/10) \\approx 37^\\circ$ from the vertical.\n3. $T = 2\\pi\\sqrt{1/12.5} = 2\\pi \\times 0.283 \\approx 1.78$ s. *Why this step:* small oscillations happen about the tilted equilibrium, with $g_{\\text{eff}}$ playing the role of $g$.\n\n**Worked example 4 (bob in water).** A pendulum with a bob of density 8000 kg/m³ swings in water (1000 kg/m³). By what factor does its period change? (Ignore drag.)\n\n1. Buoyancy reduces the net downward force to $mg(1 - 1000/8000) = \\tfrac78 mg$, but the inertia is still $m$. So $g_{\\text{eff}} = \\tfrac78 g$.\n2. $T'/T = \\sqrt{g/g_{\\text{eff}}} = \\sqrt{8/7} \\approx 1.069$: about 7% slower.",
+      type: "worked-example",
+      id: "owt0-5-we2",
+      title: "Worked example 2 (pendulum in a lift, JEE Main)",
+      problem:
+        "The same pendulum is in a lift accelerating upward at 2 m/s². Find the new period.",
+      steps: [
+        { text: "In the lift frame the bob feels $mg$ down and a pseudo-force $ma$ down, so $g_{\\text{eff}} = 10 + 2 = 12$ m/s². *Why this step:* the tension at rest must now balance $m(g + a)$, so gravity is effectively stronger." },
+        { text: "$T' = 2\\pi\\sqrt{1/12} \\approx 1.81$ s." },
+        { text: "Ratio $T'/T = \\sqrt{10/12} \\approx 0.913$: the clock runs fast." },
+      ],
+      answer: "$T' \\approx 1.81$ s",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (rod pivoted at one end).** A uniform rod of length 1.5 m swings about one end. Find its period ($g = 10$ m/s²).\n\n1. $I = \\tfrac13 mL^2$, $d = L/2$. *Why this step:* gravity acts at the centre of mass, half-way down the rod.\n2. $T = 2\\pi\\sqrt{\\dfrac{mL^2/3}{mgL/2}} = 2\\pi\\sqrt{\\dfrac{2L}{3g}} = 2\\pi\\sqrt{\\dfrac{3}{30}} = 2\\pi\\sqrt{0.1} \\approx 1.99$ s.\n3. The rod behaves like a simple pendulum of length $2L/3 = 1$ m, *not* $L/2$: mass near the pivot adds little inertia.\n\n**Worked example 6 (clock in summer, link to 4.2).** A pendulum clock keeps correct time at 15 °C. Its brass rod has linear expansion coefficient $\\alpha = 1.2 \\times 10^{-5}$ /°C. How many seconds does it lose per day at 35 °C?\n\n1. $L' = L(1 + \\alpha\\Delta\\theta)$, and $T \\propto \\sqrt L$, so $T' \\approx T(1 + \\tfrac12\\alpha\\Delta\\theta)$. *Why this step:* $\\sqrt{1 + \\epsilon} \\approx 1 + \\epsilon/2$ for small $\\epsilon$.\n2. Fractional change $\\tfrac12 \\times 1.2 \\times 10^{-5} \\times 20 = 1.2 \\times 10^{-4}$.\n3. Each tick takes longer, so the clock is slow by $86400 \\times 1.2 \\times 10^{-4} \\approx 10.4$ s per day.",
+      type: "worked-example",
+      id: "owt0-5-we3",
+      title: "Worked example 3 (accelerating car)",
+      problem:
+        "A 1 m pendulum hangs in a car accelerating at 7.5 m/s² on a level road. Find the tilt of the string at rest and the period ($g = 10$ m/s²).",
+      steps: [
+        { text: "In the car frame: $g$ down and $a = 7.5$ backward. $g_{\\text{eff}} = \\sqrt{10^2 + 7.5^2} = \\sqrt{156.25} = 12.5$ m/s²." },
+        { text: "The string hangs along $\\vec g_{\\text{eff}}$, tilted back at $\\tan^{-1}(7.5/10) \\approx 37^\\circ$ from the vertical." },
+        { text: "$T = 2\\pi\\sqrt{1/12.5} = 2\\pi \\times 0.283 \\approx 1.78$ s. *Why this step:* small oscillations happen about the tilted equilibrium, with $g_{\\text{eff}}$ playing the role of $g$." },
+      ],
+      answer: "Tilted back $\\approx 37^\\circ$ from the vertical; $T \\approx 1.78$ s",
+    },
+    {
+      type: "worked-example",
+      id: "owt0-5-we4",
+      title: "Worked example 4 (bob in water)",
+      problem:
+        "A pendulum with a bob of density 8000 kg/m³ swings in water (1000 kg/m³). By what factor does its period change? (Ignore drag.)",
+      steps: [
+        { text: "Buoyancy reduces the net downward force to $mg(1 - 1000/8000) = \\tfrac78 mg$, but the inertia is still $m$. So $g_{\\text{eff}} = \\tfrac78 g$." },
+        { text: "$T'/T = \\sqrt{g/g_{\\text{eff}}} = \\sqrt{8/7} \\approx 1.069$: about 7% slower." },
+      ],
+      answer: "The period increases by a factor $\\sqrt{8/7} \\approx 1.069$ (about 7% slower).",
+    },
+    {
+      type: "worked-example",
+      id: "owt0-5-we5",
+      title: "Worked example 5 (rod pivoted at one end)",
+      problem:
+        "A uniform rod of length 1.5 m swings about one end. Find its period ($g = 10$ m/s²).",
+      steps: [
+        { text: "$I = \\tfrac13 mL^2$, $d = L/2$. *Why this step:* gravity acts at the centre of mass, half-way down the rod." },
+        { text: "$T = 2\\pi\\sqrt{\\dfrac{mL^2/3}{mgL/2}} = 2\\pi\\sqrt{\\dfrac{2L}{3g}} = 2\\pi\\sqrt{\\dfrac{3}{30}} = 2\\pi\\sqrt{0.1} \\approx 1.99$ s." },
+        { text: "The rod behaves like a simple pendulum of length $2L/3 = 1$ m, *not* $L/2$: mass near the pivot adds little inertia." },
+      ],
+      answer: "$T \\approx 1.99$ s",
+    },
+    {
+      type: "worked-example",
+      id: "owt0-5-we6",
+      title: "Worked example 6 (clock in summer, link to 4.2)",
+      problem:
+        "A pendulum clock keeps correct time at 15 °C. Its brass rod has linear expansion coefficient $\\alpha = 1.2 \\times 10^{-5}$ /°C. How many seconds does it lose per day at 35 °C?",
+      steps: [
+        { text: "$L' = L(1 + \\alpha\\Delta\\theta)$, and $T \\propto \\sqrt L$, so $T' \\approx T(1 + \\tfrac12\\alpha\\Delta\\theta)$. *Why this step:* $\\sqrt{1 + \\epsilon} \\approx 1 + \\epsilon/2$ for small $\\epsilon$." },
+        { text: "Fractional change $\\tfrac12 \\times 1.2 \\times 10^{-5} \\times 20 = 1.2 \\times 10^{-4}$." },
+        { text: "Each tick takes longer, so the clock is slow by $86400 \\times 1.2 \\times 10^{-4} \\approx 10.4$ s per day." },
+      ],
+      answer: "It loses about 10.4 s per day.",
     },
     {
       type: "callout",
@@ -815,6 +1173,7 @@ const lesson05: LessonSeed = {
       content:
         "A heavier bob is pulled harder by gravity, but it is harder to accelerate in exactly the same proportion; $m$ cancels from $mL\\ddot\\theta = -mg\\theta$. A lead bob and a wooden bob on equal strings keep step (until air drag, which matters more for the light one, spoils it).",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "owt0-5-q1",
@@ -826,6 +1185,7 @@ const lesson05: LessonSeed = {
         { text: "4 s", correct: true, feedback: "$T \\propto \\sqrt L$, so $\\times 4$ in length gives $\\times 2$ in period." },
         { text: "1 s", feedback: "A longer pendulum is slower, not faster." },
       ],
+      hint: "Which property of the pendulum does the period depend on, and to what power? Then compare the new length with the old one.",
     },
     {
       type: "quiz",
@@ -838,6 +1198,7 @@ const lesson05: LessonSeed = {
         { text: "$T/\\sqrt2$", feedback: "Accelerating *down* makes gravity feel weaker, so the pendulum slows." },
         { text: "$T\\sqrt{2/3}$", feedback: "That uses $g + g/2$. Downward acceleration subtracts." },
       ],
+      hint: "In the lift's frame replace $g$ by the effective gravity $g_{\\text{eff}}$. Does a downward acceleration of the lift raise or lower it?",
     },
     {
       type: "quiz",
@@ -849,17 +1210,22 @@ const lesson05: LessonSeed = {
         { text: "Neither: the periods are equal", correct: true, feedback: "$T = 2\\pi\\sqrt{L/g}$ has no mass in it." },
         { text: "The iron one, because gravity pulls it harder", feedback: "Gravity pulls it ten times harder, but it has ten times the inertia too." },
       ],
+      hint: "Write Newton's second law for the bob along its arc. Where does the mass enter, in the force and in the inertia?",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt0-5-q4",
       variant: "practice",
-      question: "A uniform rod of length 0.6 m swings about a pivot at one end. What is its period? ($g = 10$ m/s²)",
-      options: [
-        { text: "$2\\pi\\sqrt{0.06}$ s $\\approx 1.54$ s", feedback: "That treats it as a simple pendulum of length 0.6 m. The equivalent length is $2L/3 = 0.4$ m." },
-        { text: "$2\\pi\\sqrt{0.03}$ s $\\approx 1.09$ s", feedback: "That puts all the mass at the centre ($L/2$). The rod's inertia about the end is $\\tfrac13 mL^2$, not $m(L/2)^2$." },
-        { text: "$0.2\\pi$ s", feedback: "Recheck: $\\sqrt{0.04} = 0.2$, and $T = 2\\pi \\times 0.2 = 0.4\\pi$." },
-        { text: "$0.4\\pi$ s $\\approx 1.26$ s", correct: true, feedback: "$T = 2\\pi\\sqrt{2L/3g} = 2\\pi\\sqrt{0.4/10} = 2\\pi \\times 0.2$." },
+      question: "A uniform rod of length 0.6 m swings about a pivot at one end. What is its period? ($g = 10$ m/s²) Give your answer in seconds, to two decimal places.",
+      answer: 1.257,
+      relTolerance: 0.02,
+      unit: "s",
+      hint: "Use $T = 2\\pi\\sqrt{I/mgd}$ with $I = \\tfrac13 mL^2$ and $d = L/2$.",
+      solution: "$T = 2\\pi\\sqrt{\\dfrac{mL^2/3}{mgL/2}} = 2\\pi\\sqrt{\\dfrac{2L}{3g}} = 2\\pi\\sqrt{0.4/10} = 2\\pi \\times 0.2 = 0.4\\pi \\approx 1.26$ s.\n\nThe rod behaves like a simple pendulum of length $2L/3 = 0.4$ m.",
+      commonMistakes: [
+        { answer: 1.54, feedback: "That is $2\\pi\\sqrt{0.06}$, treating the rod as a simple pendulum of length 0.6 m. The equivalent length is $2L/3 = 0.4$ m." },
+        { answer: 1.09, feedback: "That is $2\\pi\\sqrt{0.03}$, which puts all the mass at the centre ($L/2$). The rod's inertia about the end is $\\tfrac13 mL^2$, not $m(L/2)^2$." },
+        { answer: 0.628, feedback: "That is $0.2\\pi$. Recheck: $\\sqrt{0.04} = 0.2$, and $T = 2\\pi \\times 0.2 = 0.4\\pi$." },
       ],
     },
     {
@@ -873,6 +1239,21 @@ const lesson05: LessonSeed = {
         { text: "$T/2^{1/4}$", correct: true, feedback: "$g_{\\text{eff}} = \\sqrt{g^2 + g^2} = \\sqrt2\\,g$, and $T \\propto g_{\\text{eff}}^{-1/2}$, so $T' = T/2^{1/4} \\approx 0.84T$." },
         { text: "$T/\\sqrt2$", feedback: "That uses $g_{\\text{eff}} = 2g$. The two accelerations are perpendicular, so they add as $\\sqrt{g^2 + g^2}$." },
       ],
+      hint: "In the truck's frame add the pseudo-force to gravity: $g_{\\text{eff}}$ is the vector sum of $g$ downward and $a$ horizontally.",
+    },
+    {
+      type: "quiz",
+      id: "owt0-5-q6",
+      variant: "practice",
+      multiple: true,
+      question: "A simple pendulum swings with small amplitude. Select every change that makes its period **longer**.",
+      options: [
+        { text: "Putting it in a lift that accelerates downward at $g/4$.", correct: true, feedback: "$g_{\\text{eff}} = g - g/4 = \\tfrac34 g$ is weaker, so $T = 2\\pi\\sqrt{L/g_{\\text{eff}}}$ grows." },
+        { text: "Letting the bob (denser than water) swing fully immersed in water, ignoring drag.", correct: true, feedback: "Buoyancy reduces the net downward pull to $mg(1 - \\sigma/\\rho)$ while the inertia stays $m$, so $g_{\\text{eff}}$ falls and $T$ rises." },
+        { text: "Replacing the bob with a heavier one of the same size.", feedback: "Mass cancels from $mL\\ddot\\theta = -mg\\theta$; the period is unchanged." },
+        { text: "Hanging it in a truck that accelerates horizontally.", feedback: "$g_{\\text{eff}} = \\sqrt{g^2 + a^2}$ is *larger* than $g$, so the period gets shorter." },
+      ],
+      hint: "Work out $g_{\\text{eff}}$ in each case. The period goes as $1/\\sqrt{g_{\\text{eff}}}$.",
     },
   ]),
 };
@@ -887,6 +1268,7 @@ const lesson06: LessonSeed = {
       content:
         "A loudspeaker cone driven by two signals of the same frequency moves with a single combined motion. What is its amplitude? And away from springs and pendulums, how do you recognise SHM hiding in a U-tube of water, a floating log, or a ball dropped down a tunnel through the Earth? The reference circle answers the first question; the method of 0.1 answers the second.",
     },
+    { type: "heading", text: "Adding two SHMs along one line" },
     {
       type: "text",
       content:
@@ -922,10 +1304,31 @@ const lesson06: LessonSeed = {
         "What you should have seen: with $\\phi_2 = 0$ the resultant amplitude is the sum, 0.30 m. Slide $\\phi_2$ to $\\pi$ and it collapses to $|A_1 - A_2|$, zero when the amplitudes are equal. At $\\phi_2 = \\pi/2$ it is $\\sqrt{0.15^2 + 0.15^2} \\approx 0.21$ m, not 0.30 m.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (one SHM in disguise).** Write $x = 3\\sin\\omega t + 4\\cos\\omega t$ as a single SHM.\n\n1. $4\\cos\\omega t = 4\\sin(\\omega t + \\pi/2)$: the two terms are SHMs with $\\delta = \\pi/2$. *Why this step:* both terms must be in the same form before the phase difference can be read off.\n2. $A = \\sqrt{9 + 16 + 0} = 5$.\n3. $\\tan\\alpha = 4/3$, so $\\alpha \\approx 53^\\circ$: $x = 5\\sin(\\omega t + 53^\\circ)$.\n\n**Worked example 2.** Two SHMs of amplitudes 3 cm and 4 cm have a phase difference of $\\pi/3$. Find the resultant amplitude.\n\n1. $A^2 = 9 + 16 + 2(3)(4)\\cos 60^\\circ = 25 + 12 = 37$.\n2. $A = \\sqrt{37} \\approx 6.08$ cm, between $4 - 3 = 1$ and $4 + 3 = 7$, as it must be.",
+      type: "worked-example",
+      id: "owt0-6-we1",
+      title: "Worked example 1 (one SHM in disguise)",
+      problem:
+        "Write $x = 3\\sin\\omega t + 4\\cos\\omega t$ as a single SHM.",
+      steps: [
+        { text: "$4\\cos\\omega t = 4\\sin(\\omega t + \\pi/2)$: the two terms are SHMs with $\\delta = \\pi/2$. *Why this step:* both terms must be in the same form before the phase difference can be read off." },
+        { text: "$A = \\sqrt{9 + 16 + 0} = 5$." },
+        { text: "$\\tan\\alpha = 4/3$, so $\\alpha \\approx 53^\\circ$: $x = 5\\sin(\\omega t + 53^\\circ)$." },
+      ],
+      answer: "$x = 5\\sin(\\omega t + 53^\\circ)$",
     },
+    {
+      type: "worked-example",
+      id: "owt0-6-we2",
+      title: "Worked example 2",
+      problem:
+        "Two SHMs of amplitudes 3 cm and 4 cm have a phase difference of $\\pi/3$. Find the resultant amplitude.",
+      steps: [
+        { text: "$A^2 = 9 + 16 + 2(3)(4)\\cos 60^\\circ = 25 + 12 = 37$." },
+        { text: "$A = \\sqrt{37} \\approx 6.08$ cm, between $4 - 3 = 1$ and $4 + 3 = 7$, as it must be." },
+      ],
+      answer: "$A = \\sqrt{37} \\approx 6.08$ cm",
+    },
+    { type: "heading", text: "Recognising hidden SHMs" },
     {
       type: "callout",
       variant: "tip",
@@ -959,9 +1362,28 @@ const lesson06: LessonSeed = {
         "the same as the period of a satellite skimming the surface. **A charge between two charges.** A charge $q$ sits at the midpoint of two fixed equal charges $Q$ (same sign) a distance $2d$ apart, and is constrained to move along the line. Displaced by $x$, the nearer charge pushes harder: $F = \\dfrac{kQq}{(d + x)^2} - \\dfrac{kQq}{(d - x)^2} \\approx -\\dfrac{4kQq}{d^3}\\,x$ (using $(1 \\pm x/d)^{-2} \\approx 1 \\mp 2x/d$). Again $F \\propto -x$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (U-tube, JEE Main).** A U-tube holds a liquid column of total length 40 cm. Find the period of small oscillations ($g = 10$ m/s²).\n\n1. $T = 2\\pi\\sqrt{L/2g} = 2\\pi\\sqrt{0.4/20} = 2\\pi\\sqrt{0.02}$. *Why this step:* the restoring weight comes from a height difference of $2x$, which is why $2g$ appears.\n2. $\\sqrt{0.02} \\approx 0.1414$, so $T \\approx 0.889$ s. The liquid and the tube's width do not matter.\n\n**Worked example 4 (floating block).** A wooden cube of side 10 cm and density 600 kg/m³ floats in water. Find the period of small vertical oscillations ($g = 10$ m/s²).\n\n1. Fraction submerged $= 600/1000 = 0.6$, so $h = 6$ cm. *Why this step:* floating fixes the submerged depth, and only $h$ enters the period.\n2. $T = 2\\pi\\sqrt{0.06/10} = 2\\pi \\times 0.0775 \\approx 0.487$ s.",
+      type: "worked-example",
+      id: "owt0-6-we3",
+      title: "Worked example 3 (U-tube, JEE Main)",
+      problem:
+        "A U-tube holds a liquid column of total length 40 cm. Find the period of small oscillations ($g = 10$ m/s²).",
+      steps: [
+        { text: "$T = 2\\pi\\sqrt{L/2g} = 2\\pi\\sqrt{0.4/20} = 2\\pi\\sqrt{0.02}$. *Why this step:* the restoring weight comes from a height difference of $2x$, which is why $2g$ appears." },
+        { text: "$\\sqrt{0.02} \\approx 0.1414$, so $T \\approx 0.889$ s. The liquid and the tube's width do not matter." },
+      ],
+      answer: "$T \\approx 0.889$ s",
+    },
+    {
+      type: "worked-example",
+      id: "owt0-6-we4",
+      title: "Worked example 4 (floating block)",
+      problem:
+        "A wooden cube of side 10 cm and density 600 kg/m³ floats in water. Find the period of small vertical oscillations ($g = 10$ m/s²).",
+      steps: [
+        { text: "Fraction submerged $= 600/1000 = 0.6$, so $h = 6$ cm. *Why this step:* floating fixes the submerged depth, and only $h$ enters the period." },
+        { text: "$T = 2\\pi\\sqrt{0.06/10} = 2\\pi \\times 0.0775 \\approx 0.487$ s." },
+      ],
+      answer: "$T \\approx 0.487$ s",
     },
     {
       type: "callout",
@@ -970,16 +1392,19 @@ const lesson06: LessonSeed = {
       content:
         "Only if they are exactly in phase. Amplitudes add like **vectors**, with the phase difference as the angle between the arrows. At $\\delta = \\pi/2$ the answer is 5; at $\\delta = \\pi$ it is 1. Anything from 1 to 7 is possible.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt0-6-q1",
       variant: "practice",
       question: "What is the amplitude of $x = 6\\sin\\omega t + 8\\cos\\omega t$?",
-      options: [
-        { text: "$14$", feedback: "The two terms are $\\pi/2$ out of phase, so they add like perpendicular vectors." },
-        { text: "$10$", correct: true, feedback: "$\\sqrt{36 + 64} = 10$." },
-        { text: "$2$", feedback: "That would be for opposite phases. Here $\\delta = \\pi/2$." },
-        { text: "$7$", feedback: "Averaging is not how amplitudes combine. Use $\\sqrt{A_1^2 + A_2^2}$ for $\\delta = \\pi/2$." },
+      answer: 10,
+      hint: "$8\\cos\\omega t = 8\\sin(\\omega t + \\pi/2)$. What is the phase difference between the two terms?",
+      solution: "The two terms are $\\pi/2$ out of phase, so they add like perpendicular arrows: $A = \\sqrt{6^2 + 8^2} = \\sqrt{36 + 64} = 10$.",
+      commonMistakes: [
+        { answer: 14, feedback: "The two terms are $\\pi/2$ out of phase, so they add like perpendicular vectors, not as plain numbers." },
+        { answer: 2, feedback: "That would be for opposite phases. Here $\\delta = \\pi/2$." },
+        { answer: 7, feedback: "Averaging is not how amplitudes combine. Use $\\sqrt{A_1^2 + A_2^2}$ for $\\delta = \\pi/2$." },
       ],
     },
     {
@@ -993,6 +1418,7 @@ const lesson06: LessonSeed = {
         { text: "$\\sqrt3\\,A$", feedback: "That is the answer for $\\delta = \\pi/3$. At $2\\pi/3$ the cosine is negative." },
         { text: "$0$", feedback: "Complete cancellation needs $\\delta = \\pi$." },
       ],
+      hint: "Draw the two amplitudes as phasors with the given phase angle between them, and add them as you would add vectors.",
     },
     {
       type: "quiz",
@@ -1005,6 +1431,7 @@ const lesson06: LessonSeed = {
         { text: "It depends on the density of the liquid.", feedback: "Density multiplies both the restoring force and the moving mass, so it cancels." },
         { text: "$0.2\\pi$ s $\\approx 0.63$ s", correct: true, feedback: "$T = 2\\pi\\sqrt{0.2/20} = 2\\pi \\times 0.1$." },
       ],
+      hint: "Push the liquid down by $x$ on one side: the level difference is $2x$. Write the restoring force on the whole column and compare it with $-kx$.",
     },
     {
       type: "quiz",
@@ -1016,18 +1443,36 @@ const lesson06: LessonSeed = {
         { text: "the same, about 84 minutes", correct: true, feedback: "Along the chord, the component of $-\\frac{mg}{R}\\vec r$ is $-\\frac{mg}{R}x$ with $x$ measured from the chord's midpoint, so $\\omega^2 = g/R$ again." },
         { text: "shorter, because the tunnel is shorter", feedback: "The amplitude is smaller, but SHM periods do not depend on amplitude." },
       ],
+      hint: "Inside the Earth $g(r) = g\\,r/R$. Find the component of that force along the chord at distance $x$ from the chord's midpoint.",
+    },
+    {
+      type: "numeric",
+      id: "owt0-6-q5",
+      variant: "practice",
+      question: "A cylinder floats upright in water with 25 cm of its length submerged. It is pushed down slightly and released. What is its period? ($g = 10$ m/s²) Give your answer in seconds, to two decimal places.",
+      answer: 0.993,
+      relTolerance: 0.02,
+      unit: "s",
+      hint: "For a floating body $\\omega^2 = g/h$, where $h$ is the submerged depth. The density is already accounted for by $h$.",
+      solution: "$T = 2\\pi\\sqrt{h/g} = 2\\pi\\sqrt{0.25/10} = 2\\pi\\sqrt{0.025} = 2\\pi \\times 0.158 \\approx 0.99$ s (exactly $\\pi/\\sqrt{10}$ s).",
+      commonMistakes: [
+        { answer: 3.14, tolerance: 0.02, feedback: "That is $2\\pi\\sqrt{0.25} = \\pi$ s. Divide by $g$: $h/g = 0.025$ s²." },
+        { answer: 0.702, feedback: "That is $2\\pi\\sqrt{0.0125}$, the U-tube formula. A floating body gives $\\omega^2 = g/h$, with no factor 2." },
+      ],
     },
     {
       type: "quiz",
-      id: "owt0-6-q5",
+      id: "owt0-6-q6",
       variant: "practice",
-      question: "A cylinder floats upright in water with 25 cm of its length submerged. It is pushed down slightly and released. What is its period? ($g = 10$ m/s²)",
+      multiple: true,
+      question: "A particle moves along a line as $x = 3\\sin\\omega t + 4\\cos\\omega t$ (in cm). Select every statement that is true.",
       options: [
-        { text: "It needs the density of the cylinder.", feedback: "The density only fixes how deep it floats, and that is given." },
-        { text: "$\\pi/\\sqrt{10}$ s $\\approx 0.99$ s", correct: true, feedback: "$T = 2\\pi\\sqrt{h/g} = 2\\pi\\sqrt{0.025} = 2\\pi \\times 0.158 \\approx 0.99$ s." },
-        { text: "$2\\pi\\sqrt{0.25}$ s $= \\pi$ s", feedback: "Divide by $g$: $h/g = 0.025$ s²." },
-        { text: "$2\\pi\\sqrt{0.0125}$ s", feedback: "That is the U-tube formula. A floating body gives $\\omega^2 = g/h$, with no factor 2." },
+        { text: "The motion is SHM with amplitude 5 cm.", correct: true, feedback: "The terms are $\\pi/2$ out of phase, so $A = \\sqrt{3^2 + 4^2} = 5$ cm, and a sum of same-frequency SHMs is SHM." },
+        { text: "At $t = 0$ the particle is at $x = 4$ cm.", correct: true, feedback: "$x(0) = 3\\sin 0 + 4\\cos 0 = 4$ cm." },
+        { text: "Its maximum speed is $7\\omega$ cm/s.", feedback: "That adds the amplitudes as numbers. $v_{\\max} = A\\omega = 5\\omega$ cm/s." },
+        { text: "Its period is $\\pi/\\omega$.", feedback: "Both terms repeat every $2\\pi/\\omega$, and so does their sum. Adding SHMs of one frequency does not change the frequency." },
       ],
+      hint: "Combine the two terms into one SHM first (Worked example 1).",
     },
   ]),
 };
@@ -1042,10 +1487,11 @@ const lesson07: LessonSeed = {
       content:
         "A real swing stops if nobody pushes it. Push it at the right moments, though, and a small child can build up a huge swing with tiny shoves. The first fact is **damping**: friction drains the energy. The second is **resonance**: a periodic push timed to the natural rhythm pumps energy in. Together they explain car shock absorbers, radio tuning, and bridges that shake themselves apart.",
     },
+    { type: "heading", text: "Damped oscillations" },
     {
       type: "text",
       content:
-        "**Damped oscillations.** In air or oil the drag on a slow object is roughly proportional to its velocity, $-bv$. Newton's second law becomes",
+        "In air or oil the drag on a slow object is roughly proportional to its velocity, $-bv$. Newton's second law becomes",
     },
     { type: "math", latex: "m\\ddot x = -kx - b\\dot x" },
     {
@@ -1090,6 +1536,7 @@ const lesson07: LessonSeed = {
       content:
         "**Free oscillation:** the system oscillates at its own **natural frequency** $\\omega_0 = \\sqrt{k/m}$ after one disturbance.\n**Damped oscillation:** amplitude decays as $e^{-\\gamma t}$ because of dissipative forces.\n**Forced (driven) oscillation:** a periodic external force $F_0\\cos\\omega t$ keeps it going; after the start-up dies away, the system oscillates at the **driving** frequency $\\omega$, not its own.\n**Resonance:** the steady amplitude is largest when $\\omega$ is close to $\\omega_0$.",
     },
+    { type: "heading", text: "Forced oscillations and resonance" },
     {
       type: "text",
       content:
@@ -1124,20 +1571,49 @@ const lesson07: LessonSeed = {
       content:
         "What you should have seen: the horizontal axis is the driving frequency $\\omega$ and the curve is the steady amplitude (with $F_0/m = 1$). Moving $w_0$ slides the peak so that it always sits near $\\omega = \\omega_0$. Reducing $g$ (the damping $\\gamma$) makes the peak shoot up and narrow; with heavy damping ($g = 1$, the grey base curve) resonance is barely noticeable.",
     },
+    { type: "heading", text: "Resonance in the real world" },
     {
       type: "text",
       content:
         "**Where you meet it.** Soldiers break step when crossing a bridge so that their marching rhythm cannot match a natural frequency of the bridge. The Tacoma Narrows bridge (1940) was destroyed by wind-driven oscillations that grew because the energy fed in exceeded what damping could remove. A radio tuner is a driven electrical oscillator whose natural frequency you adjust until it matches one station, which then dominates. Car shock absorbers do the opposite: they add heavy damping so that a bump does not set the car bouncing.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (exponential decay, JEE Main).** The amplitude of a damped oscillator falls to half its initial value in 10 s. How long until it is one eighth?\n\n1. Exponential decay multiplies by the same factor in equal times: every 10 s, the amplitude halves. *Why this step:* $e^{-\\gamma(t + 10)} = e^{-\\gamma t} \\cdot e^{-10\\gamma}$, and $e^{-10\\gamma} = \\tfrac12$ is fixed.\n2. $\\tfrac18 = \\left(\\tfrac12\\right)^3$, so three halvings: $t = 30$ s.\n3. The damping constant is $\\gamma = \\dfrac{\\ln 2}{10} \\approx 0.069$ s⁻¹.\n\n**Worked example 2 (energy decays faster).** For the same oscillator, when has the energy fallen to half?\n\n1. $E \\propto A^2 \\propto e^{-2\\gamma t}$. *Why this step:* energy follows the square of the amplitude.\n2. $e^{-2\\gamma t} = \\tfrac12 \\Rightarrow t = \\dfrac{\\ln 2}{2\\gamma} = 5$ s. At that moment the amplitude is $1/\\sqrt2 \\approx 71\\%$ of its start.",
+      type: "worked-example",
+      id: "owt0-7-we1",
+      title: "Worked example 1 (exponential decay, JEE Main)",
+      problem:
+        "The amplitude of a damped oscillator falls to half its initial value in 10 s. How long until it is one eighth?",
+      steps: [
+        { text: "Exponential decay multiplies by the same factor in equal times: every 10 s, the amplitude halves. *Why this step:* $e^{-\\gamma(t + 10)} = e^{-\\gamma t} \\cdot e^{-10\\gamma}$, and $e^{-10\\gamma} = \\tfrac12$ is fixed." },
+        { text: "$\\tfrac18 = \\left(\\tfrac12\\right)^3$, so three halvings: $t = 30$ s." },
+        { text: "The damping constant is $\\gamma = \\dfrac{\\ln 2}{10} \\approx 0.069$ s⁻¹." },
+      ],
+      answer: "$t = 30$ s",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (a resonance estimate).** A 0.1 kg mass on a spring has natural frequency $\\omega_0 = 20$ rad/s and damping $\\gamma = 0.5$ s⁻¹. A force of amplitude 0.2 N drives it at $\\omega = 20$ rad/s. Estimate the steady amplitude, and compare with a static push of 0.2 N.\n\n1. At resonance $A \\approx \\dfrac{F_0}{2m\\gamma\\omega_0} = \\dfrac{0.2}{2 \\times 0.1 \\times 0.5 \\times 20} = \\dfrac{0.2}{2} = 0.1$ m.\n2. Static stretch: $k = m\\omega_0^2 = 0.1 \\times 400 = 40$ N/m, so $F_0/k = 0.2/40 = 0.005$ m.\n3. Resonance multiplies the response by $0.1/0.005 = 20$. *Why this step:* the ratio $\\omega_0/2\\gamma = 20$ measures how sharp the resonance is (the quality factor); lighter damping would make it larger still.",
+      type: "worked-example",
+      id: "owt0-7-we2",
+      title: "Worked example 2 (energy decays faster)",
+      problem:
+        "For the same oscillator, when has the energy fallen to half?",
+      steps: [
+        { text: "$E \\propto A^2 \\propto e^{-2\\gamma t}$. *Why this step:* energy follows the square of the amplitude." },
+        { text: "$e^{-2\\gamma t} = \\tfrac12 \\Rightarrow t = \\dfrac{\\ln 2}{2\\gamma} = 5$ s. At that moment the amplitude is $1/\\sqrt2 \\approx 71\\%$ of its start." },
+      ],
+      answer: "$t = 5$ s",
+    },
+    {
+      type: "worked-example",
+      id: "owt0-7-we3",
+      title: "Worked example 3 (a resonance estimate)",
+      problem:
+        "A 0.1 kg mass on a spring has natural frequency $\\omega_0 = 20$ rad/s and damping $\\gamma = 0.5$ s⁻¹. A force of amplitude 0.2 N drives it at $\\omega = 20$ rad/s. Estimate the steady amplitude, and compare with a static push of 0.2 N.",
+      steps: [
+        { text: "At resonance $A \\approx \\dfrac{F_0}{2m\\gamma\\omega_0} = \\dfrac{0.2}{2 \\times 0.1 \\times 0.5 \\times 20} = \\dfrac{0.2}{2} = 0.1$ m." },
+        { text: "Static stretch: $k = m\\omega_0^2 = 0.1 \\times 400 = 40$ N/m, so $F_0/k = 0.2/40 = 0.005$ m." },
+        { text: "Resonance multiplies the response by $0.1/0.005 = 20$. *Why this step:* the ratio $\\omega_0/2\\gamma = 20$ measures how sharp the resonance is (the quality factor); lighter damping would make it larger still." },
+      ],
+      answer: "$A \\approx 0.1$ m, 20 times the static stretch of 0.005 m.",
     },
     {
       type: "callout",
@@ -1146,28 +1622,35 @@ const lesson07: LessonSeed = {
       content:
         "Resonance is about **timing**, not strength. A tiny force pushed at the natural frequency does positive work on every cycle and builds a large amplitude, limited only by damping; a large force at the wrong frequency spends half its time fighting the motion. Worked example 3 shows a 0.2 N force producing twenty times its static effect purely through matched frequency.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt0-7-q1",
       variant: "practice",
       question: "A damped oscillator's amplitude falls from 8 cm to 4 cm in 5 s. What is it after a further 10 s?",
-      options: [
-        { text: "$1$ cm", correct: true, feedback: "It halves every 5 s: 4 → 2 → 1 cm in the next 10 s." },
-        { text: "$0$ cm", feedback: "That assumes a linear fall of 4 cm per 5 s. Exponential decay halves each time; it never quite reaches zero." },
-        { text: "$2$ cm", feedback: "That is after 5 more seconds. Ten more seconds is two halvings." },
-        { text: "$1.33$ cm", feedback: "Exponential decay multiplies by $\\tfrac12$ each 5 s; it does not divide by the elapsed time." },
+      answer: 1,
+      unit: "cm",
+      hint: "Exponential decay multiplies by the same factor in equal times.",
+      solution: "The amplitude halves every 5 s. A further 10 s is two more halvings: $4 \\to 2 \\to 1$ cm.",
+      commonMistakes: [
+        { answer: 0, feedback: "That assumes a linear fall of 4 cm per 5 s. Exponential decay halves each time; it never quite reaches zero." },
+        { answer: 2, feedback: "That is after 5 more seconds. Ten more seconds is two halvings." },
+        { answer: 1.33, tolerance: 0.01, feedback: "Exponential decay multiplies by $\\tfrac12$ each 5 s; it does not divide by the elapsed time." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt0-7-q2",
       variant: "practice",
       question: "In a lightly damped oscillator the amplitude halves every 10 s. How long does the energy take to fall to one quarter of its initial value?",
-      options: [
-        { text: "$20$ s", feedback: "After 20 s the amplitude is $\\tfrac14$, so the energy is $\\tfrac1{16}$." },
-        { text: "$5$ s", feedback: "After 5 s the energy has halved, not quartered." },
-        { text: "$40$ s", feedback: "Energy falls faster than amplitude, not slower." },
-        { text: "$10$ s", correct: true, feedback: "$E \\propto A^2$. When $A$ has halved (10 s), $E$ is $\\tfrac14$." },
+      answer: 10,
+      unit: "s",
+      hint: "How does the energy depend on the amplitude?",
+      solution: "$E \\propto A^2$. When $A$ has halved (after 10 s), $E$ is $\\left(\\tfrac12\\right)^2 = \\tfrac14$ of its initial value.",
+      commonMistakes: [
+        { answer: 20, feedback: "After 20 s the amplitude is $\\tfrac14$, so the energy is $\\tfrac1{16}$." },
+        { answer: 5, feedback: "After 5 s the energy has halved, not quartered." },
+        { answer: 40, feedback: "Energy falls faster than amplitude, not slower." },
       ],
     },
     {
@@ -1181,6 +1664,7 @@ const lesson07: LessonSeed = {
         { text: "3 Hz", correct: true, feedback: "In the steady state a forced oscillator follows the driver; its natural motion has died away." },
         { text: "5 Hz", feedback: "The natural frequency only appears in the transient at the start and in *how large* the response is." },
       ],
+      hint: "Recall the difference between the transient and the steady state of a driven oscillator (0.7). What sets the frequency of each?",
     },
     {
       type: "quiz",
@@ -1192,6 +1676,7 @@ const lesson07: LessonSeed = {
         { text: "Because their combined weight in step would exceed what the bridge can hold.", feedback: "The total weight is the same in or out of step. The danger is timing, not load." },
         { text: "To increase the damping of the bridge.", feedback: "Walking out of step does not change the bridge's damping; it avoids a periodic driving force." },
       ],
+      hint: "Think about what a regular periodic push does to a structure when its frequency matches one of the structure's natural frequencies (0.7).",
     },
     {
       type: "quiz",
@@ -1204,6 +1689,21 @@ const lesson07: LessonSeed = {
         { text: "exactly the same, since only the amplitude decays", feedback: "Close, but not exact: $\\omega' = \\sqrt{\\omega_0^2 - \\gamma^2} < \\omega_0$." },
         { text: "zero, because the oscillation stops", feedback: "A lightly damped oscillator keeps oscillating while its amplitude decays." },
       ],
+      hint: "Damping opposes the motion on every swing. Recall the damped-oscillator frequency from 0.7.",
+    },
+    {
+      type: "quiz",
+      id: "owt0-7-q6",
+      variant: "practice",
+      multiple: true,
+      question: "A lightly damped oscillator's amplitude halves every 10 s. Select every statement that is true.",
+      options: [
+        { text: "Its energy halves every 5 s.", correct: true, feedback: "$E \\propto A^2 \\propto e^{-2\\gamma t}$, so the energy decays twice as fast: half-life $10/2 = 5$ s." },
+        { text: "Its damping constant is $\\gamma = \\dfrac{\\ln 2}{10}$ s⁻¹ $\\approx 0.069$ s⁻¹.", correct: true, feedback: "$e^{-10\\gamma} = \\tfrac12$ gives $\\gamma = \\ln 2/10$." },
+        { text: "The amplitude falls by equal amounts (in cm) in equal times.", feedback: "That would be linear decay. Exponential decay falls by equal *fractions* in equal times: 8, 4, 2, 1, ..." },
+        { text: "Its period is slightly shorter than that of the same oscillator without damping.", feedback: "$\\omega' = \\sqrt{\\omega_0^2 - \\gamma^2} < \\omega_0$, so the damped period is slightly *longer*." },
+      ],
+      hint: "Amplitude goes as $e^{-\\gamma t}$, energy as $e^{-2\\gamma t}$, and $\\omega' = \\sqrt{\\omega_0^2 - \\gamma^2}$.",
     },
   ]),
 };
@@ -1236,41 +1736,50 @@ const lessonMastery: LessonSeed = {
         { text: "Not SHM, because of the constant 5 J", feedback: "A constant in $U$ gives no force; only the slope of $U$ matters." },
         { text: "SHM about $x = 3$ with period $\\pi$ s", correct: true, feedback: "$U = \\tfrac12 k(x - 3)^2 + 5$ with $k = 4$ N/m, so $\\omega = 2$ rad/s and $T = \\pi$ s. The constant 5 J does not affect the force." },
       ],
+      hint: "Revisit 0.1, why $F = -kx$ is everywhere: the minimum of $U(x)$ and its curvature.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt0-8-q2",
       variant: "mastery",
       question: "A particle in SHM has period 1.2 s. What is the shortest time to go from $x = +A/2$ to $x = -A/2$?",
-      options: [
-        { text: "$0.4$ s", feedback: "That is $T/3$, the time from $+A$ to $-A/2$." },
-        { text: "$0.1$ s", feedback: "$0.1$ s is $T/12$: only half the journey." },
-        { text: "$0.2$ s", correct: true, feedback: "From $+A/2$ to the centre is $T/12$ and on to $-A/2$ is another $T/12$: $T/6 = 0.2$ s." },
-        { text: "$0.3$ s", feedback: "That is $T/4$, which assumes uniform motion over a distance $A$. The central region is covered fastest." },
+      answer: 0.2,
+      unit: "s",
+      hint: "Use the reference circle: what angle does the arrow turn through?",
+      solution: "From $+A/2$ to the centre the arrow turns $30^\\circ$ ($T/12$), and on to $-A/2$ another $30^\\circ$ ($T/12$). Total $T/6 = 1.2/6 = 0.2$ s.",
+      commonMistakes: [
+        { answer: 0.4, feedback: "That is $T/3$, the time from $+A$ to $-A/2$." },
+        { answer: 0.1, feedback: "$0.1$ s is $T/12$: only half the journey." },
+        { answer: 0.3, feedback: "That is $T/4$, which assumes uniform motion over a distance $A$. The central region is covered fastest." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt0-8-q3",
       variant: "mastery",
       question: "A particle performs SHM with amplitude 13 cm and $\\omega = 2$ rad/s. What is its speed at $x = 5$ cm?",
-      options: [
-        { text: "$288$ cm/s", feedback: "You forgot the square root: $\\sqrt{144} = 12$." },
-        { text: "$24$ cm/s", correct: true, feedback: "$2\\sqrt{169 - 25} = 2 \\times 12 = 24$ cm/s." },
-        { text: "$16$ cm/s", feedback: "That is $\\omega(A - x)$. Speed uses $\\sqrt{A^2 - x^2}$." },
-        { text: "$26$ cm/s", feedback: "That is $v_{\\max} = A\\omega$, the speed at the centre." },
+      answer: 24,
+      unit: "cm/s",
+      hint: "Use the speed–position relation for SHM from 0.3.",
+      solution: "$|v| = \\omega\\sqrt{A^2 - x^2} = 2\\sqrt{169 - 25} = 2 \\times 12 = 24$ cm/s.",
+      commonMistakes: [
+        { answer: 288, feedback: "You forgot the square root: $\\sqrt{144} = 12$." },
+        { answer: 16, feedback: "That is $\\omega(A - x)$. Speed uses $\\sqrt{A^2 - x^2}$." },
+        { answer: 26, feedback: "That is $v_{\\max} = A\\omega$, the speed at the centre." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt0-8-q4",
       variant: "mastery",
-      question: "At $x = 0.6A$, what fraction of the total energy of an SHM is kinetic?",
-      options: [
-        { text: "$0.64$", correct: true, feedback: "$PE/E = (0.6)^2 = 0.36$, so $KE/E = 0.64$." },
-        { text: "$0.4$", feedback: "Energy goes as $x^2$, not $x$." },
-        { text: "$0.36$", feedback: "That is the potential-energy fraction." },
-        { text: "$0.8$", feedback: "0.8 is the fraction of the maximum *speed*: $\\sqrt{1 - 0.36}$. Energy goes as the square of speed." },
+      question: "At $x = 0.6A$, what fraction of the total energy of an SHM is kinetic? Give your answer as a decimal.",
+      answer: 0.64,
+      hint: "Energy in SHM (0.3): the potential energy grows as $x^2$.",
+      solution: "$PE/E = (x/A)^2 = (0.6)^2 = 0.36$, so $KE/E = 1 - 0.36 = 0.64$.",
+      commonMistakes: [
+        { answer: 0.4, feedback: "Energy goes as $x^2$, not $x$." },
+        { answer: 0.36, feedback: "That is the potential-energy fraction." },
+        { answer: 0.8, feedback: "0.8 is the fraction of the maximum *speed*: $\\sqrt{1 - 0.36}$. Energy goes as the square of speed." },
       ],
     },
     {
@@ -1284,6 +1793,7 @@ const lessonMastery: LessonSeed = {
         { text: "$2\\pi\\sqrt{\\dfrac{3m}{k}}$", feedback: "That puts all three in series." },
         { text: "$2\\pi\\sqrt{\\dfrac{3m}{2k}}$", correct: true, feedback: "Parallel pair: $2k$. In series with $k$: $\\frac{2k \\cdot k}{3k} = \\frac{2k}{3}$. So $T = 2\\pi\\sqrt{3m/2k}$." },
       ],
+      hint: "Combine springs as in 0.4: reduce the parallel pair first.",
     },
     {
       type: "quiz",
@@ -1296,6 +1806,7 @@ const lessonMastery: LessonSeed = {
         { text: "$T/\\sqrt2$", correct: true, feedback: "Half the length means twice the stiffness, and $T \\propto 1/\\sqrt k$." },
         { text: "$T/2$", feedback: "Stiffness doubles, but the period goes as $1/\\sqrt k$, not $1/k$." },
       ],
+      hint: "Recall from 0.4 how cutting a spring changes its stiffness.",
     },
     {
       type: "quiz",
@@ -1308,6 +1819,7 @@ const lessonMastery: LessonSeed = {
         { text: "$1.5$ s", feedback: "That scales $T$ by $3/4$. The period goes as $1/\\sqrt{g_{\\text{eff}}}$." },
         { text: "$2\\sqrt{3/2}$ s $\\approx 2.45$ s", feedback: "That uses $g - g/3$. Upward acceleration adds to $g$." },
       ],
+      hint: "Effective gravity in an accelerating lift (0.5).",
     },
     {
       type: "quiz",
@@ -1320,6 +1832,7 @@ const lessonMastery: LessonSeed = {
         { text: "$2\\pi\\sqrt{0.02}$ s", feedback: "That is the U-tube formula with $2g$. For a floating body $\\omega^2 = g/h$." },
         { text: "It depends on the liquid's density.", feedback: "Density cancels between the extra buoyancy and the mass of a floating body." },
       ],
+      hint: "Treat it as a hidden SHM (0.6): find the extra buoyancy for a small extra depth $x$.",
     },
     {
       type: "quiz",
@@ -1332,17 +1845,22 @@ const lessonMastery: LessonSeed = {
         { text: "$4\\sqrt2$", feedback: "That is for $\\delta = \\pi/2$." },
         { text: "$4\\sqrt3 \\approx 6.93$", correct: true, feedback: "$A^2 = 16 + 16 + 32\\cos 60^\\circ = 48$, so $A = 4\\sqrt3$." },
       ],
+      hint: "Adding two SHMs of the same frequency (0.6): use phasor addition.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "owt0-8-q10",
       variant: "mastery",
-      question: "A damped oscillator loses 10% of its amplitude in each cycle (the same fraction every cycle). What percentage of its initial energy remains after 2 cycles?",
-      options: [
-        { text: "80%", feedback: "Losses compound: $0.9 \\times 0.9$, not $1 - 2 \\times 0.1$. And energy needs squaring too." },
-        { text: "64%", feedback: "That is $(1 - 0.2)^2$, which treats two 10% losses as one 20% loss. Compound them: $0.9^4 \\approx 0.656$." },
-        { text: "about 66%", correct: true, feedback: "Amplitude after 2 cycles: $0.9^2 = 0.81$. Energy $\\propto A^2$: $0.81^2 \\approx 0.656$." },
-        { text: "81%", feedback: "That is the amplitude fraction. Energy goes as its square." },
+      question: "A damped oscillator loses 10% of its amplitude in each cycle (the same fraction every cycle). What percentage of its initial energy remains after 2 cycles? Give your answer to one decimal place.",
+      answer: 65.6,
+      tolerance: 0.5,
+      unit: "%",
+      hint: "Find the amplitude fraction after 2 cycles first, then square it.",
+      solution: "Amplitude after 2 cycles: $0.9^2 = 0.81$ of the start. Energy $\\propto A^2$: $0.81^2 = 0.6561$, so about $65.6\\%$ remains.",
+      commonMistakes: [
+        { answer: 80, feedback: "Losses compound: $0.9 \\times 0.9$, not $1 - 2 \\times 0.1$. And energy needs squaring too." },
+        { answer: 64, feedback: "That is $(1 - 0.2)^2$, which treats two 10% losses as one 20% loss. Compound them: $0.9^4 \\approx 0.656$." },
+        { answer: 81, tolerance: 0.4, feedback: "That is the amplitude fraction. Energy goes as its square." },
       ],
     },
     {
@@ -1369,6 +1887,21 @@ const lessonMastery: LessonSeed = {
         { text: "$5$ cm, $\\pi/5 \\times \\sqrt{2}$ s", feedback: "The incline does not change the period; there is no $\\sin\\theta$ in $T = 2\\pi\\sqrt{m/k}$." },
         { text: "$5\\sqrt3$ cm, $\\pi/5$ s", feedback: "That uses $\\cos 30^\\circ$. The component along the slope is $mg\\sin\\theta$." },
       ],
+      hint: "Equilibrium balances the spring against the component of gravity along the incline; then recall what sets the period of a spring-block system (0.4).",
+    },
+    {
+      type: "quiz",
+      id: "owt0-8-q13",
+      variant: "mastery",
+      multiple: true,
+      question: "A 1 kg particle moves as $x = 0.1\\sin(10t)$ m ($t$ in s). Select every statement that is true.",
+      options: [
+        { text: "Its maximum speed is 1 m/s.", correct: true, feedback: "$v_{\\max} = A\\omega = 0.1 \\times 10 = 1$ m/s." },
+        { text: "Its maximum acceleration is 10 m/s².", correct: true, feedback: "$a_{\\max} = A\\omega^2 = 0.1 \\times 100 = 10$ m/s²." },
+        { text: "Its total mechanical energy is 1 J.", feedback: "$E = \\tfrac12 m v_{\\max}^2 = \\tfrac12 \\times 1 \\times 1^2 = 0.5$ J. You dropped the $\\tfrac12$." },
+        { text: "Its kinetic energy repeats every $\\pi/5$ s.", feedback: "$\\pi/5$ s is the period of $x$. KE peaks at every pass through the centre, so it repeats every $T/2 = \\pi/10$ s." },
+      ],
+      hint: "Read $A = 0.1$ m and $\\omega = 10$ rad/s from the equation.",
     },
     {
       type: "callout",

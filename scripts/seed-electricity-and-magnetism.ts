@@ -9,6 +9,7 @@ import { emChapter2Lessons } from "../src/modules/content/em-chapter-2-content";
 import { emChapter3Lessons } from "../src/modules/content/em-chapter-3-content";
 import { emChapter4Lessons } from "../src/modules/content/em-chapter-4-content";
 import { emChapter5Lessons } from "../src/modules/content/em-chapter-5-content";
+import { emChapter6Lessons } from "../src/modules/content/em-chapter-6-content";
 import {
   createChapter,
   createCourse,
@@ -64,6 +65,12 @@ const chapterSeeds: {
     position: 5,
     lessons: emChapter5Lessons,
   },
+  {
+    slug: "magnetism-and-em-waves",
+    title: "Chapter 6 · Magnetism and Matter and Electromagnetic Waves",
+    position: 6,
+    lessons: emChapter6Lessons,
+  },
 ];
 
 async function main() {
@@ -77,7 +84,7 @@ async function main() {
       title: "Electricity and Magnetism: Fields That Push, Store and Induce",
       slug: "electricity-and-magnetism",
       description:
-        "Coulomb's law, electric fields and dipoles; Gauss's law, potential and conductors; capacitors, dielectrics and stored energy; current electricity with Kirchhoff's laws, bridges and the potentiometer; magnetic forces, Biot-Savart and Ampère's laws, loops and galvanometers; and electromagnetic induction, inductors, AC phasors, LCR resonance, transformers and EM waves. Taught to CBSE Class 12 / JEE Main and Advanced depth.",
+        "Coulomb's law, electric fields and dipoles; Gauss's law, potential and conductors; capacitors, dielectrics and stored energy; current electricity with Kirchhoff's laws, bridges and the potentiometer; magnetic forces, Biot-Savart and Ampère's laws, loops and galvanometers; electromagnetic induction, inductors, AC phasors, LCR resonance and transformers; and magnetism in matter (bar magnets, the Earth's field, the tangent galvanometer, dia-, para- and ferromagnetism, hysteresis) with displacement current, Maxwell's equations, electromagnetic waves, their energy and momentum, and the spectrum. Taught to CBSE Class 12 / JEE Main and Advanced depth.",
     });
   }
   await db
@@ -85,7 +92,7 @@ async function main() {
     .set({
       title: "Electricity and Magnetism: Fields That Push, Store and Induce",
       description:
-        "Coulomb's law, electric fields and dipoles; Gauss's law, potential and conductors; capacitors, dielectrics and stored energy; current electricity with Kirchhoff's laws, bridges and the potentiometer; magnetic forces, Biot-Savart and Ampère's laws, loops and galvanometers; and electromagnetic induction, inductors, AC phasors, LCR resonance, transformers and EM waves. Taught to CBSE Class 12 / JEE Main and Advanced depth.",
+        "Coulomb's law, electric fields and dipoles; Gauss's law, potential and conductors; capacitors, dielectrics and stored energy; current electricity with Kirchhoff's laws, bridges and the potentiometer; magnetic forces, Biot-Savart and Ampère's laws, loops and galvanometers; electromagnetic induction, inductors, AC phasors, LCR resonance and transformers; and magnetism in matter (bar magnets, the Earth's field, the tangent galvanometer, dia-, para- and ferromagnetism, hysteresis) with displacement current, Maxwell's equations, electromagnetic waves, their energy and momentum, and the spectrum. Taught to CBSE Class 12 / JEE Main and Advanced depth.",
       status: "published",
       updatedAt: new Date(),
     })

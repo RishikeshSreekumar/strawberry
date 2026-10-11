@@ -7,6 +7,7 @@ import {
 } from "@/modules/content/services/content-service";
 import { getCourseProgress } from "@/modules/progress/services/progress-service";
 import { CourseSidebar } from "@/modules/content/components/course-sidebar";
+import { MobileCourseNav } from "@/modules/content/components/mobile-course-nav";
 
 // The sidebar lives in this layout (not the lesson page) so it is fetched
 // once and its DOM persists across lesson-to-lesson navigation.
@@ -24,19 +25,26 @@ export default async function ChapterLayout({
     getCourseProgress(db, { userId: user.id, courseId: course.id }),
   ]);
 
+  const sidebarProps = {
+    outline,
+    courseSlug,
+    courseTitle: course.title,
+    progressEntries: progress.map((p) => [p.lessonId, p.status] as [string, typeof p.status]),
+  };
+
   return (
     <div className="lg:grid lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-10">
       <aside className="hidden lg:block">
-        <div className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pb-4">
-          <CourseSidebar
-            outline={outline}
-            courseSlug={courseSlug}
-            courseTitle={course.title}
-            progressEntries={progress.map((p) => [p.lessonId, p.status])}
-          />
+        <div className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pr-1 pb-4">
+          <CourseSidebar {...sidebarProps} />
         </div>
       </aside>
-      <div className="min-w-0">{children}</div>
+      <div className="min-w-0">
+        <div className="lg:hidden">
+          <MobileCourseNav {...sidebarProps} />
+        </div>
+        {children}
+      </div>
     </div>
   );
 }

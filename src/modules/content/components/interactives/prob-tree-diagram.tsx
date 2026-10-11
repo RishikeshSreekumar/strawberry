@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { z } from "zod";
 import type { ProbTreeNode, probTreeDiagramSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 
 type Config = z.infer<typeof probTreeDiagramSchema>;
@@ -611,7 +612,7 @@ export function ProbTreeDiagram({ config }: { config: Config }) {
       {collapseNode}
 
       <div className="flex items-start justify-between gap-3">
-        <p className="text-xs text-muted-foreground">{caption}</p>
+        <p className="text-xs text-muted-foreground"><RichText text={caption} /></p>
         {(config.editable.length > 0 || config.highlight) && (
           <button
             type="button"

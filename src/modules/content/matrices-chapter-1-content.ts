@@ -67,6 +67,7 @@ const lesson01: LessonSeed = {
       content:
         "$AB$ is the matrix of the transformation **\"do $B$ first, then $A$\"**. For every vector $\\mathbf{v}$:\n$(AB)\\mathbf{v} = A(B\\mathbf{v})$.\nThe matrix nearest the vector acts first, exactly like $f(g(x))$ means \"apply $g$, then $f$\".",
     },
+    { type: "heading", text: "Building $AB$ one column at a time" },
     {
       type: "text",
       content:
@@ -84,55 +85,103 @@ const lesson01: LessonSeed = {
       content:
         "**Column $j$ of $AB$ is $A$ times column $j$ of $B$.** Every product rule in this chapter is a consequence of that sentence.",
     },
+    { type: "heading", text: "Worked examples: composing two transformations" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — rotate, then shear.** Find $SR$, the matrix for \"rotate by $90^\\circ$, then shear\".\n\n**Step 1: column 1.** $R$ sends $\\hat{\\imath}$ to $\\begin{pmatrix}0\\\\1\\end{pmatrix}$. The shear sends that to $0\\begin{pmatrix}1\\\\0\\end{pmatrix} + 1\\begin{pmatrix}1\\\\1\\end{pmatrix} = \\begin{pmatrix}1\\\\1\\end{pmatrix}$.\n\n**Step 2: column 2.** $R$ sends $\\hat{\\jmath}$ to $\\begin{pmatrix}-1\\\\0\\end{pmatrix}$. The shear sends that to $-1\\begin{pmatrix}1\\\\0\\end{pmatrix} + 0\\begin{pmatrix}1\\\\1\\end{pmatrix} = \\begin{pmatrix}-1\\\\0\\end{pmatrix}$.\n\n**Step 3: assemble.**",
+      type: "worked-example",
+      id: "mx1-1-we1",
+      title: "Worked example 1: rotate, then shear",
+      problem: "Find $SR$, the matrix for \"rotate by $90^\\circ$, then shear\".",
+      steps: [
+        {
+          text: "**Column 1.** $R$ sends $\\hat{\\imath}$ to $\\begin{pmatrix}0\\\\1\\end{pmatrix}$. The shear sends that to $0\\begin{pmatrix}1\\\\0\\end{pmatrix} + 1\\begin{pmatrix}1\\\\1\\end{pmatrix} = \\begin{pmatrix}1\\\\1\\end{pmatrix}$.",
+        },
+        {
+          text: "**Column 2.** $R$ sends $\\hat{\\jmath}$ to $\\begin{pmatrix}-1\\\\0\\end{pmatrix}$. The shear sends that to $-1\\begin{pmatrix}1\\\\0\\end{pmatrix} + 0\\begin{pmatrix}1\\\\1\\end{pmatrix} = \\begin{pmatrix}-1\\\\0\\end{pmatrix}$.",
+        },
+        {
+          text: "**Assemble.**",
+          latex:
+            "SR = \\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix} = \\begin{pmatrix}1&-1\\\\1&0\\end{pmatrix}",
+        },
+        {
+          text: "Check it on the grid above: with \"AB in one move\" on, $\\hat{\\imath}$ ends at $(1, 1)$ and $\\hat{\\jmath}$ ends at $(-1, 0)$.",
+        },
+      ],
+      answer: "$SR = \\begin{pmatrix}1&-1\\\\1&0\\end{pmatrix}$",
     },
     {
-      type: "math",
-      latex:
-        "SR = \\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix} = \\begin{pmatrix}1&-1\\\\1&0\\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "Check it on the grid above: with \"AB in one move\" on, $\\hat{\\imath}$ ends at $(1, 1)$ and $\\hat{\\jmath}$ ends at $(-1, 0)$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2 — no geometry needed.** Let $A = \\begin{pmatrix}2&1\\\\1&3\\end{pmatrix}$ and $B = \\begin{pmatrix}1&-1\\\\2&0\\end{pmatrix}$. Find $AB$.\n\n**Step 1: column 1.** $A\\begin{pmatrix}1\\\\2\\end{pmatrix} = 1\\begin{pmatrix}2\\\\1\\end{pmatrix} + 2\\begin{pmatrix}1\\\\3\\end{pmatrix} = \\begin{pmatrix}4\\\\7\\end{pmatrix}$.\n\n**Step 2: column 2.** $A\\begin{pmatrix}-1\\\\0\\end{pmatrix} = -1\\begin{pmatrix}2\\\\1\\end{pmatrix} + 0\\begin{pmatrix}1\\\\3\\end{pmatrix} = \\begin{pmatrix}-2\\\\-1\\end{pmatrix}$.\n\n**Step 3: assemble.** $AB = \\begin{pmatrix}4&-2\\\\7&-1\\end{pmatrix}$.\n\nEach column is a *combination of the columns of $A$*, weighted by the entries of a column of $B$. That is the Chapter 0 rule for matrix times vector, used twice.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 — a game sprite (application).** A game engine first stretches a sprite horizontally by 2, using $D = \\begin{pmatrix}2&0\\\\0&1\\end{pmatrix}$, and then turns it a quarter turn anticlockwise with $R$. Find the single matrix the engine should store, and where the sprite's corner $(1, 1)$ ends up.\n\n**Step 1: name the product.** $D$ acts first, so the combined matrix is $RD$, not $DR$. *Why this step:* the matrix nearest the vector acts first, so the first move goes on the right.\n\n**Step 2: column 1.** $D\\hat{\\imath} = (2, 0)$, and $R$ turns that to $(0, 2)$.\n\n**Step 3: column 2.** $D\\hat{\\jmath} = (0, 1)$, and $R$ turns that to $(-1, 0)$.\n\n**Step 4: assemble and apply.**",
-    },
-    {
-      type: "math",
-      latex:
-        "RD = \\begin{pmatrix}0&-1\\\\2&0\\end{pmatrix}, \\qquad RD\\begin{pmatrix}1\\\\1\\end{pmatrix} = \\begin{pmatrix}-1\\\\2\\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "Check in two stages: $D(1, 1) = (2, 1)$, then a quarter turn sends $(2, 1)$ to $(-1, 2)$. It matches. *Why store one matrix:* a sprite has thousands of pixels. Computing $RD$ once and then doing one matrix–vector multiplication per pixel is half the work of applying $D$ and $R$ separately to every pixel.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 — two reflections make a rotation (JEE-style).** Let $F_1 = \\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$ (reflect in the x-axis) and $F_2 = \\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$ (reflect in the line $y = x$). Identify the single transformation \"reflect in the x-axis, then in $y = x$\".\n\n**Step 1: order.** $F_1$ acts first, so we want $F_2F_1$. *Why this step:* getting the order wrong gives the opposite answer, as Step 4 shows.\n\n**Step 2: follow $\\hat{\\imath}$.** $F_1$ leaves it at $(1, 0)$; $F_2$ swaps coordinates, giving $(0, 1)$.\n\n**Step 3: follow $\\hat{\\jmath}$.** $F_1$ sends it to $(0, -1)$; $F_2$ swaps that to $(-1, 0)$.\n\n**Step 4: recognise the matrices.**",
-    },
-    {
-      type: "math",
-      latex:
-        "F_2F_1 = \\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix} = R_{90^\\circ}, \\qquad F_1F_2 = \\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix} = R_{-90^\\circ}",
+      type: "worked-example",
+      id: "mx1-1-we2",
+      title: "Worked example 2: no geometry needed",
+      problem:
+        "Let $A = \\begin{pmatrix}2&1\\\\1&3\\end{pmatrix}$ and $B = \\begin{pmatrix}1&-1\\\\2&0\\end{pmatrix}$. Find $AB$.",
+      steps: [
+        {
+          text: "**Column 1.** $A\\begin{pmatrix}1\\\\2\\end{pmatrix} = 1\\begin{pmatrix}2\\\\1\\end{pmatrix} + 2\\begin{pmatrix}1\\\\3\\end{pmatrix} = \\begin{pmatrix}4\\\\7\\end{pmatrix}$.",
+        },
+        {
+          text: "**Column 2.** $A\\begin{pmatrix}-1\\\\0\\end{pmatrix} = -1\\begin{pmatrix}2\\\\1\\end{pmatrix} + 0\\begin{pmatrix}1\\\\3\\end{pmatrix} = \\begin{pmatrix}-2\\\\-1\\end{pmatrix}$.",
+        },
+        { text: "**Assemble.** Put the two columns side by side: column 1 is $(4, 7)$ and column 2 is $(-2, -1)$." },
+      ],
+      answer: "$AB = \\begin{pmatrix}4&-2\\\\7&-1\\end{pmatrix}$",
     },
     {
       type: "text",
       content:
-        "Two mirror images compose to a quarter turn, and swapping the order turns the other way. *Why this makes sense:* each reflection reverses orientation (clockwise becomes anticlockwise), so two of them restore it. A map that fixes the origin, keeps lengths and keeps orientation is a rotation. Its angle is twice the $45^\\circ$ between the two mirrors.",
+        "Each column is a *combination of the columns of $A$*, weighted by the entries of a column of $B$. That is the Chapter 0 rule for matrix times vector, used twice.",
+    },
+    {
+      type: "worked-example",
+      id: "mx1-1-we3",
+      title: "Worked example 3: a game sprite (application)",
+      problem:
+        "A game engine first stretches a sprite horizontally by 2, using $D = \\begin{pmatrix}2&0\\\\0&1\\end{pmatrix}$, and then turns it a quarter turn anticlockwise with $R$. Find the single matrix the engine should store, and where the sprite's corner $(1, 1)$ ends up.",
+      steps: [
+        {
+          text: "**Name the product.** $D$ acts first, so the combined matrix is $RD$, not $DR$. *Why this step:* the matrix nearest the vector acts first, so the first move goes on the right.",
+        },
+        { text: "**Column 1.** $D\\hat{\\imath} = (2, 0)$, and $R$ turns that to $(0, 2)$." },
+        { text: "**Column 2.** $D\\hat{\\jmath} = (0, 1)$, and $R$ turns that to $(-1, 0)$." },
+        {
+          text: "**Assemble and apply.**",
+          latex:
+            "RD = \\begin{pmatrix}0&-1\\\\2&0\\end{pmatrix}, \\qquad RD\\begin{pmatrix}1\\\\1\\end{pmatrix} = \\begin{pmatrix}-1\\\\2\\end{pmatrix}",
+        },
+        {
+          text: "Check in two stages: $D(1, 1) = (2, 1)$, then a quarter turn sends $(2, 1)$ to $(-1, 2)$. It matches.",
+        },
+      ],
+      answer: "Store $RD = \\begin{pmatrix}0&-1\\\\2&0\\end{pmatrix}$; the corner $(1, 1)$ ends up at $(-1, 2)$.",
+    },
+    {
+      type: "text",
+      content:
+        "*Why store one matrix:* a sprite has thousands of pixels. Computing $RD$ once and then doing one matrix–vector multiplication per pixel is half the work of applying $D$ and $R$ separately to every pixel.",
+    },
+    {
+      type: "worked-example",
+      id: "mx1-1-we4",
+      title: "Worked example 4: two reflections make a rotation (JEE-style)",
+      problem:
+        "Let $F_1 = \\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$ (reflect in the x-axis) and $F_2 = \\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$ (reflect in the line $y = x$). Identify the single transformation \"reflect in the x-axis, then in $y = x$\".",
+      steps: [
+        {
+          text: "**Order.** $F_1$ acts first, so we want $F_2F_1$. *Why this step:* getting the order wrong gives the opposite answer, as Step 4 shows.",
+        },
+        { text: "**Follow $\\hat{\\imath}$.** $F_1$ leaves it at $(1, 0)$; $F_2$ swaps coordinates, giving $(0, 1)$." },
+        { text: "**Follow $\\hat{\\jmath}$.** $F_1$ sends it to $(0, -1)$; $F_2$ swaps that to $(-1, 0)$." },
+        {
+          text: "**Recognise the matrices.**",
+          latex:
+            "F_2F_1 = \\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix} = R_{90^\\circ}, \\qquad F_1F_2 = \\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix} = R_{-90^\\circ}",
+        },
+        {
+          text: "*Why this makes sense:* each reflection reverses orientation (clockwise becomes anticlockwise), so two of them restore it. A map that fixes the origin, keeps lengths and keeps orientation is a rotation. Its angle is twice the $45^\\circ$ between the two mirrors.",
+        },
+      ],
+      answer:
+        "Two mirror images compose to a quarter turn, and swapping the order turns the other way: $F_2F_1 = R_{90^\\circ}$.",
     },
     {
       type: "callout",
@@ -141,6 +190,7 @@ const lesson01: LessonSeed = {
       content:
         "You read $AB$ left to right, but the plane feels $B$ first. The same thing happens with functions: in $\\sin(x^2)$ you write $\\sin$ first, yet squaring happens first. Whenever you are unsure, put a vector on the right: $AB\\mathbf{v} = A(B\\mathbf{v})$, and $B$ is the one touching $\\mathbf{v}$.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx1-1-q1",
@@ -304,6 +354,7 @@ const lesson02: LessonSeed = {
       content:
         "Computing whole columns is the right way to *think* about a product. For computing a single entry quickly, and for matrices that are not square, there is a faster rule. It is the same rule, just read one entry at a time.",
     },
+    { type: "heading", text: "Entry $(i, j)$ is row times column" },
     {
       type: "text",
       content:
@@ -326,10 +377,11 @@ const lesson02: LessonSeed = {
       latex:
         "(AB)_{ij} = a_{i1}b_{1j} + a_{i2}b_{2j} + \\cdots + a_{in}b_{nj} = \\sum_{k=1}^{n} a_{ik}\\,b_{kj}",
     },
+    { type: "heading", text: "Why the inner numbers must match" },
     {
       type: "text",
       content:
-        "**Why the inner numbers must match.** Row $i$ of $A$ has $n$ entries, and column $j$ of $B$ has however many rows $B$ has. You can only pair them off if those counts agree. Think of dominoes: the touching ends have to match, and the outer ends give the shape of the answer.",
+        "Row $i$ of $A$ has $n$ entries, and column $j$ of $B$ has however many rows $B$ has. You can only pair them off if those counts agree. Think of dominoes: the touching ends have to match, and the outer ends give the shape of the answer.",
     },
     {
       type: "math",
@@ -354,49 +406,51 @@ const lesson02: LessonSeed = {
       content:
         "The second row of the table says it: a $2\\times3$ times a $3\\times4$ works, but the other way round the inner numbers are 4 and 2. Even when both products exist (first row), they can have **different orders**, so they cannot possibly be equal.",
     },
+    { type: "heading", text: "Worked examples: computing products" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — a $2\\times3$ times a $3\\times2$.** Let",
-    },
-    {
-      type: "math",
-      latex:
-        "A = \\begin{pmatrix}1&2&0\\\\3&-1&4\\end{pmatrix}, \\qquad B = \\begin{pmatrix}2&1\\\\0&3\\\\-1&2\\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: order.** $(2\\times\\boxed{3})(\\boxed{3}\\times2)$, so $AB$ is $2\\times2$.\n\n**Step 2: row 1 of $A$.** $(1, 2, 0)\\cdot(2, 0, -1) = 2 + 0 + 0 = 2$ and $(1,2,0)\\cdot(1,3,2) = 1 + 6 + 0 = 7$.\n\n**Step 3: row 2 of $A$.** $(3,-1,4)\\cdot(2,0,-1) = 6 + 0 - 4 = 2$ and $(3,-1,4)\\cdot(1,3,2) = 3 - 3 + 8 = 8$.",
-    },
-    {
-      type: "math",
-      latex:
-        "AB = \\begin{pmatrix}2&7\\\\2&8\\end{pmatrix}, \\qquad BA = \\begin{pmatrix}5&3&4\\\\9&-3&12\\\\5&-4&8\\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "$BA$ is a $(3\\times2)(2\\times3)$ product, so it is $3\\times3$. For instance its $(3,2)$ entry is row 3 of $B$ dot column 2 of $A$: $(-1)(2) + (2)(-1) = -4$. Same two matrices, two products of completely different sizes.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2 — a $3\\times3$ product.** Let",
-    },
-    {
-      type: "math",
-      latex:
-        "A = \\begin{pmatrix}1&0&2\\\\0&1&-1\\\\3&1&0\\end{pmatrix}, \\qquad B = \\begin{pmatrix}2&1&0\\\\1&0&1\\\\0&-1&1\\end{pmatrix}",
+      type: "worked-example",
+      id: "mx1-2-we1",
+      title: "Worked example 1: a $2\\times3$ times a $3\\times2$",
+      problem:
+        "Let\n\n$$A = \\begin{pmatrix}1&2&0\\\\3&-1&4\\end{pmatrix}, \\qquad B = \\begin{pmatrix}2&1\\\\0&3\\\\-1&2\\end{pmatrix}$$\n\nFind $AB$ and $BA$.",
+      steps: [
+        { text: "**Order.** $(2\\times\\boxed{3})(\\boxed{3}\\times2)$, so $AB$ is $2\\times2$." },
+        {
+          text: "**Row 1 of $A$.** $(1, 2, 0)\\cdot(2, 0, -1) = 2 + 0 + 0 = 2$ and $(1,2,0)\\cdot(1,3,2) = 1 + 6 + 0 = 7$.",
+        },
+        {
+          text: "**Row 2 of $A$.** $(3,-1,4)\\cdot(2,0,-1) = 6 + 0 - 4 = 2$ and $(3,-1,4)\\cdot(1,3,2) = 3 - 3 + 8 = 8$.",
+        },
+        {
+          latex:
+            "AB = \\begin{pmatrix}2&7\\\\2&8\\end{pmatrix}, \\qquad BA = \\begin{pmatrix}5&3&4\\\\9&-3&12\\\\5&-4&8\\end{pmatrix}",
+        },
+        {
+          text: "$BA$ is a $(3\\times2)(2\\times3)$ product, so it is $3\\times3$. For instance its $(3,2)$ entry is row 3 of $B$ dot column 2 of $A$: $(-1)(2) + (2)(-1) = -4$.",
+        },
+      ],
+      answer:
+        "$AB = \\begin{pmatrix}2&7\\\\2&8\\end{pmatrix}$ is $2\\times2$, while $BA = \\begin{pmatrix}5&3&4\\\\9&-3&12\\\\5&-4&8\\end{pmatrix}$ is $3\\times3$.",
     },
     {
       type: "text",
-      content:
-        "**Row 1 of $A$ is $(1, 0, 2)$.** With the columns of $B$: $2 + 0 + 0 = 2$; $1 + 0 - 2 = -1$; $0 + 0 + 2 = 2$.\n\n**Row 2 is $(0, 1, -1)$.** $0 + 1 - 0 = 1$; $0 + 0 + 1 = 1$; $0 + 1 - 1 = 0$.\n\n**Row 3 is $(3, 1, 0)$.** $6 + 1 + 0 = 7$; $3 + 0 + 0 = 3$; $0 + 1 + 0 = 1$.",
+      content: "Same two matrices, two products of completely different sizes.",
     },
     {
-      type: "math",
-      latex: "AB = \\begin{pmatrix}2&-1&2\\\\1&1&0\\\\7&3&1\\end{pmatrix}",
+      type: "worked-example",
+      id: "mx1-2-we2",
+      title: "Worked example 2: a $3\\times3$ product",
+      problem:
+        "Let\n\n$$A = \\begin{pmatrix}1&0&2\\\\0&1&-1\\\\3&1&0\\end{pmatrix}, \\qquad B = \\begin{pmatrix}2&1&0\\\\1&0&1\\\\0&-1&1\\end{pmatrix}$$\n\nFind $AB$.",
+      steps: [
+        {
+          text: "**Row 1 of $A$ is $(1, 0, 2)$.** With the columns of $B$: $2 + 0 + 0 = 2$; $1 + 0 - 2 = -1$; $0 + 0 + 2 = 2$.",
+        },
+        { text: "**Row 2 is $(0, 1, -1)$.** $0 + 1 - 0 = 1$; $0 + 0 + 1 = 1$; $0 + 1 - 1 = 0$." },
+        { text: "**Row 3 is $(3, 1, 0)$.** $6 + 1 + 0 = 7$; $3 + 0 + 0 = 3$; $0 + 1 + 0 = 1$." },
+        { text: "**Assemble.** The three rows of results, in order, are the three rows of $AB$." },
+      ],
+      answer: "$AB = \\begin{pmatrix}2&-1&2\\\\1&1&0\\\\7&3&1\\end{pmatrix}$",
     },
     {
       type: "callout",
@@ -406,29 +460,28 @@ const lesson02: LessonSeed = {
         "Point your left index finger along a row of $A$ and your right index finger down a column of $B$. Move them together, multiply, add. Write the order of the answer **before** computing anything: it catches undefined products and tells you how many entries to expect.",
     },
     {
+      type: "worked-example",
+      id: "mx1-2-we3",
+      title: "Worked example 3: where the rule comes from in business",
+      problem:
+        "Two stores, X and Y, buy pens, notebooks and bags. In $Q$ the rows are stores and the columns are items. In $P$ each row is an item; column 1 is its unit cost price and column 2 its selling price (in ₹).\n\n$$Q = \\begin{pmatrix}10&5&2\\\\4&8&3\\end{pmatrix}, \\qquad P = \\begin{pmatrix}10&12\\\\40&50\\\\250&300\\end{pmatrix}$$\n\nFind each store's total cost, revenue and profit.",
+      steps: [
+        {
+          text: "The total cost of store X's order is $10(10) + 5(40) + 2(250) = 800$. That is row X of $Q$ dot the cost column of $P$ — a row-by-column entry.",
+        },
+        {
+          text: "The whole table at once:",
+          latex:
+            "QP = \\begin{pmatrix}800 & 970\\\\ 1110 & 1348\\end{pmatrix} \\quad \\begin{matrix}\\leftarrow \\text{store X: cost, revenue}\\\\ \\leftarrow \\text{store Y: cost, revenue}\\end{matrix}",
+        },
+        { text: "Profit from X is ₹$(970 - 800) =$ ₹170 and from Y is ₹$(1348 - 1110) =$ ₹238." },
+      ],
+      answer: "Costs ₹800 (X) and ₹1110 (Y), revenues ₹970 and ₹1348, so profits ₹170 and ₹238.",
+    },
+    {
       type: "text",
       content:
-        "**Worked example 3 — where the rule comes from in business.** Two stores, X and Y, buy pens, notebooks and bags. In $Q$ the rows are stores and the columns are items. In $P$ each row is an item; column 1 is its unit cost price and column 2 its selling price (in ₹).",
-    },
-    {
-      type: "math",
-      latex:
-        "Q = \\begin{pmatrix}10&5&2\\\\4&8&3\\end{pmatrix}, \\qquad P = \\begin{pmatrix}10&12\\\\40&50\\\\250&300\\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "The total cost of store X's order is $10(10) + 5(40) + 2(250) = 800$. That is row X of $Q$ dot the cost column of $P$ — a row-by-column entry. The whole table at once:",
-    },
-    {
-      type: "math",
-      latex:
-        "QP = \\begin{pmatrix}800 & 970\\\\ 1110 & 1348\\end{pmatrix} \\quad \\begin{matrix}\\leftarrow \\text{store X: cost, revenue}\\\\ \\leftarrow \\text{store Y: cost, revenue}\\end{matrix}",
-    },
-    {
-      type: "text",
-      content:
-        "Profit from X is ₹$(970 - 800) =$ ₹170 and from Y is ₹$(1348 - 1110) =$ ₹238. The inner dimension (3 items) is exactly the thing being summed over, which is why it has to match on both sides. $PQ$ would be a $(3\\times2)(2\\times3)$ product: defined, but it would pair prices with stores and mean nothing.",
+        "The inner dimension (3 items) is exactly the thing being summed over, which is why it has to match on both sides. $PQ$ would be a $(3\\times2)(2\\times3)$ product: defined, but it would pair prices with stores and mean nothing.",
     },
     {
       type: "quiz",
@@ -464,7 +517,7 @@ const lesson02: LessonSeed = {
           feedback: "$(2\\times\\boxed{3})(\\boxed{3}\\times4)$ matches. $(3\\times\\boxed{4})(\\boxed{2}\\times3)$ does not.",
         },
         {
-          text: "Both are defined, since $AB$ is.",
+          text: "Both $AB$ and $BA$ are defined, since $AB$ is.",
           feedback: "For $BA$ the inner numbers are 4 and 2. One product existing says nothing about the other.",
         },
         {
@@ -548,20 +601,29 @@ const lesson02: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "Triple products and unknown factors" },
+    {
+      type: "worked-example",
+      id: "mx1-2-we4",
+      title: "Worked example 4: row · matrix · column (NCERT staple)",
+      problem:
+        "Find $x$ if the product below is the zero matrix.\n\n$$\\begin{pmatrix}1&x&1\\end{pmatrix}\\begin{pmatrix}1&3&2\\\\2&5&1\\\\15&3&2\\end{pmatrix}\\begin{pmatrix}1\\\\2\\\\x\\end{pmatrix} = O$$",
+      steps: [
+        {
+          text: "The orders are $(1\\times3)(3\\times3)(3\\times1)$, so the answer is $1\\times1$: a single number that must be 0.",
+        },
+        {
+          text: "**Row times matrix.** Row $(1, x, 1)$ against each column: $1 + 2x + 15 = 16 + 2x$; $3 + 5x + 3 = 6 + 5x$; $2 + x + 2 = 4 + x$. So the first product is the row $(16 + 2x,\\; 6 + 5x,\\; 4 + x)$.",
+        },
+        { text: "**Row times column.** $(16 + 2x)(1) + (6 + 5x)(2) + (4 + x)(x) = x^2 + 16x + 28$." },
+        { text: "**Solve.** $x^2 + 16x + 28 = (x + 2)(x + 14) = 0$, so $x = -2$ or $x = -14$." },
+      ],
+      answer: "$x = -2$ or $x = -14$",
+    },
     {
       type: "text",
       content:
-        "**Worked example 4 — row · matrix · column (NCERT staple).** Find $x$ if the product below is the zero matrix. The orders are $(1\\times3)(3\\times3)(3\\times1)$, so the answer is $1\\times1$: a single number that must be 0.",
-    },
-    {
-      type: "math",
-      latex:
-        "\\begin{pmatrix}1&x&1\\end{pmatrix}\\begin{pmatrix}1&3&2\\\\2&5&1\\\\15&3&2\\end{pmatrix}\\begin{pmatrix}1\\\\2\\\\x\\end{pmatrix} = O",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: row times matrix.** Row $(1, x, 1)$ against each column: $1 + 2x + 15 = 16 + 2x$; $3 + 5x + 3 = 6 + 5x$; $2 + x + 2 = 4 + x$. So the first product is the row $(16 + 2x,\\; 6 + 5x,\\; 4 + x)$.\n\n**Step 2: row times column.** $(16 + 2x)(1) + (6 + 5x)(2) + (4 + x)(x) = x^2 + 16x + 28$.\n\n**Step 3: solve.** $x^2 + 16x + 28 = (x + 2)(x + 14) = 0$, so $x = -2$ or $x = -14$.\n\nAssociativity (Lesson 1.4) means you could also do the matrix times the column first; you get the same quadratic.",
+        "Associativity (Lesson 1.4) means you could also do the matrix times the column first; you get the same quadratic.",
     },
     {
       type: "quiz",
@@ -591,28 +653,34 @@ const lesson02: LessonSeed = {
       hint: "Multiply the row by the matrix first to get a $1\\times3$ row, then multiply by the column.",
     },
     {
-      type: "text",
-      content: "**Worked example 5 — find the unknown matrix (NCERT exam problem).** Find $A$ such that",
-    },
-    {
-      type: "math",
-      latex:
-        "\\begin{pmatrix}2&-1\\\\1&0\\\\-3&4\\end{pmatrix}A = \\begin{pmatrix}-1&-8&-10\\\\1&-2&-5\\\\9&22&15\\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: order of $A$.** The left factor is $3\\times2$ and the answer is $3\\times3$, so $A$ must be $2\\times3$. *Why this step first:* it tells you how many unknowns to expect (six) and that $A$ has exactly two rows.\n\n**Step 2: read the rule by rows.** Row $i$ of a product is (row $i$ of the left matrix) times $A$, which is a combination of the **rows** of $A$. Call the rows of $A$ $\\mathbf{r}_1$ and $\\mathbf{r}_2$. Row 2 of the product is $1\\,\\mathbf{r}_1 + 0\\,\\mathbf{r}_2 = \\mathbf{r}_1$, so $\\mathbf{r}_1 = (1, -2, -5)$ with no work at all.\n\n**Step 3: use row 1.** $2\\mathbf{r}_1 - \\mathbf{r}_2 = (-1, -8, -10)$, so $\\mathbf{r}_2 = 2(1, -2, -5) - (-1, -8, -10) = (3, 4, 0)$.\n\n**Step 4: check with the unused row.** Row 3 should be $-3\\mathbf{r}_1 + 4\\mathbf{r}_2 = (-3 + 12,\\; 6 + 16,\\; 15 + 0) = (9, 22, 15)$. It matches, so",
-    },
-    {
-      type: "math",
-      latex: "A = \\begin{pmatrix}1&-2&-5\\\\3&4&0\\end{pmatrix}",
+      type: "worked-example",
+      id: "mx1-2-we5",
+      title: "Worked example 5: find the unknown matrix (NCERT exam problem)",
+      problem:
+        "Find $A$ such that\n\n$$\\begin{pmatrix}2&-1\\\\1&0\\\\-3&4\\end{pmatrix}A = \\begin{pmatrix}-1&-8&-10\\\\1&-2&-5\\\\9&22&15\\end{pmatrix}$$",
+      steps: [
+        {
+          text: "**Order of $A$.** The left factor is $3\\times2$ and the answer is $3\\times3$, so $A$ must be $2\\times3$. *Why this step first:* it tells you how many unknowns to expect (six) and that $A$ has exactly two rows.",
+        },
+        {
+          text: "**Read the rule by rows.** Row $i$ of a product is (row $i$ of the left matrix) times $A$, which is a combination of the **rows** of $A$. Call the rows of $A$ $\\mathbf{r}_1$ and $\\mathbf{r}_2$. Row 2 of the product is $1\\,\\mathbf{r}_1 + 0\\,\\mathbf{r}_2 = \\mathbf{r}_1$, so $\\mathbf{r}_1 = (1, -2, -5)$ with no work at all.",
+        },
+        {
+          text: "**Use row 1.** $2\\mathbf{r}_1 - \\mathbf{r}_2 = (-1, -8, -10)$, so $\\mathbf{r}_2 = 2(1, -2, -5) - (-1, -8, -10) = (3, 4, 0)$.",
+        },
+        {
+          text: "**Check with the unused row.** Row 3 should be $-3\\mathbf{r}_1 + 4\\mathbf{r}_2 = (-3 + 12,\\; 6 + 16,\\; 15 + 0) = (9, 22, 15)$. It matches, so",
+          latex: "A = \\begin{pmatrix}1&-2&-5\\\\3&4&0\\end{pmatrix}",
+        },
+      ],
+      answer: "$A = \\begin{pmatrix}1&-2&-5\\\\3&4&0\\end{pmatrix}$",
     },
     {
       type: "text",
       content:
         "*Why the check matters:* three rows of data but only two unknown rows means the system is over-determined. If row 3 had not matched, no such $A$ would exist. This **row picture** (rows of $AB$ are combinations of the rows of $B$) is the mirror image of the column picture from 1.1.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx1-2-q7",
@@ -704,6 +772,7 @@ const lesson03: LessonSeed = {
           "Now shear first, then rotate: RS. Same two moves, different final square.",
       },
     },
+    { type: "heading", text: "Comparing $SR$ and $RS$" },
     {
       type: "text",
       content:
@@ -722,20 +791,31 @@ const lesson03: LessonSeed = {
         "In general $AB \\ne BA$. When $AB = BA$ happens, we say $A$ and $B$ **commute**. It is a special relationship, never an assumption.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — the photo editor (application).** A photo app has two buttons: *Rotate* (a quarter turn anticlockwise, $R = \\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}$) and *Flip* (mirror left–right, $H = \\begin{pmatrix}-1&0\\\\0&1\\end{pmatrix}$). A sticker sits at $(2, 1)$. Does it matter which button you press first?\n\n**Step 1: flip, then rotate, which is $RH$.** Follow $\\hat{\\imath}$: $H$ gives $(-1, 0)$, then $R$ gives $(0, -1)$. Follow $\\hat{\\jmath}$: $H$ leaves $(0, 1)$, then $R$ gives $(-1, 0)$.\n\n**Step 2: rotate, then flip, which is $HR$.** $\\hat{\\imath}$: $R$ gives $(0, 1)$, and $H$ leaves it. $\\hat{\\jmath}$: $R$ gives $(-1, 0)$, and $H$ gives $(1, 0)$.\n\n*Why follow basis vectors instead of the sticker:* once you have the matrix, you can send every pixel, not just one point.",
+      type: "worked-example",
+      id: "mx1-3-we1",
+      title: "Worked example 1: the photo editor (application)",
+      problem:
+        "A photo app has two buttons: *Rotate* (a quarter turn anticlockwise, $R = \\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}$) and *Flip* (mirror left–right, $H = \\begin{pmatrix}-1&0\\\\0&1\\end{pmatrix}$). A sticker sits at $(2, 1)$. Does it matter which button you press first?",
+      steps: [
+        {
+          text: "**Flip, then rotate, which is $RH$.** Follow $\\hat{\\imath}$: $H$ gives $(-1, 0)$, then $R$ gives $(0, -1)$. Follow $\\hat{\\jmath}$: $H$ leaves $(0, 1)$, then $R$ gives $(-1, 0)$.",
+        },
+        {
+          text: "**Rotate, then flip, which is $HR$.** $\\hat{\\imath}$: $R$ gives $(0, 1)$, and $H$ leaves it. $\\hat{\\jmath}$: $R$ gives $(-1, 0)$, and $H$ gives $(1, 0)$.",
+        },
+        {
+          text: "*Why follow basis vectors instead of the sticker:* once you have the matrix, you can send every pixel, not just one point.",
+          latex:
+            "RH = \\begin{pmatrix}0&-1\\\\-1&0\\end{pmatrix},\\; RH\\begin{pmatrix}2\\\\1\\end{pmatrix} = \\begin{pmatrix}-1\\\\-2\\end{pmatrix}, \\qquad HR = \\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\; HR\\begin{pmatrix}2\\\\1\\end{pmatrix} = \\begin{pmatrix}1\\\\2\\end{pmatrix}",
+        },
+        {
+          text: "**Interpret.** $RH$ is a reflection in the line $y = -x$ and $HR$ is a reflection in $y = x$. The sticker ends up in opposite quadrants.",
+        },
+      ],
+      answer:
+        "The order of the buttons matters, and the matrices say exactly how: the sticker lands at $(-1, -2)$ one way and $(1, 2)$ the other.",
     },
-    {
-      type: "math",
-      latex:
-        "RH = \\begin{pmatrix}0&-1\\\\-1&0\\end{pmatrix},\\; RH\\begin{pmatrix}2\\\\1\\end{pmatrix} = \\begin{pmatrix}-1\\\\-2\\end{pmatrix}; \\qquad HR = \\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\; HR\\begin{pmatrix}2\\\\1\\end{pmatrix} = \\begin{pmatrix}1\\\\2\\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3: interpret.** $RH$ is a reflection in the line $y = -x$ and $HR$ is a reflection in $y = x$. The sticker ends up in opposite quadrants. The order of the buttons matters, and the matrices say exactly how.",
-    },
+    { type: "heading", text: "Three surprises: what matrix algebra loses" },
     {
       type: "text",
       content:
@@ -772,18 +852,32 @@ const lesson03: LessonSeed = {
         "For numbers, $ab = 0$ forces $a = 0$ or $b = 0$. For matrices, $AB = O$ can happen with **neither** $A$ nor $B$ zero. It happens exactly when everything $B$ outputs lies in what $A$ destroys. Another pair: $\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}\\begin{pmatrix}1&-1\\\\-1&1\\end{pmatrix} = O$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — every $B$ with $AB = O$ (JEE-style).** Let $A = \\begin{pmatrix}1&2\\\\2&4\\end{pmatrix}$. Find all $2\\times2$ matrices $B$ with $AB = O$.\n\n**Step 1: think in columns.** Column $j$ of $AB$ is $A\\mathbf{b}_j$ (Lesson 1.1), so $AB = O$ means $A$ kills **each column** of $B$. *Why this step:* one matrix equation becomes two copies of the same vector equation.\n\n**Step 2: what does $A$ kill?** $A\\begin{pmatrix}x\\\\y\\end{pmatrix} = \\begin{pmatrix}x + 2y\\\\2x + 4y\\end{pmatrix} = \\mathbf{0}$ exactly when $x = -2y$, i.e. when $(x, y)$ is a multiple of $(-2, 1)$. (Row 2 of $A$ is twice row 1, so there is only one condition.)\n\n**Step 3: assemble.** Both columns must be multiples of $(-2, 1)$:",
+      type: "worked-example",
+      id: "mx1-3-we2",
+      title: "Worked example 2: every $B$ with $AB = O$ (JEE-style)",
+      problem:
+        "Let $A = \\begin{pmatrix}1&2\\\\2&4\\end{pmatrix}$. Find all $2\\times2$ matrices $B$ with $AB = O$.",
+      steps: [
+        {
+          text: "**Think in columns.** Column $j$ of $AB$ is $A\\mathbf{b}_j$ (Lesson 1.1), so $AB = O$ means $A$ kills **each column** of $B$. *Why this step:* one matrix equation becomes two copies of the same vector equation.",
+        },
+        {
+          text: "**What does $A$ kill?** $A\\begin{pmatrix}x\\\\y\\end{pmatrix} = \\begin{pmatrix}x + 2y\\\\2x + 4y\\end{pmatrix} = \\mathbf{0}$ exactly when $x = -2y$, i.e. when $(x, y)$ is a multiple of $(-2, 1)$. (Row 2 of $A$ is twice row 1, so there is only one condition.)",
+        },
+        {
+          text: "**Assemble.** Both columns must be multiples of $(-2, 1)$:",
+          latex: "B = \\begin{pmatrix}-2r & -2s\\\\ r & s\\end{pmatrix}, \\quad r, s \\text{ any real numbers}",
+        },
+        {
+          text: "For instance $r = 1$, $s = 3$ gives $B = \\begin{pmatrix}-2&-6\\\\1&3\\end{pmatrix}$. Row 1 of $A$ against its columns gives $-2 + 2 = 0$ and $-6 + 6 = 0$, and row 2 gives twice those.",
+        },
+      ],
+      answer: "$B = \\begin{pmatrix}-2r & -2s\\\\ r & s\\end{pmatrix}$ for any real $r$, $s$",
     },
     {
-      type: "math",
-      latex: "B = \\begin{pmatrix}-2r & -2s\\\\ r & s\\end{pmatrix}, \\quad r, s \\text{ any real numbers}",
-    },
-    {
       type: "text",
       content:
-        "For instance $r = 1$, $s = 3$ gives $B = \\begin{pmatrix}-2&-6\\\\1&3\\end{pmatrix}$. Row 1 of $A$ against its columns gives $-2 + 2 = 0$ and $-6 + 6 = 0$, and row 2 gives twice those. Geometrically, $A$ squashes the plane onto the line through $(1, 2)$ and flattens the whole line through $(-2, 1)$ to the origin. Any $B$ whose outputs all lie on that second line is wiped out.",
+        "Geometrically, $A$ squashes the plane onto the line through $(1, 2)$ and flattens the whole line through $(-2, 1)$ to the origin. Any $B$ whose outputs all lie on that second line is wiped out.",
     },
     {
       type: "text",
@@ -971,11 +1065,32 @@ const lesson03: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "Who commutes with the shear?" },
+    {
+      type: "worked-example",
+      id: "mx1-3-we3",
+      title: "Who commutes with the shear?",
+      problem:
+        "Find every $X = \\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$ with $XS = SX$, where $S = \\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$.",
+      steps: [
+        {
+          text: "$XS = \\begin{pmatrix}a & a + b\\\\ c & c + d\\end{pmatrix}$ and $SX = \\begin{pmatrix}a + c & b + d\\\\ c & d\\end{pmatrix}$.",
+        },
+        {
+          text: "**Match entries.** $(1,1)$: $a = a + c$, so $c = 0$. $(1,2)$: $a + b = b + d$, so $a = d$. $(2,2)$: $c + d = d$, again $c = 0$.",
+        },
+        {
+          text: "So $X = \\begin{pmatrix}a&b\\\\0&a\\end{pmatrix} = aI + bN$ with $N = \\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$.",
+        },
+      ],
+      answer: "$X = \\begin{pmatrix}a&b\\\\0&a\\end{pmatrix} = aI + bN$ for any $a$, $b$",
+    },
     {
       type: "text",
       content:
-        "**Worked example — who commutes with the shear?** Find every $X = \\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$ with $XS = SX$, where $S = \\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$.\n\n**Step 1.** $XS = \\begin{pmatrix}a & a + b\\\\ c & c + d\\end{pmatrix}$ and $SX = \\begin{pmatrix}a + c & b + d\\\\ c & d\\end{pmatrix}$.\n\n**Step 2: match entries.** $(1,1)$: $a = a + c$, so $c = 0$. $(1,2)$: $a + b = b + d$, so $a = d$. $(2,2)$: $c + d = d$, again $c = 0$.\n\n**Step 3.** So $X = \\begin{pmatrix}a&b\\\\0&a\\end{pmatrix} = aI + bN$ with $N = \\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$. Only a two-parameter family commutes with $S$, far fewer than all $2\\times2$ matrices. Commuting really is special.",
+        "Only a two-parameter family commutes with $S$, far fewer than all $2\\times2$ matrices. Commuting really is special.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx1-3-q7",
@@ -1076,6 +1191,7 @@ const lesson04: LessonSeed = {
       content:
         "For matrices whose orders make each product defined:\n**Associative:** $(AB)C = A(BC)$.\n**Distributive:** $A(B + C) = AB + AC$ and $(A + B)C = AC + BC$.\n**Identity:** $AI = IA = A$.\n**Scalars move freely:** $k(AB) = (kA)B = A(kB)$.",
     },
+    { type: "heading", text: "Why the laws hold" },
     {
       type: "text",
       content:
@@ -1091,19 +1207,28 @@ const lesson04: LessonSeed = {
         "**Distributivity.** $A(B + C)\\mathbf{v} = A(B\\mathbf{v} + C\\mathbf{v}) = AB\\mathbf{v} + AC\\mathbf{v}$, because a linear map respects sums (Chapter 0). Notice the orders: $A$ stays on the left in every term.\n\n**Associativity is what makes powers meaningful.** $A^3$ could mean $(AA)A$ or $A(AA)$, and associativity says these agree. So $A^n$ is simply \"apply $A$, $n$ times\", and $A^mA^n = A^{m+n}$ as with numbers.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example — city and village (associativity at work).** Each year 10% of a district's city population moves to the villages, and 20% of the village population moves to the city. Write the populations (in thousands) as $\\mathbf{v} = \\begin{pmatrix}\\text{city}\\\\\\text{village}\\end{pmatrix}$ and start with $\\mathbf{v}_0 = (600, 400)$.\n\n**Step 1: build the one-year matrix $M$ by columns.** Column 1 is what happens to 1 city-dweller: 0.9 stays, 0.1 leaves for the villages. Column 2 is what happens to 1 villager: 0.2 goes to the city, 0.8 stays. *Why columns:* a column records what happens to one unit of each input, exactly as with $\\hat{\\imath}$ and $\\hat{\\jmath}$.",
+      type: "worked-example",
+      id: "mx1-4-we1",
+      title: "City and village (associativity at work)",
+      problem:
+        "Each year 10% of a district's city population moves to the villages, and 20% of the village population moves to the city. Write the populations (in thousands) as $\\mathbf{v} = \\begin{pmatrix}\\text{city}\\\\\\text{village}\\end{pmatrix}$ and start with $\\mathbf{v}_0 = (600, 400)$. Find the populations after one year and after two years.",
+      steps: [
+        {
+          text: "**Build the one-year matrix $M$ by columns.** Column 1 is what happens to 1 city-dweller: 0.9 stays, 0.1 leaves for the villages. Column 2 is what happens to 1 villager: 0.2 goes to the city, 0.8 stays. *Why columns:* a column records what happens to one unit of each input, exactly as with $\\hat{\\imath}$ and $\\hat{\\jmath}$.",
+          latex:
+            "M = \\begin{pmatrix}0.9&0.2\\\\0.1&0.8\\end{pmatrix}, \\qquad M\\mathbf{v}_0 = \\begin{pmatrix}540 + 80\\\\60 + 320\\end{pmatrix} = \\begin{pmatrix}620\\\\380\\end{pmatrix}",
+        },
+        {
+          text: "**Year two, two ways.** Stage by stage: $M(620, 380) = (558 + 76,\\; 62 + 304) = (634, 366)$. Or square first: $M^2 = \\begin{pmatrix}0.83&0.34\\\\0.17&0.66\\end{pmatrix}$, and $M^2(600, 400) = (498 + 136,\\; 102 + 264) = (634, 366)$.",
+        },
+        { text: "**Why they agree.** $M(M\\mathbf{v}_0) = (MM)\\mathbf{v}_0$ is associativity." },
+      ],
+      answer: "After one year $(620, 380)$; after two years $(634, 366)$ either way (in thousands).",
     },
     {
-      type: "math",
-      latex:
-        "M = \\begin{pmatrix}0.9&0.2\\\\0.1&0.8\\end{pmatrix}, \\qquad M\\mathbf{v}_0 = \\begin{pmatrix}540 + 80\\\\60 + 320\\end{pmatrix} = \\begin{pmatrix}620\\\\380\\end{pmatrix}",
-    },
-    {
       type: "text",
       content:
-        "**Step 2: year two, two ways.** Stage by stage: $M(620, 380) = (558 + 76,\\; 62 + 304) = (634, 366)$. Or square first: $M^2 = \\begin{pmatrix}0.83&0.34\\\\0.17&0.66\\end{pmatrix}$, and $M^2(600, 400) = (498 + 136,\\; 102 + 264) = (634, 366)$.\n\n**Step 3: why they agree.** $M(M\\mathbf{v}_0) = (MM)\\mathbf{v}_0$ is associativity. *Why it matters:* a planner who wants year 10 for many different starting populations computes $M^{10}$ once and then does one multiplication per scenario. The total stays at 1000 every year because each column of $M$ adds up to 1: nobody appears or disappears.",
+        "*Why it matters:* a planner who wants year 10 for many different starting populations computes $M^{10}$ once and then does one multiplication per scenario. The total stays at 1000 every year because each column of $M$ adds up to 1: nobody appears or disappears.",
     },
     {
       type: "callout",
@@ -1112,10 +1237,11 @@ const lesson04: LessonSeed = {
       content:
         "$A^2 = AA$ is a matrix product: $\\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}^2 = \\begin{pmatrix}7&10\\\\15&22\\end{pmatrix}$, not $\\begin{pmatrix}1&4\\\\9&16\\end{pmatrix}$. Squaring the entries has no geometric meaning. Applying the transformation twice does.",
     },
+    { type: "heading", text: "Powers by pattern" },
     {
       type: "text",
       content:
-        "**Powers by pattern.** Think of the shear $A = \\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ as pushing each horizontal line sideways by its height. Doing that twice pushes twice as far. So we expect $A^n$ to push by $n$.",
+        "Think of the shear $A = \\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ as pushing each horizontal line sideways by its height. Doing that twice pushes twice as far. So we expect $A^n$ to push by $n$.",
     },
     {
       type: "interactive",
@@ -1130,64 +1256,121 @@ const lesson04: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — prove $A^n = \\begin{pmatrix}1&n\\\\0&1\\end{pmatrix}$ by induction.**\n\n**Base case.** $n = 1$: $A^1 = A = \\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$. True.\n\n**Step.** Suppose $A^k = \\begin{pmatrix}1&k\\\\0&1\\end{pmatrix}$. Then",
-    },
-    {
-      type: "math",
-      latex:
-        "A^{k+1} = A^kA = \\begin{pmatrix}1&k\\\\0&1\\end{pmatrix}\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix} = \\begin{pmatrix}1&1+k\\\\0&1\\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "That is the formula for $n = k+1$, so it holds for every $n \\ge 1$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Rotations.** Turning by $\\theta$, $n$ times, turns by $n\\theta$. So we expect the power of a rotation matrix to be the rotation matrix of $n\\theta$. The NCERT form of this uses the matrix below (it turns by $\\theta$ clockwise; the argument is identical either way).\n\n**Worked example 2 — prove the rotation-power formula by induction.** Let",
-    },
-    {
-      type: "math",
-      latex:
-        "A = \\begin{pmatrix}\\cos\\theta&\\sin\\theta\\\\-\\sin\\theta&\\cos\\theta\\end{pmatrix}. \\quad\\text{Claim: } A^n = \\begin{pmatrix}\\cos n\\theta&\\sin n\\theta\\\\-\\sin n\\theta&\\cos n\\theta\\end{pmatrix}",
+      type: "worked-example",
+      id: "mx1-4-we2",
+      title: "Worked example 1",
+      problem:
+        "For the shear $A = \\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$, prove $A^n = \\begin{pmatrix}1&n\\\\0&1\\end{pmatrix}$ by induction.",
+      steps: [
+        { text: "**Base case.** $n = 1$: $A^1 = A = \\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$. True." },
+        {
+          text: "**Inductive step.** Suppose $A^k = \\begin{pmatrix}1&k\\\\0&1\\end{pmatrix}$. Then",
+          latex:
+            "A^{k+1} = A^kA = \\begin{pmatrix}1&k\\\\0&1\\end{pmatrix}\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix} = \\begin{pmatrix}1&1+k\\\\0&1\\end{pmatrix}",
+        },
+        { text: "That is the formula for $n = k+1$, so it holds for every $n \\ge 1$." },
+      ],
+      answer: "$A^n = \\begin{pmatrix}1&n\\\\0&1\\end{pmatrix}$ for every $n \\ge 1$.",
     },
     {
       type: "text",
       content:
-        "**Base case.** $n = 1$ is $A$ itself.\n\n**Step.** Suppose the formula holds for $n = k$. Then $A^{k+1} = A^kA$, and its $(1,1)$ entry is row 1 of $A^k$ dot column 1 of $A$: $\\cos k\\theta\\cos\\theta - \\sin k\\theta\\sin\\theta = \\cos(k+1)\\theta$. Its $(1,2)$ entry is $\\cos k\\theta\\sin\\theta + \\sin k\\theta\\cos\\theta = \\sin(k+1)\\theta$. The second row works the same way, giving $-\\sin(k+1)\\theta$ and $\\cos(k+1)\\theta$.\n\nThe product of matrices has turned into the **addition formulas** for $\\cos$ and $\\sin$. That is composition again: two turns add their angles. Consequences: a rotation by $90^\\circ$ has $A^4 = I$, and one by $30^\\circ$ has $A^{12} = I$.",
+        "**Rotations.** Turning by $\\theta$, $n$ times, turns by $n\\theta$. So we expect the power of a rotation matrix to be the rotation matrix of $n\\theta$. The NCERT form of this uses the matrix below (it turns by $\\theta$ clockwise; the argument is identical either way).",
+    },
+    {
+      type: "worked-example",
+      id: "mx1-4-we3",
+      title: "Worked example 2: prove the rotation-power formula by induction",
+      problem:
+        "Let\n\n$$A = \\begin{pmatrix}\\cos\\theta&\\sin\\theta\\\\-\\sin\\theta&\\cos\\theta\\end{pmatrix}. \\quad\\text{Claim: } A^n = \\begin{pmatrix}\\cos n\\theta&\\sin n\\theta\\\\-\\sin n\\theta&\\cos n\\theta\\end{pmatrix}$$\n\nProve the claim for every $n \\ge 1$ by induction.",
+      steps: [
+        { text: "**Base case.** $n = 1$ is $A$ itself." },
+        {
+          text: "**Inductive step.** Suppose the formula holds for $n = k$. Then $A^{k+1} = A^kA$, and its $(1,1)$ entry is row 1 of $A^k$ dot column 1 of $A$: $\\cos k\\theta\\cos\\theta - \\sin k\\theta\\sin\\theta = \\cos(k+1)\\theta$.",
+        },
+        { text: "Its $(1,2)$ entry is $\\cos k\\theta\\sin\\theta + \\sin k\\theta\\cos\\theta = \\sin(k+1)\\theta$." },
+        { text: "The second row works the same way, giving $-\\sin(k+1)\\theta$ and $\\cos(k+1)\\theta$." },
+      ],
+      answer:
+        "$A^n = \\begin{pmatrix}\\cos n\\theta&\\sin n\\theta\\\\-\\sin n\\theta&\\cos n\\theta\\end{pmatrix}$ for every $n \\ge 1$.",
     },
     {
       type: "text",
       content:
-        "**A related CBSE item.** For this $A$, find $\\theta$ in $(0, \\frac{\\pi}{2})$ with $A + A^T = I$. Here $A^T = \\begin{pmatrix}\\cos\\theta&-\\sin\\theta\\\\\\sin\\theta&\\cos\\theta\\end{pmatrix}$ (transpose swaps rows and columns; more in Lesson 1.6), so $A + A^T = \\begin{pmatrix}2\\cos\\theta&0\\\\0&2\\cos\\theta\\end{pmatrix}$. Setting this equal to $I$ gives $\\cos\\theta = \\frac{1}{2}$, so $\\theta = \\frac{\\pi}{3}$.",
+        "The product of matrices has turned into the **addition formulas** for $\\cos$ and $\\sin$. That is composition again: two turns add their angles. Consequences: a rotation by $90^\\circ$ has $A^4 = I$, and one by $30^\\circ$ has $A^{12} = I$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx1-4-we4",
+      title: "A related CBSE item",
+      problem:
+        "For $A = \\begin{pmatrix}\\cos\\theta&\\sin\\theta\\\\-\\sin\\theta&\\cos\\theta\\end{pmatrix}$, find $\\theta$ in $(0, \\frac{\\pi}{2})$ with $A + A^T = I$.",
+      steps: [
+        {
+          text: "Here $A^T = \\begin{pmatrix}\\cos\\theta&-\\sin\\theta\\\\\\sin\\theta&\\cos\\theta\\end{pmatrix}$ (transpose swaps rows and columns; more in Lesson 1.6), so $A + A^T = \\begin{pmatrix}2\\cos\\theta&0\\\\0&2\\cos\\theta\\end{pmatrix}$.",
+        },
+        { text: "Setting this equal to $I$ gives $\\cos\\theta = \\frac{1}{2}$, so $\\theta = \\frac{\\pi}{3}$." },
+      ],
+      answer: "$\\theta = \\frac{\\pi}{3}$",
     },
     {
       type: "text",
       content:
         "**All-ones matrix.** $J = \\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$ has $J^2 = \\begin{pmatrix}2&2\\\\2&2\\end{pmatrix} = 2J$. Then $J^3 = 2J^2 = 4J$, and in general $J^n = 2^{n-1}J$.",
     },
+    { type: "heading", text: "Matrix polynomials" },
     {
       type: "text",
       content:
-        "**Matrix polynomials.** Because powers, sums and scalar multiples all make sense, so does an expression like $A^2 - 5A + 7I$. The constant term must be written $7I$, not $7$: you cannot add a number to a matrix.\n\n**Worked example 3 (CBSE staple).** Show that $A = \\begin{pmatrix}3&1\\\\-1&2\\end{pmatrix}$ satisfies $A^2 - 5A + 7I = O$, and use it to find $A^3$.\n\n**Step 1: $A^2$.** $A^2 = \\begin{pmatrix}9-1 & 3+2\\\\ -3-2 & -1+4\\end{pmatrix} = \\begin{pmatrix}8&5\\\\-5&3\\end{pmatrix}$.\n\n**Step 2: substitute.** $A^2 - 5A + 7I = \\begin{pmatrix}8-15+7 & 5-5+0\\\\ -5+5+0 & 3-10+7\\end{pmatrix} = \\begin{pmatrix}0&0\\\\0&0\\end{pmatrix}$.\n\n**Step 3: reduce $A^3$.** From the identity, $A^2 = 5A - 7I$. Multiply both sides by $A$:",
+        "Because powers, sums and scalar multiples all make sense, so does an expression like $A^2 - 5A + 7I$. The constant term must be written $7I$, not $7$: you cannot add a number to a matrix.",
     },
     {
-      type: "math",
-      latex:
-        "A^3 = 5A^2 - 7A = 5(5A - 7I) - 7A = 18A - 35I = \\begin{pmatrix}19&18\\\\-18&1\\end{pmatrix}",
+      type: "worked-example",
+      id: "mx1-4-we5",
+      title: "Worked example 3 (CBSE staple)",
+      problem:
+        "Show that $A = \\begin{pmatrix}3&1\\\\-1&2\\end{pmatrix}$ satisfies $A^2 - 5A + 7I = O$, and use it to find $A^3$.",
+      steps: [
+        {
+          text: "**$A^2$.** $A^2 = \\begin{pmatrix}9-1 & 3+2\\\\ -3-2 & -1+4\\end{pmatrix} = \\begin{pmatrix}8&5\\\\-5&3\\end{pmatrix}$.",
+        },
+        {
+          text: "**Substitute.** $A^2 - 5A + 7I = \\begin{pmatrix}8-15+7 & 5-5+0\\\\ -5+5+0 & 3-10+7\\end{pmatrix} = \\begin{pmatrix}0&0\\\\0&0\\end{pmatrix}$.",
+        },
+        {
+          text: "**Reduce $A^3$.** From the identity, $A^2 = 5A - 7I$. Multiply both sides by $A$:",
+          latex:
+            "A^3 = 5A^2 - 7A = 5(5A - 7I) - 7A = 18A - 35I = \\begin{pmatrix}19&18\\\\-18&1\\end{pmatrix}",
+        },
+        {
+          text: "Check directly: $A^2A = \\begin{pmatrix}8&5\\\\-5&3\\end{pmatrix}\\begin{pmatrix}3&1\\\\-1&2\\end{pmatrix} = \\begin{pmatrix}24-5 & 8+10\\\\ -15-3 & -5+6\\end{pmatrix} = \\begin{pmatrix}19&18\\\\-18&1\\end{pmatrix}$.",
+        },
+      ],
+      answer: "$A^2 - 5A + 7I = O$, and $A^3 = 18A - 35I = \\begin{pmatrix}19&18\\\\-18&1\\end{pmatrix}$",
     },
     {
       type: "text",
       content:
-        "Check directly: $A^2A = \\begin{pmatrix}8&5\\\\-5&3\\end{pmatrix}\\begin{pmatrix}3&1\\\\-1&2\\end{pmatrix} = \\begin{pmatrix}24-5 & 8+10\\\\ -15-3 & -5+6\\end{pmatrix} = \\begin{pmatrix}19&18\\\\-18&1\\end{pmatrix}$. The identity turned a cubic into a linear expression in $A$. Multiplying by $A$ again and substituting gets you any power this way.",
+        "The identity turned a cubic into a linear expression in $A$. Multiplying by $A$ again and substituting gets you any power this way.",
+    },
+    {
+      type: "worked-example",
+      id: "mx1-4-we6",
+      title: "Worked example 4",
+      problem: "Find $k$ so that $A = \\begin{pmatrix}3&-2\\\\4&-2\\end{pmatrix}$ satisfies $A^2 = kA - 2I$.",
+      steps: [
+        {
+          text: "$A^2 = \\begin{pmatrix}9-8 & -6+4\\\\ 12-8 & -8+4\\end{pmatrix} = \\begin{pmatrix}1&-2\\\\4&-4\\end{pmatrix}$.",
+        },
+        { text: "$kA - 2I = \\begin{pmatrix}3k-2 & -2k\\\\ 4k & -2k-2\\end{pmatrix}$." },
+        { text: "**Match entries.** The $(1,2)$ entry gives $-2k = -2$, so $k = 1$." },
+        { text: "Check the rest: $3(1) - 2 = 1$, $4(1) = 4$, $-2 - 2 = -4$. All four agree, so $k = 1$." },
+      ],
+      answer: "$k = 1$",
     },
     {
       type: "text",
-      content:
-        "**Worked example 4.** Find $k$ so that $A = \\begin{pmatrix}3&-2\\\\4&-2\\end{pmatrix}$ satisfies $A^2 = kA - 2I$.\n\n**Step 1.** $A^2 = \\begin{pmatrix}9-8 & -6+4\\\\ 12-8 & -8+4\\end{pmatrix} = \\begin{pmatrix}1&-2\\\\4&-4\\end{pmatrix}$.\n\n**Step 2.** $kA - 2I = \\begin{pmatrix}3k-2 & -2k\\\\ 4k & -2k-2\\end{pmatrix}$.\n\n**Step 3: match entries.** The $(1,2)$ entry gives $-2k = -2$, so $k = 1$. Check the rest: $3(1) - 2 = 1$, $4(1) = 4$, $-2 - 2 = -4$. All four agree, so $k = 1$. Always check every entry: one entry can give a value that the others reject.",
+      content: "Always check every entry: one entry can give a value that the others reject.",
     },
     {
       type: "callout",
@@ -1207,20 +1390,39 @@ const lesson04: LessonSeed = {
       content:
         "The **trace** of a square matrix is the sum of its diagonal entries: $\\operatorname{tr}A = a_{11} + a_{22} + \\cdots + a_{nn}$. For a $2\\times2$ matrix it is the $a + d$ above.\n$\\operatorname{tr}(A + B) = \\operatorname{tr}A + \\operatorname{tr}B$ and $\\operatorname{tr}(kA) = k\\operatorname{tr}A$, since the diagonal adds and scales entry by entry.\n$\\operatorname{tr}(AB) = \\operatorname{tr}(BA)$, even though $AB \\ne BA$: $\\operatorname{tr}(AB) = \\sum_i\\sum_k a_{ik}b_{ki}$, and $\\operatorname{tr}(BA) = \\sum_k\\sum_i b_{ki}a_{ik}$ is the same sum of the same products in a different order.",
     },
+    { type: "heading", text: "When the binomial theorem is allowed" },
     {
       type: "text",
       content:
-        "**When the binomial theorem is allowed.** Expanding $(A + B)^n$ as $\\sum_r \\binom{n}{r}A^{n-r}B^r$ collects terms like $ABA$ and $A^2B$ together. That is legal **only when $AB = BA$** (Lesson 1.3). The cheapest commuting partner is $I$, which commutes with everything, so $(aI + N)^n$ can always be expanded binomially.\n\n**Worked example 5 (JEE) — powers of $A = \\begin{pmatrix}3&1\\\\0&3\\end{pmatrix}$.**\n\n**Step 1: split.** $A = 3I + N$ with $N = \\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$, and $N^2 = O$ (Lesson 1.5 calls this nilpotent).\n\n**Step 2: expand.** $3I$ commutes with $N$, so $(3I + N)^n = (3I)^n + n(3I)^{n-1}N + \\binom{n}{2}(3I)^{n-2}N^2 + \\cdots$. Every term from $N^2$ on is $O$.\n\n**Step 3: read off.**",
+        "Expanding $(A + B)^n$ as $\\sum_r \\binom{n}{r}A^{n-r}B^r$ collects terms like $ABA$ and $A^2B$ together. That is legal **only when $AB = BA$** (Lesson 1.3). The cheapest commuting partner is $I$, which commutes with everything, so $(aI + N)^n$ can always be expanded binomially.",
     },
     {
-      type: "math",
-      latex:
-        "A^n = 3^nI + n\\,3^{n-1}N = \\begin{pmatrix}3^n & n\\,3^{n-1}\\\\ 0 & 3^n\\end{pmatrix}",
+      type: "worked-example",
+      id: "mx1-4-we7",
+      title: "Worked example 5 (JEE)",
+      problem: "Find $A^n$ for $A = \\begin{pmatrix}3&1\\\\0&3\\end{pmatrix}$.",
+      steps: [
+        {
+          text: "**Split.** $A = 3I + N$ with $N = \\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$, and $N^2 = O$ (Lesson 1.5 calls this nilpotent).",
+        },
+        {
+          text: "**Expand.** $3I$ commutes with $N$, so $(3I + N)^n = (3I)^n + n(3I)^{n-1}N + \\binom{n}{2}(3I)^{n-2}N^2 + \\cdots$. Every term from $N^2$ on is $O$.",
+        },
+        {
+          text: "**Read off.**",
+          latex:
+            "A^n = 3^nI + n\\,3^{n-1}N = \\begin{pmatrix}3^n & n\\,3^{n-1}\\\\ 0 & 3^n\\end{pmatrix}",
+        },
+        {
+          text: "Check $n = 2$: $A^2 = \\begin{pmatrix}9&6\\\\0&9\\end{pmatrix}$, and the formula gives $9$ and $2\\cdot3 = 6$.",
+        },
+      ],
+      answer: "$A^n = \\begin{pmatrix}3^n & n\\,3^{n-1}\\\\ 0 & 3^n\\end{pmatrix}$",
     },
     {
       type: "text",
       content:
-        "Check $n = 2$: $A^2 = \\begin{pmatrix}9&6\\\\0&9\\end{pmatrix}$, and the formula gives $9$ and $2\\cdot3 = 6$.\n\n**The same trick for an idempotent.** If $A^2 = A$ then every power $A^r$ is $A$, and $I$ commutes with $A$, so $(I + A)^n = I + \\binom{n}{1}A + \\binom{n}{2}A + \\cdots + \\binom{n}{n}A = I + (2^n - 1)A$.",
+        "**The same trick for an idempotent.** If $A^2 = A$ then every power $A^r$ is $A$, and $I$ commutes with $A$, so $(I + A)^n = I + \\binom{n}{1}A + \\binom{n}{2}A + \\cdots + \\binom{n}{n}A = I + (2^n - 1)A$.",
     },
     {
       type: "callout",
@@ -1229,6 +1431,7 @@ const lesson04: LessonSeed = {
       content:
         "With $A = \\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$, $B = \\begin{pmatrix}1&0\\\\1&1\\end{pmatrix}$ from Lesson 1.3, $(A + B)^2 \\ne A^2 + 2AB + B^2$. Before writing $\\binom{n}{r}$, check that the two pieces commute.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx1-4-q1",
@@ -1534,6 +1737,7 @@ const lesson05: LessonSeed = {
           "Load each preset and describe what it does before reading the table below. For the idempotent and nilpotent ones, ask: what would a second application do?",
       },
     },
+    { type: "heading", text: "Named by pattern and by behaviour" },
     {
       type: "callout",
       variant: "definition",
@@ -1569,60 +1773,87 @@ const lesson05: LessonSeed = {
       content:
         "**A diagonal matrix may have zeros on the diagonal.** $\\begin{pmatrix}5&0\\\\0&0\\end{pmatrix}$ is diagonal, and so is $O$. The rule is only about the *off*-diagonal entries.\n**Scalar is stricter than diagonal.** $\\begin{pmatrix}2&0\\\\0&3\\end{pmatrix}$ is diagonal but not scalar. Every scalar matrix is diagonal; not every diagonal matrix is scalar.",
     },
+    { type: "heading", text: "Why a projection is idempotent" },
     {
       type: "text",
       content:
-        "**Why a projection is idempotent.** Project every vector straight down onto the x-axis. After one projection every vector already lies on the x-axis, so projecting again changes nothing: $P^2 = P$. Conversely, any $A$ with $A^2 = A$ fixes everything in its output, which is what a projection does.\n\n**Why a reflection is involutory.** A mirror image of a mirror image is the original, so $F^2 = I$. On the grid: reflect in $y = x$ twice and $\\hat{\\imath}$, $\\hat{\\jmath}$ swap, then swap back.",
+        "Project every vector straight down onto the x-axis. After one projection every vector already lies on the x-axis, so projecting again changes nothing: $P^2 = P$. Conversely, any $A$ with $A^2 = A$ fixes everything in its output, which is what a projection does.\n\n**Why a reflection is involutory.** A mirror image of a mirror image is the original, so $F^2 = I$. On the grid: reflect in $y = x$ twice and $\\hat{\\imath}$, $\\hat{\\jmath}$ swap, then swap back.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example — shadows (application).** Model a vertical slice of a playground: $x$ runs along the ground and $y$ is height. Sunlight slants so that for every metre a ray drops, it moves $0.5$ m to the right. A point $(x, y)$ slides down its ray to the ground at $(x + 0.5y,\\; 0)$.\n\n**Step 1: the matrix.** Read off the columns: $\\hat{\\imath} = (1, 0)$ is already on the ground and stays; $\\hat{\\jmath} = (0, 1)$ lands at $(0.5, 0)$.",
+      type: "worked-example",
+      id: "mx1-5-we1",
+      title: "Shadows (application)",
+      problem:
+        "Model a vertical slice of a playground: $x$ runs along the ground and $y$ is height. Sunlight slants so that for every metre a ray drops, it moves $0.5$ m to the right. A point $(x, y)$ slides down its ray to the ground at $(x + 0.5y,\\; 0)$. Find the matrix $P$ of this shadow map, where the top of a 3 m pole standing at $x = 2$ casts its shadow, and $P^2$.",
+      steps: [
+        {
+          text: "**The matrix.** Read off the columns: $\\hat{\\imath} = (1, 0)$ is already on the ground and stays; $\\hat{\\jmath} = (0, 1)$ lands at $(0.5, 0)$.",
+          latex:
+            "P = \\begin{pmatrix}1&0.5\\\\0&0\\end{pmatrix}, \\qquad P\\begin{pmatrix}2\\\\3\\end{pmatrix} = \\begin{pmatrix}3.5\\\\0\\end{pmatrix}",
+        },
+        { text: "So the top of a 3 m pole standing at $x = 2$ casts its shadow at $x = 3.5$." },
+        {
+          text: "**Predict $P^2$ before computing.** A shadow is already on the ground, and the shadow of a shadow is itself. So $P^2$ should equal $P$. *Why predict first:* the behaviour tells you the answer; the computation only confirms it.",
+        },
+        {
+          text: "**Confirm.** Row 1, $(1, 0.5)$, against the columns: $1 + 0 = 1$ and $0.5 + 0 = 0.5$. Row 2 is all zeros. So $P^2 = P$.",
+        },
+        {
+          text: "This $P$ is not diagonal and does not look special, yet its behaviour (flatten along a slant, then stay put) forces idempotence. It is the $k = 0.5$ member of the $\\begin{pmatrix}1&k\\\\0&0\\end{pmatrix}$ family.",
+        },
+      ],
+      answer: "$P = \\begin{pmatrix}1&0.5\\\\0&0\\end{pmatrix}$, and $P^2 = P$: the shadow map is idempotent.",
+    },
+    { type: "heading", text: "Worked examples: idempotent, involutory, nilpotent" },
+    {
+      type: "worked-example",
+      id: "mx1-5-we2",
+      title: "Worked example 1: a $3\\times3$ idempotent (NCERT)",
+      problem: "Show $A = \\begin{pmatrix}2&-2&-4\\\\-1&3&4\\\\1&-2&-3\\end{pmatrix}$ is idempotent.",
+      steps: [
+        { text: "**Row 1 $(2,-2,-4)$** against the columns: $4 + 2 - 4 = 2$; $-4 - 6 + 8 = -2$; $-8 - 8 + 12 = -4$." },
+        { text: "**Row 2 $(-1,3,4)$:** $-2 - 3 + 4 = -1$; $2 + 9 - 8 = 3$; $4 + 12 - 12 = 4$." },
+        { text: "**Row 3 $(1,-2,-3)$:** $2 + 2 - 3 = 1$; $-2 - 6 + 6 = -2$; $-4 - 8 + 9 = -3$." },
+        { text: "Every row of $A^2$ reproduces the row of $A$, so $A^2 = A$." },
+      ],
+      answer: "$A^2 = A$, so $A$ is idempotent.",
     },
     {
-      type: "math",
-      latex:
-        "P = \\begin{pmatrix}1&0.5\\\\0&0\\end{pmatrix}, \\qquad P\\begin{pmatrix}2\\\\3\\end{pmatrix} = \\begin{pmatrix}3.5\\\\0\\end{pmatrix}",
+      type: "worked-example",
+      id: "mx1-5-we3",
+      title: "Worked example 2: a family of involutory and nilpotent $2\\times2$ matrices",
+      problem:
+        "Try $A = \\begin{pmatrix}a&b\\\\c&-a\\end{pmatrix}$ (diagonal entries summing to 0). Find $A^2$, and decide when $A$ is involutory and when it is nilpotent.",
+      steps: [
+        {
+          latex:
+            "A^2 = \\begin{pmatrix}a^2 + bc & ab - ab\\\\ ca - ac & bc + a^2\\end{pmatrix} = (a^2 + bc)\\,I",
+        },
+        {
+          text: "So within this family, $A^2 = I$ exactly when $a^2 + bc = 1$, and $A^2 = O$ (nilpotent) exactly when $a^2 + bc = 0$. Apart from $\\pm I$, every $2\\times2$ involutory matrix has this form, and so does every nilpotent one.",
+        },
+        {
+          text: "- $\\begin{pmatrix}3&-4\\\\2&-3\\end{pmatrix}$: $9 - 8 = 1$, involutory.\n- $\\begin{pmatrix}2&-4\\\\1&-2\\end{pmatrix}$: $4 - 4 = 0$, nilpotent of index 2.",
+        },
+      ],
+      answer: "Involutory when $a^2 + bc = 1$; nilpotent when $a^2 + bc = 0$.",
     },
     {
-      type: "text",
-      content:
-        "So the top of a 3 m pole standing at $x = 2$ casts its shadow at $x = 3.5$.\n\n**Step 2: predict $P^2$ before computing.** A shadow is already on the ground, and the shadow of a shadow is itself. So $P^2$ should equal $P$. *Why predict first:* the behaviour tells you the answer; the computation only confirms it.\n\n**Step 3: confirm.** Row 1, $(1, 0.5)$, against the columns: $1 + 0 = 1$ and $0.5 + 0 = 0.5$. Row 2 is all zeros. So $P^2 = P$. This $P$ is not diagonal and does not look special, yet its behaviour (flatten along a slant, then stay put) forces idempotence. It is the $k = 0.5$ member of the $\\begin{pmatrix}1&k\\\\0&0\\end{pmatrix}$ family.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 1 — a $3\\times3$ idempotent (NCERT).** Show $A = \\begin{pmatrix}2&-2&-4\\\\-1&3&4\\\\1&-2&-3\\end{pmatrix}$ is idempotent.\n\n**Row 1 $(2,-2,-4)$** against the columns: $4 + 2 - 4 = 2$; $-4 - 6 + 8 = -2$; $-8 - 8 + 12 = -4$.\n\n**Row 2 $(-1,3,4)$:** $-2 - 3 + 4 = -1$; $2 + 9 - 8 = 3$; $4 + 12 - 12 = 4$.\n\n**Row 3 $(1,-2,-3)$:** $2 + 2 - 3 = 1$; $-2 - 6 + 6 = -2$; $-4 - 8 + 9 = -3$.\n\nEvery row of $A^2$ reproduces the row of $A$, so $A^2 = A$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2 — a family of involutory and nilpotent $2\\times2$ matrices.** Try $A = \\begin{pmatrix}a&b\\\\c&-a\\end{pmatrix}$ (diagonal entries summing to 0):",
-    },
-    {
-      type: "math",
-      latex:
-        "A^2 = \\begin{pmatrix}a^2 + bc & ab - ab\\\\ ca - ac & bc + a^2\\end{pmatrix} = (a^2 + bc)\\,I",
-    },
-    {
-      type: "text",
-      content:
-        "So within this family, $A^2 = I$ exactly when $a^2 + bc = 1$, and $A^2 = O$ (nilpotent) exactly when $a^2 + bc = 0$. Apart from $\\pm I$, every $2\\times2$ involutory matrix has this form, and so does every nilpotent one.\n\n- $\\begin{pmatrix}3&-4\\\\2&-3\\end{pmatrix}$: $9 - 8 = 1$, involutory.\n- $\\begin{pmatrix}2&-4\\\\1&-2\\end{pmatrix}$: $4 - 4 = 0$, nilpotent of index 2.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 — nilpotent of index 3.** $N = \\begin{pmatrix}0&1&0\\\\0&0&1\\\\0&0&0\\end{pmatrix}$ shifts each coordinate up one slot: $(x, y, z) \\mapsto (y, z, 0)$, i.e. $\\mathbf{e}_3 \\to \\mathbf{e}_2 \\to \\mathbf{e}_1 \\to \\mathbf{0}$. So",
-    },
-    {
-      type: "math",
-      latex:
-        "N^2 = \\begin{pmatrix}0&0&1\\\\0&0&0\\\\0&0&0\\end{pmatrix} \\ne O, \\qquad N^3 = O",
-    },
-    {
-      type: "text",
-      content:
-        "Each application pushes the non-zero diagonal one place further towards the corner, until it falls off.",
+      type: "worked-example",
+      id: "mx1-5-we4",
+      title: "Worked example 3: a shift matrix",
+      problem:
+        "$N = \\begin{pmatrix}0&1&0\\\\0&0&1\\\\0&0&0\\end{pmatrix}$ shifts each coordinate up one slot: $(x, y, z) \\mapsto (y, z, 0)$, i.e. $\\mathbf{e}_3 \\to \\mathbf{e}_2 \\to \\mathbf{e}_1 \\to \\mathbf{0}$. Show that $N$ is nilpotent and find its index.",
+      steps: [
+        {
+          latex:
+            "N^2 = \\begin{pmatrix}0&0&1\\\\0&0&0\\\\0&0&0\\end{pmatrix} \\ne O, \\qquad N^3 = O",
+        },
+        {
+          text: "Each application pushes the non-zero diagonal one place further towards the corner, until it falls off.",
+        },
+      ],
+      answer: "$N^2 \\ne O$ but $N^3 = O$: nilpotent of index 3.",
     },
     {
       type: "callout",
@@ -1632,20 +1863,29 @@ const lesson05: LessonSeed = {
         "If $A$ is idempotent, so is $I - A$: $(I - A)^2 = I - 2A + A^2 = I - 2A + A = I - A$. (Expanding like this is safe because $I$ commutes with $A$.) Geometrically: if $A$ projects onto one line, $I - A$ keeps the part $A$ threw away.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — from a reflection to a projection (JEE-style).** If $F$ is involutory, show that $P = \\frac{1}{2}(I + F)$ is idempotent, and identify $P$ when $F = \\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$.\n\n**Step 1: expand.** $P^2 = \\frac{1}{4}(I + F)^2 = \\frac{1}{4}(I + 2F + F^2)$. *Why the expansion is legal:* $I$ commutes with $F$, so the cross terms $IF + FI$ really are $2F$.\n\n**Step 2: use $F^2 = I$.** $P^2 = \\frac{1}{4}(2I + 2F) = \\frac{1}{2}(I + F) = P$.\n\n**Step 3: the example.**",
+      type: "worked-example",
+      id: "mx1-5-we5",
+      title: "Worked example 4: from a reflection to a projection (JEE-style)",
+      problem:
+        "If $F$ is involutory, show that $P = \\frac{1}{2}(I + F)$ is idempotent, and identify $P$ when $F = \\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$.",
+      steps: [
+        {
+          text: "**Expand.** $P^2 = \\frac{1}{4}(I + F)^2 = \\frac{1}{4}(I + 2F + F^2)$. *Why the expansion is legal:* $I$ commutes with $F$, so the cross terms $IF + FI$ really are $2F$.",
+        },
+        { text: "**Use $F^2 = I$.** $P^2 = \\frac{1}{4}(2I + 2F) = \\frac{1}{2}(I + F) = P$." },
+        {
+          text: "**The example.**",
+          latex:
+            "P = \\frac{1}{2}\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix} = \\begin{pmatrix}\\frac{1}{2}&\\frac{1}{2}\\\\\\frac{1}{2}&\\frac{1}{2}\\end{pmatrix}, \\qquad P\\begin{pmatrix}4\\\\0\\end{pmatrix} = \\begin{pmatrix}2\\\\2\\end{pmatrix}",
+        },
+        {
+          text: "$P$ sends $(4, 0)$ to $(2, 2)$, the midpoint of $(4, 0)$ and its mirror image $(0, 4)$. That is the geometric reason behind the algebra: averaging a point with its reflection lands it on the mirror, so $\\frac{1}{2}(I + F)$ is the projection onto the mirror line $y = x$, and projections are idempotent.",
+        },
+      ],
+      answer:
+        "$P^2 = P$; for this $F$, $P = \\begin{pmatrix}\\frac{1}{2}&\\frac{1}{2}\\\\\\frac{1}{2}&\\frac{1}{2}\\end{pmatrix}$, the projection onto the line $y = x$.",
     },
-    {
-      type: "math",
-      latex:
-        "P = \\frac{1}{2}\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix} = \\begin{pmatrix}\\frac{1}{2}&\\frac{1}{2}\\\\\\frac{1}{2}&\\frac{1}{2}\\end{pmatrix}, \\qquad P\\begin{pmatrix}4\\\\0\\end{pmatrix} = \\begin{pmatrix}2\\\\2\\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "$P$ sends $(4, 0)$ to $(2, 2)$, the midpoint of $(4, 0)$ and its mirror image $(0, 4)$. That is the geometric reason behind the algebra: averaging a point with its reflection lands it on the mirror, so $\\frac{1}{2}(I + F)$ is the projection onto the mirror line $y = x$, and projections are idempotent.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx1-5-q1",
@@ -1847,6 +2087,7 @@ const lesson06: LessonSeed = {
       content:
         "A table of marks can be stored with students as rows and subjects as columns, or the other way round. Same data, flipped layout. That flip is the **transpose**, and it turns out to interact with multiplication in a very specific way.",
     },
+    { type: "heading", text: "The transpose and its basic rules" },
     {
       type: "callout",
       variant: "definition",
@@ -1864,6 +2105,7 @@ const lesson06: LessonSeed = {
       content:
         "Three properties follow straight from the entry formula:\n\n$(A^T)^T = A$: flipping twice restores.\n\n$(A + B)^T = A^T + B^T$: adding entry by entry commutes with moving entries around.\n\n$(kA)^T = kA^T$: scaling every entry commutes with moving them.\n\nThe fourth one involves a product, and it has a twist.",
     },
+    { type: "heading", text: "The reversal rule for $(AB)^T$" },
     {
       type: "text",
       content:
@@ -1884,7 +2126,26 @@ const lesson06: LessonSeed = {
     {
       type: "text",
       content:
-        "The orders confirm it. $AB$ is $m\\times p$, so $(AB)^T$ is $p\\times m$. $B^TA^T$ is $(p\\times n)(n\\times m) = p\\times m$, which matches. $A^TB^T$ would be $(n\\times m)(p\\times n)$, which is not even defined unless $m = p$.\n\n**Worked example 1 — check it.** $A = \\begin{pmatrix}1&2\\\\0&3\\end{pmatrix}$, $B = \\begin{pmatrix}2&0\\\\1&-1\\end{pmatrix}$.\n\n**Step 1.** $AB = \\begin{pmatrix}4&-2\\\\3&-3\\end{pmatrix}$, so $(AB)^T = \\begin{pmatrix}4&3\\\\-2&-3\\end{pmatrix}$.\n\n**Step 2.** $B^TA^T = \\begin{pmatrix}2&1\\\\0&-1\\end{pmatrix}\\begin{pmatrix}1&0\\\\2&3\\end{pmatrix} = \\begin{pmatrix}4&3\\\\-2&-3\\end{pmatrix}$. It matches.\n\n**Step 3.** For contrast, $A^TB^T = \\begin{pmatrix}1&0\\\\2&3\\end{pmatrix}\\begin{pmatrix}2&1\\\\0&-1\\end{pmatrix} = \\begin{pmatrix}2&1\\\\4&-1\\end{pmatrix}$. This one is wrong.",
+        "The orders confirm it. $AB$ is $m\\times p$, so $(AB)^T$ is $p\\times m$. $B^TA^T$ is $(p\\times n)(n\\times m) = p\\times m$, which matches. $A^TB^T$ would be $(n\\times m)(p\\times n)$, which is not even defined unless $m = p$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx1-6-we1",
+      title: "Worked example 1: check it",
+      problem:
+        "$A = \\begin{pmatrix}1&2\\\\0&3\\end{pmatrix}$, $B = \\begin{pmatrix}2&0\\\\1&-1\\end{pmatrix}$. Find $(AB)^T$, and check whether it equals $B^TA^T$ or $A^TB^T$.",
+      steps: [
+        {
+          text: "$AB = \\begin{pmatrix}4&-2\\\\3&-3\\end{pmatrix}$, so $(AB)^T = \\begin{pmatrix}4&3\\\\-2&-3\\end{pmatrix}$.",
+        },
+        {
+          text: "$B^TA^T = \\begin{pmatrix}2&1\\\\0&-1\\end{pmatrix}\\begin{pmatrix}1&0\\\\2&3\\end{pmatrix} = \\begin{pmatrix}4&3\\\\-2&-3\\end{pmatrix}$. It matches.",
+        },
+        {
+          text: "For contrast, $A^TB^T = \\begin{pmatrix}1&0\\\\2&3\\end{pmatrix}\\begin{pmatrix}2&1\\\\0&-1\\end{pmatrix} = \\begin{pmatrix}2&1\\\\4&-1\\end{pmatrix}$. This one is wrong.",
+        },
+      ],
+      answer: "$(AB)^T = B^TA^T = \\begin{pmatrix}4&3\\\\-2&-3\\end{pmatrix}$, while $A^TB^T$ is a different matrix.",
     },
     {
       type: "callout",
@@ -1894,20 +2155,27 @@ const lesson06: LessonSeed = {
         "Transposing a product reverses the order. $A^TB^T$ is $(BA)^T$, a different matrix whenever $AB \\ne BA$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example — two ways to store a mark sheet (application).** Three students took two tests. With students as rows, the mark sheet $M$ is $3\\times2$. The final score counts test 1 at 30% and test 2 at 70%, so the weight column is $\\mathbf{w} = \\begin{pmatrix}0.3\\\\0.7\\end{pmatrix}$.",
+      type: "worked-example",
+      id: "mx1-6-we2",
+      title: "Two ways to store a mark sheet (application)",
+      problem:
+        "Three students took two tests. With students as rows, the mark sheet $M$ is $3\\times2$. The final score counts test 1 at 30% and test 2 at 70%, so the weight column is $\\mathbf{w} = \\begin{pmatrix}0.3\\\\0.7\\end{pmatrix}$.\n\n$$M = \\begin{pmatrix}80&70\\\\60&90\\\\75&85\\end{pmatrix}, \\qquad M\\mathbf{w} = \\begin{pmatrix}24 + 49\\\\18 + 63\\\\22.5 + 59.5\\end{pmatrix} = \\begin{pmatrix}73\\\\81\\\\82\\end{pmatrix}$$\n\n**The other layout.** A second teacher stores the same data with tests as rows. Her table is $M^T$, a $2\\times3$ matrix, and she wants the three final scores as a row. Which product should she compute, and what does it give?",
+      steps: [
+        {
+          text: "**Which product?** $M^T\\mathbf{w}$ is $(2\\times3)(2\\times1)$: not defined. The reversal rule says what to do: $(M\\mathbf{w})^T = \\mathbf{w}^TM^T$, which is $(1\\times2)(2\\times3) = 1\\times3$. *Why this step:* transposing a whole calculation reverses the order of its factors, so the weights move to the front.",
+        },
+        {
+          text: "**Compute.** $\\mathbf{w}^TM^T = (0.3,\\; 0.7)\\begin{pmatrix}80&60&75\\\\70&90&85\\end{pmatrix} = (24 + 49,\\; 18 + 63,\\; 22.5 + 59.5) = (73, 81, 82)$. The same scores, laid out as a row.",
+        },
+      ],
+      answer: "$\\mathbf{w}^TM^T = (73, 81, 82)$",
     },
     {
-      type: "math",
-      latex:
-        "M = \\begin{pmatrix}80&70\\\\60&90\\\\75&85\\end{pmatrix}, \\qquad M\\mathbf{w} = \\begin{pmatrix}24 + 49\\\\18 + 63\\\\22.5 + 59.5\\end{pmatrix} = \\begin{pmatrix}73\\\\81\\\\82\\end{pmatrix}",
-    },
-    {
       type: "text",
       content:
-        "**Step 1: the other layout.** A second teacher stores the same data with tests as rows. Her table is $M^T$, a $2\\times3$ matrix, and she wants the three final scores as a row.\n\n**Step 2: which product?** $M^T\\mathbf{w}$ is $(2\\times3)(2\\times1)$: not defined. The reversal rule says what to do: $(M\\mathbf{w})^T = \\mathbf{w}^TM^T$, which is $(1\\times2)(2\\times3) = 1\\times3$. *Why this step:* transposing a whole calculation reverses the order of its factors, so the weights move to the front.\n\n**Step 3: compute.** $\\mathbf{w}^TM^T = (0.3,\\; 0.7)\\begin{pmatrix}80&60&75\\\\70&90&85\\end{pmatrix} = (24 + 49,\\; 18 + 63,\\; 22.5 + 59.5) = (73, 81, 82)$. The same scores, laid out as a row. Spreadsheets and data libraries switch layouts like this constantly; the reversal rule tells you where each factor goes.",
+        "Spreadsheets and data libraries switch layouts like this constantly; the reversal rule tells you where each factor goes.",
     },
+    { type: "heading", text: "Symmetric and skew-symmetric matrices" },
     {
       type: "callout",
       variant: "definition",
@@ -1947,6 +2215,7 @@ const lesson06: LessonSeed = {
           "The dashed lines are directions the matrix only stretches. For the symmetric presets they are always perpendicular. The skew-symmetric one has none: it is a pure quarter turn.",
       },
     },
+    { type: "heading", text: "Splitting a matrix into symmetric and skew" },
     {
       type: "text",
       content:
@@ -1969,13 +2238,51 @@ const lesson06: LessonSeed = {
     {
       type: "text",
       content:
-        "This split is unique: if $A = P + Q$ with $P$ symmetric and $Q$ skew, transposing gives $A^T = P - Q$, and solving these two equations forces the formulas above.\n\n**Worked example 2 — a $2\\times2$ split.** $A = \\begin{pmatrix}3&5\\\\1&-1\\end{pmatrix}$, $A^T = \\begin{pmatrix}3&1\\\\5&-1\\end{pmatrix}$.\n$P = \\frac{1}{2}\\begin{pmatrix}6&6\\\\6&-2\\end{pmatrix} = \\begin{pmatrix}3&3\\\\3&-1\\end{pmatrix}$, $Q = \\frac{1}{2}\\begin{pmatrix}0&4\\\\-4&0\\end{pmatrix} = \\begin{pmatrix}0&2\\\\-2&0\\end{pmatrix}$. Check: $P + Q = A$.\n\nShortcut: each off-diagonal pair $(a_{ij}, a_{ji})$ splits into its average (symmetric part) and half its difference (skew part). The diagonal goes entirely into $P$.",
+        "This split is unique: if $A = P + Q$ with $P$ symmetric and $Q$ skew, transposing gives $A^T = P - Q$, and solving these two equations forces the formulas above.",
+    },
+    {
+      type: "worked-example",
+      id: "mx1-6-we3",
+      title: "Worked example 2: a $2\\times2$ split",
+      problem:
+        "$A = \\begin{pmatrix}3&5\\\\1&-1\\end{pmatrix}$. Write $A = P + Q$ with $P$ symmetric and $Q$ skew-symmetric.",
+      steps: [
+        { text: "$A^T = \\begin{pmatrix}3&1\\\\5&-1\\end{pmatrix}$." },
+        {
+          text: "$P = \\frac{1}{2}\\begin{pmatrix}6&6\\\\6&-2\\end{pmatrix} = \\begin{pmatrix}3&3\\\\3&-1\\end{pmatrix}$, $Q = \\frac{1}{2}\\begin{pmatrix}0&4\\\\-4&0\\end{pmatrix} = \\begin{pmatrix}0&2\\\\-2&0\\end{pmatrix}$.",
+        },
+        { text: "Check: $P + Q = A$." },
+      ],
+      answer:
+        "$P = \\begin{pmatrix}3&3\\\\3&-1\\end{pmatrix}$ (symmetric), $Q = \\begin{pmatrix}0&2\\\\-2&0\\end{pmatrix}$ (skew-symmetric)",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 — a $3\\times3$ split (CBSE).** $A = \\begin{pmatrix}2&-2&-4\\\\-1&3&4\\\\1&-2&-3\\end{pmatrix}$.\n\n**Step 1: transpose.** $A^T = \\begin{pmatrix}2&-1&1\\\\-2&3&-2\\\\-4&4&-3\\end{pmatrix}$.\n\n**Step 2: symmetric part.** $A + A^T = \\begin{pmatrix}4&-3&-3\\\\-3&6&2\\\\-3&2&-6\\end{pmatrix}$, so $P = \\begin{pmatrix}2&-\\frac{3}{2}&-\\frac{3}{2}\\\\-\\frac{3}{2}&3&1\\\\-\\frac{3}{2}&1&-3\\end{pmatrix}$.\n\n**Step 3: skew part.** $A - A^T = \\begin{pmatrix}0&-1&-5\\\\1&0&6\\\\5&-6&0\\end{pmatrix}$, so $Q = \\begin{pmatrix}0&-\\frac{1}{2}&-\\frac{5}{2}\\\\\\frac{1}{2}&0&3\\\\\\frac{5}{2}&-3&0\\end{pmatrix}$.\n\n**Step 4: check.** Row 3 of $P + Q$: $-\\frac{3}{2} + \\frac{5}{2} = 1$, $1 - 3 = -2$, $-3 + 0 = -3$. That is row 3 of $A$. Check the other rows the same way.",
+        "Shortcut: each off-diagonal pair $(a_{ij}, a_{ji})$ splits into its average (symmetric part) and half its difference (skew part). The diagonal goes entirely into $P$.",
     },
+    {
+      type: "worked-example",
+      id: "mx1-6-we4",
+      title: "Worked example 3: a $3\\times3$ split (CBSE)",
+      problem:
+        "$A = \\begin{pmatrix}2&-2&-4\\\\-1&3&4\\\\1&-2&-3\\end{pmatrix}$. Write $A = P + Q$ with $P$ symmetric and $Q$ skew-symmetric.",
+      steps: [
+        { text: "**Transpose.** $A^T = \\begin{pmatrix}2&-1&1\\\\-2&3&-2\\\\-4&4&-3\\end{pmatrix}$." },
+        {
+          text: "**Symmetric part.** $A + A^T = \\begin{pmatrix}4&-3&-3\\\\-3&6&2\\\\-3&2&-6\\end{pmatrix}$, so $P = \\begin{pmatrix}2&-\\frac{3}{2}&-\\frac{3}{2}\\\\-\\frac{3}{2}&3&1\\\\-\\frac{3}{2}&1&-3\\end{pmatrix}$.",
+        },
+        {
+          text: "**Skew part.** $A - A^T = \\begin{pmatrix}0&-1&-5\\\\1&0&6\\\\5&-6&0\\end{pmatrix}$, so $Q = \\begin{pmatrix}0&-\\frac{1}{2}&-\\frac{5}{2}\\\\\\frac{1}{2}&0&3\\\\\\frac{5}{2}&-3&0\\end{pmatrix}$.",
+        },
+        {
+          text: "**Check.** Row 3 of $P + Q$: $-\\frac{3}{2} + \\frac{5}{2} = 1$, $1 - 3 = -2$, $-3 + 0 = -3$. That is row 3 of $A$. Check the other rows the same way.",
+        },
+      ],
+      answer:
+        "$P = \\begin{pmatrix}2&-\\frac{3}{2}&-\\frac{3}{2}\\\\-\\frac{3}{2}&3&1\\\\-\\frac{3}{2}&1&-3\\end{pmatrix}$, $Q = \\begin{pmatrix}0&-\\frac{1}{2}&-\\frac{5}{2}\\\\\\frac{1}{2}&0&3\\\\\\frac{5}{2}&-3&0\\end{pmatrix}$",
+    },
+    { type: "heading", text: "Using the reversal rule in proofs" },
     {
       type: "callout",
       variant: "tip",
@@ -1984,24 +2291,47 @@ const lesson06: LessonSeed = {
         "$AA^T$ and $A^TA$ are always symmetric: $(AA^T)^T = (A^T)^TA^T = AA^T$.\nIf $A$ and $B$ are symmetric, $AB$ is symmetric **exactly when** $AB = BA$, since $(AB)^T = B^TA^T = BA$.\nOrthogonal matrices from 1.5 are exactly those with $A^TA = I$: entry $(i,j)$ of $A^TA$ is column $i$ dot column $j$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example — orthogonal by the columns (NCERT/JEE).** Find $x$, $y$, $z$ so that the matrix below satisfies $A^TA = I$.",
+      type: "worked-example",
+      id: "mx1-6-we5",
+      title: "Orthogonal by the columns (NCERT/JEE)",
+      problem:
+        "Find $x$, $y$, $z$ so that the matrix below satisfies $A^TA = I$.\n\n$$A = \\begin{pmatrix}0&2y&z\\\\x&y&-z\\\\x&-y&z\\end{pmatrix}$$",
+      steps: [
+        {
+          text: "**Translate.** Entry $(i, j)$ of $A^TA$ is (column $i$ of $A$) $\\cdot$ (column $j$ of $A$). So $A^TA = I$ says that each column has squared length 1 and different columns have dot product 0. *Why this beats multiplying out:* nine entries collapse into three length conditions plus three checks.",
+        },
+        {
+          text: "**Lengths.** Column 1, $(0, x, x)$: $2x^2 = 1$, so $x = \\pm\\frac{1}{\\sqrt{2}}$. Column 2, $(2y, y, -y)$: $6y^2 = 1$, so $y = \\pm\\frac{1}{\\sqrt{6}}$. Column 3, $(z, -z, z)$: $3z^2 = 1$, so $z = \\pm\\frac{1}{\\sqrt{3}}$.",
+        },
+        {
+          text: "**Check perpendicularity.** Columns 1 and 2: $0 + xy - xy = 0$. Columns 1 and 3: $0 - xz + xz = 0$. Columns 2 and 3: $2yz - yz - yz = 0$. These vanish for every choice of signs, so all eight sign choices work.",
+        },
+      ],
+      answer:
+        "$x = \\pm\\frac{1}{\\sqrt{2}}$, $y = \\pm\\frac{1}{\\sqrt{6}}$, $z = \\pm\\frac{1}{\\sqrt{3}}$, with any of the eight sign choices",
     },
     {
-      type: "math",
-      latex: "A = \\begin{pmatrix}0&2y&z\\\\x&y&-z\\\\x&-y&z\\end{pmatrix}",
+      type: "worked-example",
+      id: "mx1-6-we6",
+      title: "Worked example 4: proofs CBSE asks for",
+      problem:
+        "- **(a) If $A$, $B$ are symmetric, then $AB - BA$ is skew-symmetric.**\n- **(b) If $A$, $B$ are symmetric, then $AB + BA$ is symmetric.**\n- **(c) If $A$ is symmetric, so is $B^TAB$ (for any $B$ of the same order).**\n\nEach one is the same move: transpose the expression, apply the reversal rule, then substitute $A^T = \\pm A$.",
+      steps: [
+        { text: "$(AB - BA)^T = (AB)^T - (BA)^T = B^TA^T - A^TB^T = BA - AB = -(AB - BA)$." },
+        { text: "$(AB + BA)^T = B^TA^T + A^TB^T = BA + AB$." },
+        {
+          text: "$(B^TAB)^T = B^TA^T(B^T)^T = B^TAB$. The same computation shows that if $A$ is skew, $(B^TAB)^T = B^T(-A)B = -B^TAB$, so $B^TAB$ is skew.",
+        },
+      ],
+      answer:
+        "(a) $(AB - BA)^T = -(AB - BA)$, so it is skew-symmetric. (b) $(AB + BA)^T = AB + BA$, so it is symmetric. (c) $(B^TAB)^T = B^TAB$, so it is symmetric.",
     },
     {
       type: "text",
       content:
-        "**Step 1: translate.** Entry $(i, j)$ of $A^TA$ is (column $i$ of $A$) $\\cdot$ (column $j$ of $A$). So $A^TA = I$ says that each column has squared length 1 and different columns have dot product 0. *Why this beats multiplying out:* nine entries collapse into three length conditions plus three checks.\n\n**Step 2: lengths.** Column 1, $(0, x, x)$: $2x^2 = 1$, so $x = \\pm\\frac{1}{\\sqrt{2}}$. Column 2, $(2y, y, -y)$: $6y^2 = 1$, so $y = \\pm\\frac{1}{\\sqrt{6}}$. Column 3, $(z, -z, z)$: $3z^2 = 1$, so $z = \\pm\\frac{1}{\\sqrt{3}}$.\n\n**Step 3: check perpendicularity.** Columns 1 and 2: $0 + xy - xy = 0$. Columns 1 and 3: $0 - xz + xz = 0$. Columns 2 and 3: $2yz - yz - yz = 0$. These vanish for every choice of signs, so all eight sign choices work.",
+        "Notice how (a) and (b) fit Lesson 1.3: $AB - BA$ measures how far $A$ and $B$ are from commuting.",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 — proofs CBSE asks for.** Each one is the same move: transpose the expression, apply the reversal rule, then substitute $A^T = \\pm A$.\n\n**(a) If $A$, $B$ are symmetric, then $AB - BA$ is skew-symmetric.** $(AB - BA)^T = (AB)^T - (BA)^T = B^TA^T - A^TB^T = BA - AB = -(AB - BA)$.\n\n**(b) If $A$, $B$ are symmetric, then $AB + BA$ is symmetric.** $(AB + BA)^T = B^TA^T + A^TB^T = BA + AB$.\n\n**(c) If $A$ is symmetric, so is $B^TAB$ (for any $B$ of the same order).** $(B^TAB)^T = B^TA^T(B^T)^T = B^TAB$. The same computation shows that if $A$ is skew, $(B^TAB)^T = B^T(-A)B = -B^TAB$, so $B^TAB$ is skew.\n\nNotice how (a) and (b) fit Lesson 1.3: $AB - BA$ measures how far $A$ and $B$ are from commuting.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx1-6-q1",

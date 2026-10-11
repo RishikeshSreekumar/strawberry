@@ -59,6 +59,7 @@ const lesson01: LessonSeed = {
           "Play the full sweep 0 → 2 for each preset. The grid always returns home — until you pick a collapsing matrix, where the slider stops at 1.",
       },
     },
+    { type: "heading", text: "Why a collapse cannot be undone" },
     {
       type: "text",
       content:
@@ -69,6 +70,7 @@ const lesson01: LessonSeed = {
       content:
         "Make that concrete with $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$. Then\n\n$A\\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 4 \\end{pmatrix}$ and $A\\begin{pmatrix} 0 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 4 \\end{pmatrix}$.\n\nTwo different inputs, one output. Any \"undo\" would have to send $(2, 4)$ back to $(2,0)$ **and** to $(0,1)$ at the same time. No function can do that, so no inverse exists.",
     },
+    { type: "heading", text: "Defining the inverse matrix" },
     {
       type: "callout",
       variant: "definition",
@@ -81,6 +83,7 @@ const lesson01: LessonSeed = {
       content:
         "Why both orders, $AB$ **and** $BA$? Because \"undo\" has to work either way round: apply $A$ then $A^{-1}$ and you are home; apply $A^{-1}$ then $A$ and you are home too. (For square matrices it turns out one equation forces the other, but the definition asks for both.) And only **square** matrices qualify: a $2\\times3$ matrix sends 3D space into the plane, which necessarily crushes a whole direction.",
     },
+    { type: "heading", text: "An inverse exists exactly when $\\det A \\ne 0$" },
     {
       type: "text",
       content:
@@ -102,30 +105,110 @@ const lesson01: LessonSeed = {
       content:
         "Suppose $B$ and $C$ both undo $A$: $BA = I$ and $AC = I$. Then\n\n$B = BI = B(AC) = (BA)C = IC = C.$\n\nSo there is only ever one inverse, and writing *the* inverse $A^{-1}$ is justified. The whole proof is associativity: bracket the product $BAC$ two ways.",
     },
+    { type: "heading", text: "Testing for invertibility" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — checking a claimed inverse.** Is $B = \\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix}$ the inverse of $A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 1 \\end{pmatrix}$?\n\n**Step 1.** Multiply row by column: $AB = \\begin{pmatrix} 2\\cdot1 + 1\\cdot(-1) & 2\\cdot(-1) + 1\\cdot 2 \\\\ 1\\cdot1 + 1\\cdot(-1) & 1\\cdot(-1)+1\\cdot2 \\end{pmatrix} = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}$.\n\n**Step 2.** The other order: $BA = \\begin{pmatrix} 2-1 & 1-1 \\\\ -2+2 & -1+2 \\end{pmatrix} = I$.\n\n**Conclusion.** Yes, $B = A^{-1}$. Note that $\\det A = 2 - 1 = 1 \\ne 0$, as it must be.",
+      type: "worked-example",
+      id: "mx3-1-we1",
+      title: "Worked example 1: checking a claimed inverse",
+      problem:
+        "Is $B = \\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix}$ the inverse of $A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 1 \\end{pmatrix}$?",
+      steps: [
+        {
+          text:
+            "Multiply row by column: $AB = \\begin{pmatrix} 2\\cdot1 + 1\\cdot(-1) & 2\\cdot(-1) + 1\\cdot 2 \\\\ 1\\cdot1 + 1\\cdot(-1) & 1\\cdot(-1)+1\\cdot2 \\end{pmatrix} = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}$.",
+        },
+        {
+          text:
+            "The other order: $BA = \\begin{pmatrix} 2-1 & 1-1 \\\\ -2+2 & -1+2 \\end{pmatrix} = I$.",
+        },
+      ],
+      answer: "Yes, $B = A^{-1}$. Note that $\\det A = 2 - 1 = 1 \\ne 0$, as it must be.",
+    },
+    {
+      type: "worked-example",
+      id: "mx3-1-we2",
+      title: "Worked example 2: deciding invertibility",
+      problem: "For which $k$ is $A = \\begin{pmatrix} k & 4 \\\\ 1 & k \\end{pmatrix}$ singular?",
+      steps: [
+        { text: "$\\det A = k\\cdot k - 4\\cdot 1 = k^2 - 4$." },
+        { text: "Singular means $\\det A = 0$: $k^2 = 4$, so $k = 2$ or $k = -2$." },
+        {
+          text:
+            "**Check** $k = 2$: $A = \\begin{pmatrix} 2 & 4 \\\\ 1 & 2 \\end{pmatrix}$: the first row is twice the second, so both columns point along $(2,1)$ and the plane collapses onto that line. For every other $k$, $A$ is invertible.",
+        },
+      ],
+      answer: "$A$ is singular exactly when $k = 2$ or $k = -2$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx3-1-we3",
+      title: "Worked example 3: can this code be cracked back? (application)",
+      problem:
+        "Two friends send two-letter messages as number pairs ($A = 1, B = 2, \\ldots, Z = 26$). Before sending, each pair $(x, y)$ is scrambled by a matrix: the sent pair is $M\\begin{pmatrix} x \\\\ y \\end{pmatrix}$. Their first choice is $M = \\begin{pmatrix} 2 & 1 \\\\ 4 & 2 \\end{pmatrix}$. Can the receiver always unscramble? If not, change one entry of $M$ so that they can.",
+      steps: [
+        {
+          text:
+            "**Test the determinant.** $\\det M = 2\\cdot2 - 1\\cdot4 = 0$. *Why start here:* the determinant decides invertibility in one line, before any clever guessing.",
+        },
+        {
+          text:
+            "**Find the collision the zero warns about.** \"AC\" is $(1, 3)$, and $M\\begin{pmatrix} 1 \\\\ 3 \\end{pmatrix} = \\begin{pmatrix} 2 + 3 \\\\ 4 + 6 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix}$. \"BA\" is $(2, 1)$, and $M\\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 4 + 1 \\\\ 8 + 2 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix}$. *Why this matters:* the receiver gets $(5, 10)$ and cannot tell which word was sent. Every output lies on the line $y = 2x$, which is the collapse you saw in the grid.",
+        },
+        {
+          text:
+            "**Repair the code.** Change one entry: $M = \\begin{pmatrix} 2 & 1 \\\\ 3 & 2 \\end{pmatrix}$, with $\\det M = 4 - 3 = 1 \\ne 0$. Now \"AC\" goes to $(5, 9)$ and \"BA\" to $(5, 8)$, and the undo matrix $\\begin{pmatrix} 2 & -1 \\\\ -3 & 2 \\end{pmatrix}$ (you will derive it in Lesson 3.2) recovers the message: $\\begin{pmatrix} 2 & -1 \\\\ -3 & 2 \\end{pmatrix}\\begin{pmatrix} 5 \\\\ 9 \\end{pmatrix} = \\begin{pmatrix} 10 - 9 \\\\ -15 + 18 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 3 \\end{pmatrix}$, which is \"AC\". ✓",
+        },
+      ],
+      answer:
+        "No: $\\det M = 0$, so different messages can arrive as the same pair (\"AC\" and \"BA\" both become $(5, 10)$). Changing the 4 to a 3 gives $\\det M = 1$, and the code can be undone.",
+    },
+    {
+      type: "worked-example",
+      id: "mx3-1-we4",
+      title: "Worked example 4: a 3×3 with a parameter (JEE style)",
+      problem:
+        "For which real $\\lambda$ is $A = \\begin{pmatrix} 1 & \\lambda & 0 \\\\ 0 & 1 & \\lambda \\\\ \\lambda & 0 & 1 \\end{pmatrix}$ singular?",
+      steps: [
+        {
+          text:
+            "**Expand along row 1.** $\\det A = 1\\begin{vmatrix} 1 & \\lambda \\\\ 0 & 1 \\end{vmatrix} - \\lambda\\begin{vmatrix} 0 & \\lambda \\\\ \\lambda & 1 \\end{vmatrix} + 0 = 1\\cdot(1 - 0) - \\lambda(0 - \\lambda^2) = 1 + \\lambda^3.$ *Why row 1:* it contains a zero, so one of the three minors is not needed.",
+        },
+        {
+          text:
+            "**Set it to zero.** $\\lambda^3 = -1$. The only real cube root of $-1$ is $\\lambda = -1$. (Factorising, $1 + \\lambda^3 = (1 + \\lambda)(1 - \\lambda + \\lambda^2)$, and the quadratic has discriminant $1 - 4 < 0$, so it has no real roots.)",
+        },
+        {
+          text:
+            "**See the collapse.** At $\\lambda = -1$ the rows are $(1, -1, 0)$, $(0, 1, -1)$, $(-1, 0, 1)$, and they add up to $(0, 0, 0)$. One row is minus the sum of the other two, so space is flattened onto a plane. For every other real $\\lambda$, $A^{-1}$ exists.",
+        },
+      ],
+      answer: "$\\lambda = -1$",
+    },
+    {
+      type: "worked-example",
+      id: "mx3-1-we5",
+      title: "Worked example 5: a proof question (CBSE/JEE style)",
+      problem: "$A$ is a square matrix with $A^2 = A$ and $A \\ne I$. Show that $A$ is singular.",
+      steps: [
+        {
+          text:
+            "**Suppose the opposite.** Assume $A^{-1}$ exists. *Why:* the only tool that turns $A^2 = A$ into something simpler is cancelling an $A$, and cancelling is exactly what an inverse allows.",
+        },
+        {
+          text:
+            "**Cancel.** Multiply $A^2 = A$ on the left by $A^{-1}$: $A^{-1}AA = A^{-1}A$, so $IA = I$, which says $A = I$.",
+        },
+        {
+          text:
+            "**Contradiction.** That contradicts $A \\ne I$. So $A^{-1}$ cannot exist, and $|A| = 0$.",
+        },
+      ],
+      answer: "$|A| = 0$: $A$ is singular.",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 — deciding invertibility.** For which $k$ is $A = \\begin{pmatrix} k & 4 \\\\ 1 & k \\end{pmatrix}$ singular?\n\n**Step 1.** $\\det A = k\\cdot k - 4\\cdot 1 = k^2 - 4$.\n\n**Step 2.** Singular means $\\det A = 0$: $k^2 = 4$, so $k = 2$ or $k = -2$.\n\n**Check** $k = 2$: $A = \\begin{pmatrix} 2 & 4 \\\\ 1 & 2 \\end{pmatrix}$: the first row is twice the second, so both columns point along $(2,1)$ and the plane collapses onto that line. For every other $k$, $A$ is invertible.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 — can this code be cracked back? (application)** Two friends send two-letter messages as number pairs ($A = 1, B = 2, \\ldots, Z = 26$). Before sending, each pair $(x, y)$ is scrambled by a matrix: the sent pair is $M\\begin{pmatrix} x \\\\ y \\end{pmatrix}$. Their first choice is $M = \\begin{pmatrix} 2 & 1 \\\\ 4 & 2 \\end{pmatrix}$. Can the receiver always unscramble?\n\n**Step 1 — test the determinant.** $\\det M = 2\\cdot2 - 1\\cdot4 = 0$. *Why start here:* the determinant decides invertibility in one line, before any clever guessing.\n\n**Step 2 — find the collision the zero warns about.** \"AC\" is $(1, 3)$, and $M\\begin{pmatrix} 1 \\\\ 3 \\end{pmatrix} = \\begin{pmatrix} 2 + 3 \\\\ 4 + 6 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix}$. \"BA\" is $(2, 1)$, and $M\\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 4 + 1 \\\\ 8 + 2 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix}$. *Why this matters:* the receiver gets $(5, 10)$ and cannot tell which word was sent. Every output lies on the line $y = 2x$, which is the collapse you saw in the grid.\n\n**Step 3 — repair the code.** Change one entry: $M = \\begin{pmatrix} 2 & 1 \\\\ 3 & 2 \\end{pmatrix}$, with $\\det M = 4 - 3 = 1 \\ne 0$. Now \"AC\" goes to $(5, 9)$ and \"BA\" to $(5, 8)$, and the undo matrix $\\begin{pmatrix} 2 & -1 \\\\ -3 & 2 \\end{pmatrix}$ (you will derive it in Lesson 3.2) recovers the message: $\\begin{pmatrix} 2 & -1 \\\\ -3 & 2 \\end{pmatrix}\\begin{pmatrix} 5 \\\\ 9 \\end{pmatrix} = \\begin{pmatrix} 10 - 9 \\\\ -15 + 18 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 3 \\end{pmatrix}$, which is \"AC\". ✓",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 — a 3×3 with a parameter (JEE style).** For which real $\\lambda$ is $A = \\begin{pmatrix} 1 & \\lambda & 0 \\\\ 0 & 1 & \\lambda \\\\ \\lambda & 0 & 1 \\end{pmatrix}$ singular?\n\n**Step 1 — expand along row 1.** $\\det A = 1\\begin{vmatrix} 1 & \\lambda \\\\ 0 & 1 \\end{vmatrix} - \\lambda\\begin{vmatrix} 0 & \\lambda \\\\ \\lambda & 1 \\end{vmatrix} + 0 = 1\\cdot(1 - 0) - \\lambda(0 - \\lambda^2) = 1 + \\lambda^3.$ *Why row 1:* it contains a zero, so one of the three minors is not needed.\n\n**Step 2 — set it to zero.** $\\lambda^3 = -1$. The only real cube root of $-1$ is $\\lambda = -1$. (Factorising, $1 + \\lambda^3 = (1 + \\lambda)(1 - \\lambda + \\lambda^2)$, and the quadratic has discriminant $1 - 4 < 0$, so it has no real roots.)\n\n**Step 3 — see the collapse.** At $\\lambda = -1$ the rows are $(1, -1, 0)$, $(0, 1, -1)$, $(-1, 0, 1)$, and they add up to $(0, 0, 0)$. One row is minus the sum of the other two, so space is flattened onto a plane. For every other real $\\lambda$, $A^{-1}$ exists.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 — a proof question (CBSE/JEE style).** $A$ is a square matrix with $A^2 = A$ and $A \\ne I$. Show that $A$ is singular.\n\n**Step 1 — suppose the opposite.** Assume $A^{-1}$ exists. *Why:* the only tool that turns $A^2 = A$ into something simpler is cancelling an $A$, and cancelling is exactly what an inverse allows.\n\n**Step 2 — cancel.** Multiply $A^2 = A$ on the left by $A^{-1}$: $A^{-1}AA = A^{-1}A$, so $IA = I$, which says $A = I$.\n\n**Step 3 — contradiction.** That contradicts $A \\ne I$. So $A^{-1}$ cannot exist, and $|A| = 0$.\n\n**Picture.** $A^2 = A$ says \"doing $A$ twice is the same as doing it once\", like a projection onto a line. Projecting a second time changes nothing, and projecting destroys information, so it cannot be undone. Example: $\\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$.",
+        "**Picture.** $A^2 = A$ says \"doing $A$ twice is the same as doing it once\", like a projection onto a line. Projecting a second time changes nothing, and projecting destroys information, so it cannot be undone. Example: $\\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$.",
     },
     {
       type: "table",
@@ -145,6 +228,7 @@ const lesson01: LessonSeed = {
       content:
         "With numbers, $ab = ac$ and $a \\ne 0$ give $b = c$. With matrices the condition is $\\det A \\ne 0$, not $A \\ne O$. Example: $A = \\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$, $B = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$, $C = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$ give $AB = AC = \\begin{pmatrix} 1 & 0 \\\\ 1 & 0 \\end{pmatrix}$, yet $B \\ne C$. The singular $A$ erased the difference.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx3-1-q1",
@@ -352,31 +436,132 @@ const lesson02: LessonSeed = {
       content:
         "**Check by multiplying**, because a derivation deserves a check:\n\n$\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix} = \\begin{pmatrix} ad - bc & -ab + ab \\\\ cd - cd & -bc + ad \\end{pmatrix} = (ad - bc)\\,I.$\n\nDivide by $ad - bc$ and you get exactly $I$. The swapped-and-negated matrix gives $\\det A$ times the identity. Lesson 3.3 names it the **adjoint**, and the same fact holds for every size.",
     },
+    { type: "heading", text: "Computing a 2×2 inverse" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** $A = \\begin{pmatrix} 4 & 7 \\\\ 2 & 6 \\end{pmatrix}$.\n\n**Step 1 — determinant.** $4\\cdot6 - 7\\cdot2 = 24 - 14 = 10 \\ne 0$, so $A^{-1}$ exists.\n\n**Step 2 — swap and negate.** $\\begin{pmatrix} 6 & -7 \\\\ -2 & 4 \\end{pmatrix}$.\n\n**Step 3 — divide.** $A^{-1} = \\dfrac{1}{10}\\begin{pmatrix} 6 & -7 \\\\ -2 & 4 \\end{pmatrix} = \\begin{pmatrix} 0.6 & -0.7 \\\\ -0.2 & 0.4 \\end{pmatrix}$.\n\n**Check.** $\\begin{pmatrix} 4 & 7 \\\\ 2 & 6 \\end{pmatrix}\\begin{pmatrix} 6 & -7 \\\\ -2 & 4 \\end{pmatrix} = \\begin{pmatrix} 24 - 14 & -28 + 28 \\\\ 12 - 12 & -14 + 24 \\end{pmatrix} = 10I$. ✓",
+      type: "worked-example",
+      id: "mx3-2-we1",
+      title: "Worked example 1",
+      problem: "$A = \\begin{pmatrix} 4 & 7 \\\\ 2 & 6 \\end{pmatrix}$. Find $A^{-1}$.",
+      steps: [
+        {
+          text: "**Determinant.** $4\\cdot6 - 7\\cdot2 = 24 - 14 = 10 \\ne 0$, so $A^{-1}$ exists.",
+        },
+        { text: "**Swap and negate.** $\\begin{pmatrix} 6 & -7 \\\\ -2 & 4 \\end{pmatrix}$." },
+        {
+          text:
+            "**Divide.** $A^{-1} = \\dfrac{1}{10}\\begin{pmatrix} 6 & -7 \\\\ -2 & 4 \\end{pmatrix} = \\begin{pmatrix} 0.6 & -0.7 \\\\ -0.2 & 0.4 \\end{pmatrix}$.",
+        },
+        {
+          text:
+            "**Check.** $\\begin{pmatrix} 4 & 7 \\\\ 2 & 6 \\end{pmatrix}\\begin{pmatrix} 6 & -7 \\\\ -2 & 4 \\end{pmatrix} = \\begin{pmatrix} 24 - 14 & -28 + 28 \\\\ 12 - 12 & -14 + 24 \\end{pmatrix} = 10I$. ✓",
+        },
+      ],
+      answer: "$A^{-1} = \\begin{pmatrix} 0.6 & -0.7 \\\\ -0.2 & 0.4 \\end{pmatrix}$",
+    },
+    {
+      type: "worked-example",
+      id: "mx3-2-we2",
+      title: "Worked example 2: a negative determinant",
+      problem: "$A = \\begin{pmatrix} 3 & -2 \\\\ 5 & -4 \\end{pmatrix}$. Find $A^{-1}$.",
+      steps: [
+        { text: "$\\det A = 3(-4) - (-2)(5) = -12 + 10 = -2$." },
+        {
+          text:
+            "Swap and negate: $\\begin{pmatrix} -4 & 2 \\\\ -5 & 3 \\end{pmatrix}$. (Negating $-2$ gives $+2$.)",
+        },
+        {
+          text:
+            "Divide by $-2$: $A^{-1} = \\begin{pmatrix} 2 & -1 \\\\ \\frac52 & -\\frac32 \\end{pmatrix}$.",
+        },
+        {
+          text:
+            "**Check.** Row 1 of $A$ with column 1: $3\\cdot2 + (-2)\\cdot\\frac52 = 6 - 5 = 1$. Row 2 with column 2: $5\\cdot(-1) + (-4)(-\\frac32) = -5 + 6 = 1$. The off-diagonal products are $-3 + 3 = 0$ and $10 - 10 = 0$. ✓",
+        },
+      ],
+      answer: "$A^{-1} = \\begin{pmatrix} 2 & -1 \\\\ \\frac52 & -\\frac32 \\end{pmatrix}$",
+    },
+    { type: "heading", text: "Decoding, matrix equations and self-inverse matrices" },
+    {
+      type: "worked-example",
+      id: "mx3-2-we3",
+      title: "Worked example 3: decoding a secret message (application)",
+      problem:
+        "Letters are numbered $A = 1, \\ldots, Z = 26$ and sent in pairs, scrambled by $M = \\begin{pmatrix} 3 & 1 \\\\ 5 & 2 \\end{pmatrix}$. You receive the pair $(21, 38)$. What was the message?",
+      steps: [
+        {
+          text:
+            "**The receiver needs $M^{-1}$.** $\\det M = 6 - 5 = 1$, so $M^{-1} = \\begin{pmatrix} 2 & -1 \\\\ -5 & 3 \\end{pmatrix}$. *Why this step:* the sender computed $\\mathbf{c} = M\\mathbf{m}$; multiplying on the left by $M^{-1}$ gives $M^{-1}\\mathbf{c} = \\mathbf{m}$.",
+        },
+        {
+          text:
+            "**Unscramble.** $M^{-1}\\begin{pmatrix} 21 \\\\ 38 \\end{pmatrix} = \\begin{pmatrix} 42 - 38 \\\\ -105 + 114 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 9 \\end{pmatrix}$, which is \"DI\".",
+        },
+        {
+          text:
+            "**Check by re-encoding.** $M\\begin{pmatrix} 4 \\\\ 9 \\end{pmatrix} = \\begin{pmatrix} 12 + 9 \\\\ 20 + 18 \\end{pmatrix} = \\begin{pmatrix} 21 \\\\ 38 \\end{pmatrix}$. ✓",
+        },
+      ],
+      answer: "The message was \"DI\", the pair $(4, 9)$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 — a negative determinant.** $A = \\begin{pmatrix} 3 & -2 \\\\ 5 & -4 \\end{pmatrix}$.\n\n**Step 1.** $\\det A = 3(-4) - (-2)(5) = -12 + 10 = -2$.\n\n**Step 2.** Swap and negate: $\\begin{pmatrix} -4 & 2 \\\\ -5 & 3 \\end{pmatrix}$. (Negating $-2$ gives $+2$.)\n\n**Step 3.** Divide by $-2$: $A^{-1} = \\begin{pmatrix} 2 & -1 \\\\ \\frac52 & -\\frac32 \\end{pmatrix}$.\n\n**Check.** Row 1 of $A$ with column 1: $3\\cdot2 + (-2)\\cdot\\frac52 = 6 - 5 = 1$. Row 2 with column 2: $5\\cdot(-1) + (-4)(-\\frac32) = -5 + 6 = 1$. The off-diagonal products are $-3 + 3 = 0$ and $10 - 10 = 0$. ✓",
+        "**Why pick $\\det M = 1$?** You divide by the determinant, so $\\det M = \\pm1$ keeps the decoded numbers whole. This is the idea behind the Hill cipher. Real versions work modulo 26, but the undo principle is the same.",
+    },
+    {
+      type: "worked-example",
+      id: "mx3-2-we4",
+      title: "Worked example 4: solving a matrix equation (CBSE style)",
+      problem:
+        "Find $X$ with $AX = B$, where $A = \\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}$ and $B = \\begin{pmatrix} 1 & 0 \\\\ 2 & 1 \\end{pmatrix}$.",
+      steps: [
+        {
+          text:
+            "**Invert $A$.** $\\det A = 6 - 5 = 1$, so $A^{-1} = \\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}$.",
+        },
+        {
+          text:
+            "**Multiply on the correct side.** $A$ sits on the **left** of $X$, so multiply both sides on the left: $A^{-1}AX = A^{-1}B$, which gives $X = A^{-1}B$. *Why the side matters:* $BA^{-1}$ is a different matrix in general, because matrix products do not commute.",
+        },
+        {
+          text:
+            "**Compute.** $X = \\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}\\begin{pmatrix} 1 & 0 \\\\ 2 & 1 \\end{pmatrix} = \\begin{pmatrix} 3 - 2 & 0 - 1 \\\\ -5 + 4 & 0 + 2 \\end{pmatrix} = \\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix}$.",
+        },
+        {
+          text:
+            "**Check.** $AX = \\begin{pmatrix} 2 - 1 & -2 + 2 \\\\ 5 - 3 & -5 + 6 \\end{pmatrix} = \\begin{pmatrix} 1 & 0 \\\\ 2 & 1 \\end{pmatrix} = B$. ✓",
+        },
+      ],
+      answer: "$X = A^{-1}B = \\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix}$",
+    },
+    {
+      type: "worked-example",
+      id: "mx3-2-we5",
+      title: "Worked example 5: a matrix that is its own inverse (JEE style)",
+      problem:
+        "Show that if $A = \\begin{pmatrix} a & b \\\\ c & -a \\end{pmatrix}$ with $a^2 + bc = 1$, then $A^{-1} = A$.",
+      steps: [
+        {
+          text:
+            "**Determinant.** $\\det A = a(-a) - bc = -(a^2 + bc) = -1$. *Why first:* it is non-zero, so the inverse exists, and it is the number we will divide by.",
+        },
+        {
+          text:
+            "**Swap and negate.** Swapping $a$ and $-a$ and negating $b, c$ gives $\\begin{pmatrix} -a & -b \\\\ -c & a \\end{pmatrix}$.",
+        },
+        {
+          text:
+            "**Divide by $-1$.** $A^{-1} = \\begin{pmatrix} a & b \\\\ c & -a \\end{pmatrix} = A$. ✓",
+        },
+      ],
+      answer: "$\\det A = -1$, and $A^{-1} = A$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 — decoding a secret message (application).** Letters are numbered $A = 1, \\ldots, Z = 26$ and sent in pairs, scrambled by $M = \\begin{pmatrix} 3 & 1 \\\\ 5 & 2 \\end{pmatrix}$. You receive the pair $(21, 38)$. What was the message?\n\n**Step 1 — the receiver needs $M^{-1}$.** $\\det M = 6 - 5 = 1$, so $M^{-1} = \\begin{pmatrix} 2 & -1 \\\\ -5 & 3 \\end{pmatrix}$. *Why this step:* the sender computed $\\mathbf{c} = M\\mathbf{m}$; multiplying on the left by $M^{-1}$ gives $M^{-1}\\mathbf{c} = \\mathbf{m}$.\n\n**Step 2 — unscramble.** $M^{-1}\\begin{pmatrix} 21 \\\\ 38 \\end{pmatrix} = \\begin{pmatrix} 42 - 38 \\\\ -105 + 114 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 9 \\end{pmatrix}$, which is \"DI\".\n\n**Step 3 — check by re-encoding.** $M\\begin{pmatrix} 4 \\\\ 9 \\end{pmatrix} = \\begin{pmatrix} 12 + 9 \\\\ 20 + 18 \\end{pmatrix} = \\begin{pmatrix} 21 \\\\ 38 \\end{pmatrix}$. ✓\n\n**Why pick $\\det M = 1$?** You divide by the determinant, so $\\det M = \\pm1$ keeps the decoded numbers whole. This is the idea behind the Hill cipher. Real versions work modulo 26, but the undo principle is the same.",
+        "**A numerical instance.** $A = \\begin{pmatrix} 3 & 4 \\\\ -2 & -3 \\end{pmatrix}$ has $9 + 4(-2) = 1$, and indeed $A^2 = \\begin{pmatrix} 9 - 8 & 12 - 12 \\\\ -6 + 6 & -8 + 9 \\end{pmatrix} = I$. Geometrically, such matrices behave like reflections: do them twice and you are home.",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 — solving a matrix equation (CBSE style).** Find $X$ with $AX = B$, where $A = \\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}$ and $B = \\begin{pmatrix} 1 & 0 \\\\ 2 & 1 \\end{pmatrix}$.\n\n**Step 1 — invert $A$.** $\\det A = 6 - 5 = 1$, so $A^{-1} = \\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}$.\n\n**Step 2 — multiply on the correct side.** $A$ sits on the **left** of $X$, so multiply both sides on the left: $A^{-1}AX = A^{-1}B$, which gives $X = A^{-1}B$. *Why the side matters:* $BA^{-1}$ is a different matrix in general, because matrix products do not commute.\n\n**Step 3 — compute.** $X = \\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}\\begin{pmatrix} 1 & 0 \\\\ 2 & 1 \\end{pmatrix} = \\begin{pmatrix} 3 - 2 & 0 - 1 \\\\ -5 + 4 & 0 + 2 \\end{pmatrix} = \\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix}$.\n\n**Check.** $AX = \\begin{pmatrix} 2 - 1 & -2 + 2 \\\\ 5 - 3 & -5 + 6 \\end{pmatrix} = \\begin{pmatrix} 1 & 0 \\\\ 2 & 1 \\end{pmatrix} = B$. ✓",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 — a matrix that is its own inverse (JEE style).** Show that if $A = \\begin{pmatrix} a & b \\\\ c & -a \\end{pmatrix}$ with $a^2 + bc = 1$, then $A^{-1} = A$.\n\n**Step 1 — determinant.** $\\det A = a(-a) - bc = -(a^2 + bc) = -1$. *Why first:* it is non-zero, so the inverse exists, and it is the number we will divide by.\n\n**Step 2 — swap and negate.** Swapping $a$ and $-a$ and negating $b, c$ gives $\\begin{pmatrix} -a & -b \\\\ -c & a \\end{pmatrix}$.\n\n**Step 3 — divide by $-1$.** $A^{-1} = \\begin{pmatrix} a & b \\\\ c & -a \\end{pmatrix} = A$. ✓\n\n**A numerical instance.** $A = \\begin{pmatrix} 3 & 4 \\\\ -2 & -3 \\end{pmatrix}$ has $9 + 4(-2) = 1$, and indeed $A^2 = \\begin{pmatrix} 9 - 8 & 12 - 12 \\\\ -6 + 6 & -8 + 9 \\end{pmatrix} = I$. Geometrically, such matrices behave like reflections: do them twice and you are home.",
-    },
+    { type: "heading", text: "Inverses of geometric transformations" },
     {
       type: "text",
       content:
@@ -424,6 +609,7 @@ const lesson02: LessonSeed = {
       content:
         "The most common slip is to swap $a$ and $d$ and then negate **everything**, giving $\\begin{pmatrix} -d & -b \\\\ -c & -a \\end{pmatrix}$. Multiply it by $A$ and the off-diagonal entries are $-2ab$ and $-2cd$, not 0, so the result is not even a multiple of $I$. A related slip negates the diagonal instead of the off-diagonal, giving $\\begin{pmatrix} -d & b \\\\ c & -a \\end{pmatrix} = -\\operatorname{adj}A$, which produces $-A^{-1}$. Only $b$ and $c$ change sign.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx3-2-q1",
@@ -604,6 +790,7 @@ const lesson03: LessonSeed = {
       content:
         "The $2\\times2$ recipe hid a pattern. The matrix $\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$ multiplied $A$ to give $(\\det A)\\,I$. For $3\\times3$ and larger we need a matrix with the same property. Its entries turn out to be the **cofactors** you used in Chapter 2 to expand determinants, arranged in the right places.",
     },
+    { type: "heading", text: "Defining the adjoint" },
     {
       type: "callout",
       variant: "definition",
@@ -616,6 +803,7 @@ const lesson03: LessonSeed = {
       content:
         "**Test it on 2×2.** For $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$: $C_{11} = d$, $C_{12} = -c$, $C_{21} = -b$, $C_{22} = a$. The cofactor matrix is $\\begin{pmatrix} d & -c \\\\ -b & a \\end{pmatrix}$, and transposing gives $\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$, exactly the matrix from Lesson 3.2. The transpose is what put $-b$ in the top-right corner.",
     },
+    { type: "heading", text: "Why $A\\,\\operatorname{adj}A = (\\det A)\\,I$" },
     {
       type: "text",
       content:
@@ -641,20 +829,41 @@ const lesson03: LessonSeed = {
       content:
         "Multiply the entries of one row by the cofactors of a **different** row and add: the answer is always 0. The same holds for columns. This single fact is why the adjoint gives $(\\det A)\\,I$: the diagonal entries are $\\det A$ and every off-diagonal entry is 0.",
     },
+    { type: "heading", text: "Computing a 3×3 adjoint" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — a 3×3 adjoint in steps.** $A = \\begin{pmatrix} 1 & 2 & 1 \\\\ 0 & 3 & 2 \\\\ 1 & 0 & 1 \\end{pmatrix}$.\n\n**Step 1 — row 1 cofactors.**\n$C_{11} = +\\begin{vmatrix} 3 & 2 \\\\ 0 & 1 \\end{vmatrix} = 3$, $C_{12} = -\\begin{vmatrix} 0 & 2 \\\\ 1 & 1 \\end{vmatrix} = -(0 - 2) = 2$, $C_{13} = +\\begin{vmatrix} 0 & 3 \\\\ 1 & 0 \\end{vmatrix} = -3$.\n\n**Step 2 — row 2 cofactors.**\n$C_{21} = -\\begin{vmatrix} 2 & 1 \\\\ 0 & 1 \\end{vmatrix} = -2$, $C_{22} = +\\begin{vmatrix} 1 & 1 \\\\ 1 & 1 \\end{vmatrix} = 0$, $C_{23} = -\\begin{vmatrix} 1 & 2 \\\\ 1 & 0 \\end{vmatrix} = -(0 - 2) = 2$.\n\n**Step 3 — row 3 cofactors.**\n$C_{31} = +\\begin{vmatrix} 2 & 1 \\\\ 3 & 2 \\end{vmatrix} = 1$, $C_{32} = -\\begin{vmatrix} 1 & 1 \\\\ 0 & 2 \\end{vmatrix} = -2$, $C_{33} = +\\begin{vmatrix} 1 & 2 \\\\ 0 & 3 \\end{vmatrix} = 3$.",
-    },
-    {
-      type: "math",
-      latex:
-        "\\text{cofactor matrix} = \\begin{pmatrix} 3 & 2 & -3 \\\\ -2 & 0 & 2 \\\\ 1 & -2 & 3 \\end{pmatrix}, \\qquad \\operatorname{adj}A = \\begin{pmatrix} 3 & -2 & 1 \\\\ 2 & 0 & -2 \\\\ -3 & 2 & 3 \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4 — the determinant for free.** Expand along row 1 with the cofactors you already have: $\\det A = 1\\cdot3 + 2\\cdot2 + 1\\cdot(-3) = 4$.\n\n**Step 5 — check.** Row 1 of $A$, $(1, 2, 1)$, against the columns of $\\operatorname{adj}A$: $3 + 4 - 3 = 4$, $-2 + 0 + 2 = 0$, $1 - 4 + 3 = 0$. Row 2, $(0, 3, 2)$: $0 + 6 - 6 = 0$, $0 + 0 + 4 = 4$, $0 - 6 + 6 = 0$. Row 3, $(1, 0, 1)$: $3 - 3 = 0$, $-2 + 2 = 0$, $1 + 3 = 4$. So $A\\,(\\operatorname{adj}A) = 4I$. ✓",
+      type: "worked-example",
+      id: "mx3-3-we1",
+      title: "Worked example 1: a 3×3 adjoint in steps",
+      problem:
+        "$A = \\begin{pmatrix} 1 & 2 & 1 \\\\ 0 & 3 & 2 \\\\ 1 & 0 & 1 \\end{pmatrix}$. Find $\\operatorname{adj}A$ and $\\det A$, and check that $A\\,(\\operatorname{adj}A) = (\\det A)\\,I$.",
+      steps: [
+        {
+          text:
+            "**Row 1 cofactors.**\n$C_{11} = +\\begin{vmatrix} 3 & 2 \\\\ 0 & 1 \\end{vmatrix} = 3$, $C_{12} = -\\begin{vmatrix} 0 & 2 \\\\ 1 & 1 \\end{vmatrix} = -(0 - 2) = 2$, $C_{13} = +\\begin{vmatrix} 0 & 3 \\\\ 1 & 0 \\end{vmatrix} = -3$.",
+        },
+        {
+          text:
+            "**Row 2 cofactors.**\n$C_{21} = -\\begin{vmatrix} 2 & 1 \\\\ 0 & 1 \\end{vmatrix} = -2$, $C_{22} = +\\begin{vmatrix} 1 & 1 \\\\ 1 & 1 \\end{vmatrix} = 0$, $C_{23} = -\\begin{vmatrix} 1 & 2 \\\\ 1 & 0 \\end{vmatrix} = -(0 - 2) = 2$.",
+        },
+        {
+          text:
+            "**Row 3 cofactors.**\n$C_{31} = +\\begin{vmatrix} 2 & 1 \\\\ 3 & 2 \\end{vmatrix} = 1$, $C_{32} = -\\begin{vmatrix} 1 & 1 \\\\ 0 & 2 \\end{vmatrix} = -2$, $C_{33} = +\\begin{vmatrix} 1 & 2 \\\\ 0 & 3 \\end{vmatrix} = 3$.",
+        },
+        {
+          latex:
+            "\\text{cofactor matrix} = \\begin{pmatrix} 3 & 2 & -3 \\\\ -2 & 0 & 2 \\\\ 1 & -2 & 3 \\end{pmatrix}, \\qquad \\operatorname{adj}A = \\begin{pmatrix} 3 & -2 & 1 \\\\ 2 & 0 & -2 \\\\ -3 & 2 & 3 \\end{pmatrix}",
+        },
+        {
+          text:
+            "**The determinant for free.** Expand along row 1 with the cofactors you already have: $\\det A = 1\\cdot3 + 2\\cdot2 + 1\\cdot(-3) = 4$.",
+        },
+        {
+          text:
+            "**Check.** Row 1 of $A$, $(1, 2, 1)$, against the columns of $\\operatorname{adj}A$: $3 + 4 - 3 = 4$, $-2 + 0 + 2 = 0$, $1 - 4 + 3 = 0$. Row 2, $(0, 3, 2)$: $0 + 6 - 6 = 0$, $0 + 0 + 4 = 4$, $0 - 6 + 6 = 0$. Row 3, $(1, 0, 1)$: $3 - 3 = 0$, $-2 + 2 = 0$, $1 + 3 = 4$. So $A\\,(\\operatorname{adj}A) = 4I$. ✓",
+        },
+      ],
+      answer:
+        "$\\operatorname{adj}A = \\begin{pmatrix} 3 & -2 & 1 \\\\ 2 & 0 & -2 \\\\ -3 & 2 & 3 \\end{pmatrix}$, with $\\det A = 4$.",
     },
     {
       type: "callout",
@@ -664,15 +873,59 @@ const lesson03: LessonSeed = {
         "The adjoint is **not** the cofactor matrix; it is its transpose. In the example, $C_{12} = 2$ sits in row 1, column 2 of the cofactor matrix but in row 2, column 1 of $\\operatorname{adj}A$. Skip the transpose and $A$ times your matrix is not a multiple of $I$ (unless $A$ happens to be symmetric, which is why this mistake can survive a lazy check).",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — verify $A(\\operatorname{adj}A) = (\\operatorname{adj}A)A = |A|\\,I$ (a standard NCERT exercise).** $A = \\begin{pmatrix} 1 & -1 & 2 \\\\ 3 & 0 & -2 \\\\ 1 & 0 & 3 \\end{pmatrix}$.\n\n**Step 1 — cofactors, row by row, with the checkerboard signs.**\nRow 1: $C_{11} = +(0\\cdot3 - (-2)\\cdot0) = 0$, $C_{12} = -(3\\cdot3 - (-2)\\cdot1) = -11$, $C_{13} = +(3\\cdot0 - 0\\cdot1) = 0$.\nRow 2: $C_{21} = -((-1)\\cdot3 - 2\\cdot0) = 3$, $C_{22} = +(1\\cdot3 - 2\\cdot1) = 1$, $C_{23} = -(1\\cdot0 - (-1)\\cdot1) = -1$.\nRow 3: $C_{31} = +((-1)(-2) - 2\\cdot0) = 2$, $C_{32} = -(1\\cdot(-2) - 2\\cdot3) = 8$, $C_{33} = +(1\\cdot0 - (-1)\\cdot3) = 3$.\n\n**Step 2 — transpose.** $\\operatorname{adj}A = \\begin{pmatrix} 0 & 3 & 2 \\\\ -11 & 1 & 8 \\\\ 0 & -1 & 3 \\end{pmatrix}$. *Why:* row 1 of the adjoint holds the cofactors of **column** 1 of $A$.\n\n**Step 3 — the determinant, the lazy way.** Column 2 of $A$ is $(-1, 0, 0)$, so expand down it: $|A| = (-1)\\cdot C_{12} = (-1)(-11) = 11$. *Why column 2:* two zeros mean only one term survives.\n\n**Step 4 — multiply.** Row 1 of $A$, $(1, -1, 2)$, against the columns of $\\operatorname{adj}A$: $0 + 11 + 0 = 11$, $3 - 1 - 2 = 0$, $2 - 8 + 6 = 0$. Row 2, $(3, 0, -2)$: $0$, $9 + 2 = 11$, $6 - 6 = 0$. Row 3, $(1, 0, 3)$: $0$, $3 - 3 = 0$, $2 + 9 = 11$. So $A(\\operatorname{adj}A) = 11I$. Multiplying in the other order, row 1 of $\\operatorname{adj}A$, $(0, 3, 2)$, against column 1 of $A$, $(1, 3, 1)$, gives $0 + 9 + 2 = 11$, and the remaining entries work out the same way to $11I$. ✓",
+      type: "worked-example",
+      id: "mx3-3-we2",
+      title: "Worked example 2: verifying the adjoint identity (a standard NCERT exercise)",
+      problem:
+        "$A = \\begin{pmatrix} 1 & -1 & 2 \\\\ 3 & 0 & -2 \\\\ 1 & 0 & 3 \\end{pmatrix}$. Find $\\operatorname{adj}A$ and $|A|$, and verify that $A(\\operatorname{adj}A) = (\\operatorname{adj}A)A = |A|\\,I$.",
+      steps: [
+        {
+          text:
+            "**Cofactors, row by row, with the checkerboard signs.**\nRow 1: $C_{11} = +(0\\cdot3 - (-2)\\cdot0) = 0$, $C_{12} = -(3\\cdot3 - (-2)\\cdot1) = -11$, $C_{13} = +(3\\cdot0 - 0\\cdot1) = 0$.\nRow 2: $C_{21} = -((-1)\\cdot3 - 2\\cdot0) = 3$, $C_{22} = +(1\\cdot3 - 2\\cdot1) = 1$, $C_{23} = -(1\\cdot0 - (-1)\\cdot1) = -1$.\nRow 3: $C_{31} = +((-1)(-2) - 2\\cdot0) = 2$, $C_{32} = -(1\\cdot(-2) - 2\\cdot3) = 8$, $C_{33} = +(1\\cdot0 - (-1)\\cdot3) = 3$.",
+        },
+        {
+          text:
+            "**Transpose.** $\\operatorname{adj}A = \\begin{pmatrix} 0 & 3 & 2 \\\\ -11 & 1 & 8 \\\\ 0 & -1 & 3 \\end{pmatrix}$. *Why:* row 1 of the adjoint holds the cofactors of **column** 1 of $A$.",
+        },
+        {
+          text:
+            "**The determinant, the lazy way.** Column 2 of $A$ is $(-1, 0, 0)$, so expand down it: $|A| = (-1)\\cdot C_{12} = (-1)(-11) = 11$. *Why column 2:* two zeros mean only one term survives.",
+        },
+        {
+          text:
+            "**Multiply.** Row 1 of $A$, $(1, -1, 2)$, against the columns of $\\operatorname{adj}A$: $0 + 11 + 0 = 11$, $3 - 1 - 2 = 0$, $2 - 8 + 6 = 0$. Row 2, $(3, 0, -2)$: $0$, $9 + 2 = 11$, $6 - 6 = 0$. Row 3, $(1, 0, 3)$: $0$, $3 - 3 = 0$, $2 + 9 = 11$. So $A(\\operatorname{adj}A) = 11I$. Multiplying in the other order, row 1 of $\\operatorname{adj}A$, $(0, 3, 2)$, against column 1 of $A$, $(1, 3, 1)$, gives $0 + 9 + 2 = 11$, and the remaining entries work out the same way to $11I$. ✓",
+        },
+      ],
+      answer: "$|A| = 11$, and $A(\\operatorname{adj}A) = (\\operatorname{adj}A)A = 11I$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx3-3-we3",
+      title: "Worked example 3: one entry, not nine (application)",
+      problem:
+        "An engineer's model of a three-beam frame has stiffness matrix $A = \\begin{pmatrix} 1 & -1 & 2 \\\\ 3 & 0 & -2 \\\\ 1 & 0 & 3 \\end{pmatrix}$ (the matrix from Worked example 2). The deflection she cares about depends only on the entry in row 2, column 3 of $A^{-1}$. Find it without building the whole inverse.",
+      steps: [
+        {
+          text:
+            "**Use the identity.** Dividing $A(\\operatorname{adj}A) = |A|\\,I$ by $|A|$ shows that $A^{-1} = \\frac{1}{|A|}\\operatorname{adj}A$ (Lesson 3.4 makes this official). So $(A^{-1})_{23} = \\dfrac{(\\operatorname{adj}A)_{23}}{|A|}$.",
+        },
+        {
+          text:
+            "**Remember the transpose.** $(\\operatorname{adj}A)_{23} = C_{32}$, the cofactor of the entry in row **3**, column **2**. *Why this is the trap:* reaching for $C_{23} = -1$ gives the wrong answer.",
+        },
+        {
+          text:
+            "**Compute one cofactor.** $C_{32} = -\\begin{vmatrix} 1 & 2 \\\\ 3 & -2 \\end{vmatrix} = -(-2 - 6) = 8$, and $|A| = 11$. So $(A^{-1})_{23} = \\dfrac{8}{11}$.",
+        },
+      ],
+      answer: "$(A^{-1})_{23} = \\dfrac{8}{11}$",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 — one entry, not nine (application).** An engineer's model of a three-beam frame has stiffness matrix $A = \\begin{pmatrix} 1 & -1 & 2 \\\\ 3 & 0 & -2 \\\\ 1 & 0 & 3 \\end{pmatrix}$ (the matrix from Worked example 2). The deflection she cares about depends only on the entry in row 2, column 3 of $A^{-1}$. Find it without building the whole inverse.\n\n**Step 1 — use the identity.** Dividing $A(\\operatorname{adj}A) = |A|\\,I$ by $|A|$ shows that $A^{-1} = \\frac{1}{|A|}\\operatorname{adj}A$ (Lesson 3.4 makes this official). So $(A^{-1})_{23} = \\dfrac{(\\operatorname{adj}A)_{23}}{|A|}$.\n\n**Step 2 — remember the transpose.** $(\\operatorname{adj}A)_{23} = C_{32}$, the cofactor of the entry in row **3**, column **2**. *Why this is the trap:* reaching for $C_{23} = -1$ gives the wrong answer.\n\n**Step 3 — compute one cofactor.** $C_{32} = -\\begin{vmatrix} 1 & 2 \\\\ 3 & -2 \\end{vmatrix} = -(-2 - 6) = 8$, and $|A| = 11$. So $(A^{-1})_{23} = \\dfrac{8}{11}$.\n\nOne $2\\times2$ determinant instead of nine. For large systems, this shortcut is the difference between a quick answer and an afternoon of arithmetic.",
+        "One $2\\times2$ determinant instead of nine. For large systems, this shortcut is the difference between a quick answer and an afternoon of arithmetic.",
     },
+    { type: "heading", text: "Properties of the adjoint" },
     {
       type: "text",
       content:
@@ -691,10 +944,28 @@ const lesson03: LessonSeed = {
       ],
     },
     {
+      type: "worked-example",
+      id: "mx3-3-we4",
+      title: "Worked example 4: stacking the properties (JEE style)",
+      problem: "$A$ is $3\\times3$ with $|A| = 4$. Find $|\\operatorname{adj}(2A)|$.",
+      steps: [
+        {
+          text:
+            "**Route 1 — apply the adjoint rule to the matrix $2A$.** $|\\operatorname{adj}M| = |M|^{n-1}$ with $M = 2A$ and $n = 3$. First $|2A| = 2^3|A| = 32$. *Why $2^3$:* scaling a $3\\times3$ matrix by 2 scales all three rows, and each row contributes a factor of 2. So $|\\operatorname{adj}(2A)| = 32^2 = 1024$.",
+        },
+        {
+          text:
+            "**Route 2 — pull the scalar out first.** $\\operatorname{adj}(2A) = 2^{n-1}\\operatorname{adj}A = 4\\operatorname{adj}A$. Then $|4\\operatorname{adj}A| = 4^3\\,|\\operatorname{adj}A| = 64\\cdot|A|^2 = 64\\cdot16 = 1024$.",
+        },
+      ],
+      answer: "$|\\operatorname{adj}(2A)| = 1024$",
+    },
+    {
       type: "text",
       content:
-        "**Worked example 4 — stacking the properties (JEE style).** $A$ is $3\\times3$ with $|A| = 4$. Find $|\\operatorname{adj}(2A)|$.\n\n**Route 1 — apply the adjoint rule to the matrix $2A$.** $|\\operatorname{adj}M| = |M|^{n-1}$ with $M = 2A$ and $n = 3$. First $|2A| = 2^3|A| = 32$. *Why $2^3$:* scaling a $3\\times3$ matrix by 2 scales all three rows, and each row contributes a factor of 2. So $|\\operatorname{adj}(2A)| = 32^2 = 1024$.\n\n**Route 2 — pull the scalar out first.** $\\operatorname{adj}(2A) = 2^{n-1}\\operatorname{adj}A = 4\\operatorname{adj}A$. Then $|4\\operatorname{adj}A| = 4^3\\,|\\operatorname{adj}A| = 64\\cdot|A|^2 = 64\\cdot16 = 1024$.\n\nTwo routes, one answer. Doing it both ways is the best defence against the classic slip of writing $|4\\operatorname{adj}A| = 4\\,|\\operatorname{adj}A|$, which forgets that a scalar comes out of a determinant once per row.",
+        "Two routes, one answer. Doing it both ways is the best defence against the classic slip of writing $|4\\operatorname{adj}A| = 4\\,|\\operatorname{adj}A|$, which forgets that a scalar comes out of a determinant once per row.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx3-3-q1",
@@ -883,25 +1154,60 @@ const lesson04: LessonSeed = {
       type: "math",
       latex: "A^{-1} = \\frac{1}{|A|}\\,\\operatorname{adj}A, \\qquad |A| \\ne 0",
     },
+    { type: "heading", text: "A full 3×3 inverse, step by step" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — full 3×3 inverse.** $A = \\begin{pmatrix} 1 & -1 & 2 \\\\ 0 & 2 & -3 \\\\ 3 & -2 & 4 \\end{pmatrix}$.\n\n**Step 1 — determinant** (along row 1): $1(8 - 6) - (-1)(0 + 9) + 2(0 - 6) = 2 + 9 - 12 = -1$. Non-zero, so $A^{-1}$ exists.\n\n**Step 2 — cofactors.**\nRow 1: $C_{11} = 8 - 6 = 2$, $C_{12} = -(0 + 9) = -9$, $C_{13} = 0 - 6 = -6$.\nRow 2: $C_{21} = -(-4 + 4) = 0$, $C_{22} = 4 - 6 = -2$, $C_{23} = -(-2 + 3) = -1$.\nRow 3: $C_{31} = 3 - 4 = -1$, $C_{32} = -(-3 - 0) = 3$, $C_{33} = 2 - 0 = 2$.\n\n**Step 3 — transpose into the adjoint.** $\\operatorname{adj}A = \\begin{pmatrix} 2 & 0 & -1 \\\\ -9 & -2 & 3 \\\\ -6 & -1 & 2 \\end{pmatrix}$.\n\n**Step 4 — divide by the determinant**, $|A| = -1$, which flips every sign:",
+      type: "worked-example",
+      id: "mx3-4-we1",
+      title: "Worked example 1: full 3×3 inverse",
+      problem:
+        "$A = \\begin{pmatrix} 1 & -1 & 2 \\\\ 0 & 2 & -3 \\\\ 3 & -2 & 4 \\end{pmatrix}$. Find $A^{-1}$ using the adjoint, and verify it.",
+      steps: [
+        {
+          text:
+            "**Determinant** (along row 1): $1(8 - 6) - (-1)(0 + 9) + 2(0 - 6) = 2 + 9 - 12 = -1$. Non-zero, so $A^{-1}$ exists.",
+        },
+        {
+          text:
+            "**Cofactors.**\nRow 1: $C_{11} = 8 - 6 = 2$, $C_{12} = -(0 + 9) = -9$, $C_{13} = 0 - 6 = -6$.\nRow 2: $C_{21} = -(-4 + 4) = 0$, $C_{22} = 4 - 6 = -2$, $C_{23} = -(-2 + 3) = -1$.\nRow 3: $C_{31} = 3 - 4 = -1$, $C_{32} = -(-3 - 0) = 3$, $C_{33} = 2 - 0 = 2$.",
+        },
+        {
+          text:
+            "**Transpose into the adjoint.** $\\operatorname{adj}A = \\begin{pmatrix} 2 & 0 & -1 \\\\ -9 & -2 & 3 \\\\ -6 & -1 & 2 \\end{pmatrix}$.",
+        },
+        {
+          text: "**Divide by the determinant**, $|A| = -1$, which flips every sign:",
+          latex:
+            "A^{-1} = \\begin{pmatrix} -2 & 0 & 1 \\\\ 9 & 2 & -3 \\\\ 6 & 1 & -2 \\end{pmatrix}",
+        },
+        {
+          text:
+            "**Verify.** Check $AA^{-1} = I$. Row 1 of $A$, $(1, -1, 2)$: with column 1, $-2 - 9 + 12 = 1$; with column 2, $0 - 2 + 2 = 0$; with column 3, $1 + 3 - 4 = 0$. Row 2, $(0, 2, -3)$: $18 - 18 = 0$, $4 - 3 = 1$, $-6 + 6 = 0$. Row 3, $(3, -2, 4)$: $-6 - 18 + 24 = 0$, $0 - 4 + 4 = 0$, $3 + 6 - 8 = 1$. ✓ Always do this check: one sign slip in a cofactor shows up at once.",
+        },
+      ],
+      answer:
+        "$A^{-1} = \\begin{pmatrix} -2 & 0 & 1 \\\\ 9 & 2 & -3 \\\\ 6 & 1 & -2 \\end{pmatrix}$",
     },
     {
-      type: "math",
-      latex: "A^{-1} = \\begin{pmatrix} -2 & 0 & 1 \\\\ 9 & 2 & -3 \\\\ 6 & 1 & -2 \\end{pmatrix}",
+      type: "worked-example",
+      id: "mx3-4-we2",
+      title: "Worked example 2: a fractional inverse",
+      problem:
+        "From Lesson 3.3, $A = \\begin{pmatrix} 1 & 2 & 1 \\\\ 0 & 3 & 2 \\\\ 1 & 0 & 1 \\end{pmatrix}$ has $|A| = 4$ and $\\operatorname{adj}A = \\begin{pmatrix} 3 & -2 & 1 \\\\ 2 & 0 & -2 \\\\ -3 & 2 & 3 \\end{pmatrix}$. Find $A^{-1}$.",
+      steps: [
+        {
+          text: "Divide the adjoint by $|A| = 4$:",
+          latex:
+            "A^{-1} = \\dfrac14\\begin{pmatrix} 3 & -2 & 1 \\\\ 2 & 0 & -2 \\\\ -3 & 2 & 3 \\end{pmatrix}.",
+        },
+        {
+          text:
+            "The check was already done: $A\\,(\\operatorname{adj}A) = 4I$. Leave the $\\frac14$ outside; that keeps the arithmetic clean and the answer readable.",
+        },
+      ],
+      answer:
+        "$A^{-1} = \\dfrac14\\begin{pmatrix} 3 & -2 & 1 \\\\ 2 & 0 & -2 \\\\ -3 & 2 & 3 \\end{pmatrix}$",
     },
-    {
-      type: "text",
-      content:
-        "**Step 5 — verify.** Check $AA^{-1} = I$. Row 1 of $A$, $(1, -1, 2)$: with column 1, $-2 - 9 + 12 = 1$; with column 2, $0 - 2 + 2 = 0$; with column 3, $1 + 3 - 4 = 0$. Row 2, $(0, 2, -3)$: $18 - 18 = 0$, $4 - 3 = 1$, $-6 + 6 = 0$. Row 3, $(3, -2, 4)$: $-6 - 18 + 24 = 0$, $0 - 4 + 4 = 0$, $3 + 6 - 8 = 1$. ✓ Always do this check: one sign slip in a cofactor shows up at once.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2 — a fractional inverse.** From Lesson 3.3, $A = \\begin{pmatrix} 1 & 2 & 1 \\\\ 0 & 3 & 2 \\\\ 1 & 0 & 1 \\end{pmatrix}$ has $|A| = 4$ and $\\operatorname{adj}A = \\begin{pmatrix} 3 & -2 & 1 \\\\ 2 & 0 & -2 \\\\ -3 & 2 & 3 \\end{pmatrix}$. So\n\n$A^{-1} = \\dfrac14\\begin{pmatrix} 3 & -2 & 1 \\\\ 2 & 0 & -2 \\\\ -3 & 2 & 3 \\end{pmatrix}.$\n\nThe check was already done: $A\\,(\\operatorname{adj}A) = 4I$. Leave the $\\frac14$ outside; that keeps the arithmetic clean and the answer readable.",
-    },
+    { type: "heading", text: "Inverses of products and transposes" },
     {
       type: "text",
       content:
@@ -953,9 +1259,27 @@ const lesson04: LessonSeed = {
         "**Transpose.** Using $(XY)^T = Y^TX^T$: $A^T(A^{-1})^T = (A^{-1}A)^T = I^T = I$. So $(A^{-1})^T$ undoes $A^T$. Inverting and transposing can be done in either order.\n\n**Determinant.** $|A|\\cdot|A^{-1}| = |AA^{-1}| = |I| = 1$. The inverse scales areas by the reciprocal factor, which is what you would expect from an undo.\n\n**Two more that follow straight from the definition:** $(A^{-1})^{-1} = A$, and $(kA)^{-1} = \\frac1k A^{-1}$ for $k \\ne 0$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — checking socks-and-shoes with numbers.** $A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 1 \\end{pmatrix}$, $B = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$, so $A^{-1} = \\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix}$ and $B^{-1} = \\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix}$.\n\n**Step 1.** $AB = \\begin{pmatrix} 2 & 3 \\\\ 1 & 2 \\end{pmatrix}$, $\\det = 1$, so $(AB)^{-1} = \\begin{pmatrix} 2 & -3 \\\\ -1 & 2 \\end{pmatrix}$.\n\n**Step 2.** $B^{-1}A^{-1} = \\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix} = \\begin{pmatrix} 2 & -3 \\\\ -1 & 2 \\end{pmatrix}$. ✓ Matches.\n\n**Step 3.** The wrong order: $A^{-1}B^{-1} = \\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix}\\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix} = \\begin{pmatrix} 1 & -2 \\\\ -1 & 3 \\end{pmatrix}$. Different.",
+      type: "worked-example",
+      id: "mx3-4-we3",
+      title: "Worked example 3: checking socks-and-shoes with numbers",
+      problem:
+        "$A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 1 \\end{pmatrix}$, $B = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$, so $A^{-1} = \\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix}$ and $B^{-1} = \\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix}$. Find $(AB)^{-1}$ and compare it with $B^{-1}A^{-1}$ and with $A^{-1}B^{-1}$.",
+      steps: [
+        {
+          text:
+            "$AB = \\begin{pmatrix} 2 & 3 \\\\ 1 & 2 \\end{pmatrix}$, $\\det = 1$, so $(AB)^{-1} = \\begin{pmatrix} 2 & -3 \\\\ -1 & 2 \\end{pmatrix}$.",
+        },
+        {
+          text:
+            "$B^{-1}A^{-1} = \\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix} = \\begin{pmatrix} 2 & -3 \\\\ -1 & 2 \\end{pmatrix}$. ✓ Matches.",
+        },
+        {
+          text:
+            "The wrong order: $A^{-1}B^{-1} = \\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix}\\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix} = \\begin{pmatrix} 1 & -2 \\\\ -1 & 3 \\end{pmatrix}$. Different.",
+        },
+      ],
+      answer:
+        "$(AB)^{-1} = B^{-1}A^{-1} = \\begin{pmatrix} 2 & -3 \\\\ -1 & 2 \\end{pmatrix}$, while $A^{-1}B^{-1}$ is a different matrix.",
     },
     {
       type: "callout",
@@ -965,24 +1289,84 @@ const lesson04: LessonSeed = {
         "The order reverses, for the same reason $(AB)^T = B^TA^T$. The two orders agree only when $A^{-1}$ and $B^{-1}$ commute. For three matrices: $(ABC)^{-1} = C^{-1}B^{-1}A^{-1}$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — undoing a photo edit (application).** A design app first shears an image with $S = \\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}$, then rotates it by $90^\\circ$ with $R = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$. A pixel ends up at $(3, 5)$. Where was it originally, and what single matrix is the \"Undo\" button?\n\n**Step 1 — the combined edit.** Shear first, rotate second, so the edit is $RS$ (the first move sits on the right): $RS = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}\\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix} = \\begin{pmatrix} 0 & -1 \\\\ 1 & 2 \\end{pmatrix}$.\n\n**Step 2 — undo in reverse order.** $(RS)^{-1} = S^{-1}R^{-1}$: un-rotate first (by $-90^\\circ$), then un-shear. *Why reversed:* the rotation happened last, so it has to be undone first. $S^{-1} = \\begin{pmatrix} 1 & -2 \\\\ 0 & 1 \\end{pmatrix}$ and $R^{-1} = \\begin{pmatrix} 0 & 1 \\\\ -1 & 0 \\end{pmatrix}$, so\n\n$S^{-1}R^{-1} = \\begin{pmatrix} 1 & -2 \\\\ 0 & 1 \\end{pmatrix}\\begin{pmatrix} 0 & 1 \\\\ -1 & 0 \\end{pmatrix} = \\begin{pmatrix} 2 & 1 \\\\ -1 & 0 \\end{pmatrix}.$\n\n**Step 3 — check against the edit.** $\\begin{pmatrix} 0 & -1 \\\\ 1 & 2 \\end{pmatrix}\\begin{pmatrix} 2 & 1 \\\\ -1 & 0 \\end{pmatrix} = \\begin{pmatrix} 1 & 0 \\\\ 2 - 2 & 1 \\end{pmatrix} = I$. ✓\n\n**Step 4 — send the pixel home.** $\\begin{pmatrix} 2 & 1 \\\\ -1 & 0 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 5 \\end{pmatrix} = \\begin{pmatrix} 11 \\\\ -3 \\end{pmatrix}$. Re-applying the edit: $RS\\begin{pmatrix} 11 \\\\ -3 \\end{pmatrix} = \\begin{pmatrix} 3 \\\\ 11 - 6 \\end{pmatrix} = \\begin{pmatrix} 3 \\\\ 5 \\end{pmatrix}$. ✓",
+      type: "worked-example",
+      id: "mx3-4-we4",
+      title: "Worked example 4: undoing a photo edit (application)",
+      problem:
+        "A design app first shears an image with $S = \\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}$, then rotates it by $90^\\circ$ with $R = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$. A pixel ends up at $(3, 5)$. Where was it originally, and what single matrix is the \"Undo\" button?",
+      steps: [
+        {
+          text:
+            "**The combined edit.** Shear first, rotate second, so the edit is $RS$ (the first move sits on the right): $RS = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}\\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix} = \\begin{pmatrix} 0 & -1 \\\\ 1 & 2 \\end{pmatrix}$.",
+        },
+        {
+          text:
+            "**Undo in reverse order.** $(RS)^{-1} = S^{-1}R^{-1}$: un-rotate first (by $-90^\\circ$), then un-shear. *Why reversed:* the rotation happened last, so it has to be undone first. $S^{-1} = \\begin{pmatrix} 1 & -2 \\\\ 0 & 1 \\end{pmatrix}$ and $R^{-1} = \\begin{pmatrix} 0 & 1 \\\\ -1 & 0 \\end{pmatrix}$, so",
+          latex:
+            "S^{-1}R^{-1} = \\begin{pmatrix} 1 & -2 \\\\ 0 & 1 \\end{pmatrix}\\begin{pmatrix} 0 & 1 \\\\ -1 & 0 \\end{pmatrix} = \\begin{pmatrix} 2 & 1 \\\\ -1 & 0 \\end{pmatrix}.",
+        },
+        {
+          text:
+            "**Check against the edit.** $\\begin{pmatrix} 0 & -1 \\\\ 1 & 2 \\end{pmatrix}\\begin{pmatrix} 2 & 1 \\\\ -1 & 0 \\end{pmatrix} = \\begin{pmatrix} 1 & 0 \\\\ 2 - 2 & 1 \\end{pmatrix} = I$. ✓",
+        },
+        {
+          text:
+            "**Send the pixel home.** $\\begin{pmatrix} 2 & 1 \\\\ -1 & 0 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 5 \\end{pmatrix} = \\begin{pmatrix} 11 \\\\ -3 \\end{pmatrix}$. Re-applying the edit: $RS\\begin{pmatrix} 11 \\\\ -3 \\end{pmatrix} = \\begin{pmatrix} 3 \\\\ 11 - 6 \\end{pmatrix} = \\begin{pmatrix} 3 \\\\ 5 \\end{pmatrix}$. ✓",
+        },
+      ],
+      answer:
+        "The pixel started at $(11, -3)$, and the \"Undo\" button is $(RS)^{-1} = \\begin{pmatrix} 2 & 1 \\\\ -1 & 0 \\end{pmatrix}$.",
+    },
+    {
+      type: "worked-example",
+      id: "mx3-4-we5",
+      title: "Worked example 5: $(AB)^{-1}$ without ever finding $A$ (a standard NCERT exercise)",
+      problem:
+        "Given $A^{-1} = \\begin{pmatrix} 3 & -1 & 1 \\\\ -15 & 6 & -5 \\\\ 5 & -2 & 2 \\end{pmatrix}$ and $B = \\begin{pmatrix} 1 & 2 & -2 \\\\ -1 & 3 & 0 \\\\ 0 & -2 & 1 \\end{pmatrix}$, find $(AB)^{-1}$.",
+      steps: [
+        {
+          text:
+            "**Choose the rule.** $(AB)^{-1} = B^{-1}A^{-1}$. *Why this saves work:* $A^{-1}$ is already given, so only $B$ needs inverting. Recovering $A$ first would be a wasted detour.",
+        },
+        { text: "**$|B|$ along row 1.** $1(3 - 0) - 2(-1 - 0) + (-2)(2 - 0) = 3 + 2 - 4 = 1$." },
+        {
+          text:
+            "**Cofactors of $B$.**\nRow 1: $C_{11} = 3$, $C_{12} = -(-1 - 0) = 1$, $C_{13} = 2 - 0 = 2$.\nRow 2: $C_{21} = -(2 - 4) = 2$, $C_{22} = 1 - 0 = 1$, $C_{23} = -(-2 - 0) = 2$.\nRow 3: $C_{31} = 0 + 6 = 6$, $C_{32} = -(0 - 2) = 2$, $C_{33} = 3 + 2 = 5$.\nTranspose and divide by $|B| = 1$: $B^{-1} = \\begin{pmatrix} 3 & 2 & 6 \\\\ 1 & 1 & 2 \\\\ 2 & 2 & 5 \\end{pmatrix}$.",
+        },
+        {
+          text:
+            "**Multiply in the right order.** Row 1 of $B^{-1}$, $(3, 2, 6)$, against the columns of $A^{-1}$: $9 - 30 + 30 = 9$, $-3 + 12 - 12 = -3$, $3 - 10 + 12 = 5$. Row 2, $(1, 1, 2)$: $3 - 15 + 10 = -2$, $-1 + 6 - 4 = 1$, $1 - 5 + 4 = 0$. Row 3, $(2, 2, 5)$: $6 - 30 + 25 = 1$, $-2 + 12 - 10 = 0$, $2 - 10 + 10 = 2$.",
+          latex:
+            "(AB)^{-1} = B^{-1}A^{-1} = \\begin{pmatrix} 9 & -3 & 5 \\\\ -2 & 1 & 0 \\\\ 1 & 0 & 2 \\end{pmatrix}",
+        },
+      ],
+      answer:
+        "$(AB)^{-1} = \\begin{pmatrix} 9 & -3 & 5 \\\\ -2 & 1 & 0 \\\\ 1 & 0 & 2 \\end{pmatrix}$",
+    },
+    {
+      type: "worked-example",
+      id: "mx3-4-we6",
+      title: "Worked example 6: determinants of combinations (JEE style)",
+      problem: "$A$ and $B$ are $3\\times3$ with $|A| = 2$ and $|B| = 3$. Find $|3A^{-1}B^T|$.",
+      steps: [
+        {
+          text:
+            "**Split the product.** Determinants multiply: $|3A^{-1}B^T| = |3I|\\cdot|A^{-1}|\\cdot|B^T|$. *Why this is allowed:* $3A^{-1}B^T = (3I)A^{-1}B^T$, and $|XY| = |X||Y|$.",
+        },
+        {
+          text:
+            "**Each factor on its own.** $|3I| = 3^3 = 27$ (one factor of 3 per row), $|A^{-1}| = \\frac{1}{|A|} = \\frac12$, $|B^T| = |B| = 3$.",
+        },
+        { text: "**Combine.** $27\\cdot\\frac12\\cdot3 = \\dfrac{81}{2}$." },
+      ],
+      answer: "$|3A^{-1}B^T| = \\dfrac{81}{2}$",
     },
     {
       type: "text",
       content:
-        "**Worked example 5 — $(AB)^{-1}$ without ever finding $A$ (a standard NCERT exercise).** Given $A^{-1} = \\begin{pmatrix} 3 & -1 & 1 \\\\ -15 & 6 & -5 \\\\ 5 & -2 & 2 \\end{pmatrix}$ and $B = \\begin{pmatrix} 1 & 2 & -2 \\\\ -1 & 3 & 0 \\\\ 0 & -2 & 1 \\end{pmatrix}$, find $(AB)^{-1}$.\n\n**Step 1 — choose the rule.** $(AB)^{-1} = B^{-1}A^{-1}$. *Why this saves work:* $A^{-1}$ is already given, so only $B$ needs inverting. Recovering $A$ first would be a wasted detour.\n\n**Step 2 — $|B|$ along row 1.** $1(3 - 0) - 2(-1 - 0) + (-2)(2 - 0) = 3 + 2 - 4 = 1$.\n\n**Step 3 — cofactors of $B$.**\nRow 1: $C_{11} = 3$, $C_{12} = -(-1 - 0) = 1$, $C_{13} = 2 - 0 = 2$.\nRow 2: $C_{21} = -(2 - 4) = 2$, $C_{22} = 1 - 0 = 1$, $C_{23} = -(-2 - 0) = 2$.\nRow 3: $C_{31} = 0 + 6 = 6$, $C_{32} = -(0 - 2) = 2$, $C_{33} = 3 + 2 = 5$.\nTranspose and divide by $|B| = 1$: $B^{-1} = \\begin{pmatrix} 3 & 2 & 6 \\\\ 1 & 1 & 2 \\\\ 2 & 2 & 5 \\end{pmatrix}$.\n\n**Step 4 — multiply in the right order.** Row 1 of $B^{-1}$, $(3, 2, 6)$, against the columns of $A^{-1}$: $9 - 30 + 30 = 9$, $-3 + 12 - 12 = -3$, $3 - 10 + 12 = 5$. Row 2, $(1, 1, 2)$: $3 - 15 + 10 = -2$, $-1 + 6 - 4 = 1$, $1 - 5 + 4 = 0$. Row 3, $(2, 2, 5)$: $6 - 30 + 25 = 1$, $-2 + 12 - 10 = 0$, $2 - 10 + 10 = 2$.",
+        "The three facts in play (the scalar becomes $k^n$, the inverse gives the reciprocal, the transpose changes nothing) cover most one-line JEE questions on this topic.",
     },
-    {
-      type: "math",
-      latex: "(AB)^{-1} = B^{-1}A^{-1} = \\begin{pmatrix} 9 & -3 & 5 \\\\ -2 & 1 & 0 \\\\ 1 & 0 & 2 \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 6 — determinants of combinations (JEE style).** $A$ and $B$ are $3\\times3$ with $|A| = 2$ and $|B| = 3$. Find $|3A^{-1}B^T|$.\n\n**Step 1 — split the product.** Determinants multiply: $|3A^{-1}B^T| = |3I|\\cdot|A^{-1}|\\cdot|B^T|$. *Why this is allowed:* $3A^{-1}B^T = (3I)A^{-1}B^T$, and $|XY| = |X||Y|$.\n\n**Step 2 — each factor on its own.** $|3I| = 3^3 = 27$ (one factor of 3 per row), $|A^{-1}| = \\frac{1}{|A|} = \\frac12$, $|B^T| = |B| = 3$.\n\n**Step 3 — combine.** $27\\cdot\\frac12\\cdot3 = \\dfrac{81}{2}$.\n\nThe three facts in play (the scalar becomes $k^n$, the inverse gives the reciprocal, the transpose changes nothing) cover most one-line JEE questions on this topic.",
-    },
+    { type: "heading", text: "Special cases from the rules", level: 3 },
     {
       type: "text",
       content:
@@ -1001,10 +1385,29 @@ const lesson04: LessonSeed = {
         ["$I - N$, nilpotent $N$", "$N^k = O$", "$I + N + \\cdots + N^{k-1}$", "The product telescopes to $I - N^k = I$"],
       ],
     },
+    { type: "heading", text: "Inverses from a matrix polynomial" },
     {
-      type: "text",
-      content:
-        "**The polynomial method.** Sometimes you know an equation that $A$ satisfies, and the inverse falls out of it with no adjoint at all. Take $A = \\begin{pmatrix} 2 & 3 \\\\ 1 & 2 \\end{pmatrix}$.\n\n**Step 1 — verify the equation.** $A^2 = \\begin{pmatrix} 7 & 12 \\\\ 4 & 7 \\end{pmatrix}$ and $4A = \\begin{pmatrix} 8 & 12 \\\\ 4 & 8 \\end{pmatrix}$, so $A^2 - 4A + I = \\begin{pmatrix} 7 - 8 + 1 & 0 \\\\ 0 & 7 - 8 + 1 \\end{pmatrix} = O$.\n\n**Step 2 — isolate the identity.** $A^2 - 4A = -I$, so $A(A - 4I) = -I$, i.e. $A(4I - A) = I$.\n\n**Step 3 — read off the inverse.** $A^{-1} = 4I - A = \\begin{pmatrix} 2 & -3 \\\\ -1 & 2 \\end{pmatrix}$. The $2\\times2$ formula agrees, since $\\det A = 1$.",
+      type: "worked-example",
+      id: "mx3-4-we7",
+      title: "The polynomial method",
+      problem:
+        "Sometimes you know an equation that $A$ satisfies, and the inverse falls out of it with no adjoint at all. Take $A = \\begin{pmatrix} 2 & 3 \\\\ 1 & 2 \\end{pmatrix}$. Verify that $A^2 - 4A + I = O$, and use it to find $A^{-1}$.",
+      steps: [
+        {
+          text:
+            "**Verify the equation.** $A^2 = \\begin{pmatrix} 7 & 12 \\\\ 4 & 7 \\end{pmatrix}$ and $4A = \\begin{pmatrix} 8 & 12 \\\\ 4 & 8 \\end{pmatrix}$, so $A^2 - 4A + I = \\begin{pmatrix} 7 - 8 + 1 & 0 \\\\ 0 & 7 - 8 + 1 \\end{pmatrix} = O$.",
+        },
+        {
+          text:
+            "**Isolate the identity.** $A^2 - 4A = -I$, so $A(A - 4I) = -I$, i.e. $A(4I - A) = I$.",
+        },
+        {
+          text:
+            "**Read off the inverse.** $A^{-1} = 4I - A = \\begin{pmatrix} 2 & -3 \\\\ -1 & 2 \\end{pmatrix}$. The $2\\times2$ formula agrees, since $\\det A = 1$.",
+        },
+      ],
+      answer: "$A^{-1} = 4I - A = \\begin{pmatrix} 2 & -3 \\\\ -1 & 2 \\end{pmatrix}$",
+      tryFirst: false,
     },
     {
       type: "callout",
@@ -1014,10 +1417,37 @@ const lesson04: LessonSeed = {
         "If $A$ satisfies a polynomial with a **non-zero constant term**, move the constant term to one side as a multiple of $I$ and factor $A$ out of everything else: $A \\cdot (\\ldots) = cI$ gives $A^{-1} = \\frac1c(\\ldots)$. Every $2\\times2$ matrix satisfies $A^2 - (\\operatorname{tr}A)A + (\\det A)I = O$, a preview of the Cayley–Hamilton theorem in Chapter 5.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 7 — a 3×3 CBSE classic.** $A = \\begin{pmatrix} 2 & -1 & 1 \\\\ -1 & 2 & -1 \\\\ 1 & -1 & 2 \\end{pmatrix}$ satisfies $A^3 - 6A^2 + 9A - 4I = O$. Show this, and hence find $A^{-1}$.\n\n**Step 0 — check the equation.** $A^2 = \\begin{pmatrix} 6 & -5 & 5 \\\\ -5 & 6 & -5 \\\\ 5 & -5 & 6 \\end{pmatrix}$ and $A^3 = A\\cdot A^2 = \\begin{pmatrix} 22 & -21 & 21 \\\\ -21 & 22 & -21 \\\\ 21 & -21 & 22 \\end{pmatrix}$. Now compare entry by entry. On the diagonal: $22 - 6(6) + 9(2) - 4 = 22 - 36 + 18 - 4 = 0$. At position (1,2): $-21 - 6(-5) + 9(-1) - 0 = -21 + 30 - 9 = 0$. At position (1,3): $21 - 30 + 9 = 0$. The other entries match by the same pattern, so $A^3 - 6A^2 + 9A - 4I = O$. Where does this cubic come from? Its coefficients are the trace ($6$), the sum of the principal $2\\times2$ minors ($9$) and $|A| = 4$. That is the Cayley–Hamilton theorem of Chapter 5.\n\n**Step 1.** $A^3 - 6A^2 + 9A = 4I$, so $A(A^2 - 6A + 9I) = 4I$ and $A^{-1} = \\frac14(A^2 - 6A + 9I)$.\n\n**Step 2.** $A^2 = \\begin{pmatrix} 6 & -5 & 5 \\\\ -5 & 6 & -5 \\\\ 5 & -5 & 6 \\end{pmatrix}$.\n\n**Step 3.** $A^2 - 6A + 9I = \\begin{pmatrix} 6 - 12 + 9 & -5 + 6 & 5 - 6 \\\\ -5 + 6 & 6 - 12 + 9 & -5 + 6 \\\\ 5 - 6 & -5 + 6 & 6 - 12 + 9 \\end{pmatrix} = \\begin{pmatrix} 3 & 1 & -1 \\\\ 1 & 3 & 1 \\\\ -1 & 1 & 3 \\end{pmatrix}$.\n\nSo $A^{-1} = \\frac14\\begin{pmatrix} 3 & 1 & -1 \\\\ 1 & 3 & 1 \\\\ -1 & 1 & 3 \\end{pmatrix}$. That bracket is exactly $\\operatorname{adj}A$, and $|A| = 4$, so the two methods agree.",
+      type: "worked-example",
+      id: "mx3-4-we8",
+      title: "Worked example 7: a 3×3 CBSE classic",
+      problem:
+        "$A = \\begin{pmatrix} 2 & -1 & 1 \\\\ -1 & 2 & -1 \\\\ 1 & -1 & 2 \\end{pmatrix}$ satisfies $A^3 - 6A^2 + 9A - 4I = O$. Show this, and hence find $A^{-1}$.",
+      steps: [
+        {
+          text:
+            "**Check the equation.** $A^2 = \\begin{pmatrix} 6 & -5 & 5 \\\\ -5 & 6 & -5 \\\\ 5 & -5 & 6 \\end{pmatrix}$ and $A^3 = A\\cdot A^2 = \\begin{pmatrix} 22 & -21 & 21 \\\\ -21 & 22 & -21 \\\\ 21 & -21 & 22 \\end{pmatrix}$. Now compare entry by entry. On the diagonal: $22 - 6(6) + 9(2) - 4 = 22 - 36 + 18 - 4 = 0$. At position (1,2): $-21 - 6(-5) + 9(-1) - 0 = -21 + 30 - 9 = 0$. At position (1,3): $21 - 30 + 9 = 0$. The other entries match by the same pattern, so $A^3 - 6A^2 + 9A - 4I = O$. Where does this cubic come from? Its coefficients are the trace ($6$), the sum of the principal $2\\times2$ minors ($9$) and $|A| = 4$. That is the Cayley–Hamilton theorem of Chapter 5.",
+        },
+        {
+          text:
+            "$A^3 - 6A^2 + 9A = 4I$, so $A(A^2 - 6A + 9I) = 4I$ and $A^{-1} = \\frac14(A^2 - 6A + 9I)$.",
+        },
+        {
+          text:
+            "$A^2 = \\begin{pmatrix} 6 & -5 & 5 \\\\ -5 & 6 & -5 \\\\ 5 & -5 & 6 \\end{pmatrix}$.",
+        },
+        {
+          text:
+            "$A^2 - 6A + 9I = \\begin{pmatrix} 6 - 12 + 9 & -5 + 6 & 5 - 6 \\\\ -5 + 6 & 6 - 12 + 9 & -5 + 6 \\\\ 5 - 6 & -5 + 6 & 6 - 12 + 9 \\end{pmatrix} = \\begin{pmatrix} 3 & 1 & -1 \\\\ 1 & 3 & 1 \\\\ -1 & 1 & 3 \\end{pmatrix}$.",
+        },
+        {
+          text:
+            "That bracket is exactly $\\operatorname{adj}A$, and $|A| = 4$, so the two methods agree.",
+        },
+      ],
+      answer:
+        "$A^{-1} = \\frac14\\begin{pmatrix} 3 & 1 & -1 \\\\ 1 & 3 & 1 \\\\ -1 & 1 & 3 \\end{pmatrix}$",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx3-4-q1",
@@ -1236,6 +1666,7 @@ const lesson05: LessonSeed = {
       type: "math",
       latex: "\\big[\\,A \\mid I\\,\\big] \\;\\xrightarrow{\\text{row operations}}\\; \\big[\\,I \\mid A^{-1}\\,\\big]",
     },
+    { type: "heading", text: "Why row operations build $A^{-1}$" },
     {
       type: "text",
       content:
@@ -1255,10 +1686,34 @@ const lesson05: LessonSeed = {
       content:
         "Now suppose a sequence of operations $E_1, E_2, \\ldots, E_k$ turns $A$ into $I$:\n\n$E_k \\cdots E_2E_1\\,A = I.$\n\nThat says the product $E_k\\cdots E_1$ is a matrix that undoes $A$, so it **is** $A^{-1}$. Meanwhile the right-hand block started as $I$ and received the same operations, so it now holds $E_k\\cdots E_1\\,I = A^{-1}$. The right side is a *record* of everything you did, compressed into one matrix.",
     },
+    { type: "heading", text: "Reducing $[A \\mid I]$ step by step" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — 2×2.** $A = \\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}$.\n\n$\\left[\\begin{array}{cc|cc} 2 & 1 & 1 & 0 \\\\ 5 & 3 & 0 & 1 \\end{array}\\right]$\n\n**Step 1.** $R_1 \\to \\frac12R_1$: row 1 becomes $\\left(1,\\ \\frac12 \\mid \\frac12,\\ 0\\right)$.\n**Step 2.** $R_2 \\to R_2 - 5R_1$: row 2 becomes $\\left(0,\\ \\frac12 \\mid -\\frac52,\\ 1\\right)$.\n**Step 3.** $R_2 \\to 2R_2$: row 2 becomes $\\left(0,\\ 1 \\mid -5,\\ 2\\right)$.\n**Step 4.** $R_1 \\to R_1 - \\frac12R_2$: row 1 becomes $\\left(1,\\ 0 \\mid 3,\\ -1\\right)$.\n\nSo $A^{-1} = \\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}$. The formula agrees: $\\det A = 1$, and swapping and negating gives the same matrix.",
+      type: "worked-example",
+      id: "mx3-5-we1",
+      title: "Worked example 1: 2×2",
+      problem:
+        "$A = \\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}$. Find $A^{-1}$ by row-reducing $[A \\mid I]$:\n\n$$\\left[\\begin{array}{cc|cc} 2 & 1 & 1 & 0 \\\\ 5 & 3 & 0 & 1 \\end{array}\\right]$$",
+      steps: [
+        {
+          text:
+            "$R_1 \\to \\frac12R_1$: row 1 becomes $\\left(1,\\ \\frac12 \\mid \\frac12,\\ 0\\right)$.",
+        },
+        {
+          text:
+            "$R_2 \\to R_2 - 5R_1$: row 2 becomes $\\left(0,\\ \\frac12 \\mid -\\frac52,\\ 1\\right)$.",
+        },
+        { text: "$R_2 \\to 2R_2$: row 2 becomes $\\left(0,\\ 1 \\mid -5,\\ 2\\right)$." },
+        {
+          text:
+            "$R_1 \\to R_1 - \\frac12R_2$: row 1 becomes $\\left(1,\\ 0 \\mid 3,\\ -1\\right)$.",
+        },
+        {
+          text:
+            "The formula agrees: $\\det A = 1$, and swapping and negating gives the same matrix.",
+        },
+      ],
+      answer: "$A^{-1} = \\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}$",
+      tryFirst: false,
     },
     {
       type: "text",
@@ -1280,18 +1735,42 @@ const lesson05: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — 3×3.** $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 4 \\\\ 5 & 6 & 0 \\end{pmatrix}$.\n\n$\\left[\\begin{array}{ccc|ccc} 1 & 2 & 3 & 1 & 0 & 0 \\\\ 0 & 1 & 4 & 0 & 1 & 0 \\\\ 5 & 6 & 0 & 0 & 0 & 1 \\end{array}\\right]$\n\n**Going down (clear below the diagonal).**\n**Step 1.** $R_3 \\to R_3 - 5R_1$: $\\left(0,\\ -4,\\ -15 \\mid -5,\\ 0,\\ 1\\right)$.\n**Step 2.** $R_3 \\to R_3 + 4R_2$: $\\left(0,\\ 0,\\ 1 \\mid -5,\\ 4,\\ 1\\right)$. The pivots are all 1 already.\n\n**Going up (clear above the diagonal).**\n**Step 3.** $R_2 \\to R_2 - 4R_3$: $\\left(0,\\ 1,\\ 0 \\mid 20,\\ -15,\\ -4\\right)$.\n**Step 4.** $R_1 \\to R_1 - 3R_3$: $\\left(1,\\ 2,\\ 0 \\mid 16,\\ -12,\\ -3\\right)$.\n**Step 5.** $R_1 \\to R_1 - 2R_2$: $\\left(1,\\ 0,\\ 0 \\mid -24,\\ 18,\\ 5\\right)$.",
+      type: "worked-example",
+      id: "mx3-5-we2",
+      title: "Worked example 2: 3×3",
+      problem:
+        "$A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 4 \\\\ 5 & 6 & 0 \\end{pmatrix}$. Find $A^{-1}$ by row-reducing $[A \\mid I]$:\n\n$$\\left[\\begin{array}{ccc|ccc} 1 & 2 & 3 & 1 & 0 & 0 \\\\ 0 & 1 & 4 & 0 & 1 & 0 \\\\ 5 & 6 & 0 & 0 & 0 & 1 \\end{array}\\right]$$",
+      steps: [
+        {
+          text:
+            "**Going down (clear below the diagonal).**\n$R_3 \\to R_3 - 5R_1$: $\\left(0,\\ -4,\\ -15 \\mid -5,\\ 0,\\ 1\\right)$.",
+        },
+        {
+          text:
+            "$R_3 \\to R_3 + 4R_2$: $\\left(0,\\ 0,\\ 1 \\mid -5,\\ 4,\\ 1\\right)$. The pivots are all 1 already.",
+        },
+        {
+          text:
+            "**Going up (clear above the diagonal).**\n$R_2 \\to R_2 - 4R_3$: $\\left(0,\\ 1,\\ 0 \\mid 20,\\ -15,\\ -4\\right)$.",
+        },
+        { text: "$R_1 \\to R_1 - 3R_3$: $\\left(1,\\ 2,\\ 0 \\mid 16,\\ -12,\\ -3\\right)$." },
+        { text: "$R_1 \\to R_1 - 2R_2$: $\\left(1,\\ 0,\\ 0 \\mid -24,\\ 18,\\ 5\\right)$." },
+        {
+          latex:
+            "A^{-1} = \\begin{pmatrix} -24 & 18 & 5 \\\\ 20 & -15 & -4 \\\\ -5 & 4 & 1 \\end{pmatrix}",
+        },
+        {
+          text:
+            "**Check** one row and one column at least: row 1 of $A$, $(1, 2, 3)$, with column 1, $(-24, 20, -5)$, gives $-24 + 40 - 15 = 1$. Row 3, $(5, 6, 0)$, with column 1 gives $-120 + 120 = 0$. Here $\\det A = 1$, so the adjoint method would give the same matrix, but it would take nine minors.",
+        },
+      ],
+      answer:
+        "$A^{-1} = \\begin{pmatrix} -24 & 18 & 5 \\\\ 20 & -15 & -4 \\\\ -5 & 4 & 1 \\end{pmatrix}$",
     },
     {
-      type: "math",
-      latex: "A^{-1} = \\begin{pmatrix} -24 & 18 & 5 \\\\ 20 & -15 & -4 \\\\ -5 & 4 & 1 \\end{pmatrix}",
-    },
-    {
       type: "text",
       content:
-        "**Check** one row and one column at least: row 1 of $A$, $(1, 2, 3)$, with column 1, $(-24, 20, -5)$, gives $-24 + 40 - 15 = 1$. Row 3, $(5, 6, 0)$, with column 1 gives $-120 + 120 = 0$. Here $\\det A = 1$, so the adjoint method would give the same matrix, but it would take nine minors. Reproduce the steps below.",
+        "Reproduce the steps below.",
     },
     {
       type: "interactive",
@@ -1308,25 +1787,74 @@ const lesson05: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — when the top-left entry is 0 (NCERT style).** $A = \\begin{pmatrix} 0 & 1 & 2 \\\\ 1 & 0 & 3 \\\\ 4 & -3 & 8 \\end{pmatrix}$.\n\n$\\left[\\begin{array}{ccc|ccc} 0 & 1 & 2 & 1 & 0 & 0 \\\\ 1 & 0 & 3 & 0 & 1 & 0 \\\\ 4 & -3 & 8 & 0 & 0 & 1 \\end{array}\\right]$\n\n**Step 1.** $R_1 \\leftrightarrow R_2$. *Why:* you cannot scale a 0 up to a 1, and a swap is the cheapest way to get a non-zero pivot. Row 1 is now $\\left(1,\\ 0,\\ 3 \\mid 0,\\ 1,\\ 0\\right)$ and row 2 is $\\left(0,\\ 1,\\ 2 \\mid 1,\\ 0,\\ 0\\right)$.\n**Step 2.** $R_3 \\to R_3 - 4R_1$: $\\left(0,\\ -3,\\ -4 \\mid 0,\\ -4,\\ 1\\right)$.\n**Step 3.** $R_3 \\to R_3 + 3R_2$: $\\left(0,\\ 0,\\ 2 \\mid 3,\\ -4,\\ 1\\right)$.\n**Step 4.** $R_3 \\to \\frac12R_3$: $\\left(0,\\ 0,\\ 1 \\mid \\frac32,\\ -2,\\ \\frac12\\right)$.\n**Step 5.** $R_2 \\to R_2 - 2R_3$: $\\left(0,\\ 1,\\ 0 \\mid -2,\\ 4,\\ -1\\right)$.\n**Step 6.** $R_1 \\to R_1 - 3R_3$: $\\left(1,\\ 0,\\ 0 \\mid -\\frac92,\\ 7,\\ -\\frac32\\right)$.",
+      type: "worked-example",
+      id: "mx3-5-we3",
+      title: "Worked example 3: when the top-left entry is 0 (NCERT style)",
+      problem:
+        "$A = \\begin{pmatrix} 0 & 1 & 2 \\\\ 1 & 0 & 3 \\\\ 4 & -3 & 8 \\end{pmatrix}$. Find $A^{-1}$ by row-reducing $[A \\mid I]$:\n\n$$\\left[\\begin{array}{ccc|ccc} 0 & 1 & 2 & 1 & 0 & 0 \\\\ 1 & 0 & 3 & 0 & 1 & 0 \\\\ 4 & -3 & 8 & 0 & 0 & 1 \\end{array}\\right]$$",
+      steps: [
+        {
+          text:
+            "$R_1 \\leftrightarrow R_2$. *Why:* you cannot scale a 0 up to a 1, and a swap is the cheapest way to get a non-zero pivot. Row 1 is now $\\left(1,\\ 0,\\ 3 \\mid 0,\\ 1,\\ 0\\right)$ and row 2 is $\\left(0,\\ 1,\\ 2 \\mid 1,\\ 0,\\ 0\\right)$.",
+        },
+        { text: "$R_3 \\to R_3 - 4R_1$: $\\left(0,\\ -3,\\ -4 \\mid 0,\\ -4,\\ 1\\right)$." },
+        { text: "$R_3 \\to R_3 + 3R_2$: $\\left(0,\\ 0,\\ 2 \\mid 3,\\ -4,\\ 1\\right)$." },
+        {
+          text:
+            "$R_3 \\to \\frac12R_3$: $\\left(0,\\ 0,\\ 1 \\mid \\frac32,\\ -2,\\ \\frac12\\right)$.",
+        },
+        { text: "$R_2 \\to R_2 - 2R_3$: $\\left(0,\\ 1,\\ 0 \\mid -2,\\ 4,\\ -1\\right)$." },
+        {
+          text:
+            "$R_1 \\to R_1 - 3R_3$: $\\left(1,\\ 0,\\ 0 \\mid -\\frac92,\\ 7,\\ -\\frac32\\right)$.",
+        },
+        {
+          latex:
+            "A^{-1} = \\begin{pmatrix} -\\frac92 & 7 & -\\frac32 \\\\ -2 & 4 & -1 \\\\ \\frac32 & -2 & \\frac12 \\end{pmatrix} = \\frac12\\begin{pmatrix} -9 & 14 & -3 \\\\ -4 & 8 & -2 \\\\ 3 & -4 & 1 \\end{pmatrix}",
+        },
+        {
+          text:
+            "**Check.** Row 1 of $A$, $(0, 1, 2)$, with column 1 of $A^{-1}$, $(-\\frac92, -2, \\frac32)$: $0 - 2 + 3 = 1$. Row 3, $(4, -3, 8)$, with column 3, $(-\\frac32, -1, \\frac12)$: $-6 + 3 + 4 = 1$. Row 2, $(1, 0, 3)$, with column 2, $(7, 4, -2)$: $7 + 0 - 6 = 1$. ✓",
+        },
+      ],
+      answer:
+        "$A^{-1} = \\frac12\\begin{pmatrix} -9 & 14 & -3 \\\\ -4 & 8 & -2 \\\\ 3 & -4 & 1 \\end{pmatrix}$",
     },
     {
-      type: "math",
-      latex:
-        "A^{-1} = \\begin{pmatrix} -\\frac92 & 7 & -\\frac32 \\\\ -2 & 4 & -1 \\\\ \\frac32 & -2 & \\frac12 \\end{pmatrix} = \\frac12\\begin{pmatrix} -9 & 14 & -3 \\\\ -4 & 8 & -2 \\\\ 3 & -4 & 1 \\end{pmatrix}",
-    },
-    {
       type: "text",
       content:
-        "**Check.** Row 1 of $A$, $(0, 1, 2)$, with column 1 of $A^{-1}$, $(-\\frac92, -2, \\frac32)$: $0 - 2 + 3 = 1$. Row 3, $(4, -3, 8)$, with column 3, $(-\\frac32, -1, \\frac12)$: $-6 + 3 + 4 = 1$. Row 2, $(1, 0, 3)$, with column 2, $(7, 4, -2)$: $7 + 0 - 6 = 1$. ✓\n\n**Bonus — the determinant from the bookkeeping.** The swap multiplied the determinant by $-1$ and Step 4 multiplied it by $\\frac12$; the other steps left it alone. The process ended at $I$, whose determinant is 1, so $|A|\\cdot(-1)\\cdot\\frac12 = 1$ and $|A| = -2$. Expanding $|A|$ directly along row 1 gives $0 - 1(8 - 12) + 2(-3 - 0) = 4 - 6 = -2$, the same.",
+        "**Bonus — the determinant from the bookkeeping.** The swap multiplied the determinant by $-1$ and Step 4 multiplied it by $\\frac12$; the other steps left it alone. The process ended at $I$, whose determinant is 1, so $|A|\\cdot(-1)\\cdot\\frac12 = 1$ and $|A| = -2$. Expanding $|A|$ directly along row 1 gives $0 - 1(8 - 12) + 2(-3 - 0) = 4 - 6 = -2$, the same.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — planning a diet (application).** A dietitian uses three foods. One serving of food $X$ gives 1 unit of protein, 0 of fibre and 1 of iron; food $Y$ gives $(2, 1, 2)$; food $Z$ gives $(1, 1, 2)$. If $\\mathbf{q}$ lists the servings, the nutrients are $\\mathbf{n} = M\\mathbf{q}$ with\n\n$M = \\begin{pmatrix} 1 & 2 & 1 \\\\ 0 & 1 & 1 \\\\ 1 & 2 & 2 \\end{pmatrix}$ (each column is one food).\n\nShe gets a new target $\\mathbf{n}$ for every patient. *Why invert once:* with $M^{-1}$ in hand, every target is answered by one multiplication, $\\mathbf{q} = M^{-1}\\mathbf{n}$.\n\n**Step 1.** $R_3 \\to R_3 - R_1$: $\\left(0,\\ 0,\\ 1 \\mid -1,\\ 0,\\ 1\\right)$. The third pivot is ready at once.\n**Step 2.** $R_2 \\to R_2 - R_3$: $\\left(0,\\ 1,\\ 0 \\mid 1,\\ 1,\\ -1\\right)$.\n**Step 3.** $R_1 \\to R_1 - R_3$: $\\left(1,\\ 2,\\ 0 \\mid 2,\\ 0,\\ -1\\right)$.\n**Step 4.** $R_1 \\to R_1 - 2R_2$: $\\left(1,\\ 0,\\ 0 \\mid 0,\\ -2,\\ 1\\right)$.\n\nSo $M^{-1} = \\begin{pmatrix} 0 & -2 & 1 \\\\ 1 & 1 & -1 \\\\ -1 & 0 & 1 \\end{pmatrix}$.\n\n**Step 5 — a patient needs 10 protein, 4 fibre, 13 iron.** $\\mathbf{q} = M^{-1}\\begin{pmatrix} 10 \\\\ 4 \\\\ 13 \\end{pmatrix} = \\begin{pmatrix} 0 - 8 + 13 \\\\ 10 + 4 - 13 \\\\ -10 + 0 + 13 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 1 \\\\ 3 \\end{pmatrix}$: 5 servings of $X$, 1 of $Y$, 3 of $Z$.\n\n**Check.** Protein $5 + 2 + 3 = 10$, fibre $0 + 1 + 3 = 4$, iron $5 + 2 + 6 = 13$. ✓ The next patient, who needs $(12, 5, 15)$, costs one more multiplication: $\\mathbf{q} = (5, 2, 3)$.",
+      type: "worked-example",
+      id: "mx3-5-we4",
+      title: "Worked example 4: planning a diet (application)",
+      problem:
+        "A dietitian uses three foods. One serving of food $X$ gives 1 unit of protein, 0 of fibre and 1 of iron; food $Y$ gives $(2, 1, 2)$; food $Z$ gives $(1, 1, 2)$. If $\\mathbf{q}$ lists the servings, the nutrients are $\\mathbf{n} = M\\mathbf{q}$ with\n\n$M = \\begin{pmatrix} 1 & 2 & 1 \\\\ 0 & 1 & 1 \\\\ 1 & 2 & 2 \\end{pmatrix}$ (each column is one food).\n\nShe gets a new target $\\mathbf{n}$ for every patient. *Why invert once:* with $M^{-1}$ in hand, every target is answered by one multiplication, $\\mathbf{q} = M^{-1}\\mathbf{n}$.\n\nFind $M^{-1}$ by row-reducing $[M \\mid I]$, then find the servings for a patient who needs 10 units of protein, 4 of fibre and 13 of iron.",
+      steps: [
+        {
+          text:
+            "$R_3 \\to R_3 - R_1$: $\\left(0,\\ 0,\\ 1 \\mid -1,\\ 0,\\ 1\\right)$. The third pivot is ready at once.",
+        },
+        { text: "$R_2 \\to R_2 - R_3$: $\\left(0,\\ 1,\\ 0 \\mid 1,\\ 1,\\ -1\\right)$." },
+        { text: "$R_1 \\to R_1 - R_3$: $\\left(1,\\ 2,\\ 0 \\mid 2,\\ 0,\\ -1\\right)$." },
+        {
+          text:
+            "$R_1 \\to R_1 - 2R_2$: $\\left(1,\\ 0,\\ 0 \\mid 0,\\ -2,\\ 1\\right)$.\n\nSo $M^{-1} = \\begin{pmatrix} 0 & -2 & 1 \\\\ 1 & 1 & -1 \\\\ -1 & 0 & 1 \\end{pmatrix}$.",
+        },
+        {
+          text:
+            "**A patient needs 10 protein, 4 fibre, 13 iron.** $\\mathbf{q} = M^{-1}\\begin{pmatrix} 10 \\\\ 4 \\\\ 13 \\end{pmatrix} = \\begin{pmatrix} 0 - 8 + 13 \\\\ 10 + 4 - 13 \\\\ -10 + 0 + 13 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 1 \\\\ 3 \\end{pmatrix}$: 5 servings of $X$, 1 of $Y$, 3 of $Z$.",
+        },
+        {
+          text:
+            "**Check.** Protein $5 + 2 + 3 = 10$, fibre $0 + 1 + 3 = 4$, iron $5 + 2 + 6 = 13$. ✓ The next patient, who needs $(12, 5, 15)$, costs one more multiplication: $\\mathbf{q} = (5, 2, 3)$.",
+        },
+      ],
+      answer:
+        "$M^{-1} = \\begin{pmatrix} 0 & -2 & 1 \\\\ 1 & 1 & -1 \\\\ -1 & 0 & 1 \\end{pmatrix}$, and this patient needs 5 servings of $X$, 1 of $Y$ and 3 of $Z$.",
     },
+    { type: "heading", text: "Spotting a singular matrix mid-reduction" },
     {
       type: "text",
       content:
@@ -1347,9 +1875,27 @@ const lesson05: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 — where does it break? (JEE/CBSE style).** For which $k$ does $A = \\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 3 \\\\ 1 & 3 & k \\end{pmatrix}$ fail to have an inverse?\n\n**Step 1.** $R_2 \\to R_2 - R_1$: $(0,\\ 1,\\ 2)$. $R_3 \\to R_3 - R_1$: $(0,\\ 2,\\ k - 1)$. *Why only the left block:* the question is whether an inverse exists, and that is decided by the left block alone.\n**Step 2.** $R_3 \\to R_3 - 2R_2$: $(0,\\ 0,\\ k - 5)$.\n\n**Step 3 — read the verdict.** If $k = 5$, row 3 of the left block is all zeros, so $A$ is singular. If $k \\ne 5$, scale row 3 by $\\frac{1}{k-5}$ and carry on to $I$.\n\n**Cross-check with the determinant.** Expanding along row 1: $1(2k - 9) - 1(k - 3) + 1(3 - 2) = 2k - 9 - k + 3 + 1 = k - 5$. It vanishes exactly at $k = 5$. The two methods agree because the steps used (adding multiples of rows) do not change the determinant, so $|A|$ equals the product of the diagonal $1\\cdot1\\cdot(k-5)$.",
+      type: "worked-example",
+      id: "mx3-5-we5",
+      title: "Worked example 5: where does it break? (JEE/CBSE style)",
+      problem:
+        "For which $k$ does $A = \\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 3 \\\\ 1 & 3 & k \\end{pmatrix}$ fail to have an inverse?",
+      steps: [
+        {
+          text:
+            "$R_2 \\to R_2 - R_1$: $(0,\\ 1,\\ 2)$. $R_3 \\to R_3 - R_1$: $(0,\\ 2,\\ k - 1)$. *Why only the left block:* the question is whether an inverse exists, and that is decided by the left block alone.",
+        },
+        { text: "$R_3 \\to R_3 - 2R_2$: $(0,\\ 0,\\ k - 5)$." },
+        {
+          text:
+            "**Read the verdict.** If $k = 5$, row 3 of the left block is all zeros, so $A$ is singular. If $k \\ne 5$, scale row 3 by $\\frac{1}{k-5}$ and carry on to $I$.",
+        },
+        {
+          text:
+            "**Cross-check with the determinant.** Expanding along row 1: $1(2k - 9) - 1(k - 3) + 1(3 - 2) = 2k - 9 - k + 3 + 1 = k - 5$. It vanishes exactly at $k = 5$. The two methods agree because the steps used (adding multiples of rows) do not change the determinant, so $|A|$ equals the product of the diagonal $1\\cdot1\\cdot(k-5)$.",
+        },
+      ],
+      answer: "$A$ has no inverse exactly when $k = 5$.",
     },
     {
       type: "callout",
@@ -1358,6 +1904,7 @@ const lesson05: LessonSeed = {
       content:
         "Row operations are left-multiplications: $E_k\\cdots E_1A = I$. Column operations are right-multiplications: $AF_1\\cdots F_m = I$, which also gives an inverse, applied to the stacked block $\\begin{bmatrix} A \\\\ I \\end{bmatrix}$. Mix them and you get $E\\,A\\,F = I$, so $A^{-1} = FE$. The right-hand block has recorded only $E$, not $FE$, so what it shows is wrong. Pick one kind of operation and stick to it for the whole inversion.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx3-5-q1",

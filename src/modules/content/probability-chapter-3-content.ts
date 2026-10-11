@@ -124,6 +124,7 @@ const lesson01: LessonSeed = {
       content:
         "So about 3.45% of all bolts are defective. Nothing new was used: the multiplication rule along each path, the addition rule across the leaves. The only new idea is *choosing* the first stage to be the hidden cause.",
     },
+    { type: "heading", text: "Partitions and total probability" },
     {
       type: "callout",
       variant: "definition",
@@ -156,10 +157,11 @@ const lesson01: LessonSeed = {
       content:
         "If $E_1, \\ldots, E_n$ partition $S$, then for any event $A$:\n$P(A) = P(E_1)P(A \\mid E_1) + P(E_2)P(A \\mid E_2) + \\cdots + P(E_n)P(A \\mid E_n)$.\nOn a tree: add up every leaf where $A$ happens.",
     },
+    { type: "heading", text: "Read it as a weighted average" },
     {
       type: "text",
       content:
-        "**Read it as a weighted average.** The weights $P(E_i)$ add to 1, so $P(A)$ is an *average* of the conditional probabilities $P(A \\mid E_i)$, where each cause counts in proportion to how often it occurs. That reading gives you a free sanity check: $P(A)$ must lie between the smallest and the largest $P(A \\mid E_i)$. Here $0.0345$ sits between $0.02$ and $0.05$, and it is pulled toward $0.02$ because $M_3$, the careful machine, does the most work.",
+        "The weights $P(E_i)$ add to 1, so $P(A)$ is an *average* of the conditional probabilities $P(A \\mid E_i)$, where each cause counts in proportion to how often it occurs. That reading gives you a free sanity check: $P(A)$ must lie between the smallest and the largest $P(A \\mid E_i)$. Here $0.0345$ sits between $0.02$ and $0.05$, and it is pulled toward $0.02$ because $M_3$, the careful machine, does the most work.",
     },
     {
       type: "callout",
@@ -168,38 +170,51 @@ const lesson01: LessonSeed = {
       content:
         "The tempting shortcut is $\\frac{5\\% + 4\\% + 2\\%}{3} \\approx 3.67\\%$. That treats the three machines as if each made a third of the bolts. They don't. A plain average is only right when the causes are equally likely; otherwise each rate must be weighted by how often its cause happens.",
     },
+    { type: "heading", text: "Urns, school runs, calls and bags" },
     {
-      type: "text",
-      content:
-        "**Worked example: an urn chosen by a die.** Urn I holds 3 red and 2 black balls; urn II holds 1 red and 4 black. Roll a die: on a 1 or 2 draw from urn I, otherwise from urn II. Find $P(\\text{red})$.\n\n**Step 1: name the partition.** $E_1$ = \"urn I used\", $E_2$ = \"urn II used\". Exactly one happens. $P(E_1) = \\frac{2}{6} = \\frac{1}{3}$, $P(E_2) = \\frac{2}{3}$.\n\n**Step 2: conditional probabilities.** $P(R \\mid E_1) = \\frac{3}{5}$, $P(R \\mid E_2) = \\frac{1}{5}$.\n\n**Step 3: weight and add.**",
-    },
-    {
-      type: "math",
-      latex:
-        "P(R) = \\frac{1}{3}\\cdot\\frac{3}{5} + \\frac{2}{3}\\cdot\\frac{1}{5} = \\frac{3}{15} + \\frac{2}{15} = \\frac{1}{3}",
-    },
-    {
-      type: "text",
-      content:
-        "**Check:** $\\frac{1}{3}$ lies between $\\frac{1}{5}$ and $\\frac{3}{5}$, and closer to $\\frac{1}{5}$ because urn II is used twice as often. The unweighted average $\\frac{2}{5}$ would be wrong.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example: getting to school.** 60% of students come by bus and 40% walk. A bus rider is late with probability $0.2$; a walker with probability $0.05$. What fraction of students are late?\n\nThe partition is {bus, walk}. Then",
-    },
-    {
-      type: "math",
-      latex: "P(L) = 0.6 \\times 0.2 + 0.4 \\times 0.05 = 0.12 + 0.02 = 0.14",
-    },
-    {
-      type: "table",
-      headers: ["Cause $E_i$", "$P(E_i)$", "$P(L \\mid E_i)$", "Leaf $P(E_i)P(L \\mid E_i)$"],
-      rows: [
-        ["Bus", "0.6", "0.2", "0.12"],
-        ["Walk", "0.4", "0.05", "0.02"],
-        ["**Total**", "1", "", "**0.14**"],
+      type: "worked-example",
+      id: "pr3-1-we1",
+      title: "Worked example: an urn chosen by a die",
+      problem:
+        "Urn I holds 3 red and 2 black balls; urn II holds 1 red and 4 black. Roll a die: on a 1 or 2 draw from urn I, otherwise from urn II. Find $P(\\text{red})$.",
+      steps: [
+        {
+          text: "**Name the partition.** $E_1$ = \"urn I used\", $E_2$ = \"urn II used\". Exactly one happens. $P(E_1) = \\frac{2}{6} = \\frac{1}{3}$, $P(E_2) = \\frac{2}{3}$.",
+        },
+        {
+          text: "**Conditional probabilities.** $P(R \\mid E_1) = \\frac{3}{5}$, $P(R \\mid E_2) = \\frac{1}{5}$.",
+        },
+        {
+          text: "**Weight and add.** ",
+          latex: "P(R) = \\frac{1}{3}\\cdot\\frac{3}{5} + \\frac{2}{3}\\cdot\\frac{1}{5} = \\frac{3}{15} + \\frac{2}{15} = \\frac{1}{3}",
+        },
+        {
+          text: "**Check:** $\\frac{1}{3}$ lies between $\\frac{1}{5}$ and $\\frac{3}{5}$, and closer to $\\frac{1}{5}$ because urn II is used twice as often. The unweighted average $\\frac{2}{5}$ would be wrong.",
+        },
       ],
+      answer: "$P(R) = \\frac{1}{3}$",
+    },
+    {
+      type: "worked-example",
+      id: "pr3-1-we2",
+      title: "Worked example: getting to school",
+      problem:
+        "60% of students come by bus and 40% walk. A bus rider is late with probability $0.2$; a walker with probability $0.05$. What fraction of students are late?",
+      steps: [
+        {
+          text: "The partition is {bus, walk}. Then",
+          latex: "P(L) = 0.6 \\times 0.2 + 0.4 \\times 0.05 = 0.12 + 0.02 = 0.14",
+          table: {
+            headers: ["Cause $E_i$", "$P(E_i)$", "$P(L \\mid E_i)$", "Leaf $P(E_i)P(L \\mid E_i)$"],
+            rows: [
+              ["Bus", "0.6", "0.2", "0.12"],
+              ["Walk", "0.4", "0.05", "0.02"],
+              ["**Total**", "1", "", "**0.14**"],
+            ],
+          },
+        },
+      ],
+      answer: "$0.14$, so 14% of students are late.",
     },
     {
       type: "callout",
@@ -209,34 +224,55 @@ const lesson01: LessonSeed = {
         "For any total-probability problem, make three columns: prior weight, conditional rate, product. The last column's sum is $P(A)$. Next lesson you will see that the same table, read one more column to the right, is Bayes' theorem.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (application): dropped calls.** A mobile network handles calls through three kinds of tower: 50% of calls go through urban towers, 30% through suburban towers and 20% through rural towers. The drop rates are 1%, 2% and 5%. What fraction of all calls are dropped?\n\n**Step 1: name the partition.** Every call goes through exactly one kind of tower, so {urban, suburban, rural} is a partition with weights $0.5, 0.3, 0.2$. *Why this step:* the drop rate is only known *per tower type*, so that is the hidden cause to split on.\n\n**Step 2: one leaf per cause.** Urban: $0.5 \\times 0.01 = 0.005$. Suburban: $0.3 \\times 0.02 = 0.006$. Rural: $0.2 \\times 0.05 = 0.010$. *Why this step:* each leaf is $P(\\text{tower} \\cap \\text{dropped})$, a path through the tree, so it is a product.\n\n**Step 3: add the leaves.**",
+      type: "worked-example",
+      id: "pr3-1-we3",
+      title: "Worked example (application): dropped calls",
+      problem:
+        "A mobile network handles calls through three kinds of tower: 50% of calls go through urban towers, 30% through suburban towers and 20% through rural towers. The drop rates are 1%, 2% and 5%. What fraction of all calls are dropped?",
+      steps: [
+        {
+          text: "**Name the partition.** Every call goes through exactly one kind of tower, so {urban, suburban, rural} is a partition with weights $0.5, 0.3, 0.2$. *Why this step:* the drop rate is only known *per tower type*, so that is the hidden cause to split on.",
+        },
+        {
+          text: "**One leaf per cause.** Urban: $0.5 \\times 0.01 = 0.005$. Suburban: $0.3 \\times 0.02 = 0.006$. Rural: $0.2 \\times 0.05 = 0.010$. *Why this step:* each leaf is $P(\\text{tower} \\cap \\text{dropped})$, a path through the tree, so it is a product.",
+        },
+        {
+          text: "**Add the leaves.** ",
+          latex: "P(\\text{dropped}) = 0.005 + 0.006 + 0.010 = 0.021",
+        },
+        {
+          text: "**Check:** $2.1\\%$ lies between $1\\%$ and $5\\%$. Notice that the rural towers carry only a fifth of the calls but produce almost half the drops ($0.010$ of $0.021$). That observation is already a Bayes question, and it is where the next lesson starts.",
+        },
+      ],
+      answer: "$0.021$, about 2.1% of calls.",
     },
     {
-      type: "math",
-      latex: "P(\\text{dropped}) = 0.005 + 0.006 + 0.010 = 0.021",
+      type: "worked-example",
+      id: "pr3-1-we4",
+      title: "Worked example (exam-style, CBSE/JEE): two balls change bags",
+      problem:
+        "Bag I holds 5 red and 3 black balls; bag II holds 4 red and 5 black. **Two** balls are moved at random from bag I to bag II, and then one ball is drawn from bag II. Find the probability that it is red.",
+      steps: [
+        {
+          text: "(The one-ball transfer and the urn that grows after each draw, both from Lesson 2.4, were already total-probability problems with a two-piece partition. Moving two balls needs three pieces.)",
+        },
+        {
+          text: "**Find the hidden cause and partition on it.** What was moved decides what bag II looks like, so the partition is: $E_1$ = both red, $E_2$ = one of each, $E_3$ = both black. Out of $\\binom{8}{2} = 28$ equally likely pairs, $\\binom{5}{2} = 10$ are both red, $5 \\times 3 = 15$ are mixed and $\\binom{3}{2} = 3$ are both black. So $P(E_1) = \\frac{10}{28}$, $P(E_2) = \\frac{15}{28}$, $P(E_3) = \\frac{3}{28}$, and $10 + 15 + 3 = 28$ confirms nothing is missing. *Why this step:* you cannot write $P(\\text{red})$ directly, because bag II's contents are unknown until you fix what was moved.",
+        },
+        {
+          text: "**Rebuild bag II in each case.** It now holds 11 balls: 6, 5 or 4 of them red. So $P(R \\mid E_1) = \\frac{6}{11}$, $P(R \\mid E_2) = \\frac{5}{11}$, $P(R \\mid E_3) = \\frac{4}{11}$. *Why this step:* the conditional probabilities are always computed from the situation **after** the hidden step.",
+        },
+        {
+          text: "**Weight and add.** ",
+          latex: "P(R) = \\frac{10}{28}\\cdot\\frac{6}{11} + \\frac{15}{28}\\cdot\\frac{5}{11} + \\frac{3}{28}\\cdot\\frac{4}{11} = \\frac{60 + 75 + 12}{308} = \\frac{147}{308} = \\frac{21}{44} \\approx 0.477",
+        },
+        {
+          text: "**Check:** $\\frac{21}{44}$ lies between the smallest and largest conditional values, $\\frac{4}{11} \\approx 0.36$ and $\\frac{6}{11} \\approx 0.55$, and sits nearest $\\frac{5}{11}$ because the mixed transfer is the most common. A second route: on average $2 \\times \\frac58 = 1.25$ red balls are moved, so bag II ends up with $4 + 1.25 = 5.25$ red balls out of 11 on average, and $\\frac{5.25}{11} = \\frac{21}{44}$. That shortcut is justified by linearity of expectation in Chapter 4; here it is simply a welcome confirmation.",
+        },
+      ],
+      answer: "$\\frac{21}{44} \\approx 0.477$",
     },
-    {
-      type: "text",
-      content:
-        "**Check:** $2.1\\%$ lies between $1\\%$ and $5\\%$. Notice that the rural towers carry only a fifth of the calls but produce almost half the drops ($0.010$ of $0.021$). That observation is already a Bayes question, and it is where the next lesson starts.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example (exam-style, CBSE/JEE): two balls change bags.** Bag I holds 5 red and 3 black balls; bag II holds 4 red and 5 black. **Two** balls are moved at random from bag I to bag II, and then one ball is drawn from bag II. Find the probability that it is red.\n\n(The one-ball transfer and the urn that grows after each draw, both from Lesson 2.4, were already total-probability problems with a two-piece partition. Moving two balls needs three pieces.)\n\n**Step 1: find the hidden cause and partition on it.** What was moved decides what bag II looks like, so the partition is: $E_1$ = both red, $E_2$ = one of each, $E_3$ = both black. Out of $\\binom{8}{2} = 28$ equally likely pairs, $\\binom{5}{2} = 10$ are both red, $5 \\times 3 = 15$ are mixed and $\\binom{3}{2} = 3$ are both black. So $P(E_1) = \\frac{10}{28}$, $P(E_2) = \\frac{15}{28}$, $P(E_3) = \\frac{3}{28}$, and $10 + 15 + 3 = 28$ confirms nothing is missing. *Why this step:* you cannot write $P(\\text{red})$ directly, because bag II's contents are unknown until you fix what was moved.\n\n**Step 2: rebuild bag II in each case.** It now holds 11 balls: 6, 5 or 4 of them red. So $P(R \\mid E_1) = \\frac{6}{11}$, $P(R \\mid E_2) = \\frac{5}{11}$, $P(R \\mid E_3) = \\frac{4}{11}$. *Why this step:* the conditional probabilities are always computed from the situation **after** the hidden step.\n\n**Step 3: weight and add.**",
-    },
-    {
-      type: "math",
-      latex:
-        "P(R) = \\frac{10}{28}\\cdot\\frac{6}{11} + \\frac{15}{28}\\cdot\\frac{5}{11} + \\frac{3}{28}\\cdot\\frac{4}{11} = \\frac{60 + 75 + 12}{308} = \\frac{147}{308} = \\frac{21}{44} \\approx 0.477",
-    },
-    {
-      type: "text",
-      content:
-        "**Check:** $\\frac{21}{44}$ lies between the smallest and largest conditional values, $\\frac{4}{11} \\approx 0.36$ and $\\frac{6}{11} \\approx 0.55$, and sits nearest $\\frac{5}{11}$ because the mixed transfer is the most common. A second route: on average $2 \\times \\frac58 = 1.25$ red balls are moved, so bag II ends up with $4 + 1.25 = 5.25$ red balls out of 11 on average, and $\\frac{5.25}{11} = \\frac{21}{44}$. That shortcut is justified by linearity of expectation in Chapter 4; here it is simply a welcome confirmation.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr3-1-q1",
@@ -365,6 +401,7 @@ const lesson02: LessonSeed = {
       content:
         "Back to the factory. An inspector picks a bolt, finds it **defective**, and wants to know which machine to blame. The tree answers forward questions, \"given the machine, how likely is a defect?\" The inspector is asking the backward question: \"given the defect, how likely is each machine?\"\n\nThat reversal is Bayes' theorem, and you already have everything needed for it.",
     },
+    { type: "heading", text: "Keep only the leaves you observed" },
     {
       type: "text",
       content:
@@ -391,6 +428,7 @@ const lesson02: LessonSeed = {
       content:
         "In natural frequencies: of 10,000 bolts, $M_1$ makes 2,500 and 125 are defective; $M_2$ makes 3,500 and 140 are defective; $M_3$ makes 4,000 and 80 are defective. Among the 345 defective bolts, 140 are from $M_2$. $\\frac{140}{345} = \\frac{28}{69}$. Same answer, no formula.",
     },
+    { type: "heading", text: "Deriving Bayes' theorem" },
     {
       type: "text",
       content:
@@ -422,20 +460,41 @@ const lesson02: LessonSeed = {
       content:
         "The numerator is one leaf; the denominator is the sum of all the leaves consistent with what you saw. That's the whole theorem. Everything else in this chapter is this sentence applied carefully.",
     },
+    { type: "heading", text: "Priors, likelihoods and posteriors" },
     {
-      type: "text",
-      content:
-        "**Worked example (in steps): which machine made the defective bolt?**\n\n**Step 1: partition and priors.** $P(M_1) = 0.25$, $P(M_2) = 0.35$, $P(M_3) = 0.40$.\n\n**Step 2: likelihoods of the evidence.** $P(D \\mid M_1) = 0.05$, $P(D \\mid M_2) = 0.04$, $P(D \\mid M_3) = 0.02$.\n\n**Step 3: joints (the leaves).** $0.0125$, $0.0140$, $0.0080$.\n\n**Step 4: total.** $P(D) = 0.0345$.\n\n**Step 5: divide.**",
-    },
-    {
-      type: "table",
-      headers: ["Machine", "Prior", "Likelihood $P(D \\mid M_i)$", "Joint", "Posterior $P(M_i \\mid D)$"],
-      rows: [
-        ["$M_1$", "0.25", "0.05", "0.0125", "$\\frac{25}{69} \\approx 0.362$"],
-        ["$M_2$", "0.35", "0.04", "0.0140", "$\\frac{28}{69} \\approx 0.406$"],
-        ["$M_3$", "0.40", "0.02", "0.0080", "$\\frac{16}{69} \\approx 0.232$"],
-        ["**Total**", "1", "", "0.0345", "1"],
+      type: "worked-example",
+      id: "pr3-2-we1",
+      title: "Worked example (in steps): which machine made the defective bolt?",
+      problem:
+        "Machines $M_1$, $M_2$ and $M_3$ make 25%, 35% and 40% of a factory's bolts, and 5%, 4% and 2% of their bolts are defective. A bolt picked at random is defective. Find the probability that it came from each machine, $P(M_i \\mid D)$.",
+      steps: [
+        {
+          text: "**Partition and priors.** $P(M_1) = 0.25$, $P(M_2) = 0.35$, $P(M_3) = 0.40$.",
+        },
+        {
+          text: "**Likelihoods of the evidence.** $P(D \\mid M_1) = 0.05$, $P(D \\mid M_2) = 0.04$, $P(D \\mid M_3) = 0.02$.",
+        },
+        {
+          text: "**Joints (the leaves).** $0.0125$, $0.0140$, $0.0080$.",
+        },
+        {
+          text: "**Total.** $P(D) = 0.0345$.",
+        },
+        {
+          text: "**Divide.** Each joint over $P(D) = 0.0345$ gives that machine's posterior.",
+          table: {
+            headers: ["Machine", "Prior", "Likelihood $P(D \\mid M_i)$", "Joint", "Posterior $P(M_i \\mid D)$"],
+            rows: [
+              ["$M_1$", "0.25", "0.05", "0.0125", "$\\frac{25}{69} \\approx 0.362$"],
+              ["$M_2$", "0.35", "0.04", "0.0140", "$\\frac{28}{69} \\approx 0.406$"],
+              ["$M_3$", "0.40", "0.02", "0.0080", "$\\frac{16}{69} \\approx 0.232$"],
+              ["**Total**", "1", "", "0.0345", "1"],
+            ],
+          },
+        },
       ],
+      answer: "$P(M_1 \\mid D) = \\frac{25}{69} \\approx 0.362$, $P(M_2 \\mid D) = \\frac{28}{69} \\approx 0.406$, $P(M_3 \\mid D) = \\frac{16}{69} \\approx 0.232$",
+      tryFirst: false,
     },
     {
       type: "text",
@@ -449,14 +508,26 @@ const lesson02: LessonSeed = {
       content:
         "$P(D \\mid M_1) = 0.05$ but $P(M_1 \\mid D) \\approx 0.36$. The two conditionals answer different questions and can be wildly different. Swapping them is called **confusing the inverse**, and it is behind most real-world Bayes errors. Bayes' theorem is the correct way to swap.",
     },
+    { type: "heading", text: "Grades, spam and a late doctor" },
     {
-      type: "text",
-      content:
-        "**Worked example: hostel and grades.** In a college, 30% of students live in the hostel and 70% are day scholars. 50% of hostellers and 30% of day scholars get an A grade. A student chosen at random has an A. What is the probability they live in the hostel?\n\nLet $G$ be the event \"gets an A grade\" (a separate letter, so it doesn't clash with the $A$ in the formula).\n\n**Leaves:** hostel and $G$: $0.3 \\times 0.5 = 0.15$; day and $G$: $0.7 \\times 0.3 = 0.21$.\n\n**Total:** $P(G) = 0.36$.",
-    },
-    {
-      type: "math",
-      latex: "P(\\text{hostel} \\mid G) = \\frac{0.15}{0.36} = \\frac{5}{12} \\approx 0.417",
+      type: "worked-example",
+      id: "pr3-2-we2",
+      title: "Worked example: hostel and grades",
+      problem:
+        "In a college, 30% of students live in the hostel and 70% are day scholars. 50% of hostellers and 30% of day scholars get an A grade. A student chosen at random has an A. What is the probability they live in the hostel?",
+      steps: [
+        {
+          text: "Let $G$ be the event \"gets an A grade\" (a separate letter, so it doesn't clash with the $A$ in the formula).",
+        },
+        {
+          text: "**Leaves:** hostel and $G$: $0.3 \\times 0.5 = 0.15$; day and $G$: $0.7 \\times 0.3 = 0.21$.",
+        },
+        {
+          text: "**Total:** $P(G) = 0.36$.",
+          latex: "P(\\text{hostel} \\mid G) = \\frac{0.15}{0.36} = \\frac{5}{12} \\approx 0.417",
+        },
+      ],
+      answer: "$\\frac{5}{12} \\approx 0.417$",
     },
     {
       type: "text",
@@ -464,13 +535,27 @@ const lesson02: LessonSeed = {
         "The A grade raised the hostel probability from 30% to about 42%, because hostellers explain an A better. But day scholars are still more likely, simply because there are so many more of them.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (application): a spam filter.** 40% of the email reaching an inbox is spam. The word \"free\" appears in 25% of spam emails and in 2% of genuine ones. An email containing \"free\" arrives. What is the probability it is spam?\n\n**Step 1: hypotheses and priors.** Spam $0.4$, genuine $0.6$. *Why this step:* before reading the email, the only information is how common spam is.\n\n**Step 2: likelihood of the evidence.** $P(\\text{free} \\mid \\text{spam}) = 0.25$, $P(\\text{free} \\mid \\text{genuine}) = 0.02$. *Why this step:* these measure how well each hypothesis explains the word you saw.\n\n**Step 3: joints and total.** $0.4 \\times 0.25 = 0.100$ and $0.6 \\times 0.02 = 0.012$, so $P(\\text{free}) = 0.112$.\n\n**Step 4: divide.**",
-    },
-    {
-      type: "math",
-      latex: "P(\\text{spam} \\mid \\text{free}) = \\frac{0.100}{0.100 + 0.012} = \\frac{0.100}{0.112} = \\frac{25}{28} \\approx 0.893",
+      type: "worked-example",
+      id: "pr3-2-we3",
+      title: "Worked example (application): a spam filter",
+      problem:
+        "40% of the email reaching an inbox is spam. The word \"free\" appears in 25% of spam emails and in 2% of genuine ones. An email containing \"free\" arrives. What is the probability it is spam?",
+      steps: [
+        {
+          text: "**Hypotheses and priors.** Spam $0.4$, genuine $0.6$. *Why this step:* before reading the email, the only information is how common spam is.",
+        },
+        {
+          text: "**Likelihood of the evidence.** $P(\\text{free} \\mid \\text{spam}) = 0.25$, $P(\\text{free} \\mid \\text{genuine}) = 0.02$. *Why this step:* these measure how well each hypothesis explains the word you saw.",
+        },
+        {
+          text: "**Joints and total.** $0.4 \\times 0.25 = 0.100$ and $0.6 \\times 0.02 = 0.012$, so $P(\\text{free}) = 0.112$.",
+        },
+        {
+          text: "**Divide.** ",
+          latex: "P(\\text{spam} \\mid \\text{free}) = \\frac{0.100}{0.100 + 0.012} = \\frac{0.100}{0.112} = \\frac{25}{28} \\approx 0.893",
+        },
+      ],
+      answer: "$\\frac{25}{28} \\approx 0.893$",
     },
     {
       type: "text",
@@ -478,30 +563,38 @@ const lesson02: LessonSeed = {
         "One word moved the spam probability from 40% to about 89%, because \"free\" is $\\frac{0.25}{0.02} = 12.5$ times more common in spam. Real filters do exactly this with thousands of words, updating once per word; you will see that chaining in 3.6.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (exam-style, CBSE): the late doctor.** A doctor visits a patient. From past experience, the probabilities that she comes by train, bus, scooter or some other means are $\\frac{3}{10}$, $\\frac15$, $\\frac{1}{10}$ and $\\frac25$. The probabilities that she is late are $\\frac14$ by train, $\\frac13$ by bus and $\\frac{1}{12}$ by scooter; by other means she is never late. She arrives late. What is the probability she came by train?\n\n**Step 1: check the partition.** $\\frac{3}{10} + \\frac15 + \\frac{1}{10} + \\frac25 = 1$, and she uses exactly one mode. *Why this step:* Bayes' denominator must cover every way the evidence can happen, so the causes must be exhaustive and disjoint.\n\n**Step 2: joints over a common denominator of 120.** *Why this step:* fractions with different denominators are error-prone; one denominator makes the final division a ratio of whole numbers.",
-    },
-    {
-      type: "table",
-      headers: ["Mode", "Prior", "$P(\\text{late} \\mid \\text{mode})$", "Joint", "Joint $\\times 120$"],
-      rows: [
-        ["Train", "$\\frac{3}{10}$", "$\\frac14$", "$\\frac{3}{40}$", "9"],
-        ["Bus", "$\\frac15$", "$\\frac13$", "$\\frac{1}{15}$", "8"],
-        ["Scooter", "$\\frac{1}{10}$", "$\\frac{1}{12}$", "$\\frac{1}{120}$", "1"],
-        ["Other", "$\\frac25$", "0", "0", "0"],
-        ["**Total**", "1", "", "$\\frac{18}{120}$", "18"],
+      type: "worked-example",
+      id: "pr3-2-we4",
+      title: "Worked example (exam-style, CBSE): the late doctor",
+      problem:
+        "A doctor visits a patient. From past experience, the probabilities that she comes by train, bus, scooter or some other means are $\\frac{3}{10}$, $\\frac15$, $\\frac{1}{10}$ and $\\frac25$. The probabilities that she is late are $\\frac14$ by train, $\\frac13$ by bus and $\\frac{1}{12}$ by scooter; by other means she is never late. She arrives late. What is the probability she came by train?",
+      steps: [
+        {
+          text: "**Check the partition.** $\\frac{3}{10} + \\frac15 + \\frac{1}{10} + \\frac25 = 1$, and she uses exactly one mode. *Why this step:* Bayes' denominator must cover every way the evidence can happen, so the causes must be exhaustive and disjoint.",
+        },
+        {
+          text: "**Joints over a common denominator of 120.** *Why this step:* fractions with different denominators are error-prone; one denominator makes the final division a ratio of whole numbers.",
+          table: {
+            headers: ["Mode", "Prior", "$P(\\text{late} \\mid \\text{mode})$", "Joint", "Joint $\\times 120$"],
+            rows: [
+              ["Train", "$\\frac{3}{10}$", "$\\frac14$", "$\\frac{3}{40}$", "9"],
+              ["Bus", "$\\frac15$", "$\\frac13$", "$\\frac{1}{15}$", "8"],
+              ["Scooter", "$\\frac{1}{10}$", "$\\frac{1}{12}$", "$\\frac{1}{120}$", "1"],
+              ["Other", "$\\frac25$", "0", "0", "0"],
+              ["**Total**", "1", "", "$\\frac{18}{120}$", "18"],
+            ],
+          },
+        },
+        {
+          latex: "P(\\text{train} \\mid \\text{late}) = \\frac{9}{9 + 8 + 1 + 0} = \\frac{9}{18} = \\frac{1}{2}",
+        },
+        {
+          text: "**Sanity check.** The \"other\" row has prior $\\frac25$, the biggest, yet posterior 0: a cause that *cannot* produce the evidence is ruled out entirely, however common it is. Train rose from 30% to 50% because it is both common and a frequent cause of lateness.",
+        },
       ],
+      answer: "$P(\\text{train} \\mid \\text{late}) = \\frac{1}{2}$",
     },
-    {
-      type: "math",
-      latex: "P(\\text{train} \\mid \\text{late}) = \\frac{9}{9 + 8 + 1 + 0} = \\frac{9}{18} = \\frac{1}{2}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3: sanity check.** The \"other\" row has prior $\\frac25$, the biggest, yet posterior 0: a cause that *cannot* produce the evidence is ruled out entirely, however common it is. Train rose from 30% to 50% because it is both common and a frequent cause of lateness.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr3-2-q1",
@@ -623,10 +716,11 @@ const lesson03: LessonSeed = {
       content:
         "**Prevalence** (base rate): $P(D)$, the fraction of the population with the condition.\n**Sensitivity**: $P(+ \\mid D)$, how often the test catches a sick person.\n**Specificity**: $P(- \\mid D')$, how often it clears a healthy person.\n**False-positive rate**: $P(+ \\mid D') = 1 - \\text{specificity}$.\nThe question you care about, $P(D \\mid +)$, is none of these.",
     },
+    { type: "heading", text: "Natural frequencies: 10,000 people" },
     {
       type: "text",
       content:
-        "**Natural frequencies.** Forget formulas and imagine 10,000 people walking through the clinic.",
+        "Forget formulas and imagine 10,000 people walking through the clinic.",
     },
     {
       type: "table",
@@ -665,6 +759,7 @@ const lesson03: LessonSeed = {
           "Slide the prevalence up and the posterior climbs fast; slide the false-positive rate down and it climbs too. The natural-frequency line counts the people in each positive leaf.",
       },
     },
+    { type: "heading", text: "The prior changes everything" },
     {
       type: "text",
       content:
@@ -709,14 +804,20 @@ const lesson03: LessonSeed = {
       content:
         "In court the same error has a name. \"Only 1 in a million innocent people would match this DNA sample, so there is a 1 in a million chance the defendant is innocent.\" That swaps $P(\\text{match} \\mid \\text{innocent})$ for $P(\\text{innocent} \\mid \\text{match})$. In a city of 10 million, about 10 innocent people would match. If the culprit is known to be one of the city's 10 million and, before the DNA test, no one was more suspect than anyone else, then with the match as the only evidence the defendant is one of roughly 11 matching people, not a near-certain culprit. (That uniform prior is itself an assumption; other evidence would change it.) Real convictions have been overturned over this.",
     },
+    { type: "heading", text: "Rare diseases, negatives and fraud alarms" },
     {
-      type: "text",
-      content:
-        "**Worked example: a rarer disease.** Prevalence 1 in 1,000; the test catches every sick person (sensitivity 100%) and has a 1% false-positive rate. Out of 100,000 people: 100 sick, all positive; 99,900 healthy, of whom 999 test positive.",
-    },
-    {
-      type: "math",
-      latex: "P(D \\mid +) = \\frac{100}{100 + 999} = \\frac{100}{1099} \\approx 9.1\\%",
+      type: "worked-example",
+      id: "pr3-3-we1",
+      title: "Worked example: a rarer disease",
+      problem:
+        "Prevalence 1 in 1,000; the test catches every sick person (sensitivity 100%) and has a 1% false-positive rate. Find $P(D \\mid +)$.",
+      steps: [
+        {
+          text: "Out of 100,000 people: 100 sick, all positive; 99,900 healthy, of whom 999 test positive.",
+          latex: "P(D \\mid +) = \\frac{100}{100 + 999} = \\frac{100}{1099} \\approx 9.1\\%",
+        },
+      ],
+      answer: "$\\frac{100}{1099} \\approx 9.1\\%$",
     },
     {
       type: "text",
@@ -729,13 +830,27 @@ const lesson03: LessonSeed = {
         "**Worked example: what does a negative mean?** Back to the original test (1%, 99%, 95%). From the table, 9,406 people test negative and only 1 of them is sick: $P(D \\mid -) = \\frac{1}{9406} \\approx 0.011\\%$. For a rare disease, a negative from a sensitive test is very reassuring. Positives and negatives are not symmetric.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (application): a fraud alarm.** A bank's software flags suspicious card transactions. 0.2% of transactions are fraudulent. The alarm flags 95% of fraudulent transactions and 1% of legitimate ones. A transaction is flagged. How likely is it to be fraud?\n\n**Step 1: pick a round population.** Take 100,000 transactions. *Why this step:* with a base rate of 0.2%, you want a population big enough that every cell of the table is a whole number, so the reasoning becomes counting.\n\n**Step 2: split by the hidden cause.** $0.2\\%$ of 100,000 is 200 fraudulent; 99,800 are legitimate.\n\n**Step 3: apply the alarm to each group.** Fraud flagged: $0.95 \\times 200 = 190$. Legitimate flagged: $0.01 \\times 99{,}800 = 998$. *Why this step:* each rate only applies inside its own group; mixing them is exactly the inverse-confusion error.\n\n**Step 4: look only inside the flagged pile.**",
-    },
-    {
-      type: "math",
-      latex: "P(\\text{fraud} \\mid \\text{flag}) = \\frac{190}{190 + 998} = \\frac{190}{1188} = \\frac{95}{594} \\approx 16\\%",
+      type: "worked-example",
+      id: "pr3-3-we2",
+      title: "Worked example (application): a fraud alarm",
+      problem:
+        "A bank's software flags suspicious card transactions. 0.2% of transactions are fraudulent. The alarm flags 95% of fraudulent transactions and 1% of legitimate ones. A transaction is flagged. How likely is it to be fraud?",
+      steps: [
+        {
+          text: "**Pick a round population.** Take 100,000 transactions. *Why this step:* with a base rate of 0.2%, you want a population big enough that every cell of the table is a whole number, so the reasoning becomes counting.",
+        },
+        {
+          text: "**Split by the hidden cause.** $0.2\\%$ of 100,000 is 200 fraudulent; 99,800 are legitimate.",
+        },
+        {
+          text: "**Apply the alarm to each group.** Fraud flagged: $0.95 \\times 200 = 190$. Legitimate flagged: $0.01 \\times 99{,}800 = 998$. *Why this step:* each rate only applies inside its own group; mixing them is exactly the inverse-confusion error.",
+        },
+        {
+          text: "**Look only inside the flagged pile.** ",
+          latex: "P(\\text{fraud} \\mid \\text{flag}) = \\frac{190}{190 + 998} = \\frac{190}{1188} = \\frac{95}{594} \\approx 16\\%",
+        },
+      ],
+      answer: "$\\frac{95}{594} \\approx 16\\%$",
     },
     {
       type: "text",
@@ -743,20 +858,29 @@ const lesson03: LessonSeed = {
         "Five out of six alarms are false. This is why banks send you a \"was this you?\" text instead of blocking the card outright: the alarm is a screening test, and for rare events a screening test mostly finds innocent people. The fix, again, is specificity: cutting the false-alarm rate to 0.1% would drop the false flags to about 100 and lift the posterior to about 66%.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (exam-style, NCERT):** A laboratory blood test is 99% effective in detecting a certain disease when it is present. However, the test also gives a false positive for 0.5% of healthy people tested. If 0.1% of the population has the disease, find the probability that a person has the disease given a positive result.\n\n**Step 1: translate every sentence into a probability.** Let $E$ = \"has the disease\". $P(E) = 0.001$, $P(E') = 0.999$, $P(+ \\mid E) = 0.99$, $P(+ \\mid E') = 0.005$. *Why this step:* exam questions hide the likelihoods in words like \"effective\" and \"false positive\"; naming them first stops you from plugging the wrong one in.\n\n**Step 2: apply Bayes.**",
+      type: "worked-example",
+      id: "pr3-3-we3",
+      title: "Worked example (exam-style, NCERT)",
+      problem:
+        "A laboratory blood test is 99% effective in detecting a certain disease when it is present. However, the test also gives a false positive for 0.5% of healthy people tested. If 0.1% of the population has the disease, find the probability that a person has the disease given a positive result.",
+      steps: [
+        {
+          text: "**Translate every sentence into a probability.** Let $E$ = \"has the disease\". $P(E) = 0.001$, $P(E') = 0.999$, $P(+ \\mid E) = 0.99$, $P(+ \\mid E') = 0.005$. *Why this step:* exam questions hide the likelihoods in words like \"effective\" and \"false positive\"; naming them first stops you from plugging the wrong one in.",
+        },
+        {
+          text: "**Apply Bayes.** ",
+          latex: "P(E \\mid +) = \\frac{0.001 \\times 0.99}{0.001 \\times 0.99 + 0.999 \\times 0.005} = \\frac{0.00099}{0.00099 + 0.004995} = \\frac{0.00099}{0.005985}",
+        },
+        {
+          text: "**Clear the decimals.** Multiply top and bottom by $10^6$: $\\frac{990}{5985}$. Both are divisible by 45, giving $\\frac{22}{133} \\approx 0.165$. *Why this step:* exam answers are expected as exact fractions, and scaling to whole numbers makes common factors visible.",
+        },
+        {
+          text: "**Interpret.** A \"99% effective\" test, and a positive result still means only about a 1-in-6 chance of disease. The disease is so rare (1 in 1,000) that the 0.5% false-positive rate, applied to 999 healthy people, produces five times as many positives as the sick group does.",
+        },
+      ],
+      answer: "$\\frac{22}{133} \\approx 0.165$",
     },
-    {
-      type: "math",
-      latex:
-        "P(E \\mid +) = \\frac{0.001 \\times 0.99}{0.001 \\times 0.99 + 0.999 \\times 0.005} = \\frac{0.00099}{0.00099 + 0.004995} = \\frac{0.00099}{0.005985}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3: clear the decimals.** Multiply top and bottom by $10^6$: $\\frac{990}{5985}$. Both are divisible by 45, giving $\\frac{22}{133} \\approx 0.165$. *Why this step:* exam answers are expected as exact fractions, and scaling to whole numbers makes common factors visible.\n\n**Step 4: interpret.** A \"99% effective\" test, and a positive result still means only about a 1-in-6 chance of disease. The disease is so rare (1 in 1,000) that the 0.5% false-positive rate, applied to 999 healthy people, produces five times as many positives as the sick group does.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr3-3-q1",
@@ -891,23 +1015,31 @@ const lesson04: LessonSeed = {
       content:
         "1. List the hypotheses $E_1, \\ldots, E_n$ (they must be a partition).\n2. Write each prior $P(E_i)$.\n3. Write each likelihood $P(A \\mid E_i)$ of **exactly** what was observed.\n4. Multiply to get the joints; add them to get $P(A)$.\n5. Posterior = joint ÷ total. Check the posteriors add to 1.",
     },
+    { type: "heading", text: "Truth-tellers and bags of balls" },
     {
-      type: "text",
-      content:
-        "**Worked example 1: the truth-teller.** Asha speaks the truth 3 times out of 4. A die is thrown, and Asha reports that it shows a six. What is the probability it really is a six?\n\n**Hypotheses:** $E_1$ = \"it is a six\", $E_2$ = \"it is not a six\". **Priors:** $\\frac16$, $\\frac56$.\n\n**Observation:** Asha *reports* six (call this event $R$; it plays the role of $A$ in the recipe). If it is a six, Asha reports six by telling the truth: $\\frac34$. If it isn't, Asha reports six by lying: $\\frac14$ (the standard textbook convention is that the lie is \"six\").",
-    },
-    {
-      type: "table",
-      headers: ["Hypothesis", "Prior", "$P(\\text{reports six} \\mid E_i)$", "Joint", "Posterior"],
-      rows: [
-        ["Six", "$\\frac16$", "$\\frac34$", "$\\frac{3}{24}$", "$\\frac{3}{8}$"],
-        ["Not six", "$\\frac56$", "$\\frac14$", "$\\frac{5}{24}$", "$\\frac{5}{8}$"],
-        ["**Total**", "1", "", "$\\frac{8}{24}$", "1"],
+      type: "worked-example",
+      id: "pr3-4-we1",
+      title: "Worked example 1: the truth-teller",
+      problem:
+        "Asha speaks the truth 3 times out of 4. A die is thrown, and Asha reports that it shows a six. What is the probability it really is a six?",
+      steps: [
+        {
+          text: "**Hypotheses:** $E_1$ = \"it is a six\", $E_2$ = \"it is not a six\". **Priors:** $\\frac16$, $\\frac56$.",
+        },
+        {
+          text: "**Observation:** Asha *reports* six (call this event $R$; it plays the role of $A$ in the recipe). If it is a six, Asha reports six by telling the truth: $\\frac34$. If it isn't, Asha reports six by lying: $\\frac14$ (the standard textbook convention is that the lie is \"six\").",
+          latex: "P(\\text{six} \\mid \\text{reports six}) = \\frac{\\frac{3}{24}}{\\frac{3}{24} + \\frac{5}{24}} = \\frac{3}{8}",
+          table: {
+            headers: ["Hypothesis", "Prior", "$P(\\text{reports six} \\mid E_i)$", "Joint", "Posterior"],
+            rows: [
+              ["Six", "$\\frac16$", "$\\frac34$", "$\\frac{3}{24}$", "$\\frac{3}{8}$"],
+              ["Not six", "$\\frac56$", "$\\frac14$", "$\\frac{5}{24}$", "$\\frac{5}{8}$"],
+              ["**Total**", "1", "", "$\\frac{8}{24}$", "1"],
+            ],
+          },
+        },
       ],
-    },
-    {
-      type: "math",
-      latex: "P(\\text{six} \\mid \\text{reports six}) = \\frac{\\frac{3}{24}}{\\frac{3}{24} + \\frac{5}{24}} = \\frac{3}{8}",
+      answer: "$\\frac{3}{8}$",
     },
     {
       type: "text",
@@ -922,28 +1054,33 @@ const lesson04: LessonSeed = {
         "The $\\frac14$ above assumes a lie is always \"six\". If instead a liar names one of the five wrong faces at random, then $P(\\text{reports six} \\mid \\text{not six}) = \\frac14 \\cdot \\frac15 = \\frac{1}{20}$, and\n$P(\\text{six} \\mid \\text{reports six}) = \\dfrac{\\frac16 \\cdot \\frac34}{\\frac16\\cdot\\frac34 + \\frac56 \\cdot \\frac{1}{20}} = \\dfrac{\\frac{3}{24}}{\\frac{3}{24} + \\frac{1}{24}} = \\dfrac34$.\nBayes is only as good as the likelihoods you feed it. Always ask: *how exactly would this observation arise under each hypothesis?* In exams, follow the convention the question states or implies.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2: three bags.** Bag I has 1 white, 2 black, 3 red balls. Bag II has 2 white, 1 black, 1 red. Bag III has 4 white, 5 black, 3 red. A bag is chosen at random and two balls are drawn from it (without replacement). They are one white and one red. What is the probability they came from bag I?\n\n**Likelihoods** (count white-red pairs over all pairs):\n- Bag I: $\\dfrac{1 \\times 3}{\\binom{6}{2}} = \\dfrac{3}{15} = \\dfrac15$\n- Bag II: $\\dfrac{2 \\times 1}{\\binom{4}{2}} = \\dfrac{2}{6} = \\dfrac13$\n- Bag III: $\\dfrac{4 \\times 3}{\\binom{12}{2}} = \\dfrac{12}{66} = \\dfrac{2}{11}$\n\nThe priors are all $\\frac13$, so they cancel and the posterior is each likelihood over their sum. Over a common denominator of 165:",
-    },
-    {
-      type: "table",
-      headers: ["Bag", "Prior", "Likelihood", "Likelihood (over 165)", "Posterior"],
-      rows: [
-        ["I", "$\\frac13$", "$\\frac15$", "$\\frac{33}{165}$", "$\\frac{33}{118}$"],
-        ["II", "$\\frac13$", "$\\frac13$", "$\\frac{55}{165}$", "$\\frac{55}{118}$"],
-        ["III", "$\\frac13$", "$\\frac{2}{11}$", "$\\frac{30}{165}$", "$\\frac{30}{118} = \\frac{15}{59}$"],
-        ["**Total**", "1", "", "sum of likelihoods: $\\frac{118}{165}$", "1"],
+      type: "worked-example",
+      id: "pr3-4-we2",
+      title: "Worked example 2: three bags",
+      problem:
+        "Bag I has 1 white, 2 black, 3 red balls. Bag II has 2 white, 1 black, 1 red. Bag III has 4 white, 5 black, 3 red. A bag is chosen at random and two balls are drawn from it (without replacement). They are one white and one red. What is the probability they came from bag I?",
+      steps: [
+        {
+          text: "**Likelihoods** (count white-red pairs over all pairs):\n- Bag I: $\\dfrac{1 \\times 3}{\\binom{6}{2}} = \\dfrac{3}{15} = \\dfrac15$\n- Bag II: $\\dfrac{2 \\times 1}{\\binom{4}{2}} = \\dfrac{2}{6} = \\dfrac13$\n- Bag III: $\\dfrac{4 \\times 3}{\\binom{12}{2}} = \\dfrac{12}{66} = \\dfrac{2}{11}$",
+        },
+        {
+          text: "The priors are all $\\frac13$, so they cancel and the posterior is each likelihood over their sum. Over a common denominator of 165:",
+          latex: "P(\\text{I} \\mid \\text{white and red}) = \\frac{33}{33 + 55 + 30} = \\frac{33}{118}",
+          table: {
+            headers: ["Bag", "Prior", "Likelihood", "Likelihood (over 165)", "Posterior"],
+            rows: [
+              ["I", "$\\frac13$", "$\\frac15$", "$\\frac{33}{165}$", "$\\frac{33}{118}$"],
+              ["II", "$\\frac13$", "$\\frac13$", "$\\frac{55}{165}$", "$\\frac{55}{118}$"],
+              ["III", "$\\frac13$", "$\\frac{2}{11}$", "$\\frac{30}{165}$", "$\\frac{30}{118} = \\frac{15}{59}$"],
+              ["**Total**", "1", "", "sum of likelihoods: $\\frac{118}{165}$", "1"],
+            ],
+          },
+        },
+        {
+          text: "The $\\frac{118}{165}$ in the table is a sum of likelihoods, not a probability. For the record, $P(\\text{white and red}) = \\frac13\\cdot\\frac{118}{165} = \\frac{118}{495}$; the common $\\frac13$ cancels in every posterior.",
+        },
       ],
-    },
-    {
-      type: "math",
-      latex: "P(\\text{I} \\mid \\text{white and red}) = \\frac{33}{33 + 55 + 30} = \\frac{33}{118}",
-    },
-    {
-      type: "text",
-      content:
-        "The $\\frac{118}{165}$ in the table is a sum of likelihoods, not a probability. For the record, $P(\\text{white and red}) = \\frac13\\cdot\\frac{118}{165} = \\frac{118}{495}$; the common $\\frac13$ cancels in every posterior.",
+      answer: "$\\frac{33}{118}$",
     },
     {
       type: "callout",
@@ -952,30 +1089,42 @@ const lesson04: LessonSeed = {
       content:
         "When the hypotheses start equally likely, the posterior is simply $\\dfrac{P(A \\mid E_i)}{\\sum_j P(A \\mid E_j)}$. Common factors in every joint always cancel, so clear them before you do any arithmetic.",
     },
+    { type: "heading", text: "Insurance and guessing students" },
     {
-      type: "text",
-      content:
-        "**Worked example 3: insurance.** An insurer covers 2,000 scooter riders, 4,000 car drivers and 6,000 truck drivers. The probabilities of an accident in a year are $0.01$, $0.03$ and $0.15$. One insured person has an accident. What is the probability they are a scooter rider?\n\nHere the priors come as counts, and natural frequencies are easiest: expected accidents are $2000 \\times 0.01 = 20$, $4000 \\times 0.03 = 120$, $6000 \\times 0.15 = 900$.",
-    },
-    {
-      type: "table",
-      headers: ["Class", "Insured", "$P(\\text{accident} \\mid \\text{class})$", "Expected accidents", "Posterior"],
-      rows: [
-        ["Scooter", "2,000", "0.01", "20", "$\\frac{20}{1040} = \\frac{1}{52}$"],
-        ["Car", "4,000", "0.03", "120", "$\\frac{120}{1040} = \\frac{3}{26}$"],
-        ["Truck", "6,000", "0.15", "900", "$\\frac{900}{1040} = \\frac{45}{52}$"],
-        ["**Total**", "12,000", "", "1,040", "1"],
+      type: "worked-example",
+      id: "pr3-4-we3",
+      title: "Worked example 3: insurance",
+      problem:
+        "An insurer covers 2,000 scooter riders, 4,000 car drivers and 6,000 truck drivers. The probabilities of an accident in a year are $0.01$, $0.03$ and $0.15$. One insured person has an accident. What is the probability they are a scooter rider?",
+      steps: [
+        {
+          text: "Here the priors come as counts, and natural frequencies are easiest: expected accidents are $2000 \\times 0.01 = 20$, $4000 \\times 0.03 = 120$, $6000 \\times 0.15 = 900$.",
+          table: {
+            headers: ["Class", "Insured", "$P(\\text{accident} \\mid \\text{class})$", "Expected accidents", "Posterior"],
+            rows: [
+              ["Scooter", "2,000", "0.01", "20", "$\\frac{20}{1040} = \\frac{1}{52}$"],
+              ["Car", "4,000", "0.03", "120", "$\\frac{120}{1040} = \\frac{3}{26}$"],
+              ["Truck", "6,000", "0.15", "900", "$\\frac{900}{1040} = \\frac{45}{52}$"],
+              ["**Total**", "12,000", "", "1,040", "1"],
+            ],
+          },
+        },
       ],
+      answer: "$\\frac{20}{1040} = \\frac{1}{52}$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4: knows or guesses?** In a multiple-choice test with 4 options per question, a student knows the answer with probability $\\frac34$ and otherwise guesses at random. Given that the student answered correctly, what is the probability they knew it?\n\n**Hypotheses:** knew ($\\frac34$), guessed ($\\frac14$). **Likelihood of a correct answer:** 1 if they knew, $\\frac14$ if they guessed.",
-    },
-    {
-      type: "math",
-      latex:
-        "P(\\text{knew} \\mid \\text{correct}) = \\frac{\\frac34 \\cdot 1}{\\frac34 \\cdot 1 + \\frac14 \\cdot \\frac14} = \\frac{\\frac{12}{16}}{\\frac{13}{16}} = \\frac{12}{13}",
+      type: "worked-example",
+      id: "pr3-4-we4",
+      title: "Worked example 4: knows or guesses?",
+      problem:
+        "In a multiple-choice test with 4 options per question, a student knows the answer with probability $\\frac34$ and otherwise guesses at random. Given that the student answered correctly, what is the probability they knew it?",
+      steps: [
+        {
+          text: "**Hypotheses:** knew ($\\frac34$), guessed ($\\frac14$). **Likelihood of a correct answer:** 1 if they knew, $\\frac14$ if they guessed.",
+          latex: "P(\\text{knew} \\mid \\text{correct}) = \\frac{\\frac34 \\cdot 1}{\\frac34 \\cdot 1 + \\frac14 \\cdot \\frac14} = \\frac{\\frac{12}{16}}{\\frac{13}{16}} = \\frac{12}{13}",
+        },
+      ],
+      answer: "$\\frac{12}{13}$",
     },
     {
       type: "text",
@@ -1011,29 +1160,34 @@ const lesson04: LessonSeed = {
           "Slide P(knows) down. When students rarely know the answer, a correct answer is weaker evidence that they knew it.",
       },
     },
+    { type: "heading", text: "Hidden draws and unknown bags" },
     {
-      type: "text",
-      content:
-        "**Worked example 5: a transferred ball.** Bag I has 3 red and 4 black balls; bag II has 4 red and 5 black. One ball is drawn from bag I, *without looking*, and put into bag II. Then a ball is drawn from bag II, and it is red. What is the probability that the transferred ball was red?\n\n**Spot the partition.** Nobody chose a bag here. The hidden cause is the colour of the transferred ball: $E_1$ = \"transferred red\", $E_2$ = \"transferred black\". **Priors** come from bag I: $\\frac37$ and $\\frac47$.\n\n**Likelihoods** come from the *new* bag II, which now has 10 balls:\n- If a red was moved, bag II has 5 red of 10: $P(\\text{red} \\mid E_1) = \\frac{5}{10}$.\n- If a black was moved, bag II has 4 red of 10: $P(\\text{red} \\mid E_2) = \\frac{4}{10}$.",
-    },
-    {
-      type: "table",
-      headers: ["Transferred", "Prior", "$P(\\text{red from II} \\mid E_i)$", "Joint", "Posterior"],
-      rows: [
-        ["Red", "$\\frac37$", "$\\frac{5}{10}$", "$\\frac{15}{70}$", "$\\frac{15}{31}$"],
-        ["Black", "$\\frac47$", "$\\frac{4}{10}$", "$\\frac{16}{70}$", "$\\frac{16}{31}$"],
-        ["**Total**", "1", "", "$\\frac{31}{70}$", "1"],
+      type: "worked-example",
+      id: "pr3-4-we5",
+      title: "Worked example 5: a transferred ball",
+      problem:
+        "Bag I has 3 red and 4 black balls; bag II has 4 red and 5 black. One ball is drawn from bag I, *without looking*, and put into bag II. Then a ball is drawn from bag II, and it is red. What is the probability that the transferred ball was red?",
+      steps: [
+        {
+          text: "**Spot the partition.** Nobody chose a bag here. The hidden cause is the colour of the transferred ball: $E_1$ = \"transferred red\", $E_2$ = \"transferred black\". **Priors** come from bag I: $\\frac37$ and $\\frac47$.",
+        },
+        {
+          text: "**Likelihoods** come from the *new* bag II, which now has 10 balls:\n- If a red was moved, bag II has 5 red of 10: $P(\\text{red} \\mid E_1) = \\frac{5}{10}$.\n- If a black was moved, bag II has 4 red of 10: $P(\\text{red} \\mid E_2) = \\frac{4}{10}$.",
+          latex: "P(\\text{transferred red} \\mid \\text{red}) = \\frac{\\frac{15}{70}}{\\frac{15}{70} + \\frac{16}{70}} = \\frac{15}{31}",
+          table: {
+            headers: ["Transferred", "Prior", "$P(\\text{red from II} \\mid E_i)$", "Joint", "Posterior"],
+            rows: [
+              ["Red", "$\\frac37$", "$\\frac{5}{10}$", "$\\frac{15}{70}$", "$\\frac{15}{31}$"],
+              ["Black", "$\\frac47$", "$\\frac{4}{10}$", "$\\frac{16}{70}$", "$\\frac{16}{31}$"],
+              ["**Total**", "1", "", "$\\frac{31}{70}$", "1"],
+            ],
+          },
+        },
+        {
+          text: "The forward question, \"what is the probability the ball drawn from bag II is red?\", is the law of total probability with the same partition: $P(\\text{red}) = \\frac{15}{70} + \\frac{16}{70} = \\frac{31}{70}$. The red draw nudged the transferred-red probability from $\\frac37 \\approx 0.43$ up to $\\frac{15}{31} \\approx 0.48$: a red transfer makes a red draw a little more likely, so the evidence leans that way.",
+        },
       ],
-    },
-    {
-      type: "math",
-      latex:
-        "P(\\text{transferred red} \\mid \\text{red}) = \\frac{\\frac{15}{70}}{\\frac{15}{70} + \\frac{16}{70}} = \\frac{15}{31}",
-    },
-    {
-      type: "text",
-      content:
-        "The forward question, \"what is the probability the ball drawn from bag II is red?\", is the law of total probability with the same partition: $P(\\text{red}) = \\frac{15}{70} + \\frac{16}{70} = \\frac{31}{70}$. The red draw nudged the transferred-red probability from $\\frac37 \\approx 0.43$ up to $\\frac{15}{31} \\approx 0.48$: a red transfer makes a red draw a little more likely, so the evidence leans that way.",
+      answer: "$\\frac{15}{31}$",
     },
     {
       type: "callout",
@@ -1043,29 +1197,40 @@ const lesson04: LessonSeed = {
         "Transfer problems, \"a card is lost from the pack\" problems and similar ones all hide the partition in an unseen first step. Ask: *what earlier event, which I didn't see, changes the odds of what I did see?* Its possible outcomes are your $E_i$, its probabilities are the priors, and the likelihoods are computed from the situation **after** that step.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 6 (exam-style, JEE): what is in the bag?** A bag contains 4 balls, each either white or not. Two balls are drawn at random (without replacement) and both are white. Assuming all possible numbers of white balls are equally likely *among those consistent with the draw*, find the probability that all four balls are white.\n\n**Step 1: list the hypotheses.** Two white balls came out, so the bag has at least 2 white. $E_2, E_3, E_4$ = \"the bag has 2, 3, 4 white balls\", each with prior $\\frac13$. *Why this step:* the hidden cause here is not a choice of bag but the bag's unknown **composition**. Hypotheses with fewer than 2 white balls have likelihood 0, and the question tells you to leave them out.\n\n**Step 2: likelihood of \"two white\" under each.** There are $\\binom42 = 6$ equally likely pairs.\n- $E_2$: only $\\binom22 = 1$ white pair, so $\\frac16$.\n- $E_3$: $\\binom32 = 3$ white pairs, so $\\frac36$.\n- $E_4$: every pair is white, so $\\frac66 = 1$.\n*Why this step:* the observation is a specific event (both drawn balls white), and counting pairs gives its probability exactly.\n\n**Step 3: equal priors cancel.** The posterior is each likelihood over their sum, $\\frac16 + \\frac36 + \\frac66 = \\frac{10}{6}$.",
-    },
-    {
-      type: "table",
-      headers: ["Hypothesis", "Prior", "Likelihood", "Likelihood $\\times 6$", "Posterior"],
-      rows: [
-        ["2 white", "$\\frac13$", "$\\frac16$", "1", "$\\frac{1}{10}$"],
-        ["3 white", "$\\frac13$", "$\\frac36$", "3", "$\\frac{3}{10}$"],
-        ["4 white", "$\\frac13$", "1", "6", "$\\frac{6}{10} = \\frac35$"],
-        ["**Total**", "1", "", "10", "1"],
+      type: "worked-example",
+      id: "pr3-4-we6",
+      title: "Worked example 6 (exam-style, JEE): what is in the bag?",
+      problem:
+        "A bag contains 4 balls, each either white or not. Two balls are drawn at random (without replacement) and both are white. Assuming all possible numbers of white balls are equally likely *among those consistent with the draw*, find the probability that all four balls are white.",
+      steps: [
+        {
+          text: "**List the hypotheses.** Two white balls came out, so the bag has at least 2 white. $E_2, E_3, E_4$ = \"the bag has 2, 3, 4 white balls\", each with prior $\\frac13$. *Why this step:* the hidden cause here is not a choice of bag but the bag's unknown **composition**. Hypotheses with fewer than 2 white balls have likelihood 0, and the question tells you to leave them out.",
+        },
+        {
+          text: "**Likelihood of \"two white\" under each.** There are $\\binom42 = 6$ equally likely pairs.\n- $E_2$: only $\\binom22 = 1$ white pair, so $\\frac16$.\n- $E_3$: $\\binom32 = 3$ white pairs, so $\\frac36$.\n- $E_4$: every pair is white, so $\\frac66 = 1$.\n*Why this step:* the observation is a specific event (both drawn balls white), and counting pairs gives its probability exactly.",
+        },
+        {
+          text: "**Equal priors cancel.** The posterior is each likelihood over their sum, $\\frac16 + \\frac36 + \\frac66 = \\frac{10}{6}$.",
+          latex: "P(E_4 \\mid \\text{two white}) = \\frac{1}{\\frac16 + \\frac12 + 1} = \\frac{6}{10} = \\frac{3}{5}",
+          table: {
+            headers: ["Hypothesis", "Prior", "Likelihood", "Likelihood $\\times 6$", "Posterior"],
+            rows: [
+              ["2 white", "$\\frac13$", "$\\frac16$", "1", "$\\frac{1}{10}$"],
+              ["3 white", "$\\frac13$", "$\\frac36$", "3", "$\\frac{3}{10}$"],
+              ["4 white", "$\\frac13$", "1", "6", "$\\frac{6}{10} = \\frac35$"],
+              ["**Total**", "1", "", "10", "1"],
+            ],
+          },
+        },
       ],
-    },
-    {
-      type: "math",
-      latex: "P(E_4 \\mid \\text{two white}) = \\frac{1}{\\frac16 + \\frac12 + 1} = \\frac{6}{10} = \\frac{3}{5}",
+      answer: "$\\frac{3}{5}$",
     },
     {
       type: "text",
       content:
         "The all-white bag was one of three equal possibilities, and it explains the draw perfectly, so it ends up with more than half the belief. Watch the stated assumption: if the question had said \"all numbers 0 to 4 are equally likely\" (priors $\\frac15$ each), the impossible hypotheses $E_0$ and $E_1$ would get posterior 0 anyway, and since the remaining priors are still equal, the answer would *also* be $\\frac35$. Equal priors cancel, whatever their common value.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr3-4-q1",
@@ -1240,6 +1405,7 @@ const lesson05: LessonSeed = {
       content:
         "The simulation settles near **stick ≈ 1/3, switch ≈ 2/3**. Switching doubles your chance of winning. If that feels wrong, you are in good company: when this was published in a magazine column in 1990, thousands of readers, including mathematicians, wrote in to say it was wrong. The simulator does not care.",
     },
+    { type: "heading", text: "Why switching wins" },
     {
       type: "text",
       content:
@@ -1284,10 +1450,11 @@ const lesson05: LessonSeed = {
       content:
         "Look at where the asymmetry comes from. If the car were behind door 2, the host was **forced** to open door 3. If it were behind door 1, he opened door 3 only half the time. Door 3 opening is twice as likely under $C_2$ as under $C_1$, so it doubles the odds in favour of door 2.",
     },
+    { type: "heading", text: "The 100-door version" },
     {
       type: "text",
       content:
-        "**The 100-door version.** Suppose there are 100 doors. You pick one. The host, who knows where the car is, opens 98 of the others, all goats, and leaves one door closed. Would you stick with your original 1-in-100 guess, or switch to the one door he carefully avoided?\n\nYour door is still the car with probability $\\frac{1}{100}$. The other closed door carries all of the remaining $\\frac{99}{100}$. Try it: the simulator has a 100-door mode.",
+        "Suppose there are 100 doors. You pick one. The host, who knows where the car is, opens 98 of the others, all goats, and leaves one door closed. Would you stick with your original 1-in-100 guess, or switch to the one door he carefully avoided?\n\nYour door is still the car with probability $\\frac{1}{100}$. The other closed door carries all of the remaining $\\frac{99}{100}$. Try it: the simulator has a 100-door mode.",
     },
     {
       type: "interactive",
@@ -1307,10 +1474,11 @@ const lesson05: LessonSeed = {
       content:
         "Two options do not mean equal probabilities. \"Equally likely\" is a claim that has to be justified, and here it is false: the two remaining doors got there in different ways. Your door survived because you chose it; the other door survived because the host, knowing where the car is, chose not to open it. That knowledge is what makes the other door special.",
     },
+    { type: "heading", text: "The host's rule is what does the work" },
     {
       type: "text",
       content:
-        "**The host's rule is what does the work.** Change the rule and the answer changes. Suppose the host *doesn't know* where the car is and opens one of the other two doors at random, and it happens to show a goat. Now:\n- $P(\\text{opens 3, goat} \\mid C_1) = \\frac12$\n- $P(\\text{opens 3, goat} \\mid C_2) = \\frac12$\n- $P(\\text{opens 3, goat} \\mid C_3) = 0$ (he would have revealed the car)\n\nThe two surviving likelihoods are equal, so the posteriors for doors 1 and 2 are both $\\frac12$. With an ignorant host, switching and sticking really are 50-50. Same doors, same goat, different information, because the goat was revealed by luck rather than by knowledge.",
+        "Change the rule and the answer changes. Suppose the host *doesn't know* where the car is and opens one of the other two doors at random, and it happens to show a goat. Now:\n- $P(\\text{opens 3, goat} \\mid C_1) = \\frac12$\n- $P(\\text{opens 3, goat} \\mid C_2) = \\frac12$\n- $P(\\text{opens 3, goat} \\mid C_3) = 0$ (he would have revealed the car)\n\nThe two surviving likelihoods are equal, so the posteriors for doors 1 and 2 are both $\\frac12$. With an ignorant host, switching and sticking really are 50-50. Same doors, same goat, different information, because the goat was revealed by luck rather than by knowledge.",
     },
     {
       type: "callout",
@@ -1319,30 +1487,46 @@ const lesson05: LessonSeed = {
       content:
         "The same observed event can carry different evidence depending on the **process that produced it**. In Bayes' theorem the process lives in the likelihoods $P(\\text{observation} \\mid \\text{hypothesis})$. Whenever a puzzle feels paradoxical, write those likelihoods out explicitly.",
     },
+    { type: "heading", text: "Four doors, three prisoners, two-sided cards" },
     {
-      type: "text",
-      content:
-        "**Worked example (routine): four doors.** Four doors, one car. You pick door 1. The host, who knows where the car is, opens one of the other three doors to show a goat, choosing at random when he has a choice. He opens door 4. Find the posterior for every door.\n\n**Step 1: priors.** $P(C_i) = \\frac14$ for $i = 1, 2, 3, 4$.\n\n**Step 2: likelihoods of \"opens 4\".** *Why this step:* this is where the host's rule enters; everything else is arithmetic.\n- $C_1$: doors 2, 3, 4 all hide goats; he picks one of three: $\\frac13$.\n- $C_2$: he can't open 1 (yours) or 2 (car), so he picks 3 or 4: $\\frac12$.\n- $C_3$: similarly $\\frac12$.\n- $C_4$: he never reveals the car: $0$.\n\n**Step 3: joints over a common denominator of 24.** $\\frac14 \\cdot \\frac13 = \\frac{2}{24}$, $\\frac14 \\cdot \\frac12 = \\frac{3}{24}$, $\\frac{3}{24}$, $0$. Total $\\frac{8}{24}$.",
+      type: "worked-example",
+      id: "pr3-5-we1",
+      title: "Worked example (routine): four doors",
+      problem:
+        "Four doors, one car. You pick door 1. The host, who knows where the car is, opens one of the other three doors to show a goat, choosing at random when he has a choice. He opens door 4. Find the posterior for every door.",
+      steps: [
+        {
+          text: "**Priors.** $P(C_i) = \\frac14$ for $i = 1, 2, 3, 4$.",
+        },
+        {
+          text: "**Likelihoods of \"opens 4\".** *Why this step:* this is where the host's rule enters; everything else is arithmetic.\n- $C_1$: doors 2, 3, 4 all hide goats; he picks one of three: $\\frac13$.\n- $C_2$: he can't open 1 (yours) or 2 (car), so he picks 3 or 4: $\\frac12$.\n- $C_3$: similarly $\\frac12$.\n- $C_4$: he never reveals the car: $0$.",
+        },
+        {
+          text: "**Joints over a common denominator of 24.** $\\frac14 \\cdot \\frac13 = \\frac{2}{24}$, $\\frac14 \\cdot \\frac12 = \\frac{3}{24}$, $\\frac{3}{24}$, $0$. Total $\\frac{8}{24}$.",
+          latex: "P(C_1 \\mid H_4) = \\frac{2}{8} = \\frac14, \\qquad P(C_2 \\mid H_4) = P(C_3 \\mid H_4) = \\frac{3}{8}",
+        },
+        {
+          text: "**Read it.** Your door stays at $\\frac14$, just as in the 3-door game. The $\\frac14$ that door 4 lost is shared equally by doors 2 and 3, each rising from $\\frac14$ to $\\frac38$. Switching to either of them beats sticking: that is why, in quiz 4 below, switching to a random one of them wins with probability $\\frac38$.",
+        },
+      ],
+      answer: "Door 1: $\\frac14$. Doors 2 and 3: $\\frac38$ each. Door 4: 0.",
     },
     {
-      type: "math",
-      latex:
-        "P(C_1 \\mid H_4) = \\frac{2}{8} = \\frac14, \\qquad P(C_2 \\mid H_4) = P(C_3 \\mid H_4) = \\frac{3}{8}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4: read it.** Your door stays at $\\frac14$, just as in the 3-door game. The $\\frac14$ that door 4 lost is shared equally by doors 2 and 3, each rising from $\\frac14$ to $\\frac38$. Switching to either of them beats sticking: that is why, in quiz 4 below, switching to a random one of them wins with probability $\\frac38$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example (word problem): the three prisoners.** Prisoners A, B and C are told one of them, chosen at random, will be pardoned. A asks the warden: \"Tell me the name of one of the *others* who will not be pardoned. If both will not, pick at random.\" The warden says \"B\". A reasons: \"Now it's between me and C, so my chance rose to $\\frac12$.\" Is A right?\n\n**Step 1: hypotheses.** $P_A, P_B, P_C$ = \"A, B, C is pardoned\", priors $\\frac13$ each.\n\n**Step 2: likelihoods of \"warden says B\".** *Why this step:* the warden's answer is evidence, and its strength depends on his rule, just like the host's.\n- $P_A$: B and C both not pardoned; he names B half the time: $\\frac12$.\n- $P_B$: he can't name the pardoned man: $0$.\n- $P_C$: B is the only one he can name: $1$.",
-    },
-    {
-      type: "math",
-      latex:
-        "P(P_A \\mid \\text{says B}) = \\frac{\\frac13 \\cdot \\frac12}{\\frac13 \\cdot \\frac12 + 0 + \\frac13 \\cdot 1} = \\frac{\\frac16}{\\frac12} = \\frac13, \\qquad P(P_C \\mid \\text{says B}) = \\frac23",
+      type: "worked-example",
+      id: "pr3-5-we2",
+      title: "Worked example (word problem): the three prisoners",
+      problem:
+        "Prisoners A, B and C are told one of them, chosen at random, will be pardoned. A asks the warden: \"Tell me the name of one of the *others* who will not be pardoned. If both will not, pick at random.\" The warden says \"B\". A reasons: \"Now it's between me and C, so my chance rose to $\\frac12$.\" Is A right?",
+      steps: [
+        {
+          text: "**Hypotheses.** $P_A, P_B, P_C$ = \"A, B, C is pardoned\", priors $\\frac13$ each.",
+        },
+        {
+          text: "**Likelihoods of \"warden says B\".** *Why this step:* the warden's answer is evidence, and its strength depends on his rule, just like the host's.\n- $P_A$: B and C both not pardoned; he names B half the time: $\\frac12$.\n- $P_B$: he can't name the pardoned man: $0$.\n- $P_C$: B is the only one he can name: $1$.",
+          latex: "P(P_A \\mid \\text{says B}) = \\frac{\\frac13 \\cdot \\frac12}{\\frac13 \\cdot \\frac12 + 0 + \\frac13 \\cdot 1} = \\frac{\\frac16}{\\frac12} = \\frac13, \\qquad P(P_C \\mid \\text{says B}) = \\frac23",
+        },
+      ],
+      answer: "Still $\\frac13$.",
     },
     {
       type: "text",
@@ -1350,19 +1534,32 @@ const lesson05: LessonSeed = {
         "A is wrong: his chance is still $\\frac13$. The warden was always going to name someone other than A, so the answer tells A nothing about himself. It does tell him a lot about C. This is Monty Hall with a different costume: A is \"your door\", the warden is the host, and C is the door he carefully avoided.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (exam-style): Bertrand's box, card version.** In Lesson 2.6 you met Bertrand's box with gold and silver coins. Exam papers usually set it with cards, so here it is again, run through the Bayes recipe step by step. Three cards are in a bag: one red on both sides (RR), one white on both sides (WW), one red on one side and white on the other (RW). A card is drawn and placed on the table; the side facing up is red. What is the probability the other side is also red?\n\nThe tempting answer is $\\frac12$: \"it's RR or RW, one of two cards\". Bayes says otherwise.\n\n**Step 1: hypotheses and priors.** RR, WW, RW, each $\\frac13$.\n\n**Step 2: likelihood of \"red face up\".** RR: 1 (both faces red). WW: 0. RW: $\\frac12$ (either face could land up). *Why this step:* what you observe is a **face**, not a card. RR has two ways to show red, RW only one.\n\n**Step 3: equal priors cancel.**",
+      type: "worked-example",
+      id: "pr3-5-we3",
+      title: "Worked example (exam-style): Bertrand's box, card version",
+      problem:
+        "In Lesson 2.6 you met Bertrand's box with gold and silver coins. Exam papers usually set it with cards, so here it is again, run through the Bayes recipe step by step. Three cards are in a bag: one red on both sides (RR), one white on both sides (WW), one red on one side and white on the other (RW). A card is drawn and placed on the table; the side facing up is red. What is the probability the other side is also red?",
+      steps: [
+        {
+          text: "The tempting answer is $\\frac12$: \"it's RR or RW, one of two cards\". Bayes says otherwise.",
+        },
+        {
+          text: "**Hypotheses and priors.** RR, WW, RW, each $\\frac13$.",
+        },
+        {
+          text: "**Likelihood of \"red face up\".** RR: 1 (both faces red). WW: 0. RW: $\\frac12$ (either face could land up). *Why this step:* what you observe is a **face**, not a card. RR has two ways to show red, RW only one.",
+        },
+        {
+          text: "**Equal priors cancel.** ",
+          latex: "P(\\text{RR} \\mid \\text{red up}) = \\frac{1}{1 + 0 + \\frac12} = \\frac{2}{3}",
+        },
+        {
+          text: "**Count faces to confirm.** There are three red faces in the bag, all equally likely to be the one facing up. Two of them belong to RR, so $\\frac23$. The \"two cards left, so 50-50\" error is the same one as \"two doors left, so 50-50\": two possibilities are not automatically equally likely.",
+        },
+      ],
+      answer: "$\\frac{2}{3}$",
     },
-    {
-      type: "math",
-      latex: "P(\\text{RR} \\mid \\text{red up}) = \\frac{1}{1 + 0 + \\frac12} = \\frac{2}{3}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4: count faces to confirm.** There are three red faces in the bag, all equally likely to be the one facing up. Two of them belong to RR, so $\\frac23$. The \"two cards left, so 50-50\" error is the same one as \"two doors left, so 50-50\": two possibilities are not automatically equally likely.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr3-5-q1",
@@ -1561,6 +1758,7 @@ const lesson06: LessonSeed = {
       content:
         "Updating on both results at once (the tree above) and updating one result at a time (posterior → prior → posterior) give exactly the same answer, and the order of the evidence doesn't matter. Either way you multiply the prior by both likelihoods and then normalise.",
     },
+    { type: "heading", text: "Chaining evidence with odds" },
     {
       type: "text",
       content:
@@ -1598,27 +1796,31 @@ const lesson06: LessonSeed = {
       content:
         "It is tempting to think a 99%-sensitive test \"moves you most of the way to certainty\" whatever your starting point. It doesn't. The same positive takes a 1% prior to 17%, a 17% prior to 80%, and a 50% prior to 95%. What the evidence fixes is the **likelihood ratio** (how much the odds are multiplied), not the size of the jump in probability. You must know the prior to know where you land.",
     },
+    { type: "heading", text: "Heads in a row: a two-headed coin?" },
     {
-      type: "text",
-      content:
-        "**Worked example: a coin that might be two-headed.** A bag has 10 coins: 9 fair and 1 two-headed. You pull one out at random and toss it $n$ times. Every toss is heads. How sure should you be that it's the two-headed coin?\n\n**Prior:** $P(\\text{2H}) = \\frac{1}{10}$. **Likelihoods of $n$ heads:** 1 for the two-headed coin, $\\left(\\frac12\\right)^n$ for a fair one.",
-    },
-    {
-      type: "math",
-      latex:
-        "P(\\text{2H} \\mid n \\text{ heads}) = \\frac{\\frac{1}{10}}{\\frac{1}{10} + \\frac{9}{10}\\left(\\frac12\\right)^{n}} = \\frac{1}{1 + 9/2^{n}}",
-    },
-    {
-      type: "table",
-      headers: ["Heads in a row $n$", "Posterior $P(\\text{2H})$"],
-      rows: [
-        ["0", "$\\frac{1}{10} = 0.10$"],
-        ["1", "$\\frac{2}{11} \\approx 0.18$"],
-        ["2", "$\\frac{4}{13} \\approx 0.31$"],
-        ["3", "$\\frac{8}{17} \\approx 0.47$"],
-        ["5", "$\\frac{32}{41} \\approx 0.78$"],
-        ["10", "$\\frac{1024}{1033} \\approx 0.991$"],
+      type: "worked-example",
+      id: "pr3-6-we1",
+      title: "Worked example: a coin that might be two-headed",
+      problem:
+        "A bag has 10 coins: 9 fair and 1 two-headed. You pull one out at random and toss it $n$ times. Every toss is heads. How sure should you be that it's the two-headed coin?",
+      steps: [
+        {
+          text: "**Prior:** $P(\\text{2H}) = \\frac{1}{10}$. **Likelihoods of $n$ heads:** 1 for the two-headed coin, $\\left(\\frac12\\right)^n$ for a fair one.",
+          latex: "P(\\text{2H} \\mid n \\text{ heads}) = \\frac{\\frac{1}{10}}{\\frac{1}{10} + \\frac{9}{10}\\left(\\frac12\\right)^{n}} = \\frac{1}{1 + 9/2^{n}}",
+          table: {
+            headers: ["Heads in a row $n$", "Posterior $P(\\text{2H})$"],
+            rows: [
+              ["0", "$\\frac{1}{10} = 0.10$"],
+              ["1", "$\\frac{2}{11} \\approx 0.18$"],
+              ["2", "$\\frac{4}{13} \\approx 0.31$"],
+              ["3", "$\\frac{8}{17} \\approx 0.47$"],
+              ["5", "$\\frac{32}{41} \\approx 0.78$"],
+              ["10", "$\\frac{1024}{1033} \\approx 0.991$"],
+            ],
+          },
+        },
       ],
+      answer: "$P(\\text{2H} \\mid n \\text{ heads}) = \\dfrac{1}{1 + 9/2^{n}}$",
     },
     {
       type: "text",
@@ -1685,50 +1887,65 @@ const lesson06: LessonSeed = {
       content:
         "Multiplying likelihoods assumes the pieces of evidence are **independent given each hypothesis** (conditionally independent). Two separate labs testing separate samples, or separate coin tosses, qualify. Re-running the same test on the same sample may not: if something about you fooled the test once (a cross-reacting antibody, say), it may fool it again, and the second positive adds much less than a factor of 19.8.",
     },
+    { type: "heading", text: "Two forecasts and a biased coin" },
     {
-      type: "text",
-      content:
-        "**Worked example (application): two weather forecasts.** In a city it rains on 30% of monsoon days. A forecasting service says \"rain\" on 80% of the days it actually rains and on 20% of the days it stays dry. Two services, working independently, both say \"rain\" tomorrow. What is the probability of rain?\n\n**Step 1: prior odds.** $P(\\text{rain}) : P(\\text{dry}) = 0.3 : 0.7 = 3 : 7$. *Why this step:* in odds form, each new piece of evidence is just one multiplication.\n\n**Step 2: likelihood ratio of one \"rain\" forecast.** $\\frac{0.8}{0.2} = 4$. *Why this step:* the ratio, not either rate on its own, measures how strongly a forecast favours rain over dry.\n\n**Step 3: multiply once per forecast.** The services are independent given the weather, so chaining is legitimate.",
-    },
-    {
-      type: "table",
-      headers: ["After", "Odds rain : dry", "$P(\\text{rain})$"],
-      rows: [
-        ["No forecasts", "$3 : 7$", "$\\frac{3}{10} = 0.30$"],
-        ["One \"rain\"", "$12 : 7$", "$\\frac{12}{19} \\approx 0.63$"],
-        ["Two \"rain\"", "$48 : 7$", "$\\frac{48}{55} \\approx 0.87$"],
+      type: "worked-example",
+      id: "pr3-6-we2",
+      title: "Worked example (application): two weather forecasts",
+      problem:
+        "In a city it rains on 30% of monsoon days. A forecasting service says \"rain\" on 80% of the days it actually rains and on 20% of the days it stays dry. Two services, working independently, both say \"rain\" tomorrow. What is the probability of rain?",
+      steps: [
+        {
+          text: "**Prior odds.** $P(\\text{rain}) : P(\\text{dry}) = 0.3 : 0.7 = 3 : 7$. *Why this step:* in odds form, each new piece of evidence is just one multiplication.",
+        },
+        {
+          text: "**Likelihood ratio of one \"rain\" forecast.** $\\frac{0.8}{0.2} = 4$. *Why this step:* the ratio, not either rate on its own, measures how strongly a forecast favours rain over dry.",
+        },
+        {
+          text: "**Multiply once per forecast.** The services are independent given the weather, so chaining is legitimate.",
+          table: {
+            headers: ["After", "Odds rain : dry", "$P(\\text{rain})$"],
+            rows: [
+              ["No forecasts", "$3 : 7$", "$\\frac{3}{10} = 0.30$"],
+              ["One \"rain\"", "$12 : 7$", "$\\frac{12}{19} \\approx 0.63$"],
+              ["Two \"rain\"", "$48 : 7$", "$\\frac{48}{55} \\approx 0.87$"],
+            ],
+          },
+        },
+        {
+          text: "**Convert back.** Odds $a : b$ mean probability $\\frac{a}{a+b}$, so $\\frac{48}{55}$. Check it the long way: $\\frac{0.3 \\times 0.8^2}{0.3 \\times 0.8^2 + 0.7 \\times 0.2^2} = \\frac{0.192}{0.192 + 0.028} = \\frac{0.192}{0.220} = \\frac{48}{55}$. Same answer, more arithmetic.",
+        },
       ],
+      answer: "$\\frac{48}{55}$",
     },
     {
-      type: "text",
-      content:
-        "**Step 4: convert back.** Odds $a : b$ mean probability $\\frac{a}{a+b}$, so $\\frac{48}{55}$. Check it the long way: $\\frac{0.3 \\times 0.8^2}{0.3 \\times 0.8^2 + 0.7 \\times 0.2^2} = \\frac{0.192}{0.192 + 0.028} = \\frac{0.192}{0.220} = \\frac{48}{55}$. Same answer, more arithmetic.",
+      type: "worked-example",
+      id: "pr3-6-we3",
+      title: "Worked example (exam-style, JEE): which coin, and what next?",
+      problem:
+        "A bag has two coins: a fair one and a biased one with $P(H) = \\frac34$. One is chosen at random and tossed three times, giving H, H, T. (a) Find the probability it is the biased coin. (b) Find the probability the next toss is a head.",
+      steps: [
+        {
+          text: "**(a) Likelihood ratios per toss.** Biased vs fair: a head gives $\\frac{3/4}{1/2} = \\frac32$; a tail gives $\\frac{1/4}{1/2} = \\frac12$. *Why this step:* the tosses are independent given the coin, so each toss multiplies the odds by its own ratio, and the tail counts as evidence *against* the biased coin.",
+        },
+        {
+          text: "**Chain them.** Prior odds $1 : 1$.",
+          latex: "\\text{odds(biased : fair)} = 1 \\times \\frac32 \\times \\frac32 \\times \\frac12 = \\frac98 \\quad\\Longrightarrow\\quad P(\\text{biased} \\mid HHT) = \\frac{9}{9+8} = \\frac{9}{17}",
+        },
+        {
+          text: "**Check directly:** $P(HHT \\mid \\text{biased}) = \\left(\\frac34\\right)^2 \\cdot \\frac14 = \\frac{9}{64}$ and $P(HHT \\mid \\text{fair}) = \\frac18 = \\frac{8}{64}$. With equal priors, $\\frac{9}{9+8} = \\frac{9}{17}$.",
+        },
+        {
+          text: "**(b) Today's posterior is the weight for tomorrow's forecast.** The next toss is a total-probability problem, with the partition {biased, fair} now weighted by the *posteriors*. *Why this step:* after seeing HHT, $\\frac{9}{17}$ and $\\frac{8}{17}$ are your current beliefs, so they are the right weights.",
+          latex: "P(H_4 \\mid HHT) = \\frac{9}{17}\\cdot\\frac34 + \\frac{8}{17}\\cdot\\frac12 = \\frac{27}{68} + \\frac{16}{68} = \\frac{43}{68} \\approx 0.63",
+        },
+        {
+          text: "Before any tosses, $P(H) = \\frac12\\cdot\\frac34 + \\frac12\\cdot\\frac12 = \\frac58 = 0.625$. The data nudged the prediction up only slightly, to $\\frac{43}{68} \\approx 0.632$, because two heads and one tail is weak evidence either way. This two-step pattern (Bayes to update the causes, then total probability to predict) is a favourite in JEE papers.",
+        },
+      ],
+      answer: "(a) $\\frac{9}{17}$ (b) $\\frac{43}{68} \\approx 0.63$",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example (exam-style, JEE): which coin, and what next?** A bag has two coins: a fair one and a biased one with $P(H) = \\frac34$. One is chosen at random and tossed three times, giving H, H, T. (a) Find the probability it is the biased coin. (b) Find the probability the next toss is a head.\n\n**(a) Step 1: likelihood ratios per toss.** Biased vs fair: a head gives $\\frac{3/4}{1/2} = \\frac32$; a tail gives $\\frac{1/4}{1/2} = \\frac12$. *Why this step:* the tosses are independent given the coin, so each toss multiplies the odds by its own ratio, and the tail counts as evidence *against* the biased coin.\n\n**Step 2: chain them.** Prior odds $1 : 1$.",
-    },
-    {
-      type: "math",
-      latex:
-        "\\text{odds(biased : fair)} = 1 \\times \\frac32 \\times \\frac32 \\times \\frac12 = \\frac98 \\quad\\Longrightarrow\\quad P(\\text{biased} \\mid HHT) = \\frac{9}{9+8} = \\frac{9}{17}",
-    },
-    {
-      type: "text",
-      content:
-        "**Check directly:** $P(HHT \\mid \\text{biased}) = \\left(\\frac34\\right)^2 \\cdot \\frac14 = \\frac{9}{64}$ and $P(HHT \\mid \\text{fair}) = \\frac18 = \\frac{8}{64}$. With equal priors, $\\frac{9}{9+8} = \\frac{9}{17}$.\n\n**(b) Step 3: today's posterior is the weight for tomorrow's forecast.** The next toss is a total-probability problem, with the partition {biased, fair} now weighted by the *posteriors*. *Why this step:* after seeing HHT, $\\frac{9}{17}$ and $\\frac{8}{17}$ are your current beliefs, so they are the right weights.",
-    },
-    {
-      type: "math",
-      latex:
-        "P(H_4 \\mid HHT) = \\frac{9}{17}\\cdot\\frac34 + \\frac{8}{17}\\cdot\\frac12 = \\frac{27}{68} + \\frac{16}{68} = \\frac{43}{68} \\approx 0.63",
-    },
-    {
-      type: "text",
-      content:
-        "Before any tosses, $P(H) = \\frac12\\cdot\\frac34 + \\frac12\\cdot\\frac12 = \\frac58 = 0.625$. The data nudged the prediction up only slightly, to $\\frac{43}{68} \\approx 0.632$, because two heads and one tail is weak evidence either way. This two-step pattern (Bayes to update the causes, then total probability to predict) is a favourite in JEE papers.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr3-6-q1",

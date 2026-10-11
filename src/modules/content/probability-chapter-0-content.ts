@@ -59,6 +59,7 @@ const lesson01: LessonSeed = {
       content:
         "\"Heads came up five times running, so tails is due.\" It is not. The coin has no memory, and the next flip is still 50–50. The simulator above shows the proof: after every run of 3 or more heads, the readout under the chart counts how often the *next* flip was heads. Run 10,000 flips and that fraction sits near one half, not below it.",
     },
+    { type: "heading", text: "Relative frequency settles down" },
     {
       type: "callout",
       variant: "definition",
@@ -90,46 +91,97 @@ const lesson01: LessonSeed = {
       content:
         "The **proportion** gets closer to 0.5 at every checkpoint. The **raw count** of heads above or below half actually drifts *further* away: +2, then −4, +9, −22. Both are normal. The proportion settles because the gap is divided by an ever-larger $n$: a gap of 22 out of 10,000 is only 0.22%.\n\nSo the coin never \"corrects\" its earlier excess. It simply buries it under thousands of new flips.",
     },
+    { type: "heading", text: "Estimating and forecasting from frequencies" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — the numbers do not need to balance.** A fair coin gives 4 heads in the first 4 flips. What proportion of heads do you expect after 1,000 flips?\n\n**Step 1.** The remaining 996 flips know nothing about the first four, so expect half of them to be heads: $498$.\n\n**Step 2.** Add the heads already seen: $4 + 498 = 502$.\n\n**Step 3.** Proportion $= \\frac{502}{1000} = 0.502$.\n\nThe early streak is diluted, not cancelled. You would still expect 4 more heads than tails at the end, yet the proportion is almost exactly one half.",
+      type: "worked-example",
+      id: "pr0-1-we1",
+      title: "Worked example 1 — the numbers do not need to balance",
+      problem:
+        "A fair coin gives 4 heads in the first 4 flips. What proportion of heads do you expect after 1,000 flips?",
+      steps: [
+        {
+          text: "The remaining 996 flips know nothing about the first four, so expect half of them to be heads: $498$.",
+        },
+        {
+          text: "Add the heads already seen: $4 + 498 = 502$.",
+        },
+        {
+          text: "Proportion $= \\frac{502}{1000} = 0.502$.",
+        },
+      ],
+      answer: "$\\frac{502}{1000} = 0.502$",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 — estimating from data.** A die is rolled 600 times and a six appears 94 times.\n\n**Step 1.** Relative frequency of a six $= \\frac{94}{600} \\approx 0.157$.\n\n**Step 2.** For a fair die we would expect about $\\frac{1}{6} \\approx 0.167$, which is $100$ sixes in 600 rolls.\n\n**Step 3.** 94 is 6 below 100. With only 600 rolls a gap of that size happens often, so this is no evidence that the die is loaded. With 60,000 rolls and the same proportion, it would be.",
+        "The early streak is diluted, not cancelled. You would still expect 4 more heads than tails at the end, yet the proportion is almost exactly one half.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — reading a frequency table (CBSE style).** A die is thrown 300 times with the results below. Find the relative frequency of (i) an even number, (ii) a number greater than 4, (iii) a prime number.",
+      type: "worked-example",
+      id: "pr0-1-we2",
+      title: "Worked example 2 — estimating from data",
+      problem:
+        "A die is rolled 600 times and a six appears 94 times. Estimate the chance of a six. Is this evidence that the die is loaded?",
+      steps: [
+        {
+          text: "Relative frequency of a six $= \\frac{94}{600} \\approx 0.157$.",
+        },
+        {
+          text: "For a fair die we would expect about $\\frac{1}{6} \\approx 0.167$, which is $100$ sixes in 600 rolls.",
+        },
+        {
+          text: "94 is 6 below 100. With only 600 rolls a gap of that size happens often, so this is no evidence that the die is loaded. With 60,000 rolls and the same proportion, it would be.",
+        },
+      ],
+      answer: "$\\frac{94}{600} \\approx 0.157$. No: with 600 rolls a gap of 6 sixes from the expected 100 is common.",
     },
     {
-      type: "table",
-      headers: ["Face", "1", "2", "3", "4", "5", "6", "Total"],
-      rows: [["Frequency", "45", "54", "51", "48", "57", "45", "300"]],
+      type: "worked-example",
+      id: "pr0-1-we3",
+      title: "Worked example 3 — reading a frequency table (CBSE style)",
+      problem:
+        "A die is thrown 300 times with the results below. Find the relative frequency of (i) an even number, (ii) a number greater than 4, (iii) a prime number.",
+      problemTable: {
+        headers: ["Face", "1", "2", "3", "4", "5", "6", "Total"],
+        rows: [["Frequency", "45", "54", "51", "48", "57", "45", "300"]],
+      },
+      steps: [
+        {
+          text: "**Check the total.** $45 + 54 + 51 + 48 + 57 + 45 = 300$. *Why this step:* the number of trials is the denominator of every relative frequency, so confirm it before dividing anything.",
+        },
+        {
+          text: "**Add the counts of the faces inside each event.** *Why this step:* one throw shows exactly one face, so no throw is counted twice when face counts are added.\n\n(i) Even $= \\{2, 4, 6\\}$: $54 + 48 + 45 = 147$.\n(ii) Greater than 4 $= \\{5, 6\\}$: $57 + 45 = 102$.\n(iii) Prime $= \\{2, 3, 5\\}$: $54 + 51 + 57 = 162$. (1 is **not** prime, a favourite exam trap.)",
+        },
+        {
+          text: "**Divide each count by 300.** ",
+          latex: "f(\\text{even}) = \\frac{147}{300} = 0.49, \\qquad f(\\text{greater than } 4) = \\frac{102}{300} = 0.34, \\qquad f(\\text{prime}) = \\frac{162}{300} = 0.54",
+        },
+        {
+          text: "*Sanity check:* a fair die would give roughly $0.5$, $0.33$ and $0.5$. The data sit close to all three, which is what 300 throws of a fair die typically look like.",
+        },
+      ],
+      answer: "(i) $0.49$ (ii) $0.34$ (iii) $0.54$",
     },
     {
-      type: "text",
-      content:
-        "**Step 1. Check the total.** $45 + 54 + 51 + 48 + 57 + 45 = 300$. *Why this step:* the number of trials is the denominator of every relative frequency, so confirm it before dividing anything.\n\n**Step 2. Add the counts of the faces inside each event.** *Why this step:* one throw shows exactly one face, so no throw is counted twice when face counts are added.\n\n(i) Even $= \\{2, 4, 6\\}$: $54 + 48 + 45 = 147$.\n(ii) Greater than 4 $= \\{5, 6\\}$: $57 + 45 = 102$.\n(iii) Prime $= \\{2, 3, 5\\}$: $54 + 51 + 57 = 162$. (1 is **not** prime, a favourite exam trap.)\n\n**Step 3. Divide each count by 300.**",
+      type: "worked-example",
+      id: "pr0-1-we4",
+      title: "Worked example 4 — using a frequency to forecast",
+      problem:
+        "A school cricketer has been out for fewer than 10 runs in 36 of her last 120 innings. About how many of her next 50 innings should the coach expect to end below 10?",
+      steps: [
+        {
+          text: "**Estimate the long-run proportion.** $f = \\frac{36}{120} = 0.3$. *Why this step:* with 120 trials the relative frequency is the best available estimate of the stable long-run fraction.",
+        },
+        {
+          text: "**Scale to the new number of trials.** $0.3 \\times 50 = 15$ innings.",
+        },
+        {
+          text: "**Read it correctly.** \"About 15\" is a forecast of the proportion, not a promise. The real number could easily be 12 or 18, and a coach who sees 3 low scores in a row has learned almost nothing new.",
+          latex: "\\text{expected count} \\approx (\\text{relative frequency}) \\times (\\text{number of new trials}) = 0.3 \\times 50 = 15",
+        },
+      ],
+      answer: "About $15$ innings.",
     },
-    {
-      type: "math",
-      latex: "f(\\text{even}) = \\frac{147}{300} = 0.49, \\qquad f(\\text{greater than } 4) = \\frac{102}{300} = 0.34, \\qquad f(\\text{prime}) = \\frac{162}{300} = 0.54",
-    },
-    {
-      type: "text",
-      content:
-        "*Sanity check:* a fair die would give roughly $0.5$, $0.33$ and $0.5$. The data sit close to all three, which is what 300 throws of a fair die typically look like.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 — using a frequency to forecast.** A school cricketer has been out for fewer than 10 runs in 36 of her last 120 innings. About how many of her next 50 innings should the coach expect to end below 10?\n\n**Step 1. Estimate the long-run proportion.** $f = \\frac{36}{120} = 0.3$. *Why this step:* with 120 trials the relative frequency is the best available estimate of the stable long-run fraction.\n\n**Step 2. Scale to the new number of trials.** $0.3 \\times 50 = 15$ innings.\n\n**Step 3. Read it correctly.** \"About 15\" is a forecast of the proportion, not a promise. The real number could easily be 12 or 18, and a coach who sees 3 low scores in a row has learned almost nothing new.",
-    },
-    { type: "math", latex: "\\text{expected count} \\approx (\\text{relative frequency}) \\times (\\text{number of new trials}) = 0.3 \\times 50 = 15" },
     {
       type: "text",
       content:
@@ -156,6 +208,7 @@ const lesson01: LessonSeed = {
       content:
         "To talk about \"the fraction of the time something happens\" we first need a precise list of what *can* happen (the sample space) and a precise way to name the things we care about (events). That is Chapter 0. Chapter 1 then attaches numbers to events.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr0-1-q1",
@@ -284,6 +337,7 @@ const lesson02: LessonSeed = {
       content:
         "A **random experiment** is an action that (i) has more than one possible result, (ii) whose result cannot be predicted in advance, and (iii) can be repeated under the same conditions.\nEach possible result is an **outcome** (also called a *sample point*).\nThe set of all outcomes is the **sample space**, written $S$. The number of outcomes is $n(S)$.",
     },
+    { type: "heading", text: "Building sample spaces stage by stage" },
     {
       type: "text",
       content:
@@ -340,6 +394,7 @@ const lesson02: LessonSeed = {
           "Twelve paths: H1, …, H6, T1, …, T6. The highlighted leaves are \"heads and an even number\" (3 outcomes). Tap leaves to build your own event and watch n(E) update.",
       },
     },
+    { type: "heading", text: "Two dice: the 36-cell grid" },
     {
       type: "text",
       content:
@@ -365,10 +420,26 @@ const lesson02: LessonSeed = {
       content:
         "The same experiment can be described by more than one sample space. For a die you could use $\\{1,2,3,4,5,6\\}$ or $\\{\\text{even}, \\text{odd}\\}$. Both are legitimate as long as the outcomes are **mutually exclusive** (exactly one happens) and **exhaustive** (one always happens). The finer list is usually better: it can answer more questions, and its outcomes are more often equally likely, which Chapter 1 will need.",
     },
+    { type: "heading", text: "Coins, sixes, balls and signals" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — three coins.** Extend the tree one more stage. Each of the 4 two-coin outcomes splits into 2, giving $4 \\times 2 = 8$:\n\n$S = \\{\\text{HHH}, \\text{HHT}, \\text{HTH}, \\text{HTT}, \\text{THH}, \\text{THT}, \\text{TTH}, \\text{TTT}\\}$.\n\nThe pattern: $n$ coins give $2^n$ outcomes, because every coin doubles the number of paths.",
+      type: "worked-example",
+      id: "pr0-2-we1",
+      title: "Worked example 1 — three coins",
+      problem:
+        "Write the sample space for tossing three coins.",
+      steps: [
+        {
+          text: "Extend the tree one more stage. Each of the 4 two-coin outcomes splits into 2, giving $4 \\times 2 = 8$:",
+        },
+        {
+          text: "$S = \\{\\text{HHH}, \\text{HHT}, \\text{HTH}, \\text{HTT}, \\text{THH}, \\text{THT}, \\text{TTH}, \\text{TTT}\\}$.",
+        },
+        {
+          text: "The pattern: $n$ coins give $2^n$ outcomes, because every coin doubles the number of paths.",
+        },
+      ],
+      answer: "$8$ outcomes, from HHH to TTT.",
+      tryFirst: false,
     },
     {
       type: "interactive",
@@ -386,43 +457,96 @@ const lesson02: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — roll a die until a six appears.** Record the whole sequence of rolls. The six could come first, or after one non-six, or after two, and so on with no upper limit:\n\n$S = \\{(6),\\ (1,6),\\ (2,6),\\ \\ldots,\\ (5,6),\\ (1,1,6),\\ (1,2,6),\\ \\ldots\\}$,\n\nwhere every entry before the last is a non-six.\n\nThis sample space is **infinite**. If you only record the *number* of rolls, then $S = \\{1, 2, 3, \\ldots\\}$, still infinite. Sample spaces do not have to be finite; they only have to list every possibility.",
+      type: "worked-example",
+      id: "pr0-2-we2",
+      title: "Worked example 2 — roll a die until a six appears",
+      problem:
+        "Write a sample space for rolling a die until a six appears.",
+      steps: [
+        {
+          text: "Record the whole sequence of rolls. The six could come first, or after one non-six, or after two, and so on with no upper limit:\n\n$S = \\{(6),\\ (1,6),\\ (2,6),\\ \\ldots,\\ (5,6),\\ (1,1,6),\\ (1,2,6),\\ \\ldots\\}$,\n\nwhere every entry before the last is a non-six.",
+        },
+        {
+          text: "This sample space is **infinite**. If you only record the *number* of rolls, then $S = \\{1, 2, 3, \\ldots\\}$, still infinite. Sample spaces do not have to be finite; they only have to list every possibility.",
+        },
+      ],
+      answer: "$S = \\{(6),\\ (1,6),\\ \\ldots,\\ (5,6),\\ (1,1,6),\\ \\ldots\\}$, an infinite sample space.",
+    },
+    {
+      type: "worked-example",
+      id: "pr0-2-we3",
+      title: "Worked example 3 — drawing two balls",
+      problem:
+        "A bag holds two red balls and one blue ball. Two are drawn one after the other without replacement. Write the sample space.",
+      steps: [
+        {
+          text: "**Make identical-looking objects distinguishable.** Call them $R_1, R_2, B$. The balls are physically different even if you cannot tell them apart by eye.",
+        },
+        {
+          text: "**Ordered draws.** The first ball can be any of 3, the second any of the remaining 2: $3 \\times 2 = 6$ outcomes, $\\{R_1R_2, R_2R_1, R_1B, BR_1, R_2B, BR_2\\}$.",
+        },
+        {
+          text: "**If order is not recorded,** each pair appears twice in that list, so there are $\\frac{6}{2} = 3$ outcomes: $\\{\\{R_1,R_2\\}, \\{R_1,B\\}, \\{R_2,B\\}\\}$.",
+        },
+      ],
+      answer: "$6$ ordered outcomes, or $3$ if order is not recorded.",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 — drawing two balls.** A bag holds two red balls and one blue ball. Two are drawn one after the other without replacement.\n\n**Step 1. Make identical-looking objects distinguishable.** Call them $R_1, R_2, B$. The balls are physically different even if you cannot tell them apart by eye.\n\n**Step 2. Ordered draws.** The first ball can be any of 3, the second any of the remaining 2: $3 \\times 2 = 6$ outcomes, $\\{R_1R_2, R_2R_1, R_1B, BR_1, R_2B, BR_2\\}$.\n\n**Step 3. If order is not recorded,** each pair appears twice in that list, so there are $\\frac{6}{2} = 3$ outcomes: $\\{\\{R_1,R_2\\}, \\{R_1,B\\}, \\{R_2,B\\}\\}$.\n\nBoth are valid sample spaces. What is *not* valid is writing $\\{\\text{RR}, \\text{RB}\\}$ and treating the two as equally likely: RR happens in 1 of the 3 unordered pairs.",
+        "Both are valid sample spaces. What is *not* valid is writing $\\{\\text{RR}, \\text{RB}\\}$ and treating the two as equally likely: RR happens in 1 of the 3 unordered pairs.",
+    },
+    {
+      type: "worked-example",
+      id: "pr0-2-we4",
+      title: "Worked example 4 — two traffic signals",
+      problem:
+        "On the way to school Meera passes two traffic signals. When she reaches each one it is red (R), amber (A) or green (G). Write the sample space. How many outcomes make her meet at least one red?",
+      steps: [
+        {
+          text: "**Treat each signal as a stage.** *Why this step:* the first signal has 3 results and, for each of them, the second has 3, so the tree has $3 \\times 3$ leaves.",
+        },
+        {
+          text: "**List in order (signal 1, then signal 2).** ",
+          latex: "S = \\{\\text{RR}, \\text{RA}, \\text{RG}, \\text{AR}, \\text{AA}, \\text{AG}, \\text{GR}, \\text{GA}, \\text{GG}\\}, \\qquad n(S) = 3 \\times 3 = 9",
+        },
+        {
+          text: "**Pick out the outcomes with an R anywhere.** RR, RA, RG (red at the first signal), then AR, GR (red only at the second): **5 outcomes**.",
+        },
+      ],
+      answer: "$9$ outcomes, $5$ of them with at least one red.",
     },
     {
       type: "text",
       content:
-        "**Worked example 4 — two traffic signals.** On the way to school Meera passes two traffic signals. When she reaches each one it is red (R), amber (A) or green (G). Write the sample space. How many outcomes make her meet at least one red?\n\n**Step 1. Treat each signal as a stage.** *Why this step:* the first signal has 3 results and, for each of them, the second has 3, so the tree has $3 \\times 3$ leaves.\n\n**Step 2. List in order (signal 1, then signal 2).**",
+        "*A warning worth keeping:* a sample space only lists what **can** happen. A signal may show green for 40 seconds and amber for 4, so these 9 outcomes are almost certainly **not** equally likely. Counting 5 out of 9 does not make the chance $\\frac{5}{9}$. Chapter 1 returns to this.",
     },
     {
-      type: "math",
-      latex: "S = \\{\\text{RR}, \\text{RA}, \\text{RG}, \\text{AR}, \\text{AA}, \\text{AG}, \\text{GR}, \\text{GA}, \\text{GG}\\}, \\qquad n(S) = 3 \\times 3 = 9",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3. Pick out the outcomes with an R anywhere.** RR, RA, RG (red at the first signal), then AR, GR (red only at the second): **5 outcomes**.\n\n*A warning worth keeping:* a sample space only lists what **can** happen. A signal may show green for 40 seconds and amber for 4, so these 9 outcomes are almost certainly **not** equally likely. Counting 5 out of 9 does not make the chance $\\frac{5}{9}$. Chapter 1 returns to this.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 — a stage that depends on the first (NCERT style).** A coin is tossed. If it shows heads, a die is rolled; if it shows tails, the coin is tossed once more. Write the sample space.\n\n**Step 1. Draw the first stage.** Two branches: H and T.\n\n**Step 2. Grow each branch by its own rule.** *Why this step:* the second action is different on the two branches, so you cannot simply multiply $2 \\times 6$. Heads sprouts 6 branches (the die); tails sprouts 2 (a coin).\n\n**Step 3. Read off the leaves.**",
-    },
-    {
-      type: "math",
-      latex: "S = \\{\\text{H}1, \\text{H}2, \\text{H}3, \\text{H}4, \\text{H}5, \\text{H}6, \\text{TH}, \\text{TT}\\}, \\qquad n(S) = 6 + 2 = 8",
+      type: "worked-example",
+      id: "pr0-2-we5",
+      title: "Worked example 5 — a stage that depends on the first (NCERT style)",
+      problem:
+        "A coin is tossed. If it shows heads, a die is rolled; if it shows tails, the coin is tossed once more. Write the sample space.",
+      steps: [
+        {
+          text: "**Draw the first stage.** Two branches: H and T.",
+        },
+        {
+          text: "**Grow each branch by its own rule.** *Why this step:* the second action is different on the two branches, so you cannot simply multiply $2 \\times 6$. Heads sprouts 6 branches (the die); tails sprouts 2 (a coin).",
+        },
+        {
+          text: "**Read off the leaves.** ",
+          latex: "S = \\{\\text{H}1, \\text{H}2, \\text{H}3, \\text{H}4, \\text{H}5, \\text{H}6, \\text{TH}, \\text{TT}\\}, \\qquad n(S) = 6 + 2 = 8",
+        },
+      ],
+      answer: "$8$ outcomes: H1 to H6, TH and TT.",
     },
     {
       type: "text",
       content:
         "Here the counts **add** across branches ($6 + 2$) because the branches are alternatives; they only multiply when every branch splits the same way. And again the outcomes are not equally likely: TH happens about a quarter of the time (tails, then heads), while H3 happens about one time in twelve.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr0-2-q1",
@@ -563,6 +687,7 @@ const lesson03: LessonSeed = {
       },
     },
     { type: "math", latex: "A = \\{(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)\\}, \\qquad n(A) = 6" },
+    { type: "heading", text: "Named kinds of events" },
     {
       type: "text",
       content:
@@ -585,10 +710,27 @@ const lesson03: LessonSeed = {
       content:
         "\"The die shows 7\" is a perfectly good event. It is the empty set, so it never occurs. Likewise \"less than 7\" is the whole of $S$, so it always occurs. Having these two extremes in the family keeps the algebra of the next lesson closed: combining events always produces another event.",
     },
+    { type: "heading", text: "Listing the outcomes in an event" },
+    {
+      type: "worked-example",
+      id: "pr0-3-we1",
+      title: "Worked example 1 — sum at least 10",
+      problem:
+        "Which cells of the two-dice grid make up \"sum $\\geq 10$\"?",
+      steps: [
+        {
+          text: "**Split by the exact sum.** Sum 10: $(4,6), (5,5), (6,4)$. Sum 11: $(5,6), (6,5)$. Sum 12: $(6,6)$.",
+        },
+        {
+          text: "**Collect.** $E = \\{(4,6), (5,5), (6,4), (5,6), (6,5), (6,6)\\}$, so $n(E) = 3 + 2 + 1 = 6$.",
+        },
+      ],
+      answer: "$n(E) = 6$",
+    },
     {
       type: "text",
       content:
-        "**Worked example 1 — sum at least 10.** Which cells of the two-dice grid make up \"sum $\\geq 10$\"?\n\n**Step 1. Split by the exact sum.** Sum 10: $(4,6), (5,5), (6,4)$. Sum 11: $(5,6), (6,5)$. Sum 12: $(6,6)$.\n\n**Step 2. Collect.** $E = \\{(4,6), (5,5), (6,4), (5,6), (6,5), (6,6)\\}$, so $n(E) = 3 + 2 + 1 = 6$.\n\nOn the grid these fill the bottom-right corner, a small triangle. Check it below.",
+        "On the grid these fill the bottom-right corner, a small triangle. Check it below.",
     },
     {
       type: "interactive",
@@ -602,35 +744,82 @@ const lesson03: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — at least one six.** Count the cells with a 6 in either coordinate.\n\n**Step 1.** Column 6 (first die is 6): 6 cells. Row 6 (second die is 6): 6 cells.\n\n**Step 2.** The cell $(6,6)$ is in both and has been counted twice, so subtract it once: $6 + 6 - 1 = 11$.\n\nThat double-counting correction is your first sight of the addition rule of Chapter 1.",
+      type: "worked-example",
+      id: "pr0-3-we2",
+      title: "Worked example 2 — at least one six",
+      problem:
+        "Count the cells with a 6 in either coordinate.",
+      steps: [
+        {
+          text: "Column 6 (first die is 6): 6 cells. Row 6 (second die is 6): 6 cells.",
+        },
+        {
+          text: "The cell $(6,6)$ is in both and has been counted twice, so subtract it once: $6 + 6 - 1 = 11$.",
+        },
+      ],
+      answer: "$11$ cells.",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 — three coins.** $E$ = \"at least two heads\" $= \\{\\text{HHH}, \\text{HHT}, \\text{HTH}, \\text{THH}\\}$, so $n(E) = 4$. The event $F$ = \"the first and last tosses match\" $= \\{\\text{HHH}, \\text{HTH}, \\text{THT}, \\text{TTT}\\}$, also 4 outcomes. Different events can have the same size.",
+        "That double-counting correction is your first sight of the addition rule of Chapter 1.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — a quality check.** A shop has 5 phones, labelled $P_1, \\ldots, P_5$. Phones $P_1$ and $P_2$ are faulty. An inspector picks 2 phones at once. Write the sample space, the event $E$ = \"at least one faulty phone is picked\" and the event $F$ = \"no faulty phone is picked\".\n\n**Step 1. Label the phones.** *Why this step:* two faulty phones look the same, but they are different objects. Labels keep $\\{P_1, P_3\\}$ and $\\{P_2, P_3\\}$ as separate outcomes (the lesson from d'Alembert).\n\n**Step 2. List the unordered pairs.** Pair $P_1$ with each later phone, then $P_2$, and so on: $4 + 3 + 2 + 1 = 10$ outcomes.",
+      type: "worked-example",
+      id: "pr0-3-we5",
+      title: "Worked example 3 — three coins",
+      problem:
+        "Three coins are tossed. List the events $E$ = \"at least two heads\" and $F$ = \"the first and last tosses match\", and find $n(E)$ and $n(F)$.",
+      steps: [
+        {
+          text: "$E$ = \"at least two heads\" $= \\{\\text{HHH}, \\text{HHT}, \\text{HTH}, \\text{THH}\\}$, so $n(E) = 4$.",
+        },
+        {
+          text: "The event $F$ = \"the first and last tosses match\" $= \\{\\text{HHH}, \\text{HTH}, \\text{THT}, \\text{TTT}\\}$, also 4 outcomes. Different events can have the same size.",
+        },
+      ],
+      answer: "$n(E) = n(F) = 4$",
     },
     {
-      type: "math",
-      latex: "S = \\{P_1P_2,\\ P_1P_3,\\ P_1P_4,\\ P_1P_5,\\ P_2P_3,\\ P_2P_4,\\ P_2P_5,\\ P_3P_4,\\ P_3P_5,\\ P_4P_5\\}, \\qquad n(S) = 10",
+      type: "worked-example",
+      id: "pr0-3-we3",
+      title: "Worked example 4 — a quality check",
+      problem:
+        "A shop has 5 phones, labelled $P_1, \\ldots, P_5$. Phones $P_1$ and $P_2$ are faulty. An inspector picks 2 phones at once. Write the sample space, the event $E$ = \"at least one faulty phone is picked\" and the event $F$ = \"no faulty phone is picked\".",
+      steps: [
+        {
+          text: "**Label the phones.** *Why this step:* two faulty phones look the same, but they are different objects. Labels keep $\\{P_1, P_3\\}$ and $\\{P_2, P_3\\}$ as separate outcomes (the lesson from d'Alembert).",
+        },
+        {
+          text: "**List the unordered pairs.** Pair $P_1$ with each later phone, then $P_2$, and so on: $4 + 3 + 2 + 1 = 10$ outcomes.",
+          latex: "S = \\{P_1P_2,\\ P_1P_3,\\ P_1P_4,\\ P_1P_5,\\ P_2P_3,\\ P_2P_4,\\ P_2P_5,\\ P_3P_4,\\ P_3P_5,\\ P_4P_5\\}, \\qquad n(S) = 10",
+        },
+        {
+          text: "**Test each outcome against the statement.** Any pair containing $P_1$ or $P_2$ belongs to $E$:\n\n$E = \\{P_1P_2, P_1P_3, P_1P_4, P_1P_5, P_2P_3, P_2P_4, P_2P_5\\}$, so $n(E) = 7$.\n$F = \\{P_3P_4, P_3P_5, P_4P_5\\}$, so $n(F) = 3$.",
+        },
+        {
+          text: "**Check.** $7 + 3 = 10$: every outcome is in exactly one of $E$ and $F$, because \"no faulty phone\" is exactly the failure of \"at least one\". Next lesson gives this relationship a name: $F = E'$.",
+        },
+      ],
+      answer: "$n(S) = 10$, $n(E) = 7$, $n(F) = 3$",
     },
     {
-      type: "text",
-      content:
-        "**Step 3. Test each outcome against the statement.** Any pair containing $P_1$ or $P_2$ belongs to $E$:\n\n$E = \\{P_1P_2, P_1P_3, P_1P_4, P_1P_5, P_2P_3, P_2P_4, P_2P_5\\}$, so $n(E) = 7$.\n$F = \\{P_3P_4, P_3P_5, P_4P_5\\}$, so $n(F) = 3$.\n\n**Step 4. Check.** $7 + 3 = 10$: every outcome is in exactly one of $E$ and $F$, because \"no faulty phone\" is exactly the failure of \"at least one\". Next lesson gives this relationship a name: $F = E'$.",
+      type: "worked-example",
+      id: "pr0-3-we4",
+      title: "Worked example 5 — product is a perfect square (exam style)",
+      problem:
+        "Two dice are rolled. How many outcomes are in $E$ = \"the product of the two numbers is a perfect square\"?",
+      steps: [
+        {
+          text: "**List the possible target values.** Products run from 1 to 36, so the perfect squares available are $1, 4, 9, 16, 25, 36$. *Why this step:* splitting by the value of the product turns one fuzzy question into six small, checkable ones.",
+        },
+        {
+          text: "**Find the cells for each value, with both orders.** \n• $1$: $(1,1)$.\n• $4$: $(1,4), (4,1), (2,2)$.\n• $9$: $(3,3)$ only, since $1 \\times 9$ needs a 9.\n• $16$: $(4,4)$ only, since $2 \\times 8$ needs an 8.\n• $25$: $(5,5)$.\n• $36$: $(6,6)$ only, since $4 \\times 9$ needs a 9.",
+          latex: "n(E) = 1 + 3 + 1 + 1 + 1 + 1 = 8",
+        },
+      ],
+      answer: "$n(E) = 8$",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 — product is a perfect square (exam style).** Two dice are rolled. How many outcomes are in $E$ = \"the product of the two numbers is a perfect square\"?\n\n**Step 1. List the possible target values.** Products run from 1 to 36, so the perfect squares available are $1, 4, 9, 16, 25, 36$. *Why this step:* splitting by the value of the product turns one fuzzy question into six small, checkable ones.\n\n**Step 2. Find the cells for each value, with both orders.**\n• $1$: $(1,1)$.\n• $4$: $(1,4), (4,1), (2,2)$.\n• $9$: $(3,3)$ only, since $1 \\times 9$ needs a 9.\n• $16$: $(4,4)$ only, since $2 \\times 8$ needs an 8.\n• $25$: $(5,5)$.\n• $36$: $(6,6)$ only, since $4 \\times 9$ needs a 9.",
-    },
-    { type: "math", latex: "n(E) = 1 + 3 + 1 + 1 + 1 + 1 = 8" },
     {
       type: "text",
       content:
@@ -643,6 +832,7 @@ const lesson03: LessonSeed = {
       content:
         "Every subset of $S$ is an event. A set with $n$ elements has $2^n$ subsets: each outcome is either in or out. So one die ($n(S) = 6$) has $2^6 = 64$ events, including $\\varnothing$ and $S$ itself.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr0-3-q1",
@@ -760,6 +950,7 @@ const lesson04: LessonSeed = {
         ["$A$ but not $B$", "$A - B = A \\cap B'$", "in $A$ and outside $B$"],
       ],
     },
+    { type: "heading", text: "The Venn diagram's four regions" },
     {
       type: "text",
       content:
@@ -799,18 +990,37 @@ const lesson04: LessonSeed = {
         track: "event-A",
         seed: 42,
         caption:
-          "A is columns 2, 4 and 6 (the first die is even; 18 cells). B is the lower-right triangle (15 cells). Toggle the combinations and verify the counts in the table below.",
+          "A is columns 2, 4 and 6 (the first die is even). B is the lower-right triangle. Toggle the combinations and count the cells, then compare with the worked example below.",
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — counting the combinations.**\n\n**Step 1. $A$.** Columns 2, 4, 6 (first die even), six cells each: $n(A) = 18$.\n\n**Step 2. $B$.** Sums 8, 9, 10, 11, 12 have $5 + 4 + 3 + 2 + 1 = 15$ cells.\n\n**Step 3. $A \\cap B$.** Go column by column. First die 2: second must be 6 (1 cell). First die 4: second $\\geq 4$ (3 cells). First die 6: second $\\geq 2$ (5 cells). Total $1 + 3 + 5 = 9$.\n\n**Step 4. $A \\cup B$.** Adding 18 and 15 counts the 9 overlap cells twice, so $n(A \\cup B) = 18 + 15 - 9 = 24$.\n\n**Step 5.** $n(A') = 36 - 18 = 18$ and $n(A - B) = 18 - 9 = 9$.",
-    },
-    {
-      type: "table",
-      headers: ["Region", "$A \\cup B$", "$A \\cap B$", "$A'$", "$A - B$", "$(A \\cup B)'$"],
-      rows: [["Cells", "24", "9", "18", "9", "12"]],
+      type: "worked-example",
+      id: "pr0-4-we1",
+      title: "Worked example 1 — counting the combinations",
+      problem:
+        "On the two-dice grid, $A$ = \"first die even\" and $B$ = \"sum $\\geq 8$\". Count $A$, $B$, $A \\cap B$, $A \\cup B$, $A'$ and $A - B$.",
+      steps: [
+        {
+          text: "**$A$.** Columns 2, 4, 6 (first die even), six cells each: $n(A) = 18$.",
+        },
+        {
+          text: "**$B$.** Sums 8, 9, 10, 11, 12 have $5 + 4 + 3 + 2 + 1 = 15$ cells.",
+        },
+        {
+          text: "**$A \\cap B$.** Go column by column. First die 2: second must be 6 (1 cell). First die 4: second $\\geq 4$ (3 cells). First die 6: second $\\geq 2$ (5 cells). Total $1 + 3 + 5 = 9$.",
+        },
+        {
+          text: "**$A \\cup B$.** Adding 18 and 15 counts the 9 overlap cells twice, so $n(A \\cup B) = 18 + 15 - 9 = 24$.",
+        },
+        {
+          text: "$n(A') = 36 - 18 = 18$ and $n(A - B) = 18 - 9 = 9$.",
+          table: {
+            headers: ["Region", "$A \\cup B$", "$A \\cap B$", "$A'$", "$A - B$", "$(A \\cup B)'$"],
+            rows: [["Cells", "24", "9", "18", "9", "12"]],
+          },
+        },
+      ],
+      answer: "$n(A) = 18$, $n(B) = 15$, $n(A \\cap B) = 9$, $n(A \\cup B) = 24$, $n(A') = 18$, $n(A - B) = 9$",
     },
     {
       type: "callout",
@@ -819,10 +1029,11 @@ const lesson04: LessonSeed = {
       content:
         "In ordinary speech \"tea or coffee?\" usually means one, not both. In probability, **$A$ or $B$ always means at least one**, and the outcomes in both are included. When a question really wants just one of them, it says \"**exactly** one\", and that is a different event: $(A - B) \\cup (B - A)$.",
     },
+    { type: "heading", text: "De Morgan's laws, by shading" },
     {
       type: "text",
       content:
-        "**De Morgan's laws, by shading.** What is the region *outside* $A \\cup B$? Those cells are outside $A$ and also outside $B$. So the complement of a union is the intersection of the complements. Check the count: cells with first die odd and sum $\\leq 7$. First die 1: 6 cells. First die 3: second $\\leq 4$, 4 cells. First die 5: second $\\leq 2$, 2 cells. Total $6 + 4 + 2 = 12 = 36 - 24$. It matches.",
+        "What is the region *outside* $A \\cup B$? Those cells are outside $A$ and also outside $B$. So the complement of a union is the intersection of the complements. Check the count: cells with first die odd and sum $\\leq 7$. First die 1: 6 cells. First die 3: second $\\leq 4$, 4 cells. First die 5: second $\\leq 2$, 2 cells. Total $6 + 4 + 2 = 12 = 36 - 24$. It matches.",
     },
     {
       type: "math",
@@ -840,6 +1051,7 @@ const lesson04: LessonSeed = {
       content:
         "Each law below can be checked by shading both sides on a Venn diagram and seeing the same region.\n• **Complement laws:** $A \\cup A' = S$ (every outcome is in $A$ or outside it); $A \\cap A' = \\varnothing$ (none is both); $(A')' = A$ (outside the outside is inside); $S' = \\varnothing$, $\\varnothing' = S$.\n• **Commutative:** $A \\cup B = B \\cup A$ and $A \\cap B = B \\cap A$ (the order of naming does not change the shaded region).\n• **Associative:** $(A \\cup B) \\cup C = A \\cup (B \\cup C)$ and $(A \\cap B) \\cap C = A \\cap (B \\cap C)$ (so $A \\cup B \\cup C$ needs no brackets).\n• **Distributive:** $A \\cap (B \\cup C) = (A \\cap B) \\cup (A \\cap C)$ and $A \\cup (B \\cap C) = (A \\cup B) \\cap (A \\cup C)$ (shade $A$ and the union of $B$, $C$: the overlap is the part of $A$ inside $B$ plus the part inside $C$).\n• **Difference:** $A - B = A \\cap B'$ (in $A$, and outside $B$).\n• **Identity:** $A \\cup \\varnothing = A$, $A \\cap S = A$, $A \\cup S = S$, $A \\cap \\varnothing = \\varnothing$.",
     },
+    { type: "heading", text: "Overlaps, gaps and partitions" },
     {
       type: "callout",
       variant: "definition",
@@ -862,10 +1074,11 @@ const lesson04: LessonSeed = {
       content:
         "Partitions matter later: splitting $S$ into pieces that cannot overlap and leave nothing out is exactly what the law of total probability and Bayes' theorem need in Chapter 3.",
     },
+    { type: "heading", text: "The translation dictionary" },
     {
       type: "text",
       content:
-        "**The translation dictionary.** These phrases appear in almost every exam question. Each has a set form you should be able to write without thinking.",
+        "These phrases appear in almost every exam question. Each has a set form you should be able to write without thinking.",
     },
     {
       type: "table",
@@ -889,52 +1102,85 @@ const lesson04: LessonSeed = {
       content:
         "**Reading the three-event phrases.** \"Exactly one\" means one of the three happens and the other two fail, so each piece has one plain letter and two complements; there are three ways to choose which letter is plain. \"At least two\" means *some pair* happens: if $A$ and $B$ both happen, the outcome is in $A \\cap B$ whatever $C$ does, so the union of the three pairwise intersections catches every outcome with two or three successes. On a three-circle Venn diagram it is the three lens-shaped overlaps together with the centre.",
     },
+    { type: "heading", text: "Translating in practice", level: 3 },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — three coins.** Let $A$ = \"first toss is heads\" and $B$ = \"exactly one head\".\n\n$A = \\{\\text{HHH}, \\text{HHT}, \\text{HTH}, \\text{HTT}\\}$, $B = \\{\\text{HTT}, \\text{THT}, \\text{TTH}\\}$.\n\n$A \\cap B = \\{\\text{HTT}\\}$: first is a head and it is the only head.\n$A \\cup B = \\{\\text{HHH}, \\text{HHT}, \\text{HTH}, \\text{HTT}, \\text{THT}, \\text{TTH}\\}$, six outcomes.\n$B - A = \\{\\text{THT}, \\text{TTH}\\}$.\nNeither: $(A \\cup B)' = \\{\\text{THH}, \\text{TTT}\\}$.\n\n$A$ and $B$ are **not** mutually exclusive, because they share HTT. Check: $6 + 2 = 8 = n(S)$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 — raffle tickets.** Tickets numbered 1 to 30 are in a drum and one is drawn. $A$ = \"a multiple of 3\", $B$ = \"a multiple of 5\". Count $A \\cap B$, $A \\cup B$, \"neither\" and \"exactly one\".\n\n**Step 1. Size each event.** Multiples of 3 up to 30: $3, 6, \\ldots, 30$, so $n(A) = 10$. Multiples of 5: $5, 10, \\ldots, 30$, so $n(B) = 6$.\n\n**Step 2. Find the overlap.** A number is a multiple of both 3 and 5 exactly when it is a multiple of 15: $A \\cap B = \\{15, 30\\}$, $n(A \\cap B) = 2$. *Why this step:* the overlap has to be found first, because every other region is built from it.\n\n**Step 3. Fill the four Venn regions.** $A$ only: $10 - 2 = 8$. $B$ only: $6 - 2 = 4$. Both: 2. Neither: $30 - (8 + 2 + 4) = 16$.",
-    },
-    {
-      type: "math",
-      latex: "n(A \\cup B) = 10 + 6 - 2 = 14, \\qquad n\\big((A \\cup B)'\\big) = 30 - 14 = 16, \\qquad n(\\text{exactly one}) = 8 + 4 = 12",
-    },
-    {
-      type: "text",
-      content:
-        "*Check:* $8 + 2 + 4 + 16 = 30$. The four regions are a partition, so their counts must add back to $n(S)$. If they do not, a region was double-counted or missed.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 — which pairs are mutually exclusive? (NCERT style).** Two dice are rolled. Let\n$A$ = \"the sum is even\", $B$ = \"the sum is a multiple of 3\", $C$ = \"the sum is less than 4\", $D$ = \"the sum is greater than 11\".\nWhich pairs are mutually exclusive? Are $A, B, C, D$ exhaustive?\n\n**Step 1. Rewrite each event as a set of sums.** $A$: 2, 4, 6, 8, 10, 12. $B$: 3, 6, 9, 12. $C$: 2, 3. $D$: 12. *Why this step:* every event here depends only on the sum, so comparing lists of sums is far quicker than comparing 36 cells.\n\n**Step 2. Look for one shared outcome in each pair.** *Why this step:* a single common outcome is enough to prove two events are **not** exclusive.",
-    },
-    {
-      type: "table",
-      headers: ["Pair", "A shared outcome?", "Mutually exclusive?"],
-      rows: [
-        ["$A, B$", "sum 6, e.g. $(3,3)$", "no"],
-        ["$A, C$", "sum 2, $(1,1)$", "no"],
-        ["$A, D$", "sum 12, $(6,6)$", "no"],
-        ["$B, C$", "sum 3, e.g. $(1,2)$", "no"],
-        ["$B, D$", "sum 12, $(6,6)$", "no"],
-        ["$C, D$", "none: a sum cannot be both $< 4$ and $> 11$", "**yes**"],
+      type: "worked-example",
+      id: "pr0-4-we2",
+      title: "Worked example 2 — three coins",
+      problem:
+        "Let $A$ = \"first toss is heads\" and $B$ = \"exactly one head\". List $A$, $B$, $A \\cap B$, $A \\cup B$ and $B - A$. Are $A$ and $B$ mutually exclusive?",
+      steps: [
+        {
+          text: "$A = \\{\\text{HHH}, \\text{HHT}, \\text{HTH}, \\text{HTT}\\}$, $B = \\{\\text{HTT}, \\text{THT}, \\text{TTH}\\}$.",
+        },
+        {
+          text: "$A \\cap B = \\{\\text{HTT}\\}$: first is a head and it is the only head.\n$A \\cup B = \\{\\text{HHH}, \\text{HHT}, \\text{HTH}, \\text{HTT}, \\text{THT}, \\text{TTH}\\}$, six outcomes.\n$B - A = \\{\\text{THT}, \\text{TTH}\\}$.\nNeither: $(A \\cup B)' = \\{\\text{THH}, \\text{TTT}\\}$.",
+        },
+        {
+          text: "$A$ and $B$ are **not** mutually exclusive, because they share HTT. Check: $6 + 2 = 8 = n(S)$.",
+        },
       ],
+      answer: "Not mutually exclusive: they share HTT.",
     },
     {
-      type: "text",
-      content:
-        "**Step 3. Exhaustive?** No. The outcome $(1,4)$ has sum 5, which is odd, not a multiple of 3, not below 4 and not above 11, so it lies in none of the four events. One outcome left out is enough to break exhaustiveness.",
+      type: "worked-example",
+      id: "pr0-4-we3",
+      title: "Worked example 3 — raffle tickets",
+      problem:
+        "Tickets numbered 1 to 30 are in a drum and one is drawn. $A$ = \"a multiple of 3\", $B$ = \"a multiple of 5\". Count $A \\cap B$, $A \\cup B$, \"neither\" and \"exactly one\".",
+      steps: [
+        {
+          text: "**Size each event.** Multiples of 3 up to 30: $3, 6, \\ldots, 30$, so $n(A) = 10$. Multiples of 5: $5, 10, \\ldots, 30$, so $n(B) = 6$.",
+        },
+        {
+          text: "**Find the overlap.** A number is a multiple of both 3 and 5 exactly when it is a multiple of 15: $A \\cap B = \\{15, 30\\}$, $n(A \\cap B) = 2$. *Why this step:* the overlap has to be found first, because every other region is built from it.",
+        },
+        {
+          text: "**Fill the four Venn regions.** $A$ only: $10 - 2 = 8$. $B$ only: $6 - 2 = 4$. Both: 2. Neither: $30 - (8 + 2 + 4) = 16$.",
+          latex: "n(A \\cup B) = 10 + 6 - 2 = 14, \\qquad n\\big((A \\cup B)'\\big) = 30 - 14 = 16, \\qquad n(\\text{exactly one}) = 8 + 4 = 12",
+        },
+        {
+          text: "*Check:* $8 + 2 + 4 + 16 = 30$. The four regions are a partition, so their counts must add back to $n(S)$. If they do not, a region was double-counted or missed.",
+        },
+      ],
+      answer: "$n(A \\cap B) = 2$, $n(A \\cup B) = 14$, neither: $16$, exactly one: $12$",
+    },
+    {
+      type: "worked-example",
+      id: "pr0-4-we4",
+      title: "Worked example 4 — which pairs are mutually exclusive? (NCERT style)",
+      problem:
+        "Two dice are rolled. Let\n$A$ = \"the sum is even\", $B$ = \"the sum is a multiple of 3\", $C$ = \"the sum is less than 4\", $D$ = \"the sum is greater than 11\".\nWhich pairs are mutually exclusive? Are $A, B, C, D$ exhaustive?",
+      steps: [
+        {
+          text: "**Rewrite each event as a set of sums.** $A$: 2, 4, 6, 8, 10, 12. $B$: 3, 6, 9, 12. $C$: 2, 3. $D$: 12. *Why this step:* every event here depends only on the sum, so comparing lists of sums is far quicker than comparing 36 cells.",
+        },
+        {
+          text: "**Look for one shared outcome in each pair.** *Why this step:* a single common outcome is enough to prove two events are **not** exclusive.",
+          table: {
+            headers: ["Pair", "A shared outcome?", "Mutually exclusive?"],
+            rows: [
+              ["$A, B$", "sum 6, e.g. $(3,3)$", "no"],
+              ["$A, C$", "sum 2, $(1,1)$", "no"],
+              ["$A, D$", "sum 12, $(6,6)$", "no"],
+              ["$B, C$", "sum 3, e.g. $(1,2)$", "no"],
+              ["$B, D$", "sum 12, $(6,6)$", "no"],
+              ["$C, D$", "none: a sum cannot be both $< 4$ and $> 11$", "**yes**"],
+            ],
+          },
+        },
+        {
+          text: "**Exhaustive?** No. The outcome $(1,4)$ has sum 5, which is odd, not a multiple of 3, not below 4 and not above 11, so it lies in none of the four events. One outcome left out is enough to break exhaustiveness.",
+        },
+      ],
+      answer: "Only $C$ and $D$ are mutually exclusive, and the four events are not exhaustive.",
     },
     {
       type: "text",
       content:
         "**Worked example 5 — three events in words.** Three friends $A$, $B$, $C$ each try the same puzzle; let the same letters stand for \"$A$ solves it\" and so on. Translate:\n\n• \"The puzzle gets solved\" means at least one solves it: $A \\cup B \\cup C$.\n• \"Only $A$ solves it\": $A$ succeeds and the other two fail, $A \\cap B' \\cap C'$.\n• \"Nobody solves it\": $A' \\cap B' \\cap C' = (A \\cup B \\cup C)'$, by De Morgan.\n• \"Not everyone solves it\": $(A \\cap B \\cap C)' = A' \\cup B' \\cup C'$.\n\n*Why this matters:* \"nobody\" and \"not everyone\" sound similar but are different regions. \"Nobody\" is the single region outside all three circles; \"not everyone\" is everything except the centre.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr0-4-q1",
@@ -1072,6 +1318,7 @@ const lesson05: LessonSeed = {
       content:
         "A grid of 36 cells can be listed. A hand of 5 cards from a deck cannot: there are over two and a half million hands. From here on, most sample spaces are sized by **counting rules** rather than by writing them out. This lesson is a quick toolkit; the Permutations & Combinations course builds each tool from scratch.",
     },
+    { type: "heading", text: "Multiplying stages" },
     {
       type: "callout",
       variant: "definition",
@@ -1084,6 +1331,7 @@ const lesson05: LessonSeed = {
       content:
         "This is just the tree from Lesson 0.2, counted instead of drawn: every node at one level sprouts the same number of branches, so the leaves multiply. Two dice: $6 \\times 6 = 36$. $n$ coins: $2^n$. Coin then die: $2 \\times 6 = 12$.",
     },
+    { type: "heading", text: "Order matters or not: ${}^nP_r$ and ${}^nC_r$" },
     {
       type: "text",
       content:
@@ -1120,6 +1368,7 @@ const lesson05: LessonSeed = {
       content:
         "Ask: **if I swap two of the chosen objects, do I get a different outcome?** Swapping the gold and silver medallists changes the result, so use ${}^nP_r$. Swapping two members of a committee changes nothing, so use ${}^nC_r$.",
     },
+    { type: "heading", text: "Hands, committees, words and plates" },
     {
       type: "text",
       content:
@@ -1138,32 +1387,113 @@ const lesson05: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — poker hands.** How many 5-card hands can be dealt from a deck, and how many of them are all hearts?\n\n**Step 1. Order?** A hand is the same hand however it was dealt, so use combinations.\n\n**Step 2. Sample space.** $n(S) = \\binom{52}{5} = \\frac{52 \\cdot 51 \\cdot 50 \\cdot 49 \\cdot 48}{5!} = \\frac{311{,}875{,}200}{120} = 2{,}598{,}960$.\n\n**Step 3. Event.** All five from the 13 hearts: $n(E) = \\binom{13}{5} = \\frac{13 \\cdot 12 \\cdot 11 \\cdot 10 \\cdot 9}{120} = 1287$.\n\nBoth counts are unordered, so they are consistent with each other.",
+      type: "worked-example",
+      id: "pr0-5-we1",
+      title: "Worked example 1 — poker hands",
+      problem:
+        "How many 5-card hands can be dealt from a deck, and how many of them are all hearts?",
+      steps: [
+        {
+          text: "**Order?** A hand is the same hand however it was dealt, so use combinations.",
+        },
+        {
+          text: "**Sample space.** $n(S) = \\binom{52}{5} = \\frac{52 \\cdot 51 \\cdot 50 \\cdot 49 \\cdot 48}{5!} = \\frac{311{,}875{,}200}{120} = 2{,}598{,}960$.",
+        },
+        {
+          text: "**Event.** All five from the 13 hearts: $n(E) = \\binom{13}{5} = \\frac{13 \\cdot 12 \\cdot 11 \\cdot 10 \\cdot 9}{120} = 1287$.",
+        },
+      ],
+      answer: "$n(S) = 2{,}598{,}960$ hands, of which $n(E) = 1287$ are all hearts.",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 — a committee with a condition.** A committee of 3 is chosen from 6 men and 4 women. How many committees are possible, and how many have exactly 2 women?\n\n**Step 1.** $n(S) = \\binom{10}{3} = \\frac{10 \\cdot 9 \\cdot 8}{6} = 120$.\n\n**Step 2. Split the choice into stages.** Choose the 2 women from 4, *then* the 1 man from 6. Stages multiply: $n(E) = \\binom{4}{2} \\times \\binom{6}{1} = 6 \\times 6 = 36$.",
+        "Both counts are unordered, so they are consistent with each other.",
+    },
+    {
+      type: "worked-example",
+      id: "pr0-5-we2",
+      title: "Worked example 2 — a committee with a condition",
+      problem:
+        "A committee of 3 is chosen from 6 men and 4 women. How many committees are possible, and how many have exactly 2 women?",
+      steps: [
+        {
+          text: "$n(S) = \\binom{10}{3} = \\frac{10 \\cdot 9 \\cdot 8}{6} = 120$.",
+        },
+        {
+          text: "**Split the choice into stages.** Choose the 2 women from 4, *then* the 1 man from 6. Stages multiply: $n(E) = \\binom{4}{2} \\times \\binom{6}{1} = 6 \\times 6 = 36$.",
+        },
+      ],
+      answer: "$120$ committees, $36$ with exactly 2 women.",
+    },
+    {
+      type: "worked-example",
+      id: "pr0-5-we3",
+      title: "Worked example 3 — letters",
+      problem:
+        "How many arrangements does the word EQUATION have, and in how many are all the vowels together?",
+      steps: [
+        {
+          text: "EQUATION has 8 different letters, so it has $8! = 40{,}320$ arrangements.",
+        },
+        {
+          text: "**Glue the vowels.** The vowels E, U, A, I, O become one block. That leaves 4 units to arrange: the block, Q, T, N, giving $4! = 24$ ways.",
+        },
+        {
+          text: "**Arrange inside the block.** The 5 vowels can be ordered in $5! = 120$ ways.",
+        },
+        {
+          text: "$n(E) = 4! \\times 5! = 24 \\times 120 = 2880$.",
+        },
+      ],
+      answer: "$8! = 40{,}320$ arrangements, $2880$ with the vowels together.",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 — letters.** How many arrangements does the word EQUATION have, and in how many are all the vowels together?\n\n**Step 1.** EQUATION has 8 different letters, so it has $8! = 40{,}320$ arrangements.\n\n**Step 2. Glue the vowels.** The vowels E, U, A, I, O become one block. That leaves 4 units to arrange: the block, Q, T, N, giving $4! = 24$ ways.\n\n**Step 3. Arrange inside the block.** The 5 vowels can be ordered in $5! = 120$ ways.\n\n**Step 4.** $n(E) = 4! \\times 5! = 24 \\times 120 = 2880$.\n\nIf letters repeat, divide out the swaps that change nothing. BANANA has $\\frac{6!}{3!\\,2!} = \\frac{720}{12} = 60$ distinct arrangements (three A's, two N's).",
+        "If letters repeat, divide out the swaps that change nothing. BANANA has $\\frac{6!}{3!\\,2!} = \\frac{720}{12} = 60$ distinct arrangements (three A's, two N's).",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — a number plate.** A college issues parking stickers with 2 letters followed by 3 digits, like KV-407. Letters may repeat, but the 3 digits must all be different. How many stickers are possible?\n\n**Step 1. One slot, one stage.** There are 5 slots, filled left to right. *Why this step:* the counting principle only needs the number of options at each stage, given the earlier stages.\n\n**Step 2. Letters.** Repeats allowed, so each letter slot has 26 options: $26 \\times 26 = 676$.\n\n**Step 3. Digits.** No repeats, so the options shrink: $10 \\times 9 \\times 8 = 720$ (that is ${}^{10}P_3$; order matters because 407 and 704 are different stickers).",
+      type: "worked-example",
+      id: "pr0-5-we4",
+      title: "Worked example 4 — a number plate",
+      problem:
+        "A college issues parking stickers with 2 letters followed by 3 digits, like KV-407. Letters may repeat, but the 3 digits must all be different. How many stickers are possible?",
+      steps: [
+        {
+          text: "**One slot, one stage.** There are 5 slots, filled left to right. *Why this step:* the counting principle only needs the number of options at each stage, given the earlier stages.",
+        },
+        {
+          text: "**Letters.** Repeats allowed, so each letter slot has 26 options: $26 \\times 26 = 676$.",
+        },
+        {
+          text: "**Digits.** No repeats, so the options shrink: $10 \\times 9 \\times 8 = 720$ (that is ${}^{10}P_3$; order matters because 407 and 704 are different stickers).",
+          latex: "n(S) = 26 \\times 26 \\times 10 \\times 9 \\times 8 = 676 \\times 720 = 486{,}720",
+        },
+      ],
+      answer: "$486{,}720$ stickers.",
     },
-    { type: "math", latex: "n(S) = 26 \\times 26 \\times 10 \\times 9 \\times 8 = 676 \\times 720 = 486{,}720" },
+    { type: "heading", text: "At least: cases or the complement" },
     {
-      type: "text",
-      content:
-        "**Worked example 5 — \"at least\" by cases (NCERT style).** A group of 5 is chosen from 7 men and 6 women. In how many ways can the group contain at least 3 men?\n\n**Step 1. Split \"at least 3 men\" into exact cases.** With 5 people the group is 3M + 2W, 4M + 1W or 5M. *Why this step:* each case fixes exactly how many of each kind to choose, so each can be counted by stages.\n\n**Step 2. Count each case with stages (multiply).**\n• 3 men, 2 women: $\\binom{7}{3}\\binom{6}{2} = 35 \\times 15 = 525$.\n• 4 men, 1 woman: $\\binom{7}{4}\\binom{6}{1} = 35 \\times 6 = 210$.\n• 5 men: $\\binom{7}{5} = 21$.\n\n**Step 3. Combine the cases (add).** *Why add here:* the cases are mutually exclusive (a group cannot have exactly 3 men and exactly 4 men), so no group is counted twice.",
+      type: "worked-example",
+      id: "pr0-5-we5",
+      title: "Worked example 5 — \"at least\" by cases (NCERT style)",
+      problem:
+        "A group of 5 is chosen from 7 men and 6 women. In how many ways can the group contain at least 3 men?",
+      steps: [
+        {
+          text: "**Split \"at least 3 men\" into exact cases.** With 5 people the group is 3M + 2W, 4M + 1W or 5M. *Why this step:* each case fixes exactly how many of each kind to choose, so each can be counted by stages.",
+        },
+        {
+          text: "**Count each case with stages (multiply).** \n• 3 men, 2 women: $\\binom{7}{3}\\binom{6}{2} = 35 \\times 15 = 525$.\n• 4 men, 1 woman: $\\binom{7}{4}\\binom{6}{1} = 35 \\times 6 = 210$.\n• 5 men: $\\binom{7}{5} = 21$.",
+        },
+        {
+          text: "**Combine the cases (add).** *Why add here:* the cases are mutually exclusive (a group cannot have exactly 3 men and exactly 4 men), so no group is counted twice.",
+          latex: "n(E) = 525 + 210 + 21 = 756",
+        },
+      ],
+      answer: "$756$ ways.",
     },
-    { type: "math", latex: "n(E) = 525 + 210 + 21 = 756" },
     {
       type: "callout",
       variant: "warning",
@@ -1172,15 +1502,27 @@ const lesson05: LessonSeed = {
         "A tempting shortcut is $\\binom{7}{3} \\times \\binom{10}{2} = 35 \\times 45 = 1575$: choose 3 guaranteed men, then any 2 of the remaining 10 people. It overcounts. A group with 4 men is produced four times, once for each choice of which 3 men were the \"guaranteed\" ones. Split into exact cases instead.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 6 — \"at least one\" by the complement (JEE style).** How many 5-card hands contain at least one ace?\n\n**Step 1. Notice the cases are many.** One, two, three or four aces: four separate counts. *Why switch:* the complement \"no ace\" is a single case, and $E = S - E'$ from Lesson 0.4 turns it into the answer.\n\n**Step 2. Count the complement.** No ace means all 5 cards from the 48 non-aces: $\\binom{48}{5} = \\frac{48 \\cdot 47 \\cdot 46 \\cdot 45 \\cdot 44}{120} = 1{,}712{,}304$.\n\n**Step 3. Subtract from the whole.**",
-    },
-    { type: "math", latex: "n(E) = \\binom{52}{5} - \\binom{48}{5} = 2{,}598{,}960 - 1{,}712{,}304 = 886{,}656" },
-    {
-      type: "text",
-      content:
-        "*Check by cases:* $4\\binom{48}{4} + 6\\binom{48}{3} + 4\\binom{48}{2} + 1 \\cdot 48 = 778{,}320 + 103{,}776 + 4{,}512 + 48 = 886{,}656$. Same answer, four times the work. **Whenever you read \"at least one\", try the complement first.**",
+      type: "worked-example",
+      id: "pr0-5-we6",
+      title: "Worked example 6 — \"at least one\" by the complement (JEE style)",
+      problem:
+        "How many 5-card hands contain at least one ace?",
+      steps: [
+        {
+          text: "**Notice the cases are many.** One, two, three or four aces: four separate counts. *Why switch:* the complement \"no ace\" is a single case, and $E = S - E'$ from Lesson 0.4 turns it into the answer.",
+        },
+        {
+          text: "**Count the complement.** No ace means all 5 cards from the 48 non-aces: $\\binom{48}{5} = \\frac{48 \\cdot 47 \\cdot 46 \\cdot 45 \\cdot 44}{120} = 1{,}712{,}304$.",
+        },
+        {
+          text: "**Subtract from the whole.** ",
+          latex: "n(E) = \\binom{52}{5} - \\binom{48}{5} = 2{,}598{,}960 - 1{,}712{,}304 = 886{,}656",
+        },
+        {
+          text: "*Check by cases:* $4\\binom{48}{4} + 6\\binom{48}{3} + 4\\binom{48}{2} + 1 \\cdot 48 = 778{,}320 + 103{,}776 + 4{,}512 + 48 = 886{,}656$. Same answer, four times the work. **Whenever you read \"at least one\", try the complement first.**",
+        },
+      ],
+      answer: "$886{,}656$ hands.",
     },
     {
       type: "callout",
@@ -1194,6 +1536,7 @@ const lesson05: LessonSeed = {
       content:
         "The ratio $\\frac{n(E)}{n(S)}$ is exactly how Chapter 1 will define a probability when outcomes are equally likely. That is why sizing $S$ and $E$ consistently matters so much.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr0-5-q1",
@@ -1316,18 +1659,36 @@ const lessonMastery: LessonSeed = {
       variant: "info",
       title: "The chapter in five lines",
       content:
-        "1. Single outcomes are unpredictable; relative frequencies settle. The coin has no memory.\n2. A sample space lists every outcome at a useful level of detail, with ordered pairs kept distinct (HT ≠ TH).\n3. An event is a subset of $S$; it occurs when the outcome lands inside it.\n4. or $= \\cup$ (includes both), and $= \\cap$, not $=$ complement; $(A \\cup B)' = A' \\cap B'$ and $(A \\cap B)' = A' \\cup B'$.\n5. Size large sample spaces with the multiplication principle, ${}^nP_r$ and ${}^nC_r$, counting $S$ and $E$ the same way.",
+        "1. Single outcomes are unpredictable; relative frequencies settle. The coin has no memory.\n2. A sample space lists every outcome at a useful level of detail, with ordered pairs kept distinct (HT ≠ TH).\n3. An event is a subset of $S$; it occurs when the outcome lands inside it.\n4. \"Or\" $= \\cup$ (includes both), \"and\" $= \\cap$, \"not\" $=$ complement; $(A \\cup B)' = A' \\cap B'$ and $(A \\cap B)' = A' \\cup B'$.\n5. Size large sample spaces with the multiplication principle, ${}^nP_r$ and ${}^nC_r$, counting $S$ and $E$ the same way.",
     },
     {
-      type: "text",
-      content:
-        "**Worked exam problem — all three steps in one.** A bag holds 5 red and 3 blue balls. Three are drawn at once. Let $A$ = \"all three the same colour\" and $B$ = \"at least two red\". Find $n(S)$, $n(A)$, $n(B)$, $n(A \\cap B)$ and $n(A \\cup B)$.\n\n**Step 1. Sample space.** Drawn at once, so unordered: $n(S) = \\binom{8}{3} = 56$. *Why:* the event counts below are also unordered, and the two must match.\n\n**Step 2. $A$ by cases.** All red: $\\binom{5}{3} = 10$. All blue: $\\binom{3}{3} = 1$. The cases cannot overlap, so $n(A) = 11$.\n\n**Step 3. $B$ by cases.** Exactly 2 red: $\\binom{5}{2}\\binom{3}{1} = 10 \\times 3 = 30$. Exactly 3 red: $10$. So $n(B) = 40$.\n\n**Step 4. The overlap.** Same colour *and* at least two red can only mean all red: $n(A \\cap B) = 10$.\n\n**Step 5. Union, correcting the double count.**",
-    },
-    { type: "math", latex: "n(A \\cup B) = 11 + 40 - 10 = 41" },
-    {
-      type: "text",
-      content:
-        "*Check with the complement:* outside $A \\cup B$ means mixed colours with fewer than two red, which is exactly 1 red and 2 blue: $\\binom{5}{1}\\binom{3}{2} = 5 \\times 3 = 15$. And $56 - 41 = 15$. Two independent routes agree, so the answer is safe.",
+      type: "worked-example",
+      id: "pr0-6-we1",
+      title: "Worked exam problem — all three steps in one",
+      problem:
+        "A bag holds 5 red and 3 blue balls. Three are drawn at once. Let $A$ = \"all three the same colour\" and $B$ = \"at least two red\". Find $n(S)$, $n(A)$, $n(B)$, $n(A \\cap B)$ and $n(A \\cup B)$.",
+      steps: [
+        {
+          text: "**Sample space.** Drawn at once, so unordered: $n(S) = \\binom{8}{3} = 56$. *Why:* the event counts below are also unordered, and the two must match.",
+        },
+        {
+          text: "**$A$ by cases.** All red: $\\binom{5}{3} = 10$. All blue: $\\binom{3}{3} = 1$. The cases cannot overlap, so $n(A) = 11$.",
+        },
+        {
+          text: "**$B$ by cases.** Exactly 2 red: $\\binom{5}{2}\\binom{3}{1} = 10 \\times 3 = 30$. Exactly 3 red: $10$. So $n(B) = 40$.",
+        },
+        {
+          text: "**The overlap.** Same colour *and* at least two red can only mean all red: $n(A \\cap B) = 10$.",
+        },
+        {
+          text: "**Union, correcting the double count.**",
+          latex: "n(A \\cup B) = 11 + 40 - 10 = 41",
+        },
+        {
+          text: "*Check with the complement:* outside $A \\cup B$ means mixed colours with fewer than two red, which is exactly 1 red and 2 blue: $\\binom{5}{1}\\binom{3}{2} = 5 \\times 3 = 15$. And $56 - 41 = 15$. Two independent routes agree, so the answer is safe.",
+        },
+      ],
+      answer: "$n(S) = 56$, $n(A) = 11$, $n(B) = 40$, $n(A \\cap B) = 10$, $n(A \\cup B) = 41$",
     },
     {
       type: "quiz",

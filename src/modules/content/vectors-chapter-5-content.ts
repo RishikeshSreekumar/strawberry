@@ -34,6 +34,7 @@ const lesson01: LessonSeed = {
       content:
         "Take a rectangular box: volume is length × breadth × height, or more usefully, **base area × height**. Now push the top of the box sideways so every face becomes a parallelogram. The box leans, but no material was added or removed: the volume is still base area × *perpendicular* height.\n\nThat slanted box is a **parallelepiped**, and its three edges from one corner are three vectors $\\vec a$, $\\vec b$, $\\vec c$. This lesson finds its volume using nothing but the two products you already own.",
     },
+    { type: "heading", text: "Volume as base area times height" },
     {
       type: "text",
       content:
@@ -82,44 +83,82 @@ const lesson01: LessonSeed = {
       content:
         "It is not even a valid expression. $\\vec a\\cdot\\vec b$ is a plain number, and the cross product needs two vectors. The only meaningful way to combine one dot and one cross on three vectors into a number is to do the cross **first**: $\\vec a\\cdot(\\vec b\\times\\vec c)$. Brackets are often dropped, $\\vec a\\cdot\\vec b\\times\\vec c$, precisely because only one reading makes sense.",
     },
+    { type: "heading", text: "Volumes of slanted boxes" },
     {
-      type: "text",
-      content:
-        "**Worked example 1: a sheared box.** Edges $\\vec a = (3, 0, 0)$, $\\vec b = (0, 2, 0)$, $\\vec c = (1, 1, 5)$.\n\n**Step 1.** Cross the last two: $\\vec b\\times\\vec c = (2\\cdot 5 - 0\\cdot 1,\\; 0\\cdot 1 - 0\\cdot 5,\\; 0\\cdot 1 - 2\\cdot 1) = (10, 0, -2)$.\n\n**Step 2.** Dot with the first: $\\vec a\\cdot(10, 0, -2) = 30$.\n\n**Step 3.** Read it: volume $30$. Sanity check: the base spanned by $\\vec a$ and $\\vec b$ is a $3\\times 2$ rectangle in the $xy$-plane, and $\\vec c$ rises 5 above it, so the volume is $6\\times 5 = 30$. (Any face can serve as the base; 5.2 shows why the triple product gives the same number either way.) The sideways lean $(1, 1)$ in $\\vec c$ changes nothing, exactly like pushing a deck of cards.",
+      type: "worked-example",
+      id: "va5-1-we1",
+      title: "Worked example 1: a sheared box",
+      problem: "Edges $\\vec a = (3, 0, 0)$, $\\vec b = (0, 2, 0)$, $\\vec c = (1, 1, 5)$. Find the volume of the parallelepiped on these edges.",
+      steps: [
+        {
+          text: "Cross the last two: $\\vec b\\times\\vec c = (2\\cdot 5 - 0\\cdot 1,\\; 0\\cdot 1 - 0\\cdot 5,\\; 0\\cdot 1 - 2\\cdot 1) = (10, 0, -2)$.",
+        },
+        { text: "Dot with the first: $\\vec a\\cdot(10, 0, -2) = 30$." },
+        {
+          text: "Read it: volume $30$. Sanity check: the base spanned by $\\vec a$ and $\\vec b$ is a $3\\times 2$ rectangle in the $xy$-plane, and $\\vec c$ rises 5 above it, so the volume is $6\\times 5 = 30$. (Any face can serve as the base; 5.2 shows why the triple product gives the same number either way.) The sideways lean $(1, 1)$ in $\\vec c$ changes nothing, exactly like pushing a deck of cards.",
+        },
+      ],
+      answer: "Volume $30$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2.** $\\vec a = (2, 1, 3)$, $\\vec b = (1, 1, 0)$, $\\vec c = (0, 1, 1)$.\n\n**Step 1.** $\\vec b\\times\\vec c = (1\\cdot 1 - 0\\cdot 1,\\; 0\\cdot 0 - 1\\cdot 1,\\; 1\\cdot 1 - 1\\cdot 0) = (1, -1, 1)$.\n\n**Step 2.** $\\vec a\\cdot(1, -1, 1) = 2 - 1 + 3 = 4$.\n\n**Step 3.** The parallelepiped has volume $4$.",
+      type: "worked-example",
+      id: "va5-1-we2",
+      title: "Worked example 2",
+      problem: "$\\vec a = (2, 1, 3)$, $\\vec b = (1, 1, 0)$, $\\vec c = (0, 1, 1)$. Find the volume of the parallelepiped on these edges.",
+      steps: [
+        {
+          text: "$\\vec b\\times\\vec c = (1\\cdot 1 - 0\\cdot 1,\\; 0\\cdot 0 - 1\\cdot 1,\\; 1\\cdot 1 - 1\\cdot 0) = (1, -1, 1)$.",
+        },
+        { text: "$\\vec a\\cdot(1, -1, 1) = 2 - 1 + 3 = 4$." },
+      ],
+      answer: "The parallelepiped has volume $4$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (application): a crystal's unit cell.** Many minerals, gypsum among them, are *monoclinic*: their repeating building block is a slanted box. Take a cell with edges (in ångströms, Å) $\\vec a = (5, 0, 0)$, $\\vec b = (0, 6, 0)$ and $\\vec c = (2, 0, 4)$, where $\\vec c$ leans over in the $xz$-plane. What is the volume of one cell?\n\n**Step 1 (cross the base edges).** $\\vec b\\times\\vec c = (6\\cdot 4 - 0\\cdot 0,\\; 0\\cdot 2 - 0\\cdot 4,\\; 0\\cdot 0 - 6\\cdot 2) = (24, 0, -12)$.\n*Why this step:* the cross product packs the base area (its length, $\\sqrt{720} = 12\\sqrt5$) and the base's normal direction into one vector, so we never need to find an angle.\n\n**Step 2 (dot with the remaining edge).**",
+      type: "worked-example",
+      id: "va5-1-we3",
+      title: "Worked example (application): a crystal's unit cell",
+      problem:
+        "Many minerals, gypsum among them, are *monoclinic*: their repeating building block is a slanted box. Take a cell with edges (in ångströms, Å) $\\vec a = (5, 0, 0)$, $\\vec b = (0, 6, 0)$ and $\\vec c = (2, 0, 4)$, where $\\vec c$ leans over in the $xz$-plane. What is the volume of one cell?",
+      steps: [
+        {
+          text: "**Cross the base edges.** $\\vec b\\times\\vec c = (6\\cdot 4 - 0\\cdot 0,\\; 0\\cdot 2 - 0\\cdot 4,\\; 0\\cdot 0 - 6\\cdot 2) = (24, 0, -12)$.\n*Why this step:* the cross product packs the base area (its length, $\\sqrt{720} = 12\\sqrt5$) and the base's normal direction into one vector, so we never need to find an angle.",
+        },
+        {
+          text: "**Dot with the remaining edge.** *Why this step:* the dot picks out only the part of $\\vec a$ that sticks out of the base along the normal, which is the height.",
+          latex: "\\vec a\\cdot(\\vec b\\times\\vec c) = 5\\cdot 24 + 0\\cdot 0 + 0\\cdot(-12) = 120",
+        },
+        {
+          text: "**Interpret.** Each cell occupies $120\\ \\text{Å}^3$. Sanity check with a different base: $\\vec a$ and $\\vec b$ span a $5\\times 6$ rectangle in the $xy$-plane and $\\vec c$ rises 4 above it, so $30\\times 4 = 120$. The lean of $2$ Å in $\\vec c$ does not change the volume, only the shape. Chemists divide the mass of the atoms in one cell by this volume to predict the crystal's density.",
+        },
+      ],
+      answer: "$120\\ \\text{Å}^3$ per cell",
     },
     {
-      type: "math",
-      latex: "\\vec a\\cdot(\\vec b\\times\\vec c) = 5\\cdot 24 + 0\\cdot 0 + 0\\cdot(-12) = 120",
+      type: "worked-example",
+      id: "va5-1-we4",
+      title: "Worked example (exam style): an unknown edge",
+      problem:
+        "The parallelepiped with coterminous edges $\\vec a = \\hat i + 2\\hat j - \\hat k$, $\\vec b = \\hat j + \\lambda\\hat k$ and $\\vec c = 2\\hat i + \\hat k$ has volume $15$. Find $\\lambda$.",
+      steps: [
+        {
+          text: "**Cross.** $\\vec b\\times\\vec c = (1\\cdot 1 - \\lambda\\cdot 0,\\; \\lambda\\cdot 2 - 0\\cdot 1,\\; 0\\cdot 0 - 1\\cdot 2) = (1,\\; 2\\lambda,\\; -2)$.",
+        },
+        { text: "**Dot.** $\\vec a\\cdot(1, 2\\lambda, -2) = 1 + 4\\lambda + 2 = 3 + 4\\lambda$." },
+        {
+          text: "**Set up the equation.** Volume is the **absolute value** of the triple product:",
+          latex: "|3 + 4\\lambda| = 15 \\iff 3 + 4\\lambda = 15 \\;\\text{ or }\\; 3 + 4\\lambda = -15",
+        },
+        {
+          text: "*Why two cases:* a box of volume 15 can be right-handed (triple product $+15$) or left-handed ($-15$). The problem only fixes the size.",
+        },
+        { text: "**Solve.** $\\lambda = 3$ or $\\lambda = -\\tfrac92$." },
+        {
+          text: "**Check.** $\\lambda = 3$: $3 + 12 = 15$. $\\lambda = -\\tfrac92$: $3 - 18 = -15$, size 15. Dropping the absolute value is the most common way to lose half the marks here.",
+        },
+      ],
+      answer: "$\\lambda = 3$ or $\\lambda = -\\tfrac92$",
     },
-    {
-      type: "text",
-      content:
-        "*Why this step:* the dot picks out only the part of $\\vec a$ that sticks out of the base along the normal, which is the height.\n\n**Step 3 (interpret).** Each cell occupies $120\\ \\text{Å}^3$. Sanity check with a different base: $\\vec a$ and $\\vec b$ span a $5\\times 6$ rectangle in the $xy$-plane and $\\vec c$ rises 4 above it, so $30\\times 4 = 120$. The lean of $2$ Å in $\\vec c$ does not change the volume, only the shape. Chemists divide the mass of the atoms in one cell by this volume to predict the crystal's density.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example (exam style): an unknown edge.** The parallelepiped with coterminous edges $\\vec a = \\hat i + 2\\hat j - \\hat k$, $\\vec b = \\hat j + \\lambda\\hat k$ and $\\vec c = 2\\hat i + \\hat k$ has volume $15$. Find $\\lambda$.\n\n**Step 1 (cross).** $\\vec b\\times\\vec c = (1\\cdot 1 - \\lambda\\cdot 0,\\; \\lambda\\cdot 2 - 0\\cdot 1,\\; 0\\cdot 0 - 1\\cdot 2) = (1,\\; 2\\lambda,\\; -2)$.\n\n**Step 2 (dot).** $\\vec a\\cdot(1, 2\\lambda, -2) = 1 + 4\\lambda + 2 = 3 + 4\\lambda$.\n\n**Step 3 (set up the equation).** Volume is the **absolute value** of the triple product:",
-    },
-    {
-      type: "math",
-      latex: "|3 + 4\\lambda| = 15 \\iff 3 + 4\\lambda = 15 \\;\\text{ or }\\; 3 + 4\\lambda = -15",
-    },
-    {
-      type: "text",
-      content:
-        "*Why two cases:* a box of volume 15 can be right-handed (triple product $+15$) or left-handed ($-15$). The problem only fixes the size.\n\n**Step 4 (solve).** $\\lambda = 3$ or $\\lambda = -\\tfrac92$.\n\n**Check.** $\\lambda = 3$: $3 + 12 = 15$. $\\lambda = -\\tfrac92$: $3 - 18 = -15$, size 15. Dropping the absolute value is the most common way to lose half the marks here.",
-    },
+    { type: "heading", text: "Volume of a tetrahedron" },
     {
       type: "text",
       content:
@@ -130,23 +169,47 @@ const lesson01: LessonSeed = {
       latex: "V_{\\text{tetrahedron}} = \\tfrac16\\,\\big|[\\overrightarrow{AB}\\;\\overrightarrow{AC}\\;\\overrightarrow{AD}]\\big|",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3.** Tetrahedron $A(1, 0, 1)$, $B(2, 1, 1)$, $C(1, 2, 2)$, $D(3, 1, 4)$.\n\n**Step 1.** Edges from $A$: $\\overrightarrow{AB} = (1, 1, 0)$, $\\overrightarrow{AC} = (0, 2, 1)$, $\\overrightarrow{AD} = (2, 1, 3)$.\n\n**Step 2.** $\\overrightarrow{AC}\\times\\overrightarrow{AD} = (2\\cdot 3 - 1\\cdot 1,\\; 1\\cdot 2 - 0\\cdot 3,\\; 0\\cdot 1 - 2\\cdot 2) = (5, 2, -4)$.\n\n**Step 3.** $\\overrightarrow{AB}\\cdot(5, 2, -4) = 5 + 2 + 0 = 7$.\n\n**Step 4.** Volume $= \\tfrac16\\cdot 7 = \\tfrac76$.",
+      type: "worked-example",
+      id: "va5-1-we5",
+      title: "Worked example 3",
+      problem: "Find the volume of the tetrahedron $A(1, 0, 1)$, $B(2, 1, 1)$, $C(1, 2, 2)$, $D(3, 1, 4)$.",
+      steps: [
+        {
+          text: "Edges from $A$: $\\overrightarrow{AB} = (1, 1, 0)$, $\\overrightarrow{AC} = (0, 2, 1)$, $\\overrightarrow{AD} = (2, 1, 3)$.",
+        },
+        {
+          text: "$\\overrightarrow{AC}\\times\\overrightarrow{AD} = (2\\cdot 3 - 1\\cdot 1,\\; 1\\cdot 2 - 0\\cdot 3,\\; 0\\cdot 1 - 2\\cdot 2) = (5, 2, -4)$.",
+        },
+        { text: "$\\overrightarrow{AB}\\cdot(5, 2, -4) = 5 + 2 + 0 = 7$." },
+        { text: "Volume $= \\tfrac16\\cdot 7 = \\tfrac76$." },
+      ],
+      answer: "Volume $= \\tfrac76$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (exam style): a missing vertex.** The tetrahedron with vertices $A(1, 2, 0)$, $B(3, 2, 0)$, $C(1, 5, 0)$ and $D(2, 0, k)$ has volume $4$. Find $k$.\n\n**Step 1 (edges from $A$).** $\\overrightarrow{AB} = (2, 0, 0)$, $\\overrightarrow{AC} = (0, 3, 0)$, $\\overrightarrow{AD} = (1, -2, k)$.\n*Why this step:* the volume formula needs three edges from one common vertex, and $A$ keeps the numbers smallest.\n\n**Step 2 (cross, then dot).** $\\overrightarrow{AC}\\times\\overrightarrow{AD} = (3k - 0\\cdot(-2),\\; 0\\cdot 1 - 0\\cdot k,\\; 0\\cdot(-2) - 3\\cdot 1) = (3k, 0, -3)$, and $\\overrightarrow{AB}\\cdot(3k, 0, -3) = 6k$.\n\n**Step 3 (use the one-sixth and the absolute value).**",
-    },
-    {
-      type: "math",
-      latex: "\\tfrac16\\,|6k| = 4 \\iff |k| = 4 \\iff k = 4 \\;\\text{ or }\\; k = -4",
-    },
-    {
-      type: "text",
-      content:
-        "*Why two answers:* $D$ can sit 4 units above or 4 units below the plane $z = 0$ that holds $A, B, C$; both tetrahedra have the same volume.\n\n**Check with base × height.** $A, B, C$ form a right triangle in the plane $z = 0$ with legs $2$ and $3$, so its area is $3$. The height of $D$ above that plane is $|k|$, so the volume is $\\tfrac13\\cdot 3\\cdot|k| = |k|$. Setting $|k| = 4$ agrees.",
+      type: "worked-example",
+      id: "va5-1-we6",
+      title: "Worked example (exam style): a missing vertex",
+      problem:
+        "The tetrahedron with vertices $A(1, 2, 0)$, $B(3, 2, 0)$, $C(1, 5, 0)$ and $D(2, 0, k)$ has volume $4$. Find $k$.",
+      steps: [
+        {
+          text: "**Edges from $A$.** $\\overrightarrow{AB} = (2, 0, 0)$, $\\overrightarrow{AC} = (0, 3, 0)$, $\\overrightarrow{AD} = (1, -2, k)$.\n*Why this step:* the volume formula needs three edges from one common vertex, and $A$ keeps the numbers smallest.",
+        },
+        {
+          text: "**Cross, then dot.** $\\overrightarrow{AC}\\times\\overrightarrow{AD} = (3k - 0\\cdot(-2),\\; 0\\cdot 1 - 0\\cdot k,\\; 0\\cdot(-2) - 3\\cdot 1) = (3k, 0, -3)$, and $\\overrightarrow{AB}\\cdot(3k, 0, -3) = 6k$.",
+        },
+        {
+          text: "**Use the one-sixth and the absolute value.**",
+          latex: "\\tfrac16\\,|6k| = 4 \\iff |k| = 4 \\iff k = 4 \\;\\text{ or }\\; k = -4",
+        },
+        {
+          text: "*Why two answers:* $D$ can sit 4 units above or 4 units below the plane $z = 0$ that holds $A, B, C$; both tetrahedra have the same volume.",
+        },
+        {
+          text: "**Check with base × height.** $A, B, C$ form a right triangle in the plane $z = 0$ with legs $2$ and $3$, so its area is $3$. The height of $D$ above that plane is $|k|$, so the volume is $\\tfrac13\\cdot 3\\cdot|k| = |k|$. Setting $|k| = 4$ agrees.",
+        },
+      ],
+      answer: "$k = 4$ or $k = -4$",
     },
     {
       type: "table",
@@ -157,6 +220,7 @@ const lesson01: LessonSeed = {
         ["Tetrahedron", "$\\tfrac16|[\\vec a\\;\\vec b\\;\\vec c]|$"],
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va5-1-q1",
@@ -273,6 +337,7 @@ const lesson02: LessonSeed = {
       content:
         "Computing a cross product and then a dot product works, but it is two steps and easy to slip on. Since the cross product already came from a determinant, there should be a one-step formula. There is, and its shape explains every symmetry of the triple product at a glance.",
     },
+    { type: "heading", text: "Deriving the determinant form" },
     {
       type: "text",
       content:
@@ -301,10 +366,19 @@ const lesson02: LessonSeed = {
         "The scalar triple product is the $3\\times 3$ determinant whose rows are the components of $\\vec a$, $\\vec b$, $\\vec c$ **in that order**.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** $\\vec a = (1, 2, 3)$, $\\vec b = (0, 1, 4)$, $\\vec c = (5, 6, 0)$.\n\n**Step 1.** Expand along the top row: $1(1\\cdot 0 - 4\\cdot 6) - 2(0\\cdot 0 - 4\\cdot 5) + 3(0\\cdot 6 - 1\\cdot 5)$.\n\n**Step 2.** $= 1(-24) - 2(-20) + 3(-5) = -24 + 40 - 15 = 1$.\n\n**Step 3.** $[\\vec a\\;\\vec b\\;\\vec c] = 1$: the box has volume 1, and the triple is right-handed.",
+      type: "worked-example",
+      id: "va5-2-we1",
+      title: "Worked example 1",
+      problem: "$\\vec a = (1, 2, 3)$, $\\vec b = (0, 1, 4)$, $\\vec c = (5, 6, 0)$. Find $[\\vec a\\;\\vec b\\;\\vec c]$ and say what it tells you about the box on these edges.",
+      steps: [
+        {
+          text: "Expand along the top row: $1(1\\cdot 0 - 4\\cdot 6) - 2(0\\cdot 0 - 4\\cdot 5) + 3(0\\cdot 6 - 1\\cdot 5)$.",
+        },
+        { text: "$= 1(-24) - 2(-20) + 3(-5) = -24 + 40 - 15 = 1$." },
+      ],
+      answer: "$[\\vec a\\;\\vec b\\;\\vec c] = 1$: the box has volume 1, and the triple is right-handed.",
     },
+    { type: "heading", text: "Symmetries from determinant rules" },
     {
       type: "text",
       content:
@@ -323,15 +397,28 @@ const lesson02: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example (routine): shearing keeps the volume.** Let $\\vec a = (1, 0, 2)$, $\\vec b = (0, 1, 1)$, $\\vec c = (1, 1, 0)$. Compare $[\\vec a\\;\\vec b\\;\\vec c]$ with $[\\vec a + 3\\vec b\\;\\;\\vec b\\;\\;\\vec c]$.\n\n**Step 1 (original box).** $1(1\\cdot 0 - 1\\cdot 1) - 0 + 2(0\\cdot 1 - 1\\cdot 1) = -1 - 2 = -3$.\n\n**Step 2 (sheared box).** $\\vec a + 3\\vec b = (1, 3, 5)$, and\n$1(0 - 1) - 3(0 - 1) + 5(0 - 1) = -1 + 3 - 5 = -3$.\n\n**Step 3 (why they agree, without computing).** By linearity, $[\\vec a + 3\\vec b\\;\\;\\vec b\\;\\;\\vec c] = [\\vec a\\;\\vec b\\;\\vec c] + 3[\\vec b\\;\\vec b\\;\\vec c] = [\\vec a\\;\\vec b\\;\\vec c] + 0$.\n*Why this step:* adding a multiple of $\\vec b$ to $\\vec a$ slides the top of the box parallel to a face that contains $\\vec b$, like pushing a deck of cards. The height above that face does not change, so neither does the volume. In determinant language: adding a multiple of one row to another leaves the determinant unchanged.",
+      type: "worked-example",
+      id: "va5-2-we2",
+      title: "Worked example (routine): shearing keeps the volume",
+      problem:
+        "Let $\\vec a = (1, 0, 2)$, $\\vec b = (0, 1, 1)$, $\\vec c = (1, 1, 0)$. Compare $[\\vec a\\;\\vec b\\;\\vec c]$ with $[\\vec a + 3\\vec b\\;\\;\\vec b\\;\\;\\vec c]$.",
+      steps: [
+        { text: "**Original box.** $1(1\\cdot 0 - 1\\cdot 1) - 0 + 2(0\\cdot 1 - 1\\cdot 1) = -1 - 2 = -3$." },
+        {
+          text: "**Sheared box.** $\\vec a + 3\\vec b = (1, 3, 5)$, and\n$1(0 - 1) - 3(0 - 1) + 5(0 - 1) = -1 + 3 - 5 = -3$.",
+        },
+        {
+          text: "**Why they agree, without computing.** By linearity, $[\\vec a + 3\\vec b\\;\\;\\vec b\\;\\;\\vec c] = [\\vec a\\;\\vec b\\;\\vec c] + 3[\\vec b\\;\\vec b\\;\\vec c] = [\\vec a\\;\\vec b\\;\\vec c] + 0$.\n*Why this step:* adding a multiple of $\\vec b$ to $\\vec a$ slides the top of the box parallel to a face that contains $\\vec b$, like pushing a deck of cards. The height above that face does not change, so neither does the volume. In determinant language: adding a multiple of one row to another leaves the determinant unchanged.",
+        },
+      ],
+      answer: "Both triple products equal $-3$: the shear keeps the volume.",
     },
     {
       type: "text",
       content:
         "**Why dot and cross can be swapped.** $(\\vec a\\times\\vec b)\\cdot\\vec c = \\vec c\\cdot(\\vec a\\times\\vec b) = [\\vec c\\;\\vec a\\;\\vec b]$, and a cyclic shift gives $[\\vec a\\;\\vec b\\;\\vec c]$. So in $\\vec a\\cdot\\vec b\\times\\vec c$ you may put the dot and the cross in either slot, as long as the vectors keep their order. That is why the bracket notation $[\\vec a\\;\\vec b\\;\\vec c]$ records only the order.",
     },
+    { type: "heading", text: "The sign: right- or left-handed" },
     {
       type: "text",
       content:
@@ -352,19 +439,23 @@ const lesson02: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example (application): checking a 3D camera's axes.** A game engine builds a camera frame from three axis vectors: $\\vec u = (1, 1, 0)$ (right), $\\vec v = (-1, 1, 0)$ (up) and $\\vec w = (0, 0, -2)$ (forward). The renderer assumes a right-handed frame; if the frame is left-handed, every model appears mirror-flipped. Is this frame safe?\n\n**Step 1 (determinant, rows in the order u, v, w).**",
-    },
-    {
-      type: "math",
-      latex:
-        "[\\vec u\\;\\vec v\\;\\vec w] = \\begin{vmatrix} 1 & 1 & 0 \\\\ -1 & 1 & 0 \\\\ 0 & 0 & -2 \\end{vmatrix} = 1(1\\cdot(-2) - 0) - 1\\big((-1)(-2) - 0\\big) + 0 = -2 - 2 = -4",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* only the **sign** is needed to decide handedness, and the determinant gives it in one line.\n\n**Step 2 (read the sign).** $-4 < 0$: the frame is left-handed, so the scene would render mirrored.\n\n**Step 3 (fix and check).** Flip the forward axis to $\\vec w = (0, 0, 2)$. One row changes sign, so the triple product becomes $+4$: right-handed. Cross-check: $\\vec u\\times\\vec v = (0, 0, 2)$, which points the same way as the new $\\vec w$, exactly as $\\hat i\\times\\hat j = \\hat k$ does. The size $4$ is the volume of the box, $|\\vec u\\times\\vec v|\\times|\\vec w| = 2\\times 2$, since $\\vec w$ is perpendicular to both.",
+      type: "worked-example",
+      id: "va5-2-we3",
+      title: "Worked example (application): checking a 3D camera's axes",
+      problem:
+        "A game engine builds a camera frame from three axis vectors: $\\vec u = (1, 1, 0)$ (right), $\\vec v = (-1, 1, 0)$ (up) and $\\vec w = (0, 0, -2)$ (forward). The renderer assumes a right-handed frame; if the frame is left-handed, every model appears mirror-flipped. Is this frame safe?",
+      steps: [
+        {
+          text: "**Determinant, rows in the order u, v, w.** *Why this step:* only the **sign** is needed to decide handedness, and the determinant gives it in one line.",
+          latex:
+            "[\\vec u\\;\\vec v\\;\\vec w] = \\begin{vmatrix} 1 & 1 & 0 \\\\ -1 & 1 & 0 \\\\ 0 & 0 & -2 \\end{vmatrix} = 1(1\\cdot(-2) - 0) - 1\\big((-1)(-2) - 0\\big) + 0 = -2 - 2 = -4",
+        },
+        { text: "**Read the sign.** $-4 < 0$: the frame is left-handed, so the scene would render mirrored." },
+        {
+          text: "**Fix and check.** Flip the forward axis to $\\vec w = (0, 0, 2)$. One row changes sign, so the triple product becomes $+4$: right-handed. Cross-check: $\\vec u\\times\\vec v = (0, 0, 2)$, which points the same way as the new $\\vec w$, exactly as $\\hat i\\times\\hat j = \\hat k$ does. The size $4$ is the volume of the box, $|\\vec u\\times\\vec v|\\times|\\vec w| = 2\\times 2$, since $\\vec w$ is perpendicular to both.",
+        },
+      ],
+      answer: "Not safe: $[\\vec u\\;\\vec v\\;\\vec w] = -4$, a left-handed frame. Flipping $\\vec w$ to $(0, 0, 2)$ fixes it.",
     },
     {
       type: "callout",
@@ -373,10 +464,26 @@ const lesson02: LessonSeed = {
       content:
         "Only **cyclic** rearrangements do: $abc \\to bca \\to cab$. The other three orders, $bac$, $acb$, $cba$, give the **negative**. The size never changes (same box), but the sign does. Quick test: read the order around a circle $a \\to b \\to c \\to a$; if your order goes the same way round, the sign is kept.",
     },
+    { type: "heading", text: "Triple products of combinations" },
     {
-      type: "text",
-      content:
-        "**Worked example 2: expanding a sum.** Given $[\\vec a\\;\\vec b\\;\\vec c] = 5$, find $[\\vec a + \\vec b\\;\\;\\vec b + \\vec c\\;\\;\\vec c + \\vec a]$.\n\n**Step 1.** Cross the last two: $(\\vec b + \\vec c)\\times(\\vec c + \\vec a) = \\vec b\\times\\vec c + \\vec b\\times\\vec a + \\vec c\\times\\vec c + \\vec c\\times\\vec a$, and $\\vec c\\times\\vec c = \\vec 0$.\n\n**Step 2.** Dot with $\\vec a$: only $\\vec a\\cdot(\\vec b\\times\\vec c) = [\\vec a\\;\\vec b\\;\\vec c]$ survives; the other terms repeat $\\vec a$ and vanish.\n\n**Step 3.** Dot with $\\vec b$: only $\\vec b\\cdot(\\vec c\\times\\vec a) = [\\vec b\\;\\vec c\\;\\vec a] = [\\vec a\\;\\vec b\\;\\vec c]$ survives.\n\n**Step 4.** Total: $2[\\vec a\\;\\vec b\\;\\vec c] = 10$.",
+      type: "worked-example",
+      id: "va5-2-we4",
+      title: "Worked example 2: expanding a sum",
+      problem:
+        "Given $[\\vec a\\;\\vec b\\;\\vec c] = 5$, find $[\\vec a + \\vec b\\;\\;\\vec b + \\vec c\\;\\;\\vec c + \\vec a]$.",
+      steps: [
+        {
+          text: "Cross the last two: $(\\vec b + \\vec c)\\times(\\vec c + \\vec a) = \\vec b\\times\\vec c + \\vec b\\times\\vec a + \\vec c\\times\\vec c + \\vec c\\times\\vec a$, and $\\vec c\\times\\vec c = \\vec 0$.",
+        },
+        {
+          text: "Dot with $\\vec a$: only $\\vec a\\cdot(\\vec b\\times\\vec c) = [\\vec a\\;\\vec b\\;\\vec c]$ survives; the other terms repeat $\\vec a$ and vanish.",
+        },
+        {
+          text: "Dot with $\\vec b$: only $\\vec b\\cdot(\\vec c\\times\\vec a) = [\\vec b\\;\\vec c\\;\\vec a] = [\\vec a\\;\\vec b\\;\\vec c]$ survives.",
+        },
+        { text: "Total: $2[\\vec a\\;\\vec b\\;\\vec c] = 10$." },
+      ],
+      answer: "$[\\vec a + \\vec b\\;\\;\\vec b + \\vec c\\;\\;\\vec c + \\vec a] = 10$",
     },
     {
       type: "callout",
@@ -386,20 +493,30 @@ const lesson02: LessonSeed = {
         "In determinant language, the rows $\\vec a + \\vec b$, $\\vec b + \\vec c$, $\\vec c + \\vec a$ come from $\\vec a, \\vec b, \\vec c$ by the matrix $\\begin{pmatrix}1&1&0\\\\0&1&1\\\\1&0&1\\end{pmatrix}$, whose determinant is 2. So the answer is $2\\times 5$. The same idea shows $[\\vec a - \\vec b\\;\\;\\vec b - \\vec c\\;\\;\\vec c - \\vec a] = 0$: those three vectors add up to $\\vec 0$, so they are coplanar.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (exam style).** If $[\\vec a\\;\\vec b\\;\\vec c] = 3$, find $[\\vec a - 2\\vec b\\;\\;\\vec b + \\vec c\\;\\;\\vec c - \\vec a]$.\n\n**Step 1 (write the coefficient matrix).** Each new vector is a combination of $\\vec a, \\vec b, \\vec c$; record the coefficients as rows:\n$\\vec a - 2\\vec b \\to (1, -2, 0)$, $\\vec b + \\vec c \\to (0, 1, 1)$, $\\vec c - \\vec a \\to (-1, 0, 1)$.\n*Why this step:* the triple product is linear in each slot, so expanding all $2\\times 2\\times 2 = 8$ terms is the same as multiplying $[\\vec a\\;\\vec b\\;\\vec c]$ by the determinant of these coefficients.\n\n**Step 2 (coefficient determinant).**",
+      type: "worked-example",
+      id: "va5-2-we5",
+      title: "Worked example (exam style)",
+      problem:
+        "If $[\\vec a\\;\\vec b\\;\\vec c] = 3$, find $[\\vec a - 2\\vec b\\;\\;\\vec b + \\vec c\\;\\;\\vec c - \\vec a]$.",
+      steps: [
+        {
+          text: "**Write the coefficient matrix.** Each new vector is a combination of $\\vec a, \\vec b, \\vec c$; record the coefficients as rows:\n$\\vec a - 2\\vec b \\to (1, -2, 0)$, $\\vec b + \\vec c \\to (0, 1, 1)$, $\\vec c - \\vec a \\to (-1, 0, 1)$.\n*Why this step:* the triple product is linear in each slot, so expanding all $2\\times 2\\times 2 = 8$ terms is the same as multiplying $[\\vec a\\;\\vec b\\;\\vec c]$ by the determinant of these coefficients.",
+        },
+        {
+          text: "**Coefficient determinant.**",
+          latex:
+            "\\begin{vmatrix} 1 & -2 & 0 \\\\ 0 & 1 & 1 \\\\ -1 & 0 & 1 \\end{vmatrix} = 1(1 - 0) - (-2)\\big(0 - (-1)\\big) + 0 = 1 + 2 = 3",
+        },
+        {
+          text: "**Multiply.** $[\\vec a - 2\\vec b\\;\\;\\vec b + \\vec c\\;\\;\\vec c - \\vec a] = 3\\times[\\vec a\\;\\vec b\\;\\vec c] = 3\\times 3 = 9$.",
+        },
+        {
+          text: "**Check by expanding directly.** Of the 8 terms, only those using each of $\\vec a, \\vec b, \\vec c$ exactly once survive: $\\vec a$ from slot 1 with $\\vec b$ from slot 2 and $\\vec c$ from slot 3 gives $+[\\vec a\\;\\vec b\\;\\vec c]$; $-2\\vec b$ from slot 1, $\\vec c$ from slot 2 and $-\\vec a$ from slot 3 gives $(-2)(-1)[\\vec b\\;\\vec c\\;\\vec a] = +2[\\vec a\\;\\vec b\\;\\vec c]$. Total $3[\\vec a\\;\\vec b\\;\\vec c] = 9$.",
+        },
+      ],
+      answer: "$[\\vec a - 2\\vec b\\;\\;\\vec b + \\vec c\\;\\;\\vec c - \\vec a] = 9$",
     },
-    {
-      type: "math",
-      latex:
-        "\\begin{vmatrix} 1 & -2 & 0 \\\\ 0 & 1 & 1 \\\\ -1 & 0 & 1 \\end{vmatrix} = 1(1 - 0) - (-2)\\big(0 - (-1)\\big) + 0 = 1 + 2 = 3",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3 (multiply).** $[\\vec a - 2\\vec b\\;\\;\\vec b + \\vec c\\;\\;\\vec c - \\vec a] = 3\\times[\\vec a\\;\\vec b\\;\\vec c] = 3\\times 3 = 9$.\n\n**Check by expanding directly.** Of the 8 terms, only those using each of $\\vec a, \\vec b, \\vec c$ exactly once survive: $\\vec a$ from slot 1 with $\\vec b$ from slot 2 and $\\vec c$ from slot 3 gives $+[\\vec a\\;\\vec b\\;\\vec c]$; $-2\\vec b$ from slot 1, $\\vec c$ from slot 2 and $-\\vec a$ from slot 3 gives $(-2)(-1)[\\vec b\\;\\vec c\\;\\vec a] = +2[\\vec a\\;\\vec b\\;\\vec c]$. Total $3[\\vec a\\;\\vec b\\;\\vec c] = 9$.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va5-2-q1",
@@ -545,6 +662,7 @@ const lesson03: LessonSeed = {
       content:
         "Three vectors $\\vec a, \\vec b, \\vec c$ are coplanar **if and only if** $[\\vec a\\;\\vec b\\;\\vec c] = 0$.\n\nFour points $A, B, C, D$ are coplanar **if and only if** $[\\overrightarrow{AB}\\;\\overrightarrow{AC}\\;\\overrightarrow{AD}] = 0$.",
     },
+    { type: "heading", text: "Why zero volume means coplanar" },
     {
       type: "text",
       content:
@@ -555,50 +673,104 @@ const lesson03: LessonSeed = {
       latex:
         "[\\vec a\\;\\vec b\\;\\vec c] = 0 \\iff \\text{one of the vectors is a linear combination of the other two}",
     },
+    { type: "heading", text: "Testing vectors and points for coplanarity" },
     {
-      type: "text",
-      content:
-        "**Worked example 1: find λ.** For which $\\lambda$ are $\\vec a = (2, -1, 1)$, $\\vec b = (1, 2, -3)$, $\\vec c = (3, \\lambda, 5)$ coplanar?\n\n**Step 1.** Set the determinant to zero, expanding along the top row:\n$2\\big(2\\cdot 5 - (-3)\\lambda\\big) - (-1)\\big(1\\cdot 5 - (-3)\\cdot 3\\big) + 1\\big(1\\cdot\\lambda - 2\\cdot 3\\big) = 0$.\n\n**Step 2.** Simplify: $2(10 + 3\\lambda) + 14 + (\\lambda - 6) = 28 + 7\\lambda$.\n\n**Step 3.** $28 + 7\\lambda = 0$ gives $\\lambda = -4$.\n\n**Check.** With $\\lambda = -4$: $\\vec c = (3, -4, 5)$. Try $\\vec c = x\\vec a + y\\vec b$: the first two components give $2x + y = 3$, $-x + 2y = -4$, so $x = 2$, $y = -1$. Third component: $2\\cdot 1 + (-1)(-3) = 5$. It matches.",
+      type: "worked-example",
+      id: "va5-3-we1",
+      title: "Worked example 1: find λ",
+      problem:
+        "For which $\\lambda$ are $\\vec a = (2, -1, 1)$, $\\vec b = (1, 2, -3)$, $\\vec c = (3, \\lambda, 5)$ coplanar?",
+      steps: [
+        {
+          text: "Set the determinant to zero, expanding along the top row:\n$2\\big(2\\cdot 5 - (-3)\\lambda\\big) - (-1)\\big(1\\cdot 5 - (-3)\\cdot 3\\big) + 1\\big(1\\cdot\\lambda - 2\\cdot 3\\big) = 0$.",
+        },
+        { text: "Simplify: $2(10 + 3\\lambda) + 14 + (\\lambda - 6) = 28 + 7\\lambda$." },
+        { text: "$28 + 7\\lambda = 0$ gives $\\lambda = -4$." },
+        {
+          text: "**Check.** With $\\lambda = -4$: $\\vec c = (3, -4, 5)$. Try $\\vec c = x\\vec a + y\\vec b$: the first two components give $2x + y = 3$, $-x + 2y = -4$, so $x = 2$, $y = -1$. Third component: $2\\cdot 1 + (-1)(-3) = 5$. It matches.",
+        },
+      ],
+      answer: "$\\lambda = -4$",
+    },
+    {
+      type: "worked-example",
+      id: "va5-3-we2",
+      title: "Worked example 2: four points",
+      problem: "Find $x$ if $A(3, 2, 1)$, $B(4, x, 5)$, $C(4, 2, -2)$, $D(6, 5, -1)$ are coplanar.",
+      steps: [
+        {
+          text: "Edges from $A$: $\\overrightarrow{AB} = (1, x - 2, 4)$, $\\overrightarrow{AC} = (1, 0, -3)$, $\\overrightarrow{AD} = (3, 3, -2)$.",
+        },
+        {
+          text: "Determinant: $1\\big(0\\cdot(-2) - (-3)\\cdot 3\\big) - (x - 2)\\big(1\\cdot(-2) - (-3)\\cdot 3\\big) + 4\\big(1\\cdot 3 - 0\\cdot 3\\big)$.",
+        },
+        { text: "$= 9 - 7(x - 2) + 12 = 35 - 7x$." },
+        { text: "$35 - 7x = 0$, so $x = 5$." },
+      ],
+      answer: "$x = 5$",
+    },
+    {
+      type: "worked-example",
+      id: "va5-3-we3",
+      title: "Worked example (application): will the solar panel sit flat?",
+      problem:
+        "A flat solar panel is to be bolted onto four mounting brackets on a sloping roof. A surveyor measures the bracket tips (in metres, from a corner of the roof) as $P(1, 0, 2)$, $Q(3, 1, 3)$, $R(2, 3, 4)$, $S(4, 4, 5)$. A rigid flat panel can only touch all four if they are coplanar. Will it rock?",
+      steps: [
+        {
+          text: "**Edges from one bracket.** $\\overrightarrow{PQ} = (2, 1, 1)$, $\\overrightarrow{PR} = (1, 3, 2)$, $\\overrightarrow{PS} = (3, 4, 3)$.\n*Why this step:* coplanarity of points becomes coplanarity of the three edge vectors from one of them.",
+        },
+        {
+          text: "**Triple product.**",
+          latex:
+            "\\begin{vmatrix} 2 & 1 & 1 \\\\ 1 & 3 & 2 \\\\ 3 & 4 & 3 \\end{vmatrix} = 2(9 - 8) - 1(3 - 6) + 1(4 - 9) = 2 + 3 - 5 = 0",
+        },
+        {
+          text: "**Interpret.** The tetrahedron $PQRS$ has zero volume, so the four tips lie in one plane and the panel will sit flat. You can even see why: $\\overrightarrow{PS} = \\overrightarrow{PQ} + \\overrightarrow{PR}$, so $PQSR$ is a parallelogram.",
+        },
+      ],
+      answer: "It will not rock: the triple product is $0$, so the four tips are coplanar.",
     },
     {
       type: "text",
       content:
-        "**Worked example 2: four points.** Find $x$ if $A(3, 2, 1)$, $B(4, x, 5)$, $C(4, 2, -2)$, $D(6, 5, -1)$ are coplanar.\n\n**Step 1.** Edges from $A$: $\\overrightarrow{AB} = (1, x - 2, 4)$, $\\overrightarrow{AC} = (1, 0, -3)$, $\\overrightarrow{AD} = (3, 3, -2)$.\n\n**Step 2.** Determinant: $1\\big(0\\cdot(-2) - (-3)\\cdot 3\\big) - (x - 2)\\big(1\\cdot(-2) - (-3)\\cdot 3\\big) + 4\\big(1\\cdot 3 - 0\\cdot 3\\big)$.\n\n**Step 3.** $= 9 - 7(x - 2) + 12 = 35 - 7x$.\n\n**Step 4.** $35 - 7x = 0$, so $x = 5$.",
+        "**What if a bracket is 10 cm too high?** Move $S$ to $(4, 4, 5.1)$. Only the last row changes, to $(3, 4, 3.1)$, and the determinant becomes $2(9.3 - 8) - 1(3.1 - 6) + 1(4 - 9) = 2.6 + 2.9 - 5 = 0.5 \\neq 0$. The panel would rock on a diagonal. The tetrahedron's volume $\\tfrac16(0.5) \\approx 0.083\\ \\text{m}^3$ measures how badly.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (application): will the solar panel sit flat?** A flat solar panel is to be bolted onto four mounting brackets on a sloping roof. A surveyor measures the bracket tips (in metres, from a corner of the roof) as $P(1, 0, 2)$, $Q(3, 1, 3)$, $R(2, 3, 4)$, $S(4, 4, 5)$. A rigid flat panel can only touch all four if they are coplanar. Will it rock?\n\n**Step 1 (edges from one bracket).** $\\overrightarrow{PQ} = (2, 1, 1)$, $\\overrightarrow{PR} = (1, 3, 2)$, $\\overrightarrow{PS} = (3, 4, 3)$.\n*Why this step:* coplanarity of points becomes coplanarity of the three edge vectors from one of them.\n\n**Step 2 (triple product).**",
+      type: "worked-example",
+      id: "va5-3-we4",
+      title: "Worked example 3: three vectors",
+      problem: "$\\vec a = (1, 2, 3)$, $\\vec b = (2, 3, 4)$, $\\vec c = (3, 4, 5)$. Are they coplanar? Are any two of them parallel?",
+      steps: [
+        { text: "$1(15 - 16) - 2(10 - 12) + 3(8 - 9) = -1 + 4 - 3 = 0$." },
+        {
+          text: "So they are coplanar. Indeed $\\vec c = 2\\vec b - \\vec a$. No two of them are parallel, yet all three lie in one plane.",
+        },
+      ],
+      answer: "Coplanar: $[\\vec a\\;\\vec b\\;\\vec c] = 0$ and $\\vec c = 2\\vec b - \\vec a$",
     },
     {
-      type: "math",
-      latex:
-        "\\begin{vmatrix} 2 & 1 & 1 \\\\ 1 & 3 & 2 \\\\ 3 & 4 & 3 \\end{vmatrix} = 2(9 - 8) - 1(3 - 6) + 1(4 - 9) = 2 + 3 - 5 = 0",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3 (interpret).** The tetrahedron $PQRS$ has zero volume, so the four tips lie in one plane and the panel will sit flat. You can even see why: $\\overrightarrow{PS} = \\overrightarrow{PQ} + \\overrightarrow{PR}$, so $PQSR$ is a parallelogram.\n\n**What if a bracket is 10 cm too high?** Move $S$ to $(4, 4, 5.1)$. Only the last row changes, to $(3, 4, 3.1)$, and the determinant becomes $2(9.3 - 8) - 1(3.1 - 6) + 1(4 - 9) = 2.6 + 2.9 - 5 = 0.5 \\neq 0$. The panel would rock on a diagonal. The tetrahedron's volume $\\tfrac16(0.5) \\approx 0.083\\ \\text{m}^3$ measures how badly.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3: coplanar but nowhere near parallel.** $\\vec a = (1, 2, 3)$, $\\vec b = (2, 3, 4)$, $\\vec c = (3, 4, 5)$.\n\n**Step 1.** $1(15 - 16) - 2(10 - 12) + 3(8 - 9) = -1 + 4 - 3 = 0$.\n\n**Step 2.** So they are coplanar. Indeed $\\vec c = 2\\vec b - \\vec a$. No two of them are parallel, yet all three lie in one plane.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example (exam style, a CBSE favourite).** $\\vec a, \\vec b, \\vec c$ are non-coplanar. Show that $\\vec p = \\vec a - 2\\vec b + 3\\vec c$, $\\vec q = -2\\vec a + 3\\vec b - 4\\vec c$ and $\\vec r = \\vec a - 3\\vec b + 5\\vec c$ are coplanar, and express $\\vec r$ in terms of $\\vec p$ and $\\vec q$.\n\n**Step 1 (reduce to a number determinant).** As in 5.2, $[\\vec p\\;\\vec q\\;\\vec r] = D\\,[\\vec a\\;\\vec b\\;\\vec c]$, where $D$ is the determinant of the coefficients.\n*Why this step:* we do not know the components of $\\vec a, \\vec b, \\vec c$, but we don't need them. Only the coefficients matter.",
-    },
-    {
-      type: "math",
-      latex:
-        "D = \\begin{vmatrix} 1 & -2 & 3 \\\\ -2 & 3 & -4 \\\\ 1 & -3 & 5 \\end{vmatrix} = 1(15 - 12) - (-2)(-10 + 4) + 3(6 - 3) = 3 - 12 + 9 = 0",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 2 (conclude).** $[\\vec p\\;\\vec q\\;\\vec r] = 0\\cdot[\\vec a\\;\\vec b\\;\\vec c] = 0$, so $\\vec p, \\vec q, \\vec r$ are coplanar.\n\n**Step 3 (find the combination).** Try $\\vec r = x\\vec p + y\\vec q$. Since $\\vec a, \\vec b, \\vec c$ are non-coplanar, their coefficients must match separately:\n$\\vec a$: $x - 2y = 1$; $\\vec b$: $-2x + 3y = -3$.\nFrom the first, $x = 1 + 2y$; substituting, $-2 - 4y + 3y = -3$, so $y = 1$ and $x = 3$.\n*Why this step:* matching coefficients is only allowed because $\\vec a, \\vec b, \\vec c$ form a basis (non-zero triple product), so each vector has a unique set of coefficients.\n\n**Step 4 (check the unused equation).** $\\vec c$: $3x - 4y = 9 - 4 = 5$. It matches, so $\\vec r = 3\\vec p + \\vec q$.",
+      type: "worked-example",
+      id: "va5-3-we5",
+      title: "Worked example (exam style, a CBSE favourite)",
+      problem:
+        "$\\vec a, \\vec b, \\vec c$ are non-coplanar. Show that $\\vec p = \\vec a - 2\\vec b + 3\\vec c$, $\\vec q = -2\\vec a + 3\\vec b - 4\\vec c$ and $\\vec r = \\vec a - 3\\vec b + 5\\vec c$ are coplanar, and express $\\vec r$ in terms of $\\vec p$ and $\\vec q$.",
+      steps: [
+        {
+          text: "**Reduce to a number determinant.** As in 5.2, $[\\vec p\\;\\vec q\\;\\vec r] = D\\,[\\vec a\\;\\vec b\\;\\vec c]$, where $D$ is the determinant of the coefficients.\n*Why this step:* we do not know the components of $\\vec a, \\vec b, \\vec c$, but we don't need them. Only the coefficients matter.",
+          latex:
+            "D = \\begin{vmatrix} 1 & -2 & 3 \\\\ -2 & 3 & -4 \\\\ 1 & -3 & 5 \\end{vmatrix} = 1(15 - 12) - (-2)(-10 + 4) + 3(6 - 3) = 3 - 12 + 9 = 0",
+        },
+        {
+          text: "**Conclude.** $[\\vec p\\;\\vec q\\;\\vec r] = 0\\cdot[\\vec a\\;\\vec b\\;\\vec c] = 0$, so $\\vec p, \\vec q, \\vec r$ are coplanar.",
+        },
+        {
+          text: "**Find the combination.** Try $\\vec r = x\\vec p + y\\vec q$. Since $\\vec a, \\vec b, \\vec c$ are non-coplanar, their coefficients must match separately:\n$\\vec a$: $x - 2y = 1$; $\\vec b$: $-2x + 3y = -3$.\nFrom the first, $x = 1 + 2y$; substituting, $-2 - 4y + 3y = -3$, so $y = 1$ and $x = 3$.\n*Why this step:* matching coefficients is only allowed because $\\vec a, \\vec b, \\vec c$ form a basis (non-zero triple product), so each vector has a unique set of coefficients.",
+        },
+        {
+          text: "**Check the unused equation.** $\\vec c$: $3x - 4y = 9 - 4 = 5$. It matches, so $\\vec r = 3\\vec p + \\vec q$.",
+        },
+      ],
+      answer: "Coplanar, with $\\vec r = 3\\vec p + \\vec q$",
     },
     {
       type: "callout",
@@ -616,10 +788,26 @@ const lesson03: LessonSeed = {
         ["$> 0$ / $< 0$", "Right-handed / left-handed triple"],
       ],
     },
+    { type: "heading", text: "Non-coplanar vectors as a basis" },
     {
-      type: "text",
-      content:
-        "**Worked example 4: using a non-coplanar basis.** The table says a non-zero triple product lets you write *every* vector as $x\\vec a + y\\vec b + z\\vec c$. Let us actually do it. Write $\\vec r = (1, 2, 3)$ in terms of $\\vec a = (1, 0, 0)$, $\\vec b = (1, 1, 0)$, $\\vec c = (1, 1, 1)$.\n\n**Step 1 (is it a basis?).** $[\\vec a\\;\\vec b\\;\\vec c] = \\begin{vmatrix}1&0&0\\\\1&1&0\\\\1&1&1\\end{vmatrix} = 1 \\neq 0$, so the three are not coplanar and an answer exists and is unique.\n\n**Step 2 (match components).** $x(1, 0, 0) + y(1, 1, 0) + z(1, 1, 1) = (x + y + z,\\; y + z,\\; z) = (1, 2, 3)$.\n\n**Step 3 (solve from the bottom).** $z = 3$; then $y + 3 = 2$ gives $y = -1$; then $x - 1 + 3 = 1$ gives $x = -1$.\n\n**Check.** $-(1, 0, 0) - (1, 1, 0) + 3(1, 1, 1) = (1, 2, 3)$. So $\\vec r = -\\vec a - \\vec b + 3\\vec c$.",
+      type: "worked-example",
+      id: "va5-3-we6",
+      title: "Worked example 4: using a non-coplanar basis",
+      problem:
+        "The table says a non-zero triple product lets you write *every* vector as $x\\vec a + y\\vec b + z\\vec c$. Let us actually do it. Write $\\vec r = (1, 2, 3)$ in terms of $\\vec a = (1, 0, 0)$, $\\vec b = (1, 1, 0)$, $\\vec c = (1, 1, 1)$.",
+      steps: [
+        {
+          text: "**Is it a basis?** $[\\vec a\\;\\vec b\\;\\vec c] = \\begin{vmatrix}1&0&0\\\\1&1&0\\\\1&1&1\\end{vmatrix} = 1 \\neq 0$, so the three are not coplanar and an answer exists and is unique.",
+        },
+        {
+          text: "**Match components.** $x(1, 0, 0) + y(1, 1, 0) + z(1, 1, 1) = (x + y + z,\\; y + z,\\; z) = (1, 2, 3)$.",
+        },
+        {
+          text: "**Solve from the bottom.** $z = 3$; then $y + 3 = 2$ gives $y = -1$; then $x - 1 + 3 = 1$ gives $x = -1$.",
+        },
+        { text: "**Check.** $-(1, 0, 0) - (1, 1, 0) + 3(1, 1, 1) = (1, 2, 3)$." },
+      ],
+      answer: "$\\vec r = -\\vec a - \\vec b + 3\\vec c$",
     },
     {
       type: "callout",
@@ -628,6 +816,7 @@ const lesson03: LessonSeed = {
       content:
         "The plane through the point with position vector $\\vec a$, spanned by directions $\\vec b$ and $\\vec c$, is the set of points $\\vec r$ for which $\\vec r - \\vec a$, $\\vec b$, $\\vec c$ are coplanar: $[\\,\\vec r - \\vec a\\;\\;\\vec b\\;\\;\\vec c\\,] = 0$. You will meet this again in 3D geometry.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va5-3-q1",
@@ -754,6 +943,7 @@ const lesson04: LessonSeed = {
       content:
         "You now own four tools: length, dot, cross and triple product. Most vector questions are easy **once you know which tool the question is asking for**, and hard only when you guess. This lesson is about recognising the question.",
     },
+    { type: "heading", text: "Which question each product answers" },
     {
       type: "text",
       content:
@@ -783,31 +973,56 @@ const lesson04: LessonSeed = {
       content:
         "The word **perpendicular** asks for a dot product when it is a *test* (is this 90°?) and a cross product when it is a *construction* (find a vector at 90° to both). The word **parallel** is the reverse: test with cross ($=\\vec 0$), construct with scalar multiples.",
     },
+    { type: "heading", text: "Three chains of products" },
     {
       type: "text",
       content:
         "Real problems chain the tools. Here are three chains you will meet again and again.",
     },
+    { type: "heading", text: "Height of a triangle from its area", level: 3 },
     {
-      type: "text",
-      content:
-        "**Chain 1: height of a triangle from its area.** Triangle $A(1, 1, 1)$, $B(1, 2, 3)$, $C(2, 3, 1)$. Find the height from $C$ to side $AB$.\n\n**Step 1 (cross, for area).** $\\overrightarrow{AB} = (0, 1, 2)$, $\\overrightarrow{AC} = (1, 2, 0)$. $\\overrightarrow{AB}\\times\\overrightarrow{AC} = (1\\cdot 0 - 2\\cdot 2,\\; 2\\cdot 1 - 0\\cdot 0,\\; 0\\cdot 2 - 1\\cdot 1) = (-4, 2, -1)$, of length $\\sqrt{21}$. Area $= \\tfrac12\\sqrt{21}$.\n\n**Step 2 (magnitude, for the base).** $|\\overrightarrow{AB}| = \\sqrt5$.\n\n**Step 3 (area = ½ base × height).** $h = \\dfrac{2\\cdot\\text{Area}}{|\\overrightarrow{AB}|} = \\dfrac{\\sqrt{21}}{\\sqrt5} = \\sqrt{\\tfrac{21}{5}} \\approx 2.05$.",
+      type: "worked-example",
+      id: "va5-4-we1",
+      title: "Chain 1: height of a triangle from its area",
+      problem: "Triangle $A(1, 1, 1)$, $B(1, 2, 3)$, $C(2, 3, 1)$. Find the height from $C$ to side $AB$.",
+      steps: [
+        {
+          text: "**Cross, for area.** $\\overrightarrow{AB} = (0, 1, 2)$, $\\overrightarrow{AC} = (1, 2, 0)$. $\\overrightarrow{AB}\\times\\overrightarrow{AC} = (1\\cdot 0 - 2\\cdot 2,\\; 2\\cdot 1 - 0\\cdot 0,\\; 0\\cdot 2 - 1\\cdot 1) = (-4, 2, -1)$, of length $\\sqrt{21}$. Area $= \\tfrac12\\sqrt{21}$.",
+        },
+        { text: "**Magnitude, for the base.** $|\\overrightarrow{AB}| = \\sqrt5$." },
+        {
+          text: "**Area = ½ base × height.** $h = \\dfrac{2\\cdot\\text{Area}}{|\\overrightarrow{AB}|} = \\dfrac{\\sqrt{21}}{\\sqrt5} = \\sqrt{\\tfrac{21}{5}} \\approx 2.05$.",
+        },
+      ],
+      answer: "$h = \\sqrt{\\tfrac{21}{5}} \\approx 2.05$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (application): a tilted solar panel.** A triangular solar panel has corners $A(0, 0, 0)$, $B(4, 0, 0)$, $C(0, 3, 3)$ (metres, $z$ pointing up). Find (a) its area, (b) a unit normal, (c) the angle the panel makes with the horizontal ground.\n\n**Step 1 (cross: area and normal together).** $\\overrightarrow{AB} = (4, 0, 0)$, $\\overrightarrow{AC} = (0, 3, 3)$.",
+      type: "worked-example",
+      id: "va5-4-we2",
+      title: "Worked example (application): a tilted solar panel",
+      problem:
+        "A triangular solar panel has corners $A(0, 0, 0)$, $B(4, 0, 0)$, $C(0, 3, 3)$ (metres, $z$ pointing up). Find (a) its area, (b) a unit normal, (c) the angle the panel makes with the horizontal ground.",
+      steps: [
+        {
+          text: "**Cross: area and normal together.** $\\overrightarrow{AB} = (4, 0, 0)$, $\\overrightarrow{AC} = (0, 3, 3)$. *Why this step:* the questions \"area\" and \"perpendicular direction\" both point to the cross product, and one computation answers both.",
+          latex:
+            "\\overrightarrow{AB}\\times\\overrightarrow{AC} = (0\\cdot 3 - 0\\cdot 3,\\; 0\\cdot 0 - 4\\cdot 3,\\; 4\\cdot 3 - 0\\cdot 0) = (0, -12, 12)",
+        },
+        {
+          text: "**Magnitude: area.** $|(0, -12, 12)| = 12\\sqrt2$, so the area is $\\tfrac12\\cdot 12\\sqrt2 = 6\\sqrt2 \\approx 8.49\\ \\text{m}^2$.",
+        },
+        { text: "**Unit normal.** $\\hat n = \\dfrac{(0, -12, 12)}{12\\sqrt2} = \\dfrac{1}{\\sqrt2}(0, -1, 1)$." },
+        {
+          text: "**Dot: the tilt.** The angle between two planes equals the angle between their normals. The ground's normal is $\\hat k$, so $\\cos\\theta = \\hat n\\cdot\\hat k = \\tfrac{1}{\\sqrt2}$ and $\\theta = 45^\\circ$.\n*Why this step:* \"angle\" is a dot-product word, but it needs *directions*, so we first built the normal with a cross. Chaining cross then dot is the everyday pattern.",
+        },
+        {
+          text: "**Check.** Edge $AC$ climbs 3 m while moving 3 m horizontally, a $45^\\circ$ slope, and $AB$ is level, so the panel does tilt at $45^\\circ$.",
+        },
+      ],
+      answer:
+        "(a) $6\\sqrt2 \\approx 8.49\\ \\text{m}^2$, (b) $\\hat n = \\tfrac{1}{\\sqrt2}(0, -1, 1)$, (c) $\\theta = 45^\\circ$",
     },
-    {
-      type: "math",
-      latex:
-        "\\overrightarrow{AB}\\times\\overrightarrow{AC} = (0\\cdot 3 - 0\\cdot 3,\\; 0\\cdot 0 - 4\\cdot 3,\\; 4\\cdot 3 - 0\\cdot 0) = (0, -12, 12)",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* the questions \"area\" and \"perpendicular direction\" both point to the cross product, and one computation answers both.\n\n**Step 2 (magnitude: area).** $|(0, -12, 12)| = 12\\sqrt2$, so the area is $\\tfrac12\\cdot 12\\sqrt2 = 6\\sqrt2 \\approx 8.49\\ \\text{m}^2$.\n\n**Step 3 (unit normal).** $\\hat n = \\dfrac{(0, -12, 12)}{12\\sqrt2} = \\dfrac{1}{\\sqrt2}(0, -1, 1)$.\n\n**Step 4 (dot: the tilt).** The angle between two planes equals the angle between their normals. The ground's normal is $\\hat k$, so $\\cos\\theta = \\hat n\\cdot\\hat k = \\tfrac{1}{\\sqrt2}$ and $\\theta = 45^\\circ$.\n*Why this step:* \"angle\" is a dot-product word, but it needs *directions*, so we first built the normal with a cross. Chaining cross then dot is the everyday pattern.\n\n**Check.** Edge $AC$ climbs 3 m while moving 3 m horizontally, a $45^\\circ$ slope, and $AB$ is level, so the panel does tilt at $45^\\circ$.",
-    },
+    { type: "heading", text: "Distance from a point to a line", level: 3 },
     {
       type: "text",
       content:
@@ -834,10 +1049,23 @@ const lesson04: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example.** Distance from $P(2, 3, 4)$ to the line through $A(1, 0, 0)$ with direction $\\vec d = (1, 2, 2)$.\n\n**Step 1.** $\\overrightarrow{AP} = (1, 3, 4)$, $|\\vec d| = 3$.\n\n**Step 2.** $\\overrightarrow{AP}\\times\\vec d = (3\\cdot 2 - 4\\cdot 2,\\; 4\\cdot 1 - 1\\cdot 2,\\; 1\\cdot 2 - 3\\cdot 1) = (-2, 2, -1)$, length 3.\n\n**Step 3.** Distance $= 3/3 = 1$.\n\n**Cross-check with dot and Pythagoras.** The projection of $\\overrightarrow{AP}$ on the line is $\\overrightarrow{AP}\\cdot\\hat d = (1 + 6 + 8)/3 = 5$, and $|\\overrightarrow{AP}|^2 = 26$. The perpendicular part is $\\sqrt{26 - 25} = 1$. Two tools, one answer.",
+      type: "worked-example",
+      id: "va5-4-we3",
+      problem:
+        "Find the distance from $P(2, 3, 4)$ to the line through $A(1, 0, 0)$ with direction $\\vec d = (1, 2, 2)$.",
+      steps: [
+        { text: "$\\overrightarrow{AP} = (1, 3, 4)$, $|\\vec d| = 3$." },
+        {
+          text: "$\\overrightarrow{AP}\\times\\vec d = (3\\cdot 2 - 4\\cdot 2,\\; 4\\cdot 1 - 1\\cdot 2,\\; 1\\cdot 2 - 3\\cdot 1) = (-2, 2, -1)$, length 3.",
+        },
+        { text: "Distance $= 3/3 = 1$." },
+        {
+          text: "**Cross-check with dot and Pythagoras.** The projection of $\\overrightarrow{AP}$ on the line is $\\overrightarrow{AP}\\cdot\\hat d = (1 + 6 + 8)/3 = 5$, and $|\\overrightarrow{AP}|^2 = 26$. The perpendicular part is $\\sqrt{26 - 25} = 1$. Two tools, one answer.",
+        },
+      ],
+      answer: "Distance $= 1$",
     },
+    { type: "heading", text: "Shortest distance between skew lines", level: 3 },
     {
       type: "text",
       content:
@@ -853,40 +1081,58 @@ const lesson04: LessonSeed = {
         "**Sanity check.** The $x$-axis ($\\vec b_1 = \\vec 0$, $\\vec d_1 = \\hat i$) and the line through $(0, 0, 3)$ along $\\hat j$. Then $\\vec d_1\\times\\vec d_2 = \\hat k$ and $[3\\hat k\\;\\hat i\\;\\hat j] = 3$, so $d = 3$: the second line runs 3 units above the first, as expected.\n\n**A real one.** $\\vec b_1 = \\vec 0$, $\\vec d_1 = (1, 1, 0)$; $\\vec b_2 = (1, 0, 1)$, $\\vec d_2 = (0, 1, 1)$. $\\vec d_1\\times\\vec d_2 = (1, -1, 1)$, length $\\sqrt3$. $(1, 0, 1)\\cdot(1, -1, 1) = 2$. So $d = 2/\\sqrt3$.\n\n**When the triple product is 0.** Then $\\vec b_2 - \\vec b_1$, $\\vec d_1$, $\\vec d_2$ are coplanar, so the two lines lie in one plane: they intersect (or are parallel), and the shortest distance between intersecting lines is 0. So $[\\,\\vec b_2 - \\vec b_1\\;\\;\\vec d_1\\;\\;\\vec d_2\\,] = 0$ is the test for two lines being coplanar.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (exam style, NCERT/CBSE).** Find the shortest distance between the lines $\\vec r = (\\hat i + 2\\hat j + \\hat k) + \\lambda(\\hat i - \\hat j + \\hat k)$ and $\\vec r = (2\\hat i - \\hat j - \\hat k) + \\mu(2\\hat i + \\hat j + 2\\hat k)$.\n\n**Step 1 (read off the data).** $\\vec b_1 = (1, 2, 1)$, $\\vec d_1 = (1, -1, 1)$; $\\vec b_2 = (2, -1, -1)$, $\\vec d_2 = (2, 1, 2)$. So $\\vec b_2 - \\vec b_1 = (1, -3, -2)$.\n*Why this step:* the directions $\\vec d_1, \\vec d_2$ are not parallel, so the lines are either intersecting or skew and the triple-product formula applies.\n\n**Step 2 (cross: the common normal).**",
+      type: "worked-example",
+      id: "va5-4-we4",
+      title: "Worked example (exam style, NCERT/CBSE)",
+      problem:
+        "Find the shortest distance between the lines $\\vec r = (\\hat i + 2\\hat j + \\hat k) + \\lambda(\\hat i - \\hat j + \\hat k)$ and $\\vec r = (2\\hat i - \\hat j - \\hat k) + \\mu(2\\hat i + \\hat j + 2\\hat k)$.",
+      steps: [
+        {
+          text: "**Read off the data.** $\\vec b_1 = (1, 2, 1)$, $\\vec d_1 = (1, -1, 1)$; $\\vec b_2 = (2, -1, -1)$, $\\vec d_2 = (2, 1, 2)$. So $\\vec b_2 - \\vec b_1 = (1, -3, -2)$.\n*Why this step:* the directions $\\vec d_1, \\vec d_2$ are not parallel, so the lines are either intersecting or skew and the triple-product formula applies.",
+        },
+        {
+          text: "**Cross: the common normal.**",
+          latex:
+            "\\vec d_1\\times\\vec d_2 = \\big((-1)(2) - (1)(1),\\; (1)(2) - (1)(2),\\; (1)(1) - (-1)(2)\\big) = (-3, 0, 3),\\qquad |\\vec d_1\\times\\vec d_2| = 3\\sqrt2",
+        },
+        {
+          text: "**Dot: project the gap onto the normal.** $(\\vec b_2 - \\vec b_1)\\cdot(\\vec d_1\\times\\vec d_2) = (1)(-3) + (-3)(0) + (-2)(3) = -9$.\n*Why this step:* only the part of the gap along the common perpendicular is the shortest distance; sliding along either line changes the rest.",
+        },
+        {
+          text: "**Divide.** $d = \\dfrac{|-9|}{3\\sqrt2} = \\dfrac{3}{\\sqrt2} = \\dfrac{3\\sqrt2}{2} \\approx 2.12$ units.",
+        },
+        { text: "**Verdict.** $d \\neq 0$, so the lines are skew: they neither meet nor run parallel." },
+      ],
+      answer: "$d = \\dfrac{3\\sqrt2}{2} \\approx 2.12$ units; the lines are skew",
     },
-    {
-      type: "math",
-      latex:
-        "\\vec d_1\\times\\vec d_2 = \\big((-1)(2) - (1)(1),\\; (1)(2) - (1)(2),\\; (1)(1) - (-1)(2)\\big) = (-3, 0, 3),\\qquad |\\vec d_1\\times\\vec d_2| = 3\\sqrt2",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3 (dot: project the gap onto the normal).** $(\\vec b_2 - \\vec b_1)\\cdot(\\vec d_1\\times\\vec d_2) = (1)(-3) + (-3)(0) + (-2)(3) = -9$.\n*Why this step:* only the part of the gap along the common perpendicular is the shortest distance; sliding along either line changes the rest.\n\n**Step 4 (divide).** $d = \\dfrac{|-9|}{3\\sqrt2} = \\dfrac{3}{\\sqrt2} = \\dfrac{3\\sqrt2}{2} \\approx 2.12$ units.\n\n**Verdict.** $d \\neq 0$, so the lines are skew: they neither meet nor run parallel.",
-    },
+    { type: "heading", text: "Products in physics: work and torque" },
     {
       type: "text",
       content:
         "**Physics, briefly.** A force $\\vec F = (2, 1, 3)$ N moving a body through $\\vec d = (1, -1, 2)$ m does work $\\vec F\\cdot\\vec d = 2 - 1 + 6 = 7$ J (dot: only the part of the force along the motion counts). A force $\\vec F = 2\\hat j$ N applied at $\\vec r = \\hat i$ m has torque $\\vec r\\times\\vec F = 2\\hat k$ N·m about the origin (cross: turning effect, with an axis).",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (application): opening a door is a triple product.** A door is hinged along the $z$-axis. Its handle is at $\\vec r = (0.8, 0, 1)$ m from the origin (a point on the hinge line), and you push with $\\vec F = (0, 20, 0)$ N. How much of your effort actually turns the door?\n\n**Step 1 (cross: torque about the origin).**",
+      type: "worked-example",
+      id: "va5-4-we5",
+      title: "Worked example (application): opening a door is a triple product",
+      problem:
+        "A door is hinged along the $z$-axis. Its handle is at $\\vec r = (0.8, 0, 1)$ m from the origin (a point on the hinge line), and you push with $\\vec F = (0, 20, 0)$ N. How much of your effort actually turns the door?",
+      steps: [
+        {
+          text: "**Cross: torque about the origin.** *Why this step:* \"turning effect\" is a cross-product word, so we start with the torque about a point on the axis.",
+          latex:
+            "\\vec r\\times\\vec F = (0\\cdot 0 - 1\\cdot 20,\\; 1\\cdot 0 - 0.8\\cdot 0,\\; 0.8\\cdot 20 - 0\\cdot 0) = (-20,\\; 0,\\; 16)\\ \\text{N}\\cdot\\text{m}",
+        },
+        {
+          text: "**Dot: keep only the part along the hinge.** The door can only rotate about $\\hat k$, so the useful part is $\\hat k\\cdot(\\vec r\\times\\vec F) = [\\hat k\\;\\vec r\\;\\vec F] = 16$ N·m.\n*Why this step:* the $-20$ N·m part of the torque tries to twist the door about the $x$-axis. The hinges resist it and it does nothing to open the door.",
+        },
+        {
+          text: "**Interpret.** The moment of a force about an **axis** with unit direction $\\hat n$ is the triple product $[\\hat n\\;\\vec r\\;\\vec F]$: the volume of the box on the axis, the lever arm and the force. It is zero when the three are coplanar. Try lifting the handle straight up, $\\vec F = (0, 0, 20)$: then $\\vec r\\times\\vec F = (0, -16, 0)$ and $[\\hat k\\;\\vec r\\;\\vec F] = 0$. The force is in the plane of the door and the hinge, and no amount of lifting opens it.",
+        },
+      ],
+      answer: "$[\\hat k\\;\\vec r\\;\\vec F] = 16$ N·m of the torque turns the door.",
     },
-    {
-      type: "math",
-      latex:
-        "\\vec r\\times\\vec F = (0\\cdot 0 - 1\\cdot 20,\\; 1\\cdot 0 - 0.8\\cdot 0,\\; 0.8\\cdot 20 - 0\\cdot 0) = (-20,\\; 0,\\; 16)\\ \\text{N}\\cdot\\text{m}",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* \"turning effect\" is a cross-product word, so we start with the torque about a point on the axis.\n\n**Step 2 (dot: keep only the part along the hinge).** The door can only rotate about $\\hat k$, so the useful part is $\\hat k\\cdot(\\vec r\\times\\vec F) = [\\hat k\\;\\vec r\\;\\vec F] = 16$ N·m.\n*Why this step:* the $-20$ N·m part of the torque tries to twist the door about the $x$-axis. The hinges resist it and it does nothing to open the door.\n\n**Step 3 (interpret).** The moment of a force about an **axis** with unit direction $\\hat n$ is the triple product $[\\hat n\\;\\vec r\\;\\vec F]$: the volume of the box on the axis, the lever arm and the force. It is zero when the three are coplanar. Try lifting the handle straight up, $\\vec F = (0, 0, 20)$: then $\\vec r\\times\\vec F = (0, -16, 0)$ and $[\\hat k\\;\\vec r\\;\\vec F] = 0$. The force is in the plane of the door and the hinge, and no amount of lifting opens it.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va5-4-q1",
@@ -1054,6 +1300,7 @@ const lesson05: LessonSeed = {
       content:
         "Classical geometry proofs often need clever constructions: extra lines, congruent triangles, similar triangles. With vectors, many of them become **two or three lines of algebra**. The recipe is always the same:\n\n**1.** Put the origin at a convenient point and name a few vectors.\n\n**2.** Write every side or diagonal as a sum or difference of them.\n\n**3.** Translate the geometric claim (a length, a right angle, parallel lines) into a dot or cross statement, and expand.",
     },
+    { type: "heading", text: "The cosine rule and right angles" },
     {
       type: "text",
       content:
@@ -1103,20 +1350,35 @@ const lesson05: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example (routine): the angle in a semicircle is a right angle.** You proved this in Lesson 3.5; redo it here without looking back, because it is the same one-line trick as the rhombus.\n\n**Step 1 (set up).** Put the origin at the centre $O$ of a circle of radius $r$. Let the diameter be $AB$ with $\\overrightarrow{OA} = \\vec a$ and $\\overrightarrow{OB} = -\\vec a$, and let $P$ be any other point on the circle, $\\overrightarrow{OP} = \\vec p$.\n*Why this step:* with the origin at the centre, \"on the circle\" becomes the simple statement $|\\vec p| = |\\vec a| = r$.\n\n**Step 2 (write the two chords).** $\\overrightarrow{PA} = \\vec a - \\vec p$ and $\\overrightarrow{PB} = -\\vec a - \\vec p$.\n\n**Step 3 (dot and expand).**",
+      type: "worked-example",
+      id: "va5-5-we1",
+      title: "Worked example (routine): the angle in a semicircle is a right angle",
+      problem:
+        "You proved this in Lesson 3.5; redo it here without looking back, because it is the same one-line trick as the rhombus.",
+      steps: [
+        {
+          text: "**Set up.** Put the origin at the centre $O$ of a circle of radius $r$. Let the diameter be $AB$ with $\\overrightarrow{OA} = \\vec a$ and $\\overrightarrow{OB} = -\\vec a$, and let $P$ be any other point on the circle, $\\overrightarrow{OP} = \\vec p$.\n*Why this step:* with the origin at the centre, \"on the circle\" becomes the simple statement $|\\vec p| = |\\vec a| = r$.",
+        },
+        {
+          text: "**Write the two chords.** $\\overrightarrow{PA} = \\vec a - \\vec p$ and $\\overrightarrow{PB} = -\\vec a - \\vec p$.",
+        },
+        {
+          text: "**Dot and expand.**",
+          latex:
+            "\\overrightarrow{PA}\\cdot\\overrightarrow{PB} = (\\vec a - \\vec p)\\cdot(-\\vec a - \\vec p) = -|\\vec a|^2 - \\vec a\\cdot\\vec p + \\vec p\\cdot\\vec a + |\\vec p|^2 = |\\vec p|^2 - |\\vec a|^2 = r^2 - r^2 = 0",
+        },
+        {
+          text: "**Conclude.** The dot is 0, so $\\angle APB = 90^\\circ$ wherever $P$ sits on the circle.",
+        },
+      ],
+      answer: "$\\angle APB = 90^\\circ$ for every $P$ on the circle",
     },
     {
-      type: "math",
-      latex:
-        "\\overrightarrow{PA}\\cdot\\overrightarrow{PB} = (\\vec a - \\vec p)\\cdot(-\\vec a - \\vec p) = -|\\vec a|^2 - \\vec a\\cdot\\vec p + \\vec p\\cdot\\vec a + |\\vec p|^2 = |\\vec p|^2 - |\\vec a|^2 = r^2 - r^2 = 0",
-    },
-    {
       type: "text",
       content:
-        "**Step 4 (conclude).** The dot is 0, so $\\angle APB = 90^\\circ$ wherever $P$ sits on the circle. Notice this is the rhombus computation in disguise: $\\overrightarrow{PA}$ and $\\overrightarrow{PB}$ are the diagonals of the parallelogram with sides $\\vec a$ and $-\\vec p$, which have equal lengths.",
+        "Notice this is the rhombus computation in disguise: $\\overrightarrow{PA}$ and $\\overrightarrow{PB}$ are the diagonals of the parallelogram with sides $\\vec a$ and $-\\vec p$, which have equal lengths.",
     },
+    { type: "heading", text: "Medians and midpoint parallelograms" },
     {
       type: "text",
       content:
@@ -1132,20 +1394,32 @@ const lesson05: LessonSeed = {
         "**Numerical use.** $AB = 7$, $AC = 5$, $BC = 8$. Then $AM^2 = \\dfrac{2\\cdot 49 + 2\\cdot 25 - 64}{4} = \\dfrac{84}{4} = 21$, so the median $AM = \\sqrt{21}$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (exam style, a CBSE favourite): the midpoint parallelogram.** (This is Varignon's theorem from Lesson 2.5, written the way a board answer expects.) Prove that the midpoints of the sides of **any** quadrilateral $ABCD$ are the vertices of a parallelogram.\n\n**Step 1 (name position vectors).** Let $A, B, C, D$ have position vectors $\\vec a, \\vec b, \\vec c, \\vec d$, and let $P, Q, R, S$ be the midpoints of $AB, BC, CD, DA$. By the section formula,\n$\\vec p = \\tfrac12(\\vec a + \\vec b)$, $\\vec q = \\tfrac12(\\vec b + \\vec c)$, $\\vec r = \\tfrac12(\\vec c + \\vec d)$, $\\vec s = \\tfrac12(\\vec d + \\vec a)$.\n*Why this step:* a general quadrilateral has no convenient corner, so we use a free origin and let the algebra do the work.\n\n**Step 2 (write two opposite sides).**",
+      type: "worked-example",
+      id: "va5-5-we2",
+      title: "Worked example (exam style, a CBSE favourite): the midpoint parallelogram",
+      problem:
+        "(This is Varignon's theorem from Lesson 2.5, written the way a board answer expects.) Prove that the midpoints of the sides of **any** quadrilateral $ABCD$ are the vertices of a parallelogram.",
+      steps: [
+        {
+          text: "**Name position vectors.** Let $A, B, C, D$ have position vectors $\\vec a, \\vec b, \\vec c, \\vec d$, and let $P, Q, R, S$ be the midpoints of $AB, BC, CD, DA$. By the section formula,\n$\\vec p = \\tfrac12(\\vec a + \\vec b)$, $\\vec q = \\tfrac12(\\vec b + \\vec c)$, $\\vec r = \\tfrac12(\\vec c + \\vec d)$, $\\vec s = \\tfrac12(\\vec d + \\vec a)$.\n*Why this step:* a general quadrilateral has no convenient corner, so we use a free origin and let the algebra do the work.",
+        },
+        {
+          text: "**Write two opposite sides.**",
+          latex:
+            "\\overrightarrow{PQ} = \\vec q - \\vec p = \\tfrac12(\\vec c - \\vec a),\\qquad \\overrightarrow{SR} = \\vec r - \\vec s = \\tfrac12(\\vec c - \\vec a)",
+        },
+        {
+          text: "**Conclude.** $\\overrightarrow{PQ} = \\overrightarrow{SR}$, so $PQ$ and $SR$ are equal in length **and** parallel. A quadrilateral with one pair of opposite sides equal and parallel is a parallelogram.\n*Why this step:* equality of vectors carries both facts at once, length and direction, which is exactly what the classical proof needs two congruent triangles to establish.",
+        },
+      ],
+      answer: "$\\overrightarrow{PQ} = \\overrightarrow{SR}$, so $PQRS$ is a parallelogram.",
     },
     {
-      type: "math",
-      latex:
-        "\\overrightarrow{PQ} = \\vec q - \\vec p = \\tfrac12(\\vec c - \\vec a),\\qquad \\overrightarrow{SR} = \\vec r - \\vec s = \\tfrac12(\\vec c - \\vec a)",
-    },
-    {
       type: "text",
       content:
-        "**Step 3 (conclude).** $\\overrightarrow{PQ} = \\overrightarrow{SR}$, so $PQ$ and $SR$ are equal in length **and** parallel. A quadrilateral with one pair of opposite sides equal and parallel is a parallelogram.\n*Why this step:* equality of vectors carries both facts at once, length and direction, which is exactly what the classical proof needs two congruent triangles to establish.\n\n**Bonus.** Both sides equal half the diagonal $\\overrightarrow{AC}$, and the proof never used a plane: it works even for a \"skew\" quadrilateral whose four corners are not coplanar.\n\n**Numeric check.** $A(0, 0, 0)$, $B(4, 0, 0)$, $C(6, 4, 0)$, $D(0, 2, 0)$ give $P(2, 0, 0)$, $Q(5, 2, 0)$, $R(3, 3, 0)$, $S(0, 1, 0)$. Then $\\overrightarrow{PQ} = (3, 2, 0) = \\overrightarrow{SR}$, and $\\tfrac12\\overrightarrow{AC} = (3, 2, 0)$ too.",
+        "**Bonus.** Both sides equal half the diagonal $\\overrightarrow{AC}$, and the proof never used a plane: it works even for a \"skew\" quadrilateral whose four corners are not coplanar.\n\n**Numeric check.** $A(0, 0, 0)$, $B(4, 0, 0)$, $C(6, 4, 0)$, $D(0, 2, 0)$ give $P(2, 0, 0)$, $Q(5, 2, 0)$, $R(3, 3, 0)$, $S(0, 1, 0)$. Then $\\overrightarrow{PQ} = (3, 2, 0) = \\overrightarrow{SR}$, and $\\tfrac12\\overrightarrow{AC} = (3, 2, 0)$ too.",
     },
+    { type: "heading", text: "Angle bisectors from unit vectors" },
     {
       type: "text",
       content:
@@ -1171,29 +1445,58 @@ const lesson05: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example.** $\\vec a = (3, 4)$, $\\vec b = (2, 0)$.\n\n**Step 1.** $\\hat a = (0.6, 0.8)$, $\\hat b = (1, 0)$.\n\n**Step 2.** $\\hat a + \\hat b = (1.6, 0.8)$, which points along $(2, 1)$.\n\n**Step 3 (check).** $\\vec a$ makes $\\tan^{-1}\\tfrac43 \\approx 53.13^\\circ$ with the $x$-axis, and $(2, 1)$ makes $\\tan^{-1}\\tfrac12 \\approx 26.57^\\circ$, exactly half. By contrast $\\vec a + \\vec b = (5, 4)$ makes $38.66^\\circ$: not the bisector, because $|\\vec a| \\neq |\\vec b|$.",
+      type: "worked-example",
+      id: "va5-5-we3",
+      problem: "$\\vec a = (3, 4)$, $\\vec b = (2, 0)$. Find a vector along the bisector of the angle between $\\vec a$ and $\\vec b$.",
+      steps: [
+        { text: "$\\hat a = (0.6, 0.8)$, $\\hat b = (1, 0)$." },
+        { text: "$\\hat a + \\hat b = (1.6, 0.8)$, which points along $(2, 1)$." },
+        {
+          text: "**Check.** $\\vec a$ makes $\\tan^{-1}\\tfrac43 \\approx 53.13^\\circ$ with the $x$-axis, and $(2, 1)$ makes $\\tan^{-1}\\tfrac12 \\approx 26.57^\\circ$, exactly half. By contrast $\\vec a + \\vec b = (5, 4)$ makes $38.66^\\circ$: not the bisector, because $|\\vec a| \\neq |\\vec b|$.",
+        },
+      ],
+      answer: "The bisector points along $(2, 1)$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (application): a path that splits a corner evenly.** Two straight garden walls leave a gate at the origin along $\\vec a = (3, 4)$ and $\\vec b = (12, 5)$ (metres). The gardener wants a path from the gate that makes equal angles with both walls. Which direction?\n\n**Step 1 (normalise).** $|\\vec a| = 5$ and $|\\vec b| = 13$, so $\\hat a = \\left(\\tfrac35, \\tfrac45\\right)$ and $\\hat b = \\left(\\tfrac{12}{13}, \\tfrac{5}{13}\\right)$.\n*Why this step:* the walls have different lengths, so $\\vec a + \\vec b$ would lean toward the longer wall. Unit vectors make the parallelogram a rhombus.\n\n**Step 2 (add).** $\\hat a + \\hat b = \\left(\\tfrac{39 + 60}{65}, \\tfrac{52 + 25}{65}\\right) = \\tfrac{1}{65}(99, 77) = \\tfrac{11}{65}(9, 7)$. The path runs along $(9, 7)$.\n\n**Step 3 (check the angles).** $\\vec a$ makes $\\tan^{-1}\\tfrac43 \\approx 53.13^\\circ$ with the $x$-axis and $\\vec b$ makes $\\tan^{-1}\\tfrac{5}{12} \\approx 22.62^\\circ$. Their average is $37.87^\\circ$, and $\\tan^{-1}\\tfrac79 \\approx 37.87^\\circ$. Equal angles of about $15.3^\\circ$ with each wall.",
+      type: "worked-example",
+      id: "va5-5-we4",
+      title: "Worked example (application): a path that splits a corner evenly",
+      problem:
+        "Two straight garden walls leave a gate at the origin along $\\vec a = (3, 4)$ and $\\vec b = (12, 5)$ (metres). The gardener wants a path from the gate that makes equal angles with both walls. Which direction?",
+      steps: [
+        {
+          text: "**Normalise.** $|\\vec a| = 5$ and $|\\vec b| = 13$, so $\\hat a = \\left(\\tfrac35, \\tfrac45\\right)$ and $\\hat b = \\left(\\tfrac{12}{13}, \\tfrac{5}{13}\\right)$.\n*Why this step:* the walls have different lengths, so $\\vec a + \\vec b$ would lean toward the longer wall. Unit vectors make the parallelogram a rhombus.",
+        },
+        {
+          text: "**Add.** $\\hat a + \\hat b = \\left(\\tfrac{39 + 60}{65}, \\tfrac{52 + 25}{65}\\right) = \\tfrac{1}{65}(99, 77) = \\tfrac{11}{65}(9, 7)$. The path runs along $(9, 7)$.",
+        },
+        {
+          text: "**Check the angles.** $\\vec a$ makes $\\tan^{-1}\\tfrac43 \\approx 53.13^\\circ$ with the $x$-axis and $\\vec b$ makes $\\tan^{-1}\\tfrac{5}{12} \\approx 22.62^\\circ$. Their average is $37.87^\\circ$, and $\\tan^{-1}\\tfrac79 \\approx 37.87^\\circ$. Equal angles of about $15.3^\\circ$ with each wall.",
+        },
+      ],
+      answer: "Along $(9, 7)$, about $15.3^\\circ$ from each wall",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (exam style, 3D).** Find a unit vector along the internal bisector of the angle between $\\vec a = 2\\hat i + \\hat j - 2\\hat k$ and $\\vec b = 3\\hat j + 4\\hat k$.\n\n**Step 1 (lengths).** $|\\vec a| = \\sqrt{4 + 1 + 4} = 3$, $|\\vec b| = \\sqrt{9 + 16} = 5$.\n\n**Step 2 (add the unit vectors over a common denominator).**",
-    },
-    {
-      type: "math",
-      latex:
-        "\\hat a + \\hat b = \\tfrac13(2, 1, -2) + \\tfrac15(0, 3, 4) = \\tfrac{1}{15}(10,\\; 5 + 9,\\; -10 + 12) = \\tfrac{1}{15}(10, 14, 2) = \\tfrac{2}{15}(5, 7, 1)",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3 (normalise the answer).** $|(5, 7, 1)| = \\sqrt{25 + 49 + 1} = \\sqrt{75} = 5\\sqrt3$, so the unit bisector is $\\dfrac{1}{5\\sqrt3}(5\\hat i + 7\\hat j + \\hat k)$.\n*Why this step:* $\\hat a + \\hat b$ has the right direction but is not itself a unit vector (its length is $2\\cos\\tfrac{\\theta}{2}$), and the question asks for one.\n\n**Check (equal angles).** Let $\\vec w = (5, 7, 1)$. $\\vec a\\cdot\\vec w = 10 + 7 - 2 = 15$, so $\\cos(\\text{angle with } \\vec a) = \\dfrac{15}{3\\cdot 5\\sqrt3} = \\dfrac{1}{\\sqrt3}$. $\\vec b\\cdot\\vec w = 21 + 4 = 25$, so $\\cos(\\text{angle with } \\vec b) = \\dfrac{25}{5\\cdot 5\\sqrt3} = \\dfrac{1}{\\sqrt3}$. Equal, as promised.",
+      type: "worked-example",
+      id: "va5-5-we5",
+      title: "Worked example (exam style, 3D)",
+      problem:
+        "Find a unit vector along the internal bisector of the angle between $\\vec a = 2\\hat i + \\hat j - 2\\hat k$ and $\\vec b = 3\\hat j + 4\\hat k$.",
+      steps: [
+        { text: "**Lengths.** $|\\vec a| = \\sqrt{4 + 1 + 4} = 3$, $|\\vec b| = \\sqrt{9 + 16} = 5$." },
+        {
+          text: "**Add the unit vectors over a common denominator.**",
+          latex:
+            "\\hat a + \\hat b = \\tfrac13(2, 1, -2) + \\tfrac15(0, 3, 4) = \\tfrac{1}{15}(10,\\; 5 + 9,\\; -10 + 12) = \\tfrac{1}{15}(10, 14, 2) = \\tfrac{2}{15}(5, 7, 1)",
+        },
+        {
+          text: "**Normalise the answer.** $|(5, 7, 1)| = \\sqrt{25 + 49 + 1} = \\sqrt{75} = 5\\sqrt3$, so the unit bisector is $\\dfrac{1}{5\\sqrt3}(5\\hat i + 7\\hat j + \\hat k)$.\n*Why this step:* $\\hat a + \\hat b$ has the right direction but is not itself a unit vector (its length is $2\\cos\\tfrac{\\theta}{2}$), and the question asks for one.",
+        },
+        {
+          text: "**Check (equal angles).** Let $\\vec w = (5, 7, 1)$. $\\vec a\\cdot\\vec w = 10 + 7 - 2 = 15$, so $\\cos(\\text{angle with } \\vec a) = \\dfrac{15}{3\\cdot 5\\sqrt3} = \\dfrac{1}{\\sqrt3}$. $\\vec b\\cdot\\vec w = 21 + 4 = 25$, so $\\cos(\\text{angle with } \\vec b) = \\dfrac{25}{5\\cdot 5\\sqrt3} = \\dfrac{1}{\\sqrt3}$. Equal, as promised.",
+        },
+      ],
+      answer: "$\\dfrac{1}{5\\sqrt3}(5\\hat i + 7\\hat j + \\hat k)$",
     },
     {
       type: "callout",
@@ -1202,6 +1505,7 @@ const lesson05: LessonSeed = {
       content:
         "That condition belongs to $\\vec a + \\vec b$, not to $\\hat a + \\hat b$. The hats have already made both lengths equal to 1, so $\\hat a + \\hat b$ **always** bisects, whatever $|\\vec a|$ and $|\\vec b|$ are. Normalise first, then add.",
     },
+    { type: "heading", text: "Optional: the vector triple product" },
     {
       type: "callout",
       variant: "info",
@@ -1209,6 +1513,7 @@ const lesson05: LessonSeed = {
       content:
         "Crossing three vectors gives a vector, and it expands as\n$\\vec a\\times(\\vec b\\times\\vec c) = (\\vec a\\cdot\\vec c)\\,\\vec b - (\\vec a\\cdot\\vec b)\\,\\vec c$.\n\nWhy it must have this shape: $\\vec b\\times\\vec c$ is normal to the plane of $\\vec b, \\vec c$, and crossing that normal with $\\vec a$ brings the result back into that plane, so it is a combination of $\\vec b$ and $\\vec c$.\n\n**Check on basis vectors.** $\\vec a = \\hat i$, $\\vec b = \\hat i$, $\\vec c = \\hat j$: left side $\\hat i\\times(\\hat i\\times\\hat j) = \\hat i\\times\\hat k = -\\hat j$; right side $(\\hat i\\cdot\\hat j)\\hat i - (\\hat i\\cdot\\hat i)\\hat j = -\\hat j$. And $\\vec a = \\hat j$, $\\vec b = \\hat i$, $\\vec c = \\hat j$: left $\\hat j\\times\\hat k = \\hat i$; right $(\\hat j\\cdot\\hat j)\\hat i - (\\hat j\\cdot\\hat i)\\hat j = \\hat i$.\n\n**Why those checks are enough.** Both sides are linear in each of $\\vec a$, $\\vec b$, $\\vec c$, so the identity holds everywhere once it holds for all 27 choices of $\\vec a, \\vec b, \\vec c$ from $\\{\\hat i, \\hat j, \\hat k\\}$. When $\\vec b = \\vec c$ both sides are $\\vec 0$. When $\\vec a$ differs from both $\\vec b$ and $\\vec c$, both sides are again $\\vec 0$ (for example $\\hat k\\times(\\hat i\\times\\hat j) = \\hat k\\times\\hat k = \\vec 0$, and both dots on the right vanish). The remaining cases are the two above, or are obtained from them by relabelling the axes cyclically ($\\hat i\\to\\hat j\\to\\hat k\\to\\hat i$) or by swapping $\\vec b$ and $\\vec c$ (both sides change sign).\n\n**Numeric check with general vectors.** $\\vec a = (1, 2, 0)$, $\\vec b = (0, 1, 1)$, $\\vec c = (1, 0, 1)$. Then $\\vec b\\times\\vec c = (1, 1, -1)$ and $\\vec a\\times(\\vec b\\times\\vec c) = (-2, 1, -1)$. Right side: $\\vec a\\cdot\\vec c = 1$, $\\vec a\\cdot\\vec b = 2$, so $1\\cdot(0, 1, 1) - 2\\cdot(1, 0, 1) = (-2, 1, -1)$. They agree.\n\n**Brackets matter.** $(\\hat i\\times\\hat i)\\times\\hat j = \\vec 0$, but $\\hat i\\times(\\hat i\\times\\hat j) = -\\hat j$. The cross product is not associative. With the brackets on the left, $(\\vec a\\times\\vec b)\\times\\vec c = -\\vec c\\times(\\vec a\\times\\vec b) = (\\vec a\\cdot\\vec c)\\,\\vec b - (\\vec b\\cdot\\vec c)\\,\\vec a$, a combination of $\\vec a$ and $\\vec b$ instead. In both forms the answer lies in the plane of the two vectors inside the brackets.\n\n**Lagrange's identity.** $(\\vec a\\times\\vec b)\\cdot(\\vec c\\times\\vec d) = (\\vec a\\cdot\\vec c)(\\vec b\\cdot\\vec d) - (\\vec a\\cdot\\vec d)(\\vec b\\cdot\\vec c)$. Sketch: swap dot and cross to get $\\vec a\\cdot\\big(\\vec b\\times(\\vec c\\times\\vec d)\\big)$, then expand the inner part with the rule above. With $\\vec c = \\vec a$, $\\vec d = \\vec b$ it gives $|\\vec a\\times\\vec b|^2 = |\\vec a|^2|\\vec b|^2 - (\\vec a\\cdot\\vec b)^2$.\n\n**A classic.** $[\\,\\vec a\\times\\vec b\\;\\;\\vec b\\times\\vec c\\;\\;\\vec c\\times\\vec a\\,] = [\\vec a\\;\\vec b\\;\\vec c]^2$. Sketch: $(\\vec b\\times\\vec c)\\times(\\vec c\\times\\vec a) = \\big((\\vec b\\times\\vec c)\\cdot\\vec a\\big)\\vec c - \\big((\\vec b\\times\\vec c)\\cdot\\vec c\\big)\\vec a = [\\vec a\\;\\vec b\\;\\vec c]\\,\\vec c$, and dotting with $\\vec a\\times\\vec b$ gives $[\\vec a\\;\\vec b\\;\\vec c]\\,[\\vec a\\;\\vec b\\;\\vec c]$.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va5-5-q1",

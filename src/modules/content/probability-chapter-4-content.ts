@@ -64,6 +64,7 @@ const lesson01: LessonSeed = {
       content:
         "The name is misleading on both counts. $X$ is not a \"variable\" like the $x$ in $2x + 3 = 7$ that you solve for. It is a fixed *rule*: \"count the heads.\" The rule never changes. What is random is the **outcome** fed into it. Once the coins land, $X$ has a definite value.",
     },
+    { type: "heading", text: "Several variables, one experiment" },
     {
       type: "text",
       content:
@@ -93,10 +94,11 @@ const lesson01: LessonSeed = {
       content:
         "**Events come from random variables.** \"$X = 2$\" is shorthand for the set of outcomes that the rule sends to 2:\n\n$\\{X = 2\\} = \\{HHT, HTH, THH\\}$, $\\quad \\{X \\ge 2\\} = \\{HHH, HHT, HTH, THH\\}$.\n\nSo everything from Chapters 0–3 still applies. $P(X = 2)$ is the probability of an ordinary event, and here it is $\\frac{3}{8}$.",
     },
+    { type: "heading", text: "The sum of two dice" },
     {
       type: "text",
       content:
-        "**The sum of two dice.**\n\nRoll two dice. $S$ has 36 equally likely ordered pairs $(a, b)$. Let $X = a + b$. The rule squashes 36 outcomes onto only 11 values, $2, 3, \\ldots, 12$, and the values collect different numbers of outcomes. A sum of 7 can happen six ways, $(1,6), (2,5), \\ldots, (6,1)$, but a sum of 2 happens only one way, $(1,1)$.",
+        "Roll two dice. $S$ has 36 equally likely ordered pairs $(a, b)$. Let $X = a + b$. The rule squashes 36 outcomes onto only 11 values, $2, 3, \\ldots, 12$, and the values collect different numbers of outcomes. A sum of 7 can happen six ways, $(1,6), (2,5), \\ldots, (6,1)$, but a sum of 2 happens only one way, $(1,1)$.",
     },
     {
       type: "table",
@@ -115,79 +117,115 @@ const lesson01: LessonSeed = {
           "Each roll is one outcome in the 6×6 grid. The bars record only the number the outcome produces, its sum. Run a thousand rolls and the bars take on the 1-2-3-4-5-6-5-4-3-2-1 shape of the table.",
       },
     },
+    { type: "heading", text: "Money is a random variable too" },
     {
       type: "text",
       content:
-        "**Money is a random variable too.**\n\nA stall charges ₹10 to play. You roll one die, and if it shows 6 you receive ₹30, otherwise nothing. Your **profit** is\n\n$X = 30 - 10 = 20$ if the die shows 6, $\\quad X = -10$ if it shows 1, 2, 3, 4 or 5.\n\nSix outcomes, two values. Losses are just negative values, and a random variable is allowed to take them.",
+        "A stall charges ₹10 to play. You roll one die, and if it shows 6 you receive ₹30, otherwise nothing. Your **profit** is\n\n$X = 30 - 10 = 20$ if the die shows 6, $\\quad X = -10$ if it shows 1, 2, 3, 4 or 5.\n\nSix outcomes, two values. Losses are just negative values, and a random variable is allowed to take them.",
     },
+    { type: "heading", text: "Finding the values and their counts" },
     {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-1-we1",
       title: "Worked example 1 · Red balls in a draw",
-      content:
-        "A bag has 3 red balls ($R_1, R_2, R_3$) and 2 blue balls ($B_1, B_2$). Two are drawn together. Let $X$ be the number of red balls drawn.\n\n**Step 1: the sample space.** Unordered pairs from 5 balls: $\\binom{5}{2} = 10$ outcomes, all equally likely.\n\n**Step 2: apply the rule.** Both red: $\\binom{3}{2} = 3$ pairs give $X = 2$. One of each: $3 \\times 2 = 6$ pairs give $X = 1$. Both blue: $\\binom{2}{2} = 1$ pair gives $X = 0$.\n\n**Step 3: check.** $3 + 6 + 1 = 10$. Every outcome got exactly one value, as a function must.",
-    },
-    {
-      type: "callout",
-      variant: "tip",
-      title: "Worked example 2 · The larger of two dice",
-      content:
-        "Roll two dice and let $M = \\max(a, b)$. How many of the 36 outcomes give $M = k$?\n\n**Step 1.** $M \\le k$ means both dice are at most $k$: that is $k \\times k = k^2$ outcomes.\n\n**Step 2.** $M = k$ means $M \\le k$ but not $M \\le k - 1$: $k^2 - (k-1)^2 = 2k - 1$ outcomes.\n\n**Step 3.** So $M = 1, 2, 3, 4, 5, 6$ collect $1, 3, 5, 7, 9, 11$ outcomes, and $1 + 3 + 5 + 7 + 9 + 11 = 36$. ✓",
-    },
-    {
-      type: "callout",
-      variant: "tip",
-      title: "Worked example 3 · A delivery rider's day (word problem)",
-      content:
-        "A rider has 3 deliveries today. Each one is either on time ($O$) or late ($L$), so there are $2^3 = 8$ possible strings such as $OLO$. The app pays ₹40 for an on-time delivery and fines ₹20 for a late one. Let $X$ be the rider's net earnings for the day. What values can $X$ take, and how many of the 8 strings give each value?",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: find a simpler variable underneath.** Let $K$ be the number of on-time deliveries. Then $K \\in \\{0, 1, 2, 3\\}$ and there are $3 - K$ late ones, so",
-    },
-    { type: "math", latex: "X = 40K - 20(3 - K) = 60K - 60" },
-    {
-      type: "text",
-      content:
-        "*Why this step:* the earnings depend only on *how many* deliveries were on time, not on which ones. $K$ is the heads-count from the three-coin table in disguise.\n\n**Step 2: push each value of $K$ through the rule.** $K = 3, 2, 1, 0$ give $X = 120, 60, 0, -60$.\n\n**Step 3: count the strings.** The number of strings with $K$ on-time deliveries is $\\binom{3}{K}$, which is $1, 3, 3, 1$. Check: $1 + 3 + 3 + 1 = 8$. ✓\n\n*Why this step:* $X = 60K - 60$ is one-to-one, so each value of $X$ collects exactly the strings that give one value of $K$, and the counts carry over unchanged. A day with one on-time delivery earns exactly ₹0, and 0 is a perfectly good value of a random variable.",
-    },
-    {
-      type: "table",
-      headers: ["On time $K$", "0", "1", "2", "3"],
-      rows: [
-        ["Earnings $X$ (₹)", "−60", "0", "60", "120"],
-        ["Strings giving it", "1", "3", "3", "1"],
+      problem:
+        "A bag has 3 red balls ($R_1, R_2, R_3$) and 2 blue balls ($B_1, B_2$). Two are drawn together. Let $X$ be the number of red balls drawn. What values can $X$ take, and how many outcomes give each?",
+      steps: [
+        {
+          text: "**The sample space.** Unordered pairs from 5 balls: $\\binom{5}{2} = 10$ outcomes, all equally likely.",
+        },
+        {
+          text: "**Apply the rule.** Both red: $\\binom{3}{2} = 3$ pairs give $X = 2$. One of each: $3 \\times 2 = 6$ pairs give $X = 1$. Both blue: $\\binom{2}{2} = 1$ pair gives $X = 0$.",
+        },
+        {
+          text: "**Check.** $3 + 6 + 1 = 10$. Every outcome got exactly one value, as a function must.",
+        },
       ],
+      answer: "$X = 2$ for 3 pairs, $X = 1$ for 6 pairs, $X = 0$ for 1 pair.",
     },
     {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-1-we2",
+      title: "Worked example 2 · The larger of two dice",
+      problem:
+        "Roll two dice and let $M = \\max(a, b)$. How many of the 36 outcomes give $M = k$?",
+      steps: [
+        {
+          text: "$M \\le k$ means both dice are at most $k$: that is $k \\times k = k^2$ outcomes.",
+        },
+        {
+          text: "$M = k$ means $M \\le k$ but not $M \\le k - 1$: $k^2 - (k-1)^2 = 2k - 1$ outcomes.",
+        },
+        {
+          text: "So $M = 1, 2, 3, 4, 5, 6$ collect $1, 3, 5, 7, 9, 11$ outcomes, and $1 + 3 + 5 + 7 + 9 + 11 = 36$. ✓",
+        },
+      ],
+      answer: "$2k - 1$ outcomes.",
+    },
+    {
+      type: "worked-example",
+      id: "pr4-1-we3",
+      title: "Worked example 3 · A delivery rider's day (word problem)",
+      problem:
+        "A rider has 3 deliveries today. Each one is either on time ($O$) or late ($L$), so there are $2^3 = 8$ possible strings such as $OLO$. The app pays ₹40 for an on-time delivery and fines ₹20 for a late one. Let $X$ be the rider's net earnings for the day. What values can $X$ take, and how many of the 8 strings give each value?",
+      steps: [
+        {
+          text: "**Find a simpler variable underneath.** Let $K$ be the number of on-time deliveries. Then $K \\in \\{0, 1, 2, 3\\}$ and there are $3 - K$ late ones, so",
+          latex: "X = 40K - 20(3 - K) = 60K - 60",
+        },
+        {
+          text: "*Why this step:* the earnings depend only on *how many* deliveries were on time, not on which ones. $K$ is the heads-count from the three-coin table in disguise.",
+        },
+        {
+          text: "**Push each value of $K$ through the rule.** $K = 3, 2, 1, 0$ give $X = 120, 60, 0, -60$.",
+        },
+        {
+          text: "**Count the strings.** The number of strings with $K$ on-time deliveries is $\\binom{3}{K}$, which is $1, 3, 3, 1$. Check: $1 + 3 + 3 + 1 = 8$. ✓\n\n*Why this step:* $X = 60K - 60$ is one-to-one, so each value of $X$ collects exactly the strings that give one value of $K$, and the counts carry over unchanged. A day with one on-time delivery earns exactly ₹0, and 0 is a perfectly good value of a random variable.",
+          table: {
+            headers: ["On time $K$", "0", "1", "2", "3"],
+            rows: [
+              ["Earnings $X$ (₹)", "−60", "0", "60", "120"],
+              ["Strings giving it", "1", "3", "3", "1"],
+            ],
+          },
+        },
+      ],
+      answer: "$X = -60, 0, 60, 120$, from $1, 3, 3, 1$ strings.",
+    },
+    {
+      type: "worked-example",
+      id: "pr4-1-we4",
       title: "Worked example 4 · The gap between two dice (exam style)",
-      content:
+      problem:
         "Two dice are rolled and $D = |a - b|$ is the absolute difference of the two numbers. List the values of $D$ and count how many of the 36 outcomes give each value.",
+      steps: [
+        {
+          text: "**The range.** The smallest gap is 0 (a double) and the largest is $6 - 1 = 5$, so $D \\in \\{0, 1, 2, 3, 4, 5\\}$.",
+        },
+        {
+          text: "**Gap 0.** The doubles $(1,1), \\ldots, (6,6)$ give 6 outcomes.",
+        },
+        {
+          text: "**Gap $d \\ge 1$.** First count the pairs with $a - b = d$: $b$ can be $1, 2, \\ldots, 6 - d$, so there are $6 - d$ of them. The pairs with $b - a = d$ are their mirror images, another $6 - d$.",
+          latex: "\\#\\{D = d\\} = 2(6 - d) \\qquad (d = 1, 2, \\ldots, 5)",
+        },
+        {
+          text: "*Why this step:* the absolute value folds the $6 \\times 6$ grid along its main diagonal. Every gap $d \\ge 1$ is collected from two diagonals, one on each side, while gap 0 is the main diagonal itself and is counted once.",
+        },
+        {
+          text: "**Tabulate.** Put $d = 0$ and $d = 1, \\ldots, 5$ into the counts above.",
+          table: {
+            headers: ["$d$", "0", "1", "2", "3", "4", "5"],
+            rows: [["Outcomes with $D = d$", "6", "10", "8", "6", "4", "2"]],
+          },
+        },
+        {
+          text: "**Check.** $6 + 10 + 8 + 6 + 4 + 2 = 36$. ✓ The most common gap is 1, not 0: the doubles fill one diagonal, but a gap of 1 fills two.",
+        },
+      ],
+      answer: "$D = 0, 1, 2, 3, 4, 5$ from $6, 10, 8, 6, 4, 2$ outcomes.",
     },
-    {
-      type: "text",
-      content:
-        "**Step 1: the range.** The smallest gap is 0 (a double) and the largest is $6 - 1 = 5$, so $D \\in \\{0, 1, 2, 3, 4, 5\\}$.\n\n**Step 2: gap 0.** The doubles $(1,1), \\ldots, (6,6)$ give 6 outcomes.\n\n**Step 3: gap $d \\ge 1$.** First count the pairs with $a - b = d$: $b$ can be $1, 2, \\ldots, 6 - d$, so there are $6 - d$ of them. The pairs with $b - a = d$ are their mirror images, another $6 - d$.",
-    },
-    { type: "math", latex: "\\#\\{D = d\\} = 2(6 - d) \\qquad (d = 1, 2, \\ldots, 5)" },
-    {
-      type: "text",
-      content:
-        "*Why this step:* the absolute value folds the $6 \\times 6$ grid along its main diagonal. Every gap $d \\ge 1$ is collected from two diagonals, one on each side, while gap 0 is the main diagonal itself and is counted once.\n\n**Step 4: tabulate and check.**",
-    },
-    {
-      type: "table",
-      headers: ["$d$", "0", "1", "2", "3", "4", "5"],
-      rows: [["Outcomes with $D = d$", "6", "10", "8", "6", "4", "2"]],
-    },
-    {
-      type: "text",
-      content:
-        "$6 + 10 + 8 + 6 + 4 + 2 = 36$. ✓ The most common gap is 1, not 0: the doubles fill one diagonal, but a gap of 1 fills two.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr4-1-q1",
@@ -311,6 +349,7 @@ const lesson02: LessonSeed = {
       content:
         "That table is the **probability distribution** of $X$. It drops the outcomes entirely and keeps only what you need: each value and its probability. Once you have it, you can answer any question about $X$ without going back to the coins.",
     },
+    { type: "heading", text: "What makes a valid distribution" },
     {
       type: "callout",
       variant: "definition",
@@ -346,10 +385,11 @@ const lesson02: LessonSeed = {
       content:
         "If a bar is negative, or the bars add up to 0.9 or to 1.2, the table does not describe any real experiment. There is no outcome that happens −10% of the time, and a total other than 1 means some probability has gone missing or been counted twice. Always check both conditions before using a table.",
     },
+    { type: "heading", text: "Finding the constant $k$" },
     {
       type: "text",
       content:
-        "**Finding the constant $k$.**\n\nA standard exam question gives a distribution with an unknown constant. You use the condition $\\sum p_i = 1$ to find it, and the condition $p_i \\ge 0$ to throw away any impossible solution.",
+        "A standard exam question gives a distribution with an unknown constant. You use the condition $\\sum p_i = 1$ to find it, and the condition $p_i \\ge 0$ to throw away any impossible solution.",
     },
     {
       type: "table",
@@ -357,16 +397,32 @@ const lesson02: LessonSeed = {
       rows: [["$P(X = x)$", "0", "$k$", "$2k$", "$2k$", "$3k$", "$k^2$", "$2k^2$", "$7k^2 + k$"]],
     },
     {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-2-we1",
       title: "Worked example 1 · A quadratic in k",
-      content:
-        "**Step 1: sum to 1.** $0 + k + 2k + 2k + 3k + k^2 + 2k^2 + 7k^2 + k = 1$, so $10k^2 + 9k - 1 = 0$.\n\n**Step 2: solve.** $(10k - 1)(k + 1) = 0$, so $k = \\frac{1}{10}$ or $k = -1$.\n\n**Step 3: reject.** $k = -1$ would make $P(X = 1) = -1$, which is not allowed. So $k = \\frac{1}{10}$.\n\n**Step 4: use it.** $P(X < 3) = 0 + k + 2k = \\frac{3}{10}$. $\\;P(X > 6) = 7k^2 + k = 0.07 + 0.1 = 0.17$.",
+      problem:
+        "For the distribution in the table above, find $k$, then $P(X < 3)$ and $P(X > 6)$.",
+      steps: [
+        {
+          text: "**Sum to 1.** $0 + k + 2k + 2k + 3k + k^2 + 2k^2 + 7k^2 + k = 1$, so $10k^2 + 9k - 1 = 0$.",
+        },
+        {
+          text: "**Solve.** $(10k - 1)(k + 1) = 0$, so $k = \\frac{1}{10}$ or $k = -1$.",
+        },
+        {
+          text: "**Reject.** $k = -1$ would make $P(X = 1) = -1$, which is not allowed. So $k = \\frac{1}{10}$.",
+        },
+        {
+          text: "**Use it.** $P(X < 3) = 0 + k + 2k = \\frac{3}{10}$. $\\;P(X > 6) = 7k^2 + k = 0.07 + 0.1 = 0.17$.",
+        },
+      ],
+      answer: "$k = \\frac{1}{10}$, $P(X < 3) = \\frac{3}{10}$, $P(X > 6) = 0.17$",
     },
+    { type: "heading", text: "The cumulative distribution function" },
     {
       type: "text",
       content:
-        "**The cumulative distribution function.**\n\nMany questions ask \"at most\": at most 2 heads, a score of 4 or less. The running total of the PMF answers all of them at once.",
+        "Many questions ask \"at most\": at most 2 heads, a score of 4 or less. The running total of the PMF answers all of them at once.",
     },
     {
       type: "callout",
@@ -394,84 +450,100 @@ const lesson02: LessonSeed = {
         "P(X = x_i) = F(x_i) - F(x_{i-1}), \\qquad P(a < X \\le b) = F(b) - F(a)",
     },
     {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-2-we2",
       title: "Worked example 2 · From staircase back to bars",
-      content:
-        "$X$ takes the values 1, 2, 3, 4 with $F(1) = 0.2$, $F(2) = 0.5$, $F(3) = 0.9$, $F(4) = 1$.\n\n**Step 1: the PMF is the jumps.** $P(X=1) = 0.2$, $P(X=2) = 0.5 - 0.2 = 0.3$, $P(X=3) = 0.9 - 0.5 = 0.4$, $P(X=4) = 1 - 0.9 = 0.1$.\n\n**Step 2: check.** $0.2 + 0.3 + 0.4 + 0.1 = 1$. ✓\n\n**Step 3: an interval.** $P(2 \\le X \\le 3) = P(1 < X \\le 3) = F(3) - F(1) = 0.9 - 0.2 = 0.7$.",
-    },
-    {
-      type: "callout",
-      variant: "tip",
-      title: "Worked example 3 · The gap between two dice, as a distribution",
-      content:
-        "In 4.1 (Worked example 4) the gap $D = |a - b|$ collected 6, 10, 8, 6, 4, 2 of the 36 outcomes. Write down its distribution and its CDF, then find $P(D \\le 2)$ and $P(D \\ge 3)$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: divide by 36.** Every outcome has probability $\\frac{1}{36}$, so $P(D = d)$ is the count divided by 36.\n\n*Why this step:* $\\{D = d\\}$ is an ordinary event, and for equally likely outcomes its probability is favourable over total.\n\n**Step 2: running totals.** Add the bars from the left to get $F$.",
-    },
-    {
-      type: "table",
-      headers: ["$d$", "0", "1", "2", "3", "4", "5"],
-      rows: [
-        ["$P(D = d)$", "$\\frac{6}{36}$", "$\\frac{10}{36}$", "$\\frac{8}{36}$", "$\\frac{6}{36}$", "$\\frac{4}{36}$", "$\\frac{2}{36}$"],
-        ["$F(d)$", "$\\frac{6}{36}$", "$\\frac{16}{36}$", "$\\frac{24}{36}$", "$\\frac{30}{36}$", "$\\frac{34}{36}$", "$1$"],
+      problem:
+        "$X$ takes the values 1, 2, 3, 4 with $F(1) = 0.2$, $F(2) = 0.5$, $F(3) = 0.9$, $F(4) = 1$. Find the PMF of $X$ and $P(2 \\le X \\le 3)$.",
+      steps: [
+        {
+          text: "**The PMF is the jumps.** $P(X=1) = 0.2$, $P(X=2) = 0.5 - 0.2 = 0.3$, $P(X=3) = 0.9 - 0.5 = 0.4$, $P(X=4) = 1 - 0.9 = 0.1$.",
+        },
+        {
+          text: "**Check.** $0.2 + 0.3 + 0.4 + 0.1 = 1$. ✓",
+        },
+        {
+          text: "**An interval.** $P(2 \\le X \\le 3) = P(1 < X \\le 3) = F(3) - F(1) = 0.9 - 0.2 = 0.7$.",
+        },
       ],
+      answer: "PMF $0.2, 0.3, 0.4, 0.1$; $P(2 \\le X \\le 3) = 0.7$",
+    },
+    { type: "heading", text: "Distributions from counting and waiting" },
+    {
+      type: "worked-example",
+      id: "pr4-2-we3",
+      title: "Worked example 3 · The gap between two dice, as a distribution",
+      problem:
+        "In 4.1 (Worked example 4) the gap $D = |a - b|$ collected 6, 10, 8, 6, 4, 2 of the 36 outcomes. Write down its distribution and its CDF, then find $P(D \\le 2)$ and $P(D \\ge 3)$.",
+      steps: [
+        {
+          text: "**Divide by 36.** Every outcome has probability $\\frac{1}{36}$, so $P(D = d)$ is the count divided by 36.\n\n*Why this step:* $\\{D = d\\}$ is an ordinary event, and for equally likely outcomes its probability is favourable over total.",
+        },
+        {
+          text: "**Running totals.** Add the bars from the left to get $F$.",
+          table: {
+            headers: ["$d$", "0", "1", "2", "3", "4", "5"],
+            rows: [
+              ["$P(D = d)$", "$\\frac{6}{36}$", "$\\frac{10}{36}$", "$\\frac{8}{36}$", "$\\frac{6}{36}$", "$\\frac{4}{36}$", "$\\frac{2}{36}$"],
+              ["$F(d)$", "$\\frac{6}{36}$", "$\\frac{16}{36}$", "$\\frac{24}{36}$", "$\\frac{30}{36}$", "$\\frac{34}{36}$", "$1$"],
+            ],
+          },
+        },
+        {
+          text: "**Read off.** $P(D \\le 2) = F(2) = \\frac{24}{36} = \\frac{2}{3}$, and $P(D \\ge 3) = 1 - F(2) = \\frac{1}{3}$.\n\n*Why this step:* \"$D \\ge 3$\" is the complement of \"$D \\le 2$\", so one CDF value answers both questions. The last CDF entry coming out as exactly 1 is your built-in check.",
+        },
+      ],
+      answer: "$P(D \\le 2) = \\frac{2}{3}$, $P(D \\ge 3) = \\frac{1}{3}$",
     },
     {
-      type: "text",
-      content:
-        "**Step 3: read off.** $P(D \\le 2) = F(2) = \\frac{24}{36} = \\frac{2}{3}$, and $P(D \\ge 3) = 1 - F(2) = \\frac{1}{3}$.\n\n*Why this step:* \"$D \\ge 3$\" is the complement of \"$D \\le 2$\", so one CDF value answers both questions. The last CDF entry coming out as exactly 1 is your built-in check.",
-    },
-    {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-2-we4",
       title: "Worked example 4 · Testing bulbs until both duds are found (word problem)",
-      content:
+      problem:
         "A box of 6 bulbs contains 2 defective ones. A technician tests the bulbs one at a time, in random order, and stops as soon as both defective bulbs have been found. Let $X$ be the number of tests made. Find the distribution of $X$ and $P(X \\le 4)$.",
+      steps: [
+        {
+          text: "**Choose a sample space that makes counting easy.** All that matters is *which two positions* in the testing order hold the defective bulbs. Every pair of positions is equally likely, and there are $\\binom{6}{2} = 15$ pairs.\n\n*Why this step:* listing all $6! = 720$ testing orders would work, but it is far more than you need. Only the positions of the two duds decide $X$.",
+        },
+        {
+          text: "**Apply the rule.** Testing stops at the *later* of the two positions, so $X$ is the larger position. For $X = k$, one dud sits at position $k$ and the other at any of the $k - 1$ earlier positions.",
+          latex: "P(X = k) = \\frac{k - 1}{15}, \\qquad k = 2, 3, 4, 5, 6",
+        },
+        {
+          text: "**Check.** $\\frac{1 + 2 + 3 + 4 + 5}{15} = \\frac{15}{15} = 1$. ✓ This is the \"larger of two\" rule from 4.1 again, now without repeats, since two duds can't share a position.",
+        },
+        {
+          text: "**Add the first three values.** $P(X \\le 4) = \\frac{1 + 2 + 3}{15} = \\frac{6}{15} = \\frac{2}{5}$. So 60% of the time the technician has to test at least 5 bulbs.",
+        },
+      ],
+      answer: "$P(X = k) = \\frac{k - 1}{15}$ for $k = 2, \\ldots, 6$; $P(X \\le 4) = \\frac{2}{5}$",
     },
     {
-      type: "text",
-      content:
-        "**Step 1: choose a sample space that makes counting easy.** All that matters is *which two positions* in the testing order hold the defective bulbs. Every pair of positions is equally likely, and there are $\\binom{6}{2} = 15$ pairs.\n\n*Why this step:* listing all $6! = 720$ testing orders would work, but it is far more than you need. Only the positions of the two duds decide $X$.\n\n**Step 2: apply the rule.** Testing stops at the *later* of the two positions, so $X$ is the larger position. For $X = k$, one dud sits at position $k$ and the other at any of the $k - 1$ earlier positions.",
-    },
-    { type: "math", latex: "P(X = k) = \\frac{k - 1}{15}, \\qquad k = 2, 3, 4, 5, 6" },
-    {
-      type: "text",
-      content:
-        "This is the \"larger of two\" rule from 4.1 again, now without repeats, since two duds can't share a position.\n\n**Step 3: check.** $\\frac{1 + 2 + 3 + 4 + 5}{15} = \\frac{15}{15} = 1$. ✓\n\n**Step 4: answer.** $P(X \\le 4) = \\frac{1 + 2 + 3}{15} = \\frac{6}{15} = \\frac{2}{5}$. So 60% of the time the technician has to test at least 5 bulbs.",
-    },
-    {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-2-we5",
       title: "Worked example 5 · Throwing until a six (exam style)",
-      content:
+      problem:
         "A die is thrown repeatedly until a 6 appears. Let $X$ be the number of throws needed. Find the distribution of $X$, show that it is a valid distribution, and find $P(X \\ge 4)$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: the event $X = k$.** It means the first $k - 1$ throws are not sixes and throw $k$ is a six. The throws are independent, so the probabilities multiply.",
-    },
-    {
-      type: "math",
-      latex: "P(X = k) = \\left(\\tfrac{5}{6}\\right)^{k-1} \\cdot \\tfrac{1}{6}, \\qquad k = 1, 2, 3, \\ldots",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* $X$ has no largest value, so no finite table can hold it. A formula in $k$ is the distribution. This is the **listable** set of values that the definition in 4.1 allowed for.\n\n**Step 2: check validity.** Every term is positive. The sum is a geometric series with first term $\\frac{1}{6}$ and ratio $\\frac{5}{6}$:",
-    },
-    {
-      type: "math",
-      latex: "\\sum_{k=1}^{\\infty} \\left(\\tfrac{5}{6}\\right)^{k-1} \\tfrac{1}{6} = \\frac{1/6}{1 - 5/6} = 1",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3: $P(X \\ge 4)$ without summing a tail.** $X \\ge 4$ happens exactly when the first 3 throws all miss the six:\n\n$P(X \\ge 4) = \\left(\\frac{5}{6}\\right)^3 = \\frac{125}{216} \\approx 0.58$.\n\n*Why this step:* adding $P(X = 4) + P(X = 5) + \\cdots$ would need another infinite series. Describing the event in words first turns it into a single product.\n\n**Step 4: check with the complement.** $P(X \\le 3) = \\frac{1}{6} + \\frac{5}{36} + \\frac{25}{216} = \\frac{36 + 30 + 25}{216} = \\frac{91}{216}$, and $\\frac{91}{216} + \\frac{125}{216} = 1$. ✓",
+      steps: [
+        {
+          text: "**The event $X = k$.** It means the first $k - 1$ throws are not sixes and throw $k$ is a six. The throws are independent, so the probabilities multiply.",
+          latex: "P(X = k) = \\left(\\tfrac{5}{6}\\right)^{k-1} \\cdot \\tfrac{1}{6}, \\qquad k = 1, 2, 3, \\ldots",
+        },
+        {
+          text: "*Why this step:* $X$ has no largest value, so no finite table can hold it. A formula in $k$ is the distribution. This is the **listable** set of values that the definition in 4.1 allowed for.",
+        },
+        {
+          text: "**Check validity.** Every term is positive. The sum is a geometric series with first term $\\frac{1}{6}$ and ratio $\\frac{5}{6}$:",
+          latex: "\\sum_{k=1}^{\\infty} \\left(\\tfrac{5}{6}\\right)^{k-1} \\tfrac{1}{6} = \\frac{1/6}{1 - 5/6} = 1",
+        },
+        {
+          text: "**$P(X \\ge 4)$ without summing a tail.** $X \\ge 4$ happens exactly when the first 3 throws all miss the six:\n\n$P(X \\ge 4) = \\left(\\frac{5}{6}\\right)^3 = \\frac{125}{216} \\approx 0.58$.\n\n*Why this step:* adding $P(X = 4) + P(X = 5) + \\cdots$ would need another infinite series. Describing the event in words first turns it into a single product.",
+        },
+        {
+          text: "**Check with the complement.** $P(X \\le 3) = \\frac{1}{6} + \\frac{5}{36} + \\frac{25}{216} = \\frac{36 + 30 + 25}{216} = \\frac{91}{216}$, and $\\frac{91}{216} + \\frac{125}{216} = 1$. ✓",
+        },
+      ],
+      answer: "$P(X = k) = \\left(\\frac{5}{6}\\right)^{k-1} \\cdot \\frac{1}{6}$; $P(X \\ge 4) = \\frac{125}{216} \\approx 0.58$",
     },
     {
       type: "interactive",
@@ -488,6 +560,7 @@ const lesson02: LessonSeed = {
           "The distribution of the sum of two dice, with P(4 ≤ X ≤ 9) shaded. In the CDF view, the same probability is the rise of the staircase from just before 4 up to 9.",
       },
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr4-2-q1",
@@ -629,10 +702,11 @@ const lesson03: LessonSeed = {
           "The line is the running average of all rolls so far. Early on it jumps around. After a thousand rolls it hugs 3.5, which is the average of 1 to 6.",
       },
     },
+    { type: "heading", text: "Why \"balance point\"" },
     {
       type: "text",
       content:
-        "**Why \"balance point\".**\n\nDraw the distribution as bars on a see-saw, where each bar's weight is its probability. The pivot that makes it balance is the point $\\mu$ where the moments cancel: $\\sum (x_i - \\mu) p_i = 0$. Solving gives $\\sum x_i p_i = \\mu \\sum p_i = \\mu$. So **the expectation is the centre of mass of the bar chart.**",
+        "Draw the distribution as bars on a see-saw, where each bar's weight is its probability. The pivot that makes it balance is the point $\\mu$ where the moments cancel: $\\sum (x_i - \\mu) p_i = 0$. Solving gives $\\sum x_i p_i = \\mu \\sum p_i = \\mu$. So **the expectation is the centre of mass of the bar chart.**",
     },
     {
       type: "interactive",
@@ -656,122 +730,161 @@ const lesson03: LessonSeed = {
         "The expected value of a die roll is 3.5, and no roll ever shows 3.5. In the distribution above the most likely value is 0 but $E[X] = 1.1$. The mean is a long-run *average*. It need not be a possible value, and it need not be the value with the tallest bar.",
     },
     {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-3-we1",
       title: "Worked example 1 · Heads in three tosses",
-      content:
-        "Using the distribution from 4.2:\n\n$E[X] = 0 \\cdot \\frac{1}{8} + 1 \\cdot \\frac{3}{8} + 2 \\cdot \\frac{3}{8} + 3 \\cdot \\frac{1}{8} = \\frac{0 + 3 + 6 + 3}{8} = \\frac{12}{8} = 1.5$.\n\nThat is half of 3 tosses, as you would expect. The distribution is symmetric about 1.5, so the see-saw balances at its centre.",
-    },
-    {
-      type: "callout",
-      variant: "tip",
-      title: "Worked example 2 · Sum of two dice by symmetry",
-      content:
-        "The distribution 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1 (out of 36) is symmetric about 7. A symmetric bar chart balances at its centre, so $E[X] = 7$ without any arithmetic.\n\nCheck: $\\frac{2\\cdot1 + 3\\cdot2 + 4\\cdot3 + 5\\cdot4 + 6\\cdot5 + 7\\cdot6 + 8\\cdot5 + 9\\cdot4 + 10\\cdot3 + 11\\cdot2 + 12\\cdot1}{36} = \\frac{252}{36} = 7$. ✓",
-    },
-    {
-      type: "text",
-      content:
-        "**Fair games and expected profit.**\n\nA game is **fair** if your expected profit is 0. Neither side gains in the long run. A positive expected profit favours you and a negative one favours the house.",
-    },
-    {
-      type: "callout",
-      variant: "tip",
-      title: "Worked example 3 · The ₹10 die stall",
-      content:
-        "From 4.1: pay ₹10, win ₹30 on a 6. Profit $X = 20$ with probability $\\frac{1}{6}$ and $X = -10$ with probability $\\frac{5}{6}$.\n\n**Step 1.** $E[X] = 20 \\cdot \\frac{1}{6} + (-10) \\cdot \\frac{5}{6} = \\frac{20 - 50}{6} = -5$.\n\n**Step 2: interpret.** On average you lose ₹5 per game. Over 600 games you expect to lose about ₹3000.\n\n**Step 3: the fair price.** Expected payout is $30 \\cdot \\frac{1}{6} = 5$, so ₹5. A ₹5 entry fee would make the game fair.",
-    },
-    {
-      type: "callout",
-      variant: "tip",
-      title: "Worked example 4 · A charity lottery",
-      content:
-        "1000 tickets are sold at ₹100 each. Prizes: one of ₹50,000, five of ₹2,000 and twenty of ₹500.\n\n**Step 1: expected payout per ticket.** A ticket is equally likely to be any of the 1000, so the expected payout is the total prize money divided by 1000: $\\frac{50000 + 5 \\cdot 2000 + 20 \\cdot 500}{1000} = \\frac{70000}{1000} = 70$, so ₹70.\n\n**Step 2: expected profit.** $70 - 100 = -30$, a loss of ₹30 per ticket. The charity keeps ₹30,000 in total, which is the point of the lottery.",
-    },
-    {
-      type: "callout",
-      variant: "tip",
-      title: "Worked example 5 · Pricing an insurance policy (word problem)",
-      content:
-        "An insurer sells one-year phone insurance for a premium of ₹3,000. Each year 2% of insured phones are written off, and the insurer then pays out ₹1,00,000. Otherwise it pays nothing. Find the insurer's expected profit per policy and the break-even premium.",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: the random variable.** Let $X$ be the insurer's profit on one policy. The premium comes in whether or not there is a claim.",
-    },
-    {
-      type: "table",
-      headers: ["Case", "Profit $x$ (₹)", "$p$"],
-      rows: [
-        ["No claim", "$3000$", "$0.98$"],
-        ["Claim", "$3000 - 100000 = -97000$", "$0.02$"],
+      problem:
+        "Find the expected number of heads in three tosses of a fair coin.\n\nUsing the distribution from 4.2: $P(X = 0, 1, 2, 3) = \\frac{1}{8}, \\frac{3}{8}, \\frac{3}{8}, \\frac{1}{8}$.",
+      steps: [
+        {
+          text: "$E[X] = 0 \\cdot \\frac{1}{8} + 1 \\cdot \\frac{3}{8} + 2 \\cdot \\frac{3}{8} + 3 \\cdot \\frac{1}{8} = \\frac{0 + 3 + 6 + 3}{8} = \\frac{12}{8} = 1.5$.",
+        },
+        {
+          text: "That is half of 3 tosses, as you would expect. The distribution is symmetric about 1.5, so the see-saw balances at its centre.",
+        },
       ],
+      answer: "$E[X] = 1.5$",
     },
+    {
+      type: "worked-example",
+      id: "pr4-3-we2",
+      title: "Worked example 2 · Sum of two dice by symmetry",
+      problem:
+        "Find the expected sum of two dice.",
+      steps: [
+        {
+          text: "The distribution 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1 (out of 36) is symmetric about 7. A symmetric bar chart balances at its centre, so $E[X] = 7$ without any arithmetic.",
+        },
+        {
+          text: "Check: $\\frac{2\\cdot1 + 3\\cdot2 + 4\\cdot3 + 5\\cdot4 + 6\\cdot5 + 7\\cdot6 + 8\\cdot5 + 9\\cdot4 + 10\\cdot3 + 11\\cdot2 + 12\\cdot1}{36} = \\frac{252}{36} = 7$. ✓",
+        },
+      ],
+      answer: "$E[X] = 7$",
+    },
+    { type: "heading", text: "Fair games and expected profit" },
     {
       type: "text",
       content:
-        "*Why this step:* writing both cases as *profit* keeps the signs honest. The claim case is a large negative value, and it has to enter the average with its sign.\n\n**Step 2: the expectation.**",
-    },
-    { type: "math", latex: "E[X] = 3000(0.98) + (-97000)(0.02) = 2940 - 1940 = 1000" },
-    {
-      type: "text",
-      content:
-        "**Step 3: a faster route.** $X = 3000 - C$, where $C$ is the payout. Subtracting from a fixed ₹3,000 subtracts the average too, so $E[X] = 3000 - E[C] = 3000 - 0.02 \\times 100000 = 1000$. (This is the rule $E[aX + b] = aE[X] + b$, derived at the end of this lesson.)\n\n**Step 4: break-even.** The premium that gives expected profit 0 equals the expected payout, ₹2,000.\n\n*Why this matters:* on any single policy the insurer either gains ₹3,000 or loses ₹97,000. It never makes ₹1,000. Over 10,000 policies, though, it can count on roughly $10000 \\times 1000$, about ₹1 crore. The mean describes the whole portfolio, not one customer.",
+        "A game is **fair** if your expected profit is 0. Neither side gains in the long run. A positive expected profit favours you and a negative one favours the house.",
     },
     {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-3-we3",
+      title: "Worked example 3 · The ₹10 die stall",
+      problem:
+        "From 4.1: pay ₹10, win ₹30 on a 6. Profit $X = 20$ with probability $\\frac{1}{6}$ and $X = -10$ with probability $\\frac{5}{6}$. Find $E[X]$ and the fair entry fee.",
+      steps: [
+        {
+          text: "$E[X] = 20 \\cdot \\frac{1}{6} + (-10) \\cdot \\frac{5}{6} = \\frac{20 - 50}{6} = -5$.",
+        },
+        {
+          text: "**Interpret.** On average you lose ₹5 per game. Over 600 games you expect to lose about ₹3000.",
+        },
+        {
+          text: "**The fair price.** Expected payout is $30 \\cdot \\frac{1}{6} = 5$, so ₹5. A ₹5 entry fee would make the game fair.",
+        },
+      ],
+      answer: "$E[X] = -5$: you lose ₹5 per game on average. A fair fee is ₹5.",
+    },
+    {
+      type: "worked-example",
+      id: "pr4-3-we4",
+      title: "Worked example 4 · A charity lottery",
+      problem:
+        "1000 tickets are sold at ₹100 each. Prizes: one of ₹50,000, five of ₹2,000 and twenty of ₹500. Find a buyer's expected profit per ticket.",
+      steps: [
+        {
+          text: "**Expected payout per ticket.** A ticket is equally likely to be any of the 1000, so the expected payout is the total prize money divided by 1000: $\\frac{50000 + 5 \\cdot 2000 + 20 \\cdot 500}{1000} = \\frac{70000}{1000} = 70$, so ₹70.",
+        },
+        {
+          text: "**Expected profit.** $70 - 100 = -30$, a loss of ₹30 per ticket. The charity keeps ₹30,000 in total, which is the point of the lottery.",
+        },
+      ],
+      answer: "A loss of ₹30 per ticket.",
+    },
+    {
+      type: "worked-example",
+      id: "pr4-3-we5",
+      title: "Worked example 5 · Pricing an insurance policy (word problem)",
+      problem:
+        "An insurer sells one-year phone insurance for a premium of ₹3,000. Each year 2% of insured phones are written off, and the insurer then pays out ₹1,00,000. Otherwise it pays nothing. Find the insurer's expected profit per policy and the break-even premium.",
+      steps: [
+        {
+          text: "**The random variable.** Let $X$ be the insurer's profit on one policy. The premium comes in whether or not there is a claim.\n\n*Why this step:* writing both cases as *profit* keeps the signs honest. The claim case is a large negative value, and it has to enter the average with its sign.",
+          table: {
+            headers: ["Case", "Profit $x$ (₹)", "$p$"],
+            rows: [
+              ["No claim", "$3000$", "$0.98$"],
+              ["Claim", "$3000 - 100000 = -97000$", "$0.02$"],
+            ],
+          },
+        },
+        {
+          text: "**The expectation.** ",
+          latex: "E[X] = 3000(0.98) + (-97000)(0.02) = 2940 - 1940 = 1000",
+        },
+        {
+          text: "**A faster route.** $X = 3000 - C$, where $C$ is the payout. Subtracting from a fixed ₹3,000 subtracts the average too, so $E[X] = 3000 - E[C] = 3000 - 0.02 \\times 100000 = 1000$. (This is the rule $E[aX + b] = aE[X] + b$, derived at the end of this lesson.)",
+        },
+        {
+          text: "**Break-even.** The premium that gives expected profit 0 equals the expected payout, ₹2,000.\n\n*Why this matters:* on any single policy the insurer either gains ₹3,000 or loses ₹97,000. It never makes ₹1,000. Over 10,000 policies, though, it can count on roughly $10000 \\times 1000$, about ₹1 crore. The mean describes the whole portfolio, not one customer.",
+        },
+      ],
+      answer: "Expected profit ₹1,000 per policy; break-even premium ₹2,000.",
+    },
+    { type: "heading", text: "Expected numbers of tests and throws" },
+    {
+      type: "worked-example",
+      id: "pr4-3-we6",
       title: "Worked example 6 · How many bulbs get tested? (exam style)",
-      content:
+      problem:
         "In 4.2 (Worked example 4), 6 bulbs including 2 defective ones are tested until both duds are found, and $P(X = k) = \\frac{k - 1}{15}$ for $k = 2, \\ldots, 6$. Find $E[X]$.",
+      steps: [
+        {
+          text: "**Weight each value by its probability.** ",
+          latex: "E[X] = \\frac{2 \\cdot 1 + 3 \\cdot 2 + 4 \\cdot 3 + 5 \\cdot 4 + 6 \\cdot 5}{15} = \\frac{2 + 6 + 12 + 20 + 30}{15} = \\frac{70}{15} = \\frac{14}{3} \\approx 4.67",
+        },
+        {
+          text: "*Why this step:* pulling the common $\\frac{1}{15}$ out front keeps the arithmetic in whole numbers until the very end.",
+        },
+        {
+          text: "**A sanity check by symmetry.** The two duds cut the 4 good bulbs into three gaps: before the first dud, between the duds, and after the second. By symmetry each gap holds $\\frac{4}{3}$ good bulbs on average. Testing stops before the last gap, so $E[X] = 6 - \\frac{4}{3} = \\frac{14}{3}$. ✓\n\nTwo different methods agreeing is the strongest check you can make in an exam.",
+        },
+      ],
+      answer: "$E[X] = \\frac{14}{3} \\approx 4.67$",
     },
     {
-      type: "text",
-      content: "**Step 1: weight each value by its probability.**",
-    },
-    {
-      type: "math",
-      latex:
-        "E[X] = \\frac{2 \\cdot 1 + 3 \\cdot 2 + 4 \\cdot 3 + 5 \\cdot 4 + 6 \\cdot 5}{15} = \\frac{2 + 6 + 12 + 20 + 30}{15} = \\frac{70}{15} = \\frac{14}{3} \\approx 4.67",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* pulling the common $\\frac{1}{15}$ out front keeps the arithmetic in whole numbers until the very end.\n\n**Step 2: a sanity check by symmetry.** The two duds cut the 4 good bulbs into three gaps: before the first dud, between the duds, and after the second. By symmetry each gap holds $\\frac{4}{3}$ good bulbs on average. Testing stops before the last gap, so $E[X] = 6 - \\frac{4}{3} = \\frac{14}{3}$. ✓\n\nTwo different methods agreeing is the strongest check you can make in an exam.",
-    },
-    {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-3-we7",
       title: "Worked example 7 · Expected throws until a six (JEE style)",
-      content:
+      problem:
         "In 4.2 (Worked example 5), the number of throws needed to get a six has $P(X = k) = q^{k-1}p$ for $k = 1, 2, 3, \\ldots$, with $p = \\frac{1}{6}$ and $q = \\frac{5}{6}$. Find $E[X]$.",
+      steps: [
+        {
+          text: "**Set up the sum.** $E[X] = \\sum_{k \\ge 1} k\\,q^{k-1} p = p\\,S$, where $S = 1 + 2q + 3q^2 + 4q^3 + \\cdots$.\n\n*Why this step:* $p$ is a factor of every term, so pull it out. What remains is an arithmetico-geometric series: the coefficients rise by 1 while the powers of $q$ rise by 1.",
+        },
+        {
+          text: "**Shift and subtract.** Multiply $S$ by $q$ and subtract, lining up equal powers of $q$:",
+          latex: "\\begin{aligned} S &= 1 + 2q + 3q^2 + 4q^3 + \\cdots \\\\ qS &= \\quad\\;\\; q + 2q^2 + 3q^3 + \\cdots \\\\ (1 - q)S &= 1 + q + q^2 + q^3 + \\cdots = \\frac{1}{1 - q} \\end{aligned}",
+        },
+        {
+          text: "*Why this step:* subtracting cancels the rising coefficients and leaves a plain geometric series, which you know how to sum.",
+        },
+        {
+          text: "**Finish.** $S = \\frac{1}{(1 - q)^2} = \\frac{1}{p^2}$, so",
+          latex: "E[X] = p \\cdot \\frac{1}{p^2} = \\frac{1}{p} = 6",
+        },
+        {
+          text: "The answer matches intuition: a six turns up once in every 6 throws on average, so on average you wait 6 throws for one. The same working gives $\\frac{1}{p}$ for any success probability $p$: 2 tosses for a head, 36 throws of two dice for a double six.",
+        },
+      ],
+      answer: "$E[X] = 6$",
     },
+    { type: "heading", text: "Expectation of a function of $X$" },
     {
       type: "text",
       content:
-        "**Step 1: set up the sum.** $E[X] = \\sum_{k \\ge 1} k\\,q^{k-1} p = p\\,S$, where $S = 1 + 2q + 3q^2 + 4q^3 + \\cdots$.\n\n*Why this step:* $p$ is a factor of every term, so pull it out. What remains is an arithmetico-geometric series: the coefficients rise by 1 while the powers of $q$ rise by 1.\n\n**Step 2: shift and subtract.** Multiply $S$ by $q$ and subtract, lining up equal powers of $q$:",
-    },
-    {
-      type: "math",
-      latex:
-        "\\begin{aligned} S &= 1 + 2q + 3q^2 + 4q^3 + \\cdots \\\\ qS &= \\quad\\;\\; q + 2q^2 + 3q^3 + \\cdots \\\\ (1 - q)S &= 1 + q + q^2 + q^3 + \\cdots = \\frac{1}{1 - q} \\end{aligned}",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* subtracting cancels the rising coefficients and leaves a plain geometric series, which you know how to sum.\n\n**Step 3: finish.** $S = \\frac{1}{(1 - q)^2} = \\frac{1}{p^2}$, so",
-    },
-    { type: "math", latex: "E[X] = p \\cdot \\frac{1}{p^2} = \\frac{1}{p} = 6" },
-    {
-      type: "text",
-      content:
-        "The answer matches intuition: a six turns up once in every 6 throws on average, so on average you wait 6 throws for one. The same working gives $\\frac{1}{p}$ for any success probability $p$: 2 tosses for a head, 36 throws of two dice for a double six.",
-    },
-    {
-      type: "text",
-      content:
-        "**Expectation of a function of $X$.**\n\nIf $Y = g(X)$, then $Y$ takes the value $g(x_i)$ whenever $X = x_i$. So you don't need a new table. You weight $g(x_i)$ by the same $p_i$:",
+        "If $Y = g(X)$, then $Y$ takes the value $g(x_i)$ whenever $X = x_i$. So you don't need a new table. You weight $g(x_i)$ by the same $p_i$:",
     },
     { type: "math", latex: "E[g(X)] = \\sum_i g(x_i)\\, p_i, \\qquad \\text{e.g.}\\quad E[X^2] = \\sum_i x_i^2\\, p_i" },
     {
@@ -789,6 +902,7 @@ const lesson03: LessonSeed = {
       content:
         "Changing units or shifting the scale does the same thing to the average. If your die winnings are doubled and you get a ₹1 bonus, you expect $2(3.5) + 1 = 8$ rupees per game. Be careful, though: $E[X^2]$ is **not** $(E[X])^2$ in general. For a die, $E[X^2] = \\frac{1 + 4 + 9 + 16 + 25 + 36}{6} = \\frac{91}{6} \\approx 15.17$, while $3.5^2 = 12.25$. The gap between those two numbers is the subject of the next lesson.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr4-3-q1",
@@ -912,10 +1026,11 @@ const lesson04: LessonSeed = {
           "X and Y both balance at 3. X spreads its weight evenly while Y piles it in the middle. The ±σ bands show the difference: Var(X) = 2 and Var(Y) = 0.7.",
       },
     },
+    { type: "heading", text: "Building a measure of spread" },
     {
       type: "text",
       content:
-        "**Building a measure of spread.**\n\n**First try: the average deviation.** Measure each value's distance from the mean, $X - \\mu$, and average it. That fails every time:\n\n$E[X - \\mu] = E[X] - \\mu = 0$.\n\nPositive and negative deviations always cancel. That is exactly what \"balance point\" means.\n\n**Fix: square the deviations** so they can't cancel. Squares are never negative, they punish large deviations more than small ones, and they lead to clean algebra.",
+        "**First try: the average deviation.** Measure each value's distance from the mean, $X - \\mu$, and average it. That fails every time:\n\n$E[X - \\mu] = E[X] - \\mu = 0$.\n\nPositive and negative deviations always cancel. That is exactly what \"balance point\" means.\n\n**Fix: square the deviations** so they can't cancel. Squares are never negative, they punish large deviations more than small ones, and they lead to clean algebra.",
     },
     {
       type: "callout",
@@ -929,10 +1044,11 @@ const lesson04: LessonSeed = {
       content:
         "For the two distributions above, with $\\mu = 3$:\n\n$\\operatorname{Var}(X) = 0.2\\,(4 + 1 + 0 + 1 + 4) = 2$, so $\\sigma_X = \\sqrt{2} \\approx 1.41$.\n\n$\\operatorname{Var}(Y) = 0.05 \\cdot 4 + 0.15 \\cdot 1 + 0.6 \\cdot 0 + 0.15 \\cdot 1 + 0.05 \\cdot 4 = 0.7$, so $\\sigma_Y \\approx 0.84$.",
     },
+    { type: "heading", text: "The shortcut formula, derived" },
     {
       type: "text",
       content:
-        "**The shortcut formula, derived.**\n\nThe definition needs $x_i - \\mu$ for every value, and that gets messy when $\\mu$ is a fraction. Expand the square and use $E[aX + b] = aE[X] + b$ from 4.3. Here $\\mu$ is a constant:",
+        "The definition needs $x_i - \\mu$ for every value, and that gets messy when $\\mu$ is a fraction. Expand the square and use $E[aX + b] = aE[X] + b$ from 4.3. Here $\\mu$ is a constant:",
     },
     {
       type: "math",
@@ -946,11 +1062,26 @@ const lesson04: LessonSeed = {
         "In words: **the mean of the squares minus the square of the mean.** A variance can never be negative, so this also shows $E[X^2] \\ge (E[X])^2$ for every random variable. Equality holds only when $X$ never strays from $\\mu$, that is, when $X$ is a constant.",
     },
     {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-4-we1",
       title: "Worked example 1 · A fair die",
-      content:
-        "**Step 1.** $\\mu = 3.5 = \\frac{7}{2}$.\n\n**Step 2.** $E[X^2] = \\frac{1 + 4 + 9 + 16 + 25 + 36}{6} = \\frac{91}{6}$.\n\n**Step 3.** $\\operatorname{Var}(X) = \\frac{91}{6} - \\frac{49}{4} = \\frac{182 - 147}{12} = \\frac{35}{12} \\approx 2.92$.\n\n**Step 4.** $\\sigma = \\sqrt{35/12} \\approx 1.71$. A typical roll lands about 1.7 away from 3.5.",
+      problem:
+        "Find the variance and standard deviation of one roll of a fair die.",
+      steps: [
+        {
+          text: "$\\mu = 3.5 = \\frac{7}{2}$.",
+        },
+        {
+          text: "$E[X^2] = \\frac{1 + 4 + 9 + 16 + 25 + 36}{6} = \\frac{91}{6}$.",
+        },
+        {
+          text: "$\\operatorname{Var}(X) = \\frac{91}{6} - \\frac{49}{4} = \\frac{182 - 147}{12} = \\frac{35}{12} \\approx 2.92$.",
+        },
+        {
+          text: "$\\sigma = \\sqrt{35/12} \\approx 1.71$. A typical roll lands about 1.7 away from 3.5.",
+        },
+      ],
+      answer: "$\\operatorname{Var}(X) = \\frac{35}{12} \\approx 2.92$, $\\sigma \\approx 1.71$",
     },
     {
       type: "text",
@@ -968,16 +1099,26 @@ const lesson04: LessonSeed = {
       ],
     },
     {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-4-we2",
       title: "Worked example 2 · Heads in three tosses",
-      content:
-        "From the table: $\\mu = 1.5$ and $E[X^2] = 3$. So $\\operatorname{Var}(X) = 3 - 1.5^2 = 3 - 2.25 = 0.75$, and $\\sigma = \\sqrt{0.75} \\approx 0.87$.\n\nThe column totals are all you need. Check the $p$ column adds up to 1 before going further.",
+      problem:
+        "Find the variance and standard deviation of the number of heads in three tosses.",
+      steps: [
+        {
+          text: "From the table: $\\mu = 1.5$ and $E[X^2] = 3$. So $\\operatorname{Var}(X) = 3 - 1.5^2 = 3 - 2.25 = 0.75$, and $\\sigma = \\sqrt{0.75} \\approx 0.87$.",
+        },
+        {
+          text: "The column totals are all you need. Check the $p$ column adds up to 1 before going further.",
+        },
+      ],
+      answer: "$\\operatorname{Var}(X) = 0.75$, $\\sigma \\approx 0.87$",
     },
+    { type: "heading", text: "What happens to spread under $aX + b$" },
     {
       type: "text",
       content:
-        "**What happens to spread under $aX + b$.**\n\nLet $Y = aX + b$. From 4.3, $\\mu_Y = a\\mu + b$. Look at a deviation:",
+        "Let $Y = aX + b$. From 4.3, $\\mu_Y = a\\mu + b$. Look at a deviation:",
     },
     {
       type: "math",
@@ -1002,98 +1143,131 @@ const lesson04: LessonSeed = {
         "A tempting wrong answer is $\\operatorname{Var}(aX + b) = a\\operatorname{Var}(X) + b$, which copies the rule for the mean. But **adding $b$ slides the whole bar chart sideways without changing its width**, so $b$ contributes nothing to spread. And variance is measured in squared units, so scaling by $a$ scales the variance by $a^2$. A negative $a$ flips the chart over, which doesn't change its width either: $\\operatorname{Var}(-X) = \\operatorname{Var}(X)$.",
     },
     {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-4-we3",
       title: "Worked example 3 · Celsius to Fahrenheit",
-      content:
-        "A city's noon temperature $C$ has mean 30 °C and standard deviation 5 °C. In Fahrenheit, $F = 1.8C + 32$.\n\n**Mean:** $1.8 \\cdot 30 + 32 = 86$ °F.\n\n**SD:** $|1.8| \\cdot 5 = 9$ °F. The $+32$ does nothing to it.\n\n**Variance:** $1.8^2 \\cdot 25 = 81$ (°F)², which is $9^2$. ✓",
-    },
-    {
-      type: "callout",
-      variant: "tip",
-      title: "Worked example 4 · A negative scale",
-      content:
-        "$\\operatorname{Var}(X) = 4$. Find $\\operatorname{Var}(3 - 2X)$.\n\nHere $a = -2$ and $b = 3$. $\\operatorname{Var} = (-2)^2 \\cdot 4 = 16$, and $\\sigma = 4$. The sign of $a$ and the constant 3 play no part.",
-    },
-    {
-      type: "callout",
-      variant: "tip",
-      title: "Worked example 5 · Red balls, all the way to σ",
-      content:
-        "Back to the bag from 4.1: 3 red and 2 blue balls, two drawn together, $X$ = number of red balls. We found $P(X = 0) = \\frac{1}{10}$, $P(X = 1) = \\frac{6}{10}$, $P(X = 2) = \\frac{3}{10}$.\n\n**Step 1: the mean.** $E[X] = 0 \\cdot \\frac{1}{10} + 1 \\cdot \\frac{6}{10} + 2 \\cdot \\frac{3}{10} = 0.6 + 0.6 = 1.2$.\n\n**Step 2: the mean of the squares.** $E[X^2] = 0 + 1 \\cdot \\frac{6}{10} + 4 \\cdot \\frac{3}{10} = 0.6 + 1.2 = 1.8$.\n\n**Step 3: the shortcut.** $\\operatorname{Var}(X) = 1.8 - 1.2^2 = 1.8 - 1.44 = 0.36$.\n\n**Step 4: the SD.** $\\sigma = \\sqrt{0.36} = 0.6$.\n\nThis is the shape of the standard board question: build the table from the experiment, then mean, variance, SD.",
-    },
-    {
-      type: "callout",
-      variant: "tip",
-      title: "Worked example 6 · Same average, different risk (word problem)",
-      content:
-        "Two business plans have these one-year returns, in ₹ lakh.\n\n**Plan A:** 2 or 6, each with probability 0.5.\n\n**Plan B:** $-2$ with probability 0.25, 4 with probability 0.5, 10 with probability 0.25.\n\nCompare the two plans.",
-    },
-    { type: "text", content: "**Step 1: the means.**" },
-    {
-      type: "math",
-      latex: "E[A] = 0.5(2) + 0.5(6) = 4, \\qquad E[B] = 0.25(-2) + 0.5(4) + 0.25(10) = -0.5 + 2 + 2.5 = 4",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* always compare centres first. If the means differed, that alone might settle the choice. Here they tie, so spread decides.\n\n**Step 2: the means of the squares.**",
-    },
-    {
-      type: "math",
-      latex: "E[A^2] = 0.5(4) + 0.5(36) = 20, \\qquad E[B^2] = 0.25(4) + 0.5(16) + 0.25(100) = 1 + 8 + 25 = 34",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* the square of $-2$ is $+4$. A loss adds to the spread just as much as a gain of the same size.\n\n**Step 3: variance and SD.**",
-    },
-    {
-      type: "math",
-      latex:
-        "\\operatorname{Var}(A) = 20 - 4^2 = 4,\\ \\ \\sigma_A = 2; \\qquad \\operatorname{Var}(B) = 34 - 4^2 = 18,\\ \\ \\sigma_B = \\sqrt{18} \\approx 4.24",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4: interpret.** Both plans return ₹4 lakh on average, but B's typical distance from that average is more than twice A's, and B can lose money. A cautious owner picks A. This is how banks and fund managers use $\\sigma$: as a number for **risk**.",
-    },
-    {
-      type: "callout",
-      variant: "tip",
-      title: "Worked example 7 · The larger of two numbers (board exam style)",
-      content:
-        "Two numbers are chosen at random, without replacement, from $1, 2, 3, 4, 5, 6$. Let $X$ be the larger of the two. Find the mean and the variance of $X$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: the distribution.** There are $\\binom{6}{2} = 15$ equally likely pairs. For $X = k$ the larger number is $k$ and the smaller is any of $1, \\ldots, k - 1$, so $P(X = k) = \\frac{k - 1}{15}$ for $k = 2, \\ldots, 6$.\n\n*Why this step:* this is exactly the count from the bulb-testing problem in 4.2. Recognising a structure you have already solved is the biggest time-saver in an exam.\n\n**Step 2: the table.** Keep the common denominator 15 outside, so every entry is a whole number.",
-    },
-    {
-      type: "table",
-      headers: ["$x$", "2", "3", "4", "5", "6", "Total"],
-      rows: [
-        ["$15\\,p$", "1", "2", "3", "4", "5", "15"],
-        ["$15\\,x\\,p$", "2", "6", "12", "20", "30", "70"],
-        ["$15\\,x^2\\,p$", "4", "18", "48", "100", "180", "350"],
+      problem:
+        "A city's noon temperature $C$ has mean 30 °C and standard deviation 5 °C. In Fahrenheit, $F = 1.8C + 32$. Find the mean, SD and variance in Fahrenheit.",
+      steps: [
+        {
+          text: "**Mean:** $1.8 \\cdot 30 + 32 = 86$ °F.",
+        },
+        {
+          text: "**SD:** $|1.8| \\cdot 5 = 9$ °F. The $+32$ does nothing to it.",
+        },
+        {
+          text: "**Variance:** $1.8^2 \\cdot 25 = 81$ (°F)², which is $9^2$. ✓",
+        },
       ],
+      answer: "Mean 86 °F, SD 9 °F, variance 81 (°F)².",
+    },
+    {
+      type: "worked-example",
+      id: "pr4-4-we4",
+      title: "Worked example 4 · A negative scale",
+      problem:
+        "$\\operatorname{Var}(X) = 4$. Find $\\operatorname{Var}(3 - 2X)$.",
+      steps: [
+        {
+          text: "Here $a = -2$ and $b = 3$. $\\operatorname{Var} = (-2)^2 \\cdot 4 = 16$, and $\\sigma = 4$. The sign of $a$ and the constant 3 play no part.",
+        },
+      ],
+      answer: "$\\operatorname{Var}(3 - 2X) = 16$, $\\sigma = 4$",
+    },
+    { type: "heading", text: "Red balls, two plans and a maximum" },
+    {
+      type: "worked-example",
+      id: "pr4-4-we5",
+      title: "Worked example 5 · Red balls, all the way to σ",
+      problem:
+        "Back to the bag from 4.1: 3 red and 2 blue balls, two drawn together, $X$ = number of red balls. We found $P(X = 0) = \\frac{1}{10}$, $P(X = 1) = \\frac{6}{10}$, $P(X = 2) = \\frac{3}{10}$. Find the mean, variance and SD of $X$.",
+      steps: [
+        {
+          text: "**The mean.** $E[X] = 0 \\cdot \\frac{1}{10} + 1 \\cdot \\frac{6}{10} + 2 \\cdot \\frac{3}{10} = 0.6 + 0.6 = 1.2$.",
+        },
+        {
+          text: "**The mean of the squares.** $E[X^2] = 0 + 1 \\cdot \\frac{6}{10} + 4 \\cdot \\frac{3}{10} = 0.6 + 1.2 = 1.8$.",
+        },
+        {
+          text: "**The shortcut.** $\\operatorname{Var}(X) = 1.8 - 1.2^2 = 1.8 - 1.44 = 0.36$.",
+        },
+        {
+          text: "**The SD.** $\\sigma = \\sqrt{0.36} = 0.6$.",
+        },
+      ],
+      answer: "$\\mu = 1.2$, $\\operatorname{Var}(X) = 0.36$, $\\sigma = 0.6$",
     },
     {
       type: "text",
       content:
-        "**Step 3: mean and mean of squares.** $E[X] = \\frac{70}{15} = \\frac{14}{3}$ and $E[X^2] = \\frac{350}{15} = \\frac{70}{3}$.\n\n**Step 4: variance.**",
+        "This is the shape of the standard board question: build the table from the experiment, then mean, variance, SD.",
     },
     {
-      type: "math",
-      latex:
-        "\\operatorname{Var}(X) = \\frac{70}{3} - \\left(\\frac{14}{3}\\right)^2 = \\frac{210}{9} - \\frac{196}{9} = \\frac{14}{9}, \\qquad \\sigma = \\frac{\\sqrt{14}}{3} \\approx 1.25",
+      type: "worked-example",
+      id: "pr4-4-we6",
+      title: "Worked example 6 · Same average, different risk (word problem)",
+      problem:
+        "Two business plans have these one-year returns, in ₹ lakh.\n\n**Plan A:** 2 or 6, each with probability 0.5.\n\n**Plan B:** $-2$ with probability 0.25, 4 with probability 0.5, 10 with probability 0.25.\n\nCompare the two plans.",
+      steps: [
+        {
+          text: "**The means.** ",
+          latex: "E[A] = 0.5(2) + 0.5(6) = 4, \\qquad E[B] = 0.25(-2) + 0.5(4) + 0.25(10) = -0.5 + 2 + 2.5 = 4",
+        },
+        {
+          text: "*Why this step:* always compare centres first. If the means differed, that alone might settle the choice. Here they tie, so spread decides.",
+        },
+        {
+          text: "**The means of the squares.** ",
+          latex: "E[A^2] = 0.5(4) + 0.5(36) = 20, \\qquad E[B^2] = 0.25(4) + 0.5(16) + 0.25(100) = 1 + 8 + 25 = 34",
+        },
+        {
+          text: "*Why this step:* the square of $-2$ is $+4$. A loss adds to the spread just as much as a gain of the same size.",
+        },
+        {
+          text: "**Variance and SD.** ",
+          latex: "\\operatorname{Var}(A) = 20 - 4^2 = 4,\\ \\ \\sigma_A = 2, \\qquad \\operatorname{Var}(B) = 34 - 4^2 = 18,\\ \\ \\sigma_B = \\sqrt{18} \\approx 4.24",
+        },
+        {
+          text: "**Interpret.** Both plans return ₹4 lakh on average, but B's typical distance from that average is more than twice A's, and B can lose money. A cautious owner picks A. This is how banks and fund managers use $\\sigma$: as a number for **risk**.",
+        },
+      ],
+      answer: "Both means are 4; $\\sigma_A = 2$ and $\\sigma_B \\approx 4.24$, so B is riskier.",
     },
     {
-      type: "text",
-      content:
-        "*Why this step:* put both terms over 9 before subtracting. Converting $\\frac{70}{3}$ and $\\frac{196}{9}$ to decimals first invites rounding errors, and board answers expect the exact fraction.",
+      type: "worked-example",
+      id: "pr4-4-we7",
+      title: "Worked example 7 · The larger of two numbers (board exam style)",
+      problem:
+        "Two numbers are chosen at random, without replacement, from $1, 2, 3, 4, 5, 6$. Let $X$ be the larger of the two. Find the mean and the variance of $X$.",
+      steps: [
+        {
+          text: "**The distribution.** There are $\\binom{6}{2} = 15$ equally likely pairs. For $X = k$ the larger number is $k$ and the smaller is any of $1, \\ldots, k - 1$, so $P(X = k) = \\frac{k - 1}{15}$ for $k = 2, \\ldots, 6$.\n\n*Why this step:* this is exactly the count from the bulb-testing problem in 4.2. Recognising a structure you have already solved is the biggest time-saver in an exam.",
+        },
+        {
+          text: "**The table.** Keep the common denominator 15 outside, so every entry is a whole number.",
+          table: {
+            headers: ["$x$", "2", "3", "4", "5", "6", "Total"],
+            rows: [
+              ["$15\\,p$", "1", "2", "3", "4", "5", "15"],
+              ["$15\\,x\\,p$", "2", "6", "12", "20", "30", "70"],
+              ["$15\\,x^2\\,p$", "4", "18", "48", "100", "180", "350"],
+            ],
+          },
+        },
+        {
+          text: "**Mean and mean of squares.** $E[X] = \\frac{70}{15} = \\frac{14}{3}$ and $E[X^2] = \\frac{350}{15} = \\frac{70}{3}$.",
+        },
+        {
+          text: "**Variance.** ",
+          latex: "\\operatorname{Var}(X) = \\frac{70}{3} - \\left(\\frac{14}{3}\\right)^2 = \\frac{210}{9} - \\frac{196}{9} = \\frac{14}{9}, \\qquad \\sigma = \\frac{\\sqrt{14}}{3} \\approx 1.25",
+        },
+        {
+          text: "*Why this step:* put both terms over 9 before subtracting. Converting $\\frac{70}{3}$ and $\\frac{196}{9}$ to decimals first invites rounding errors, and board answers expect the exact fraction.",
+        },
+      ],
+      answer: "$E[X] = \\frac{14}{3}$, $\\operatorname{Var}(X) = \\frac{14}{9}$",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr4-4-q1",
@@ -1217,10 +1391,11 @@ const lesson05: LessonSeed = {
       content:
         "Toss a coin 100 times. What is the expected number of heads? You could write down the distribution of $X$, with 101 values and probabilities like $\\binom{100}{37}/2^{100}$, and then compute $\\sum x p$. Nobody wants to do that.\n\nYour instinct probably says 50, because each toss contributes half a head on average. This lesson shows that the instinct is exactly right, and that the same idea works in far harder problems.",
     },
+    { type: "heading", text: "Expectation over outcomes, and linearity" },
     {
       type: "text",
       content:
-        "**Expectation over outcomes.**\n\nFirst, one more way to compute $E[X]$. Instead of grouping outcomes by value, go outcome by outcome and weight each outcome's value by its probability:",
+        "First, one more way to compute $E[X]$. Instead of grouping outcomes by value, go outcome by outcome and weight each outcome's value by its probability:",
     },
     { type: "math", latex: "E[X] = \\sum_{\\omega \\in S} X(\\omega)\\, P(\\omega)" },
     {
@@ -1256,10 +1431,11 @@ const lesson05: LessonSeed = {
           "The running mean of the sum of two dice settles at 7. That is 3.5 + 3.5: the expectation of a sum is the sum of the expectations.",
       },
     },
+    { type: "heading", text: "Indicator variables: counting by adding" },
     {
       type: "text",
       content:
-        "**Indicator variables: counting by adding.**\n\nMost \"how many\" questions ask you to count how many of several events happen. The trick is to give each event its own 0/1 switch.",
+        "Most \"how many\" questions ask you to count how many of several events happen. The trick is to give each event its own 0/1 switch.",
     },
     {
       type: "callout",
@@ -1274,18 +1450,44 @@ const lesson05: LessonSeed = {
         "The recipe has three steps. **(1)** Write the count as a sum of indicators. **(2)** Find the probability of each single event, which is usually easy. **(3)** Add them up. You never need the distribution of $X$ itself.",
     },
     {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-5-we1",
       title: "Worked example 1 · Heads, done properly",
-      content:
-        "Toss a coin with $P(H) = p$ a total of $n$ times. Let $I_k = 1$ if toss $k$ is heads. Then $X = I_1 + \\cdots + I_n$ and $E[I_k] = p$, so\n\n$E[X] = np$.\n\nFor 100 fair tosses, that gives 50. For 12 rolls of a die, counting sixes, it gives $12 \\cdot \\frac{1}{6} = 2$. This is the binomial mean you will meet again in Chapter 5, obtained here without writing the distribution.",
+      problem:
+        "Find the expected number of heads in $n$ tosses of a coin with $P(H) = p$.",
+      steps: [
+        {
+          text: "Toss a coin with $P(H) = p$ a total of $n$ times. Let $I_k = 1$ if toss $k$ is heads. Then $X = I_1 + \\cdots + I_n$ and $E[I_k] = p$, so\n\n$E[X] = np$.",
+        },
+        {
+          text: "For 100 fair tosses, that gives 50. For 12 rolls of a die, counting sixes, it gives $12 \\cdot \\frac{1}{6} = 2$. This is the binomial mean you will meet again in Chapter 5, obtained here without writing the distribution.",
+        },
+      ],
+      answer: "$E[X] = np$",
     },
     {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-5-we2",
       title: "Worked example 2 · Letters in the wrong envelopes",
+      problem:
+        "A secretary puts $n$ letters into $n$ addressed envelopes completely at random. What is the expected number of letters that land in their own envelope?",
+      steps: [
+        {
+          text: "Let $I_k = 1$ if letter $k$ is in envelope $k$. The number of matches is $X = I_1 + \\cdots + I_n$.",
+        },
+        {
+          text: "Letter $k$ is equally likely to go into any of the $n$ envelopes, so $P(I_k = 1) = \\frac{1}{n}$.",
+        },
+        {
+          text: "$E[X] = n \\cdot \\frac{1}{n} = 1$.",
+        },
+      ],
+      answer: "$1$, for every $n$.",
+    },
+    {
+      type: "text",
       content:
-        "A secretary puts $n$ letters into $n$ addressed envelopes completely at random. What is the expected number of letters that land in their own envelope?\n\n**Step 1.** Let $I_k = 1$ if letter $k$ is in envelope $k$. The number of matches is $X = I_1 + \\cdots + I_n$.\n\n**Step 2.** Letter $k$ is equally likely to go into any of the $n$ envelopes, so $P(I_k = 1) = \\frac{1}{n}$.\n\n**Step 3.** $E[X] = n \\cdot \\frac{1}{n} = 1$.\n\nThat holds for **every** $n$: 3 letters or a million, you expect exactly one match on average. The indicators are dependent (if letters 1 to $n-1$ all match, letter $n$ must match too), but linearity doesn't care.",
+        "That holds for **every** $n$: 3 letters or a million, you expect exactly one match on average. The indicators are dependent (if letters 1 to $n-1$ all match, letter $n$ must match too), but linearity doesn't care.",
     },
     {
       type: "text",
@@ -1302,62 +1504,94 @@ const lesson05: LessonSeed = {
         "$E[X] = \\frac{3 + 1 + 1 + 1 + 0 + 0}{6} = 1$. ✓ Notice that $X = 2$ is impossible (two matches force the third), and the most likely value is 1. Linearity got the mean without either of those facts.",
     },
     {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-5-we3",
       title: "Worked example 3 · Shared birthdays",
-      content:
-        "In a class of $n$ people (365 equally likely birthdays, ignoring leap years), what is the expected number of **pairs** of people who share a birthday?\n\n**Step 1.** One indicator per pair: there are $\\binom{n}{2}$ pairs.\n\n**Step 2.** Any given pair shares a birthday with probability $\\frac{1}{365}$: whatever the first person's birthday is, the second must match it.\n\n**Step 3.** $E[\\text{pairs}] = \\binom{n}{2} \\cdot \\frac{1}{365}$.\n\nFor $n = 23$: $\\frac{253}{365} \\approx 0.69$. For $n = 28$: $\\frac{378}{365} \\approx 1.04$. So with about 28 people you should expect one shared-birthday pair. The count of pairs grows like $n^2$, which is why coincidences arrive much sooner than intuition suggests.",
+      problem:
+        "In a class of $n$ people (365 equally likely birthdays, ignoring leap years), what is the expected number of **pairs** of people who share a birthday?",
+      steps: [
+        {
+          text: "One indicator per pair: there are $\\binom{n}{2}$ pairs.",
+        },
+        {
+          text: "Any given pair shares a birthday with probability $\\frac{1}{365}$: whatever the first person's birthday is, the second must match it.",
+        },
+        {
+          text: "$E[\\text{pairs}] = \\binom{n}{2} \\cdot \\frac{1}{365}$.\n\nFor $n = 23$: $\\frac{253}{365} \\approx 0.69$. For $n = 28$: $\\frac{378}{365} \\approx 1.04$. So with about 28 people you should expect one shared-birthday pair. The count of pairs grows like $n^2$, which is why coincidences arrive much sooner than intuition suggests.",
+        },
+      ],
+      answer: "$\\binom{n}{2} \\cdot \\frac{1}{365}$",
     },
     {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-5-we4",
       title: "Worked example 4 · Faces that never show up",
-      content:
-        "Roll a die 6 times. What is the expected number of faces that **never** appear?\n\n**Step 1.** Let $I_k = 1$ if face $k$ is missing from all 6 rolls.\n\n**Step 2.** $P(\\text{face } k \\text{ missing}) = \\left(\\frac{5}{6}\\right)^6 \\approx 0.335$.\n\n**Step 3.** $E[\\text{missing faces}] = 6\\left(\\frac{5}{6}\\right)^6 \\approx 2.01$.\n\nSo six rolls typically show only about 4 different faces. Finding the full distribution of the number of missing faces would take a page of inclusion–exclusion. Linearity takes three lines.",
+      problem:
+        "Roll a die 6 times. What is the expected number of faces that **never** appear?",
+      steps: [
+        {
+          text: "Let $I_k = 1$ if face $k$ is missing from all 6 rolls.",
+        },
+        {
+          text: "$P(\\text{face } k \\text{ missing}) = \\left(\\frac{5}{6}\\right)^6 \\approx 0.335$.",
+        },
+        {
+          text: "$E[\\text{missing faces}] = 6\\left(\\frac{5}{6}\\right)^6 \\approx 2.01$.\n\nSo six rolls typically show only about 4 different faces. Finding the full distribution of the number of missing faces would take a page of inclusion–exclusion. Linearity takes three lines.",
+        },
+      ],
+      answer: "$6\\left(\\frac{5}{6}\\right)^6 \\approx 2.01$",
     },
     {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-5-we5",
       title: "Worked example 5 · How often does the lift stop? (word problem)",
-      content:
+      problem:
         "Ten people get into a lift on the ground floor of a building with 5 floors above. Each person gets off at one of the 5 floors, chosen at random and independently of the others. What is the expected number of floors at which the lift stops?",
+      steps: [
+        {
+          text: "**One switch per floor.** Let $I_f = 1$ if at least one person gets off at floor $f$. The number of stops is $X = I_1 + I_2 + \\cdots + I_5$.\n\n*Why this step:* the lift stops at a floor, not for a person. Indicators on floors count stops directly, while indicators on people would just count passengers.",
+        },
+        {
+          text: "**One floor at a time.** It is easier to find when floor $f$ is **skipped**: all 10 people choose one of the other 4 floors.",
+          latex: "P(I_f = 1) = 1 - \\left(\\tfrac{4}{5}\\right)^{10} \\approx 1 - 0.107 = 0.893",
+        },
+        {
+          text: "*Why this step:* \"at least one\" is almost always easiest through its complement, \"none\".",
+        },
+        {
+          text: "**Add.** $E[X] = 5\\left(1 - \\left(\\frac{4}{5}\\right)^{10}\\right) \\approx 4.46$.\n\nSo with ten passengers the lift usually stops at 4 or 5 floors. The indicators are dependent (if the lift skips four floors, it must stop at the fifth), and linearity ignores that. It is the same method as the faces that never show up, moved into a building.",
+        },
+      ],
+      answer: "$5\\left(1 - \\left(\\frac{4}{5}\\right)^{10}\\right) \\approx 4.46$ stops.",
     },
     {
-      type: "text",
-      content:
-        "**Step 1: one switch per floor.** Let $I_f = 1$ if at least one person gets off at floor $f$. The number of stops is $X = I_1 + I_2 + \\cdots + I_5$.\n\n*Why this step:* the lift stops at a floor, not for a person. Indicators on floors count stops directly, while indicators on people would just count passengers.\n\n**Step 2: one floor at a time.** It is easier to find when floor $f$ is **skipped**: all 10 people choose one of the other 4 floors.",
-    },
-    {
-      type: "math",
-      latex: "P(I_f = 1) = 1 - \\left(\\tfrac{4}{5}\\right)^{10} \\approx 1 - 0.107 = 0.893",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* \"at least one\" is almost always easiest through its complement, \"none\".\n\n**Step 3: add.** $E[X] = 5\\left(1 - \\left(\\frac{4}{5}\\right)^{10}\\right) \\approx 4.46$.\n\nSo with ten passengers the lift usually stops at 4 or 5 floors. The indicators are dependent (if the lift skips four floors, it must stop at the fifth), and linearity ignores that. It is the same method as the faces that never show up, moved into a building.",
-    },
-    {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-5-we6",
       title: "Worked example 6 · Boys and girls side by side (exam style)",
-      content:
+      problem:
         "5 boys and 5 girls stand in a row in random order. Find the expected number of neighbouring pairs made up of one boy and one girl.",
+      steps: [
+        {
+          text: "**Indicators on neighbouring spots.** A row of 10 has 9 neighbouring pairs of spots, $(1,2), (2,3), \\ldots, (9,10)$. Let $I_j = 1$ if spots $j$ and $j + 1$ hold one boy and one girl.",
+        },
+        {
+          text: "**The probability for one pair.** Spot $j$ holds a boy with probability $\\frac{5}{10}$. Given that, spot $j + 1$ holds a girl with probability $\\frac{5}{9}$, since 9 people remain and 5 of them are girls. The girl-then-boy order gives the same amount again.",
+          latex: "P(I_j = 1) = 2 \\cdot \\frac{5}{10} \\cdot \\frac{5}{9} = \\frac{5}{9}",
+        },
+        {
+          text: "*Why this step:* inside a single indicator you may use conditional probability freely. Linearity only frees you from worrying about how *different* indicators depend on each other.",
+        },
+        {
+          text: "**Add.** $E[X] = 9 \\cdot \\frac{5}{9} = 5$.\n\nA common slip is to take $P(I_j = 1) = \\frac{1}{2}$, as if each spot were a fair coin toss, which gives 4.5. Once a boy is placed, only 4 boys are left among the 9 remaining people, so his neighbour is slightly more likely to be a girl.",
+        },
+      ],
+      answer: "$5$",
     },
+    { type: "heading", text: "Where independence does matter: variance" },
     {
       type: "text",
       content:
-        "**Step 1: indicators on neighbouring spots.** A row of 10 has 9 neighbouring pairs of spots, $(1,2), (2,3), \\ldots, (9,10)$. Let $I_j = 1$ if spots $j$ and $j + 1$ hold one boy and one girl.\n\n**Step 2: the probability for one pair.** Spot $j$ holds a boy with probability $\\frac{5}{10}$. Given that, spot $j + 1$ holds a girl with probability $\\frac{5}{9}$, since 9 people remain and 5 of them are girls. The girl-then-boy order gives the same amount again.",
-    },
-    { type: "math", latex: "P(I_j = 1) = 2 \\cdot \\frac{5}{10} \\cdot \\frac{5}{9} = \\frac{5}{9}" },
-    {
-      type: "text",
-      content:
-        "*Why this step:* inside a single indicator you may use conditional probability freely. Linearity only frees you from worrying about how *different* indicators depend on each other.\n\n**Step 3: add.** $E[X] = 9 \\cdot \\frac{5}{9} = 5$.\n\nA common slip is to take $P(I_j = 1) = \\frac{1}{2}$, as if each spot were a fair coin toss, which gives 4.5. Once a boy is placed, only 4 boys are left among the 9 remaining people, so his neighbour is slightly more likely to be a girl.",
-    },
-    {
-      type: "text",
-      content:
-        "**Where independence does matter: variance.**\n\nFor variance there is no free lunch. Expand $\\operatorname{Var}(X + Y)$ with the shortcut formula and a cross term appears:",
+        "For variance there is no free lunch. Expand $\\operatorname{Var}(X + Y)$ with the shortcut formula and a cross term appears:",
     },
     {
       type: "math",
@@ -1375,30 +1609,30 @@ const lesson05: LessonSeed = {
         "Why does independence kill the cross term? For independent $X$ and $Y$, $P(X = x, Y = y) = P(X = x)P(Y = y)$, so $E[XY] = \\sum_x \\sum_y xy\\, p_x p_y = \\left(\\sum_x x p_x\\right)\\left(\\sum_y y p_y\\right) = E[X]E[Y]$.\n\nWhen $X$ and $Y$ are independent, then, the cross term vanishes, so the variances add. Otherwise they need not add. Heads and tails again: $\\operatorname{Var}(X) = \\operatorname{Var}(Y) = 0.75$, but $X + Y = 3$ is a constant with variance 0, not 1.5. For independent coin tosses, each indicator has variance $E[I^2] - p^2 = p - p^2 = pq$. So $n$ tosses give $\\operatorname{Var}(X) = npq$, which for 3 fair tosses is $0.75$, matching 4.4.",
     },
     {
-      type: "callout",
-      variant: "tip",
+      type: "worked-example",
+      id: "pr4-5-we7",
       title: "Worked example 7 · The spread of the sum of two dice",
-      content:
+      problem:
         "Find the variance of the sum $S = X_1 + X_2$ of two fair dice, first with the independence rule, then directly from the distribution.",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: one die.** From 4.4 (Worked example 1), a single die has $\\operatorname{Var} = \\frac{35}{12}$.\n\n**Step 2: add, because the dice are independent.** $\\operatorname{Var}(X_1 + X_2) = \\frac{35}{12} + \\frac{35}{12} = \\frac{35}{6} \\approx 5.83$.\n\n*Why this step is allowed:* two separate dice don't influence each other, so the cross term $E[X_1 X_2] - E[X_1]E[X_2]$ is 0.\n\n**Step 3: check directly.** Use the 1-2-3-4-5-6-5-4-3-2-1 table from 4.1 and $E[S] = 7$:",
-    },
-    {
-      type: "math",
-      latex:
-        "E[S^2] = \\frac{4 \\cdot 1 + 9 \\cdot 2 + 16 \\cdot 3 + 25 \\cdot 4 + 36 \\cdot 5 + 49 \\cdot 6 + 64 \\cdot 5 + 81 \\cdot 4 + 100 \\cdot 3 + 121 \\cdot 2 + 144 \\cdot 1}{36} = \\frac{1974}{36} = \\frac{329}{6}",
-    },
-    {
-      type: "math",
-      latex: "\\operatorname{Var}(S) = \\frac{329}{6} - 7^2 = \\frac{329 - 294}{6} = \\frac{35}{6} \\ \\checkmark",
-    },
-    {
-      type: "text",
-      content:
-        "The one-line rule and the eleven-term sum agree. With the rule, $n$ dice have variance $\\frac{35n}{12}$, which nobody would want to find from a table.",
+      steps: [
+        {
+          text: "**One die.** From 4.4 (Worked example 1), a single die has $\\operatorname{Var} = \\frac{35}{12}$.",
+        },
+        {
+          text: "**Add, because the dice are independent.** $\\operatorname{Var}(X_1 + X_2) = \\frac{35}{12} + \\frac{35}{12} = \\frac{35}{6} \\approx 5.83$.\n\n*Why this step is allowed:* two separate dice don't influence each other, so the cross term $E[X_1 X_2] - E[X_1]E[X_2]$ is 0.",
+        },
+        {
+          text: "**Check directly.** Use the 1-2-3-4-5-6-5-4-3-2-1 table from 4.1 and $E[S] = 7$:",
+          latex: "E[S^2] = \\frac{4 \\cdot 1 + 9 \\cdot 2 + 16 \\cdot 3 + 25 \\cdot 4 + 36 \\cdot 5 + 49 \\cdot 6 + 64 \\cdot 5 + 81 \\cdot 4 + 100 \\cdot 3 + 121 \\cdot 2 + 144 \\cdot 1}{36} = \\frac{1974}{36} = \\frac{329}{6}",
+        },
+        {
+          latex: "\\operatorname{Var}(S) = \\frac{329}{6} - 7^2 = \\frac{329 - 294}{6} = \\frac{35}{6} \\ \\checkmark",
+        },
+        {
+          text: "The one-line rule and the eleven-term sum agree. With the rule, $n$ dice have variance $\\frac{35n}{12}$, which nobody would want to find from a table.",
+        },
+      ],
+      answer: "$\\operatorname{Var}(S) = \\frac{35}{6}$",
     },
     {
       type: "callout",
@@ -1407,6 +1641,7 @@ const lesson05: LessonSeed = {
       content:
         "$E[X + Y] = E[X] + E[Y]$ holds for **all** $X, Y$, dependent or not. It is $\\operatorname{Var}(X + Y) = \\operatorname{Var}(X) + \\operatorname{Var}(Y)$ that needs independence. Mixing the two up leads students to avoid indicator methods exactly where they are most useful: envelopes, birthdays and draws without replacement.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr4-5-q1",

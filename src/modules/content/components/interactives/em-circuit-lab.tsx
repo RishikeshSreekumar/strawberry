@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import type { z } from "zod";
 import type { emCircuitLabSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { niceStep, niceTicks, sciLatex, sigText } from "./em-format";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 import { ArrowSvg, SvgLatex, type VecColor } from "./vec-canvas-2d";
@@ -656,7 +657,7 @@ export function EmCircuitLab({ config }: { config: Config }) {
       )}
       <div className="flex items-start justify-between gap-3">
         <p className="text-xs text-muted-foreground">
-          {config.caption ?? DEFAULT_CAPTIONS[mode]}
+          <RichText text={config.caption ?? DEFAULT_CAPTIONS[mode]} />
           {mode === "rc" || mode === "lr" ? ` Source ℰ = ${sigText(E)} V.` : ` Source peak V₀ = ${sigText(V0)} V.`}
         </p>
         <button type="button" onClick={reset} className="shrink-0 rounded-md border bg-background px-2 py-1 text-xs">

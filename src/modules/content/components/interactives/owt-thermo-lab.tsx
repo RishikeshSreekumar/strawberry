@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import type { z } from "zod";
 import type { owtThermoLabSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import {
   ArrowMarker,
   PlayButton,
@@ -472,8 +473,8 @@ export function OwtThermoLab({ config }: { config: Config }) {
         {sliders}
         <Readouts rows={rows} />
         <p className="text-center text-xs text-muted-foreground">
-          {config.caption ??
-            "Shaded area = work done by the gas (blue when it expands, orange when it is compressed). Sign convention: ΔU = Q − W, with W done by the gas."}
+          <RichText text={config.caption ??
+            "Shaded area = work done by the gas (blue when it expands, orange when it is compressed). Sign convention: ΔU = Q − W, with W done by the gas."} />
         </p>
       </InteractiveFrame>
     );
@@ -526,8 +527,8 @@ export function OwtThermoLab({ config }: { config: Config }) {
         {sliders}
         <Readouts rows={rows} />
         <p className="text-center text-xs text-muted-foreground">
-          {config.caption ??
-            "Blue: isothermal (pV = const). Orange: adiabatic (pV^γ = const), always steeper through the same point by the factor γ."}
+          <RichText text={config.caption ??
+            "Blue: isothermal (pV = const). Orange: adiabatic (pV^γ = const), always steeper through the same point by the factor γ."} />
         </p>
       </InteractiveFrame>
     );
@@ -600,8 +601,8 @@ export function OwtThermoLab({ config }: { config: Config }) {
       {sliders}
       <Readouts rows={rows} />
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ??
-          "Clockwise loop: the enclosed area is the net work done by the gas per cycle. Over a full cycle ΔU = 0, so W_net = Q_in + Q_out."}
+        <RichText text={config.caption ??
+          "Clockwise loop: the enclosed area is the net work done by the gas per cycle. Over a full cycle ΔU = 0, so W_net = Q_in + Q_out."} />
       </p>
     </InteractiveFrame>
   );
@@ -723,8 +724,8 @@ function KineticView({
         ]}
       />
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ??
-          "Heat the gas and every molecule speeds up by √T; squeeze the box and the same molecules hit the walls more often, so the pressure rises."}
+        <RichText text={config.caption ??
+          "Heat the gas and every molecule speeds up by √T; squeeze the box and the same molecules hit the walls more often, so the pressure rises."} />
       </p>
     </InteractiveFrame>
   );

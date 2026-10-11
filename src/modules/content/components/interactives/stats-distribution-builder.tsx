@@ -4,6 +4,7 @@ import { useId, useRef, useState } from "react";
 import type { z } from "zod";
 import { compileExpression } from "../../lib/math-eval";
 import type { statsDistributionBuilderSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { fmt, niceStep, snapTo, summarize, ticks, type Summary } from "./stats-math";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 
@@ -972,7 +973,7 @@ export function StatsDistributionBuilder({ config }: { config: Config }) {
         </div>
       )}
 
-      <p className="text-center text-xs text-muted-foreground">{caption}</p>
+      <p className="text-center text-xs text-muted-foreground"><RichText text={caption} /></p>
     </InteractiveFrame>
   );
 }

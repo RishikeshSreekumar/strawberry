@@ -35,6 +35,7 @@ const lesson01: LessonSeed = {
       content:
         "Stack numbers in a triangle: put a 1 at the top, and make every other number the sum of the two numbers just above it (a missing neighbour counts as 0). The rows come out as 1; 1 1; 1 2 1; 1 3 3 1; 1 4 6 4 1; …\n\nThat is **Pascal's triangle**. You could treat it as a curiosity built by a rule. This lesson shows what it *counts*, and why that makes every entry a familiar number, $^nC_r$.",
     },
+    { type: "heading", text: "Counting routes down the triangle" },
     {
       type: "text",
       content:
@@ -67,6 +68,7 @@ const lesson01: LessonSeed = {
       content:
         "The entry in row $n$, position $r$ (both counted from 0) is $^nC_r$, the number of L/R paths from the apex to it. Row $n$ is $^nC_0, {}^nC_1, \\dots, {}^nC_n$.",
     },
+    { type: "heading", text: "Why each entry is the sum above" },
     {
       type: "text",
       content:
@@ -83,38 +85,104 @@ const lesson01: LessonSeed = {
       content:
         "In Lesson 2.2 you proved Pascal's rule by asking \"is the special person in the committee or out?\" Here the same identity comes from \"did the last step come from the left or the right?\" Both proofs split the set by one yes/no decision about a single element.",
     },
+    { type: "heading", text: "Grid paths are the same thing" },
     {
       type: "text",
       content:
-        "**Grid paths are the same thing.** Tilt the triangle 45° and the L/R bounces become moves **Right (R)** and **Up (U)** on a grid. Walking from $(0, 0)$ to $(p, q)$ takes $p + q$ unit moves, of which exactly $q$ are U. So the route is a word of length $p + q$ with $q$ U's:",
+        "Tilt the triangle 45° and the L/R bounces become moves **Right (R)** and **Up (U)** on a grid. Walking from $(0, 0)$ to $(p, q)$ takes $p + q$ unit moves, of which exactly $q$ are U. So the route is a word of length $p + q$ with $q$ U's:",
     },
     {
       type: "math",
       latex: "\\#\\{\\text{grid paths } (0,0) \\to (p,q)\\} = {}^{p+q}C_{q} = {}^{p+q}C_{p}",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — a city grid.** How many shortest routes are there from $(0,0)$ to $(4,3)$ moving only right or up?\n\n1. Every shortest route uses 4 R's and 3 U's: 7 moves in all.\n2. A route is fixed once you decide which 3 of the 7 moves are U.\n3. Count: $^7C_3 = \\dfrac{7 \\cdot 6 \\cdot 5}{3!} = 35$.\n\nCheck against the triangle: 35 sits in row 7, position 3.",
+      type: "worked-example",
+      id: "pc4-1-we1",
+      title: "Worked example 1 — a city grid",
+      problem:
+        "How many shortest routes are there from $(0,0)$ to $(4,3)$ moving only right or up?",
+      steps: [
+        {
+          text: "Every shortest route uses 4 R's and 3 U's: 7 moves in all.",
+        },
+        {
+          text: "A route is fixed once you decide which 3 of the 7 moves are U.",
+        },
+        {
+          text: "Count: $^7C_3 = \\dfrac{7 \\cdot 6 \\cdot 5}{3!} = 35$.",
+        },
+        {
+          text: "Check against the triangle: 35 sits in row 7, position 3.",
+        },
+      ],
+      answer: "${}^7C_3 = 35$ routes.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — through a checkpoint.** How many shortest routes from $(0,0)$ to $(3,2)$ pass through $(1,1)$?\n\n1. Split the trip at the checkpoint. Leg 1, $(0,0) \\to (1,1)$: one R, one U, so $^2C_1 = 2$ routes.\n2. Leg 2, $(1,1) \\to (3,2)$: two R's, one U, so $^3C_1 = 3$ routes.\n3. Every leg-1 route can be followed by every leg-2 route (product rule): $2 \\times 3 = 6$.\n\nFor comparison, all routes $(0,0) \\to (3,2)$: $^5C_2 = 10$. So 4 of the 10 routes avoid $(1,1)$.",
+      type: "worked-example",
+      id: "pc4-1-we2",
+      title: "Worked example 2 — through a checkpoint",
+      problem:
+        "How many shortest routes from $(0,0)$ to $(3,2)$ pass through $(1,1)$?",
+      steps: [
+        {
+          text: "Split the trip at the checkpoint. Leg 1, $(0,0) \\to (1,1)$: one R, one U, so $^2C_1 = 2$ routes.",
+        },
+        {
+          text: "Leg 2, $(1,1) \\to (3,2)$: two R's, one U, so $^3C_1 = 3$ routes.",
+        },
+        {
+          text: "Every leg-1 route can be followed by every leg-2 route (product rule): $2 \\times 3 = 6$.",
+        },
+        {
+          text: "For comparison, all routes $(0,0) \\to (3,2)$: $^5C_2 = 10$. So 4 of the 10 routes avoid $(1,1)$.",
+        },
+      ],
+      answer: "$6$ routes.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — a warehouse robot avoids a spill.** A robot drives from its dock at $(0,0)$ to a shelf at $(5,4)$ on a grid of aisles, moving only east (R) or north (U). A spill blocks the crossing at $(2,2)$. How many shortest routes avoid it?\n\n1. All routes: 9 moves, 4 of them U, so $^9C_4 = 126$.\n   *Why this step:* \"avoid\" is hard to count directly. Counting everything first sets up the complement.\n2. Routes **through** $(2,2)$: leg 1 $(0,0) \\to (2,2)$ gives $^4C_2 = 6$, and leg 2 $(2,2) \\to (5,4)$ (3 R's, 2 U's) gives $^5C_2 = 10$. Product: $60$.\n   *Why this step:* splitting at the blocked point turns the \"bad\" routes into a checkpoint count, exactly like Worked example 2.\n3. Routes avoiding the spill: $126 - 60 = 66$.\n   *Why this step:* every route either passes through $(2,2)$ or doesn't, so the good routes are what's left after removing the bad ones.",
+      type: "worked-example",
+      id: "pc4-1-we3",
+      title: "Worked example 3 — a warehouse robot avoids a spill",
+      problem:
+        "A robot drives from its dock at $(0,0)$ to a shelf at $(5,4)$ on a grid of aisles, moving only east (R) or north (U). A spill blocks the crossing at $(2,2)$. How many shortest routes avoid it?",
+      steps: [
+        {
+          text: "All routes: 9 moves, 4 of them U, so $^9C_4 = 126$.\n*Why this step:* \"avoid\" is hard to count directly. Counting everything first sets up the complement.",
+        },
+        {
+          text: "Routes **through** $(2,2)$: leg 1 $(0,0) \\to (2,2)$ gives $^4C_2 = 6$, and leg 2 $(2,2) \\to (5,4)$ (3 R's, 2 U's) gives $^5C_2 = 10$. Product: $60$.\n*Why this step:* splitting at the blocked point turns the \"bad\" routes into a checkpoint count, exactly like Worked example 2.",
+        },
+        {
+          text: "Routes avoiding the spill: $126 - 60 = 66$.\n*Why this step:* every route either passes through $(2,2)$ or doesn't, so the good routes are what's left after removing the bad ones.",
+          latex: "\\underbrace{{}^9C_4}_{126} - \\underbrace{{}^4C_2 \\cdot {}^5C_2}_{6 \\cdot 10 = 60} = 66",
+        },
+      ],
+      answer: "$66$ routes.",
     },
     {
-      type: "math",
-      latex: "\\underbrace{{}^9C_4}_{126} - \\underbrace{{}^4C_2 \\cdot {}^5C_2}_{6 \\cdot 10 = 60} = 66",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 — exam style: two checkpoints (inclusion-exclusion).** How many shortest routes from $(0,0)$ to $(4,4)$ pass through $(1,1)$ **or** $(3,3)$?\n\n1. Through $(1,1)$: $^2C_1 \\cdot {}^6C_3 = 2 \\cdot 20 = 40$.\n2. Through $(3,3)$: $^6C_3 \\cdot {}^2C_1 = 20 \\cdot 2 = 40$.\n3. Through **both**: three legs, $^2C_1 \\cdot {}^4C_2 \\cdot {}^2C_1 = 2 \\cdot 6 \\cdot 2 = 24$.\n   *Why this step:* a route through both points was counted once in step 1 and again in step 2. Adding 40 + 40 would count those 24 routes twice.\n4. Through at least one: $40 + 40 - 24 = 56$.\n\nSo of the $^8C_4 = 70$ routes, only $70 - 56 = 14$ miss both checkpoints.",
+      type: "worked-example",
+      id: "pc4-1-we4",
+      title: "Worked example 4 — exam style: two checkpoints (inclusion-exclusion)",
+      problem:
+        "How many shortest routes from $(0,0)$ to $(4,4)$ pass through $(1,1)$ **or** $(3,3)$?",
+      steps: [
+        {
+          text: "Through $(1,1)$: $^2C_1 \\cdot {}^6C_3 = 2 \\cdot 20 = 40$.",
+        },
+        {
+          text: "Through $(3,3)$: $^6C_3 \\cdot {}^2C_1 = 20 \\cdot 2 = 40$.",
+        },
+        {
+          text: "Through **both**: three legs, $^2C_1 \\cdot {}^4C_2 \\cdot {}^2C_1 = 2 \\cdot 6 \\cdot 2 = 24$.\n*Why this step:* a route through both points was counted once in step 1 and again in step 2. Adding 40 + 40 would count those 24 routes twice.",
+        },
+        {
+          text: "Through at least one: $40 + 40 - 24 = 56$.",
+        },
+        {
+          text: "So of the $^8C_4 = 70$ routes, only $70 - 56 = 14$ miss both checkpoints.",
+        },
+      ],
+      answer: "$56$ routes (and $14$ miss both checkpoints).",
     },
     {
       type: "table",
@@ -133,6 +201,7 @@ const lesson01: LessonSeed = {
       content:
         "The apex is row 0 and the first entry of every row is position 0. Row 5 is 1 5 10 10 5 1, which is $^5C_0$ to $^5C_5$. Counting rows from 1 shifts every answer by one row.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc4-1-q1",
@@ -235,6 +304,7 @@ const lesson02: LessonSeed = {
       content:
         "Stare at Pascal's triangle long enough and patterns come out of it: rows that add to powers of 2, a mirror down the middle, diagonals that sum like a hockey stick. Each one could be checked on a few rows and trusted. This lesson does better: every pattern gets a **one-line counting reason**, so you know it holds in every row, not just the rows you looked at.",
     },
+    { type: "heading", text: "Row sums: counting every subset" },
     {
       type: "text",
       content:
@@ -257,19 +327,48 @@ const lesson02: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — pizza toppings.** A pizzeria offers 8 toppings. How many different pizzas can you order with **at least one** topping? With **at least two**?\n\n1. Each topping is either on or off: $2^8 = 256$ topping sets in all.\n   *Why this step:* this is the row sum $^8C_0 + {}^8C_1 + \\cdots + {}^8C_8$ counted the fast way, one yes/no per topping.\n2. At least one topping: remove the empty set, the plain base ($^8C_0 = 1$). That gives $256 - 1 = 255$.\n3. At least two: also remove the 8 single-topping pizzas ($^8C_1 = 8$). That gives $256 - 1 - 8 = 247$.\n   *Why this step:* \"at least\" questions are quickest by complement. The row total is known, so subtract the few small entries at the start of the row.",
+      type: "worked-example",
+      id: "pc4-2-we1",
+      title: "Worked example 1 — pizza toppings",
+      problem:
+        "A pizzeria offers 8 toppings. How many different pizzas can you order with **at least one** topping? With **at least two**?",
+      steps: [
+        {
+          text: "Each topping is either on or off: $2^8 = 256$ topping sets in all.\n*Why this step:* this is the row sum $^8C_0 + {}^8C_1 + \\cdots + {}^8C_8$ counted the fast way, one yes/no per topping.",
+        },
+        {
+          text: "At least one topping: remove the empty set, the plain base ($^8C_0 = 1$). That gives $256 - 1 = 255$.",
+        },
+        {
+          text: "At least two: also remove the 8 single-topping pizzas ($^8C_1 = 8$). That gives $256 - 1 - 8 = 247$.\n*Why this step:* \"at least\" questions are quickest by complement. The row total is known, so subtract the few small entries at the start of the row.",
+          latex: "{}^8C_2 + {}^8C_3 + \\cdots + {}^8C_8 = 2^8 - {}^8C_0 - {}^8C_1 = 256 - 1 - 8 = 247",
+        },
+      ],
+      answer: "$255$ pizzas with at least one topping, $247$ with at least two.",
     },
     {
-      type: "math",
-      latex: "{}^8C_2 + {}^8C_3 + \\cdots + {}^8C_8 = 2^8 - {}^8C_0 - {}^8C_1 = 256 - 1 - 8 = 247",
+      type: "worked-example",
+      id: "pc4-2-we2",
+      title: "Worked example 2 — exam style: even-sized subsets",
+      problem:
+        "Show that a set of $n \\ge 1$ elements has as many even-sized subsets as odd-sized ones, so that $^nC_0 + {}^nC_2 + {}^nC_4 + \\cdots = 2^{n-1}$.",
+      steps: [
+        {
+          text: "Fix one element, call it $x$. For any subset $S$, **toggle** $x$: add it if it's missing, remove it if it's there.",
+        },
+        {
+          text: "Toggling changes the size by exactly 1, so it turns an even subset into an odd one and back.\n*Why this step:* a rule that swaps two kinds of object, and undoes itself when applied twice, pairs them off one-to-one. That is the same idea as the L/R swap behind symmetry.",
+        },
+        {
+          text: "So the even and odd subsets are equal in number. Together they make all $2^n$ subsets, so each kind numbers $2^{n-1}$.",
+        },
+        {
+          text: "Check on row 4: $1 + 6 + 1 = 8$ and $4 + 4 = 8$, and $2^3 = 8$. ✓ A club of 9 people can therefore form $2^8 = 256$ committees of even size (counting the empty one).",
+        },
+      ],
+      answer: "Each kind numbers $2^{n-1}$.",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 2 — exam style: even-sized subsets.** Show that a set of $n \\ge 1$ elements has as many even-sized subsets as odd-sized ones, so that $^nC_0 + {}^nC_2 + {}^nC_4 + \\cdots = 2^{n-1}$.\n\n1. Fix one element, call it $x$. For any subset $S$, **toggle** $x$: add it if it's missing, remove it if it's there.\n2. Toggling changes the size by exactly 1, so it turns an even subset into an odd one and back.\n   *Why this step:* a rule that swaps two kinds of object, and undoes itself when applied twice, pairs them off one-to-one. That is the same idea as the L/R swap behind symmetry.\n3. So the even and odd subsets are equal in number. Together they make all $2^n$ subsets, so each kind numbers $2^{n-1}$.\n\nCheck on row 4: $1 + 6 + 1 = 8$ and $4 + 4 = 8$, and $2^3 = 8$. ✓ A club of 9 people can therefore form $2^8 = 256$ committees of even size (counting the empty one).",
-    },
+    { type: "heading", text: "Symmetry: swapping L and R" },
     {
       type: "text",
       content:
@@ -287,14 +386,23 @@ const lesson02: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — CBSE style: solving with symmetry.** If $^nC_7 = {}^nC_{12}$, find $n$ and then $^nC_{17}$.\n\n1. Along one row the entries rise to the middle and then fall, so two entries can be equal only if they are the same position or mirror images. Positions 7 and 12 are different, so they must be mirrors: $7 + 12 = n$, giving $n = 19$.\n   *Why this step:* mirror positions $r$ and $n - r$ always add to $n$.\n2. $^{19}C_{17} = {}^{19}C_{2} = \\dfrac{19 \\cdot 18}{2} = 171$.\n   *Why this step:* choosing 17 from 19 is the same as choosing the 2 left out, and a product of two numbers is far easier than one of seventeen.",
+      type: "worked-example",
+      id: "pc4-2-we3",
+      title: "Worked example 3 — CBSE style: solving with symmetry",
+      problem:
+        "If $^nC_7 = {}^nC_{12}$, find $n$ and then $^nC_{17}$.",
+      steps: [
+        {
+          text: "Along one row the entries rise to the middle and then fall, so two entries can be equal only if they are the same position or mirror images. Positions 7 and 12 are different, so they must be mirrors: $7 + 12 = n$, giving $n = 19$.\n*Why this step:* mirror positions $r$ and $n - r$ always add to $n$.",
+        },
+        {
+          text: "$^{19}C_{17} = {}^{19}C_{2} = \\dfrac{19 \\cdot 18}{2} = 171$.\n*Why this step:* choosing 17 from 19 is the same as choosing the 2 left out, and a product of two numbers is far easier than one of seventeen.",
+          latex: "{}^nC_a = {}^nC_b,\\ a \\ne b \\;\\Rightarrow\\; a + b = n",
+        },
+      ],
+      answer: "$n = 19$, ${}^{19}C_{17} = 171$",
     },
-    {
-      type: "math",
-      latex: "{}^nC_a = {}^nC_b,\\ a \\ne b \\;\\Rightarrow\\; a + b = n",
-    },
+    { type: "heading", text: "The hockey stick and diagonal sums" },
     {
       type: "text",
       content:
@@ -327,19 +435,51 @@ const lesson02: LessonSeed = {
         "**Worked example 4 — sums you already know.** The case $r = 1$ says $^1C_1 + {}^2C_1 + \\cdots + {}^nC_1 = {}^{n+1}C_2$, which is $1 + 2 + \\cdots + n = \\dfrac{n(n+1)}{2}$. The famous triangular-number formula is a hockey stick.\n\nThe case $r = 2$: $^2C_2 + {}^3C_2 + \\cdots + {}^{7}C_2 = 1 + 3 + 6 + 10 + 15 + 21 = 56 = {}^8C_3$. A sum of triangular numbers is a tetrahedral number.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 — a word problem.** A shop stacks oranges in a triangular pyramid: 1 on top, then 3, 6, 10, … (the triangular numbers), with 8 layers. How many oranges are there?\n\n1. Layer $k$ holds the $k$-th triangular number, $^{k+1}C_2$. The layers are $^2C_2, {}^3C_2, \\dots, {}^9C_2$.\n   *Why this step:* writing the layers as entries of one diagonal is what lets the hockey stick apply.\n2. The handle runs from $^2C_2$ to $^9C_2$, so the blade is $^{10}C_3 = \\dfrac{10 \\cdot 9 \\cdot 8}{6} = 120$.\n3. Check: $1 + 3 + 6 + 10 + 15 + 21 + 28 + 36 = 120$. ✓",
+      type: "worked-example",
+      id: "pc4-2-we4",
+      title: "Worked example 5 — a word problem",
+      problem:
+        "A shop stacks oranges in a triangular pyramid: 1 on top, then 3, 6, 10, … (the triangular numbers), with 8 layers. How many oranges are there?",
+      steps: [
+        {
+          text: "Layer $k$ holds the $k$-th triangular number, $^{k+1}C_2$. The layers are $^2C_2, {}^3C_2, \\dots, {}^9C_2$.\n*Why this step:* writing the layers as entries of one diagonal is what lets the hockey stick apply.",
+        },
+        {
+          text: "The handle runs from $^2C_2$ to $^9C_2$, so the blade is $^{10}C_3 = \\dfrac{10 \\cdot 9 \\cdot 8}{6} = 120$.",
+        },
+        {
+          text: "Check: $1 + 3 + 6 + 10 + 15 + 21 + 28 + 36 = 120$. ✓",
+        },
+      ],
+      answer: "$120$ oranges.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 6 — JEE classic: telescoping with Pascal's rule.** Evaluate $^{47}C_4 + \\displaystyle\\sum_{j=1}^{5} {}^{52-j}C_3$.\n\n1. Write the sum out, smallest term first: $^{47}C_4 + {}^{47}C_3 + {}^{48}C_3 + {}^{49}C_3 + {}^{50}C_3 + {}^{51}C_3$.\n   *Why this step:* the lone $^{47}C_4$ is waiting for a partner from the same row. Ordering the terms shows which one.\n2. Pascal's rule: $^{47}C_4 + {}^{47}C_3 = {}^{48}C_4$.\n3. Then $^{48}C_4 + {}^{48}C_3 = {}^{49}C_4$, and so on. Each step climbs one row.\n4. After the last step: $^{51}C_4 + {}^{51}C_3 = {}^{52}C_4$.\n\nThe answer is $^{52}C_4$. No arithmetic is needed, only repeated use of \"each entry is the sum of the two above it\". The hockey stick is this same chain started from the top of the diagonal.",
+      type: "worked-example",
+      id: "pc4-2-we5",
+      title: "Worked example 6 — JEE classic: telescoping with Pascal's rule",
+      problem:
+        "Evaluate $^{47}C_4 + \\displaystyle\\sum_{j=1}^{5} {}^{52-j}C_3$.",
+      steps: [
+        {
+          text: "Write the sum out, smallest term first: $^{47}C_4 + {}^{47}C_3 + {}^{48}C_3 + {}^{49}C_3 + {}^{50}C_3 + {}^{51}C_3$.\n*Why this step:* the lone $^{47}C_4$ is waiting for a partner from the same row. Ordering the terms shows which one.",
+        },
+        {
+          text: "Pascal's rule: $^{47}C_4 + {}^{47}C_3 = {}^{48}C_4$.",
+        },
+        {
+          text: "Then $^{48}C_4 + {}^{48}C_3 = {}^{49}C_4$, and so on. Each step climbs one row.",
+        },
+        {
+          text: "After the last step: $^{51}C_4 + {}^{51}C_3 = {}^{52}C_4$.",
+        },
+        {
+          text: "The answer is $^{52}C_4$. No arithmetic is needed, only repeated use of \"each entry is the sum of the two above it\". The hockey stick is this same chain started from the top of the diagonal.",
+          latex: "{}^{47}C_4 + {}^{47}C_3 + {}^{48}C_3 + \\cdots + {}^{51}C_3 = {}^{48}C_4 + {}^{48}C_3 + \\cdots = \\cdots = {}^{52}C_4",
+        },
+      ],
+      answer: "${}^{52}C_4$",
     },
-    {
-      type: "math",
-      latex: "{}^{47}C_4 + {}^{47}C_3 + {}^{48}C_3 + \\cdots + {}^{51}C_3 = {}^{48}C_4 + {}^{48}C_3 + \\cdots = \\cdots = {}^{52}C_4",
-    },
+    { type: "heading", text: "Odd entries and powers of 11" },
     {
       type: "text",
       content:
@@ -390,6 +530,7 @@ const lesson02: LessonSeed = {
         ["Powers of 11", "$11^n = \\sum {}^nC_r 10^{n-r}$", "$(10+1)^n$; digits only while entries $< 10$"],
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc4-2-q1",
@@ -500,6 +641,7 @@ const lesson03: LessonSeed = {
       content:
         "Expanding $(a + b)^2 = a^2 + 2ab + b^2$ is familiar. Doing $(a+b)^7$ by repeated multiplication is slow and error-prone. There is a better way, because multiplying out brackets is a **counting process**.",
     },
+    { type: "heading", text: "Multiplying out brackets is choosing" },
     {
       type: "text",
       content:
@@ -524,6 +666,7 @@ const lesson03: LessonSeed = {
       content:
         "Where did the 3 in $3a^2b$ come from? The term $a^2b$ appears once for each way of choosing **which one bracket** supplies the $b$: $^3C_1 = 3$ ways. In general, with $n$ brackets, the term $a^{n-r}b^r$ appears once for every choice of **which $r$ brackets supply $b$** (the rest supply $a$). That is $^nC_r$ times. This is Lesson 4.1 again: each pick is a word of a's and b's, just as each path was a word of L's and R's.\n\nThis counting argument is a **complete proof** of the binomial theorem for every positive integer $n$, not just a pattern spotted on small cases.",
     },
+    { type: "heading", text: "The theorem and the shape of an expansion" },
     {
       type: "callout",
       variant: "definition",
@@ -562,6 +705,7 @@ const lesson03: LessonSeed = {
       content:
         "This keeps only the two picks \"all a\" and \"all b\" and throws away every mixed pick. Test it: $(1 + 1)^2 = 4$, but $1^2 + 1^2 = 2$. For $n = 3$ you lose the six mixed picks worth $3a^2b + 3ab^2$. Powers do not distribute over addition. They do distribute over multiplication: $(ab)^n = a^n b^n$.",
     },
+    { type: "heading", text: "Signs and full expansions" },
     {
       type: "text",
       content:
@@ -572,9 +716,26 @@ const lesson03: LessonSeed = {
       latex: "(a - b)^n = \\sum_{r=0}^{n} (-1)^r\\, {}^nC_r\\, a^{n-r} b^r",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — expand $(x + 2)^4$.**\n\n1. Row 4 of the triangle: 1, 4, 6, 4, 1.\n2. Terms: $x^4,\\ 4 \\cdot x^3 \\cdot 2,\\ 6 \\cdot x^2 \\cdot 2^2,\\ 4 \\cdot x \\cdot 2^3,\\ 2^4$.\n3. Simplify: $x^4 + 8x^3 + 24x^2 + 32x + 16$.\n4. Check with $x = 1$: $1 + 8 + 24 + 32 + 16 = 81 = 3^4$. ✓",
+      type: "worked-example",
+      id: "pc4-3-we1",
+      title: "Worked example 1 — expand $(x + 2)^4$",
+      problem:
+        "Expand $(x + 2)^4$.",
+      steps: [
+        {
+          text: "Row 4 of the triangle: 1, 4, 6, 4, 1.",
+        },
+        {
+          text: "Terms: $x^4,\\ 4 \\cdot x^3 \\cdot 2,\\ 6 \\cdot x^2 \\cdot 2^2,\\ 4 \\cdot x \\cdot 2^3,\\ 2^4$.",
+        },
+        {
+          text: "Simplify: $x^4 + 8x^3 + 24x^2 + 32x + 16$.",
+        },
+        {
+          text: "Check with $x = 1$: $1 + 8 + 24 + 32 + 16 = 81 = 3^4$. ✓",
+        },
+      ],
+      answer: "$x^4 + 8x^3 + 24x^2 + 32x + 16$",
     },
     {
       type: "interactive",
@@ -584,37 +745,100 @@ const lesson03: LessonSeed = {
         rows: 8,
         expansion: { a: "x", b: "2" },
         initialCell: { n: 4, r: 2 },
-        caption: "(x + 2)⁴ term by term. The selected term is T₃ = ⁴C₂ · x² · 2² = 6 · 4 · x² = 24x². The readout leaves 2² unsimplified.",
+        caption: "(x + 2)⁴ term by term. The selected term is T₃ = ⁴C₂ · x² · 2². The readout leaves 2² unsimplified.",
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — expand $\\left(x - \\dfrac{1}{x}\\right)^4$.**\n\n1. The general term is $^4C_r\\, x^{4-r} \\left(-\\dfrac{1}{x}\\right)^r = (-1)^r\\, {}^4C_r\\, x^{4-2r}$.\n2. $r = 0, 1, 2, 3, 4$ give $x^4,\\ -4x^2,\\ 6,\\ -\\dfrac{4}{x^2},\\ \\dfrac{1}{x^4}$.\n3. So $\\left(x - \\dfrac1x\\right)^4 = x^4 - 4x^2 + 6 - \\dfrac{4}{x^2} + \\dfrac{1}{x^4}$. Notice the constant term 6 in the middle; Lesson 4.4 shows how to find terms like that directly.",
+      type: "worked-example",
+      id: "pc4-3-we2",
+      title: "Worked example 2 — expand $\\left(x - \\dfrac{1}{x}\\right)^4$",
+      problem:
+        "Expand $\\left(x - \\dfrac{1}{x}\\right)^4$.",
+      steps: [
+        {
+          text: "The general term is $^4C_r\\, x^{4-r} \\left(-\\dfrac{1}{x}\\right)^r = (-1)^r\\, {}^4C_r\\, x^{4-2r}$.",
+        },
+        {
+          text: "$r = 0, 1, 2, 3, 4$ give $x^4,\\ -4x^2,\\ 6,\\ -\\dfrac{4}{x^2},\\ \\dfrac{1}{x^4}$.",
+        },
+        {
+          text: "So $\\left(x - \\dfrac1x\\right)^4 = x^4 - 4x^2 + 6 - \\dfrac{4}{x^2} + \\dfrac{1}{x^4}$. Notice the constant term 6 in the middle; Lesson 4.4 shows how to find terms like that directly.",
+        },
+      ],
+      answer: "$x^4 - 4x^2 + 6 - \\dfrac{4}{x^2} + \\dfrac{1}{x^4}$",
+    },
+    { type: "heading", text: "Arithmetic, growth and divisibility" },
+    {
+      type: "worked-example",
+      id: "pc4-3-we3",
+      title: "Worked example 3 — arithmetic with the theorem",
+      problem:
+        "Find $(1.01)^5$ to 5 decimal places.",
+      steps: [
+        {
+          text: "$(1 + 0.01)^5 = 1 + 5(0.01) + 10(0.01)^2 + 10(0.01)^3 + 5(0.01)^4 + (0.01)^5$.",
+        },
+        {
+          text: "$= 1 + 0.05 + 0.001 + 0.00001 + 0.00000005 + 0.0000000001$.",
+        },
+        {
+          text: "$= 1.0510100501$, so $(1.01)^5 \\approx 1.05101$.",
+        },
+      ],
+      answer: "$(1.01)^5 \\approx 1.05101$",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 — arithmetic with the theorem.** Find $(1.01)^5$ to 5 decimal places.\n\n1. $(1 + 0.01)^5 = 1 + 5(0.01) + 10(0.01)^2 + 10(0.01)^3 + 5(0.01)^4 + (0.01)^5$.\n2. $= 1 + 0.05 + 0.001 + 0.00001 + 0.00000005 + 0.0000000001$.\n3. $= 1.0510100501$, so $(1.01)^5 \\approx 1.05101$.\n\nThe terms shrink fast, which is why a few terms of a binomial expansion make good approximations.",
+        "The terms shrink fast, which is why a few terms of a binomial expansion make good approximations.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — growth in the real world.** A town of 10,000 people grows by 2% every year. What is its population after 3 years?\n\n1. Each year multiplies the population by $1.02$, so after 3 years it is $10000 \\times (1 + 0.02)^3$.\n   *Why this step:* 2% growth on the current population is multiplication by $1 + 0.02$, repeated once per year.\n2. Expand with row 3 (1, 3, 3, 1): $(1 + 0.02)^3 = 1 + 3(0.02) + 3(0.02)^2 + (0.02)^3 = 1 + 0.06 + 0.0012 + 0.000008 = 1.061208$.\n3. Population $= 10000 \\times 1.061208 \\approx 10612$.\n\nRead the terms: $1 + 0.06$ is \"2% of the original, three times\", which would give 10,600. The $3(0.02)^2$ term is growth on earlier growth, the compounding. It adds 12 people. The last term adds less than 1 person.",
+      type: "worked-example",
+      id: "pc4-3-we4",
+      title: "Worked example 4 — growth in the real world",
+      problem:
+        "A town of 10,000 people grows by 2% every year. What is its population after 3 years?",
+      steps: [
+        {
+          text: "Each year multiplies the population by $1.02$, so after 3 years it is $10000 \\times (1 + 0.02)^3$.\n*Why this step:* 2% growth on the current population is multiplication by $1 + 0.02$, repeated once per year.",
+        },
+        {
+          text: "Expand with row 3 (1, 3, 3, 1): $(1 + 0.02)^3 = 1 + 3(0.02) + 3(0.02)^2 + (0.02)^3 = 1 + 0.06 + 0.0012 + 0.000008 = 1.061208$.",
+        },
+        {
+          text: "Population $= 10000 \\times 1.061208 \\approx 10612$.",
+        },
+        {
+          text: "Read the terms: $1 + 0.06$ is \"2% of the original, three times\", which would give 10,600. The $3(0.02)^2$ term is growth on earlier growth, the compounding. It adds 12 people. The last term adds less than 1 person.",
+          latex: "10000(1.02)^3 = 10000\\,\\big(\\underbrace{1 + 0.06}_{\\text{simple growth}} + \\underbrace{0.0012 + 0.000008}_{\\text{compounding}}\\big) = 10612.08",
+        },
+      ],
+      answer: "About $10\\,612$ people.",
     },
     {
-      type: "math",
-      latex: "10000(1.02)^3 = 10000\\,\\big(\\underbrace{1 + 0.06}_{\\text{simple growth}} + \\underbrace{0.0012 + 0.000008}_{\\text{compounding}}\\big) = 10612.08",
+      type: "worked-example",
+      id: "pc4-3-we5",
+      title: "Worked example 5 — CBSE/NCERT style: a divisibility proof",
+      problem:
+        "Prove that $9^{n+1} - 8n - 9$ is divisible by 64 for every positive integer $n$.",
+      steps: [
+        {
+          text: "Write $9 = 1 + 8$ and expand: $9^{n+1} = (1 + 8)^{n+1} = 1 + {}^{n+1}C_1 \\cdot 8 + {}^{n+1}C_2 \\cdot 8^2 + {}^{n+1}C_3 \\cdot 8^3 + \\cdots$\n*Why this step:* 64 is $8^2$. Splitting 9 as $1 + 8$ makes every term from $r = 2$ onward carry a factor $8^2$.",
+        },
+        {
+          text: "The first two terms are $1 + 8(n + 1) = 8n + 9$, exactly what is being subtracted.",
+        },
+        {
+          text: "So $9^{n+1} - 8n - 9 = 8^2\\left[{}^{n+1}C_2 + {}^{n+1}C_3 \\cdot 8 + \\cdots\\right] = 64 \\times (\\text{an integer})$. ∎",
+        },
+        {
+          text: "Check: $n = 1$ gives $81 - 8 - 9 = 64$, and $n = 2$ gives $729 - 16 - 9 = 704 = 64 \\times 11$. ✓",
+          latex: "9^{n+1} - 8n - 9 = 64\\left[{}^{n+1}C_2 + 8\\,{}^{n+1}C_3 + 8^2\\,{}^{n+1}C_4 + \\cdots\\right]",
+        },
+      ],
+      answer: "$9^{n+1} - 8n - 9 = 64 \\times (\\text{an integer})$, so it is divisible by 64.",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 — CBSE/NCERT style: a divisibility proof.** Prove that $9^{n+1} - 8n - 9$ is divisible by 64 for every positive integer $n$.\n\n1. Write $9 = 1 + 8$ and expand: $9^{n+1} = (1 + 8)^{n+1} = 1 + {}^{n+1}C_1 \\cdot 8 + {}^{n+1}C_2 \\cdot 8^2 + {}^{n+1}C_3 \\cdot 8^3 + \\cdots$\n   *Why this step:* 64 is $8^2$. Splitting 9 as $1 + 8$ makes every term from $r = 2$ onward carry a factor $8^2$.\n2. The first two terms are $1 + 8(n + 1) = 8n + 9$, exactly what is being subtracted.\n3. So $9^{n+1} - 8n - 9 = 8^2\\left[{}^{n+1}C_2 + {}^{n+1}C_3 \\cdot 8 + \\cdots\\right] = 64 \\times (\\text{an integer})$. ∎\n\nCheck: $n = 1$ gives $81 - 8 - 9 = 64$, and $n = 2$ gives $729 - 16 - 9 = 704 = 64 \\times 11$. ✓",
-    },
-    {
-      type: "math",
-      latex: "9^{n+1} - 8n - 9 = 64\\left[{}^{n+1}C_2 + 8\\,{}^{n+1}C_3 + 8^2\\,{}^{n+1}C_4 + \\cdots\\right]",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc4-3-q1",
@@ -713,6 +937,7 @@ const lesson04: LessonSeed = {
       content:
         "Exam questions rarely ask for a whole expansion. They ask for **one term**: the coefficient of $x^5$, the term without $x$, the 6th term. Writing out all $n + 1$ terms to find one wastes time. The counting picture points straight at the term you want.",
     },
+    { type: "heading", text: "Writing the general term $T_{r+1}$" },
     {
       type: "callout",
       variant: "definition",
@@ -738,43 +963,129 @@ const lesson04: LessonSeed = {
       content:
         "The subscript of the term is always **one more** than the $r$ in $^nC_r$. The 5th term of $(1 + x)^{10}$ is $T_5$, so $r = 4$: $^{10}C_4 x^4 = 210x^4$. Using $^{10}C_5 x^5 = 252x^5$ gives the 6th term. A quick check: $T_1$ must be the term with no $b$, and $r = 0$ gives exactly that.",
     },
+    { type: "heading", text: "Finding one particular term" },
     {
       type: "text",
       content:
         "**The method** for any \"find the term\" question:\n\n1. Write $T_{r+1}$ with the actual $a$ and $b$, including signs and coefficients inside them.\n2. Collect the power of $x$ as a function of $r$.\n3. Set that power equal to what you want and solve for $r$. It must be a whole number from 0 to $n$; if it isn't, no such term exists.\n4. Substitute $r$ back and simplify.",
     },
     {
+      type: "worked-example",
+      id: "pc4-4-we1",
+      title: "Worked example 1 — the coefficient of $x^5$ in $(2x - 3)^8$",
+      problem:
+        "Find the coefficient of $x^5$ in $(2x - 3)^8$.",
+      steps: [
+        {
+          text: "$a = 2x$, $b = -3$: $T_{r+1} = {}^8C_r (2x)^{8-r} (-3)^r$.",
+        },
+        {
+          text: "The power of $x$ is $8 - r$.",
+        },
+        {
+          text: "$8 - r = 5$ gives $r = 3$.",
+        },
+        {
+          text: "Coefficient $= {}^8C_3 \\cdot 2^5 \\cdot (-3)^3 = 56 \\cdot 32 \\cdot (-27) = -48384$.",
+        },
+        {
+          text: "The sign comes from $(-3)^3$: an odd number of negative factors. The $2^5$ is easy to forget. The 2 belongs to $a = 2x$, so it is raised to the same power as $x$.",
+          latex: "T_4 = {}^8C_3\\,(2x)^5(-3)^3 = 56 \\cdot 32 \\cdot (-27)\\,x^5 = -48384\\,x^5",
+        },
+      ],
+      answer: "$-48384$",
+    },
+    {
+      type: "worked-example",
+      id: "pc4-4-we2",
+      title: "Worked example 2 — the term independent of $x$ in $\\left(x^2 + \\dfrac{1}{x}\\right)^9$",
+      problem:
+        "Find the term independent of $x$ in $\\left(x^2 + \\dfrac{1}{x}\\right)^9$.",
+      steps: [
+        {
+          text: "\"Independent of $x$\" means the power of $x$ is 0.",
+        },
+        {
+          text: "$T_{r+1} = {}^9C_r (x^2)^{9-r} \\left(x^{-1}\\right)^r$.",
+        },
+        {
+          text: "Power of $x$: $2(9 - r) - r = 18 - 3r$.",
+        },
+        {
+          text: "$18 - 3r = 0$ gives $r = 6$, a whole number between 0 and 9, so the term exists. It is $T_7$.",
+        },
+        {
+          text: "$T_7 = {}^9C_6 = {}^9C_3 = 84$.",
+          latex: "T_{r+1} = {}^9C_r\\, x^{18-3r} \\;\\Rightarrow\\; r = 6,\\quad T_7 = {}^9C_6 = 84",
+        },
+      ],
+      answer: "$T_7 = 84$",
+    },
+    {
+      type: "worked-example",
+      id: "pc4-4-we3",
+      title: "Worked example 3 — when there is no such term",
+      problem:
+        "Is there a term independent of $x$ in $\\left(x + \\dfrac{1}{x^2}\\right)^7$?",
+      steps: [
+        {
+          text: "$T_{r+1} = {}^7C_r\\, x^{7-r} x^{-2r} = {}^7C_r\\, x^{7-3r}$.",
+        },
+        {
+          text: "$7 - 3r = 0$ gives $r = \\dfrac{7}{3}$, which is not an integer.",
+        },
+        {
+          text: "So **no** term is independent of $x$. The powers present are $7, 4, 1, -2, -5, \\dots$, and they jump over 0.",
+        },
+      ],
+      answer: "No: $r = \\dfrac{7}{3}$ is not an integer, so no term is independent of $x$.",
+    },
+    {
+      type: "worked-example",
+      id: "pc4-4-we4",
+      title: "Worked example 4 — a term counted from the end",
+      problem:
+        "Find the 3rd term from the end of $\\left(x + \\dfrac1x\\right)^{10}$.",
+      steps: [
+        {
+          text: "There are 11 terms, so the 3rd from the end is the 9th from the start: $T_9$, with $r = 8$.",
+        },
+        {
+          text: "$T_9 = {}^{10}C_8\\, x^{2} \\left(\\dfrac1x\\right)^8 = 45\\,x^{-6}$.",
+        },
+        {
+          text: "Shortcut: the $k$-th term from the end of $(a + b)^n$ is the $k$-th term from the start of $(b + a)^n$. Here that is $^{10}C_2 \\left(\\dfrac1x\\right)^{8} x^2$, the same answer.",
+        },
+      ],
+      answer: "$T_9 = 45\\,x^{-6}$",
+    },
+    { type: "heading", text: "Sums and products of expansions", level: 3 },
+    {
+      type: "worked-example",
+      id: "pc4-4-we5",
+      title: "Worked example 5 — adding two expansions",
+      problem:
+        "Simplify $(x + a)^n + (x - a)^n$, then evaluate $(\\sqrt2 + 1)^6 + (\\sqrt2 - 1)^6$.",
+      steps: [
+        {
+          text: "The terms of the two expansions are $^nC_r\\, x^{n-r} a^r$ and $(-1)^r\\, {}^nC_r\\, x^{n-r} a^r$.",
+        },
+        {
+          text: "For even $r$ they are equal, so they add up to twice the term. For odd $r$ they are opposites and cancel.",
+        },
+        {
+          text: "So $(x + a)^n + (x - a)^n = 2\\left[x^n + {}^nC_2\\, x^{n-2} a^2 + {}^nC_4\\, x^{n-4} a^4 + \\cdots\\right]$. Only the even-$r$ terms are left.",
+        },
+        {
+          text: "Put $x = \\sqrt2$, $a = 1$, $n = 6$: $2\\left[(\\sqrt2)^6 + 15(\\sqrt2)^4 + 15(\\sqrt2)^2 + 1\\right] = 2[8 + 60 + 30 + 1] = 198$.",
+        },
+      ],
+      answer: "$198$",
+    },
+    {
       type: "text",
       content:
-        "**Worked example 1 — the coefficient of $x^5$ in $(2x - 3)^8$.**\n\n1. $a = 2x$, $b = -3$: $T_{r+1} = {}^8C_r (2x)^{8-r} (-3)^r$.\n2. The power of $x$ is $8 - r$.\n3. $8 - r = 5$ gives $r = 3$.\n4. Coefficient $= {}^8C_3 \\cdot 2^5 \\cdot (-3)^3 = 56 \\cdot 32 \\cdot (-27) = -48384$.\n\nThe sign comes from $(-3)^3$: an odd number of negative factors. The $2^5$ is easy to forget. The 2 belongs to $a = 2x$, so it is raised to the same power as $x$.",
-    },
-    {
-      type: "math",
-      latex: "T_4 = {}^8C_3\\,(2x)^5(-3)^3 = 56 \\cdot 32 \\cdot (-27)\\,x^5 = -48384\\,x^5",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2 — the term independent of $x$ in $\\left(x^2 + \\dfrac{1}{x}\\right)^9$.** \"Independent of $x$\" means the power of $x$ is 0.\n\n1. $T_{r+1} = {}^9C_r (x^2)^{9-r} \\left(x^{-1}\\right)^r$.\n2. Power of $x$: $2(9 - r) - r = 18 - 3r$.\n3. $18 - 3r = 0$ gives $r = 6$, a whole number between 0 and 9, so the term exists. It is $T_7$.\n4. $T_7 = {}^9C_6 = {}^9C_3 = 84$.",
-    },
-    {
-      type: "math",
-      latex: "T_{r+1} = {}^9C_r\\, x^{18-3r} \\;\\Rightarrow\\; r = 6,\\quad T_7 = {}^9C_6 = 84",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 — when there is no such term.** Is there a term independent of $x$ in $\\left(x + \\dfrac{1}{x^2}\\right)^7$?\n\n1. $T_{r+1} = {}^7C_r\\, x^{7-r} x^{-2r} = {}^7C_r\\, x^{7-3r}$.\n2. $7 - 3r = 0$ gives $r = \\dfrac{7}{3}$, which is not an integer.\n3. So **no** term is independent of $x$. The powers present are $7, 4, 1, -2, -5, \\dots$, and they jump over 0.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 — a term counted from the end.** Find the 3rd term from the end of $\\left(x + \\dfrac1x\\right)^{10}$.\n\n1. There are 11 terms, so the 3rd from the end is the 9th from the start: $T_9$, with $r = 8$.\n2. $T_9 = {}^{10}C_8\\, x^{2} \\left(\\dfrac1x\\right)^8 = 45\\,x^{-6}$.\n\nShortcut: the $k$-th term from the end of $(a + b)^n$ is the $k$-th term from the start of $(b + a)^n$. Here that is $^{10}C_2 \\left(\\dfrac1x\\right)^{8} x^2$, the same answer.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 — adding two expansions.** Simplify $(x + a)^n + (x - a)^n$, then evaluate $(\\sqrt2 + 1)^6 + (\\sqrt2 - 1)^6$.\n\n1. The terms of the two expansions are $^nC_r\\, x^{n-r} a^r$ and $(-1)^r\\, {}^nC_r\\, x^{n-r} a^r$.\n2. For even $r$ they are equal, so they add up to twice the term. For odd $r$ they are opposites and cancel.\n3. So $(x + a)^n + (x - a)^n = 2\\left[x^n + {}^nC_2\\, x^{n-2} a^2 + {}^nC_4\\, x^{n-4} a^4 + \\cdots\\right]$. Only the even-$r$ terms are left.\n4. Put $x = \\sqrt2$, $a = 1$, $n = 6$: $2\\left[(\\sqrt2)^6 + 15(\\sqrt2)^4 + 15(\\sqrt2)^2 + 1\\right] = 2[8 + 60 + 30 + 1] = 198$.\n\nThe surds all had even powers, so the answer is a whole number. In the same way $(x + a)^n - (x - a)^n$ keeps only the odd-$r$ terms, doubled.",
+        "The surds all had even powers, so the answer is a whole number. In the same way $(x + a)^n - (x - a)^n$ keeps only the odd-$r$ terms, doubled.",
     },
     {
       type: "table",
@@ -785,23 +1096,76 @@ const lesson04: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 6 — a coefficient in a product.** Find the coefficient of $x^3$ in $(1 + 2x)(1 - x)^6$.\n\n1. An $x^3$ in the product comes from one of two pairings: $1 \\times$ (the $x^3$ term of $(1 - x)^6$), or $2x \\times$ (the $x^2$ term of $(1 - x)^6$).\n2. In $(1 - x)^6$ the coefficient of $x^k$ is $(-1)^k\\, {}^6C_k$: for $x^3$ it is $-20$, for $x^2$ it is $15$.\n3. Coefficient $= 1 \\cdot (-20) + 2 \\cdot 15 = 10$.\n\nList every way the powers can add up to the one you want, find each coefficient with the general term, and add the products.",
+      type: "worked-example",
+      id: "pc4-4-we6",
+      title: "Worked example 6 — a coefficient in a product",
+      problem:
+        "Find the coefficient of $x^3$ in $(1 + 2x)(1 - x)^6$.",
+      steps: [
+        {
+          text: "An $x^3$ in the product comes from one of two pairings: $1 \\times$ (the $x^3$ term of $(1 - x)^6$), or $2x \\times$ (the $x^2$ term of $(1 - x)^6$).",
+        },
+        {
+          text: "In $(1 - x)^6$ the coefficient of $x^k$ is $(-1)^k\\, {}^6C_k$: for $x^3$ it is $-20$, for $x^2$ it is $15$.",
+        },
+        {
+          text: "Coefficient $= 1 \\cdot (-20) + 2 \\cdot 15 = 10$.",
+        },
+      ],
+      answer: "$10$",
     },
     {
       type: "text",
       content:
-        "**Running the general term backwards.** So far $n$, $a$ and $b$ were given and you found a term. Exam questions often give a coefficient and ask for the unknown instead. The method is the same: write $T_{r+1}$, then set up an equation.\n\n**Worked example 7 — find $n$.** In $(1 + x)^n$ the coefficient of $x^2$ is 36. Find $n$.\n\n1. The $x^2$ term has $r = 2$: its coefficient is $^nC_2 = \\dfrac{n(n-1)}{2}$.\n2. $\\dfrac{n(n-1)}{2} = 36 \\Rightarrow n^2 - n - 72 = 0 \\Rightarrow (n - 9)(n + 8) = 0$.\n3. $n$ is a positive integer, so $n = 9$. Check: $^9C_2 = 36$. ✓\n   *Why this step:* the quadratic has two roots. Only one can be the power of an expansion.",
+        "List every way the powers can add up to the one you want, find each coefficient with the general term, and add the products.",
     },
+    { type: "heading", text: "Running the general term backwards" },
     {
       type: "text",
       content:
-        "**Worked example 8 — NCERT/JEE style: find a parameter.** The coefficients of $x^2$ and $x^3$ in $(3 + ax)^9$ are equal. Find $a$ (with $a \\ne 0$).\n\n1. General term: $T_{r+1} = {}^9C_r\\, 3^{9-r} (ax)^r = {}^9C_r\\, 3^{9-r} a^r x^r$.\n   *Why this step:* the unknown $a$ sits inside $b = ax$, so it gets raised to the power $r$ along with $x$.\n2. Coefficient of $x^2$: $^9C_2 \\cdot 3^7 a^2 = 36 \\cdot 3^7 a^2$. Coefficient of $x^3$: $^9C_3 \\cdot 3^6 a^3 = 84 \\cdot 3^6 a^3$.\n3. Set them equal and divide both sides by $3^6 a^2$ (allowed, since $a \\ne 0$): $36 \\cdot 3 = 84a$, so $a = \\dfrac{108}{84} = \\dfrac{9}{7}$.\n   *Why this step:* dividing by the common powers leaves a one-line linear equation instead of a huge one.\n4. Check: $36 \\cdot 2187 \\cdot \\dfrac{81}{49}$ and $84 \\cdot 729 \\cdot \\dfrac{729}{343}$ both equal $\\dfrac{6377292}{49}$. ✓",
+        "So far $n$, $a$ and $b$ were given and you found a term. Exam questions often give a coefficient and ask for the unknown instead. The method is the same: write $T_{r+1}$, then set up an equation.",
     },
     {
-      type: "math",
-      latex: "{}^9C_2\\,3^7a^2 = {}^9C_3\\,3^6a^3 \\;\\Rightarrow\\; 36 \\cdot 3 = 84\\,a \\;\\Rightarrow\\; a = \\frac{9}{7}",
+      type: "worked-example",
+      id: "pc4-4-we7",
+      title: "Worked example 7 — find $n$",
+      problem:
+        "In $(1 + x)^n$ the coefficient of $x^2$ is 36. Find $n$.",
+      steps: [
+        {
+          text: "The $x^2$ term has $r = 2$: its coefficient is $^nC_2 = \\dfrac{n(n-1)}{2}$.",
+        },
+        {
+          text: "$\\dfrac{n(n-1)}{2} = 36 \\Rightarrow n^2 - n - 72 = 0 \\Rightarrow (n - 9)(n + 8) = 0$.",
+        },
+        {
+          text: "$n$ is a positive integer, so $n = 9$. Check: $^9C_2 = 36$. ✓\n*Why this step:* the quadratic has two roots. Only one can be the power of an expansion.",
+        },
+      ],
+      answer: "$n = 9$",
+    },
+    {
+      type: "worked-example",
+      id: "pc4-4-we8",
+      title: "Worked example 8 — NCERT/JEE style: find a parameter",
+      problem:
+        "The coefficients of $x^2$ and $x^3$ in $(3 + ax)^9$ are equal. Find $a$ (with $a \\ne 0$).",
+      steps: [
+        {
+          text: "General term: $T_{r+1} = {}^9C_r\\, 3^{9-r} (ax)^r = {}^9C_r\\, 3^{9-r} a^r x^r$.\n*Why this step:* the unknown $a$ sits inside $b = ax$, so it gets raised to the power $r$ along with $x$.",
+        },
+        {
+          text: "Coefficient of $x^2$: $^9C_2 \\cdot 3^7 a^2 = 36 \\cdot 3^7 a^2$. Coefficient of $x^3$: $^9C_3 \\cdot 3^6 a^3 = 84 \\cdot 3^6 a^3$.",
+        },
+        {
+          text: "Set them equal and divide both sides by $3^6 a^2$ (allowed, since $a \\ne 0$): $36 \\cdot 3 = 84a$, so $a = \\dfrac{108}{84} = \\dfrac{9}{7}$.\n*Why this step:* dividing by the common powers leaves a one-line linear equation instead of a huge one.",
+        },
+        {
+          text: "Check: $36 \\cdot 2187 \\cdot \\dfrac{81}{49}$ and $84 \\cdot 729 \\cdot \\dfrac{729}{343}$ both equal $\\dfrac{6377292}{49}$. ✓",
+          latex: "{}^9C_2\\,3^7a^2 = {}^9C_3\\,3^6a^3 \\;\\Rightarrow\\; 36 \\cdot 3 = 84\\,a \\;\\Rightarrow\\; a = \\frac{9}{7}",
+        },
+      ],
+      answer: "$a = \\dfrac{9}{7}$",
     },
     {
       type: "callout",
@@ -810,6 +1174,7 @@ const lesson04: LessonSeed = {
       content:
         "How many terms of $\\left(\\sqrt2 + \\sqrt[3]{3}\\right)^{10}$ are rational? The general term is $^{10}C_r\\, 2^{(10-r)/2}\\, 3^{r/3}$. It is rational exactly when both exponents are whole numbers: $10 - r$ even (so $r$ even) and $r$ a multiple of 3. So $r$ is a multiple of 6 between 0 and 10: $r = 0$ or $r = 6$, giving **2** rational terms, $T_1 = 32$ and $T_7 = {}^{10}C_6 \\cdot 4 \\cdot 9 = 7560$. Same method as the term independent of $x$: write the exponents in terms of $r$ and ask which $r$ make them integers.",
     },
+    { type: "heading", text: "Three letters: the multinomial coefficient" },
     {
       type: "text",
       content:
@@ -822,7 +1187,29 @@ const lesson04: LessonSeed = {
     {
       type: "text",
       content:
-        "With only two letters this is $\\dfrac{n!}{(n-r)!\\,r!} = {}^nC_r$, the binomial coefficient again. It is also the labelled-groups count from 3.1, and lesson 3.2 counted how many different terms there are: ${}^{n+2}C_2$.\n\n**Worked example 9 — a multinomial coefficient.** Find the coefficient of $x^2y^3z$ in $(x + 2y - z)^6$.\n\n1. Check the powers: $2 + 3 + 1 = 6$, so the term exists.\n2. Choose which 2 brackets give $x$, which 3 give $2y$ and which 1 gives $-z$: $\\dfrac{6!}{2!\\,3!\\,1!} = 60$ ways.\n3. Each such pick multiplies to $x^2\\,(2y)^3\\,(-z) = -8\\,x^2y^3z$.\n   *Why this step:* exactly as with two terms, the number inside each part is raised to the same power as its variable, signs included.\n4. Coefficient $= 60 \\times (-8) = -480$.",
+        "With only two letters this is $\\dfrac{n!}{(n-r)!\\,r!} = {}^nC_r$, the binomial coefficient again. It is also the labelled-groups count from 3.1, and lesson 3.2 counted how many different terms there are: ${}^{n+2}C_2$.",
+    },
+    {
+      type: "worked-example",
+      id: "pc4-4-we9",
+      title: "Worked example 9 — a multinomial coefficient",
+      problem:
+        "Find the coefficient of $x^2y^3z$ in $(x + 2y - z)^6$.",
+      steps: [
+        {
+          text: "Check the powers: $2 + 3 + 1 = 6$, so the term exists.",
+        },
+        {
+          text: "Choose which 2 brackets give $x$, which 3 give $2y$ and which 1 gives $-z$: $\\dfrac{6!}{2!\\,3!\\,1!} = 60$ ways.",
+        },
+        {
+          text: "Each such pick multiplies to $x^2\\,(2y)^3\\,(-z) = -8\\,x^2y^3z$.\n*Why this step:* exactly as with two terms, the number inside each part is raised to the same power as its variable, signs included.",
+        },
+        {
+          text: "Coefficient $= 60 \\times (-8) = -480$.",
+        },
+      ],
+      answer: "$-480$",
     },
     {
       type: "interactive",
@@ -836,6 +1223,7 @@ const lesson04: LessonSeed = {
           "(2x − 3)⁸ from Worked Example 1, with T₄ selected (the readout writes it as 2x plus −3). Each extra factor of (−3) flips the sign: odd r gives a negative term, even r a positive one. The subscript of T always stays one ahead of r.",
       },
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc4-4-q1",
@@ -996,10 +1384,11 @@ const lesson05: LessonSeed = {
           "Row 10 with its centre entry ¹⁰C₅ = 252 selected. Set r to the middle of the row (n/2, or (n − 1)/2 for odd n): even rows have one central entry; in odd rows the selected entry and its mirror sit side by side and are equal, e.g. ¹¹C₅ = ¹¹C₆ = 462.",
       },
     },
+    { type: "heading", text: "Why the middle is the peak" },
     {
       type: "text",
       content:
-        "**Why the middle is the peak.** Compare neighbours in row $n$:",
+        "Compare neighbours in row $n$:",
     },
     {
       type: "math",
@@ -1010,6 +1399,7 @@ const lesson05: LessonSeed = {
       content:
         "The ratio is bigger than 1 exactly when $n - r > r + 1$, that is $r < \\dfrac{n-1}{2}$. So the entries grow up to the middle and shrink after it. For even $n$ the single largest is $^nC_{n/2}$. For odd $n$ there is a tie between $^nC_{(n-1)/2}$ and $^nC_{(n+1)/2}$, where the ratio is exactly 1.",
     },
+    { type: "heading", text: "Finding the middle terms" },
     {
       type: "callout",
       variant: "definition",
@@ -1018,14 +1408,42 @@ const lesson05: LessonSeed = {
         "$(a + b)^n$ has $n + 1$ terms. If $n$ is **even**, there is one middle term, $T_{\\frac{n}{2}+1}$. If $n$ is **odd**, there are two, $T_{\\frac{n+1}{2}}$ and $T_{\\frac{n+3}{2}}$. The middle terms carry the largest binomial coefficient.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — the middle term of $\\left(x - \\dfrac{2}{x}\\right)^{10}$.**\n\n1. $n = 10$ is even, so 11 terms and one middle term, $T_6$, with $r = 5$.\n2. $T_6 = {}^{10}C_5\\, x^5 \\left(-\\dfrac{2}{x}\\right)^5 = 252 \\cdot (-32) \\cdot x^5 x^{-5}$.\n3. $T_6 = -8064$. Here the middle term is also the term independent of $x$.",
+      type: "worked-example",
+      id: "pc4-5-we1",
+      title: "Worked example 1 — the middle term of $\\left(x - \\dfrac{2}{x}\\right)^{10}$",
+      problem:
+        "Find the middle term of $\\left(x - \\dfrac{2}{x}\\right)^{10}$.",
+      steps: [
+        {
+          text: "$n = 10$ is even, so 11 terms and one middle term, $T_6$, with $r = 5$.",
+        },
+        {
+          text: "$T_6 = {}^{10}C_5\\, x^5 \\left(-\\dfrac{2}{x}\\right)^5 = 252 \\cdot (-32) \\cdot x^5 x^{-5}$.",
+        },
+        {
+          text: "$T_6 = -8064$. Here the middle term is also the term independent of $x$.",
+        },
+      ],
+      answer: "$T_6 = -8064$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — the middle terms of $(1 + x)^7$.**\n\n1. $n = 7$ is odd, so 8 terms and two middle terms, $T_4$ and $T_5$ ($r = 3$ and $r = 4$).\n2. $T_4 = {}^7C_3 x^3 = 35x^3$ and $T_5 = {}^7C_4 x^4 = 35x^4$.\n3. Equal coefficients, by symmetry.",
+      type: "worked-example",
+      id: "pc4-5-we2",
+      title: "Worked example 2 — the middle terms of $(1 + x)^7$",
+      problem:
+        "Find the middle terms of $(1 + x)^7$.",
+      steps: [
+        {
+          text: "$n = 7$ is odd, so 8 terms and two middle terms, $T_4$ and $T_5$ ($r = 3$ and $r = 4$).",
+        },
+        {
+          text: "$T_4 = {}^7C_3 x^3 = 35x^3$ and $T_5 = {}^7C_4 x^4 = 35x^4$.",
+        },
+        {
+          text: "Equal coefficients, by symmetry.",
+        },
+      ],
+      answer: "$T_4 = 35x^3$ and $T_5 = 35x^4$",
     },
     {
       type: "interactive",
@@ -1035,13 +1453,14 @@ const lesson05: LessonSeed = {
         rows: 10,
         expansion: { a: "a", b: "x" },
         initialCell: { n: 7, r: 3 },
-        caption: "(a + x)⁷ with T₄ = ⁷C₃ a⁴x³ selected. Put a = 1 to get (1 + x)⁷, where T₄ = 35x³. Move r to 4 to see its twin T₅ = 35x⁴.",
+        caption: "(a + x)⁷ with T₄ = ⁷C₃ a⁴x³ selected. Put a = 1 to get (1 + x)⁷. Move r to 4 to see its twin T₅.",
       },
     },
+    { type: "heading", text: "The numerically greatest term" },
     {
       type: "text",
       content:
-        "**The numerically greatest term.** Once $a$ and $b$ are numbers other than 1, the binomial coefficient is no longer the whole story. Use the same trick as above: compare each term with the one before it. In $(a + b)^n$,",
+        "Once $a$ and $b$ are numbers other than 1, the binomial coefficient is no longer the whole story. Use the same trick as above: compare each term with the one before it. In $(a + b)^n$,",
     },
     {
       type: "math",
@@ -1053,19 +1472,75 @@ const lesson05: LessonSeed = {
         "Work with absolute values. While $\\left|\\dfrac{T_{r+1}}{T_r}\\right| > 1$ the terms are still growing. Find the **largest $r$ with $\\left|\\dfrac{T_{r+1}}{T_r}\\right| \\ge 1$**. Then $T_{r+1}$, not $T_r$, is the greatest term: the ratio says the step *into* $T_{r+1}$ was still a step up. If the ratio equals 1 exactly at that $r$, then $T_r$ and $T_{r+1}$ tie.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — the greatest term of $(1 + 2x)^{10}$ at $x = \\frac12$.**\n\n1. $a = 1$, $b = 2x = 1$, so $\\dfrac{T_{r+1}}{T_r} = \\dfrac{11 - r}{r}$.\n2. $\\dfrac{11 - r}{r} \\ge 1 \\iff 11 \\ge 2r \\iff r \\le 5.5$, so $r = 5$ is the last step up.\n3. The greatest term is $T_6 = {}^{10}C_5 \\cdot 1^5 = 252$.\n\nAt $x = \\frac12$ every term is just $^{10}C_r$, so the peak is the middle, as the triangle said. The ratio test was not really needed here. The next example is one where it is.",
+      type: "worked-example",
+      id: "pc4-5-we3",
+      title: "Worked example 3 — the greatest term of $(1 + 2x)^{10}$ at $x = \\frac12$",
+      problem:
+        "Find the greatest term of $(1 + 2x)^{10}$ at $x = \\frac12$.",
+      steps: [
+        {
+          text: "$a = 1$, $b = 2x = 1$, so $\\dfrac{T_{r+1}}{T_r} = \\dfrac{11 - r}{r}$.",
+        },
+        {
+          text: "$\\dfrac{11 - r}{r} \\ge 1 \\iff 11 \\ge 2r \\iff r \\le 5.5$, so $r = 5$ is the last step up.",
+        },
+        {
+          text: "The greatest term is $T_6 = {}^{10}C_5 \\cdot 1^5 = 252$.",
+        },
+      ],
+      answer: "$T_6 = 252$",
     },
     {
       type: "text",
       content:
-        "**Worked example 4 — the peak moves off-centre: $(1 + 3x)^8$ at $x = \\frac12$.**\n\n1. $a = 1$, $b = 3x = \\frac32$, so $\\dfrac{T_{r+1}}{T_r} = \\dfrac{9 - r}{r} \\cdot \\dfrac32$.\n2. $\\ge 1 \\iff 3(9 - r) \\ge 2r \\iff r \\le 5.4$, so the largest such $r$ is 5, and the greatest term is $T_6$.\n3. $T_6 = {}^8C_5 \\left(\\dfrac32\\right)^5 = 56 \\cdot \\dfrac{243}{32} = \\dfrac{1701}{4} = 425.25$.\n4. Compare: the middle term $T_5 = 70 \\cdot \\dfrac{81}{16} = 354.375$ and $T_7 = 28 \\cdot \\dfrac{729}{64} \\approx 318.94$ are both smaller.\n\nBecause $b > a$, the growing powers of $\\frac32$ pull the peak to the right of the middle.",
+        "At $x = \\frac12$ every term is just $^{10}C_r$, so the peak is the middle, as the triangle said. The ratio test was not really needed here. The next example is one where it is.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 — a tie: the greatest term of $(3 + 2x)^9$ at $x = 1$.**\n\n1. $a = 3$, $b = 2$: $\\dfrac{T_{r+1}}{T_r} = \\dfrac{10 - r}{r} \\cdot \\dfrac{2}{3}$.\n2. $\\ge 1 \\iff 2(10 - r) \\ge 3r \\iff r \\le 4$, with **equality** at $r = 4$.\n3. So $T_5 = T_4$, and both are the greatest: $T_4 = {}^9C_3 \\cdot 3^6 \\cdot 2^3 = 84 \\cdot 729 \\cdot 8 = 489888$, and $T_5 = {}^9C_4 \\cdot 3^5 \\cdot 2^4 = 126 \\cdot 243 \\cdot 16 = 489888$.\n4. Check the neighbours: $T_3 = 314928$ and $T_6 = 326592$, both smaller.",
+      type: "worked-example",
+      id: "pc4-5-we4",
+      title: "Worked example 4 — the greatest term of $(1 + 3x)^8$ at $x = \\frac12$",
+      problem:
+        "Find the greatest term of $(1 + 3x)^8$ at $x = \\frac12$.",
+      steps: [
+        {
+          text: "$a = 1$, $b = 3x = \\frac32$, so $\\dfrac{T_{r+1}}{T_r} = \\dfrac{9 - r}{r} \\cdot \\dfrac32$.",
+        },
+        {
+          text: "$\\ge 1 \\iff 3(9 - r) \\ge 2r \\iff r \\le 5.4$, so the largest such $r$ is 5, and the greatest term is $T_6$.",
+        },
+        {
+          text: "$T_6 = {}^8C_5 \\left(\\dfrac32\\right)^5 = 56 \\cdot \\dfrac{243}{32} = \\dfrac{1701}{4} = 425.25$.",
+        },
+        {
+          text: "Compare: the middle term $T_5 = 70 \\cdot \\dfrac{81}{16} = 354.375$ and $T_7 = 28 \\cdot \\dfrac{729}{64} \\approx 318.94$ are both smaller.",
+        },
+        {
+          text: "Because $b > a$, the growing powers of $\\frac32$ pull the peak to the right of the middle.",
+        },
+      ],
+      answer: "$T_6 = \\dfrac{1701}{4} = 425.25$",
+    },
+    {
+      type: "worked-example",
+      id: "pc4-5-we5",
+      title: "Worked example 5 — the greatest term of $(3 + 2x)^9$ at $x = 1$",
+      problem:
+        "Find the greatest term of $(3 + 2x)^9$ at $x = 1$.",
+      steps: [
+        {
+          text: "$a = 3$, $b = 2$: $\\dfrac{T_{r+1}}{T_r} = \\dfrac{10 - r}{r} \\cdot \\dfrac{2}{3}$.",
+        },
+        {
+          text: "$\\ge 1 \\iff 2(10 - r) \\ge 3r \\iff r \\le 4$, with **equality** at $r = 4$.",
+        },
+        {
+          text: "So $T_5 = T_4$, and both are the greatest: $T_4 = {}^9C_3 \\cdot 3^6 \\cdot 2^3 = 84 \\cdot 729 \\cdot 8 = 489888$, and $T_5 = {}^9C_4 \\cdot 3^5 \\cdot 2^4 = 126 \\cdot 243 \\cdot 16 = 489888$.",
+        },
+        {
+          text: "Check the neighbours: $T_3 = 314928$ and $T_6 = 326592$, both smaller.",
+        },
+      ],
+      answer: "$T_4 = T_5 = 489888$",
     },
     {
       type: "callout",
@@ -1077,21 +1552,80 @@ const lesson05: LessonSeed = {
     {
       type: "text",
       content:
-        "**Running the ratio backwards.** The neighbour ratio $\\dfrac{{}^nC_r}{{}^nC_{r-1}} = \\dfrac{n - r + 1}{r}$ also works in reverse: given ratios of coefficients, it finds $n$ and $r$.\n\n**Worked example 6 — three consecutive coefficients.** Three consecutive coefficients of $(1 + x)^n$ are in the ratio $1 : 3 : 5$. Find $n$.\n\n1. Call them $^nC_{r-1}$, $^nC_r$, $^nC_{r+1}$.\n2. First ratio: $\\dfrac{{}^nC_r}{{}^nC_{r-1}} = \\dfrac{n - r + 1}{r} = 3$, so $n + 1 = 4r$.\n3. Second ratio: $\\dfrac{{}^nC_{r+1}}{{}^nC_r} = \\dfrac{n - r}{r + 1} = \\dfrac{5}{3}$, so $3n - 3r = 5r + 5$, that is $3n = 8r + 5$.\n4. Substitute $n = 4r - 1$: $12r - 3 = 8r + 5$, so $r = 2$ and $n = 7$.\n5. Check: $^7C_1, {}^7C_2, {}^7C_3 = 7, 21, 35$, which is $1 : 3 : 5$. ✓",
+        "**Running the ratio backwards.** The neighbour ratio $\\dfrac{{}^nC_r}{{}^nC_{r-1}} = \\dfrac{n - r + 1}{r}$ also works in reverse: given ratios of coefficients, it finds $n$ and $r$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 7 — a real-world greatest term: the most likely number of sixes.** Roll a fair die 10 times. Which number of sixes is most likely?\n\n1. Expand $\\left(\\dfrac56 + \\dfrac16\\right)^{10} = 1$. The term $^{10}C_r \\left(\\dfrac56\\right)^{10-r} \\left(\\dfrac16\\right)^r$ is the chance of exactly $r$ sixes: choose which $r$ rolls are sixes, then multiply the chances.\n   *Why this step:* the chances for $r = 0, 1, \\dots, 10$ are exactly the terms of a binomial expansion, so \"most likely\" means \"greatest term\".\n2. Ratio with $a = \\dfrac56$, $b = \\dfrac16$: $\\dfrac{T_{r+1}}{T_r} = \\dfrac{11 - r}{r} \\cdot \\dfrac{1/6}{5/6} = \\dfrac{11 - r}{5r}$.\n3. $\\dfrac{11 - r}{5r} \\ge 1 \\iff 11 \\ge 6r \\iff r \\le 1.83$, so $r = 1$ is the last step up and the greatest term is $T_2$: **exactly one six**.\n   *Why this step:* $T_{r+1}$ corresponds to $r$ sixes, so $T_2$ means 1 six. The off-by-one trap applies here too.\n4. Check: the chances of 0, 1 and 2 sixes are about $0.162$, $0.323$ and $0.291$.\n\nThe peak sits near $10 \\times \\dfrac16 \\approx 1.7$, the average number of sixes, and not in the middle of the row.",
+      type: "worked-example",
+      id: "pc4-5-we6",
+      title: "Worked example 6 — three consecutive coefficients",
+      problem:
+        "Three consecutive coefficients of $(1 + x)^n$ are in the ratio $1 : 3 : 5$. Find $n$.",
+      steps: [
+        {
+          text: "Call them $^nC_{r-1}$, $^nC_r$, $^nC_{r+1}$.",
+        },
+        {
+          text: "First ratio: $\\dfrac{{}^nC_r}{{}^nC_{r-1}} = \\dfrac{n - r + 1}{r} = 3$, so $n + 1 = 4r$.",
+        },
+        {
+          text: "Second ratio: $\\dfrac{{}^nC_{r+1}}{{}^nC_r} = \\dfrac{n - r}{r + 1} = \\dfrac{5}{3}$, so $3n - 3r = 5r + 5$, that is $3n = 8r + 5$.",
+        },
+        {
+          text: "Substitute $n = 4r - 1$: $12r - 3 = 8r + 5$, so $r = 2$ and $n = 7$.",
+        },
+        {
+          text: "Check: $^7C_1, {}^7C_2, {}^7C_3 = 7, 21, 35$, which is $1 : 3 : 5$. ✓",
+        },
+      ],
+      answer: "$n = 7$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 8 — JEE style: the greatest term of $(2 + 3x)^9$ at $x = \\frac32$.**\n\n1. $a = 2$, $b = 3x = \\dfrac92$, so $\\left|\\dfrac{b}{a}\\right| = \\dfrac94$ and $\\dfrac{T_{r+1}}{T_r} = \\dfrac{10 - r}{r} \\cdot \\dfrac94$.\n   *Why this step:* put the number in for $x$ **before** comparing. The size of $b/a$ decides how far the peak moves.\n2. $\\dfrac{9(10 - r)}{4r} \\ge 1 \\iff 90 \\ge 13r \\iff r \\le 6.92$, so $r = 6$ is the last step up and the greatest term is $T_7$.\n3. $T_7 = {}^9C_6 \\cdot 2^3 \\cdot \\left(\\dfrac92\\right)^6 = 84 \\cdot 8 \\cdot \\dfrac{531441}{64} = \\dfrac{7 \\cdot 3^{13}}{2} = 5580130.5$.\n   *Why this step:* the inequality gave no equality at a whole number, so there is a single greatest term and no tie.\n4. Sanity check: $\\dfrac{T_8}{T_7} = \\dfrac{3}{7} \\cdot \\dfrac94 = \\dfrac{27}{28} < 1$, so $T_8$ is only slightly smaller. The peak is far to the right of the middle terms $T_5, T_6$.",
+      type: "worked-example",
+      id: "pc4-5-we7",
+      title: "Worked example 7 — a real-world greatest term: the most likely number of sixes",
+      problem:
+        "Roll a fair die 10 times. Which number of sixes is most likely?",
+      steps: [
+        {
+          text: "Expand $\\left(\\dfrac56 + \\dfrac16\\right)^{10} = 1$. The term $^{10}C_r \\left(\\dfrac56\\right)^{10-r} \\left(\\dfrac16\\right)^r$ is the chance of exactly $r$ sixes: choose which $r$ rolls are sixes, then multiply the chances.\n*Why this step:* the chances for $r = 0, 1, \\dots, 10$ are exactly the terms of a binomial expansion, so \"most likely\" means \"greatest term\".",
+        },
+        {
+          text: "Ratio with $a = \\dfrac56$, $b = \\dfrac16$: $\\dfrac{T_{r+1}}{T_r} = \\dfrac{11 - r}{r} \\cdot \\dfrac{1/6}{5/6} = \\dfrac{11 - r}{5r}$.",
+        },
+        {
+          text: "$\\dfrac{11 - r}{5r} \\ge 1 \\iff 11 \\ge 6r \\iff r \\le 1.83$, so $r = 1$ is the last step up and the greatest term is $T_2$: **exactly one six**.\n*Why this step:* $T_{r+1}$ corresponds to $r$ sixes, so $T_2$ means 1 six. The off-by-one trap applies here too.",
+        },
+        {
+          text: "Check: the chances of 0, 1 and 2 sixes are about $0.162$, $0.323$ and $0.291$.",
+        },
+        {
+          text: "The peak sits near $10 \\times \\dfrac16 \\approx 1.7$, the average number of sixes, and not in the middle of the row.",
+        },
+      ],
+      answer: "$1$ six.",
     },
     {
-      type: "math",
-      latex: "\\frac{T_{r+1}}{T_r} = \\frac{10-r}{r}\\cdot\\frac{9}{4} \\ge 1 \\iff r \\le \\frac{90}{13} \\;\\Rightarrow\\; T_7 = {}^9C_6\\,2^3\\left(\\tfrac92\\right)^6 = \\frac{7 \\cdot 3^{13}}{2}",
+      type: "worked-example",
+      id: "pc4-5-we8",
+      title: "Worked example 8 — JEE style: the greatest term of $(2 + 3x)^9$ at $x = \\frac32$",
+      problem:
+        "Find the greatest term of $(2 + 3x)^9$ at $x = \\frac32$.",
+      steps: [
+        {
+          text: "$a = 2$, $b = 3x = \\dfrac92$, so $\\left|\\dfrac{b}{a}\\right| = \\dfrac94$ and $\\dfrac{T_{r+1}}{T_r} = \\dfrac{10 - r}{r} \\cdot \\dfrac94$.\n*Why this step:* put the number in for $x$ **before** comparing. The size of $b/a$ decides how far the peak moves.",
+        },
+        {
+          text: "$\\dfrac{9(10 - r)}{4r} \\ge 1 \\iff 90 \\ge 13r \\iff r \\le 6.92$, so $r = 6$ is the last step up and the greatest term is $T_7$.",
+        },
+        {
+          text: "$T_7 = {}^9C_6 \\cdot 2^3 \\cdot \\left(\\dfrac92\\right)^6 = 84 \\cdot 8 \\cdot \\dfrac{531441}{64} = \\dfrac{7 \\cdot 3^{13}}{2} = 5580130.5$.\n*Why this step:* the inequality gave no equality at a whole number, so there is a single greatest term and no tie.",
+        },
+        {
+          text: "Sanity check: $\\dfrac{T_8}{T_7} = \\dfrac{3}{7} \\cdot \\dfrac94 = \\dfrac{27}{28} < 1$, so $T_8$ is only slightly smaller. The peak is far to the right of the middle terms $T_5, T_6$.",
+          latex: "\\frac{T_{r+1}}{T_r} = \\frac{10-r}{r}\\cdot\\frac{9}{4} \\ge 1 \\iff r \\le \\frac{90}{13} \\;\\Rightarrow\\; T_7 = {}^9C_6\\,2^3\\left(\\tfrac92\\right)^6 = \\frac{7 \\cdot 3^{13}}{2}",
+        },
+      ],
+      answer: "$T_7 = \\dfrac{7 \\cdot 3^{13}}{2}$",
     },
     {
       type: "table",
@@ -1102,6 +1636,7 @@ const lesson05: LessonSeed = {
         ["Largest term or coefficient with numbers inside", "Ratio $\\left|\\frac{T_{r+1}}{T_r}\\right| = \\frac{n-r+1}{r}\\left|\\frac{b}{a}\\right| \\ge 1$"],
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc4-5-q1",
@@ -1228,7 +1763,7 @@ const lesson06: LessonSeed = {
       variant: "tip",
       title: "Checklist before you answer",
       content:
-        "1. Write $T_{r+1} = {}^nC_r a^{n-r} b^r$ with the real $a$ and $b$, signs included. 2. Get the power of $x$ in terms of $r$ and solve. 3. The $k$-th term uses $r = k - 1$. 4. Raise the numbers inside $a$ and $b$ to their powers too.",
+        "1. Write $T_{r+1} = {}^nC_r a^{n-r} b^r$ with the real $a$ and $b$, signs included.\n2. Get the power of $x$ in terms of $r$ and solve.\n3. The $k$-th term uses $r = k - 1$.\n4. Raise the numbers inside $a$ and $b$ to their powers too.",
     },
     {
       type: "quiz",

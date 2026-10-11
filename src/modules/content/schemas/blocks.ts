@@ -1,4 +1,7 @@
 import { z } from "zod";
+import { isNumericAnswerCorrect } from "../lib/numeric-answer";
+import { srfExpressionError, srfShadedRegions } from "../lib/srf";
+import { seqExpressionError } from "../lib/seq";
 
 /**
  * Lesson content is stored as a JSONB array of typed blocks
@@ -7,14 +10,37 @@ import { z } from "zod";
  *
  * Text-bearing fields (text/callout content, table cells, quiz text)
  * support inline math with $...$ delimiters, rendered via KaTeX.
+ *
+ * Questions: `quiz` (single-correct or, with `multiple: true`, select-all
+ * MCQ) and `numeric` (typed number answer). See the authoring note on
+ * quizBlockSchema for which to use.
+ *
+ * Solved problems ("Worked example 3", "Pattern 1", "Example: ...") go in a
+ * `worked-example` block, not in text + math runs: see the authoring note
+ * on workedExampleBlockSchema below.
  */
 
 export const CURRENT_SCHEMA_VERSION = 1;
 
 export const textBlockSchema = z.object({
   type: z.literal("text"),
-  /** Markdown-ish plain text for now; rich text editing comes later. */
+  /**
+   * Markdown-ish plain text: blank lines separate paragraphs, single
+   * newlines break lines, and lines starting "- ", "* ", "• " or "1. " /
+   * "1) " form lists (see lib/text-structure.ts). Same for callout content.
+   */
   content: z.string().min(1),
+});
+
+/**
+ * Section heading inside a lesson. Gets a stable anchor id slugged from its
+ * text (lib/headings.ts); two or more level-2 headings produce an
+ * "On this page" table of contents. Level defaults to 2.
+ */
+export const headingBlockSchema = z.object({
+  type: z.literal("heading"),
+  text: z.string().regex(/\S/, "heading text must not be blank"),
+  level: z.union([z.literal(2), z.literal(3)]).optional(),
 });
 
 export const mathBlockSchema = z.object({
@@ -50,26 +76,226 @@ export const videoBlockSchema = z.object({
 });
 
 /**
+ * AUTHORING: which question block to use.
+ * - `quiz` (single correct, the default): exactly one option is right. Use
+ *   for conceptual checks and for JEE single-correct MCQs. Write wrong
+ *   options that encode real misconceptions and give each one `feedback`.
+ * - `quiz` with `multiple: true` (JEE "one or more correct"): the learner
+ *   ticks every option that applies and presses Check; the answer counts
+ *   only if the ticked set equals the set of correct options exactly (no
+ *   partial credit). One correct option is allowed, as in JEE Advanced: the
+ *   learner is not told how many to pick. Don't use it for a question that
+ *   just happens to have one answer and doesn't need "select all".
+ * - `numeric` (JEE numerical / integer type): the answer is a number the
+ *   learner types (integer, decimal, fraction like 3/4, or 1.6e-19). Prefer
+ *   it over an MCQ whenever the options would just be four candidate
+ *   numbers; MCQ options leak the answer by elimination and estimation.
+ *   Integer-type questions use the default tolerance (exact). Put the unit
+ *   in `unit`, never in the number, and a worked `solution` for anything
+ *   past a one-step calculation.
+ *
  * Multiple-choice question with per-option feedback. `variant` shades the
  * framing: practice (low stakes), concept (misconception check),
- * mastery (end-of-lesson check).
+ * mastery (end-of-lesson check). Option indices (attempt tracking) always
+ * refer to authored order, whatever order the options are displayed in.
+ *
+ * Correct options: exactly one without `multiple`; at least one with
+ * `multiple: true`. A quiz with no correct option is always rejected.
  */
-export const quizBlockSchema = z.object({
-  type: z.literal("quiz"),
-  /** Stable identifier for attempt tracking; survives republishes. */
+export const quizBlockSchema = z
+  .object({
+    type: z.literal("quiz"),
+    /** Stable identifier for attempt tracking; survives republishes. */
+    id: z.string().min(1).optional(),
+    variant: z.enum(["practice", "concept", "mastery"]),
+    question: z.string().min(1),
+    options: z
+      .array(
+        z.object({
+          text: z.string().min(1),
+          correct: z.boolean().optional(),
+          feedback: z.string().optional(),
+        }),
+      )
+      .min(2),
+    hint: z.string().optional(),
+    /**
+     * Options are shown in a deterministic shuffled order (see
+     * lib/quiz-shuffle.ts). Set false when an option refers to another by
+     * position ("all of the above", "A and B"). Absent means true.
+     */
+    shuffle: z.boolean().optional(),
+    /**
+     * "Select all that apply": checkboxes plus a Check button, graded on
+     * the exact set of correct options. Absent means single-correct.
+     */
+    multiple: z.boolean().optional(),
+  })
+  .superRefine((quiz, ctx) => {
+    const correct = quiz.options.filter((o) => o.correct).length;
+    if (correct === 0) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["options"],
+        message: "a quiz needs at least one correct option",
+      });
+    } else if (correct > 1 && !quiz.multiple) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["multiple"],
+        message: `${correct} options are marked correct: set multiple: true for a "select all that apply" question, or mark exactly one`,
+      });
+    }
+  });
+
+/**
+ * Numerical-answer question (JEE numerical value / integer type): the
+ * learner types a number and presses Check. See the authoring note on
+ * quizBlockSchema for when to use it.
+ *
+ * Grading (lib/numeric-answer.ts): a response x is correct when
+ * |x - answer| <= max(tolerance, relTolerance * |answer|), plus a tiny
+ * floating-point allowance. Both absent means exact (integer type).
+ * The learner may type decimals, negatives, fractions ("3/4"), scientific
+ * notation ("1.6e-19", "1.6 x 10^-19") and a unicode minus.
+ *
+ * Rich-text fields (text-block conventions, $math$): `question`, `unit`,
+ * `hint`, `solution`, and each common mistake's `feedback`.
+ */
+export const numericBlockSchema = z
+  .object({
+    type: z.literal("numeric"),
+    /** Stable identifier for attempt tracking; survives republishes. */
+    id: z.string().min(1).optional(),
+    variant: z.enum(["practice", "concept", "mastery"]),
+    question: z.string().regex(/\S/, "question must not be blank"),
+    /** The correct value, in the unit given by `unit`. */
+    answer: z.number(),
+    /** Absolute tolerance, in the answer's unit (e.g. 0.01). Default 0. */
+    tolerance: z.number().min(0).optional(),
+    /**
+     * Relative tolerance as a fraction of |answer| (0.01 = 1%). Default 0.
+     * An answer of 0 needs an absolute `tolerance` instead.
+     */
+    relTolerance: z.number().min(0).max(1).optional(),
+    /** Unit shown after the input box, e.g. "m/s" or "$\\text{m s}^{-2}$". */
+    unit: z.string().regex(/\S/, "unit must not be blank").optional(),
+    hint: z.string().regex(/\S/, "hint must not be blank").optional(),
+    /**
+     * Worked solution (StructuredText: paragraphs, lists, $math$). Shown
+     * once the learner is correct, or on request after two wrong attempts.
+     */
+    solution: z.string().regex(/\S/, "solution must not be blank").optional(),
+    /**
+     * Targeted feedback for predictable wrong answers (sign error, forgot
+     * to square, wrong unit prefix). `tolerance` is absolute and defaults
+     * to the question's own tolerance rule.
+     */
+    commonMistakes: z
+      .array(
+        z.object({
+          answer: z.number(),
+          tolerance: z.number().min(0).optional(),
+          feedback: z.string().regex(/\S/, "feedback must not be blank"),
+        }),
+      )
+      .min(1)
+      .optional(),
+  })
+  .superRefine((block, ctx) => {
+    if (block.answer === 0 && block.relTolerance && !(block.tolerance && block.tolerance > 0)) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["tolerance"],
+        message:
+          "relTolerance is a fraction of |answer| and so accepts nothing around an answer of 0: give an absolute tolerance",
+      });
+    }
+    block.commonMistakes?.forEach((mistake, i) => {
+      // The correct-answer check would accept this "mistake" first.
+      if (isNumericAnswerCorrect(mistake.answer, block)) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["commonMistakes", i, "answer"],
+          message: `common mistake ${mistake.answer} is within the accepted tolerance of the answer ${block.answer}`,
+        });
+      }
+    });
+  });
+
+/**
+ * A solved problem the learner can attempt before seeing the solution.
+ *
+ * AUTHORING: when to use worked-example instead of text/math blocks.
+ * - Use it whenever the lesson poses a concrete problem and then solves it:
+ *   "**Worked example 3.** A ball is thrown...", "Pattern 1: solve
+ *   $2\sin x = 1$", "Example: find the determinant of...". The lead-in
+ *   ("Worked example 3", "Pattern 1") becomes `title`; the question becomes
+ *   `problem`; each numbered step or derivation line becomes one `steps`
+ *   entry; the final result goes in `answer`.
+ * - Keep using text/math/callout for exposition, derivations of the theory
+ *   itself, and general strategy ("to solve any such equation, first...").
+ *   If there is no specific question a learner could try, it is not a
+ *   worked example.
+ * - One step = one move a learner could check on their own: a sentence of
+ *   reasoning (`text`) and/or the line of algebra it produces (`latex`).
+ *   Put the explanation in `text` and the equation in `latex` rather than
+ *   wrapping display math in `$$...$$` inside text.
+ * - Set `tryFirst: false` only for a demonstration the learner cannot
+ *   sensibly attempt yet (e.g. the very first example introducing a
+ *   brand-new method); then every step is shown at once.
+ * - The last step derives the result; `answer` restates it in one line
+ *   with units. Don't add a separate "Answer: ..." step.
+ * - A heading before a group of examples ("Worked examples") is fine; the
+ *   block itself never creates a heading or a TOC entry.
+ *
+ * - Tables belong inside the example, not as separate table blocks around
+ *   it: data given in the question goes in `problemTable` (shown under the
+ *   problem, always visible); a table built while solving (frequency table,
+ *   fx / cumulative-frequency columns) goes in that step's `table`.
+ *
+ * Fields: `title` is inline rich text ($math$, **bold**; no paragraphs or
+ * lists). `problem`, step `text` and `answer` follow the text-block
+ * conventions (paragraphs, "- " / "1. " lists, $math$, $$display$$,
+ * **bold**). Step `latex` is raw LaTeX rendered with KaTeX in
+ * display mode (like a math block). `problemTable` and step `table` have the
+ * table block's shape; each cell is inline rich text ($math$, **bold**).
+ * Each step needs at least one of `text`, `latex`, `table`; a step renders
+ * them in the order text, table, latex (split into two steps for another
+ * order).
+ */
+export const tableDataSchema = z.object({
+  headers: z.array(z.string()).min(1),
+  rows: z.array(z.array(z.string())).min(1),
+});
+
+export const workedExampleStepSchema = z
+  .object({
+    text: z.string().regex(/\S/, "step text must not be blank").optional(),
+    latex: z.string().regex(/\S/, "step latex must not be blank").optional(),
+    table: tableDataSchema.optional(),
+  })
+  .refine(
+    (step) => step.text !== undefined || step.latex !== undefined || step.table !== undefined,
+    { message: "a worked-example step needs text, latex or a table" },
+  );
+
+export const workedExampleBlockSchema = z.object({
+  type: z.literal("worked-example"),
+  /** Optional stable identifier (future reveal tracking); survives republishes. */
   id: z.string().min(1).optional(),
-  variant: z.enum(["practice", "concept", "mastery"]),
-  question: z.string().min(1),
-  options: z
-    .array(
-      z.object({
-        text: z.string().min(1),
-        correct: z.boolean().optional(),
-        feedback: z.string().optional(),
-      }),
-    )
-    .min(2),
-  hint: z.string().optional(),
+  /** Short label, e.g. "Worked example 3" or "Pattern 1: $\\sin x = k$". */
+  title: z.string().regex(/\S/, "title must not be blank").optional(),
+  problem: z.string().regex(/\S/, "problem must not be blank"),
+  /** Data given in the question, shown under the problem (never hidden). */
+  problemTable: tableDataSchema.optional(),
+  steps: z.array(workedExampleStepSchema).min(1),
+  answer: z.string().regex(/\S/, "answer must not be blank").optional(),
+  /**
+   * Hide the steps behind "Show first step" / "Next step" / "Show all" so
+   * the learner attempts the problem first. Absent means true.
+   */
+  tryFirst: z.boolean().optional(),
 });
 
 // ---------- Interactive components ----------
@@ -2077,9 +2303,1154 @@ export const emCircuitLabSchema = z
     }
   });
 
+const emRangeIssue = (r: { min: number; max: number; initial: number }) =>
+  r.min > r.max || r.initial < r.min || r.initial > r.max;
+
+/**
+ * Bar magnets and magnetic materials. field: a bar magnet (pole model,
+ * poles at ±halfLength along its axis, drawn vertically) with traced field
+ * lines and a probe at distance r and angle θ from the magnet's N
+ * direction (exact field against the short-dipole formula); with
+ * earthField > 0 the Earth's horizontal field points up the page
+ * (geographic north) and the neutral points are marked. torque: a magnet
+ * at angle θ to a uniform field, the couple on its poles, τ and U against
+ * θ, and the small-oscillation period. hysteresis: a B–H loop with
+ * retentivity and coercivity sliders, soft-iron and steel presets and the
+ * loop area. Units: moment A m², lengths cm, earthField μT, coercivity and
+ * hMax A/m, saturation and retentivity T.
+ */
+export const emMagnetLabSchema = z
+  .object({
+    component: z.literal("em-magnet-lab"),
+    mode: z.enum(["field", "torque", "hysteresis"]).default("field"),
+    moment: emRangeSchema.default({ min: 0.5, max: 10, step: 0.5, initial: 2 }),
+    /** field mode: half the magnetic length l, in cm. */
+    halfLength: z.number().positive().default(5),
+    /** field mode: probe distance r from the centre, in cm. */
+    distance: emRangeSchema.default({ min: 8, max: 28, step: 1, initial: 20 }),
+    /** Starting angle in degrees: probe angle from the axis (field) or magnet angle to B (torque). */
+    angle: z.number().optional(),
+    /** field mode: Earth's horizontal component in μT (0 = no Earth field). */
+    earthField: z.number().min(0).default(0),
+    /** field mode: which geographic direction the magnet's N pole points. */
+    magnetPointing: z.enum(["north", "south"]).default("north"),
+    window: plotWindowSchema.default({ xmin: -40, xmax: 40, ymin: -30, ymax: 30 }),
+    /** torque mode: the uniform field, in fieldUnit. */
+    fieldStrength: emRangeSchema.default({ min: 5, max: 100, step: 5, initial: 40 }),
+    fieldUnit: z.enum(["uT", "mT", "T"]).default("uT"),
+    /** torque mode: moment of inertia about the suspension, kg m². */
+    inertia: z.number().positive().default(1e-5),
+    /** hysteresis mode. */
+    saturation: z.number().positive().default(1.5),
+    retentivity: emRangeSchema.default({ min: 0.3, max: 1.45, step: 0.05, initial: 1.2 }),
+    coercivity: emRangeSchema.default({ min: 50, max: 2500, step: 50, initial: 150 }),
+    hMax: z.number().positive().default(5000),
+    /** hysteresis mode: frequency used for the power-loss readout, Hz. */
+    frequency: z.number().positive().default(50),
+    showGhost: z.boolean().default(true),
+    /** Live values to show; omitted = a sensible per-mode default. */
+    readouts: z
+      .array(
+        z.enum([
+          "probe",
+          "components",
+          "axial-equatorial",
+          "neutral",
+          "torque",
+          "energy",
+          "work",
+          "period",
+          "loop",
+          "point",
+        ]),
+      )
+      .optional(),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    for (const key of ["moment", "distance", "fieldStrength", "retentivity", "coercivity"] as const) {
+      if (emRangeIssue(cfg[key]) || cfg[key].min <= 0) {
+        ctx.addIssue({ code: "custom", path: [key], message: "need 0 < min ≤ initial ≤ max" });
+      }
+    }
+    if (cfg.distance.min <= cfg.halfLength) {
+      ctx.addIssue({ code: "custom", path: ["distance"], message: "the probe must stay outside the poles (min > halfLength)" });
+    }
+    if (cfg.retentivity.max >= cfg.saturation) {
+      ctx.addIssue({ code: "custom", path: ["retentivity"], message: "retentivity must stay below saturation" });
+    }
+    if (cfg.coercivity.max >= cfg.hMax) {
+      ctx.addIssue({ code: "custom", path: ["coercivity"], message: "coercivity must stay below hMax" });
+    }
+    if (cfg.window.xmin >= cfg.window.xmax || cfg.window.ymin >= cfg.window.ymax) {
+      ctx.addIssue({ code: "custom", path: ["window"], message: "window must have positive width and height" });
+    }
+  });
+
+/**
+ * Electromagnetic waves. wave: E and B drawn in perspective along x
+ * (B drawn as cB so both share a scale), perpendicular to each other and
+ * to the direction of travel, with an ωt slider, E₀, λ and refractive
+ * index sliders, direction and polarisation toggles, and readouts for
+ * B₀ = E₀/v, the wave equations, energy density, intensity and radiation
+ * pressure. spectrum: a log-scale wavelength bar with the seven bands; a
+ * slider moves a marker and reads off frequency, photon energy, sources
+ * and uses. wavelength is in wavelengthUnit; wavelengthExp is log₁₀(λ/m).
+ */
+export const emWaveLabSchema = z
+  .object({
+    component: z.literal("em-wave-lab"),
+    mode: z.enum(["wave", "spectrum"]).default("wave"),
+    /** E₀ in V/m. */
+    amplitude: emRangeSchema.default({ min: 1, max: 100, step: 1, initial: 30 }),
+    wavelength: emRangeSchema.default({ min: 0.5, max: 10, step: 0.5, initial: 2 }),
+    wavelengthUnit: z.enum(["nm", "um", "mm", "cm", "m"]).default("m"),
+    refractiveIndex: emRangeSchema.default({ min: 1, max: 2.5, step: 0.05, initial: 1 }),
+    direction: z.enum(["+x", "-x"]).default("+x"),
+    /** The axis E oscillates along. */
+    polarisation: z.enum(["y", "z"]).default("y"),
+    wavelengthExp: emRangeSchema.default({ min: -13, max: 3, step: 0.05, initial: -6.3 }),
+    /** wave mode sliders; omitted = all four. */
+    sliders: z.array(z.enum(["E0", "lambda", "n", "t"])).optional(),
+    readouts: z
+      .array(
+        z.enum(["fields", "equation", "speed", "energy", "intensity", "pressure", "band", "photon", "uses"]),
+      )
+      .optional(),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    for (const key of ["amplitude", "wavelength", "refractiveIndex"] as const) {
+      if (emRangeIssue(cfg[key]) || cfg[key].min <= 0) {
+        ctx.addIssue({ code: "custom", path: [key], message: "need 0 < min ≤ initial ≤ max" });
+      }
+    }
+    if (cfg.refractiveIndex.min < 1) {
+      ctx.addIssue({ code: "custom", path: ["refractiveIndex"], message: "refractive index must be at least 1" });
+    }
+    const e = cfg.wavelengthExp;
+    if (emRangeIssue(e) || e.min < -14 || e.max > 4) {
+      ctx.addIssue({ code: "custom", path: ["wavelengthExp"], message: "need -14 ≤ min ≤ initial ≤ max ≤ 4" });
+    }
+  });
+
+// ---------- Calculus (calc) interactives ----------
+
+const calcRangeSchema = z
+  .object({ min: z.number(), max: z.number(), step: z.number().positive(), initial: z.number() })
+  .refine((r) => r.min < r.max && r.initial >= r.min && r.initial <= r.max, {
+    message: "need min < max and min ≤ initial ≤ max",
+  });
+
+/**
+ * Tangent-line explorer: drag x₀ along f and watch the tangent, the
+ * one-sided derivatives (LHD/RHD, computed numerically from `expr`) and,
+ * optionally, f′ plotted underneath. A corner (LHD ≠ RHD) draws two half
+ * tangents; slopes that blow up are reported as a vertical tangent.
+ * `secant` adds an h slider (secant through x₀ and x₀ + h). `chord` is the
+ * mean value theorem mode: the chord from a to b is drawn and every c in
+ * (a, b) with f′(c) equal to the chord slope is marked. `derivExpr` is the
+ * exact f′ (needed for `showDerivative`; otherwise numeric).
+ */
+export const calcTangentExplorerSchema = z
+  .object({
+    component: z.literal("calc-tangent-explorer"),
+    expr: z.string().min(1),
+    exprLatex: z.string().min(1),
+    derivExpr: z.string().min(1).optional(),
+    derivLatex: z.string().min(1).optional(),
+    window: plotWindowSchema,
+    /** y-window of the f′ panel (x-range is shared with `window`). */
+    derivWindow: z.object({ ymin: z.number(), ymax: z.number() }).optional(),
+    x0: calcRangeSchema,
+    showDerivative: z.boolean().default(false),
+    secant: calcRangeSchema.optional(),
+    chord: z.object({ a: z.number(), b: z.number() }).optional(),
+    /** x-values where f (and f′) are undefined. */
+    excluded: z.array(z.number()).default([]),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    if (cfg.showDerivative && !cfg.derivExpr) {
+      ctx.addIssue({ code: "custom", path: ["derivExpr"], message: "showDerivative needs derivExpr" });
+    }
+    if (cfg.chord && !(cfg.chord.a < cfg.chord.b)) {
+      ctx.addIssue({ code: "custom", path: ["chord"], message: "chord needs a < b" });
+    }
+  });
+
+/**
+ * Sign-chart explorer: f with its critical points (f′ = 0 or f′ undefined)
+ * and inflection points found numerically, plus sign charts of f′ and f″
+ * underneath. A scanning x slider reads off f′(x), f″(x) and what they say
+ * (rising/falling, concave up/down). `interval` turns on the closed-interval
+ * method: endpoints and interior critical points are tabulated and the
+ * absolute maximum and minimum are highlighted. Exact `derivExpr` /
+ * `secondDerivExpr` are optional (central differences otherwise).
+ */
+export const calcSignChartSchema = z
+  .object({
+    component: z.literal("calc-sign-chart"),
+    expr: z.string().min(1),
+    exprLatex: z.string().min(1),
+    derivExpr: z.string().min(1).optional(),
+    secondDerivExpr: z.string().min(1).optional(),
+    window: plotWindowSchema,
+    rows: z.array(z.enum(["first", "second"])).min(1).default(["first", "second"]),
+    interval: z.object({ a: z.number(), b: z.number() }).optional(),
+    initial: z.number(),
+    excluded: z.array(z.number()).default([]),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    if (cfg.interval && !(cfg.interval.a < cfg.interval.b)) {
+      ctx.addIssue({ code: "custom", path: ["interval"], message: "interval needs a < b" });
+    }
+    if (cfg.initial < cfg.window.xmin || cfg.initial > cfg.window.xmax) {
+      ctx.addIssue({ code: "custom", path: ["initial"], message: "initial must lie in the window" });
+    }
+  });
+
+// ---------- Complex Numbers & Quadratics (cq) interactives ----------
+
+const cqRangeSchema = z.object({
+  min: z.number(),
+  max: z.number(),
+  step: z.number().positive(),
+  initial: z.number(),
+});
+
+const cqRangeValid = (r: z.infer<typeof cqRangeSchema>) =>
+  r.min < r.max && r.initial >= r.min && r.initial <= r.max;
+
+/**
+ * The parabola y = ax² + bx + c with a, b, c sliders. Readouts: the
+ * discriminant, the roots (real, equal or complex p ± qi), the vertex, the
+ * sum and product of roots, the factored form and the range. `markers`
+ * adds k₁ (and optionally k₂) on the x-axis with the location-of-roots
+ * checklist (D, a·f(k), −b/2a against k). `showSign` colours the x-axis
+ * where the quadratic is positive (green) or negative (red).
+ */
+export const cqQuadraticExplorerSchema = z
+  .object({
+    component: z.literal("cq-quadratic-explorer"),
+    a: cqRangeSchema.default({ min: -3, max: 3, step: 0.5, initial: 1 }),
+    b: cqRangeSchema.default({ min: -6, max: 6, step: 0.5, initial: -2 }),
+    c: cqRangeSchema.default({ min: -6, max: 6, step: 0.5, initial: -3 }),
+    /** Location of roots: one number k₁, or an interval (k₁, k₂). */
+    markers: z.object({ k1: cqRangeSchema, k2: cqRangeSchema.optional() }).optional(),
+    showVertex: z.boolean().default(true),
+    showAxis: z.boolean().default(true),
+    showRoots: z.boolean().default(true),
+    showSign: z.boolean().default(false),
+    /** Live values to show; omitted = discriminant, roots, vertex, sum-product. */
+    readouts: z
+      .array(z.enum(["discriminant", "roots", "vertex", "sum-product", "factored", "range"]))
+      .optional(),
+    window: plotWindowSchema.default({ xmin: -6, xmax: 6, ymin: -8, ymax: 8 }),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    for (const key of ["a", "b", "c"] as const) {
+      if (!cqRangeValid(cfg[key])) {
+        ctx.addIssue({ code: "custom", path: [key], message: "need min < max and min ≤ initial ≤ max" });
+      }
+    }
+    if (cfg.markers) {
+      if (!cqRangeValid(cfg.markers.k1)) {
+        ctx.addIssue({ code: "custom", path: ["markers", "k1"], message: "need min < max and min ≤ initial ≤ max" });
+      }
+      if (cfg.markers.k2 && !cqRangeValid(cfg.markers.k2)) {
+        ctx.addIssue({ code: "custom", path: ["markers", "k2"], message: "need min < max and min ≤ initial ≤ max" });
+      }
+    }
+    if (cfg.window.xmin >= cfg.window.xmax || cfg.window.ymin >= cfg.window.ymax) {
+      ctx.addIssue({ code: "custom", path: ["window"], message: "window must have positive width and height" });
+    }
+  });
+
+/**
+ * The Argand plane with draggable complex numbers. Modes:
+ * point (z, its modulus, principal argument, polar and Euler forms, plus
+ * optional conjugate / −z / iz / 1/z), sum (parallelogram, triangle
+ * inequality, optional difference), product (scale-and-rotate, args add,
+ * optional quotient), powers (z, z², …, zⁿ: De Moivre), roots (the n-th
+ * roots of z₁ on a circle, a regular polygon; z₁ = 1 gives roots of unity),
+ * rotation (triangle z₁z₂z₃ and (z₃ − z₁)/(z₂ − z₁) as ratio·e^{iθ}).
+ */
+export const cqArgandPlaneSchema = z
+  .object({
+    component: z.literal("cq-argand-plane"),
+    mode: z.enum(["point", "sum", "product", "powers", "roots", "rotation"]).default("point"),
+    z1: vec2Schema.default([2, 1]),
+    z2: vec2Schema.default([1, 2]),
+    z3: vec2Schema.default([0, 3]),
+    /** powers / roots: the exponent n (whole numbers). */
+    n: z
+      .object({ min: z.number().int().min(1), max: z.number().int().max(24), initial: z.number().int() })
+      .default({ min: 2, max: 12, initial: 3 }),
+    /** Optional overlays; which apply depends on the mode. */
+    show: z
+      .array(
+        z.enum(["conjugate", "negative", "i-times", "reciprocal", "difference", "quotient", "unit-circle", "polygon"]),
+      )
+      .optional(),
+    /** Handles the learner may drag; omitted = a sensible per-mode default. */
+    draggable: z.array(z.enum(["z1", "z2", "z3"])).optional(),
+    /** Grid step that dragged points snap to. */
+    snap: z.number().positive().default(0.5),
+    window: plotWindowSchema.default({ xmin: -4, xmax: 4, ymin: -4, ymax: 4 }),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    if (cfg.n.min > cfg.n.max || cfg.n.initial < cfg.n.min || cfg.n.initial > cfg.n.max) {
+      ctx.addIssue({ code: "custom", path: ["n"], message: "need min ≤ initial ≤ max" });
+    }
+    if (cfg.window.xmin >= cfg.window.xmax || cfg.window.ymin >= cfg.window.ymax) {
+      ctx.addIssue({ code: "custom", path: ["window"], message: "window must have positive width and height" });
+    }
+  });
+
+/**
+ * Loci in the Argand plane, with fixed points a and b (draggable if listed):
+ * circle |z − a| = k, bisector |z − a| = |z − b|, ellipse |z − a| + |z − b| = k,
+ * hyperbola |z − a| − |z − b| = k (one branch), apollonius |z − a| = k|z − b|,
+ * arc arg((z − a)/(z − b)) = θ. A draggable test point P shows the defining
+ * quantity at P; `probe` q marks the points of the locus nearest to and
+ * farthest from q (max/min of |z − q|).
+ */
+export const cqLocusExplorerSchema = z
+  .object({
+    component: z.literal("cq-locus-explorer"),
+    locus: z.enum(["circle", "bisector", "ellipse", "hyperbola", "apollonius", "arc"]).default("circle"),
+    a: vec2Schema.default([-1, 0]),
+    b: vec2Schema.default([1, 0]),
+    /** The constant k (radius, sum, difference or ratio); omitted = a per-locus default. */
+    k: cqRangeSchema.optional(),
+    /** arc: θ in degrees. */
+    theta: cqRangeSchema.default({ min: 15, max: 165, step: 15, initial: 60 }),
+    /** Test point P. */
+    p: vec2Schema.default([0, 2]),
+    /** When set, mark the nearest and farthest points of the locus from q. */
+    probe: vec2Schema.optional(),
+    /** Shade the inside of a closed locus (circle, ellipse, apollonius). */
+    shade: z.boolean().default(false),
+    draggable: z.array(z.enum(["a", "b", "p", "probe"])).default(["p"]),
+    snap: z.number().positive().default(0.5),
+    window: plotWindowSchema.default({ xmin: -5, xmax: 5, ymin: -4, ymax: 4 }),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    if (cfg.k && !cqRangeValid(cfg.k)) {
+      ctx.addIssue({ code: "custom", path: ["k"], message: "need min < max and min ≤ initial ≤ max" });
+    }
+    if (!cqRangeValid(cfg.theta)) {
+      ctx.addIssue({ code: "custom", path: ["theta"], message: "need min < max and min ≤ initial ≤ max" });
+    }
+    if (cfg.window.xmin >= cfg.window.xmax || cfg.window.ymin >= cfg.window.ymax) {
+      ctx.addIssue({ code: "custom", path: ["window"], message: "window must have positive width and height" });
+    }
+  });
+
+// ---------- Sets, Relations and Functions (srf) interactives ----------
+
+const srfRegionKey = z.enum(["", "A", "B", "C", "AB", "AC", "BC", "ABC"]);
+
+/**
+ * Two- or three-set Venn diagram. Shade a preset expression or click regions
+ * to shade your own; with `counts`, every shaded region shows its count and
+ * the readout totals them (plus the inclusion–exclusion breakdown).
+ * Expressions use `|` union, `&` intersection, `-` difference, `^` symmetric
+ * difference, postfix `'` complement, brackets, and atoms A, B, C, U, 0.
+ */
+export const srfVennDiagramSchema = z
+  .object({
+    component: z.literal("srf-venn-diagram"),
+    sets: z.union([z.literal(2), z.literal(3)]).default(2),
+    /** Display names for the circles (plain text), default A, B, C. */
+    labels: z.array(z.string().min(1).max(14)).min(2).max(3).optional(),
+    universeLabel: z.string().min(1).max(14).default("U"),
+    /**
+     * Element count of each region: "" outside every set, "A" in A only,
+     * "AB" in A and B only, "ABC" in all three. Missing regions count 0.
+     */
+    counts: z.partialRecord(srfRegionKey, z.number().int().min(0)).optional(),
+    /** Preset expressions offered as buttons; `latex` is raw KaTeX (no $). */
+    expressions: z
+      .array(z.object({ expr: z.string().min(1), latex: z.string().min(1) }))
+      .max(8)
+      .default([]),
+    /** Index into `expressions` shaded at the start; absent means nothing shaded. */
+    initialExpression: z.number().int().min(0).optional(),
+    /** Show n(A), n(A ∩ B), ... and the inclusion–exclusion total (needs counts). */
+    showInclusionExclusion: z.boolean().default(false),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    if (cfg.labels && cfg.labels.length !== cfg.sets) {
+      ctx.addIssue({ code: "custom", path: ["labels"], message: "need one label per set" });
+    }
+    cfg.expressions.forEach((e, i) => {
+      const result = srfShadedRegions(e.expr, cfg.sets);
+      if (typeof result === "string") {
+        ctx.addIssue({ code: "custom", path: ["expressions", i, "expr"], message: result });
+      }
+    });
+    if (cfg.initialExpression !== undefined && cfg.initialExpression >= cfg.expressions.length) {
+      ctx.addIssue({ code: "custom", path: ["initialExpression"], message: "no such expression" });
+    }
+    if (cfg.sets === 2 && cfg.counts && Object.keys(cfg.counts).some((k) => k.includes("C"))) {
+      ctx.addIssue({ code: "custom", path: ["counts"], message: "a two-set diagram has no C regions" });
+    }
+    if (cfg.showInclusionExclusion && !cfg.counts) {
+      ctx.addIssue({ code: "custom", path: ["counts"], message: "showInclusionExclusion needs counts" });
+    }
+  });
+
+/**
+ * Arrow diagram for a finite relation or function, with a pair grid to
+ * toggle pairs. Relation mode (R on one set A): reflexive / symmetric /
+ * antisymmetric / transitive checks with counterexamples, equivalence
+ * classes and an equivalence-closure button. Function mode (A to B):
+ * function? one-one? onto? with witnesses, and the counts of all, one-one
+ * and onto functions between sets of these sizes.
+ */
+export const srfMappingExplorerSchema = z
+  .object({
+    component: z.literal("srf-mapping-explorer"),
+    mode: z.enum(["relation", "function"]).default("relation"),
+    /** Relation mode: the set A. Function mode: the domain. Plain-text labels. */
+    domain: z.array(z.string().min(1).max(6)).min(1).max(6),
+    /** Function mode: the codomain (defaults to the domain). */
+    codomain: z.array(z.string().min(1).max(6)).min(1).max(6).optional(),
+    /** Starting pairs [a, b] meaning a R b, or f(a) = b. */
+    pairs: z.array(z.tuple([z.string(), z.string()])).default([]),
+    editable: z.boolean().default(true),
+    /** Function mode: show the counts of functions / injections / surjections. */
+    showCounts: z.boolean().default(false),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    const codomain = cfg.codomain ?? cfg.domain;
+    if (new Set(cfg.domain).size !== cfg.domain.length || new Set(codomain).size !== codomain.length) {
+      ctx.addIssue({ code: "custom", path: ["domain"], message: "element labels must be distinct" });
+    }
+    cfg.pairs.forEach(([a, b], i) => {
+      if (!cfg.domain.includes(a) || !codomain.includes(b)) {
+        ctx.addIssue({ code: "custom", path: ["pairs", i], message: `pair (${a}, ${b}) uses an unknown element` });
+      }
+    });
+  });
+
+/**
+ * Plot lab for the JEE special functions and graph transformations. Each
+ * function is an expression in x (math-eval grammar plus floor, ceil, frac,
+ * sgn, cbrt, cot, sec, csc, acot, asec, acsc); jumps get open and closed
+ * dots. Transforms: |f(x)|, f(|x|), [f(x)], {f(x)}, -f(x), f(-x), and the
+ * inverse (reflection of the `branch` piece in y = x).
+ */
+export const srfGraphLabSchema = z
+  .object({
+    component: z.literal("srf-graph-lab"),
+    functions: z
+      .array(
+        z.object({
+          label: z.string().min(1),
+          expr: z.string().min(1),
+          /** Raw KaTeX for f(x), no $. */
+          latex: z.string().min(1),
+          /** Restricted domain whose piece is highlighted and inverted. */
+          branch: z.object({ min: z.number(), max: z.number() }).optional(),
+        }),
+      )
+      .min(1)
+      .max(10),
+    transforms: z
+      .array(z.enum(["none", "abs", "abs-x", "floor", "frac", "neg", "neg-x", "inverse"]))
+      .min(1)
+      .default(["none"]),
+    window: plotWindowSchema,
+    /** Label the x-axis in multiples of pi. */
+    xAxis: z.enum(["numeric", "radians"]).default("numeric"),
+    /** Draw the line y = x (always drawn for the inverse transform). */
+    showMirror: z.boolean().default(false),
+    /** Start value of the x probe; absent hides the probe. */
+    probe: z.number().optional(),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    cfg.functions.forEach((f, i) => {
+      const err = srfExpressionError(f.expr);
+      if (err) ctx.addIssue({ code: "custom", path: ["functions", i, "expr"], message: err });
+      if (f.branch && !(f.branch.min < f.branch.max)) {
+        ctx.addIssue({ code: "custom", path: ["functions", i, "branch"], message: "branch needs min < max" });
+      }
+    });
+    const w = cfg.window;
+    if (!(w.xmin < w.xmax && w.ymin < w.ymax)) {
+      ctx.addIssue({ code: "custom", path: ["window"], message: "window needs xmin < xmax and ymin < ymax" });
+    }
+    if (cfg.probe !== undefined && (cfg.probe < w.xmin || cfg.probe > w.xmax)) {
+      ctx.addIssue({ code: "custom", path: ["probe"], message: "probe must lie in the window" });
+    }
+  });
+
+// ---------- Integral Calculus (integ) interactives ----------
+
+const integRangeSchema = z
+  .object({ min: z.number(), max: z.number(), step: z.number().positive(), initial: z.number() })
+  .refine((r) => r.min < r.max && r.initial >= r.min && r.initial <= r.max, {
+    message: "need min < max and min ≤ initial ≤ max",
+  });
+
+/**
+ * Riemann-sum explorer: f on [a, b] cut into n strips, with left, right,
+ * midpoint or trapezoid heights. Rectangles above the axis are shaded one
+ * colour, below the axis another (signed area). The sum is compared with
+ * the exact integral (`exact`, or Simpson's rule with 2000 panels when
+ * absent). `accumulate` is the Fundamental Theorem mode: an upper-limit
+ * slider x sweeps from a to b and reads off A(x) = ∫ₐˣ f(t) dt and f(x).
+ */
+export const integRiemannSumSchema = z
+  .object({
+    component: z.literal("integ-riemann-sum"),
+    expr: z.string().min(1),
+    exprLatex: z.string().min(1),
+    window: plotWindowSchema,
+    a: z.number(),
+    b: z.number(),
+    /** LaTeX for the limits when they are not tidy decimals, e.g. "\\pi". */
+    aLatex: z.string().min(1).optional(),
+    bLatex: z.string().min(1).optional(),
+    n: z
+      .object({
+        min: z.number().int().min(1),
+        max: z.number().int().max(200),
+        initial: z.number().int(),
+      })
+      .default({ min: 1, max: 50, initial: 4 }),
+    methods: z
+      .array(z.enum(["left", "right", "midpoint", "trapezoid"]))
+      .min(1)
+      .default(["left", "right", "midpoint"]),
+    /** Exact value of the integral (numeric fallback when absent). */
+    exact: z.number().optional(),
+    /** LaTeX for the exact value, e.g. "\\tfrac{8}{3}". */
+    exactLatex: z.string().min(1).optional(),
+    accumulate: z.boolean().default(false),
+    excluded: z.array(z.number()).default([]),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    if (!(cfg.a < cfg.b)) ctx.addIssue({ code: "custom", path: ["b"], message: "need a < b" });
+    if (cfg.a < cfg.window.xmin || cfg.b > cfg.window.xmax) {
+      ctx.addIssue({ code: "custom", path: ["a"], message: "[a, b] must lie in the window" });
+    }
+    if (!(cfg.n.min <= cfg.n.initial && cfg.n.initial <= cfg.n.max)) {
+      ctx.addIssue({ code: "custom", path: ["n"], message: "need n.min ≤ n.initial ≤ n.max" });
+    }
+  });
+
+/**
+ * Area between two curves. `variable: "x"` takes y = f(x) and y = g(x)
+ * (expressions in x) with vertical strips from a to b; `variable: "y"`
+ * takes x = f(y) and x = g(y) (expressions in y) with horizontal strips
+ * from y = a to y = b. g defaults to 0 (the axis). The region is shaded
+ * (where f ≥ g one colour, where f < g another), crossings are found
+ * numerically, and a strip slider reads off the strip length f − g. The
+ * readout compares the signed ∫(f − g) with the area ∫|f − g|.
+ */
+export const integAreaBetweenSchema = z
+  .object({
+    component: z.literal("integ-area-between"),
+    variable: z.enum(["x", "y"]).default("x"),
+    f: z.string().min(1),
+    fLatex: z.string().min(1),
+    g: z.string().min(1).default("0"),
+    gLatex: z.string().min(1).default("0"),
+    a: z.number(),
+    b: z.number(),
+    aLatex: z.string().min(1).optional(),
+    bLatex: z.string().min(1).optional(),
+    window: plotWindowSchema,
+    /** Initial strip position (defaults to the midpoint of [a, b]). */
+    strip: z.number().optional(),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    if (!(cfg.a < cfg.b)) ctx.addIssue({ code: "custom", path: ["b"], message: "need a < b" });
+    if (cfg.strip !== undefined && (cfg.strip < cfg.a || cfg.strip > cfg.b)) {
+      ctx.addIssue({ code: "custom", path: ["strip"], message: "strip must lie in [a, b]" });
+    }
+  });
+
+/**
+ * Slope field for dy/dx = F(x, y) (an expression in x and y). Short
+ * segments of slope F are drawn on a grid; the solution curve through the
+ * draggable point (x₀, y₀) is traced numerically (RK4) both ways until it
+ * leaves the window or the slope blows up. `curves` adds fixed solution
+ * curves through extra points (a family). With F depending on x alone,
+ * every curve is a vertical shift of the others: the + C of an
+ * antiderivative.
+ */
+export const integSlopeFieldSchema = z.object({
+  component: z.literal("integ-slope-field"),
+  expr: z.string().min(1),
+  exprLatex: z.string().min(1),
+  window: plotWindowSchema,
+  x0: integRangeSchema,
+  y0: integRangeSchema,
+  grid: z.number().int().min(6).max(30).default(17),
+  curves: z.array(z.object({ x: z.number(), y: z.number() })).max(8).default([]),
+  caption: z.string().optional(),
+});
+
+// ---------- Sequences and Series (seq) interactives ----------
+
+const seqRangeSchema = z
+  .object({ min: z.number(), max: z.number(), step: z.number().positive(), initial: z.number() })
+  .refine((r) => r.min < r.max && r.initial >= r.min && r.initial <= r.max, {
+    message: "need min < max and min ≤ initial ≤ max",
+  });
+
+/**
+ * Sequence and partial-sum plotter. Pick a progression (AP, GP, HP, AGP)
+ * and drag a, d, r and n: the terms t_k are drawn as stems, the partial
+ * sums S_k as a joined dot plot, and for a convergent GP / AGP (|r| < 1)
+ * the sum to infinity as a dashed line. Readouts give t_n, S_n (from the
+ * closed form where one exists) and S∞. `series` adds authored general
+ * terms in the variable k (math-eval grammar), e.g. "1/(k*(k+1))", with an
+ * optional known `limit` drawn as the dashed line. HP terms are
+ * 1/(a + (k − 1)d), the reciprocals of the AP with the same a and d.
+ */
+export const seqProgressionLabSchema = z
+  .object({
+    component: z.literal("seq-progression-lab"),
+    kinds: z.array(z.enum(["ap", "gp", "hp", "agp"])).max(4).default(["ap", "gp"]),
+    series: z
+      .array(
+        z.object({
+          /** Plain-text button label. */
+          label: z.string().min(1).max(24),
+          /** General term in k, e.g. "1/(k*(k+1))". */
+          expr: z.string().min(1),
+          /** Raw KaTeX for t_k, no $. */
+          latex: z.string().min(1),
+          /** Known sum to infinity, drawn as a dashed line. */
+          limit: z.number().optional(),
+          /** Raw KaTeX for the limit (defaults to the number). */
+          limitLatex: z.string().min(1).optional(),
+        }),
+      )
+      .max(6)
+      .default([]),
+    a: seqRangeSchema.default({ min: -5, max: 10, step: 0.5, initial: 2 }),
+    d: seqRangeSchema.default({ min: -3, max: 3, step: 0.25, initial: 1 }),
+    r: seqRangeSchema.default({ min: -1.5, max: 1.5, step: 0.05, initial: 0.5 }),
+    n: seqRangeSchema.default({ min: 1, max: 30, step: 1, initial: 10 }),
+    view: z.enum(["terms", "sums", "both"]).default("both"),
+    /** Draw S∞ for a convergent GP / AGP (and `limit` for authored series). */
+    showLimit: z.boolean().default(true),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    if (cfg.kinds.length + cfg.series.length === 0) {
+      ctx.addIssue({ code: "custom", path: ["kinds"], message: "need at least one progression or series" });
+    }
+    cfg.series.forEach((s, i) => {
+      const err = seqExpressionError(s.expr);
+      if (err) ctx.addIssue({ code: "custom", path: ["series", i, "expr"], message: err });
+    });
+    const n = cfg.n;
+    if (!(Number.isInteger(n.min) && Number.isInteger(n.max) && Number.isInteger(n.initial) && n.step === 1)) {
+      ctx.addIssue({ code: "custom", path: ["n"], message: "n needs integer min, max, initial and step 1" });
+    }
+    if (n.min < 1 || n.max > 60) {
+      ctx.addIssue({ code: "custom", path: ["n"], message: "n must stay within 1 to 60" });
+    }
+  });
+
+/**
+ * AM–GM–HM on a semicircle. Two positive lengths a and b (sliders) lie
+ * end to end along a diameter. The radius is the AM, the half-chord
+ * perpendicular to the diameter at the join is the GM, and the foot of the
+ * perpendicular from the join onto the radius cuts off the HM. Readouts
+ * show AM ≥ GM ≥ HM and G² = AH; equality when a = b. `fixed` locks the
+ * sum (a + b) or the product (ab) so the learner sees the AM–GM
+ * optimisation: with a fixed sum the product is largest at a = b, with a
+ * fixed product the sum is smallest at a = b.
+ */
+export const seqMeansLabSchema = z
+  .object({
+    component: z.literal("seq-means-lab"),
+    a: seqRangeSchema.default({ min: 0.5, max: 12, step: 0.5, initial: 9 }),
+    b: seqRangeSchema.default({ min: 0.5, max: 12, step: 0.5, initial: 4 }),
+    fixed: z.enum(["none", "sum", "product"]).default("none"),
+    showHm: z.boolean().default(true),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    if (!(cfg.a.min > 0 && cfg.b.min > 0)) {
+      ctx.addIssue({ code: "custom", path: ["a"], message: "a and b must be positive" });
+    }
+  });
+
+// ---------- Three-Dimensional Geometry (tdg) interactives ----------
+
+const tdgRangeSchema = z.object({
+  min: z.number(),
+  max: z.number(),
+  step: z.number().positive(),
+  initial: z.number(),
+});
+
+const tdgRangeValid = (r: z.infer<typeof tdgRangeSchema>) =>
+  r.min < r.max && r.initial >= r.min && r.initial <= r.max;
+
+/** A plane ax + by + cz + d = 0, written [a, b, c, d]. */
+const tdgPlaneSchema = z.tuple([z.number(), z.number(), z.number(), z.number()]);
+
+/**
+ * Rotatable 3D scene (orthographic SVG projection; drag or arrow keys to
+ * rotate; right-handed axes, z up) for points, lines and planes. Modes:
+ * - points: A and B, the segment AB and its length. `show`: "box" (the
+ *   coordinate box of each point), "projections" (AB projected on the
+ *   axes), "section" (P divides AB in m : n; add "external" for external
+ *   division), "centroid" (of triangle ABC, and of tetrahedron ABCD).
+ * - line: r = a + λb through A (`a`) with direction `b`, in vector and
+ *   Cartesian form with direction cosines. "general-point" (λ slider),
+ *   "foot" and "image" (of P).
+ * - two-lines: L₁ = (a, b), L₂ = (c, d): parallel / intersecting / skew,
+ *   the angle, and "shortest-distance" (the common perpendicular, its feet).
+ * - plane: `plane` with "normal", the foot from O, and P with "foot",
+ *   "image", distance and side; "intercepts" draws the intercept triangle.
+ * - two-planes: `plane` and `plane2`: the angle between them, the line of
+ *   intersection ("intersection"), or the gap when parallel.
+ * - line-plane: line (a, b) and `plane`: the angle between them,
+ *   "intersection" (the meeting point) and "projection" (the projection of
+ *   the line on the plane).
+ */
+export const tdgSpaceViewerSchema = z
+  .object({
+    component: z.literal("tdg-space-viewer"),
+    mode: z.enum(["points", "line", "two-lines", "plane", "two-planes", "line-plane"]).default("points"),
+    /** points: A. Line modes: a point on L₁. */
+    a: vec3Schema.default([1, 2, 3]),
+    /** points: B. Line modes: the direction of L₁. */
+    b: vec3Schema.default([4, -2, 1]),
+    /** points: C. two-lines: a point on L₂. */
+    c: vec3Schema.default([-2, 1, 2]),
+    /** points: D (tetrahedron centroid). two-lines: the direction of L₂. */
+    d: vec3Schema.default([1, 3, -1]),
+    /** The external point P (line, plane modes). */
+    p: vec3Schema.default([3, 3, 2]),
+    plane: tdgPlaneSchema.default([1, 2, 2, -6]),
+    plane2: tdgPlaneSchema.default([2, -1, 1, -2]),
+    /** points + section: the ratio m : n. */
+    m: tdgRangeSchema.default({ min: 1, max: 5, step: 1, initial: 2 }),
+    n: tdgRangeSchema.default({ min: 1, max: 5, step: 1, initial: 1 }),
+    /** line + general-point: the parameter λ. */
+    lambda: tdgRangeSchema.default({ min: -3, max: 3, step: 0.25, initial: 1 }),
+    /** Extra sliders: the coordinates of P, or the constant d of `plane`. */
+    sliders: z
+      .array(
+        z.object({
+          name: z.enum(["px", "py", "pz", "d"]),
+          min: z.number(),
+          max: z.number(),
+          step: z.number().positive(),
+          initial: z.number(),
+        }),
+      )
+      .default([]),
+    /** Optional overlays; omitted = a sensible per-mode default. */
+    show: z
+      .array(
+        z.enum([
+          "box",
+          "projections",
+          "section",
+          "external",
+          "centroid",
+          "general-point",
+          "foot",
+          "image",
+          "shortest-distance",
+          "normal",
+          "intercepts",
+          "intersection",
+          "projection",
+        ]),
+      )
+      .optional(),
+    /** Camera azimuth (yaw, from +x toward +y) and elevation (pitch), degrees. */
+    initialView: z.object({ yaw: z.number(), pitch: z.number() }).default({ yaw: 35, pitch: 22 }),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    for (const key of ["m", "n", "lambda"] as const) {
+      if (!tdgRangeValid(cfg[key])) {
+        ctx.addIssue({ code: "custom", path: [key], message: "need min < max and min ≤ initial ≤ max" });
+      }
+    }
+    if (cfg.m.min <= 0 || cfg.n.min <= 0) {
+      ctx.addIssue({ code: "custom", path: ["m"], message: "m and n must be positive" });
+    }
+    cfg.sliders.forEach((s, i) => {
+      if (!tdgRangeValid(s)) {
+        ctx.addIssue({ code: "custom", path: ["sliders", i], message: "need min < max and min ≤ initial ≤ max" });
+      }
+    });
+  });
+
+/**
+ * Distance and angle calculator: editable integer inputs (± steppers),
+ * the formula worked on the live numbers step by step, and a small
+ * schematic. Inputs per mode:
+ * - two-points (p1, p2): distance, midpoint, projections on the axes and
+ *   the ratio in which each coordinate plane divides P₁P₂.
+ * - direction (d1): direction ratios → direction cosines and angles.
+ * - two-directions (d1, d2): angle between two lines, parallel/perpendicular.
+ * - point-line (p1 = P; p2, d1 = the line): foot, distance, image.
+ * - skew-lines (p1, d1; p2, d2): classification and shortest distance.
+ * - point-plane (p1, plane1): signed value, distance, side, foot, image.
+ * - two-planes (plane1, plane2): angle, or the distance when parallel.
+ * - line-plane (p1, d1, plane1): angle, and the meeting point.
+ */
+export const tdgDistanceLabSchema = z.object({
+  component: z.literal("tdg-distance-lab"),
+  mode: z
+    .enum(["two-points", "direction", "two-directions", "point-line", "skew-lines", "point-plane", "two-planes", "line-plane"])
+    .default("point-plane"),
+  p1: vec3Schema.default([1, 2, 3]),
+  p2: vec3Schema.default([4, -2, 1]),
+  d1: vec3Schema.default([2, -1, 2]),
+  d2: vec3Schema.default([1, 2, -2]),
+  plane1: tdgPlaneSchema.default([2, -1, 2, -5]),
+  plane2: tdgPlaneSchema.default([4, -2, 4, 7]),
+  /** Show ± steppers on every input (else the inputs are fixed). */
+  editable: z.boolean().default(true),
+  caption: z.string().optional(),
+});
+
+// ---------- Straight Lines and Circles (slc) interactives ----------
+
+const slcRangeSchema = z.object({
+  min: z.number(),
+  max: z.number(),
+  step: z.number().positive(),
+  initial: z.number(),
+});
+
+const slcRangeValid = (r: z.infer<typeof slcRangeSchema>) =>
+  r.min < r.max && r.initial >= r.min && r.initial <= r.max;
+
+const slcWindowValid = (w: z.infer<typeof plotWindowSchema>) => w.xmin < w.xmax && w.ymin < w.ymax;
+
+/**
+ * Coordinate plane with draggable points A, B, C, D and P (snapping to a
+ * grid). Modes:
+ * - section: P divides AB internally in m : n (and Q externally), with the
+ *   section formula worked on the live numbers.
+ * - triangle: triangle ABC, its area by the determinant and the centres
+ *   (centroid, incentre, circumcentre, orthocentre, excentres, Euler line,
+ *   circumcircle, incircle, medians, altitudes) chosen in `show`.
+ * - line: the line AB with its slope, inclination, intercepts and every
+ *   standard form (slope-intercept, point-slope, two-point, intercept,
+ *   normal, parametric, general).
+ * - point-line: line AB and point P: distance, foot of the perpendicular,
+ *   image, and the sign of L(P) against L(O) (same or opposite side).
+ * - two-lines: L₁ = AB and L₂ = CD: intersection, acute angle, parallel /
+ *   perpendicular tests, and (show "bisectors") both angle bisectors with
+ *   the origin-containing and acute bisectors named.
+ * - family: L₁ + λL₂ = 0 with a λ slider; every member passes through
+ *   L₁ ∩ L₂ (show "family-fan" draws several members faintly).
+ * - pair: ax² + 2hxy + by² = 0 with a, h, b sliders: the two lines through
+ *   the origin, h² − ab, m₁ + m₂, m₁m₂ and the angle between them.
+ */
+export const slcLineExplorerSchema = z
+  .object({
+    component: z.literal("slc-line-explorer"),
+    mode: z.enum(["section", "triangle", "line", "point-line", "two-lines", "family", "pair"]).default("line"),
+    a: vec2Schema.default([-3, -1]),
+    b: vec2Schema.default([3, 2]),
+    c: vec2Schema.default([1, 4]),
+    d: vec2Schema.default([4, -2]),
+    p: vec2Schema.default([3, -2]),
+    /** section: the ratio m : n. */
+    m: slcRangeSchema.default({ min: 1, max: 6, step: 1, initial: 2 }),
+    n: slcRangeSchema.default({ min: 1, max: 6, step: 1, initial: 1 }),
+    /** family: λ in L₁ + λL₂ = 0. */
+    lambda: slcRangeSchema.default({ min: -4, max: 4, step: 0.25, initial: 1 }),
+    /** pair: coefficients of ax² + 2hxy + by² = 0. */
+    coef: z
+      .object({ a: slcRangeSchema, h: slcRangeSchema, b: slcRangeSchema })
+      .default({
+        a: { min: -5, max: 5, step: 0.5, initial: 1 },
+        h: { min: -5, max: 5, step: 0.5, initial: 2 },
+        b: { min: -5, max: 5, step: 0.5, initial: -3 },
+      }),
+    /** Optional overlays; omitted = a sensible per-mode default. */
+    show: z
+      .array(
+        z.enum([
+          "centroid",
+          "incentre",
+          "circumcentre",
+          "orthocentre",
+          "excentres",
+          "euler-line",
+          "circumcircle",
+          "incircle",
+          "medians",
+          "altitudes",
+          "external",
+          "forms",
+          "intercepts",
+          "foot",
+          "image",
+          "bisectors",
+          "family-fan",
+        ]),
+      )
+      .optional(),
+    /** Points the learner may drag; omitted = a per-mode default. */
+    draggable: z.array(z.enum(["a", "b", "c", "d", "p"])).optional(),
+    snap: z.number().positive().default(0.5),
+    window: plotWindowSchema.default({ xmin: -6, xmax: 6, ymin: -5, ymax: 5 }),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    const ranges = { m: cfg.m, n: cfg.n, lambda: cfg.lambda, "coef.a": cfg.coef.a, "coef.h": cfg.coef.h, "coef.b": cfg.coef.b };
+    for (const [key, r] of Object.entries(ranges)) {
+      if (!slcRangeValid(r)) {
+        ctx.addIssue({ code: "custom", path: key.split("."), message: "need min < max and min ≤ initial ≤ max" });
+      }
+    }
+    if (cfg.m.min <= 0 || cfg.n.min <= 0) {
+      ctx.addIssue({ code: "custom", path: ["m"], message: "m and n must be positive" });
+    }
+    if (!slcWindowValid(cfg.window)) {
+      ctx.addIssue({ code: "custom", path: ["window"], message: "window must have positive width and height" });
+    }
+  });
+
+/**
+ * Circle lab: a circle with draggable centre and a radius slider. Modes:
+ * - circle: centre-radius and general equations, a test point P with S₁ and
+ *   its position (show "parametric" adds a θ slider and the point
+ *   (h + r cos θ, k + r sin θ); "normal" draws the normal through P).
+ * - line: the line AB against the circle: distance from the centre, number
+ *   of meeting points, chord length 2√(r² − d²), tangency.
+ * - tangents: point P. Outside: both tangents, the tangent length √S₁ and
+ *   the chord of contact. Inside: the polar of P and the chord with
+ *   midpoint P. Optional director circle.
+ * - two-circles: a second circle: d against r₁ + r₂ and |r₁ − r₂|, the
+ *   relative position, the number of common tangents (drawn), the radical
+ *   axis / common chord and the orthogonality test.
+ * - three-circles: three circles, their three radical axes and the radical
+ *   centre (with the orthogonal circle when the power there is positive).
+ */
+export const slcCircleLabSchema = z
+  .object({
+    component: z.literal("slc-circle-lab"),
+    mode: z.enum(["circle", "line", "tangents", "two-circles", "three-circles"]).default("circle"),
+    centre: vec2Schema.default([0, 0]),
+    radius: slcRangeSchema.default({ min: 0.5, max: 5, step: 0.25, initial: 2.5 }),
+    p: vec2Schema.default([4, 2]),
+    a: vec2Schema.default([-4, -3]),
+    b: vec2Schema.default([4, 1]),
+    centre2: vec2Schema.default([3, 1]),
+    radius2: slcRangeSchema.default({ min: 0.5, max: 5, step: 0.25, initial: 2 }),
+    centre3: vec2Schema.default([-1, 3]),
+    radius3: slcRangeSchema.default({ min: 0.5, max: 5, step: 0.25, initial: 1.5 }),
+    /** Optional overlays; omitted = a sensible per-mode default. */
+    show: z
+      .array(
+        z.enum([
+          "general-form",
+          "parametric",
+          "normal",
+          "tangents",
+          "chord-of-contact",
+          "polar",
+          "midpoint-chord",
+          "director-circle",
+          "common-tangents",
+          "radical-axis",
+          "orthogonal",
+        ]),
+      )
+      .optional(),
+    /** Handles the learner may drag; omitted = a per-mode default. */
+    draggable: z.array(z.enum(["centre", "p", "a", "b", "centre2", "centre3"])).optional(),
+    snap: z.number().positive().default(0.5),
+    window: plotWindowSchema.default({ xmin: -6, xmax: 6, ymin: -5, ymax: 5 }),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    for (const key of ["radius", "radius2", "radius3"] as const) {
+      if (!slcRangeValid(cfg[key])) {
+        ctx.addIssue({ code: "custom", path: [key], message: "need min < max and min ≤ initial ≤ max" });
+      } else if (cfg[key].min <= 0) {
+        ctx.addIssue({ code: "custom", path: [key], message: "radius must be positive" });
+      }
+    }
+    if (!slcWindowValid(cfg.window)) {
+      ctx.addIssue({ code: "custom", path: ["window"], message: "window must have positive width and height" });
+    }
+  });
+
+// ---------- Conic Sections (con) interactives ----------
+
+const conRangeSchema = z.object({
+  min: z.number(),
+  max: z.number(),
+  step: z.number().positive(),
+  initial: z.number(),
+});
+
+const conRangeValid = (r: z.infer<typeof conRangeSchema>) =>
+  r.min < r.max && r.initial >= r.min && r.initial <= r.max;
+
+/**
+ * One definition, every conic. Mode `focus-directrix`: focus S at the
+ * origin, directrix x = −ℓ/e; the e slider morphs a circle (e = 0) into an
+ * ellipse, a parabola (e = 1) and a hyperbola at a fixed semi-latus rectum
+ * ℓ. P sits on the conic at polar angle θ (degrees) seen from S; readouts
+ * PS, PM and PS/PM = e. `show` adds the second focus and directrix, the
+ * centre and the latus rectum. Mode `cone`: side view of a double cone with
+ * semi-vertical angle α cut by a plane at angle β to the axis, at
+ * perpendicular distance `offset` from the vertex (0 = through it): names the
+ * section, degenerate ones included, with e = cos β / cos α.
+ */
+export const conConicExplorerSchema = z
+  .object({
+    component: z.literal("con-conic-explorer"),
+    mode: z.enum(["focus-directrix", "cone"]).default("focus-directrix"),
+    e: conRangeSchema.default({ min: 0, max: 2.5, step: 0.05, initial: 0.6 }),
+    /** Semi-latus rectum ℓ (half the latus rectum): fixes the size. */
+    l: conRangeSchema.default({ min: 1, max: 4, step: 0.5, initial: 2 }),
+    /** Polar angle of P at the focus, degrees. */
+    theta: conRangeSchema.default({ min: -180, max: 180, step: 5, initial: 60 }),
+    /** cone: semi-vertical angle α, degrees. */
+    alpha: conRangeSchema.default({ min: 15, max: 60, step: 5, initial: 30 }),
+    /** cone: angle β between the cutting plane and the axis, degrees. */
+    beta: conRangeSchema.default({ min: 0, max: 90, step: 5, initial: 60 }),
+    /** cone: perpendicular distance d of the plane from the vertex (0 = through the vertex). */
+    offset: conRangeSchema.default({ min: 0, max: 3, step: 0.5, initial: 1.5 }),
+    /** Sliders to show; omitted = e and θ (focus-directrix) or α, β and offset (cone). */
+    sliders: z.array(z.enum(["e", "l", "theta", "alpha", "beta", "offset"])).optional(),
+    show: z
+      .array(z.enum(["directrix", "distances", "second-focus", "centre", "latus-rectum"]))
+      .default(["directrix", "distances"]),
+    window: plotWindowSchema.default({ xmin: -7, xmax: 9, ymin: -6, ymax: 6 }),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    for (const key of ["e", "l", "theta", "alpha", "beta", "offset"] as const) {
+      if (!conRangeValid(cfg[key])) {
+        ctx.addIssue({ code: "custom", path: [key], message: "need min < max and min ≤ initial ≤ max" });
+      }
+    }
+    if (cfg.e.min < 0) ctx.addIssue({ code: "custom", path: ["e"], message: "e cannot be negative" });
+    if (cfg.l.min <= 0) ctx.addIssue({ code: "custom", path: ["l"], message: "ℓ must be positive" });
+    if (cfg.alpha.min <= 0 || cfg.alpha.max >= 90) {
+      ctx.addIssue({ code: "custom", path: ["alpha"], message: "α must lie strictly between 0° and 90°" });
+    }
+    if (cfg.beta.min < 0 || cfg.beta.max > 90) {
+      ctx.addIssue({ code: "custom", path: ["beta"], message: "β must lie in [0°, 90°]" });
+    }
+    if (cfg.offset.min < 0) ctx.addIssue({ code: "custom", path: ["offset"], message: "offset cannot be negative" });
+    if (cfg.window.xmin >= cfg.window.xmax || cfg.window.ymin >= cfg.window.ymax) {
+      ctx.addIssue({ code: "custom", path: ["window"], message: "window must have positive width and height" });
+    }
+  });
+
+/**
+ * Tangent–normal–chord lab on a standard conic: parabola y² = 4ax, ellipse
+ * x²/a² + y²/b² = 1 (major axis on y when b > a), hyperbola
+ * x²/a² − y²/b² = 1, rectangular hyperbola xy = c² (c is the `a` slider).
+ * P is (at², 2at), (a cos θ, b sin θ), (a sec θ, b tan θ) or (ct, c/t):
+ * `t` is t, or θ in degrees. Overlays in `show`. The draggable point Q
+ * (when `q` is set) drives chord-of-contact (T = 0), pair-of-tangents and
+ * midpoint-chord (T = S₁) overlays, with S₁ and the tangent count.
+ */
+export const conTangentLabSchema = z
+  .object({
+    component: z.literal("con-tangent-lab"),
+    conic: z.enum(["parabola", "ellipse", "hyperbola", "rectangular"]).default("parabola"),
+    /** a (or c for xy = c²); omitted = a per-conic default. */
+    a: conRangeSchema.optional(),
+    /** b (ellipse, hyperbola); omitted = a per-conic default. */
+    b: conRangeSchema.optional(),
+    /** P's parameter: t, or θ in degrees; omitted = a per-conic default. */
+    t: conRangeSchema.optional(),
+    /** Slider-free values are fixed at `initial`; list the sliders to show (omitted = a, b where used, and t). */
+    sliders: z.array(z.enum(["a", "b", "t"])).optional(),
+    show: z
+      .array(
+        z.enum([
+          "tangent",
+          "normal",
+          "focus",
+          "directrix",
+          "latus-rectum",
+          "focal-chord",
+          "focal-radii",
+          "auxiliary-circle",
+          "director-circle",
+          "asymptotes",
+          "chord-of-contact",
+          "pair-of-tangents",
+          "midpoint-chord",
+        ]),
+      )
+      .default(["tangent", "normal"]),
+    /** Draggable point Q for the chord overlays. */
+    q: vec2Schema.optional(),
+    snap: z.number().positive().default(0.5),
+    /** omitted = a per-conic default window. */
+    window: plotWindowSchema.optional(),
+    caption: z.string().optional(),
+  })
+  .superRefine((cfg, ctx) => {
+    for (const key of ["a", "b", "t"] as const) {
+      const r = cfg[key];
+      if (r && !conRangeValid(r)) {
+        ctx.addIssue({ code: "custom", path: [key], message: "need min < max and min ≤ initial ≤ max" });
+      }
+    }
+    for (const key of ["a", "b"] as const) {
+      const r = cfg[key];
+      if (r && r.min <= 0) ctx.addIssue({ code: "custom", path: [key], message: `${key} must be positive` });
+    }
+    if (cfg.window && (cfg.window.xmin >= cfg.window.xmax || cfg.window.ymin >= cfg.window.ymax)) {
+      ctx.addIssue({ code: "custom", path: ["window"], message: "window must have positive width and height" });
+    }
+  });
+
 export const interactiveConfigSchema = z.discriminatedUnion("component", [
+  conConicExplorerSchema,
+  conTangentLabSchema,
+  slcLineExplorerSchema,
+  slcCircleLabSchema,
+  tdgSpaceViewerSchema,
+  tdgDistanceLabSchema,
+  seqProgressionLabSchema,
+  seqMeansLabSchema,
+  integRiemannSumSchema,
+  integAreaBetweenSchema,
+  integSlopeFieldSchema,
+  srfVennDiagramSchema,
+  srfMappingExplorerSchema,
+  srfGraphLabSchema,
+  calcTangentExplorerSchema,
+  calcSignChartSchema,
   emFieldCanvasSchema,
   emCircuitLabSchema,
+  emMagnetLabSchema,
+  emWaveLabSchema,
   ompRayBenchSchema,
   ompQuantumLabSchema,
   functionMachineSchema,
@@ -2119,6 +3490,9 @@ export const interactiveConfigSchema = z.discriminatedUnion("component", [
   owtThermoLabSchema,
   mfeMotionLabSchema,
   mfeForceLabSchema,
+  cqQuadraticExplorerSchema,
+  cqArgandPlaneSchema,
+  cqLocusExplorerSchema,
 ]);
 
 export const interactiveBlockSchema = z.object({
@@ -2128,22 +3502,53 @@ export const interactiveBlockSchema = z.object({
 
 export const lessonBlockSchema = z.discriminatedUnion("type", [
   textBlockSchema,
+  headingBlockSchema,
   mathBlockSchema,
   calloutBlockSchema,
   tableBlockSchema,
   videoBlockSchema,
   quizBlockSchema,
+  numericBlockSchema,
+  workedExampleBlockSchema,
   interactiveBlockSchema,
 ]);
 
-export const lessonBlocksSchema = z.array(lessonBlockSchema);
+/**
+ * A lesson's blocks. Question and worked-example ids must be unique within
+ * the lesson: attempts are stored and restored by id, and question cards
+ * are keyed by it.
+ */
+export const lessonBlocksSchema = z.array(lessonBlockSchema).superRefine((blocks, ctx) => {
+  const seen = new Map<string, number>();
+  blocks.forEach((block, i) => {
+    if (block.type !== "quiz" && block.type !== "numeric" && block.type !== "worked-example") {
+      return;
+    }
+    if (!block.id) return;
+    const first = seen.get(block.id);
+    if (first === undefined) {
+      seen.set(block.id, i);
+      return;
+    }
+    ctx.addIssue({
+      code: "custom",
+      path: [i, "id"],
+      message: `duplicate block id "${block.id}" (also used by block ${first})`,
+    });
+  });
+});
 
 export type TextBlock = z.infer<typeof textBlockSchema>;
+export type HeadingBlock = z.infer<typeof headingBlockSchema>;
 export type MathBlock = z.infer<typeof mathBlockSchema>;
 export type CalloutBlock = z.infer<typeof calloutBlockSchema>;
 export type TableBlock = z.infer<typeof tableBlockSchema>;
 export type VideoBlock = z.infer<typeof videoBlockSchema>;
 export type QuizBlock = z.infer<typeof quizBlockSchema>;
+export type NumericBlock = z.infer<typeof numericBlockSchema>;
+export type WorkedExampleBlock = z.infer<typeof workedExampleBlockSchema>;
+export type WorkedExampleStep = z.infer<typeof workedExampleStepSchema>;
+export type TableData = z.infer<typeof tableDataSchema>;
 export type InteractiveBlock = z.infer<typeof interactiveBlockSchema>;
 export type InteractiveConfig = z.infer<typeof interactiveConfigSchema>;
 export type PlotWindow = z.infer<typeof plotWindowSchema>;

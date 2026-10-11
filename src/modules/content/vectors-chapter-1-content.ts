@@ -46,6 +46,7 @@ const lesson01: LessonSeed = {
       content:
         "The **position vector** of a point $P$ relative to the origin $O$ is $\\overrightarrow{OP}$. We name it with the matching lower-case letter: $\\vec p = \\overrightarrow{OP}$, $\\vec a = \\overrightarrow{OA}$, $\\vec b = \\overrightarrow{OB}$. If $P$ has coordinates $(x, y)$, the arrow $\\vec p$ runs from $(0,0)$ to $(x,y)$.",
     },
+    { type: "heading", text: "Arrows between points: end minus start" },
     {
       type: "text",
       content:
@@ -86,50 +87,98 @@ const lesson01: LessonSeed = {
       content:
         "The letters appear in the order $A$, $B$, so it is tempting to subtract in that order. But $\\vec a - \\vec b$ is the arrow from $B$ **to** $A$: it has the right length and exactly the wrong direction. Always subtract the start from the end: $\\overrightarrow{AB} = \\vec b - \\vec a$ and $\\overrightarrow{BA} = \\vec a - \\vec b = -\\overrightarrow{AB}$.",
     },
+    { type: "heading", text: "Worked examples: finding arrows and points" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** $A = (2, -1)$ and $B = (5, 3)$. Find $\\overrightarrow{AB}$ and its length.\n\n1. End minus start: $\\overrightarrow{AB} = (5 - 2,\\ 3 - (-1)) = (3, 4)$.\n2. The arrow goes 3 across and 4 up, so by Pythagoras its length is $\\sqrt{3^2 + 4^2} = 5$.\n3. Check the direction: from $A$ you must go right and up to reach $B$, and both numbers are positive. Good.",
+      type: "worked-example",
+      id: "va1-1-we1",
+      title: "Worked example 1",
+      problem: "$A = (2, -1)$ and $B = (5, 3)$. Find $\\overrightarrow{AB}$ and its length.",
+      steps: [
+        { text: "End minus start: $\\overrightarrow{AB} = (5 - 2,\\ 3 - (-1)) = (3, 4)$." },
+        { text: "The arrow goes 3 across and 4 up, so by Pythagoras its length is $\\sqrt{3^2 + 4^2} = 5$." },
+        { text: "Check the direction: from $A$ you must go right and up to reach $B$, and both numbers are positive. Good." },
+      ],
+      answer: "$\\overrightarrow{AB} = (3, 4)$, with length $5$.",
+    },
+    {
+      type: "worked-example",
+      id: "va1-1-we2",
+      title: "Worked example 2",
+      problem: "$A = (1, 4)$ and $\\overrightarrow{AB} = (-3, 2)$. Where is $B$?",
+      steps: [
+        {
+          text: "Rearrange $\\overrightarrow{AB} = \\vec b - \\vec a$ as $\\vec b = \\vec a + \\overrightarrow{AB}$. (This is the triangle law again: start at $A$, then walk along $\\overrightarrow{AB}$.)",
+        },
+        { text: "$\\vec b = (1 + (-3),\\ 4 + 2) = (-2, 6)$, so $B = (-2, 6)$." },
+      ],
+      answer: "$B = (-2, 6)$",
+    },
+    {
+      type: "worked-example",
+      id: "va1-1-we3",
+      title: "Worked example 2b: a ship's log (application)",
+      problem:
+        "Measure positions in km from a lighthouse $O$, with $x$ pointing east and $y$ north. A ship leaves port $P = (-2, 1)$ and sails straight to a buoy $B = (4, 9)$. From the buoy it sails on with displacement $\\overrightarrow{BC} = (3, -5)$ to a fishing ground $C$. Find (a) the distance from port to buoy, (b) where $C$ is, and (c) how far $C$ is from port in a straight line.",
+      steps: [
+        {
+          text: "**(a)** *Why this step:* the trip from port to buoy is an arrow between two points, so it is end minus start. Its length is the distance sailed.",
+          latex:
+            "\\overrightarrow{PB} = \\vec b - \\vec p = (4 - (-2),\\ 9 - 1) = (6, 8), \\qquad PB = \\sqrt{6^2 + 8^2} = 10 \\text{ km}",
+        },
+        {
+          text: "**(b)** $\\vec c = \\vec b + \\overrightarrow{BC} = (4 + 3,\\ 9 - 5) = (7, 4)$. *Why:* we know where the second leg starts and which arrow it follows, so we add, exactly as in worked example 2.",
+        },
+        {
+          text: "**(c)** $\\overrightarrow{PC} = \\vec c - \\vec p = (7 - (-2),\\ 4 - 1) = (9, 3)$, so $PC = \\sqrt{81 + 9} = \\sqrt{90} = 3\\sqrt{10} \\approx 9.49$ km.",
+        },
+        {
+          text: "Check with the triangle law: $\\overrightarrow{PB} + \\overrightarrow{BC} = (6, 8) + (3, -5) = (9, 3) = \\overrightarrow{PC}$.",
+        },
+        {
+          text: "The ship sailed $10 + \\sqrt{34} \\approx 15.8$ km but ended only about $9.5$ km from port: distances along a path do not add like arrows do.",
+        },
+      ],
+      answer: "(a) $10$ km, (b) $C = (7, 4)$, (c) $3\\sqrt{10} \\approx 9.49$ km.",
+    },
+    {
+      type: "worked-example",
+      id: "va1-1-we4",
+      title: "Worked example 3: the origin does not matter",
+      problem:
+        "Move the origin somewhere else and every position vector changes. Does $\\overrightarrow{AB}$ change?",
+      steps: [
+        {
+          text: "Suppose the new origin $O'$ sits at position $\\vec s$ from the old one. Then the new position vectors are $\\vec a - \\vec s$ and $\\vec b - \\vec s$, and",
+          latex: "(\\vec b - \\vec s) - (\\vec a - \\vec s) = \\vec b - \\vec a.",
+        },
+        { text: "The shift cancels." },
+      ],
+      answer:
+        "No. Position vectors depend on where you put $O$, but the arrow from $A$ to $B$ does not. That is the free vector from Chapter 0, recovered.",
+    },
+    {
+      type: "worked-example",
+      id: "va1-1-we5",
+      title: "Worked example 4: the missing vertex (exam style)",
+      problem:
+        "$ABCD$ is a parallelogram (vertices in that order) with $A = (1, 2)$, $B = (4, 3)$ and $C = (6, 6)$. Find $D$.",
+      steps: [
+        {
+          text: "In parallelogram $ABCD$, side $AB$ and side $DC$ are the same free vector: equal length, same direction. *Why this step:* worked example 3 showed that an arrow between two points is a free vector, so \"opposite sides are equal and parallel\" becomes one vector equation.",
+          latex:
+            "\\overrightarrow{AB} = \\overrightarrow{DC} \\;\\Longrightarrow\\; \\vec b - \\vec a = \\vec c - \\vec d \\;\\Longrightarrow\\; \\vec d = \\vec a + \\vec c - \\vec b",
+        },
+        { text: "$\\vec d = (1 + 6 - 4,\\ 2 + 6 - 3) = (3, 5)$, so $D = (3, 5)$." },
+        {
+          text: "Check the other pair of sides: $\\overrightarrow{AD} = (2, 3)$ and $\\overrightarrow{BC} = (2, 3)$. Equal, as they must be.",
+        },
+      ],
+      answer: "$D = (3, 5)$",
     },
     {
       type: "text",
       content:
-        "**Worked example 2.** $A = (1, 4)$ and $\\overrightarrow{AB} = (-3, 2)$. Where is $B$?\n\n1. Rearrange $\\overrightarrow{AB} = \\vec b - \\vec a$ as $\\vec b = \\vec a + \\overrightarrow{AB}$. (This is the triangle law again: start at $A$, then walk along $\\overrightarrow{AB}$.)\n2. $\\vec b = (1 + (-3),\\ 4 + 2) = (-2, 6)$, so $B = (-2, 6)$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2b: a ship's log (application).** Measure positions in km from a lighthouse $O$, with $x$ pointing east and $y$ north. A ship leaves port $P = (-2, 1)$ and sails straight to a buoy $B = (4, 9)$. From the buoy it sails on with displacement $\\overrightarrow{BC} = (3, -5)$ to a fishing ground $C$. Find (a) the distance from port to buoy, (b) where $C$ is, and (c) how far $C$ is from port in a straight line.",
-    },
-    {
-      type: "math",
-      latex:
-        "\\overrightarrow{PB} = \\vec b - \\vec p = (4 - (-2),\\ 9 - 1) = (6, 8), \\qquad PB = \\sqrt{6^2 + 8^2} = 10 \\text{ km}",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* the trip from port to buoy is an arrow between two points, so it is end minus start. Its length is the distance sailed.\n\n**(b)** $\\vec c = \\vec b + \\overrightarrow{BC} = (4 + 3,\\ 9 - 5) = (7, 4)$. *Why:* we know where the second leg starts and which arrow it follows, so we add, exactly as in worked example 2.\n\n**(c)** $\\overrightarrow{PC} = \\vec c - \\vec p = (7 - (-2),\\ 4 - 1) = (9, 3)$, so $PC = \\sqrt{81 + 9} = \\sqrt{90} = 3\\sqrt{10} \\approx 9.49$ km.\n\nCheck with the triangle law: $\\overrightarrow{PB} + \\overrightarrow{BC} = (6, 8) + (3, -5) = (9, 3) = \\overrightarrow{PC}$. The ship sailed $10 + \\sqrt{34} \\approx 15.8$ km but ended only about $9.5$ km from port: distances along a path do not add like arrows do.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3: the origin does not matter.** Move the origin somewhere else and every position vector changes. Does $\\overrightarrow{AB}$ change? Suppose the new origin $O'$ sits at position $\\vec s$ from the old one. Then the new position vectors are $\\vec a - \\vec s$ and $\\vec b - \\vec s$, and\n\n$(\\vec b - \\vec s) - (\\vec a - \\vec s) = \\vec b - \\vec a.$\n\nThe shift cancels. Position vectors depend on where you put $O$, but the arrow from $A$ to $B$ does not. That is the free vector from Chapter 0, recovered.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4: the missing vertex (exam style).** $ABCD$ is a parallelogram (vertices in that order) with $A = (1, 2)$, $B = (4, 3)$ and $C = (6, 6)$. Find $D$.\n\n1. In parallelogram $ABCD$, side $AB$ and side $DC$ are the same free vector: equal length, same direction. *Why this step:* worked example 3 showed that an arrow between two points is a free vector, so \"opposite sides are equal and parallel\" becomes one vector equation.",
-    },
-    {
-      type: "math",
-      latex:
-        "\\overrightarrow{AB} = \\overrightarrow{DC} \\;\\Longrightarrow\\; \\vec b - \\vec a = \\vec c - \\vec d \\;\\Longrightarrow\\; \\vec d = \\vec a + \\vec c - \\vec b",
-    },
-    {
-      type: "text",
-      content:
-        "2. $\\vec d = (1 + 6 - 4,\\ 2 + 6 - 3) = (3, 5)$, so $D = (3, 5)$.\n3. Check the other pair of sides: $\\overrightarrow{AD} = (2, 3)$ and $\\overrightarrow{BC} = (2, 3)$. Equal, as they must be.\n\n*Exam trap:* if the question only says \"$A$, $B$, $C$ are three vertices of a parallelogram\" without fixing the order, there are **three** answers: $\\vec a + \\vec c - \\vec b = (3, 5)$, $\\vec a + \\vec b - \\vec c = (-1, -1)$ and $\\vec b + \\vec c - \\vec a = (9, 7)$. The missing vertex is always the sum of its two neighbours minus the vertex opposite it.",
+        "*Exam trap:* if the question only says \"$A$, $B$, $C$ are three vertices of a parallelogram\" without fixing the order, there are **three** answers: $\\vec a + \\vec c - \\vec b = (3, 5)$, $\\vec a + \\vec b - \\vec c = (-1, -1)$ and $\\vec b + \\vec c - \\vec a = (9, 7)$. The missing vertex is always the sum of its two neighbours minus the vertex opposite it.",
     },
     {
       type: "table",
@@ -149,6 +198,7 @@ const lesson01: LessonSeed = {
       content:
         "After computing $\\overrightarrow{AB}$, add it to $A$. You must land on $B$. If you land somewhere else, you subtracted in the wrong order.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va1-1-q1",
@@ -259,6 +309,7 @@ const lesson02: LessonSeed = {
       content:
         "Answering that means splitting the arrow into a horizontal piece and a vertical piece. Those two pieces are the vector's **components**, and they turn every plane vector into a pair of numbers.",
     },
+    { type: "heading", text: "Splitting a vector along $\\hat i$ and $\\hat j$" },
     {
       type: "callout",
       variant: "definition",
@@ -287,6 +338,7 @@ const lesson02: LessonSeed = {
       content:
         "If $\\vec r = x\\hat i + y\\hat j$, then $x$ is the $x$-component and $y$ is the $y$-component of $\\vec r$. We often write the pair as $\\vec r = (x, y)$. The vectors $x\\hat i$ and $y\\hat j$ are called the **vector components**.",
     },
+    { type: "heading", text: "Resolving with $r\\cos\\theta$ and $r\\sin\\theta$" },
     {
       type: "text",
       content:
@@ -315,9 +367,18 @@ const lesson02: LessonSeed = {
       latex: "x = r\\cos\\theta, \\qquad y = r\\sin\\theta, \\qquad \\vec r = r\\cos\\theta\\,\\hat i + r\\sin\\theta\\,\\hat j",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1: the rope.** $r = 10$ N and $\\theta = 30^\\circ$.\n\n1. Forward part: $x = 10\\cos 30^\\circ = 10 \\cdot \\frac{\\sqrt 3}{2} = 5\\sqrt 3 \\approx 8.66$ N.\n2. Lifting part: $y = 10\\sin 30^\\circ = 10 \\cdot \\frac12 = 5$ N.\n3. So $\\vec F = 5\\sqrt3\\,\\hat i + 5\\,\\hat j$. Check: $\\sqrt{(5\\sqrt3)^2 + 5^2} = \\sqrt{75 + 25} = 10$. The length comes back.",
+      type: "worked-example",
+      id: "va1-2-we1",
+      title: "Worked example 1: the rope",
+      problem: "$r = 10$ N and $\\theta = 30^\\circ$. Write the force $\\vec F$ in components.",
+      steps: [
+        { text: "Forward part: $x = 10\\cos 30^\\circ = 10 \\cdot \\frac{\\sqrt 3}{2} = 5\\sqrt 3 \\approx 8.66$ N." },
+        { text: "Lifting part: $y = 10\\sin 30^\\circ = 10 \\cdot \\frac12 = 5$ N." },
+        {
+          text: "So $\\vec F = 5\\sqrt3\\,\\hat i + 5\\,\\hat j$. Check: $\\sqrt{(5\\sqrt3)^2 + 5^2} = \\sqrt{75 + 25} = 10$. The length comes back.",
+        },
+      ],
+      answer: "$\\vec F = 5\\sqrt3\\,\\hat i + 5\\,\\hat j$ (in N)",
     },
     {
       type: "text",
@@ -353,16 +414,26 @@ const lesson02: LessonSeed = {
         ["Quadrant IV", "$270^\\circ < \\theta < 360^\\circ$", "$+$", "$-$"],
       ],
     },
+    { type: "heading", text: "Recovering length and angle" },
     {
       type: "text",
       content:
         "**Going back: from components to length and angle.** The legs are $|x|$ and $|y|$, so Pythagoras gives the length $r = \\sqrt{x^2 + y^2}$. (Squaring removes the signs.) For the angle, $\\tan\\theta = \\frac{y}{x}$, but a calculator's $\\tan^{-1}$ only returns angles between $-90^\\circ$ and $90^\\circ$. Always check which quadrant the arrow points into.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2.** Find the length and direction of $\\vec v = -3\\hat i + 4\\hat j$.\n\n1. Length: $\\sqrt{(-3)^2 + 4^2} = \\sqrt{25} = 5$.\n2. Signs: $x < 0$, $y > 0$, so the arrow points into quadrant II.\n3. Reference angle: $\\tan^{-1}\\frac{4}{3} \\approx 53.13^\\circ$.\n4. In quadrant II, $\\theta = 180^\\circ - 53.13^\\circ \\approx 126.87^\\circ$.",
+      type: "worked-example",
+      id: "va1-2-we2",
+      title: "Worked example 2",
+      problem: "Find the length and direction of $\\vec v = -3\\hat i + 4\\hat j$.",
+      steps: [
+        { text: "Length: $\\sqrt{(-3)^2 + 4^2} = \\sqrt{25} = 5$." },
+        { text: "Signs: $x < 0$, $y > 0$, so the arrow points into quadrant II." },
+        { text: "Reference angle: $\\tan^{-1}\\frac{4}{3} \\approx 53.13^\\circ$." },
+        { text: "In quadrant II, $\\theta = 180^\\circ - 53.13^\\circ \\approx 126.87^\\circ$." },
+      ],
+      answer: "Length $5$, direction $\\theta \\approx 126.87^\\circ$.",
     },
+    { type: "heading", text: "Component-wise addition and scaling" },
     {
       type: "text",
       content:
@@ -383,23 +454,44 @@ const lesson02: LessonSeed = {
         "So the triangle law, which in Chapter 0 needed a careful drawing, becomes plain arithmetic: **add the components separately, and scale each component by** $k$. Subtraction follows as $\\vec a - \\vec b = \\vec a + (-1)\\vec b$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3.** $\\vec a = 2\\hat i - \\hat j$ and $\\vec b = -\\hat i + 3\\hat j$. Find $3\\vec a - 2\\vec b$.\n\n1. $3\\vec a = 6\\hat i - 3\\hat j$.\n2. $2\\vec b = -2\\hat i + 6\\hat j$.\n3. $3\\vec a - 2\\vec b = (6 - (-2))\\hat i + (-3 - 6)\\hat j = 8\\hat i - 9\\hat j$.",
+      type: "worked-example",
+      id: "va1-2-we3",
+      title: "Worked example 3",
+      problem: "$\\vec a = 2\\hat i - \\hat j$ and $\\vec b = -\\hat i + 3\\hat j$. Find $3\\vec a - 2\\vec b$.",
+      steps: [
+        { text: "$3\\vec a = 6\\hat i - 3\\hat j$." },
+        { text: "$2\\vec b = -2\\hat i + 6\\hat j$." },
+        { text: "$3\\vec a - 2\\vec b = (6 - (-2))\\hat i + (-3 - 6)\\hat j = 8\\hat i - 9\\hat j$." },
+      ],
+      answer: "$3\\vec a - 2\\vec b = 8\\hat i - 9\\hat j$",
+    },
+    {
+      type: "worked-example",
+      id: "va1-2-we4",
+      title: "Worked example 3b: building one vector from two (exam style)",
+      problem:
+        "$\\vec a = 2\\hat i + 3\\hat j$ and $\\vec b = -\\hat i + 2\\hat j$. Write $\\vec c = 4\\hat i + 13\\hat j$ as $p\\,\\vec a + q\\,\\vec b$.",
+      steps: [
+        {
+          text: "Expand the right side in components: $p\\vec a + q\\vec b = (2p - q)\\hat i + (3p + 2q)\\hat j$. *Why this step:* scaling and adding work one component at a time, so the combination is just another pair of numbers.",
+        },
+        {
+          text: "Components are unique, so match them with $\\vec c$:",
+          latex: "2p - q = 4, \\qquad 3p + 2q = 13",
+        },
+        {
+          text: "From the first equation $q = 2p - 4$. Substitute: $3p + 2(2p - 4) = 13$, so $7p = 21$, giving $p = 3$ and $q = 2$.",
+        },
+        {
+          text: "Check: $3(2\\hat i + 3\\hat j) + 2(-\\hat i + 2\\hat j) = (6 - 2)\\hat i + (9 + 4)\\hat j = 4\\hat i + 13\\hat j$. ✓",
+        },
+      ],
+      answer: "$p = 3$, $q = 2$, so $\\vec c = 3\\vec a + 2\\vec b$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 3b: building one vector from two (exam style).** $\\vec a = 2\\hat i + 3\\hat j$ and $\\vec b = -\\hat i + 2\\hat j$. Write $\\vec c = 4\\hat i + 13\\hat j$ as $p\\,\\vec a + q\\,\\vec b$.\n\n1. Expand the right side in components: $p\\vec a + q\\vec b = (2p - q)\\hat i + (3p + 2q)\\hat j$. *Why this step:* scaling and adding work one component at a time, so the combination is just another pair of numbers.\n2. Components are unique, so match them with $\\vec c$:",
-    },
-    {
-      type: "math",
-      latex: "2p - q = 4, \\qquad 3p + 2q = 13",
-    },
-    {
-      type: "text",
-      content:
-        "3. From the first equation $q = 2p - 4$. Substitute: $3p + 2(2p - 4) = 13$, so $7p = 21$, giving $p = 3$ and $q = 2$.\n4. Check: $3(2\\hat i + 3\\hat j) + 2(-\\hat i + 2\\hat j) = (6 - 2)\\hat i + (9 + 4)\\hat j = 4\\hat i + 13\\hat j$. ✓\n\nThe uniqueness of components is what turns one vector equation into two ordinary equations. Without it, you could not \"match\" anything.",
+        "The uniqueness of components is what turns one vector equation into two ordinary equations. Without it, you could not \"match\" anything.",
     },
     {
       type: "quiz",
@@ -414,25 +506,52 @@ const lesson02: LessonSeed = {
       hint: "Expand $p\\vec a + q\\vec b$ into $\\hat i$ and $\\hat j$ parts, then match each part.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4: a velocity pointing down and to the left.** A ball moves at 20 m/s in the direction $240^\\circ$. Resolve it.\n\n1. $x = 20\\cos 240^\\circ = 20 \\cdot (-\\tfrac12) = -10$.\n2. $y = 20\\sin 240^\\circ = 20 \\cdot (-\\tfrac{\\sqrt3}{2}) = -10\\sqrt3 \\approx -17.32$.\n3. $\\vec v = -10\\,\\hat i - 10\\sqrt3\\,\\hat j$. Both components are negative because $240^\\circ$ is in quadrant III.",
+      type: "worked-example",
+      id: "va1-2-we5",
+      title: "Worked example 4: a velocity pointing down and to the left",
+      problem: "A ball moves at 20 m/s in the direction $240^\\circ$. Resolve it.",
+      steps: [
+        { text: "$x = 20\\cos 240^\\circ = 20 \\cdot (-\\tfrac12) = -10$." },
+        { text: "$y = 20\\sin 240^\\circ = 20 \\cdot (-\\tfrac{\\sqrt3}{2}) = -10\\sqrt3 \\approx -17.32$." },
+        {
+          text: "$\\vec v = -10\\,\\hat i - 10\\sqrt3\\,\\hat j$. Both components are negative because $240^\\circ$ is in quadrant III.",
+        },
+      ],
+      answer: "$\\vec v = -10\\,\\hat i - 10\\sqrt3\\,\\hat j$ (in m/s)",
+    },
+    {
+      type: "worked-example",
+      id: "va1-2-we6",
+      title: "Worked example 5: two ropes on one crate (application)",
+      problem:
+        "Two people pull a crate across a floor. One pulls with $10$ N at $30^\\circ$ to the $x$-axis, the other with $6$ N at $120^\\circ$. What single pull would do the same job (the **resultant**), and which way does it point?",
+      steps: [
+        {
+          text: "Resolve each force. *Why this step:* arrows at different angles cannot be added as numbers, but their components can.",
+          latex:
+            "\\vec F_1 = 10\\cos30^\\circ\\,\\hat i + 10\\sin30^\\circ\\,\\hat j = 5\\sqrt3\\,\\hat i + 5\\,\\hat j, \\qquad \\vec F_2 = 6\\cos120^\\circ\\,\\hat i + 6\\sin120^\\circ\\,\\hat j = -3\\,\\hat i + 3\\sqrt3\\,\\hat j",
+        },
+        {
+          text: "Add component by component: $\\vec R = (5\\sqrt3 - 3)\\,\\hat i + (5 + 3\\sqrt3)\\,\\hat j \\approx 5.66\\,\\hat i + 10.20\\,\\hat j$.",
+        },
+        {
+          text: "Length: $|\\vec R| = \\sqrt{5.66^2 + 10.20^2} \\approx 11.66$ N. Exactly, $|\\vec R|^2 = (5\\sqrt3 - 3)^2 + (5 + 3\\sqrt3)^2 = (84 - 30\\sqrt3) + (52 + 30\\sqrt3) = 136$, so $|\\vec R| = \\sqrt{136} = 2\\sqrt{34}$ N.",
+        },
+        {
+          text: "Direction: both components are positive (quadrant I), so $\\theta = \\tan^{-1}\\frac{10.20}{5.66} \\approx 60.96^\\circ$.",
+        },
+        {
+          text: "*Cross-check:* $30^\\circ$ and $120^\\circ$ are exactly $90^\\circ$ apart, so the two pulls are perpendicular and $|\\vec R| = \\sqrt{10^2 + 6^2} = \\sqrt{136}$. The resultant sits $\\tan^{-1}\\frac{6}{10} \\approx 30.96^\\circ$ beyond the first rope: $30^\\circ + 30.96^\\circ = 60.96^\\circ$. Two different routes, same answer.",
+        },
+      ],
+      answer: "$|\\vec R| = 2\\sqrt{34} \\approx 11.66$ N, at about $60.96^\\circ$ to the $x$-axis.",
     },
     {
       type: "text",
       content:
-        "**Worked example 5: two ropes on one crate (application).** Two people pull a crate across a floor. One pulls with $10$ N at $30^\\circ$ to the $x$-axis, the other with $6$ N at $120^\\circ$. What single pull would do the same job (the **resultant**), and which way does it point?\n\n1. Resolve each force. *Why this step:* arrows at different angles cannot be added as numbers, but their components can.",
+        "Note that the resultant is **less** than $10 + 6 = 16$ N: pulls at an angle partly waste each other.",
     },
-    {
-      type: "math",
-      latex:
-        "\\vec F_1 = 10\\cos30^\\circ\\,\\hat i + 10\\sin30^\\circ\\,\\hat j = 5\\sqrt3\\,\\hat i + 5\\,\\hat j, \\qquad \\vec F_2 = 6\\cos120^\\circ\\,\\hat i + 6\\sin120^\\circ\\,\\hat j = -3\\,\\hat i + 3\\sqrt3\\,\\hat j",
-    },
-    {
-      type: "text",
-      content:
-        "2. Add component by component: $\\vec R = (5\\sqrt3 - 3)\\,\\hat i + (5 + 3\\sqrt3)\\,\\hat j \\approx 5.66\\,\\hat i + 10.20\\,\\hat j$.\n3. Length: $|\\vec R| = \\sqrt{5.66^2 + 10.20^2} \\approx 11.66$ N. Exactly, $|\\vec R|^2 = (5\\sqrt3 - 3)^2 + (5 + 3\\sqrt3)^2 = (84 - 30\\sqrt3) + (52 + 30\\sqrt3) = 136$, so $|\\vec R| = \\sqrt{136} = 2\\sqrt{34}$ N.\n4. Direction: both components are positive (quadrant I), so $\\theta = \\tan^{-1}\\frac{10.20}{5.66} \\approx 60.96^\\circ$.\n\n*Cross-check:* $30^\\circ$ and $120^\\circ$ are exactly $90^\\circ$ apart, so the two pulls are perpendicular and $|\\vec R| = \\sqrt{10^2 + 6^2} = \\sqrt{136}$. The resultant sits $\\tan^{-1}\\frac{6}{10} \\approx 30.96^\\circ$ beyond the first rope: $30^\\circ + 30.96^\\circ = 60.96^\\circ$. Two different routes, same answer. Note that the resultant is **less** than $10 + 6 = 16$ N: pulls at an angle partly waste each other.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va1-2-q7",
@@ -515,6 +634,7 @@ const lesson03: LessonSeed = {
       content:
         "A drone hovers above a playground. To say where it is, \"4 m east and 3 m north of the gate\" is not enough. You also need its height. Space needs three numbers, so it needs a third axis and a third unit vector.",
     },
+    { type: "heading", text: "Right-handed axes and $\\hat k$" },
     {
       type: "text",
       content:
@@ -552,6 +672,7 @@ const lesson03: LessonSeed = {
         ["Anywhere", "$(x, y, z)$", "$x\\hat i + y\\hat j + z\\hat k$"],
       ],
     },
+    { type: "heading", text: "Length of a vector in space" },
     {
       type: "text",
       content:
@@ -599,50 +720,96 @@ const lesson03: LessonSeed = {
       type: "math",
       latex: "AB = |\\vec b - \\vec a| = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2}",
     },
+    { type: "heading", text: "Lengths and distances in practice" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Find $|2\\hat i - 3\\hat j + 6\\hat k|$.\n\n1. Square each component: $4$, $9$, $36$. The minus sign disappears.\n2. Add: $49$.\n3. Square root: $|\\vec r| = 7$.",
+      type: "worked-example",
+      id: "va1-3-we1",
+      title: "Worked example 1",
+      problem: "Find $|2\\hat i - 3\\hat j + 6\\hat k|$.",
+      steps: [
+        { text: "Square each component: $4$, $9$, $36$. The minus sign disappears." },
+        { text: "Add: $49$." },
+        { text: "Square root: $|\\vec r| = 7$." },
+      ],
+      answer: "$|2\\hat i - 3\\hat j + 6\\hat k| = 7$",
+    },
+    {
+      type: "worked-example",
+      id: "va1-3-we2",
+      title: "Worked example 2",
+      problem: "Find the distance between $A = (1, -2, 3)$ and $B = (3, 1, -3)$.",
+      steps: [
+        { text: "$\\overrightarrow{AB} = (3 - 1,\\ 1 - (-2),\\ -3 - 3) = (2, 3, -6)$." },
+        { text: "$AB = \\sqrt{4 + 9 + 36} = 7$." },
+      ],
+      answer: "$AB = 7$",
+    },
+    {
+      type: "worked-example",
+      id: "va1-3-we3",
+      title: "Worked example 3",
+      problem:
+        "Show that $A = (0, 7, -10)$, $B = (1, 6, -6)$ and $C = (4, 9, -6)$ form an isosceles triangle. Is it also right-angled?",
+      steps: [
+        { text: "$\\overrightarrow{AB} = (1, -1, 4)$, so $AB = \\sqrt{1 + 1 + 16} = \\sqrt{18}$." },
+        { text: "$\\overrightarrow{BC} = (3, 3, 0)$, so $BC = \\sqrt{9 + 9 + 0} = \\sqrt{18}$." },
+        { text: "$\\overrightarrow{AC} = (4, 2, 4)$, so $AC = \\sqrt{16 + 4 + 16} = 6$." },
+        { text: "$AB = BC$, so the triangle is isosceles." },
+        {
+          text: "$AB^2 + BC^2 = 18 + 18 = 36 = AC^2$. By the converse of Pythagoras, the angle at $B$ is a right angle.",
+        },
+      ],
+      answer: "Isosceles ($AB = BC = \\sqrt{18}$) and right-angled at $B$.",
+    },
+    {
+      type: "worked-example",
+      id: "va1-3-we4",
+      title: "Worked example 4: the drone from the opening (application)",
+      problem:
+        "Put the playground gate at $O$, with $x$ east, $y$ north and $z$ up, in metres. The drone hovers at $D = (4, 3, 12)$. (a) How far is it from the gate? (b) It then flies straight to $E = (-2, 11, 12)$. How far does it fly, and is the flight level? (c) How far is $E$ from the gate?",
+      steps: [
+        {
+          text: "**(a)** $|\\overrightarrow{OD}| = \\sqrt{4^2 + 3^2 + 12^2} = \\sqrt{16 + 9 + 144} = \\sqrt{169} = 13$ m. *Why this step:* the distance from the origin is the length of the position vector, the long diagonal of a $4 \\times 3 \\times 12$ box. Pythagoras twice: the floor diagonal is $5$, then $\\sqrt{5^2 + 12^2} = 13$.",
+        },
+        {
+          text: "**(b)** *Why this step:* the flight is an arrow between two points, so it is end minus start (Lesson 1.1). The $\\hat k$ component is $0$: the height never changes, so the flight is level. A zero component is information, not something to skip.",
+          latex:
+            "\\overrightarrow{DE} = \\vec e - \\vec d = (-2 - 4,\\ 11 - 3,\\ 12 - 12) = (-6, 8, 0), \\qquad DE = \\sqrt{36 + 64 + 0} = 10 \\text{ m}",
+        },
+        {
+          text: "**(c)** $|\\overrightarrow{OE}| = \\sqrt{(-2)^2 + 11^2 + 12^2} = \\sqrt{4 + 121 + 144} = \\sqrt{269} \\approx 16.4$ m.",
+        },
+        {
+          text: "Notice $16.4 < 13 + 10$: the straight-line distance is shorter than the path, exactly as the triangle inequality demands.",
+        },
+      ],
+      answer: "(a) $13$ m, (b) $10$ m, and the flight is level, (c) $\\sqrt{269} \\approx 16.4$ m.",
+    },
+    {
+      type: "worked-example",
+      id: "va1-3-we5",
+      title: "Worked example 5: a point on an axis (exam style)",
+      problem: "Find the point on the $x$-axis that is equidistant from $A = (1, 2, 3)$ and $B = (3, 5, -2)$.",
+      steps: [
+        {
+          text: "Any point on the $x$-axis has the form $P = (x, 0, 0)$. *Why this step:* \"on the $x$-axis\" means the $y$- and $z$-coordinates are zero, which leaves a single unknown.",
+        },
+        {
+          text: "Equate the **squared** distances. *Why:* $PA = PB$ is equivalent to $PA^2 = PB^2$ (both are non-negative), and squaring removes the square roots.",
+          latex:
+            "(x - 1)^2 + 2^2 + 3^2 = (x - 3)^2 + 5^2 + (-2)^2 \\;\\Longrightarrow\\; x^2 - 2x + 14 = x^2 - 6x + 38",
+        },
+        {
+          text: "The $x^2$ terms cancel, so the equation is linear: $4x = 24$, $x = 6$. The point is $P = (6, 0, 0)$.",
+        },
+        { text: "Check: $PA^2 = 25 + 4 + 9 = 38$ and $PB^2 = 9 + 25 + 4 = 38$. ✓" },
+      ],
+      answer: "$P = (6, 0, 0)$",
     },
     {
       type: "text",
       content:
-        "**Worked example 2.** Find the distance between $A = (1, -2, 3)$ and $B = (3, 1, -3)$.\n\n1. $\\overrightarrow{AB} = (3 - 1,\\ 1 - (-2),\\ -3 - 3) = (2, 3, -6)$.\n2. $AB = \\sqrt{4 + 9 + 36} = 7$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3.** Show that $A = (0, 7, -10)$, $B = (1, 6, -6)$ and $C = (4, 9, -6)$ form an isosceles triangle. Is it also right-angled?\n\n1. $\\overrightarrow{AB} = (1, -1, 4)$, so $AB = \\sqrt{1 + 1 + 16} = \\sqrt{18}$.\n2. $\\overrightarrow{BC} = (3, 3, 0)$, so $BC = \\sqrt{9 + 9 + 0} = \\sqrt{18}$.\n3. $\\overrightarrow{AC} = (4, 2, 4)$, so $AC = \\sqrt{16 + 4 + 16} = 6$.\n4. $AB = BC$, so the triangle is isosceles.\n5. $AB^2 + BC^2 = 18 + 18 = 36 = AC^2$. By the converse of Pythagoras, the angle at $B$ is a right angle.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4: the drone from the opening (application).** Put the playground gate at $O$, with $x$ east, $y$ north and $z$ up, in metres. The drone hovers at $D = (4, 3, 12)$. (a) How far is it from the gate? (b) It then flies straight to $E = (-2, 11, 12)$. How far does it fly, and is the flight level? (c) How far is $E$ from the gate?\n\n**(a)** $|\\overrightarrow{OD}| = \\sqrt{4^2 + 3^2 + 12^2} = \\sqrt{16 + 9 + 144} = \\sqrt{169} = 13$ m. *Why this step:* the distance from the origin is the length of the position vector, the long diagonal of a $4 \\times 3 \\times 12$ box. Pythagoras twice: the floor diagonal is $5$, then $\\sqrt{5^2 + 12^2} = 13$.",
-    },
-    {
-      type: "math",
-      latex:
-        "\\overrightarrow{DE} = \\vec e - \\vec d = (-2 - 4,\\ 11 - 3,\\ 12 - 12) = (-6, 8, 0), \\qquad DE = \\sqrt{36 + 64 + 0} = 10 \\text{ m}",
-    },
-    {
-      type: "text",
-      content:
-        "**(b)** *Why this step:* the flight is an arrow between two points, so it is end minus start (Lesson 1.1). The $\\hat k$ component is $0$: the height never changes, so the flight is level. A zero component is information, not something to skip.\n\n**(c)** $|\\overrightarrow{OE}| = \\sqrt{(-2)^2 + 11^2 + 12^2} = \\sqrt{4 + 121 + 144} = \\sqrt{269} \\approx 16.4$ m.\n\nNotice $16.4 < 13 + 10$: the straight-line distance is shorter than the path, exactly as the triangle inequality demands.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5: a point on an axis (exam style).** Find the point on the $x$-axis that is equidistant from $A = (1, 2, 3)$ and $B = (3, 5, -2)$.\n\n1. Any point on the $x$-axis has the form $P = (x, 0, 0)$. *Why this step:* \"on the $x$-axis\" means the $y$- and $z$-coordinates are zero, which leaves a single unknown.\n2. Equate the **squared** distances. *Why:* $PA = PB$ is equivalent to $PA^2 = PB^2$ (both are non-negative), and squaring removes the square roots.",
-    },
-    {
-      type: "math",
-      latex:
-        "(x - 1)^2 + 2^2 + 3^2 = (x - 3)^2 + 5^2 + (-2)^2 \\;\\Longrightarrow\\; x^2 - 2x + 14 = x^2 - 6x + 38",
-    },
-    {
-      type: "text",
-      content:
-        "3. The $x^2$ terms cancel, so the equation is linear: $4x = 24$, $x = 6$. The point is $P = (6, 0, 0)$.\n4. Check: $PA^2 = 25 + 4 + 9 = 38$ and $PB^2 = 9 + 25 + 4 = 38$. ✓\n\nThe same method finds a point on the $y$-axis $(0, y, 0)$, on the $z$-axis $(0, 0, z)$, or in the $xy$-plane $(x, y, 0)$ (then you need a second condition).",
+        "The same method finds a point on the $y$-axis $(0, y, 0)$, on the $z$-axis $(0, 0, z)$, or in the $xy$-plane $(x, y, 0)$ (then you need a second condition).",
     },
     {
       type: "callout",
@@ -651,6 +818,7 @@ const lesson03: LessonSeed = {
       content:
         "The length of a vector is always at least as large as the absolute value of each component, and at most $|x| + |y| + |z|$. For $2\\hat i - 3\\hat j + 6\\hat k$: $6 \\le 7 \\le 11$. If your answer falls outside that range, recheck the arithmetic.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va1-3-q1",
@@ -768,6 +936,7 @@ const lesson04: LessonSeed = {
       content:
         "A **unit vector** has length 1. The unit vector in the direction of a non-zero vector $\\vec a$ is\n\n$\\hat a = \\frac{\\vec a}{|\\vec a|}.$\n\nTurning $\\vec a$ into $\\hat a$ is called **normalising**. Rearranged, $\\vec a = |\\vec a|\\,\\hat a$: every vector is (its length) times (its direction). The zero vector has no direction, so it has no unit vector.",
     },
+    { type: "heading", text: "Plane unit vectors and the unit circle" },
     {
       type: "text",
       content:
@@ -811,38 +980,78 @@ const lesson04: LessonSeed = {
           "Put the tip at (1, 1): the length reads √2 ≈ 1.41, not 1. Now drag it to (0.7, 0.7), which is almost on the unit circle.",
       },
     },
+    { type: "heading", text: "Normalising and rescaling vectors" },
     {
-      type: "text",
-      content:
-        "**Worked example 1: normalise.** Find the unit vector along $\\vec a = 2\\hat i - \\hat j + 2\\hat k$.\n\n1. $|\\vec a| = \\sqrt{4 + 1 + 4} = 3$.\n2. $\\hat a = \\frac13(2\\hat i - \\hat j + 2\\hat k) = \\frac23\\hat i - \\frac13\\hat j + \\frac23\\hat k$.\n3. Check: $\\frac49 + \\frac19 + \\frac49 = 1$.",
+      type: "worked-example",
+      id: "va1-4-we1",
+      title: "Worked example 1: normalise",
+      problem: "Find the unit vector along $\\vec a = 2\\hat i - \\hat j + 2\\hat k$.",
+      steps: [
+        { text: "$|\\vec a| = \\sqrt{4 + 1 + 4} = 3$." },
+        { text: "$\\hat a = \\frac13(2\\hat i - \\hat j + 2\\hat k) = \\frac23\\hat i - \\frac13\\hat j + \\frac23\\hat k$." },
+        { text: "Check: $\\frac49 + \\frac19 + \\frac49 = 1$." },
+      ],
+      answer: "$\\hat a = \\frac23\\hat i - \\frac13\\hat j + \\frac23\\hat k$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2: a given length in a given direction.** Find the vector of length 10 along $3\\hat i - 4\\hat j$.\n\n1. Normalise the direction: $|3\\hat i - 4\\hat j| = 5$, so the unit vector is $\\frac15(3\\hat i - 4\\hat j)$.\n2. Scale to length 10: $10 \\cdot \\frac15(3\\hat i - 4\\hat j) = 6\\hat i - 8\\hat j$.\n3. The vector of length 10 in the *opposite* direction is $-6\\hat i + 8\\hat j$.",
+      type: "worked-example",
+      id: "va1-4-we2",
+      title: "Worked example 2: a given length in a given direction",
+      problem: "Find the vector of length 10 along $3\\hat i - 4\\hat j$.",
+      steps: [
+        { text: "Normalise the direction: $|3\\hat i - 4\\hat j| = 5$, so the unit vector is $\\frac15(3\\hat i - 4\\hat j)$." },
+        { text: "Scale to length 10: $10 \\cdot \\frac15(3\\hat i - 4\\hat j) = 6\\hat i - 8\\hat j$." },
+        { text: "The vector of length 10 in the *opposite* direction is $-6\\hat i + 8\\hat j$." },
+      ],
+      answer: "$6\\hat i - 8\\hat j$ (and $-6\\hat i + 8\\hat j$ in the opposite direction)",
     },
     {
       type: "math",
       latex: "\\text{vector of length } \\lambda \\text{ along } \\vec a \\;=\\; \\lambda\\,\\hat a \\;=\\; \\lambda\\,\\frac{\\vec a}{|\\vec a|}",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3: unit vector along a sum.** $\\vec a = 2\\hat i + 2\\hat j - 5\\hat k$ and $\\vec b = 2\\hat i + \\hat j + 3\\hat k$. Find the unit vector along $\\vec a + \\vec b$.\n\n1. $\\vec a + \\vec b = 4\\hat i + 3\\hat j - 2\\hat k$.\n2. $|\\vec a + \\vec b| = \\sqrt{16 + 9 + 4} = \\sqrt{29}$.\n3. Unit vector: $\\frac{1}{\\sqrt{29}}(4\\hat i + 3\\hat j - 2\\hat k)$.\n\nAdd first, then normalise. $\\hat a + \\hat b$ is a different vector, and generally not a unit vector.",
+      type: "worked-example",
+      id: "va1-4-we3",
+      title: "Worked example 3: unit vector along a sum",
+      problem:
+        "$\\vec a = 2\\hat i + 2\\hat j - 5\\hat k$ and $\\vec b = 2\\hat i + \\hat j + 3\\hat k$. Find the unit vector along $\\vec a + \\vec b$.",
+      steps: [
+        { text: "$\\vec a + \\vec b = 4\\hat i + 3\\hat j - 2\\hat k$." },
+        { text: "$|\\vec a + \\vec b| = \\sqrt{16 + 9 + 4} = \\sqrt{29}$." },
+        { text: "Divide the sum by its length: unit vector $= \\frac{1}{\\sqrt{29}}(4\\hat i + 3\\hat j - 2\\hat k)$." },
+      ],
+      answer: "$\\frac{1}{\\sqrt{29}}(4\\hat i + 3\\hat j - 2\\hat k)$",
     },
     {
       type: "text",
       content:
-        "**Worked example 3b: a force along a cable (application).** A crane hook at $A = (1, 2, 3)$ is pulled by a cable towards a winch at $B = (3, -1, 9)$ (metres). The tension is $14$ N. Write the force as a vector.\n\n1. Direction first: $\\overrightarrow{AB} = (3 - 1,\\ -1 - 2,\\ 9 - 3) = (2, -3, 6)$. *Why this step:* a cable pulls along itself, from the hook towards the winch, so the force points along $\\overrightarrow{AB}$ (end minus start).\n2. Normalise: $|\\overrightarrow{AB}| = \\sqrt{4 + 9 + 36} = 7$, so the direction is $\\frac17(2\\hat i - 3\\hat j + 6\\hat k)$. *Why:* $\\overrightarrow{AB}$ has length 7 m, which has nothing to do with the force. Stripping it to length 1 keeps only the direction.\n3. Scale to the size of the force:",
+        "Add first, then normalise. $\\hat a + \\hat b$ is a different vector, and generally not a unit vector.",
     },
     {
-      type: "math",
-      latex: "\\vec F = 14 \\cdot \\frac{2\\hat i - 3\\hat j + 6\\hat k}{7} = 4\\hat i - 6\\hat j + 12\\hat k \\text{ N}",
+      type: "worked-example",
+      id: "va1-4-we4",
+      title: "Worked example 3b: a force along a cable (application)",
+      problem:
+        "A crane hook at $A = (1, 2, 3)$ is pulled by a cable towards a winch at $B = (3, -1, 9)$ (metres). The tension is $14$ N. Write the force as a vector.",
+      steps: [
+        {
+          text: "Direction first: $\\overrightarrow{AB} = (3 - 1,\\ -1 - 2,\\ 9 - 3) = (2, -3, 6)$. *Why this step:* a cable pulls along itself, from the hook towards the winch, so the force points along $\\overrightarrow{AB}$ (end minus start).",
+        },
+        {
+          text: "Normalise: $|\\overrightarrow{AB}| = \\sqrt{4 + 9 + 36} = 7$, so the direction is $\\frac17(2\\hat i - 3\\hat j + 6\\hat k)$. *Why:* $\\overrightarrow{AB}$ has length 7 m, which has nothing to do with the force. Stripping it to length 1 keeps only the direction.",
+        },
+        {
+          text: "Scale to the size of the force:",
+          latex: "\\vec F = 14 \\cdot \\frac{2\\hat i - 3\\hat j + 6\\hat k}{7} = 4\\hat i - 6\\hat j + 12\\hat k \\text{ N}",
+        },
+        { text: "Check: $|\\vec F| = \\sqrt{16 + 36 + 144} = \\sqrt{196} = 14$. ✓" },
+      ],
+      answer: "$\\vec F = 4\\hat i - 6\\hat j + 12\\hat k$ N",
     },
     {
       type: "text",
       content:
-        "4. Check: $|\\vec F| = \\sqrt{16 + 36 + 144} = \\sqrt{196} = 14$. ✓ This \"direction from two points, normalise, scale\" routine is how every force, velocity and field vector along a line is written in physics.",
+        "This \"direction from two points, normalise, scale\" routine is how every force, velocity and field vector along a line is written in physics.",
     },
     {
       type: "quiz",
@@ -856,6 +1065,7 @@ const lesson04: LessonSeed = {
       ],
       hint: "Direction $\\overrightarrow{AB}$, normalise, then multiply by 15.",
     },
+    { type: "heading", text: "Equating components" },
     {
       type: "text",
       content:
@@ -866,9 +1076,16 @@ const lesson04: LessonSeed = {
       latex: "a_1\\hat i + a_2\\hat j + a_3\\hat k = b_1\\hat i + b_2\\hat j + b_3\\hat k \\iff a_1 = b_1,\\ a_2 = b_2,\\ a_3 = b_3",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4.** Solve $(x + 2)\\hat i + (y - x)\\hat j + 2z\\,\\hat k = 5\\hat i + \\hat j - 4\\hat k$.\n\n1. $\\hat i$: $x + 2 = 5$, so $x = 3$.\n2. $\\hat j$: $y - x = 1$, so $y = 4$.\n3. $\\hat k$: $2z = -4$, so $z = -2$.",
+      type: "worked-example",
+      id: "va1-4-we5",
+      title: "Worked example 4",
+      problem: "Solve $(x + 2)\\hat i + (y - x)\\hat j + 2z\\,\\hat k = 5\\hat i + \\hat j - 4\\hat k$.",
+      steps: [
+        { text: "$\\hat i$: $x + 2 = 5$, so $x = 3$." },
+        { text: "$\\hat j$: $y - x = 1$, so $y = 4$." },
+        { text: "$\\hat k$: $2z = -4$, so $z = -2$." },
+      ],
+      answer: "$x = 3$, $y = 4$, $z = -2$",
     },
     {
       type: "quiz",
@@ -881,6 +1098,7 @@ const lesson04: LessonSeed = {
         { text: "Cannot tell without a picture.", feedback: "The components settle it: compare them one at a time." },
       ],
     },
+    { type: "heading", text: "Collinearity by proportional components" },
     {
       type: "text",
       content:
@@ -898,24 +1116,57 @@ const lesson04: LessonSeed = {
         "Read the ratio test as \"$\\vec a = \\lambda\\vec b$\". If $b_3 = 0$ then $a_3$ must also be 0, and you compare only the other ratios. The sign of $\\lambda$ tells you whether the two arrows point the same way ($\\lambda > 0$) or opposite ways ($\\lambda < 0$).",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5.** Are $\\vec a = 2\\hat i - 3\\hat j + 4\\hat k$ and $\\vec b = -4\\hat i + 6\\hat j - 8\\hat k$ collinear?\n\nRatios: $\\frac{2}{-4} = \\frac{-3}{6} = \\frac{4}{-8} = -\\frac12$. All equal, so $\\vec a = -\\frac12\\vec b$. They are collinear and point in opposite directions.\n\n**Worked example 6.** Find $p$ and $q$ so that $3\\hat i + p\\hat j + 2\\hat k$ is parallel to $6\\hat i - 2\\hat j + q\\hat k$.\n\n1. The $\\hat i$ ratio fixes $\\lambda$: $\\frac36 = \\frac12$.\n2. $\\frac{p}{-2} = \\frac12$, so $p = -1$.\n3. $\\frac{2}{q} = \\frac12$, so $q = 4$.",
+      type: "worked-example",
+      id: "va1-4-we6",
+      title: "Worked example 5",
+      problem:
+        "Are $\\vec a = 2\\hat i - 3\\hat j + 4\\hat k$ and $\\vec b = -4\\hat i + 6\\hat j - 8\\hat k$ collinear?",
+      steps: [
+        {
+          text: "Ratios: $\\frac{2}{-4} = \\frac{-3}{6} = \\frac{4}{-8} = -\\frac12$. All equal, so $\\vec a = -\\frac12\\vec b$.",
+        },
+        { text: "They are collinear and point in opposite directions." },
+      ],
+      answer: "Yes: $\\vec a = -\\frac12\\vec b$, so they are collinear and opposite.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 7: collinear points with unknowns (exam style).** The points $A = (2, -1, 3)$, $B = (4, 3, 1)$ and $C = (5, p, q)$ are collinear. Find $p$ and $q$.\n\n1. Three points are collinear when the arrows $\\overrightarrow{AB}$ and $\\overrightarrow{AC}$ are parallel. *Why this step:* both arrows start at $A$, so if they point along the same line, $B$ and $C$ both lie on that line through $A$. Parallel arrows from different starting points would not be enough.\n2. Compute both arrows (end minus start):",
+      type: "worked-example",
+      id: "va1-4-we7",
+      title: "Worked example 6",
+      problem:
+        "Find $p$ and $q$ so that $3\\hat i + p\\hat j + 2\\hat k$ is parallel to $6\\hat i - 2\\hat j + q\\hat k$.",
+      steps: [
+        { text: "The $\\hat i$ ratio fixes $\\lambda$: $\\frac36 = \\frac12$." },
+        { text: "$\\frac{p}{-2} = \\frac12$, so $p = -1$." },
+        { text: "$\\frac{2}{q} = \\frac12$, so $q = 4$." },
+      ],
+      answer: "$p = -1$, $q = 4$",
     },
     {
-      type: "math",
-      latex: "\\overrightarrow{AB} = (2, 4, -2), \\qquad \\overrightarrow{AC} = (3,\\ p + 1,\\ q - 3)",
+      type: "worked-example",
+      id: "va1-4-we8",
+      title: "Worked example 7: collinear points with unknowns (exam style)",
+      problem:
+        "The points $A = (2, -1, 3)$, $B = (4, 3, 1)$ and $C = (5, p, q)$ are collinear. Find $p$ and $q$.",
+      steps: [
+        {
+          text: "Three points are collinear when the arrows $\\overrightarrow{AB}$ and $\\overrightarrow{AC}$ are parallel. *Why this step:* both arrows start at $A$, so if they point along the same line, $B$ and $C$ both lie on that line through $A$. Parallel arrows from different starting points would not be enough.",
+        },
+        {
+          text: "Compute both arrows (end minus start):",
+          latex: "\\overrightarrow{AB} = (2, 4, -2), \\qquad \\overrightarrow{AC} = (3,\\ p + 1,\\ q - 3)",
+        },
+        {
+          text: "Parallel means $\\overrightarrow{AC} = \\lambda\\,\\overrightarrow{AB}$. The first components have no unknowns, so they fix $\\lambda$: $3 = 2\\lambda$, $\\lambda = \\frac32$. *Why:* always find $\\lambda$ from a component you already know, then use it on the others.",
+        },
+        { text: "$p + 1 = \\frac32 \\cdot 4 = 6$, so $p = 5$. And $q - 3 = \\frac32 \\cdot (-2) = -3$, so $q = 0$." },
+        {
+          text: "Check: $C = (5, 5, 0)$ and $\\overrightarrow{AC} = (3, 6, -3) = \\frac32(2, 4, -2)$. ✓ Since $\\lambda = \\frac32 > 1$, $C$ lies beyond $B$ on the ray from $A$.",
+        },
+      ],
+      answer: "$p = 5$, $q = 0$",
     },
-    {
-      type: "text",
-      content:
-        "3. Parallel means $\\overrightarrow{AC} = \\lambda\\,\\overrightarrow{AB}$. The first components have no unknowns, so they fix $\\lambda$: $3 = 2\\lambda$, $\\lambda = \\frac32$. *Why:* always find $\\lambda$ from a component you already know, then use it on the others.\n4. $p + 1 = \\frac32 \\cdot 4 = 6$, so $p = 5$. And $q - 3 = \\frac32 \\cdot (-2) = -3$, so $q = 0$.\n5. Check: $C = (5, 5, 0)$ and $\\overrightarrow{AC} = (3, 6, -3) = \\frac32(2, 4, -2)$. ✓ Since $\\lambda = \\frac32 > 1$, $C$ lies beyond $B$ on the ray from $A$.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va1-4-q10",
@@ -1020,6 +1271,7 @@ const lesson05: LessonSeed = {
       content:
         "In the plane, one angle describes a direction: the angle with the $x$-axis. In space one angle is not enough, since infinitely many directions make $60^\\circ$ with the $x$-axis (they form a cone). So record the angle the vector makes with **each** axis.",
     },
+    { type: "heading", text: "Direction cosines from components" },
     {
       type: "callout",
       variant: "definition",
@@ -1074,35 +1326,77 @@ const lesson05: LessonSeed = {
       content:
         "That is the rule for a triangle's angles, and these three angles do not form a triangle. The true relation is between the squared cosines. For $\\hat i + \\hat j + \\hat k$ each angle is $\\cos^{-1}\\frac{1}{\\sqrt3} \\approx 54.7^\\circ$, and the sum is about $164.2^\\circ$. (For $\\hat i$ itself the angles are $0^\\circ, 90^\\circ, 90^\\circ$ and happen to sum to $180^\\circ$, which is how the myth survives.)",
     },
+    { type: "heading", text: "Worked examples: angles with the axes" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Find the direction cosines of $\\vec r = 2\\hat i - 3\\hat j + 6\\hat k$.\n\n1. $r = \\sqrt{4 + 9 + 36} = 7$.\n2. $l = \\frac27$, $m = -\\frac37$, $n = \\frac67$.\n3. Check: $\\frac{4 + 9 + 36}{49} = 1$. Also $m < 0$, so $\\beta$ is obtuse: the vector leans away from the positive $y$-axis.",
+      type: "worked-example",
+      id: "va1-5-we1",
+      title: "Worked example 1",
+      problem: "Find the direction cosines of $\\vec r = 2\\hat i - 3\\hat j + 6\\hat k$.",
+      steps: [
+        { text: "$r = \\sqrt{4 + 9 + 36} = 7$." },
+        { text: "$l = \\frac27$, $m = -\\frac37$, $n = \\frac67$." },
+        {
+          text: "Check: $\\frac{4 + 9 + 36}{49} = 1$. Also $m < 0$, so $\\beta$ is obtuse: the vector leans away from the positive $y$-axis.",
+        },
+      ],
+      answer: "$l = \\frac27$, $m = -\\frac37$, $n = \\frac67$",
+    },
+    {
+      type: "worked-example",
+      id: "va1-5-we2",
+      title: "Worked example 2",
+      problem:
+        "A vector makes $45^\\circ$ with the $x$-axis and $60^\\circ$ with the $y$-axis. What angle does it make with the $z$-axis?",
+      steps: [
+        { text: "$l = \\cos45^\\circ = \\frac{1}{\\sqrt2}$ and $m = \\cos 60^\\circ = \\frac12$." },
+        { text: "$n^2 = 1 - \\frac12 - \\frac14 = \\frac14$, so $n = \\pm\\frac12$." },
+        {
+          text: "$\\gamma = 60^\\circ$ or $120^\\circ$. Both answers are valid: one vector tilts up and its mirror image in the floor tilts down.",
+        },
+      ],
+      answer: "$\\gamma = 60^\\circ$ or $120^\\circ$",
+    },
+    {
+      type: "worked-example",
+      id: "va1-5-we3",
+      title: "Worked example 3",
+      problem: "A vector makes equal angles with all three axes. Find its direction cosines.",
+      steps: [
+        { text: "$l = m = n$, so $3l^2 = 1$ and $l = \\pm\\frac{1}{\\sqrt3}$." },
+        {
+          text: "The direction cosines are $\\left(\\frac1{\\sqrt3}, \\frac1{\\sqrt3}, \\frac1{\\sqrt3}\\right)$ or $\\left(-\\frac1{\\sqrt3}, -\\frac1{\\sqrt3}, -\\frac1{\\sqrt3}\\right)$.",
+        },
+      ],
+      answer: "$\\pm\\left(\\frac1{\\sqrt3}, \\frac1{\\sqrt3}, \\frac1{\\sqrt3}\\right)$",
+    },
+    {
+      type: "worked-example",
+      id: "va1-5-we4",
+      title: "Worked example 3b: how steeply does the drone climb? (application)",
+      problem:
+        "A drone takes off from the pad $O$ and flies in a straight line to $P = (6, 2, 3)$, with $x$ east, $y$ north and $z$ up (metres). Find the angle its path makes with east, with the vertical, and with the ground.",
+      steps: [
+        {
+          text: "Length: $r = \\sqrt{36 + 4 + 9} = 7$ m. Direction cosines: $l = \\frac67$, $m = \\frac27$, $n = \\frac37$. *Why this step:* each direction cosine is (component) / (length), the cosine of the angle with that axis.",
+        },
+        { text: "Angle with east: $\\alpha = \\cos^{-1}\\frac67 \\approx 31.0^\\circ$." },
+        { text: "Angle with the vertical: $\\gamma = \\cos^{-1}\\frac37 \\approx 64.6^\\circ$." },
+        {
+          text: "Angle with the ground (the climb angle) is **not** a direction angle. The ground is the $xy$-plane, perpendicular to the $z$-axis, so the climb angle $\\phi$ and $\\gamma$ add to $90^\\circ$:",
+          latex: "\\phi = 90^\\circ - \\gamma \\approx 25.4^\\circ, \\qquad \\sin\\phi = \\cos\\gamma = n = \\tfrac37",
+        },
+        {
+          text: "*Cross-check:* the drone moves $\\sqrt{6^2 + 2^2} = \\sqrt{40} \\approx 6.32$ m horizontally while rising 3 m, and $\\tan^{-1}\\frac{3}{6.32} \\approx 25.4^\\circ$. ✓",
+        },
+      ],
+      answer: "About $31.0^\\circ$ with east, $64.6^\\circ$ with the vertical and $25.4^\\circ$ with the ground.",
     },
     {
       type: "text",
       content:
-        "**Worked example 2.** A vector makes $45^\\circ$ with the $x$-axis and $60^\\circ$ with the $y$-axis. What angle does it make with the $z$-axis?\n\n1. $l = \\cos45^\\circ = \\frac{1}{\\sqrt2}$ and $m = \\cos 60^\\circ = \\frac12$.\n2. $n^2 = 1 - \\frac12 - \\frac14 = \\frac14$, so $n = \\pm\\frac12$.\n3. $\\gamma = 60^\\circ$ or $120^\\circ$. Both answers are valid: one vector tilts up and its mirror image in the floor tilts down.",
+        "Exam questions love this twist: \"angle with the $z$-axis\" and \"angle with the $xy$-plane\" are complements.",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 3.** A vector makes equal angles with all three axes. Find its direction cosines.\n\n$l = m = n$, so $3l^2 = 1$ and $l = \\pm\\frac{1}{\\sqrt3}$. The direction cosines are $\\left(\\frac1{\\sqrt3}, \\frac1{\\sqrt3}, \\frac1{\\sqrt3}\\right)$ or $\\left(-\\frac1{\\sqrt3}, -\\frac1{\\sqrt3}, -\\frac1{\\sqrt3}\\right)$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3b: how steeply does the drone climb? (application).** A drone takes off from the pad $O$ and flies in a straight line to $P = (6, 2, 3)$, with $x$ east, $y$ north and $z$ up (metres). Find the angle its path makes with east, with the vertical, and with the ground.\n\n1. Length: $r = \\sqrt{36 + 4 + 9} = 7$ m. Direction cosines: $l = \\frac67$, $m = \\frac27$, $n = \\frac37$. *Why this step:* each direction cosine is (component) / (length), the cosine of the angle with that axis.\n2. Angle with east: $\\alpha = \\cos^{-1}\\frac67 \\approx 31.0^\\circ$.\n3. Angle with the vertical: $\\gamma = \\cos^{-1}\\frac37 \\approx 64.6^\\circ$.\n4. Angle with the ground (the climb angle) is **not** a direction angle. The ground is the $xy$-plane, perpendicular to the $z$-axis, so the climb angle $\\phi$ and $\\gamma$ add to $90^\\circ$:",
-    },
-    {
-      type: "math",
-      latex: "\\phi = 90^\\circ - \\gamma \\approx 25.4^\\circ, \\qquad \\sin\\phi = \\cos\\gamma = n = \\tfrac37",
-    },
-    {
-      type: "text",
-      content:
-        "*Cross-check:* the drone moves $\\sqrt{6^2 + 2^2} = \\sqrt{40} \\approx 6.32$ m horizontally while rising 3 m, and $\\tan^{-1}\\frac{3}{6.32} \\approx 25.4^\\circ$. ✓ Exam questions love this twist: \"angle with the $z$-axis\" and \"angle with the $xy$-plane\" are complements.",
-    },
+    { type: "heading", text: "Direction ratios and lines" },
     {
       type: "callout",
       variant: "definition",
@@ -1142,30 +1436,83 @@ const lesson05: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4.** A line has direction ratios $1, -2, 2$. Find its direction cosines.\n\n$\\sqrt{1 + 4 + 4} = 3$, so the direction cosines are $\\pm\\left(\\frac13, -\\frac23, \\frac23\\right)$.\n\n**Worked example 5.** Find the direction cosines of the line through $A = (-2, 4, -5)$ and $B = (1, 2, 3)$.\n\n1. Direction ratios from $\\overrightarrow{AB}$: $(1 - (-2),\\ 2 - 4,\\ 3 - (-5)) = (3, -2, 8)$.\n2. $\\sqrt{9 + 4 + 64} = \\sqrt{77}$.\n3. Direction cosines: $\\pm\\left(\\frac{3}{\\sqrt{77}}, \\frac{-2}{\\sqrt{77}}, \\frac{8}{\\sqrt{77}}\\right)$.",
+      type: "worked-example",
+      id: "va1-5-we5",
+      title: "Worked example 4",
+      problem: "A line has direction ratios $1, -2, 2$. Find its direction cosines.",
+      steps: [
+        { text: "$\\sqrt{1 + 4 + 4} = 3$, so the direction cosines are $\\pm\\left(\\frac13, -\\frac23, \\frac23\\right)$." },
+      ],
+      answer: "$\\pm\\left(\\frac13, -\\frac23, \\frac23\\right)$",
+    },
+    {
+      type: "worked-example",
+      id: "va1-5-we6",
+      title: "Worked example 5",
+      problem: "Find the direction cosines of the line through $A = (-2, 4, -5)$ and $B = (1, 2, 3)$.",
+      steps: [
+        { text: "Direction ratios from $\\overrightarrow{AB}$: $(1 - (-2),\\ 2 - 4,\\ 3 - (-5)) = (3, -2, 8)$." },
+        { text: "$\\sqrt{9 + 4 + 64} = \\sqrt{77}$." },
+        {
+          text: "Divide each ratio by $\\sqrt{77}$, with either sign since the line has two directions. Direction cosines: $\\pm\\left(\\frac{3}{\\sqrt{77}}, \\frac{-2}{\\sqrt{77}}, \\frac{8}{\\sqrt{77}}\\right)$.",
+        },
+      ],
+      answer: "$\\pm\\left(\\frac{3}{\\sqrt{77}}, \\frac{-2}{\\sqrt{77}}, \\frac{8}{\\sqrt{77}}\\right)$",
+    },
+    {
+      type: "worked-example",
+      id: "va1-5-we7",
+      title: "Worked example 6: build a vector from its length and direction",
+      problem: "Find the vector of magnitude 6 that makes equal acute angles with the three axes.",
+      steps: [
+        {
+          text: "Equal angles means $l = m = n$, so $3l^2 = 1$. The angles are acute, so $l = m = n = \\frac{1}{\\sqrt3}$.",
+        },
+        { text: "The unit vector is $\\hat r = \\frac{1}{\\sqrt3}(\\hat i + \\hat j + \\hat k)$." },
+        {
+          text: "Scale to length 6: $\\vec r = 6 \\cdot \\frac{1}{\\sqrt3}(\\hat i + \\hat j + \\hat k) = 2\\sqrt3\\,(\\hat i + \\hat j + \\hat k)$.",
+        },
+      ],
+      answer: "$\\vec r = 2\\sqrt3\\,(\\hat i + \\hat j + \\hat k)$",
     },
     {
       type: "text",
       content:
-        "**Worked example 6: build a vector from its length and direction.** Find the vector of magnitude 6 that makes equal acute angles with the three axes.\n\n1. Equal angles means $l = m = n$, so $3l^2 = 1$. The angles are acute, so $l = m = n = \\frac{1}{\\sqrt3}$.\n2. The unit vector is $\\hat r = \\frac{1}{\\sqrt3}(\\hat i + \\hat j + \\hat k)$.\n3. Scale to length 6: $\\vec r = 6 \\cdot \\frac{1}{\\sqrt3}(\\hat i + \\hat j + \\hat k) = 2\\sqrt3\\,(\\hat i + \\hat j + \\hat k)$.\n\nIn general, a vector of length $r$ with direction cosines $l, m, n$ is $\\vec r = r\\,(l\\,\\hat i + m\\,\\hat j + n\\,\\hat k)$.",
+        "In general, a vector of length $r$ with direction cosines $l, m, n$ is $\\vec r = r\\,(l\\,\\hat i + m\\,\\hat j + n\\,\\hat k)$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 7: an identity (exam style).** A line makes angles $\\alpha, \\beta, \\gamma$ with the axes. Prove that $\\cos 2\\alpha + \\cos 2\\beta + \\cos 2\\gamma = -1$.\n\n1. Rewrite each term using only $\\cos^2$: $\\cos 2\\theta = 2\\cos^2\\theta - 1$. *Why this step:* the one fact we know about direction angles is about $\\cos^2$, so steer every expression towards it.",
+      type: "worked-example",
+      id: "va1-5-we8",
+      title: "Worked example 7: an identity (exam style)",
+      problem:
+        "A line makes angles $\\alpha, \\beta, \\gamma$ with the axes. Prove that $\\cos 2\\alpha + \\cos 2\\beta + \\cos 2\\gamma = -1$.",
+      steps: [
+        {
+          text: "Rewrite each term using only $\\cos^2$: $\\cos 2\\theta = 2\\cos^2\\theta - 1$. *Why this step:* the one fact we know about direction angles is about $\\cos^2$, so steer every expression towards it.",
+          latex:
+            "\\cos 2\\alpha + \\cos 2\\beta + \\cos 2\\gamma = 2(\\cos^2\\alpha + \\cos^2\\beta + \\cos^2\\gamma) - 3 = 2(1) - 3 = -1",
+        },
+        {
+          text: "Test it on $\\hat i$ (angles $0^\\circ, 90^\\circ, 90^\\circ$): $\\cos 0^\\circ + \\cos 180^\\circ + \\cos 180^\\circ = 1 - 1 - 1 = -1$. ✓",
+        },
+      ],
+      answer: "$\\cos 2\\alpha + \\cos 2\\beta + \\cos 2\\gamma = 2(\\cos^2\\alpha + \\cos^2\\beta + \\cos^2\\gamma) - 3 = -1$",
     },
     {
-      type: "math",
-      latex:
-        "\\cos 2\\alpha + \\cos 2\\beta + \\cos 2\\gamma = 2(\\cos^2\\alpha + \\cos^2\\beta + \\cos^2\\gamma) - 3 = 2(1) - 3 = -1",
+      type: "worked-example",
+      id: "va1-5-we9",
+      title: "Worked example 8: collinearity by direction ratios",
+      problem: "Are $A = (2, 3, -4)$, $B = (1, -2, 3)$ and $C = (3, 8, -11)$ collinear?",
+      steps: [
+        { text: "Direction ratios of $AB$: $(1 - 2,\\ -2 - 3,\\ 3 - (-4)) = (-1, -5, 7)$." },
+        { text: "Direction ratios of $BC$: $(3 - 1,\\ 8 - (-2),\\ -11 - 3) = (2, 10, -14)$." },
+        {
+          text: "$(2, 10, -14) = -2 \\times (-1, -5, 7)$. *Why this matters:* proportional direction ratios mean $AB$ and $BC$ are parallel, and since they share the point $B$ they lie on one line. So yes, the points are collinear.",
+        },
+      ],
+      answer: "Yes, $A$, $B$ and $C$ are collinear.",
     },
-    {
-      type: "text",
-      content:
-        "2. Test it on $\\hat i$ (angles $0^\\circ, 90^\\circ, 90^\\circ$): $\\cos 0^\\circ + \\cos 180^\\circ + \\cos 180^\\circ = 1 - 1 - 1 = -1$. ✓\n\n**Worked example 8: collinearity by direction ratios.** Are $A = (2, 3, -4)$, $B = (1, -2, 3)$ and $C = (3, 8, -11)$ collinear?\n\n1. Direction ratios of $AB$: $(1 - 2,\\ -2 - 3,\\ 3 - (-4)) = (-1, -5, 7)$.\n2. Direction ratios of $BC$: $(3 - 1,\\ 8 - (-2),\\ -11 - 3) = (2, 10, -14)$.\n3. $(2, 10, -14) = -2 \\times (-1, -5, 7)$. *Why this matters:* proportional direction ratios mean $AB$ and $BC$ are parallel, and since they share the point $B$ they lie on one line. So yes, the points are collinear.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va1-5-q1",
@@ -1296,19 +1643,30 @@ const lessonMastery: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**One problem, the whole chapter (worked).** $A = (-1, 3, 2)$ and $B = (3, -1, 4)$. Find (a) $\\overrightarrow{AB}$, (b) the distance $AB$, (c) the direction cosines of $\\overrightarrow{AB}$ and the angle it makes with the $z$-axis, and (d) the vector of length 9 in the direction of $\\overrightarrow{AB}$.\n\n**(a)** End minus start: $\\overrightarrow{AB} = (3 - (-1),\\ -1 - 3,\\ 4 - 2) = 4\\hat i - 4\\hat j + 2\\hat k$.\n\n**(b)** $AB = \\sqrt{16 + 16 + 4} = \\sqrt{36} = 6$. *Why:* distance is the length of the arrow between the points.",
+      type: "worked-example",
+      id: "va1-6-we1",
+      title: "One problem, the whole chapter (worked)",
+      problem:
+        "$A = (-1, 3, 2)$ and $B = (3, -1, 4)$. Find (a) $\\overrightarrow{AB}$, (b) the distance $AB$, (c) the direction cosines of $\\overrightarrow{AB}$ and the angle it makes with the $z$-axis, and (d) the vector of length 9 in the direction of $\\overrightarrow{AB}$.",
+      steps: [
+        { text: "**(a)** End minus start: $\\overrightarrow{AB} = (3 - (-1),\\ -1 - 3,\\ 4 - 2) = 4\\hat i - 4\\hat j + 2\\hat k$." },
+        { text: "**(b)** $AB = \\sqrt{16 + 16 + 4} = \\sqrt{36} = 6$. *Why:* distance is the length of the arrow between the points." },
+        {
+          text: "*Why:* direction cosines are the components of the unit vector, so divide by the length. Check: $\\frac49 + \\frac49 + \\frac19 = 1$. ✓",
+          latex:
+            "\\text{(c)}\\quad (l, m, n) = \\frac{(4, -4, 2)}{6} = \\left(\\tfrac23,\\ -\\tfrac23,\\ \\tfrac13\\right), \\qquad \\gamma = \\cos^{-1}\\tfrac13 \\approx 70.5^\\circ",
+        },
+        {
+          text: "**(d)** $9 \\cdot \\hat{AB} = 9\\left(\\frac23\\hat i - \\frac23\\hat j + \\frac13\\hat k\\right) = 6\\hat i - 6\\hat j + 3\\hat k$. *Why:* normalise, then scale. Check: $\\sqrt{36 + 36 + 9} = 9$. ✓",
+        },
+      ],
+      answer:
+        "(a) $4\\hat i - 4\\hat j + 2\\hat k$, (b) $6$, (c) $\\left(\\tfrac23, -\\tfrac23, \\tfrac13\\right)$ with $\\gamma \\approx 70.5^\\circ$, (d) $6\\hat i - 6\\hat j + 3\\hat k$",
     },
     {
-      type: "math",
-      latex:
-        "\\text{(c)}\\quad (l, m, n) = \\frac{(4, -4, 2)}{6} = \\left(\\tfrac23,\\ -\\tfrac23,\\ \\tfrac13\\right), \\qquad \\gamma = \\cos^{-1}\\tfrac13 \\approx 70.5^\\circ",
-    },
-    {
       type: "text",
       content:
-        "*Why:* direction cosines are the components of the unit vector, so divide by the length. Check: $\\frac49 + \\frac49 + \\frac19 = 1$. ✓\n\n**(d)** $9 \\cdot \\hat{AB} = 9\\left(\\frac23\\hat i - \\frac23\\hat j + \\frac13\\hat k\\right) = 6\\hat i - 6\\hat j + 3\\hat k$. *Why:* normalise, then scale. Check: $\\sqrt{36 + 36 + 9} = 9$. ✓\n\nOne arrow, four descriptions: components, length, direction cosines, and a rescaled copy. Every question below is some slice of this routine.",
+        "One arrow, four descriptions: components, length, direction cosines, and a rescaled copy. Every question below is some slice of this routine.",
     },
     {
       type: "quiz",

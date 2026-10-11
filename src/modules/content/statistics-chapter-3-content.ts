@@ -51,6 +51,7 @@ const lesson01: LessonSeed = {
       content:
         "Chapters 1 and 2 gave you two numbers for any data set: a **centre** (mean, median, mode) and a **spread** (range, IQR, SD). Two numbers can still hide a lot. A class whose marks are spread evenly from 30 to 90 and a class split into two clusters around 43 and 77 can share both: mean 60, SD about 17. The piece that is missing is the **shape**: where the data pile up, and which way they trail off.",
     },
+    { type: "heading", text: "Symmetric, skewed and other shapes" },
     {
       type: "text",
       content:
@@ -137,10 +138,11 @@ const lesson01: LessonSeed = {
       ],
       hint: "Find the long thin part of the picture and ask which way it points.",
     },
+    { type: "heading", text: "Where do these shapes come from?" },
     {
       type: "text",
       content:
-        "### Where do these shapes come from?\n\nShape is usually explained by what produced the data. A hard floor or ceiling squashes one side and leaves a tail on the other. A few extreme but possible values stretch one side.",
+        "Shape is usually explained by what produced the data. A hard floor or ceiling squashes one side and leaves a tail on the other. A few extreme but possible values stretch one side.",
     },
     {
       type: "table",
@@ -155,10 +157,11 @@ const lesson01: LessonSeed = {
         ["Heights of a mixed group of adults and 10-year-olds", "Bimodal", "Two different groups, each with its own peak."],
       ],
     },
+    { type: "heading", text: "How shape orders the mean, median and mode" },
     {
       type: "text",
       content:
-        "### Shape decides the order of mean, median and mode\n\nIn Chapter 1 you met the mean as the **balance point** and the median as the **middle position**. That difference is all you need.\n\nTake a right-skewed data set and stretch its largest value further to the right. The median does not move, because the middle position is still the same value. The mean *does* move: a value far from the balance point has a long lever arm, so the balance point has to slide towards it. The mode stays at the peak.\n\nSo in a right-skewed distribution the tail pulls the mean furthest, the median a little, and the mode not at all.",
+        "In Chapter 1 you met the mean as the **balance point** and the median as the **middle position**. That difference is all you need.\n\nTake a right-skewed data set and stretch its largest value further to the right. The median does not move, because the middle position is still the same value. The mean *does* move: a value far from the balance point has a long lever arm, so the balance point has to slide towards it. The mode stays at the peak.\n\nSo in a right-skewed distribution the tail pulls the mean furthest, the median a little, and the mode not at all.",
     },
     {
       type: "table",
@@ -177,9 +180,18 @@ const lesson01: LessonSeed = {
         "Mean well above the median suggests a right tail; mean well below the median suggests a left tail. This is why news reports quote the **median** income: the mean is inflated by a handful of very high earners.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — reading shape from raw data.** The number of books eight friends read last year: $2, 3, 3, 3, 4, 5, 9, 15$.\n\n**Step 1 (mode).** 3 appears most often, so the mode is 3.\n\n**Step 2 (median).** $n = 8$, so the median is the average of the 4th and 5th values: $\\frac{3 + 4}{2} = 3.5$.\n\n**Step 3 (mean).** $\\Sigma x = 44$, so $\\bar{x} = \\frac{44}{8} = 5.5$.\n\n**Step 4 (conclude).** mode $3 <$ median $3.5 <$ mean $5.5$. The values 9 and 15 form a right tail and drag the mean up. The distribution is right-skewed.",
+      type: "worked-example",
+      id: "st3-1-we1",
+      title: "Worked example 1: reading shape from raw data",
+      problem:
+        "The number of books eight friends read last year: $2, 3, 3, 3, 4, 5, 9, 15$. Find the mode, median and mean, and describe the shape.",
+      steps: [
+        { text: "**Mode.** 3 appears most often, so the mode is 3." },
+        { text: "**Median.** $n = 8$, so the median is the average of the 4th and 5th values: $\\frac{3 + 4}{2} = 3.5$." },
+        { text: "**Mean.** $\\Sigma x = 44$, so $\\bar{x} = \\frac{44}{8} = 5.5$." },
+        { text: "**Conclude.** mode $3 <$ median $3.5 <$ mean $5.5$. The values 9 and 15 form a right tail and drag the mean up. The distribution is right-skewed." },
+      ],
+      answer: "Mode 3 < median 3.5 < mean 5.5: right-skewed",
     },
     {
       type: "text",
@@ -205,9 +217,29 @@ const lesson01: LessonSeed = {
       latex: "\\text{mode} \\approx 3\\,\\text{median} - 2\\,\\text{mean}",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — incomes.** In a town, the mean monthly income is ₹42 thousand and the median is ₹38 thousand.\n\n**Step 1.** Mean $>$ median, so the tail is on the right: right-skewed.\n\n**Step 2.** Estimated mode $\\approx 3(38) - 2(42) = 114 - 84 = 30$, i.e. about ₹30 thousand.\n\n**Step 3 (check).** $30 < 38 < 42$: mode $<$ median $<$ mean, exactly the right-skew order.\n\n**Worked example 3 — an easy test.** Mean 71, median 76. Now mean $<$ median, so the test scores are left-skewed (bunched near the top). Estimated mode $\\approx 3(76) - 2(71) = 228 - 142 = 86$, and $71 < 76 < 86$ is the left-skew order.",
+      type: "worked-example",
+      id: "st3-1-we2",
+      title: "Worked example 2: incomes",
+      problem:
+        "In a town, the mean monthly income is ₹42 thousand and the median is ₹38 thousand. Describe the skew and estimate the mode.",
+      steps: [
+        { text: "Mean $>$ median, so the tail is on the right: right-skewed." },
+        { text: "Estimated mode $\\approx 3(38) - 2(42) = 114 - 84 = 30$, i.e. about ₹30 thousand." },
+        { text: "**Check.** $30 < 38 < 42$: mode $<$ median $<$ mean, exactly the right-skew order." },
+      ],
+      answer: "Right-skewed; estimated mode about ₹30 thousand",
+    },
+    {
+      type: "worked-example",
+      id: "st3-1-we3",
+      title: "Worked example 3: an easy test",
+      problem:
+        "Mean 71, median 76. Describe the skew and estimate the mode.",
+      steps: [
+        { text: "Now mean $<$ median, so the test scores are left-skewed (bunched near the top)." },
+        { text: "Estimated mode $\\approx 3(76) - 2(71) = 228 - 142 = 86$, and $71 < 76 < 86$ is the left-skew order." },
+      ],
+      answer: "Left-skewed; estimated mode 86",
     },
     {
       type: "callout",
@@ -265,10 +297,22 @@ const lesson01: LessonSeed = {
       hint: "mode ≈ 3·median − 2·mean.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — exam style (two parts).**\n\n**(a)** In a moderately skewed distribution the mean is 34.5 and the mode is 32.1. Find the median.\n\n**Step 1 (rearrange first).** From $\\text{mode} = 3\\,\\text{median} - 2\\,\\text{mean}$ we get $\\text{median} = \\frac{\\text{mode} + 2\\,\\text{mean}}{3}$. *Why this step:* the median is the unknown, so isolate it before putting in numbers. That leaves less room for arithmetic slips.\n\n**Step 2 (substitute).** $\\text{median} = \\frac{32.1 + 2(34.5)}{3} = \\frac{32.1 + 69}{3} = \\frac{101.1}{3} = 33.7$.\n\n**Step 3 (sense check).** $32.1 < 33.7 < 34.5$, so mode $<$ median $<$ mean, the right-skew order. *Why this step:* the relation puts the median between the mode and the mean, one third of the way from the mean towards the mode: $34.5 - \\frac{34.5 - 32.1}{3} = 34.5 - 0.8 = 33.7$. If your answer lands outside that gap, you have swapped a coefficient.\n\n**(b)** A distribution has mean 40, coefficient of variation 20% and Pearson's coefficient of skewness $\\text{Sk}_P = 0.6$. Find the median.\n\n**Step 1 (get the SD from the CV).** $\\text{CV} = \\frac{\\sigma}{\\bar{x}} \\times 100$, so $\\sigma = \\frac{20 \\times 40}{100} = 8$. *Why this step:* $\\text{Sk}_P$ needs $\\sigma$, and the CV is where the question has hidden it.\n\n**Step 2 (solve for the median).** $0.6 = \\frac{3(40 - \\text{median})}{8}$, so $40 - \\text{median} = \\frac{0.6 \\times 8}{3} = 1.6$ and the median is $38.4$.\n\n**Step 3 (sense check).** A positive coefficient needs mean $>$ median, and $40 > 38.4$. ✓",
+      type: "worked-example",
+      id: "st3-1-we4",
+      title: "Worked example 4: exam style (two parts)",
+      problem:
+        "**(a)** In a moderately skewed distribution the mean is 34.5 and the mode is 32.1. Find the median.\n\n**(b)** A distribution has mean 40, coefficient of variation 20% and Pearson's coefficient of skewness $\\text{Sk}_P = 0.6$. Find the median.",
+      steps: [
+        { text: "**Rearrange first.** From $\\text{mode} = 3\\,\\text{median} - 2\\,\\text{mean}$ we get $\\text{median} = \\frac{\\text{mode} + 2\\,\\text{mean}}{3}$. *Why this step:* the median is the unknown, so isolate it before putting in numbers. That leaves less room for arithmetic slips." },
+        { text: "**Substitute.** $\\text{median} = \\frac{32.1 + 2(34.5)}{3} = \\frac{32.1 + 69}{3} = \\frac{101.1}{3} = 33.7$." },
+        { text: "**Sense check.** $32.1 < 33.7 < 34.5$, so mode $<$ median $<$ mean, the right-skew order. *Why this step:* the relation puts the median between the mode and the mean, one third of the way from the mean towards the mode: $34.5 - \\frac{34.5 - 32.1}{3} = 34.5 - 0.8 = 33.7$. If your answer lands outside that gap, you have swapped a coefficient." },
+        { text: "**Get the SD from the CV.** $\\text{CV} = \\frac{\\sigma}{\\bar{x}} \\times 100$, so $\\sigma = \\frac{20 \\times 40}{100} = 8$. *Why this step:* $\\text{Sk}_P$ needs $\\sigma$, and the CV is where the question has hidden it." },
+        { text: "**Solve for the median.** $0.6 = \\frac{3(40 - \\text{median})}{8}$, so $40 - \\text{median} = \\frac{0.6 \\times 8}{3} = 1.6$ and the median is $38.4$." },
+        { text: "**Sense check.** A positive coefficient needs mean $>$ median, and $40 > 38.4$. ✓" },
+      ],
+      answer: "(a) Median $= 33.7$. (b) Median $= 38.4$",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st3-1-q6",
@@ -390,15 +434,30 @@ const lesson02: LessonSeed = {
       content:
         "$\\text{min},\\ Q_1,\\ \\text{median},\\ Q_3,\\ \\text{max}$\nThe quartiles cut the ordered data into four parts with roughly a quarter of the values in each. We use the median-of-halves rule from lesson 2.2: split the ordered data at the median ($Q_2$), leaving the median out of both halves when $n$ is odd. $Q_1$ is the median of the lower half and $Q_3$ the median of the upper half.",
     },
+    { type: "heading", text: "Building a boxplot by hand" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — build a boxplot by hand.** Fifteen students logged their daily study time in minutes:\n\n$12,\\ 18,\\ 20,\\ 22,\\ 25,\\ 25,\\ 28,\\ 30,\\ 32,\\ 35,\\ 38,\\ 40,\\ 45,\\ 52,\\ 58$\n\n**Step 1 (order the data).** Already done. $n = 15$.\n\n**Step 2 (median).** Position $\\frac{n+1}{2} = 8$, so the median is the 8th value, **30**.\n\n**Step 3 ($Q_1$).** Lower half = the 7 values before the median: $12, 18, 20, 22, 25, 25, 28$. Its middle (4th) value is **22**.\n\n**Step 4 ($Q_3$).** Upper half = the 7 values after the median: $32, 35, 38, 40, 45, 52, 58$. Its middle value is **40**.\n\n**Step 5 (extremes).** min $= 12$, max $= 58$.\n\n**Step 6 (draw).** Draw a number line. Draw a box from $Q_1 = 22$ to $Q_3 = 40$, with a line across it at the median, 30. Draw whiskers from the box out to 12 and to 58.",
-    },
-    {
-      type: "table",
-      headers: ["min", "$Q_1$", "median", "$Q_3$", "max", "IQR"],
-      rows: [["12", "22", "30", "40", "58", "$40 - 22 = 18$"]],
+      type: "worked-example",
+      id: "st3-2-we1",
+      title: "Worked example 1: build a boxplot by hand",
+      problem:
+        "Fifteen students logged their daily study time in minutes:\n\n$12,\\ 18,\\ 20,\\ 22,\\ 25,\\ 25,\\ 28,\\ 30,\\ 32,\\ 35,\\ 38,\\ 40,\\ 45,\\ 52,\\ 58$\n\nFind the five-number summary and draw the boxplot.",
+      steps: [
+        { text: "**Order the data.** Already done. $n = 15$." },
+        { text: "**Median.** Position $\\frac{n+1}{2} = 8$, so the median is the 8th value, **30**." },
+        { text: "**$Q_1$.** Lower half = the 7 values before the median: $12, 18, 20, 22, 25, 25, 28$. Its middle (4th) value is **22**." },
+        { text: "**$Q_3$.** Upper half = the 7 values after the median: $32, 35, 38, 40, 45, 52, 58$. Its middle value is **40**." },
+        { text: "**Extremes.** min $= 12$, max $= 58$." },
+        {
+          text: "**Draw.** Draw a number line. Draw a box from $Q_1 = 22$ to $Q_3 = 40$, with a line across it at the median, 30. Draw whiskers from the box out to 12 and to 58.",
+          table: {
+            headers: ["min", "$Q_1$", "median", "$Q_3$", "max", "IQR"],
+            rows: [
+              ["12", "22", "30", "40", "58", "$40 - 22 = 18$"],
+            ],
+          },
+        },
+      ],
+      answer: "Five-number summary $12,\\ 22,\\ 30,\\ 40,\\ 58$",
     },
     {
       type: "interactive",
@@ -448,15 +507,17 @@ const lesson02: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "Reading shape from a boxplot" },
     {
       type: "text",
       content:
-        "### Reading shape from a boxplot\n\nBecause every piece holds the same share, piece **length** measures how thinly that share is spread. A stretched right side (longer right whisker, median nearer $Q_1$) means the upper values are spread out: a right tail. For study time, median $- Q_1 = 8$ while $Q_3 -$ median $= 10$, and the whiskers are 10 and 18. Everything points to a right skew, and indeed mean $32 >$ median $30$.",
+        "Because every piece holds the same share, piece **length** measures how thinly that share is spread. A stretched right side (longer right whisker, median nearer $Q_1$) means the upper values are spread out: a right tail. For study time, median $- Q_1 = 8$ while $Q_3 -$ median $= 10$, and the whiskers are 10 and 18. Everything points to a right skew, and indeed mean $32 >$ median $30$.",
     },
+    { type: "heading", text: "Putting a number on boxplot skew" },
     {
       type: "text",
       content:
-        "### Putting a number on boxplot skew\n\nThe box itself gives a measure of skewness that uses only quartiles, so it is resistant to outliers. **Bowley's coefficient** compares the two halves of the box:\n$\\displaystyle \\text{Sk}_B = \\frac{(Q_3 - \\text{median}) - (\\text{median} - Q_1)}{Q_3 - Q_1} = \\frac{Q_3 + Q_1 - 2\\,\\text{median}}{Q_3 - Q_1}$\nIt is 0 when the median sits in the middle of the box, positive when the upper half is longer (right skew), and negative when the lower half is longer (left skew). It always lies between $-1$ and $1$.\n\nFor study time: $\\text{Sk}_B = \\frac{40 + 22 - 2(30)}{40 - 22} = \\frac{2}{18} \\approx 0.11$. The value is small and positive, a mild right skew, which agrees with the whisker reading. Pearson's $\\text{Sk}_P$ from Lesson 3.1 uses the mean and SD; Bowley's uses the quartiles and median, so it ignores the tails and any outliers.",
+        "The box itself gives a measure of skewness that uses only quartiles, so it is resistant to outliers. **Bowley's coefficient** compares the two halves of the box:\n$\\displaystyle \\text{Sk}_B = \\frac{(Q_3 - \\text{median}) - (\\text{median} - Q_1)}{Q_3 - Q_1} = \\frac{Q_3 + Q_1 - 2\\,\\text{median}}{Q_3 - Q_1}$\nIt is 0 when the median sits in the middle of the box, positive when the upper half is longer (right skew), and negative when the lower half is longer (left skew). It always lies between $-1$ and $1$.\n\nFor study time: $\\text{Sk}_B = \\frac{40 + 22 - 2(30)}{40 - 22} = \\frac{2}{18} \\approx 0.11$. The value is small and positive, a mild right skew, which agrees with the whisker reading. Pearson's $\\text{Sk}_P$ from Lesson 3.1 uses the mean and SD; Bowley's uses the quartiles and median, so it ignores the tails and any outliers.",
     },
     {
       type: "table",
@@ -467,10 +528,20 @@ const lesson02: LessonSeed = {
         ["Median nearer $Q_3$, longer left whisker", "Left-skewed"],
       ],
     },
+    { type: "heading", text: "Worked examples: summaries, shape and skew" },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — even $n$.** Weekly pocket money (₹ tens) for 10 children: $4, 7, 8, 10, 11, 13, 15, 16, 20, 26$.\n\n**Step 1 (median).** $n = 10$, so the median is the average of the 5th and 6th values: $\\frac{11 + 13}{2} = 12$.\n\n**Step 2 (halves).** With $n$ even, the halves are simply the first five and the last five values. Lower half $4, 7, 8, 10, 11$ gives $Q_1 = 8$. Upper half $13, 15, 16, 20, 26$ gives $Q_3 = 16$.\n\n**Step 3 (summary).** $4,\\ 8,\\ 12,\\ 16,\\ 26$ with IQR $= 8$.\n\n**Step 4 (read shape).** The box is perfectly balanced ($12 - 8 = 16 - 12 = 4$), but the right whisker (10) is much longer than the left whisker (4). The middle half is symmetric, but the top quarter trails off: a mild right skew coming from the tail.",
+      type: "worked-example",
+      id: "st3-2-we2",
+      title: "Worked example 2: even $n$",
+      problem:
+        "Weekly pocket money (₹ tens) for 10 children: $4, 7, 8, 10, 11, 13, 15, 16, 20, 26$. Find the five-number summary and the IQR, and describe the shape.",
+      steps: [
+        { text: "**Median.** $n = 10$, so the median is the average of the 5th and 6th values: $\\frac{11 + 13}{2} = 12$." },
+        { text: "**Halves.** With $n$ even, the halves are simply the first five and the last five values. Lower half $4, 7, 8, 10, 11$ gives $Q_1 = 8$. Upper half $13, 15, 16, 20, 26$ gives $Q_3 = 16$." },
+        { text: "**Summary.** $4,\\ 8,\\ 12,\\ 16,\\ 26$ with IQR $= 8$." },
+        { text: "**Read shape.** The box is perfectly balanced ($12 - 8 = 16 - 12 = 4$), but the right whisker (10) is much longer than the left whisker (4). The middle half is symmetric, but the top quarter trails off: a mild right skew coming from the tail." },
+      ],
+      answer: "$4,\\ 8,\\ 12,\\ 16,\\ 26$ with IQR 8; a mild right skew from the tail",
     },
     {
       type: "quiz",
@@ -499,14 +570,33 @@ const lesson02: LessonSeed = {
       hint: "Median first, then the median of each 4-value half.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — food delivery times (application).** A cloud kitchen logs 12 delivery times in minutes:\n\n$14,\\ 16,\\ 17,\\ 19,\\ 20,\\ 21,\\ 23,\\ 25,\\ 28,\\ 31,\\ 36,\\ 44$\n\nThe manager wants a quick sketch and a number for the skew.\n\n**Step 1 (median).** $n = 12$ is even, so the median is the average of the 6th and 7th values: $\\frac{21 + 23}{2} = 22$. *Why this step:* with an even count no single value sits in the middle.\n\n**Step 2 (quartiles).** The halves are the first six and the last six values. Lower half $14, 16, 17, 19, 20, 21$ gives $Q_1 = \\frac{17 + 19}{2} = 18$. Upper half $23, 25, 28, 31, 36, 44$ gives $Q_3 = \\frac{28 + 31}{2} = 29.5$. *Why this step:* each half also has an even count, so each quartile is again an average of two values.\n\n**Step 3 (summary).** $14,\\ 18,\\ 22,\\ 29.5,\\ 44$, with IQR $= 29.5 - 18 = 11.5$.\n\n**Step 4 (read the shape).** Box halves: $22 - 18 = 4$ and $29.5 - 22 = 7.5$. Whiskers: $18 - 14 = 4$ and $44 - 29.5 = 14.5$. Every right-hand piece is longer, so the data are right-skewed. That fits the context: a delivery cannot be much faster than about 15 minutes, but traffic can make one much slower.\n\n**Step 5 (Bowley).** $\\text{Sk}_B = \\frac{29.5 + 18 - 2(22)}{11.5} = \\frac{3.5}{11.5} \\approx 0.30$, a moderate right skew. *Why Bowley here:* it uses only the box, so the single 44-minute delivery does not affect it. Change 44 to 90 and $\\text{Sk}_B$ stays 0.30.",
+      type: "worked-example",
+      id: "st3-2-we3",
+      title: "Worked example 3: food delivery times (application)",
+      problem:
+        "A cloud kitchen logs 12 delivery times in minutes:\n\n$14,\\ 16,\\ 17,\\ 19,\\ 20,\\ 21,\\ 23,\\ 25,\\ 28,\\ 31,\\ 36,\\ 44$\n\nThe manager wants a quick sketch and a number for the skew.\n\nFind the five-number summary, describe the shape and compute Bowley's coefficient of skewness.",
+      steps: [
+        { text: "**Median.** $n = 12$ is even, so the median is the average of the 6th and 7th values: $\\frac{21 + 23}{2} = 22$. *Why this step:* with an even count no single value sits in the middle." },
+        { text: "**Quartiles.** The halves are the first six and the last six values. Lower half $14, 16, 17, 19, 20, 21$ gives $Q_1 = \\frac{17 + 19}{2} = 18$. Upper half $23, 25, 28, 31, 36, 44$ gives $Q_3 = \\frac{28 + 31}{2} = 29.5$. *Why this step:* each half also has an even count, so each quartile is again an average of two values." },
+        { text: "**Summary.** $14,\\ 18,\\ 22,\\ 29.5,\\ 44$, with IQR $= 29.5 - 18 = 11.5$." },
+        { text: "**Read the shape.** Box halves: $22 - 18 = 4$ and $29.5 - 22 = 7.5$. Whiskers: $18 - 14 = 4$ and $44 - 29.5 = 14.5$. Every right-hand piece is longer, so the data are right-skewed. That fits the context: a delivery cannot be much faster than about 15 minutes, but traffic can make one much slower." },
+        { text: "**Bowley.** $\\text{Sk}_B = \\frac{29.5 + 18 - 2(22)}{11.5} = \\frac{3.5}{11.5} \\approx 0.30$, a moderate right skew. *Why Bowley here:* it uses only the box, so the single 44-minute delivery does not affect it. Change 44 to 90 and $\\text{Sk}_B$ stays 0.30." },
+      ],
+      answer: "$14,\\ 18,\\ 22,\\ 29.5,\\ 44$; right-skewed, $\\text{Sk}_B \\approx 0.30$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — exam style (Bowley, working backwards).** For a distribution, Bowley's coefficient of skewness is $0.2$, $Q_1 = 30$ and the median is 40. Find $Q_3$ and the quartile deviation $\\frac{Q_3 - Q_1}{2}$.\n\n**Step 1 (write one equation).** $0.2 = \\frac{Q_3 + 30 - 2(40)}{Q_3 - 30} = \\frac{Q_3 - 50}{Q_3 - 30}$. *Why this step:* there is one unknown, so one equation is enough.\n\n**Step 2 (cross-multiply and solve).** $0.2(Q_3 - 30) = Q_3 - 50$, so $0.2Q_3 - 6 = Q_3 - 50$, which gives $44 = 0.8Q_3$ and $Q_3 = 55$.\n\n**Step 3 (check).** $\\frac{55 + 30 - 80}{55 - 30} = \\frac{5}{25} = 0.2$ ✓. The upper half of the box ($55 - 40 = 15$) is longer than the lower half ($40 - 30 = 10$), as a positive coefficient needs. *Why this step:* a sign error in Step 2 would give a $Q_3$ that fails this check.\n\n**Step 4 (quartile deviation).** $\\frac{55 - 30}{2} = 12.5$.",
+      type: "worked-example",
+      id: "st3-2-we4",
+      title: "Worked example 4: exam style (Bowley, working backwards)",
+      problem:
+        "For a distribution, Bowley's coefficient of skewness is $0.2$, $Q_1 = 30$ and the median is 40. Find $Q_3$ and the quartile deviation $\\frac{Q_3 - Q_1}{2}$.",
+      steps: [
+        { text: "**Write one equation.** $0.2 = \\frac{Q_3 + 30 - 2(40)}{Q_3 - 30} = \\frac{Q_3 - 50}{Q_3 - 30}$. *Why this step:* there is one unknown, so one equation is enough." },
+        { text: "**Cross-multiply and solve.** $0.2(Q_3 - 30) = Q_3 - 50$, so $0.2Q_3 - 6 = Q_3 - 50$, which gives $44 = 0.8Q_3$ and $Q_3 = 55$." },
+        { text: "**Check.** $\\frac{55 + 30 - 80}{55 - 30} = \\frac{5}{25} = 0.2$ ✓. The upper half of the box ($55 - 40 = 15$) is longer than the lower half ($40 - 30 = 10$), as a positive coefficient needs. *Why this step:* a sign error in Step 2 would give a $Q_3$ that fails this check." },
+        { text: "**Quartile deviation.** $\\frac{55 - 30}{2} = 12.5$." },
+      ],
+      answer: "$Q_3 = 55$, quartile deviation 12.5",
     },
     {
       type: "quiz",
@@ -588,10 +678,11 @@ const lesson02: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "What a boxplot hides" },
     {
       type: "text",
       content:
-        "### What a boxplot hides\n\nFive numbers cannot hold everything. Here are two sets of 12 values with **identical** five-number summaries, $2, 3, 6, 9, 10$:\n\n**Set A:** $2, 2, 3, 3, 5, 6, 6, 7, 9, 9, 10, 10$\n**Set B:** $2, 2, 3, 3, 3, 4, 8, 8, 9, 9, 10, 10$\n\nSet A is spread fairly evenly from 2 to 10. Check B: median $= \\frac{4 + 8}{2} = 6$, $Q_1 = \\frac{3+3}{2} = 3$, $Q_3 = \\frac{9+9}{2} = 9$. Its boxplot is the same as A's, but B has **no values at all** between 4 and 8. It is two clusters, and its median of 6 lands in an empty gap where no one actually is.",
+        "Five numbers cannot hold everything. Here are two sets of 12 values with **identical** five-number summaries, $2, 3, 6, 9, 10$:\n\n**Set A:** $2, 2, 3, 3, 5, 6, 6, 7, 9, 9, 10, 10$\n**Set B:** $2, 2, 3, 3, 3, 4, 8, 8, 9, 9, 10, 10$\n\nSet A is spread fairly evenly from 2 to 10. Check B: median $= \\frac{4 + 8}{2} = 6$, $Q_1 = \\frac{3+3}{2} = 3$, $Q_3 = \\frac{9+9}{2} = 9$. Its boxplot is the same as A's, but B has **no values at all** between 4 and 8. It is two clusters, and its median of 6 lands in an empty gap where no one actually is.",
     },
     {
       type: "interactive",
@@ -638,6 +729,7 @@ const lesson02: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st3-2-q5",
@@ -677,6 +769,7 @@ const lesson03: LessonSeed = {
       content:
         "A height survey of 40 students includes one entry of 1720 cm. It is almost certainly 172 cm with a slipped decimal. A marathon results table includes a runner who took 9 hours. That one is real: they walked and still finished. Both are **outliers**, values that sit far from the rest. We need a fair rule for flagging them, and summaries that one wild value cannot wreck.",
     },
+    { type: "heading", text: "Tukey's 1.5·IQR fences" },
     {
       type: "text",
       content:
@@ -694,9 +787,20 @@ const lesson03: LessonSeed = {
       latex: "\\text{outlier if } \\; x < Q_1 - 1.5\\,\\text{IQR} \\quad \\text{or} \\quad x > Q_3 + 1.5\\,\\text{IQR}",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** The study-time survey from 3.2, except the two heaviest studiers now report 60 and 75 minutes:\n\n$12, 18, 20, 22, 25, 25, 28, 30, 32, 35, 38, 40, 45, 60, 75$\n\n**Step 1 (quartiles).** Nothing below the 13th value changed, so median $= 30$, $Q_1 = 22$, $Q_3 = 40$ as before.\n\n**Step 2 (IQR).** $40 - 22 = 18$, and $1.5 \\times 18 = 27$.\n\n**Step 3 (fences).** Lower: $22 - 27 = -5$. Upper: $40 + 27 = 67$.\n\n**Step 4 (check the data).** Nothing is below $-5$. Above 67: only **75**. So 75 is flagged; 60 is not.\n\n**Step 5 (modified boxplot).** Draw the box as before. The right whisker stops at the **largest value inside the fences**, 60, not at the fence itself. Plot 75 as a separate point.",
+      type: "worked-example",
+      id: "st3-3-we1",
+      title: "Worked example 1",
+      problem:
+        "The study-time survey from 3.2, except the two heaviest studiers now report 60 and 75 minutes:\n\n$12, 18, 20, 22, 25, 25, 28, 30, 32, 35, 38, 40, 45, 60, 75$\n\nUse the 1.5 × IQR rule to find any outliers, and describe the modified boxplot.",
+      steps: [
+        { text: "**Quartiles.** Nothing below the 13th value changed, so median $= 30$, $Q_1 = 22$, $Q_3 = 40$ as before." },
+        { text: "**IQR.** $40 - 22 = 18$, and $1.5 \\times 18 = 27$." },
+        { text: "**Fences.** Lower: $22 - 27 = -5$. Upper: $40 + 27 = 67$." },
+        { text: "**Check the data.** Nothing is below $-5$. Above 67: only **75**. So 75 is flagged; 60 is not." },
+        { text: "**Modified boxplot.** Draw the box as before. The right whisker stops at the **largest value inside the fences**, 60, not at the fence itself. Plot 75 as a separate point." },
+      ],
+      answer: "Fences $-5$ and 67: 75 is an outlier, 60 is not",
+      tryFirst: false,
     },
     {
       type: "interactive",
@@ -713,10 +817,11 @@ const lesson03: LessonSeed = {
           "A modified boxplot with 1.5·IQR fences. Drag the 75 out to 150 and watch the readouts: mean, SD and range jump; median and IQR do not move.",
       },
     },
+    { type: "heading", text: "Resistant and non-resistant summaries" },
     {
       type: "text",
       content:
-        "### Resistant and non-resistant summaries\n\nDrag the top value from 75 to 150 and record what happens. Only one number changed, by $+75$.",
+        "Drag the top value from 75 to 150 and record what happens. Only one number changed, by $+75$.",
     },
     {
       type: "table",
@@ -748,6 +853,7 @@ const lesson03: LessonSeed = {
       content:
         "For roughly symmetric data without outliers, report **mean and SD**; they use every value and feed into later theory. For skewed data or data with outliers, report **median and IQR** (the five-number summary). Always keep centre and spread matched: median with IQR, mean with SD.",
     },
+    { type: "heading", text: "Worked examples: fences and resistance" },
     {
       type: "quiz",
       id: "st3-3-q1",
@@ -776,9 +882,18 @@ const lesson03: LessonSeed = {
       hint: "IQR first, then 1.5 × IQR, then subtract from Q₁ and add to Q₃.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — a long whisker that is not an outlier.** A boxplot has five-number summary $3, 20, 26, 32, 70$.\n\n**Step 1.** IQR $= 32 - 20 = 12$; $1.5 \\times 12 = 18$.\n\n**Step 2.** Fences: $20 - 18 = 2$ and $32 + 18 = 50$.\n\n**Step 3 (low end).** The minimum is 3, and $3 > 2$, so it is **not** an outlier, even though the left whisker from 20 down to 3 is 17 units long, longer than the whole box.\n\n**Step 4 (high end).** The maximum is 70, and $70 > 50$, so **it is** an outlier. The original boxplot's right whisker runs to 70. A modified boxplot would stop the whisker at the largest value that is $\\le 50$ and plot 70 as a point.",
+      type: "worked-example",
+      id: "st3-3-we2",
+      title: "Worked example 2: a long whisker",
+      problem:
+        "A boxplot has five-number summary $3, 20, 26, 32, 70$. Use the 1.5 × IQR rule to decide whether the minimum and the maximum are outliers.",
+      steps: [
+        { text: "IQR $= 32 - 20 = 12$; $1.5 \\times 12 = 18$." },
+        { text: "Fences: $20 - 18 = 2$ and $32 + 18 = 50$." },
+        { text: "**Low end.** The minimum is 3, and $3 > 2$, so it is **not** an outlier, even though the left whisker from 20 down to 3 is 17 units long, longer than the whole box." },
+        { text: "**High end.** The maximum is 70, and $70 > 50$, so **it is** an outlier. The original boxplot's right whisker runs to 70. A modified boxplot would stop the whisker at the largest value that is $\\le 50$ and plot 70 as a point." },
+      ],
+      answer: "Fences 2 and 50: the minimum 3 is not an outlier, the maximum 70 is",
     },
     {
       type: "quiz",
@@ -829,9 +944,18 @@ const lesson03: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — office commutes (application).** HR surveys 11 employees' one-way commute times in minutes:\n\n$18,\\ 20,\\ 21,\\ 22,\\ 24,\\ 25,\\ 26,\\ 28,\\ 30,\\ 33,\\ 95$\n\nThe 95 belongs to an employee who moved to a nearby city and comes in by train.\n\n**Step 1 (quartiles).** $n = 11$, so the median is the 6th value, **25**. Lower half $18, 20, 21, 22, 24$ gives $Q_1 = 21$; upper half $26, 28, 30, 33, 95$ gives $Q_3 = 30$. *Why this step:* the fences are built from $Q_1$ and $Q_3$. These come from positions, so the 95 cannot distort the yardstick used to judge it.\n\n**Step 2 (fences).** IQR $= 9$ and $1.5 \\times 9 = 13.5$, so the fences are $21 - 13.5 = 7.5$ and $30 + 13.5 = 43.5$. Only 95 lies outside: it is an outlier.\n\n**Step 3 (with and without).** $\\Sigma x = 342$, so the mean is $\\frac{342}{11} \\approx 31.1$ min. Without the 95: $\\Sigma x = 247$ over 10 people, mean $24.7$; median $= \\frac{24 + 25}{2} = 24.5$.\n\n**Step 4 (interpret).** With the outlier included, the mean of 31.1 minutes is longer than the commute of 9 of the 11 employees, so it describes almost nobody. Removing one value moved the mean by about 6.4 minutes and the median by only 0.5. *Why this matters:* if HR plans a shuttle around the 'average commute', the median of 25 minutes is the honest figure. The 95 is a real commute, so keep it and report it separately; do not delete it.",
+      type: "worked-example",
+      id: "st3-3-we3",
+      title: "Worked example 3: office commutes (application)",
+      problem:
+        "HR surveys 11 employees' one-way commute times in minutes:\n\n$18,\\ 20,\\ 21,\\ 22,\\ 24,\\ 25,\\ 26,\\ 28,\\ 30,\\ 33,\\ 95$\n\nThe 95 belongs to an employee who moved to a nearby city and comes in by train.\n\nFind the fences, identify any outlier, and decide which average describes a typical commute.",
+      steps: [
+        { text: "**Quartiles.** $n = 11$, so the median is the 6th value, **25**. Lower half $18, 20, 21, 22, 24$ gives $Q_1 = 21$; upper half $26, 28, 30, 33, 95$ gives $Q_3 = 30$. *Why this step:* the fences are built from $Q_1$ and $Q_3$. These come from positions, so the 95 cannot distort the yardstick used to judge it." },
+        { text: "**Fences.** IQR $= 9$ and $1.5 \\times 9 = 13.5$, so the fences are $21 - 13.5 = 7.5$ and $30 + 13.5 = 43.5$. Only 95 lies outside: it is an outlier." },
+        { text: "**With and without.** $\\Sigma x = 342$, so the mean is $\\frac{342}{11} \\approx 31.1$ min. Without the 95: $\\Sigma x = 247$ over 10 people, mean $24.7$; median $= \\frac{24 + 25}{2} = 24.5$." },
+        { text: "**Interpret.** With the outlier included, the mean of 31.1 minutes is longer than the commute of 9 of the 11 employees, so it describes almost nobody. Removing one value moved the mean by about 6.4 minutes and the median by only 0.5. *Why this matters:* if HR plans a shuttle around the 'average commute', the median of 25 minutes is the honest figure. The 95 is a real commute, so keep it and report it separately; do not delete it." },
+      ],
+      answer: "Fences 7.5 and 43.5, so 95 is an outlier; report the median, 25 minutes",
     },
     {
       type: "quiz",
@@ -860,15 +984,26 @@ const lesson03: LessonSeed = {
       ],
       hint: "n = 11: the median is the 6th value; leave it out of both halves.",
     },
+    { type: "heading", text: "What to do with an outlier: investigate" },
     {
       type: "text",
       content:
-        "### What to do with an outlier: investigate\n\nThe fences flag a value. They do not tell you to delete it. Ask where it came from:\n\n**A mistake** (a typed 1720 cm, a sensor glitch): correct it if you can; otherwise remove it and say so.\n**A member of a different population** (a teacher's score mixed into student scores): it doesn't belong in this data set.\n**A genuine extreme** (the 9-hour marathon, a billionaire's income): keep it. It is real information, and often the most interesting value in the data. Use resistant summaries so it does not distort the typical picture, or report results with and without it.",
+        "The fences flag a value. They do not tell you to delete it. Ask where it came from:\n\n**A mistake** (a typed 1720 cm, a sensor glitch): correct it if you can; otherwise remove it and say so.\n**A member of a different population** (a teacher's score mixed into student scores): it doesn't belong in this data set.\n**A genuine extreme** (the 9-hour marathon, a billionaire's income): keep it. It is real information, and often the most interesting value in the data. Use resistant summaries so it does not distort the typical picture, or report results with and without it.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — exam style (correcting a recording error).** The mean and SD of 15 observations are 12 and 3. On checking, one observation recorded as 20 should have been 5. Find the correct mean and SD. (Lesson 2.5 solved a smaller slip of the same kind; here the wrong value was also the most extreme one.)\n\n**Step 1 (recover the totals).** $\\Sigma x = n\\bar{x} = 15 \\times 12 = 180$. From $\\sigma^2 = \\frac{\\Sigma x^2}{n} - \\bar{x}^2$ we get $\\Sigma x^2 = n(\\sigma^2 + \\bar{x}^2) = 15(9 + 144) = 2295$. *Why this step:* you cannot correct a mean or an SD directly, but you can correct a sum, because each observation appears in it exactly once.\n\n**Step 2 (swap the wrong value for the right one).** $\\Sigma x = 180 - 20 + 5 = 165$ and $\\Sigma x^2 = 2295 - 400 + 25 = 1920$. *Why this step:* take out the wrong value's contribution to each sum and put in the right one's. For $\\Sigma x^2$ that means the squares.\n\n**Step 3 (new mean).** $\\bar{x} = \\frac{165}{15} = 11$.\n\n**Step 4 (new SD).** $\\sigma^2 = \\frac{1920}{15} - 11^2 = 128 - 121 = 7$, so $\\sigma = \\sqrt{7} \\approx 2.65$.\n\n**Step 5 (sense check).** One value dropped by 15, so the mean should drop by $\\frac{15}{15} = 1$, and $12 - 1 = 11$ ✓. The SD fell from 3 to about 2.65: the miscopied 20 sat $8$ above the old mean, and its square was inflating $\\Sigma x^2$. Neither the mean nor the SD is resistant, so one slip changes both.",
+      type: "worked-example",
+      id: "st3-3-we4",
+      title: "Worked example 4: exam style (correcting a recording error)",
+      problem:
+        "The mean and SD of 15 observations are 12 and 3. On checking, one observation recorded as 20 should have been 5. Find the correct mean and SD. (Lesson 2.5 solved a smaller slip of the same kind; here the wrong value was also the most extreme one.)",
+      steps: [
+        { text: "**Recover the totals.** $\\Sigma x = n\\bar{x} = 15 \\times 12 = 180$. From $\\sigma^2 = \\frac{\\Sigma x^2}{n} - \\bar{x}^2$ we get $\\Sigma x^2 = n(\\sigma^2 + \\bar{x}^2) = 15(9 + 144) = 2295$. *Why this step:* you cannot correct a mean or an SD directly, but you can correct a sum, because each observation appears in it exactly once." },
+        { text: "**Swap the wrong value for the right one.** $\\Sigma x = 180 - 20 + 5 = 165$ and $\\Sigma x^2 = 2295 - 400 + 25 = 1920$. *Why this step:* take out the wrong value's contribution to each sum and put in the right one's. For $\\Sigma x^2$ that means the squares." },
+        { text: "**New mean.** $\\bar{x} = \\frac{165}{15} = 11$." },
+        { text: "**New SD.** $\\sigma^2 = \\frac{1920}{15} - 11^2 = 128 - 121 = 7$, so $\\sigma = \\sqrt{7} \\approx 2.65$." },
+        { text: "**Sense check.** One value dropped by 15, so the mean should drop by $\\frac{15}{15} = 1$, and $12 - 1 = 11$ ✓. The SD fell from 3 to about 2.65: the miscopied 20 sat $8$ above the old mean, and its square was inflating $\\Sigma x^2$. Neither the mean nor the SD is resistant, so one slip changes both." },
+      ],
+      answer: "Mean 11, SD $\\sqrt{7} \\approx 2.65$",
     },
     {
       type: "quiz",
@@ -978,6 +1113,7 @@ const lesson04: LessonSeed = {
       content:
         "Riya is $92 - 70 = 22$ marks above her class mean. Arjun is $84 - 60 = 24$ marks above his. Even raw distances are not comparable, because a mark is 'worth' more in a tightly bunched exam. The fair unit is the class's own **standard deviation**, the typical distance from the mean. Riya is $\\frac{22}{10} = 2.2$ SDs above; Arjun is $\\frac{24}{8} = 3$ SDs above. **Arjun's performance is more exceptional**, even though his raw mark is lower.",
     },
+    { type: "heading", text: "The z-score: distance in SDs" },
     {
       type: "callout",
       variant: "definition",
@@ -1027,10 +1163,11 @@ const lesson04: LessonSeed = {
       ],
       hint: "Compute z = (x − mean)/SD for each.",
     },
+    { type: "heading", text: "The z-scores of a whole data set" },
     {
       type: "text",
       content:
-        "### The z-scores of a whole data set\n\nConvert **every** value in a data set to its z-score. What are the mean and SD of the new list? Lesson 2.6 already answered this. The z-transformation is a linear map $x \\mapsto a + bx$ with",
+        "Convert **every** value in a data set to its z-score. What are the mean and SD of the new list? Lesson 2.6 already answered this. The z-transformation is a linear map $x \\mapsto a + bx$ with",
     },
     {
       type: "math",
@@ -1067,9 +1204,19 @@ const lesson04: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — standardise a data set.** Data: $2, 4, 4, 4, 5, 5, 7, 9$.\n\n**Step 1 (mean).** $\\Sigma x = 40$, $\\bar{x} = 5$.\n\n**Step 2 (SD).** Squared deviations: $9, 1, 1, 1, 0, 0, 4, 16$, sum 32. $\\sigma^2 = \\frac{32}{8} = 4$, so $\\sigma = 2$.\n\n**Step 3 (z-scores).** $z = \\frac{x - 5}{2}$ gives $-1.5, -0.5, -0.5, -0.5, 0, 0, 1, 2$.\n\n**Step 4 (check).** Sum: $-1.5 - 1.5 + 0 + 1 + 2 = 0$, so the mean is 0. ✓ Sum of squares: $2.25 + 3(0.25) + 0 + 0 + 1 + 4 = 8 = n$, so the SD is $\\sqrt{8/8} = 1$. ✓",
+      type: "worked-example",
+      id: "st3-4-we1",
+      title: "Worked example 1: standardise a data set",
+      problem:
+        "Data: $2, 4, 4, 4, 5, 5, 7, 9$. Find the z-score of each value, and check that the z-scores have mean 0 and SD 1.",
+      steps: [
+        { text: "**Mean.** $\\Sigma x = 40$, $\\bar{x} = 5$." },
+        { text: "**SD.** Squared deviations: $9, 1, 1, 1, 0, 0, 4, 16$, sum 32. $\\sigma^2 = \\frac{32}{8} = 4$, so $\\sigma = 2$." },
+        { text: "**Z-scores.** $z = \\frac{x - 5}{2}$ gives $-1.5, -0.5, -0.5, -0.5, 0, 0, 1, 2$." },
+        { text: "**Check.** Sum: $-1.5 - 1.5 + 0 + 1 + 2 = 0$, so the mean is 0. ✓ Sum of squares: $2.25 + 3(0.25) + 0 + 0 + 1 + 4 = 8 = n$, so the SD is $\\sqrt{8/8} = 1$. ✓" },
+      ],
+      answer: "$z = -1.5, -0.5, -0.5, -0.5, 0, 0, 1, 2$",
+      tryFirst: false,
     },
     {
       type: "text",
@@ -1077,9 +1224,18 @@ const lesson04: LessonSeed = {
         "**Going back.** Rearranging $z = \\frac{x - \\bar{x}}{\\sigma}$ gives $x = \\bar{x} + z\\sigma$. A z-score of $-1.5$ in the Maths exam means a mark of $70 + (-1.5)(10) = 55$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — recover the mean and SD (JEE style).** In an exam, Ravi's mark 75 has z-score 1.5 and Sita's mark 51 has z-score $-0.5$. Find the mean and SD.\n\n**Step 1 (write both as equations).** $75 = \\bar{x} + 1.5\\sigma$ and $51 = \\bar{x} - 0.5\\sigma$.\n\n**Step 2 (subtract).** $24 = 2\\sigma$, so $\\sigma = 12$.\n\n**Step 3 (substitute).** $\\bar{x} = 51 + 0.5(12) = 57$.\n\n**Step 4 (check).** $57 + 1.5(12) = 75$ ✓ and $57 - 0.5(12) = 51$ ✓.",
+      type: "worked-example",
+      id: "st3-4-we2",
+      title: "Worked example 2: recover the mean and SD (JEE style)",
+      problem:
+        "In an exam, Ravi's mark 75 has z-score 1.5 and Sita's mark 51 has z-score $-0.5$. Find the mean and SD.",
+      steps: [
+        { text: "**Write both as equations.** $75 = \\bar{x} + 1.5\\sigma$ and $51 = \\bar{x} - 0.5\\sigma$." },
+        { text: "**Subtract.** $24 = 2\\sigma$, so $\\sigma = 12$." },
+        { text: "**Substitute.** $\\bar{x} = 51 + 0.5(12) = 57$." },
+        { text: "**Check.** $57 + 1.5(12) = 75$ ✓ and $57 - 0.5(12) = 51$ ✓." },
+      ],
+      answer: "Mean 57, SD 12",
     },
     {
       type: "quiz",
@@ -1134,9 +1290,18 @@ const lesson04: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — when lower is better (application).** At a district athletics meet, Kavya ran the 100 m in 11.2 s (event mean 12.0 s, SD 0.4 s). Rohan long-jumped 6.9 m (event mean 6.0 m, SD 0.5 m). One award goes to the most outstanding performance.\n\n**Step 1 (Kavya's z).** $z_K = \\frac{11.2 - 12.0}{0.4} = \\frac{-0.8}{0.4} = -2$.\n\n**Step 2 (Rohan's z).** $z_R = \\frac{6.9 - 6.0}{0.5} = \\frac{0.9}{0.5} = 1.8$.\n\n**Step 3 (read the direction).** *Why this step:* a z-score tells you how far from the mean a value is and on which side. It does not tell you whether that side is good. In a race a smaller time is better, so $z_K = -2$ means Kavya was 2 SDs **better** than average. Rohan was 1.8 SDs better.\n\n**Step 4 (conclude).** $2 > 1.8$, so Kavya's run is the more outstanding performance. Seconds and metres cannot be compared directly, but numbers of SDs can.",
+      type: "worked-example",
+      id: "st3-4-we3",
+      title: "Worked example 3: when lower is better (application)",
+      problem:
+        "At a district athletics meet, Kavya ran the 100 m in 11.2 s (event mean 12.0 s, SD 0.4 s). Rohan long-jumped 6.9 m (event mean 6.0 m, SD 0.5 m). One award goes to the most outstanding performance. Whose performance is more outstanding?",
+      steps: [
+        { text: "**Kavya's z.** $z_K = \\frac{11.2 - 12.0}{0.4} = \\frac{-0.8}{0.4} = -2$." },
+        { text: "**Rohan's z.** $z_R = \\frac{6.9 - 6.0}{0.5} = \\frac{0.9}{0.5} = 1.8$." },
+        { text: "**Read the direction.** *Why this step:* a z-score tells you how far from the mean a value is and on which side. It does not tell you whether that side is good. In a race a smaller time is better, so $z_K = -2$ means Kavya was 2 SDs **better** than average. Rohan was 1.8 SDs better." },
+        { text: "**Conclude.** $2 > 1.8$, so Kavya's run is the more outstanding performance. Seconds and metres cannot be compared directly, but numbers of SDs can." },
+      ],
+      answer: "Kavya: 2 SDs better than average, against Rohan's 1.8",
     },
     {
       type: "quiz",
@@ -1166,9 +1331,18 @@ const lesson04: LessonSeed = {
       hint: "Compute z for each, then remember that a lower time is better.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — exam style (rescaling marks).** A test's raw marks have mean 40 and SD 10. The board rescales every mark by $y = a + bx$ with $b > 0$, so that the new mean is 60 and the new SD is 12. Find $a$ and $b$, and the new mark of a student who scored 52.\n\n**Step 1 (the SD fixes $b$).** Under $x \\mapsto a + bx$ the SD becomes $|b|\\sigma$, so $12 = 10b$ and $b = 1.2$. *Why this step first:* adding a constant never changes spread, so the SD equation contains only $b$. Solve it first, then use it in the mean equation.\n\n**Step 2 (the mean fixes $a$).** $60 = a + 1.2(40) = a + 48$, so $a = 12$.\n\n**Step 3 (convert).** $y = 12 + 1.2(52) = 12 + 62.4 = 74.4$.\n\n**Step 4 (check with z).** Old $z = \\frac{52 - 40}{10} = 1.2$. New $z = \\frac{74.4 - 60}{12} = \\frac{14.4}{12} = 1.2$ ✓. *Why this works:* a linear rescaling with $b > 0$ keeps every z-score, so each student's standing is unchanged. That also gives a shortcut: new mark $= 60 + 1.2 \\times 12 = 74.4$.",
+      type: "worked-example",
+      id: "st3-4-we4",
+      title: "Worked example 4: exam style (rescaling marks)",
+      problem:
+        "A test's raw marks have mean 40 and SD 10. The board rescales every mark by $y = a + bx$ with $b > 0$, so that the new mean is 60 and the new SD is 12. Find $a$ and $b$, and the new mark of a student who scored 52.",
+      steps: [
+        { text: "**The SD fixes $b$.** Under $x \\mapsto a + bx$ the SD becomes $|b|\\sigma$, so $12 = 10b$ and $b = 1.2$. *Why this step first:* adding a constant never changes spread, so the SD equation contains only $b$. Solve it first, then use it in the mean equation." },
+        { text: "**The mean fixes $a$.** $60 = a + 1.2(40) = a + 48$, so $a = 12$." },
+        { text: "**Convert.** $y = 12 + 1.2(52) = 12 + 62.4 = 74.4$." },
+        { text: "**Check with z.** Old $z = \\frac{52 - 40}{10} = 1.2$. New $z = \\frac{74.4 - 60}{12} = \\frac{14.4}{12} = 1.2$ ✓. *Why this works:* a linear rescaling with $b > 0$ keeps every z-score, so each student's standing is unchanged. That also gives a shortcut: new mark $= 60 + 1.2 \\times 12 = 74.4$." },
+      ],
+      answer: "$a = 12$, $b = 1.2$; a raw 52 becomes 74.4",
     },
     {
       type: "quiz",
@@ -1197,10 +1371,11 @@ const lesson04: LessonSeed = {
       ],
       hint: "Find the z-score first; it stays the same after rescaling.",
     },
+    { type: "heading", text: "Percentile rank" },
     {
       type: "text",
       content:
-        "### Percentile rank\n\nA z-score uses the mean and SD. A second measure of standing uses only counting and works for any shape.",
+        "A z-score uses the mean and SD. A second measure of standing uses only counting and works for any shape.",
     },
     {
       type: "callout",
@@ -1290,6 +1465,7 @@ const lesson04: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st3-4-q5",
@@ -1372,6 +1548,7 @@ const lesson05: LessonSeed = {
       content:
         "The means match, but the stories don't. **Half of Section B scored 36 or more**, which is true of only about a quarter of Section A (36 is A's $Q_3$). B's typical student did better. B's mean was dragged down to 32 by two very low marks, 4 and 7. Fences for B are $30 - 15 = 15$ and $40 + 15 = 55$, so both are outliers. Maybe those two students were ill or absent for part of the test. That is worth finding out.",
     },
+    { type: "heading", text: "Centre, spread, shape and outliers" },
     {
       type: "callout",
       variant: "definition",
@@ -1406,9 +1583,19 @@ const lesson05: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — choosing a battery brand (application).** A school tests 40 torch batteries of each of two brands and records how many hours each lasts. Only the five-number summaries are published:\n\n**Brand P:** $38,\\ 44,\\ 47,\\ 50,\\ 53$\n**Brand Q:** $26,\\ 38,\\ 44,\\ 54,\\ 80$\n\n**Centre.** P's median (47 h) is 3 h more than Q's (44 h).\n\n**Spread.** IQR: P $= 50 - 44 = 6$, Q $= 54 - 38 = 16$. Q is far less predictable. *Why the IQR and not the range:* the range is set by a single battery, and Q's single best battery would dominate it.\n\n**Shape.** P: box halves $3$ and $3$, whiskers $6$ and $3$, so roughly symmetric with a slight left tail. Q: box halves $6$ and $10$, whiskers $12$ and $26$, so every right-hand piece is longer: right-skewed.\n\n**Unusual values.** P's fences are $44 - 9 = 35$ and $50 + 9 = 59$: no outliers. Q's fences are $38 - 24 = 14$ and $54 + 24 = 78$, so Q's 80-hour battery is an outlier. *Why this step matters:* Q's long right whisker could tempt you to call Q 'longer-lasting', but that impression comes from one exceptional battery.\n\n**Conclusion in context.** For an emergency kit you want reliability, so choose P. Half its batteries last at least 47 h and the middle half last between 44 and 50 h. About a quarter of Q's batteries are dead by 38 h, which is P's worst result.",
+      type: "worked-example",
+      id: "st3-5-we2",
+      title: "Worked example 2: choosing a battery brand (application)",
+      problem:
+        "A school tests 40 torch batteries of each of two brands and records how many hours each lasts. Only the five-number summaries are published:\n\n**Brand P:** $38,\\ 44,\\ 47,\\ 50,\\ 53$\n**Brand Q:** $26,\\ 38,\\ 44,\\ 54,\\ 80$",
+      steps: [
+        { text: "**Centre.** P's median (47 h) is 3 h more than Q's (44 h)." },
+        { text: "**Spread.** IQR: P $= 50 - 44 = 6$, Q $= 54 - 38 = 16$. Q is far less predictable. *Why the IQR and not the range:* the range is set by a single battery, and Q's single best battery would dominate it." },
+        { text: "**Shape.** P: box halves $3$ and $3$, whiskers $6$ and $3$, so roughly symmetric with a slight left tail. Q: box halves $6$ and $10$, whiskers $12$ and $26$, so every right-hand piece is longer: right-skewed." },
+        { text: "**Unusual values.** P's fences are $44 - 9 = 35$ and $50 + 9 = 59$: no outliers. Q's fences are $38 - 24 = 14$ and $54 + 24 = 78$, so Q's 80-hour battery is an outlier. *Why this step matters:* Q's long right whisker could tempt you to call Q 'longer-lasting', but that impression comes from one exceptional battery." },
+        { text: "**Conclusion in context.** For an emergency kit you want reliability, so choose P. Half its batteries last at least 47 h and the middle half last between 44 and 50 h. About a quarter of Q's batteries are dead by 38 h, which is P's worst result." },
+      ],
+      answer: "Choose P: higher median (47 h) and a much smaller IQR (6 h against 16 h); Q's 80 h battery is an outlier",
     },
     {
       type: "quiz",
@@ -1437,10 +1624,11 @@ const lesson05: LessonSeed = {
       ],
       hint: "Work out each IQR and each pair of fences before judging.",
     },
+    { type: "heading", text: "Back-to-back stem-and-leaf" },
     {
       type: "text",
       content:
-        "### Back-to-back stem-and-leaf\n\nFor small data sets you can keep every value and still compare shapes. Put the **stems** (tens digit) in the middle column. Write A's leaves to the left, reading outwards from the stem, and B's leaves to the right.",
+        "For small data sets you can keep every value and still compare shapes. Put the **stems** (tens digit) in the middle column. Write A's leaves to the left, reading outwards from the stem, and B's leaves to the right.",
     },
     {
       type: "table",
@@ -1458,15 +1646,29 @@ const lesson05: LessonSeed = {
       content:
         "Read it like two histograms turned on their side, back to back. Key: '2 | 1' on B's side means 21; '8 | 2' on A's side means 28. A's leaves pile up in the 30s and taper evenly both ways. B's leaves pile into the 30s and 40s with a thin trail down to the single-digit marks. That is the left skew, drawn with the actual numbers.",
     },
+    { type: "heading", text: "When means differ: SD or CV?" },
     {
       type: "text",
       content:
-        "### Spread when the means differ: SD vs CV\n\nLesson 2.6 introduced the **coefficient of variation**, $\\text{CV} = \\frac{\\sigma}{\\bar{x}} \\times 100\\%$. It measures spread *relative to* the size of the values. This matters whenever the two groups have very different means or units.",
+        "Lesson 2.6 introduced the **coefficient of variation**, $\\text{CV} = \\frac{\\sigma}{\\bar{x}} \\times 100\\%$. It measures spread *relative to* the size of the values. This matters whenever the two groups have very different means or units.",
+    },
+    {
+      type: "worked-example",
+      id: "st3-5-we3",
+      title: "Worked example 3: which batter is more consistent?",
+      problem:
+        "Over a season, batter P averages 50 runs with SD 15; batter Q averages 30 runs with SD 12. Which batter is more consistent?",
+      steps: [
+        { text: "By SD alone, Q looks steadier (12 $<$ 15)." },
+        { text: "**CV.** $\\text{CV}_P = \\frac{15}{50} \\times 100 = 30\\%$ and $\\text{CV}_Q = \\frac{12}{30} \\times 100 = 40\\%$." },
+        { text: "**Conclude.** Relative to what each usually scores, P varies less. **P is more consistent**, and also scores more." },
+      ],
+      answer: "P is more consistent: CV 30% against 40%",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 — which batter is more consistent?** Over a season, batter P averages 50 runs with SD 15; batter Q averages 30 runs with SD 12.\n\n**Step 1.** By SD alone, Q looks steadier (12 $<$ 15).\n\n**Step 2 (CV).** $\\text{CV}_P = \\frac{15}{50} \\times 100 = 30\\%$ and $\\text{CV}_Q = \\frac{12}{30} \\times 100 = 40\\%$.\n\n**Step 3 (conclude).** Relative to what each usually scores, P varies less. **P is more consistent**, and also scores more.\n\nFor the two sections (same mean 32) the CV adds nothing new: $\\text{CV}_A \\approx 23\\%$, $\\text{CV}_B \\approx 36\\%$, the same order as the SDs.",
+        "For the two sections (same mean 32) the CV adds nothing new: $\\text{CV}_A \\approx 23\\%$, $\\text{CV}_B \\approx 36\\%$, the same order as the SDs.",
     },
     {
       type: "callout",
@@ -1499,9 +1701,18 @@ const lesson05: LessonSeed = {
       hint: "CV = SD ÷ mean × 100.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — exam style (which series is more variable?).** The heights of two varieties of seedling (cm) are summarised by totals only:\n\n**Variety A:** $n = 10$, $\\Sigma x = 500$, $\\Sigma x^2 = 25\\,810$\n**Variety B:** $n = 8$, $\\Sigma x = 320$, $\\Sigma x^2 = 13\\,088$\n\nWhich variety is more variable in height?\n\n**Step 1 (means).** $\\bar{x}_A = \\frac{500}{10} = 50$ and $\\bar{x}_B = \\frac{320}{8} = 40$.\n\n**Step 2 (variances).** $\\sigma_A^2 = \\frac{25\\,810}{10} - 50^2 = 2581 - 2500 = 81$, so $\\sigma_A = 9$. $\\sigma_B^2 = \\frac{13\\,088}{8} - 40^2 = 1636 - 1600 = 36$, so $\\sigma_B = 6$. *Why this form:* when only the totals are given, $\\sigma^2 = \\frac{\\Sigma x^2}{n} - \\bar{x}^2$ is the only route to the SD.\n\n**Step 3 (CVs).** $\\text{CV}_A = \\frac{9}{50} \\times 100 = 18\\%$ and $\\text{CV}_B = \\frac{6}{40} \\times 100 = 15\\%$. *Why this step:* the means differ (50 vs 40), so the fair comparison is spread relative to size. This is also the comparison that board exams expect.\n\n**Step 4 (conclude).** Variety A is more variable (18% against 15%); B is more consistent. Here the SD and the CV agree. In worked example 3 (the batters) they did not, which is why you compute the CV whenever the means differ.",
+      type: "worked-example",
+      id: "st3-5-we4",
+      title: "Worked example 4: exam style (which series is more variable?)",
+      problem:
+        "The heights of two varieties of seedling (cm) are summarised by totals only:\n\n**Variety A:** $n = 10$, $\\Sigma x = 500$, $\\Sigma x^2 = 25\\,810$\n**Variety B:** $n = 8$, $\\Sigma x = 320$, $\\Sigma x^2 = 13\\,088$\n\nWhich variety is more variable in height?",
+      steps: [
+        { text: "**Means.** $\\bar{x}_A = \\frac{500}{10} = 50$ and $\\bar{x}_B = \\frac{320}{8} = 40$." },
+        { text: "**Variances.** $\\sigma_A^2 = \\frac{25\\,810}{10} - 50^2 = 2581 - 2500 = 81$, so $\\sigma_A = 9$. $\\sigma_B^2 = \\frac{13\\,088}{8} - 40^2 = 1636 - 1600 = 36$, so $\\sigma_B = 6$. *Why this form:* when only the totals are given, $\\sigma^2 = \\frac{\\Sigma x^2}{n} - \\bar{x}^2$ is the only route to the SD." },
+        { text: "**CVs.** $\\text{CV}_A = \\frac{9}{50} \\times 100 = 18\\%$ and $\\text{CV}_B = \\frac{6}{40} \\times 100 = 15\\%$. *Why this step:* the means differ (50 vs 40), so the fair comparison is spread relative to size. This is also the comparison that board exams expect." },
+        { text: "**Conclude.** Variety A is more variable (18% against 15%); B is more consistent. Here the SD and the CV agree. In worked example 3 (the batters) they did not, which is why you compute the CV whenever the means differ." },
+      ],
+      answer: "Variety A is more variable: CV 18% against 15%",
     },
     {
       type: "quiz",
@@ -1530,6 +1741,7 @@ const lesson05: LessonSeed = {
       ],
       hint: "Mean, then σ² = Σx²/n − mean², then CV.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st3-5-q3",

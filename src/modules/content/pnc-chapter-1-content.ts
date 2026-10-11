@@ -61,6 +61,7 @@ const lesson01: LessonSeed = {
           "Every ordered pair of different letters. AB and BA are both listed: in an arrangement, order matters. Count them: 12, exactly what the slots predicted.",
       },
     },
+    { type: "heading", text: "The permutation formula ${}^{n}P_{r}$" },
     {
       type: "callout",
       variant: "definition",
@@ -106,64 +107,146 @@ const lesson01: LessonSeed = {
         ["${}^{n}P_{0}$", "(empty product)", "1"],
       ],
     },
+    { type: "heading", text: "Counting strings, numbers and tickets" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** How many 4-letter strings (meaningful or not) can be made from the letters of LOGARITHM, using each letter at most once?\n\n**Step 1 — check the letters are distinct.** L, O, G, A, R, I, T, H, M: nine different letters.\n**Step 2 — slots.** Four slots, no repetition, order matters (LOGA and GOLA are different strings).\n**Step 3 — count.** ${}^{9}P_{4} = 9 \\cdot 8 \\cdot 7 \\cdot 6 = 3024$.",
+      type: "worked-example",
+      id: "pc1-1-we1",
+      title: "Worked example 1",
+      problem:
+        "How many 4-letter strings (meaningful or not) can be made from the letters of LOGARITHM, using each letter at most once?",
+      steps: [
+        {
+          text: "**Check the letters are distinct.** L, O, G, A, R, I, T, H, M: nine different letters.",
+        },
+        {
+          text: "**Slots.** Four slots, no repetition, order matters (LOGA and GOLA are different strings).",
+        },
+        {
+          text: "**Count.** ${}^{9}P_{4} = 9 \\cdot 8 \\cdot 7 \\cdot 6 = 3024$.",
+        },
+      ],
+      answer: "${}^{9}P_{4} = 3024$ strings.",
+    },
+    {
+      type: "worked-example",
+      id: "pc1-1-we2",
+      title: "Worked example 2",
+      problem:
+        "How many 3-digit numbers have three different digits?",
+      steps: [
+        {
+          text: "**Spot the restricted slot.** The hundreds digit cannot be 0, so fill it first (the habit from lesson 0.5): 9 choices.",
+        },
+        {
+          text: "**The rest.** The tens digit can be anything except the digit already used, and 0 is now allowed: 9 choices. The units digit: 8 choices.",
+        },
+        {
+          text: "**Multiply.** $9 \\times 9 \\times 8 = 648$.",
+        },
+        {
+          text: "Notice this is *not* ${}^{10}P_{3} = 720$. The formula counts arrangements of free slots; the leading-zero rule breaks that symmetry, and $720 - 648 = 72$ is exactly the number of strings starting with 0 (that is $1 \\times 9 \\times 8$).",
+        },
+      ],
+      answer: "$648$ numbers.",
+    },
+    {
+      type: "worked-example",
+      id: "pc1-1-we6",
+      title: "Application — railway tickets",
+      problem:
+        "A railway line has 12 stations. A ticket is printed for every journey from one station to a *different* station, and it names both the start and the destination. How many different tickets must be printed?",
+      steps: [
+        {
+          text: "**Does order matter?** Yes: a Pune → Mumbai ticket is useless for Mumbai → Pune. *Why this step:* \"order matters\" is the signal that you are counting arrangements, not selections.",
+        },
+        {
+          text: "**Slots.** Slot 1 is the start: 12 choices. Slot 2 is the destination: any station except the start, so 11 choices.",
+        },
+        {
+          text: "**Count.**",
+          latex: "{}^{12}P_{2} = 12 \\times 11 = 132",
+        },
+        {
+          text: "**Small-case check.** With 3 stations A, B, C the tickets are AB, AC, BA, BC, CA, CB, which is ${}^{3}P_{2} = 6$. ✓ If the railway printed one ticket per *pair* of stations, valid both ways, the count would halve to 66. That is a Chapter 2 question.",
+        },
+      ],
+      answer: "${}^{12}P_{2} = 132$ tickets.",
+    },
+    { type: "heading", text: "Two restricted slots: divisible by 5" },
+    {
+      type: "worked-example",
+      id: "pc1-1-we7",
+      title: "Exam-style — divisible by 5",
+      problem: "How many 4-digit numbers with all digits different are divisible by 5?",
+      steps: [
+        {
+          text: "**Find the restricted slots.** The units digit must be 0 or 5. The thousands digit cannot be 0. *Why split into cases:* the two restrictions interact. If the units digit is 0, then 0 is already used and the thousands digit has 9 options; if it is 5, the thousands digit has only 8 (not 0, not 5). The product rule needs a fixed number of choices per slot, so split on the units digit.",
+        },
+        {
+          text: "**Case 1 — units digit 0.** Thousands: 9 (digits 1–9). Hundreds: 8 left. Tens: 7 left.",
+          latex:
+            "\\text{Case 1: } \\underset{\\text{th}}{9} \\times \\underset{\\text{h}}{8} \\times \\underset{\\text{t}}{7} \\times \\underset{\\text{u}}{1} = 504",
+        },
+        {
+          text: "**Case 2 — units digit 5.** Thousands: not 0 and not 5, so 8 choices. Hundreds: any of the 8 unused digits (0 is allowed again here). Tens: 7.",
+          latex:
+            "\\text{Case 2: } \\underset{\\text{th}}{8} \\times \\underset{\\text{h}}{8} \\times \\underset{\\text{t}}{7} \\times \\underset{\\text{u}}{1} = 448",
+        },
+        {
+          text: "**Add.** A number ends in 0 or in 5, never both, so the cases don't overlap: $504 + 448 = 952$.",
+        },
+        {
+          text: "**Cross-check.** The tempting one-liner \"units: 2 choices, then $9 \\times 8 \\times 7$\" gives $1008$. It overcounts by the strings in Case 2 that start with 0, of the form 0 _ _ 5: $1 \\times 8 \\times 7 = 56$ of them. $1008 - 56 = 952$. ✓",
+        },
+      ],
+      answer: "$952$ numbers.",
+    },
+    { type: "heading", text: "Equations, special letters and digit sums" },
+    {
+      type: "worked-example",
+      id: "pc1-1-we3",
+      title: "Worked example 3 — solving for $n$",
+      problem:
+        "If ${}^{n}P_{4} = 20 \\cdot {}^{n}P_{2}$, find $n$.",
+      steps: [
+        {
+          text: "**Write both as products.** $n(n-1)(n-2)(n-3) = 20\\,n(n-1)$.",
+        },
+        {
+          text: "**Cancel the common front.** $n(n-1) \\neq 0$ (we need $n \\geq 4$), so $(n-2)(n-3) = 20$.",
+        },
+        {
+          text: "**Spot consecutive integers.** $20 = 5 \\times 4$, so $n - 2 = 5$ and $n = 7$.",
+        },
+        {
+          text: "**Check.** ${}^{7}P_{4} = 840$ and $20 \\cdot {}^{7}P_{2} = 20 \\cdot 42 = 840$. ✓",
+        },
+      ],
+      answer: "$n = 7$",
+    },
+    {
+      type: "worked-example",
+      id: "pc1-1-we4",
+      title: "Worked example 4 — a particular letter always in, or always out",
+      problem:
+        "Take 4-letter arrangements of the letters of LOGARITHM again (${}^{9}P_{4} = 3024$ in all). How many of them (a) never contain L, (b) always contain L?",
+      steps: [
+        {
+          text: "**(a) L never appears.** Delete L from the menu. Four slots are filled from the other 8 letters: ${}^{8}P_{4} = 8 \\cdot 7 \\cdot 6 \\cdot 5 = 1680$.",
+        },
+        {
+          text: "**(b) L always appears.** First decide *where* L goes: 4 choices of slot. The other 3 slots are filled from the remaining 8 letters, in order: ${}^{8}P_{3} = 336$. Total $4 \\times 336 = 1344$.",
+        },
+        {
+          text: "**Check.** Every arrangement either uses L or doesn't: $1344 + 1680 = 3024$. ✓",
+        },
+      ],
+      answer: "(a) $1680$ (b) $1344$",
     },
     {
       type: "text",
       content:
-        "**Worked example 2.** How many 3-digit numbers have three different digits?\n\n**Step 1 — spot the restricted slot.** The hundreds digit cannot be 0, so fill it first (the habit from lesson 0.5): 9 choices.\n**Step 2 — the rest.** The tens digit can be anything except the digit already used, and 0 is now allowed: 9 choices. The units digit: 8 choices.\n**Step 3 — multiply.** $9 \\times 9 \\times 8 = 648$.\n\nNotice this is *not* ${}^{10}P_{3} = 720$. The formula counts arrangements of free slots; the leading-zero rule breaks that symmetry, and $720 - 648 = 72$ is exactly the number of strings starting with 0 (that is $1 \\times 9 \\times 8$).",
-    },
-    {
-      type: "text",
-      content:
-        "**Application — railway tickets.** A railway line has 12 stations. A ticket is printed for every journey from one station to a *different* station, and it names both the start and the destination. How many different tickets must be printed?\n\n**Step 1 — does order matter?** Yes: a Pune → Mumbai ticket is useless for Mumbai → Pune. *Why this step:* \"order matters\" is the signal that you are counting arrangements, not selections.\n**Step 2 — slots.** Slot 1 is the start: 12 choices. Slot 2 is the destination: any station except the start, so 11 choices.\n**Step 3 — count.**",
-    },
-    {
-      type: "math",
-      latex: "{}^{12}P_{2} = 12 \\times 11 = 132",
-    },
-    {
-      type: "text",
-      content:
-        "**Small-case check.** With 3 stations A, B, C the tickets are AB, AC, BA, BC, CA, CB, which is ${}^{3}P_{2} = 6$. ✓ If the railway printed one ticket per *pair* of stations, valid both ways, the count would halve to 66. That is a Chapter 2 question.",
-    },
-    {
-      type: "text",
-      content:
-        "**Exam-style — divisible by 5.** How many 4-digit numbers with all digits different are divisible by 5?\n\n**Step 1 — find the restricted slots.** The units digit must be 0 or 5. The thousands digit cannot be 0. *Why split into cases:* the two restrictions interact. If the units digit is 0, then 0 is already used and the thousands digit has 9 options; if it is 5, the thousands digit has only 8 (not 0, not 5). The product rule needs a fixed number of choices per slot, so split on the units digit.\n**Case 1 — units digit 0.** Thousands: 9 (digits 1–9). Hundreds: 8 left. Tens: 7 left.",
-    },
-    {
-      type: "math",
-      latex:
-        "\\text{Case 1: } \\underset{\\text{th}}{9} \\times \\underset{\\text{h}}{8} \\times \\underset{\\text{t}}{7} \\times \\underset{\\text{u}}{1} = 504",
-    },
-    {
-      type: "text",
-      content:
-        "**Case 2 — units digit 5.** Thousands: not 0 and not 5, so 8 choices. Hundreds: any of the 8 unused digits (0 is allowed again here). Tens: 7.",
-    },
-    {
-      type: "math",
-      latex:
-        "\\text{Case 2: } \\underset{\\text{th}}{8} \\times \\underset{\\text{h}}{8} \\times \\underset{\\text{t}}{7} \\times \\underset{\\text{u}}{1} = 448",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4 — add.** A number ends in 0 or in 5, never both, so the cases don't overlap: $504 + 448 = 952$.\n\n**Cross-check.** The tempting one-liner \"units: 2 choices, then $9 \\times 8 \\times 7$\" gives $1008$. It overcounts by the strings in Case 2 that start with 0, of the form 0 _ _ 5: $1 \\times 8 \\times 7 = 56$ of them. $1008 - 56 = 952$. ✓",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 — solving for $n$.** If ${}^{n}P_{4} = 20 \\cdot {}^{n}P_{2}$, find $n$.\n\n**Step 1 — write both as products.** $n(n-1)(n-2)(n-3) = 20\\,n(n-1)$.\n**Step 2 — cancel the common front.** $n(n-1) \\neq 0$ (we need $n \\geq 4$), so $(n-2)(n-3) = 20$.\n**Step 3 — spot consecutive integers.** $20 = 5 \\times 4$, so $n - 2 = 5$ and $n = 7$.\n**Step 4 — check.** ${}^{7}P_{4} = 840$ and $20 \\cdot {}^{7}P_{2} = 20 \\cdot 42 = 840$. ✓",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 — a particular letter always in, or always out.** Take 4-letter arrangements of the letters of LOGARITHM again (${}^{9}P_{4} = 3024$ in all).\n\n**(a) L never appears.** Delete L from the menu. Four slots are filled from the other 8 letters: ${}^{8}P_{4} = 8 \\cdot 7 \\cdot 6 \\cdot 5 = 1680$.\n**(b) L always appears.** First decide *where* L goes: 4 choices of slot. The other 3 slots are filled from the remaining 8 letters, in order: ${}^{8}P_{3} = 336$. Total $4 \\times 336 = 1344$.\n**(c) Check.** Every arrangement either uses L or doesn't: $1344 + 1680 = 3024$. ✓\n\nIn general, among arrangements of $r$ out of $n$ distinct objects, those that **always include** a particular object number $r \\cdot {}^{n-1}P_{r-1}$, and those that **never include** it number ${}^{n-1}P_{r}$.",
+        "In general, among arrangements of $r$ out of $n$ distinct objects, those that **always include** a particular object number $r \\cdot {}^{n-1}P_{r-1}$, and those that **never include** it number ${}^{n-1}P_{r}$.",
     },
     {
       type: "callout",
@@ -173,9 +256,31 @@ const lesson01: LessonSeed = {
         "Worked example 4 split all arrangements into \"uses the special object\" and \"doesn't\". Nothing overlaps and nothing is missed, so the two counts must add up to the total:\n${}^{n}P_{r} = {}^{n-1}P_{r} + r \\cdot {}^{n-1}P_{r-1}.$\nThat is a proof with no algebra: one set counted two ways. (You can also check it with factorials: the right side is $\\frac{(n-1)!}{(n-1-r)!}\\left(1 + \\frac{r}{n-r}\\right) = \\frac{(n-1)!\\,n}{(n-r)!} = \\frac{n!}{(n-r)!}$.) For $n = 9$, $r = 4$: $1680 + 1344 = 3024$.",
     },
     {
+      type: "worked-example",
+      id: "pc1-1-we5",
+      title: "Worked example 5 (JEE extension) — the sum of all the numbers",
+      problem:
+        "Find the sum of all 4-digit numbers formed from the digits 1, 2, 3, 4, each used once.",
+      steps: [
+        {
+          text: "**How many numbers?** $4! = 24$. Adding 24 numbers by hand is possible but slow, and it doesn't scale.",
+        },
+        {
+          text: "**Add column by column.** Look only at the units column. How often does the digit 4 sit there? Fix 4 in the units place and arrange the other 3 digits: $3! = 6$ times. The same holds for 1, 2 and 3. So the units column adds up to $6 \\times (1 + 2 + 3 + 4) = 60$.",
+        },
+        {
+          text: "**Every column is the same.** The tens, hundreds and thousands columns also add up to 60 each, but they are worth 10, 100 and 1000.",
+        },
+        {
+          text: "**Combine.** $60 \\times (1000 + 100 + 10 + 1) = 60 \\times 1111 = 66\\,660$.",
+        },
+      ],
+      answer: "$66\\,660$",
+    },
+    {
       type: "text",
       content:
-        "**Worked example 5 (JEE extension) — the sum of all the numbers.** Find the sum of all 4-digit numbers formed from the digits 1, 2, 3, 4, each used once.\n\n**Step 1 — how many numbers?** $4! = 24$. Adding 24 numbers by hand is possible but slow, and it doesn't scale.\n**Step 2 — add column by column.** Look only at the units column. How often does the digit 4 sit there? Fix 4 in the units place and arrange the other 3 digits: $3! = 6$ times. The same holds for 1, 2 and 3. So the units column adds up to $6 \\times (1 + 2 + 3 + 4) = 60$.\n**Step 3 — every column is the same.** The tens, hundreds and thousands columns also add up to 60 each, but they are worth 10, 100 and 1000.\n**Step 4 — combine.** $60 \\times (1000 + 100 + 10 + 1) = 60 \\times 1111 = 66\\,660$.\n\nGeneral pattern (distinct nonzero digits, all used): sum $= (n-1)! \\times (\\text{sum of digits}) \\times \\underbrace{11\\ldots1}_{n}$. Sanity check with 2 digits: 12 + 21 = 33 = $1! \\cdot 3 \\cdot 11$. ✓",
+        "General pattern (distinct nonzero digits, all used): sum $= (n-1)! \\times (\\text{sum of digits}) \\times \\underbrace{11\\ldots1}_{n}$. Sanity check with 2 digits: 12 + 21 = 33 = $1! \\cdot 3 \\cdot 11$. ✓",
     },
     {
       type: "callout",
@@ -184,6 +289,7 @@ const lesson01: LessonSeed = {
       content:
         "Before trusting any formula on a big problem, run it on one you can list. ${}^{3}P_{2}$ should be $3 \\cdot 2 = 6$: AB, AC, BA, BC, CA, CB. Six. If your formula had given 3, you would know it was counting *selections*, not arrangements. That is Chapter 2.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc1-1-q1",
@@ -338,6 +444,7 @@ const lesson02: LessonSeed = {
           "Each level has all three letters again, so the leaves grow 3, 9, 27. The highlighted path BBA reuses B, which is allowed here.",
       },
     },
+    { type: "heading", text: "Counting with repeats: $n^r$" },
     {
       type: "callout",
       variant: "definition",
@@ -376,39 +483,75 @@ const lesson02: LessonSeed = {
         ["4-digit PIN", "${}^{10}P_{4} = 5040$", "$10^4 = 10\\,000$"],
       ],
     },
+    { type: "heading", text: "Repeats, functions and number plates" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — at least one repeat.** How many 4-digit PINs have at least one repeated digit?\n\n**Step 1 — complement.** \"At least one repeat\" is everything except \"all different\" (lesson 0.3).\n**Step 2 — count both.** All PINs: $10^4 = 10\\,000$. All different: ${}^{10}P_{4} = 5040$.\n**Step 3 — subtract.** $10\\,000 - 5040 = 4960$. Almost half of all PINs repeat a digit.",
+      type: "worked-example",
+      id: "pc1-2-we1",
+      title: "Worked example 1 — at least one repeat",
+      problem:
+        "How many 4-digit PINs have at least one repeated digit?",
+      steps: [
+        {
+          text: "**Complement.** \"At least one repeat\" is everything except \"all different\" (lesson 0.3).",
+        },
+        {
+          text: "**Count both.** All PINs: $10^4 = 10\\,000$. All different: ${}^{10}P_{4} = 5040$.",
+        },
+        {
+          text: "**Subtract.** $10\\,000 - 5040 = 4960$. Almost half of all PINs repeat a digit.",
+        },
+      ],
+      answer: "$4960$ PINs.",
+    },
+    {
+      type: "worked-example",
+      id: "pc1-2-we2",
+      title: "Worked example 2 — functions",
+      problem:
+        "How many functions are there from $A = \\{1, 2, 3\\}$ to $B = \\{p, q\\}$?",
+      steps: [
+        {
+          text: "**What is being chosen?** A function assigns each element of $A$ one output in $B$. So each element of $A$ is a slot.",
+        },
+        {
+          text: "**Choices per slot.** Each slot picks from the 2 elements of $B$, and different inputs may share an output.",
+        },
+        {
+          text: "**Count.** $2 \\times 2 \\times 2 = 2^3 = 8$.",
+        },
+      ],
+      answer: "$2^3 = 8$ functions.",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 — functions.** How many functions are there from $A = \\{1, 2, 3\\}$ to $B = \\{p, q\\}$?\n\n**Step 1 — what is being chosen?** A function assigns each element of $A$ one output in $B$. So each element of $A$ is a slot.\n**Step 2 — choices per slot.** Each slot picks from the 2 elements of $B$, and different inputs may share an output.\n**Step 3 — count.** $2 \\times 2 \\times 2 = 2^3 = 8$.\n\nIn general, from an $r$-element set to an $n$-element set there are $n^r$ functions. If the function must be one-one (no two inputs share an output), the outputs cannot repeat and the count drops to ${}^{n}P_{r}$.",
+        "In general, from an $r$-element set to an $n$-element set there are $n^r$ functions. If the function must be one-one (no two inputs share an output), the outputs cannot repeat and the count drops to ${}^{n}P_{r}$.",
     },
     {
-      type: "text",
-      content:
-        "**Application — number plates, both rules at once.** A state issues plates made of two letters followed by four digits, such as MH 0427. How many plates are possible (a) with no restriction, (b) if the two letters must be different?\n\n**Step 1 — six slots.** Two letter slots with 26 options each, then four digit slots with 10 options each. *Why the product rule still works:* letters and digits come from separate menus, so a choice in one kind of slot never changes the options in the other kind.\n**(a) Repetition everywhere.**",
+      type: "worked-example",
+      id: "pc1-2-we3",
+      title: "Application — number plates, both rules at once",
+      problem:
+        "A state issues plates made of two letters followed by four digits, such as MH 0427. How many plates are possible (a) with no restriction, (b) if the two letters must be different?",
+      steps: [
+        {
+          text: "**Six slots.** Two letter slots with 26 options each, then four digit slots with 10 options each. *Why the product rule still works:* letters and digits come from separate menus, so a choice in one kind of slot never changes the options in the other kind.",
+        },
+        {
+          text: "**(a) Repetition everywhere.**",
+          latex: "26^2 \\times 10^4 = 676 \\times 10\\,000 = 6\\,760\\,000",
+        },
+        {
+          text: "**(b) Letters different, digits still free.** Only the second letter slot shrinks, to 25 choices.",
+          latex: "26 \\times 25 \\times 10^4 = 650 \\times 10\\,000 = 6\\,500\\,000",
+        },
+        {
+          text: "Decide **slot by slot** whether that slot's menu shrinks. The difference, $260\\,000 = 26 \\times 10^4$, is exactly the plates with a doubled letter such as AA 1234: 26 doubled pairs, each with $10^4$ digit strings.",
+        },
+      ],
+      answer: "(a) $6\\,760\\,000$ (b) $6\\,500\\,000$",
     },
-    {
-      type: "math",
-      latex: "26^2 \\times 10^4 = 676 \\times 10\\,000 = 6\\,760\\,000",
-    },
-    {
-      type: "text",
-      content:
-        "**(b) Letters different, digits still free.** Only the second letter slot shrinks, to 25 choices.",
-    },
-    {
-      type: "math",
-      latex: "26 \\times 25 \\times 10^4 = 650 \\times 10\\,000 = 6\\,500\\,000",
-    },
-    {
-      type: "text",
-      content:
-        "Decide **slot by slot** whether that slot's menu shrinks. The difference, $260\\,000 = 26 \\times 10^4$, is exactly the plates with a doubled letter such as AA 1234: 26 doubled pairs, each with $10^4$ digit strings.",
-    },
+    { type: "heading", text: "Numbers below 1000, two ways" },
     {
       type: "text",
       content:
@@ -430,6 +573,7 @@ const lesson02: LessonSeed = {
       content:
         "Students swap base and exponent constantly. Don't memorise the letters; ask **\"who is choosing?\"** Each chooser is a slot, so the number of choosers is the exponent. The number of options each chooser has is the base.\n\n5 letters into 3 postboxes: each *letter* chooses a postbox. 5 choosers, 3 options each: $3^5 = 243$. It is not $5^3 = 125$, which would be each postbox choosing one letter, and postboxes do not choose.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc1-2-q1",
@@ -567,6 +711,7 @@ const lesson03: LessonSeed = {
           "Tap any word: its whole class lights up. Each class has 3! × 2! = 12 labelled versions (shuffle the A's, shuffle the N's). 720 ÷ 12 = 60 words.",
       },
     },
+    { type: "heading", text: "Why we divide by $p!\\,q!\\cdots$" },
     {
       type: "text",
       content:
@@ -583,57 +728,121 @@ const lesson03: LessonSeed = {
       content:
         "The number of arrangements of $n$ objects, of which $p_1$ are alike of one kind, $p_2$ alike of a second kind, …, $p_k$ alike of a $k$-th kind (with $p_1 + p_2 + \\cdots + p_k = n$), is\n$\\frac{n!}{p_1!\\,p_2!\\cdots p_k!}.$\nObjects that appear only once contribute $1! = 1$, so they can be left out of the denominator.",
     },
+    { type: "heading", text: "Words, flags, grid paths and digits" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — MISSISSIPPI.**\n\n**Step 1 — tally.** M ×1, I ×4, S ×4, P ×2. Total $1 + 4 + 4 + 2 = 11$. ✓\n**Step 2 — label and count.** $11! = 39\\,916\\,800$.\n**Step 3 — divide by the overcount.** Each word is counted $4!\\,4!\\,2! = 24 \\cdot 24 \\cdot 2 = 1152$ times.\n**Step 4 — answer.** $\\dfrac{11!}{4!\\,4!\\,2!} = \\dfrac{39\\,916\\,800}{1152} = 34\\,650$.",
+      type: "worked-example",
+      id: "pc1-3-we1",
+      title: "Worked example 1 — MISSISSIPPI",
+      problem:
+        "How many arrangements of the letters of MISSISSIPPI are there?",
+      steps: [
+        {
+          text: "**Tally.** M ×1, I ×4, S ×4, P ×2. Total $1 + 4 + 4 + 2 = 11$. ✓",
+        },
+        {
+          text: "**Label and count.** $11! = 39\\,916\\,800$.",
+        },
+        {
+          text: "**Divide by the overcount.** Each word is counted $4!\\,4!\\,2! = 24 \\cdot 24 \\cdot 2 = 1152$ times.",
+        },
+        {
+          text: "**Compute.** $\\dfrac{11!}{4!\\,4!\\,2!} = \\dfrac{39\\,916\\,800}{1152} = 34\\,650$.",
+        },
+      ],
+      answer: "$34\\,650$ arrangements.",
+    },
+    {
+      type: "worked-example",
+      id: "pc1-3-we2",
+      title: "Worked example 2 — flags on a pole",
+      problem:
+        "A signal is made by hanging 7 flags in a vertical line: 4 red, 2 blue, 1 green (flags of one colour look the same). How many signals?",
+      steps: [
+        {
+          text: "7 positions, colour counts 4, 2, 1.",
+        },
+        {
+          text: "$\\dfrac{7!}{4!\\,2!\\,1!} = \\dfrac{5040}{48} = 105$.",
+        },
+      ],
+      answer: "$105$ signals.",
+    },
+    {
+      type: "worked-example",
+      id: "pc1-3-we5",
+      title: "Worked example 3 — paths on a grid",
+      problem: "How many paths lead from the corner $(0,0)$ to $(3,2)$ moving only right (R) or up (U)?",
+      steps: [
+        {
+          text: "To walk from the corner $(0,0)$ to $(3,2)$ moving only right (R) or up (U), you make 3 R's and 2 U's in some order. Every path is a word like RRURU, and every such word is a path.",
+        },
+        {
+          text: "So the number of paths is the number of arrangements of R, R, R, U, U:\n$\\frac{5!}{3!\\,2!} = 10.$",
+        },
+        {
+          text: "This reframing — a path is a word — comes back in Chapter 4 with Pascal's triangle.",
+        },
+      ],
+      answer: "$10$ paths.",
+    },
+    {
+      type: "worked-example",
+      id: "pc1-3-we3",
+      title: "Worked example 4 — identical digits and a leading zero",
+      problem:
+        "How many numbers greater than 1 000 000 can be formed from the digits 2, 3, 0, 3, 4, 2, 3 (each used exactly as often as listed)?",
+      steps: [
+        {
+          text: "**What does \"greater than 1 000 000\" mean here?** All seven digits are used, so every arrangement is a 7-digit string. It is a genuine 7-digit number (and so bigger than 1 000 000) exactly when it **doesn't start with 0**.",
+        },
+        {
+          text: "**Count all strings.** Tally: 2 ×2, 3 ×3, 0 ×1, 4 ×1. $\\dfrac{7!}{2!\\,3!} = \\dfrac{5040}{12} = 420$.",
+        },
+        {
+          text: "**Count the bad ones.** Put 0 first. The other six digits 2, 2, 3, 3, 3, 4 fill the rest: $\\dfrac{6!}{2!\\,3!} = \\dfrac{720}{12} = 60$.",
+        },
+        {
+          text: "**Subtract.** $420 - 60 = 360$.",
+        },
+      ],
+      answer: "$360$ numbers.",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 — flags on a pole.** A signal is made by hanging 7 flags in a vertical line: 4 red, 2 blue, 1 green (flags of one colour look the same). How many signals?\n\n**Step 1.** 7 positions, colour counts 4, 2, 1.\n**Step 2.** $\\dfrac{7!}{4!\\,2!\\,1!} = \\dfrac{5040}{48} = 105$.",
+        "The complement habit from Chapter 0 and the multiset formula work together: count everything, then remove the strings with a leading zero, using the multiset formula both times.",
     },
+    { type: "heading", text: "Fixing letters in place: INDEPENDENCE" },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — paths on a grid.** To walk from the corner $(0,0)$ to $(3,2)$ moving only right (R) or up (U), you make 3 R's and 2 U's in some order. Every path is a word like RRURU, and every such word is a path. So the number of paths is the number of arrangements of R, R, R, U, U:\n$\\frac{5!}{3!\\,2!} = 10.$\nThis reframing — a path is a word — comes back in Chapter 4 with Pascal's triangle.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 — identical digits and a leading zero.** How many numbers greater than 1 000 000 can be formed from the digits 2, 3, 0, 3, 4, 2, 3 (each used exactly as often as listed)?\n\n**Step 1 — what does \"greater than 1 000 000\" mean here?** All seven digits are used, so every arrangement is a 7-digit string. It is a genuine 7-digit number (and so bigger than 1 000 000) exactly when it **doesn't start with 0**.\n**Step 2 — count all strings.** Tally: 2 ×2, 3 ×3, 0 ×1, 4 ×1. $\\dfrac{7!}{2!\\,3!} = \\dfrac{5040}{12} = 420$.\n**Step 3 — count the bad ones.** Put 0 first. The other six digits 2, 2, 3, 3, 3, 4 fill the rest: $\\dfrac{6!}{2!\\,3!} = \\dfrac{720}{12} = 60$.\n**Step 4 — subtract.** $420 - 60 = 360$.\n\nThe complement habit from Chapter 0 and the multiset formula work together: count everything, then remove the strings with a leading zero, using the multiset formula both times.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 — INDEPENDENCE (exam-style).** Find the number of arrangements of the letters of INDEPENDENCE, and how many of them (b) start with P, (c) start with I and end with P, (d) start with E.\n\n**Step 1 — tally.** I ×1, N ×3, D ×2, E ×4, P ×1, C ×1. Check: $1 + 3 + 2 + 4 + 1 + 1 = 12$. ✓\n**(a) All arrangements.**",
-    },
-    {
-      type: "math",
-      latex: "\\frac{12!}{4!\\,3!\\,2!} = \\frac{479\\,001\\,600}{288} = 1\\,663\\,200",
-    },
-    {
-      type: "text",
-      content:
-        "**(b) Starts with P.** Put P in the first place and re-tally what's left: I, N ×3, D ×2, E ×4, C, which is 11 letters. *Why re-tally:* fixing a letter removes it from the multiset, and the denominator must describe the letters still being arranged.",
-    },
-    {
-      type: "math",
-      latex: "\\frac{11!}{4!\\,3!\\,2!} = \\frac{39\\,916\\,800}{288} = 138\\,600",
-    },
-    {
-      type: "text",
-      content:
-        "**(c) Starts with I and ends with P.** Both ends are fixed. The middle 10 places take N ×3, D ×2, E ×4, C: $\\dfrac{10!}{4!\\,3!\\,2!} = \\dfrac{3\\,628\\,800}{288} = 12\\,600$.\n\n**(d) Starts with E.** Now the fixed letter is one of the *repeated* ones. What's left is I, N ×3, D ×2, E ×3, P, C: only three E's remain, so the denominator changes from $4!$ to $3!$.",
-    },
-    {
-      type: "math",
-      latex: "\\frac{11!}{3!\\,3!\\,2!} = \\frac{39\\,916\\,800}{72} = 554\\,400",
-    },
-    {
-      type: "text",
-      content:
-        "**Sanity check on (d).** 4 of the 12 letters are E, so about a third of all words should start with E: $\\frac{4}{12} \\times 1\\,663\\,200 = 554\\,400$. ✓ By the same reasoning, (b) should be $\\frac{1}{12}$ of the total, and $\\frac{1\\,663\\,200}{12} = 138\\,600$. ✓",
+      type: "worked-example",
+      id: "pc1-3-we4",
+      title: "Worked example 5 — INDEPENDENCE (exam-style)",
+      problem:
+        "Find the number of arrangements of the letters of INDEPENDENCE, and how many of them (b) start with P, (c) start with I and end with P, (d) start with E.",
+      steps: [
+        {
+          text: "**Tally.** I ×1, N ×3, D ×2, E ×4, P ×1, C ×1. Check: $1 + 3 + 2 + 4 + 1 + 1 = 12$. ✓",
+        },
+        {
+          text: "**(a) All arrangements.**",
+          latex: "\\frac{12!}{4!\\,3!\\,2!} = \\frac{479\\,001\\,600}{288} = 1\\,663\\,200",
+        },
+        {
+          text: "**(b) Starts with P.** Put P in the first place and re-tally what's left: I, N ×3, D ×2, E ×4, C, which is 11 letters. *Why re-tally:* fixing a letter removes it from the multiset, and the denominator must describe the letters still being arranged.",
+          latex: "\\frac{11!}{4!\\,3!\\,2!} = \\frac{39\\,916\\,800}{288} = 138\\,600",
+        },
+        {
+          text: "**(c) Starts with I and ends with P.** Both ends are fixed. The middle 10 places take N ×3, D ×2, E ×4, C: $\\dfrac{10!}{4!\\,3!\\,2!} = \\dfrac{3\\,628\\,800}{288} = 12\\,600$.",
+        },
+        {
+          text: "**(d) Starts with E.** Now the fixed letter is one of the *repeated* ones. What's left is I, N ×3, D ×2, E ×3, P, C: only three E's remain, so the denominator changes from $4!$ to $3!$.",
+          latex: "\\frac{11!}{3!\\,3!\\,2!} = \\frac{39\\,916\\,800}{72} = 554\\,400",
+        },
+        {
+          text: "**Sanity check on (d).** 4 of the 12 letters are E, so about a third of all words should start with E: $\\frac{4}{12} \\times 1\\,663\\,200 = 554\\,400$. ✓ By the same reasoning, (b) should be $\\frac{1}{12}$ of the total, and $\\frac{1\\,663\\,200}{12} = 138\\,600$. ✓",
+        },
+      ],
+      answer: "(a) $1\\,663\\,200$ (b) $138\\,600$ (c) $12\\,600$ (d) $554\\,400$",
     },
     {
       type: "table",
@@ -653,6 +862,7 @@ const lesson03: LessonSeed = {
       content:
         "A tempting shortcut is \"$3! = 6$, but two A's are the same, so subtract the duplicate: $6 - 1 = 5$\" or \"$6 - 2 = 4$\". Listing shows 3. Subtraction fails because the overcount is not a fixed number of extra words; it is a **factor**. Every word is repeated the same number of times ($2!$ here), so the fix is division. For BANANA, subtracting anything from 720 can't get you near 60.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc1-3-q1",
@@ -780,6 +990,7 @@ const lesson04: LessonSeed = {
           "Each colour is one seating. ABCD, BCDA, CDAB and DABC are the same table turned, so each class has 4 members. 24 ÷ 4 = 6 = 3!.",
       },
     },
+    { type: "heading", text: "Why a circle gives $(n-1)!$" },
     {
       type: "text",
       content:
@@ -801,10 +1012,11 @@ const lesson04: LessonSeed = {
       content:
         "$n$ distinct objects around a circle, where rotations count as the same arrangement but clockwise and anticlockwise orders are different: $(n-1)!$.\nIf flipping the circle over also gives the same arrangement (a necklace or garland, viewed from either side): $\\frac{(n-1)!}{2}$, for $n \\geq 3$.",
     },
+    { type: "heading", text: "Necklaces: when flipping counts too" },
     {
       type: "text",
       content:
-        "**Necklaces.** People at a table have a left and a right, so the clockwise order A B C D is a different seating from the anticlockwise A D C B (A's left neighbour changes). But a necklace of beads can be picked up and turned over. Then each arrangement also equals its mirror image, and the classes double in size.",
+        "People at a table have a left and a right, so the clockwise order A B C D is a different seating from the anticlockwise A D C B (A's left neighbour changes). But a necklace of beads can be picked up and turned over. Then each arrangement also equals its mirror image, and the classes double in size.",
     },
     {
       type: "interactive",
@@ -832,15 +1044,53 @@ const lesson04: LessonSeed = {
         caption: "Two beads: flipping is the same as rotating, so there is nothing to halve. One necklace.",
       },
     },
+    { type: "heading", text: "Conditions at a round table" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — two people together.** Six people sit at a round table. In how many ways can they sit if A and B must sit next to each other?\n\n**Step 1 — glue.** Tie A and B into one block. Now there are 5 units around the table: [AB], C, D, E, F.\n**Step 2 — arrange the units in a circle.** $(5-1)! = 24$.\n**Step 3 — arrange inside the block.** AB or BA: $2! = 2$.\n**Step 4 — multiply.** $24 \\times 2 = 48$.\n\n**Follow-up:** A and B *not* together: total $(6-1)! = 120$, minus 48, gives 72.",
+      type: "worked-example",
+      id: "pc1-4-we1",
+      title: "Worked example 1 — two people together",
+      problem:
+        "Six people sit at a round table. In how many ways can they sit if A and B must sit next to each other?",
+      steps: [
+        {
+          text: "**Glue.** Tie A and B into one block. Now there are 5 units around the table: [AB], C, D, E, F.",
+        },
+        {
+          text: "**Arrange the units in a circle.** $(5-1)! = 24$.",
+        },
+        {
+          text: "**Arrange inside the block.** AB or BA: $2! = 2$.",
+        },
+        {
+          text: "**Multiply.** $24 \\times 2 = 48$.",
+        },
+        {
+          text: "**Follow-up:** A and B *not* together: total $(6-1)! = 120$, minus 48, gives 72.",
+        },
+      ],
+      answer: "$48$ ways (and $72$ with A and B not together).",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — alternating.** 5 boys and 5 girls sit at a round table so that no two boys are neighbours. How many ways?\n\n**Step 1 — seat the boys around the circle.** $(5-1)! = 4! = 24$. This fixes the rotation.\n**Step 2 — the gaps.** Between the 5 boys there are exactly 5 gaps, and they are now distinguishable because the boys are seated. Each gap gets one girl.\n**Step 3 — girls into gaps.** $5! = 120$. Note: *not* $4!$ — the rotation was already used up in Step 1.\n**Step 4 — multiply.** $24 \\times 120 = 2880$.",
+      type: "worked-example",
+      id: "pc1-4-we2",
+      title: "Worked example 2 — alternating",
+      problem:
+        "5 boys and 5 girls sit at a round table so that no two boys are neighbours. How many ways?",
+      steps: [
+        {
+          text: "**Seat the boys around the circle.** $(5-1)! = 4! = 24$. This fixes the rotation.",
+        },
+        {
+          text: "**The gaps.** Between the 5 boys there are exactly 5 gaps, and they are now distinguishable because the boys are seated. Each gap gets one girl.",
+        },
+        {
+          text: "**Girls into gaps.** $5! = 120$. Note: *not* $4!$ — the rotation was already used up in Step 1.",
+        },
+        {
+          text: "**Multiply.** $24 \\times 120 = 2880$.",
+        },
+      ],
+      answer: "$2880$ ways.",
     },
     {
       type: "table",
@@ -853,10 +1103,11 @@ const lesson04: LessonSeed = {
         ["$r$ of $n$ people at a round table", "rotated", "$\\frac{{}^{n}P_{r}}{r}$"],
       ],
     },
+    { type: "heading", text: "Only some of the people sit down", level: 3 },
     {
       type: "text",
       content:
-        "**Only some of the people sit down.** A round table has 3 seats and 4 people A, B, C, D want them. In a row there would be ${}^{4}P_{3} = 24$ ways. Around the circle, each seating can be read from any of its **3** seats (not 4: there are only 3 people at the table), so each seating is counted 3 times:",
+        "A round table has 3 seats and 4 people A, B, C, D want them. In a row there would be ${}^{4}P_{3} = 24$ ways. Around the circle, each seating can be read from any of its **3** seats (not 4: there are only 3 people at the table), so each seating is counted 3 times:",
     },
     {
       type: "interactive",
@@ -875,32 +1126,70 @@ const lesson04: LessonSeed = {
       latex: "\\text{seatings of } r \\text{ out of } n \\text{ around a circle} = \\frac{{}^{n}P_{r}}{r}",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — 6 of 10 at a round table.** Ten guests, but the round table has only 6 chairs. How many seatings?\n\n**Step 1 — as a row.** Choose and order 6 of the 10: ${}^{10}P_{6} = 10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6 \\cdot 5 = 151\\,200$.\n**Step 2 — divide by the rotations.** Each seating has 6 rotations (one per person *at the table*): $\\dfrac{151\\,200}{6} = 25\\,200$.\n\nCheck against the old formula: when $r = n$, $\\frac{{}^{n}P_{n}}{n} = \\frac{n!}{n} = (n-1)!$. ✓",
+      type: "worked-example",
+      id: "pc1-4-we3",
+      title: "Worked example 3 — 6 of 10 at a round table",
+      problem:
+        "Ten guests, but the round table has only 6 chairs. How many seatings?",
+      steps: [
+        {
+          text: "**As a row.** Choose and order 6 of the 10: ${}^{10}P_{6} = 10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6 \\cdot 5 = 151\\,200$.",
+        },
+        {
+          text: "**Divide by the rotations.** Each seating has 6 rotations (one per person *at the table*): $\\dfrac{151\\,200}{6} = 25\\,200$.\n\nCheck against the old formula: when $r = n$, $\\frac{{}^{n}P_{n}}{n} = \\frac{n!}{n} = (n-1)!$. ✓",
+        },
+      ],
+      answer: "$25\\,200$ seatings.",
+    },
+    { type: "heading", text: "Couples and fixed spacing", level: 3 },
+    {
+      type: "worked-example",
+      id: "pc1-4-we4",
+      title: "Worked example 4 — couples at dinner (application)",
+      problem:
+        "Four married couples sit at a round table so that every husband sits next to his wife. How many seatings?",
+      steps: [
+        {
+          text: "**Glue each couple.** That gives 4 blocks. *Why glue:* \"next to\" is the together condition, and it works around a table just as it does in a row.",
+        },
+        {
+          text: "**Blocks around the circle.** $(4-1)! = 6$. Fixing one block uses up the rotations.",
+        },
+        {
+          text: "**Inside each block.** Each couple can sit as husband–wife or wife–husband, independently of the others: $2^4 = 16$.",
+        },
+        {
+          text: "**Multiply.** ",
+          latex: "(4-1)! \\times 2^4 = 6 \\times 16 = 96",
+        },
+      ],
+      answer: "$96$ seatings.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — couples at dinner (application).** Four married couples sit at a round table so that every husband sits next to his wife. How many seatings?\n\n**Step 1 — glue each couple.** That gives 4 blocks. *Why glue:* \"next to\" is the together condition, and it works around a table just as it does in a row.\n**Step 2 — blocks around the circle.** $(4-1)! = 6$. Fixing one block uses up the rotations.\n**Step 3 — inside each block.** Each couple can sit as husband–wife or wife–husband, independently of the others: $2^4 = 16$.\n**Step 4 — multiply.**",
-    },
-    {
-      type: "math",
-      latex: "(4-1)! \\times 2^4 = 6 \\times 16 = 96",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 — exactly one person between (JEE).** Eight people, including A and B, sit at a round table. In how many seatings is there exactly one person between A and B?\n\n**Step 1 — seat A.** *Why start here:* seating A uses up the rotation, and every other seat now has a name (\"1st clockwise from A\", \"2nd clockwise\", …).\n**Step 2 — place B.** Exactly one seat between them means B is 2nd clockwise or 2nd anticlockwise from A: 2 choices. With 8 seats these are different seats. They would be the same seat only at a table of 4.\n**Step 3 — the person in between.** Any of the other 6 people: 6 choices.\n**Step 4 — everyone else.** 5 people, 5 remaining named seats: $5! = 120$.",
-    },
-    {
-      type: "math",
-      latex: "\\underset{\\text{B's side}}{2} \\times \\underset{\\text{middle}}{6} \\times \\underset{\\text{rest}}{5!} = 1440",
-    },
-    {
-      type: "text",
-      content:
-        "**Cross-check with a block.** Treat A–x–B as one block. Choose x: 6 ways. Order AxB or BxA: 2 ways. Now 1 block and 5 other people make 6 units around the table: $(6-1)! = 120$. Total $6 \\times 2 \\times 120 = 1440$. ✓ Two different methods, same answer.",
+      type: "worked-example",
+      id: "pc1-4-we5",
+      title: "Worked example 5 — exactly one person between (JEE)",
+      problem:
+        "Eight people, including A and B, sit at a round table. In how many seatings is there exactly one person between A and B?",
+      steps: [
+        {
+          text: "**Seat A.** *Why start here:* seating A uses up the rotation, and every other seat now has a name (\"1st clockwise from A\", \"2nd clockwise\", …).",
+        },
+        {
+          text: "**Place B.** Exactly one seat between them means B is 2nd clockwise or 2nd anticlockwise from A: 2 choices. With 8 seats these are different seats. They would be the same seat only at a table of 4.",
+        },
+        {
+          text: "**The person in between.** Any of the other 6 people: 6 choices.",
+        },
+        {
+          text: "**Everyone else.** 5 people, 5 remaining named seats: $5! = 120$.",
+          latex: "\\underset{\\text{B's side}}{2} \\times \\underset{\\text{middle}}{6} \\times \\underset{\\text{rest}}{5!} = 1440",
+        },
+        {
+          text: "**Cross-check with a block.** Treat A–x–B as one block. Choose x: 6 ways. Order AxB or BxA: 2 ways. Now 1 block and 5 other people make 6 units around the table: $(6-1)! = 120$. Total $6 \\times 2 \\times 120 = 1440$. ✓ Two different methods, same answer.",
+        },
+      ],
+      answer: "$1440$ seatings.",
     },
     {
       type: "callout",
@@ -909,6 +1198,7 @@ const lesson04: LessonSeed = {
       content:
         "Only divide by 2 when clockwise and anticlockwise really are the same — that is, when the object can be flipped over (necklaces, garlands, rings of keys). People around a table cannot be flipped: in a mirror image each person's left and right neighbours swap, and that's a different seating. And if the seats are numbered, even rotations are different, so you don't divide at all.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc1-4-q1",
@@ -1028,10 +1318,11 @@ const lesson05: LessonSeed = {
           "Scan for AB or BA as a neighbouring pair. You should find 12. Now predict that number without listing.",
       },
     },
+    { type: "heading", text: "Together: the block (glue) method" },
     {
       type: "text",
       content:
-        "**The block (glue) method.** Tape A and B together into one super-item [AB]. Now you're arranging 3 things: [AB], C, D, which gives $3! = 6$ ways. Inside the tape, the pair can be AB or BA, which gives $2! = 2$ ways. Total $6 \\times 2 = 12$. ✓",
+        "Tape A and B together into one super-item [AB]. Now you're arranging 3 things: [AB], C, D, which gives $3! = 6$ ways. Inside the tape, the pair can be AB or BA, which gives $2! = 2$ ways. Total $6 \\times 2 = 12$. ✓",
     },
     {
       type: "text",
@@ -1045,10 +1336,11 @@ const lesson05: LessonSeed = {
       content:
         "To force $k$ particular items to be together among $n$ distinct items:\n1. Treat the $k$ items as one block. Arrange the $n - k + 1$ units: $(n-k+1)!$.\n2. Arrange the items inside the block: $k!$.\n3. Multiply: $(n-k+1)!\\,k!$.",
     },
+    { type: "heading", text: "Apart: the gap method" },
     {
       type: "text",
       content:
-        "**The gap method.** Now the opposite: no two of certain items may touch. Gluing doesn't help. Instead, place the *other* items first and look at the gaps they create. Arrange 3 consonants X, Y, Z:\n\n$\\_\\;X\\;\\_\\;Y\\;\\_\\;Z\\;\\_$\n\nThere are 4 gaps (both ends count). If each vowel goes into a *different* gap, no two vowels can be adjacent, because a consonant always sits between them. And every arrangement with no two vowels adjacent arises this way exactly once.",
+        "Now the opposite: no two of certain items may touch. Gluing doesn't help. Instead, place the *other* items first and look at the gaps they create. Arrange 3 consonants X, Y, Z:\n\n$\\_\\;X\\;\\_\\;Y\\;\\_\\;Z\\;\\_$\n\nThere are 4 gaps (both ends count). If each vowel goes into a *different* gap, no two vowels can be adjacent, because a consonant always sits between them. And every arrangement with no two vowels adjacent arises this way exactly once.",
     },
     {
       type: "callout",
@@ -1057,15 +1349,28 @@ const lesson05: LessonSeed = {
       content:
         "To arrange $m$ unrestricted items and $k$ items with no two of the $k$ adjacent:\n1. Arrange the $m$ unrestricted items: $m!$.\n2. They create $m + 1$ gaps. Place the $k$ items into $k$ different gaps, in order: ${}^{m+1}P_{k}$.\n3. Multiply: $m! \\cdot {}^{m+1}P_{k}$. (If $k > m + 1$, it's impossible: 0.)",
     },
+    { type: "heading", text: "ORANGE: together, apart, not all together" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — ORANGE.** Vowels O, A, E; consonants R, N, G. All six letters distinct, $6! = 720$ arrangements in total.\n\n**(a) All vowels together.** Block [OAE] + R, N, G = 4 units: $4! = 24$. Inside the block: $3! = 6$. Total $24 \\times 6 = 144$.\n\n**(b) No two vowels together.** Consonants first: $3! = 6$. They make 4 gaps; put the 3 vowels in 3 different gaps: ${}^{4}P_{3} = 24$. Total $6 \\times 24 = 144$.\n\n**(c) Vowels not all together.** Complement of (a): $720 - 144 = 576$.",
-    },
-    {
-      type: "text",
-      content:
-        "Look at (b) and (c): 144 versus 576. They answer different questions. \"Not all together\" includes arrangements like O A R N E G, where O and A touch but E is off on its own. Those are *not* allowed in (b).",
+      type: "worked-example",
+      id: "pc1-5-we1",
+      title: "Worked example 1 — ORANGE",
+      problem:
+        "Arrange the letters of ORANGE so that (a) all the vowels are together, (b) no two vowels are together, (c) the vowels are not all together.\n\nVowels O, A, E; consonants R, N, G. All six letters distinct, $6! = 720$ arrangements in total.",
+      steps: [
+        {
+          text: "**(a) All vowels together.** Block [OAE] + R, N, G = 4 units: $4! = 24$. Inside the block: $3! = 6$. Total $24 \\times 6 = 144$.",
+        },
+        {
+          text: "**(b) No two vowels together.** Consonants first: $3! = 6$. They make 4 gaps; put the 3 vowels in 3 different gaps: ${}^{4}P_{3} = 24$. Total $6 \\times 24 = 144$.",
+        },
+        {
+          text: "**(c) Vowels not all together.** Complement of (a): $720 - 144 = 576$.",
+        },
+        {
+          text: "Look at (b) and (c): 144 versus 576. They answer different questions. \"Not all together\" includes arrangements like O A R N E G, where O and A touch but E is off on its own. Those are *not* allowed in (b).",
+        },
+      ],
+      answer: "(a) $144$ (b) $144$ (c) $576$",
     },
     {
       type: "callout",
@@ -1085,51 +1390,102 @@ const lesson05: LessonSeed = {
         ["Starts with O and ends with E", "Fix ends, arrange middle: $4!$", "24"],
       ],
     },
+    { type: "heading", text: "Fixed positions and mixed conditions" },
     {
       type: "text",
       content:
         "**Fixed positions** need no new idea. Fill the constrained places first, then arrange the rest freely. For \"vowels in the even places\", the 3 even places take the 3 vowels ($3!$) and the odd places take the consonants ($3!$), giving 36.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — boys and girls in a row.** 5 boys and 3 girls stand in a row.\n\n**(a) Girls together.** Block of 3 girls + 5 boys = 6 units: $6! = 720$. Inside: $3! = 6$. Total $4320$.\n\n**(b) No two girls together.** Boys first: $5! = 120$, giving 6 gaps. Girls into 3 different gaps: ${}^{6}P_{3} = 120$. Total $120 \\times 120 = 14\\,400$.",
+      type: "worked-example",
+      id: "pc1-5-we2",
+      title: "Worked example 2 — boys and girls in a row",
+      problem:
+        "5 boys and 3 girls stand in a row. In how many ways can they stand if (a) the girls are together, (b) no two girls are together?",
+      steps: [
+        {
+          text: "**(a) Girls together.** Block of 3 girls + 5 boys = 6 units: $6! = 720$. Inside: $3! = 6$. Total $4320$.",
+        },
+        {
+          text: "**(b) No two girls together.** Boys first: $5! = 120$, giving 6 gaps. Girls into 3 different gaps: ${}^{6}P_{3} = 120$. Total $120 \\times 120 = 14\\,400$.",
+        },
+      ],
+      answer: "(a) $4320$ (b) $14\\,400$",
+    },
+    { type: "heading", text: "Identical letters and relative order" },
+    {
+      type: "worked-example",
+      id: "pc1-5-we3",
+      title: "Worked example 3 — gap method with identical letters (stretch)",
+      problem:
+        "In how many arrangements of MISSISSIPPI do no two S's stand together?",
+      steps: [
+        {
+          text: "**The others.** Arrange M, I, I, I, I, P, P (7 letters): $\\frac{7!}{4!\\,2!} = 105$.",
+        },
+        {
+          text: "**Gaps.** 7 letters make 8 gaps. The 4 S's go into 4 different gaps. If the S's were different, that would be ${}^{8}P_{4} = 1680$ ways, but they're identical, so divide by $4!$ (lesson 1.3): $\\frac{1680}{24} = 70$.",
+        },
+        {
+          text: "**Multiply.** $105 \\times 70 = 7350$.",
+        },
+      ],
+      answer: "$7350$ arrangements.",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 — gap method with identical letters (stretch).** In how many arrangements of MISSISSIPPI do no two S's stand together?\n\n**Step 1 — the others.** Arrange M, I, I, I, I, P, P (7 letters): $\\frac{7!}{4!\\,2!} = 105$.\n**Step 2 — gaps.** 7 letters make 8 gaps. The 4 S's go into 4 different gaps. If the S's were different, that would be ${}^{8}P_{4} = 1680$ ways, but they're identical, so divide by $4!$ (lesson 1.3): $\\frac{1680}{24} = 70$.\n**Step 3 — multiply.** $105 \\times 70 = 7350$.\n\nThat \"arrange, then divide by $k!$ because order no longer matters\" is exactly the move Chapter 2 names ${}^{n}C_{r}$.",
+        "That \"arrange, then divide by $k!$ because order no longer matters\" is exactly the move Chapter 2 names ${}^{n}C_{r}$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — identical letters in a block (exam-style).** In how many arrangements of the letters of ARRANGE are the two R's (a) together, (b) not together?\n\n**Step 1 — tally.** A ×2, R ×2, N, G, E: 7 letters. All arrangements: $\\frac{7!}{2!\\,2!} = \\frac{5040}{4} = 1260$.\n**Step 2 — glue the R's.** Units: [RR], A, A, N, G, E. That's 6 units with two identical A's: $\\frac{6!}{2!} = 360$. *Why no $\\times 2!$ for the inside:* the two R's are identical, so the block RR has only one inner order. Multiplying by 2 here is the most common slip.\n**Step 3 — complement.** With exactly two R's, \"not together\" means \"not adjacent\", so subtract:",
+      type: "worked-example",
+      id: "pc1-5-we4",
+      title: "Worked example 4 — identical letters in a block (exam-style)",
+      problem:
+        "In how many arrangements of the letters of ARRANGE are the two R's (a) together, (b) not together?",
+      steps: [
+        {
+          text: "**Tally.** A ×2, R ×2, N, G, E: 7 letters. All arrangements: $\\frac{7!}{2!\\,2!} = \\frac{5040}{4} = 1260$.",
+        },
+        {
+          text: "**Glue the R's.** Units: [RR], A, A, N, G, E. That's 6 units with two identical A's: $\\frac{6!}{2!} = 360$. *Why no $\\times 2!$ for the inside:* the two R's are identical, so the block RR has only one inner order. Multiplying by 2 here is the most common slip.",
+        },
+        {
+          text: "**Complement.** With exactly two R's, \"not together\" means \"not adjacent\", so subtract:",
+          latex: "\\underbrace{\\frac{7!}{2!\\,2!}}_{\\text{all}} - \\underbrace{\\frac{6!}{2!}}_{\\text{RR glued}} = 1260 - 360 = 900",
+        },
+        {
+          text: "**Cross-check by the gap method.** Arrange A, A, N, G, E: $\\frac{5!}{2!} = 60$. They make 6 gaps. Put the two R's in 2 different gaps: ${}^{6}P_{2} = 30$, but the R's are identical, so divide by $2!$: 15. $60 \\times 15 = 900$. ✓",
+        },
+      ],
+      answer: "(a) $360$ (b) $900$",
     },
     {
-      type: "math",
-      latex:
-        "\\underbrace{\\frac{7!}{2!\\,2!}}_{\\text{all}} - \\underbrace{\\frac{6!}{2!}}_{\\text{RR glued}} = 1260 - 360 = 900",
-    },
-    {
-      type: "text",
-      content:
-        "**Cross-check by the gap method.** Arrange A, A, N, G, E: $\\frac{5!}{2!} = 60$. They make 6 gaps. Put the two R's in 2 different gaps: ${}^{6}P_{2} = 30$, but the R's are identical, so divide by $2!$: 15. $60 \\times 15 = 900$. ✓",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 — before, but not necessarily next to (application).** Six speakers A, B, C, D, E, F give talks one after another. In how many orders does A speak before B (not necessarily immediately before)?\n\n**Step 1 — all orders.** $6! = 720$.\n**Step 2 — pair them up.** Take any order and swap A and B. You get another order, and in exactly one of the two, A comes first. *Why this is a fair pairing:* swapping twice gets you back where you started, so every order has exactly one partner, and the other four speakers never move.\n**Step 3 — halve.** Exactly half the orders have A before B.",
-    },
-    {
-      type: "math",
-      latex:
-        "\\text{A before B: } \\frac{6!}{2} = 360 \\qquad \\text{A, B, C in that order: } \\frac{6!}{3!} = 120",
+      type: "worked-example",
+      id: "pc1-5-we5",
+      title: "Worked example 5 — before, but not necessarily next to (application)",
+      problem:
+        "Six speakers A, B, C, D, E, F give talks one after another. In how many orders does A speak before B (not necessarily immediately before)?",
+      steps: [
+        {
+          text: "**All orders.** $6! = 720$.",
+        },
+        {
+          text: "**Pair them up.** Take any order and swap A and B. You get another order, and in exactly one of the two, A comes first. *Why this is a fair pairing:* swapping twice gets you back where you started, so every order has exactly one partner, and the other four speakers never move.",
+        },
+        {
+          text: "**Halve.** Exactly half the orders have A before B.",
+          latex: "\\text{A before B: } \\frac{6!}{2} = 360 \\qquad \\text{A, B, C in that order: } \\frac{6!}{3!} = 120",
+        },
+      ],
+      answer: "$360$ orders.",
     },
     {
       type: "text",
       content:
         "**The extension on the right.** The three speakers A, B, C can appear in $3! = 6$ relative orders, and each one occurs equally often. Only A, B, C is allowed, so keep $\\frac{1}{6}$ of 720.\n\n**Contrast: immediately before.** If A must speak *right* before B, glue [AB] in that fixed order: 5 units, $5! = 120$. There's no $\\times 2$ because the order inside the block is forced.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc1-5-q1",
@@ -1260,6 +1616,7 @@ const lesson06: LessonSeed = {
       content:
         "The idea is how you already compare words: look at the first letter. Any word that starts with an earlier letter comes first, however the rest is arranged. If the first letters match, move on to the second letter, and so on. Each step is a product-rule count of \"choose a smaller letter here, then arrange everything after it freely\".",
     },
+    { type: "heading", text: "Counting the words that come first" },
     {
       type: "callout",
       variant: "definition",
@@ -1268,21 +1625,46 @@ const lesson06: LessonSeed = {
         "Sort the letters alphabetically. Then for each position, left to right:\n1. Count the unused letters that are alphabetically smaller than the letter actually in this position.\n2. Each of them could sit here, followed by *any* arrangement of the remaining letters. Add (smaller letters) × (arrangements of what's left).\n3. Remove the actual letter and move right.\n\n**Rank = (total words counted) + 1**. The $+1$ is the word itself.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — MOTHER** (distinct letters). Sorted: E, H, M, O, R, T.\n\n**Position 1: M.** Smaller unused letters: E, H (2). Each is followed by $5!$ arrangements: $2 \\times 120 = 240$.\n**Position 2: O.** Unused: E, H, O, R, T. Smaller than O: E, H (2). $2 \\times 4! = 48$.\n**Position 3: T.** Unused: E, H, R, T. Smaller: E, H, R (3). $3 \\times 3! = 18$.\n**Position 4: H.** Unused: E, H, R. Smaller: E (1). $1 \\times 2! = 2$.\n**Position 5: E.** Unused: E, R. Smaller: none. $0$.\n**Position 6: R.** Last letter: $0$.\n\n**Total before:** $240 + 48 + 18 + 2 = 308$. **Rank = 309.**",
-    },
-    {
-      type: "table",
-      headers: ["Position", "Letter", "Unused letters", "Smaller", "Remaining arrangements", "Contribution"],
-      rows: [
-        ["1", "M", "E H M O R T", "2", "$5! = 120$", "240"],
-        ["2", "O", "E H O R T", "2", "$4! = 24$", "48"],
-        ["3", "T", "E H R T", "3", "$3! = 6$", "18"],
-        ["4", "H", "E H R", "1", "$2! = 2$", "2"],
-        ["5", "E", "E R", "0", "$1! = 1$", "0"],
-        ["6", "R", "R", "0", "$0! = 1$", "0"],
+      type: "worked-example",
+      id: "pc1-6-we1",
+      title: "Worked example 1 — MOTHER (distinct letters)",
+      problem:
+        "Find the rank of MOTHER among its arrangements in dictionary order.\n\nSorted: E, H, M, O, R, T.",
+      steps: [
+        {
+          text: "**Position 1: M.** Smaller unused letters: E, H (2). Each is followed by $5!$ arrangements: $2 \\times 120 = 240$.",
+        },
+        {
+          text: "**Position 2: O.** Unused: E, H, O, R, T. Smaller than O: E, H (2). $2 \\times 4! = 48$.",
+        },
+        {
+          text: "**Position 3: T.** Unused: E, H, R, T. Smaller: E, H, R (3). $3 \\times 3! = 18$.",
+        },
+        {
+          text: "**Position 4: H.** Unused: E, H, R. Smaller: E (1). $1 \\times 2! = 2$.",
+        },
+        {
+          text: "**Position 5: E.** Unused: E, R. Smaller: none. $0$.",
+        },
+        {
+          text: "**Position 6: R.** Last letter: $0$.",
+        },
+        {
+          text: "**Total before:** $240 + 48 + 18 + 2 = 308$. **Rank = 309.**",
+          table: {
+            headers: ["Position", "Letter", "Unused letters", "Smaller", "Remaining arrangements", "Contribution"],
+            rows: [
+              ["1", "M", "E H M O R T", "2", "$5! = 120$", "240"],
+              ["2", "O", "E H O R T", "2", "$4! = 24$", "48"],
+              ["3", "T", "E H R T", "3", "$3! = 6$", "18"],
+              ["4", "H", "E H R", "1", "$2! = 2$", "2"],
+              ["5", "E", "E R", "0", "$1! = 1$", "0"],
+              ["6", "R", "R", "0", "$0! = 1$", "0"],
+            ],
+          },
+        },
       ],
+      answer: "Rank $= 309$.",
     },
     {
       type: "callout",
@@ -1291,48 +1673,128 @@ const lesson06: LessonSeed = {
       content:
         "Test the recipe on something you can list. The arrangements of A, B, C in order are ABC, ACB, BAC, BCA, CAB, CBA. The rank of BCA: position 1, B has one smaller letter (A), giving $1 \\times 2! = 2$. Position 2, C among {A, C} has one smaller (A), giving $1 \\times 1! = 1$. Total 3, rank 4. The list agrees.",
     },
+    { type: "heading", text: "Repeated letters" },
     {
       type: "text",
       content:
-        "**Repeated letters.** The recipe is the same, but \"arrangements of what's left\" now means the multiset count from lesson 1.3. And a letter that appears twice among the unused letters still counts **once** as a smaller choice, because starting with the first A or the second A gives the same words.",
+        "The recipe is the same, but \"arrangements of what's left\" now means the multiset count from lesson 1.3. And a letter that appears twice among the unused letters still counts **once** as a smaller choice, because starting with the first A or the second A gives the same words.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — AGAIN.** Letters A, A, G, I, N. Sorted: A, A, G, I, N. Total arrangements $\\frac{5!}{2!} = 60$.\n\n**Position 1: A.** Nothing is smaller than A. $0$.\n**Position 2: G.** Unused: A, G, I, N. Smaller: A. Then arrange G, I, N freely: $3! = 6$. Contribution $6$.\n**Position 3: A.** Unused: A, I, N. Nothing smaller. $0$.\n**Position 4: I.** Unused: I, N. Nothing smaller. $0$.\n**Position 5: N.** Last letter: $0$.\n\n**Total before:** 6 (the words AA _ _ _). **Rank = 7.**",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 — SCHOOL** (repeat among the later letters). Sorted: C, H, L, O, O, S.\n\n**Position 1: S.** Smaller distinct letters: C, H, L, O (4 kinds). After C, H or L the rest still has two O's: $\\frac{5!}{2!} = 60$ each. After O, the rest is C, H, L, O, S, all distinct: $5! = 120$. Contribution $60 + 60 + 60 + 120 = 300$.\n**Position 2: C.** Nothing smaller. $0$.\n**Position 3: H.** Unused: H, L, O, O. Nothing smaller. $0$.\n**Position 4: O.** Unused: L, O, O. Smaller: L, followed by O, O in $1$ way. Contribution $1$.\n**Position 5: O.** Unused: L, O. Smaller: L, then O. Contribution $1$.\n\n**Total before:** $302$. **Rank = 303.**",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 — SUCCESS (JEE Main).** Letters C ×2, E, S ×3, U: 7 letters and $\\frac{7!}{2!\\,3!} = 420$ words. Sorted: C, C, E, S, S, S, U.\n\n**Position 1: S.** Smaller kinds: C and E. *Why compute each one separately:* what's left depends on which letter you place, so the multiset denominator changes. C first leaves C, E, S, S, S, U: $\\frac{6!}{3!} = 120$. E first leaves C, C, S, S, S, U: $\\frac{6!}{2!\\,3!} = 60$. Contribution $180$.\n**Position 2: U.** Unused: C, C, E, S, S, U. Smaller kinds: C, E, S. C leaves C, E, S, S, U: $\\frac{5!}{2!} = 60$. E leaves C, C, S, S, U: $\\frac{5!}{2!\\,2!} = 30$. S leaves C, C, E, S, U: $\\frac{5!}{2!} = 60$. Contribution $150$.\n**Positions 3 to 7.** The unused letters are C, C, E, S, S, and the word continues C C E S S, already in alphabetical order. No smaller letter ever appears: $0$.",
-    },
-    {
-      type: "table",
-      headers: ["Position", "Letter", "Smaller kinds", "Words counted"],
-      rows: [
-        ["1", "S", "C, E", "$120 + 60 = 180$"],
-        ["2", "U", "C, E, S", "$60 + 30 + 60 = 150$"],
-        ["3–7", "C C E S S", "none", "0"],
-        ["", "", "Total before", "330"],
+      type: "worked-example",
+      id: "pc1-6-we2",
+      title: "Worked example 2 — AGAIN",
+      problem:
+        "Find the rank of AGAIN among its arrangements in dictionary order.\n\nLetters A, A, G, I, N. Sorted: A, A, G, I, N. Total arrangements $\\frac{5!}{2!} = 60$.",
+      steps: [
+        {
+          text: "**Position 1: A.** Nothing is smaller than A. $0$.",
+        },
+        {
+          text: "**Position 2: G.** Unused: A, G, I, N. Smaller: A. Then arrange G, I, N freely: $3! = 6$. Contribution $6$.",
+        },
+        {
+          text: "**Position 3: A.** Unused: A, I, N. Nothing smaller. $0$.",
+        },
+        {
+          text: "**Position 4: I.** Unused: I, N. Nothing smaller. $0$.",
+        },
+        {
+          text: "**Position 5: N.** Last letter: $0$.",
+        },
+        {
+          text: "**Total before:** 6 (the words AA _ _ _). **Rank = 7.**",
+        },
       ],
+      answer: "Rank $= 7$.",
     },
     {
-      type: "math",
-      latex: "\\text{rank(SUCCESS)} = 180 + 150 + 1 = 331",
+      type: "worked-example",
+      id: "pc1-6-we3",
+      title: "Worked example 3 — SCHOOL (repeat among the later letters)",
+      problem:
+        "Find the rank of SCHOOL among its arrangements in dictionary order.\n\nSorted: C, H, L, O, O, S.",
+      steps: [
+        {
+          text: "**Position 1: S.** Smaller distinct letters: C, H, L, O (4 kinds). After C, H or L the rest still has two O's: $\\frac{5!}{2!} = 60$ each. After O, the rest is C, H, L, O, S, all distinct: $5! = 120$. Contribution $60 + 60 + 60 + 120 = 300$.",
+        },
+        {
+          text: "**Position 2: C.** Nothing smaller. $0$.",
+        },
+        {
+          text: "**Position 3: H.** Unused: H, L, O, O. Nothing smaller. $0$.",
+        },
+        {
+          text: "**Position 4: O.** Unused: L, O, O. Smaller: L, followed by O, O in $1$ way. Contribution $1$.",
+        },
+        {
+          text: "**Position 5: O.** Unused: L, O. Smaller: L, then O. Contribution $1$.",
+        },
+        {
+          text: "**Total before:** $302$. **Rank = 303.**",
+        },
+      ],
+      answer: "Rank $= 303$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 — numbers in increasing order (application).** All 5-digit numbers formed from 1, 2, 3, 4, 5, each used once, are written in increasing order. In which position is 35142?\n\n*Why the same recipe works:* for numbers with the same number of digits, increasing order *is* dictionary order on the digits. Compare the first digits; if they tie, compare the second; and so on.\n**Position 1: 3.** Smaller: 1, 2. $2 \\times 4! = 48$.\n**Position 2: 5.** Unused: 1, 2, 4, 5. Smaller: 1, 2, 4. $3 \\times 3! = 18$.\n**Position 3: 1.** Unused: 1, 2, 4. None smaller. $0$.\n**Position 4: 4.** Unused: 2, 4. Smaller: 2. $1 \\times 1! = 1$.\n**Position 5: 2.** Last digit. $0$.",
+      type: "worked-example",
+      id: "pc1-6-we4",
+      title: "Worked example 4 — SUCCESS (JEE Main)",
+      problem:
+        "Find the rank of SUCCESS among its arrangements in dictionary order.\n\nLetters C ×2, E, S ×3, U: 7 letters and $\\frac{7!}{2!\\,3!} = 420$ words. Sorted: C, C, E, S, S, S, U.",
+      steps: [
+        {
+          text: "**Position 1: S.** Smaller kinds: C and E. *Why compute each one separately:* what's left depends on which letter you place, so the multiset denominator changes. C first leaves C, E, S, S, S, U: $\\frac{6!}{3!} = 120$. E first leaves C, C, S, S, S, U: $\\frac{6!}{2!\\,3!} = 60$. Contribution $180$.",
+        },
+        {
+          text: "**Position 2: U.** Unused: C, C, E, S, S, U. Smaller kinds: C, E, S. C leaves C, E, S, S, U: $\\frac{5!}{2!} = 60$. E leaves C, C, S, S, U: $\\frac{5!}{2!\\,2!} = 30$. S leaves C, C, E, S, U: $\\frac{5!}{2!} = 60$. Contribution $150$.",
+        },
+        {
+          text: "**Positions 3 to 7.** The unused letters are C, C, E, S, S, and the word continues C C E S S, already in alphabetical order. No smaller letter ever appears: $0$.",
+        },
+        {
+          latex: "\\text{rank(SUCCESS)} = 180 + 150 + 1 = 331",
+          table: {
+            headers: ["Position", "Letter", "Smaller kinds", "Words counted"],
+            rows: [
+              ["1", "S", "C, E", "$120 + 60 = 180$"],
+              ["2", "U", "C, E, S", "$60 + 30 + 60 = 150$"],
+              ["3–7", "C C E S S", "none", "0"],
+              ["", "", "Total before", "330"],
+            ],
+          },
+        },
+      ],
+      answer: "Rank $= 331$.",
     },
+    { type: "heading", text: "Ranking numbers in increasing order" },
     {
-      type: "math",
-      latex: "48 + 18 + 0 + 1 + 0 = 67 \\quad\\Longrightarrow\\quad \\text{35142 is in position } 68",
+      type: "worked-example",
+      id: "pc1-6-we5",
+      title: "Worked example 5 — numbers in increasing order (application)",
+      problem:
+        "All 5-digit numbers formed from 1, 2, 3, 4, 5, each used once, are written in increasing order. In which position is 35142?",
+      steps: [
+        {
+          text: "*Why the same recipe works:* for numbers with the same number of digits, increasing order *is* dictionary order on the digits. Compare the first digits; if they tie, compare the second; and so on.",
+        },
+        {
+          text: "**Position 1: 3.** Smaller: 1, 2. $2 \\times 4! = 48$.",
+        },
+        {
+          text: "**Position 2: 5.** Unused: 1, 2, 4, 5. Smaller: 1, 2, 4. $3 \\times 3! = 18$.",
+        },
+        {
+          text: "**Position 3: 1.** Unused: 1, 2, 4. None smaller. $0$.",
+        },
+        {
+          text: "**Position 4: 4.** Unused: 2, 4. Smaller: 2. $1 \\times 1! = 1$.",
+        },
+        {
+          text: "**Position 5: 2.** Last digit. $0$.",
+          latex: "48 + 18 + 0 + 1 + 0 = 67 \\quad\\Longrightarrow\\quad \\text{35142 is in position } 68",
+        },
+      ],
+      answer: "Position $68$.",
     },
     {
       type: "callout",
@@ -1341,11 +1803,13 @@ const lesson06: LessonSeed = {
       content:
         "**Forgetting the $+1$.** The count gives the words *before* yours; your word is the next one.\n**Counting smaller letters from the full word instead of the unused ones.** At each position only the letters not yet placed are available. In MOTHER at position 3, M and O are already used, so they don't count as smaller than T.",
     },
+    { type: "heading", text: "Reversing: which word is at rank $k$?" },
     {
       type: "text",
       content:
-        "**Reversing the question — which word is at rank $k$?** Arrangements of A, B, C, D: words beginning with A take ranks 1–6, B takes 7–12, C takes 13–18, D takes 19–24. Rank 15 is therefore the 3rd word starting with C. The remaining letters A, B, D give CABD (13), CADB (14), CBAD (15). So rank 15 is **CBAD**. You peel off blocks of $3!$, then $2!$, then $1!$.",
+        "Arrangements of A, B, C, D: words beginning with A take ranks 1–6, B takes 7–12, C takes 13–18, D takes 19–24. Rank 15 is therefore the 3rd word starting with C. The remaining letters A, B, D give CABD (13), CADB (14), CBAD (15). So rank 15 is **CBAD**. You peel off blocks of $3!$, then $2!$, then $1!$.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc1-6-q1",

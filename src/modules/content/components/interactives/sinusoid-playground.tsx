@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { z } from "zod";
 import type { sinusoidPlaygroundSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { FunctionPlot, formatNumber } from "./function-plot";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 
@@ -85,8 +86,8 @@ export function SinusoidPlayground({ config }: { config: Config }) {
           ? matched
             ? "Matched — the two curves now coincide."
             : "Move the sliders until your curve sits exactly on the purple target."
-          : (config.caption ??
-            "Dashed is the untransformed curve. Change one slider at a time and name the job it does.")}
+          : <RichText text={config.caption ??
+            "Dashed is the untransformed curve. Change one slider at a time and name the job it does."} />}
       </p>
     </InteractiveFrame>
   );

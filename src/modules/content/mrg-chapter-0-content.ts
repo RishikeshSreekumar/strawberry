@@ -23,6 +23,14 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/mrg-0-centre-of-mass.mp4",
+      poster: "/videos/mrg-0-centre-of-mass.jpg",
+      title: "Chapter 0 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "Slide a spanner across a smooth ice rink with a flick of the wrist. It spins and wobbles, the jaw end and the handle end chase each other round and round, and no single point on the handle seems to follow a simple path. Yet if you film it from above and mark one particular point, somewhere between the middle and the heavy jaw, that point glides in a perfectly straight line at a steady speed. Throw the same spanner through the air and that point traces a clean parabola, exactly like a small stone would.",
@@ -32,6 +40,7 @@ const lesson01: LessonSeed = {
       content:
         "That special point is the **centre of mass** (COM). This chapter finds where it is and proves why it behaves so simply. The whole of Mechanics II rests on it: once you know how the COM moves, a tumbling body becomes a single particle plus a spin about that particle.",
     },
+    { type: "heading", text: "Balancing two masses on a rod" },
     {
       type: "text",
       content:
@@ -55,10 +64,11 @@ const lesson01: LessonSeed = {
       content:
         "For masses $m_1$ at $x_1$ and $m_2$ at $x_2$: $x_{cm} = \\dfrac{m_1x_1 + m_2x_2}{m_1 + m_2}$.\nIt lies on the segment joining them, and its distances $r_1$, $r_2$ from $m_1$ and $m_2$ are in the **inverse** ratio of the masses: $r_1 : r_2 = m_2 : m_1$, so $m_1r_1 = m_2r_2$.",
     },
+    { type: "heading", text: "Why the inverse ratio" },
     {
       type: "text",
       content:
-        "**Why the inverse ratio.** Put the origin at $m_1$ and let the separation be $d$, so $x_1 = 0$ and $x_2 = d$. Then",
+        "Put the origin at $m_1$ and let the separation be $d$, so $x_1 = 0$ and $x_2 = d$. Then",
     },
     {
       type: "math",
@@ -99,14 +109,57 @@ const lesson01: LessonSeed = {
         "What you should have seen: with 3 kg at $A$ and 1 kg at $B$, $P$ sits at $x = -2$, a quarter of the way from $A$ ($AP : PB = 1 : 3$). Equal masses put $P$ at the midpoint. Swap the masses and $P$ jumps to the mirror position near $B$. The ratio of the *distances* is always the ratio of the *masses* upside down.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (the Earth–Moon barycentre).** The Earth is 81 times as massive as the Moon and their centres are $3.84\\times10^5$ km apart. Where is their centre of mass?\n\n1. Put the origin at the Earth's centre and the Moon at $d = 3.84\\times10^5$ km. *Why this step:* placing the origin on one mass kills its term in the numerator.\n2. With $M_E = 81m$ and $M_m = m$: $r_E = \\dfrac{m\\,d}{81m + m} = \\dfrac{d}{82}$.\n3. $r_E = \\dfrac{3.84\\times10^5}{82} \\approx 4.68\\times10^3$ km, about 4700 km from the Earth's centre.\n4. The Earth's radius is 6400 km, so the barycentre is *inside* the Earth, about 1700 km below the surface. *Why this step:* comparing with a known length is how you check a number makes sense. The Earth and Moon both circle this point once a month, which is why the Earth wobbles slightly.\n\n**Worked example 2 (a dumbbell).** A 2 kg mass and a 3 kg mass sit at the ends of a light rod 1 m long. Find the centre of mass.\n\n1. Origin at the 2 kg mass, positive direction towards the 3 kg mass.\n2. $x_{cm} = \\dfrac{2(0) + 3(1)}{2 + 3} = 0.6$ m from the 2 kg mass.\n3. So it is 0.4 m from the 3 kg mass. Check the inverse ratio: $0.6 : 0.4 = 3 : 2 = m_2 : m_1$. ✓",
+      type: "worked-example",
+      id: "mrg0-1-we1",
+      title: "Worked example 1: the Earth–Moon barycentre",
+      problem:
+        "The Earth is 81 times as massive as the Moon and their centres are $3.84\\times10^5$ km apart. Where is their centre of mass?",
+      steps: [
+        { text: "Put the origin at the Earth's centre and the Moon at $d = 3.84\\times10^5$ km. *Why this step:* placing the origin on one mass kills its term in the numerator." },
+        { text: "With $M_E = 81m$ and $M_m = m$: $r_E = \\dfrac{m\\,d}{81m + m} = \\dfrac{d}{82}$." },
+        { text: "$r_E = \\dfrac{3.84\\times10^5}{82} \\approx 4.68\\times10^3$ km, about 4700 km from the Earth's centre." },
+        { text: "The Earth's radius is 6400 km, so the barycentre is *inside* the Earth, about 1700 km below the surface. *Why this step:* comparing with a known length is how you check a number makes sense. The Earth and Moon both circle this point once a month, which is why the Earth wobbles slightly." },
+      ],
+      answer: "About $4.68\\times10^3$ km from the Earth's centre, inside the Earth.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (the origin does not matter).** A 4 kg particle sits at $x = -2$ m and a 1 kg particle at $x = 3$ m.\n\n1. $x_{cm} = \\dfrac{4(-2) + 1(3)}{4 + 1} = \\dfrac{-5}{5} = -1$ m.\n2. Redo it with the origin at the 4 kg particle: the 1 kg particle is now at $+5$ m, and $x_{cm} = \\dfrac{0 + 1(5)}{5} = 1$ m from the 4 kg particle, which is $-2 + 1 = -1$ m in the old coordinates. ✓ *Why this step:* the COM is a physical point; moving the origin changes its coordinate but never its place among the masses.\n\n**Worked example 4 (keeping the COM fixed, NCERT/JEE Main).** Particles of 1 kg and 3 kg are 8 cm apart. (a) How far is the COM from the 1 kg particle? (b) The 1 kg particle is moved 3 cm towards the COM. How must the 3 kg particle move so the COM stays put?\n\n1. (a) $r_1 = \\dfrac{3 \\times 8}{1 + 3} = 6$ cm.\n2. (b) Take $+x$ from the 1 kg particle towards the 3 kg particle. If the COM does not move, $\\Delta x_{cm} = \\dfrac{m_1\\Delta x_1 + m_2\\Delta x_2}{m_1 + m_2} = 0$. *Why this step:* the COM formula is linear, so it applies to changes in position just as well as to positions.\n3. $1(+3) + 3\\,\\Delta x_2 = 0 \\Rightarrow \\Delta x_2 = -1$ cm.\n4. The minus sign means the 3 kg particle moves 1 cm in the $-x$ direction, that is, 1 cm *towards* the COM. Both close in on it, the heavy one by less.",
+      type: "worked-example",
+      id: "mrg0-1-we2",
+      title: "Worked example 2: a dumbbell",
+      problem:
+        "A 2 kg mass and a 3 kg mass sit at the ends of a light rod 1 m long. Find the centre of mass.",
+      steps: [
+        { text: "Origin at the 2 kg mass, positive direction towards the 3 kg mass." },
+        { text: "$x_{cm} = \\dfrac{2(0) + 3(1)}{2 + 3} = 0.6$ m from the 2 kg mass." },
+        { text: "So it is 0.4 m from the 3 kg mass. Check the inverse ratio: $0.6 : 0.4 = 3 : 2 = m_2 : m_1$. ✓" },
+      ],
+      answer: "0.6 m from the 2 kg mass (0.4 m from the 3 kg mass).",
+    },
+    {
+      type: "worked-example",
+      id: "mrg0-1-we3",
+      title: "Worked example 3: the origin does not matter",
+      problem:
+        "A 4 kg particle sits at $x = -2$ m and a 1 kg particle at $x = 3$ m. Find the COM, then find it again with the origin at the 4 kg particle.",
+      steps: [
+        { text: "$x_{cm} = \\dfrac{4(-2) + 1(3)}{4 + 1} = \\dfrac{-5}{5} = -1$ m." },
+        { text: "Redo it with the origin at the 4 kg particle: the 1 kg particle is now at $+5$ m, and $x_{cm} = \\dfrac{0 + 1(5)}{5} = 1$ m from the 4 kg particle, which is $-2 + 1 = -1$ m in the old coordinates. ✓ *Why this step:* the COM is a physical point; moving the origin changes its coordinate but never its place among the masses." },
+      ],
+      answer: "$x_{cm} = -1$ m, which is 1 m from the 4 kg particle: the same point either way.",
+    },
+    {
+      type: "worked-example",
+      id: "mrg0-1-we4",
+      title: "Worked example 4: keeping the COM fixed, NCERT/JEE Main",
+      problem:
+        "Particles of 1 kg and 3 kg are 8 cm apart. (a) How far is the COM from the 1 kg particle? (b) The 1 kg particle is moved 3 cm towards the COM. How must the 3 kg particle move so the COM stays put?",
+      steps: [
+        { text: "(a) $r_1 = \\dfrac{3 \\times 8}{1 + 3} = 6$ cm." },
+        { text: "(b) Take $+x$ from the 1 kg particle towards the 3 kg particle. If the COM does not move, $\\Delta x_{cm} = \\dfrac{m_1\\Delta x_1 + m_2\\Delta x_2}{m_1 + m_2} = 0$. *Why this step:* the COM formula is linear, so it applies to changes in position just as well as to positions." },
+        { text: "$1(+3) + 3\\,\\Delta x_2 = 0 \\Rightarrow \\Delta x_2 = -1$ cm." },
+        { text: "The minus sign means the 3 kg particle moves 1 cm in the $-x$ direction, that is, 1 cm *towards* the COM. Both close in on it, the heavy one by less." },
+      ],
+      answer: "(a) 6 cm; (b) the 3 kg particle moves 1 cm towards the COM.",
     },
     {
       type: "callout",
@@ -122,16 +175,20 @@ const lesson01: LessonSeed = {
       content:
         "Students sometimes weight the wrong way round and put the COM of 1 kg and 3 kg a quarter of the way from the 3 kg mass. It is the other way: the COM is **nearer the heavier mass**, because $m_1r_1 = m_2r_2$ makes the big mass's lever arm small. Always sanity-check with the extreme case: if one mass were enormous, the COM would sit on top of it.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mrg0-1-q1",
       variant: "practice",
-      question: "A 2 kg particle is at $x = 0$ and a 6 kg particle at $x = 4$ m. Where is the centre of mass?",
-      options: [
-        { text: "$x = 1$ m", feedback: "That puts the COM nearer the 2 kg particle. You have used the inverse ratio the wrong way round: $r_{2\\text{ kg}} = \\frac{6 \\times 4}{8}$." },
-        { text: "$x = 3$ m", correct: true, feedback: "$\\frac{2(0) + 6(4)}{8} = 3$ m, three times as far from the light particle as from the heavy one." },
-        { text: "$x = 2$ m", feedback: "That is the midpoint, which is only right for equal masses." },
-        { text: "$x = 24$ m", feedback: "You forgot to divide by the total mass, 8 kg. The COM must lie between the two particles." },
+      question: "A 2 kg particle is at $x = 0$ and a 6 kg particle at $x = 4$ m. Where is the centre of mass? Give its $x$-coordinate in metres.",
+      answer: 3,
+      unit: "m",
+      hint: "Weight each position by its mass and divide by the total mass.",
+      solution: "$x_{cm} = \\dfrac{2(0) + 6(4)}{2 + 6} = \\dfrac{24}{8} = 3$ m: three times as far from the light particle as from the heavy one.",
+      commonMistakes: [
+        { answer: 1, feedback: "That puts the COM nearer the 2 kg particle. You have used the inverse ratio the wrong way round: $r_{2\\text{ kg}} = \\frac{6 \\times 4}{8}$." },
+        { answer: 2, feedback: "That is the midpoint, which is only right for equal masses." },
+        { answer: 24, feedback: "You forgot to divide by the total mass, 8 kg. The COM must lie between the two particles." },
       ],
     },
     {
@@ -145,6 +202,7 @@ const lesson01: LessonSeed = {
         { text: "$4 : 1$", correct: true, feedback: "$m_1r_1 = m_2r_2$ gives $r_1 : r_2 = m_2 : m_1 = 4 : 1$." },
         { text: "$1 : 16$", feedback: "Masses enter linearly, not squared. The ratio is simply $m_2 : m_1$." },
       ],
+      hint: "Balance the rod about the COM by taking moments: $m_1 r_1 = m_2 r_2$. Which particle must be closer to the COM?",
     },
     {
       type: "quiz",
@@ -157,6 +215,7 @@ const lesson01: LessonSeed = {
         { text: "$\\dfrac{d}{3}$", feedback: "Divide by the total mass $4M$, not by $3M$." },
         { text: "$\\dfrac{d}{2}$", feedback: "The midpoint is only for equal masses." },
       ],
+      hint: "Put the origin at the heavier star and use $x_{cm} = \\dfrac{m_1 x_1 + m_2 x_2}{m_1 + m_2}$, or use the inverse-ratio rule directly.",
     },
     {
       type: "quiz",
@@ -181,6 +240,21 @@ const lesson01: LessonSeed = {
         { text: "The COM moves to a different point between the masses.", feedback: "The weighted average is origin-independent as a point: $\\frac{m_1(x_1 + s) + m_2(x_2 + s)}{m_1 + m_2} = x_{cm} + s$." },
         { text: "The coordinate $x_{cm}$ changes, but the COM is the same physical point.", correct: true, feedback: "Shifting the origin by $s$ shifts every coordinate, including $x_{cm}$, by $s$. The point among the masses stays put." },
       ],
+      hint: "Think of Worked example 3: shifting the origin shifts every coordinate by the same amount. Does that move any physical point?",
+    },
+    {
+      type: "quiz",
+      id: "mrg0-1-q6",
+      variant: "practice",
+      multiple: true,
+      question: "Two particles of masses $m_1 > m_2$ are a distance $d$ apart, at distances $r_1$ and $r_2$ from their centre of mass. Select all the statements that are correct.",
+      options: [
+        { text: "The centre of mass lies on the line segment joining them.", correct: true, feedback: "It is a weighted average of the two positions with positive weights, so it lies between them." },
+        { text: "$m_1 r_1 = m_2 r_2$", correct: true, feedback: "The balance condition: the mass moments about the COM cancel." },
+        { text: "$r_1 = \\dfrac{m_2 d}{m_1 + m_2}$", correct: true, feedback: "From $m_1 r_1 = m_2 r_2$ and $r_1 + r_2 = d$. Each particle's distance is set by the *other* mass." },
+        { text: "The centre of mass is nearer $m_2$, the lighter particle.", feedback: "The heavier particle gets the shorter lever arm: $r_1 < r_2$ when $m_1 > m_2$." },
+      ],
+      hint: "Balance the two masses about their centre of mass (the inverse-ratio rule), with $r_1 + r_2 = d$, and test each statement against that.",
     },
   ]),
 };
@@ -195,10 +269,11 @@ const lesson02: LessonSeed = {
       content:
         "Real bodies are made of many particles, not two, and they live in the plane or in space, not on a line. We need the weighted average of many *position vectors*. The nice thing is that we do not need a new idea, only the two-particle formula used over and over.",
     },
+    { type: "heading", text: "Grouping builds the general formula" },
     {
       type: "text",
       content:
-        "**Grouping builds the general formula.** Take three particles. First replace $m_1$ and $m_2$ by a single particle of mass $m_1 + m_2$ at their COM, $\\vec r_{12} = \\frac{m_1\\vec r_1 + m_2\\vec r_2}{m_1 + m_2}$. Then find the COM of that particle and $m_3$:",
+        "Take three particles. First replace $m_1$ and $m_2$ by a single particle of mass $m_1 + m_2$ at their COM, $\\vec r_{12} = \\frac{m_1\\vec r_1 + m_2\\vec r_2}{m_1 + m_2}$. Then find the COM of that particle and $m_3$:",
     },
     {
       type: "math",
@@ -223,10 +298,11 @@ const lesson02: LessonSeed = {
       content:
         "Any sub-system can be replaced by its total mass placed at its own COM, and the answer for the whole is unchanged. This is the single most useful trick in the chapter: a table with four legs and a lamp on it is \"table at its COM\" plus \"lamp at its COM\".",
     },
+    { type: "heading", text: "Three equal masses" },
     {
       type: "text",
       content:
-        "**Three equal masses.** With $m_1 = m_2 = m_3 = m$ the formula becomes $\\vec r_{cm} = \\frac{\\vec r_1 + \\vec r_2 + \\vec r_3}{3}$, the centroid of the triangle. Drag the vertices below: the point $G$ is where three equal masses would balance, and it always divides each median $2 : 1$ from the vertex.",
+        "With $m_1 = m_2 = m_3 = m$ the formula becomes $\\vec r_{cm} = \\frac{\\vec r_1 + \\vec r_2 + \\vec r_3}{3}$, the centroid of the triangle. Drag the vertices below: the point $G$ is where three equal masses would balance, and it always divides each median $2 : 1$ from the vertex.",
     },
     {
       type: "interactive",
@@ -245,20 +321,74 @@ const lesson02: LessonSeed = {
       content:
         "What you should have seen: $G$ starts at $(0, -\\tfrac13)$, the average of $(-3,-2)$, $(3,-2)$ and $(0,3)$. Moving one vertex by some displacement moves $G$ by a third of it, because that vertex carries a third of the total mass.",
     },
+    { type: "heading", text: "Squares, molecules and triangles" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (masses on a square).** Masses of 1, 2, 3 and 4 kg sit at the corners $(0,0)$, $(1,0)$, $(1,1)$ and $(0,1)$ of a square of side 1 m. Find the COM.\n\n1. Total mass $M = 10$ kg.\n2. $x_{cm} = \\dfrac{1(0) + 2(1) + 3(1) + 4(0)}{10} = \\dfrac{5}{10} = 0.5$ m. *Why this step:* each coordinate is a separate weighted average; do not mix $x$ and $y$.\n3. $y_{cm} = \\dfrac{1(0) + 2(0) + 3(1) + 4(1)}{10} = \\dfrac{7}{10} = 0.7$ m.\n4. COM $= (0.5, 0.7)$ m. Sanity check: the top edge carries $3 + 4 = 7$ kg against 3 kg on the bottom, so the COM should be above the middle, and it is. The left and right edges carry 5 kg each, so $x_{cm}$ is exactly central.\n\n**Worked example 2 (grouping).** 2 kg at $(0,0)$, 2 kg at $(2,0)$ and 4 kg at $(1,3)$, in metres.\n\n1. The two 2 kg masses group into 4 kg at their midpoint $(1,0)$. *Why this step:* equal masses group at the midpoint with no arithmetic.\n2. Now 4 kg at $(1,0)$ and 4 kg at $(1,3)$: again equal, so the COM is the midpoint, $(1, 1.5)$ m.\n3. Check directly: $x_{cm} = \\frac{0 + 4 + 4}{8} = 1$, $y_{cm} = \\frac{0 + 0 + 12}{8} = 1.5$. ✓",
+      type: "worked-example",
+      id: "mrg0-2-we1",
+      title: "Worked example 1: masses on a square",
+      problem:
+        "Masses of 1, 2, 3 and 4 kg sit at the corners $(0,0)$, $(1,0)$, $(1,1)$ and $(0,1)$ of a square of side 1 m. Find the COM.",
+      steps: [
+        { text: "Total mass $M = 10$ kg." },
+        { text: "$x_{cm} = \\dfrac{1(0) + 2(1) + 3(1) + 4(0)}{10} = \\dfrac{5}{10} = 0.5$ m. *Why this step:* each coordinate is a separate weighted average; do not mix $x$ and $y$." },
+        { text: "$y_{cm} = \\dfrac{1(0) + 2(0) + 3(1) + 4(1)}{10} = \\dfrac{7}{10} = 0.7$ m." },
+        { text: "COM $= (0.5, 0.7)$ m. Sanity check: the top edge carries $3 + 4 = 7$ kg against 3 kg on the bottom, so the COM should be above the middle, and it is. The left and right edges carry 5 kg each, so $x_{cm}$ is exactly central." },
+      ],
+      answer: "COM $= (0.5, 0.7)$ m.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (the water molecule, NCERT).** In $\\text{H}_2\\text{O}$ each O–H bond is 0.96 Å long and the angle between the bonds is $104.5^\\circ$. Taking the masses as 16 u for oxygen and 1 u for each hydrogen, locate the COM.\n\n1. Put O at the origin with the $x$-axis along the bisector of the H–O–H angle. *Why this step:* the molecule is symmetric about the bisector, so the COM must lie on it and $y_{cm} = 0$ with no calculation.\n2. Each H is at angle $52.25^\\circ$ from the axis, so its $x$-coordinate is $0.96\\cos 52.25^\\circ \\approx 0.96 \\times 0.612 = 0.588$ Å.\n3. $x_{cm} = \\dfrac{16(0) + 1(0.588) + 1(0.588)}{18} \\approx \\dfrac{1.176}{18} \\approx 0.065$ Å.\n4. The COM sits 0.065 Å from the O nucleus along the bisector, deep inside the oxygen atom, because oxygen carries $\\frac{16}{18}$ of the mass. The two $y$-coordinates $\\pm 0.96\\sin 52.25^\\circ$ cancel, as step 1 promised.",
+      type: "worked-example",
+      id: "mrg0-2-we2",
+      title: "Worked example 2: grouping",
+      problem:
+        "2 kg at $(0,0)$, 2 kg at $(2,0)$ and 4 kg at $(1,3)$, in metres. Find the COM.",
+      steps: [
+        { text: "The two 2 kg masses group into 4 kg at their midpoint $(1,0)$. *Why this step:* equal masses group at the midpoint with no arithmetic." },
+        { text: "Now 4 kg at $(1,0)$ and 4 kg at $(1,3)$: again equal, so the COM is the midpoint, $(1, 1.5)$ m." },
+        { text: "Check directly: $x_{cm} = \\frac{0 + 4 + 4}{8} = 1$, $y_{cm} = \\frac{0 + 0 + 12}{8} = 1.5$. ✓" },
+      ],
+      answer: "COM $= (1, 1.5)$ m.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (unequal masses on a triangle, JEE Main).** Masses $m$, $2m$ and $3m$ sit at the vertices of an equilateral triangle of side $a$. Find the COM relative to the vertex holding $m$.\n\n1. Place $m$ at $(0,0)$, $2m$ at $(a, 0)$ and $3m$ at $\\left(\\frac a2, \\frac{\\sqrt3 a}{2}\\right)$. *Why this step:* putting the lightest mass at the origin and one side on the $x$-axis zeroes as many terms as possible.\n2. $x_{cm} = \\dfrac{0 + 2m(a) + 3m\\left(\\frac a2\\right)}{6m} = \\dfrac{3.5a}{6} = \\dfrac{7a}{12}$.\n3. $y_{cm} = \\dfrac{0 + 0 + 3m\\left(\\frac{\\sqrt3a}{2}\\right)}{6m} = \\dfrac{\\sqrt3a}{4}$.\n4. COM $= \\left(\\frac{7a}{12}, \\frac{\\sqrt3 a}{4}\\right)$. Compare the centroid $\\left(\\frac a2, \\frac{\\sqrt3a}{6}\\right)$: the COM has moved right and up, towards the $2m$ and $3m$ corners, as it should.\n\n**Worked example 5 (a bent wire).** Two identical uniform rods, each of length $L$ and mass $M$, are joined at one end to form an L. Find the COM.\n\n1. Replace each rod by its mass at its midpoint: $(\\frac L2, 0)$ and $(0, \\frac L2)$ with the corner at the origin. *Why this step:* a uniform rod's COM is its midpoint (0.3 proves it), and grouping lets us treat each rod as one particle.\n2. Equal masses, so the COM is the midpoint: $\\left(\\frac L4, \\frac L4\\right)$.\n3. That point lies in the empty space inside the corner of the L, not on either rod.",
+      type: "worked-example",
+      id: "mrg0-2-we3",
+      title: "Worked example 3: the water molecule, NCERT",
+      problem:
+        "In $\\text{H}_2\\text{O}$ each O–H bond is 0.96 Å long and the angle between the bonds is $104.5^\\circ$. Taking the masses as 16 u for oxygen and 1 u for each hydrogen, locate the COM.",
+      steps: [
+        { text: "Put O at the origin with the $x$-axis along the bisector of the H–O–H angle. *Why this step:* the molecule is symmetric about the bisector, so the COM must lie on it and $y_{cm} = 0$ with no calculation." },
+        { text: "Each H is at angle $52.25^\\circ$ from the axis, so its $x$-coordinate is $0.96\\cos 52.25^\\circ \\approx 0.96 \\times 0.612 = 0.588$ Å." },
+        { text: "$x_{cm} = \\dfrac{16(0) + 1(0.588) + 1(0.588)}{18} \\approx \\dfrac{1.176}{18} \\approx 0.065$ Å." },
+        { text: "The COM sits 0.065 Å from the O nucleus along the bisector, deep inside the oxygen atom, because oxygen carries $\\frac{16}{18}$ of the mass. The two $y$-coordinates $\\pm 0.96\\sin 52.25^\\circ$ cancel, as step 1 promised." },
+      ],
+      answer: "About 0.065 Å from the O nucleus, along the bisector of the H–O–H angle.",
+    },
+    {
+      type: "worked-example",
+      id: "mrg0-2-we4",
+      title: "Worked example 4: unequal masses on a triangle, JEE Main",
+      problem:
+        "Masses $m$, $2m$ and $3m$ sit at the vertices of an equilateral triangle of side $a$. Find the COM relative to the vertex holding $m$.",
+      steps: [
+        { text: "Place $m$ at $(0,0)$, $2m$ at $(a, 0)$ and $3m$ at $\\left(\\frac a2, \\frac{\\sqrt3 a}{2}\\right)$. *Why this step:* putting the lightest mass at the origin and one side on the $x$-axis zeroes as many terms as possible." },
+        { text: "$x_{cm} = \\dfrac{0 + 2m(a) + 3m\\left(\\frac a2\\right)}{6m} = \\dfrac{3.5a}{6} = \\dfrac{7a}{12}$." },
+        { text: "$y_{cm} = \\dfrac{0 + 0 + 3m\\left(\\frac{\\sqrt3a}{2}\\right)}{6m} = \\dfrac{\\sqrt3a}{4}$." },
+        { text: "COM $= \\left(\\frac{7a}{12}, \\frac{\\sqrt3 a}{4}\\right)$. Compare the centroid $\\left(\\frac a2, \\frac{\\sqrt3a}{6}\\right)$: the COM has moved right and up, towards the $2m$ and $3m$ corners, as it should." },
+      ],
+      answer: "COM $= \\left(\\frac{7a}{12}, \\frac{\\sqrt3 a}{4}\\right)$.",
+    },
+    {
+      type: "worked-example",
+      id: "mrg0-2-we5",
+      title: "Worked example 5: a bent wire",
+      problem:
+        "Two identical uniform rods, each of length $L$ and mass $M$, are joined at one end to form an L. Find the COM.",
+      steps: [
+        { text: "Replace each rod by its mass at its midpoint: $(\\frac L2, 0)$ and $(0, \\frac L2)$ with the corner at the origin. *Why this step:* a uniform rod's COM is its midpoint (0.3 proves it), and grouping lets us treat each rod as one particle." },
+        { text: "Equal masses, so the COM is the midpoint: $\\left(\\frac L4, \\frac L4\\right)$." },
+        { text: "That point lies in the empty space inside the corner of the L, not on either rod." },
+      ],
+      answer: "COM $= \\left(\\frac L4, \\frac L4\\right)$ from the corner, off the wire.",
     },
     {
       type: "callout",
@@ -267,6 +397,7 @@ const lesson02: LessonSeed = {
       content:
         "The COM is a weighted average of positions, and an average can land where there is no material. The COM of a ring is its centre, the COM of an L-shaped wire is in the gap inside the corner, and a boomerang's COM lies in the air between its arms. That is why a boomerang seems to rotate about an empty point as it flies.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mrg0-2-q1",
@@ -278,6 +409,7 @@ const lesson02: LessonSeed = {
         { text: "$(1, 0.5)$", feedback: "You have swapped the coordinates. The heavy mass is on the $y$-axis, so $y_{cm}$ is the larger one." },
         { text: "$(0.5, 0.5)$", feedback: "Weight each $y$-coordinate by its mass: $2 \\times 2 = 4$, and $4 / 4 = 1$." },
       ],
+      hint: "Use $x_{cm} = \\dfrac{\\sum m_i x_i}{\\sum m_i}$ and the same for $y$, one coordinate at a time.",
     },
     {
       type: "quiz",
@@ -290,6 +422,7 @@ const lesson02: LessonSeed = {
         { text: "$(4, 5)$", feedback: "That puts the COM nearer the 1 kg particle. The 3 kg system should have the bigger pull." },
         { text: "$(2, 3)$", correct: true, feedback: "Group the system as 3 kg at $(1,2)$: $x = \\frac{3 + 5}{4} = 2$, $y = \\frac{6 + 6}{4} = 3$." },
       ],
+      hint: "Treat the original system as a single 3 kg particle at its COM, then combine it with the new particle (grouping works both ways).",
     },
     {
       type: "quiz",
@@ -301,6 +434,7 @@ const lesson02: LessonSeed = {
         { text: "Somewhere on the ring itself, since the mass is all there.", feedback: "The COM is an average position. The average of points spread round a circle is its centre." },
         { text: "Undefined, since there is no mass at the centre.", feedback: "The COM never needs mass at its own location. It is a weighted average, not a lump of material." },
       ],
+      hint: "Use symmetry: every bit of the ring has a matching bit diametrically opposite. Where do all those pairs balance?",
     },
     {
       type: "quiz",
@@ -326,6 +460,22 @@ const lesson02: LessonSeed = {
         { text: "$\\left(\\frac16, \\frac13, \\frac12\\right)$", correct: true, feedback: "$x = \\frac16$, $y = \\frac26$, $z = \\frac36$." },
         { text: "$\\left(\\frac12, \\frac13, \\frac16\\right)$", feedback: "Reversed: the 3 kg mass is on the $z$-axis, so $z_{cm}$ is the largest." },
       ],
+      hint: "Apply the COM formula separately to $x$, $y$ and $z$. In each coordinate, only one particle is off the origin.",
+    },
+    {
+      type: "quiz",
+      id: "mrg0-2-q6",
+      variant: "concept",
+      multiple: true,
+      question: "For which of these uniform bodies does the centre of mass lie at a point where there is **no material**? Select all that apply.",
+      options: [
+        { text: "A thin ring", correct: true, feedback: "Its COM is the centre of the circle, and all the material is on the rim." },
+        { text: "A thin spherical shell", correct: true, feedback: "By symmetry the COM is the centre of the sphere, which is empty." },
+        { text: "A thin semicircular wire", correct: true, feedback: "The COM is on the symmetry axis at $\\frac{2R}{\\pi}$ from the centre, inside the arc, where there is no wire." },
+        { text: "A solid disc", feedback: "The COM is the centre of the disc, and a solid disc has material there." },
+        { text: "A solid hemisphere", feedback: "The COM is $\\frac{3R}{8}$ above the flat face, inside the solid." },
+      ],
+      hint: "For each body, find the COM by symmetry or from the standard results, then ask whether material actually occupies that point.",
     },
   ]),
 };
@@ -344,6 +494,7 @@ const lesson03: LessonSeed = {
       type: "math",
       latex: "x_{cm} = \\frac{\\sum m_ix_i}{\\sum m_i} \\;\\longrightarrow\\; x_{cm} = \\frac{\\int x\\,dm}{\\int dm} = \\frac{1}{M}\\int x\\,dm",
     },
+    { type: "heading", text: "Writing $dm$ with a density" },
     {
       type: "text",
       content:
@@ -372,6 +523,7 @@ const lesson03: LessonSeed = {
       content:
         "Pick an element whose every point is the same distance along the axis you care about, or whose own COM you already know. For a rod: short slices $dx$. For a semicircular ring: small arcs $R\\,d\\theta$. For a semicircular disc: thin semicircular rings. For a cone or hemisphere: thin discs stacked along the axis. Then the integral is one-dimensional.",
     },
+    { type: "heading", text: "Uniform and non-uniform rods" },
     {
       type: "text",
       content:
@@ -406,6 +558,7 @@ const lesson03: LessonSeed = {
       content:
         "What you should have seen: at $n = 0$ the density is flat and the COM is at $\\frac12$. At $n = 1$ the density is a ramp and the COM is at $\\frac23$. In general $x_{cm} = \\dfrac{\\int_0^1 x\\cdot x^n\\,dx}{\\int_0^1 x^n\\,dx} = \\dfrac{1/(n+2)}{1/(n+1)} = \\dfrac{n+1}{n+2}L$: $\\frac34$ at $n = 2$, $\\frac45$ at $n = 3$, creeping towards the heavy end but never reaching it.",
     },
+    { type: "heading", text: "Semicircles, hemispheres and cones" },
     {
       type: "text",
       content:
@@ -453,14 +606,43 @@ const lesson03: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (a non-uniform rod, JEE Main).** A rod of length $L$ has linear density $\\lambda = \\lambda_0\\left(1 + \\frac xL\\right)$, where $x$ is measured from one end. Find its COM.\n\n1. Mass: $M = \\int_0^L \\lambda_0\\left(1 + \\frac xL\\right)dx = \\lambda_0\\left(L + \\frac L2\\right) = \\frac{3\\lambda_0 L}{2}$. *Why this step:* the denominator is the total mass, which is not $\\lambda_0L$ once the density varies.\n2. Moment: $\\int_0^L x\\,\\lambda_0\\left(1 + \\frac xL\\right)dx = \\lambda_0\\left(\\frac{L^2}{2} + \\frac{L^2}{3}\\right) = \\frac{5\\lambda_0L^2}{6}$.\n3. $x_{cm} = \\dfrac{5\\lambda_0L^2/6}{3\\lambda_0L/2} = \\dfrac{5L}{9}$.\n4. Check: the density doubles from one end to the other, so the COM should be a little past the middle ($\\frac{5}{9} \\approx 0.56$), but short of the $\\frac23$ for $\\lambda \\propto x$, which starts from zero. ✓\n\n**Worked example 2 (numbers with $\\pi = 22/7$).** A thin wire of radius $R = 11$ cm is bent into a semicircle, and a uniform semicircular plate of the same radius is cut from sheet metal.\n\n1. Wire: $\\frac{2R}{\\pi} = \\frac{2 \\times 11 \\times 7}{22} = 7$ cm from the centre.\n2. Plate: $\\frac{4R}{3\\pi} = \\frac{4 \\times 11 \\times 7}{3 \\times 22} = \\frac{14}{3} \\approx 4.67$ cm from the centre.\n3. The wire's COM is further out, because all of its mass is at distance $R$ while the plate has mass right down to the centre. *Why this step:* this comparison is exactly the misconception below, settled with numbers.",
+      type: "worked-example",
+      id: "mrg0-3-we1",
+      title: "Worked example 1: a non-uniform rod, JEE Main",
+      problem:
+        "A rod of length $L$ has linear density $\\lambda = \\lambda_0\\left(1 + \\frac xL\\right)$, where $x$ is measured from one end. Find its COM.",
+      steps: [
+        { text: "Mass: $M = \\int_0^L \\lambda_0\\left(1 + \\frac xL\\right)dx = \\lambda_0\\left(L + \\frac L2\\right) = \\frac{3\\lambda_0 L}{2}$. *Why this step:* the denominator is the total mass, which is not $\\lambda_0L$ once the density varies." },
+        { text: "Moment: $\\int_0^L x\\,\\lambda_0\\left(1 + \\frac xL\\right)dx = \\lambda_0\\left(\\frac{L^2}{2} + \\frac{L^2}{3}\\right) = \\frac{5\\lambda_0L^2}{6}$." },
+        { text: "$x_{cm} = \\dfrac{5\\lambda_0L^2/6}{3\\lambda_0L/2} = \\dfrac{5L}{9}$." },
+        { text: "Check: the density doubles from one end to the other, so the COM should be a little past the middle ($\\frac{5}{9} \\approx 0.56$), but short of the $\\frac23$ for $\\lambda \\propto x$, which starts from zero. ✓" },
+      ],
+      answer: "$x_{cm} = \\dfrac{5L}{9}$ from the lighter end.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (a solid hemisphere and a cone).** A solid hemisphere of radius 8 cm and a solid cone of height 12 cm stand on their flat faces.\n\n1. Hemisphere: $\\frac{3R}{8} = \\frac{3 \\times 8}{8} = 3$ cm above the table.\n2. Cone: $\\frac h4 = 3$ cm above the table as well, even though it is 12 cm tall. *Why this step:* most of a cone's volume is near its base, so its COM is low; the numbers make that visible.",
+      type: "worked-example",
+      id: "mrg0-3-we2",
+      title: "Worked example 2: numbers with $\\pi = 22/7$",
+      problem:
+        "A thin wire of radius $R = 11$ cm is bent into a semicircle, and a uniform semicircular plate of the same radius is cut from sheet metal. How far from the centre is the COM of each?",
+      steps: [
+        { text: "Wire: $\\frac{2R}{\\pi} = \\frac{2 \\times 11 \\times 7}{22} = 7$ cm from the centre." },
+        { text: "Plate: $\\frac{4R}{3\\pi} = \\frac{4 \\times 11 \\times 7}{3 \\times 22} = \\frac{14}{3} \\approx 4.67$ cm from the centre." },
+        { text: "The wire's COM is further out, because all of its mass is at distance $R$ while the plate has mass right down to the centre. *Why this step:* this comparison is exactly the misconception below, settled with numbers." },
+      ],
+      answer: "Wire 7 cm, plate $\\frac{14}{3} \\approx 4.67$ cm from the centre.",
+    },
+    {
+      type: "worked-example",
+      id: "mrg0-3-we3",
+      title: "Worked example 3: a solid hemisphere and a cone",
+      problem:
+        "A solid hemisphere of radius 8 cm and a solid cone of height 12 cm stand on their flat faces. How high is the COM of each above the table?",
+      steps: [
+        { text: "Hemisphere: $\\frac{3R}{8} = \\frac{3 \\times 8}{8} = 3$ cm above the table." },
+        { text: "Cone: $\\frac h4 = 3$ cm above the table as well, even though it is 12 cm tall. *Why this step:* most of a cone's volume is near its base, so its COM is low; the numbers make that visible." },
+      ],
+      answer: "Both 3 cm above the table.",
     },
     {
       type: "callout",
@@ -469,6 +651,7 @@ const lesson03: LessonSeed = {
       content:
         "They share an outline, not a mass distribution. The ring has every bit of mass at distance $R$, so its COM is at $\\frac{2R}{\\pi} \\approx 0.64R$. The disc has mass spread from the centre outwards, which drags the COM in to $\\frac{4R}{3\\pi} \\approx 0.42R$. The same trap exists for hollow ($\\frac R2$) versus solid ($\\frac{3R}{8}$) hemispheres.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mrg0-3-q1",
@@ -480,6 +663,7 @@ const lesson03: LessonSeed = {
         { text: "$\\dfrac{L}{3}$", feedback: "That is on the light side. You may have inverted the fraction: it is $\\frac{L^4/4}{L^3/3}$." },
         { text: "$\\dfrac{3L}{4}$", correct: true, feedback: "$\\frac{\\int x\\cdot x^2\\,dx}{\\int x^2\\,dx} = \\frac{L^4/4}{L^3/3} = \\frac{3L}{4}$, the $\\frac{n+1}{n+2}L$ rule with $n = 2$." },
       ],
+      hint: "Write $dm = \\lambda\\,dx = kx^2\\,dx$ and compute $x_{cm} = \\dfrac{\\int x\\,dm}{\\int dm}$ from $0$ to $L$; the constant $k$ cancels.",
     },
     {
       type: "quiz",
@@ -491,29 +675,38 @@ const lesson03: LessonSeed = {
         { text: "The plate, at $\\frac{4R}{3\\pi}$, because it has more material.", feedback: "Compare the numbers: $\\frac{4}{3\\pi} \\approx 0.42$ and $\\frac{2}{\\pi} \\approx 0.64$. The plate's COM is nearer the centre." },
         { text: "Neither: the same outline means the same COM.", feedback: "The COM depends on how the mass is distributed, not only on the outline." },
       ],
+      hint: "Compare where the mass sits: how far from the centre is each bit of the wire, and each bit of the plate?",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mrg0-3-q3",
       variant: "practice",
-      question: "How far above its flat face is the centre of mass of a uniform solid hemisphere of radius 8 cm?",
-      options: [
-        { text: "4 cm", feedback: "$\\frac R2 = 4$ cm is the *hollow* hemisphere. A solid one has more mass near the flat face." },
-        { text: "3 cm", correct: true, feedback: "$\\frac{3R}{8} = 3$ cm." },
-        { text: "$\\frac{32}{3\\pi} \\approx 3.4$ cm", feedback: "$\\frac{4R}{3\\pi}$ is the semicircular *plate*, a 2D body. The hemisphere is solid, giving $\\frac{3R}{8}$." },
-        { text: "6 cm", feedback: "That is $\\frac{3R}{4}$, which would put the COM above the middle of the height. Most of the volume is near the base." },
+      question: "How far above its flat face is the centre of mass of a uniform solid hemisphere of radius 8 cm? Give your answer in centimetres.",
+      answer: 3,
+      tolerance: 0.01,
+      unit: "cm",
+      hint: "Solid hemisphere, not a hollow shell and not a flat semicircle.",
+      solution: "For a uniform solid hemisphere the COM is $\\dfrac{3R}{8}$ above the flat face: $\\dfrac{3 \\times 8}{8} = 3$ cm.",
+      commonMistakes: [
+        { answer: 4, feedback: "$\\frac R2 = 4$ cm is the *hollow* hemisphere. A solid one has more mass near the flat face." },
+        { answer: 3.395, tolerance: 0.01, feedback: "$\\frac{4R}{3\\pi} = \\frac{32}{3\\pi} \\approx 3.4$ cm is the semicircular *plate*, a 2D body. The hemisphere is solid, giving $\\frac{3R}{8}$." },
+        { answer: 6, feedback: "That is $\\frac{3R}{4}$, which would put the COM above the middle of the height. Most of the volume is near the base." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mrg0-3-q4",
       variant: "practice",
-      question: "A uniform solid cone is 12 cm tall. How far from its apex is its centre of mass?",
-      options: [
-        { text: "3 cm", feedback: "3 cm is the distance from the *base*, $\\frac h4$." },
-        { text: "4 cm", feedback: "$\\frac h3$ is the centroid of a triangular *plate*. A solid cone has even more of its volume near the base." },
-        { text: "9 cm", correct: true, feedback: "$\\frac{3h}{4} = 9$ cm from the apex, 3 cm above the base." },
-        { text: "6 cm", feedback: "The midpoint would need the mass spread evenly along the height, but the cone widens towards its base." },
+      question: "A uniform solid cone is 12 cm tall. How far from its **apex** is its centre of mass? Give your answer in centimetres.",
+      answer: 9,
+      unit: "cm",
+      hint: "The cone widens towards its base, so most of its volume is near the base.",
+      solution: "A solid cone's COM is $\\dfrac h4$ above the base, i.e. $\\dfrac{3h}{4}$ from the apex: $\\dfrac{3 \\times 12}{4} = 9$ cm from the apex (3 cm above the base).",
+      commonMistakes: [
+        { answer: 3, feedback: "3 cm is the distance from the *base*, $\\frac h4$. The question asks for the distance from the apex." },
+        { answer: 8, feedback: "$\\frac{2h}{3}$ from the apex is the centroid of a triangular *plate*. A solid cone has even more of its volume near the base." },
+        { answer: 4, feedback: "$\\frac h3$ is the triangle's centroid measured from the base. A solid cone's COM is $\\frac h4$ from the base, $\\frac{3h}{4}$ from the apex." },
+        { answer: 6, feedback: "The midpoint would need the mass spread evenly along the height, but the cone widens towards its base." },
       ],
     },
     {
@@ -526,19 +719,23 @@ const lesson03: LessonSeed = {
         { text: "It approaches $\\frac L2$.", feedback: "$\\frac L2$ is $n = 0$, the uniform rod. Larger $n$ moves the COM away from the middle." },
         { text: "It goes past $L$ for $n > 4$.", feedback: "A COM is a weighted average of points on the rod, so it can never leave the rod." },
       ],
+      hint: "Look at the fraction $\\frac{n+1}{n+2}$ as $n$ grows. What does it tend to, and can it ever reach that value?",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mrg0-3-q6",
       variant: "practice",
-      question: "A 1 m rod has linear density $\\lambda = (2 + 3x)$ kg/m, with $x$ in metres from one end. Find its COM.",
-      options: [
-        { text: "$\\dfrac12$ m", feedback: "That ignores the $3x$ term. The density increases along the rod, so the COM is past the middle." },
-        { text: "$\\dfrac23$ m", feedback: "That would be a density proportional to $x$, starting at zero. Here it starts at 2 kg/m, which keeps the COM nearer the middle." },
-        { text: "$\\dfrac{2}{5}$ m", feedback: "That divides the moment 2 by $5 = 2 + 3$, the density at the far end. Divide by the total mass $\\int_0^1(2 + 3x)\\,dx = 3.5$ kg." },
-        { text: "$\\dfrac47$ m", correct: true, feedback: "$M = 2 + 1.5 = 3.5$ kg and $\\int_0^1 x(2 + 3x)\\,dx = 1 + 1 = 2$, so $x_{cm} = \\frac{2}{3.5} = \\frac47$ m." },
-      ],
+      question: "A 1 m rod has linear density $\\lambda = (2 + 3x)$ kg/m, with $x$ in metres from one end. How far from that end ($x = 0$) is its COM? Give your answer in metres (a fraction such as 3/5 is fine).",
+      answer: 4 / 7,
+      relTolerance: 0.01,
+      unit: "m",
       hint: "Compute $M = \\int_0^1 \\lambda\\,dx$ and $\\int_0^1 x\\lambda\\,dx$ separately.",
+      solution: "$M = \\displaystyle\\int_0^1 (2 + 3x)\\,dx = 2 + 1.5 = 3.5$ kg and $\\displaystyle\\int_0^1 x(2 + 3x)\\,dx = 1 + 1 = 2$ kg m, so $x_{cm} = \\dfrac{2}{3.5} = \\dfrac47 \\approx 0.571$ m.",
+      commonMistakes: [
+        { answer: 0.5, feedback: "That ignores the $3x$ term. The density increases along the rod, so the COM is past the middle." },
+        { answer: 2 / 3, feedback: "That would be a density proportional to $x$, starting at zero. Here it starts at 2 kg/m, which keeps the COM nearer the middle." },
+        { answer: 0.4, feedback: "That divides the moment 2 by $5 = 2 + 3$, the density at the far end. Divide by the total mass $\\int_0^1(2 + 3x)\\,dx = 3.5$ kg." },
+      ],
     },
   ]),
 };
@@ -553,6 +750,7 @@ const lesson04: LessonSeed = {
       content:
         "A spade is a blade plus a handle. A washer is a disc with a hole. A cricket bat is a blade plus a handle plus a grip. Nobody integrates these from scratch; you break them into pieces whose COMs you already know and use grouping. The one new idea is how to handle a *hole*.",
     },
+    { type: "heading", text: "Adding and removing pieces" },
     {
       type: "text",
       content:
@@ -573,10 +771,20 @@ const lesson04: LessonSeed = {
       content:
         "The COM of a body with a piece cut out is the COM of the complete body (mass $M$) together with a **negative** mass $-m$ placed at the centre of the removed piece. Here $m$ is the mass the piece *would* have had, found from its share of the area or volume.",
     },
+    { type: "heading", text: "A disc with an off-centre hole" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (disc with a hole touching the rim).** A uniform disc of radius $R$ has a circular hole of radius $\\frac R2$ cut from it, the hole touching the rim. Where is the COM of what is left?\n\n1. Origin at the centre $O$ of the full disc, $x$-axis through the centre of the hole, which is at $x = \\frac R2$. *Why this step:* the whole disc's COM is then at the origin and drops out of the numerator.\n2. The hole's area is $\\pi\\left(\\frac R2\\right)^2 = \\frac14\\pi R^2$, so its mass would be $m = \\frac M4$. *Why this step:* for a uniform plate, mass is proportional to area.\n3. $x_{\\text{rem}} = \\dfrac{M(0) - \\frac M4\\cdot\\frac R2}{M - \\frac M4} = \\dfrac{-MR/8}{3M/4} = -\\dfrac R6$.\n4. The remaining body's COM is $\\frac R6$ from the centre, on the side *opposite* the hole.",
+      type: "worked-example",
+      id: "mrg0-4-we1",
+      title: "Worked example 1: disc with a hole touching the rim",
+      problem:
+        "A uniform disc of radius $R$ has a circular hole of radius $\\frac R2$ cut from it, the hole touching the rim. Where is the COM of what is left?",
+      steps: [
+        { text: "Origin at the centre $O$ of the full disc, $x$-axis through the centre of the hole, which is at $x = \\frac R2$. *Why this step:* the whole disc's COM is then at the origin and drops out of the numerator." },
+        { text: "The hole's area is $\\pi\\left(\\frac R2\\right)^2 = \\frac14\\pi R^2$, so its mass would be $m = \\frac M4$. *Why this step:* for a uniform plate, mass is proportional to area." },
+        { text: "$x_{\\text{rem}} = \\dfrac{M(0) - \\frac M4\\cdot\\frac R2}{M - \\frac M4} = \\dfrac{-MR/8}{3M/4} = -\\dfrac R6$." },
+        { text: "The remaining body's COM is $\\frac R6$ from the centre, on the side *opposite* the hole." },
+      ],
+      answer: "$\\frac R6$ from the centre, on the side opposite the hole.",
     },
     {
       type: "text",
@@ -608,20 +816,58 @@ const lesson04: LessonSeed = {
       content:
         "What you should have seen: with $4 : 1$ the point $P$ sits at $x = -\\frac23$, which is $-\\frac R6$ for $R = 4$. A smaller hole ($9 : 1$, the hole of radius $\\frac R3$ has mass $\\frac M9$) pulls $P$ closer to $O$. Internal division would put $P$ between $O$ and the hole, which is the misconception below. $P$ is always on the far side of $O$ from $H$.",
     },
+    { type: "heading", text: "Cut plates, T-shapes and cavities" },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (a square plate with a quarter removed).** A uniform square plate of side $2a$ is centred at the origin. The $a \\times a$ square in the first quadrant is cut away.\n\n1. The removed square has a quarter of the area, so mass $\\frac M4$, centred at $\\left(\\frac a2, \\frac a2\\right)$.\n2. $x_{\\text{rem}} = \\dfrac{0 - \\frac M4\\cdot\\frac a2}{\\frac{3M}{4}} = -\\dfrac a6$, and by the same arithmetic $y_{\\text{rem}} = -\\dfrac a6$.\n3. The COM is at $\\left(-\\frac a6, -\\frac a6\\right)$, a distance $\\frac{\\sqrt2 a}{6}$ from the centre along the diagonal, away from the missing corner. In terms of the side $L = 2a$ that is $\\frac{\\sqrt2 L}{12}$.\n\nThe remaining piece is an L-shape of three $a \\times a$ squares. Check by *adding* instead: the squares are centred at $\\left(-\\frac a2, \\frac a2\\right)$, $\\left(-\\frac a2, -\\frac a2\\right)$, $\\left(\\frac a2, -\\frac a2\\right)$, whose average is $\\left(-\\frac a6, -\\frac a6\\right)$. ✓ *Why this step:* subtracting and adding are two independent routes, and agreement is your proof.",
+      type: "worked-example",
+      id: "mrg0-4-we2",
+      title: "Worked example 2: a square plate with a quarter removed",
+      problem:
+        "A uniform square plate of side $2a$ is centred at the origin. The $a \\times a$ square in the first quadrant is cut away. Find the COM of the remaining piece.",
+      steps: [
+        { text: "The removed square has a quarter of the area, so mass $\\frac M4$, centred at $\\left(\\frac a2, \\frac a2\\right)$." },
+        { text: "$x_{\\text{rem}} = \\dfrac{0 - \\frac M4\\cdot\\frac a2}{\\frac{3M}{4}} = -\\dfrac a6$, and by the same arithmetic $y_{\\text{rem}} = -\\dfrac a6$." },
+        { text: "The COM is at $\\left(-\\frac a6, -\\frac a6\\right)$, a distance $\\frac{\\sqrt2 a}{6}$ from the centre along the diagonal, away from the missing corner. In terms of the side $L = 2a$ that is $\\frac{\\sqrt2 L}{12}$." },
+        { text: "The remaining piece is an L-shape of three $a \\times a$ squares. Check by *adding* instead: the squares are centred at $\\left(-\\frac a2, \\frac a2\\right)$, $\\left(-\\frac a2, -\\frac a2\\right)$, $\\left(\\frac a2, -\\frac a2\\right)$, whose average is $\\left(-\\frac a6, -\\frac a6\\right)$. ✓ *Why this step:* subtracting and adding are two independent routes, and agreement is your proof." },
+      ],
+      answer: "$\\left(-\\frac a6, -\\frac a6\\right)$, a distance $\\frac{\\sqrt2 a}{6}$ from the centre away from the missing corner.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (a T-shaped lamina).** A uniform T is made of a top bar 8 cm × 2 cm lying on a stem 2 cm wide and 6 cm tall. Find the height of the COM above the foot of the stem.\n\n1. By symmetry the COM is on the vertical centre line; only its height is unknown.\n2. Stem: area 12 cm², centre 3 cm up. Bar: area 16 cm², centre $6 + 1 = 7$ cm up. *Why this step:* for a uniform lamina the areas stand in for the masses.\n3. $y_{cm} = \\dfrac{12(3) + 16(7)}{12 + 16} = \\dfrac{36 + 112}{28} = \\dfrac{148}{28} = \\dfrac{37}{7} \\approx 5.29$ cm.\n\n**Worked example 4 (a rod carrying a sphere).** A uniform 1 kg rod 1 m long has a 2 kg solid sphere of radius 0.1 m fixed to one end, so the sphere's centre is 1.1 m from the free end of the rod.\n\n1. Origin at the free end of the rod. Rod: 1 kg at 0.5 m. Sphere: 2 kg at 1.1 m (the COM of a uniform sphere is its centre).\n2. $x_{cm} = \\dfrac{1(0.5) + 2(1.1)}{3} = \\dfrac{2.7}{3} = 0.9$ m from the free end.",
+      type: "worked-example",
+      id: "mrg0-4-we3",
+      title: "Worked example 3: a T-shaped lamina",
+      problem:
+        "A uniform T is made of a top bar 8 cm × 2 cm lying on a stem 2 cm wide and 6 cm tall. Find the height of the COM above the foot of the stem.",
+      steps: [
+        { text: "By symmetry the COM is on the vertical centre line; only its height is unknown." },
+        { text: "Stem: area 12 cm², centre 3 cm up. Bar: area 16 cm², centre $6 + 1 = 7$ cm up. *Why this step:* for a uniform lamina the areas stand in for the masses." },
+        { text: "$y_{cm} = \\dfrac{12(3) + 16(7)}{12 + 16} = \\dfrac{36 + 112}{28} = \\dfrac{148}{28} = \\dfrac{37}{7} \\approx 5.29$ cm." },
+      ],
+      answer: "$y_{cm} = \\frac{37}{7} \\approx 5.29$ cm above the foot.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (a sphere with a cavity, JEE Main).** A uniform solid sphere of radius $R$ has a spherical cavity of radius $\\frac R2$ that touches its surface. Locate the COM.\n\n1. Volume scales as radius cubed, so the cavity would have held $\\left(\\frac12\\right)^3 = \\frac18$ of the mass: $m = \\frac M8$, centred $\\frac R2$ from $O$. *Why this step:* in 3D the mass ratio is the cube of the radius ratio, not the square; this is where most slips happen.\n2. $x_{\\text{rem}} = \\dfrac{0 - \\frac M8\\cdot\\frac R2}{\\frac{7M}{8}} = -\\dfrac{R}{14}$.\n3. The COM is $\\frac{R}{14}$ from the centre, on the side away from the cavity. Compare the disc: the same geometry in 2D gave $\\frac R6$, a much bigger shift, because a circle of half the radius removes a quarter of a disc but only an eighth of a sphere.",
+      type: "worked-example",
+      id: "mrg0-4-we4",
+      title: "Worked example 4: a rod carrying a sphere",
+      problem:
+        "A uniform 1 kg rod 1 m long has a 2 kg solid sphere of radius 0.1 m fixed to one end, so the sphere's centre is 1.1 m from the free end of the rod. Find the COM of the combination.",
+      steps: [
+        { text: "Origin at the free end of the rod. Rod: 1 kg at 0.5 m. Sphere: 2 kg at 1.1 m (the COM of a uniform sphere is its centre)." },
+        { text: "$x_{cm} = \\dfrac{1(0.5) + 2(1.1)}{3} = \\dfrac{2.7}{3} = 0.9$ m from the free end." },
+      ],
+      answer: "0.9 m from the free end of the rod.",
+    },
+    {
+      type: "worked-example",
+      id: "mrg0-4-we5",
+      title: "Worked example 5: a sphere with a cavity, JEE Main",
+      problem:
+        "A uniform solid sphere of radius $R$ has a spherical cavity of radius $\\frac R2$ that touches its surface. Locate the COM.",
+      steps: [
+        { text: "Volume scales as radius cubed, so the cavity would have held $\\left(\\frac12\\right)^3 = \\frac18$ of the mass: $m = \\frac M8$, centred $\\frac R2$ from $O$. *Why this step:* in 3D the mass ratio is the cube of the radius ratio, not the square; this is where most slips happen." },
+        { text: "$x_{\\text{rem}} = \\dfrac{0 - \\frac M8\\cdot\\frac R2}{\\frac{7M}{8}} = -\\dfrac{R}{14}$." },
+        { text: "The COM is $\\frac{R}{14}$ from the centre, on the side away from the cavity. Compare the disc: the same geometry in 2D gave $\\frac R6$, a much bigger shift, because a circle of half the radius removes a quarter of a disc but only an eighth of a sphere." },
+      ],
+      answer: "$\\frac{R}{14}$ from the centre, on the side away from the cavity.",
     },
     {
       type: "callout",
@@ -630,6 +876,7 @@ const lesson04: LessonSeed = {
       content:
         "Removing mass from one side leaves the *other* side heavier, so the balance point moves **away** from the hole. In the formula, the hole enters with a minus sign, which is why the answer is an external division point beyond the original centre.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mrg0-4-q1",
@@ -641,6 +888,7 @@ const lesson04: LessonSeed = {
         { text: "$\\dfrac{R}{14}$", correct: true, feedback: "$\\frac{(M/8)(R/2)}{7M/8} = \\frac{R}{14}$, away from the cavity." },
         { text: "$\\dfrac{R}{2}$", feedback: "That is where the cavity's centre is. The remaining COM lies on the opposite side, much closer to $O$." },
       ],
+      hint: "Treat the cavity as a negative mass at its own centre. With equal density, masses scale as $r^3$; take moments about the sphere's centre.",
     },
     {
       type: "quiz",
@@ -652,6 +900,7 @@ const lesson04: LessonSeed = {
         { text: "To the left, away from the hole.", correct: true, feedback: "The hole acts as a negative mass on the right, so the balance point shifts left." },
         { text: "It does not move, because the hole is small.", feedback: "Any off-centre hole shifts the COM, however little." },
       ],
+      hint: "A hole is a negative mass at its location. Removing mass from one side tips the balance towards which side?",
     },
     {
       type: "quiz",
@@ -664,30 +913,38 @@ const lesson04: LessonSeed = {
         { text: "$\\dfrac{R}{3}$", feedback: "That takes the hole's mass as $\\frac M3$. Area goes as radius squared, so it is $\\left(\\frac13\\right)^2 = \\frac19$ of the disc." },
         { text: "$\\dfrac{R}{12}$", correct: true, feedback: "Hole mass $\\frac M9$ at $\\frac{2R}{3}$: shift $= \\frac{(M/9)(2R/3)}{8M/9} = \\frac{2R/27}{8/9} = \\frac{R}{12}$, away from the hole." },
       ],
+      hint: "Model the hole as a negative mass. For a uniform disc, mass scales with area, $\\propto r^2$; then use the COM formula with the disc's centre as origin (Worked example 1).",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mrg0-4-q4",
       variant: "practice",
-      question: "A uniform square plate of side 12 cm has a 6 cm × 6 cm square cut from one corner. How far is the COM of the remaining L-shape from the centre of the original square?",
-      options: [
-        { text: "$\\sqrt2$ cm", correct: true, feedback: "Each coordinate shifts by $\\frac{(M/4)(3)}{3M/4} = 1$ cm away from the missing corner, so the distance is $\\sqrt{1^2 + 1^2} = \\sqrt2$ cm." },
-        { text: "1 cm", feedback: "That is the shift in one coordinate. It shifts by 1 cm in both $x$ and $y$, along the diagonal." },
-        { text: "$\\frac34\\sqrt2$ cm", feedback: "You divided by $M$ instead of $\\frac{3M}{4}$." },
-        { text: "$3\\sqrt2$ cm", feedback: "That is the distance to the centre of the *removed* square. The remaining COM moves only a third as far, the other way." },
-      ],
+      question: "A uniform square plate of side 12 cm has a 6 cm × 6 cm square cut from one corner. How far is the COM of the remaining L-shape from the centre of the original square? Give your answer in centimetres.",
+      answer: Math.SQRT2,
+      relTolerance: 0.01,
+      unit: "cm",
       hint: "The removed square has a quarter of the mass and its centre is at $(3, 3)$ cm from the plate's centre.",
+      solution: "Treat the cut-out as a negative mass $\\frac M4$ at $(3, 3)$ cm. Each coordinate of the remainder shifts by $\\dfrac{(M/4)(3)}{3M/4} = 1$ cm away from the missing corner, so the distance is $\\sqrt{1^2 + 1^2} = \\sqrt2 \\approx 1.41$ cm.",
+      commonMistakes: [
+        { answer: 1, feedback: "That is the shift in one coordinate. It shifts by 1 cm in both $x$ and $y$, along the diagonal." },
+        { answer: 1.061, tolerance: 0.01, feedback: "That is $\\frac34\\sqrt2$: you divided by $M$ instead of the remaining mass $\\frac{3M}{4}$." },
+        { answer: 4.243, tolerance: 0.02, feedback: "That is $3\\sqrt2$, the distance to the centre of the *removed* square. The remaining COM moves only a third as far, the other way." },
+      ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mrg0-4-q5",
       variant: "practice",
-      question: "A uniform 2 kg rod of length 1.2 m has a 1 kg point mass attached at one end. How far from the other (free) end is the COM?",
-      options: [
-        { text: "0.6 m", feedback: "That is the rod alone. The attached mass drags the COM towards its end." },
-        { text: "0.8 m", correct: true, feedback: "$\\frac{2(0.6) + 1(1.2)}{3} = \\frac{2.4}{3} = 0.8$ m." },
-        { text: "0.9 m", feedback: "Weight the rod's midpoint by the rod's mass: $2 \\times 0.6 = 1.2$, not $1 \\times 0.6$." },
-        { text: "0.4 m", feedback: "That is measured from the wrong end: 0.4 m from the point mass is 0.8 m from the free end." },
+      question: "A uniform 2 kg rod of length 1.2 m has a 1 kg point mass attached at one end. How far from the other (free) end is the COM? Give your answer in metres.",
+      answer: 0.8,
+      tolerance: 0.005,
+      unit: "m",
+      hint: "Replace the rod by 2 kg at its midpoint, measured from the free end.",
+      solution: "From the free end: rod 2 kg at 0.6 m, point mass 1 kg at 1.2 m. $x_{cm} = \\dfrac{2(0.6) + 1(1.2)}{3} = \\dfrac{2.4}{3} = 0.8$ m.",
+      commonMistakes: [
+        { answer: 0.6, feedback: "That is the rod alone. The attached mass drags the COM towards its end." },
+        { answer: 0.9, feedback: "Weight the rod's midpoint by the rod's mass: $2 \\times 0.6 = 1.2$, not $1 \\times 0.6$." },
+        { answer: 0.4, feedback: "That is measured from the wrong end: 0.4 m from the point mass is 0.8 m from the free end." },
       ],
     },
   ]),
@@ -703,6 +960,7 @@ const lesson05: LessonSeed = {
       content:
         "At Diwali, a rocket shell climbs, bursts at the top of its arc, and showers sparks in every direction. Each spark follows its own parabola. Yet if you could weigh every spark and average their positions at each instant, that average would carry on along the very parabola the unexploded shell was following, as if nothing had happened. This lesson proves it, and the proof is only three lines long.",
     },
+    { type: "heading", text: "Deriving the COM's equation of motion" },
     {
       type: "text",
       content:
@@ -731,6 +989,7 @@ const lesson05: LessonSeed = {
       content:
         "$\\vec P = M\\vec v_{cm}$ and $M\\vec a_{cm} = \\vec F_{\\text{ext}}$.\nThe COM moves like a single particle of mass $M$ acted on by the **external** forces alone. Internal forces, however large (a spring, an explosion, muscles), cannot change the motion of the COM.",
     },
+    { type: "heading", text: "Internal forces leave the COM alone" },
     {
       type: "text",
       content:
@@ -754,19 +1013,69 @@ const lesson05: LessonSeed = {
         "What you should have seen: before and after the release the COM moves at the same $v_0$. The two momentum curves swing in opposite directions by equal amounts, so their sum (the total) is a flat line. Set $v_0 = 0$ and the COM stays at rest while the carts race apart.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (velocity of the COM).** A 2 kg ball moves at 3 m/s to the right and a 3 kg ball at 2 m/s to the left. Take right as positive.\n\n1. $P = 2(3) + 3(-2) = 0$.\n2. $v_{cm} = \\dfrac{P}{M} = 0$. The COM is at rest, even though both balls are moving. *Why this step:* $\\vec P = M\\vec v_{cm}$ turns a statement about momentum into one about the COM.\n\n**Worked example 2 (acceleration of the COM).** On a smooth floor, a 4 N force pushes a 2 kg block to the right while a 1 N force pushes a separate 3 kg block to the left. The two blocks are joined by a spring.\n\n1. The spring force is internal, so ignore it. External forces: $+4 - 1 = 3$ N (weights and normal forces cancel vertically).\n2. $a_{cm} = \\dfrac{3}{5} = 0.6$ m/s² to the right, whatever the spring is doing. *Why this step:* you cannot find each block's acceleration without knowing the spring's extension, but you never need it for the COM.",
+      type: "worked-example",
+      id: "mrg0-5-we1",
+      title: "Worked example 1: velocity of the COM",
+      problem:
+        "A 2 kg ball moves at 3 m/s to the right and a 3 kg ball at 2 m/s to the left. Take right as positive. Find the velocity of the COM.",
+      steps: [
+        { text: "$P = 2(3) + 3(-2) = 0$." },
+        { text: "$v_{cm} = \\dfrac{P}{M} = 0$. The COM is at rest, even though both balls are moving. *Why this step:* $\\vec P = M\\vec v_{cm}$ turns a statement about momentum into one about the COM." },
+      ],
+      answer: "$v_{cm} = 0$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (the exploding shell, JEE classic).** A shell is fired with range $R$ on level ground. At the top of its flight it explodes into two equal fragments. One falls vertically down (it is momentarily at rest after the explosion). Where does the other land? Ignore air resistance.\n\n1. The explosion is internal, and the only external force is gravity. So the COM continues on the original parabola and lands at $R$. *Why this step:* $M\\vec a_{cm} = M\\vec g$ both before and after the explosion.\n2. Both fragments start from the top with zero vertical velocity, so they fall for the same time and land together. *Why this step:* the COM rule only holds until the first fragment hits the ground (then the ground's push is an extra external force), so we need them to land at the same moment.\n3. The first fragment lands directly below the top, at $\\frac R2$. Landing positions must average to $R$: $\\frac{m}{2}\\cdot\\frac R2 + \\frac m2\\,x = mR$.\n4. $x = 2R - \\frac R2 = \\dfrac{3R}{2}$.\n\n**Worked example 4 (the same, with numbers and a check).** A shell is fired at $20\\sqrt2$ m/s at $45^\\circ$ ($g = 10$ m/s²). At the top it splits into two equal halves, and one half retraces its path back to the gun. Where does the other land?\n\n1. Range $R = \\dfrac{u^2\\sin 2\\theta}{g} = \\dfrac{800 \\times 1}{10} = 80$ m, and the top is at $x = 40$ m.\n2. One half lands at the gun, $x = 0$. The COM lands at 80 m: $\\frac m2(0) + \\frac m2\\,x = m(80)$, so $x = 160$ m.\n3. Check with momentum. At the top the shell moves horizontally at $u\\cos45^\\circ = 20$ m/s. Horizontal momentum: $m(20) = \\frac m2(-20) + \\frac m2 v$, so $v = 60$ m/s. The fall from the top takes $\\frac{u\\sin45^\\circ}{g} = 2$ s, so $x = 40 + 60 \\times 2 = 160$ m. ✓ *Why this step:* the COM route and the momentum route are really the same law, so they must agree.",
+      type: "worked-example",
+      id: "mrg0-5-we2",
+      title: "Worked example 2: acceleration of the COM",
+      problem:
+        "On a smooth floor, a 4 N force pushes a 2 kg block to the right while a 1 N force pushes a separate 3 kg block to the left. The two blocks are joined by a spring. Find the acceleration of the COM.",
+      steps: [
+        { text: "The spring force is internal, so ignore it. External forces: $+4 - 1 = 3$ N (weights and normal forces cancel vertically)." },
+        { text: "$a_{cm} = \\dfrac{3}{5} = 0.6$ m/s² to the right, whatever the spring is doing. *Why this step:* you cannot find each block's acceleration without knowing the spring's extension, but you never need it for the COM." },
+      ],
+      answer: "$a_{cm} = 0.6$ m/s² to the right.",
+    },
+    { type: "heading", text: "Exploding shells and attracting bodies" },
+    {
+      type: "worked-example",
+      id: "mrg0-5-we3",
+      title: "Worked example 3: the exploding shell, JEE classic",
+      problem:
+        "A shell is fired with range $R$ on level ground. At the top of its flight it explodes into two equal fragments. One falls vertically down (it is momentarily at rest after the explosion). Where does the other land? Ignore air resistance.",
+      steps: [
+        { text: "The explosion is internal, and the only external force is gravity. So the COM continues on the original parabola and lands at $R$. *Why this step:* $M\\vec a_{cm} = M\\vec g$ both before and after the explosion." },
+        { text: "Both fragments start from the top with zero vertical velocity, so they fall for the same time and land together. *Why this step:* the COM rule only holds until the first fragment hits the ground (then the ground's push is an extra external force), so we need them to land at the same moment." },
+        { text: "The first fragment lands directly below the top, at $\\frac R2$. Landing positions must average to $R$: $\\frac{m}{2}\\cdot\\frac R2 + \\frac m2\\,x = mR$." },
+        { text: "$x = 2R - \\frac R2 = \\dfrac{3R}{2}$." },
+      ],
+      answer: "At $\\dfrac{3R}{2}$ from the launch point.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (two bodies that attract each other).** A 1 kg and a 4 kg particle are released from rest 10 m apart in deep space and attract each other gravitationally. Where do they meet?\n\n1. Their mutual attraction is internal and there are no external forces, so the COM stays at rest where it started. *Why this step:* $\\vec F_{\\text{ext}} = 0$ and $\\vec v_{cm} = 0$ initially.\n2. They meet at the COM: $\\dfrac{4 \\times 10}{5} = 8$ m from the 1 kg particle's starting point.\n3. The light particle covers 8 m and the heavy one 2 m, in the ratio $4 : 1$, which is also the ratio of their speeds at every instant.",
+      type: "worked-example",
+      id: "mrg0-5-we4",
+      title: "Worked example 4: the same, with numbers and a check",
+      problem:
+        "A shell is fired at $20\\sqrt2$ m/s at $45^\\circ$ ($g = 10$ m/s²). At the top it splits into two equal halves, and one half retraces its path back to the gun. Where does the other land?",
+      steps: [
+        { text: "Range $R = \\dfrac{u^2\\sin 2\\theta}{g} = \\dfrac{800 \\times 1}{10} = 80$ m, and the top is at $x = 40$ m." },
+        { text: "One half lands at the gun, $x = 0$. The COM lands at 80 m: $\\frac m2(0) + \\frac m2\\,x = m(80)$, so $x = 160$ m." },
+        { text: "Check with momentum. At the top the shell moves horizontally at $u\\cos45^\\circ = 20$ m/s. Horizontal momentum: $m(20) = \\frac m2(-20) + \\frac m2 v$, so $v = 60$ m/s. The fall from the top takes $\\frac{u\\sin45^\\circ}{g} = 2$ s, so $x = 40 + 60 \\times 2 = 160$ m. ✓ *Why this step:* the COM route and the momentum route are really the same law, so they must agree." },
+      ],
+      answer: "160 m from the gun.",
+    },
+    {
+      type: "worked-example",
+      id: "mrg0-5-we5",
+      title: "Worked example 5: two bodies that attract each other",
+      problem:
+        "A 1 kg and a 4 kg particle are released from rest 10 m apart in deep space and attract each other gravitationally. Where do they meet?",
+      steps: [
+        { text: "Their mutual attraction is internal and there are no external forces, so the COM stays at rest where it started. *Why this step:* $\\vec F_{\\text{ext}} = 0$ and $\\vec v_{cm} = 0$ initially." },
+        { text: "They meet at the COM: $\\dfrac{4 \\times 10}{5} = 8$ m from the 1 kg particle's starting point." },
+        { text: "The light particle covers 8 m and the heavy one 2 m, in the ratio $4 : 1$, which is also the ratio of their speeds at every instant." },
+      ],
+      answer: "8 m from the 1 kg particle's starting point.",
     },
     {
       type: "callout",
@@ -775,6 +1084,7 @@ const lesson05: LessonSeed = {
       content:
         "The fragments scatter, but the forces that scatter them are internal and cancel in pairs. The COM keeps the parabola it was on. What *does* change the COM's motion is any new external force: air drag, or the ground stopping the first fragment to land. That is why JEE problems arrange for the fragments to land at the same time.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mrg0-5-q1",
@@ -786,6 +1096,7 @@ const lesson05: LessonSeed = {
         { text: "$(\\hat i + 2\\hat j)$ m/s", correct: true, feedback: "$\\vec P = 6\\hat i + (-3\\hat i + 6\\hat j) = 3\\hat i + 6\\hat j$, and dividing by 3 kg gives $\\hat i + 2\\hat j$." },
         { text: "$\\vec 0$", feedback: "The $x$-momenta are $6$ and $-3$ kg m/s, which do not cancel." },
       ],
+      hint: "Use the mass-weighted average of the velocities: $\\vec v_{cm} = \\dfrac{m_1\\vec v_1 + m_2\\vec v_2}{m_1 + m_2}$, component by component.",
     },
     {
       type: "quiz",
@@ -797,29 +1108,35 @@ const lesson05: LessonSeed = {
         { text: "At the midpoint of the rope.", feedback: "Only if they have equal masses. The lighter astronaut moves further." },
         { text: "Where the stronger astronaut started.", feedback: "Pulling harder does not help: the rope pulls both of them with the same tension, and only the COM matters." },
       ],
+      hint: "The pulls are internal forces and space provides no external force. What does that say about the COM of a system that starts at rest?",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mrg0-5-q3",
       variant: "practice",
-      question: "A shell with range 120 m explodes at the top of its path into two equal fragments. One falls vertically. Where does the other land? (Ignore air.)",
-      options: [
-        { text: "180 m", correct: true, feedback: "$\\frac{60 + x}{2} = 120$, so $x = 180$ m, that is, $1.5R$." },
-        { text: "120 m", feedback: "The *COM* lands at 120 m. The fragment that fell vertically landed at 60 m, so the other must be beyond 120 m." },
-        { text: "240 m", feedback: "That would need the first fragment to land at the gun. It fell vertically from the top, at 60 m." },
-        { text: "150 m", feedback: "That averages the fragment positions incorrectly. Solve $\\frac m2(60) + \\frac m2 x = m(120)$." },
+      question: "A shell with range 120 m explodes at the top of its path into two equal fragments. One falls vertically. How far from the gun does the other land? (Ignore air.) Give your answer in metres.",
+      answer: 180,
+      unit: "m",
+      hint: "The COM still lands at 120 m. Where does the fragment that falls vertically from the top land?",
+      solution: "The top of the path is above $x = 60$ m, so the first fragment lands at 60 m. Both fragments start with zero vertical velocity and land together, and the COM lands at the original 120 m: $\\dfrac{60 + x}{2} = 120$, so $x = 180$ m, that is, $1.5R$.",
+      commonMistakes: [
+        { answer: 120, feedback: "The *COM* lands at 120 m. The fragment that fell vertically landed at 60 m, so the other must be beyond 120 m." },
+        { answer: 240, feedback: "That would need the first fragment to land at the gun. It fell vertically from the top, at 60 m." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mrg0-5-q4",
       variant: "practice",
-      question: "A shell of mass $3m$ has range 80 m. At the top it splits into pieces of mass $m$ and $2m$; the piece of mass $m$ falls vertically. Where does the $2m$ piece land?",
-      options: [
-        { text: "120 m", feedback: "That is the equal-mass answer $1.5R$. Here the heavier piece carries more of the COM, so it lands closer." },
-        { text: "100 m", correct: true, feedback: "$m(40) + 2m\\,x = 3m(80)$ gives $x = 100$ m." },
-        { text: "160 m", feedback: "That is the equal-halves answer when one half retraces its path to the gun, $\\frac m2(0) + \\frac m2 x = m(80)$. Here the pieces are unequal and the $m$ piece lands below the top, at 40 m." },
-        { text: "90 m", feedback: "Check: $m(40) + 2m(90) = 220m$, but the COM needs $3m(80) = 240m$." },
+      question: "A shell of mass $3m$ has range 80 m. At the top it splits into pieces of mass $m$ and $2m$; the piece of mass $m$ falls vertically. How far from the launch point does the $2m$ piece land? Give your answer in metres.",
+      answer: 100,
+      unit: "m",
+      hint: "The $m$ piece lands below the top, at 40 m. Weight the landing points by mass.",
+      solution: "Both pieces land together, and their COM lands at 80 m: $m(40) + 2m\\,x = 3m(80)$, so $2x = 200$ and $x = 100$ m.",
+      commonMistakes: [
+        { answer: 120, feedback: "That is the equal-mass answer $1.5R$. Here the heavier piece carries more of the COM, so it lands closer." },
+        { answer: 160, feedback: "That is the equal-halves answer when one half retraces its path to the gun, $\\frac m2(0) + \\frac m2 x = m(80)$. Here the pieces are unequal and the $m$ piece lands below the top, at 40 m." },
+        { answer: 90, feedback: "Check: $m(40) + 2m(90) = 220m$, but the COM needs $3m(80) = 240m$." },
       ],
     },
     {
@@ -832,6 +1149,21 @@ const lesson05: LessonSeed = {
         { text: "Yes, as long as there is no air resistance.", feedback: "Air resistance is one extra external force, but the ground is another." },
         { text: "No: once a piece is on the ground, the ground pushes on it, an extra external force.", correct: true, feedback: "$M\\vec a_{cm} = \\vec F_{\\text{ext}}$ still holds, but $\\vec F_{\\text{ext}}$ is no longer just the weight." },
       ],
+      hint: "The COM follows the parabola only while the net external force is just gravity. What new external force appears when a piece lands?",
+    },
+    {
+      type: "quiz",
+      id: "mrg0-5-q6",
+      variant: "practice",
+      multiple: true,
+      question: "A shell flying through the air (no air resistance) explodes into two fragments. Consider the time from just before the explosion until the first fragment lands. Select all the statements that are correct.",
+      options: [
+        { text: "The total momentum just after the explosion equals the total momentum just before it.", correct: true, feedback: "The explosion forces are internal, and gravity's impulse during the brief burst is negligible." },
+        { text: "The centre of mass continues along the original parabola.", correct: true, feedback: "Until something lands, the only external force is the total weight, so $M\\vec a_{cm} = M\\vec g$ exactly as before." },
+        { text: "The acceleration of the centre of mass is $\\vec g$ throughout.", correct: true, feedback: "$\\vec a_{cm} = \\vec F_{\\text{ext}}/M = \\vec g$ while both pieces are in the air." },
+        { text: "The total kinetic energy is unchanged by the explosion.", feedback: "The explosion releases chemical energy, so the kinetic energy increases. Momentum is conserved; kinetic energy is not." },
+      ],
+      hint: "The explosion forces are internal, so test each statement against what internal forces can and cannot change: total momentum, COM motion, and kinetic energy.",
     },
   ]),
 };
@@ -846,6 +1178,7 @@ const lesson06: LessonSeed = {
       content:
         "Step from a small boat onto the jetty and the boat slides away from under you. Walk forward in a rowing boat and the boat creeps backwards. Nobody pushed the boat from outside, so how did it move? The answer is the most useful special case of $M\\vec a_{cm} = \\vec F_{\\text{ext}}$.",
     },
+    { type: "heading", text: "Zero external force, starting at rest" },
     {
       type: "text",
       content:
@@ -866,6 +1199,7 @@ const lesson06: LessonSeed = {
       content:
         "Problems usually give you a *relative* displacement (\"the man walks 5 m along the boat\", \"the block slides down the wedge\"). Write every body's displacement relative to the ground in terms of one unknown, then impose $\\sum m\\,\\Delta x = 0$. If the boat moves $d$ backwards, a man who walks $L$ along it moves $L - d$ forwards over the ground.",
     },
+    { type: "heading", text: "The man on the boat" },
     {
       type: "text",
       content:
@@ -894,20 +1228,70 @@ const lesson06: LessonSeed = {
       content:
         "What you should have seen: the COM marker stays fixed while the carts separate. At every instant the displacements satisfy $m_1\\Delta x_1 = -m_2\\Delta x_2$: the heavy cart moves a short distance, the light one a long distance, in opposite directions. The spring energy only changes *how fast* this happens, not the ratio.",
     },
+    { type: "heading", text: "Boats, wedges and balloons" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (the boat, JEE Main).** A 60 kg man stands at one end of a 140 kg boat at rest in still water. He walks 5 m along the boat. How far do he and the boat move relative to the shore?\n\n1. Forwards is positive; boat displacement $-d$, man's $5 - d$. *Why this step:* the 5 m is relative to the boat, so it must be corrected by the boat's own motion.\n2. $60(5 - d) - 140d = 0 \\Rightarrow 300 = 200d \\Rightarrow d = 1.5$ m.\n3. The boat moves 1.5 m back, and the man moves $5 - 1.5 = 3.5$ m forwards over the ground. Check: $60 \\times 3.5 = 210 = 140 \\times 1.5$. ✓\n\n**Worked example 2 (a dog on a boat).** A 5 kg dog stands on a 20 kg flat boat, 10 m from the shore, facing it. It walks 4 m towards the shore along the boat. How far is it from the shore now?\n\n1. Take towards the shore as positive. Boat: $-d$. Dog: $4 - d$.\n2. $5(4 - d) - 20d = 0 \\Rightarrow 20 = 25d \\Rightarrow d = 0.8$ m.\n3. The dog has moved $4 - 0.8 = 3.2$ m towards the shore, so it is $10 - 3.2 = 6.8$ m from the shore. *Why this step:* the tempting answer 6 m forgets that the boat slid away from the shore.",
+      type: "worked-example",
+      id: "mrg0-6-we1",
+      title: "Worked example 1: the boat, JEE Main",
+      problem:
+        "A 60 kg man stands at one end of a 140 kg boat at rest in still water. He walks 5 m along the boat. How far do he and the boat move relative to the shore?",
+      steps: [
+        { text: "Forwards is positive; boat displacement $-d$, man's $5 - d$. *Why this step:* the 5 m is relative to the boat, so it must be corrected by the boat's own motion." },
+        { text: "$60(5 - d) - 140d = 0 \\Rightarrow 300 = 200d \\Rightarrow d = 1.5$ m." },
+        { text: "The boat moves 1.5 m back, and the man moves $5 - 1.5 = 3.5$ m forwards over the ground. Check: $60 \\times 3.5 = 210 = 140 \\times 1.5$. ✓" },
+      ],
+      answer: "The boat moves 1.5 m back; the man moves 3.5 m forwards.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (block on a smooth wedge).** A small block of mass $m = 1$ kg slides from the top to the bottom of a smooth wedge of mass $M = 4$ kg resting on a smooth floor. The wedge's sloping face spans a horizontal distance $b = 1$ m. How far does the wedge move?\n\n1. Horizontally there is no external force (the floor is smooth and gravity is vertical), and everything starts at rest. Vertically the floor pushes, so only the horizontal COM is fixed. *Why this step:* the fixed-COM rule is used one direction at a time.\n2. Relative to the wedge, the block moves $b = 1$ m horizontally, say forwards. The wedge moves $d$ backwards, so the block's ground displacement is $1 - d$.\n3. $1(1 - d) - 4d = 0 \\Rightarrow d = \\dfrac{mb}{m + M} = \\dfrac{1}{5} = 0.2$ m.\n\n**Worked example 4 (two skaters and a rope).** Skaters of 40 kg and 60 kg stand 10 m apart on smooth ice, holding a light rope. The 40 kg skater pulls. Where do they meet?\n\n1. Ice is smooth, so the only horizontal forces are the rope's, which are internal.\n2. They meet at the COM, which is $\\frac{60 \\times 10}{100} = 6$ m from the 40 kg skater. It does not matter who pulls.",
+      type: "worked-example",
+      id: "mrg0-6-we2",
+      title: "Worked example 2: a dog on a boat",
+      problem:
+        "A 5 kg dog stands on a 20 kg flat boat, 10 m from the shore, facing it. It walks 4 m towards the shore along the boat. How far is it from the shore now?",
+      steps: [
+        { text: "Take towards the shore as positive. Boat: $-d$. Dog: $4 - d$." },
+        { text: "$5(4 - d) - 20d = 0 \\Rightarrow 20 = 25d \\Rightarrow d = 0.8$ m." },
+        { text: "The dog has moved $4 - 0.8 = 3.2$ m towards the shore, so it is $10 - 3.2 = 6.8$ m from the shore. *Why this step:* the tempting answer 6 m forgets that the boat slid away from the shore." },
+      ],
+      answer: "6.8 m from the shore.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (a balloon with a climbing man).** A balloon of mass $M$ hovers at rest with a rope ladder hanging from it, and a man of mass $m$ on the ladder. He climbs a length $L$ up the ladder. How far does the balloon move?\n\n1. The balloon hovers, so buoyancy balances the total weight and the net external force is zero. *Why this step:* the man's climbing force is internal; he pulls the ladder down as it pushes him up.\n2. Upwards is positive. Balloon: $-d$. Man: $L - d$. So $m(L - d) - Md = 0$ and $d = \\dfrac{mL}{m + M}$ downwards.\n3. With $m = 80$ kg, $M = 320$ kg and $L = 10$ m: $d = \\frac{800}{400} = 2$ m down, and the man rises $10 - 2 = 8$ m relative to the ground.",
+      type: "worked-example",
+      id: "mrg0-6-we3",
+      title: "Worked example 3: block on a smooth wedge",
+      problem:
+        "A small block of mass $m = 1$ kg slides from the top to the bottom of a smooth wedge of mass $M = 4$ kg resting on a smooth floor. The wedge's sloping face spans a horizontal distance $b = 1$ m. How far does the wedge move?",
+      steps: [
+        { text: "Horizontally there is no external force (the floor is smooth and gravity is vertical), and everything starts at rest. Vertically the floor pushes, so only the horizontal COM is fixed. *Why this step:* the fixed-COM rule is used one direction at a time." },
+        { text: "Relative to the wedge, the block moves $b = 1$ m horizontally, say forwards. The wedge moves $d$ backwards, so the block's ground displacement is $1 - d$." },
+        { text: "$1(1 - d) - 4d = 0 \\Rightarrow d = \\dfrac{mb}{m + M} = \\dfrac{1}{5} = 0.2$ m." },
+      ],
+      answer: "$d = 0.2$ m.",
+    },
+    {
+      type: "worked-example",
+      id: "mrg0-6-we4",
+      title: "Worked example 4: two skaters and a rope",
+      problem:
+        "Skaters of 40 kg and 60 kg stand 10 m apart on smooth ice, holding a light rope. The 40 kg skater pulls. Where do they meet?",
+      steps: [
+        { text: "Ice is smooth, so the only horizontal forces are the rope's, which are internal." },
+        { text: "They meet at the COM, which is $\\frac{60 \\times 10}{100} = 6$ m from the 40 kg skater. It does not matter who pulls." },
+      ],
+      answer: "6 m from the 40 kg skater's starting point.",
+    },
+    {
+      type: "worked-example",
+      id: "mrg0-6-we5",
+      title: "Worked example 5: a balloon with a climbing man",
+      problem:
+        "A balloon of mass $M$ hovers at rest with a rope ladder hanging from it, and a man of mass $m$ on the ladder. He climbs a length $L$ up the ladder. How far does the balloon move?",
+      steps: [
+        { text: "The balloon hovers, so buoyancy balances the total weight and the net external force is zero. *Why this step:* the man's climbing force is internal; he pulls the ladder down as it pushes him up." },
+        { text: "Upwards is positive. Balloon: $-d$. Man: $L - d$. So $m(L - d) - Md = 0$ and $d = \\dfrac{mL}{m + M}$ downwards." },
+        { text: "With $m = 80$ kg, $M = 320$ kg and $L = 10$ m: $d = \\frac{800}{400} = 2$ m down, and the man rises $10 - 2 = 8$ m relative to the ground." },
+      ],
+      answer: "$d = \\dfrac{mL}{m + M}$ downwards (2 m for the numbers given).",
     },
     {
       type: "callout",
@@ -916,16 +1300,20 @@ const lesson06: LessonSeed = {
       content:
         "The length of the boat (or the distance walked on it) is measured on the boat, and the boat is moving. Relative to the ground the man covers $L - d = \\frac{ML}{m + M}$, which is less than $L$. Plugging $L$ in as a ground displacement gives $mL = Md$ and the wrong $d = \\frac{mL}{M}$.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mrg0-6-q1",
       variant: "practice",
-      question: "A 50 kg girl stands on a 150 kg boat at rest. She walks 8 m along the boat. How far does the boat move relative to the water? (Ignore water resistance.)",
-      options: [
-        { text: "2 m", correct: true, feedback: "$d = \\frac{mL}{m + M} = \\frac{50 \\times 8}{200} = 2$ m, opposite to her walk." },
-        { text: "2.67 m", feedback: "That is $\\frac{mL}{M}$, which treats her 8 m as a ground displacement." },
-        { text: "6 m", feedback: "6 m is how far *she* moves relative to the water, $8 - 2$." },
-        { text: "8 m", feedback: "The boat is three times heavier than she is, so it moves much less than she does." },
+      question: "A 50 kg girl stands on a 150 kg boat at rest. She walks 8 m along the boat. How far does the boat move relative to the water? (Ignore water resistance.) Give your answer in metres.",
+      answer: 2,
+      unit: "m",
+      hint: "The COM stays put, and $\\sum m\\,\\Delta x = 0$ needs ground displacements. Her ground displacement is $8 - d$.",
+      solution: "Let the boat move back $d$. Then she moves $8 - d$ forward over the water, and $50(8 - d) = 150\\,d$, so $d = \\dfrac{mL}{m + M} = \\dfrac{50 \\times 8}{200} = 2$ m, opposite to her walk.",
+      commonMistakes: [
+        { answer: 2.67, tolerance: 0.01, feedback: "That is $\\frac{mL}{M}$, which treats her 8 m as a ground displacement." },
+        { answer: 6, feedback: "6 m is how far *she* moves relative to the water, $8 - 2$." },
+        { answer: 8, feedback: "The boat is three times heavier than she is, so it moves much less than she does." },
       ],
     },
     {
@@ -938,6 +1326,7 @@ const lesson06: LessonSeed = {
         { text: "The displacement of body $i$ relative to the other body.", feedback: "Relative displacements are what problems give you, but they must be converted before being used." },
         { text: "Either: it makes no difference.", feedback: "It does: using a relative displacement is exactly the mistake that gives $\\frac{mL}{M}$ instead of $\\frac{mL}{m + M}$." },
       ],
+      hint: "The fixed-COM condition comes from $x_{cm}$ staying constant. In which frame is that $x_{cm}$ measured?",
     },
     {
       type: "quiz",
@@ -950,30 +1339,52 @@ const lesson06: LessonSeed = {
         { text: "14 m", correct: true, feedback: "They meet at the COM, $\\frac{70 \\times 20}{100} = 14$ m from the lighter skater." },
         { text: "It depends on who pulls harder.", feedback: "The rope pulls both with the same tension. Only the masses matter." },
       ],
+      hint: "With no external horizontal force, the COM stays put and the skaters meet there. Locate the COM between them using the inverse-mass ratio.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mrg0-6-q4",
       variant: "practice",
-      question: "A 2 kg block slides down the smooth face of an 8 kg wedge on a smooth floor. The face spans 50 cm horizontally. How far does the wedge move by the time the block reaches the bottom?",
-      options: [
-        { text: "12.5 cm", feedback: "That is $\\frac{mb}{M}$, treating 50 cm as the block's ground displacement." },
-        { text: "10 cm", correct: true, feedback: "$d = \\frac{mb}{m + M} = \\frac{2 \\times 50}{10} = 10$ cm." },
-        { text: "40 cm", feedback: "40 cm is the block's horizontal displacement relative to the ground." },
-        { text: "0 cm: the floor holds it.", feedback: "A smooth floor cannot push horizontally, so the block's horizontal push on the wedge moves it." },
+      question: "A 2 kg block slides down the smooth face of an 8 kg wedge on a smooth floor. The face spans 50 cm horizontally. How far does the wedge move by the time the block reaches the bottom? Give your answer in centimetres.",
+      answer: 10,
+      unit: "cm",
+      hint: "Only the horizontal direction is free of external force. The 50 cm is the block's displacement *relative to the wedge*.",
+      solution: "Horizontally the COM stays fixed. If the wedge moves back $d$, the block moves $50 - d$ forward over the ground: $2(50 - d) = 8d$, so $d = \\dfrac{mb}{m + M} = \\dfrac{2 \\times 50}{10} = 10$ cm.",
+      commonMistakes: [
+        { answer: 12.5, feedback: "That is $\\frac{mb}{M}$, treating 50 cm as the block's ground displacement." },
+        { answer: 40, feedback: "40 cm is the block's horizontal displacement relative to the ground." },
+        { answer: 0, feedback: "A smooth floor cannot push horizontally, so the block's horizontal push on the wedge moves it." },
+      ],
+    },
+    {
+      type: "numeric",
+      id: "mrg0-6-q5",
+      variant: "practice",
+      question: "A man of 80 kg hangs from a rope ladder beneath a hovering balloon of mass 320 kg. He climbs 10 m up the ladder. How far does he rise relative to the ground? Give your answer in metres.",
+      answer: 8,
+      unit: "m",
+      hint: "The COM of man + balloon stays put, so the balloon sinks as he climbs.",
+      solution: "The balloon drops $d = \\dfrac{mL}{m + M} = \\dfrac{80 \\times 10}{400} = 2$ m, so he rises $10 - 2 = 8$ m over the ground. Check: $80 \\times 8 = 320 \\times 2$.",
+      commonMistakes: [
+        { answer: 10, feedback: "10 m is relative to the ladder, which moves down as he climbs." },
+        { answer: 2, feedback: "2 m is how far the balloon descends." },
+        { answer: 7.5, feedback: "That uses $\\frac{mL}{M} = 2.5$ m for the balloon, treating the 10 m as a ground displacement." },
       ],
     },
     {
       type: "quiz",
-      id: "mrg0-6-q5",
+      id: "mrg0-6-q6",
       variant: "practice",
-      question: "A man of 80 kg hangs from a rope ladder beneath a hovering balloon of mass 320 kg. He climbs 10 m up the ladder. How far does he rise relative to the ground?",
+      multiple: true,
+      question: "A girl walks from one end of a boat to the other; the boat starts at rest on still water and water resistance is negligible. Select all the statements that are correct.",
       options: [
-        { text: "10 m", feedback: "10 m is relative to the ladder, which moves down as he climbs." },
-        { text: "2 m", feedback: "2 m is how far the balloon descends." },
-        { text: "7.5 m", feedback: "That uses $\\frac{mL}{M} = 2.5$ m for the balloon, treating the 10 m as a ground displacement." },
-        { text: "8 m", correct: true, feedback: "The balloon drops $\\frac{80 \\times 10}{400} = 2$ m, so he rises $10 - 2 = 8$ m." },
+        { text: "The centre of mass of girl + boat stays at rest.", correct: true, feedback: "No horizontal external force acts, and the COM started at rest." },
+        { text: "The total horizontal momentum of girl + boat is zero at every instant.", correct: true, feedback: "It starts at zero and no horizontal external force changes it." },
+        { text: "The boat moves in the same direction as she walks.", feedback: "Her feet push the boat backwards, and with zero total momentum the boat must move opposite to her." },
+        { text: "When she stops walking, the boat stops too.", correct: true, feedback: "Her momentum becomes zero, so the boat's must too: $mv + MV = 0$." },
+        { text: "The boat's displacement does not depend on how fast she walks.", correct: true, feedback: "$d = \\frac{mL}{m + M}$ involves only the masses and the length walked. Speed sets *when*, not *how far*." },
       ],
+      hint: "No external horizontal force acts and everything starts at rest. Ask what that fixes for girl + boat together, then test each statement.",
     },
   ]),
 };
@@ -1006,17 +1417,22 @@ const lessonMastery: LessonSeed = {
         { text: "$(-2, 1)$", feedback: "Those are the weighted sums. Divide by the total mass, 6 kg." },
         { text: "$\\left(\\frac13, \\frac16\\right)$", feedback: "Sign slip in $x$: $1(1) + 3(-1) = -2$, so $x_{cm}$ is negative." },
       ],
+      hint: "Lesson 0.2: apply the COM formula to each coordinate in turn.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mrg0-7-q2",
       variant: "mastery",
-      question: "A rod of length 2 m has linear density $\\lambda = (1 + 2x)$ kg/m, with $x$ in metres from one end. Where is its centre of mass?",
-      options: [
-        { text: "1 m from the light end", feedback: "That is the midpoint, correct only for a uniform rod." },
-        { text: "$\\dfrac{11}{9}$ m from the light end", correct: true, feedback: "$M = \\int_0^2(1 + 2x)\\,dx = 6$ kg and $\\int_0^2 x(1 + 2x)\\,dx = 2 + \\frac{16}{3} = \\frac{22}{3}$, so $x_{cm} = \\frac{22}{18} = \\frac{11}{9}$ m." },
-        { text: "$\\dfrac43$ m from the light end", feedback: "That is $\\frac{2L}{3}$ for $\\lambda \\propto x$. The constant 1 in the density pulls the COM back towards the middle." },
-        { text: "$\\dfrac{22}{3}$ m from the light end", feedback: "That is the moment $\\int x\\,dm$. Divide by the mass, 6 kg." },
+      question: "A rod of length 2 m has linear density $\\lambda = (1 + 2x)$ kg/m, with $x$ in metres from one end. How far from the light end ($x = 0$) is its centre of mass? Give your answer in metres (a fraction is fine).",
+      answer: 11 / 9,
+      relTolerance: 0.01,
+      unit: "m",
+      hint: "Centre of mass of a non-uniform rod (lesson 0.3).",
+      solution: "$M = \\displaystyle\\int_0^2(1 + 2x)\\,dx = 2 + 4 = 6$ kg and $\\displaystyle\\int_0^2 x(1 + 2x)\\,dx = 2 + \\frac{16}{3} = \\frac{22}{3}$ kg m, so $x_{cm} = \\dfrac{22/3}{6} = \\dfrac{11}{9} \\approx 1.22$ m.",
+      commonMistakes: [
+        { answer: 1, feedback: "That is the midpoint, correct only for a uniform rod." },
+        { answer: 4 / 3, feedback: "That is $\\frac{2L}{3}$ for $\\lambda \\propto x$. The constant 1 in the density pulls the COM back towards the middle." },
+        { answer: 22 / 3, feedback: "That is the moment $\\int x\\,dm$. Divide by the mass, 6 kg." },
       ],
     },
     {
@@ -1030,6 +1446,7 @@ const lessonMastery: LessonSeed = {
         { text: "$\\dfrac{2R}{3\\pi}$", correct: true, feedback: "$\\frac{2R}{\\pi} - \\frac{4R}{3\\pi} = \\frac{6R - 4R}{3\\pi} = \\frac{2R}{3\\pi}$." },
         { text: "$\\dfrac{2R}{\\pi}$", feedback: "That is the wire's distance from the centre, not the gap between the two COMs." },
       ],
+      hint: "Lesson 0.3: recall the standard COM distances of a semicircular wire and a semicircular plate.",
     },
     {
       type: "quiz",
@@ -1042,6 +1459,7 @@ const lessonMastery: LessonSeed = {
         { text: "0.86 cm, away from the hole", feedback: "That uses the 3D mass fraction $\\frac18$ (it is $\\frac{6}{7}$ cm). A disc is 2D: the fraction is $\\left(\\frac12\\right)^2 = \\frac14$." },
         { text: "2 cm, on the side away from the hole", correct: true, feedback: "The hole has mass $\\frac M4$ at 6 cm: shift $= \\frac{(M/4)(6)}{3M/4} = 2$ cm, away from the hole." },
       ],
+      hint: "Lesson 0.4: the hole is a negative mass, and mass scales with area.",
     },
     {
       type: "quiz",
@@ -1054,30 +1472,36 @@ const lessonMastery: LessonSeed = {
         { text: "$\\left(\\frac43, \\frac13\\right)$ m", feedback: "The vertical rod's COM is at height 0.5 m, not 1 m: $y = \\frac{1 \\times 0.5}{3} = \\frac16$." },
         { text: "$\\left(1, \\frac16\\right)$ m", feedback: "The vertical rod sits at $x = 2$, which pulls $x_{cm}$ beyond 1: $\\frac{2(1) + 1(2)}{3} = \\frac43$." },
       ],
+      hint: "Centre of mass of a bent rod (lesson 0.2).",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mrg0-7-q6",
       variant: "mastery",
-      question: "A projectile of mass $3m$ would have a range of 100 m. At the top of its flight it splits into pieces of mass $m$ and $2m$. The smaller piece retraces its path exactly and lands at the launch point. Where does the larger piece land?",
-      options: [
-        { text: "200 m", feedback: "That is the answer for two *equal* halves. The larger piece carries two-thirds of the mass, so it lands closer." },
-        { text: "150 m", correct: true, feedback: "The pieces land together (both start with zero vertical velocity), so $m(0) + 2m\\,x = 3m(100)$ and $x = 150$ m." },
-        { text: "125 m", feedback: "Check: $m(0) + 2m(125) = 250m$, but the COM needs $3m(100) = 300m$." },
-        { text: "300 m", feedback: "You forgot to divide by the $2m$ of the larger piece." },
-      ],
+      question: "A projectile of mass $3m$ would have a range of 100 m. At the top of its flight it splits into pieces of mass $m$ and $2m$. The smaller piece retraces its path exactly and lands at the launch point. How far from the launch point does the larger piece land? Give your answer in metres.",
+      answer: 150,
+      unit: "m",
       hint: "Where does the COM land, and where does the small piece land?",
+      solution: "Both pieces start with zero vertical velocity at the top, so they land together, and their COM lands where the unbroken projectile would have: 100 m. The small piece lands at 0, so $m(0) + 2m\\,x = 3m(100)$ and $x = 150$ m.",
+      commonMistakes: [
+        { answer: 200, feedback: "That is the answer for two *equal* halves. The larger piece carries two-thirds of the mass, so it lands closer." },
+        { answer: 125, feedback: "Check: $m(0) + 2m(125) = 250m$, but the COM needs $3m(100) = 300m$." },
+        { answer: 300, feedback: "You forgot to divide by the $2m$ of the larger piece." },
+      ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mrg0-7-q7",
       variant: "mastery",
-      question: "A 70 kg man stands at one end of a 3 m long, 140 kg boat at rest in still water. He walks to the other end. How far does he move relative to the shore?",
-      options: [
-        { text: "3 m", feedback: "3 m is relative to the boat, which slides back as he walks." },
-        { text: "1 m", feedback: "1 m is the boat's displacement, in the opposite direction." },
-        { text: "2 m", correct: true, feedback: "The boat moves back $\\frac{70 \\times 3}{210} = 1$ m, so he moves $3 - 1 = 2$ m over the ground." },
-        { text: "1.5 m", feedback: "That comes from treating 3 m as his ground displacement: $\\frac{70 \\times 3}{140}$ for the boat, which is wrong." },
+      question: "A 70 kg man stands at one end of a 3 m long, 140 kg boat at rest in still water. He walks to the other end. How far does he move relative to the shore? Give your answer in metres.",
+      answer: 2,
+      unit: "m",
+      hint: "The man on the boat (lesson 0.6).",
+      solution: "The boat moves back $\\dfrac{mL}{m + M} = \\dfrac{70 \\times 3}{210} = 1$ m, so he moves $3 - 1 = 2$ m over the ground. Check: $70 \\times 2 = 140 \\times 1$.",
+      commonMistakes: [
+        { answer: 3, feedback: "3 m is relative to the boat, which slides back as he walks." },
+        { answer: 1, feedback: "1 m is the boat's displacement, in the opposite direction." },
+        { answer: 1.5, feedback: "That comes from treating 3 m as his ground displacement: $\\frac{70 \\times 3}{140}$ for the boat, which is wrong." },
       ],
     },
     {
@@ -1091,6 +1515,7 @@ const lessonMastery: LessonSeed = {
         { text: "$\\dfrac18$ m", feedback: "You used the height, but the fixed-COM rule applies horizontally. The horizontal span is $0.5\\cot30^\\circ$." },
         { text: "$\\dfrac{3\\sqrt3}{8}$ m $\\approx 0.65$ m", feedback: "That is the block's horizontal displacement over the ground, $b - d$." },
       ],
+      hint: "A block on a free wedge (lesson 0.6).",
     },
     {
       type: "quiz",
@@ -1103,17 +1528,21 @@ const lessonMastery: LessonSeed = {
         { text: "$\\left(\\frac43\\hat i + \\frac53\\hat j\\right)$ m/s", feedback: "The $x$-momenta are $+2$ and $-2$ kg m/s: they cancel." },
         { text: "$\\dfrac53\\hat j$ m/s", correct: true, feedback: "$\\vec P = (2 - 2)\\hat i + (3 + 2)\\hat j = 5\\hat j$ kg m/s; divide by 3 kg." },
       ],
+      hint: "Lesson 0.5: mass-weighted average of the velocities.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "mrg0-7-q10",
       variant: "mastery",
-      question: "Particles of 2 kg and 3 kg are released from rest 1 m apart in free space and move towards each other under their mutual attraction. Where do they collide?",
-      options: [
-        { text: "0.4 m from the 2 kg particle's starting point", feedback: "That is the distance from the 3 kg particle. The lighter particle travels further." },
-        { text: "0.5 m from each", feedback: "The midpoint needs equal masses." },
-        { text: "0.6 m from the 2 kg particle's starting point", correct: true, feedback: "The COM stays at rest; it is $\\frac{3 \\times 1}{5} = 0.6$ m from the 2 kg particle." },
-        { text: "It depends on the strength of the attraction.", feedback: "The attraction is internal. It sets *when* they meet, not *where*." },
+      question: "Particles of 2 kg and 3 kg are released from rest 1 m apart in free space and move towards each other under their mutual attraction. How far from the 2 kg particle's starting point do they collide? Give your answer in metres.",
+      answer: 0.6,
+      tolerance: 0.005,
+      unit: "m",
+      hint: "The attraction is internal. What happens to the COM?",
+      solution: "No external force acts and the COM starts at rest, so it stays put and they meet there. It is $\\dfrac{3 \\times 1}{2 + 3} = 0.6$ m from the 2 kg particle. The strength of the attraction sets *when* they meet, not *where*.",
+      commonMistakes: [
+        { answer: 0.4, feedback: "That is the distance from the 3 kg particle. The lighter particle travels further." },
+        { answer: 0.5, feedback: "The midpoint needs equal masses." },
       ],
     },
     {
@@ -1140,6 +1569,22 @@ const lessonMastery: LessonSeed = {
         { text: "$h = R$", feedback: "Check the moments: with $h = R$ the cone gives $\\frac{R^4}{12}$ against the hemisphere's $\\frac{R^4}{4}$, so the COM would be inside the hemisphere." },
         { text: "$h = \\sqrt3\\,R$", correct: true, feedback: "Cone: mass $\\propto \\frac13R^2h$ at $\\frac h4$ above the face. Hemisphere: $\\propto \\frac23R^3$ at $\\frac{3R}{8}$ below. Equal moments: $\\frac{R^2h^2}{12} = \\frac{R^4}{4}$, so $h^2 = 3R^2$." },
       ],
+      hint: "Lesson 0.3: use the standard COM positions of a solid cone and a solid hemisphere, measured from their flat faces.",
+    },
+    {
+      type: "quiz",
+      id: "mrg0-7-q13",
+      variant: "mastery",
+      multiple: true,
+      question: "JEE Advanced. The net external force on a system of particles is zero, but the particles exert forces on one another. Select all the statements that must be true.",
+      options: [
+        { text: "The velocity of the centre of mass is constant.", correct: true, feedback: "$M\\vec a_{cm} = \\vec F_{\\text{ext}} = \\vec 0$." },
+        { text: "The total momentum of the system is constant.", correct: true, feedback: "$\\vec P = M\\vec v_{cm}$, and $\\vec v_{cm}$ is constant." },
+        { text: "The momentum of each particle is constant.", feedback: "Internal forces change individual momenta (the boat and the girl both start moving); only the total is fixed." },
+        { text: "The total kinetic energy of the system is constant.", feedback: "Internal forces can do work: an explosion or two particles pulled together by their attraction gain kinetic energy with zero external force." },
+        { text: "Strong enough internal forces can accelerate the centre of mass.", feedback: "Internal forces come in action-reaction pairs and cancel in the sum. They can never move the COM." },
+      ],
+      hint: "Lesson 0.5: internal forces cancel in pairs in the system's equation of motion. Ask which quantities that protects.",
     },
     {
       type: "callout",

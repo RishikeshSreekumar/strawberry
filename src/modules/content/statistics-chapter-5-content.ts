@@ -62,6 +62,7 @@ const lesson01: LessonSeed = {
       content:
         "Measure the heights of 120 students and draw a histogram. You get a jagged staircase of bars. Now picture measuring 12,000 students, then 12 lakh, with the bins getting narrower each time. The staircase gets finer and finer until it looks like a smooth curve.\n\nThis chapter is about that curve. Once we have it, questions like *what fraction of students are between 150 and 165 cm?* are answered by an **area**, and we no longer need the raw data at all.",
     },
+    { type: "heading", text: "Relative-frequency density" },
     {
       type: "text",
       content:
@@ -111,59 +112,106 @@ const lesson01: LessonSeed = {
       content:
         "A **density curve** (probability density function) $f(x)$ for a continuous variable $X$ satisfies:\n1. $f(x) \\ge 0$ everywhere (the curve never goes below the axis).\n2. The total area under the curve is exactly 1.\n3. $P(a < X < b)$ = the area under the curve between $a$ and $b$.",
     },
+    { type: "heading", text: "Reading areas under a density" },
     {
-      type: "text",
-      content:
-        "**Worked example 1: reading a bar.** In the histogram above with width-5 bins, the class $[155, 160)$ holds 27 of the 120 students.\n\n**Step 1.** Relative frequency: $\\frac{27}{120} = 0.225$.\n\n**Step 2.** Density (bar height): $\\frac{0.225}{5} = 0.045$ per cm.\n\n**Step 3.** Check: bar area $= 5 \\times 0.045 = 0.225$, the fraction of students in that class.\n\nNotice the units. The height is *proportion per cm*, not a proportion, and that matters in a moment.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2: a flat density.** A bus arrives every 20 minutes, and you turn up at a random moment. Your waiting time $X$ is equally likely to be anywhere in $[0, 20]$, so its density is a flat line. For the area to be 1, the rectangle $20 \\times h$ must equal 1, so $h = \\frac{1}{20} = 0.05$.\n\n**Step 1.** $P(5 < X < 12)$ is a rectangle of width 7 and height 0.05.\n\n**Step 2.** Area $= 7 \\times 0.05 = 0.35$.\n\nSo there is a 35% chance you wait between 5 and 12 minutes.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3: a sloping density.** Let $f(x) = \\frac{x}{8}$ for $0 \\le x \\le 4$ (and 0 elsewhere).\n\n**Step 1. Is it a density?** It is never negative, and the region under it is a triangle with base 4 and height $\\frac{4}{8} = \\frac12$, so the area is $\\frac12 \\cdot 4 \\cdot \\frac12 = 1$. Yes.\n\n**Step 2.** $P(X < 2)$ is the small triangle with base 2 and height $\\frac{2}{8} = \\frac14$: area $= \\frac12 \\cdot 2 \\cdot \\frac14 = 0.25$.\n\nHalf the interval, but only a quarter of the probability, because the curve is low on the left. Area, not width, is what counts.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4: unequal classes (application).** A food-delivery app records 80 delivery times (minutes) in classes of *different* widths:",
-    },
-    {
-      type: "table",
-      headers: ["Time (min)", "Frequency $f$", "Width $w$", "Relative freq. $f/n$", "Density $f/(nw)$"],
-      rows: [
-        ["0–10", "12", "10", "0.150", "0.0150"],
-        ["10–15", "18", "5", "0.225", "0.0450"],
-        ["15–20", "24", "5", "0.300", "0.0600"],
-        ["20–30", "16", "10", "0.200", "0.0200"],
-        ["30–50", "10", "20", "0.125", "0.00625"],
+      type: "worked-example",
+      id: "st5-1-we1",
+      title: "Worked example 1: reading a bar",
+      problem:
+        "In the histogram above with width-5 bins, the class $[155, 160)$ holds 27 of the 120 students. Find the relative frequency of this class and the height (density) of its bar.",
+      steps: [
+        { text: "Relative frequency: $\\frac{27}{120} = 0.225$." },
+        { text: "Density (bar height): $\\frac{0.225}{5} = 0.045$ per cm." },
+        { text: "Check: bar area $= 5 \\times 0.045 = 0.225$, the fraction of students in that class." },
       ],
+      answer: "Density $0.045$ per cm (relative frequency 0.225)",
     },
     {
       type: "text",
       content:
-        "**Step 1. Compute densities.** Divide each relative frequency by its width, e.g. $\\frac{0.125}{20} = 0.00625$ for the last class.\n\n*Why this step:* a frequency histogram would draw the 30–50 bar at height 10, almost as tall as 0–10, even though its 10 deliveries are spread over 20 minutes. Dividing by width puts every class on the same *per-minute* footing.\n\n**Step 2. Check the total area.** $0.150 + 0.225 + 0.300 + 0.200 + 0.125 = 1$ ✓.\n\n**Step 3. Estimate the fraction delivered in under 18 minutes.** The first two classes are whole: $0.150 + 0.225 = 0.375$. From 15 to 18 we take 3 minutes of the 15–20 bar: $3 \\times 0.06 = 0.18$.",
+        "Notice the units. The height is *proportion per cm*, not a proportion, and that matters in a moment.",
     },
-    { type: "math", latex: "P(X < 18) \\approx 0.150 + 0.225 + 3 \\times 0.060 = 0.555" },
+    {
+      type: "worked-example",
+      id: "st5-1-we2",
+      title: "Worked example 2: a flat density",
+      problem:
+        "A bus arrives every 20 minutes, and you turn up at a random moment. Your waiting time $X$ is equally likely to be anywhere in $[0, 20]$, so its density is a flat line. For the area to be 1, the rectangle $20 \\times h$ must equal 1, so $h = \\frac{1}{20} = 0.05$. Find $P(5 < X < 12)$.",
+      steps: [
+        { text: "$P(5 < X < 12)$ is a rectangle of width 7 and height 0.05." },
+        { text: "Area $= 7 \\times 0.05 = 0.35$." },
+      ],
+      answer: "There is a 35% chance you wait between 5 and 12 minutes.",
+    },
+    {
+      type: "worked-example",
+      id: "st5-1-we3",
+      title: "Worked example 3: a sloping density",
+      problem:
+        "Let $f(x) = \\frac{x}{8}$ for $0 \\le x \\le 4$ (and 0 elsewhere). Is $f$ a density? Find $P(X < 2)$.",
+      steps: [
+        { text: "**Is it a density?** It is never negative, and the region under it is a triangle with base 4 and height $\\frac{4}{8} = \\frac12$, so the area is $\\frac12 \\cdot 4 \\cdot \\frac12 = 1$. Yes." },
+        { text: "$P(X < 2)$ is the small triangle with base 2 and height $\\frac{2}{8} = \\frac14$: area $= \\frac12 \\cdot 2 \\cdot \\frac14 = 0.25$." },
+      ],
+      answer: "Yes, it is a density (area 1); $P(X < 2) = 0.25$",
+    },
     {
       type: "text",
       content:
-        "*Why this step:* inside a bar the density is flat, so a part of the bar carries area in proportion to its width. About 55.5% of deliveries (roughly 44 of the 80) arrive within 18 minutes.",
+        "Half the interval, but only a quarter of the probability, because the curve is low on the left. Area, not width, is what counts.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5: find the constant (exam style).** A continuous variable has density $f(x) = k$ for $0 \\le x \\le 2$, falling in a straight line from $k$ to 0 as $x$ goes from 2 to 4, and 0 elsewhere. Find $k$, $P(X > 3)$ and $P(1 < X < 3)$.\n\n**Step 1. Total area = 1.** The region is a rectangle ($2 \\times k$) plus a triangle ($\\frac12 \\cdot 2 \\cdot k$):",
+      type: "worked-example",
+      id: "st5-1-we4",
+      title: "Worked example 4: unequal classes (application)",
+      problem:
+        "A food-delivery app records 80 delivery times (minutes) in classes of *different* widths. Find the density of each class and estimate the fraction delivered in under 18 minutes.",
+      problemTable: {
+        headers: ["Time (min)", "Frequency $f$"],
+        rows: [
+          ["0–10", "12"],
+          ["10–15", "18"],
+          ["15–20", "24"],
+          ["20–30", "16"],
+          ["30–50", "10"],
+        ],
+      },
+      steps: [
+        {
+          text: "**Compute densities.** Divide each relative frequency by its width, e.g. $\\frac{0.125}{20} = 0.00625$ for the last class.\n\n*Why this step:* a frequency histogram would draw the 30–50 bar at height 10, almost as tall as 0–10, even though its 10 deliveries are spread over 20 minutes. Dividing by width puts every class on the same *per-minute* footing.",
+          table: {
+            headers: ["Time (min)", "Frequency $f$", "Width $w$", "Relative freq. $f/n$", "Density $f/(nw)$"],
+            rows: [
+              ["0–10", "12", "10", "0.150", "0.0150"],
+              ["10–15", "18", "5", "0.225", "0.0450"],
+              ["15–20", "24", "5", "0.300", "0.0600"],
+              ["20–30", "16", "10", "0.200", "0.0200"],
+              ["30–50", "10", "20", "0.125", "0.00625"],
+            ],
+          },
+        },
+        { text: "**Check the total area.** $0.150 + 0.225 + 0.300 + 0.200 + 0.125 = 1$ ✓." },
+        { text: "**Estimate the fraction delivered in under 18 minutes.** The first two classes are whole: $0.150 + 0.225 = 0.375$. From 15 to 18 we take 3 minutes of the 15–20 bar: $3 \\times 0.06 = 0.18$.", latex: "P(X < 18) \\approx 0.150 + 0.225 + 3 \\times 0.060 = 0.555" },
+        { text: "*Why this step:* inside a bar the density is flat, so a part of the bar carries area in proportion to its width. About 55.5% of deliveries (roughly 44 of the 80) arrive within 18 minutes." },
+      ],
+      answer: "$P(X < 18) \\approx 0.555$, roughly 44 of the 80 deliveries",
     },
-    { type: "math", latex: "2k + k = 3k = 1 \\;\\Rightarrow\\; k = \\tfrac13" },
     {
-      type: "text",
-      content:
-        "*Why this step:* the only condition that pins down an unknown constant in a density is that the total area is exactly 1.\n\n**Step 2. $P(X > 3)$.** On $[2, 4]$ the line drops from $\\frac13$ to 0, so at $x = 3$ (halfway) the height is $\\frac16$. The region right of 3 is a triangle: $\\frac12 \\cdot 1 \\cdot \\frac16 = \\frac{1}{12}$.\n\n**Step 3. $P(1 < X < 3)$.** Rectangle from 1 to 2: $1 \\times \\frac13 = \\frac13$. Trapezium from 2 to 3 with parallel sides $\\frac13$ and $\\frac16$: $\\frac12\\left(\\frac13 + \\frac16\\right) \\cdot 1 = \\frac14$. Total $\\frac13 + \\frac14 = \\frac{7}{12}$.\n\n**Check.** $P(X < 1) = \\frac13$, so $\\frac13 + \\frac{7}{12} + \\frac{1}{12} = \\frac{4 + 7 + 1}{12} = 1$ ✓.",
+      type: "worked-example",
+      id: "st5-1-we5",
+      title: "Worked example 5: find the constant (exam style)",
+      problem:
+        "A continuous variable has density $f(x) = k$ for $0 \\le x \\le 2$, falling in a straight line from $k$ to 0 as $x$ goes from 2 to 4, and 0 elsewhere. Find $k$, $P(X > 3)$ and $P(1 < X < 3)$.",
+      steps: [
+        { text: "**Total area = 1.** The region is a rectangle ($2 \\times k$) plus a triangle ($\\frac12 \\cdot 2 \\cdot k$):", latex: "2k + k = 3k = 1 \\;\\Rightarrow\\; k = \\tfrac13" },
+        { text: "*Why this step:* the only condition that pins down an unknown constant in a density is that the total area is exactly 1." },
+        { text: "**$P(X > 3)$.** On $[2, 4]$ the line drops from $\\frac13$ to 0, so at $x = 3$ (halfway) the height is $\\frac16$. The region right of 3 is a triangle: $\\frac12 \\cdot 1 \\cdot \\frac16 = \\frac{1}{12}$." },
+        { text: "**$P(1 < X < 3)$.** Rectangle from 1 to 2: $1 \\times \\frac13 = \\frac13$. Trapezium from 2 to 3 with parallel sides $\\frac13$ and $\\frac16$: $\\frac12\\left(\\frac13 + \\frac16\\right) \\cdot 1 = \\frac14$. Total $\\frac13 + \\frac14 = \\frac{7}{12}$." },
+        { text: "**Check.** $P(X < 1) = \\frac13$, so $\\frac13 + \\frac{7}{12} + \\frac{1}{12} = \\frac{4 + 7 + 1}{12} = 1$ ✓." },
+      ],
+      answer: "$k = \\tfrac13$, $P(X > 3) = \\frac{1}{12}$, $P(1 < X < 3) = \\frac{7}{12}$",
     },
+    { type: "heading", text: "Heights, areas and single points" },
     {
       type: "callout",
       variant: "warning",
@@ -192,6 +240,7 @@ const lesson01: LessonSeed = {
         ["Changes with every new sample", "Describes the whole population"],
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st5-1-q1",
@@ -331,6 +380,7 @@ const lesson02: LessonSeed = {
       content:
         "A continuous variable $X$ is normal with mean $\\mu$ and standard deviation $\\sigma$, written $X \\sim N(\\mu, \\sigma^2)$, if its density is $f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}}\\, e^{-(x-\\mu)^2/(2\\sigma^2)}$.\n\nThe second number in the brackets is the **variance** $\\sigma^2$, so $N(70, 25)$ has $\\sigma = 5$.",
     },
+    { type: "heading", text: "What $\\mu$ and $\\sigma$ do" },
     {
       type: "text",
       content:
@@ -372,6 +422,7 @@ const lesson02: LessonSeed = {
         ["Total area = 1", "The constant $\\frac{1}{\\sigma\\sqrt{2\\pi}}$ is chosen for this"],
       ],
     },
+    { type: "heading", text: "The 68–95–99.7 rule" },
     {
       type: "text",
       content:
@@ -415,39 +466,63 @@ const lesson02: LessonSeed = {
         ["below $\\mu$ (or above $\\mu$)", "50%"],
       ],
     },
+    { type: "heading", text: "Percentages, counts and unknown parameters" },
+    {
+      type: "worked-example",
+      id: "st5-2-we1",
+      title: "Worked example 1",
+      problem:
+        "Heights of students are $N(160, 8^2)$. Using the 68–95–99.7 rule, what percentage are (a) between 152 and 168 cm, (b) taller than 176 cm, (c) between 144 and 168 cm?",
+      steps: [
+        { text: "(a) *Between 152 and 168 cm?* These are $160 \\pm 8$, i.e. $\\mu \\pm \\sigma$: about **68%**." },
+        { text: "(b) *Taller than 176 cm?* $176 = 160 + 2 \\times 8$, i.e. $\\mu + 2\\sigma$. Outside $\\mu \\pm 2\\sigma$ is 5%, half of it above: about **2.5%**." },
+        { text: "(c) *Between 144 and 168 cm?* $144 = \\mu - 2\\sigma$ and $168 = \\mu + \\sigma$. Split at $\\mu$: $47.5\\%$ (half of 95%) on the left plus $34\\%$ (half of 68%) on the right, about **81.5%**." },
+      ],
+      answer: "(a) about 68%, (b) about 2.5%, (c) about 81.5%",
+    },
+    {
+      type: "worked-example",
+      id: "st5-2-we2",
+      title: "Worked example 2",
+      problem:
+        "A machine fills milk packets with volume $X \\sim N(500, 16)$ ml. Note the 16 is the variance, so $\\sigma = 4$ ml. Using the 68–95–99.7 rule, what percentage of packets hold (a) below 496 ml, (b) between 488 and 504 ml?",
+      steps: [
+        { text: "(a) *Below 496 ml?* $496 = \\mu - \\sigma$. Below $\\mu - \\sigma$ is the left tail: about **16%**." },
+        { text: "(b) *Between 488 and 504 ml?* $488 = \\mu - 3\\sigma$, $504 = \\mu + \\sigma$. That is $49.85\\% + 34\\% \\approx$ **83.85%**." },
+      ],
+      answer: "(a) about 16%, (b) about 83.85%",
+    },
+    {
+      type: "worked-example",
+      id: "st5-2-we3",
+      title: "Worked example 3: from percentages to counts (application)",
+      problem:
+        "A company tests 1000 phones. Battery life on a full charge is $N(20, 2^2)$ hours. How many phones should last between 16 and 22 hours, and how many less than 16?",
+      steps: [
+        { text: "**Locate the bounds in SD units.** $16 = 20 - 2 \\times 2 = \\mu - 2\\sigma$ and $22 = 20 + 2 = \\mu + \\sigma$.\n\n*Why this step:* the 68–95–99.7 rule speaks only in SDs from the mean, so every bound must be translated into that language first." },
+        { text: "**Split at the mean.** Left part: half of 95% $= 47.5\\%$. Right part: half of 68% $= 34\\%$. Total $81.5\\%$." },
+        { text: "**Convert to counts.** $0.815 \\times 1000 = 815$ phones last 16 to 22 hours. Below 16 is the lower tail beyond $2\\sigma$: $2.5\\%$, i.e. about **25 phones**." },
+      ],
+      answer: "About 815 phones last 16 to 22 hours; about 25 last less than 16",
+    },
+    {
+      type: "worked-example",
+      id: "st5-2-we4",
+      title: "Worked example 4: finding $\\mu$ and $\\sigma$ (exam style)",
+      problem:
+        "In a normal distribution, 16% of values lie above 72 and 2.5% lie below 48. Using the 68–95–99.7 rule, find $\\mu$ and $\\sigma$.",
+      steps: [
+        { text: "**Read each tail.** 16% in one upper tail is the tail beyond $\\mu + \\sigma$, so $72 = \\mu + \\sigma$. 2.5% in the lower tail is the tail beyond $\\mu - 2\\sigma$, so $48 = \\mu - 2\\sigma$.\n\n*Why this step:* each percentage fixes *how many SDs* the value is from the mean, and the side of the tail fixes the sign." },
+        { text: "**Solve the pair.**", latex: "(\\mu + \\sigma) - (\\mu - 2\\sigma) = 72 - 48 \\;\\Rightarrow\\; 3\\sigma = 24 \\;\\Rightarrow\\; \\sigma = 8,\\quad \\mu = 64" },
+        { text: "**Check.** $64 + 8 = 72$ ✓ and $64 - 16 = 48$ ✓. The distribution is $N(64, 8^2)$." },
+      ],
+      answer: "$\\mu = 64$, $\\sigma = 8$",
+    },
+    { type: "heading", text: "Where does the bell come from?" },
     {
       type: "text",
       content:
-        "**Worked example 1.** Heights of students are $N(160, 8^2)$.\n\n(a) *Between 152 and 168 cm?* These are $160 \\pm 8$, i.e. $\\mu \\pm \\sigma$: about **68%**.\n\n(b) *Taller than 176 cm?* $176 = 160 + 2 \\times 8$, i.e. $\\mu + 2\\sigma$. Outside $\\mu \\pm 2\\sigma$ is 5%, half of it above: about **2.5%**.\n\n(c) *Between 144 and 168 cm?* $144 = \\mu - 2\\sigma$ and $168 = \\mu + \\sigma$. Split at $\\mu$: $47.5\\%$ (half of 95%) on the left plus $34\\%$ (half of 68%) on the right, about **81.5%**.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2.** A machine fills milk packets with volume $X \\sim N(500, 16)$ ml. Note the 16 is the variance, so $\\sigma = 4$ ml.\n\n(a) *Below 496 ml?* $496 = \\mu - \\sigma$. Below $\\mu - \\sigma$ is the left tail: about **16%**.\n\n(b) *Between 488 and 504 ml?* $488 = \\mu - 3\\sigma$, $504 = \\mu + \\sigma$. That is $49.85\\% + 34\\% \\approx$ **83.85%**.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3: from percentages to counts (application).** A company tests 1000 phones. Battery life on a full charge is $N(20, 2^2)$ hours. How many phones should last between 16 and 22 hours, and how many less than 16?\n\n**Step 1. Locate the bounds in SD units.** $16 = 20 - 2 \\times 2 = \\mu - 2\\sigma$ and $22 = 20 + 2 = \\mu + \\sigma$.\n\n*Why this step:* the 68–95–99.7 rule speaks only in SDs from the mean, so every bound must be translated into that language first.\n\n**Step 2. Split at the mean.** Left part: half of 95% $= 47.5\\%$. Right part: half of 68% $= 34\\%$. Total $81.5\\%$.\n\n**Step 3. Convert to counts.** $0.815 \\times 1000 = 815$ phones last 16 to 22 hours. Below 16 is the lower tail beyond $2\\sigma$: $2.5\\%$, i.e. about **25 phones**.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4: finding $\\mu$ and $\\sigma$ (exam style).** In a normal distribution, 16% of values lie above 72 and 2.5% lie below 48. Using the 68–95–99.7 rule, find $\\mu$ and $\\sigma$.\n\n**Step 1. Read each tail.** 16% in one upper tail is the tail beyond $\\mu + \\sigma$, so $72 = \\mu + \\sigma$. 2.5% in the lower tail is the tail beyond $\\mu - 2\\sigma$, so $48 = \\mu - 2\\sigma$.\n\n*Why this step:* each percentage fixes *how many SDs* the value is from the mean, and the side of the tail fixes the sign.\n\n**Step 2. Solve the pair.**",
-    },
-    {
-      type: "math",
-      latex: "(\\mu + \\sigma) - (\\mu - 2\\sigma) = 72 - 48 \\;\\Rightarrow\\; 3\\sigma = 24 \\;\\Rightarrow\\; \\sigma = 8,\\quad \\mu = 64",
-    },
-    {
-      type: "text",
-      content:
-        "**Check.** $64 + 8 = 72$ ✓ and $64 - 16 = 48$ ✓. The distribution is $N(64, 8^2)$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Where does the bell come from?** Think of a quantity built up from many small, independent pushes, some up and some down. Your height depends on hundreds of genes plus nutrition, sleep and more, each adding or subtracting a little. It is rare for almost all the pushes to go the same way, so extreme totals are rare, and most totals land near the middle. Add up enough small independent effects and the bell shape appears almost whatever the individual effects look like. You will see this happen for sample means in 5.5.",
+        "Think of a quantity built up from many small, independent pushes, some up and some down. Your height depends on hundreds of genes plus nutrition, sleep and more, each adding or subtracting a little. It is rare for almost all the pushes to go the same way, so extreme totals are rare, and most totals land near the middle. Add up enough small independent effects and the bell shape appears almost whatever the individual effects look like. You will see this happen for sample means in 5.5.",
     },
     {
       type: "callout",
@@ -456,6 +531,7 @@ const lesson02: LessonSeed = {
       content:
         "The normal curve is a *model*, and plenty of real data do not fit it. **Incomes** are strongly right-skewed (a long tail of very high earners). **Waiting times** cannot be negative and pile up near 0. **Marks on an easy test** bunch up against the maximum. Before using the normal table, look at the data: a roughly symmetric, single-peaked histogram is the minimum requirement.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st5-2-q1",
@@ -575,6 +651,7 @@ const lesson03: LessonSeed = {
       content:
         "The 68–95–99.7 rule only works for whole numbers of SDs. What fraction of students are shorter than 170 cm, when that is $1.25\\sigma$ above the mean? We need areas for *any* position, and nobody could print a table for every possible $\\mu$ and $\\sigma$. We do not need to: one table does the job for every normal distribution.",
     },
+    { type: "heading", text: "Standardising with $z$" },
     {
       type: "text",
       content:
@@ -587,6 +664,7 @@ const lesson03: LessonSeed = {
         "Subtracting $\\mu$ slides the curve so its centre is at 0. Dividing by $\\sigma$ rescales it so its SD is 1. Both steps just relabel the axis. The shape does not change and neither does any area. So if $X \\sim N(\\mu, \\sigma^2)$, then $Z = \\frac{X - \\mu}{\\sigma} \\sim N(0, 1)$, and",
     },
     { type: "math", latex: "P(X < x) = P\\!\\left(Z < \\frac{x - \\mu}{\\sigma}\\right)" },
+    { type: "heading", text: "Reading the $\\Phi$ table" },
     {
       type: "callout",
       variant: "definition",
@@ -629,52 +707,85 @@ const lesson03: LessonSeed = {
           "Marks N(62, 10²). The lab converts each bound to z, looks up Φ, and subtracts. Toggle a = −∞ or b = +∞ to get one-sided areas.",
       },
     },
+    { type: "heading", text: "Heights, marks and lifetimes" },
     {
-      type: "text",
-      content:
-        "**Worked example 1: heights.** $X \\sim N(160, 8^2)$. Find $P(X < 170)$.\n\n**Step 1. Standardise.** $z = \\frac{170 - 160}{8} = 1.25$.\n\n**Step 2. Look up.** $\\Phi(1.25) = 0.8944$.\n\n**Step 3. Interpret.** About 89.4% of students are shorter than 170 cm.\n\nAnd $P(150 < X < 170)$? The lower bound gives $z = \\frac{150 - 160}{8} = -1.25$, so the interval is symmetric: $2\\Phi(1.25) - 1 = 2(0.8944) - 1 = 0.7888$.",
+      type: "worked-example",
+      id: "st5-3-we1",
+      title: "Worked example 1: heights",
+      problem:
+        "$X \\sim N(160, 8^2)$. Find $P(X < 170)$. Then find $P(150 < X < 170)$.",
+      steps: [
+        { text: "**Standardise.** $z = \\frac{170 - 160}{8} = 1.25$." },
+        { text: "**Look up.** $\\Phi(1.25) = 0.8944$." },
+        { text: "**Interpret.** About 89.4% of students are shorter than 170 cm." },
+        { text: "And $P(150 < X < 170)$? The lower bound gives $z = \\frac{150 - 160}{8} = -1.25$, so the interval is symmetric: $2\\Phi(1.25) - 1 = 2(0.8944) - 1 = 0.7888$." },
+      ],
+      answer: "$P(X < 170) = 0.8944$, about 89.4%; $P(150 < X < 170) = 0.7888$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2: exam marks.** $X \\sim N(62, 10^2)$.\n\n(a) *Fail mark below 50.* $z = \\frac{50 - 62}{10} = -1.2$. The table has no negative $z$, so use symmetry: $\\Phi(-1.2) = 1 - \\Phi(1.2) = 1 - 0.8849 = 0.1151$. About 11.5% fail.\n\n(b) *Between 55 and 80.* $z_a = \\frac{55 - 62}{10} = -0.7$ and $z_b = \\frac{80 - 62}{10} = 1.8$, so",
+      type: "worked-example",
+      id: "st5-3-we2",
+      title: "Worked example 2: exam marks",
+      problem:
+        "$X \\sim N(62, 10^2)$. If the pass mark is 50, what fraction fail? What fraction score between 55 and 80?",
+      steps: [
+        { text: "(a) *Fail mark below 50.* $z = \\frac{50 - 62}{10} = -1.2$. The table has no negative $z$, so use symmetry: $\\Phi(-1.2) = 1 - \\Phi(1.2) = 1 - 0.8849 = 0.1151$. About 11.5% fail." },
+        { text: "(b) *Between 55 and 80.* $z_a = \\frac{55 - 62}{10} = -0.7$ and $z_b = \\frac{80 - 62}{10} = 1.8$, so", latex: "P = \\Phi(1.8) - \\Phi(-0.7) = 0.9641 - (1 - 0.7580) = 0.9641 - 0.2420 = 0.7221" },
+        { text: "About 72% score between 55 and 80, which matches the lab." },
+      ],
+      answer: "(a) $0.1151$, about 11.5% fail. (b) $0.7221$",
     },
     {
-      type: "math",
-      latex: "P = \\Phi(1.8) - \\Phi(-0.7) = 0.9641 - (1 - 0.7580) = 0.9641 - 0.2420 = 0.7221",
+      type: "worked-example",
+      id: "st5-3-we3",
+      title: "Worked example 3: component lifetimes",
+      problem:
+        "Bulbs last $X \\sim N(1200, 150^2)$ hours, and a batch has 5000 bulbs. How many bulbs last more than 1500 h? What fraction last between 900 and 1500 h?",
+      steps: [
+        { text: "Lasting more than 1500 h: $z = \\frac{1500 - 1200}{150} = 2$, so $P = 1 - \\Phi(2) = 1 - 0.9772 = 0.0228$." },
+        { text: "Expected number: $0.0228 \\times 5000 = 114$ bulbs." },
+        { text: "Between 900 and 1500 h: $z = \\pm 2$, so $P = 2\\Phi(2) - 1 = 0.9544$. That is the precise version of the rule's 95%." },
+      ],
+      answer: "$P = 0.0228$, about 114 bulbs above 1500 h; $0.9544$ between 900 and 1500 h",
     },
     {
-      type: "text",
-      content: "About 72% score between 55 and 80, which matches the lab.",
+      type: "worked-example",
+      id: "st5-3-we4",
+      title: "Worked example 4: a count between two values (routine)",
+      problem:
+        "1000 students take a test with marks $N(62, 10^2)$. How many score between 67 and 82?",
+      steps: [
+        { text: "**Standardise both bounds.** $z_a = \\frac{67 - 62}{10} = 0.5$ and $z_b = \\frac{82 - 62}{10} = 2$." },
+        { text: "**Subtract left areas.** $\\Phi(2) - \\Phi(0.5) = 0.9772 - 0.6915 = 0.2857$.\n\n*Why this step:* $\\Phi(2)$ is everything left of 82; removing everything left of 67 leaves exactly the band between them." },
+        { text: "**Scale up.** $0.2857 \\times 1000 = 285.7$, so about **286 students**." },
+      ],
+      answer: "About 286 students",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3: component lifetimes.** Bulbs last $X \\sim N(1200, 150^2)$ hours, and a batch has 5000 bulbs.\n\n**Step 1.** Lasting more than 1500 h: $z = \\frac{1500 - 1200}{150} = 2$, so $P = 1 - \\Phi(2) = 1 - 0.9772 = 0.0228$.\n\n**Step 2.** Expected number: $0.0228 \\times 5000 = 114$ bulbs.\n\n**Step 3.** Between 900 and 1500 h: $z = \\pm 2$, so $P = 2\\Phi(2) - 1 = 0.9544$. That is the precise version of the rule's 95%.",
+      type: "worked-example",
+      id: "st5-3-we5",
+      title: "Worked example 5: which machine underfills more? (application)",
+      problem:
+        "Machine A fills packets $N(500, 4^2)$ g; machine B fills $N(504, 6^2)$ g. A packet under 495 g is rejected. Which machine rejects a larger fraction?",
+      steps: [
+        { text: "**Machine A.** $z = \\frac{495 - 500}{4} = -1.25$, so $P = \\Phi(-1.25) = 1 - 0.8944 = 0.1056$." },
+        { text: "**Machine B.** $z = \\frac{495 - 504}{6} = -1.5$, so $P = 1 - 0.9332 = 0.0668$.\n\n*Why this step:* raw distances mislead. 495 is 5 g below A's mean but 9 g below B's; B is more variable, yet in *SD units* 495 is further out for B ($1.5\\sigma$ against $1.25\\sigma$)." },
+        { text: "**Conclude.** A rejects about 10.6%, B about 6.7%. The less consistent machine wins here, because its higher mean more than makes up for its spread." },
+      ],
+      answer: "Machine A rejects more: about 10.6% against 6.7%",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4: a count between two values (routine).** 1000 students take a test with marks $N(62, 10^2)$. How many score between 67 and 82?\n\n**Step 1. Standardise both bounds.** $z_a = \\frac{67 - 62}{10} = 0.5$ and $z_b = \\frac{82 - 62}{10} = 2$.\n\n**Step 2. Subtract left areas.** $\\Phi(2) - \\Phi(0.5) = 0.9772 - 0.6915 = 0.2857$.\n\n*Why this step:* $\\Phi(2)$ is everything left of 82; removing everything left of 67 leaves exactly the band between them.\n\n**Step 3. Scale up.** $0.2857 \\times 1000 = 285.7$, so about **286 students**.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5: which machine underfills more? (application).** Machine A fills packets $N(500, 4^2)$ g; machine B fills $N(504, 6^2)$ g. A packet under 495 g is rejected. Which machine rejects a larger fraction?\n\n**Step 1. Machine A.** $z = \\frac{495 - 500}{4} = -1.25$, so $P = \\Phi(-1.25) = 1 - 0.8944 = 0.1056$.\n\n**Step 2. Machine B.** $z = \\frac{495 - 504}{6} = -1.5$, so $P = 1 - 0.9332 = 0.0668$.\n\n*Why this step:* raw distances mislead. 495 is 5 g below A's mean but 9 g below B's; B is more variable, yet in *SD units* 495 is further out for B ($1.5\\sigma$ against $1.25\\sigma$).\n\n**Step 3. Conclude.** A rejects about 10.6%, B about 6.7%. The less consistent machine wins here, because its higher mean more than makes up for its spread.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 6: a conditional probability (exam style).** Marks are $N(62, 10^2)$. A student is known to have scored above the mean. What is the probability that the student scored above 80?\n\n**Step 1. Write the conditional probability.** Scoring above 80 already implies scoring above 62, so the \"and\" event is just $X > 80$:",
-    },
-    {
-      type: "math",
-      latex: "P(X > 80 \\mid X > 62) = \\frac{P(X > 80)}{P(X > 62)} = \\frac{1 - \\Phi(1.8)}{0.5} = \\frac{0.0359}{0.5} = 0.0718",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* knowing the student is above the mean shrinks the whole world to the right half of the curve, whose area is 0.5. Dividing by 0.5 rescales that half to total 1.\n\n**Step 2. Interpret.** Unconditionally about 3.6% score above 80; among those above the mean it is about 7.2%, exactly double.",
+      type: "worked-example",
+      id: "st5-3-we6",
+      title: "Worked example 6: a conditional probability (exam style)",
+      problem:
+        "Marks are $N(62, 10^2)$. A student is known to have scored above the mean. What is the probability that the student scored above 80?",
+      steps: [
+        { text: "**Write the conditional probability.** Scoring above 80 already implies scoring above 62, so the \"and\" event is just $X > 80$:", latex: "P(X > 80 \\mid X > 62) = \\frac{P(X > 80)}{P(X > 62)} = \\frac{1 - \\Phi(1.8)}{0.5} = \\frac{0.0359}{0.5} = 0.0718" },
+        { text: "*Why this step:* knowing the student is above the mean shrinks the whole world to the right half of the curve, whose area is 0.5. Dividing by 0.5 rescales that half to total 1." },
+        { text: "**Interpret.** Unconditionally about 3.6% score above 80; among those above the mean it is about 7.2%, exactly double." },
+      ],
+      answer: "$P(X > 80 \\mid X > 62) = 0.0718$",
     },
     {
       type: "callout",
@@ -690,6 +801,7 @@ const lesson03: LessonSeed = {
       content:
         "A negative $z$ only says the value is *below the mean*. $\\Phi(-1.2) = 0.1151$: a small positive area, less than 0.5 because the value is left of centre. Every $\\Phi$ value is an area, so it is always between 0 and 1.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st5-3-q1",
@@ -805,6 +917,7 @@ const lesson04: LessonSeed = {
       content:
         "In 5.3 we went from a value to a proportion. Often the question runs the other way. *The top 10% get an A: what mark do you need?* *A company wants only 2.5% of packets to be underweight: how consistent must the machine be?* Now we know the area and want the boundary.",
     },
+    { type: "heading", text: "Running the chain in reverse" },
     {
       type: "text",
       content: "Run the chain from 5.3 in reverse:",
@@ -851,87 +964,122 @@ const lesson04: LessonSeed = {
           "Drag b until the shaded area to its left is 0.90. When you hit it, the lab shows b = μ + zσ.",
       },
     },
+    { type: "heading", text: "Cut-offs for tails and the middle" },
     {
-      type: "text",
-      content:
-        "**Worked example 1: the top 10%.** Marks are $N(62, 10^2)$ and the top 10% get an A.\n\n**Step 1. Sketch.** The cut-off $c$ has 10% above it, so 90% below: $\\Phi(z) = 0.90$.\n\n**Step 2. Table backwards.** $z = 1.282$.\n\n**Step 3. Unstandardise.** $c = 62 + 1.282 \\times 10 = 74.82$.\n\nYou need about **75 marks** for an A, far below 90.",
+      type: "worked-example",
+      id: "st5-4-we1",
+      title: "Worked example 1: the top 10%",
+      problem:
+        "Marks are $N(62, 10^2)$ and the top 10% get an A. What is the lowest mark that earns an A?",
+      steps: [
+        { text: "**Sketch.** The cut-off $c$ has 10% above it, so 90% below: $\\Phi(z) = 0.90$." },
+        { text: "**Table backwards.** $z = 1.282$." },
+        { text: "**Unstandardise.** $c = 62 + 1.282 \\times 10 = 74.82$." },
+        { text: "**The top-10% cut-off is not 90% of the maximum.** \"Top 10%\" is about *people*, not about *marks*. It means 10% of the **area**, and where that boundary falls depends on $\\mu$ and $\\sigma$. On a hard paper ($\\mu = 62$, $\\sigma = 10$) the top 10% starts near 75 out of 100. On an easy paper with $\\mu = 80$, $\\sigma = 5$ it would start near $80 + 1.282 \\times 5 \\approx 86.4$. Either way, 90 plays no special role." },
+      ],
+      answer: "You need about **75 marks** for an A, far below 90.",
     },
     {
-      type: "callout",
-      variant: "warning",
-      title: "The top-10% cut-off is not 90% of the maximum",
-      content:
-        "\"Top 10%\" is about *people*, not about *marks*. It means 10% of the **area**, and where that boundary falls depends on $\\mu$ and $\\sigma$. On a hard paper ($\\mu = 62$, $\\sigma = 10$) the top 10% starts near 75 out of 100. On an easy paper with $\\mu = 80$, $\\sigma = 5$ it would start near $80 + 1.282 \\times 5 \\approx 86.4$. Either way, 90 plays no special role.",
+      type: "worked-example",
+      id: "st5-4-we2",
+      title: "Worked example 2: a lower tail",
+      problem:
+        "Heights are $N(160, 8^2)$. A school checks on the shortest 5% for nutrition. Where is the cut-off?",
+      steps: [
+        { text: "5% below, so $\\Phi(z) = 0.05$. That is below 0.5, so $z$ is **negative**." },
+        { text: "By symmetry, it is the mirror of $\\Phi(1.645) = 0.95$: $z = -1.645$." },
+        { text: "$c = 160 + (-1.645)(8) = 160 - 13.16 = 146.84$ cm." },
+      ],
+      answer: "$146.84$ cm",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2: a lower tail.** Heights are $N(160, 8^2)$. A school checks on the shortest 5% for nutrition. Where is the cut-off?\n\n**Step 1.** 5% below, so $\\Phi(z) = 0.05$. That is below 0.5, so $z$ is **negative**.\n\n**Step 2.** By symmetry, it is the mirror of $\\Phi(1.645) = 0.95$: $z = -1.645$.\n\n**Step 3.** $c = 160 + (-1.645)(8) = 160 - 13.16 = 146.84$ cm.",
+      type: "worked-example",
+      id: "st5-4-we3",
+      title: "Worked example 3: the middle 50%",
+      problem:
+        "For heights $N(160, 8^2)$, find the quartiles and the IQR.",
+      steps: [
+        { text: "The quartiles have 25% and 75% to their left, so $z = \\mp 0.674$:", latex: "Q_1 = 160 - 0.674 \\times 8 \\approx 154.6, \\qquad Q_3 = 160 + 0.674 \\times 8 \\approx 165.4" },
+        { text: "The IQR is $2 \\times 0.674\\sigma \\approx 1.35\\sigma \\approx 10.8$ cm. For normal data, IQR $\\approx 1.35\\sigma$." },
+      ],
+      answer: "$Q_1 \\approx 154.6$, $Q_3 \\approx 165.4$, IQR $\\approx 10.8$ cm",
+    },
+    { type: "heading", text: "An unknown mean or SD" },
+    {
+      type: "worked-example",
+      id: "st5-4-we4",
+      title: "Worked example 4: an unknown $\\sigma$",
+      problem:
+        "A machine fills bottles with mean 500 ml. The company wants only 2.5% of bottles below 490 ml. What SD can it allow?",
+      steps: [
+        { text: "2.5% below 490 gives $z = -1.96$." },
+        { text: "$\\frac{490 - 500}{\\sigma} = -1.96$, so $\\sigma = \\frac{10}{1.96} \\approx 5.10$ ml." },
+      ],
+      answer: "The machine's SD must be at most about 5.1 ml.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3: the middle 50%.** For heights $N(160, 8^2)$, the quartiles have 25% and 75% to their left, so $z = \\mp 0.674$:",
-    },
-    {
-      type: "math",
-      latex: "Q_1 = 160 - 0.674 \\times 8 \\approx 154.6, \\qquad Q_3 = 160 + 0.674 \\times 8 \\approx 165.4",
-    },
-    {
-      type: "text",
-      content:
-        "The IQR is $2 \\times 0.674\\sigma \\approx 1.35\\sigma \\approx 10.8$ cm. For normal data, IQR $\\approx 1.35\\sigma$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4: an unknown $\\sigma$.** A machine fills bottles with mean 500 ml. The company wants only 2.5% of bottles below 490 ml. What SD can it allow?\n\n**Step 1.** 2.5% below 490 gives $z = -1.96$.\n\n**Step 2.** $\\frac{490 - 500}{\\sigma} = -1.96$, so $\\sigma = \\frac{10}{1.96} \\approx 5.10$ ml.\n\nThe machine's SD must be at most about 5.1 ml.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4b: an unknown $\\mu$.** A machine fills bags of sugar with $\\sigma = 3$ g. Only 5% of bags may weigh under 250 g. What mean should the machine be set to?\n\n**Step 1.** 5% below 250 means 250 is below the mean, so $z = -1.645$.\n\n**Step 2.** $\\frac{250 - \\mu}{3} = -1.645$, so $250 - \\mu = -4.935$.\n\n**Step 3.** $\\mu = 250 + 4.935 \\approx 254.9$ g.\n\nThe mean must sit about $1.645\\sigma$ above the limit so that only the thin left tail falls below it.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5: unknown $\\mu$ and $\\sigma$.** In a normal distribution, 31% of items are below 45 and 8% are above 64. Find $\\mu$ and $\\sigma$. (Table: $\\Phi(0.5) \\approx 0.69$, $\\Phi(1.4) \\approx 0.92$.)\n\n**Step 1. Below 45.** 31% is less than half, so 45 is below the mean. $\\Phi(-z) = 0.31$ means $\\Phi(z) = 0.69$, so $z = -0.5$:",
-    },
-    {
-      type: "math",
-      latex: "\\frac{45 - \\mu}{\\sigma} = -0.5 \\;\\Rightarrow\\; \\mu - 0.5\\sigma = 45",
-    },
-    {
-      type: "text",
-      content: "**Step 2. Above 64.** 8% above means 92% below, so $z = 1.4$:",
-    },
-    {
-      type: "math",
-      latex: "\\frac{64 - \\mu}{\\sigma} = 1.4 \\;\\Rightarrow\\; \\mu + 1.4\\sigma = 64",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3. Subtract.** $1.9\\sigma = 19$, so $\\sigma = 10$ and $\\mu = 45 + 5 = 50$.\n\n**Check.** $\\frac{45 - 50}{10} = -0.5$ ✓ and $\\frac{64 - 50}{10} = 1.4$ ✓.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 6: a scholarship cut-off (application).** 5000 candidates sit an entrance test with scores $N(480, 60^2)$. There are 125 scholarships for the top scorers. What score guarantees one?\n\n**Step 1. Turn the count into an area.** $\\frac{125}{5000} = 0.025$, so 2.5% lie above the cut-off and 97.5% below: $\\Phi(z) = 0.975$.\n\n*Why this step:* the table works with proportions, not head-counts, so the first job is always to divide by the total.\n\n**Step 2. Table backwards.** $z = 1.96$.\n\n**Step 3. Unstandardise.** $c = 480 + 1.96 \\times 60 = 480 + 117.6 = 597.6$. A score of about **598** secures a scholarship.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 7: a two-sided tolerance (exam style).** Bolts must have diameter $20 \\pm 0.5$ mm; anything outside is rejected. The machine is centred at 20 mm. What is the largest $\\sigma$ that keeps rejects to at most 1%?\n\n**Step 1. Split the reject rate.** Rejects come from *both* tails, and by symmetry they share equally: 0.5% below 19.5 and 0.5% above 20.5.\n\n*Why this step:* forgetting that there are two tails is the classic slip here. Using 1% in one tail would give $z = 2.326$ and a machine that actually rejects 2%.\n\n**Step 2. Table backwards.** 0.5% above means $\\Phi(z) = 0.995$, so $z = 2.576$.\n\n**Step 3. Solve for $\\sigma$.**",
-    },
-    {
-      type: "math",
-      latex: "\\frac{20.5 - 20}{\\sigma} = 2.576 \\;\\Rightarrow\\; \\sigma = \\frac{0.5}{2.576} \\approx 0.194 \\text{ mm}",
+      type: "worked-example",
+      id: "st5-4-we4b",
+      title: "Worked example 4b: an unknown $\\mu$",
+      problem:
+        "A machine fills bags of sugar with $\\sigma = 3$ g. Only 5% of bags may weigh under 250 g. What mean should the machine be set to?",
+      steps: [
+        { text: "5% below 250 means 250 is below the mean, so $z = -1.645$." },
+        { text: "$\\frac{250 - \\mu}{3} = -1.645$, so $250 - \\mu = -4.935$." },
+        { text: "$\\mu = 250 + 4.935 \\approx 254.9$ g." },
+      ],
+      answer: "$\\mu \\approx 254.9$ g",
     },
     {
       type: "text",
       content:
-        "The machine's SD must be at most about 0.19 mm. A tighter tolerance or a lower reject rate both force a smaller $\\sigma$, i.e. a more precise (and more expensive) machine.",
+        "The mean must sit about $1.645\\sigma$ above the limit so that only the thin left tail falls below it.",
+    },
+    {
+      type: "worked-example",
+      id: "st5-4-we5",
+      title: "Worked example 5: unknown $\\mu$ and $\\sigma$",
+      problem:
+        "In a normal distribution, 31% of items are below 45 and 8% are above 64. Find $\\mu$ and $\\sigma$. (Table: $\\Phi(0.5) \\approx 0.69$, $\\Phi(1.4) \\approx 0.92$.)",
+      steps: [
+        { text: "**Below 45.** 31% is less than half, so 45 is below the mean. $\\Phi(-z) = 0.31$ means $\\Phi(z) = 0.69$, so $z = -0.5$:", latex: "\\frac{45 - \\mu}{\\sigma} = -0.5 \\;\\Rightarrow\\; \\mu - 0.5\\sigma = 45" },
+        { text: "**Above 64.** 8% above means 92% below, so $z = 1.4$:", latex: "\\frac{64 - \\mu}{\\sigma} = 1.4 \\;\\Rightarrow\\; \\mu + 1.4\\sigma = 64" },
+        { text: "**Subtract.** $1.9\\sigma = 19$, so $\\sigma = 10$ and $\\mu = 45 + 5 = 50$." },
+        { text: "**Check.** $\\frac{45 - 50}{10} = -0.5$ ✓ and $\\frac{64 - 50}{10} = 1.4$ ✓." },
+      ],
+      answer: "$\\mu = 50$, $\\sigma = 10$",
+    },
+    { type: "heading", text: "Scholarships and tolerances" },
+    {
+      type: "worked-example",
+      id: "st5-4-we6",
+      title: "Worked example 6: a scholarship cut-off (application)",
+      problem:
+        "5000 candidates sit an entrance test with scores $N(480, 60^2)$. There are 125 scholarships for the top scorers. What score guarantees one?",
+      steps: [
+        { text: "**Turn the count into an area.** $\\frac{125}{5000} = 0.025$, so 2.5% lie above the cut-off and 97.5% below: $\\Phi(z) = 0.975$.\n\n*Why this step:* the table works with proportions, not head-counts, so the first job is always to divide by the total." },
+        { text: "**Table backwards.** $z = 1.96$." },
+        { text: "**Unstandardise.** $c = 480 + 1.96 \\times 60 = 480 + 117.6 = 597.6$. A score of about **598** secures a scholarship." },
+      ],
+      answer: "A score of about 598",
+    },
+    {
+      type: "worked-example",
+      id: "st5-4-we7",
+      title: "Worked example 7: a two-sided tolerance (exam style)",
+      problem:
+        "Bolts must have diameter $20 \\pm 0.5$ mm; anything outside is rejected. The machine is centred at 20 mm. What is the largest $\\sigma$ that keeps rejects to at most 1%?",
+      steps: [
+        { text: "**Split the reject rate.** Rejects come from *both* tails, and by symmetry they share equally: 0.5% below 19.5 and 0.5% above 20.5.\n\n*Why this step:* forgetting that there are two tails is the classic slip here. Using 1% in one tail would give $z = 2.326$ and a machine that actually rejects 2%." },
+        { text: "**Table backwards.** 0.5% above means $\\Phi(z) = 0.995$, so $z = 2.576$." },
+        { text: "**Solve for $\\sigma$.**", latex: "\\frac{20.5 - 20}{\\sigma} = 2.576 \\;\\Rightarrow\\; \\sigma = \\frac{0.5}{2.576} \\approx 0.194 \\text{ mm}" },
+      ],
+      answer: "The machine's SD must be at most about 0.19 mm.",
+    },
+    {
+      type: "text",
+      content:
+        "A tighter tolerance or a lower reject rate both force a smaller $\\sigma$, i.e. a more precise (and more expensive) machine.",
     },
     {
       type: "callout",
@@ -940,6 +1088,7 @@ const lesson04: LessonSeed = {
       content:
         "When you convert a proportion to $z$, first ask whether the value is below or above the mean. Below the mean means $z < 0$. Getting this sign wrong in a two-equation problem gives nonsense such as a negative $\\sigma$, which is a useful warning.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st5-4-q1",
@@ -1096,10 +1245,11 @@ const lesson05: LessonSeed = {
         ["Mean, SD", "$\\mu$, $\\sigma$ (fixed, usually unknown)", "$\\bar{x}$, $s$ (known, but change from sample to sample)"],
       ],
     },
+    { type: "heading", text: "Choosing the sample" },
     {
       type: "text",
       content:
-        "**Choosing the sample.** The goal is a sample that looks like the population. The reliable way to get one is to let **chance** choose, so that no human preference can creep in.",
+        "The goal is a sample that looks like the population. The reliable way to get one is to let **chance** choose, so that no human preference can creep in.",
     },
     {
       type: "table",
@@ -1111,14 +1261,35 @@ const lesson05: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1: stratified allocation.** A school has 480 students in Class 9, 420 in Class 10 and 300 in Class 11 (1200 in total). Take a stratified sample of 80.\n\n**Step 1.** Sampling fraction: $\\frac{80}{1200} = \\frac{1}{15}$.\n\n**Step 2.** Class 9: $\\frac{480}{15} = 32$. Class 10: $\\frac{420}{15} = 28$. Class 11: $\\frac{300}{15} = 20$.\n\n**Step 3.** Check: $32 + 28 + 20 = 80$ ✓. Each class is represented in its true proportion. A simple random sample could, by bad luck, include very few Class 11 students.",
+      type: "worked-example",
+      id: "st5-5-we1",
+      title: "Worked example 1: stratified allocation",
+      problem:
+        "A school has 480 students in Class 9, 420 in Class 10 and 300 in Class 11 (1200 in total). Take a stratified sample of 80.",
+      steps: [
+        { text: "Sampling fraction: $\\frac{80}{1200} = \\frac{1}{15}$." },
+        { text: "Class 9: $\\frac{480}{15} = 32$. Class 10: $\\frac{420}{15} = 28$. Class 11: $\\frac{300}{15} = 20$." },
+        { text: "Check: $32 + 28 + 20 = 80$ ✓. Each class is represented in its true proportion. A simple random sample could, by bad luck, include very few Class 11 students." },
+      ],
+      answer: "Class 9: 32, Class 10: 28, Class 11: 20",
+    },
+    {
+      type: "worked-example",
+      id: "st5-5-we2",
+      title: "Worked example 2: systematic sampling",
+      problem:
+        "Choose 30 from a list of 600 customers.",
+      steps: [
+        { text: "$k = \\frac{600}{30} = 20$." },
+        { text: "Pick a random start from 1 to 20, say 7." },
+        { text: "Take customers 7, 27, 47, …, up to $7 + 29 \\times 20 = 587$. That gives 30 customers." },
+      ],
+      answer: "Customers 7, 27, 47, …, 587 (30 in all)",
     },
     {
       type: "text",
       content:
-        "**Worked example 2: systematic sampling.** Choose 30 from a list of 600 customers.\n\n**Step 1.** $k = \\frac{600}{30} = 20$.\n\n**Step 2.** Pick a random start from 1 to 20, say 7.\n\n**Step 3.** Take customers 7, 27, 47, …, up to $7 + 29 \\times 20 = 587$. That gives 30 customers.\n\nWatch out if the list has a repeating pattern with period 20, for example every 20th entry being a manager. Then the sample could be badly skewed.",
+        "Watch out if the list has a repeating pattern with period 20, for example every 20th entry being a manager. Then the sample could be badly skewed.",
     },
     {
       type: "callout",
@@ -1134,10 +1305,11 @@ const lesson05: LessonSeed = {
       content:
         "In 1936 the *Literary Digest* magazine mailed about 10 million ballots, drawn from its subscribers plus telephone and car-owner lists, and got about 2.4 million back. It predicted a big win for Landon. Roosevelt won by a landslide. Better-off households were heavily overrepresented, and those who chose to reply were not typical either. George Gallup, with a far smaller but more representative sample, called the result correctly. More data from a biased method just gives you the wrong answer with more confidence.",
     },
+    { type: "heading", text: "Sampling variability" },
     {
       type: "text",
       content:
-        "**Sampling variability.** Even with perfect random sampling, different samples give different means. That is not a mistake; it is chance. The question is how much $\\bar{x}$ varies. Try it: the population below is **right-skewed** with $\\mu = 50$ and $\\sigma = 10$. Draw many samples of size $n$ and watch the histogram of their means.",
+        "Even with perfect random sampling, different samples give different means. That is not a mistake; it is chance. The question is how much $\\bar{x}$ varies. Try it: the population below is **right-skewed** with $\\mu = 50$ and $\\sigma = 10$. Draw many samples of size $n$ and watch the histogram of their means.",
     },
     {
       type: "interactive",
@@ -1185,29 +1357,60 @@ const lesson05: LessonSeed = {
         ["144", "1"],
       ],
     },
+    { type: "heading", text: "Probabilities about a sample mean" },
     {
-      type: "text",
-      content:
-        "**Worked example 3: a probability about a mean.** Daily phone screen time among teenagers has mean 180 minutes and SD 60 minutes, with a strong right skew. A random sample of 100 teenagers is taken. How likely is a sample mean above 192 minutes?\n\n**Step 1.** $n = 100$ is large, so $\\bar{x} \\approx N\\!\\left(180, \\left(\\frac{60}{\\sqrt{100}}\\right)^2\\right) = N(180, 6^2)$.\n\n**Step 2.** $z = \\frac{192 - 180}{6} = 2$.\n\n**Step 3.** $P(\\bar{x} > 192) = 1 - \\Phi(2) = 1 - 0.9772 = 0.0228$.\n\nOne teenager above 192 minutes is common. An *average* of 100 teenagers above 192 is rare.",
+      type: "worked-example",
+      id: "st5-5-we3",
+      title: "Worked example 3: a probability about a mean",
+      problem:
+        "Daily phone screen time among teenagers has mean 180 minutes and SD 60 minutes, with a strong right skew. A random sample of 100 teenagers is taken. How likely is a sample mean above 192 minutes?",
+      steps: [
+        { text: "$n = 100$ is large, so $\\bar{x} \\approx N\\!\\left(180, \\left(\\frac{60}{\\sqrt{100}}\\right)^2\\right) = N(180, 6^2)$." },
+        { text: "$z = \\frac{192 - 180}{6} = 2$." },
+        { text: "$P(\\bar{x} > 192) = 1 - \\Phi(2) = 1 - 0.9772 = 0.0228$." },
+      ],
+      answer: "$P(\\bar{x} > 192) = 0.0228$",
     },
     {
       type: "text",
       content:
-        "**Worked example 4: one packet versus a carton (routine).** Packets of atta weigh $N(500, 4^2)$ g. An inspector weighs one packet; another weighs a random carton of 16 and takes the mean. What is the chance each result is below 498 g?\n\n**Step 1. One packet.** $z = \\frac{498 - 500}{4} = -0.5$, so $P = 1 - 0.6915 = 0.3085$.\n\n**Step 2. The carton mean.** The population is normal, so $\\bar{x}$ is exactly normal with SD $\\frac{4}{\\sqrt{16}} = 1$: $\\bar{x} \\sim N(500, 1^2)$.\n\n*Why this step:* the question is about a *mean*, so the spread to use is the SD of $\\bar{x}$, not of one packet. Using $\\sigma = 4$ here is the most common error.\n\n**Step 3.** $z = \\frac{498 - 500}{1} = -2$, so $P = 1 - 0.9772 = 0.0228$.\n\nA single light packet happens about 31% of the time; a light *carton average* only about 2% of the time.",
+        "One teenager above 192 minutes is common. An *average* of 100 teenagers above 192 is rare.",
+    },
+    {
+      type: "worked-example",
+      id: "st5-5-we4",
+      title: "Worked example 4: one packet versus a carton (routine)",
+      problem:
+        "Packets of atta weigh $N(500, 4^2)$ g. An inspector weighs one packet; another weighs a random carton of 16 and takes the mean. What is the chance each result is below 498 g?",
+      steps: [
+        { text: "**One packet.** $z = \\frac{498 - 500}{4} = -0.5$, so $P = 1 - 0.6915 = 0.3085$." },
+        { text: "**The carton mean.** The population is normal, so $\\bar{x}$ is exactly normal with SD $\\frac{4}{\\sqrt{16}} = 1$: $\\bar{x} \\sim N(500, 1^2)$.\n\n*Why this step:* the question is about a *mean*, so the spread to use is the SD of $\\bar{x}$, not of one packet. Using $\\sigma = 4$ here is the most common error." },
+        { text: "$z = \\frac{498 - 500}{1} = -2$, so $P = 1 - 0.9772 = 0.0228$." },
+      ],
+      answer: "One packet: $0.3085$. Carton mean: $0.0228$",
     },
     {
       type: "text",
       content:
-        "**Worked example 5: will the lift be overloaded? (exam style).** A lift is rated for 1160 kg. Adult weights are $N(68, 12^2)$ kg. If 16 randomly chosen adults get in, what is the probability the load exceeds the rating?\n\n**Step 1. Turn the total into a mean.** Total $> 1160$ exactly when $\\bar{x} > \\frac{1160}{16} = 72.5$ kg.\n\n*Why this step:* we know how $\\bar{x}$ behaves ($\\mu$ and $\\frac{\\sigma}{\\sqrt{n}}$), so rewrite any question about a sum as one about the mean.\n\n**Step 2. Sampling distribution.** $\\text{SD}(\\bar{x}) = \\frac{12}{\\sqrt{16}} = 3$, so $\\bar{x} \\sim N(68, 3^2)$.\n\n**Step 3. Standardise.**",
+        "A single light packet happens about 31% of the time; a light *carton average* only about 2% of the time.",
     },
     {
-      type: "math",
-      latex: "P(\\bar{x} > 72.5) = P\\!\\left(Z > \\frac{72.5 - 68}{3}\\right) = P(Z > 1.5) = 1 - 0.9332 = 0.0668",
+      type: "worked-example",
+      id: "st5-5-we5",
+      title: "Worked example 5: will the lift be overloaded? (exam style)",
+      problem:
+        "A lift is rated for 1160 kg. Adult weights are $N(68, 12^2)$ kg. If 16 randomly chosen adults get in, what is the probability the load exceeds the rating?",
+      steps: [
+        { text: "**Turn the total into a mean.** Total $> 1160$ exactly when $\\bar{x} > \\frac{1160}{16} = 72.5$ kg.\n\n*Why this step:* we know how $\\bar{x}$ behaves ($\\mu$ and $\\frac{\\sigma}{\\sqrt{n}}$), so rewrite any question about a sum as one about the mean." },
+        { text: "**Sampling distribution.** $\\text{SD}(\\bar{x}) = \\frac{12}{\\sqrt{16}} = 3$, so $\\bar{x} \\sim N(68, 3^2)$." },
+        { text: "**Standardise.**", latex: "P(\\bar{x} > 72.5) = P\\!\\left(Z > \\frac{72.5 - 68}{3}\\right) = P(Z > 1.5) = 1 - 0.9332 = 0.0668" },
+      ],
+      answer: "About a 6.7% chance: small, but far too big for a safety rating.",
     },
     {
       type: "text",
       content:
-        "About a 6.7% chance: small, but far too big for a safety rating. That is why real lifts are rated well above the expected load: $16 \\times 68 = 1088$ kg on average.",
+        "That is why real lifts are rated well above the expected load: $16 \\times 68 = 1088$ kg on average.",
     },
     {
       type: "callout",
@@ -1216,6 +1419,7 @@ const lesson05: LessonSeed = {
       content:
         "The formula $\\frac{\\sigma}{\\sqrt{n}}$ contains the sample size $n$ but **not** the population size $N$. A random sample of 1000 voters is about as precise for all of India as for one city (as long as the population is much larger than the sample). A cook tastes one spoonful whether the pot holds 2 litres or 20, provided it is well stirred. Randomisation is the stirring.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st5-5-q7",
@@ -1391,10 +1595,11 @@ const lesson06: LessonSeed = {
       content:
         "A **point estimate** is a single-number guess at a parameter: $\\bar{x}$ estimates $\\mu$. Its **standard error** is the SD of the estimate over repeated samples, i.e. how much it typically wobbles: $\\text{SE}(\\bar{x}) = \\frac{\\sigma}{\\sqrt{n}}$.",
     },
+    { type: "heading", text: "Estimating $\\sigma$: why divide by $n - 1$" },
     {
       type: "text",
       content:
-        "**Estimating $\\sigma$: why divide by $n - 1$.** The standard error needs $\\sigma$, which is usually unknown, so we estimate it from the sample. The obvious estimate, the SD from Chapter 2 with $n$ in the denominator, comes out **too small** on average.\n\nThe reason goes back to 2.4: $\\sum (x_i - a)^2$ is smallest when $a = \\bar{x}$. The true $\\mu$ is some other number, so the deviations from $\\bar{x}$ are, on average, smaller than the deviations from $\\mu$ that we really wanted. The data sit closer to their own mean than to the population mean.",
+        "The standard error needs $\\sigma$, which is usually unknown, so we estimate it from the sample. The obvious estimate, the SD from Chapter 2 with $n$ in the denominator, comes out **too small** on average.\n\nThe reason goes back to 2.4: $\\sum (x_i - a)^2$ is smallest when $a = \\bar{x}$. The true $\\mu$ is some other number, so the deviations from $\\bar{x}$ are, on average, smaller than the deviations from $\\mu$ that we really wanted. The data sit closer to their own mean than to the population mean.",
     },
     {
       type: "text",
@@ -1413,10 +1618,11 @@ const lesson06: LessonSeed = {
       content:
         "Dividing by $n$ **describes** the spread of the data you have; Chapters 2–4 use that. Dividing by $n - 1$ **estimates** the spread of the population the data came from. For large $n$ the two are almost equal. When $\\sigma$ is unknown and $n$ is large, use $s$ in place of $\\sigma$ in the formulas below. (For small samples with unknown $\\sigma$, a slightly wider method called the $t$-distribution is used, beyond this course.)",
     },
+    { type: "heading", text: "Building the interval" },
     {
       type: "text",
       content:
-        "**Building the interval.** From 5.5, $\\bar{x} \\approx N\\!\\left(\\mu, \\frac{\\sigma^2}{n}\\right)$. By the table, 95% of the area lies within $1.96$ SDs of the centre:",
+        "From 5.5, $\\bar{x} \\approx N\\!\\left(\\mu, \\frac{\\sigma^2}{n}\\right)$. By the table, 95% of the area lies within $1.96$ SDs of the centre:",
     },
     {
       type: "math",
@@ -1471,15 +1677,32 @@ const lesson06: LessonSeed = {
       content:
         "It does **not** mean \"there is a 95% chance that $\\mu$ lies in *this* interval\". Once you have computed, say, $(1150.6, 1209.4)$, $\\mu$ either is in it or is not; nothing random is left. The 95% describes the **method**: if we repeated the sampling many times, about 95% of the intervals built this way would contain $\\mu$. We trust this interval because it came from a method that works 95% of the time.",
     },
+    { type: "heading", text: "Margins, sample sizes and unknown $\\sigma$" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** 64 bulbs give $\\bar{x} = 1180$ h, with known $\\sigma = 120$ h. Find a 95% confidence interval for $\\mu$.\n\n**Step 1. Standard error.** $\\frac{120}{\\sqrt{64}} = \\frac{120}{8} = 15$.\n\n**Step 2. Margin of error.** $1.96 \\times 15 = 29.4$.\n\n**Step 3. Interval.** $1180 \\pm 29.4 = (1150.6,\\ 1209.4)$ hours.\n\n**Step 4. Interpret.** We are 95% confident the factory's mean bulb life is between about 1151 and 1209 hours.",
+      type: "worked-example",
+      id: "st5-6-we1",
+      title: "Worked example 1",
+      problem:
+        "64 bulbs give $\\bar{x} = 1180$ h, with known $\\sigma = 120$ h. Find a 95% confidence interval for $\\mu$.",
+      steps: [
+        { text: "**Standard error.** $\\frac{120}{\\sqrt{64}} = \\frac{120}{8} = 15$." },
+        { text: "**Margin of error.** $1.96 \\times 15 = 29.4$." },
+        { text: "**Interval.** $1180 \\pm 29.4 = (1150.6,\\ 1209.4)$ hours." },
+        { text: "**Interpret.** We are 95% confident the factory's mean bulb life is between about 1151 and 1209 hours." },
+      ],
+      answer: "$(1150.6,\\ 1209.4)$ hours",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2: more confidence costs width.** Same data, 99% confidence: margin $2.576 \\times 15 = 38.64$, so the interval is $(1141.36,\\ 1218.64)$. To be surer of catching $\\mu$, the net has to be wider.",
+      type: "worked-example",
+      id: "st5-6-we2",
+      title: "Worked example 2: more confidence costs width",
+      problem:
+        "Same data, but with 99% confidence. Find the interval.",
+      steps: [
+        { text: "Margin $2.576 \\times 15 = 38.64$, so the interval is $(1141.36,\\ 1218.64)$." },
+        { text: "To be surer of catching $\\mu$, the net has to be wider." },
+      ],
+      answer: "$(1141.36,\\ 1218.64)$",
     },
     {
       type: "table",
@@ -1491,41 +1714,71 @@ const lesson06: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3: choosing $n$.** A researcher wants to estimate mean study time to within $\\pm 3$ minutes with 95% confidence, and past studies suggest $\\sigma = 15$ minutes. How many students should she survey?\n\n**Step 1.** Require $1.96 \\frac{15}{\\sqrt{n}} \\le 3$.\n\n**Step 2.** $\\sqrt{n} \\ge \\frac{1.96 \\times 15}{3} = 9.8$.\n\n**Step 3.** $n \\ge 9.8^2 = 96.04$. Always **round up**, since 96 would fall just short: $n = 97$.",
+      type: "worked-example",
+      id: "st5-6-we3",
+      title: "Worked example 3: choosing $n$",
+      problem:
+        "A researcher wants to estimate mean study time to within $\\pm 3$ minutes with 95% confidence, and past studies suggest $\\sigma = 15$ minutes. How many students should she survey?",
+      steps: [
+        { text: "Require $1.96 \\frac{15}{\\sqrt{n}} \\le 3$." },
+        { text: "$\\sqrt{n} \\ge \\frac{1.96 \\times 15}{3} = 9.8$." },
+        { text: "$n \\ge 9.8^2 = 96.04$. Always **round up**, since 96 would fall just short: $n = 97$." },
+      ],
+      answer: "$n = 97$",
     },
     { type: "math", latex: "n = \\left(\\frac{z^* \\sigma}{E}\\right)^2 \\quad \\text{(rounded up)}" },
     {
-      type: "text",
-      content:
-        "**Worked example 4: $\\sigma$ unknown, so use $s$.** In real surveys $\\sigma$ is almost never known. A random sample of 100 students has a mean sleep deficit of $\\bar{x} = 5.2$ hours per week, with sample SD $s = 2.5$ h. Find a 95% confidence interval for $\\mu$.\n\n**Step 1. Standard error, with $s$ for $\\sigma$.** $n = 100$ is large, so $\\text{SE} \\approx \\frac{2.5}{\\sqrt{100}} = 0.25$.\n\n**Step 2. Margin.** $1.96 \\times 0.25 = 0.49$.\n\n**Step 3. Interval.** $5.2 \\pm 0.49 = (4.71,\\ 5.69)$ hours.\n\nThe method is unchanged; only the source of the SD is different.",
+      type: "worked-example",
+      id: "st5-6-we4",
+      title: "Worked example 4: $\\sigma$ unknown, so use $s$",
+      problem:
+        "In real surveys $\\sigma$ is almost never known. A random sample of 100 students has a mean sleep deficit of $\\bar{x} = 5.2$ hours per week, with sample SD $s = 2.5$ h. Find a 95% confidence interval for $\\mu$.",
+      steps: [
+        { text: "**Standard error, with $s$ for $\\sigma$.** $n = 100$ is large, so $\\text{SE} \\approx \\frac{2.5}{\\sqrt{100}} = 0.25$." },
+        { text: "**Margin.** $1.96 \\times 0.25 = 0.49$." },
+        { text: "**Interval.** $5.2 \\pm 0.49 = (4.71,\\ 5.69)$ hours." },
+      ],
+      answer: "$(4.71,\\ 5.69)$ hours",
     },
     {
       type: "text",
       content:
-        "**Worked example 5: from raw data to a verdict (application).** A consumer group weighs 9 randomly bought packets of a brand labelled \"503 g average\". The filling machine's SD is known to be 3 g. The weights (g) are:",
+        "The method is unchanged; only the source of the SD is different.",
     },
-    { type: "math", latex: "498,\\; 502,\\; 497,\\; 501,\\; 503,\\; 499,\\; 500,\\; 504,\\; 496" },
+    {
+      type: "worked-example",
+      id: "st5-6-we5",
+      title: "Worked example 5: from raw data to a verdict (application)",
+      problem:
+        "A consumer group weighs 9 randomly bought packets of a brand labelled \"503 g average\". The filling machine's SD is known to be 3 g. The weights (g) are:\n\n$$498,\\; 502,\\; 497,\\; 501,\\; 503,\\; 499,\\; 500,\\; 504,\\; 496$$\n\nFind a 95% confidence interval for $\\mu$ and decide whether the label is believable.",
+      steps: [
+        { text: "**Point estimate.** The sum is 4500, so $\\bar{x} = \\frac{4500}{9} = 500$ g." },
+        { text: "**Standard error.** $\\frac{3}{\\sqrt{9}} = 1$ g.\n\n*Why this step:* the interval's width comes from how much $\\bar{x}$ wobbles, and for 9 packets that is a third of one packet's wobble." },
+        { text: "**95% interval.** $500 \\pm 1.96 \\times 1 = (498.04,\\ 501.96)$ g." },
+        { text: "**Verdict.** The claimed 503 g lies well outside the interval. If the true mean really were 503, a sample mean as low as 500 would be 3 standard errors away, which is very unusual. The label looks doubtful. (This is the idea behind hypothesis testing.)" },
+      ],
+      answer: "95% interval $(498.04,\\ 501.96)$ g; the claimed 503 g lies outside it, so the label looks doubtful",
+    },
+    {
+      type: "worked-example",
+      id: "st5-6-we6",
+      title: "Worked example 6: working backwards from an interval (exam style)",
+      problem:
+        "A 95% confidence interval for $\\mu$, based on $n = 100$ with $\\sigma$ known, is $(46.08,\\ 53.92)$. Find $\\bar{x}$, the margin of error, $\\sigma$, and the 99% interval from the same data.",
+      steps: [
+        { text: "**Centre and half-width.** The interval is symmetric about $\\bar{x}$:", latex: "\\bar{x} = \\frac{46.08 + 53.92}{2} = 50, \\qquad E = \\frac{53.92 - 46.08}{2} = 3.92" },
+        { text: "*Why this step:* every $z$-interval has the form $\\bar{x} \\pm E$, so the midpoint and half the width give both pieces directly." },
+        { text: "**Standard error and $\\sigma$.** $E = 1.96 \\cdot \\text{SE}$, so $\\text{SE} = \\frac{3.92}{1.96} = 2$. Then $\\sigma = \\text{SE} \\cdot \\sqrt{n} = 2 \\times 10 = 20$." },
+        { text: "**99% interval.** Same centre and SE, new multiplier: $50 \\pm 2.576 \\times 2 = 50 \\pm 5.152$, i.e. $(44.848,\\ 55.152)$." },
+      ],
+      answer: "$\\bar{x} = 50$, $E = 3.92$, $\\sigma = 20$; 99% interval $(44.848,\\ 55.152)$",
+    },
     {
       type: "text",
       content:
-        "**Step 1. Point estimate.** The sum is 4500, so $\\bar{x} = \\frac{4500}{9} = 500$ g.\n\n**Step 2. Standard error.** $\\frac{3}{\\sqrt{9}} = 1$ g.\n\n*Why this step:* the interval's width comes from how much $\\bar{x}$ wobbles, and for 9 packets that is a third of one packet's wobble.\n\n**Step 3. 95% interval.** $500 \\pm 1.96 \\times 1 = (498.04,\\ 501.96)$ g.\n\n**Step 4. Verdict.** The claimed 503 g lies well outside the interval. If the true mean really were 503, a sample mean as low as 500 would be 3 standard errors away, which is very unusual. The label looks doubtful. (This is the idea behind hypothesis testing.)",
+        "The 99% interval is wider by the factor $\\frac{2.576}{1.96} \\approx 1.31$.",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 6: working backwards from an interval (exam style).** A 95% confidence interval for $\\mu$, based on $n = 100$ with $\\sigma$ known, is $(46.08,\\ 53.92)$. Find $\\bar{x}$, the margin of error, $\\sigma$, and the 99% interval from the same data.\n\n**Step 1. Centre and half-width.** The interval is symmetric about $\\bar{x}$:",
-    },
-    {
-      type: "math",
-      latex: "\\bar{x} = \\frac{46.08 + 53.92}{2} = 50, \\qquad E = \\frac{53.92 - 46.08}{2} = 3.92",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* every $z$-interval has the form $\\bar{x} \\pm E$, so the midpoint and half the width give both pieces directly.\n\n**Step 2. Standard error and $\\sigma$.** $E = 1.96 \\cdot \\text{SE}$, so $\\text{SE} = \\frac{3.92}{1.96} = 2$. Then $\\sigma = \\text{SE} \\cdot \\sqrt{n} = 2 \\times 10 = 20$.\n\n**Step 3. 99% interval.** Same centre and SE, new multiplier: $50 \\pm 2.576 \\times 2 = 50 \\pm 5.152$, i.e. $(44.848,\\ 55.152)$.\n\nThe 99% interval is wider by the factor $\\frac{2.576}{1.96} \\approx 1.31$.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st5-6-q1",

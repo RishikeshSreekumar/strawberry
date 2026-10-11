@@ -54,6 +54,7 @@ const lesson01: LessonSeed = {
       content:
         "Listing is hopeless here. Even writing one plate per second, day and night, would take you about **78 days**. There are $26 \\times 26 \\times 10 \\times 10 \\times 10 \\times 10 = 6{,}760{,}000$ plates, and by the end of this lesson you will see where that product comes from.\n\nThis whole course is about one idea: **find the structure of the list, and the structure tells you its length.** You never write the list out.",
     },
+    { type: "heading", text: "Seeing the structure with a tree" },
     {
       type: "text",
       content:
@@ -112,32 +113,75 @@ const lesson01: LessonSeed = {
       content:
         "If every node at a given level splits into the same number of branches, the number of leaves is the product of those branch numbers. The next lesson turns this into the **product rule** and says exactly when it is allowed.",
     },
+    { type: "heading", text: "Trees at work: cones, IDs, postboxes" },
     {
-      type: "text",
-      content:
-        "**Worked example A (routine): an ice-cream counter.** A counter offers 3 kinds of cone (plain, waffle, chocolate), 6 flavours and 4 toppings. An order is one cone, one flavour and one topping. How many different orders are there?\n\n**Step 1.** List the decisions: cone, then flavour, then topping. That is a 3-stage tree.\n*Why this step:* once the stages are named, you only need the branch count at each one.\n\n**Step 2.** Branch counts: 3, then 6, then 4. Whichever cone was picked, all 6 flavours are still on offer, and whichever flavour was picked, all 4 toppings are.\n*Why this step:* the tree has a fixed shape only if each node at a level splits the same number of ways. Here it does.\n\n**Step 3.** Multiply the branch counts.",
+      type: "worked-example",
+      id: "pc0-1-we1",
+      title: "Worked example A (routine): an ice-cream counter",
+      problem:
+        "A counter offers 3 kinds of cone (plain, waffle, chocolate), 6 flavours and 4 toppings. An order is one cone, one flavour and one topping. How many different orders are there?",
+      steps: [
+        {
+          text: "List the decisions: cone, then flavour, then topping. That is a 3-stage tree.\n*Why this step:* once the stages are named, you only need the branch count at each one.",
+        },
+        {
+          text: "Branch counts: 3, then 6, then 4. Whichever cone was picked, all 6 flavours are still on offer, and whichever flavour was picked, all 4 toppings are.\n*Why this step:* the tree has a fixed shape only if each node at a level splits the same number of ways. Here it does.",
+        },
+        {
+          text: "Multiply the branch counts.",
+          latex: "3 \\times 6 \\times 4 = 72 \\text{ orders}",
+        },
+      ],
+      answer: "$72$ orders.",
     },
     {
-      type: "math",
-      latex: "3 \\times 6 \\times 4 = 72 \\text{ orders}",
+      type: "worked-example",
+      id: "pc0-1-we2",
+      title: "Worked example B (word problem): school ID numbers",
+      problem:
+        "A school gives every senior student an ID made of a house (4 houses), a class (11 or 12), a section (A to E) and a roll number from 1 to 45. How many different IDs can the school issue?",
+      steps: [
+        {
+          text: "The ID is built in 4 stages: house, class, section, roll number.",
+        },
+        {
+          text: "Branch counts: 4, 2, 5 and 45. Every section of every class of every house uses roll numbers 1 to 45.\n*Why this step:* if one section had only 30 roll numbers, the tree would be lopsided and you could not just multiply. Check the shape before multiplying.",
+        },
+        {
+          text: "Multiply: $4 \\times 2 \\times 5 \\times 45 = 1800$.",
+        },
+        {
+          text: "**Different paths, different IDs.** Two IDs that differ in any stage are different IDs, so no leaf is counted twice.\n*Why this step:* the leaf count equals the ID count only when each path gives a different ID.",
+          latex: "\\underbrace{4}_{\\text{house}} \\times \\underbrace{2}_{\\text{class}} \\times \\underbrace{5}_{\\text{section}} \\times \\underbrace{45}_{\\text{roll no.}} = 1800",
+        },
+      ],
+      answer: "$1800$ IDs.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example B (word problem): school ID numbers.** A school gives every senior student an ID made of a house (4 houses), a class (11 or 12), a section (A to E) and a roll number from 1 to 45. How many different IDs can the school issue?\n\n**Step 1.** The ID is built in 4 stages: house, class, section, roll number.\n\n**Step 2.** Branch counts: 4, 2, 5 and 45. Every section of every class of every house uses roll numbers 1 to 45.\n*Why this step:* if one section had only 30 roll numbers, the tree would be lopsided and you could not just multiply. Check the shape before multiplying.\n\n**Step 3.** Multiply: $4 \\times 2 \\times 5 \\times 45 = 1800$.\n\n**Step 4 (different paths, different IDs).** Two IDs that differ in any stage are different IDs, so no leaf is counted twice.\n*Why this step:* the leaf count equals the ID count only when each path gives a different ID.",
-    },
-    {
-      type: "math",
-      latex: "\\underbrace{4}_{\\text{house}} \\times \\underbrace{2}_{\\text{class}} \\times \\underbrace{5}_{\\text{section}} \\times \\underbrace{45}_{\\text{roll no.}} = 1800",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example C (CBSE/JEE classic): letters and postboxes.** In how many ways can 5 different letters be posted in 4 postboxes? Any box may take any number of letters.\n\nThe common wrong answer is $5^4 = 625$. The right one is $4^5$. The difference comes from which things are making the decisions.\n\n**Step 1 (who decides?).** Each **letter** must go into exactly one box. A box does not have to take exactly one letter: it can take none or several. So the stages are the letters, and the options are the boxes.\n*Why this step:* a stage has to be a decision that is made exactly once. \"Which box does letter 1 go in?\" is made exactly once. \"Which letter goes in box 1?\" is not, because box 1 might get zero letters or three.\n\n**Step 2.** 5 stages (letters), each with 4 branches (boxes), whatever happened to the other letters.\n\n**Step 3.** $4 \\times 4 \\times 4 \\times 4 \\times 4 = 4^5 = 1024$.\n\n**Check on a small case.** 2 letters, 2 boxes. The rule gives $2^2 = 4$. List them: both in box 1, both in box 2, letter 1 in box 1 and letter 2 in box 2, or the other way round. That is 4. ✓",
-    },
-    {
-      type: "math",
-      latex: "\\underbrace{4 \\times 4 \\times 4 \\times 4 \\times 4}_{\\text{one choice of box per letter}} = 4^5 = 1024",
+      type: "worked-example",
+      id: "pc0-1-we3",
+      title: "Worked example C (CBSE/JEE classic): letters and postboxes",
+      problem:
+        "In how many ways can 5 different letters be posted in 4 postboxes? Any box may take any number of letters.",
+      steps: [
+        {
+          text: "The common wrong answer is $5^4 = 625$. The right one is $4^5$. The difference comes from which things are making the decisions.",
+        },
+        {
+          text: "**Who decides?** Each **letter** must go into exactly one box. A box does not have to take exactly one letter: it can take none or several. So the stages are the letters, and the options are the boxes.\n*Why this step:* a stage has to be a decision that is made exactly once. \"Which box does letter 1 go in?\" is made exactly once. \"Which letter goes in box 1?\" is not, because box 1 might get zero letters or three.",
+        },
+        {
+          text: "5 stages (letters), each with 4 branches (boxes), whatever happened to the other letters.",
+        },
+        {
+          text: "$4 \\times 4 \\times 4 \\times 4 \\times 4 = 4^5 = 1024$.",
+          latex: "\\underbrace{4 \\times 4 \\times 4 \\times 4 \\times 4}_{\\text{one choice of box per letter}} = 4^5 = 1024",
+        },
+        {
+          text: "**Check on a small case.** 2 letters, 2 boxes. The rule gives $2^2 = 4$. List them: both in box 1, both in box 2, letter 1 in box 1 and letter 2 in box 2, or the other way round. That is 4. ✓",
+        },
+      ],
+      answer: "$4^5 = 1024$ ways.",
     },
     {
       type: "callout",
@@ -146,6 +190,7 @@ const lesson01: LessonSeed = {
       content:
         "Clever counting is easy to get wrong without noticing. Whenever you find a formula, try it on a version small enough to list, as the outfit table did for $3 \\times 4$. If the formula and the list disagree, the formula is wrong. This check will catch many mistakes in the chapters ahead.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc0-1-q1",
@@ -292,6 +337,7 @@ const lesson02: LessonSeed = {
       content:
         "$2 \\times 3 \\times 2 = 12$ meals. The tree from lesson 0.1 is doing the same thing again, and now we can state the rule properly.",
     },
+    { type: "heading", text: "Stating the product rule" },
     {
       type: "callout",
       variant: "definition",
@@ -304,38 +350,99 @@ const lesson02: LessonSeed = {
       content:
         "**Why it is true.** Think about the tree. After stage 1 there are $n_1$ nodes. Each of them splits into exactly $n_2$ branches, so there are $n_1$ groups of $n_2$, which is $n_1 n_2$ nodes. Each of those splits into $n_3$, and so on. The word *whatever* in the definition is what makes every node at a level split into the same number of branches. The last condition makes sure the number of leaves really is the number of outcomes: if two different paths led to the same result, that result would be counted twice. That is the whole proof.",
     },
+    { type: "heading", text: "Applying it: codes, routes, locks, functions" },
     {
-      type: "text",
-      content:
-        "**Worked example 1: three-letter codes.** How many 3-letter codes can be made from the 26 letters (a) if letters may repeat, (b) if all three letters must be different?\n\n**Step 1.** Draw three slots: $\\_\\,\\_\\,\\_$. Each slot is one stage.\n\n**Step 2 (a).** With repetition, each slot has all 26 letters available, whatever was chosen before: $26 \\times 26 \\times 26 = 17{,}576$.\n\n**Step 3 (b).** Without repetition: 26 choices for the first slot. Whatever letter was used, 25 remain for the second. Whatever two were used, 24 remain for the third: $26 \\times 25 \\times 24 = 15{,}600$.\n\n**Check.** (b) should be smaller than (a), since it is (a) with the codes such as AAB removed. It is.",
+      type: "worked-example",
+      id: "pc0-2-we1",
+      title: "Worked example 1: three-letter codes",
+      problem:
+        "How many 3-letter codes can be made from the 26 letters (a) if letters may repeat, (b) if all three letters must be different?",
+      steps: [
+        {
+          text: "Draw three slots: $\\_\\,\\_\\,\\_$. Each slot is one stage.",
+        },
+        {
+          text: "**(a)** With repetition, each slot has all 26 letters available, whatever was chosen before: $26 \\times 26 \\times 26 = 17{,}576$.",
+        },
+        {
+          text: "**(b)** Without repetition: 26 choices for the first slot. Whatever letter was used, 25 remain for the second. Whatever two were used, 24 remain for the third: $26 \\times 25 \\times 24 = 15{,}600$.",
+          latex: "\\text{repetition: } 26^3 = 17{,}576 \\qquad \\text{no repetition: } 26 \\cdot 25 \\cdot 24 = 15{,}600",
+        },
+        {
+          text: "**Check.** (b) should be smaller than (a), since it is (a) with the codes such as AAB removed. It is.",
+        },
+      ],
+      answer: "(a) $26^3 = 17{,}576$ codes. (b) $26 \\times 25 \\times 24 = 15{,}600$ codes.",
     },
     {
-      type: "math",
-      latex: "\\text{repetition: } 26^3 = 17{,}576 \\qquad \\text{no repetition: } 26 \\cdot 25 \\cdot 24 = 15{,}600",
+      type: "worked-example",
+      id: "pc0-2-we2",
+      title: "Worked example 2: routes",
+      problem:
+        "There are 3 roads from town A to town B and 4 roads from B to C. How many routes are there from A to C? How many round trips A→C→A, if roads may be reused and if they may not?",
+      steps: [
+        {
+          text: "A trip from A to C means a road A→B **and** a road B→C: $3 \\times 4 = 12$ routes.",
+        },
+        {
+          text: "A round trip A→C→A has four legs: A→B, B→C, C→B, B→A. If any road may be reused: $3 \\times 4 \\times 4 \\times 3 = 144$.",
+        },
+        {
+          text: "If no road may be used twice, then on the way back the road B→C already used is not allowed, which leaves 3 roads for C→B. The road A→B already used is not allowed, which leaves 2 roads for B→A: $3 \\times 4 \\times 3 \\times 2 = 72$.",
+        },
+        {
+          text: "**Check.** Try a version small enough to list: 2 roads A→B (call them $a_1, a_2$) and 2 roads B→C (call them $p, q$), with no road reused. The formula gives $2 \\times 2 \\times 1 \\times 1 = 4$. Listing each trip as its four roads in order: $a_1\\,p\\,q\\,a_2$, $a_1\\,q\\,p\\,a_2$, $a_2\\,p\\,q\\,a_1$, $a_2\\,q\\,p\\,a_1$. That is 4. ✓ (With only 1 road A→B the formula gives $1 \\times 2 \\times 1 \\times 0 = 0$, which is also right: no unused road is left for the last leg.)",
+        },
+      ],
+      answer: "$12$ routes from A to C. Round trips: $144$ if roads may be reused, $72$ if not.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2: routes.** There are 3 roads from town A to town B and 4 roads from B to C.\n\n**Step 1.** A trip from A to C means a road A→B **and** a road B→C: $3 \\times 4 = 12$ routes.\n\n**Step 2.** A round trip A→C→A has four legs: A→B, B→C, C→B, B→A. If any road may be reused: $3 \\times 4 \\times 4 \\times 3 = 144$.\n\n**Step 3.** If no road may be used twice, then on the way back the road B→C already used is not allowed, which leaves 3 roads for C→B. The road A→B already used is not allowed, which leaves 2 roads for B→A: $3 \\times 4 \\times 3 \\times 2 = 72$.\n\n**Check.** Try a version small enough to list: 2 roads A→B (call them $a_1, a_2$) and 2 roads B→C (call them $p, q$), with no road reused. The formula gives $2 \\times 2 \\times 1 \\times 1 = 4$. Listing each trip as its four roads in order: $a_1\\,p\\,q\\,a_2$, $a_1\\,q\\,p\\,a_2$, $a_2\\,p\\,q\\,a_1$, $a_2\\,q\\,p\\,a_1$. That is 4. ✓ (With only 1 road A→B the formula gives $1 \\times 2 \\times 1 \\times 0 = 0$, which is also right: no unused road is left for the last leg.)",
+      type: "worked-example",
+      id: "pc0-2-we3",
+      title: "Worked example 3 (word problem): a suitcase lock",
+      problem:
+        "A suitcase lock has 3 rings, and each ring shows 10 different letters. Only one setting opens it. How many unsuccessful attempts could a thief make at most?",
+      steps: [
+        {
+          text: "A setting is: a letter on ring 1 AND a letter on ring 2 AND a letter on ring 3.",
+        },
+        {
+          text: "Each ring can show any of its 10 letters, whatever the other rings show. The rings turn independently, so a letter can \"repeat\" across rings with no problem.\n*Why this step:* each ring has its own 10 letters, so no ring uses up another ring's options. The count at every stage is 10.",
+        },
+        {
+          text: "Settings: $10 \\times 10 \\times 10 = 1000$.",
+        },
+        {
+          text: "Exactly one of those opens the lock, so the number of unsuccessful attempts is $1000 - 1 = 999$.\n*Why this step:* the question asks for failures, not settings. Reading exactly what is asked is part of the answer.",
+          latex: "10^3 - 1 = 999 \\text{ unsuccessful attempts}",
+        },
+      ],
+      answer: "$999$ unsuccessful attempts.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (word problem): a suitcase lock.** A suitcase lock has 3 rings, and each ring shows 10 different letters. Only one setting opens it. How many unsuccessful attempts could a thief make at most?\n\n**Step 1.** A setting is: a letter on ring 1 AND a letter on ring 2 AND a letter on ring 3.\n\n**Step 2.** Each ring can show any of its 10 letters, whatever the other rings show. The rings turn independently, so a letter can \"repeat\" across rings with no problem.\n*Why this step:* each ring has its own 10 letters, so no ring uses up another ring's options. The count at every stage is 10.\n\n**Step 3.** Settings: $10 \\times 10 \\times 10 = 1000$.\n\n**Step 4.** Exactly one of those opens the lock, so the number of unsuccessful attempts is $1000 - 1 = 999$.\n*Why this step:* the question asks for failures, not settings. Reading exactly what is asked is part of the answer.",
+      type: "worked-example",
+      id: "pc0-2-we4",
+      title: "Worked example 4 (CBSE Class 11 / JEE): counting functions",
+      problem:
+        "Let $A = \\{a, b, c\\}$ and $B = \\{1, 2, 3, 4\\}$. How many functions $f : A \\to B$ are there? How many of them are one-one?",
+      steps: [
+        {
+          text: "**What is a function, as a sequence of choices?** A function gives each element of $A$ exactly one image in $B$. So: choose $f(a)$, then $f(b)$, then $f(c)$. Three stages.\n*Why this step:* like the letters and postboxes, the elements of $A$ each make exactly one choice. Elements of $B$ may be hit several times or not at all, so they are the options, not the stages.",
+        },
+        {
+          text: "**All functions.** Each of $f(a), f(b), f(c)$ can be any of the 4 elements of $B$: $4 \\times 4 \\times 4 = 4^3 = 64$.",
+        },
+        {
+          text: "**One-one functions.** One-one means no two elements share an image. $f(a)$: 4 choices. $f(b)$: anything but $f(a)$, so 3. $f(c)$: anything but those two, so 2. That gives $4 \\times 3 \\times 2 = 24$.\n*Why this step:* the *set* of allowed images for $f(b)$ depends on $f(a)$, but the *number* is always 3. That is exactly what the product rule needs.",
+        },
+        {
+          text: "**The general result.** If $|A| = m$ and $|B| = n$, there are $n^m$ functions from $A$ to $B$, and $n(n-1)\\cdots(n-m+1)$ one-one functions (zero when $m > n$).",
+          latex: "\\#\\{f : A \\to B\\} = 4^3 = 64 \\qquad \\#\\{\\text{one-one } f\\} = 4 \\cdot 3 \\cdot 2 = 24",
+        },
+      ],
+      answer: "$64$ functions, of which $24$ are one-one.",
     },
-    {
-      type: "math",
-      latex: "10^3 - 1 = 999 \\text{ unsuccessful attempts}",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (CBSE Class 11 / JEE): counting functions.** Let $A = \\{a, b, c\\}$ and $B = \\{1, 2, 3, 4\\}$. How many functions $f : A \\to B$ are there? How many of them are one-one?\n\n**Step 1 (what is a function, as a sequence of choices?).** A function gives each element of $A$ exactly one image in $B$. So: choose $f(a)$, then $f(b)$, then $f(c)$. Three stages.\n*Why this step:* like the letters and postboxes, the elements of $A$ each make exactly one choice. Elements of $B$ may be hit several times or not at all, so they are the options, not the stages.\n\n**Step 2 (all functions).** Each of $f(a), f(b), f(c)$ can be any of the 4 elements of $B$: $4 \\times 4 \\times 4 = 4^3 = 64$.\n\n**Step 3 (one-one functions).** One-one means no two elements share an image. $f(a)$: 4 choices. $f(b)$: anything but $f(a)$, so 3. $f(c)$: anything but those two, so 2. That gives $4 \\times 3 \\times 2 = 24$.\n*Why this step:* the *set* of allowed images for $f(b)$ depends on $f(a)$, but the *number* is always 3. That is exactly what the product rule needs.\n\n**Step 4 (the general result).** If $|A| = m$ and $|B| = n$, there are $n^m$ functions from $A$ to $B$, and $n(n-1)\\cdots(n-m+1)$ one-one functions (zero when $m > n$).",
-    },
-    {
-      type: "math",
-      latex: "\\#\\{f : A \\to B\\} = 4^3 = 64 \\qquad \\#\\{\\text{one-one } f\\} = 4 \\cdot 3 \\cdot 2 = 24",
-    },
+    { type: "heading", text: "One fewer choice each time" },
     {
       type: "text",
       content:
@@ -369,6 +476,7 @@ const lesson02: LessonSeed = {
       content:
         "Now drop the titles. How many 2-person **teams** (no roles) can be picked from 8 students? Picking a first person and then a second gives $8 \\times 7 = 56$ leaves, but a team does not care about order: *Asha then Ravi* and *Ravi then Asha* are two leaves for the **same** team. Every team appears exactly twice, so there are $56 \\div 2 = 28$ teams. The product rule counts leaves; it counts outcomes only when different leaves are different outcomes. Chapter 2 turns this dividing-out into a general method.",
     },
+    { type: "heading", text: "When the number of choices varies" },
     {
       type: "text",
       content:
@@ -383,6 +491,7 @@ const lesson02: LessonSeed = {
       content:
         "Notice that 36 is also the number of ways to pick two different digits from 1 to 9: each pair can be written in increasing order in exactly one way, so pairs and increasing numbers match up one to one. Chapter 2 turns this into a formula.\n\nSplitting into cases and adding the results is the **sum rule**, the subject of the next lesson. The test to remember: *does the number of choices at this stage stay the same, whatever was picked earlier?* If yes, multiply. If no, split into cases.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc0-2-q1",
@@ -583,6 +692,7 @@ const lesson03: LessonSeed = {
       type: "math",
       latex: "\\underbrace{3 \\times 2}_{\\text{bus}} + \\underbrace{2 \\times 2}_{\\text{train}} = 6 + 4 = 10",
     },
+    { type: "heading", text: "The sum rule for separate cases" },
     {
       type: "callout",
       variant: "definition",
@@ -606,59 +716,147 @@ const lesson03: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1: passwords of mixed length.** A password uses the letters A to E (repeats allowed) and is 1, 2 or 3 letters long. How many passwords are there?\n\n**Step 1.** Split by length. A password cannot be two lengths at once, so the cases do not overlap.\n\n**Step 2.** Count each case with the product rule: length 1 gives $5$, length 2 gives $5^2 = 25$, length 3 gives $5^3 = 125$.\n\n**Step 3.** Add: $5 + 25 + 125 = 155$.",
+      type: "worked-example",
+      id: "pc0-3-we1",
+      title: "Worked example 1: passwords of mixed length",
+      problem:
+        "A password uses the letters A to E (repeats allowed) and is 1, 2 or 3 letters long. How many passwords are there?",
+      steps: [
+        {
+          text: "Split by length. A password cannot be two lengths at once, so the cases do not overlap.",
+        },
+        {
+          text: "Count each case with the product rule: length 1 gives $5$, length 2 gives $5^2 = 25$, length 3 gives $5^3 = 125$.",
+        },
+        {
+          text: "Add: $5 + 25 + 125 = 155$.",
+        },
+      ],
+      answer: "$155$ passwords.",
     },
+    {
+      type: "worked-example",
+      id: "pc0-3-we2",
+      title: "Worked example 2 (word problem, a CBSE favourite): flag signals",
+      problem:
+        "A ship has 4 flags of different colours. A signal is made by hoisting one or more flags, one above another, on a single mast. The order from top to bottom matters. How many different signals can be sent?",
+      steps: [
+        {
+          text: "**Split by the number of flags.** A signal uses 1, 2, 3 or 4 flags. No signal uses two different numbers of flags, so the cases do not overlap.\n*Why this step:* inside one case every signal has the same number of slots, so the product rule works. Across cases the number of slots changes, so the cases have to be added.",
+        },
+        {
+          text: "**Product rule inside each case.** A flag can't be used twice on the mast.\n• 1 flag: $4$\n• 2 flags: $4 \\times 3 = 12$\n• 3 flags: $4 \\times 3 \\times 2 = 24$\n• 4 flags: $4 \\times 3 \\times 2 \\times 1 = 24$\n*Why this step:* whichever flag is on top, one fewer is left for the next position.",
+        },
+        {
+          text: "**Sum rule across cases.** $4 + 12 + 24 + 24 = 64$.",
+          latex: "\\underbrace{4}_{1\\text{ flag}} + \\underbrace{4 \\cdot 3}_{2\\text{ flags}} + \\underbrace{4 \\cdot 3 \\cdot 2}_{3\\text{ flags}} + \\underbrace{4 \\cdot 3 \\cdot 2 \\cdot 1}_{4\\text{ flags}} = 4 + 12 + 24 + 24 = 64",
+        },
+      ],
+      answer: "$64$ signals.",
+    },
+    { type: "heading", text: "The complement: all minus none" },
     {
       type: "text",
       content:
-        "**Worked example 2 (word problem, a CBSE favourite): flag signals.** A ship has 4 flags of different colours. A signal is made by hoisting one or more flags, one above another, on a single mast. The order from top to bottom matters. How many different signals can be sent?\n\n**Step 1 (split by the number of flags).** A signal uses 1, 2, 3 or 4 flags. No signal uses two different numbers of flags, so the cases do not overlap.\n*Why this step:* inside one case every signal has the same number of slots, so the product rule works. Across cases the number of slots changes, so the cases have to be added.\n\n**Step 2 (product rule inside each case).** A flag can't be used twice on the mast.\n• 1 flag: $4$\n• 2 flags: $4 \\times 3 = 12$\n• 3 flags: $4 \\times 3 \\times 2 = 24$\n• 4 flags: $4 \\times 3 \\times 2 \\times 1 = 24$\n*Why this step:* whichever flag is on top, one fewer is left for the next position.\n\n**Step 3 (sum rule across cases).** $4 + 12 + 24 + 24 = 64$.",
-    },
-    {
-      type: "math",
-      latex: "\\underbrace{4}_{1\\text{ flag}} + \\underbrace{4 \\cdot 3}_{2\\text{ flags}} + \\underbrace{4 \\cdot 3 \\cdot 2}_{3\\text{ flags}} + \\underbrace{4 \\cdot 3 \\cdot 2 \\cdot 1}_{4\\text{ flags}} = 4 + 12 + 24 + 24 = 64",
-    },
-    {
-      type: "text",
-      content:
-        "**The complement.** Some questions ask for *at least one* of something. Counting them directly usually means many cases: exactly one, exactly two, and so on. It is almost always easier to count the outcomes that have *none*, then subtract.\n\nThis is the sum rule used backwards. Every outcome either has the property or it does not, and never both:",
+        "Some questions ask for *at least one* of something. Counting them directly usually means many cases: exactly one, exactly two, and so on. It is almost always easier to count the outcomes that have *none*, then subtract.\n\nThis is the sum rule used backwards. Every outcome either has the property or it does not, and never both:",
     },
     {
       type: "math",
       latex: "\\#(\\text{at least one}) = \\#(\\text{all}) - \\#(\\text{none})",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3: codes with a repeated digit.** A lock code is 4 digits, from 0000 to 9999. How many codes have **at least one** digit repeated?\n\n**Step 1 (why not directly?).** A repeat could be one pair (1123), two pairs (1122), a triple (1112) or all four the same (1111), and the repeats can sit in many positions. That is a lot of cases.\n\n**Step 2 (all).** Each of the 4 slots takes any of 10 digits: $10^4 = 10{,}000$.\n\n**Step 3 (none).** All digits different: $10 \\times 9 \\times 8 \\times 7 = 5040$.\n\n**Step 4 (subtract).** $10{,}000 - 5040 = 4960$ codes have at least one repeat.\n\n**Sense check.** Almost half of all codes repeat a digit. That seems like a lot until you remember that 4 digits drawn from only 10 bump into each other often. This is the same effect as the famous birthday problem.",
+      type: "worked-example",
+      id: "pc0-3-we3",
+      title: "Worked example 3: codes with a repeated digit",
+      problem:
+        "A lock code is 4 digits, from 0000 to 9999. How many codes have **at least one** digit repeated?",
+      steps: [
+        {
+          text: "**Why not directly?** A repeat could be one pair (1123), two pairs (1122), a triple (1112) or all four the same (1111), and the repeats can sit in many positions. That is a lot of cases.",
+        },
+        {
+          text: "**All.** Each of the 4 slots takes any of 10 digits: $10^4 = 10{,}000$.",
+        },
+        {
+          text: "**None.** All digits different: $10 \\times 9 \\times 8 \\times 7 = 5040$.",
+        },
+        {
+          text: "**Subtract.** $10{,}000 - 5040 = 4960$ codes have at least one repeat.",
+          latex: "10^4 - 10 \\cdot 9 \\cdot 8 \\cdot 7 = 10000 - 5040 = 4960",
+        },
+        {
+          text: "**Sense check.** Almost half of all codes repeat a digit. That seems like a lot until you remember that 4 digits drawn from only 10 bump into each other often. This is the same effect as the famous birthday problem.",
+        },
+      ],
+      answer: "$4960$ codes.",
     },
     {
-      type: "math",
-      latex: "10^4 - 10 \\cdot 9 \\cdot 8 \\cdot 7 = 10000 - 5040 = 4960",
+      type: "worked-example",
+      id: "pc0-3-we4",
+      title: "Worked example 4: at least one vowel",
+      problem:
+        "How many 3-letter strings (letters may repeat) contain at least one vowel? There are 5 vowels and 21 consonants.",
+      steps: [
+        {
+          text: "All strings: $26^3 = 17{,}576$. Strings with no vowel use only consonants: $21^3 = 9261$. So $17{,}576 - 9261 = 8315$ have at least one vowel.",
+        },
+      ],
+      answer: "$8315$ strings.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4: at least one vowel.** How many 3-letter strings (letters may repeat) contain at least one vowel? There are 5 vowels and 21 consonants.\n\nAll strings: $26^3 = 17{,}576$. Strings with no vowel use only consonants: $21^3 = 9261$. So $17{,}576 - 9261 = 8315$ have at least one vowel.",
+      type: "worked-example",
+      id: "pc0-3-we5",
+      title: "Worked example 5 (exam style): the digit 7",
+      problem:
+        "How many positive integers less than 1000 contain the digit 7 at least once?",
+      steps: [
+        {
+          text: "**Make every number the same length.** The numbers 1 to 999 have 1, 2 or 3 digits, which would mean three cases. Instead, write each one with 3 digits by padding with leading zeros: 7 becomes 007 and 42 becomes 042. The strings 000 to 999 are then exactly the numbers 0 to 999.\n*Why this step:* padding with zeros adds no 7s, so it does not change which numbers contain a 7. And it turns three cases into one set of 3 equal slots.",
+        },
+        {
+          text: "**All.** $10^3 = 1000$ strings, from 000 to 999.",
+        },
+        {
+          text: "**None.** Strings with no 7 use only the other 9 digits in each slot: $9^3 = 729$.\n*Why this step:* \"at least one 7\" could be one, two or three 7s in various places. \"No 7\" is a single clean product.",
+        },
+        {
+          text: "**Subtract.** $1000 - 729 = 271$ strings contain a 7.",
+        },
+        {
+          text: "**The edge.** 000 is not a positive integer, but it has no 7, so it is among the 729 and not in our answer. So **271** positive integers below 1000 contain a 7.",
+          latex: "\\underbrace{10^3}_{000\\text{ to }999} - \\underbrace{9^3}_{\\text{no }7} = 1000 - 729 = 271",
+        },
+        {
+          text: "**Check on a smaller version.** Positive integers below 100 with a 7: $10^2 - 9^2 = 19$. By hand: 7, 17, 27, 37, 47, 57, 67, 87, 97 (9 numbers ending in 7, apart from 77) and 70 to 79 (10 numbers). That is 19. ✓",
+        },
+      ],
+      answer: "$271$ positive integers.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (exam style): the digit 7.** How many positive integers less than 1000 contain the digit 7 at least once?\n\n**Step 1 (make every number the same length).** The numbers 1 to 999 have 1, 2 or 3 digits, which would mean three cases. Instead, write each one with 3 digits by padding with leading zeros: 7 becomes 007 and 42 becomes 042. The strings 000 to 999 are then exactly the numbers 0 to 999.\n*Why this step:* padding with zeros adds no 7s, so it does not change which numbers contain a 7. And it turns three cases into one set of 3 equal slots.\n\n**Step 2 (all).** $10^3 = 1000$ strings, from 000 to 999.\n\n**Step 3 (none).** Strings with no 7 use only the other 9 digits in each slot: $9^3 = 729$.\n*Why this step:* \"at least one 7\" could be one, two or three 7s in various places. \"No 7\" is a single clean product.\n\n**Step 4 (subtract).** $1000 - 729 = 271$ strings contain a 7.\n\n**Step 5 (the edge).** 000 is not a positive integer, but it has no 7, so it is among the 729 and not in our answer. So **271** positive integers below 1000 contain a 7.\n\n**Check on a smaller version.** Positive integers below 100 with a 7: $10^2 - 9^2 = 19$. By hand: 7, 17, 27, 37, 47, 57, 67, 87, 97 (9 numbers ending in 7, apart from 77) and 70 to 79 (10 numbers). That is 19. ✓",
-    },
-    {
-      type: "math",
-      latex: "\\underbrace{10^3}_{000\\text{ to }999} - \\underbrace{9^3}_{\\text{no }7} = 1000 - 729 = 271",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 6 (JEE style): all digits different.** How many positive integers less than 1000 have all their digits different?\n\nIt is tempting to reuse the padding trick from example 5. Don't. Padding 7 to 007 creates two zeros, so a number with distinct digits can turn into a string with a repeat. The trick worked for \"contains a 7\" because zeros never affect 7s. Here they do.\n\n**Step 1 (split by length).** A number below 1000 has 1, 2 or 3 digits, and no number has two lengths. So the cases do not overlap and the sum rule will apply.\n*Why this step:* inside a fixed length every number has the same slots, including a leading slot that can't be 0.\n\n**Step 2 (product rule inside each case).**\n• 1 digit: 1 to 9, so $9$.\n• 2 digits: leading slot 9 (not 0), then 9 (any digit except the first, 0 allowed): $9 \\times 9 = 81$.\n• 3 digits: $9 \\times 9 \\times 8 = 648$.\n*Why this step:* the leading slot is the fussy one (no 0), so it goes first. After it, 0 is back in play, which is why the second slot also has 9.\n\n**Step 3 (sum rule).** $9 + 81 + 648 = 738$.\n\n**Check on a smaller version.** Positive integers below 100 with distinct digits: $9 + 81 = 90$. Below 100 there are 99 numbers, and the ones with a repeat are 11, 22, …, 99, which is 9 of them. $99 - 9 = 90$. ✓",
-    },
-    {
-      type: "math",
-      latex: "\\underbrace{9}_{1\\text{ digit}} + \\underbrace{9 \\cdot 9}_{2\\text{ digits}} + \\underbrace{9 \\cdot 9 \\cdot 8}_{3\\text{ digits}} = 9 + 81 + 648 = 738",
+      type: "worked-example",
+      id: "pc0-3-we6",
+      title: "Worked example 6 (JEE style): all digits different",
+      problem:
+        "How many positive integers less than 1000 have all their digits different?",
+      steps: [
+        {
+          text: "It is tempting to reuse the padding trick from example 5. Don't. Padding 7 to 007 creates two zeros, so a number with distinct digits can turn into a string with a repeat. The trick worked for \"contains a 7\" because zeros never affect 7s. Here they do.",
+        },
+        {
+          text: "**Split by length.** A number below 1000 has 1, 2 or 3 digits, and no number has two lengths. So the cases do not overlap and the sum rule will apply.\n*Why this step:* inside a fixed length every number has the same slots, including a leading slot that can't be 0.",
+        },
+        {
+          text: "**Product rule inside each case.** \n• 1 digit: 1 to 9, so $9$.\n• 2 digits: leading slot 9 (not 0), then 9 (any digit except the first, 0 allowed): $9 \\times 9 = 81$.\n• 3 digits: $9 \\times 9 \\times 8 = 648$.\n*Why this step:* the leading slot is the fussy one (no 0), so it goes first. After it, 0 is back in play, which is why the second slot also has 9.",
+        },
+        {
+          text: "**Sum rule.** $9 + 81 + 648 = 738$.",
+          latex: "\\underbrace{9}_{1\\text{ digit}} + \\underbrace{9 \\cdot 9}_{2\\text{ digits}} + \\underbrace{9 \\cdot 9 \\cdot 8}_{3\\text{ digits}} = 9 + 81 + 648 = 738",
+        },
+        {
+          text: "**Check on a smaller version.** Positive integers below 100 with distinct digits: $9 + 81 = 90$. Below 100 there are 99 numbers, and the ones with a repeat are 11, 22, …, 99, which is 9 of them. $99 - 9 = 90$. ✓",
+        },
+      ],
+      answer: "$738$ numbers.",
     },
     {
       type: "callout",
@@ -667,6 +865,7 @@ const lesson03: LessonSeed = {
       content:
         "How many numbers from 1 to 20 are divisible by 2 **or** by 3? There are 10 multiples of 2 and 6 multiples of 3, but the answer is **not** 16. The numbers 6, 12 and 18 are in both lists, so adding counts them twice. The sum rule needs cases that **do not overlap**. Here the fix is to subtract the overlap once: $10 + 6 - 3 = 13$. This fix is called **inclusion–exclusion**, and it comes back in Chapter 3. For now, before you add, always ask: *can one outcome be in two of my cases?*",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc0-3-q1",
@@ -827,6 +1026,7 @@ const lesson04: LessonSeed = {
         caption: "24 orders, in 4 blocks of 6, one block per person in the first slot.",
       },
     },
+    { type: "heading", text: "Arranging all $n$ objects: $n!$" },
     {
       type: "callout",
       variant: "definition",
@@ -835,23 +1035,65 @@ const lesson04: LessonSeed = {
         "For a positive whole number $n$, **$n$ factorial** is\n$n! = n \\times (n-1) \\times (n-2) \\times \\cdots \\times 2 \\times 1$.\nIt is the number of ways to arrange $n$ different objects in a line.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example A (routine): the chief guest.** At a school function, 7 speakers sit in a row of 7 chairs on stage. (a) How many seatings are there? (b) How many if the chief guest must take the middle chair? (c) How many if the principal and the chief guest must take the two end chairs?\n\n**(a)** 7 different people in 7 slots: $7! = 5040$.\n\n**(b) Step 1.** The middle chair is the fussy slot. Fill it first: only 1 way (the chief guest).\n*Why this step:* a slot with a fixed occupant has exactly 1 choice. Placing it first means the other slots are free again.\n**Step 2.** The other 6 speakers fill the other 6 chairs in any order: $6! = 720$. Total $1 \\times 720 = 720$.\n\n**(c) Step 1.** The two end chairs take the principal and the chief guest: 2 ways (principal left and guest right, or the other way round).\n*Why this step:* \"the two ends\" says which chairs, not who sits in which. Both orders count.\n**Step 2.** The remaining 5 speakers fill the 5 middle chairs: $5! = 120$. Total $2 \\times 120 = 240$.\n\n**Sense check.** Each of the 7 people is equally likely to be in the middle, so (b) should be $\\frac{1}{7}$ of (a): $5040 \\div 7 = 720$. ✓",
+      type: "worked-example",
+      id: "pc0-4-we1",
+      title: "Worked example A (routine): the chief guest",
+      problem:
+        "At a school function, 7 speakers sit in a row of 7 chairs on stage. (a) How many seatings are there? (b) How many if the chief guest must take the middle chair? (c) How many if the principal and the chief guest must take the two end chairs?",
+      steps: [
+        {
+          text: "**(a)** 7 different people in 7 slots: $7! = 5040$.",
+        },
+        {
+          text: "**(b)** The middle chair is the fussy slot. Fill it first: only 1 way (the chief guest).\n*Why this step:* a slot with a fixed occupant has exactly 1 choice. Placing it first means the other slots are free again.",
+        },
+        {
+          text: "The other 6 speakers fill the other 6 chairs in any order: $6! = 720$. Total $1 \\times 720 = 720$.",
+        },
+        {
+          text: "**(c)** The two end chairs take the principal and the chief guest: 2 ways (principal left and guest right, or the other way round).\n*Why this step:* \"the two ends\" says which chairs, not who sits in which. Both orders count.",
+        },
+        {
+          text: "The remaining 5 speakers fill the 5 middle chairs: $5! = 120$. Total $2 \\times 120 = 240$.",
+          latex: "\\text{(a) } 7! = 5040 \\qquad \\text{(b) } 1 \\times 6! = 720 \\qquad \\text{(c) } 2! \\times 5! = 240",
+        },
+        {
+          text: "**Sense check.** Each of the 7 people is equally likely to be in the middle, so (b) should be $\\frac{1}{7}$ of (a): $5040 \\div 7 = 720$. ✓",
+        },
+      ],
+      answer: "(a) $5040$ (b) $720$ (c) $240$",
     },
     {
-      type: "math",
-      latex: "\\text{(a) } 7! = 5040 \\qquad \\text{(b) } 1 \\times 6! = 720 \\qquad \\text{(c) } 2! \\times 5! = 240",
+      type: "worked-example",
+      id: "pc0-4-we2",
+      title: "Worked example B (JEE/CBSE classic): friends who must sit together",
+      problem:
+        "6 students sit in a row. In how many seatings do two particular friends, Asha and Ravi, sit next to each other? In how many do they **not** sit together?",
+      steps: [
+        {
+          text: "**Glue them.** Tie Asha and Ravi together into one block. Now there are 5 things to arrange: the block and the other 4 students.\n*Why this step:* \"next to each other\" is hard to handle slot by slot, but once they are one unit the condition holds automatically.",
+        },
+        {
+          text: "**Arrange the units.** 5 units in a line: $5! = 120$.",
+        },
+        {
+          text: "**Arrange inside the block.** The block can read Asha–Ravi or Ravi–Asha: $2! = 2$.\n*Why this step:* gluing hid the order inside the block. Each seating of units opens into 2 real seatings.",
+        },
+        {
+          text: "**Product rule.** $5! \\times 2! = 240$ seatings with them together.",
+        },
+        {
+          text: "**Complement.** All seatings: $6! = 720$. Not together: $720 - 240 = 480$.\n*Why this step:* \"not together\" has many shapes (one seat apart, two seats apart, …). The complement turns it into one subtraction.",
+          latex: "\\text{together: } 5! \\times 2! = 240 \\qquad \\text{not together: } 6! - 240 = 480",
+        },
+        {
+          text: "**Check on a small case.** 3 students A, B, C with A and B together. The formula gives $2! \\times 2! = 4$. Listing: ABC, BAC, CAB, CBA. That is 4. ✓",
+        },
+      ],
+      answer: "$240$ seatings together, $480$ not together.",
+      tryFirst: false,
     },
-    {
-      type: "text",
-      content:
-        "**Worked example B (JEE/CBSE classic): friends who must sit together.** 6 students sit in a row. In how many seatings do two particular friends, Asha and Ravi, sit next to each other? In how many do they **not** sit together?\n\n**Step 1 (glue them).** Tie Asha and Ravi together into one block. Now there are 5 things to arrange: the block and the other 4 students.\n*Why this step:* \"next to each other\" is hard to handle slot by slot, but once they are one unit the condition holds automatically.\n\n**Step 2 (arrange the units).** 5 units in a line: $5! = 120$.\n\n**Step 3 (arrange inside the block).** The block can read Asha–Ravi or Ravi–Asha: $2! = 2$.\n*Why this step:* gluing hid the order inside the block. Each seating of units opens into 2 real seatings.\n\n**Step 4 (product rule).** $5! \\times 2! = 240$ seatings with them together.\n\n**Step 5 (complement).** All seatings: $6! = 720$. Not together: $720 - 240 = 480$.\n*Why this step:* \"not together\" has many shapes (one seat apart, two seats apart, …). The complement turns it into one subtraction.\n\n**Check on a small case.** 3 students A, B, C with A and B together. The formula gives $2! \\times 2! = 4$. Listing: ABC, BAC, CAB, CBA. That is 4. ✓",
-    },
-    {
-      type: "math",
-      latex: "\\text{together: } 5! \\times 2! = 240 \\qquad \\text{not together: } 6! - 240 = 480",
-    },
+    { type: "heading", text: "Building $n!$ from $(n-1)!$" },
     {
       type: "text",
       content:
@@ -861,18 +1103,20 @@ const lesson04: LessonSeed = {
       type: "math",
       latex: "n! = n \\times (n-1)!",
     },
+    { type: "heading", text: "What is $0!$?", level: 3 },
     {
       type: "text",
       content:
-        "**What is $0!$?** The definition as a product makes no sense for $n = 0$. But there are four separate reasons, which all agree, for setting $0! = 1$:\n\n**1. Continue the pattern.** Use $n! = n \\times (n-1)!$ with $n = 1$: $1! = 1 \\times 0!$. Since $1! = 1$, we need $0! = 1$.\n\n**2. Count.** How many ways are there to arrange zero objects? Exactly one: the empty arrangement, where you do nothing. That is one outcome, not zero outcomes.\n\n**3. Keep formulas valid.** Filling $r$ slots from $n$ objects gives $n(n-1)\\cdots(n-r+1)$, which equals $\\frac{n!}{(n-r)!}$ (Chapter 1 builds on this). With $r = n$, filling every slot should give $n!$, and the formula gives $\\frac{n!}{0!}$. That is right only if $0! = 1$.\n\n**4. The empty product.** An empty product is 1, just as an empty sum is 0. A running total starts at 0 before anything is added, and a running product starts at 1 before anything is multiplied. Multiplying by nothing leaves that starting value 1 unchanged, so the product of no numbers is 1.",
+        "The definition as a product makes no sense for $n = 0$. But there are four separate reasons, which all agree, for setting $0! = 1$:\n\n**1. Continue the pattern.** Use $n! = n \\times (n-1)!$ with $n = 1$: $1! = 1 \\times 0!$. Since $1! = 1$, we need $0! = 1$.\n\n**2. Count.** How many ways are there to arrange zero objects? Exactly one: the empty arrangement, where you do nothing. That is one outcome, not zero outcomes.\n\n**3. Keep formulas valid.** Filling $r$ slots from $n$ objects gives $n(n-1)\\cdots(n-r+1)$, which equals $\\frac{n!}{(n-r)!}$ (Chapter 1 builds on this). With $r = n$, filling every slot should give $n!$, and the formula gives $\\frac{n!}{0!}$. That is right only if $0! = 1$.\n\n**4. The empty product.** An empty product is 1, just as an empty sum is 0. A running total starts at 0 before anything is added, and a running product starts at 1 before anything is multiplied. Multiplying by nothing leaves that starting value 1 unchanged, so the product of no numbers is 1.",
     },
     {
       type: "math",
       latex: "0! = 1",
     },
+    { type: "heading", text: "How fast factorials grow" },
     {
       type: "text",
-      content: "**How fast factorials grow.** Each step multiplies by a bigger number, so they get very large very quickly.",
+      content: "Each step multiplies by a bigger number, so factorials get very large very quickly.",
     },
     {
       type: "table",
@@ -885,24 +1129,92 @@ const lesson04: LessonSeed = {
         ["52", "about $8.07 \\times 10^{67}$", "Shuffles of a deck: almost surely no two real shuffles have ever matched"],
       ],
     },
+    { type: "heading", text: "Cancel before you multiply", level: 3 },
     {
       type: "text",
       content:
-        "Because the numbers are so large, **never multiply factorials out in full when you can cancel.** Write the bigger factorial down until the smaller one appears, then cancel it.\n\n**Worked example 1.** $\\dfrac{10!}{8!} = \\dfrac{10 \\times 9 \\times 8!}{8!} = 10 \\times 9 = 90$.\n\n**Worked example 2.** $\\dfrac{(n+1)!}{(n-1)!} = \\dfrac{(n+1) \\times n \\times (n-1)!}{(n-1)!} = (n+1)n = n^2 + n$.\n\n**Worked example 3.** Solve $\\dfrac{n!}{(n-2)!} = 56$.\n\n**Step 1.** Cancel: $\\dfrac{n(n-1)(n-2)!}{(n-2)!} = n(n-1)$.\n\n**Step 2.** $n(n-1) = 56$, so $n^2 - n - 56 = 0$, which is $(n-8)(n+7) = 0$.\n\n**Step 3.** $n = 8$ or $n = -7$. $(n-2)!$ needs $n - 2 \\geq 0$, so $n$ must be a whole number at least 2; $n = 8$. **Check:** $8 \\times 7 = 56$. ✓",
+        "Because the numbers are so large, **never multiply factorials out in full when you can cancel.** Write the bigger factorial down until the smaller one appears, then cancel it.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4.** Find $x$ if $\\dfrac{1}{8!} + \\dfrac{1}{9!} = \\dfrac{x}{10!}$.\n\nMultiply every term by $10!$: $\\dfrac{10!}{8!} + \\dfrac{10!}{9!} = x$, so $x = 90 + 10 = 100$.",
+      type: "worked-example",
+      id: "pc0-4-we6",
+      title: "Worked example 1",
+      problem: "Simplify $\\dfrac{10!}{8!}$.",
+      steps: [
+        {
+          text: "Write $10!$ down until $8!$ appears, then cancel.",
+          latex: "\\dfrac{10!}{8!} = \\dfrac{10 \\times 9 \\times 8!}{8!} = 10 \\times 9 = 90",
+        },
+      ],
+      answer: "$90$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (exam style).** Find $n$ if $(n+2)! = 2550 \\times n!$.\n\n**Step 1 (write the bigger factorial down to the smaller one).** $(n+2)! = (n+2)(n+1) \\times n!$.\n*Why this step:* once $n!$ appears on both sides you can divide it away, since $n! \\neq 0$.\n\n**Step 2 (cancel).** $(n+2)(n+1) = 2550$.\n\n**Step 3 (spot the product of neighbours).** The left side is two consecutive whole numbers multiplied. $\\sqrt{2550} \\approx 50.5$, so try $51 \\times 50 = 2550$. ✓ So $n + 2 = 51$ and $n = 49$.\n*Why this step:* you could expand to $n^2 + 3n - 2548 = 0$, but spotting two neighbours near the square root is faster. The quadratic's other root is $n = -52$, which is not allowed.\n\n**Check.** $\\dfrac{51!}{49!} = 51 \\times 50 = 2550$. ✓",
+      type: "worked-example",
+      id: "pc0-4-we7",
+      title: "Worked example 2",
+      problem: "Simplify $\\dfrac{(n+1)!}{(n-1)!}$.",
+      steps: [
+        {
+          text: "Write $(n+1)!$ down until $(n-1)!$ appears, then cancel.",
+          latex: "\\dfrac{(n+1)!}{(n-1)!} = \\dfrac{(n+1) \\times n \\times (n-1)!}{(n-1)!} = (n+1)n = n^2 + n",
+        },
+      ],
+      answer: "$n^2 + n$",
     },
     {
-      type: "math",
-      latex: "\\frac{(n+2)!}{n!} = (n+2)(n+1) = 2550 = 51 \\times 50 \\;\\Rightarrow\\; n = 49",
+      type: "worked-example",
+      id: "pc0-4-we3",
+      title: "Worked example 3",
+      problem:
+        "Solve $\\dfrac{n!}{(n-2)!} = 56$.",
+      steps: [
+        {
+          text: "Cancel: $\\dfrac{n(n-1)(n-2)!}{(n-2)!} = n(n-1)$.",
+        },
+        {
+          text: "$n(n-1) = 56$, so $n^2 - n - 56 = 0$, which is $(n-8)(n+7) = 0$.",
+        },
+        {
+          text: "$n = 8$ or $n = -7$. $(n-2)!$ needs $n - 2 \\geq 0$, so $n$ must be a whole number at least 2; $n = 8$. **Check:** $8 \\times 7 = 56$. ✓",
+        },
+      ],
+      answer: "$n = 8$",
+    },
+    {
+      type: "worked-example",
+      id: "pc0-4-we4",
+      title: "Worked example 4",
+      problem:
+        "Find $x$ if $\\dfrac{1}{8!} + \\dfrac{1}{9!} = \\dfrac{x}{10!}$.",
+      steps: [
+        {
+          text: "Multiply every term by $10!$: $\\dfrac{10!}{8!} + \\dfrac{10!}{9!} = x$, so $x = 90 + 10 = 100$.",
+        },
+      ],
+      answer: "$x = 100$",
+    },
+    {
+      type: "worked-example",
+      id: "pc0-4-we5",
+      title: "Worked example 5 (exam style)",
+      problem:
+        "Find $n$ if $(n+2)! = 2550 \\times n!$.",
+      steps: [
+        {
+          text: "**Write the bigger factorial down to the smaller one.** $(n+2)! = (n+2)(n+1) \\times n!$.\n*Why this step:* once $n!$ appears on both sides you can divide it away, since $n! \\neq 0$.",
+        },
+        {
+          text: "**Cancel.** $(n+2)(n+1) = 2550$.",
+        },
+        {
+          text: "**Spot the product of neighbours.** The left side is two consecutive whole numbers multiplied. $\\sqrt{2550} \\approx 50.5$, so try $51 \\times 50 = 2550$. ✓ So $n + 2 = 51$ and $n = 49$.\n*Why this step:* you could expand to $n^2 + 3n - 2548 = 0$, but spotting two neighbours near the square root is faster. The quadratic's other root is $n = -52$, which is not allowed.",
+          latex: "\\frac{(n+2)!}{n!} = (n+2)(n+1) = 2550 = 51 \\times 50 \\;\\Rightarrow\\; n = 49",
+        },
+        {
+          text: "**Check.** $\\dfrac{51!}{49!} = 51 \\times 50 = 2550$. ✓",
+        },
+      ],
+      answer: "$n = 49$",
     },
     {
       type: "callout",
@@ -918,6 +1230,7 @@ const lesson04: LessonSeed = {
       content:
         "How many factors of 2 are in $10! = 1 \\times 2 \\times \\cdots \\times 10$? Count them in layers instead of multiplying out.\n• Every multiple of 2 (2, 4, 6, 8, 10) gives at least one 2: $\\lfloor 10/2 \\rfloor = 5$.\n• Every multiple of 4 (4, 8) gives one **more** 2: $\\lfloor 10/4 \\rfloor = 2$.\n• Every multiple of 8 (just 8) gives one more again: $\\lfloor 10/8 \\rfloor = 1$.\nSo the exponent of 2 in $10!$ is $5 + 2 + 1 = 8$. Check: $10! = 3{,}628{,}800 = 2^8 \\times 14{,}175$, and $14{,}175$ is odd. ✓\n\nIn general the exponent of a prime $p$ in $n!$ is $\\lfloor n/p \\rfloor + \\lfloor n/p^2 \\rfloor + \\lfloor n/p^3 \\rfloor + \\cdots$ (Legendre's formula). Each layer counts the numbers that contribute one more $p$.\n\n**Trailing zeros.** Each trailing zero of $n!$ is a factor $10 = 2 \\times 5$. There are far more 2s than 5s, so the 5s decide. Trailing zeros of $100!$: $\\lfloor 100/5 \\rfloor + \\lfloor 100/25 \\rfloor = 20 + 4 = 24$. The multiples of 25 (25, 50, 75, 100) each carry a second 5, which is why the second term is needed.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc0-4-q1",
@@ -1075,33 +1388,83 @@ const lesson05: LessonSeed = {
       content:
         "Up to now every slot has been equally free. Real problems have conditions, such as *a number can't start with 0* or *the number must be even*. A condition makes one slot fussier than the others, and the order in which you fill the slots starts to matter a lot.\n\nThe rule for this whole lesson: **fill the most restricted slot first.**",
     },
+    { type: "heading", text: "Fill the fussiest slot first" },
+    {
+      type: "worked-example",
+      id: "pc0-5-we1",
+      title: "Worked example 1: 4-digit numbers with distinct digits",
+      problem:
+        "Using the digits 0 to 9 without repetition, how many 4-digit numbers can be formed?",
+      steps: [
+        {
+          text: "**The fussy slot.** The thousands digit cannot be 0, or the number would really have 3 digits. So it has **9** choices (1 to 9).",
+        },
+        {
+          text: "**The rest.** Whatever digit went first, 9 digits are left, and 0 is now allowed. Then 8, then 7.",
+        },
+        {
+          text: "$9 \\times 9 \\times 8 \\times 7 = 4536$.",
+          latex: "\\underset{\\text{not } 0}{\\boxed{9}} \\times \\boxed{9} \\times \\boxed{8} \\times \\boxed{7} = 4536",
+        },
+      ],
+      answer: "$4536$ numbers.",
+    },
     {
       type: "text",
       content:
-        "**Worked example 1: 4-digit numbers with distinct digits.** Using the digits 0 to 9 without repetition, how many 4-digit numbers can be formed?\n\n**Step 1 (the fussy slot).** The thousands digit cannot be 0, or the number would really have 3 digits. So it has **9** choices (1 to 9).\n\n**Step 2 (the rest).** Whatever digit went first, 9 digits are left, and 0 is now allowed. Then 8, then 7.\n\n**Step 3.** $9 \\times 9 \\times 8 \\times 7 = 4536$.",
+        "The same idea works away from digits.",
     },
     {
-      type: "math",
-      latex: "\\underset{\\text{not } 0}{\\boxed{9}} \\times \\boxed{9} \\times \\boxed{8} \\times \\boxed{7} = 4536",
+      type: "worked-example",
+      id: "pc0-5-we2",
+      title: "Worked example (word problem): the family car",
+      problem:
+        "A family of 5 goes on a trip in a 5-seater car. Only Dad and Mum can drive. In how many ways can the family be seated?",
+      steps: [
+        {
+          text: "**The fussy slot.** The driver's seat can take only Dad or Mum: 2 choices.\n*Why this step:* the other 4 seats accept anyone, so they can wait. If you filled a passenger seat first and put Dad there, the driver's seat would have 1 choice instead of 2, and the count would stop being fixed.",
+        },
+        {
+          text: "**The rest.** Whoever drives, the other 4 people fill the 4 remaining seats in $4! = 24$ ways.",
+        },
+        {
+          text: "$2 \\times 24 = 48$.",
+          latex: "\\underset{\\text{Dad or Mum}}{\\boxed{2}} \\times \\underbrace{4!}_{\\text{everyone else}} = 2 \\times 24 = 48",
+        },
+        {
+          text: "**Sense check.** Without the driving rule there are $5! = 120$ seatings. The driver is one of 5 people, and 2 of those 5 can drive, so the answer should be $\\frac{2}{5}$ of 120, which is 48. ✓",
+        },
+      ],
+      answer: "$48$ seatings.",
     },
+    { type: "heading", text: "Two fussy slots: split into cases" },
     {
-      type: "text",
-      content:
-        "The same idea works away from digits. **Worked example (word problem): the family car.** A family of 5 goes on a trip in a 5-seater car. Only Dad and Mum can drive. In how many ways can the family be seated?\n\n**Step 1 (the fussy slot).** The driver's seat can take only Dad or Mum: 2 choices.\n*Why this step:* the other 4 seats accept anyone, so they can wait. If you filled a passenger seat first and put Dad there, the driver's seat would have 1 choice instead of 2, and the count would stop being fixed.\n\n**Step 2 (the rest).** Whoever drives, the other 4 people fill the 4 remaining seats in $4! = 24$ ways.\n\n**Step 3.** $2 \\times 24 = 48$.\n\n**Sense check.** Without the driving rule there are $5! = 120$ seatings. The driver is one of 5 people, and 2 of those 5 can drive, so the answer should be $\\frac{2}{5}$ of 120, which is 48. ✓",
-    },
-    {
-      type: "math",
-      latex: "\\underset{\\text{Dad or Mum}}{\\boxed{2}} \\times \\underbrace{4!}_{\\text{everyone else}} = 2 \\times 24 = 48",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2: even numbers.** How many of those 4536 numbers are **even**?\n\nNow two slots are fussy. The units digit must be 0, 2, 4, 6 or 8, and the thousands digit must not be 0. Try filling left to right and you get stuck. The thousands digit has 9 choices, but how many even digits are left for the units slot? That depends on whether earlier slots used even digits, so there is no fixed number and the product rule fails.\n\n**Step 1 (units first).** Fill the units digit first. But the choice there changes what the thousands slot is allowed to be, because it matters whether 0 has been used up. So **split into cases** on the units digit.",
-    },
-    {
-      type: "text",
-      content:
-        "**Case A: units digit is 0.** Then 0 is used, so the thousands slot can take any of the 9 remaining digits (all nonzero). Then 8, then 7:\n$1 \\times 9 \\times 8 \\times 7 = 504$.\n\n**Case B: units digit is 2, 4, 6 or 8** (4 ways). The thousands slot can't be 0 and can't be the units digit, which leaves **8** choices. The hundreds slot then has 8 left (0 is back in play), and the tens has 7:\n$4 \\times 8 \\times 8 \\times 7 = 1792$.\n\n**Step 2 (add; the cases don't overlap).** $504 + 1792 = 2296$.\n\n**Check with the complement.** Odd numbers: units digit 1, 3, 5, 7 or 9 (5 ways). The thousands slot then has 8 choices (not 0, not the units digit), then 8, then 7: $5 \\times 8 \\times 8 \\times 7 = 2240$. And $4536 - 2240 = 2296$. ✓",
+      type: "worked-example",
+      id: "pc0-5-we3",
+      title: "Worked example 2: even numbers",
+      problem:
+        "How many of those 4536 numbers are **even**?",
+      steps: [
+        {
+          text: "Now two slots are fussy. The units digit must be 0, 2, 4, 6 or 8, and the thousands digit must not be 0. Try filling left to right and you get stuck. The thousands digit has 9 choices, but how many even digits are left for the units slot? That depends on whether earlier slots used even digits, so there is no fixed number and the product rule fails.",
+        },
+        {
+          text: "**Units first.** Fill the units digit first. But the choice there changes what the thousands slot is allowed to be, because it matters whether 0 has been used up. So **split into cases** on the units digit.",
+        },
+        {
+          text: "**Case A: units digit is 0.** Then 0 is used, so the thousands slot can take any of the 9 remaining digits (all nonzero). Then 8, then 7:\n$1 \\times 9 \\times 8 \\times 7 = 504$.",
+        },
+        {
+          text: "**Case B: units digit is 2, 4, 6 or 8** (4 ways). The thousands slot can't be 0 and can't be the units digit, which leaves **8** choices. The hundreds slot then has 8 left (0 is back in play), and the tens has 7:\n$4 \\times 8 \\times 8 \\times 7 = 1792$.",
+        },
+        {
+          text: "**Add; the cases don't overlap.** $504 + 1792 = 2296$.",
+        },
+        {
+          text: "**Check with the complement.** Odd numbers: units digit 1, 3, 5, 7 or 9 (5 ways). The thousands slot then has 8 choices (not 0, not the units digit), then 8, then 7: $5 \\times 8 \\times 8 \\times 7 = 2240$. And $4536 - 2240 = 2296$. ✓",
+        },
+      ],
+      answer: "$2296$ even numbers.",
     },
     {
       type: "text",
@@ -1138,10 +1501,25 @@ const lesson05: LessonSeed = {
       content:
         "**List to confirm.** Ending in 0: 120, 130, 210, 230, 310, 320. Ending in 2: 102, 132, 302, 312. That is 6 + 4 = 10. ✓ The two branches really do have different shapes. That is why one product cannot count them, and the sum rule has to join them.",
     },
+    { type: "heading", text: "Numbers above or between limits" },
     {
-      type: "text",
-      content:
-        "**Worked example 3: numbers greater than 5000.** How many 4-digit numbers with distinct digits (from 0 to 9) are greater than 5000?\n\n**Step 1 (the fussy slot).** The number exceeds 5000 exactly when the thousands digit is 5, 6, 7, 8 or 9. (5000 itself repeats the digit 0, so it is not in our list anyway.) That gives 5 choices.\n\n**Step 2.** The other three slots have 9, 8, 7 choices, and 0 is allowed there.\n\n**Step 3.** $5 \\times 9 \\times 8 \\times 7 = 2520$.",
+      type: "worked-example",
+      id: "pc0-5-we4",
+      title: "Worked example 3: numbers greater than 5000",
+      problem:
+        "How many 4-digit numbers with distinct digits (from 0 to 9) are greater than 5000?",
+      steps: [
+        {
+          text: "**The fussy slot.** The number exceeds 5000 exactly when the thousands digit is 5, 6, 7, 8 or 9. (5000 itself repeats the digit 0, so it is not in our list anyway.) That gives 5 choices.",
+        },
+        {
+          text: "The other three slots have 9, 8, 7 choices, and 0 is allowed there.",
+        },
+        {
+          text: "$5 \\times 9 \\times 8 \\times 7 = 2520$.",
+        },
+      ],
+      answer: "$2520$ numbers.",
     },
     {
       type: "callout",
@@ -1161,28 +1539,75 @@ const lesson05: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example (JEE style): two fussy slots that interact.** How many even numbers between 3000 and 5000 can be formed from the digits 0, 1, 2, 3, 4, 5, 6 if no digit is repeated?\n\n**Step 1 (find the fussy slots).** Between 3000 and 5000 means the thousands digit is 3 or 4. (3000 repeats 0, and 5000 is not below 5000, so neither boundary sneaks in.) Even means the units digit is 0, 2, 4 or 6.\n\n**Step 2 (spot the interaction).** The digit 4 is on both lists. If the thousands digit is 4, the units slot loses one of its even options. So the number of units choices depends on the thousands digit, and one product can't cover both.\n*Why this step:* this is the same trap as 0 in the even-number example. Whenever one digit is allowed in two restricted slots, split on it.\n\n**Step 3 (Case A: thousands digit 3).** Units: any of 0, 2, 4, 6, so 4 choices. The middle two slots take any of the 5 digits left, then 4: $1 \\times 5 \\times 4 \\times 4 = 80$.\n\n**Step 4 (Case B: thousands digit 4).** Units: 0, 2 or 6, so 3 choices. Middle slots: $5 \\times 4$. Total $1 \\times 5 \\times 4 \\times 3 = 60$.\n*Why this step:* 0 causes no trouble here, because the leading slot is already fixed as 3 or 4. The only interaction is the shared 4.\n\n**Step 5 (add).** $80 + 60 = 140$.",
+      type: "worked-example",
+      id: "pc0-5-we5",
+      title: "Worked example (JEE style): two fussy slots that interact",
+      problem:
+        "How many even numbers between 3000 and 5000 can be formed from the digits 0, 1, 2, 3, 4, 5, 6 if no digit is repeated?",
+      steps: [
+        {
+          text: "**Find the fussy slots.** Between 3000 and 5000 means the thousands digit is 3 or 4. (3000 repeats 0, and 5000 is not below 5000, so neither boundary sneaks in.) Even means the units digit is 0, 2, 4 or 6.",
+        },
+        {
+          text: "**Spot the interaction.** The digit 4 is on both lists. If the thousands digit is 4, the units slot loses one of its even options. So the number of units choices depends on the thousands digit, and one product can't cover both.\n*Why this step:* this is the same trap as 0 in the even-number example. Whenever one digit is allowed in two restricted slots, split on it.",
+        },
+        {
+          text: "**Case A: thousands digit 3.** Units: any of 0, 2, 4, 6, so 4 choices. The middle two slots take any of the 5 digits left, then 4: $1 \\times 5 \\times 4 \\times 4 = 80$.",
+        },
+        {
+          text: "**Case B: thousands digit 4.** Units: 0, 2 or 6, so 3 choices. Middle slots: $5 \\times 4$. Total $1 \\times 5 \\times 4 \\times 3 = 60$.\n*Why this step:* 0 causes no trouble here, because the leading slot is already fixed as 3 or 4. The only interaction is the shared 4.",
+        },
+        {
+          text: "**Add.** $80 + 60 = 140$.",
+          latex: "\\underbrace{1 \\cdot 5 \\cdot 4 \\cdot 4}_{\\text{starts with 3}} + \\underbrace{1 \\cdot 5 \\cdot 4 \\cdot 3}_{\\text{starts with 4}} = 80 + 60 = 140",
+        },
+      ],
+      answer: "$140$ numbers.",
     },
     {
-      type: "math",
-      latex: "\\underbrace{1 \\cdot 5 \\cdot 4 \\cdot 4}_{\\text{starts with 3}} + \\underbrace{1 \\cdot 5 \\cdot 4 \\cdot 3}_{\\text{starts with 4}} = 80 + 60 = 140",
+      type: "worked-example",
+      id: "pc0-5-we7",
+      title: "When the boundary matters",
+      problem:
+        "In worked example 3 the boundary 5000 dropped out by itself, because it repeats 0. With repetition allowed it does not. How many 4-digit numbers (digits may repeat) are greater than 5000?",
+      steps: [
+        {
+          text: "Leading digit 5 to 9: $5 \\times 10 \\times 10 \\times 10 = 5000$ numbers, running from 5000 to 9999.",
+        },
+        {
+          text: "5000 itself has leading digit 5 but is **not** greater than 5000. Remove it: $5000 - 1 = 4999$.",
+        },
+        {
+          text: "**Check.** The numbers 5001 to 9999 are $9999 - 5001 + 1 = 4999$. ✓",
+        },
+      ],
+      answer: "$4999$ numbers.",
     },
+    { type: "heading", text: "Summing all the numbers formed" },
     {
-      type: "text",
-      content:
-        "**When the boundary matters.** In worked example 3 the boundary 5000 dropped out by itself, because it repeats 0. With repetition allowed it does not. How many 4-digit numbers (digits may repeat) are greater than 5000?\n\n**Step 1.** Leading digit 5 to 9: $5 \\times 10 \\times 10 \\times 10 = 5000$ numbers, running from 5000 to 9999.\n\n**Step 2.** 5000 itself has leading digit 5 but is **not** greater than 5000. Remove it: $5000 - 1 = 4999$.\n\n**Check.** The numbers 5001 to 9999 are $9999 - 5001 + 1 = 4999$. ✓",
+      type: "worked-example",
+      id: "pc0-5-we6",
+      title: "Worked example 4 (optional, JEE favourite): the sum of all the numbers",
+      problem:
+        "Find the sum of all 3-digit numbers formed from 1, 2, 3 without repetition.",
+      steps: [
+        {
+          text: "**Don't list, count by place.** Fix a digit, say 1, in the units place. The other two places take the other two digits in $2! = 2$ ways. So each digit sits in the units place exactly 2 times, and the same holds for the tens and the hundreds.",
+        },
+        {
+          text: "The units column adds up to $2 \\times (1 + 2 + 3) = 12$. The tens column is also 12, but worth 10 each, and the hundreds column is worth 100 each.",
+        },
+        {
+          text: "Sum $= (1 + 2 + 3) \\times 2 \\times (100 + 10 + 1) = 6 \\times 2 \\times 111 = 1332$.",
+          latex: "\\text{Sum} = (\\text{sum of digits}) \\times (\\text{times each digit sits in a place}) \\times 111 = 6 \\times 2 \\times 111 = 1332",
+        },
+        {
+          text: "**Check by listing.** $123 + 132 + 213 + 231 + 312 + 321 = 1332$. ✓",
+        },
+      ],
+      answer: "$1332$",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (optional, JEE favourite): the sum of all the numbers.** Find the sum of all 3-digit numbers formed from 1, 2, 3 without repetition.\n\n**Step 1 (don't list, count by place).** Fix a digit, say 1, in the units place. The other two places take the other two digits in $2! = 2$ ways. So each digit sits in the units place exactly 2 times, and the same holds for the tens and the hundreds.\n\n**Step 2.** The units column adds up to $2 \\times (1 + 2 + 3) = 12$. The tens column is also 12, but worth 10 each, and the hundreds column is worth 100 each.\n\n**Step 3.** Sum $= (1 + 2 + 3) \\times 2 \\times (100 + 10 + 1) = 6 \\times 2 \\times 111 = 1332$.\n\n**Check by listing.** $123 + 132 + 213 + 231 + 312 + 321 = 1332$. ✓",
-    },
-    {
-      type: "math",
-      latex: "\\text{Sum} = (\\text{sum of digits}) \\times (\\text{times each digit sits in a place}) \\times 111 = 6 \\times 2 \\times 111 = 1332",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc0-5-q1",

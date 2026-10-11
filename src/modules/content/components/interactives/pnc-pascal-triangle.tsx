@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { z } from "zod";
 import type { pncPascalTriangleSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 
 type Config = z.infer<typeof pncPascalTriangleSchema>;
@@ -343,7 +344,7 @@ export function PncPascalTriangle({ config }: { config: Config }) {
         {readout}
       </div>
 
-      <p className="text-center text-xs text-muted-foreground">{caption}</p>
+      <p className="text-center text-xs text-muted-foreground"><RichText text={caption} /></p>
     </InteractiveFrame>
   );
 }

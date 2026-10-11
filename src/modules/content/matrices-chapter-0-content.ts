@@ -60,6 +60,7 @@ const lesson01: LessonSeed = {
       content:
         "A **matrix** is a rectangular array of numbers arranged in rows and columns. The numbers are its **entries** (or elements). Rows run left to right; columns run top to bottom.",
     },
+    { type: "heading", text: "Order and the address $a_{ij}$" },
     {
       type: "text",
       content:
@@ -78,39 +79,65 @@ const lesson01: LessonSeed = {
         "Think of $a_{ij}$ as a street address: go down to row $i$ first, then across to column $j$. The phrase \"**R**ows before **C**olumns\" (RC, like remote control) is worth memorising, because it is the convention for the order *and* for the subscripts.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example.** Read entries of the sales matrix $S$.\n\n**Step 1.** $s_{23}$: row 2 is notebooks, column 3 is Wednesday. So $s_{23} = 6$.\n**Step 2.** $s_{31}$: row 3 is erasers, column 1 is Monday. So $s_{31} = 20$.\n**Step 3.** $s_{14}$: row 1, column 4. So $s_{14} = 10$.\n**Step 4.** Is there an $s_{41}$? No. $S$ has only 3 rows, so the row index can only be 1, 2 or 3.",
+      type: "worked-example",
+      id: "mx0-1-we1",
+      problem:
+        "Read entries of the sales matrix $S$: find $s_{23}$, $s_{31}$ and $s_{14}$, and say whether $S$ has an entry $s_{41}$.",
+      steps: [
+        { text: "$s_{23}$: row 2 is notebooks, column 3 is Wednesday. So $s_{23} = 6$." },
+        { text: "$s_{31}$: row 3 is erasers, column 1 is Monday. So $s_{31} = 20$." },
+        { text: "$s_{14}$: row 1, column 4. So $s_{14} = 10$." },
+        { text: "Is there an $s_{41}$? No. $S$ has only 3 rows, so the row index can only be 1, 2 or 3." },
+      ],
+      answer: "$s_{23} = 6$, $s_{31} = 20$, $s_{14} = 10$; there is no $s_{41}$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example.** Write the general $2 \\times 3$ matrix.\n\nEvery entry is labelled by its address, row first:",
-    },
-    {
-      type: "math",
-      latex:
-        "A = \\begin{pmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\end{pmatrix}",
+      type: "worked-example",
+      id: "mx0-1-we2",
+      problem: "Write the general $2 \\times 3$ matrix.",
+      steps: [
+        {
+          text: "Every entry is labelled by its address, row first:",
+          latex:
+            "A = \\begin{pmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\end{pmatrix}",
+        },
+      ],
+      answer: "$A = \\begin{pmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\end{pmatrix}$",
     },
     {
       type: "text",
       content:
         "Notice what stays fixed. Along a row the first subscript stays the same; down a column the second subscript stays the same. If you see $a_{21}, a_{22}, a_{23}$ you are reading across row 2.",
     },
+    { type: "heading", text: "Worked examples: recording and reading entries" },
     {
-      type: "text",
-      content:
-        "**Worked example (a shopping list as a matrix).** Three friends go to the fruit market. Asha buys 2 apples, 5 bananas, 1 mango and no oranges. Bhavin buys no apples, 6 bananas, 3 mangoes and 2 oranges. Chitra buys 4 apples, no bananas, 2 mangoes and 5 oranges. Record this as a matrix $F$ with one row per friend and one column per fruit (apples, bananas, mangoes, oranges).\n\n**Step 1: fix the meaning of rows and columns.** Rows = friends (Asha, Bhavin, Chitra); columns = fruits in the order given. *Why:* the numbers only mean something once everyone agrees on the layout.\n**Step 2: fill one row per friend.** A \"no apples\" is still an entry: it is 0, not a blank.",
-    },
-    {
-      type: "math",
-      latex:
-        "F = \\begin{pmatrix} 2 & 5 & 1 & 0 \\\\ 0 & 6 & 3 & 2 \\\\ 4 & 0 & 2 & 5 \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3: order.** 3 friends (rows) and 4 fruits (columns): $F$ is $3 \\times 4$, with $12$ entries.\n**Step 4: read addresses.** $f_{23}$ is row 2 (Bhavin), column 3 (mangoes): $f_{23} = 3$. $f_{32}$ is Chitra's bananas: $f_{32} = 0$. *Why they differ:* swapping the subscripts swaps the person and the fruit.\n**Step 5: a question the matrix answers quickly.** Total bananas bought = everything in column 2 = $5 + 6 + 0 = 11$. Everything Asha bought = row 1 = $2 + 5 + 1 + 0 = 8$ fruits.\n**Step 6: what if we had chosen fruits as rows?** Then the same data is a $4 \\times 3$ matrix, and Bhavin's mangoes move to row 3, column 2. Both layouts are fine; you just must say which one you are using.",
+      type: "worked-example",
+      id: "mx0-1-we3",
+      title: "A shopping list as a matrix",
+      problem:
+        "Three friends go to the fruit market. Asha buys 2 apples, 5 bananas, 1 mango and no oranges. Bhavin buys no apples, 6 bananas, 3 mangoes and 2 oranges. Chitra buys 4 apples, no bananas, 2 mangoes and 5 oranges. Record this as a matrix $F$ with one row per friend and one column per fruit (apples, bananas, mangoes, oranges).",
+      steps: [
+        {
+          text: "**Fix the meaning of rows and columns.** Rows = friends (Asha, Bhavin, Chitra); columns = fruits in the order given. *Why:* the numbers only mean something once everyone agrees on the layout.",
+        },
+        {
+          text: "**Fill one row per friend.** A \"no apples\" is still an entry: it is 0, not a blank.",
+          latex:
+            "F = \\begin{pmatrix} 2 & 5 & 1 & 0 \\\\ 0 & 6 & 3 & 2 \\\\ 4 & 0 & 2 & 5 \\end{pmatrix}",
+        },
+        { text: "**Order.** 3 friends (rows) and 4 fruits (columns): $F$ is $3 \\times 4$, with $12$ entries." },
+        {
+          text: "**Read addresses.** $f_{23}$ is row 2 (Bhavin), column 3 (mangoes): $f_{23} = 3$. $f_{32}$ is Chitra's bananas: $f_{32} = 0$. *Why they differ:* swapping the subscripts swaps the person and the fruit.",
+        },
+        {
+          text: "**A question the matrix answers quickly.** Total bananas bought = everything in column 2 = $5 + 6 + 0 = 11$. Everything Asha bought = row 1 = $2 + 5 + 1 + 0 = 8$ fruits.",
+        },
+        {
+          text: "**What if we had chosen fruits as rows?** Then the same data is a $4 \\times 3$ matrix, and Bhavin's mangoes move to row 3, column 2. Both layouts are fine; you just must say which one you are using.",
+        },
+      ],
+      answer:
+        "$F = \\begin{pmatrix} 2 & 5 & 1 & 0 \\\\ 0 & 6 & 3 & 2 \\\\ 4 & 0 & 2 & 5 \\end{pmatrix}$, a $3 \\times 4$ matrix",
     },
     {
       type: "callout",
@@ -120,20 +147,27 @@ const lesson01: LessonSeed = {
         "**\"Order is columns × rows.\"** No. A matrix with 2 rows and 5 columns is $2 \\times 5$, never $5 \\times 2$. Those are different shapes.\n**\"$a_{23}$ is column 2, row 3.\"** No. $a_{23}$ is row 2, column 3. The same rule, rows first, governs both the order and the subscripts.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example (CBSE board style).** In the matrix below, write (i) the order, (ii) the number of elements, and (iii) the elements $a_{13}, a_{21}, a_{33}, a_{24}, a_{23}$.",
+      type: "worked-example",
+      id: "mx0-1-we4",
+      title: "CBSE board style",
+      problem:
+        "In the matrix below, write (i) the order, (ii) the number of elements, and (iii) the elements $a_{13}, a_{21}, a_{33}, a_{24}, a_{23}$.\n\n$$A = \\begin{pmatrix} 2 & 5 & 19 & -7 \\\\ 35 & -2 & \\frac{5}{2} & 12 \\\\ \\sqrt{3} & 1 & -5 & 17 \\end{pmatrix}$$",
+      steps: [
+        { text: "**Order.** Count rows first (3), then columns (4): order $3 \\times 4$." },
+        {
+          text: "**Number of elements.** $3 \\times 4 = 12$. *Why multiply:* each of the 3 rows holds one entry for each of the 4 columns.",
+        },
+        {
+          text: "**Read each address, row first.**\n$a_{13}$: row 1, column 3 $\\Rightarrow 19$.\n$a_{21}$: row 2, column 1 $\\Rightarrow 35$.\n$a_{33}$: row 3, column 3 $\\Rightarrow -5$.\n$a_{24}$: row 2, column 4 $\\Rightarrow 12$.\n$a_{23}$: row 2, column 3 $\\Rightarrow \\frac{5}{2}$.",
+        },
+        {
+          text: "**Check for impossible addresses.** Every requested subscript has row $\\le 3$ and column $\\le 4$, so all five exist. An $a_{42}$ would not.",
+        },
+      ],
+      answer:
+        "Order $3 \\times 4$, $12$ elements; $a_{13} = 19$, $a_{21} = 35$, $a_{33} = -5$, $a_{24} = 12$, $a_{23} = \\frac{5}{2}$",
     },
-    {
-      type: "math",
-      latex:
-        "A = \\begin{pmatrix} 2 & 5 & 19 & -7 \\\\ 35 & -2 & \\frac{5}{2} & 12 \\\\ \\sqrt{3} & 1 & -5 & 17 \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: order.** Count rows first (3), then columns (4): order $3 \\times 4$.\n**Step 2: number of elements.** $3 \\times 4 = 12$. *Why multiply:* each of the 3 rows holds one entry for each of the 4 columns.\n**Step 3: read each address, row first.**\n$a_{13}$: row 1, column 3 $\\Rightarrow 19$.\n$a_{21}$: row 2, column 1 $\\Rightarrow 35$.\n$a_{33}$: row 3, column 3 $\\Rightarrow -5$.\n$a_{24}$: row 2, column 4 $\\Rightarrow 12$.\n$a_{23}$: row 2, column 3 $\\Rightarrow \\frac{5}{2}$.\n**Step 4: check for impossible addresses.** Every requested subscript has row $\\le 3$ and column $\\le 4$, so all five exist. An $a_{42}$ would not.",
-    },
+    { type: "heading", text: "Named shapes and the main diagonal" },
     {
       type: "text",
       content:
@@ -162,6 +196,7 @@ const lesson01: LessonSeed = {
       content:
         "A square matrix of order $n$ has a **main diagonal**: the entries $a_{11}, a_{22}, \\ldots, a_{nn}$, running from top-left to bottom-right. Many special matrices in Chapter 1 are defined by what happens on and off this diagonal.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx0-1-q1",
@@ -273,25 +308,42 @@ const lesson02: LessonSeed = {
       content:
         "The safe method is to fill the matrix **one address at a time**, writing the address before the number. It is slow for three entries and saves you on the fifth.",
     },
+    { type: "heading", text: "Worked examples: entries from a formula" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Construct a $2 \\times 3$ matrix with $a_{ij} = \\dfrac{(i + 2j)^2}{2}$.\n\n**Step 1: row 1** ($i = 1$).\n$a_{11} = \\frac{(1+2)^2}{2} = \\frac{9}{2}$, $a_{12} = \\frac{(1+4)^2}{2} = \\frac{25}{2}$, $a_{13} = \\frac{(1+6)^2}{2} = \\frac{49}{2}$.\n**Step 2: row 2** ($i = 2$).\n$a_{21} = \\frac{(2+2)^2}{2} = 8$, $a_{22} = \\frac{(2+4)^2}{2} = 18$, $a_{23} = \\frac{(2+6)^2}{2} = 32$.\n**Step 3: assemble.**",
+      type: "worked-example",
+      id: "mx0-2-we1",
+      title: "Worked example 1",
+      problem: "Construct a $2 \\times 3$ matrix with $a_{ij} = \\dfrac{(i + 2j)^2}{2}$.",
+      steps: [
+        {
+          text: "**Row 1** ($i = 1$).\n$a_{11} = \\frac{(1+2)^2}{2} = \\frac{9}{2}$, $a_{12} = \\frac{(1+4)^2}{2} = \\frac{25}{2}$, $a_{13} = \\frac{(1+6)^2}{2} = \\frac{49}{2}$.",
+        },
+        {
+          text: "**Row 2** ($i = 2$).\n$a_{21} = \\frac{(2+2)^2}{2} = 8$, $a_{22} = \\frac{(2+4)^2}{2} = 18$, $a_{23} = \\frac{(2+6)^2}{2} = 32$.",
+        },
+        {
+          text: "**Assemble.**",
+          latex:
+            "A = \\begin{pmatrix} \\frac{9}{2} & \\frac{25}{2} & \\frac{49}{2} \\\\[4pt] 8 & 18 & 32 \\end{pmatrix}",
+        },
+      ],
+      answer: "$A = \\begin{pmatrix} \\frac{9}{2} & \\frac{25}{2} & \\frac{49}{2} \\\\ 8 & 18 & 32 \\end{pmatrix}$",
     },
     {
-      type: "math",
-      latex:
-        "A = \\begin{pmatrix} \\frac{9}{2} & \\frac{25}{2} & \\frac{49}{2} \\\\[4pt] 8 & 18 & 32 \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2.** Construct a $3 \\times 3$ matrix with $a_{ij} = |i - j|$.\n\n**Step 1.** On the main diagonal $i = j$, so every diagonal entry is $|0| = 0$.\n**Step 2.** One step off the diagonal, $|i - j| = 1$: that is $a_{12}, a_{21}, a_{23}, a_{32}$.\n**Step 3.** The two far corners $a_{13}$ and $a_{31}$ have $|i - j| = 2$.",
-    },
-    {
-      type: "math",
-      latex:
-        "A = \\begin{pmatrix} 0 & 1 & 2 \\\\ 1 & 0 & 1 \\\\ 2 & 1 & 0 \\end{pmatrix}",
+      type: "worked-example",
+      id: "mx0-2-we2",
+      title: "Worked example 2",
+      problem: "Construct a $3 \\times 3$ matrix with $a_{ij} = |i - j|$.",
+      steps: [
+        { text: "On the main diagonal $i = j$, so every diagonal entry is $|0| = 0$." },
+        { text: "One step off the diagonal, $|i - j| = 1$: that is $a_{12}, a_{21}, a_{23}, a_{32}$." },
+        {
+          text: "The two far corners $a_{13}$ and $a_{31}$ have $|i - j| = 2$.",
+          latex:
+            "A = \\begin{pmatrix} 0 & 1 & 2 \\\\ 1 & 0 & 1 \\\\ 2 & 1 & 0 \\end{pmatrix}",
+        },
+      ],
+      answer: "$A = \\begin{pmatrix} 0 & 1 & 2 \\\\ 1 & 0 & 1 \\\\ 2 & 1 & 0 \\end{pmatrix}$",
     },
     {
       type: "text",
@@ -299,37 +351,63 @@ const lesson02: LessonSeed = {
         "The rule's symmetry shows up as a picture: $|i - j| = |j - i|$, so the matrix is a mirror image of itself across the main diagonal. Chapter 1 will call such matrices **symmetric**. Looking for patterns like this is a good way to check your work.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3.** Construct a $3 \\times 2$ matrix with $a_{ij} = 2i - j$.\n\nRow 1: $a_{11} = 1$, $a_{12} = 0$. Row 2: $a_{21} = 3$, $a_{22} = 2$. Row 3: $a_{31} = 5$, $a_{32} = 4$.",
+      type: "worked-example",
+      id: "mx0-2-we3",
+      title: "Worked example 3",
+      problem: "Construct a $3 \\times 2$ matrix with $a_{ij} = 2i - j$.",
+      steps: [
+        { text: "Row 1: $a_{11} = 1$, $a_{12} = 0$." },
+        { text: "Row 2: $a_{21} = 3$, $a_{22} = 2$." },
+        {
+          text: "Row 3: $a_{31} = 5$, $a_{32} = 4$.",
+          latex: "A = \\begin{pmatrix} 1 & 0 \\\\ 3 & 2 \\\\ 5 & 4 \\end{pmatrix}",
+        },
+      ],
+      answer: "$A = \\begin{pmatrix} 1 & 0 \\\\ 3 & 2 \\\\ 5 & 4 \\end{pmatrix}$",
     },
     {
-      type: "math",
-      latex: "A = \\begin{pmatrix} 1 & 0 \\\\ 3 & 2 \\\\ 5 & 4 \\end{pmatrix}",
+      type: "worked-example",
+      id: "mx0-2-we4",
+      title: "Worked example 4: a rule in two pieces",
+      problem:
+        "Construct the $3 \\times 3$ matrix with $a_{ij} = i$ if $i \\ge j$, and $a_{ij} = j$ if $i < j$.",
+      steps: [
+        {
+          text: "**Decide which piece applies.** On and below the diagonal ($i \\ge j$) use $i$, the row number. Above the diagonal ($i < j$) use $j$, the column number.",
+        },
+        { text: "**Row 1.** $a_{11} = 1$ (since $1 \\ge 1$), $a_{12} = 2$ and $a_{13} = 3$ (since $1 < 2$ and $1 < 3$)." },
+        { text: "**Rows 2 and 3.** $a_{21} = 2$, $a_{22} = 2$, $a_{23} = 3$; $a_{31} = 3$, $a_{32} = 3$, $a_{33} = 3$." },
+        {
+          text: "**Spot the pattern.** Every entry is the larger of $i$ and $j$, so the rule is really $a_{ij} = \\max(i, j)$.",
+        },
+        { latex: "A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 2 & 2 & 3 \\\\ 3 & 3 & 3 \\end{pmatrix}" },
+      ],
+      answer: "$A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 2 & 2 & 3 \\\\ 3 & 3 & 3 \\end{pmatrix}$, that is $a_{ij} = \\max(i, j)$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (a rule in two pieces).** Construct the $3 \\times 3$ matrix with $a_{ij} = i$ if $i \\ge j$, and $a_{ij} = j$ if $i < j$.\n\n**Step 1: decide which piece applies.** On and below the diagonal ($i \\ge j$) use $i$, the row number. Above the diagonal ($i < j$) use $j$, the column number.\n**Step 2: row 1.** $a_{11} = 1$ (since $1 \\ge 1$), $a_{12} = 2$ and $a_{13} = 3$ (since $1 < 2$ and $1 < 3$).\n**Step 3: rows 2 and 3.** $a_{21} = 2$, $a_{22} = 2$, $a_{23} = 3$; $a_{31} = 3$, $a_{32} = 3$, $a_{33} = 3$.\n**Step 4: spot the pattern.** Every entry is the larger of $i$ and $j$, so the rule is really $a_{ij} = \\max(i, j)$.",
-    },
-    {
-      type: "math",
-      latex: "A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 2 & 2 & 3 \\\\ 3 & 3 & 3 \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (a distance chart is a rule matrix).** Four bus stops $P_1, P_2, P_3, P_4$ lie along a straight highway at the km markers $x_1 = 0$, $x_2 = 3$, $x_3 = 7$ and $x_4 = 12$. The distance chart printed in the bus is the $4 \\times 4$ matrix $D = [d_{ij}]$ with $d_{ij} = |x_i - x_j|$, the distance from stop $i$ to stop $j$. Build $D$.\n\n**Step 1: diagonal first.** $d_{ii} = |x_i - x_i| = 0$. *Why start here:* it is free, and it is a check (the distance from a stop to itself must be 0).\n**Step 2: row 1** (from $P_1$ at 0): $d_{12} = 3$, $d_{13} = 7$, $d_{14} = 12$.\n**Step 3: row 2** (from $P_2$ at 3): $d_{21} = 3$, $d_{23} = |3 - 7| = 4$, $d_{24} = |3 - 12| = 9$.\n**Step 4: row 3** (from $P_3$ at 7): $d_{31} = 7$, $d_{32} = 4$, $d_{34} = |7 - 12| = 5$.\n**Step 5: row 4** (from $P_4$ at 12): $d_{41} = 12$, $d_{42} = 9$, $d_{43} = 5$.",
-    },
-    {
-      type: "math",
-      latex:
-        "D = \\begin{pmatrix} 0 & 3 & 7 & 12 \\\\ 3 & 0 & 4 & 9 \\\\ 7 & 4 & 0 & 5 \\\\ 12 & 9 & 5 & 0 \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 6: check with the picture.** Going from $P_1$ to $P_4$ passes $P_2$ and $P_3$, so $d_{14}$ should equal $d_{12} + d_{23} + d_{34} = 3 + 4 + 5 = 12$ ✓. And, just like $|i - j|$ in example 2, $D$ is a mirror image of itself across the diagonal, because the trip from $i$ to $j$ is as long as the trip back.",
+      type: "worked-example",
+      id: "mx0-2-we5",
+      title: "Worked example 5: a distance chart is a rule matrix",
+      problem:
+        "Four bus stops $P_1, P_2, P_3, P_4$ lie along a straight highway at the km markers $x_1 = 0$, $x_2 = 3$, $x_3 = 7$ and $x_4 = 12$. The distance chart printed in the bus is the $4 \\times 4$ matrix $D = [d_{ij}]$ with $d_{ij} = |x_i - x_j|$, the distance from stop $i$ to stop $j$. Build $D$.",
+      steps: [
+        {
+          text: "**Diagonal first.** $d_{ii} = |x_i - x_i| = 0$. *Why start here:* it is free, and it is a check (the distance from a stop to itself must be 0).",
+        },
+        { text: "**Row 1** (from $P_1$ at 0): $d_{12} = 3$, $d_{13} = 7$, $d_{14} = 12$." },
+        { text: "**Row 2** (from $P_2$ at 3): $d_{21} = 3$, $d_{23} = |3 - 7| = 4$, $d_{24} = |3 - 12| = 9$." },
+        { text: "**Row 3** (from $P_3$ at 7): $d_{31} = 7$, $d_{32} = 4$, $d_{34} = |7 - 12| = 5$." },
+        {
+          text: "**Row 4** (from $P_4$ at 12): $d_{41} = 12$, $d_{42} = 9$, $d_{43} = 5$.",
+          latex:
+            "D = \\begin{pmatrix} 0 & 3 & 7 & 12 \\\\ 3 & 0 & 4 & 9 \\\\ 7 & 4 & 0 & 5 \\\\ 12 & 9 & 5 & 0 \\end{pmatrix}",
+        },
+        {
+          text: "**Check with the picture.** Going from $P_1$ to $P_4$ passes $P_2$ and $P_3$, so $d_{14}$ should equal $d_{12} + d_{23} + d_{34} = 3 + 4 + 5 = 12$ ✓. And, just like $|i - j|$ in example 2, $D$ is a mirror image of itself across the diagonal, because the trip from $i$ to $j$ is as long as the trip back.",
+        },
+      ],
+      answer:
+        "$D = \\begin{pmatrix} 0 & 3 & 7 & 12 \\\\ 3 & 0 & 4 & 9 \\\\ 7 & 4 & 0 & 5 \\\\ 12 & 9 & 5 & 0 \\end{pmatrix}$",
     },
     {
       type: "callout",
@@ -338,10 +416,11 @@ const lesson02: LessonSeed = {
       content:
         "A $3 \\times 2$ matrix has $i$ running to 3 and $j$ only to 2. If your answer has an $a_{13}$, you built the wrong shape.",
     },
+    { type: "heading", text: "How many shapes can hold $N$ entries?" },
     {
       type: "text",
       content:
-        "**How many shapes can hold $N$ entries?** A matrix of order $m \\times n$ has exactly $mn$ entries. So asking \"what orders can a matrix with 12 entries have?\" is the same as asking \"which ordered pairs of positive whole numbers multiply to 12?\"",
+        "A matrix of order $m \\times n$ has exactly $mn$ entries. So asking \"what orders can a matrix with 12 entries have?\" is the same as asking \"which ordered pairs of positive whole numbers multiply to 12?\"",
     },
     {
       type: "table",
@@ -365,10 +444,18 @@ const lesson02: LessonSeed = {
       content:
         "A prime $p$ has no factor pairs *other than* $1 \\times p$, and those still count. A matrix with 13 entries is a $1 \\times 13$ row matrix or a $13 \\times 1$ column matrix. Two orders, not zero.",
     },
+    { type: "heading", text: "How many matrices can you fill?" },
     {
-      type: "text",
-      content:
-        "**How many matrices can you fill?** Now fix the shape and restrict the entries. How many $2 \\times 2$ matrices have every entry equal to 0 or 1?\n\n**Step 1.** A $2 \\times 2$ matrix has 4 entries.\n**Step 2.** Each entry is chosen independently, with 2 choices.\n**Step 3.** By the multiplication principle, the total is $2 \\times 2 \\times 2 \\times 2 = 2^4 = 16$.",
+      type: "worked-example",
+      id: "mx0-2-we6",
+      problem:
+        "Now fix the shape and restrict the entries. How many $2 \\times 2$ matrices have every entry equal to 0 or 1?",
+      steps: [
+        { text: "A $2 \\times 2$ matrix has 4 entries." },
+        { text: "Each entry is chosen independently, with 2 choices." },
+        { text: "By the multiplication principle, the total is $2 \\times 2 \\times 2 \\times 2 = 2^4 = 16$." },
+      ],
+      answer: "$16$ matrices",
     },
     {
       type: "text",
@@ -376,15 +463,30 @@ const lesson02: LessonSeed = {
         "The same argument gives the general count: an $m \\times n$ matrix whose entries come from a set of $k$ values can be filled in $k^{mn}$ ways. A $3 \\times 3$ matrix with entries 0 or 1 already has $2^9 = 512$ possibilities.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 6 (JEE style).** How many $2 \\times 2$ matrices with entries from $\\{-1, 0, 1\\}$ have **exactly two** zero entries?\n\n**Step 1: count without the condition, as a sanity bound.** $3^4 = 81$ matrices in all, so the answer must be smaller.\n**Step 2: choose where the zeros go.** The four addresses are $a_{11}, a_{12}, a_{21}, a_{22}$. The pairs of addresses that could hold the two zeros are $\\{11, 12\\}, \\{11, 21\\}, \\{11, 22\\}, \\{12, 21\\}, \\{12, 22\\}, \\{21, 22\\}$: **6** ways. *Why list them:* it guards against counting $\\{11, 12\\}$ and $\\{12, 11\\}$ twice.\n**Step 3: fill the other two addresses.** They must be non-zero, so each is $-1$ or $1$: $2 \\times 2 = 4$ ways.\n**Step 4: multiply.** Each choice of positions pairs with each filling: $6 \\times 4 = 24$ matrices.",
+      type: "worked-example",
+      id: "mx0-2-we7",
+      title: "Worked example 6: JEE style",
+      problem:
+        "How many $2 \\times 2$ matrices with entries from $\\{-1, 0, 1\\}$ have **exactly two** zero entries?",
+      steps: [
+        {
+          text: "**Count without the condition, as a sanity bound.** $3^4 = 81$ matrices in all, so the answer must be smaller.",
+        },
+        {
+          text: "**Choose where the zeros go.** The four addresses are $a_{11}, a_{12}, a_{21}, a_{22}$. The pairs of addresses that could hold the two zeros are $\\{11, 12\\}, \\{11, 21\\}, \\{11, 22\\}, \\{12, 21\\}, \\{12, 22\\}, \\{21, 22\\}$: **6** ways. *Why list them:* it guards against counting $\\{11, 12\\}$ and $\\{12, 11\\}$ twice.",
+        },
+        {
+          text: "**Fill the other two addresses.** They must be non-zero, so each is $-1$ or $1$: $2 \\times 2 = 4$ ways.",
+        },
+        {
+          text: "**Multiply.** Each choice of positions pairs with each filling: $6 \\times 4 = 24$ matrices.",
+          latex:
+            "\\underbrace{6}_{\\text{positions of the zeros}} \\times \\underbrace{2 \\times 2}_{\\text{fill the rest with } \\pm 1} = 24",
+        },
+      ],
+      answer: "$24$ matrices",
     },
-    {
-      type: "math",
-      latex:
-        "\\underbrace{6}_{\\text{positions of the zeros}} \\times \\underbrace{2 \\times 2}_{\\text{fill the rest with } \\pm 1} = 24",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx0-2-q1",
@@ -496,6 +598,7 @@ const lesson03: LessonSeed = {
       content:
         "The stationery shop has two branches. Branch A's sales matrix and branch B's sales matrix have the same rows (items) and the same columns (days). The total sales for the chain are found the obvious way: add the two grids **position by position**. Every operation in this lesson is that simple, and the conditions come straight from the shop.",
     },
+    { type: "heading", text: "When two matrices are equal" },
     {
       type: "callout",
       variant: "definition",
@@ -509,19 +612,24 @@ const lesson03: LessonSeed = {
         "So a single matrix equation between $2 \\times 2$ matrices is really **four** ordinary equations at once. That is why matrix equality is a favourite way to set simultaneous equations.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Find $a, b, c, d$ if",
-    },
-    {
-      type: "math",
-      latex:
-        "\\begin{pmatrix} 2a + b & a - 2b \\\\ 5c - d & 4c + 3d \\end{pmatrix} = \\begin{pmatrix} 4 & -3 \\\\ 11 & 24 \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: match entries.** Row 1 gives $2a + b = 4$ and $a - 2b = -3$. Row 2 gives $5c - d = 11$ and $4c + 3d = 24$.\n**Step 2: solve for $a, b$.** Double the first equation: $4a + 2b = 8$. Add $a - 2b = -3$: $5a = 5$, so $a = 1$, and then $b = 4 - 2 = 2$.\n**Step 3: solve for $c, d$.** Triple $5c - d = 11$: $15c - 3d = 33$. Add $4c + 3d = 24$: $19c = 57$, so $c = 3$, and then $d = 15 - 11 = 4$.\n**Step 4: check.** $2(1) + 2 = 4$ ✓, $1 - 4 = -3$ ✓, $15 - 4 = 11$ ✓, $12 + 12 = 24$ ✓.",
+      type: "worked-example",
+      id: "mx0-3-we1",
+      title: "Worked example 1",
+      problem:
+        "Find $a, b, c, d$ if\n\n$$\\begin{pmatrix} 2a + b & a - 2b \\\\ 5c - d & 4c + 3d \\end{pmatrix} = \\begin{pmatrix} 4 & -3 \\\\ 11 & 24 \\end{pmatrix}$$",
+      steps: [
+        {
+          text: "**Match entries.** Row 1 gives $2a + b = 4$ and $a - 2b = -3$. Row 2 gives $5c - d = 11$ and $4c + 3d = 24$.",
+        },
+        {
+          text: "**Solve for $a, b$.** Double the first equation: $4a + 2b = 8$. Add $a - 2b = -3$: $5a = 5$, so $a = 1$, and then $b = 4 - 2 = 2$.",
+        },
+        {
+          text: "**Solve for $c, d$.** Triple $5c - d = 11$: $15c - 3d = 33$. Add $4c + 3d = 24$: $19c = 57$, so $c = 3$, and then $d = 15 - 11 = 4$.",
+        },
+        { text: "**Check.** $2(1) + 2 = 4$ ✓, $1 - 4 = -3$ ✓, $15 - 4 = 11$ ✓, $12 + 12 = 24$ ✓." },
+      ],
+      answer: "$a = 1$, $b = 2$, $c = 3$, $d = 4$",
     },
     {
       type: "callout",
@@ -530,6 +638,7 @@ const lesson03: LessonSeed = {
       content:
         "$\\begin{pmatrix} 1 & 2 \\end{pmatrix}$ and $\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix}$ hold the same numbers, but one is $1 \\times 2$ and the other is $2 \\times 1$. They are **not** equal. Position is part of the information.",
     },
+    { type: "heading", text: "Adding, subtracting and scaling matrices" },
     {
       type: "callout",
       variant: "definition",
@@ -538,64 +647,74 @@ const lesson03: LessonSeed = {
         "For $A = [a_{ij}]$ and $B = [b_{ij}]$ of the **same order**:\n$A + B = [a_{ij} + b_{ij}]$ and $A - B = [a_{ij} - b_{ij}]$.\nFor any number $k$ (a **scalar**): $kA = [k\\,a_{ij}]$, where every entry is multiplied by $k$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2.** Let $A = \\begin{pmatrix} 1 & 2 & -3 \\\\ 0 & 4 & 5 \\end{pmatrix}$ and $B = \\begin{pmatrix} 3 & -1 & 2 \\\\ 1 & -2 & 0 \\end{pmatrix}$. Find $A + B$ and $2A - B$.\n\n**Step 1.** Both are $2 \\times 3$, so both operations are defined.\n**Step 2.** Add position by position:",
+      type: "worked-example",
+      id: "mx0-3-we2",
+      title: "Worked example 2",
+      problem:
+        "Let $A = \\begin{pmatrix} 1 & 2 & -3 \\\\ 0 & 4 & 5 \\end{pmatrix}$ and $B = \\begin{pmatrix} 3 & -1 & 2 \\\\ 1 & -2 & 0 \\end{pmatrix}$. Find $A + B$ and $2A - B$.",
+      steps: [
+        { text: "Both are $2 \\times 3$, so both operations are defined." },
+        {
+          text: "Add position by position:",
+          latex:
+            "A + B = \\begin{pmatrix} 1+3 & 2-1 & -3+2 \\\\ 0+1 & 4-2 & 5+0 \\end{pmatrix} = \\begin{pmatrix} 4 & 1 & -1 \\\\ 1 & 2 & 5 \\end{pmatrix}",
+        },
+        {
+          text: "Scale first: $2A = \\begin{pmatrix} 2 & 4 & -6 \\\\ 0 & 8 & 10 \\end{pmatrix}$. Then subtract $B$:",
+          latex:
+            "2A - B = \\begin{pmatrix} 2-3 & 4+1 & -6-2 \\\\ 0-1 & 8+2 & 10-0 \\end{pmatrix} = \\begin{pmatrix} -1 & 5 & -8 \\\\ -1 & 10 & 10 \\end{pmatrix}",
+        },
+      ],
+      answer:
+        "$A + B = \\begin{pmatrix} 4 & 1 & -1 \\\\ 1 & 2 & 5 \\end{pmatrix}$, $2A - B = \\begin{pmatrix} -1 & 5 & -8 \\\\ -1 & 10 & 10 \\end{pmatrix}$",
     },
     {
-      type: "math",
-      latex:
-        "A + B = \\begin{pmatrix} 1+3 & 2-1 & -3+2 \\\\ 0+1 & 4-2 & 5+0 \\end{pmatrix} = \\begin{pmatrix} 4 & 1 & -1 \\\\ 1 & 2 & 5 \\end{pmatrix}",
+      type: "worked-example",
+      id: "mx0-3-we3",
+      title: "Worked example 2b: back to the shop",
+      problem:
+        "Rows are pens and notebooks; columns are Monday, Tuesday, Wednesday. Branch A sold $A = \\begin{pmatrix} 10 & 8 & 12 \\\\ 5 & 6 & 4 \\end{pmatrix}$ and branch B sold $B = \\begin{pmatrix} 6 & 7 & 8 \\\\ 5 & 4 & 6 \\end{pmatrix}$. Next week the owner wants every figure for the chain to be 10% higher. How many pens should the chain aim to sell on Wednesday?",
+      steps: [
+        {
+          text: "**Chain total.** Both are $2 \\times 3$, so add position by position: $A + B = \\begin{pmatrix} 16 & 15 & 20 \\\\ 10 & 10 & 10 \\end{pmatrix}$.",
+        },
+        {
+          text: "**10% more is a scalar multiple.** Raising every entry by 10% multiplies it by $1.1$, so the target is $1.1(A + B) = \\begin{pmatrix} 17.6 & 16.5 & 22 \\\\ 11 & 11 & 11 \\end{pmatrix}$.",
+        },
+        {
+          text: "**Read one entry.** Pens is row 1 and Wednesday is column 3, so the target is the $(1, 3)$ entry: **22 pens**.",
+        },
+        {
+          text: "**Check.** Directly, $1.1 \\times (12 + 8) = 1.1 \\times 20 = 22$ ✓. Because $1.1(A + B) = 1.1A + 1.1B$, you could also scale each branch first and then add.",
+        },
+      ],
+      answer: "22 pens on Wednesday",
     },
     {
-      type: "text",
-      content:
-        "**Step 3.** Scale first: $2A = \\begin{pmatrix} 2 & 4 & -6 \\\\ 0 & 8 & 10 \\end{pmatrix}$. Then subtract $B$:",
-    },
-    {
-      type: "math",
-      latex:
-        "2A - B = \\begin{pmatrix} 2-3 & 4+1 & -6-2 \\\\ 0-1 & 8+2 & 10-0 \\end{pmatrix} = \\begin{pmatrix} -1 & 5 & -8 \\\\ -1 & 10 & 10 \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2b (back to the shop).** Rows are pens and notebooks; columns are Monday, Tuesday, Wednesday. Branch A sold $A = \\begin{pmatrix} 10 & 8 & 12 \\\\ 5 & 6 & 4 \\end{pmatrix}$ and branch B sold $B = \\begin{pmatrix} 6 & 7 & 8 \\\\ 5 & 4 & 6 \\end{pmatrix}$. Next week the owner wants every figure for the chain to be 10% higher. How many pens should the chain aim to sell on Wednesday?\n\n**Step 1: chain total.** Both are $2 \\times 3$, so add position by position: $A + B = \\begin{pmatrix} 16 & 15 & 20 \\\\ 10 & 10 & 10 \\end{pmatrix}$.\n**Step 2: 10% more is a scalar multiple.** Raising every entry by 10% multiplies it by $1.1$, so the target is $1.1(A + B) = \\begin{pmatrix} 17.6 & 16.5 & 22 \\\\ 11 & 11 & 11 \\end{pmatrix}$.\n**Step 3: read one entry.** Pens is row 1 and Wednesday is column 3, so the target is the $(1, 3)$ entry: **22 pens**.\n**Step 4: check.** Directly, $1.1 \\times (12 + 8) = 1.1 \\times 20 = 22$ ✓. Because $1.1(A + B) = 1.1A + 1.1B$, you could also scale each branch first and then add.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2c (profit after a festival discount).** A bakery sells cakes and loaves of bread, each in a small and a large size. Rows are (cake, bread); columns are (small, large). All prices are in rupees per item.",
-    },
-    {
-      type: "math",
-      latex:
-        "C = \\begin{pmatrix} 200 & 350 \\\\ 30 & 50 \\end{pmatrix} \\ (\\text{cost}), \\qquad S = \\begin{pmatrix} 260 & 450 \\\\ 40 & 65 \\end{pmatrix} \\ (\\text{selling price})",
-    },
-    {
-      type: "text",
-      content:
-        "During Diwali the bakery gives 10% off every selling price. Find the profit matrix, and say which item earns the least per piece.\n\n**Step 1: the discounted price is a scalar multiple.** 10% off leaves 90%, so the new price matrix is $0.9S$. *Why a scalar:* the same percentage applies to every entry.",
-    },
-    {
-      type: "math",
-      latex:
-        "0.9S = \\begin{pmatrix} 234 & 405 \\\\ 36 & 58.5 \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 2: profit = price − cost, entry by entry.** Both matrices are $2 \\times 2$ with the same labels, so subtraction is defined and each entry compares the same item.",
-    },
-    {
-      type: "math",
-      latex:
-        "P = 0.9S - C = \\begin{pmatrix} 234 - 200 & 405 - 350 \\\\ 36 - 30 & 58.5 - 50 \\end{pmatrix} = \\begin{pmatrix} 34 & 55 \\\\ 6 & 8.5 \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3: read the answer.** The smallest entry is $p_{21} = 6$: a small loaf earns just ₹6 per piece. Every entry is positive, so nothing is sold at a loss.\n**Step 4: a common trap.** $0.9(S - C)$ would be $\\begin{pmatrix} 54 & 90 \\\\ 9 & 13.5 \\end{pmatrix}$, which discounts the *profit*, not the price. The distributive law says $0.9(S - C) = 0.9S - 0.9C$, and the bakery's costs don't drop by 10%.",
+      type: "worked-example",
+      id: "mx0-3-we4",
+      title: "Worked example 2c: profit after a festival discount",
+      problem:
+        "A bakery sells cakes and loaves of bread, each in a small and a large size. Rows are (cake, bread); columns are (small, large). All prices are in rupees per item.\n\n$$C = \\begin{pmatrix} 200 & 350 \\\\ 30 & 50 \\end{pmatrix} \\ (\\text{cost}), \\qquad S = \\begin{pmatrix} 260 & 450 \\\\ 40 & 65 \\end{pmatrix} \\ (\\text{selling price})$$\n\nDuring Diwali the bakery gives 10% off every selling price. Find the profit matrix, and say which item earns the least per piece.",
+      steps: [
+        {
+          text: "**The discounted price is a scalar multiple.** 10% off leaves 90%, so the new price matrix is $0.9S$. *Why a scalar:* the same percentage applies to every entry.",
+          latex: "0.9S = \\begin{pmatrix} 234 & 405 \\\\ 36 & 58.5 \\end{pmatrix}",
+        },
+        {
+          text: "**Profit = price − cost, entry by entry.** Both matrices are $2 \\times 2$ with the same labels, so subtraction is defined and each entry compares the same item.",
+          latex:
+            "P = 0.9S - C = \\begin{pmatrix} 234 - 200 & 405 - 350 \\\\ 36 - 30 & 58.5 - 50 \\end{pmatrix} = \\begin{pmatrix} 34 & 55 \\\\ 6 & 8.5 \\end{pmatrix}",
+        },
+        {
+          text: "**Compare the entries.** The smallest entry is $p_{21} = 6$: a small loaf earns just ₹6 per piece. Every entry is positive, so nothing is sold at a loss.",
+        },
+        {
+          text: "**A common trap.** $0.9(S - C)$ would be $\\begin{pmatrix} 54 & 90 \\\\ 9 & 13.5 \\end{pmatrix}$, which discounts the *profit*, not the price. The distributive law says $0.9(S - C) = 0.9S - 0.9C$, and the bakery's costs don't drop by 10%.",
+        },
+      ],
+      answer:
+        "$P = \\begin{pmatrix} 34 & 55 \\\\ 6 & 8.5 \\end{pmatrix}$; the small loaf earns the least, ₹6 per piece",
     },
     {
       type: "callout",
@@ -604,6 +723,7 @@ const lesson03: LessonSeed = {
       content:
         "You can't. Addition pairs each entry of $A$ with the entry at the **same address** in $B$. A $2 \\times 3$ matrix has an $a_{13}$; a $3 \\times 2$ matrix has no column 3 to pair it with, and its $b_{31}$ has no partner. In the shop picture, you'd be adding items to days. $A + B$ is simply **not defined** unless the orders match exactly.",
     },
+    { type: "heading", text: "Addition laws and matrix equations" },
     {
       type: "text",
       content:
@@ -627,29 +747,59 @@ const lesson03: LessonSeed = {
         "Those laws let you solve matrix equations exactly the way you solve equations with numbers: add, subtract and divide by scalars on both sides.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3.** Find $X$ and $Y$ if $2X + Y = \\begin{pmatrix} 5 & 4 \\\\ 1 & 7 \\end{pmatrix}$ and $X - Y = \\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix}$.\n\n**Step 1: eliminate $Y$ by adding.** $3X = \\begin{pmatrix} 6 & 3 \\\\ 0 & 9 \\end{pmatrix}$.\n**Step 2: divide by the scalar 3.** $X = \\begin{pmatrix} 2 & 1 \\\\ 0 & 3 \\end{pmatrix}$.\n**Step 3: back-substitute.** $Y = X - (X - Y) = \\begin{pmatrix} 2 & 1 \\\\ 0 & 3 \\end{pmatrix} - \\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix} = \\begin{pmatrix} 1 & 2 \\\\ 1 & 1 \\end{pmatrix}$.\n**Step 4: check.** $2X + Y = \\begin{pmatrix} 4+1 & 2+2 \\\\ 0+1 & 6+1 \\end{pmatrix} = \\begin{pmatrix} 5 & 4 \\\\ 1 & 7 \\end{pmatrix}$ ✓.",
+      type: "worked-example",
+      id: "mx0-3-we5",
+      title: "Worked example 3",
+      problem:
+        "Find $X$ and $Y$ if $2X + Y = \\begin{pmatrix} 5 & 4 \\\\ 1 & 7 \\end{pmatrix}$ and $X - Y = \\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix}$.",
+      steps: [
+        { text: "**Eliminate $Y$ by adding.** $3X = \\begin{pmatrix} 6 & 3 \\\\ 0 & 9 \\end{pmatrix}$." },
+        { text: "**Divide by the scalar 3.** $X = \\begin{pmatrix} 2 & 1 \\\\ 0 & 3 \\end{pmatrix}$." },
+        {
+          text: "**Back-substitute.** $Y = X - (X - Y) = \\begin{pmatrix} 2 & 1 \\\\ 0 & 3 \\end{pmatrix} - \\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix} = \\begin{pmatrix} 1 & 2 \\\\ 1 & 1 \\end{pmatrix}$.",
+        },
+        {
+          text: "**Check.** $2X + Y = \\begin{pmatrix} 4+1 & 2+2 \\\\ 0+1 & 6+1 \\end{pmatrix} = \\begin{pmatrix} 5 & 4 \\\\ 1 & 7 \\end{pmatrix}$ ✓.",
+        },
+      ],
+      answer:
+        "$X = \\begin{pmatrix} 2 & 1 \\\\ 0 & 3 \\end{pmatrix}$, $Y = \\begin{pmatrix} 1 & 2 \\\\ 1 & 1 \\end{pmatrix}$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4.** If $X + Y = \\begin{pmatrix} 5 & 2 \\\\ 0 & 9 \\end{pmatrix}$ and $X - Y = \\begin{pmatrix} 3 & 6 \\\\ 0 & -1 \\end{pmatrix}$, then adding gives $2X = \\begin{pmatrix} 8 & 8 \\\\ 0 & 8 \\end{pmatrix}$, so $X = \\begin{pmatrix} 4 & 4 \\\\ 0 & 4 \\end{pmatrix}$; subtracting gives $2Y = \\begin{pmatrix} 2 & -4 \\\\ 0 & 10 \\end{pmatrix}$, so $Y = \\begin{pmatrix} 1 & -2 \\\\ 0 & 5 \\end{pmatrix}$.",
+      type: "worked-example",
+      id: "mx0-3-we7",
+      title: "Worked example 4",
+      problem:
+        "Find $X$ and $Y$ if $X + Y = \\begin{pmatrix} 5 & 2 \\\\ 0 & 9 \\end{pmatrix}$ and $X - Y = \\begin{pmatrix} 3 & 6 \\\\ 0 & -1 \\end{pmatrix}$.",
+      steps: [
+        {
+          text: "**Add the equations.** Adding gives $2X = \\begin{pmatrix} 8 & 8 \\\\ 0 & 8 \\end{pmatrix}$, so $X = \\begin{pmatrix} 4 & 4 \\\\ 0 & 4 \\end{pmatrix}$.",
+        },
+        {
+          text: "**Subtract the equations.** Subtracting gives $2Y = \\begin{pmatrix} 2 & -4 \\\\ 0 & 10 \\end{pmatrix}$, so $Y = \\begin{pmatrix} 1 & -2 \\\\ 0 & 5 \\end{pmatrix}$.",
+        },
+      ],
+      answer:
+        "$X = \\begin{pmatrix} 4 & 4 \\\\ 0 & 4 \\end{pmatrix}$, $Y = \\begin{pmatrix} 1 & -2 \\\\ 0 & 5 \\end{pmatrix}$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (CBSE board style).** Find $x$ and $y$ if",
-    },
-    {
-      type: "math",
-      latex:
-        "2\\begin{pmatrix} x & 5 \\\\ 7 & y - 3 \\end{pmatrix} + \\begin{pmatrix} 3 & -4 \\\\ 1 & 2 \\end{pmatrix} = \\begin{pmatrix} 7 & 6 \\\\ 15 & 14 \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1: simplify the left side into one matrix.** Scale first, then add. *Why this order:* the scalar 2 multiplies only the first matrix.\n$2\\begin{pmatrix} x & 5 \\\\ 7 & y - 3 \\end{pmatrix} = \\begin{pmatrix} 2x & 10 \\\\ 14 & 2y - 6 \\end{pmatrix}$, so the left side is $\\begin{pmatrix} 2x + 3 & 6 \\\\ 15 & 2y - 4 \\end{pmatrix}$.\n**Step 2: equate corresponding entries.** Top-left: $2x + 3 = 7$, so $x = 2$. Bottom-right: $2y - 4 = 14$, so $y = 9$.\n**Step 3: use the other entries as a free check.** Top-right: $6 = 6$ ✓. Bottom-left: $15 = 15$ ✓. If one of these had failed, the equation would have no solution at all, whatever $x$ and $y$ were.",
+      type: "worked-example",
+      id: "mx0-3-we6",
+      title: "Worked example 5: CBSE board style",
+      problem:
+        "Find $x$ and $y$ if\n\n$$2\\begin{pmatrix} x & 5 \\\\ 7 & y - 3 \\end{pmatrix} + \\begin{pmatrix} 3 & -4 \\\\ 1 & 2 \\end{pmatrix} = \\begin{pmatrix} 7 & 6 \\\\ 15 & 14 \\end{pmatrix}$$",
+      steps: [
+        {
+          text: "**Simplify the left side into one matrix.** Scale first, then add. *Why this order:* the scalar 2 multiplies only the first matrix.\n$2\\begin{pmatrix} x & 5 \\\\ 7 & y - 3 \\end{pmatrix} = \\begin{pmatrix} 2x & 10 \\\\ 14 & 2y - 6 \\end{pmatrix}$, so the left side is $\\begin{pmatrix} 2x + 3 & 6 \\\\ 15 & 2y - 4 \\end{pmatrix}$.",
+        },
+        {
+          text: "**Equate corresponding entries.** Top-left: $2x + 3 = 7$, so $x = 2$. Bottom-right: $2y - 4 = 14$, so $y = 9$.",
+        },
+        {
+          text: "**Use the other entries as a free check.** Top-right: $6 = 6$ ✓. Bottom-left: $15 = 15$ ✓. If one of these had failed, the equation would have no solution at all, whatever $x$ and $y$ were.",
+        },
+      ],
+      answer: "$x = 2$, $y = 9$",
     },
     {
       type: "callout",
@@ -658,6 +808,7 @@ const lesson03: LessonSeed = {
       content:
         "We can add matrices and multiply them by numbers, but we haven't multiplied a matrix by a matrix, or even by a vector. That needs an idea, not just a rule, and the idea is the next lesson.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx0-3-q1",
@@ -782,6 +933,7 @@ const lesson04: LessonSeed = {
       content:
         "So far a matrix has been a storage box. Here is the idea the rest of this course runs on: **a $2 \\times 2$ matrix is an instruction for moving the whole plane.** Feed it a point, and it hands back a new point. Better still, you can see the instruction just by looking at its columns.",
     },
+    { type: "heading", text: "Two arrows that build the plane" },
     {
       type: "text",
       content:
@@ -817,10 +969,11 @@ const lesson04: LessonSeed = {
       content:
         "For $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$:\nthe **first column** $\\begin{pmatrix} a \\\\ c \\end{pmatrix}$ is where $\\hat{\\imath}$ lands;\nthe **second column** $\\begin{pmatrix} b \\\\ d \\end{pmatrix}$ is where $\\hat{\\jmath}$ lands.",
     },
+    { type: "heading", text: "Deriving where every point goes" },
     {
       type: "text",
       content:
-        "**Deriving where every point goes.** Take any vector $\\mathbf{v} = \\begin{pmatrix} x \\\\ y \\end{pmatrix} = x\\,\\hat{\\imath} + y\\,\\hat{\\jmath}$. Because the grid stays evenly spaced, \"$x$ steps of $\\hat{\\imath}$\" becomes \"$x$ steps of wherever $\\hat{\\imath}$ went\", and likewise for $y$. So the image of $\\mathbf{v}$ is built from the images of $\\hat{\\imath}$ and $\\hat{\\jmath}$ with the **same weights**:",
+        "Take any vector $\\mathbf{v} = \\begin{pmatrix} x \\\\ y \\end{pmatrix} = x\\,\\hat{\\imath} + y\\,\\hat{\\jmath}$. Because the grid stays evenly spaced, \"$x$ steps of $\\hat{\\imath}$\" becomes \"$x$ steps of wherever $\\hat{\\imath}$ went\", and likewise for $y$. So the image of $\\mathbf{v}$ is built from the images of $\\hat{\\imath}$ and $\\hat{\\jmath}$ with the **same weights**:",
     },
     {
       type: "math",
@@ -849,10 +1002,23 @@ const lesson04: LessonSeed = {
       content:
         "**Column view (the meaning):** $A\\mathbf{v}$ is $x$ copies of column 1 plus $y$ copies of column 2.\n**Row view (the shortcut):** entry $i$ of $A\\mathbf{v}$ is row $i$ of $A$ times $\\mathbf{v}$, multiplied pairwise and added: $ax + by$, then $cx + dy$.\nBoth give the same numbers. Use rows to compute and columns to understand.",
     },
+    { type: "heading", text: "Worked examples with the column view" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Let $A = \\begin{pmatrix} 2 & -1 \\\\ 1 & 3 \\end{pmatrix}$. Where does $\\mathbf{v} = \\begin{pmatrix} 2 \\\\ -1 \\end{pmatrix}$ go?\n\n**Step 1: read the columns.** $\\hat{\\imath} \\to \\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix}$ and $\\hat{\\jmath} \\to \\begin{pmatrix} -1 \\\\ 3 \\end{pmatrix}$.\n**Step 2: weight them by $\\mathbf{v}$'s entries.** $2\\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix} + (-1)\\begin{pmatrix} -1 \\\\ 3 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 2 \\end{pmatrix} + \\begin{pmatrix} 1 \\\\ -3 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ -1 \\end{pmatrix}$.\n**Step 3: check with rows.** $2(2) + (-1)(-1) = 5$ and $1(2) + 3(-1) = -1$ ✓.",
+      type: "worked-example",
+      id: "mx0-4-we1",
+      title: "Worked example 1",
+      problem:
+        "Let $A = \\begin{pmatrix} 2 & -1 \\\\ 1 & 3 \\end{pmatrix}$. Where does $\\mathbf{v} = \\begin{pmatrix} 2 \\\\ -1 \\end{pmatrix}$ go?",
+      steps: [
+        {
+          text: "**Read the columns.** $\\hat{\\imath} \\to \\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix}$ and $\\hat{\\jmath} \\to \\begin{pmatrix} -1 \\\\ 3 \\end{pmatrix}$.",
+        },
+        {
+          text: "**Weight them by $\\mathbf{v}$'s entries.** $2\\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix} + (-1)\\begin{pmatrix} -1 \\\\ 3 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 2 \\end{pmatrix} + \\begin{pmatrix} 1 \\\\ -3 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ -1 \\end{pmatrix}$.",
+        },
+        { text: "**Check with rows.** $2(2) + (-1)(-1) = 5$ and $1(2) + 3(-1) = -1$ ✓." },
+      ],
+      answer: "$A\\mathbf{v} = \\begin{pmatrix} 5 \\\\ -1 \\end{pmatrix}$",
     },
     {
       type: "interactive",
@@ -871,54 +1037,85 @@ const lesson04: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2.** A transformation sends $\\hat{\\imath}$ to $\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix}$ and $\\hat{\\jmath}$ to $\\begin{pmatrix} -3 \\\\ 0 \\end{pmatrix}$. Find its matrix and the image of $\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$.\n\n**Step 1: the images are the columns.** $A = \\begin{pmatrix} 1 & -3 \\\\ 2 & 0 \\end{pmatrix}$.\n**Step 2: combine.** $1\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} + 1\\begin{pmatrix} -3 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} -2 \\\\ 2 \\end{pmatrix}$.",
+      type: "worked-example",
+      id: "mx0-4-we2",
+      title: "Worked example 2",
+      problem:
+        "A transformation sends $\\hat{\\imath}$ to $\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix}$ and $\\hat{\\jmath}$ to $\\begin{pmatrix} -3 \\\\ 0 \\end{pmatrix}$. Find its matrix and the image of $\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$.",
+      steps: [
+        { text: "**The images are the columns.** $A = \\begin{pmatrix} 1 & -3 \\\\ 2 & 0 \\end{pmatrix}$." },
+        {
+          text: "**Combine.** $1\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} + 1\\begin{pmatrix} -3 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} -2 \\\\ 2 \\end{pmatrix}$.",
+        },
+      ],
+      answer:
+        "$A = \\begin{pmatrix} 1 & -3 \\\\ 2 & 0 \\end{pmatrix}$, and $\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix} \\to \\begin{pmatrix} -2 \\\\ 2 \\end{pmatrix}$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3.** A matrix sends $\\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix}$ to $\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix}$ and $\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$ to $\\begin{pmatrix} 4 \\\\ 4 \\end{pmatrix}$. Find the matrix.\n\n**Step 1.** $\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix} = \\hat{\\imath} + \\hat{\\jmath}$, so its image is (image of $\\hat{\\imath}$) + (image of $\\hat{\\jmath}$).\n**Step 2.** Image of $\\hat{\\jmath}$ $= \\begin{pmatrix} 4 \\\\ 4 \\end{pmatrix} - \\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 3 \\end{pmatrix}$.\n**Step 3.** $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$.",
+      type: "worked-example",
+      id: "mx0-4-we3",
+      title: "Worked example 3",
+      problem:
+        "A matrix sends $\\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix}$ to $\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix}$ and $\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$ to $\\begin{pmatrix} 4 \\\\ 4 \\end{pmatrix}$. Find the matrix.",
+      steps: [
+        {
+          text: "$\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix} = \\hat{\\imath} + \\hat{\\jmath}$, so its image is (image of $\\hat{\\imath}$) + (image of $\\hat{\\jmath}$).",
+        },
+        {
+          text: "Image of $\\hat{\\jmath}$ $= \\begin{pmatrix} 4 \\\\ 4 \\end{pmatrix} - \\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 3 \\end{pmatrix}$.",
+        },
+      ],
+      answer: "$A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (the column view in a juice bar).** A juice bar makes two blends. One jug of *Sunrise* uses 2 oranges and 1 mango; one jug of *Tropical* uses 1 orange and 3 mangoes. Today's order is 4 jugs of Sunrise and 5 jugs of Tropical. How much fruit is needed?\n\n**Step 1: each recipe is a column.** Put (oranges, mangoes) down each column, one column per blend. *Why columns:* a column is \"what one unit of this input produces\", exactly like the image of $\\hat{\\imath}$ or $\\hat{\\jmath}$.",
+      type: "worked-example",
+      id: "mx0-4-we4",
+      title: "Worked example 4: the column view in a juice bar",
+      problem:
+        "A juice bar makes two blends. One jug of *Sunrise* uses 2 oranges and 1 mango; one jug of *Tropical* uses 1 orange and 3 mangoes. Today's order is 4 jugs of Sunrise and 5 jugs of Tropical. How much fruit is needed?",
+      steps: [
+        {
+          text: "**Each recipe is a column.** Put (oranges, mangoes) down each column, one column per blend. *Why columns:* a column is \"what one unit of this input produces\", exactly like the image of $\\hat{\\imath}$ or $\\hat{\\jmath}$.",
+          latex:
+            "R = \\begin{pmatrix} 2 & 1 \\\\ 1 & 3 \\end{pmatrix}, \\qquad \\mathbf{v} = \\begin{pmatrix} 4 \\\\ 5 \\end{pmatrix} \\ (\\text{jugs of Sunrise, Tropical})",
+        },
+        {
+          text: "**Weight the columns by the order.** 4 jugs of the first recipe plus 5 jugs of the second:",
+          latex:
+            "R\\mathbf{v} = 4\\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix} + 5\\begin{pmatrix} 1 \\\\ 3 \\end{pmatrix} = \\begin{pmatrix} 8 + 5 \\\\ 4 + 15 \\end{pmatrix} = \\begin{pmatrix} 13 \\\\ 19 \\end{pmatrix}",
+        },
+        { text: "**Interpret.** 13 oranges and 19 mangoes." },
+        {
+          text: "**Check with rows.** Row 1 of $R$ is \"oranges per jug of each blend\", $(2, 1)$, so oranges $= 2(4) + 1(5) = 13$ ✓. The row view answers \"how many of *this fruit*?\"; the column view answers \"what does *each blend* contribute?\". Same numbers, two stories.",
+        },
+      ],
+      answer: "13 oranges and 19 mangoes",
     },
     {
-      type: "math",
-      latex:
-        "R = \\begin{pmatrix} 2 & 1 \\\\ 1 & 3 \\end{pmatrix}, \\qquad \\mathbf{v} = \\begin{pmatrix} 4 \\\\ 5 \\end{pmatrix} \\ (\\text{jugs of Sunrise, Tropical})",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 2: weight the columns by the order.** 4 jugs of the first recipe plus 5 jugs of the second:",
-    },
-    {
-      type: "math",
-      latex:
-        "R\\mathbf{v} = 4\\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix} + 5\\begin{pmatrix} 1 \\\\ 3 \\end{pmatrix} = \\begin{pmatrix} 8 + 5 \\\\ 4 + 15 \\end{pmatrix} = \\begin{pmatrix} 13 \\\\ 19 \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3: interpret.** 13 oranges and 19 mangoes.\n**Step 4: check with rows.** Row 1 of $R$ is \"oranges per jug of each blend\", $(2, 1)$, so oranges $= 2(4) + 1(5) = 13$ ✓. The row view answers \"how many of *this fruit*?\"; the column view answers \"what does *each blend* contribute?\". Same numbers, two stories.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (JEE style: two clues, unknown matrix).** A $2 \\times 2$ matrix $A$ satisfies $A\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 4 \\end{pmatrix}$ and $A\\begin{pmatrix} 2 \\\\ -1 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 3 \\end{pmatrix}$. Find $A$.\n\n**Step 1: name the unknown columns.** Let $\\mathbf{u} = A\\hat{\\imath}$ (column 1) and $\\mathbf{w} = A\\hat{\\jmath}$ (column 2). *Why:* the columns are all we need, and every clue is a weighted sum of them.\n**Step 2: turn the clues into vector equations.** $\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\hat{\\imath} + 2\\hat{\\jmath}$ gives $\\mathbf{u} + 2\\mathbf{w} = \\begin{pmatrix} 5 \\\\ 4 \\end{pmatrix}$. And $\\begin{pmatrix} 2 \\\\ -1 \\end{pmatrix} = 2\\hat{\\imath} - \\hat{\\jmath}$ gives $2\\mathbf{u} - \\mathbf{w} = \\begin{pmatrix} 0 \\\\ 3 \\end{pmatrix}$.\n**Step 3: eliminate $\\mathbf{w}$.** Double the second equation and add the first: $5\\mathbf{u} = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix}$, so $\\mathbf{u} = \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix}$.\n**Step 4: back-substitute.** $\\mathbf{w} = 2\\mathbf{u} - \\begin{pmatrix} 0 \\\\ 3 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix}$.",
-    },
-    {
-      type: "math",
-      latex:
-        "A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 5: check both clues.** $A\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 1 + 4 \\\\ 2 + 2 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 4 \\end{pmatrix}$ ✓ and $A\\begin{pmatrix} 2 \\\\ -1 \\end{pmatrix} = \\begin{pmatrix} 2 - 2 \\\\ 4 - 1 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 3 \\end{pmatrix}$ ✓. Two clues were enough because $(1, 2)$ and $(2, -1)$ point in different directions; two clues along the same line would not pin $A$ down.",
+      type: "worked-example",
+      id: "mx0-4-we5",
+      title: "Worked example 5: JEE style, two clues, unknown matrix",
+      problem:
+        "A $2 \\times 2$ matrix $A$ satisfies $A\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 4 \\end{pmatrix}$ and $A\\begin{pmatrix} 2 \\\\ -1 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 3 \\end{pmatrix}$. Find $A$.",
+      steps: [
+        {
+          text: "**Name the unknown columns.** Let $\\mathbf{u} = A\\hat{\\imath}$ (column 1) and $\\mathbf{w} = A\\hat{\\jmath}$ (column 2). *Why:* the columns are all we need, and every clue is a weighted sum of them.",
+        },
+        {
+          text: "**Turn the clues into vector equations.** $\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\hat{\\imath} + 2\\hat{\\jmath}$ gives $\\mathbf{u} + 2\\mathbf{w} = \\begin{pmatrix} 5 \\\\ 4 \\end{pmatrix}$. And $\\begin{pmatrix} 2 \\\\ -1 \\end{pmatrix} = 2\\hat{\\imath} - \\hat{\\jmath}$ gives $2\\mathbf{u} - \\mathbf{w} = \\begin{pmatrix} 0 \\\\ 3 \\end{pmatrix}$.",
+        },
+        {
+          text: "**Eliminate $\\mathbf{w}$.** Double the second equation and add the first: $5\\mathbf{u} = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix}$, so $\\mathbf{u} = \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix}$.",
+        },
+        {
+          text: "**Back-substitute.** $\\mathbf{w} = 2\\mathbf{u} - \\begin{pmatrix} 0 \\\\ 3 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix}$.",
+          latex: "A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}",
+        },
+        {
+          text: "**Check both clues.** $A\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 1 + 4 \\\\ 2 + 2 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 4 \\end{pmatrix}$ ✓ and $A\\begin{pmatrix} 2 \\\\ -1 \\end{pmatrix} = \\begin{pmatrix} 2 - 2 \\\\ 4 - 1 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 3 \\end{pmatrix}$ ✓. Two clues were enough because $(1, 2)$ and $(2, -1)$ point in different directions; two clues along the same line would not pin $A$ down.",
+        },
+      ],
+      answer: "$A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$",
     },
     {
       type: "callout",
@@ -932,6 +1129,7 @@ const lesson04: LessonSeed = {
       content:
         "One consequence is worth noticing now: $A\\begin{pmatrix} 0 \\\\ 0 \\end{pmatrix} = 0 \\cdot \\text{col}_1 + 0 \\cdot \\text{col}_2 = \\begin{pmatrix} 0 \\\\ 0 \\end{pmatrix}$. **Every matrix fixes the origin.** Lesson 0.5 uses this to rule out some motions entirely.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx0-4-q1",
@@ -1051,6 +1249,7 @@ const lesson05: LessonSeed = {
           "Click a preset and watch it play from the identity. For each one, say where î (green) and ĵ (orange) end up, then check the matrix's columns.",
       },
     },
+    { type: "heading", text: "Scaling and rotation matrices" },
     {
       type: "text",
       content:
@@ -1074,19 +1273,41 @@ const lesson05: LessonSeed = {
         "For an anticlockwise rotation the $-\\sin\\theta$ is **top-right**, because a small anticlockwise turn pushes $\\hat{\\jmath}$ to the left (negative $x$). If you forget, rebuild column 2 from the picture instead of guessing.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Rotate $\\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix}$ by $90°$ anticlockwise.\n\n**Step 1.** $\\theta = 90°$: $R_{90°} = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$ (check: $\\hat{\\imath} \\to \\hat{\\jmath}$, $\\hat{\\jmath} \\to -\\hat{\\imath}$).\n**Step 2.** $2\\begin{pmatrix} 0 \\\\ 1 \\end{pmatrix} + 1\\begin{pmatrix} -1 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} -1 \\\\ 2 \\end{pmatrix}$.\n**Step 3: sanity check.** $(2, 1)$ is in quadrant I; a quarter turn should put it in quadrant II, at the same distance $\\sqrt{5}$. $(-1, 2)$ is both ✓.",
+      type: "worked-example",
+      id: "mx0-5-we1",
+      title: "Worked example 1",
+      problem: "Rotate $\\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix}$ by $90°$ anticlockwise.",
+      steps: [
+        {
+          text: "$\\theta = 90°$: $R_{90°} = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$ (check: $\\hat{\\imath} \\to \\hat{\\jmath}$, $\\hat{\\jmath} \\to -\\hat{\\imath}$).",
+        },
+        {
+          text: "$2\\begin{pmatrix} 0 \\\\ 1 \\end{pmatrix} + 1\\begin{pmatrix} -1 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} -1 \\\\ 2 \\end{pmatrix}$.",
+        },
+        {
+          text: "**Sanity check.** $(2, 1)$ is in quadrant I; a quarter turn should put it in quadrant II, at the same distance $\\sqrt{5}$. $(-1, 2)$ is both ✓.",
+        },
+      ],
+      answer: "$\\begin{pmatrix} -1 \\\\ 2 \\end{pmatrix}$",
     },
+    {
+      type: "worked-example",
+      id: "mx0-5-we2",
+      title: "Worked example 2",
+      problem: "Rotate $\\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix}$ by $60°$.",
+      steps: [
+        {
+          text: "$R_{60°} = \\begin{pmatrix} \\frac{1}{2} & -\\frac{\\sqrt{3}}{2} \\\\ \\frac{\\sqrt{3}}{2} & \\frac{1}{2} \\end{pmatrix}$, and $\\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix} = 2\\hat{\\imath}$, so the image is twice column 1: $\\begin{pmatrix} 1 \\\\ \\sqrt{3} \\end{pmatrix}$.",
+        },
+        { text: "Its length is $\\sqrt{1 + 3} = 2$, as a rotation must keep it." },
+      ],
+      answer: "$\\begin{pmatrix} 1 \\\\ \\sqrt{3} \\end{pmatrix}$",
+    },
+    { type: "heading", text: "Reflections, shears and projections" },
     {
       type: "text",
       content:
-        "**Worked example 2.** Rotate $\\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix}$ by $60°$.\n\n$R_{60°} = \\begin{pmatrix} \\frac{1}{2} & -\\frac{\\sqrt{3}}{2} \\\\ \\frac{\\sqrt{3}}{2} & \\frac{1}{2} \\end{pmatrix}$, and $\\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix} = 2\\hat{\\imath}$, so the image is twice column 1: $\\begin{pmatrix} 1 \\\\ \\sqrt{3} \\end{pmatrix}$. Its length is $\\sqrt{1 + 3} = 2$, as a rotation must keep it.",
-    },
-    {
-      type: "text",
-      content:
-        "**Reflections, shears and projections.**\n\n**Reflection in the x-axis:** $\\hat{\\imath}$ stays, $\\hat{\\jmath}$ flips to $-\\hat{\\jmath}$.\n**Reflection in $y = x$:** the mirror swaps the axes, so $\\hat{\\imath} \\leftrightarrow \\hat{\\jmath}$, and every point $(x, y)$ goes to $(y, x)$.\n**Horizontal shear:** the x-axis stays put and each point slides horizontally by $k$ times its height $y$ (right above the axis and left below it, when $k > 0$); $\\hat{\\imath}$ stays and $\\hat{\\jmath} \\to \\begin{pmatrix} k \\\\ 1 \\end{pmatrix}$.\n**Projection onto the x-axis:** drop every point straight down (or up) onto the x-axis; $\\hat{\\imath}$ stays and $\\hat{\\jmath}$ is crushed to $\\mathbf{0}$.",
+        "**Reflection in the x-axis:** $\\hat{\\imath}$ stays, $\\hat{\\jmath}$ flips to $-\\hat{\\jmath}$.\n**Reflection in $y = x$:** the mirror swaps the axes, so $\\hat{\\imath} \\leftrightarrow \\hat{\\jmath}$, and every point $(x, y)$ goes to $(y, x)$.\n**Horizontal shear:** the x-axis stays put and each point slides horizontally by $k$ times its height $y$ (right above the axis and left below it, when $k > 0$); $\\hat{\\imath}$ stays and $\\hat{\\jmath} \\to \\begin{pmatrix} k \\\\ 1 \\end{pmatrix}$.\n**Projection onto the x-axis:** drop every point straight down (or up) onto the x-axis; $\\hat{\\imath}$ stays and $\\hat{\\jmath}$ is crushed to $\\mathbf{0}$.",
     },
     {
       type: "table",
@@ -1103,40 +1324,67 @@ const lesson05: LessonSeed = {
         ["Project onto x-axis", "$(1, 0)$", "$(0, 0)$", "$\\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$", "$(x, 0)$"],
       ],
     },
+    { type: "heading", text: "Worked examples: from matrix to motion" },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (matrix → picture).** What does $\\begin{pmatrix} 0 & -1 \\\\ -1 & 0 \\end{pmatrix}$ do?\n\n**Step 1.** Column 1: $\\hat{\\imath} \\to (0, -1)$. Column 2: $\\hat{\\jmath} \\to (-1, 0)$.\n**Step 2.** So $(x, y) \\to (-y, -x)$. The point $(1, -1)$ goes to $(1, -1)$: points on the line $y = -x$ don't move. The point $(1, 1)$ goes to $(-1, -1)$: points on the perpendicular line flip.\n**Step 3.** Fixed line plus a flip across it: this is the **reflection in $y = -x$**.",
+      type: "worked-example",
+      id: "mx0-5-we3",
+      title: "Worked example 3: matrix → picture",
+      problem: "What does $\\begin{pmatrix} 0 & -1 \\\\ -1 & 0 \\end{pmatrix}$ do?",
+      steps: [
+        { text: "Column 1: $\\hat{\\imath} \\to (0, -1)$. Column 2: $\\hat{\\jmath} \\to (-1, 0)$." },
+        {
+          text: "So $(x, y) \\to (-y, -x)$. The point $(1, -1)$ goes to $(1, -1)$: points on the line $y = -x$ don't move. The point $(1, 1)$ goes to $(-1, -1)$: points on the perpendicular line flip.",
+        },
+        { text: "Fixed line plus a flip across it: this is the **reflection in $y = -x$**." },
+      ],
+      answer: "Reflection in the line $y = -x$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (how italic letters are made).** A font designer draws the letter I as the rectangle with corners $(0, 0), (2, 0), (2, 4), (0, 4)$. To italicise it, she applies the horizontal shear with $k = \\frac{1}{2}$. Where do the corners go, and does the letter use more ink?\n\n**Step 1: the matrix.** $\\hat{\\imath}$ stays, $\\hat{\\jmath} \\to \\left(\\frac{1}{2}, 1\\right)$, so $H = \\begin{pmatrix} 1 & \\frac{1}{2} \\\\ 0 & 1 \\end{pmatrix}$ and $(x, y) \\to \\left(x + \\frac{y}{2}, y\\right)$.\n**Step 2: the bottom corners.** $(0, 0)$ and $(2, 0)$ have $y = 0$, so they don't move. *Why:* a horizontal shear slides each point by an amount proportional to its height, and the base has height 0.\n**Step 3: the top corners.** At height 4 every point slides right by $\\frac{1}{2} \\cdot 4 = 2$: $(2, 4) \\to (4, 4)$ and $(0, 4) \\to (2, 4)$.",
+      type: "worked-example",
+      id: "mx0-5-we4",
+      title: "Worked example 4: how italic letters are made",
+      problem:
+        "A font designer draws the letter I as the rectangle with corners $(0, 0), (2, 0), (2, 4), (0, 4)$. To italicise it, she applies the horizontal shear with $k = \\frac{1}{2}$. Where do the corners go, and does the letter use more ink?",
+      steps: [
+        {
+          text: "**The matrix.** $\\hat{\\imath}$ stays, $\\hat{\\jmath} \\to \\left(\\frac{1}{2}, 1\\right)$, so $H = \\begin{pmatrix} 1 & \\frac{1}{2} \\\\ 0 & 1 \\end{pmatrix}$ and $(x, y) \\to \\left(x + \\frac{y}{2}, y\\right)$.",
+        },
+        {
+          text: "**The bottom corners.** $(0, 0)$ and $(2, 0)$ have $y = 0$, so they don't move. *Why:* a horizontal shear slides each point by an amount proportional to its height, and the base has height 0.",
+        },
+        {
+          text: "**The top corners.** At height 4 every point slides right by $\\frac{1}{2} \\cdot 4 = 2$: $(2, 4) \\to (4, 4)$ and $(0, 4) \\to (2, 4)$.",
+          latex:
+            "(0,0),\\ (2,0),\\ (2,4),\\ (0,4) \\ \\xrightarrow{\\ H\\ } \\ (0,0),\\ (2,0),\\ (4,4),\\ (2,4)",
+        },
+        {
+          text: "**The ink.** The rectangle has area $2 \\times 4 = 8$. The image is a parallelogram with the same base 2 and the same height 4, so its area is also $8$. A shear leans the letter over without making it fatter. (Chapter 2 will read this \"area stays the same\" straight off the matrix, as its determinant.)",
+        },
+      ],
+      answer:
+        "The corners go to $(0, 0), (2, 0), (4, 4), (2, 4)$; the area stays $8$, so no extra ink",
     },
     {
-      type: "math",
-      latex:
-        "(0,0),\\ (2,0),\\ (2,4),\\ (0,4) \\ \\xrightarrow{\\ H\\ } \\ (0,0),\\ (2,0),\\ (4,4),\\ (2,4)",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4: the ink.** The rectangle has area $2 \\times 4 = 8$. The image is a parallelogram with the same base 2 and the same height 4, so its area is also $8$. A shear leans the letter over without making it fatter. (Chapter 2 will read this \"area stays the same\" straight off the matrix, as its determinant.)",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (JEE style: find the angle, then use it).** An anticlockwise rotation $R_\\theta$ about the origin, with $0° \\le \\theta < 360°$, sends $(2, 0)$ to $(\\sqrt{2}, \\sqrt{2})$. Find $\\theta$, and the image of $(1, 1)$.\n\n**Step 1: $(2, 0)$ is $2\\hat{\\imath}$, so its image is twice column 1.** $2(\\cos\\theta, \\sin\\theta) = (\\sqrt{2}, \\sqrt{2})$ gives $\\cos\\theta = \\sin\\theta = \\frac{\\sqrt{2}}{2}$. *Why both are needed:* $\\cos\\theta = \\frac{\\sqrt{2}}{2}$ alone allows $45°$ or $315°$; the sign of $\\sin\\theta$ picks one.\n**Step 2: the angle.** Both positive means quadrant I, so $\\theta = 45°$.\n**Step 3: the image of $(1, 1) = \\hat{\\imath} + \\hat{\\jmath}$.** Add the two columns of $R_{45°}$:",
-    },
-    {
-      type: "math",
-      latex:
-        "R_{45°}\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} \\frac{\\sqrt{2}}{2} \\\\ \\frac{\\sqrt{2}}{2} \\end{pmatrix} + \\begin{pmatrix} -\\frac{\\sqrt{2}}{2} \\\\ \\frac{\\sqrt{2}}{2} \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ \\sqrt{2} \\end{pmatrix}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4: sanity check with the picture.** $(1, 1)$ points at $45°$ with length $\\sqrt{2}$. Turning it a further $45°$ should point it straight up, still with length $\\sqrt{2}$: that is $(0, \\sqrt{2})$ ✓.",
+      type: "worked-example",
+      id: "mx0-5-we5",
+      title: "Worked example 5: JEE style, find the angle, then use it",
+      problem:
+        "An anticlockwise rotation $R_\\theta$ about the origin, with $0° \\le \\theta < 360°$, sends $(2, 0)$ to $(\\sqrt{2}, \\sqrt{2})$. Find $\\theta$, and the image of $(1, 1)$.",
+      steps: [
+        {
+          text: "**$(2, 0)$ is $2\\hat{\\imath}$, so its image is twice column 1.** $2(\\cos\\theta, \\sin\\theta) = (\\sqrt{2}, \\sqrt{2})$ gives $\\cos\\theta = \\sin\\theta = \\frac{\\sqrt{2}}{2}$. *Why both are needed:* $\\cos\\theta = \\frac{\\sqrt{2}}{2}$ alone allows $45°$ or $315°$; the sign of $\\sin\\theta$ picks one.",
+        },
+        { text: "**The angle.** Both positive means quadrant I, so $\\theta = 45°$." },
+        {
+          text: "**The image of $(1, 1) = \\hat{\\imath} + \\hat{\\jmath}$.** Add the two columns of $R_{45°}$:",
+          latex:
+            "R_{45°}\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} \\frac{\\sqrt{2}}{2} \\\\ \\frac{\\sqrt{2}}{2} \\end{pmatrix} + \\begin{pmatrix} -\\frac{\\sqrt{2}}{2} \\\\ \\frac{\\sqrt{2}}{2} \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ \\sqrt{2} \\end{pmatrix}",
+        },
+        {
+          text: "**Sanity check with the picture.** $(1, 1)$ points at $45°$ with length $\\sqrt{2}$. Turning it a further $45°$ should point it straight up, still with length $\\sqrt{2}$: that is $(0, \\sqrt{2})$ ✓.",
+        },
+      ],
+      answer: "$\\theta = 45°$, and $(1, 1) \\to (0, \\sqrt{2})$",
     },
     {
       type: "callout",
@@ -1145,6 +1393,7 @@ const lesson05: LessonSeed = {
       content:
         "Sliding the whole plane 2 units right, $(x, y) \\to (x + 2, y)$, moves the origin to $(2, 0)$. But every matrix sends $\\mathbf{0}$ to $0 \\cdot \\text{col}_1 + 0 \\cdot \\text{col}_2 = \\mathbf{0}$. So **no $2 \\times 2$ matrix can translate the plane**. The quick test for a matrix transformation: the origin stays fixed, and grid lines stay straight, parallel and evenly spaced.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "mx0-5-q1",

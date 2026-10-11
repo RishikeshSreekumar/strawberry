@@ -23,6 +23,14 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/omp-2-wave-optics.mp4",
+      poster: "/videos/omp-2-wave-optics.jpg",
+      title: "Chapter 2 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "In Chapter 0 we used rays and two laws and never asked why the laws hold. Rays turn out to be a shorthand: they are simply the directions **perpendicular** to the crests of a light wave. If we can say how the crests move, both laws of reflection and Snell's law fall out, and we get something rays can never give us: an explanation of interference and diffraction.",
@@ -41,6 +49,7 @@ const lesson01: LessonSeed = {
       content:
         "1. Every point on a wavefront acts as a source of secondary **wavelets**, which spread out in the forward direction at the speed of the wave in that medium.\n2. After a time $t$, the new wavefront is the **envelope** (common tangent surface) of all these wavelets, each of radius $vt$.",
     },
+    { type: "heading", text: "Reflection and refraction from wavelets" },
     {
       type: "text",
       content:
@@ -83,6 +92,7 @@ const lesson01: LessonSeed = {
       content:
         "What you should have seen: at $i = 45^\\circ$ with $n_2 = 1.5$, $r \\approx 28.1^\\circ$ and $\\frac{\\sin 45^\\circ}{\\sin 28.1^\\circ} = \\frac{0.707}{0.471} \\approx 1.5$. Change $i$ and the ratio stays 1.5; change $n_2$ and the ratio follows it. The ratio is a property of the two speeds, not of the angle.",
     },
+    { type: "heading", text: "Prisms, lenses and optical path" },
     {
       type: "text",
       content:
@@ -95,15 +105,44 @@ const lesson01: LessonSeed = {
       content:
         "Light takes time $t = \\frac{L}{v} = \\frac{nL}{c}$ to cross a length $L$ of a medium of index $n$. So $nL$ is the distance light would cover **in vacuum** in the same time: the **optical path**. Wavefronts join points of equal optical path from the source. In the next lessons, every interference condition is a statement about differences in optical path.",
     },
+    { type: "heading", text: "Worked examples: wavelength and optical path" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (inside glass).** Light of wavelength 600 nm in air enters glass of $n = 1.5$.\n\n1. Speed: $v = \\frac cn = \\frac{3\\times10^8}{1.5} = 2\\times10^8$ m/s.\n2. Frequency: $\\nu = \\frac{c}{\\lambda} = \\frac{3\\times10^8}{600\\times10^{-9}} = 5\\times10^{14}$ Hz, unchanged in the glass. *Why this step:* the wavefront is continuous at the boundary, so crests cannot be created or lost.\n3. Wavelength in glass: $\\frac{v}{\\nu} = \\frac{2\\times10^8}{5\\times10^{14}} = 4\\times10^{-7}$ m $= 400$ nm $= \\frac{600}{1.5}$. ✓\n\n**Worked example 2 (speed from angles).** A plane wave in air meets a transparent medium at $60^\\circ$ and refracts at $30^\\circ$.\n\n1. Huygens: $\\frac{v_1}{v_2} = \\frac{\\sin 60^\\circ}{\\sin 30^\\circ} = \\frac{\\sqrt3/2}{1/2} = \\sqrt3$.\n2. $v_2 = \\frac{3\\times10^8}{\\sqrt3} \\approx 1.73\\times10^8$ m/s, and $n = \\sqrt3$.",
+      type: "worked-example",
+      id: "omp2-1-we1",
+      title: "Worked example 1 (inside glass)",
+      problem:
+        "Light of wavelength 600 nm in air enters glass of $n = 1.5$. Find its speed, frequency and wavelength in the glass.",
+      steps: [
+        { text: "Speed: $v = \\frac cn = \\frac{3\\times10^8}{1.5} = 2\\times10^8$ m/s." },
+        { text: "Frequency: $\\nu = \\frac{c}{\\lambda} = \\frac{3\\times10^8}{600\\times10^{-9}} = 5\\times10^{14}$ Hz, unchanged in the glass. *Why this step:* the wavefront is continuous at the boundary, so crests cannot be created or lost." },
+        { text: "Wavelength in glass: $\\frac{v}{\\nu} = \\frac{2\\times10^8}{5\\times10^{14}} = 4\\times10^{-7}$ m $= 400$ nm $= \\frac{600}{1.5}$. ✓" },
+      ],
+      answer: "$v = 2\\times10^8$ m/s, $\\nu = 5\\times10^{14}$ Hz (unchanged), $\\lambda = 400$ nm.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (optical path, JEE Main).** Light crosses 2 cm of glass ($n = 1.5$) and then 3 cm of water ($n = \\frac43$). How long does it take, and what is the optical path?\n\n1. Optical path: $1.5 \\times 2 + \\frac43 \\times 3 = 3 + 4 = 7$ cm. *Why this step:* optical paths add like ordinary lengths, each weighted by its index.\n2. Time: $t = \\frac{0.07}{3\\times10^8} \\approx 2.33\\times10^{-10}$ s, the time light would take to cross 7 cm of vacuum.\n3. Check directly: $\\frac{0.02}{2\\times10^8} + \\frac{0.03}{2.25\\times10^8} = 1.0\\times10^{-10} + 1.33\\times10^{-10} = 2.33\\times10^{-10}$ s. ✓",
+      type: "worked-example",
+      id: "omp2-1-we2",
+      title: "Worked example 2 (speed from angles)",
+      problem:
+        "A plane wave in air meets a transparent medium at $60^\\circ$ and refracts at $30^\\circ$. Find the speed of light in the medium and its refractive index.",
+      steps: [
+        { text: "Huygens: $\\frac{v_1}{v_2} = \\frac{\\sin 60^\\circ}{\\sin 30^\\circ} = \\frac{\\sqrt3/2}{1/2} = \\sqrt3$." },
+        { text: "$v_2 = \\frac{3\\times10^8}{\\sqrt3} \\approx 1.73\\times10^8$ m/s, and $n = \\sqrt3$." },
+      ],
+      answer: "$v_2 \\approx 1.73\\times10^8$ m/s, $n = \\sqrt3$",
+    },
+    {
+      type: "worked-example",
+      id: "omp2-1-we3",
+      title: "Worked example 3 (optical path, JEE Main)",
+      problem:
+        "Light crosses 2 cm of glass ($n = 1.5$) and then 3 cm of water ($n = \\frac43$). How long does it take, and what is the optical path?",
+      steps: [
+        { text: "Optical path: $1.5 \\times 2 + \\frac43 \\times 3 = 3 + 4 = 7$ cm. *Why this step:* optical paths add like ordinary lengths, each weighted by its index." },
+        { text: "Time: $t = \\frac{0.07}{3\\times10^8} \\approx 2.33\\times10^{-10}$ s, the time light would take to cross 7 cm of vacuum." },
+        { text: "Check directly: $\\frac{0.02}{2\\times10^8} + \\frac{0.03}{2.25\\times10^8} = 1.0\\times10^{-10} + 1.33\\times10^{-10} = 2.33\\times10^{-10}$ s. ✓" },
+      ],
+      answer: "Optical path 7 cm; time $\\approx 2.33\\times10^{-10}$ s.",
     },
     {
       type: "callout",
@@ -112,15 +151,19 @@ const lesson01: LessonSeed = {
       content:
         "Colour is fixed by **frequency**, and frequency is what stays the same. The wavelength shrinks to $\\lambda/n$ inside the glass. Red light of 650 nm has a wavelength of about 490 nm in water, which in air would be blue-green, yet it still looks red to a diver, because the eye responds to frequency.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-1-q1",
       variant: "practice",
-      question: "Light of wavelength 600 nm in air enters water ($n = \\frac43$). What is its wavelength in water?",
-      options: [
-        { text: "800 nm", feedback: "The wavelength shrinks in a denser medium: divide by $n$." },
-        { text: "600 nm", feedback: "Frequency is unchanged; wavelength is not." },
-        { text: "450 nm", correct: true, feedback: "$\\lambda_w = \\frac{600}{4/3} = 450$ nm." },
+      question: "Light of wavelength 600 nm in air enters water ($n = \\frac43$). What is its wavelength in water, in nm?",
+      answer: 450,
+      unit: "nm",
+      hint: "The frequency stays the same at the boundary; the speed drops by the factor $n$.",
+      solution: "The frequency is unchanged and $v = c/n$, so $\\lambda_w = \\dfrac{\\lambda}{n} = \\dfrac{600}{4/3} = 450$ nm.",
+      commonMistakes: [
+        { answer: 800, feedback: "The wavelength shrinks in a denser medium: divide by $n$, don't multiply." },
+        { answer: 600, feedback: "Frequency is unchanged; wavelength is not." },
       ],
     },
     {
@@ -133,6 +176,7 @@ const lesson01: LessonSeed = {
         { text: "It is perpendicular to the wavefronts, in the direction of travel.", correct: true, feedback: "Rays are the normals to the wavefronts." },
         { text: "It is unrelated; rays and waves are separate theories.", feedback: "Rays are a limit of the wave picture, drawn as normals to the wavefronts." },
       ],
+      hint: "In Huygens' construction the wave advances from one wavefront to the next. In which direction does that advance happen?",
     },
     {
       type: "quiz",
@@ -144,16 +188,21 @@ const lesson01: LessonSeed = {
         { text: "$1.5$", feedback: "That is $45/30$. Use the sines, not the angles." },
         { text: "$\\sqrt2$", correct: true, feedback: "$\\frac{\\sin 45^\\circ}{\\sin 30^\\circ} = \\frac{1/\\sqrt2}{1/2} = \\sqrt2$." },
       ],
+      hint: "Recall from Huygens' construction (2.1) how the ratio of the speeds relates to the angles $i$ and $r$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-1-q4",
       variant: "practice",
-      question: "What is the optical path of 4 cm of glass ($n = 1.5$), and how long does light take to cross it?",
-      options: [
-        { text: "2.67 cm; $8.9\\times10^{-11}$ s", feedback: "Optical path multiplies by $n$; it does not divide." },
-        { text: "6 cm; $2\\times10^{-10}$ s", correct: true, feedback: "$nL = 6$ cm and $t = \\frac{0.06}{3\\times10^8}$ s." },
-        { text: "4 cm; $1.33\\times10^{-10}$ s", feedback: "That is the vacuum crossing time of 4 cm. Light is slower in glass." },
+      question: "How long does light take to cross 4 cm of glass ($n = 1.5$)? Take $c = 3\\times10^8$ m/s and give your answer in seconds (e.g. 1.5e-10).",
+      answer: 2e-10,
+      relTolerance: 0.02,
+      unit: "s",
+      hint: "Find the optical path $nL$ first: the time is what light would take to cross that distance in vacuum.",
+      solution: "Optical path $nL = 1.5\\times4 = 6$ cm.\n\n$t = \\dfrac{nL}{c} = \\dfrac{0.06}{3\\times10^8} = 2\\times10^{-10}$ s. (Directly: $v = 2\\times10^8$ m/s and $0.04/(2\\times10^8)$ gives the same.)",
+      commonMistakes: [
+        { answer: 8.9e-11, feedback: "You divided the length by $n$. Optical path multiplies by $n$: light is *slower* in glass, so it takes longer." },
+        { answer: 1.33e-10, feedback: "That is the vacuum crossing time of 4 cm. Light is slower in glass." },
       ],
     },
     {
@@ -166,6 +215,7 @@ const lesson01: LessonSeed = {
         { text: "Spherical, because a star is a point source", feedback: "It starts spherical, but at that distance the curvature over a telescope's width is negligible." },
         { text: "Cylindrical", feedback: "Cylindrical wavefronts come from line sources such as slits." },
       ],
+      hint: "Compare the size of the patch of wavefront that reaches Earth with the radius of that wavefront.",
     },
   ]),
 };
@@ -187,6 +237,7 @@ const lesson02: LessonSeed = {
       content:
         "When two waves overlap, the resultant displacement at each point is the (vector) sum of the individual displacements: $y = y_1 + y_2$. Each wave passes through the other unchanged.",
     },
+    { type: "heading", text: "Intensity of two overlapping waves" },
     {
       type: "text",
       content:
@@ -255,20 +306,54 @@ const lesson02: LessonSeed = {
           "At c = 0 the two curves coincide: they add to double the amplitude. At c = π every crest meets a trough: equal amplitudes cancel completely.",
       },
     },
+    { type: "heading", text: "Coherence" },
     {
       type: "text",
       content:
-        "**Coherence.** An ordinary lamp emits light in random bursts from billions of atoms, each lasting about $10^{-8}$ s, with random phases. Two such lamps have a phase difference $\\phi$ that jumps randomly about $10^8$ times a second. Your eye averages over far longer than that, and $\\langle\\cos\\phi\\rangle = 0$, so it sees $I = I_1 + I_2$ everywhere: no fringes. Sources with a **constant** phase difference are called **coherent**. In practice we make them by splitting one source into two (Young's two slits, a thin film's two surfaces) or by using a laser.",
+        "An ordinary lamp emits light in random bursts from billions of atoms, each lasting about $10^{-8}$ s, with random phases. Two such lamps have a phase difference $\\phi$ that jumps randomly about $10^8$ times a second. Your eye averages over far longer than that, and $\\langle\\cos\\phi\\rangle = 0$, so it sees $I = I_1 + I_2$ everywhere: no fringes. Sources with a **constant** phase difference are called **coherent**. In practice we make them by splitting one source into two (Young's two slits, a thin film's two surfaces) or by using a laser.",
+    },
+    { type: "heading", text: "Worked examples: contrast and energy" },
+    {
+      type: "worked-example",
+      id: "omp2-2-we1",
+      title: "Worked example 1 (contrast from amplitudes)",
+      problem:
+        "Two coherent waves have amplitudes in the ratio 2 : 1. Find $I_{\\max}/I_{\\min}$. What is it if instead the **intensities** are in the ratio 9 : 1?",
+      steps: [
+        { text: "$\\frac{I_{\\max}}{I_{\\min}} = \\left(\\frac{2 + 1}{2 - 1}\\right)^2 = 9$. *Why this step:* amplitudes add and subtract; intensities do not." },
+        { text: "If instead the **intensities** are in the ratio 9 : 1, the amplitudes are $3 : 1$ and $\\frac{I_{\\max}}{I_{\\min}} = \\left(\\frac{4}{2}\\right)^2 = 4$." },
+      ],
+      answer: "Amplitudes 2 : 1 give 9 : 1; intensities 9 : 1 give 4 : 1.",
+    },
+    {
+      type: "worked-example",
+      id: "omp2-2-we2",
+      title: "Worked example 2 (intensity at a given path difference)",
+      problem:
+        "Two coherent sources of equal intensity $I_0$ give a maximum of $4I_0$. What is the intensity where the path difference is $\\lambda/3$?",
+      steps: [
+        { text: "$\\phi = \\frac{2\\pi}{\\lambda}\\cdot\\frac{\\lambda}{3} = \\frac{2\\pi}{3}$." },
+        { text: "$I = I_0 + I_0 + 2I_0\\cos\\frac{2\\pi}{3} = 2I_0 - I_0 = I_0$. *Why this step:* $\\cos 120^\\circ = -\\frac12$." },
+        { text: "That is one quarter of the maximum. Equivalently $I = 4I_0\\cos^2\\frac\\phi2 = 4I_0\\cdot\\frac14$. ✓" },
+      ],
+      answer: "$I = I_0$, one quarter of the maximum.",
     },
     {
       type: "text",
       content:
-        "**Worked example 1 (contrast from amplitudes).** Two coherent waves have amplitudes in the ratio 2 : 1.\n\n1. $\\frac{I_{\\max}}{I_{\\min}} = \\left(\\frac{2 + 1}{2 - 1}\\right)^2 = 9$. *Why this step:* amplitudes add and subtract; intensities do not.\n2. If instead the **intensities** are in the ratio 9 : 1, the amplitudes are $3 : 1$ and $\\frac{I_{\\max}}{I_{\\min}} = \\left(\\frac{4}{2}\\right)^2 = 4$.\n\n**Worked example 2 (intensity at a given path difference).** Two coherent sources of equal intensity $I_0$ give a maximum of $4I_0$. What is the intensity where the path difference is $\\lambda/3$?\n\n1. $\\phi = \\frac{2\\pi}{\\lambda}\\cdot\\frac{\\lambda}{3} = \\frac{2\\pi}{3}$.\n2. $I = I_0 + I_0 + 2I_0\\cos\\frac{2\\pi}{3} = 2I_0 - I_0 = I_0$. *Why this step:* $\\cos 120^\\circ = -\\frac12$.\n3. That is one quarter of the maximum. Equivalently $I = 4I_0\\cos^2\\frac\\phi2 = 4I_0\\cdot\\frac14$. ✓",
+        "**Worked example 3 (where does the energy go?).** For equal sources, $I = 2I_0(1 + \\cos\\phi) = 4I_0\\cos^2\\frac\\phi2$. Averaged across many fringes, $\\cos^2$ averages to $\\frac12$, so the average intensity is $2I_0$: exactly what the two sources would give without interference. The pattern redistributes energy, it does not create or destroy it.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (where does the energy go?).** For equal sources, $I = 2I_0(1 + \\cos\\phi) = 4I_0\\cos^2\\frac\\phi2$. Averaged across many fringes, $\\cos^2$ averages to $\\frac12$, so the average intensity is $2I_0$: exactly what the two sources would give without interference. The pattern redistributes energy, it does not create or destroy it.\n\n**Worked example 4 (reading the phase).** Two coherent waves meet with a path difference of 1.5 μm; $\\lambda = 600$ nm.\n\n1. $\\frac{\\Delta x}{\\lambda} = \\frac{1500}{600} = 2.5$ wavelengths.\n2. $\\phi = 2.5 \\times 2\\pi = 5\\pi$, an odd multiple of $\\pi$: destructive, a dark point (if the intensities are equal).",
+      type: "worked-example",
+      id: "omp2-2-we4",
+      title: "Worked example 4 (reading the phase)",
+      problem:
+        "Two coherent waves of equal intensity meet with a path difference of 1.5 μm; $\\lambda = 600$ nm. Find the phase difference. Is the point bright or dark?",
+      steps: [
+        { text: "$\\frac{\\Delta x}{\\lambda} = \\frac{1500}{600} = 2.5$ wavelengths." },
+        { text: "$\\phi = 2.5 \\times 2\\pi = 5\\pi$, an odd multiple of $\\pi$: destructive, a dark point (if the intensities are equal)." },
+      ],
+      answer: "$\\phi = 5\\pi$: destructive, a dark point.",
     },
     {
       type: "callout",
@@ -284,6 +369,7 @@ const lesson02: LessonSeed = {
       content:
         "The bright fringes carry $4I_0$, twice the $2I_0$ the sources would give together without interference. The average over the pattern is exactly $2I_0$. Energy is redistributed from the dark fringes to the bright ones.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "omp2-2-q1",
@@ -294,6 +380,7 @@ const lesson02: LessonSeed = {
         { text: "$9I$ and $I$", correct: true, feedback: "$(\\sqrt{4I} + \\sqrt I)^2 = 9I$ and $(\\sqrt{4I} - \\sqrt I)^2 = I$." },
         { text: "$25I$ and $9I$", feedback: "You squared the intensities instead of taking square roots." },
       ],
+      hint: "Combine amplitudes, not intensities: $A \\propto \\sqrt I$, so $I_{\\max,\\min} = (\\sqrt{I_1} \\pm \\sqrt{I_2})^2$.",
     },
     {
       type: "quiz",
@@ -305,6 +392,7 @@ const lesson02: LessonSeed = {
         { text: "$2\\pi$", feedback: "$2\\pi$ is a full wavelength of path." },
         { text: "$\\pi$", correct: true, feedback: "$\\phi = \\frac{2\\pi}{\\lambda}\\cdot\\frac\\lambda2 = \\pi$." },
       ],
+      hint: "A path difference of one whole wavelength is a phase difference of $2\\pi$. Scale from there.",
     },
     {
       type: "quiz",
@@ -316,17 +404,20 @@ const lesson02: LessonSeed = {
         { text: "Their wavelengths are different.", feedback: "Two sodium lamps emit the same wavelengths. The problem is the random phase." },
         { text: "Light from different lamps cannot overlap.", feedback: "The beams overlap and superpose; the pattern just flickers too fast to see." },
       ],
+      hint: "Recall the conditions for sustained interference in 2.2, and check them for two independent lamps.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-2-q4",
       variant: "practice",
-      question: "Two coherent waves of equal intensity $I_0$ meet with a phase difference of $\\frac\\pi3$. What is the resultant intensity?",
-      options: [
-        { text: "$2I_0$", feedback: "That drops the interference term." },
-        { text: "$I_0$", feedback: "That would be $\\phi = \\frac{2\\pi}{3}$, where $\\cos\\phi = -\\frac12$." },
-        { text: "$4I_0$", feedback: "$4I_0$ needs $\\phi = 0$." },
-        { text: "$3I_0$", correct: true, feedback: "$2I_0 + 2I_0\\cos 60^\\circ = 3I_0$." },
+      question: "Two coherent waves of equal intensity $I_0$ meet with a phase difference of $\\frac\\pi3$. The resultant intensity is $kI_0$. Find $k$.",
+      answer: 3,
+      hint: "$I = I_1 + I_2 + 2\\sqrt{I_1I_2}\\cos\\phi$.",
+      solution: "$I = I_0 + I_0 + 2I_0\\cos\\dfrac\\pi3 = 2I_0 + 2I_0\\cdot\\dfrac12 = 3I_0$, so $k = 3$.",
+      commonMistakes: [
+        { answer: 2, feedback: "That drops the interference term $2\\sqrt{I_1I_2}\\cos\\phi$." },
+        { answer: 1, feedback: "That would be $\\phi = \\frac{2\\pi}{3}$, where $\\cos\\phi = -\\frac12$. Here $\\cos\\frac\\pi3 = +\\frac12$." },
+        { answer: 4, feedback: "$4I_0$ needs $\\phi = 0$." },
       ],
     },
     {
@@ -339,17 +430,34 @@ const lesson02: LessonSeed = {
         { text: "It is reflected back to the sources.", feedback: "Nothing is sent back; the energy appears in the bright fringes." },
         { text: "It goes to the bright fringes, which get $4I_0$ instead of $2I_0$.", correct: true, feedback: "The average over the pattern stays $2I_0$." },
       ],
+      hint: "Energy is conserved. Compare the intensity averaged over many fringes with the sum of the two separate intensities.",
+    },
+    {
+      type: "numeric",
+      id: "omp2-2-q6",
+      variant: "practice",
+      question: "In an interference pattern, $\\frac{I_{\\max}}{I_{\\min}} = 25$. What is the ratio $a_1/a_2$ of the amplitudes of the two waves (larger to smaller)?",
+      answer: 1.5,
+      hint: "$\\dfrac{I_{\\max}}{I_{\\min}} = \\left(\\dfrac{a_1 + a_2}{a_1 - a_2}\\right)^2$. Take the square root first.",
+      solution: "$\\dfrac{a_1 + a_2}{a_1 - a_2} = \\sqrt{25} = 5$, so $a_1 + a_2 = 5a_1 - 5a_2$, i.e. $4a_1 = 6a_2$ and $\\dfrac{a_1}{a_2} = 1.5$ (3 : 2).",
+      commonMistakes: [
+        { answer: 5, feedback: "5 is $\\frac{a_1 + a_2}{a_1 - a_2}$, not $\\frac{a_1}{a_2}$. Solve for the ratio." },
+        { answer: 25, feedback: "That is the intensity ratio of max to min, not the amplitude ratio of the two waves." },
+      ],
     },
     {
       type: "quiz",
-      id: "omp2-2-q6",
+      id: "omp2-2-q7",
       variant: "practice",
-      question: "In an interference pattern, $\\frac{I_{\\max}}{I_{\\min}} = 25$. What is the ratio of the amplitudes of the two waves?",
+      multiple: true,
+      question: "Two coherent waves, each of intensity $I_0$, superpose. Select every phase difference at which the resultant intensity is exactly $I_0$.",
       options: [
-        { text: "$5 : 1$", feedback: "5 is $\\frac{a_1 + a_2}{a_1 - a_2}$, not $\\frac{a_1}{a_2}$." },
-        { text: "$3 : 2$", correct: true, feedback: "$\\frac{a_1 + a_2}{a_1 - a_2} = 5$ gives $a_1 = 1.5a_2$." },
-        { text: "$25 : 1$", feedback: "That is the intensity ratio of max to min, not of the two waves." },
+        { text: "$\\dfrac{2\\pi}{3}$", correct: true, feedback: "$I = 2I_0 + 2I_0\\cos 120^\\circ = 2I_0 - I_0 = I_0$." },
+        { text: "$\\dfrac{4\\pi}{3}$", correct: true, feedback: "$\\cos 240^\\circ = -\\frac12$ too, so $I = I_0$. Phase differences $\\phi$ and $2\\pi - \\phi$ give the same intensity." },
+        { text: "$\\dfrac{\\pi}{3}$", feedback: "$\\cos 60^\\circ = +\\frac12$, so $I = 3I_0$." },
+        { text: "$\\pi$", feedback: "$\\cos\\pi = -1$: complete cancellation, $I = 0$." },
       ],
+      hint: "For equal intensities $I = 2I_0(1 + \\cos\\phi)$. Which $\\phi$ give $\\cos\\phi = -\\frac12$?",
     },
   ]),
 };
@@ -364,6 +472,7 @@ const lesson03: LessonSeed = {
       content:
         "In 1801 Thomas Young let sunlight through a pinhole, then through two closely spaced pinholes, and saw light and dark bands on a screen. A particle theory of light could not explain dark bands where light from both holes arrived. Waves could: the two holes are coherent copies of one source, and the bands mark where the path difference is a whole or a half number of wavelengths.",
     },
+    { type: "heading", text: "Path difference at the screen" },
     {
       type: "text",
       content:
@@ -392,6 +501,7 @@ const lesson03: LessonSeed = {
       content:
         "**Bright** fringes: $\\Delta x = n\\lambda$, at $y_n = \\dfrac{n\\lambda D}{d}$, $n = 0, \\pm1, \\pm2, \\dots$ (the central fringe $n = 0$ is bright).\n**Dark** fringes: $\\Delta x = (n + \\tfrac12)\\lambda$, at $y = \\left(n + \\tfrac12\\right)\\dfrac{\\lambda D}{d}$.\n**Fringe width** (bright to bright, or dark to dark): $\\beta = \\dfrac{\\lambda D}{d}$; angular fringe width $\\dfrac{\\lambda}{d}$.\n**Intensity** (equal slits, each $I_0$): $I = 4I_0\\cos^2\\dfrac{\\pi y}{\\beta}$.",
     },
+    { type: "heading", text: "Intensity across the screen" },
     {
       type: "text",
       content:
@@ -417,15 +527,65 @@ const lesson03: LessonSeed = {
       content:
         "What you should have seen: the fringes are **equally spaced**, with peaks at $0, \\pm\\beta, \\pm2\\beta, \\dots$ and zeros halfway between. Changing $\\beta$ (slider $w$: think larger $\\lambda$, larger $D$ or smaller $d$) stretches the whole pattern; changing $I_0$ only scales the height. Every bright fringe has the same brightness, $4I_0$ (until diffraction by each slit takes over, 2.5).",
     },
+    { type: "heading", text: "Worked examples: fringe width" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (fringe width, JEE Main).** $\\lambda = 600$ nm, $d = 0.5$ mm, $D = 1$ m.\n\n1. $\\beta = \\frac{\\lambda D}{d} = \\frac{600\\times10^{-9} \\times 1}{0.5\\times10^{-3}} = 1.2\\times10^{-3}$ m $= 1.2$ mm. *Why this step:* keep everything in metres; the $10^{-9}$ and $10^{-3}$ are where errors creep in.\n2. Angular fringe width: $\\frac{\\lambda}{d} = 1.2\\times10^{-3}$ rad.\n\n**Worked example 2 (a named fringe).** Same set-up. Where is the 3rd dark fringe?\n\n1. Dark fringes sit at $(n + \\frac12)\\beta$ with $n = 0, 1, 2, \\dots$; the first dark fringe is $n = 0$, so the 3rd is $n = 2$. *Why this step:* counting from $n = 0$ is the usual off-by-one trap.\n2. $y = 2.5 \\times 1.2 = 3.0$ mm from the centre.\n3. The 3rd bright fringe (not counting the central one) is at $3\\beta = 3.6$ mm.",
+      type: "worked-example",
+      id: "omp2-3-we1",
+      title: "Worked example 1 (fringe width, JEE Main)",
+      problem:
+        "In a YDSE, $\\lambda = 600$ nm, $d = 0.5$ mm, $D = 1$ m. Find the fringe width and the angular fringe width.",
+      steps: [
+        { text: "$\\beta = \\frac{\\lambda D}{d} = \\frac{600\\times10^{-9} \\times 1}{0.5\\times10^{-3}} = 1.2\\times10^{-3}$ m $= 1.2$ mm. *Why this step:* keep everything in metres; the $10^{-9}$ and $10^{-3}$ are where errors creep in." },
+        { text: "Angular fringe width: $\\frac{\\lambda}{d} = 1.2\\times10^{-3}$ rad." },
+      ],
+      answer: "$\\beta = 1.2$ mm; angular width $1.2\\times10^{-3}$ rad.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (doubling the fringe width).** Which single change doubles $\\beta$?\n\n1. $\\beta = \\frac{\\lambda D}{d}$: double $\\lambda$ (e.g. 400 nm to 800 nm), or double $D$, or **halve** $d$. *Why this step:* $d$ is in the denominator; moving the slits apart shrinks the fringes.\n\n**Worked example 4 (across the centre).** Find the distance between the 2nd bright fringe on one side and the 3rd dark fringe on the other side, for $\\beta = 1.2$ mm.\n\n1. 2nd bright: $2\\beta$ on one side. 3rd dark: $2.5\\beta$ on the other.\n2. Distance $= 2\\beta + 2.5\\beta = 4.5\\beta = 5.4$ mm.\n\n**Worked example 5 (intensity at a point).** Where on the screen is the intensity half the maximum? $4I_0\\cos^2\\frac{\\pi y}{\\beta} = 2I_0$ needs $\\cos^2 = \\frac12$, i.e. $\\frac{\\pi y}{\\beta} = \\frac\\pi4$: at $y = \\frac\\beta4$ (and every $\\frac\\beta4 + \\frac{k\\beta}{2}$).",
+      type: "worked-example",
+      id: "omp2-3-we2",
+      title: "Worked example 2 (a named fringe)",
+      problem:
+        "Same set-up. Where is the 3rd dark fringe? Where is the 3rd bright fringe (not counting the central one)?",
+      steps: [
+        { text: "Dark fringes sit at $(n + \\frac12)\\beta$ with $n = 0, 1, 2, \\dots$; the first dark fringe is $n = 0$, so the 3rd is $n = 2$. *Why this step:* counting from $n = 0$ is the usual off-by-one trap." },
+        { text: "$y = 2.5 \\times 1.2 = 3.0$ mm from the centre." },
+        { text: "The 3rd bright fringe (not counting the central one) is at $3\\beta = 3.6$ mm." },
+      ],
+      answer: "3rd dark fringe 3.0 mm from the centre; 3rd bright fringe at 3.6 mm.",
+    },
+    {
+      type: "worked-example",
+      id: "omp2-3-we3",
+      title: "Worked example 3 (doubling the fringe width)",
+      problem:
+        "Which single change doubles $\\beta$?",
+      steps: [
+        { text: "$\\beta = \\frac{\\lambda D}{d}$: double $\\lambda$ (e.g. 400 nm to 800 nm), or double $D$, or **halve** $d$. *Why this step:* $d$ is in the denominator; moving the slits apart shrinks the fringes." },
+      ],
+      answer: "Double $\\lambda$, or double $D$, or halve $d$.",
+    },
+    {
+      type: "worked-example",
+      id: "omp2-3-we4",
+      title: "Worked example 4 (across the centre)",
+      problem:
+        "Find the distance between the 2nd bright fringe on one side and the 3rd dark fringe on the other side, for $\\beta = 1.2$ mm.",
+      steps: [
+        { text: "2nd bright: $2\\beta$ on one side. 3rd dark: $2.5\\beta$ on the other." },
+        { text: "Distance $= 2\\beta + 2.5\\beta = 4.5\\beta = 5.4$ mm." },
+      ],
+      answer: "5.4 mm ($4.5\\beta$)",
+    },
+    {
+      type: "worked-example",
+      id: "omp2-3-we5",
+      title: "Worked example 5 (intensity at a point)",
+      problem:
+        "Where on the screen is the intensity half the maximum?",
+      steps: [
+        { text: "$4I_0\\cos^2\\frac{\\pi y}{\\beta} = 2I_0$ needs $\\cos^2 = \\frac12$, i.e. $\\frac{\\pi y}{\\beta} = \\frac\\pi4$: at $y = \\frac\\beta4$ (and every $\\frac\\beta4 + \\frac{k\\beta}{2}$)." },
+      ],
+      answer: "At $y = \\frac\\beta4$ from the central maximum (and every $\\frac\\beta4 + \\frac{k\\beta}{2}$).",
     },
     {
       type: "callout",
@@ -441,15 +601,19 @@ const lesson03: LessonSeed = {
       content:
         "In the small-angle regime ($y \\ll D$) the path difference grows linearly with $y$, so the fringes are equally spaced. Only at large angles, where $\\sin\\theta \\ne \\tan\\theta$, does the spacing change, and JEE problems stay in the small-angle regime unless they say otherwise.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-3-q1",
       variant: "practice",
-      question: "In a YDSE, $\\lambda = 500$ nm, $d = 1$ mm and $D = 2$ m. What is the fringe width?",
-      options: [
-        { text: "1 mm", correct: true, feedback: "$\\frac{500\\times10^{-9} \\times 2}{10^{-3}} = 10^{-3}$ m." },
-        { text: "0.25 mm", feedback: "That divides by $D$ instead of multiplying: $\\beta = \\frac{\\lambda D}{d}$." },
-        { text: "10 mm", feedback: "Check the powers of ten: $500\\times10^{-9} \\times 2 = 10^{-6}$, then divide by $10^{-3}$." },
+      question: "In a YDSE, $\\lambda = 500$ nm, $d = 1$ mm and $D = 2$ m. What is the fringe width, in mm?",
+      answer: 1,
+      unit: "mm",
+      hint: "$\\beta = \\dfrac{\\lambda D}{d}$, with everything in metres.",
+      solution: "$\\beta = \\dfrac{\\lambda D}{d} = \\dfrac{500\\times10^{-9} \\times 2}{10^{-3}} = 10^{-3}$ m $= 1$ mm.",
+      commonMistakes: [
+        { answer: 0.25, feedback: "That divides by $D$ instead of multiplying: $\\beta = \\frac{\\lambda D}{d}$." },
+        { answer: 10, feedback: "Check the powers of ten: $500\\times10^{-9} \\times 2 = 10^{-6}$, then divide by $10^{-3}$." },
       ],
     },
     {
@@ -462,16 +626,20 @@ const lesson03: LessonSeed = {
         { text: "It stays the same.", feedback: "Fringe width depends directly on $d$." },
         { text: "It doubles.", correct: true, feedback: "$\\beta \\propto \\frac1d$." },
       ],
+      hint: "Recall how the fringe width depends on $\\lambda$, $D$ and the slit separation $d$ (2.3).",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-3-q3",
       variant: "practice",
-      question: "With $\\lambda = 600$ nm, $d = 0.3$ mm and $D = 1.5$ m, where is the 3rd bright fringe (not counting the central one)?",
-      options: [
-        { text: "7.5 mm from the centre", feedback: "That is $2.5\\beta$, the 3rd dark fringe." },
-        { text: "9 mm from the centre", correct: true, feedback: "$\\beta = 3$ mm, so $3\\beta = 9$ mm." },
-        { text: "3 mm from the centre", feedback: "3 mm is one fringe width, the 1st bright fringe." },
+      question: "With $\\lambda = 600$ nm, $d = 0.3$ mm and $D = 1.5$ m, how far from the centre is the 3rd bright fringe (not counting the central one)? Give your answer in mm.",
+      answer: 9,
+      unit: "mm",
+      hint: "Bright fringes sit at $y_n = n\\beta$.",
+      solution: "$\\beta = \\dfrac{600\\times10^{-9}\\times1.5}{0.3\\times10^{-3}} = 3\\times10^{-3}$ m $= 3$ mm.\n\nThe 3rd bright fringe is at $3\\beta = 9$ mm.",
+      commonMistakes: [
+        { answer: 7.5, feedback: "That is $2.5\\beta$, the 3rd dark fringe." },
+        { answer: 3, feedback: "3 mm is one fringe width, the 1st bright fringe." },
       ],
     },
     {
@@ -484,6 +652,7 @@ const lesson03: LessonSeed = {
         { text: "Farther apart near the centre", feedback: "All fringes have the same width $\\beta$." },
         { text: "Equally, a distance $\\beta$ apart", correct: true, feedback: "$y_n = n\\beta$ is linear in $n$." },
       ],
+      hint: "Write the position of the $n$th bright fringe for small angles (2.3), and work out the gap between neighbours.",
     },
     {
       type: "quiz",
@@ -495,6 +664,7 @@ const lesson03: LessonSeed = {
         { text: "$\\frac12 I_{\\max}$", correct: true, feedback: "$\\cos^2\\frac\\pi4 = \\frac12$." },
         { text: "0", feedback: "The first zero is at $\\beta/2$." },
       ],
+      hint: "A shift of $\\beta$ means a phase difference of $2\\pi$. Find the phase at $\\beta/4$ and use $I = I_{\\max}\\cos^2(\\phi/2)$.",
     },
     {
       type: "quiz",
@@ -506,6 +676,22 @@ const lesson03: LessonSeed = {
         { text: "$4.5\\beta$", feedback: "That is the 5th. The first dark fringe is at $0.5\\beta$." },
         { text: "$4\\beta$", feedback: "$4\\beta$ is a bright fringe." },
       ],
+      hint: "Dark fringes lie halfway between bright ones. Count carefully: where is the first dark fringe?",
+    },
+    {
+      type: "quiz",
+      id: "omp2-3-q7",
+      variant: "concept",
+      multiple: true,
+      question: "Select every single change that, on its own, doubles the fringe width in a YDSE.",
+      options: [
+        { text: "Moving the screen to twice the distance from the slits", correct: true, feedback: "$\\beta = \\frac{\\lambda D}{d}$ is proportional to $D$." },
+        { text: "Halving the slit separation", correct: true, feedback: "$d$ is in the denominator, so halving it doubles $\\beta$." },
+        { text: "Replacing 400 nm light by 800 nm light", correct: true, feedback: "$\\beta \\propto \\lambda$: doubling the wavelength doubles the fringe width." },
+        { text: "Doubling the slit separation", feedback: "That *halves* $\\beta$: wider-spaced slits crowd the fringes together." },
+        { text: "Immersing the whole apparatus in a liquid of refractive index 2", feedback: "The wavelength becomes $\\lambda/2$, so $\\beta$ halves." },
+      ],
+      hint: "Check each change against $\\beta = \\dfrac{\\lambda D}{d}$, where $\\lambda$ is the wavelength in the medium.",
     },
   ]),
 };
@@ -520,6 +706,7 @@ const lesson04: LessonSeed = {
       content:
         "Everything about Young's fringes comes from one sentence: a bright fringe sits where the optical paths from the two slits are equal (or differ by whole wavelengths). Change an optical path anywhere, by filling the apparatus with water or laying a sheet of mica over one slit, and the fringes move to keep that sentence true. The same sentence explains the colours of soap bubbles.",
     },
+    { type: "heading", text: "Liquids and slabs over a slit" },
     {
       type: "text",
       content:
@@ -567,10 +754,11 @@ const lesson04: LessonSeed = {
       content:
         "What you should have seen: changing $s$ slides the whole pattern rigidly, and the spacing between peaks stays $\\beta$ however far it moves. Set $s = \\beta$ (2 mm) and the pattern looks unchanged: a shift of a whole number of fringes is invisible unless you watch the central fringe move, which is why the white-light central fringe is used to spot it.",
     },
+    { type: "heading", text: "Thin films" },
     {
       type: "text",
       content:
-        "**Thin films.** A film of thickness $t$ and index $\\mu$ reflects light from its top and bottom surfaces, two coherent beams from one incident beam. Two facts decide the colour:\n1. The beam reflected at the bottom travels an extra optical path $2\\mu t\\cos r$ (there and back through the film; $r$ is the angle inside; $\\cos r = 1$ at normal incidence).\n2. Reflection off a **denser** medium adds a phase change of $\\pi$ (equivalent to $\\frac\\lambda2$ of path); reflection off a rarer medium adds nothing. This is the same as a wave on a string reflecting from a fixed end.",
+        "A film of thickness $t$ and index $\\mu$ reflects light from its top and bottom surfaces, two coherent beams from one incident beam. Two facts decide the colour:\n1. The beam reflected at the bottom travels an extra optical path $2\\mu t\\cos r$ (there and back through the film; $r$ is the angle inside; $\\cos r = 1$ at normal incidence).\n2. Reflection off a **denser** medium adds a phase change of $\\pi$ (equivalent to $\\frac\\lambda2$ of path); reflection off a rarer medium adds nothing. This is the same as a wave on a string reflecting from a fixed end.",
     },
     {
       type: "callout",
@@ -579,15 +767,66 @@ const lesson04: LessonSeed = {
       content:
         "Only the top reflection (air to film) gets the $\\pi$ shift. So the reflected light is\n**bright** when $2\\mu t\\cos r = \\left(m + \\tfrac12\\right)\\lambda$,\n**dark** when $2\\mu t\\cos r = m\\lambda$, $m = 0, 1, 2, \\dots$\nIf **both** reflections are off denser media (a coating on glass with $\\mu_{\\text{air}} < \\mu_{\\text{coat}} < \\mu_{\\text{glass}}$), the two $\\pi$ shifts cancel and the conditions swap: dark when $2\\mu t = (m + \\frac12)\\lambda$. The thinnest anti-reflection coating has $\\mu t = \\frac\\lambda4$.",
     },
+    { type: "heading", text: "Worked examples: mica sheets and two wavelengths" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (mica sheet, JEE Main).** A mica sheet ($\\mu = 1.6$) over one slit shifts the central fringe by 5 fringes; $\\lambda = 600$ nm. Find $t$.\n\n1. Fringes shifted: $N = \\frac{(\\mu - 1)t}{\\lambda}$. *Why this step:* each extra wavelength of optical path moves the pattern by one fringe.\n2. $t = \\frac{N\\lambda}{\\mu - 1} = \\frac{5 \\times 600\\times10^{-9}}{0.6} = 5\\times10^{-6}$ m $= 5$ μm.\n3. The fringe width is untouched; the pattern moves towards the covered slit.\n\n**Worked example 2 (immersion).** A YDSE gives $\\beta = 1.2$ mm in air. In water ($n = \\frac43$): $\\beta' = \\frac{1.2}{4/3} = 0.9$ mm.",
+      type: "worked-example",
+      id: "omp2-4-we1",
+      title: "Worked example 1 (mica sheet, JEE Main)",
+      problem:
+        "A mica sheet ($\\mu = 1.6$) over one slit shifts the central fringe by 5 fringes; $\\lambda = 600$ nm. Find $t$.",
+      steps: [
+        { text: "Fringes shifted: $N = \\frac{(\\mu - 1)t}{\\lambda}$. *Why this step:* each extra wavelength of optical path moves the pattern by one fringe." },
+        { text: "$t = \\frac{N\\lambda}{\\mu - 1} = \\frac{5 \\times 600\\times10^{-9}}{0.6} = 5\\times10^{-6}$ m $= 5$ μm." },
+        { text: "The fringe width is untouched; the pattern moves towards the covered slit." },
+      ],
+      answer: "$t = 5$ μm",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (two wavelengths).** Light of 500 nm and 600 nm is used together; $D = 1$ m, $d = 1$ mm. Where do bright fringes first coincide beyond the centre?\n\n1. Need $n_1(500) = n_2(600)$ with the smallest integers: $6 \\times 500 = 5 \\times 600 = 3000$ nm. *Why this step:* this is the least common multiple of the two wavelengths.\n2. $y = \\frac{3000\\times10^{-9} \\times 1}{10^{-3}} = 3\\times10^{-3}$ m $= 3$ mm: the 6th bright fringe of 500 nm on the 5th of 600 nm.\n\n**Worked example 4 (anti-reflection coating).** Find the minimum thickness of a magnesium fluoride coating ($\\mu = 1.38$) on glass ($\\mu = 1.5$) that cancels reflection of 550 nm.\n\n1. Both reflections are off denser media, so both get $\\pi$; they cancel each other's shift. *Why this step:* the $\\pi$ shifts must be counted before choosing the bright or dark condition.\n2. Destructive: $2\\mu t = \\frac\\lambda2$, so $t = \\frac{\\lambda}{4\\mu} = \\frac{550}{4 \\times 1.38} = \\frac{550}{5.52} \\approx 100$ nm.\n\n**Worked example 5 (a soap film).** A soap film ($\\mu = \\frac43$) in air looks bright red (640 nm) in reflection at normal incidence. What is its minimum thickness?\n\n1. Film in air: one $\\pi$ shift, so bright needs $2\\mu t = \\frac\\lambda2$ (with $m = 0$).\n2. $t = \\frac{\\lambda}{4\\mu} = \\frac{640}{16/3} = 120$ nm.",
+      type: "worked-example",
+      id: "omp2-4-we2",
+      title: "Worked example 2 (immersion)",
+      problem:
+        "A YDSE gives $\\beta = 1.2$ mm in air. What is the fringe width when the whole apparatus is immersed in water ($n = \\frac43$)?",
+      steps: [
+        { text: "Immersion shortens the wavelength to $\\lambda/n$, so $\\beta' = \\beta/n$. In water ($n = \\frac43$): $\\beta' = \\frac{1.2}{4/3} = 0.9$ mm." },
+      ],
+      answer: "$\\beta' = 0.9$ mm",
+    },
+    {
+      type: "worked-example",
+      id: "omp2-4-we3",
+      title: "Worked example 3 (two wavelengths)",
+      problem:
+        "Light of 500 nm and 600 nm is used together; $D = 1$ m, $d = 1$ mm. Where do bright fringes first coincide beyond the centre?",
+      steps: [
+        { text: "Need $n_1(500) = n_2(600)$ with the smallest integers: $6 \\times 500 = 5 \\times 600 = 3000$ nm. *Why this step:* this is the least common multiple of the two wavelengths." },
+        { text: "$y = \\frac{3000\\times10^{-9} \\times 1}{10^{-3}} = 3\\times10^{-3}$ m $= 3$ mm: the 6th bright fringe of 500 nm on the 5th of 600 nm." },
+      ],
+      answer: "At 3 mm from the centre (6th bright fringe of 500 nm on the 5th of 600 nm).",
+    },
+    {
+      type: "worked-example",
+      id: "omp2-4-we4",
+      title: "Worked example 4 (anti-reflection coating)",
+      problem:
+        "Find the minimum thickness of a magnesium fluoride coating ($\\mu = 1.38$) on glass ($\\mu = 1.5$) that cancels reflection of 550 nm.",
+      steps: [
+        { text: "Both reflections are off denser media, so both get $\\pi$; they cancel each other's shift. *Why this step:* the $\\pi$ shifts must be counted before choosing the bright or dark condition." },
+        { text: "Destructive: $2\\mu t = \\frac\\lambda2$, so $t = \\frac{\\lambda}{4\\mu} = \\frac{550}{4 \\times 1.38} = \\frac{550}{5.52} \\approx 100$ nm." },
+      ],
+      answer: "$t \\approx 100$ nm",
+    },
+    {
+      type: "worked-example",
+      id: "omp2-4-we5",
+      title: "Worked example 5 (a soap film)",
+      problem:
+        "A soap film ($\\mu = \\frac43$) in air looks bright red (640 nm) in reflection at normal incidence. What is its minimum thickness?",
+      steps: [
+        { text: "Film in air: one $\\pi$ shift, so bright needs $2\\mu t = \\frac\\lambda2$ (with $m = 0$)." },
+        { text: "$t = \\frac{\\lambda}{4\\mu} = \\frac{640}{16/3} = 120$ nm." },
+      ],
+      answer: "$t = 120$ nm",
     },
     {
       type: "callout",
@@ -603,6 +842,7 @@ const lesson04: LessonSeed = {
       content:
         "As $t \\to 0$ the path difference vanishes, but the $\\pi$ shift at the top surface remains, so the two reflected beams cancel: the thinnest part looks **black**. You can see this at the top of a vertical soap film just before it bursts.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "omp2-4-q1",
@@ -613,28 +853,35 @@ const lesson04: LessonSeed = {
         { text: "0.9 mm", correct: true, feedback: "$\\beta' = \\beta/n$, because $\\lambda \\to \\lambda/n$." },
         { text: "1.2 mm", feedback: "Immersing the whole apparatus does change $\\lambda$, and so $\\beta$." },
       ],
+      hint: "In water the wavelength becomes $\\lambda/n$, and $\\beta \\propto \\lambda$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-4-q2",
       variant: "practice",
       question: "A glass sheet ($\\mu = 1.5$, $t = 6$ μm) covers one slit; $\\lambda = 600$ nm. By how many fringes does the pattern shift?",
-      options: [
-        { text: "15", feedback: "That uses $\\mu t$. The extra path is $(\\mu - 1)t$: the sheet replaces air." },
-        { text: "10", feedback: "That is $t/\\lambda$, as if $\\mu - 1 = 1$." },
-        { text: "5", correct: true, feedback: "$\\frac{0.5 \\times 6\\times10^{-6}}{600\\times10^{-9}} = 5$." },
+      answer: 5,
+      unit: "fringes",
+      hint: "The sheet adds an optical path $(\\mu - 1)t$; each wavelength of extra path moves the pattern one fringe.",
+      solution: "$N = \\dfrac{(\\mu - 1)t}{\\lambda} = \\dfrac{0.5 \\times 6\\times10^{-6}}{600\\times10^{-9}} = 5$.",
+      commonMistakes: [
+        { answer: 15, feedback: "That uses $\\mu t$. The extra path is $(\\mu - 1)t$: the sheet replaces air." },
+        { answer: 10, feedback: "That is $t/\\lambda$, as if $\\mu - 1 = 1$." },
       ],
     },
     {
       type: "quiz",
       id: "omp2-4-q3",
       variant: "concept",
-      question: "A thin transparent sheet is placed over one slit of a YDSE. What happens?",
+      multiple: true,
+      question: "A thin transparent sheet is placed over one slit of a YDSE. Select every correct statement.",
       options: [
-        { text: "The pattern shifts towards the covered slit; the fringe width is unchanged.", correct: true, feedback: "A constant extra path shifts but does not stretch." },
+        { text: "The pattern shifts towards the covered slit.", correct: true, feedback: "The geometric path from the covered slit must be shorter to compensate for the extra optical path, so the centre moves towards it." },
+        { text: "The fringe width is unchanged.", correct: true, feedback: "A constant extra path shifts the pattern but does not stretch it." },
         { text: "The fringe width increases.", feedback: "The extra path is the same at every point, so the spacing is unchanged." },
         { text: "The pattern shifts away from the covered slit.", feedback: "The geometric path from the covered slit must be shorter to compensate, so the centre moves towards it." },
       ],
+      hint: "The sheet adds an optical path $(\\mu - 1)t$ to one beam. For each statement ask where zero path difference now falls, and whether anything in $\\beta = \\lambda D/d$ has changed.",
     },
     {
       type: "quiz",
@@ -646,16 +893,20 @@ const lesson04: LessonSeed = {
         { text: "They never coincide.", feedback: "They coincide wherever $n_1\\lambda_1 = n_2\\lambda_2$; the first is at 1800 nm." },
         { text: "4th of 450 nm with 3rd of 600 nm", correct: true, feedback: "$4 \\times 450 = 3 \\times 600 = 1800$ nm." },
       ],
+      hint: "Bright fringes coincide where $n_1\\lambda_1 = n_2\\lambda_2$. Find the smallest whole numbers that satisfy it.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-4-q5",
       variant: "practice",
-      question: "A coating of index 1.25 on glass of index 1.5 is to cancel reflection of 500 nm light. What is the minimum thickness?",
-      options: [
-        { text: "200 nm", feedback: "That is $\\frac{\\lambda}{2\\mu}$, which gives constructive interference here." },
-        { text: "125 nm", feedback: "That is $\\frac\\lambda4$ without dividing by $\\mu$." },
-        { text: "100 nm", correct: true, feedback: "Both reflections get $\\pi$; destructive needs $\\mu t = \\frac\\lambda4$: $t = \\frac{500}{5}$." },
+      question: "A coating of index 1.25 on glass of index 1.5 is to cancel reflection of 500 nm light at normal incidence. What is the minimum thickness, in nm?",
+      answer: 100,
+      unit: "nm",
+      hint: "Count the $\\pi$ shifts first: is each reflection off a denser or a rarer medium?",
+      solution: "Both reflections (air to coating, coating to glass) are off denser media, so both get $\\pi$ and the shifts cancel.\n\nDestructive then needs $2\\mu t = \\dfrac\\lambda2$, i.e. $t = \\dfrac{\\lambda}{4\\mu} = \\dfrac{500}{4\\times1.25} = 100$ nm.",
+      commonMistakes: [
+        { answer: 200, feedback: "That is $\\frac{\\lambda}{2\\mu}$, which gives constructive interference here." },
+        { answer: 125, feedback: "That is $\\frac\\lambda4$ without dividing by $\\mu$: the path inside the coating is an optical path." },
       ],
     },
     {
@@ -668,6 +919,7 @@ const lesson04: LessonSeed = {
         { text: "The top reflection has a $\\pi$ phase shift and the bottom one does not, so at zero thickness they cancel.", correct: true, feedback: "The path difference vanishes but the $\\pi$ shift remains." },
         { text: "No light reflects from a very thin film.", feedback: "Both surfaces still reflect; the two beams cancel." },
       ],
+      hint: "Compare the phase changes at the two reflections, air to film and film to air. What is the path difference as the thickness goes to zero?",
     },
   ]),
 };
@@ -682,6 +934,7 @@ const lesson05: LessonSeed = {
       content:
         "You can hear someone talking in the next room through an open door, even if you cannot see them. Sound, with wavelengths around a metre, bends round the edges of a doorway; light, with wavelengths below a micrometre, hardly does. Make the opening small enough, a fraction of a millimetre, and light bends too, spreading into a bright central band with fainter bands on either side. That is **diffraction**, and it is interference again, this time among the wavelets from different parts of one opening.",
     },
+    { type: "heading", text: "Where the minima fall" },
     {
       type: "text",
       content:
@@ -705,6 +958,7 @@ const lesson05: LessonSeed = {
       content:
         "**Minima:** $a\\sin\\theta = m\\lambda$, $m = \\pm1, \\pm2, \\dots$ (never $m = 0$: that is the central maximum).\n**Central maximum:** between the first minima on either side, angular width $\\dfrac{2\\lambda}{a}$, linear width on a screen at distance $D$: $\\dfrac{2\\lambda D}{a}$.\n**Other maxima:** each half as wide ($\\frac{\\lambda D}{a}$), and much fainter.\nIntensity: $I = I_0\\left(\\dfrac{\\sin\\beta}{\\beta}\\right)^2$ with $\\beta = \\dfrac{\\pi a\\sin\\theta}{\\lambda}$.",
     },
+    { type: "heading", text: "Diffraction versus interference" },
     {
       type: "text",
       content:
@@ -738,20 +992,60 @@ const lesson05: LessonSeed = {
         ["Condition", "bright at $d\\sin\\theta = n\\lambda$", "**dark** at $a\\sin\\theta = m\\lambda$"],
       ],
     },
+    { type: "heading", text: "When is ray optics good enough?" },
     {
       type: "text",
       content:
-        "**When is ray optics good enough?** A beam through an aperture of width $a$ spreads by an angle of about $\\frac\\lambda a$. After travelling a distance $z$ it has spread by about $\\frac{z\\lambda}{a}$, which matches the aperture itself when $z = \\frac{a^2}{\\lambda}$: the **Fresnel distance** $z_F$. For $z \\ll z_F$ the beam keeps its shape and rays work; beyond it, diffraction dominates.",
+        "A beam through an aperture of width $a$ spreads by an angle of about $\\frac\\lambda a$. After travelling a distance $z$ it has spread by about $\\frac{z\\lambda}{a}$, which matches the aperture itself when $z = \\frac{a^2}{\\lambda}$: the **Fresnel distance** $z_F$. For $z \\ll z_F$ the beam keeps its shape and rays work; beyond it, diffraction dominates.",
+    },
+    { type: "heading", text: "Worked examples: widths and envelopes" },
+    {
+      type: "worked-example",
+      id: "omp2-5-we1",
+      title: "Worked example 1 (central maximum, JEE Main)",
+      problem:
+        "Slit width 0.2 mm, $\\lambda = 600$ nm, screen 1 m away. Find the width of the central maximum on the screen, and of each secondary maximum.",
+      steps: [
+        { text: "Linear width $= \\frac{2\\lambda D}{a} = \\frac{2 \\times 600\\times10^{-9} \\times 1}{0.2\\times10^{-3}} = 6\\times10^{-3}$ m $= 6$ mm. *Why this step:* the central maximum runs from the first minimum on one side to the first minimum on the other, hence the factor 2." },
+        { text: "Each secondary maximum is 3 mm wide." },
+      ],
+      answer: "Central maximum 6 mm wide; each secondary maximum 3 mm.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (central maximum, JEE Main).** Slit width 0.2 mm, $\\lambda = 600$ nm, screen 1 m away.\n\n1. Linear width $= \\frac{2\\lambda D}{a} = \\frac{2 \\times 600\\times10^{-9} \\times 1}{0.2\\times10^{-3}} = 6\\times10^{-3}$ m $= 6$ mm. *Why this step:* the central maximum runs from the first minimum on one side to the first minimum on the other, hence the factor 2.\n2. Each secondary maximum is 3 mm wide.\n\n**Worked example 2 (a very narrow slit).** For what slit width does the first minimum of 600 nm light fall at $30^\\circ$?\n\n1. $a\\sin 30^\\circ = \\lambda$, so $a = 2\\lambda = 1.2$ μm.\n2. At $a = \\lambda$ the first minimum would be at $90^\\circ$: the central maximum fills the whole half-space and there are no dark bands at all.",
+      type: "worked-example",
+      id: "omp2-5-we2",
+      title: "Worked example 2 (a very narrow slit)",
+      problem:
+        "For what slit width does the first minimum of 600 nm light fall at $30^\\circ$?",
+      steps: [
+        { text: "$a\\sin 30^\\circ = \\lambda$, so $a = 2\\lambda = 1.2$ μm." },
+        { text: "At $a = \\lambda$ the first minimum would be at $90^\\circ$: the central maximum fills the whole half-space and there are no dark bands at all." },
+      ],
+      answer: "$a = 1.2$ μm",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (Young's fringes inside a diffraction envelope, JEE Advanced).** Two slits each of width $a = 0.2$ mm are $d = 1$ mm apart. How many bright interference fringes lie inside the central diffraction maximum?\n\n1. The envelope's first zeros are at $\\sin\\theta = \\pm\\frac\\lambda a$. *Why this step:* each slit's diffraction pattern multiplies the two-slit fringes, so the envelope decides which fringes are visible.\n2. Interference maxima are at $\\sin\\theta = \\frac{n\\lambda}{d}$. They lie inside the envelope when $|n| < \\frac da = 5$.\n3. The $n = \\pm5$ fringes fall exactly on the envelope's zeros and vanish, so $n = -4, \\dots, 4$ survive: $2\\cdot\\frac da - 1 = 9$ fringes.\n\n**Worked example 4 (Fresnel distance).** An aperture of 3 mm with 500 nm light: $z_F = \\frac{(3\\times10^{-3})^2}{5\\times10^{-7}} = 18$ m. A torch beam through such a hole behaves like a ray for a few metres, not for a kilometre.",
+      type: "worked-example",
+      id: "omp2-5-we3",
+      title: "Worked example 3 (Young's fringes inside a diffraction envelope, JEE Advanced)",
+      problem:
+        "Two slits each of width $a = 0.2$ mm are $d = 1$ mm apart. How many bright interference fringes lie inside the central diffraction maximum?",
+      steps: [
+        { text: "The envelope's first zeros are at $\\sin\\theta = \\pm\\frac\\lambda a$. *Why this step:* each slit's diffraction pattern multiplies the two-slit fringes, so the envelope decides which fringes are visible." },
+        { text: "Interference maxima are at $\\sin\\theta = \\frac{n\\lambda}{d}$. They lie inside the envelope when $|n| < \\frac da = 5$." },
+        { text: "The $n = \\pm5$ fringes fall exactly on the envelope's zeros and vanish, so $n = -4, \\dots, 4$ survive: $2\\cdot\\frac da - 1 = 9$ fringes." },
+      ],
+      answer: "9 bright fringes ($n = -4$ to $4$).",
+    },
+    {
+      type: "worked-example",
+      id: "omp2-5-we4",
+      title: "Worked example 4 (Fresnel distance)",
+      problem:
+        "Find the Fresnel distance for an aperture of 3 mm with 500 nm light.",
+      steps: [
+        { text: "$z_F = \\frac{(3\\times10^{-3})^2}{5\\times10^{-7}} = 18$ m. A torch beam through such a hole behaves like a ray for a few metres, not for a kilometre." },
+      ],
+      answer: "$z_F = 18$ m",
     },
     {
       type: "callout",
@@ -767,15 +1061,19 @@ const lesson05: LessonSeed = {
       content:
         "The widths go as $\\frac{\\lambda}{a}$: squeeze the slit and the light spreads **more**. This inverse relation is why tiny apertures blur images, and why a large telescope mirror sees finer detail (2.6).",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-5-q1",
       variant: "practice",
-      question: "A slit 0.1 mm wide is lit by 500 nm light. What is the width of the central maximum on a screen 2 m away?",
-      options: [
-        { text: "20 mm", correct: true, feedback: "$\\frac{2 \\times 500\\times10^{-9} \\times 2}{10^{-4}} = 0.02$ m." },
-        { text: "10 mm", feedback: "That is $\\frac{\\lambda D}{a}$, the half-width. The central maximum spans both sides." },
-        { text: "2 mm", feedback: "Check the powers of ten: $\\frac{2\\times10^{-6}}{10^{-4}} = 0.02$ m." },
+      question: "A slit 0.1 mm wide is lit by 500 nm light. What is the width of the central maximum on a screen 2 m away, in mm?",
+      answer: 20,
+      unit: "mm",
+      hint: "The central maximum runs from the first minimum on one side to the first minimum on the other.",
+      solution: "Width $= \\dfrac{2\\lambda D}{a} = \\dfrac{2 \\times 500\\times10^{-9} \\times 2}{10^{-4}} = 0.02$ m $= 20$ mm.",
+      commonMistakes: [
+        { answer: 10, feedback: "That is $\\frac{\\lambda D}{a}$, the half-width. The central maximum spans both sides." },
+        { answer: 2, feedback: "Check the powers of ten: $\\frac{2\\times10^{-6}}{10^{-4}} = 0.02$ m." },
       ],
     },
     {
@@ -788,6 +1086,7 @@ const lesson05: LessonSeed = {
         { text: "It stays the same width but dimmer.", feedback: "It does get dimmer, but its width depends on $a$ too." },
         { text: "It becomes twice as wide.", correct: true, feedback: "Width $\\propto \\frac1a$." },
       ],
+      hint: "The central maximum spans the gap between the first minima at $\\sin\\theta = \\pm\\lambda/a$.",
     },
     {
       type: "quiz",
@@ -799,6 +1098,7 @@ const lesson05: LessonSeed = {
         { text: "1 μm", correct: true, feedback: "$a = \\frac{\\lambda}{\\sin 30^\\circ} = 2\\lambda$." },
         { text: "500 nm", feedback: "With $a = \\lambda$ the first minimum is at $90^\\circ$." },
       ],
+      hint: "Recall the condition for the first minimum of a single slit (2.5), and keep nanometres and micrometres straight.",
     },
     {
       type: "quiz",
@@ -810,17 +1110,21 @@ const lesson05: LessonSeed = {
         { text: "Half as wide and brighter", feedback: "It is the widest band, not the narrowest." },
         { text: "Twice as wide and far brighter", correct: true, feedback: "It spans from $m = -1$ to $m = 1$ and holds most of the light." },
       ],
+      hint: "The central maximum runs from $-\\lambda/a$ to $+\\lambda/a$, while each secondary maximum lies between two neighbouring minima.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-5-q5",
       variant: "practice",
-      question: "In a double-slit set-up, each slit is 0.2 mm wide and the slits are 0.6 mm apart. How many bright fringes lie within the central diffraction maximum?",
-      options: [
-        { text: "6", feedback: "Count $n = -2, -1, 0, 1, 2$: the $\\pm3$ fringes are missing." },
-        { text: "7", feedback: "The $n = \\pm3$ fringes coincide with the envelope's zeros, so they vanish." },
-        { text: "3", feedback: "That is $d/a$, not the count of fringes on both sides." },
-        { text: "5", correct: true, feedback: "$\\frac da = 3$; the $n = \\pm3$ fringes fall on diffraction zeros, leaving $n = -2, \\dots, 2$." },
+      question: "In a double-slit set-up, each slit is 0.2 mm wide and the slits are 0.6 mm apart. How many bright interference fringes lie within the central diffraction maximum?",
+      answer: 5,
+      unit: "fringes",
+      hint: "Fringe $n$ is at $\\sin\\theta = n\\lambda/d$; the envelope's first zeros are at $\\sin\\theta = \\pm\\lambda/a$.",
+      solution: "Fringes lie inside the envelope when $|n| < \\dfrac da = 3$.\n\nThe $n = \\pm3$ fringes fall exactly on the diffraction zeros and vanish, leaving $n = -2, -1, 0, 1, 2$: 5 fringes.",
+      commonMistakes: [
+        { answer: 7, feedback: "The $n = \\pm3$ fringes coincide with the envelope's zeros, so they vanish." },
+        { answer: 6, feedback: "Count $n = -2, -1, 0, 1, 2$, including the central fringe: the count is symmetric, so it is odd." },
+        { answer: 3, feedback: "That is $d/a$, not the count of fringes on both sides." },
       ],
     },
     {
@@ -833,6 +1137,21 @@ const lesson05: LessonSeed = {
         { text: "0.8 m", feedback: "Check the powers of ten: $(2\\times10^{-3})^2 = 4\\times10^{-6}$, and $\\frac{4\\times10^{-6}}{5\\times10^{-7}} = 8$." },
         { text: "4000 m", feedback: "That is $\\frac{a}{\\lambda}$, dimensionless. The Fresnel distance is $\\frac{a^2}{\\lambda}$." },
       ],
+      hint: "Fresnel distance $z_F = a^2/\\lambda$. Watch the units.",
+    },
+    {
+      type: "quiz",
+      id: "omp2-5-q7",
+      variant: "concept",
+      multiple: true,
+      question: "Monochromatic light of wavelength $\\lambda$ falls normally on a single slit of width $a$. Select every correct statement about the pattern on a distant screen.",
+      options: [
+        { text: "The angular width of the central maximum is $\\dfrac{2\\lambda}{a}$.", correct: true, feedback: "It runs from $a\\sin\\theta = -\\lambda$ to $+\\lambda$, i.e. $\\pm\\frac\\lambda a$ at small angles." },
+        { text: "Each secondary maximum is half as wide as the central maximum.", correct: true, feedback: "Secondary maxima run between neighbouring minima, $\\frac\\lambda a$ apart; the central one spans two such gaps." },
+        { text: "The condition $a\\sin\\theta = \\lambda$ gives the first bright band beside the centre.", feedback: "In single-slit diffraction $a\\sin\\theta = m\\lambda$ gives the **dark** bands. Don't carry over the double-slit bright-fringe rule." },
+        { text: "All the bright bands are equally bright.", feedback: "The secondary maxima are only about 4.7% and 1.7% of the central peak. Equal brightness belongs to double-slit fringes." },
+      ],
+      hint: "Minima at $a\\sin\\theta = m\\lambda$, $m = \\pm1, \\pm2, \\dots$",
     },
   ]),
 };
@@ -847,6 +1166,7 @@ const lesson06: LessonSeed = {
       content:
         "Look at a car's headlights from far down a straight road at night: they merge into one light. As the car approaches, the blob splits into two. Your eye's lens is not flawed; every lens and mirror is an aperture, and every aperture diffracts. A point of light becomes a small blurred disc, and two discs that overlap too much look like one.",
     },
+    { type: "heading", text: "Airy discs and the Rayleigh criterion" },
     {
       type: "text",
       content:
@@ -887,20 +1207,49 @@ const lesson06: LessonSeed = {
       content:
         "What you should have seen: at $d = 1$ (Rayleigh's limit) the combined curve has two peaks with a clear dip to about 80% between them: just resolved. Slide $d$ below about 0.8 and the dip disappears into a single broad hump: unresolved, however much you magnify it. At $d = 2$ or more the two peaks are obviously separate. Note that the sources are incoherent, so their **intensities** add.",
     },
+    { type: "heading", text: "How to see finer detail" },
     {
       type: "text",
       content:
-        "**How to see finer detail.** $\\Delta\\theta_{\\min} = \\frac{1.22\\lambda}{D}$ gives two knobs:\n- **Bigger aperture $D$:** the reason research telescopes have mirrors many metres across.\n- **Shorter wavelength $\\lambda$:** blue or ultraviolet light in microscopes, and above all **electrons**, whose de Broglie wavelength (Chapter 3) can be a thousand times shorter than visible light. Oil immersion ($n \\approx 1.5$) also helps a microscope by raising $n\\sin\\beta$.",
+        "$\\Delta\\theta_{\\min} = \\frac{1.22\\lambda}{D}$ gives two knobs:\n- **Bigger aperture $D$:** the reason research telescopes have mirrors many metres across.\n- **Shorter wavelength $\\lambda$:** blue or ultraviolet light in microscopes, and above all **electrons**, whose de Broglie wavelength (Chapter 3) can be a thousand times shorter than visible light. Oil immersion ($n \\approx 1.5$) also helps a microscope by raising $n\\sin\\beta$.",
+    },
+    { type: "heading", text: "Worked examples: telescope and microscope limits" },
+    {
+      type: "worked-example",
+      id: "omp2-6-we1",
+      title: "Worked example 1 (a telescope)",
+      problem:
+        "Find the smallest angular separation a telescope with a 1 m objective can resolve at 500 nm.",
+      steps: [
+        { text: "$\\Delta\\theta = \\frac{1.22 \\times 500\\times10^{-9}}{1} = 6.1\\times10^{-7}$ rad." },
+        { text: "That is about $3.5\\times10^{-5}$ degrees, or 0.13 arc-seconds (ignoring the blurring by the atmosphere). *Why this step:* the number is only a limit; turbulence usually blurs more, which is why telescopes go to mountain tops and into space." },
+      ],
+      answer: "$\\Delta\\theta = 6.1\\times10^{-7}$ rad, about 0.13 arc-seconds.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (a telescope).** Find the smallest angular separation a telescope with a 1 m objective can resolve at 500 nm.\n\n1. $\\Delta\\theta = \\frac{1.22 \\times 500\\times10^{-9}}{1} = 6.1\\times10^{-7}$ rad.\n2. That is about $3.5\\times10^{-5}$ degrees, or 0.13 arc-seconds (ignoring the blurring by the atmosphere). *Why this step:* the number is only a limit; turbulence usually blurs more, which is why telescopes go to mountain tops and into space.\n\n**Worked example 2 (headlights, JEE Main).** Headlights 1.2 m apart; the pupil is 2 mm across; take $\\lambda = 500$ nm. From how far can the eye just resolve them?\n\n1. $\\Delta\\theta = \\frac{1.22 \\times 5\\times10^{-7}}{2\\times10^{-3}} = 3.05\\times10^{-4}$ rad.\n2. The lamps subtend $\\frac{1.2}{L}$ at distance $L$; set equal: $L = \\frac{1.2}{3.05\\times10^{-4}} \\approx 3.9\\times10^3$ m. *Why this step:* at larger distances the angle between the lamps falls below the limit, and the two discs merge.\n3. About 4 km. In practice the eye's retina and aberrations make it somewhat worse.",
+      type: "worked-example",
+      id: "omp2-6-we2",
+      title: "Worked example 2 (headlights, JEE Main)",
+      problem:
+        "Headlights 1.2 m apart; the pupil is 2 mm across; take $\\lambda = 500$ nm. From how far can the eye just resolve them?",
+      steps: [
+        { text: "$\\Delta\\theta = \\frac{1.22 \\times 5\\times10^{-7}}{2\\times10^{-3}} = 3.05\\times10^{-4}$ rad." },
+        { text: "The lamps subtend $\\frac{1.2}{L}$ at distance $L$; set equal: $L = \\frac{1.2}{3.05\\times10^{-4}} \\approx 3.9\\times10^3$ m. *Why this step:* at larger distances the angle between the lamps falls below the limit, and the two discs merge." },
+        { text: "About 4 km. In practice the eye's retina and aberrations make it somewhat worse." },
+      ],
+      answer: "About 4 km ($3.9\\times10^3$ m).",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (a microscope).** An oil-immersion objective has $n = 1.5$ and $\\sin\\beta = 0.9$, with $\\lambda = 550$ nm.\n\n1. Smallest resolvable separation $d_{\\min} = \\frac{1.22\\lambda}{2n\\sin\\beta} = \\frac{1.22 \\times 550\\times10^{-9}}{2 \\times 1.5 \\times 0.9} = \\frac{6.71\\times10^{-7}}{2.7}$.\n2. $d_{\\min} \\approx 2.5\\times10^{-7}$ m $= 0.25$ μm: about half a wavelength. Bacteria are visible; viruses (0.02 to 0.3 μm) mostly are not. *Why this step:* the resolving power sets a floor on detail that no eyepiece can lower.",
+      type: "worked-example",
+      id: "omp2-6-we3",
+      title: "Worked example 3 (a microscope)",
+      problem:
+        "An oil-immersion objective has $n = 1.5$ and $\\sin\\beta = 0.9$, with $\\lambda = 550$ nm. Find the smallest separation it can resolve.",
+      steps: [
+        { text: "Smallest resolvable separation $d_{\\min} = \\frac{1.22\\lambda}{2n\\sin\\beta} = \\frac{1.22 \\times 550\\times10^{-9}}{2 \\times 1.5 \\times 0.9} = \\frac{6.71\\times10^{-7}}{2.7}$." },
+        { text: "$d_{\\min} \\approx 2.5\\times10^{-7}$ m $= 0.25$ μm: about half a wavelength. Bacteria are visible; viruses (0.02 to 0.3 μm) mostly are not. *Why this step:* the resolving power sets a floor on detail that no eyepiece can lower." },
+      ],
+      answer: "$d_{\\min} \\approx 0.25$ μm",
     },
     {
       type: "callout",
@@ -909,15 +1258,20 @@ const lesson06: LessonSeed = {
       content:
         "Magnifying an image beyond the diffraction limit just enlarges the blur (\"empty magnification\"). The finest detail is set by the aperture and the wavelength, $\\frac{1.22\\lambda}{D}$, not by the eyepiece.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-6-q1",
       variant: "practice",
-      question: "What is the minimum resolvable angle for a telescope of aperture 0.5 m at 600 nm?",
-      options: [
-        { text: "$1.2\\times10^{-6}$ rad", feedback: "That drops the factor 1.22 for a circular aperture." },
-        { text: "$1.5\\times10^{-6}$ rad", correct: true, feedback: "$\\frac{1.22 \\times 6\\times10^{-7}}{0.5} \\approx 1.46\\times10^{-6}$ rad." },
-        { text: "$3.7\\times10^{-7}$ rad", feedback: "You multiplied by $D$ instead of dividing." },
+      question: "What is the minimum resolvable angle for a telescope of aperture 0.5 m at 600 nm? Give your answer in units of $10^{-6}$ rad.",
+      answer: 1.46,
+      relTolerance: 0.03,
+      unit: "$\\times10^{-6}$ rad",
+      hint: "Rayleigh: $\\Delta\\theta_{\\min} = \\dfrac{1.22\\lambda}{D}$ for a circular aperture.",
+      solution: "$\\Delta\\theta_{\\min} = \\dfrac{1.22 \\times 6\\times10^{-7}}{0.5} \\approx 1.46\\times10^{-6}$ rad.",
+      commonMistakes: [
+        { answer: 1.2, feedback: "That drops the factor 1.22 for a circular aperture." },
+        { answer: 0.366, feedback: "You multiplied by $D$ instead of dividing." },
       ],
     },
     {
@@ -930,27 +1284,35 @@ const lesson06: LessonSeed = {
         { text: "Stars are too far away to be magnified.", feedback: "Distance is not the problem; the angular separation versus $1.22\\lambda/D$ is." },
         { text: "The detail is limited by the objective's diffraction, $1.22\\lambda/D$; more magnification only enlarges the blur.", correct: true, feedback: "Resolution comes from the aperture, not the eyepiece." },
       ],
+      hint: "Recall from 2.6 what sets the smallest angle a telescope can resolve, and which part of the telescope it involves.",
     },
     {
       type: "quiz",
       id: "omp2-6-q3",
       variant: "concept",
-      question: "Which change increases a telescope's resolving power?",
+      multiple: true,
+      question: "Select every change that increases a telescope's resolving power.",
       options: [
-        { text: "A larger objective, or observing at shorter wavelength", correct: true, feedback: "Resolving power $\\propto \\frac{D}{\\lambda}$." },
+        { text: "A larger-diameter objective", correct: true, feedback: "Resolving power $= \\frac{D}{1.22\\lambda}$ grows with the aperture $D$." },
+        { text: "Observing at a shorter wavelength", correct: true, feedback: "Shorter $\\lambda$ shrinks the diffraction discs, so resolving power $\\propto \\frac1\\lambda$ rises." },
         { text: "A longer focal length eyepiece", feedback: "The eyepiece changes magnification, not resolution." },
-        { text: "Observing at longer wavelength", feedback: "Longer $\\lambda$ widens the diffraction discs." },
+        { text: "Observing at a longer wavelength", feedback: "Longer $\\lambda$ widens the diffraction discs." },
       ],
+      hint: "The minimum resolvable angle is $1.22\\lambda/D$. Test each change against that formula.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-6-q4",
       variant: "practice",
-      question: "The eye's pupil is 3 mm across and $\\lambda = 500$ nm. Up to what distance can two dots 1 mm apart just be resolved?",
-      options: [
-        { text: "about 50 m", feedback: "Recheck the angle: $\\approx 2\\times10^{-4}$ rad, and $\\frac{10^{-3}}{2\\times10^{-4}} = 5$." },
-        { text: "about 0.5 m", feedback: "Two dots 1 mm apart are easy to separate at arm's length; the limit is farther." },
-        { text: "about 5 m", correct: true, feedback: "$\\Delta\\theta = \\frac{1.22 \\times 5\\times10^{-7}}{3\\times10^{-3}} \\approx 2.0\\times10^{-4}$ rad; $L = \\frac{10^{-3}}{2.0\\times10^{-4}} \\approx 4.9$ m." },
+      question: "The eye's pupil is 3 mm across and $\\lambda = 500$ nm. Up to what distance, in metres, can two dots 1 mm apart just be resolved?",
+      answer: 4.92,
+      relTolerance: 0.03,
+      unit: "m",
+      hint: "Find the Rayleigh angle for the pupil, then the distance at which the dots subtend exactly that angle.",
+      solution: "$\\Delta\\theta = \\dfrac{1.22 \\times 5\\times10^{-7}}{3\\times10^{-3}} \\approx 2.03\\times10^{-4}$ rad.\n\nThe dots subtend $\\dfrac{10^{-3}}{L}$; setting this equal: $L = \\dfrac{10^{-3}}{2.03\\times10^{-4}} \\approx 4.9$ m.",
+      commonMistakes: [
+        { answer: 49.2, feedback: "Recheck the powers of ten: the angle is $\\approx 2\\times10^{-4}$ rad, and $\\frac{10^{-3}}{2\\times10^{-4}} = 5$." },
+        { answer: 6, feedback: "That drops the factor 1.22 for a circular aperture." },
       ],
     },
     {
@@ -963,6 +1325,7 @@ const lesson06: LessonSeed = {
         { text: "Electron microscopes have much bigger lenses.", feedback: "Their apertures are small; the wavelength does the work." },
         { text: "Fast electrons have a much shorter wavelength than visible light.", correct: true, feedback: "Resolution scales with $\\lambda$; Chapter 3 gives the electron's $\\lambda = h/p$." },
       ],
+      hint: "What property of the probe limits the finest detail any microscope can resolve? Compare that property for fast electrons and for visible light.",
     },
   ]),
 };
@@ -977,10 +1340,11 @@ const lesson07: LessonSeed = {
       content:
         "Put on polaroid sunglasses and look at the glare off a lake: it almost vanishes. Tilt your head and it comes back. Reflected light has a preferred direction of vibration and the glasses block it. That can only happen if light is a **transverse** wave: interference and diffraction work for any wave, but only a transverse wave can have a direction of vibration to filter.",
     },
+    { type: "heading", text: "Transverse waves and planes of vibration" },
     {
       type: "text",
       content:
-        "**Transverse waves and planes of vibration.** In light, the electric field $\\vec E$ oscillates perpendicular to the direction of travel. In **unpolarised** light (sunlight, a bulb) the direction of $\\vec E$ changes randomly from moment to moment, spread evenly over all directions in the plane perpendicular to the ray. In **plane-polarised** light $\\vec E$ oscillates along one fixed line.",
+        "In light, the electric field $\\vec E$ oscillates perpendicular to the direction of travel. In **unpolarised** light (sunlight, a bulb) the direction of $\\vec E$ changes randomly from moment to moment, spread evenly over all directions in the plane perpendicular to the ray. In **plane-polarised** light $\\vec E$ oscillates along one fixed line.",
     },
     {
       type: "callout",
@@ -989,10 +1353,11 @@ const lesson07: LessonSeed = {
       content:
         "A polaroid transmits only the component of $\\vec E$ along its **pass axis** and absorbs the perpendicular component.\n- Unpolarised light of intensity $I_0$ through one polaroid: $\\frac{I_0}{2}$, plane-polarised along the pass axis. (Half, because the average of $\\cos^2$ over all directions is $\\frac12$.)\n- A second polaroid (the **analyser**) at angle $\\theta$ to the first then obeys Malus' law.",
     },
+    { type: "heading", text: "Deriving Malus' law" },
     {
       type: "text",
       content:
-        "**Derivation: Malus' law.** Plane-polarised light with field amplitude $E_0$ meets an analyser whose axis is at $\\theta$ to $\\vec E$. Only the component along the axis gets through: $E = E_0\\cos\\theta$. Intensity goes as amplitude squared:",
+        "Plane-polarised light with field amplitude $E_0$ meets an analyser whose axis is at $\\theta$ to $\\vec E$. Only the component along the axis gets through: $E = E_0\\cos\\theta$. Intensity goes as amplitude squared:",
     },
     { type: "math", latex: "I = I_0\\cos^2\\theta" },
     {
@@ -1010,6 +1375,7 @@ const lesson07: LessonSeed = {
       content:
         "What you should have seen: at $x = 3$ ($30^\\circ$) three-quarters of the light gets through; at $x = 4.5$ ($45^\\circ$) half; at $x = 9$ ($90^\\circ$, crossed polaroids) none; and by $180^\\circ$ it is back to full. Rotating the analyser once through $360^\\circ$ gives two maxima and two zeros.",
     },
+    { type: "heading", text: "Polarisation by reflection and scattering" },
     {
       type: "text",
       content:
@@ -1025,15 +1391,49 @@ const lesson07: LessonSeed = {
       content:
         "**Polarisation by scattering.** Sunlight scattered by air through $90^\\circ$ is strongly polarised: the air molecules' electrons oscillate across the sunbeam, and seen from the side only one of those directions is visible. Look at the sky at right angles to the Sun through a polaroid and rotate it: the sky darkens and brightens.",
     },
+    { type: "heading", text: "Worked examples: polaroid stacks and Brewster" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (a stack of polaroids).** Unpolarised light of intensity $I_0$ passes through polaroid $P_1$, then $P_2$. Find the output for $P_2$ at $0^\\circ$, $30^\\circ$ and $90^\\circ$ to $P_1$.\n\n1. After $P_1$: $\\frac{I_0}{2}$, whatever the orientation. *Why this step:* unpolarised light has no preferred direction, so the first polaroid always halves it.\n2. $P_2$ at $0^\\circ$: $\\frac{I_0}{2}$. At $30^\\circ$: $\\frac{I_0}{2}\\cos^2 30^\\circ = \\frac{I_0}{2}\\cdot\\frac34 = \\frac{3I_0}{8}$. At $90^\\circ$: 0.\n\n**Worked example 2 (three polaroids, JEE Main).** $P_1$ and $P_3$ are crossed. $P_2$ is inserted between them at $45^\\circ$ to $P_1$.\n\n1. After $P_1$: $\\frac{I_0}{2}$.\n2. After $P_2$: $\\frac{I_0}{2}\\cos^2 45^\\circ = \\frac{I_0}{4}$.\n3. After $P_3$ (at $45^\\circ$ to $P_2$): $\\frac{I_0}{4}\\cdot\\frac12 = \\frac{I_0}{8}$. *Why this step:* each polaroid resets the direction of polarisation, so the middle one lets light through two crossed polaroids that alone would pass nothing.",
+      type: "worked-example",
+      id: "omp2-7-we1",
+      title: "Worked example 1 (a stack of polaroids)",
+      problem:
+        "Unpolarised light of intensity $I_0$ passes through polaroid $P_1$, then $P_2$. Find the output for $P_2$ at $0^\\circ$, $30^\\circ$ and $90^\\circ$ to $P_1$.",
+      steps: [
+        { text: "After $P_1$: $\\frac{I_0}{2}$, whatever the orientation. *Why this step:* unpolarised light has no preferred direction, so the first polaroid always halves it." },
+        { text: "$P_2$ at $0^\\circ$: $\\frac{I_0}{2}$. At $30^\\circ$: $\\frac{I_0}{2}\\cos^2 30^\\circ = \\frac{I_0}{2}\\cdot\\frac34 = \\frac{3I_0}{8}$. At $90^\\circ$: 0." },
+      ],
+      answer: "$\\frac{I_0}{2}$ at $0^\\circ$, $\\frac{3I_0}{8}$ at $30^\\circ$, 0 at $90^\\circ$.",
+    },
+    {
+      type: "worked-example",
+      id: "omp2-7-we2",
+      title: "Worked example 2 (three polaroids, JEE Main)",
+      problem:
+        "Polaroids $P_1$ and $P_3$ are crossed. $P_2$ is inserted between them at $45^\\circ$ to $P_1$. Unpolarised light of intensity $I_0$ falls on $P_1$. Find the intensity after $P_3$.",
+      steps: [
+        { text: "After $P_1$: $\\frac{I_0}{2}$." },
+        { text: "After $P_2$: $\\frac{I_0}{2}\\cos^2 45^\\circ = \\frac{I_0}{4}$." },
+        { text: "After $P_3$ (at $45^\\circ$ to $P_2$): $\\frac{I_0}{4}\\cdot\\frac12 = \\frac{I_0}{8}$. *Why this step:* each polaroid resets the direction of polarisation, so the middle one lets light through two crossed polaroids that alone would pass nothing." },
+      ],
+      answer: "$\\frac{I_0}{8}$",
+    },
+    {
+      type: "worked-example",
+      id: "omp2-7-we3",
+      title: "Worked example 3 (Brewster angle)",
+      problem:
+        "Find the Brewster angle for glass of $n = \\sqrt3$ and the angle of the refracted ray at that incidence. What is the Brewster angle for water ($n = \\frac43$)?",
+      steps: [
+        { text: "$\\tan\\theta_B = \\sqrt3$, so $\\theta_B = 60^\\circ$." },
+        { text: "The refracted ray is at $r = 90^\\circ - 60^\\circ = 30^\\circ$. Check with Snell: $\\sin 60^\\circ = \\sqrt3\\sin 30^\\circ$, i.e. $0.866 = 0.866$. ✓" },
+        { text: "For water ($n = \\frac43$): $\\theta_B = \\tan^{-1}\\frac43 \\approx 53^\\circ$. Glare off a lake is strongest in polarisation when the Sun is about $37^\\circ$ above the horizon." },
+      ],
+      answer: "Glass: $\\theta_B = 60^\\circ$, $r = 30^\\circ$; water: $\\theta_B \\approx 53^\\circ$.",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 (Brewster angle).** For glass of $n = \\sqrt3$:\n\n1. $\\tan\\theta_B = \\sqrt3$, so $\\theta_B = 60^\\circ$.\n2. The refracted ray is at $r = 90^\\circ - 60^\\circ = 30^\\circ$. Check with Snell: $\\sin 60^\\circ = \\sqrt3\\sin 30^\\circ$, i.e. $0.866 = 0.866$. ✓\n3. For water ($n = \\frac43$): $\\theta_B = \\tan^{-1}\\frac43 \\approx 53^\\circ$. Glare off a lake is strongest in polarisation when the Sun is about $37^\\circ$ above the horizon.\n\n**Worked example 4 (rotating analyser).** An analyser is rotated slowly in a beam. If the intensity (a) stays constant, the beam is unpolarised; (b) drops to zero twice per turn, it is plane-polarised; (c) varies between a maximum and a non-zero minimum, it is partly polarised.",
+        "**Worked example 4 (rotating analyser).** An analyser is rotated slowly in a beam. If the intensity (a) stays constant, the beam is unpolarised; (b) drops to zero twice per turn, it is plane-polarised; (c) varies between a maximum and a non-zero minimum, it is partly polarised.",
     },
     {
       type: "callout",
@@ -1049,16 +1449,19 @@ const lesson07: LessonSeed = {
       content:
         "Unpolarised light has no direction to align with. A single ideal polaroid always transmits exactly half, $\\frac{I_0}{2}$. Malus' law $I_0\\cos^2\\theta$ applies only to light that is already plane-polarised.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-7-q1",
       variant: "practice",
-      question: "Unpolarised light of intensity $I_0$ passes through two polaroids whose axes are at $60^\\circ$. What intensity emerges?",
-      options: [
-        { text: "$\\frac{I_0}{4}$", feedback: "That is $I_0\\cos^2 60^\\circ$; the first polaroid halves unpolarised light first." },
-        { text: "$\\frac{I_0}{8}$", correct: true, feedback: "$\\frac{I_0}{2}\\cos^2 60^\\circ = \\frac{I_0}{2}\\cdot\\frac14$." },
-        { text: "$\\frac{I_0}{2}$", feedback: "That is after the first polaroid only." },
-        { text: "$\\frac{3I_0}{8}$", feedback: "That uses $\\cos^2 30^\\circ$. The angle between the axes is $60^\\circ$." },
+      question: "Unpolarised light of intensity $I_0$ passes through two polaroids whose axes are at $60^\\circ$. What fraction $I/I_0$ emerges? (A fraction like 1/3 or a decimal is fine.)",
+      answer: 0.125,
+      hint: "The first polaroid halves unpolarised light; Malus' law applies only at the second.",
+      solution: "After $P_1$: $\\dfrac{I_0}{2}$. After $P_2$: $\\dfrac{I_0}{2}\\cos^2 60^\\circ = \\dfrac{I_0}{2}\\cdot\\dfrac14 = \\dfrac{I_0}{8}$, so $I/I_0 = \\dfrac18 = 0.125$.",
+      commonMistakes: [
+        { answer: 0.25, feedback: "That is $I_0\\cos^2 60^\\circ$; the first polaroid halves unpolarised light first." },
+        { answer: 0.5, feedback: "That is after the first polaroid only." },
+        { answer: 0.375, feedback: "That uses $\\cos^2 30^\\circ$. The angle between the axes is $60^\\circ$." },
       ],
     },
     {
@@ -1071,6 +1474,7 @@ const lesson07: LessonSeed = {
         { text: "$30^\\circ$", feedback: "$30^\\circ$ is the refraction angle at Brewster incidence." },
         { text: "$35.3^\\circ$", feedback: "That is the critical angle, $\\sin^{-1}\\frac1n$." },
       ],
+      hint: "At the Brewster angle the reflected and refracted rays are perpendicular (2.7). Combine that with Snell's law, or recall the relation it gives.",
     },
     {
       type: "quiz",
@@ -1082,18 +1486,21 @@ const lesson07: LessonSeed = {
         { text: "Air absorbs polarised sound.", feedback: "The reason is the longitudinal nature of sound." },
         { text: "They are longitudinal: there is no transverse vibration direction to select.", correct: true, feedback: "Polarisation needs a transverse wave." },
       ],
+      hint: "Recall what a polariser selects (2.7), and compare that with the direction in which the air layers vibrate in sound.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-7-q4",
       variant: "practice",
-      question: "Unpolarised light ($I_0$) passes through $P_1$, then $P_2$ at $30^\\circ$ to $P_1$, then $P_3$ at $90^\\circ$ to $P_1$. What emerges?",
-      options: [
-        { text: "0", feedback: "$P_1$ and $P_3$ are crossed, but $P_2$ between them rotates the polarisation." },
-        { text: "$\\frac{3I_0}{32}$", correct: true, feedback: "$\\frac{I_0}{2}\\cdot\\cos^2 30^\\circ\\cdot\\cos^2 60^\\circ = \\frac{I_0}{2}\\cdot\\frac34\\cdot\\frac14$." },
-        { text: "$\\frac{I_0}{8}$", feedback: "That is the $45^\\circ$ case. Here the angles are $30^\\circ$ then $60^\\circ$." },
-      ],
+      question: "Unpolarised light ($I_0$) passes through $P_1$, then $P_2$ at $30^\\circ$ to $P_1$, then $P_3$ at $90^\\circ$ to $P_1$. What fraction $I/I_0$ emerges? (A fraction like 1/3 or a decimal is fine.)",
+      answer: 0.09375,
+      relTolerance: 0.01,
       hint: "Use the angle between each polaroid and the one before it.",
+      solution: "After $P_1$: $\\dfrac{I_0}{2}$. $P_2$ is at $30^\\circ$ to $P_1$: $\\times\\cos^2 30^\\circ = \\dfrac34$. $P_3$ is at $60^\\circ$ to $P_2$: $\\times\\cos^2 60^\\circ = \\dfrac14$.\n\n$I = \\dfrac{I_0}{2}\\cdot\\dfrac34\\cdot\\dfrac14 = \\dfrac{3I_0}{32}$, so $I/I_0 = \\dfrac{3}{32} \\approx 0.094$.",
+      commonMistakes: [
+        { answer: 0, tolerance: 0, feedback: "$P_1$ and $P_3$ are crossed, but $P_2$ between them rotates the polarisation, so some light gets through." },
+        { answer: 0.125, feedback: "That is the $45^\\circ$ case. Here the angles are $30^\\circ$ then $60^\\circ$." },
+      ],
     },
     {
       type: "quiz",
@@ -1105,6 +1512,21 @@ const lesson07: LessonSeed = {
         { text: "$\\theta_B$", feedback: "The special feature is perpendicularity, which gives $\\tan\\theta_B = n$." },
         { text: "$90^\\circ$", correct: true, feedback: "$\\theta_B + r = 90^\\circ$, so the reflected and refracted rays are perpendicular." },
       ],
+      hint: "Use $\\tan\\theta_B = n$ together with Snell's law to find $r$, then add up the angles at the surface.",
+    },
+    {
+      type: "quiz",
+      id: "omp2-7-q6",
+      variant: "concept",
+      multiple: true,
+      question: "Select every process that polarises (fully or strongly) light from an unpolarised source.",
+      options: [
+        { text: "Passing it through a polaroid", correct: true, feedback: "The polaroid transmits only the component along its pass axis: $\\frac{I_0}{2}$, plane-polarised." },
+        { text: "Reflecting it off glass at the Brewster angle", correct: true, feedback: "At $\\tan\\theta_B = n$ the reflected light is completely polarised, with $\\vec E$ parallel to the surface." },
+        { text: "Viewing light scattered by air at $90^\\circ$ to the beam", correct: true, feedback: "Seen from the side, only one direction of the molecules' oscillation is visible, so the scattered light is strongly polarised." },
+        { text: "Passing it through a converging lens", feedback: "A lens bends all directions of $\\vec E$ alike; it does not select one." },
+      ],
+      hint: "Each correct process selects one direction of $\\vec E$ out of all the directions present.",
     },
   ]),
 };
@@ -1136,28 +1558,34 @@ const lessonMastery: LessonSeed = {
         { text: "$\\sqrt{3/2} \\approx 1.22$", correct: true, feedback: "$\\frac{\\sin 60^\\circ}{\\sin 45^\\circ} = \\frac{\\sqrt3/2}{\\sqrt2/2}$." },
         { text: "$\\frac43$", feedback: "That is $60/45$. Use the sines." },
       ],
+      hint: "Refraction by Huygens' construction (2.1).",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-8-q2",
       variant: "mastery",
       question: "Two coherent sources have intensities in the ratio 25 : 9. What is $I_{\\max}/I_{\\min}$?",
-      options: [
-        { text: "16", correct: true, feedback: "Amplitudes 5 : 3, so $\\left(\\frac{8}{2}\\right)^2 = 16$." },
-        { text: "$\\frac{17}{8}$", feedback: "That is $\\frac{25 + 9}{25 - 9}$. Take square roots first: intensities do not add like amplitudes." },
-        { text: "4", feedback: "That is $\\frac{a_1 + a_2}{a_1 - a_2}$; square it for intensities." },
+      answer: 16,
+      hint: "Convert to amplitudes first.",
+      solution: "Amplitudes are in the ratio $\\sqrt{25} : \\sqrt9 = 5 : 3$.\n\n$\\dfrac{I_{\\max}}{I_{\\min}} = \\left(\\dfrac{5 + 3}{5 - 3}\\right)^2 = 4^2 = 16$.",
+      commonMistakes: [
+        { answer: 2.125, feedback: "That is $\\frac{25 + 9}{25 - 9}$. Take square roots first: intensities do not add like amplitudes." },
+        { answer: 4, feedback: "That is $\\frac{a_1 + a_2}{a_1 - a_2}$; square it for intensities." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-8-q3",
       variant: "mastery",
-      question: "In a YDSE, $\\lambda = 500$ nm, $d = 0.25$ mm, $D = 1$ m. How far is the 3rd bright fringe on one side from the 2nd dark fringe on the other side?",
-      options: [
-        { text: "2 mm", feedback: "They are on opposite sides of the centre: add the distances." },
-        { text: "9 mm", correct: true, feedback: "$\\beta = 2$ mm; $3\\beta + 1.5\\beta = 4.5\\beta$." },
-        { text: "10 mm", feedback: "The 2nd dark fringe is at $1.5\\beta$, not $2\\beta$." },
-        { text: "3 mm", feedback: "That subtracts, as if both were on the same side." },
+      question: "In a YDSE, $\\lambda = 500$ nm, $d = 0.25$ mm, $D = 1$ m. How far is the 3rd bright fringe on one side from the 2nd dark fringe on the other side? Give your answer in mm.",
+      answer: 9,
+      unit: "mm",
+      hint: "Find $\\beta$, then place each fringe: bright at $n\\beta$, dark at $(n + \\frac12)\\beta$ counting from $n = 0$.",
+      solution: "$\\beta = \\dfrac{500\\times10^{-9}\\times1}{0.25\\times10^{-3}} = 2$ mm.\n\n3rd bright: $3\\beta$ on one side. 2nd dark: $1.5\\beta$ on the other.\n\nDistance $= 3\\beta + 1.5\\beta = 4.5\\beta = 9$ mm.",
+      commonMistakes: [
+        { answer: 2, feedback: "That is just the fringe width. Place both fringes and add their distances from the centre." },
+        { answer: 10, feedback: "The 2nd dark fringe is at $1.5\\beta$, not $2\\beta$." },
+        { answer: 3, feedback: "That subtracts, as if both were on the same side. They are on opposite sides of the centre: add." },
       ],
     },
     {
@@ -1170,6 +1598,7 @@ const lessonMastery: LessonSeed = {
         { text: "5.6 mm", feedback: "$14 \\times 400 = 10 \\times 560 = 5600$ nm is a coincidence, but not the first one. The smallest common multiple is 2800 nm." },
         { text: "2.8 mm", correct: true, feedback: "$7 \\times 400 = 5 \\times 560 = 2800$ nm; $y = 2800\\times10^{-9} \\times 10^3$ m." },
       ],
+      hint: "Two wavelengths in a YDSE (2.4).",
     },
     {
       type: "quiz",
@@ -1181,28 +1610,35 @@ const lessonMastery: LessonSeed = {
         { text: "200 nm", feedback: "$2\\mu t = \\lambda$ gives darkness here, because of the $\\pi$ shift at the top surface." },
         { text: "133 nm", feedback: "That is $\\frac\\lambda4$ without the index." },
       ],
+      hint: "Thin-film interference (2.4), including the phase change on reflection.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-8-q6",
       variant: "mastery",
-      question: "With 500 nm light and a screen 2 m away, a single slit gives a central maximum 4 mm wide. What is the slit width?",
-      options: [
-        { text: "0.25 mm", feedback: "That uses $w = \\frac{\\lambda D}{a}$, the half-width." },
-        { text: "1 mm", feedback: "Recheck: $2 \\times 5\\times10^{-7} \\times 2 = 2\\times10^{-6}$, divided by $4\\times10^{-3}$." },
-        { text: "0.5 mm", correct: true, feedback: "$a = \\frac{2\\lambda D}{w} = \\frac{2 \\times 5\\times10^{-7} \\times 2}{4\\times10^{-3}}$." },
+      question: "With 500 nm light and a screen 2 m away, a single slit gives a central maximum 4 mm wide. What is the slit width, in mm?",
+      answer: 0.5,
+      unit: "mm",
+      hint: "The central maximum's full width is $w = \\dfrac{2\\lambda D}{a}$.",
+      solution: "$a = \\dfrac{2\\lambda D}{w} = \\dfrac{2 \\times 5\\times10^{-7} \\times 2}{4\\times10^{-3}} = 5\\times10^{-4}$ m $= 0.5$ mm.",
+      commonMistakes: [
+        { answer: 0.25, feedback: "That uses $w = \\frac{\\lambda D}{a}$, the half-width. The central maximum spans both sides." },
+        { answer: 1, feedback: "Recheck: $2 \\times 5\\times10^{-7} \\times 2 = 2\\times10^{-6}$, divided by $4\\times10^{-3}$." },
       ],
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp2-8-q7",
       variant: "mastery",
       question: "Two slits, each 0.1 mm wide, are 0.5 mm apart. How many interference maxima appear within the central diffraction maximum?",
-      options: [
-        { text: "11", feedback: "The $n = \\pm5$ fringes coincide with the envelope's zeros and vanish." },
-        { text: "10", feedback: "The count is symmetric about $n = 0$, so it is odd." },
-        { text: "9", correct: true, feedback: "$\\frac da = 5$: $n = -4, \\dots, 4$ survive; $\\pm5$ fall on diffraction zeros." },
-        { text: "5", feedback: "5 is $d/a$, the order at the envelope's edge." },
+      answer: 9,
+      unit: "maxima",
+      hint: "Compare $d/a$ with the interference orders, and check which orders land on the envelope's zeros.",
+      solution: "$\\dfrac da = 5$, so orders with $|n| < 5$ lie inside the envelope.\n\nThe $n = \\pm5$ maxima fall exactly on the diffraction zeros and vanish, leaving $n = -4, \\dots, 4$: 9 maxima.",
+      commonMistakes: [
+        { answer: 11, feedback: "The $n = \\pm5$ fringes coincide with the envelope's zeros and vanish." },
+        { answer: 10, feedback: "The count is symmetric about $n = 0$, so it is odd." },
+        { answer: 5, feedback: "5 is $d/a$, the order at the envelope's edge, not the count." },
       ],
     },
     {
@@ -1215,6 +1651,7 @@ const lessonMastery: LessonSeed = {
         { text: "$3.4\\times10^{-7}$ rad", correct: true, feedback: "$\\frac{1.22 \\times 5.5\\times10^{-7}}{2}$." },
         { text: "$1.3\\times10^{-6}$ rad", feedback: "That multiplies by $D$ instead of dividing." },
       ],
+      hint: "The Rayleigh criterion (2.6): keep the wavelength and the aperture in the same units.",
     },
     {
       type: "quiz",
@@ -1226,6 +1663,7 @@ const lessonMastery: LessonSeed = {
         { text: "$\\frac{I_0}{4}$; zero after removal", feedback: "Two $45^\\circ$ steps each multiply by $\\frac12$, after the initial halving." },
         { text: "Zero in both cases", feedback: "The middle polaroid rotates the polarisation so some light passes." },
       ],
+      hint: "Malus's law (2.7), one polaroid at a time.",
     },
     {
       type: "quiz",
@@ -1237,6 +1675,7 @@ const lessonMastery: LessonSeed = {
         { text: "$35.3^\\circ$ and $90^\\circ$", feedback: "That is the critical angle picture, for light leaving glass." },
         { text: "$60^\\circ$ and $30^\\circ$", correct: true, feedback: "$\\tan\\theta_B = \\sqrt3$; reflected ⊥ refracted gives $r = 30^\\circ$." },
       ],
+      hint: "Brewster's law (2.7): how are the reflected and refracted rays oriented to each other?",
     },
     {
       type: "quiz",
@@ -1261,6 +1700,21 @@ const lessonMastery: LessonSeed = {
         { text: "The central fringe moves 2 mm; the fringe width halves.", feedback: "The shift is $D\\sin\\alpha = 1$ mm, and a tilted beam does not change $\\lambda D/d$ at small angles." },
         { text: "The central fringe moves 1 mm (along the direction of the incoming light); the fringe width stays 2 mm.", correct: true, feedback: "Path difference before the slits $d\\sin\\alpha$ is cancelled when $d\\sin\\theta = d\\sin\\alpha$: $\\theta = \\alpha$, shift $\\approx D\\alpha = 1$ mm. $\\beta = \\frac{\\lambda D}{d} = 2$ mm, unchanged." },
       ],
+      hint: "Oblique incidence on a double slit: the incoming wave already has a path difference $d\\sin\\alpha$ before it reaches the slits.",
+    },
+    {
+      type: "quiz",
+      id: "omp2-8-q13",
+      variant: "mastery",
+      multiple: true,
+      question: "In a YDSE with monochromatic light, select every change that moves the central bright fringe off the centre of the screen while leaving the fringe width unchanged.",
+      options: [
+        { text: "Covering one slit with a thin glass sheet", correct: true, feedback: "The sheet adds a constant optical path $(\\mu - 1)t$: the pattern slides towards the covered slit, $\\beta$ unchanged." },
+        { text: "Tilting the incident plane wave by a small angle", correct: true, feedback: "The path difference $d\\sin\\alpha$ before the slits moves the zero-path point to $\\theta = \\alpha$; $\\beta = \\frac{\\lambda D}{d}$ is unchanged." },
+        { text: "Moving the source slit sideways a little", correct: true, feedback: "The central fringe moves the opposite way by $s\\frac{D}{D'}$; nothing in $\\frac{\\lambda D}{d}$ changes." },
+        { text: "Immersing the whole apparatus in water", feedback: "The central fringe stays at the centre (both paths are in water), and $\\beta$ shrinks to $\\beta/n$." },
+      ],
+      hint: "A shift needs an extra path difference that is the same at every point of the screen.",
     },
   ]),
 };

@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { z } from "zod";
 import type { equationSolutionViewerSchema } from "../../schemas/blocks";
 import { compileExpression } from "../../lib/math-eval";
+import { RichText } from "../rich-text";
 import { FunctionPlot, formatNumber, makeScales } from "./function-plot";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 
@@ -121,8 +122,8 @@ export function EquationSolutionViewer({ config }: { config: Config }) {
         </p>
       </div>
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ??
-          "Drag the line. Every crossing is a solution, and the pattern of crossings repeats with the period."}
+        <RichText text={config.caption ??
+          "Drag the line. Every crossing is a solution, and the pattern of crossings repeats with the period."} />
       </p>
     </InteractiveFrame>
   );

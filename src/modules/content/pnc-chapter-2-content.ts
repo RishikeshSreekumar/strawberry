@@ -70,6 +70,7 @@ const lesson01: LessonSeed = {
           "60 ordered triples, 10 colours, each colour 6 times. Tap any triple to light up its 3! = 6 re-orderings.",
       },
     },
+    { type: "heading", text: "Dividing out the order: ${}^nC_r$" },
     {
       type: "text",
       content:
@@ -88,6 +89,7 @@ const lesson01: LessonSeed = {
       type: "text",
       content: "Read $\\binom{n}{r}$ as \"$n$ choose $r$\". Both notations mean the same number.",
     },
+    { type: "heading", text: "Cancelling, and the edge cases" },
     {
       type: "text",
       content:
@@ -113,49 +115,86 @@ const lesson01: LessonSeed = {
       content:
         "Look along the last row: 1, 5, 10, 10, 5, 1. It reads the same forwards and backwards. That is not a coincidence, and the next lesson explains it with one sentence.",
     },
+    { type: "heading", text: "Selection or arrangement? Worked cases" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — handshakes.** Twelve people at a party each shake hands once with everyone else. How many handshakes?\n\n1. A handshake is fixed by *which two people* are involved. \"Priya shakes Rahul\" is the same handshake as \"Rahul shakes Priya\", so order does not matter.\n2. Count: $^{12}C_2 = \\frac{12 \\times 11}{2} = 66$.\n3. Sanity check the slot method: $12 \\times 11 = 132$ counts each handshake from both ends, and $132 \\div 2 = 66$.",
+      type: "worked-example",
+      id: "pc2-1-we1",
+      title: "Worked example 1 — handshakes",
+      problem:
+        "Twelve people at a party each shake hands once with everyone else. How many handshakes?",
+      steps: [
+        {
+          text: "A handshake is fixed by *which two people* are involved. \"Priya shakes Rahul\" is the same handshake as \"Rahul shakes Priya\", so order does not matter.",
+        },
+        {
+          text: "Count: $^{12}C_2 = \\frac{12 \\times 11}{2} = 66$.",
+        },
+        {
+          text: "Sanity check the slot method: $12 \\times 11 = 132$ counts each handshake from both ends, and $132 \\div 2 = 66$.",
+        },
+      ],
+      answer: "${}^{12}C_2 = 66$ handshakes.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — a quiz team.** A class has 8 students. How many 3-person quiz teams can be formed? And how many ways to choose a team *leader, speaker and scribe*?\n\n1. A team is a set: $^8C_3 = \\frac{8 \\times 7 \\times 6}{6} = 56$.\n2. Leader, speaker, scribe are three **different jobs**. Swapping who is leader and who is scribe gives a different outcome, so order matters: $^8P_3 = 8 \\times 7 \\times 6 = 336$.\n3. Check: $56 \\times 3! = 336$. Every team can hand out its three jobs in $3! = 6$ ways.",
+      type: "worked-example",
+      id: "pc2-1-we2",
+      title: "Worked example 2 — a quiz team",
+      problem:
+        "A class has 8 students. How many 3-person quiz teams can be formed? And how many ways to choose a team *leader, speaker and scribe*?",
+      steps: [
+        {
+          text: "A team is a set: $^8C_3 = \\frac{8 \\times 7 \\times 6}{6} = 56$.",
+        },
+        {
+          text: "Leader, speaker, scribe are three **different jobs**. Swapping who is leader and who is scribe gives a different outcome, so order matters: $^8P_3 = 8 \\times 7 \\times 6 = 336$.",
+        },
+        {
+          text: "Check: $56 \\times 3! = 336$. Every team can hand out its three jobs in $3! = 6$ ways.",
+        },
+      ],
+      answer: "$56$ teams; $336$ ways to choose a leader, speaker and scribe.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — a football league.** Ten clubs play a league. (a) If every pair of clubs meets **once**, how many matches are there? (b) If every pair meets twice, **home and away**, how many?\n\n1. (a) A single match is fixed by which two clubs play. Mumbai vs Pune is the same match as Pune vs Mumbai. *Why this step:* apply the swap test — swapping the two clubs gives the same fixture, so this is a selection.",
+      type: "worked-example",
+      id: "pc2-1-we3",
+      title: "Worked example 3 — a football league",
+      problem:
+        "Ten clubs play a league. (a) If every pair of clubs meets **once**, how many matches are there? (b) If every pair meets twice, **home and away**, how many?",
+      steps: [
+        {
+          text: "(a) A single match is fixed by which two clubs play. Mumbai vs Pune is the same match as Pune vs Mumbai. *Why this step:* apply the swap test — swapping the two clubs gives the same fixture, so this is a selection.",
+          latex: "{}^{10}C_2 = \\frac{10 \\times 9}{2} = 45 \\text{ matches}",
+        },
+        {
+          text: "(b) Now \"Mumbai at home to Pune\" and \"Pune at home to Mumbai\" are different fixtures. *Why this step:* the host is a role, and roles make order matter.",
+          latex: "{}^{10}P_2 = 10 \\times 9 = 90 = 2 \\times {}^{10}C_2 \\text{ matches}",
+        },
+        {
+          text: "*Check:* each pair of clubs plays exactly twice, so the answer to (b) must be double the answer to (a). It is.",
+        },
+      ],
+      answer: "(a) $45$ matches (b) $90$ matches",
     },
-    { type: "math", latex: "{}^{10}C_2 = \\frac{10 \\times 9}{2} = 45 \\text{ matches}" },
     {
-      type: "text",
-      content:
-        "2. (b) Now \"Mumbai at home to Pune\" and \"Pune at home to Mumbai\" are different fixtures. *Why this step:* the host is a role, and roles make order matter.",
-    },
-    { type: "math", latex: "{}^{10}P_2 = 10 \\times 9 = 90 = 2 \\times {}^{10}C_2 \\text{ matches}" },
-    {
-      type: "text",
-      content:
-        "3. *Check:* each pair of clubs plays exactly twice, so the answer to (b) must be double the answer to (a). It is.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 — recover $n$ and $r$ (CBSE / JEE).** If $^nP_r = 840$ and $^nC_r = 35$, find $n$ and $r$.\n\n1. Divide the two facts. *Why this step:* $^nP_r = {}^nC_r \\times r!$, so the ratio isolates $r!$ and gets rid of $n$ entirely.",
-    },
-    { type: "math", latex: "r! = \\frac{{}^nP_r}{{}^nC_r} = \\frac{840}{35} = 24 = 4! \\quad\\Longrightarrow\\quad r = 4" },
-    {
-      type: "text",
-      content:
-        "2. Now $^nP_4 = n(n-1)(n-2)(n-3) = 840$. *Why this step:* with $r$ known, $^nP_r$ is a product of $r$ consecutive integers, and we just need to spot which four multiply to 840.",
-    },
-    { type: "math", latex: "840 = 7 \\times 6 \\times 5 \\times 4 \\quad\\Longrightarrow\\quad n = 7" },
-    {
-      type: "text",
-      content:
-        "3. *Check:* $^7C_4 = {}^7C_3 = \\frac{7 \\times 6 \\times 5}{6} = 35$. ✓",
+      type: "worked-example",
+      id: "pc2-1-we4",
+      title: "Worked example 4 — recover $n$ and $r$ (CBSE / JEE)",
+      problem:
+        "If $^nP_r = 840$ and $^nC_r = 35$, find $n$ and $r$.",
+      steps: [
+        {
+          text: "Divide the two facts. *Why this step:* $^nP_r = {}^nC_r \\times r!$, so the ratio isolates $r!$ and gets rid of $n$ entirely.",
+          latex: "r! = \\frac{{}^nP_r}{{}^nC_r} = \\frac{840}{35} = 24 = 4! \\quad\\Longrightarrow\\quad r = 4",
+        },
+        {
+          text: "Now $^nP_4 = n(n-1)(n-2)(n-3) = 840$. *Why this step:* with $r$ known, $^nP_r$ is a product of $r$ consecutive integers, and we just need to spot which four multiply to 840.",
+          latex: "840 = 7 \\times 6 \\times 5 \\times 4 \\quad\\Longrightarrow\\quad n = 7",
+        },
+        {
+          text: "*Check:* $^7C_4 = {}^7C_3 = \\frac{7 \\times 6 \\times 5}{6} = 35$. ✓",
+        },
+      ],
+      answer: "$n = 7$, $r = 4$",
     },
     {
       type: "callout",
@@ -164,6 +203,7 @@ const lesson01: LessonSeed = {
       content:
         "It feels like choosing two players from a squad, so students reach for $^{11}C_2 = 55$. But the two chosen people get **different roles**. (Kohli captain, Rohit vice) and (Rohit captain, Kohli vice) are different outcomes. Roles are positions, and positions make order matter: the answer is $^{11}P_2 = 11 \\times 10 = 110$.\n\nThe test to apply every time: *if I swap two of the chosen things, do I get a different outcome?* Yes → arrangement ($P$). No → selection ($C$).",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc2-1-q1",
@@ -262,6 +302,7 @@ const lesson02: LessonSeed = {
       content:
         "You could prove every identity in this lesson by pushing factorials around. But there is a cleaner method, and it tells you *why* the identity is true: **count the same collection in two different ways.** Both counts are correct, so they must be equal. Each identity below gets a counting proof first, then an algebra check.",
     },
+    { type: "heading", text: "Choosing who goes, or who stays" },
     {
       type: "text",
       content:
@@ -285,6 +326,7 @@ const lesson02: LessonSeed = {
           "Row n of this triangle lists nC0, nC1, …, nCn. Pick any entry: its mirror image across the centre line is the same number. Choosing who is in = choosing who is out.",
       },
     },
+    { type: "heading", text: "Pascal's rule: split on one person" },
     {
       type: "text",
       content:
@@ -307,22 +349,27 @@ const lesson02: LessonSeed = {
         "*Number check:* $^5C_2 + {}^5C_1 = 10 + 5 = 15 = {}^6C_2$. In the triangle above, every entry is the sum of the two just above it — that is Pascal's rule drawn. Chapter 4 builds the whole binomial theorem on it.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example — a club working group (application).** A club has 15 members, one of whom is the treasurer, Kavya. A 6-member working group is to be chosen. Count the groups directly, then again by splitting on Kavya.\n\n1. Directly. *Why this step:* with no restriction this is a plain selection of 6 from 15.",
+      type: "worked-example",
+      id: "pc2-2-we1",
+      title: "Worked example — a club working group (application)",
+      problem:
+        "A club has 15 members, one of whom is the treasurer, Kavya. A 6-member working group is to be chosen. Count the groups directly, then again by splitting on Kavya.",
+      steps: [
+        {
+          text: "Directly. *Why this step:* with no restriction this is a plain selection of 6 from 15.",
+          latex: "{}^{15}C_6 = \\frac{15 \\times 14 \\times 13 \\times 12 \\times 11 \\times 10}{720} = \\frac{3\\,603\\,600}{720} = 5005",
+        },
+        {
+          text: "Split on the yes/no question \"is Kavya in?\". *Why this step:* every group falls in exactly one of the two cases, so the sum rule applies.\n\n- Kavya in: the other 5 come from the remaining 14, ${}^{14}C_5 = 2002$.\n- Kavya out: all 6 come from the other 14, ${}^{14}C_6 = 3003$.",
+          latex: "{}^{14}C_5 + {}^{14}C_6 = 2002 + 3003 = 5005 = {}^{15}C_6",
+        },
+        {
+          text: "*Check:* the two routes agree, which is Pascal's rule with $n = 14$, $r = 6$. The split is also useful on its own: if the question asks only for groups that include the treasurer, the answer is the first case, 2002.",
+        },
+      ],
+      answer: "${}^{15}C_6 = 5005$ groups.",
     },
-    { type: "math", latex: "{}^{15}C_6 = \\frac{15 \\times 14 \\times 13 \\times 12 \\times 11 \\times 10}{720} = \\frac{3\\,603\\,600}{720} = 5005" },
-    {
-      type: "text",
-      content:
-        "2. Split on the yes/no question \"is Kavya in?\". *Why this step:* every group falls in exactly one of the two cases, so the sum rule applies.\n\n- Kavya in: the other 5 come from the remaining 14, ${}^{14}C_5 = 2002$.\n- Kavya out: all 6 come from the other 14, ${}^{14}C_6 = 3003$.",
-    },
-    { type: "math", latex: "{}^{14}C_5 + {}^{14}C_6 = 2002 + 3003 = 5005 = {}^{15}C_6" },
-    {
-      type: "text",
-      content:
-        "3. *Check:* the two routes agree, which is Pascal's rule with $n = 14$, $r = 6$. The split is also useful on its own: if the question asks only for groups that include the treasurer, the answer is the first case, 2002.",
-    },
+    { type: "heading", text: "Picking a chair, and ratios of neighbours" },
     {
       type: "text",
       content:
@@ -346,22 +393,30 @@ const lesson02: LessonSeed = {
         "So the row grows while $n - r + 1 > r$, i.e. while $r < \\frac{n+1}{2}$, and shrinks after that. That is why the biggest entries sit in the middle of each row.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example — three neighbours in a row (JEE).** Three consecutive entries of some row are ${}^nC_{r-1} = 36$, ${}^nC_r = 84$ and ${}^nC_{r+1} = 126$. Find $n$ and $r$.\n\n1. Divide the first two. *Why this step:* the neighbour ratio cancels all the factorials and leaves a linear equation in $n$ and $r$.",
+      type: "worked-example",
+      id: "pc2-2-we2",
+      title: "Worked example — three neighbours in a row (JEE)",
+      problem:
+        "Three consecutive entries of some row are ${}^nC_{r-1} = 36$, ${}^nC_r = 84$ and ${}^nC_{r+1} = 126$. Find $n$ and $r$.",
+      steps: [
+        {
+          text: "Divide the first two. *Why this step:* the neighbour ratio cancels all the factorials and leaves a linear equation in $n$ and $r$.",
+          latex: "\\frac{{}^nC_r}{{}^nC_{r-1}} = \\frac{n-r+1}{r} = \\frac{84}{36} = \\frac{7}{3} \\quad\\Longrightarrow\\quad 3n + 3 = 10r",
+        },
+        {
+          text: "Divide the next two, using the same ratio with $r$ replaced by $r + 1$. *Why this step:* two unknowns need two equations.",
+          latex: "\\frac{{}^nC_{r+1}}{{}^nC_r} = \\frac{n-r}{r+1} = \\frac{126}{84} = \\frac{3}{2} \\quad\\Longrightarrow\\quad 2n = 5r + 3",
+        },
+        {
+          text: "Solve. From step 1, $n = \\frac{10r - 3}{3}$. Substituting, $\\frac{2(10r-3)}{3} = 5r + 3$, so $20r - 6 = 15r + 9$, giving $r = 3$ and $n = 9$.",
+        },
+        {
+          text: "*Check:* ${}^9C_2 = 36$, ${}^9C_3 = 84$, ${}^9C_4 = 126$. ✓",
+        },
+      ],
+      answer: "$n = 9$, $r = 3$",
     },
-    { type: "math", latex: "\\frac{{}^nC_r}{{}^nC_{r-1}} = \\frac{n-r+1}{r} = \\frac{84}{36} = \\frac{7}{3} \\quad\\Longrightarrow\\quad 3n + 3 = 10r" },
-    {
-      type: "text",
-      content:
-        "2. Divide the next two, using the same ratio with $r$ replaced by $r + 1$. *Why this step:* two unknowns need two equations.",
-    },
-    { type: "math", latex: "\\frac{{}^nC_{r+1}}{{}^nC_r} = \\frac{n-r}{r+1} = \\frac{126}{84} = \\frac{3}{2} \\quad\\Longrightarrow\\quad 2n = 5r + 3" },
-    {
-      type: "text",
-      content:
-        "3. Solve. From step 1, $n = \\frac{10r - 3}{3}$. Substituting, $\\frac{2(10r-3)}{3} = 5r + 3$, so $20r - 6 = 15r + 9$, giving $r = 3$ and $n = 9$.\n\n4. *Check:* ${}^9C_2 = 36$, ${}^9C_3 = 84$, ${}^9C_4 = 126$. ✓",
-    },
+    { type: "heading", text: "Equal entries in one row" },
     {
       type: "text",
       content:
@@ -369,19 +424,55 @@ const lesson02: LessonSeed = {
     },
     { type: "math", latex: "{}^nC_a = {}^nC_b \\quad\\Longrightarrow\\quad a = b \\ \\text{ or } \\ a + b = n" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** If $^nC_8 = {}^nC_6$, find $^nC_2$.\n\n1. $8 \\ne 6$, so the second option must hold: $8 + 6 = n$, giving $n = 14$.\n2. $^{14}C_2 = \\frac{14 \\times 13}{2} = 91$.",
+      type: "worked-example",
+      id: "pc2-2-we3",
+      title: "Worked example 1",
+      problem:
+        "If $^nC_8 = {}^nC_6$, find $^nC_2$.",
+      steps: [
+        {
+          text: "$8 \\ne 6$, so the second option must hold: $8 + 6 = n$, giving $n = 14$.",
+        },
+        {
+          text: "$^{14}C_2 = \\frac{14 \\times 13}{2} = 91$.",
+        },
+      ],
+      answer: "${}^{14}C_2 = 91$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2.** If $^{18}C_r = {}^{18}C_{r+2}$, find $^rC_5$.\n\n1. $r \\ne r + 2$, so $r + (r + 2) = 18$, giving $r = 8$.\n2. $^8C_5 = {}^8C_3 = \\frac{8 \\times 7 \\times 6}{6} = 56$ — symmetry saved two factors of work.",
+      type: "worked-example",
+      id: "pc2-2-we4",
+      title: "Worked example 2",
+      problem:
+        "If $^{18}C_r = {}^{18}C_{r+2}$, find $^rC_5$.",
+      steps: [
+        {
+          text: "$r \\ne r + 2$, so $r + (r + 2) = 18$, giving $r = 8$.",
+        },
+        {
+          text: "$^8C_5 = {}^8C_3 = \\frac{8 \\times 7 \\times 6}{6} = 56$ — symmetry saved two factors of work.",
+        },
+      ],
+      answer: "${}^8C_5 = 56$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — Pascal twice.** Simplify $^nC_r + 2\\,{}^nC_{r-1} + {}^nC_{r-2}$.\n\n1. Split the middle term: $\\bigl({}^nC_r + {}^nC_{r-1}\\bigr) + \\bigl({}^nC_{r-1} + {}^nC_{r-2}\\bigr)$.\n2. Pascal on each bracket: $^{n+1}C_r + {}^{n+1}C_{r-1}$.\n3. Pascal again: $^{n+2}C_r$.",
+      type: "worked-example",
+      id: "pc2-2-we5",
+      title: "Worked example 3 — Pascal twice",
+      problem:
+        "Simplify $^nC_r + 2\\,{}^nC_{r-1} + {}^nC_{r-2}$.",
+      steps: [
+        {
+          text: "Split the middle term: $\\bigl({}^nC_r + {}^nC_{r-1}\\bigr) + \\bigl({}^nC_{r-1} + {}^nC_{r-2}\\bigr)$.",
+        },
+        {
+          text: "Pascal on each bracket: $^{n+1}C_r + {}^{n+1}C_{r-1}$.",
+        },
+        {
+          text: "Pascal again: $^{n+2}C_r$.",
+        },
+      ],
+      answer: "${}^{n+2}C_r$",
     },
     {
       type: "callout",
@@ -390,6 +481,7 @@ const lesson02: LessonSeed = {
       content:
         "1. Invent a concrete collection (committees, teams, paths) whose size is one side of the identity.\n2. Find a second way to build the same collection — usually by singling out one special person, or by doing the choices in a different order.\n3. Both counts are correct, so they are equal. Then check with algebra and one small number case.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc2-2-q1",
@@ -499,25 +591,31 @@ const lesson03: LessonSeed = {
       content:
         "Real committees come with rules: *at least two women*, *the treasurer must be on it*, *these two refuse to serve together*. The formula $^nC_r$ still does all the work. The skill is splitting the problem so that each piece is a plain, unrestricted choice.\n\nTwo strategies cover almost everything:\n\n- **Cases.** Split by the exact value of the restricted quantity (exactly 2 women, exactly 3, …), count each case with the product rule, and add.\n- **Complement.** Count everything, then subtract the outcomes that break the rule.",
     },
+    { type: "heading", text: "At least $k$: cases or complement" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — at least 2 women.** A committee of 5 is chosen from 6 men and 4 women. How many committees have at least 2 women?\n\n*By cases.* \"At least 2\" means exactly 2, 3 or 4 women; the rest are men.",
-    },
-    {
-      type: "table",
-      headers: ["Women", "Men", "Count", "Value"],
-      rows: [
-        ["2", "3", "$^4C_2 \\times {}^6C_3$", "$6 \\times 20 = 120$"],
-        ["3", "2", "$^4C_3 \\times {}^6C_2$", "$4 \\times 15 = 60$"],
-        ["4", "1", "$^4C_4 \\times {}^6C_1$", "$1 \\times 6 = 6$"],
-        ["", "", "**Total**", "**186**"],
+      type: "worked-example",
+      id: "pc2-3-we5",
+      title: "Worked example 1 — at least 2 women",
+      problem:
+        "A committee of 5 is chosen from 6 men and 4 women. How many committees have at least 2 women?",
+      steps: [
+        {
+          text: "*By cases.* \"At least 2\" means exactly 2, 3 or 4 women; the rest are men.",
+          table: {
+            headers: ["Women", "Men", "Count", "Value"],
+            rows: [
+              ["2", "3", "$^4C_2 \\times {}^6C_3$", "$6 \\times 20 = 120$"],
+              ["3", "2", "$^4C_3 \\times {}^6C_2$", "$4 \\times 15 = 60$"],
+              ["4", "1", "$^4C_4 \\times {}^6C_1$", "$1 \\times 6 = 6$"],
+              ["", "", "**Total**", "**186**"],
+            ],
+          },
+        },
+        {
+          text: "*By complement.* All committees: $^{10}C_5 = 252$. The bad ones have 0 or 1 woman:\n\n- 0 women: $^6C_5 = 6$.\n- 1 woman: $^4C_1 \\times {}^6C_4 = 4 \\times 15 = 60$.\n\nSo $252 - 66 = 186$. Two different routes, same answer — the best check you can have.",
+        },
       ],
-    },
-    {
-      type: "text",
-      content:
-        "*By complement.* All committees: $^{10}C_5 = 252$. The bad ones have 0 or 1 woman:\n\n- 0 women: $^6C_5 = 6$.\n- 1 woman: $^4C_1 \\times {}^6C_4 = 4 \\times 15 = 60$.\n\nSo $252 - 66 = 186$. Two different routes, same answer — the best check you can have.",
+      answer: "$186$ committees.",
     },
     {
       type: "callout",
@@ -527,26 +625,31 @@ const lesson03: LessonSeed = {
         "Count how many cases each route needs. \"At least 1\" almost always wants the complement (one bad case: \"none\"). \"At least 3 out of 4\" wants direct cases. When both are short, do both and compare.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example — at least one of each (routine).** A committee of 5 is chosen from 6 boys and 5 girls so that it has at least one boy **and** at least one girl.\n\n1. Count everything. *Why this step:* the condition fails in only two ways, so the complement is shorter than listing the four mixed cases.",
+      type: "worked-example",
+      id: "pc2-3-we1",
+      title: "Worked example — at least one of each (routine)",
+      problem:
+        "A committee of 5 is chosen from 6 boys and 5 girls so that it has at least one boy **and** at least one girl. How many such committees are there?",
+      steps: [
+        {
+          text: "Count everything. *Why this step:* the condition fails in only two ways, so the complement is shorter than listing the four mixed cases.",
+          latex: "{}^{11}C_5 = \\frac{11 \\times 10 \\times 9 \\times 8 \\times 7}{120} = 462",
+        },
+        {
+          text: "Subtract the two bad cases, all boys and all girls. *Why this step:* they cannot overlap (a committee of 5 cannot be all boys and all girls at once), so nothing is subtracted twice.",
+          latex: "462 - {}^6C_5 - {}^5C_5 = 462 - 6 - 1 = 455",
+        },
+        {
+          text: "*Check by cases:* (1 boy, 4 girls) $6 \\times 5 = 30$; (2, 3) $15 \\times 10 = 150$; (3, 2) $20 \\times 10 = 200$; (4, 1) $15 \\times 5 = 75$. Total $30 + 150 + 200 + 75 = 455$. ✓",
+        },
+      ],
+      answer: "$455$ committees.",
     },
-    { type: "math", latex: "{}^{11}C_5 = \\frac{11 \\times 10 \\times 9 \\times 8 \\times 7}{120} = 462" },
+    { type: "heading", text: "The tempting shortcut that fails" },
     {
       type: "text",
       content:
-        "2. Subtract the two bad cases, all boys and all girls. *Why this step:* they cannot overlap (a committee of 5 cannot be all boys and all girls at once), so nothing is subtracted twice.",
-    },
-    { type: "math", latex: "462 - {}^6C_5 - {}^5C_5 = 462 - 6 - 1 = 455" },
-    {
-      type: "text",
-      content:
-        "3. *Check by cases:* (1 boy, 4 girls) $6 \\times 5 = 30$; (2, 3) $15 \\times 10 = 150$; (3, 2) $20 \\times 10 = 200$; (4, 1) $15 \\times 5 = 75$. Total $30 + 150 + 200 + 75 = 455$. ✓",
-    },
-    {
-      type: "text",
-      content:
-        "**The tempting shortcut that fails.** For \"at least one woman\", many students write: *pick one woman to guarantee the condition ($^4C_1$), then fill the other 4 seats from anyone left ($^9C_4$)*, giving $4 \\times 126 = 504$. That is more than the 252 committees that exist at all! Let's shrink the problem until we can see what went wrong.",
+        "For \"at least one woman\", many students write: *pick one woman to guarantee the condition ($^4C_1$), then fill the other 4 seats from anyone left ($^9C_4$)*, giving $4 \\times 126 = 504$. That is more than the 252 committees that exist at all! Let's shrink the problem until we can see what went wrong.",
     },
     {
       type: "text",
@@ -591,58 +694,104 @@ const lesson03: LessonSeed = {
       content:
         "Guaranteeing a condition by pre-placing one item overcounts: a committee with $k$ women is counted $k$ times. Use cases (exactly 1, exactly 2, …) or the complement (all minus none). For 6 men and 4 women, committees of 5 with at least one woman number $252 - 6 = 246$, not 504.",
     },
+    { type: "heading", text: "Particular people: in, out, apart" },
     {
       type: "text",
       content:
-        "**Particular people.** From 10 people, choose 5, where Arjun **must** be included. Put Arjun on first; the remaining 4 seats come from the other 9: $^9C_4 = 126$. If Arjun must be **excluded**, all 5 come from the other 9: $^9C_5 = 126$.\n\nNotice $126 + 126 = 252 = {}^{10}C_5$ — every committee either has Arjun or doesn't. That is Pascal's rule again, now doing real work.",
+        "From 10 people, choose 5, where Arjun **must** be included. Put Arjun on first; the remaining 4 seats come from the other 9: $^9C_4 = 126$. If Arjun must be **excluded**, all 5 come from the other 9: $^9C_5 = 126$.\n\nNotice $126 + 126 = 252 = {}^{10}C_5$ — every committee either has Arjun or doesn't. That is Pascal's rule again, now doing real work.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — two who won't serve together.** From 10 people choose 5, but Arjun and Bina refuse to be on the same committee.\n\n1. Complement: committees *with both* Arjun and Bina have 3 more seats from 8 others: $^8C_3 = 56$.\n2. Answer: $252 - 56 = 196$.\n3. Cases check: neither ($^8C_5 = 56$) + Arjun only ($^8C_4 = 70$) + Bina only ($70$) $= 196$. ✓",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example — no married couple (JEE).** From 5 married couples (10 people), 4 people are chosen so that no husband and wife are both chosen. How many ways?\n\n1. Choose which 4 couples are represented. *Why this step:* \"no couple together\" means the 4 people come from 4 **different** couples. Think in couples first, people second.",
-    },
-    { type: "math", latex: "{}^5C_4 = 5" },
-    {
-      type: "text",
-      content:
-        "2. From each chosen couple, pick the husband or the wife. *Why this step:* the four picks are independent, 2 options each, so they multiply.",
-    },
-    { type: "math", latex: "{}^5C_4 \\times 2^4 = 5 \\times 16 = 80" },
-    {
-      type: "text",
-      content:
-        "3. *Complement check:* all selections ${}^{10}C_4 = 210$. Those containing a given couple: ${}^8C_2 = 28$, so $5 \\times 28 = 140$ over all couples. But a selection made of **two** couples was counted once for each couple, and there are ${}^5C_2 = 10$ of those. So selections with at least one couple number $140 - 10 = 130$, and $210 - 130 = 80$. ✓ Notice the $-10$: the same double-counting as the 'guaranteed woman' shortcut, caught and corrected.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 — an exam choice (NCERT).** A student must answer 10 of 13 questions, including at least 4 of the first 5.\n\n1. The first 5 and the last 8 are separate pools, so split by how many of the first 5 are chosen.\n2. Exactly 4 of the first 5, then 6 of the last 8: $^5C_4 \\times {}^8C_6 = 5 \\times 28 = 140$.\n3. All 5 of the first 5, then 5 of the last 8: $^5C_5 \\times {}^8C_5 = 1 \\times 56 = 56$.\n4. Total: $140 + 56 = 196$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example — picking a cricket XI (CBSE / JEE).** A squad of 16 has 5 bowlers, 2 wicket-keepers and 9 batters. An XI must contain exactly 1 wicket-keeper and at least 4 bowlers. How many XIs are possible?\n\n1. Choose the keeper: ${}^2C_1 = 2$. *Why this step:* \"exactly 1\" is a single fixed case, so it is just a factor.\n2. Split on the bowlers: exactly 4 or exactly 5. *Why this step:* the bowler count changes how many batter places are left, so each case needs its own count. The XI has $11 - 1 = 10$ places after the keeper.",
-    },
-    {
-      type: "table",
-      headers: ["Bowlers", "Batters", "Count", "Value"],
-      rows: [
-        ["4", "6", "${}^5C_4 \\times {}^9C_6$", "$5 \\times 84 = 420$"],
-        ["5", "5", "${}^5C_5 \\times {}^9C_5$", "$1 \\times 126 = 126$"],
-        ["", "", "**Sum**", "**546**"],
+      type: "worked-example",
+      id: "pc2-3-we2",
+      title: "Worked example 2 — two who won't serve together",
+      problem:
+        "From 10 people choose 5, but Arjun and Bina refuse to be on the same committee. How many committees are possible?",
+      steps: [
+        {
+          text: "Complement: committees *with both* Arjun and Bina have 3 more seats from 8 others: $^8C_3 = 56$.",
+        },
+        {
+          text: "Subtract from all ${}^{10}C_5 = 252$ committees: $252 - 56 = 196$.",
+        },
+        {
+          text: "Cases check: neither ($^8C_5 = 56$) + Arjun only ($^8C_4 = 70$) + Bina only ($70$) $= 196$. ✓",
+        },
       ],
+      answer: "$196$ committees.",
     },
-    { type: "math", latex: "\\text{XIs} = 2 \\times 546 = 1092" },
     {
-      type: "text",
-      content:
-        "3. *Check the bookkeeping:* in each row keeper + bowlers + batters $= 1 + 4 + 6 = 1 + 5 + 5 = 11$. The keeper factor multiplies the **sum** of the cases because every XI picks a keeper and then falls into one bowler case.",
+      type: "worked-example",
+      id: "pc2-3-we3",
+      title: "Worked example — no married couple (JEE)",
+      problem:
+        "From 5 married couples (10 people), 4 people are chosen so that no husband and wife are both chosen. How many ways?",
+      steps: [
+        {
+          text: "Choose which 4 couples are represented. *Why this step:* \"no couple together\" means the 4 people come from 4 **different** couples. Think in couples first, people second.",
+          latex: "{}^5C_4 = 5",
+        },
+        {
+          text: "From each chosen couple, pick the husband or the wife. *Why this step:* the four picks are independent, 2 options each, so they multiply.",
+          latex: "{}^5C_4 \\times 2^4 = 5 \\times 16 = 80",
+        },
+        {
+          text: "*Complement check:* all selections ${}^{10}C_4 = 210$. Those containing a given couple: ${}^8C_2 = 28$, so $5 \\times 28 = 140$ over all couples. But a selection made of **two** couples was counted once for each couple, and there are ${}^5C_2 = 10$ of those. So selections with at least one couple number $140 - 10 = 130$, and $210 - 130 = 80$. ✓ Notice the $-10$: the same double-counting as the 'guaranteed woman' shortcut, caught and corrected.",
+        },
+      ],
+      answer: "$80$ ways.",
     },
+    { type: "heading", text: "Choosing from separate pools" },
+    {
+      type: "worked-example",
+      id: "pc2-3-we4",
+      title: "Worked example 3 — an exam choice (NCERT)",
+      problem:
+        "A student must answer 10 of 13 questions, including at least 4 of the first 5. In how many ways can the student choose?",
+      steps: [
+        {
+          text: "The first 5 and the last 8 are separate pools, so split by how many of the first 5 are chosen.",
+        },
+        {
+          text: "Exactly 4 of the first 5, then 6 of the last 8: $^5C_4 \\times {}^8C_6 = 5 \\times 28 = 140$.",
+        },
+        {
+          text: "All 5 of the first 5, then 5 of the last 8: $^5C_5 \\times {}^8C_5 = 1 \\times 56 = 56$.",
+        },
+        {
+          text: "Total: $140 + 56 = 196$.",
+        },
+      ],
+      answer: "$196$ ways.",
+    },
+    {
+      type: "worked-example",
+      id: "pc2-3-we6",
+      title: "Worked example — picking a cricket XI (CBSE / JEE)",
+      problem:
+        "A squad of 16 has 5 bowlers, 2 wicket-keepers and 9 batters. An XI must contain exactly 1 wicket-keeper and at least 4 bowlers. How many XIs are possible?",
+      steps: [
+        {
+          text: "Choose the keeper: ${}^2C_1 = 2$. *Why this step:* \"exactly 1\" is a single fixed case, so it is just a factor.",
+        },
+        {
+          text: "Split on the bowlers: exactly 4 or exactly 5. *Why this step:* the bowler count changes how many batter places are left, so each case needs its own count. The XI has $11 - 1 = 10$ places after the keeper.",
+          table: {
+            headers: ["Bowlers", "Batters", "Count", "Value"],
+            rows: [
+              ["4", "6", "${}^5C_4 \\times {}^9C_6$", "$5 \\times 84 = 420$"],
+              ["5", "5", "${}^5C_5 \\times {}^9C_5$", "$1 \\times 126 = 126$"],
+              ["", "", "**Sum**", "**546**"],
+            ],
+          },
+          latex: "\\text{XIs} = 2 \\times 546 = 1092",
+        },
+        {
+          text: "*Check the bookkeeping:* in each row keeper + bowlers + batters $= 1 + 4 + 6 = 1 + 5 + 5 = 11$. The keeper factor multiplies the **sum** of the cases because every XI picks a keeper and then falls into one bowler case.",
+        },
+      ],
+      answer: "$1092$ XIs.",
+    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc2-3-q1",
@@ -776,9 +925,26 @@ const lesson04: LessonSeed = {
         "In fact, $^nP_r = {}^nC_r \\times r!$ from Lesson 2.1 is the simplest example: choose $r$ objects, then arrange them. The pattern scales to choices from several pools.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — words from vowels and consonants (NCERT).** From 7 consonants and 4 vowels, how many words (any string of letters) can be made using 3 consonants and 2 vowels, all letters different?\n\n1. **Choose** the consonants: $^7C_3 = 35$.\n2. **Choose** the vowels: $^4C_2 = 6$.\n3. **Arrange** the 5 chosen letters: $5! = 120$.\n4. Total: $35 \\times 6 \\times 120 = 25\\,200$.",
+      type: "worked-example",
+      id: "pc2-4-we1",
+      title: "Worked example 1 — words from vowels and consonants (NCERT)",
+      problem:
+        "From 7 consonants and 4 vowels, how many words (any string of letters) can be made using 3 consonants and 2 vowels, all letters different?",
+      steps: [
+        {
+          text: "**Choose** the consonants: $^7C_3 = 35$.",
+        },
+        {
+          text: "**Choose** the vowels: $^4C_2 = 6$.",
+        },
+        {
+          text: "**Arrange** the 5 chosen letters: $5! = 120$.",
+        },
+        {
+          text: "Total: $35 \\times 6 \\times 120 = 25\\,200$.",
+        },
+      ],
+      answer: "$25\\,200$ words.",
     },
     {
       type: "callout",
@@ -787,10 +953,11 @@ const lesson04: LessonSeed = {
       content:
         "A common slip is $^7P_3 \\times {}^4P_2 \\times 5!$. The $P$s already put the consonants and vowels in order *within their own groups*, and then $5!$ orders all five letters again. Choose with $C$, arrange once at the end.",
     },
+    { type: "heading", text: "Geometry: counting shapes by choosing points" },
     {
       type: "text",
       content:
-        "**Geometry: counting shapes by choosing points.** A figure is fixed by its corner points, and points have no order. So these are pure selections.\n\n- **Lines through $n$ points, no three collinear:** each line is fixed by 2 points: $^nC_2$.\n- **Triangles:** any 3 non-collinear points: $^nC_3$.\n- **Diagonals of an $n$-gon:** every pair of vertices gives a side or a diagonal, and there are $n$ sides:",
+        "A figure is fixed by its corner points, and points have no order. So these are pure selections.\n\n- **Lines through $n$ points, no three collinear:** each line is fixed by 2 points: $^nC_2$.\n- **Triangles:** any 3 non-collinear points: $^nC_3$.\n- **Diagonals of an $n$-gon:** every pair of vertices gives a side or a diagonal, and there are $n$ sides:",
     },
     { type: "math", latex: "\\text{diagonals} = {}^nC_2 - n = \\frac{n(n-1)}{2} - n = \\frac{n(n-3)}{2}" },
     {
@@ -809,10 +976,11 @@ const lesson04: LessonSeed = {
         ["Decagon", "10", "45", "10", "35"],
       ],
     },
+    { type: "heading", text: "When points are collinear", level: 3 },
     {
       type: "text",
       content:
-        "**When points are collinear.** Suppose 12 points lie in a plane, and exactly 4 of them are on one straight line (no other three collinear).\n\n**Lines.** $^{12}C_2 = 66$ treats every pair as a different line. But the $^4C_2 = 6$ pairs taken from the collinear 4 all give the *same* line. Remove them and add that one line back:",
+        "Suppose 12 points lie in a plane, and exactly 4 of them are on one straight line (no other three collinear).\n\n**Lines.** $^{12}C_2 = 66$ treats every pair as a different line. But the $^4C_2 = 6$ pairs taken from the collinear 4 all give the *same* line. Remove them and add that one line back:",
     },
     { type: "math", latex: "66 - 6 + 1 = 61 \\text{ lines}" },
     {
@@ -821,15 +989,46 @@ const lesson04: LessonSeed = {
         "**Triangles.** Any 3 of the 12 points, minus the triples that lie flat on the line (they make no triangle):",
     },
     { type: "math", latex: "{}^{12}C_3 - {}^4C_3 = 220 - 4 = 216 \\text{ triangles}" },
+    { type: "heading", text: "Diagonals, parallelograms and squares", level: 3 },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — reverse a diagonal count.** A polygon has 44 diagonals. How many sides?\n\n1. $\\frac{n(n-3)}{2} = 44 \\Rightarrow n^2 - 3n - 88 = 0$.\n2. Factor: $(n - 11)(n + 8) = 0$, so $n = 11$ (a side count must be positive).",
+      type: "worked-example",
+      id: "pc2-4-we2",
+      title: "Worked example 2 — reverse a diagonal count",
+      problem:
+        "A polygon has 44 diagonals. How many sides?",
+      steps: [
+        {
+          text: "$\\frac{n(n-3)}{2} = 44 \\Rightarrow n^2 - 3n - 88 = 0$.",
+        },
+        {
+          text: "Factor: $(n - 11)(n + 8) = 0$, so $n = 11$ (a side count must be positive).",
+        },
+      ],
+      answer: "$11$ sides.",
+    },
+    {
+      type: "worked-example",
+      id: "pc2-4-we3",
+      title: "Worked example 3 — parallelograms",
+      problem:
+        "A family of 4 parallel lines is crossed by a family of 3 parallel lines (in another direction). How many parallelograms do they form?",
+      steps: [
+        {
+          text: "A parallelogram needs two sides from each family.",
+        },
+        {
+          text: "Choose 2 lines from the first family: $^4C_2 = 6$. Choose 2 from the second: $^3C_2 = 3$.",
+        },
+        {
+          text: "Each such choice encloses exactly one parallelogram: $6 \\times 3 = 18$.",
+        },
+      ],
+      answer: "$18$ parallelograms.",
     },
     {
       type: "text",
       content:
-        "**Worked example 3 — parallelograms.** A family of 4 parallel lines is crossed by a family of 3 parallel lines (in another direction). How many parallelograms do they form?\n\n1. A parallelogram needs two sides from each family.\n2. Choose 2 lines from the first family: $^4C_2 = 6$. Choose 2 from the second: $^3C_2 = 3$.\n3. Each such choice encloses exactly one parallelogram: $6 \\times 3 = 18$.\n\nThe same idea counts rectangles on a chessboard: its 8×8 grid of squares is bounded by 9 horizontal and 9 vertical lines, so there are $^9C_2 \\times {}^9C_2 = 36 \\times 36 = 1296$ rectangles.",
+        "The same idea counts rectangles on a chessboard: its 8×8 grid of squares is bounded by 9 horizontal and 9 vertical lines, so there are $^9C_2 \\times {}^9C_2 = 36 \\times 36 = 1296$ rectangles.",
     },
     {
       type: "text",
@@ -843,49 +1042,76 @@ const lesson04: LessonSeed = {
       content:
         "Choose 3 vertices of an $n$-gon so that no side of the triangle is a side of the polygon. Start from all ${}^nC_3$ triangles. Triangles using **two** polygon sides are three consecutive vertices: $n$ of them. Triangles using **exactly one** side: pick the side ($n$ ways), then a third vertex that is not next to either end ($n - 4$ ways). So the count is ${}^nC_3 - n(n-4) - n$. For a hexagon: $20 - 12 - 6 = 2$, the two large triangles of the star.",
     },
+    { type: "heading", text: "Choose people, then seat them" },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — choose people, then seats.** From 6 men and 4 women, 3 men and 2 women are chosen and seated in a row of 5 chairs.\n\n1. Choose: $^6C_3 \\times {}^4C_2 = 20 \\times 6 = 120$.\n2. Arrange the 5 chosen people: $5! = 120$.\n3. Total: $120 \\times 120 = 14\\,400$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example — choose, then arrange with a rule (application).** From 4 boys and 3 girls, 2 boys and 2 girls are chosen for a photo and stand in a row so that the two girls are side by side. How many photos are possible?\n\n1. **Choose** the people. *Why this step:* the side-by-side rule is about positions, so it does not affect who is picked. Settle *who* first.",
-    },
-    { type: "math", latex: "{}^4C_2 \\times {}^3C_2 = 6 \\times 3 = 18" },
-    {
-      type: "text",
-      content:
-        "2. **Arrange** with the girls glued together. *Why this step:* treat the two girls as one block, so there are 3 units (block, boy, boy) to order, and then the girls can swap inside the block.",
-    },
-    { type: "math", latex: "3! \\times 2! = 6 \\times 2 = 12" },
-    { type: "math", latex: "\\text{photos} = 18 \\times 12 = 216" },
-    {
-      type: "text",
-      content:
-        "3. *Check:* with no rule there would be $18 \\times 4! = 432$ photos. In a row of 4, the girls occupy 2 of the 6 possible pairs of places, and 3 of those pairs are adjacent, so exactly half the photos qualify: $432 \\div 2 = 216$. ✓",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 — words from a word with repeated letters (JEE).** How many 4-letter words can be formed from the letters of EXAMINATION?\n\nFirst take stock of the letters: A, I and N appear twice each; E, X, M, T and O once each. That is **8 distinct letters, 3 of them doubled**. A chosen A is just \"an A\", so we cannot use ${}^{11}C_4$. Instead split by the *pattern* of the 4 letters, choose, then arrange each pattern with the repeated-letter formula.",
-    },
-    {
-      type: "table",
-      headers: ["Pattern", "Choose", "Arrange", "Words", "Selections"],
-      rows: [
-        ["All 4 different", "${}^8C_4 = 70$", "$4! = 24$", "$1680$", "$70$"],
-        ["One pair + 2 different", "${}^3C_1 \\times {}^7C_2 = 63$", "$\\frac{4!}{2!} = 12$", "$756$", "$63$"],
-        ["Two pairs", "${}^3C_2 = 3$", "$\\frac{4!}{2!\\,2!} = 6$", "$18$", "$3$"],
-        ["**Total**", "", "", "**2454**", "**136**"],
+      type: "worked-example",
+      id: "pc2-4-we4",
+      title: "Worked example 4 — choose people, then seats",
+      problem:
+        "From 6 men and 4 women, 3 men and 2 women are chosen and seated in a row of 5 chairs. In how many ways can this be done?",
+      steps: [
+        {
+          text: "Choose: $^6C_3 \\times {}^4C_2 = 20 \\times 6 = 120$.",
+        },
+        {
+          text: "Arrange the 5 chosen people: $5! = 120$.",
+        },
+        {
+          text: "Total: $120 \\times 120 = 14\\,400$.",
+        },
       ],
+      answer: "$14\\,400$ ways.",
     },
     {
-      type: "text",
-      content:
-        "Two details decide this problem. In the one-pair case, the pair comes from the 3 doubled letters, and the 2 singles come from the **other 7** distinct letters (the paired letter can't appear a third time). And each pattern has its own arrangement count, because repeated letters make some orders identical. Only the selections column (136) answers \"how many ways to *choose* 4 letters\".",
+      type: "worked-example",
+      id: "pc2-4-we5",
+      title: "Worked example — choose, then arrange with a rule (application)",
+      problem:
+        "From 4 boys and 3 girls, 2 boys and 2 girls are chosen for a photo and stand in a row so that the two girls are side by side. How many photos are possible?",
+      steps: [
+        {
+          text: "**Choose** the people. *Why this step:* the side-by-side rule is about positions, so it does not affect who is picked. Settle *who* first.",
+          latex: "{}^4C_2 \\times {}^3C_2 = 6 \\times 3 = 18",
+        },
+        {
+          text: "**Arrange** with the girls glued together. *Why this step:* treat the two girls as one block, so there are 3 units (block, boy, boy) to order, and then the girls can swap inside the block.",
+          latex: "3! \\times 2! = 6 \\times 2 = 12",
+        },
+        {
+          latex: "\\text{photos} = 18 \\times 12 = 216",
+        },
+        {
+          text: "*Check:* with no rule there would be $18 \\times 4! = 432$ photos. In a row of 4, the girls occupy 2 of the 6 possible pairs of places, and 3 of those pairs are adjacent, so exactly half the photos qualify: $432 \\div 2 = 216$. ✓",
+        },
+      ],
+      answer: "$216$ photos.",
     },
+    { type: "heading", text: "Words from letters that repeat" },
+    {
+      type: "worked-example",
+      id: "pc2-4-we6",
+      title: "Worked example 5 — words from a word with repeated letters (JEE)",
+      problem: "How many 4-letter words can be formed from the letters of EXAMINATION?",
+      steps: [
+        {
+          text: "First take stock of the letters: A, I and N appear twice each; E, X, M, T and O once each. That is **8 distinct letters, 3 of them doubled**. A chosen A is just \"an A\", so we cannot use ${}^{11}C_4$. Instead split by the *pattern* of the 4 letters, choose, then arrange each pattern with the repeated-letter formula.",
+          table: {
+            headers: ["Pattern", "Choose", "Arrange", "Words", "Selections"],
+            rows: [
+              ["All 4 different", "${}^8C_4 = 70$", "$4! = 24$", "$1680$", "$70$"],
+              ["One pair + 2 different", "${}^3C_1 \\times {}^7C_2 = 63$", "$\\frac{4!}{2!} = 12$", "$756$", "$63$"],
+              ["Two pairs", "${}^3C_2 = 3$", "$\\frac{4!}{2!\\,2!} = 6$", "$18$", "$3$"],
+              ["**Total**", "", "", "**2454**", "**136**"],
+            ],
+          },
+        },
+        {
+          text: "Two details decide this problem. In the one-pair case, the pair comes from the 3 doubled letters, and the 2 singles come from the **other 7** distinct letters (the paired letter can't appear a third time). And each pattern has its own arrangement count, because repeated letters make some orders identical. Only the selections column (136) answers \"how many ways to *choose* 4 letters\".",
+        },
+      ],
+      answer: "$2454$ words (from $136$ different selections of letters).",
+    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc2-4-q1",
@@ -1022,6 +1248,7 @@ const lesson05: LessonSeed = {
           "Each leaf is one selection. The highlighted path is {onion, paneer}. The all-'Out' leaf is the plain pizza — the empty selection. 2 × 2 × 2 = 8.",
       },
     },
+    { type: "heading", text: "In or out: $2^n$ selections" },
     {
       type: "text",
       content:
@@ -1044,10 +1271,11 @@ const lesson05: LessonSeed = {
       content:
         "For $n = 4$: $1 + 4 + 6 + 4 + 1 = 16 = 2^4$. ✓ Chapter 5 gets the same fact from the binomial theorem by putting $x = 1$; here it is just counting.",
     },
+    { type: "heading", text: "Identical items change the question" },
     {
       type: "text",
       content:
-        "**Identical items change the question.** A fruit bowl has 3 apples, 2 bananas and 4 oranges, where apples are indistinguishable from each other (and so on). Choosing \"one apple\" is a single choice — it doesn't matter which apple. So the decision for apples is not in/out but **how many**: 0, 1, 2 or 3 — that is 4 options.",
+        "A fruit bowl has 3 apples, 2 bananas and 4 oranges, where apples are indistinguishable from each other (and so on). Choosing \"one apple\" is a single choice — it doesn't matter which apple. So the decision for apples is not in/out but **how many**: 0, 1, 2 or 3 — that is 4 options.",
     },
     {
       type: "interactive",
@@ -1070,21 +1298,25 @@ const lesson05: LessonSeed = {
         "For the full bowl: $(3+1)(2+1)(4+1) = 4 \\times 3 \\times 5 = 60$ selections, or $59$ if the basket must contain at least one fruit. If some items are distinct too, each distinct item still contributes a factor of 2. E.g. the bowl plus one mango and one pineapple: $60 \\times 2 \\times 2 = 240$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example — a stationery kit (application).** A drawer holds 4 identical pens, 3 identical pencils and 2 different erasers (one white, one pink). (a) How many non-empty selections can be made? (b) How many selections contain at least one pen and at least one pencil?\n\n1. (a) Give each kind its options. *Why this step:* identical items only ask *how many* (pens 0–4: 5 options; pencils 0–3: 4 options), while each distinct eraser asks *in or out* (2 options each).",
-    },
-    { type: "math", latex: "5 \\times 4 \\times 2 \\times 2 = 80 \\quad\\Longrightarrow\\quad 80 - 1 = 79 \\text{ non-empty selections}" },
-    {
-      type: "text",
-      content:
-        "2. (b) Remove the 0 option for pens and pencils only. *Why this step:* \"at least one pen\" means 1–4 pens (4 options) and \"at least one pencil\" means 1–3 pencils (3 options). The erasers are unrestricted, and no subtraction is needed.",
-    },
-    { type: "math", latex: "4 \\times 3 \\times 2 \\times 2 = 48" },
-    {
-      type: "text",
-      content:
-        "3. *Complement check for (b):* from the 80 selections, remove those with no pen ($1 \\times 4 \\times 4 = 16$) and those with no pencil ($5 \\times 1 \\times 4 = 20$), then add back those with neither, which were removed twice ($1 \\times 1 \\times 4 = 4$): $80 - 16 - 20 + 4 = 48$. ✓",
+      type: "worked-example",
+      id: "pc2-5-we1",
+      title: "Worked example — a stationery kit (application)",
+      problem:
+        "A drawer holds 4 identical pens, 3 identical pencils and 2 different erasers (one white, one pink). (a) How many non-empty selections can be made? (b) How many selections contain at least one pen and at least one pencil?",
+      steps: [
+        {
+          text: "(a) Give each kind its options. *Why this step:* identical items only ask *how many* (pens 0–4: 5 options; pencils 0–3: 4 options), while each distinct eraser asks *in or out* (2 options each).",
+          latex: "5 \\times 4 \\times 2 \\times 2 = 80 \\quad\\Longrightarrow\\quad 80 - 1 = 79 \\text{ non-empty selections}",
+        },
+        {
+          text: "(b) Remove the 0 option for pens and pencils only. *Why this step:* \"at least one pen\" means 1–4 pens (4 options) and \"at least one pencil\" means 1–3 pencils (3 options). The erasers are unrestricted, and no subtraction is needed.",
+          latex: "4 \\times 3 \\times 2 \\times 2 = 48",
+        },
+        {
+          text: "*Complement check for (b):* from the 80 selections, remove those with no pen ($1 \\times 4 \\times 4 = 16$) and those with no pencil ($5 \\times 1 \\times 4 = 20$), then add back those with neither, which were removed twice ($1 \\times 1 \\times 4 = 4$): $80 - 16 - 20 + 4 = 48$. ✓",
+        },
+      ],
+      answer: "(a) $79$ (b) $48$",
     },
     {
       type: "callout",
@@ -1093,10 +1325,11 @@ const lesson05: LessonSeed = {
       content:
         "From 5 identical apples, how many ways to pick some? Not $2^5 = 32$ (that is $\\sum {}^5C_r$, which counts *which* apples, and the apples can't be told apart). The only thing you decide is *how many*: 0, 1, 2, 3, 4 or 5. That is **6** ways. $^nC_r$ needs distinct objects.",
     },
+    { type: "heading", text: "Divisors are selections from identical items" },
     {
       type: "text",
       content:
-        "**Divisors are selections from identical items.** Every divisor of $360$ is built by choosing how many of each prime factor to take from its prime factorisation:",
+        "Every divisor of $360$ is built by choosing how many of each prime factor to take from its prime factorisation:",
     },
     { type: "math", latex: "360 = 2^3 \\times 3^2 \\times 5^1" },
     {
@@ -1108,24 +1341,46 @@ const lesson05: LessonSeed = {
     {
       type: "text",
       content:
-        "This count includes 1 (take nothing) and 360 itself (take everything).\n\n**Worked example — even divisors of 360.** An even divisor must take at least one 2: that is 1, 2 or 3 twos (3 options). The rest is unchanged: $3 \\times 3 \\times 2 = 18$. The odd divisors take zero 2s: $1 \\times 3 \\times 2 = 6$. Check: $18 + 6 = 24$. ✓",
+        "This count includes 1 (take nothing) and 360 itself (take everything).",
     },
     {
-      type: "text",
-      content:
-        "**Worked example — divisors of 10 800 with conditions (routine).** Find (a) the number of divisors of $10\\,800$, (b) how many are multiples of 10, (c) how many are odd.\n\n1. Factorise. *Why this step:* every divisor question becomes a \"how many of each prime\" selection once the prime powers are known. $10\\,800 = 108 \\times 100 = (2^2 \\cdot 3^3)(2^2 \\cdot 5^2)$.",
+      type: "worked-example",
+      id: "pc2-5-we4",
+      title: "Worked example — even divisors of 360",
+      problem: "How many divisors of $360 = 2^3 \\times 3^2 \\times 5$ are even, and how many are odd?",
+      steps: [
+        {
+          text: "An even divisor must take at least one 2: that is 1, 2 or 3 twos (3 options). The rest is unchanged: $3 \\times 3 \\times 2 = 18$.",
+        },
+        {
+          text: "The odd divisors take zero 2s: $1 \\times 3 \\times 2 = 6$.",
+        },
+        {
+          text: "Check: $18 + 6 = 24$. ✓",
+        },
+      ],
+      answer: "$18$ even and $6$ odd divisors.",
     },
-    { type: "math", latex: "10\\,800 = 2^4 \\times 3^3 \\times 5^2 \\qquad\\Longrightarrow\\qquad (4+1)(3+1)(2+1) = 60 \\text{ divisors}" },
     {
-      type: "text",
-      content:
-        "2. (b) A multiple of 10 needs at least one 2 **and** at least one 5. *Why this step:* $10 = 2 \\times 5$, so each of those primes loses its \"take none\" option: 2s from 1–4 (4 options), 3s unchanged (4 options), 5s from 1–2 (2 options).",
-    },
-    { type: "math", latex: "4 \\times 4 \\times 2 = 32 \\text{ multiples of 10}" },
-    {
-      type: "text",
-      content:
-        "3. (c) An odd divisor takes **no** 2s (1 option): $1 \\times 4 \\times 3 = 12$. *Check:* the even divisors number $4 \\times 4 \\times 3 = 48$, and $48 + 12 = 60$. ✓",
+      type: "worked-example",
+      id: "pc2-5-we2",
+      title: "Worked example — divisors of 10 800 with conditions (routine)",
+      problem:
+        "Find (a) the number of divisors of $10\\,800$, (b) how many are multiples of 10, (c) how many are odd.",
+      steps: [
+        {
+          text: "Factorise. *Why this step:* every divisor question becomes a \"how many of each prime\" selection once the prime powers are known. $10\\,800 = 108 \\times 100 = (2^2 \\cdot 3^3)(2^2 \\cdot 5^2)$.",
+          latex: "10\\,800 = 2^4 \\times 3^3 \\times 5^2 \\qquad\\Longrightarrow\\qquad (4+1)(3+1)(2+1) = 60 \\text{ divisors}",
+        },
+        {
+          text: "(b) A multiple of 10 needs at least one 2 **and** at least one 5. *Why this step:* $10 = 2 \\times 5$, so each of those primes loses its \"take none\" option: 2s from 1–4 (4 options), 3s unchanged (4 options), 5s from 1–2 (2 options).",
+          latex: "4 \\times 4 \\times 2 = 32 \\text{ multiples of 10}",
+        },
+        {
+          text: "(c) An odd divisor takes **no** 2s (1 option): $1 \\times 4 \\times 3 = 12$. *Check:* the even divisors number $4 \\times 4 \\times 3 = 48$, and $48 + 12 = 60$. ✓",
+        },
+      ],
+      answer: "(a) $60$ (b) $32$ (c) $12$",
     },
     {
       type: "callout",
@@ -1135,26 +1390,30 @@ const lesson05: LessonSeed = {
         "The same \"choose how many of each prime\" picture gives more. Expand the product $(1+2+4+8)(1+3+9)(1+5)$: each term of the expansion picks one power of 2, one power of 3 and one power of 5, so every divisor of 360 appears exactly once. Hence\n\n**sum of divisors of 360** $= 15 \\times 13 \\times 6 = 1170$.\n\n**Writing 360 as a product of two factors** (order ignored): each divisor $d$ pairs with $360/d$, and since 360 is not a perfect square no divisor pairs with itself. So there are $24 / 2 = 12$ such products.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example — factor pairs of a perfect square (JEE).** In how many ways can $3600$ be written as a product of two positive integers, order ignored? How many if the two factors must be different?\n\n1. Count the divisors. *Why this step:* each factorisation $a \\times b$ is fixed by choosing $a$, a divisor.",
+      type: "worked-example",
+      id: "pc2-5-we3",
+      title: "Worked example — factor pairs of a perfect square (JEE)",
+      problem:
+        "In how many ways can $3600$ be written as a product of two positive integers, order ignored? How many if the two factors must be different?",
+      steps: [
+        {
+          text: "Count the divisors. *Why this step:* each factorisation $a \\times b$ is fixed by choosing $a$, a divisor.",
+          latex: "3600 = 2^4 \\times 3^2 \\times 5^2 \\qquad\\Longrightarrow\\qquad (4+1)(2+1)(2+1) = 45 \\text{ divisors}",
+        },
+        {
+          text: "Pair each divisor $d$ with $3600/d$. *Why this step:* $d \\times \\frac{3600}{d}$ and $\\frac{3600}{d} \\times d$ are the same product, so pairs, not divisors, are what we count. But $3600 = 60^2$ is a perfect square (every exponent is even), so $d = 60$ pairs with **itself**.",
+        },
+        {
+          text: "The other $45 - 1 = 44$ divisors fall into $22$ genuine pairs. Add the product $60 \\times 60$:",
+          latex: "22 + 1 = 23 = \\frac{45 + 1}{2} \\text{ products}, \\qquad 22 \\text{ with different factors}",
+        },
+      ],
+      answer: "$23$ products, $22$ with different factors.",
     },
-    { type: "math", latex: "3600 = 2^4 \\times 3^2 \\times 5^2 \\qquad\\Longrightarrow\\qquad (4+1)(2+1)(2+1) = 45 \\text{ divisors}" },
     {
       type: "text",
       content:
-        "2. Pair each divisor $d$ with $3600/d$. *Why this step:* $d \\times \\frac{3600}{d}$ and $\\frac{3600}{d} \\times d$ are the same product, so pairs, not divisors, are what we count. But $3600 = 60^2$ is a perfect square (every exponent is even), so $d = 60$ pairs with **itself**.",
-    },
-    {
-      type: "text",
-      content:
-        "3. The other $45 - 1 = 44$ divisors fall into $22$ genuine pairs. Add the product $60 \\times 60$:",
-    },
-    { type: "math", latex: "22 + 1 = 23 = \\frac{45 + 1}{2} \\text{ products}, \\qquad 22 \\text{ with different factors}" },
-    {
-      type: "text",
-      content:
-        "4. *Rule to remember:* with $D$ divisors, a non-square has $\\frac{D}{2}$ factor pairs and a perfect square has $\\frac{D+1}{2}$. An odd divisor count is itself the sign of a perfect square.",
+        "*Rule to remember:* with $D$ divisors, a non-square has $\\frac{D}{2}$ factor pairs and a perfect square has $\\frac{D+1}{2}$. An odd divisor count is itself the sign of a perfect square.",
     },
     {
       type: "table",
@@ -1166,6 +1425,7 @@ const lesson05: LessonSeed = {
         ["Divisors of $p_1^{a}\\,p_2^{b}\\,p_3^{c}$", "$a+1,\\ b+1,\\ c+1$", "$(a+1)(b+1)(c+1)$"],
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pc2-5-q1",

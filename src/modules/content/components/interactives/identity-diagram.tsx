@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { z } from "zod";
 import type { identityDiagramSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { formatNumber } from "./function-plot";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 
@@ -111,8 +112,8 @@ export function IdentityDiagram({ config }: { config: Config }) {
       </div>
 
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ??
-          "The height of P is QR + PT; its horizontal position is OR minus the width QT. Read the two results straight off the labelled segments."}
+        <RichText text={config.caption ??
+          "The height of P is QR + PT; its horizontal position is OR minus the width QT. Read the two results straight off the labelled segments."} />
       </p>
     </InteractiveFrame>
   );

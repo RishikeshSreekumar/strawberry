@@ -3,6 +3,7 @@
 import { useMemo, useRef, useState } from "react";
 import type { z } from "zod";
 import type { probSimulatorSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { InteractiveFrame, Latex } from "./ui";
 
 type Config = z.infer<typeof probSimulatorSchema>;
@@ -1138,7 +1139,7 @@ export function ProbSimulator({ config }: { config: Config }) {
 
       {chartNode}
 
-      <p className="text-center text-xs text-muted-foreground">{config.caption ?? DEFAULT_CAPTIONS[mode]}</p>
+      <p className="text-center text-xs text-muted-foreground"><RichText text={config.caption ?? DEFAULT_CAPTIONS[mode]} /></p>
     </InteractiveFrame>
   );
 }

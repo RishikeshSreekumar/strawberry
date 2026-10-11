@@ -11,8 +11,58 @@ import { Button } from "@/components/ui/button";
 
 const EXAMPLE_BLOCKS = [
   { type: "text", content: "Write your lesson here." },
+  { type: "heading", text: "A section heading" },
   { type: "math", latex: "\\frac{d}{dx} x^2 = 2x" },
   { type: "callout", variant: "tip", content: "You can mix blocks freely." },
+  {
+    type: "worked-example",
+    title: "Worked example 1",
+    problem: "Differentiate $f(x) = 3x^2 + 5x$.",
+    steps: [
+      { text: "Differentiate term by term with the power rule.", latex: "\\frac{d}{dx}(3x^2) = 6x, \\quad \\frac{d}{dx}(5x) = 5" },
+      { text: "Add the pieces." },
+    ],
+    answer: "$f'(x) = 6x + 5$",
+  },
+  {
+    type: "quiz",
+    id: "example-q1",
+    variant: "practice",
+    question: "What is $\\frac{d}{dx} x^3$?",
+    options: [
+      { text: "$3x^2$", correct: true, feedback: "Power rule: bring down the 3." },
+      { text: "$x^2$", feedback: "Don't forget the coefficient." },
+      { text: "$3x^3$", feedback: "The exponent drops by one." },
+    ],
+  },
+  {
+    type: "quiz",
+    id: "example-q2",
+    variant: "concept",
+    multiple: true,
+    question: "Which functions are differentiable at $x = 0$?",
+    options: [
+      { text: "$x^2$", correct: true },
+      { text: "$|x|$", feedback: "It has a corner at $0$." },
+      { text: "$\\sin x$", correct: true },
+      { text: "$\\sqrt[3]{x}$", feedback: "Its tangent is vertical at $0$." },
+    ],
+  },
+  {
+    type: "numeric",
+    id: "example-q3",
+    variant: "practice",
+    question: "A ball is dropped from rest. How far does it fall in $2\\,\\text{s}$? Take $g = 9.8\\,\\text{m/s}^2$.",
+    answer: 19.6,
+    tolerance: 0.1,
+    unit: "m",
+    hint: "Use $s = \\tfrac{1}{2} g t^2$.",
+    commonMistakes: [
+      { answer: 9.8, feedback: "That's $\\tfrac{1}{2} g t$; time must be squared." },
+      { answer: 39.2, feedback: "You dropped the $\\tfrac{1}{2}$." },
+    ],
+    solution: "$s = \\tfrac{1}{2} g t^2 = \\tfrac{1}{2}(9.8)(2)^2 = 19.6\\,\\text{m}$.",
+  },
 ];
 
 export default async function AdminLessonPage({

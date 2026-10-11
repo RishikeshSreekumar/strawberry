@@ -66,6 +66,7 @@ const lesson01: LessonSeed = {
       content:
         "If everything came out the same every time, one measurement would tell you everything and there would be no subject called statistics. **Statistics exists because things vary.** Its job is to describe that variation honestly: where the values tend to sit, how widely they spread, and what shape the whole pile makes.",
     },
+    { type: "heading", text: "Looking at the whole pile" },
     {
       type: "text",
       content:
@@ -151,6 +152,7 @@ const lesson01: LessonSeed = {
         },
       ],
     },
+    { type: "heading", text: "Population, sample, parameter, statistic" },
     {
       type: "text",
       content:
@@ -173,26 +175,65 @@ const lesson01: LessonSeed = {
       content:
         "**P**arameter goes with **P**opulation, **S**tatistic goes with **S**ample. A statistic is something you compute; a parameter is something you would like to know. Chapter 5 shows how a statistic can estimate a parameter and how far off it is likely to be.",
     },
+    { type: "heading", text: "Telling population from sample" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** A company wants to know what fraction of its 20 000 customers are happy. It emails 500 of them, and 410 reply 'happy'.\n\n**Step 1.** The population is all 20 000 customers, because that is the group the company wants to know about.\n\n**Step 2.** The sample is the 500 customers who were emailed.\n\n**Step 3.** The statistic is the sample fraction $\\frac{410}{500} = 0.82$, which is known.\n\n**Step 4.** The parameter is the fraction of all 20 000 customers who are happy. It is unknown. The company hopes it is close to 0.82.",
+      type: "worked-example",
+      id: "st0-1-we1",
+      title: "Worked example 1",
+      problem:
+        "A company wants to know what fraction of its 20 000 customers are happy. It emails 500 of them, and 410 reply 'happy'. Identify the population, the sample, the statistic and the parameter.",
+      steps: [
+        { text: "The population is all 20 000 customers, because that is the group the company wants to know about." },
+        { text: "The sample is the 500 customers who were emailed." },
+        { text: "The statistic is the sample fraction $\\frac{410}{500} = 0.82$, which is known." },
+        { text: "The parameter is the fraction of all 20 000 customers who are happy. It is unknown. The company hopes it is close to 0.82." },
+      ],
+      answer: "Population: all 20 000 customers. Sample: the 500 emailed. Statistic: $0.82$ (known). Parameter: the fraction of all 20 000 who are happy (unknown)",
+    },
+    {
+      type: "worked-example",
+      id: "st0-1-we2",
+      title: "Worked example 2",
+      problem:
+        "A quality inspector opens 20 packets from a batch of 5000 biscuit packets and weighs each one. Name the population, the sample, the statistic and the parameter.",
+      steps: [
+        { text: "The population is the 5000 packets, the sample is the 20 opened packets, the average weight of the 20 is a statistic, and the average weight of all 5000 is a parameter." },
+      ],
+      answer: "Population: the 5000 packets. Sample: the 20 opened. Statistic: their average weight. Parameter: the average weight of all 5000",
     },
     {
       type: "text",
       content:
-        "**Worked example 2.** A quality inspector opens 20 packets from a batch of 5000 biscuit packets and weighs each one. The population is the 5000 packets, the sample is the 20 opened packets, the average weight of the 20 is a statistic, and the average weight of all 5000 is a parameter. Notice that the inspector *cannot* measure the whole population here, because every packet she weighs is opened and cannot be sold. That is one of the main reasons samples exist.",
+        "Notice that the inspector *cannot* measure the whole population here, because every packet she weighs is opened and cannot be sold. That is one of the main reasons samples exist.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (census or sample?).** Every ten years the Census of India visits *every* household and records how many people live there. A school principal, on the other hand, wants to know how many hours her 1500 students spend on homework, so she asks 100 of them.\n\n**Step 1.** The Census measures the whole population. *Why this step:* when every member is measured, the number you compute *is* the parameter, with no guessing involved. That is what the word **census** means.\n\n**Step 2.** The principal measures 100 of 1500 students, a **sample**. Her average of those 100 answers is a statistic, and she uses it to estimate the parameter, the average for all 1500.\n\n**Step 3.** Why not always take a census? A census of 140 crore people takes years and thousands of crores of rupees. For most questions a well-chosen sample of a few hundred gives an answer that is close enough, far sooner and far more cheaply.",
+      type: "worked-example",
+      id: "st0-1-we3",
+      title: "Worked example 3: census or sample?",
+      problem:
+        "Every ten years the Census of India visits *every* household and records how many people live there. A school principal, on the other hand, wants to know how many hours her 1500 students spend on homework, so she asks 100 of them. Which is a census and which is a sample?",
+      steps: [
+        { text: "The Census measures the whole population. *Why this step:* when every member is measured, the number you compute *is* the parameter, with no guessing involved. That is what the word **census** means." },
+        { text: "The principal measures 100 of 1500 students, a **sample**. Her average of those 100 answers is a statistic, and she uses it to estimate the parameter, the average for all 1500." },
+        { text: "Why not always take a census? A census of 140 crore people takes years and thousands of crores of rupees. For most questions a well-chosen sample of a few hundred gives an answer that is close enough, far sooner and far more cheaply." },
+      ],
+      answer: "The Census is a census of the whole population; the principal's 100 students are a sample",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (exam style).** *A state board wants to know the average number of hours of sleep of its 2 lakh Class 12 students. An officer visits one residential school, asks the 60 boarders there, and finds an average of 6.4 hours. (a) Name the population, sample, statistic and parameter. (b) Comment on whether 6.4 hours is likely to be a good estimate.*\n\n**Step 1.** Population: all 2 lakh Class 12 students of the state. *Why:* the population is fixed by the question being asked, not by who was actually measured.\n\n**Step 2.** Sample: the 60 boarders who were asked.\n\n**Step 3.** Statistic: 6.4 hours, the average of the sample. Parameter: the average hours of sleep of all 2 lakh students, which is unknown.\n\n**Step 4.** Is 6.4 a good estimate? Probably not. All 60 students come from **one** school with a fixed hostel timetable, so their sleep is likely to differ from that of day scholars in other towns. *Why this matters:* a sample is only useful if it resembles the population. Taking more students from the same hostel would not fix this; taking students from many schools would. Choosing samples fairly is part of the subject too.",
+      type: "worked-example",
+      id: "st0-1-we4",
+      title: "Worked example 4: exam style",
+      problem:
+        "*A state board wants to know the average number of hours of sleep of its 2 lakh Class 12 students. An officer visits one residential school, asks the 60 boarders there, and finds an average of 6.4 hours. (a) Name the population, sample, statistic and parameter. (b) Comment on whether 6.4 hours is likely to be a good estimate.*",
+      steps: [
+        { text: "Population: all 2 lakh Class 12 students of the state. *Why:* the population is fixed by the question being asked, not by who was actually measured." },
+        { text: "Sample: the 60 boarders who were asked." },
+        { text: "Statistic: 6.4 hours, the average of the sample. Parameter: the average hours of sleep of all 2 lakh students, which is unknown." },
+        { text: "Is 6.4 a good estimate? Probably not. All 60 students come from **one** school with a fixed hostel timetable, so their sleep is likely to differ from that of day scholars in other towns. *Why this matters:* a sample is only useful if it resembles the population. Taking more students from the same hostel would not fix this; taking students from many schools would. Choosing samples fairly is part of the subject too." },
+      ],
+      answer: "(a) Population: all 2 lakh Class 12 students; sample: the 60 boarders; statistic: 6.4 hours; parameter: the unknown state average. (b) Probably not a good estimate: all 60 come from one school",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st0-1-q2",
@@ -333,6 +374,7 @@ const lesson02: LessonSeed = {
       content:
         "Before drawing or averaging anything, ask one question: **what kind of data is this?** The answer decides which pictures make sense and which summaries mean anything. You can average heights, but you cannot average blood groups, and a 'mean pin code' is nonsense even though a calculator will happily produce one.",
     },
+    { type: "heading", text: "Categorical and numerical data" },
     {
       type: "callout",
       variant: "definition",
@@ -347,6 +389,7 @@ const lesson02: LessonSeed = {
       content:
         "**Numerical** (quantitative) data records an amount or a count, so arithmetic on it makes sense: height, marks, number of siblings, time taken. A good test is to ask whether 'twice as much' or 'the difference between two values' means something.",
     },
+    { type: "heading", text: "Discrete and continuous" },
     {
       type: "text",
       content: "Numerical data splits once more, according to which values are possible.",
@@ -368,10 +411,20 @@ const lesson02: LessonSeed = {
         ["Numerical, continuous", "height, weight, time", "histogram, ogive, dot plot", "mean, median, spread (from grouped classes)"],
       ],
     },
+    { type: "heading", text: "Classifying real data" },
     {
-      type: "text",
-      content:
-        "**Worked example.** Classify each column of a class register.\n\n**Roll number.** Written in digits, but ask whether arithmetic makes sense. Roll number 24 is not 'twice' roll number 12; the numbers are only labels. **Categorical.**\n\n**Number of siblings.** A count, so arithmetic is meaningful and only whole numbers are possible. **Numerical, discrete.**\n\n**Height.** Any value in a range is possible if you measure finely enough. **Numerical, continuous.**\n\n**Grade in Maths (A1, A2, B1, …).** Labels with a natural order. **Categorical (ordinal).**\n\n**Marks out of 80.** Marks come in whole (or half) steps, so they are usually treated as **numerical, discrete**. When there are many possible values, we often group them into classes and draw them like continuous data. That is a choice about the picture, not a change in the data.",
+      type: "worked-example",
+      id: "st0-2-we1",
+      problem:
+        "Classify each column of a class register.",
+      steps: [
+        { text: "**Roll number.** Written in digits, but ask whether arithmetic makes sense. Roll number 24 is not 'twice' roll number 12; the numbers are only labels. **Categorical.**" },
+        { text: "**Number of siblings.** A count, so arithmetic is meaningful and only whole numbers are possible. **Numerical, discrete.**" },
+        { text: "**Height.** Any value in a range is possible if you measure finely enough. **Numerical, continuous.**" },
+        { text: "**Grade in Maths (A1, A2, B1, …).** Labels with a natural order. **Categorical (ordinal).**" },
+        { text: "**Marks out of 80.** Marks come in whole (or half) steps, so they are usually treated as **numerical, discrete**. When there are many possible values, we often group them into classes and draw them like continuous data. That is a choice about the picture, not a change in the data." },
+      ],
+      answer: "Roll number: categorical. Siblings: numerical, discrete. Height: numerical, continuous. Grade: categorical (ordinal). Marks: usually numerical, discrete",
     },
     {
       type: "callout",
@@ -381,15 +434,37 @@ const lesson02: LessonSeed = {
         "Pin codes, phone numbers, roll numbers and jersey numbers are written in digits but are labels. The mean of three pin codes is a number that corresponds to no place and means nothing. Always ask whether arithmetic on the values means something, not whether they look like numbers.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (a hospital admission form).** Classify each field, asking the same two questions every time: *does arithmetic on it mean anything?* and, if so, *can it take in-between values?*\n\n**Patient ID (e.g. 204417).** Adding two IDs is meaningless; the ID only names a patient. **Categorical, nominal.**\n\n**Ward number (3, 7, 12).** Ward 12 is not 'four times' ward 3. **Categorical, nominal.** *Why this step:* digits again, but they are labels, just like pin codes.\n\n**Pain level (mild / moderate / severe).** Labels with a natural order, but the gaps between them are not measured amounts. **Categorical, ordinal.**\n\n**Number of previous admissions (0, 1, 2, …).** A count, so only whole numbers. **Numerical, discrete.**\n\n**Body temperature (°C).** It could be 37.2, 37.25 or 37.248; the thermometer just rounds it. **Numerical, continuous.**\n\n**Age (recorded in completed years).** The form shows whole numbers, but age itself flows continuously: someone recorded as 16 could be 16 years and 11 months old. **Numerical, continuous**, recorded to the nearest year. *Why this matters:* the recording is rounded, not the quantity. The same is true of height recorded to the nearest centimetre.",
+      type: "worked-example",
+      id: "st0-2-we2",
+      title: "Worked example 2: a hospital admission form",
+      problem:
+        "Classify each field, asking the same two questions every time: *does arithmetic on it mean anything?* and, if so, *can it take in-between values?*",
+      steps: [
+        { text: "**Patient ID (e.g. 204417).** Adding two IDs is meaningless; the ID only names a patient. **Categorical, nominal.**" },
+        { text: "**Ward number (3, 7, 12).** Ward 12 is not 'four times' ward 3. **Categorical, nominal.** *Why this step:* digits again, but they are labels, just like pin codes." },
+        { text: "**Pain level (mild / moderate / severe).** Labels with a natural order, but the gaps between them are not measured amounts. **Categorical, ordinal.**" },
+        { text: "**Number of previous admissions (0, 1, 2, …).** A count, so only whole numbers. **Numerical, discrete.**" },
+        { text: "**Body temperature (°C).** It could be 37.2, 37.25 or 37.248; the thermometer just rounds it. **Numerical, continuous.**" },
+        { text: "**Age (recorded in completed years).** The form shows whole numbers, but age itself flows continuously: someone recorded as 16 could be 16 years and 11 months old. **Numerical, continuous**, recorded to the nearest year. *Why this matters:* the recording is rounded, not the quantity. The same is true of height recorded to the nearest centimetre." },
+      ],
+      answer: "Patient ID and ward number: categorical, nominal. Pain level: categorical, ordinal. Previous admissions: numerical, discrete. Temperature and age: numerical, continuous",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (CBSE style).** *Classify each as categorical, discrete or continuous: (i) the number of letters in each word of a sentence; (ii) the weights of newborn babies in a hospital; (iii) the number of accidents on a highway each day; (iv) the time between two buses at a stop; (v) the marital status of employees.*\n\n**(i)** Letters are counted, 3, 5, 7, never 4.6. **Discrete.**\n\n**(ii)** Weight can be any value in an interval, such as 2.85 kg. **Continuous.**\n\n**(iii)** Accidents are counted. **Discrete.** *Why:* even an *average* of 2.4 accidents a day does not make the data continuous; each single day's count is still a whole number.\n\n**(iv)** Time can be measured as finely as you like. **Continuous.**\n\n**(v)** Single / married / divorced / widowed are labels with no order. **Categorical (nominal).**",
+      type: "worked-example",
+      id: "st0-2-we3",
+      title: "Worked example 3: CBSE style",
+      problem:
+        "*Classify each as categorical, discrete or continuous: (i) the number of letters in each word of a sentence; (ii) the weights of newborn babies in a hospital; (iii) the number of accidents on a highway each day; (iv) the time between two buses at a stop; (v) the marital status of employees.*",
+      steps: [
+        { text: "**(i)** Letters are counted, 3, 5, 7, never 4.6. **Discrete.**" },
+        { text: "**(ii)** Weight can be any value in an interval, such as 2.85 kg. **Continuous.**" },
+        { text: "**(iii)** Accidents are counted. **Discrete.** *Why:* even an *average* of 2.4 accidents a day does not make the data continuous; each single day's count is still a whole number." },
+        { text: "**(iv)** Time can be measured as finely as you like. **Continuous.**" },
+        { text: "**(v)** Single / married / divorced / widowed are labels with no order. **Categorical (nominal).**" },
+      ],
+      answer: "(i) discrete, (ii) continuous, (iii) discrete, (iv) continuous, (v) categorical (nominal)",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st0-2-q1",
@@ -555,6 +630,7 @@ const lesson03: LessonSeed = {
       content:
         "Here are the marks (out of 60) of 40 students, in the order the teacher entered them:\n\n21, 30, 33, 18, 38, 44, 39, 48, 29, 26, 17, 15, 27, 45, 28, 35, 32, 34, 41, 46, 35, 28, 38, 37, 42, 58, 36, 23, 24, 33, 51, 55, 12, 19, 43, 36, 25, 47, 53, 31\n\nWhat is the typical mark? Did many students struggle? It is hard to say. Raw data hides its own shape, and the first job is to organise it.",
     },
+    { type: "heading", text: "Ungrouped frequency tables" },
     {
       type: "text",
       content:
@@ -563,24 +639,30 @@ const lesson03: LessonSeed = {
     {
       type: "text",
       content:
-        "An ungrouped table works well when the data has only a few distinct values. **Worked example.** Twenty students report their number of siblings: 1, 0, 2, 1, 1, 3, 2, 0, 1, 2, 4, 1, 2, 1, 0, 3, 2, 1, 2, 1. Count how often each value $x$ occurs:",
+        "An ungrouped table works well when the data has only a few distinct values.",
     },
     {
-      type: "table",
-      headers: ["Number of siblings $x$", "Frequency $f$"],
-      rows: [
-        ["0", "3"],
-        ["1", "8"],
-        ["2", "6"],
-        ["3", "2"],
-        ["4", "1"],
-        ["Total", "20"],
+      type: "worked-example",
+      id: "st0-3-we1",
+      problem:
+        "Twenty students report their number of siblings: 1, 0, 2, 1, 1, 3, 2, 0, 1, 2, 4, 1, 2, 1, 0, 3, 2, 1, 2, 1. Count how often each value $x$ occurs.",
+      steps: [
+        {
+          table: {
+            headers: ["Number of siblings $x$", "Frequency $f$"],
+            rows: [
+              ["0", "3"],
+              ["1", "8"],
+              ["2", "6"],
+              ["3", "2"],
+              ["4", "1"],
+              ["Total", "20"],
+            ],
+          },
+        },
+        { text: "Check: $3 + 8 + 6 + 2 + 1 = 20$. Now the shape is visible at once: one sibling is most common, and large families are rare. Tables like this, a column of values $x$ with a column of frequencies $f$, are exactly what Chapter 1 uses to compute a mean or a median of discrete data." },
       ],
-    },
-    {
-      type: "text",
-      content:
-        "Check: $3 + 8 + 6 + 2 + 1 = 20$. Now the shape is visible at once: one sibling is most common, and large families are rare. Tables like this, a column of values $x$ with a column of frequencies $f$, are exactly what Chapter 1 uses to compute a mean or a median of discrete data.",
+      answer: "$x$ = 0, 1, 2, 3, 4 occur 3, 8, 6, 2, 1 times (total 20)",
     },
     {
       type: "quiz",
@@ -595,6 +677,7 @@ const lesson03: LessonSeed = {
       ],
       hint: "Add the frequencies for $x = 2, 3, 4$.",
     },
+    { type: "heading", text: "Grouping values into classes" },
     {
       type: "text",
       content:
@@ -641,6 +724,7 @@ const lesson03: LessonSeed = {
       content:
         "For a class such as 20–29:\n**Class limits** are the numbers written in the table: lower limit 20, upper limit 29.\n**Class boundaries** are where one class really ends and the next begins: 19.5 and 29.5 (worked out below).\n**Class width** (class size) is upper boundary minus lower boundary: $29.5 - 19.5 = 10$.\n**Class mark** (midpoint) is the centre of the class: $\\frac{20 + 29}{2} = 24.5$, which is also $\\frac{19.5 + 29.5}{2}$.\n**Relative frequency** is $\\frac{f}{n}$, the fraction of all data in the class: $\\frac{9}{40} = 0.225$.",
     },
+    { type: "heading", text: "Inclusive classes and boundaries" },
     {
       type: "text",
       content:
@@ -681,9 +765,18 @@ const lesson03: LessonSeed = {
         "Written as limits, the classes leave a gap from 19 to 20. On a continuous scale a value like 19.7 would have nowhere to go, and a histogram drawn from the limits would have gaps between the bars. Convert to boundaries (9.5–19.5, 19.5–29.5) before drawing anything or using any formula that needs the width or the lower edge of a class.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2.** Weights (kg) are grouped as 30–34, 35–39, 40–44, 45–49. Find the boundaries, width and class mark of 35–39.\n\n**Step 1.** The gap between classes is $35 - 34 = 1$, so the adjustment is $0.5$.\n\n**Step 2.** Boundaries: $35 - 0.5 = 34.5$ and $39 + 0.5 = 39.5$.\n\n**Step 3.** Width: $39.5 - 34.5 = 5$. A common slip is $39 - 35 = 4$; that measures the limits, not the class.\n\n**Step 4.** Class mark: $\\frac{35 + 39}{2} = 37$.",
+      type: "worked-example",
+      id: "st0-3-we2",
+      title: "Worked example 2",
+      problem:
+        "Weights (kg) are grouped as 30–34, 35–39, 40–44, 45–49. Find the boundaries, width and class mark of 35–39.",
+      steps: [
+        { text: "The gap between classes is $35 - 34 = 1$, so the adjustment is $0.5$." },
+        { text: "Boundaries: $35 - 0.5 = 34.5$ and $39 + 0.5 = 39.5$." },
+        { text: "Width: $39.5 - 34.5 = 5$. A common slip is $39 - 35 = 4$; that measures the limits, not the class." },
+        { text: "Class mark: $\\frac{35 + 39}{2} = 37$." },
+      ],
+      answer: "Boundaries 34.5 and 39.5, width 5, class mark 37",
     },
     {
       type: "callout",
@@ -692,43 +785,49 @@ const lesson03: LessonSeed = {
       content:
         "Aim for roughly 5 to 10 classes. Too few and every class looks alike; too many and you are back to a jagged list. A convenient recipe: width $\\approx \\frac{\\text{largest} - \\text{smallest}}{\\text{number of classes}}$, rounded to a friendly number. The top line is the **range** of the data, largest minus smallest; for the marks it is $58 - 12 = 46$. So $\\frac{46}{5} = 9.2$, and we take width 10. Start the first class at a round number at or below the smallest value.",
     },
+    { type: "heading", text: "Building and completing tables" },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (building a table from scratch).** Twenty-four students record how many minutes they spent on their phones before school:\n\n12, 35, 47, 28, 19, 55, 33, 41, 26, 38, 8, 44, 31, 22, 50, 36, 17, 29, 42, 39, 24, 58, 33, 46\n\n**Step 1: find the range.** Smallest 8, largest 58, so the range is $58 - 8 = 50$.\n\n**Step 2: choose the classes.** $\\frac{50}{6} \\approx 8.3$, so take width 10 and start at 0: six classes 0–10, 10–20, …, 50–60. *Why exclusive classes:* time is continuous, so the classes must meet with no gaps. The rule is that each upper limit is left out.\n\n**Step 3: tally.** Go through the list **once**, in the given order, putting a tally in the right row for each value. *Why once through the list, not class by class:* scanning the list six times, once per class, is how values get missed or counted twice. Watch the value 50: with exclusive classes it belongs to 50–60, not 40–50.",
-    },
-    {
-      type: "table",
-      headers: ["Minutes", "Tally", "$f$", "Relative frequency"],
-      rows: [
-        ["0–10", "|", "1", "$\\frac{1}{24} \\approx 0.042$"],
-        ["10–20", "|||", "3", "$0.125$"],
-        ["20–30", "$\\cancel{||||}$", "5", "$\\approx 0.208$"],
-        ["30–40", "$\\cancel{||||}$ ||", "7", "$\\approx 0.292$"],
-        ["40–50", "$\\cancel{||||}$", "5", "$\\approx 0.208$"],
-        ["50–60", "|||", "3", "$0.125$"],
-        ["Total", "", "24", "1"],
+      type: "worked-example",
+      id: "st0-3-we3",
+      title: "Worked example 3: building a table from scratch",
+      problem:
+        "Twenty-four students record how many minutes they spent on their phones before school:\n\n12, 35, 47, 28, 19, 55, 33, 41, 26, 38, 8, 44, 31, 22, 50, 36, 17, 29, 42, 39, 24, 58, 33, 46\n\nOrganise the times into a frequency table.",
+      steps: [
+        { text: "**Find the range.** Smallest 8, largest 58, so the range is $58 - 8 = 50$." },
+        { text: "**Choose the classes.** $\\frac{50}{6} \\approx 8.3$, so take width 10 and start at 0: six classes 0–10, 10–20, …, 50–60. *Why exclusive classes:* time is continuous, so the classes must meet with no gaps. The rule is that each upper limit is left out." },
+        {
+          text: "**Tally.** Go through the list **once**, in the given order, putting a tally in the right row for each value. *Why once through the list, not class by class:* scanning the list six times, once per class, is how values get missed or counted twice. Watch the value 50: with exclusive classes it belongs to 50–60, not 40–50.",
+          table: {
+            headers: ["Minutes", "Tally", "$f$", "Relative frequency"],
+            rows: [
+              ["0–10", "|", "1", "$\\frac{1}{24} \\approx 0.042$"],
+              ["10–20", "|||", "3", "$0.125$"],
+              ["20–30", "$\\cancel{||||}$", "5", "$\\approx 0.208$"],
+              ["30–40", "$\\cancel{||||}$ ||", "7", "$\\approx 0.292$"],
+              ["40–50", "$\\cancel{||||}$", "5", "$\\approx 0.208$"],
+              ["50–60", "|||", "3", "$0.125$"],
+              ["Total", "", "24", "1"],
+            ],
+          },
+        },
+        { text: "**Check and read.** $1 + 3 + 5 + 7 + 5 + 3 = 24$, so every student has been counted exactly once. The shape is a single hump centred on 30–40 minutes and roughly symmetric, which was impossible to see in the raw list. Also, $7 + 5 + 3 = 15$ of the 24 students (62.5%) spent at least half an hour on their phones." },
       ],
+      answer: "Frequencies 1, 3, 5, 7, 5, 3 for 0–10, 10–20, …, 50–60 (total 24)",
     },
     {
-      type: "text",
-      content:
-        "**Step 4: check and read.** $1 + 3 + 5 + 7 + 5 + 3 = 24$, so every student has been counted exactly once. The shape is a single hump centred on 30–40 minutes and roughly symmetric, which was impossible to see in the raw list. Also, $7 + 5 + 3 = 15$ of the 24 students (62.5%) spent at least half an hour on their phones.",
+      type: "worked-example",
+      id: "st0-3-we4",
+      title: "Worked example 4 (exam style: missing frequencies)",
+      problem:
+        "*A distribution of 50 values has classes 0–10, 10–20, 20–30, 30–40, 40–50 with frequencies 7, $a$, 15, $b$, 8. The relative frequency of the class 10–20 is 0.2. Find $a$ and $b$.*",
+      steps: [
+        { text: "**Use the relative frequency.** Relative frequency $= \\frac{f}{n}$, so $\\frac{a}{50} = 0.2$, giving $a = 10$. *Why start here:* this equation has only one unknown, while the total involves both." },
+        { text: "**Use the total.** The frequencies add to $n$:", latex: "7 + 10 + 15 + b + 8 = 50 \\implies 40 + b = 50 \\implies b = 10" },
+        { text: "**Check.** $7 + 10 + 15 + 10 + 8 = 50$, and $\\frac{10}{50} = 0.2$ as given. Two unknowns need two facts: here one came from a relative frequency and one from the total. In other problems the second fact may be a given cumulative frequency, or a given mean (Chapter 1)." },
+      ],
+      answer: "$a = 10$, $b = 10$",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (exam style: missing frequencies).** *A distribution of 50 values has classes 0–10, 10–20, 20–30, 30–40, 40–50 with frequencies 7, $a$, 15, $b$, 8. The relative frequency of the class 10–20 is 0.2. Find $a$ and $b$.*\n\n**Step 1: use the relative frequency.** Relative frequency $= \\frac{f}{n}$, so $\\frac{a}{50} = 0.2$, giving $a = 10$. *Why start here:* this equation has only one unknown, while the total involves both.\n\n**Step 2: use the total.** The frequencies add to $n$:",
-    },
-    {
-      type: "math",
-      latex: "7 + 10 + 15 + b + 8 = 50 \\implies 40 + b = 50 \\implies b = 10",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3: check.** $7 + 10 + 15 + 10 + 8 = 50$, and $\\frac{10}{50} = 0.2$ as given. Two unknowns need two facts: here one came from a relative frequency and one from the total. In other problems the second fact may be a given cumulative frequency, or a given mean (Chapter 1).",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st0-3-q1",
@@ -764,7 +863,7 @@ const lesson03: LessonSeed = {
       options: [
         { text: "30–40", correct: true, feedback: "In exclusive classes the upper limit is not included, so 30 starts the next class." },
         { text: "20–30", feedback: "The upper limit is excluded in this convention, so 30 does not belong to 20–30." },
-        { text: "Both, counted half in each", feedback: "Each value is counted exactly once, or the frequencies would not add up to $n$." },
+        { text: "Both 20–30 and 30–40, counted half in each", feedback: "Each value is counted exactly once, or the frequencies would not add up to $n$." },
       ],
     },
     {
@@ -905,6 +1004,7 @@ const lesson04: LessonSeed = {
       type: "math",
       latex: "\\text{frequency density} = \\frac{\\text{frequency}}{\\text{class width}}",
     },
+    { type: "heading", text: "Frequency density for unequal widths" },
     {
       type: "callout",
       variant: "definition",
@@ -973,55 +1073,59 @@ const lesson04: LessonSeed = {
         { text: "0.7", feedback: "0.7 is the frequency density. The adjusted frequency is scaled to the minimum width: $0.7 \\times 10 = 7$." },
       ],
     },
+    { type: "heading", text: "Reading counts back from a histogram" },
     {
-      type: "text",
-      content:
-        "**Worked example 2: going backwards.** A histogram of travel times has a bar over 15–25 minutes with frequency density 2.4. How many people took 15 to 25 minutes?\n\n**Step 1.** Width $= 25 - 15 = 10$.\n\n**Step 2.** Frequency $=$ area $=$ density $\\times$ width $= 2.4 \\times 10 = 24$ people.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 (reading part of a bar).** A shop's histogram shows how long customers stayed. The bars are: 0–5 min at density 2, 5–15 min at density 3.5, 15–30 min at density 2, and 30–60 min at density 0.5 (customers per minute). (a) How many customers were recorded? (b) Estimate how many stayed between 10 and 20 minutes.\n\n**Step 1: turn every bar into a frequency.** Area = density × width:",
-    },
-    {
-      type: "math",
-      latex: "2 \\times 5 = 10, \\quad 3.5 \\times 10 = 35, \\quad 2 \\times 15 = 30, \\quad 0.5 \\times 30 = 15",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 2: add.** $10 + 35 + 30 + 15 = 90$ customers. *Why not add the heights?* $2 + 3.5 + 2 + 0.5 = 8$ is a sum of 'customers per minute' and counts nobody.\n\n**Step 3: split the bars at 10 and 20.** The stretch 10–20 cuts through two bars: 10–15 is the right half of the 5–15 bar, and 15–20 is the first third of the 15–30 bar. Take the area of each piece:",
-    },
-    {
-      type: "math",
-      latex: "\\underbrace{3.5 \\times 5}_{10\\text{ to }15} + \\underbrace{2 \\times 5}_{15\\text{ to }20} = 17.5 + 10 = 27.5 \\approx 28",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this is only an estimate:* a histogram does not say where inside a class the customers are. Using part of a bar's area assumes they are spread evenly across it, the same assumption a straight-line ogive makes in 0.5. So about 28 customers stayed 10 to 20 minutes.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (NCERT style: unequal widths).** *Draw a histogram for: 0–10: 8, 10–15: 6, 15–20: 9, 20–30: 12, 30–50: 10.*\n\n**Step 1: check the widths.** They are 10, 5, 5, 10, 20, which are not equal. *Why this step comes first:* with unequal widths, drawing heights equal to $f$ would make the 30–50 bar four times the area it should have relative to a width-5 class.\n\n**Step 2: compute heights.** Use density $\\frac{f}{w}$, or the textbook's adjusted frequency with minimum width 5, which is $5 \\times$ density.",
-    },
-    {
-      type: "table",
-      headers: ["Class", "$f$", "Width $w$", "Density $f/w$", "Adjusted $f = \\frac{5}{w} \\times f$"],
-      rows: [
-        ["0–10", "8", "10", "0.8", "4"],
-        ["10–15", "6", "5", "1.2", "6"],
-        ["15–20", "9", "5", "1.8", "9"],
-        ["20–30", "12", "10", "1.2", "6"],
-        ["30–50", "10", "20", "0.5", "2.5"],
-        ["Total", "45", "", "", ""],
+      type: "worked-example",
+      id: "st0-4-we2",
+      title: "Worked example 2: going backwards",
+      problem:
+        "A histogram of travel times has a bar over 15–25 minutes with frequency density 2.4. How many people took 15 to 25 minutes?",
+      steps: [
+        { text: "Width $= 25 - 15 = 10$." },
+        { text: "Frequency $=$ area $=$ density $\\times$ width $= 2.4 \\times 10 = 24$ people." },
       ],
+      answer: "24 people",
     },
     {
-      type: "text",
-      content:
-        "**Step 3: draw and read.** Bars stand on 0, 10, 15, 20, 30, 50 with no gaps. The tallest is 15–20, even though 20–30 has the larger frequency. Drawn at its raw frequency of 10, the 30–50 bar would have stood taller than the 0–10 bar (frequency 8). By density it is the lowest bar, at 0.5. Check the areas: $0.8 \\times 10 + 1.2 \\times 5 + 1.8 \\times 5 + 1.2 \\times 10 + 0.5 \\times 20 = 8 + 6 + 9 + 12 + 10 = 45$.",
+      type: "worked-example",
+      id: "st0-4-we3",
+      title: "Worked example 3: reading part of a bar",
+      problem:
+        "A shop's histogram shows how long customers stayed. The bars are: 0–5 min at density 2, 5–15 min at density 3.5, 15–30 min at density 2, and 30–60 min at density 0.5 (customers per minute). (a) How many customers were recorded? (b) Estimate how many stayed between 10 and 20 minutes.",
+      steps: [
+        { text: "**Turn every bar into a frequency.** Area = density × width:", latex: "2 \\times 5 = 10, \\quad 3.5 \\times 10 = 35, \\quad 2 \\times 15 = 30, \\quad 0.5 \\times 30 = 15" },
+        { text: "**Add.** $10 + 35 + 30 + 15 = 90$ customers. *Why not add the heights?* $2 + 3.5 + 2 + 0.5 = 8$ is a sum of 'customers per minute' and counts nobody." },
+        { text: "**Split the bars at 10 and 20.** The stretch 10–20 cuts through two bars: 10–15 is the right half of the 5–15 bar, and 15–20 is the first third of the 15–30 bar. Take the area of each piece:", latex: "\\underbrace{3.5 \\times 5}_{10\\text{ to }15} + \\underbrace{2 \\times 5}_{15\\text{ to }20} = 17.5 + 10 = 27.5 \\approx 28" },
+        { text: "*Why this is only an estimate:* a histogram does not say where inside a class the customers are. Using part of a bar's area assumes they are spread evenly across it, the same assumption a straight-line ogive makes in 0.5. So about 28 customers stayed 10 to 20 minutes." },
+      ],
+      answer: "(a) 90 customers, (b) about 28",
+    },
+    { type: "heading", text: "Drawing with unequal widths" },
+    {
+      type: "worked-example",
+      id: "st0-4-we4",
+      title: "Worked example 4 (NCERT style: unequal widths)",
+      problem:
+        "*Draw a histogram for: 0–10: 8, 10–15: 6, 15–20: 9, 20–30: 12, 30–50: 10.*",
+      steps: [
+        { text: "**Check the widths.** They are 10, 5, 5, 10, 20, which are not equal. *Why this step comes first:* with unequal widths, drawing heights equal to $f$ would make the 30–50 bar four times the area it should have relative to a width-5 class." },
+        {
+          text: "**Compute heights.** Use density $\\frac{f}{w}$, or the textbook's adjusted frequency with minimum width 5, which is $5 \\times$ density.",
+          table: {
+            headers: ["Class", "$f$", "Width $w$", "Density $f/w$", "Adjusted $f = \\frac{5}{w} \\times f$"],
+            rows: [
+              ["0–10", "8", "10", "0.8", "4"],
+              ["10–15", "6", "5", "1.2", "6"],
+              ["15–20", "9", "5", "1.8", "9"],
+              ["20–30", "12", "10", "1.2", "6"],
+              ["30–50", "10", "20", "0.5", "2.5"],
+              ["Total", "45", "", "", ""],
+            ],
+          },
+        },
+        { text: "**Draw and read.** Bars stand on 0, 10, 15, 20, 30, 50 with no gaps. The tallest is 15–20, even though 20–30 has the larger frequency. Drawn at its raw frequency of 10, the 30–50 bar would have stood taller than the 0–10 bar (frequency 8). By density it is the lowest bar, at 0.5. Check the areas: $0.8 \\times 10 + 1.2 \\times 5 + 1.8 \\times 5 + 1.2 \\times 10 + 0.5 \\times 20 = 8 + 6 + 9 + 12 + 10 = 45$." },
+      ],
+      answer: "Densities 0.8, 1.2, 1.8, 1.2, 0.5: the tallest bar is 15–20 and the lowest is 30–50",
     },
     {
       type: "text",
@@ -1059,6 +1163,7 @@ const lesson04: LessonSeed = {
       content:
         "Plot each class's frequency (or density) at its **class mark** and join the points with straight lines. Close the polygon by adding a point of frequency 0 at the class mark of an empty class on each end. For the marks: $(4.5, 0), (14.5, 5), (24.5, 9), (34.5, 14), (44.5, 8), (54.5, 4), (64.5, 0)$. With equal widths, the area under the polygon equals the total area of the histogram, because each triangle cut off a bar is replaced by an equal triangle added outside it. Polygons are handy for putting two distributions on one graph.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st0-4-q1",
@@ -1185,32 +1290,37 @@ const lesson05: LessonSeed = {
       content:
         "A frequency table answers 'how many are in this class?'. Often you want something different: *how many students weigh less than 55 kg?*, or *below what weight do half the students lie?* Those questions are about running totals, and a running-total graph can be read in both directions.",
     },
+    { type: "heading", text: "Building cumulative frequencies" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** The weights of 50 students are grouped as below. Build the less-than cumulative frequency by adding each frequency to the total so far.",
-    },
-    {
-      type: "table",
-      headers: ["Weight (kg)", "$f$", "Less than …", "Less-than cf", "At least …", "More-than cf"],
-      rows: [
-        ["40–45", "4", "45", "4", "40", "50"],
-        ["45–50", "9", "50", "4 + 9 = 13", "45", "50 − 4 = 46"],
-        ["50–55", "15", "55", "13 + 15 = 28", "50", "46 − 9 = 37"],
-        ["55–60", "12", "60", "28 + 12 = 40", "55", "37 − 15 = 22"],
-        ["60–65", "7", "65", "40 + 7 = 47", "60", "22 − 12 = 10"],
-        ["65–70", "3", "70", "47 + 3 = 50", "65", "10 − 7 = 3"],
+      type: "worked-example",
+      id: "st0-5-we1",
+      title: "Worked example 1",
+      problem:
+        "The weights of 50 students are grouped as below. Build the less-than cumulative frequency by adding each frequency to the total so far.",
+      steps: [
+        {
+          table: {
+            headers: ["Weight (kg)", "$f$", "Less than …", "Less-than cf", "At least …", "More-than cf"],
+            rows: [
+              ["40–45", "4", "45", "4", "40", "50"],
+              ["45–50", "9", "50", "4 + 9 = 13", "45", "50 − 4 = 46"],
+              ["50–55", "15", "55", "13 + 15 = 28", "50", "46 − 9 = 37"],
+              ["55–60", "12", "60", "28 + 12 = 40", "55", "37 − 15 = 22"],
+              ["60–65", "7", "65", "40 + 7 = 47", "60", "22 − 12 = 10"],
+              ["65–70", "3", "70", "47 + 3 = 50", "65", "10 − 7 = 3"],
+            ],
+          },
+        },
+        { text: "**Check:** the less-than column must end at $n = 50$, and the more-than column must start at 50. The more-than column counts down: the number of students weighing *at least* 55 kg is everyone minus those below 55, which is $50 - 28 = 22$." },
       ],
+      answer: "Less-than cf 4, 13, 28, 40, 47, 50; more-than cf 50, 46, 37, 22, 10, 3",
+      tryFirst: false,
     },
+    { type: "heading", text: "Where to plot" },
     {
       type: "text",
       content:
-        "**Check:** the less-than column must end at $n = 50$, and the more-than column must start at 50. The more-than column counts down: the number of students weighing *at least* 55 kg is everyone minus those below 55, which is $50 - 28 = 22$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Where to plot.** The less-than cumulative frequency 13 means '13 students weigh less than 50 kg'. It is a fact about the point 50, the **upper boundary** of the 45–50 class. Only after the whole class has been counted is the total 13; halfway through the class (at 47.5) we have not yet reached all of those 9 students. So a less-than ogive plots $(\\text{upper boundary}, \\text{cf})$: $(45, 4), (50, 13), (55, 28), (60, 40), (65, 47), (70, 50)$, starting from $(40, 0)$ since nobody is below 40 kg.",
+        "The less-than cumulative frequency 13 means '13 students weigh less than 50 kg'. It is a fact about the point 50, the **upper boundary** of the 45–50 class. Only after the whole class has been counted is the total 13; halfway through the class (at 47.5) we have not yet reached all of those 9 students. So a less-than ogive plots $(\\text{upper boundary}, \\text{cf})$: $(45, 4), (50, 13), (55, 28), (60, 40), (65, 47), (70, 50)$, starting from $(40, 0)$ since nobody is below 40 kg.",
     },
     {
       type: "text",
@@ -1249,6 +1359,7 @@ const lesson05: LessonSeed = {
       content:
         "An **ogive** (pronounced *oh-jive*) is the graph of cumulative frequency against class boundary, with the points joined by straight lines. A less-than ogive rises from 0 to $n$; a more-than ogive falls from $n$ to 0. Joining with straight lines assumes the values in each class are spread evenly across it.",
     },
+    { type: "heading", text: "Reading an ogive both ways" },
     {
       type: "text",
       content:
@@ -1277,50 +1388,50 @@ const lesson05: LessonSeed = {
       content:
         "**Why the two ogives cross at the median.** At any weight $x$, (number below $x$) + (number at or above $x$) $= n$. The curves cross where the two counts are equal, so each must be $\\frac{n}{2}$. That is exactly the median. Check with the straight-line pieces in 50–55: the less-than ogive is $13 + 3t$ and the more-than ogive is $37 - 3t$, where $t$ is kg above 50. They meet when $13 + 3t = 37 - 3t$, so $t = 4$: at 54 kg and height 25.",
     },
+    { type: "heading", text: "Inclusive classes and more-than tables" },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (inclusive classes).** Draw the less-than ogive for the test marks of 0.3 (10–19: 5, 20–29: 9, 30–39: 14, 40–49: 8, 50–59: 4) and estimate the median.\n\n**Step 1: convert to boundaries.** The classes are inclusive, so the cumulative totals belong at 19.5, 29.5, 39.5, 49.5, 59.5. *Why:* '5 students scored less than 20' is true at 19.5 as well as at 20, because nobody can score 19.7. On the continuous axis of a graph, the class really ends at the boundary 19.5.\n\n**Step 2: running totals.** $5, \\; 5 + 9 = 14, \\; 14 + 14 = 28, \\; 28 + 8 = 36, \\; 36 + 4 = 40$. The last total equals $n = 40$, which checks the addition.\n\n**Step 3: points.** $(9.5, 0), (19.5, 5), (29.5, 14), (39.5, 28), (49.5, 36), (59.5, 40)$. The first point is the lower boundary of the first class, where nobody has been counted yet.\n\n**Step 4: median.** $\\frac{n}{2} = 20$ lies between cf 14 (at 29.5) and cf 28 (at 39.5). We need 6 of the 14 students in that class:",
-    },
-    {
-      type: "math",
-      latex: "\\text{median} \\approx 29.5 + \\frac{20 - 14}{14} \\times 10 = 29.5 + 4.29 \\approx 33.8",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 5: compare with the raw data.** Sorting the 40 original marks, the 20th and 21st are 34 and 35, so the true median is 34.5. The ogive estimate, 33.8, is close but not exact. *Why:* grouping throws away where each mark sits inside its class, and the straight line assumes the 14 marks in 30–39 are spread evenly. When you only have the grouped table, this estimate is the best you can do.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 (CBSE style: from a more-than table).** *The daily wages of 60 workers are given as a more-than table: at least ₹100: 60; at least ₹120: 54; at least ₹140: 42; at least ₹160: 25; at least ₹180: 10; at least ₹200: 0. (a) Find the frequency distribution. (b) The 10 best-paid workers get a bonus. From what wage does the bonus start? (c) Estimate the median wage.*\n\n**Step 1: frequencies by subtraction.** Workers earning at least ₹100 but less than ₹120 are those in the first count and not in the second: $60 - 54 = 6$. *Why subtraction:* each more-than count includes everyone in the later classes too, so consecutive differences isolate one class.",
-    },
-    {
-      type: "table",
-      headers: ["Wage (₹)", "$f$", "Less-than cf (at upper boundary)"],
-      rows: [
-        ["100–120", "60 − 54 = 6", "6"],
-        ["120–140", "54 − 42 = 12", "18"],
-        ["140–160", "42 − 25 = 17", "35"],
-        ["160–180", "25 − 10 = 15", "50"],
-        ["180–200", "10 − 0 = 10", "60"],
+      type: "worked-example",
+      id: "st0-5-we2",
+      title: "Worked example 2: inclusive classes",
+      problem:
+        "Draw the less-than ogive for the test marks of 0.3 (10–19: 5, 20–29: 9, 30–39: 14, 40–49: 8, 50–59: 4) and estimate the median.",
+      steps: [
+        { text: "**Convert to boundaries.** The classes are inclusive, so the cumulative totals belong at 19.5, 29.5, 39.5, 49.5, 59.5. *Why:* '5 students scored less than 20' is true at 19.5 as well as at 20, because nobody can score 19.7. On the continuous axis of a graph, the class really ends at the boundary 19.5." },
+        { text: "**Running totals.** $5, \\; 5 + 9 = 14, \\; 14 + 14 = 28, \\; 28 + 8 = 36, \\; 36 + 4 = 40$. The last total equals $n = 40$, which checks the addition." },
+        { text: "**Points.** $(9.5, 0), (19.5, 5), (29.5, 14), (39.5, 28), (49.5, 36), (59.5, 40)$. The first point is the lower boundary of the first class, where nobody has been counted yet." },
+        { text: "**Median.** $\\frac{n}{2} = 20$ lies between cf 14 (at 29.5) and cf 28 (at 39.5). We need 6 of the 14 students in that class:", latex: "\\text{median} \\approx 29.5 + \\frac{20 - 14}{14} \\times 10 = 29.5 + 4.29 \\approx 33.8" },
+        { text: "**Compare with the raw data.** Sorting the 40 original marks, the 20th and 21st are 34 and 35, so the true median is 34.5. The ogive estimate, 33.8, is close but not exact. *Why:* grouping throws away where each mark sits inside its class, and the straight line assumes the 14 marks in 30–39 are spread evenly. When you only have the grouped table, this estimate is the best you can do." },
       ],
+      answer: "Median $\\approx 33.8$ (true median 34.5)",
     },
     {
-      type: "text",
-      content:
-        "**Step 2: check.** $6 + 12 + 17 + 15 + 10 = 60$. \n\n**Step 3: the bonus.** The more-than count is exactly 10 at ₹180, so the bonus starts at ₹180 a day. *Why read the more-than table:* 'the top 10' is a question about how many are *at or above* a wage.\n\n**Step 4: the median.** $\\frac{n}{2} = 30$ lies between less-than cf 18 (at 140) and 35 (at 160), so it is in the class 140–160, which holds 17 workers:",
+      type: "worked-example",
+      id: "st0-5-we3",
+      title: "Worked example 3 (CBSE style: from a more-than table)",
+      problem:
+        "*The daily wages of 60 workers are given as a more-than table: at least ₹100: 60; at least ₹120: 54; at least ₹140: 42; at least ₹160: 25; at least ₹180: 10; at least ₹200: 0. (a) Find the frequency distribution. (b) The 10 best-paid workers get a bonus. From what wage does the bonus start? (c) Estimate the median wage.*",
+      steps: [
+        {
+          text: "**Frequencies by subtraction.** Workers earning at least ₹100 but less than ₹120 are those in the first count and not in the second: $60 - 54 = 6$. *Why subtraction:* each more-than count includes everyone in the later classes too, so consecutive differences isolate one class.",
+          table: {
+            headers: ["Wage (₹)", "$f$", "Less-than cf (at upper boundary)"],
+            rows: [
+              ["100–120", "60 − 54 = 6", "6"],
+              ["120–140", "54 − 42 = 12", "18"],
+              ["140–160", "42 − 25 = 17", "35"],
+              ["160–180", "25 − 10 = 15", "50"],
+              ["180–200", "10 − 0 = 10", "60"],
+            ],
+          },
+        },
+        { text: "**Check.** $6 + 12 + 17 + 15 + 10 = 60$." },
+        { text: "**The bonus.** The more-than count is exactly 10 at ₹180, so the bonus starts at ₹180 a day. *Why read the more-than table:* 'the top 10' is a question about how many are *at or above* a wage." },
+        { text: "**The median.** $\\frac{n}{2} = 30$ lies between less-than cf 18 (at 140) and 35 (at 160), so it is in the class 140–160, which holds 17 workers:", latex: "\\text{median} \\approx 140 + \\frac{30 - 18}{17} \\times 20 = 140 + 14.1 \\approx \\text{₹}154" },
+        { text: "Half the workers earn less than about ₹154 a day. Drawing both ogives, one from the more-than table and one from the less-than column, they would cross at $(154, 30)$." },
+      ],
+      answer: "(a) $f$ = 6, 12, 17, 15, 10. (b) The bonus starts at ₹180 a day. (c) Half the workers earn less than about ₹154 a day.",
     },
-    {
-      type: "math",
-      latex: "\\text{median} \\approx 140 + \\frac{30 - 18}{17} \\times 20 = 140 + 14.1 \\approx \\text{₹}154",
-    },
-    {
-      type: "text",
-      content:
-        "Half the workers earn less than about ₹154 a day. Drawing both ogives, one from the more-than table and one from the less-than column, they would cross at $(154, 30)$.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st0-5-q1",
@@ -1454,6 +1565,7 @@ const lesson06: LessonSeed = {
       content:
         "A graph is an argument. The same numbers can be drawn to make a difference look huge or tiny, a shape look smooth or lumpy, or a trend look real when it is not. Most misleading graphs are not false: every number on them is correct. They mislead through choices of axis, width and window. The defence is a habit: **read the axes before you read the shape.**",
     },
+    { type: "heading", text: "Pie charts and stem-and-leaf plots" },
     {
       type: "text",
       content: "First, the honest pictures for each kind of data.",
@@ -1461,12 +1573,36 @@ const lesson06: LessonSeed = {
     {
       type: "text",
       content:
-        "**Pie charts (categorical).** A pie shows parts of one whole. Each sector's angle is proportional to its frequency: $\\text{angle} = \\frac{f}{n} \\times 360^\\circ$. **Worked example:** the blood groups of 40 students are O 16, B 12, A 8, AB 4. Angles: O $\\frac{16}{40} \\times 360^\\circ = 144^\\circ$, B $108^\\circ$, A $72^\\circ$, AB $36^\\circ$. Check: $144 + 108 + 72 + 36 = 360$. A bar chart of the same data is just as honest and makes it easier to compare categories of similar size.",
+        "**Pie charts (categorical).** A pie shows parts of one whole. Each sector's angle is proportional to its frequency: $\\text{angle} = \\frac{f}{n} \\times 360^\\circ$.",
+    },
+    {
+      type: "worked-example",
+      id: "st0-6-we3",
+      problem:
+        "The blood groups of 40 students are O 16, B 12, A 8, AB 4. Find the angle of each sector of a pie chart.",
+      steps: [
+        { text: "Angles: O $\\frac{16}{40} \\times 360^\\circ = 144^\\circ$, B $108^\\circ$, A $72^\\circ$, AB $36^\\circ$." },
+        { text: "Check: $144 + 108 + 72 + 36 = 360$." },
+      ],
+      answer: "O $144^\\circ$, B $108^\\circ$, A $72^\\circ$, AB $36^\\circ$",
     },
     {
       type: "text",
       content:
-        "**Worked example (exam style: reading a pie backwards).** *A pie chart shows a family's monthly expenditure of ₹40 000. The sector for food has angle $108^\\circ$. (a) How much is spent on food? (b) The family spends ₹6000 on education. What is the angle of that sector?*\n\n**Step 1: the fraction.** The whole pie is $360^\\circ$, so the food sector is $\\frac{108}{360} = 0.3$ of the total. *Why start with the fraction:* angle, frequency and amount are all in the same proportion, so the fraction is the bridge between them.\n\n**Step 2: the amount.** $0.3 \\times 40\\,000 = 12\\,000$, so ₹12 000 goes on food.\n\n**Step 3: the other direction.** Education is $\\frac{6000}{40\\,000} = 0.15$ of the total, so its angle is $0.15 \\times 360^\\circ = 54^\\circ$.",
+        "A bar chart of the same data is just as honest and makes it easier to compare categories of similar size.",
+    },
+    {
+      type: "worked-example",
+      id: "st0-6-we1",
+      title: "Worked example (exam style: reading a pie backwards)",
+      problem:
+        "*A pie chart shows a family's monthly expenditure of ₹40 000. The sector for food has angle $108^\\circ$. (a) How much is spent on food? (b) The family spends ₹6000 on education. What is the angle of that sector?*",
+      steps: [
+        { text: "**The fraction.** The whole pie is $360^\\circ$, so the food sector is $\\frac{108}{360} = 0.3$ of the total. *Why start with the fraction:* angle, frequency and amount are all in the same proportion, so the fraction is the bridge between them." },
+        { text: "**The amount.** $0.3 \\times 40\\,000 = 12\\,000$, so ₹12 000 goes on food." },
+        { text: "**The other direction.** Education is $\\frac{6000}{40\\,000} = 0.15$ of the total, so its angle is $0.15 \\times 360^\\circ = 54^\\circ$." },
+      ],
+      answer: "(a) ₹12 000, (b) $54^\\circ$",
     },
     {
       type: "text",
@@ -1488,6 +1624,7 @@ const lesson06: LessonSeed = {
       content:
         "Key: 4 | 5 means 45. Turn it on its side and it is a histogram with classes 20–29, 30–39, …, but it keeps every original value. You can read that 45 occurs three times, that 6 of the 13 values are below 40, and that the values peak in the 40s.",
     },
+    { type: "heading", text: "Tricks that mislead the eye" },
     {
       type: "text",
       content: "Now the tricks. Each one is a legitimate-looking choice that changes what your eye concludes.",
@@ -1505,9 +1642,17 @@ const lesson06: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example (measuring a lie).** A company's annual report draws its sales as bars: ₹480 crore last year and ₹520 crore this year, on a vertical axis that starts at 450. How much bigger does this year look, and how much bigger is it?\n\n**Step 1: what the eye sees.** The visible bars are $480 - 450 = 30$ and $520 - 450 = 70$ units tall, so this year looks $\\frac{70}{30} \\approx 2.33$ times as big. *Why subtract 450:* the eye compares the lengths drawn, and everything below 450 has been cut off.\n\n**Step 2: the truth.** $\\frac{520}{480} \\approx 1.083$, so sales grew by about 8.3%.\n\n**Step 3: the exaggeration.** The picture makes growth of 8% look like growth of 133%. The honest fix for a bar chart is an axis starting at 0. If you really need to show a small change, plot the *change* itself, or use a line graph with its axis clearly labelled.",
+      type: "worked-example",
+      id: "st0-6-we2",
+      title: "Worked example: measuring a lie",
+      problem:
+        "A company's annual report draws its sales as bars: ₹480 crore last year and ₹520 crore this year, on a vertical axis that starts at 450. How much bigger does this year look, and how much bigger is it?",
+      steps: [
+        { text: "**What the eye sees.** The visible bars are $480 - 450 = 30$ and $520 - 450 = 70$ units tall, so this year looks $\\frac{70}{30} \\approx 2.33$ times as big. *Why subtract 450:* the eye compares the lengths drawn, and everything below 450 has been cut off." },
+        { text: "**The truth.** $\\frac{520}{480} \\approx 1.083$, so sales grew by about 8.3%." },
+        { text: "**The exaggeration.** The picture makes growth of 8% look like growth of 133%. The honest fix for a bar chart is an axis starting at 0. If you really need to show a small change, plot the *change* itself, or use a line graph with its axis clearly labelled." },
+      ],
+      answer: "It looks about 2.33 times as big, but sales grew only by about 8.3% (a factor of 1.083)",
     },
     {
       type: "text",
@@ -1537,6 +1682,7 @@ const lesson06: LessonSeed = {
           "At width 20 there is one peak. At width 5 there are two: patients seen by a quick doctor wait about 20 minutes, and those seen by a slow one wait about 40. The dot plot shows the truth directly.",
       },
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st0-6-q7",

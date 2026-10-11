@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import type { z } from "zod";
 import type { probDistributionExplorerSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 
 type Config = z.infer<typeof probDistributionExplorerSchema>;
@@ -605,7 +606,7 @@ export function ProbDistributionExplorer({ config }: { config: Config }) {
         </div>
       )}
 
-      <p className="text-center text-xs text-muted-foreground">{config.caption ?? caption}</p>
+      <p className="text-center text-xs text-muted-foreground"><RichText text={config.caption ?? caption} /></p>
     </InteractiveFrame>
   );
 }

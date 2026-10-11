@@ -23,6 +23,14 @@ const lesson01: LessonSeed = {
   position: 1,
   blocks: blocks([
     {
+      type: "video",
+      src: "/videos/omp-1-lenses-prisms-and-instruments.mp4",
+      poster: "/videos/omp-1-lenses-prisms-and-instruments.jpg",
+      title: "Chapter 1 overview video",
+      caption:
+        "A narrated walk through the whole chapter. Watch it now for the big picture, or come back to it as a recap.",
+    },
+    {
       type: "text",
       content:
         "Hold a magnifying glass in sunlight above a sheet of paper. At most heights you get a fuzzy bright patch; at one particular height the patch shrinks to a dazzling dot and the paper starts to smoke. That height is the lens's focal length, and it is set entirely by two things: how curved the two faces are, and how much slower light travels in the glass than around it.",
@@ -34,6 +42,7 @@ const lesson01: LessonSeed = {
       content:
         "A lens is a transparent body bounded by two refracting surfaces, at least one curved. It is **thin** when its thickness is negligible compared with the object and image distances and the radii of curvature. Then both surfaces are effectively at one point, the **optical centre** O, and all distances are measured from O. Sign convention: New Cartesian, incident light left to right.",
     },
+    { type: "heading", text: "Deriving the lens maker's formula" },
     {
       type: "text",
       content:
@@ -78,6 +87,7 @@ const lesson01: LessonSeed = {
         ["concavo-convex (meniscus), both centres to the right, $|R_1| < |R_2|$", "$+$", "$+$", "positive: converging"],
       ],
     },
+    { type: "heading", text: "The $n - 1$ factor and the medium" },
     {
       type: "text",
       content:
@@ -100,15 +110,67 @@ const lesson01: LessonSeed = {
       content:
         "What you should have seen: at $n_m = 1.33$ (water), the line is much flatter and lower than in air, so $\\frac1f$ is smaller and $f$ longer. The line crosses zero exactly at $n_{\\text{lens}} = n_m$: a lens in a liquid of its own index has $\\frac1f = 0$ and vanishes (glass rods disappear in the right oil). To the left of that crossing $\\frac1f < 0$: the same convex lens now **diverges**.",
     },
+    { type: "heading", text: "Worked examples: equiconvex and meniscus lenses" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (equiconvex lens in air).** $R = 20$ cm for both faces, $n = 1.5$.\n\n1. Light meets the first face; its centre is inside the lens, to the right: $R_1 = +20$ cm. The second face's centre is to the left: $R_2 = -20$ cm. *Why this step:* a biconvex lens has radii of opposite sign, and forgetting that gives $\\frac1{R_1} - \\frac1{R_2} = 0$.\n2. $\\frac1f = (1.5 - 1)\\left(\\frac1{20} + \\frac1{20}\\right) = 0.5 \\times 0.1 = 0.05$ cm$^{-1}$.\n3. $f = +20$ cm: converging.\n\n**Worked example 2 (the same lens in water).** Water $n_w = \\frac43$.\n\n1. Relative index: $n = \\frac{1.5}{4/3} = \\frac98$, so $n - 1 = \\frac18$. *Why this step:* bending at each face depends on the ratio of indices.\n2. $\\frac1f = \\frac18 \\times 0.1 = \\frac1{80}$, so $f = 80$ cm: four times longer. The ratio is $\\frac{0.5}{0.125} = 4$.",
+      type: "worked-example",
+      id: "omp1-1-we1",
+      title: "Worked example 1 (equiconvex lens in air)",
+      problem:
+        "An equiconvex lens has $R = 20$ cm for both faces, $n = 1.5$. Find its focal length in air.",
+      steps: [
+        { text: "Light meets the first face; its centre is inside the lens, to the right: $R_1 = +20$ cm. The second face's centre is to the left: $R_2 = -20$ cm. *Why this step:* a biconvex lens has radii of opposite sign, and forgetting that gives $\\frac1{R_1} - \\frac1{R_2} = 0$." },
+        { text: "$\\frac1f = (1.5 - 1)\\left(\\frac1{20} + \\frac1{20}\\right) = 0.5 \\times 0.1 = 0.05$ cm$^{-1}$." },
+        { text: "$f = +20$ cm: converging." },
+      ],
+      answer: "$f = +20$ cm (converging)",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (a meniscus).** A concavo-convex lens ($n = 1.5$) has its first face of radius 10 cm and its second of radius 20 cm, both centres on the far side (to the right).\n\n1. $R_1 = +10$ cm, $R_2 = +20$ cm.\n2. $\\frac1f = 0.5\\left(\\frac1{10} - \\frac1{20}\\right) = 0.5 \\times 0.05 = 0.025$ cm$^{-1}$, $f = +40$ cm. The more strongly curved face wins, and it is convex, so the lens converges. Spectacle lenses are usually menisci.\n\n**Worked example 4 (an air bubble).** A thin lens-shaped air bubble (biconvex, both radii 12 cm) sits in water.\n\n1. Relative index $n = \\frac{1}{4/3} = \\frac34$, so $n - 1 = -\\frac14$.\n2. $\\frac1f = -\\frac14\\left(\\frac1{12} + \\frac1{12}\\right) = -\\frac1{24}$, so $f = -24$ cm: a **diverging** lens, although it is convex in shape. *Why this step:* the lens is now the rarer medium, so every bend reverses.\n\n**Worked example 5 (finding a radius, CBSE).** A plano-convex lens of glass ($n = 1.5$) has $f = 40$ cm. Find the radius of the curved face.\n\n1. With the flat face $R = \\infty$: $\\frac1{40} = 0.5\\cdot\\frac1R$.\n2. $R = 20$ cm. It does not matter which face faces the light: $|\\frac1{R_1} - \\frac1{R_2}| = \\frac1{20}$ either way.",
+      type: "worked-example",
+      id: "omp1-1-we2",
+      title: "Worked example 2 (the same lens in water)",
+      problem:
+        "The same lens is placed in water, $n_w = \\frac43$. Find its focal length now.",
+      steps: [
+        { text: "Relative index: $n = \\frac{1.5}{4/3} = \\frac98$, so $n - 1 = \\frac18$. *Why this step:* bending at each face depends on the ratio of indices." },
+        { text: "$\\frac1f = \\frac18 \\times 0.1 = \\frac1{80}$, so $f = 80$ cm: four times longer. The ratio is $\\frac{0.5}{0.125} = 4$." },
+      ],
+      answer: "$f = 80$ cm, four times its value in air.",
+    },
+    {
+      type: "worked-example",
+      id: "omp1-1-we3",
+      title: "Worked example 3 (a meniscus)",
+      problem:
+        "A concavo-convex lens ($n = 1.5$) has its first face of radius 10 cm and its second of radius 20 cm, both centres on the far side (to the right). Find its focal length.",
+      steps: [
+        { text: "$R_1 = +10$ cm, $R_2 = +20$ cm." },
+        { text: "$\\frac1f = 0.5\\left(\\frac1{10} - \\frac1{20}\\right) = 0.5 \\times 0.05 = 0.025$ cm$^{-1}$, $f = +40$ cm. The more strongly curved face wins, and it is convex, so the lens converges. Spectacle lenses are usually menisci." },
+      ],
+      answer: "$f = +40$ cm (converging)",
+    },
+    {
+      type: "worked-example",
+      id: "omp1-1-we4",
+      title: "Worked example 4 (an air bubble)",
+      problem:
+        "A thin lens-shaped air bubble (biconvex, both radii 12 cm) sits in water ($n = \\frac43$). Find its focal length.",
+      steps: [
+        { text: "Relative index $n = \\frac{1}{4/3} = \\frac34$, so $n - 1 = -\\frac14$." },
+        { text: "$\\frac1f = -\\frac14\\left(\\frac1{12} + \\frac1{12}\\right) = -\\frac1{24}$, so $f = -24$ cm: a **diverging** lens, although it is convex in shape. *Why this step:* the lens is now the rarer medium, so every bend reverses." },
+      ],
+      answer: "$f = -24$ cm: a diverging lens.",
+    },
+    {
+      type: "worked-example",
+      id: "omp1-1-we5",
+      title: "Worked example 5 (finding a radius, CBSE)",
+      problem:
+        "A plano-convex lens of glass ($n = 1.5$) has $f = 40$ cm. Find the radius of the curved face.",
+      steps: [
+        { text: "With the flat face $R = \\infty$: $\\frac1{40} = 0.5\\cdot\\frac1R$." },
+        { text: "$R = 20$ cm. It does not matter which face faces the light: $|\\frac1{R_1} - \\frac1{R_2}| = \\frac1{20}$ either way." },
+      ],
+      answer: "$R = 20$ cm",
     },
     {
       type: "callout",
@@ -124,6 +186,7 @@ const lesson01: LessonSeed = {
       content:
         "If the light starts in $n_1$, crosses a lens of index $n_2$ and ends in $n_3$, add the two surface equations exactly as above but keep the media separate:\n$\\dfrac{n_3}{v} - \\dfrac{n_1}{u} = \\dfrac{n_2 - n_1}{R_1} + \\dfrac{n_3 - n_2}{R_2}$.\nThe lens then has two different focal lengths, one on each side. Example: an equiconvex glass lens ($n_2 = 1.5$, $|R| = 20$ cm) with air on the left and water ($\\frac43$) on the right. Parallel light from the air side: $\\frac{4/3}{v} = \\frac{0.5}{20} + \\frac{4/3 - 1.5}{-20} = \\frac{1}{40} + \\frac{1}{120} = \\frac1{30}$, so it focuses $v = 40$ cm into the water. Parallel light from the water side focuses 30 cm into the air: the two focal lengths are in the ratio of the indices of the media they lie in, $40 : 30 = \\frac43 : 1$.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "omp1-1-q1",
@@ -135,17 +198,21 @@ const lesson01: LessonSeed = {
         { text: "Infinite", feedback: "That comes from taking $R_1 = R_2 = +30$. For a biconvex lens the radii have opposite signs." },
         { text: "30 cm", correct: true, feedback: "$\\frac1f = 0.5 \\times \\frac{2}{30} = \\frac1{30}$." },
       ],
+      hint: "Use the lensmaker's equation $\\dfrac1f = (n - 1)\\left(\\dfrac1{R_1} - \\dfrac1{R_2}\\right)$, taking the signs of $R_1$ and $R_2$ from the New Cartesian convention.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-1-q2",
       variant: "practice",
-      question: "A glass lens ($n = 1.5$) has $f = 15$ cm in air. What is its focal length in water ($n = \\frac43$)?",
-      options: [
-        { text: "20 cm", feedback: "That scales $f$ by $n_w = \\frac43$. The factor is $(n - 1)$, which changes from 0.5 to 0.125." },
-        { text: "11.25 cm", feedback: "The lens gets weaker in water, not stronger: $n - 1$ shrinks." },
-        { text: "60 cm", correct: true, feedback: "$\\frac{f_w}{f_a} = \\frac{n_g - 1}{n_g/n_w - 1} = \\frac{0.5}{0.125} = 4$." },
-        { text: "$-60$ cm", feedback: "Glass is still denser than water, so the lens still converges." },
+      question: "A glass lens ($n = 1.5$) has $f = 15$ cm in air. What is its focal length in water ($n = \\frac43$)? Give your answer in cm, with a minus sign if the lens diverges.",
+      answer: 60,
+      unit: "cm",
+      hint: "The curvature factor is the same in both media; only $n_{\\text{rel}} - 1$ changes.",
+      solution: "In water $n_{\\text{rel}} = \\dfrac{1.5}{4/3} = \\dfrac98$, so $n_{\\text{rel}} - 1 = \\dfrac18 = 0.125$ instead of $0.5$.\n\n$\\dfrac{f_w}{f_a} = \\dfrac{0.5}{0.125} = 4$, so $f_w = 4\\times15 = 60$ cm. Glass is still denser than water, so the lens still converges.",
+      commonMistakes: [
+        { answer: 20, feedback: "That scales $f$ by $n_w = \\frac43$. The factor is $(n - 1)$, which changes from 0.5 to 0.125." },
+        { answer: 11.25, feedback: "The lens gets weaker in water, not stronger: $n - 1$ shrinks." },
+        { answer: -60, feedback: "Glass is still denser than water, so the lens still converges: $f$ stays positive." },
       ],
     },
     {
@@ -158,6 +225,7 @@ const lesson01: LessonSeed = {
         { text: "As a diverging lens", correct: true, feedback: "Relative index $\\frac{1}{1.5} < 1$ flips the sign of $\\frac1f$." },
         { text: "It has no effect, because air does not bend light", feedback: "Bending happens at the glass–air boundaries, which the bubble has plenty of." },
       ],
+      hint: "Apply the lensmaker's equation with the relative index $n_{\\text{air}}/n_{\\text{glass}}$. Is that index minus 1 positive or negative?",
     },
     {
       type: "quiz",
@@ -169,6 +237,7 @@ const lesson01: LessonSeed = {
         { text: "20 cm", feedback: "That doubles the curvature as if both faces were curved." },
         { text: "15 cm", feedback: "That is $\\frac{R}{n}$. Use $(n - 1)$, not $n$." },
       ],
+      hint: "Use the lensmaker's equation with one radius infinite.",
     },
     {
       type: "quiz",
@@ -180,19 +249,22 @@ const lesson01: LessonSeed = {
         { text: "Zero", feedback: "$\\frac1f = 0$ means $f$ is infinite, not zero." },
         { text: "Infinite: the lens neither converges nor diverges.", correct: true, feedback: "$n_{\\text{rel}} = 1$, so $\\frac1f = 0$. The lens becomes invisible." },
       ],
+      hint: "In a liquid the lensmaker's equation uses $\\dfrac{n_{\\text{lens}}}{n_{\\text{liquid}}} - 1$. What is that here?",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-1-q6",
       variant: "practice",
-      question: "A thin equiconvex glass lens ($n = 1.5$, both radii 20 cm) forms a window with air on the left and water ($n = \\frac43$) on the right. Parallel light arrives from the air side. Where does it focus?",
-      options: [
-        { text: "20 cm into the water", feedback: "That is the focal length with air on both sides. The water changes the second refraction." },
-        { text: "40 cm into the water", correct: true, feedback: "$\\frac{4/3}{v} = \\frac{1.5 - 1}{20} + \\frac{4/3 - 1.5}{-20} = \\frac1{40} + \\frac1{120} = \\frac1{30}$, so $v = 40$ cm." },
-        { text: "80 cm into the water", feedback: "That is the lens fully immersed in water. Here the first surface still has air in front of it." },
-        { text: "30 cm into the water", feedback: "$\\frac{n_3}{v} = \\frac1{30}$ gives $v = 30n_3 = 40$ cm; you dropped the $n_3 = \\frac43$ on the left." },
-      ],
+      question: "A thin equiconvex glass lens ($n = 1.5$, both radii 20 cm) forms a window with air on the left and water ($n = \\frac43$) on the right. Parallel light arrives from the air side. How far into the water does it focus, in cm?",
+      answer: 40,
+      unit: "cm",
       hint: "Use $\\frac{n_3}{v} - \\frac{n_1}{u} = \\frac{n_2 - n_1}{R_1} + \\frac{n_3 - n_2}{R_2}$ with $u \\to -\\infty$.",
+      solution: "With $n_1 = 1$, $n_2 = 1.5$, $n_3 = \\frac43$, $R_1 = +20$ cm, $R_2 = -20$ cm and $u \\to -\\infty$:\n\n$\\dfrac{4/3}{v} = \\dfrac{1.5 - 1}{20} + \\dfrac{4/3 - 1.5}{-20} = \\dfrac1{40} + \\dfrac1{120} = \\dfrac1{30}$, so $v = \\dfrac43\\times30 = 40$ cm.",
+      commonMistakes: [
+        { answer: 20, feedback: "That is the focal length with air on both sides. The water changes the second refraction." },
+        { answer: 80, feedback: "That is the lens fully immersed in water. Here the first surface still has air in front of it." },
+        { answer: 30, feedback: "$\\frac{n_3}{v} = \\frac1{30}$ gives $v = 30n_3 = 40$ cm; you dropped the $n_3 = \\frac43$ on the left." },
+      ],
     },
   ]),
 };
@@ -208,10 +280,11 @@ const lesson02: LessonSeed = {
         "The lens maker's formula already contains the image equation: in 1.1 we found $\\frac1v - \\frac1u = (n - 1)\\left(\\frac1{R_1} - \\frac1{R_2}\\right)$ for any object, and the right-hand side is just $\\frac1f$. So for every thin lens, whatever its shape,",
     },
     { type: "math", latex: "\\frac1v - \\frac1u = \\frac1f" },
+    { type: "heading", text: "A second derivation, from similar triangles" },
     {
       type: "text",
       content:
-        "**A second derivation, from similar triangles.** Object AB at distance $|u|$ to the left of a converging lens, real inverted image A'B' at $v$ on the right. The ray from A through the optical centre O goes straight on (the centre of a thin lens is like a thin parallel slab), so triangles ABO and A'B'O are similar:",
+        "Object AB at distance $|u|$ to the left of a converging lens, real inverted image A'B' at $v$ on the right. The ray from A through the optical centre O goes straight on (the centre of a thin lens is like a thin parallel slab), so triangles ABO and A'B'O are similar:",
     },
     { type: "math", latex: "\\frac{A'B'}{AB} = \\frac{OB'}{OB}" },
     {
@@ -239,6 +312,7 @@ const lesson02: LessonSeed = {
       content:
         "A mirror sends light back, so a real image forms on the same side as the object, where distances are negative: both $u$ and $v$ are negative and they enter as $\\frac1v + \\frac1u$. A lens lets light through, so a real image forms on the far side where $v$ is positive. The formulas differ in form because the geometry differs, not because of a different convention.",
     },
+    { type: "heading", text: "Ray diagrams for convex and concave lenses" },
     {
       type: "callout",
       variant: "definition",
@@ -284,6 +358,7 @@ const lesson02: LessonSeed = {
       content:
         "What you should have seen: the convex lens behaves like the concave mirror of 0.3 turned inside out (real images now form on the far side), and the object-to-image distance is smallest when the object sits at $2F_1$. The concave lens, like the convex mirror, can only make small upright virtual images.",
     },
+    { type: "heading", text: "Finding $f$ by the displacement method" },
     {
       type: "text",
       content:
@@ -299,15 +374,67 @@ const lesson02: LessonSeed = {
       content:
         "Solving for $f$: $f = \\dfrac{D^2 - x^2}{4D}$, where $x$ is the distance between the two lens positions. The two positions are mirror images of each other ($a \\leftrightarrow b$, reversibility of light), so the magnifications are $\\frac ba$ and $\\frac ab$; their product is 1, and the object height is $h = \\sqrt{h_1h_2}$. The smallest object–screen distance that gives a real image is $D = 4f$, with the object at $2F_1$.",
     },
+    { type: "heading", text: "Worked examples: virtual images and displacement" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (a virtual image).** An object is 10 cm from a convex lens of focal length 15 cm.\n\n1. $u = -10$ cm, $f = +15$ cm.\n2. $\\frac1v = \\frac1f + \\frac1u = \\frac1{15} - \\frac1{10} = \\frac{2 - 3}{30} = -\\frac1{30}$, so $v = -30$ cm. *Why this step:* rearranging $\\frac1v - \\frac1u = \\frac1f$ gives $\\frac1v = \\frac1f + \\frac1u$, a plus sign that traps many students.\n3. $m = \\frac vu = \\frac{-30}{-10} = +3$: virtual, erect, three times larger, on the object's side. That is a magnifying glass.\n\n**Worked example 2 (a real image).** Object 30 cm from a convex lens of $f = 20$ cm.\n\n1. $\\frac1v = \\frac1{20} - \\frac1{30} = \\frac1{60}$, $v = +60$ cm.\n2. $m = \\frac{60}{-30} = -2$: real, inverted, double size, on the far side.\n\n**Worked example 3 (concave lens).** Object 20 cm from a concave lens of focal length 20 cm.\n\n1. $f = -20$, $u = -20$. $\\frac1v = -\\frac1{20} - \\frac1{20} = -\\frac1{10}$, $v = -10$ cm.\n2. $m = \\frac{-10}{-20} = +0.5$: virtual, erect, half size.",
+      type: "worked-example",
+      id: "omp1-2-we1",
+      title: "Worked example 1 (convex lens, object at 10 cm)",
+      problem:
+        "An object is 10 cm from a convex lens of focal length 15 cm. Find the position, magnification and nature of the image.",
+      steps: [
+        { text: "$u = -10$ cm, $f = +15$ cm." },
+        { text: "$\\frac1v = \\frac1f + \\frac1u = \\frac1{15} - \\frac1{10} = \\frac{2 - 3}{30} = -\\frac1{30}$, so $v = -30$ cm. *Why this step:* rearranging $\\frac1v - \\frac1u = \\frac1f$ gives $\\frac1v = \\frac1f + \\frac1u$, a plus sign that traps many students." },
+        { text: "$m = \\frac vu = \\frac{-30}{-10} = +3$: virtual, erect, three times larger, on the object's side. That is a magnifying glass." },
+      ],
+      answer: "$v = -30$ cm, $m = +3$: virtual, erect, three times larger, on the object's side.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (displacement method, JEE Main).** Object and screen are 100 cm apart. Sharp images appear for two lens positions 20 cm apart, and the two images are 9 mm and 4 mm tall.\n\n1. $f = \\frac{D^2 - x^2}{4D} = \\frac{10000 - 400}{400} = 24$ cm.\n2. Check the positions: $a, b = \\frac{100 \\pm 20}{2} = 60, 40$ cm, and $\\frac{60 \\times 40}{100} = 24$. ✓\n3. Object height $h = \\sqrt{9 \\times 4} = 6$ mm. *Why this step:* the two magnifications are reciprocals, $\\frac{60}{40}$ and $\\frac{40}{60}$, so $h_1h_2 = h^2$.\n\n**Worked example 5 (shortest throw).** What is the minimum distance between a real object and its real image for a lens of $f = 15$ cm? $D_{\\min} = 4f = 60$ cm, with the object at $2F_1$ (30 cm) and the image at $2F_2$ (30 cm).",
+      type: "worked-example",
+      id: "omp1-2-we2",
+      title: "Worked example 2 (convex lens, object at 30 cm)",
+      problem:
+        "Object 30 cm from a convex lens of $f = 20$ cm. Find the position, magnification and nature of the image.",
+      steps: [
+        { text: "$\\frac1v = \\frac1{20} - \\frac1{30} = \\frac1{60}$, $v = +60$ cm." },
+        { text: "$m = \\frac{60}{-30} = -2$: real, inverted, double size, on the far side." },
+      ],
+      answer: "$v = +60$ cm, $m = -2$: real, inverted, double size, on the far side.",
+    },
+    {
+      type: "worked-example",
+      id: "omp1-2-we3",
+      title: "Worked example 3 (concave lens)",
+      problem:
+        "Object 20 cm from a concave lens of focal length 20 cm. Find the position, magnification and nature of the image.",
+      steps: [
+        { text: "$f = -20$, $u = -20$. $\\frac1v = -\\frac1{20} - \\frac1{20} = -\\frac1{10}$, $v = -10$ cm." },
+        { text: "$m = \\frac{-10}{-20} = +0.5$: virtual, erect, half size." },
+      ],
+      answer: "$v = -10$ cm, $m = +0.5$: virtual, erect, half size.",
+    },
+    {
+      type: "worked-example",
+      id: "omp1-2-we4",
+      title: "Worked example 4 (displacement method, JEE Main)",
+      problem:
+        "Object and screen are 100 cm apart. Sharp images appear for two lens positions 20 cm apart, and the two images are 9 mm and 4 mm tall. Find the focal length of the lens and the height of the object.",
+      steps: [
+        { text: "$f = \\frac{D^2 - x^2}{4D} = \\frac{10000 - 400}{400} = 24$ cm." },
+        { text: "Check the positions: $a, b = \\frac{100 \\pm 20}{2} = 60, 40$ cm, and $\\frac{60 \\times 40}{100} = 24$. ✓" },
+        { text: "Object height $h = \\sqrt{9 \\times 4} = 6$ mm. *Why this step:* the two magnifications are reciprocals, $\\frac{60}{40}$ and $\\frac{40}{60}$, so $h_1h_2 = h^2$." },
+      ],
+      answer: "$f = 24$ cm, object height 6 mm.",
+    },
+    {
+      type: "worked-example",
+      id: "omp1-2-we5",
+      title: "Worked example 5 (shortest throw)",
+      problem:
+        "What is the minimum distance between a real object and its real image for a lens of $f = 15$ cm?",
+      steps: [
+        { text: "$D_{\\min} = 4f = 60$ cm, with the object at $2F_1$ (30 cm) and the image at $2F_2$ (30 cm)." },
+      ],
+      answer: "$D_{\\min} = 60$ cm",
     },
     {
       type: "callout",
@@ -323,6 +450,7 @@ const lesson02: LessonSeed = {
       content:
         "For a lens it is $\\frac1v - \\frac1u = \\frac1f$ and $m = +\\frac vu$. Using the mirror form with $u = -10$, $f = 15$ gives $v = 6$ cm, a real image, instead of the correct virtual image at $-30$ cm.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "omp1-2-q1",
@@ -334,16 +462,21 @@ const lesson02: LessonSeed = {
         { text: "$v = +30$ cm, $m = -2$", correct: true, feedback: "$\\frac1v = \\frac1{10} - \\frac1{15} = \\frac1{30}$; $m = \\frac{30}{-15}$." },
         { text: "$v = +30$ cm, $m = +2$", feedback: "$m = \\frac vu$ with $u$ negative, so $m$ is negative: inverted." },
       ],
+      hint: "Use $\\dfrac1v - \\dfrac1u = \\dfrac1f$ with $u = -15$ cm, then $m = v/u$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-2-q2",
       variant: "practice",
-      question: "An object is 30 cm from a concave lens of focal length 15 cm. Where is the image?",
-      options: [
-        { text: "30 cm on the far side, same size", feedback: "That would be a convex lens with the object at $2F$. A concave lens never makes real images of real objects." },
-        { text: "10 cm from the lens on the object's side, one-third size", correct: true, feedback: "$\\frac1v = -\\frac1{15} - \\frac1{30} = -\\frac1{10}$, $m = \\frac{-10}{-30} = \\frac13$." },
-        { text: "30 cm on the object's side", feedback: "Check the sum: $-\\frac1{15} - \\frac1{30} = -\\frac{3}{30}$." },
+      question: "An object is 30 cm from a concave lens of focal length 15 cm. Find the image distance $v$ in cm, with its sign in the New Cartesian convention (light travels left to right, distances measured from the lens).",
+      answer: -10,
+      unit: "cm",
+      hint: "$u = -30$ cm and $f = -15$ cm. Then $\\frac1v = \\frac1f + \\frac1u$.",
+      solution: "$\\dfrac1v = \\dfrac1f + \\dfrac1u = -\\dfrac1{15} - \\dfrac1{30} = -\\dfrac{3}{30} = -\\dfrac1{10}$, so $v = -10$ cm: 10 cm from the lens on the object's side, virtual.\n\n$m = \\dfrac vu = \\dfrac{-10}{-30} = \\dfrac13$: erect and one-third size.",
+      commonMistakes: [
+        { answer: 10, feedback: "Right distance, wrong side. A concave lens forms a virtual image on the object's side, so $v$ is negative." },
+        { answer: 30, feedback: "That would be a convex lens with the object at $2F$. A concave lens never makes real images of real objects." },
+        { answer: -30, feedback: "Check the sum: $-\\frac1{15} - \\frac1{30} = -\\frac{3}{30}$." },
       ],
     },
     {
@@ -356,16 +489,20 @@ const lesson02: LessonSeed = {
         { text: "The upper half of the image disappears.", feedback: "Every part of the lens contributes to every image point." },
         { text: "The image moves to a new position.", feedback: "The focal length is unchanged, so $v$ is unchanged." },
       ],
+      hint: "Every uncovered part of the lens still sends rays from each object point to the same image point. What does covering half of it change?",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-2-q4",
       variant: "practice",
-      question: "Object and screen are 90 cm apart. Sharp images form for two lens positions 30 cm apart. What is $f$?",
-      options: [
-        { text: "22.5 cm", feedback: "That is $D/4$, which only holds when the two positions coincide ($x = 0$)." },
-        { text: "20 cm", correct: true, feedback: "$f = \\frac{90^2 - 30^2}{4 \\times 90} = \\frac{7200}{360} = 20$ cm." },
-        { text: "15 cm", feedback: "Recheck: $8100 - 900 = 7200$ and $4 \\times 90 = 360$." },
+      question: "Object and screen are 90 cm apart. Sharp images form for two lens positions 30 cm apart. What is $f$, in cm?",
+      answer: 20,
+      unit: "cm",
+      hint: "Displacement method: $f = \\frac{D^2 - x^2}{4D}$.",
+      solution: "$f = \\dfrac{D^2 - x^2}{4D} = \\dfrac{90^2 - 30^2}{4 \\times 90} = \\dfrac{7200}{360} = 20$ cm.\n\nCheck: the positions are $\\frac{90 \\pm 30}{2} = 60$ and $30$ cm, and $\\frac{60\\times30}{90} = 20$. ✓",
+      commonMistakes: [
+        { answer: 22.5, feedback: "That is $D/4$, which only holds when the two positions coincide ($x = 0$)." },
+        { answer: 15, feedback: "That is $(D - x)/4 = 60/4$. The formula uses squares: $f = \\dfrac{D^2 - x^2}{4D} = \\dfrac{7200}{360}$." },
       ],
     },
     {
@@ -378,6 +515,7 @@ const lesson02: LessonSeed = {
         { text: "The mirror formula is for virtual images only.", feedback: "The mirror formula handles real and virtual images alike." },
         { text: "Light passes through a lens, so its real images lie on the positive side; a mirror sends light back, so its real images lie on the negative side.", correct: true, feedback: "The geometry of where images form changes the form of the formula." },
       ],
+      hint: "Write both formulas in the New Cartesian convention and ask on which side of the lens or the mirror the light ends up when the image is real.",
     },
     {
       type: "quiz",
@@ -389,6 +527,21 @@ const lesson02: LessonSeed = {
         { text: "50 cm", feedback: "50 cm is $2f$, the object distance at that minimum. The image is another 50 cm beyond." },
         { text: "25 cm", feedback: "With the object at F the image is at infinity, not at 25 cm." },
       ],
+      hint: "Write the separation $D = |u| + v$ for a real image, eliminate $v$ with the lens formula, and find the minimum.",
+    },
+    {
+      type: "quiz",
+      id: "omp1-2-q7",
+      variant: "practice",
+      multiple: true,
+      question: "An object is placed 20 cm in front of a convex lens of focal length 15 cm. Select every correct statement about the image.",
+      options: [
+        { text: "It is real and inverted.", correct: true, feedback: "The object is beyond F: $\\frac1v = \\frac1{15} - \\frac1{20} = \\frac1{60}$, $v = +60$ cm, on the far side." },
+        { text: "It is three times as tall as the object.", correct: true, feedback: "$m = \\frac vu = \\frac{60}{-20} = -3$: three times as tall, inverted." },
+        { text: "It forms 60 cm from the lens on the object's side.", feedback: "$v = +60$ cm is on the far side. Only an object inside F gives an image on its own side." },
+        { text: "Covering the upper half of the lens removes the lower half of the image.", feedback: "Every part of the lens sends light to every image point. The whole image still forms, only dimmer." },
+      ],
+      hint: "Find $v$ from $\\frac1v = \\frac1f + \\frac1u$ with $u = -20$ cm, then $m = \\frac vu$.",
     },
   ]),
 };
@@ -410,10 +563,11 @@ const lesson03: LessonSeed = {
       content:
         "$P = \\dfrac1f$ with $f$ in **metres**. Unit: dioptre (D) $= $ m$^{-1}$.\nConverging lenses have $P > 0$, diverging lenses $P < 0$. A lens of $f = +25$ cm has $P = +4$ D; $f = -40$ cm gives $P = -2.5$ D.",
     },
+    { type: "heading", text: "Deriving the lenses-in-contact formula" },
     {
       type: "text",
       content:
-        "**Derivation: lenses in contact.** Two thin lenses $f_1$ and $f_2$ touch. Lens 1 forms an image at $v_1$: $\\frac1{v_1} - \\frac1u = \\frac1{f_1}$. That image is the object for lens 2, at the same place because the separation is zero: $\\frac1v - \\frac1{v_1} = \\frac1{f_2}$. Add:",
+        "Two thin lenses $f_1$ and $f_2$ touch. Lens 1 forms an image at $v_1$: $\\frac1{v_1} - \\frac1u = \\frac1{f_1}$. That image is the object for lens 2, at the same place because the separation is zero: $\\frac1v - \\frac1{v_1} = \\frac1{f_2}$. Add:",
     },
     {
       type: "math",
@@ -444,10 +598,11 @@ const lesson03: LessonSeed = {
       content:
         "What you should have seen: adding a converging $f_2$ always shortens $F$ (the pair is stronger than either lens). A weak diverging lens ($f_2 = -55$ cm) lengthens $F$ to about 31 cm; as $f_2$ approaches $-20$ cm the powers nearly cancel and $F$ shoots off to large values (the grid skips $-20$, where $F$ is infinite). A strong diverging lens ($f_2 = -15$ or $-5$ cm) makes the pair diverging, $F < 0$.",
     },
+    { type: "heading", text: "Separated lenses" },
     {
       type: "text",
       content:
-        "**Separated lenses.** If the lenses are a distance $d$ apart, the image of lens 1 is no longer at the same place for lens 2, and the combination behaves like a single lens of",
+        "If the lenses are a distance $d$ apart, the image of lens 1 is no longer at the same place for lens 2, and the combination behaves like a single lens of",
     },
     { type: "math", latex: "\\frac1F = \\frac1{f_1} + \\frac1{f_2} - \\frac{d}{f_1f_2}" },
     {
@@ -455,10 +610,11 @@ const lesson03: LessonSeed = {
       content:
         "This equivalent lens is not located at either lens, so for actual image positions the reliable method is **two steps**: find the image of lens 1, shift the origin to lens 2, and use that image as the object (a virtual object if the light reaches lens 2 before converging).",
     },
+    { type: "heading", text: "The silvered lens" },
     {
       type: "text",
       content:
-        "**Silvered lens.** Silver the back face of a lens. Light passes through the lens, reflects off the silvered face, and passes back through the lens: three thin elements in contact. The system is a **mirror** whose power (converging counted positive) is",
+        "Silver the back face of a lens. Light passes through the lens, reflects off the silvered face, and passes back through the lens: three thin elements in contact. The system is a **mirror** whose power (converging counted positive) is",
     },
     { type: "math", latex: "P_{\\text{eq}} = 2P_L + P_M, \\qquad P_M = \\frac{1}{|f_{\\text{mirror}}|} \\text{ for a concave reflecting face, } 0 \\text{ for a flat one}" },
     {
@@ -466,15 +622,47 @@ const lesson03: LessonSeed = {
       content:
         "If $P_{\\text{eq}} > 0$ it behaves as a concave mirror of focal length $\\frac{1}{P_{\\text{eq}}}$ (in the New Cartesian convention that focal length is negative).\n\n**Cutting a lens.** Cut a biconvex lens **along** its axis (into left and right halves of the disc, each still biconvex): each half keeps both curvatures, so $f$ is unchanged; only the light gathered is halved. Cut it **across** the axis (into two thinner plano-convex lenses): each half has one curved face instead of two, so $\\frac1{f'} = \\frac{1}{2}\\cdot\\frac1f$, i.e. $f' = 2f$.",
     },
+    { type: "heading", text: "Worked examples: prescriptions and two-step images" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (a prescription).** Lenses of $+5$ D and $-2$ D are placed in contact.\n\n1. $P = 5 + (-2) = +3$ D. *Why this step:* in contact, powers add with their signs.\n2. $F = \\frac1{3}$ m $\\approx 33.3$ cm, converging.\n\n**Worked example 2 (silvered plano-convex lens, JEE Main).** A plano-convex lens ($R = 20$ cm, $n = 1.5$) is silvered on its **flat** face.\n\n1. Lens: $\\frac1{f_L} = 0.5 \\times \\frac1{20}$, so $f_L = 40$ cm, $P_L = \\frac1{40}$ cm$^{-1}$.\n2. Flat mirror: $P_M = 0$.\n3. $P_{\\text{eq}} = \\frac{2}{40} = \\frac1{20}$ cm$^{-1}$: a concave mirror of focal length 20 cm, i.e. $\\frac{R}{2(n - 1)}$. *Why this step:* light crosses the lens twice, so the lens counts twice.\n4. Silvered on the **curved** face instead: $P_M = \\frac{1}{R/2} = \\frac1{10}$, so $P_{\\text{eq}} = \\frac2{40} + \\frac1{10} = \\frac{3}{20}$ cm$^{-1}$ and $F = \\frac{20}{3} \\approx 6.7$ cm $= \\frac{R}{2n}$.",
+      type: "worked-example",
+      id: "omp1-3-we1",
+      title: "Worked example 1 (a prescription)",
+      problem:
+        "Lenses of $+5$ D and $-2$ D are placed in contact. Find the power and focal length of the combination.",
+      steps: [
+        { text: "$P = 5 + (-2) = +3$ D. *Why this step:* in contact, powers add with their signs." },
+        { text: "$F = \\frac1{3}$ m $\\approx 33.3$ cm, converging." },
+      ],
+      answer: "$P = +3$ D, $F \\approx 33.3$ cm (converging).",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (two lenses 10 cm apart, two-step method).** Two convex lenses, each $f = 20$ cm, are 10 cm apart. An object is 60 cm in front of the first.\n\n1. Lens 1: $\\frac1{v_1} = \\frac1{20} - \\frac1{60} = \\frac1{30}$, $v_1 = 30$ cm, $m_1 = \\frac{30}{-60} = -\\frac12$.\n2. Move the origin to lens 2. The light would converge 30 cm past lens 1, which is 20 cm past lens 2: a **virtual object** at $u_2 = +20$ cm. *Why this step:* the converging light meets lens 2 before its image forms, so the object is on the positive side.\n3. Lens 2: $\\frac1v = \\frac1{20} + \\frac1{20} = \\frac1{10}$, $v = 10$ cm past lens 2, $m_2 = \\frac{10}{20} = \\frac12$.\n4. Final image: real, 10 cm beyond lens 2, $m = m_1m_2 = -\\frac14$.\n5. For comparison, $\\frac1F = \\frac1{20} + \\frac1{20} - \\frac{10}{400} = \\frac{3}{40}$, $F \\approx 13.3$ cm. That number alone does not tell you where the image is; the two-step method does.",
+      type: "worked-example",
+      id: "omp1-3-we2",
+      title: "Worked example 2 (silvered plano-convex lens, JEE Main)",
+      problem:
+        "A plano-convex lens ($R = 20$ cm, $n = 1.5$) is silvered on its **flat** face. Find the focal length of the equivalent mirror. What is it if the **curved** face is silvered instead?",
+      steps: [
+        { text: "Lens: $\\frac1{f_L} = 0.5 \\times \\frac1{20}$, so $f_L = 40$ cm, $P_L = \\frac1{40}$ cm$^{-1}$." },
+        { text: "Flat mirror: $P_M = 0$." },
+        { text: "$P_{\\text{eq}} = \\frac{2}{40} = \\frac1{20}$ cm$^{-1}$: a concave mirror of focal length 20 cm, i.e. $\\frac{R}{2(n - 1)}$. *Why this step:* light crosses the lens twice, so the lens counts twice." },
+        { text: "Silvered on the **curved** face instead: $P_M = \\frac{1}{R/2} = \\frac1{10}$, so $P_{\\text{eq}} = \\frac2{40} + \\frac1{10} = \\frac{3}{20}$ cm$^{-1}$ and $F = \\frac{20}{3} \\approx 6.7$ cm $= \\frac{R}{2n}$." },
+      ],
+      answer: "Flat face silvered: a concave mirror of $F = 20$ cm; curved face silvered: $F = \\frac{20}{3} \\approx 6.7$ cm.",
+    },
+    {
+      type: "worked-example",
+      id: "omp1-3-we3",
+      title: "Worked example 3 (two lenses 10 cm apart, two-step method)",
+      problem:
+        "Two convex lenses, each $f = 20$ cm, are 10 cm apart. An object is 60 cm in front of the first. Find the position and magnification of the final image.",
+      steps: [
+        { text: "Lens 1: $\\frac1{v_1} = \\frac1{20} - \\frac1{60} = \\frac1{30}$, $v_1 = 30$ cm, $m_1 = \\frac{30}{-60} = -\\frac12$." },
+        { text: "Move the origin to lens 2. The light would converge 30 cm past lens 1, which is 20 cm past lens 2: a **virtual object** at $u_2 = +20$ cm. *Why this step:* the converging light meets lens 2 before its image forms, so the object is on the positive side." },
+        { text: "Lens 2: $\\frac1v = \\frac1{20} + \\frac1{20} = \\frac1{10}$, $v = 10$ cm past lens 2, $m_2 = \\frac{10}{20} = \\frac12$." },
+        { text: "Final image: real, 10 cm beyond lens 2, $m = m_1m_2 = -\\frac14$." },
+        { text: "For comparison, $\\frac1F = \\frac1{20} + \\frac1{20} - \\frac{10}{400} = \\frac{3}{40}$, $F \\approx 13.3$ cm. That number alone does not tell you where the image is; the two-step method does." },
+      ],
+      answer: "Real, 10 cm beyond the second lens, $m = -\\frac14$.",
     },
     {
       type: "callout",
@@ -490,15 +678,19 @@ const lesson03: LessonSeed = {
       content:
         "Cutting across the axis leaves each piece with one curved face instead of two, so each has half the power: $f' = 2f$. It is cutting **along** the axis (keeping both faces) that leaves $f$ unchanged.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-3-q1",
       variant: "practice",
-      question: "What is the power of a concave lens of focal length 25 cm?",
-      options: [
-        { text: "$+4$ D", feedback: "A concave lens diverges, so its power is negative." },
-        { text: "$-0.04$ D", feedback: "Use metres: 25 cm $= 0.25$ m." },
-        { text: "$-4$ D", correct: true, feedback: "$P = \\frac{1}{-0.25\\text{ m}} = -4$ D." },
+      question: "What is the power of a concave lens of focal length 25 cm? Give your answer in dioptres, with its sign.",
+      answer: -4,
+      unit: "D",
+      hint: "$P = \\frac1f$ with $f$ in metres, and a diverging lens has $f < 0$.",
+      solution: "$f = -25$ cm $= -0.25$ m, so $P = \\dfrac{1}{-0.25} = -4$ D.",
+      commonMistakes: [
+        { answer: 4, feedback: "A concave lens diverges, so its power is negative." },
+        { answer: -0.04, feedback: "Use metres: 25 cm $= 0.25$ m." },
       ],
     },
     {
@@ -511,17 +703,21 @@ const lesson03: LessonSeed = {
         { text: "$-2$ D, a diverging lens of focal length 2 m", feedback: "$f = \\frac1P = -\\frac12$ m, not $-2$ m." },
         { text: "$-2$ D, a diverging lens of focal length 50 cm", correct: true, feedback: "$P = 4 - 6 = -2$ D, $f = -0.5$ m." },
       ],
+      hint: "Powers of thin lenses in contact add, and $f = 1/P$ with $f$ in metres.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-3-q3",
       variant: "practice",
-      question: "A plano-convex lens ($R = 30$ cm, $n = 1.5$) is silvered on its flat face. What is the focal length of the resulting mirror?",
-      options: [
-        { text: "60 cm", feedback: "That is the lens alone. Light passes through it twice." },
-        { text: "30 cm (concave)", correct: true, feedback: "$f_L = 60$ cm; $P = \\frac2{60}$, so $F = 30$ cm $= \\frac{R}{2(n - 1)}$." },
-        { text: "10 cm", feedback: "That is $\\frac{R}{2n}$, the result when the **curved** face is silvered." },
-        { text: "15 cm", feedback: "That treats the curved face as a mirror of $f = R/2$. The silver is on the flat face." },
+      question: "A plano-convex lens ($R = 30$ cm, $n = 1.5$) is silvered on its flat face. It behaves as a concave mirror. What is the magnitude of that mirror's focal length, in cm?",
+      answer: 30,
+      unit: "cm",
+      hint: "Light crosses the lens twice and reflects once: $P_{\\text{eq}} = 2P_L + P_M$, with $P_M = 0$ for a flat face.",
+      solution: "Lens: $\\dfrac1{f_L} = 0.5\\times\\dfrac1{30}$, so $f_L = 60$ cm.\n\nFlat mirror: $P_M = 0$, so $P_{\\text{eq}} = \\dfrac{2}{60} = \\dfrac1{30}$ cm$^{-1}$ and $F = 30$ cm $= \\dfrac{R}{2(n - 1)}$.",
+      commonMistakes: [
+        { answer: 60, feedback: "That is the lens alone. Light passes through it twice." },
+        { answer: 10, feedback: "That is $\\frac{R}{2n}$, the result when the **curved** face is silvered." },
+        { answer: 15, feedback: "That treats the curved face as a mirror of $f = R/2$. The silver is on the flat face." },
       ],
     },
     {
@@ -534,17 +730,36 @@ const lesson03: LessonSeed = {
         { text: "20 cm", feedback: "That is the answer for a cut along the axis." },
         { text: "10 cm", feedback: "Removing a face weakens the lens; it cannot shorten $f$." },
       ],
+      hint: "Each half has one flat face. Apply the lensmaker's equation to the original lens and to one half, and compare.",
+    },
+    {
+      type: "numeric",
+      id: "omp1-3-q5",
+      variant: "practice",
+      question: "Two convex lenses, each of focal length 10 cm, are placed 5 cm apart. What is the equivalent focal length, in cm? (Decimals or a fraction are fine.)",
+      answer: 6.667,
+      relTolerance: 0.01,
+      unit: "cm",
+      hint: "$\\frac1F = \\frac1{f_1} + \\frac1{f_2} - \\frac{d}{f_1f_2}$.",
+      solution: "$\\dfrac1F = \\dfrac1{10} + \\dfrac1{10} - \\dfrac{5}{10\\times10} = \\dfrac{15}{100}$, so $F = \\dfrac{20}{3} \\approx 6.67$ cm.",
+      commonMistakes: [
+        { answer: 5, feedback: "That is the in-contact answer. The 5 cm gap adds $-\\frac{d}{f_1f_2}$." },
+        { answer: 20, feedback: "Two converging lenses make a stronger system, so $F$ is shorter than 10 cm." },
+      ],
     },
     {
       type: "quiz",
-      id: "omp1-3-q5",
+      id: "omp1-3-q6",
       variant: "practice",
-      question: "Two convex lenses, each of focal length 10 cm, are placed 5 cm apart. What is the equivalent focal length?",
+      multiple: true,
+      question: "You have two thin converging lenses of $+10$ D each. Select every correct statement.",
       options: [
-        { text: "5 cm", feedback: "That is the in-contact answer. The 5 cm gap adds $-\\frac{d}{f_1f_2}$." },
-        { text: "20 cm", feedback: "Two converging lenses make a stronger system, so $F$ is shorter than 10 cm." },
-        { text: "$\\frac{20}{3} \\approx 6.7$ cm", correct: true, feedback: "$\\frac1F = \\frac1{10} + \\frac1{10} - \\frac{5}{100} = \\frac{15}{100}$." },
+        { text: "Placed in contact, they act as a single lens of focal length 5 cm.", correct: true, feedback: "$P = 10 + 10 = 20$ D, so $F = \\frac1{20}$ m $= 5$ cm." },
+        { text: "Placed 5 cm apart, the combination has a power of $+15$ D.", correct: true, feedback: "$P = P_1 + P_2 - dP_1P_2 = 20 - 0.05\\times100 = 15$ D." },
+        { text: "Whatever their separation, the combination has a power of $+20$ D.", feedback: "Powers simply add only in contact. A gap $d$ subtracts $dP_1P_2$." },
+        { text: "Cutting one of them across its axis into two plano-convex halves gives each half a power of $+10$ D.", feedback: "Each half keeps only one curved face: half the power, $+5$ D. A cut **along** the axis would keep $+10$ D." },
       ],
+      hint: "Work in metres: $P = \\frac1f$, and remember the $-dP_1P_2$ term for separated lenses.",
     },
   ]),
 };
@@ -559,6 +774,7 @@ const lesson04: LessonSeed = {
       content:
         "Shine a narrow beam through a glass prism and slowly rotate the prism. The spot on the wall first moves back towards the straight-through direction, stops, and then moves away again, even though you keep turning the same way. The deviation has a minimum. Finding it, and using it to measure refractive index, is one of the oldest experiments in optics.",
     },
+    { type: "heading", text: "Angles inside a prism" },
     {
       type: "text",
       content:
@@ -576,10 +792,11 @@ const lesson04: LessonSeed = {
         "**Derivation 2: the deviation.** The ray turns by $i - r_1$ at the first face and by $e - r_2$ at the second, both towards the base. The total deviation is their sum (exterior-angle theorem):",
     },
     { type: "math", latex: "\\delta = (i - r_1) + (e - r_2) = i + e - A" },
+    { type: "heading", text: "Minimum deviation by symmetry" },
     {
       type: "text",
       content:
-        "**Minimum deviation by symmetry.** Light paths are reversible. If a ray entering at $i$ leaves at $e$, a ray entering at $e$ leaves at $i$ with the **same** deviation. So every value of $\\delta$ (except one) is produced by two angles of incidence, $i$ and $e$. The single exception, the turning point of the curve, must be where the two coincide: $i = e$. Then $r_1 = r_2 = \\frac A2$, and from $\\delta_m = 2i - A$, $i = \\frac{A + \\delta_m}{2}$. Snell at the first face gives the prism formula.",
+        "Light paths are reversible. If a ray entering at $i$ leaves at $e$, a ray entering at $e$ leaves at $i$ with the **same** deviation. So every value of $\\delta$ (except one) is produced by two angles of incidence, $i$ and $e$. The single exception, the turning point of the curve, must be where the two coincide: $i = e$. Then $r_1 = r_2 = \\frac A2$, and from $\\delta_m = 2i - A$, $i = \\frac{A + \\delta_m}{2}$. Snell at the first face gives the prism formula.",
     },
     {
       type: "callout",
@@ -593,10 +810,11 @@ const lesson04: LessonSeed = {
       content:
         "The thin-prism result comes from small angles: $i \\approx nr_1$, $e \\approx nr_2$, so $\\delta = n(r_1 + r_2) - A = (n - 1)A$, independent of $i$ as long as everything stays small.",
     },
+    { type: "heading", text: "When no light emerges" },
     {
       type: "text",
       content:
-        "**When no light emerges.** At the second face the ray is leaving glass, so if $r_2 > \\theta_c$ it is totally reflected. The smallest $r_2$ you can get is when $r_1$ is as large as possible, $r_1 = \\theta_c$ (grazing incidence, $i = 90^\\circ$), which gives $r_2 = A - \\theta_c$. If even that exceeds $\\theta_c$, nothing ever emerges:",
+        "At the second face the ray is leaving glass, so if $r_2 > \\theta_c$ it is totally reflected. The smallest $r_2$ you can get is when $r_1$ is as large as possible, $r_1 = \\theta_c$ (grazing incidence, $i = 90^\\circ$), which gives $r_2 = A - \\theta_c$. If even that exceeds $\\theta_c$, nothing ever emerges:",
     },
     { type: "math", latex: "A > 2\\theta_c \\quad\\Longrightarrow\\quad \\text{no emergent ray for any } i" },
     {
@@ -630,15 +848,68 @@ const lesson04: LessonSeed = {
           "Now change A and n. A bigger apex angle or a bigger index both increase δ_min, and for large A with large n the window of angles that get through closes.",
       },
     },
+    { type: "heading", text: "Worked examples: $n$ and grazing emergence" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (measuring $n$).** A prism of $A = 60^\\circ$ gives $\\delta_m = 30^\\circ$.\n\n1. $\\frac{A + \\delta_m}{2} = 45^\\circ$ and $\\frac A2 = 30^\\circ$.\n2. $n = \\frac{\\sin 45^\\circ}{\\sin 30^\\circ} = \\frac{1/\\sqrt2}{1/2} = \\sqrt2 \\approx 1.414$. *Why this step:* at minimum deviation both refractions are symmetric, so one Snell equation with $r = A/2$ is enough.\n\n**Worked example 2 (the angles at minimum deviation).** For $A = 60^\\circ$, $n = 1.5$:\n\n1. $r_1 = 30^\\circ$, $\\sin i = 1.5 \\times 0.5 = 0.75$, $i = 48.6^\\circ$.\n2. $\\delta_m = 2i - A = 97.2^\\circ - 60^\\circ = 37.2^\\circ$. That is the bottom of the curve you saw.",
+      type: "worked-example",
+      id: "omp1-4-we1",
+      title: "Worked example 1 (measuring $n$)",
+      problem:
+        "A prism of $A = 60^\\circ$ gives $\\delta_m = 30^\\circ$. Find its refractive index.",
+      steps: [
+        { text: "$\\frac{A + \\delta_m}{2} = 45^\\circ$ and $\\frac A2 = 30^\\circ$." },
+        { text: "$n = \\frac{\\sin 45^\\circ}{\\sin 30^\\circ} = \\frac{1/\\sqrt2}{1/2} = \\sqrt2 \\approx 1.414$. *Why this step:* at minimum deviation both refractions are symmetric, so one Snell equation with $r = A/2$ is enough." },
+      ],
+      answer: "$n = \\sqrt2 \\approx 1.414$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (grazing emergence).** For the same prism ($A = 60^\\circ$, $n = 1.5$), find the smallest angle of incidence for which light emerges.\n\n1. $\\theta_c = \\sin^{-1}\\frac{1}{1.5} = 41.8^\\circ$. The ray just gets out when $r_2 = \\theta_c$ (then $e = 90^\\circ$, grazing).\n2. $r_1 = A - r_2 = 60^\\circ - 41.8^\\circ = 18.2^\\circ$.\n3. $\\sin i = 1.5\\sin 18.2^\\circ = 1.5 \\times 0.312 = 0.468$, so $i \\approx 27.9^\\circ$. *Why this step:* smaller $i$ means smaller $r_1$ and bigger $r_2$, so below this angle the ray is trapped.\n\n**Worked example 4 (normal incidence, JEE Main).** A ray falls normally on one face of a $30^\\circ$ prism of index $\\sqrt2$.\n\n1. Normal incidence: $i = 0$, $r_1 = 0$, so $r_2 = A = 30^\\circ$.\n2. $\\sin e = \\sqrt2\\sin 30^\\circ = \\frac{\\sqrt2}{2}$, so $e = 45^\\circ$.\n3. $\\delta = i + e - A = 0 + 45^\\circ - 30^\\circ = 15^\\circ$.\n\n**Worked example 5 (thin prism).** A $5^\\circ$ prism with $n = 1.5$: $\\delta = 0.5 \\times 5^\\circ = 2.5^\\circ$, whatever the (small) angle of incidence.",
+      type: "worked-example",
+      id: "omp1-4-we2",
+      title: "Worked example 2 (the angles at minimum deviation)",
+      problem:
+        "For a prism with $A = 60^\\circ$ and $n = 1.5$, find the angle of incidence and the deviation at minimum deviation.",
+      steps: [
+        { text: "$r_1 = 30^\\circ$, $\\sin i = 1.5 \\times 0.5 = 0.75$, $i = 48.6^\\circ$." },
+        { text: "$\\delta_m = 2i - A = 97.2^\\circ - 60^\\circ = 37.2^\\circ$. That is the bottom of the curve you saw." },
+      ],
+      tryFirst: false,
+      answer: "$i \\approx 48.6^\\circ$, $\\delta_m \\approx 37.2^\\circ$",
+    },
+    {
+      type: "worked-example",
+      id: "omp1-4-we3",
+      title: "Worked example 3 (grazing emergence)",
+      problem:
+        "For the same prism ($A = 60^\\circ$, $n = 1.5$), find the smallest angle of incidence for which light emerges.",
+      steps: [
+        { text: "$\\theta_c = \\sin^{-1}\\frac{1}{1.5} = 41.8^\\circ$. The ray just gets out when $r_2 = \\theta_c$ (then $e = 90^\\circ$, grazing)." },
+        { text: "$r_1 = A - r_2 = 60^\\circ - 41.8^\\circ = 18.2^\\circ$." },
+        { text: "$\\sin i = 1.5\\sin 18.2^\\circ = 1.5 \\times 0.312 = 0.468$, so $i \\approx 27.9^\\circ$. *Why this step:* smaller $i$ means smaller $r_1$ and bigger $r_2$, so below this angle the ray is trapped." },
+      ],
+      answer: "$i \\approx 27.9^\\circ$",
+    },
+    {
+      type: "worked-example",
+      id: "omp1-4-we4",
+      title: "Worked example 4 (normal incidence, JEE Main)",
+      problem:
+        "A ray falls normally on one face of a $30^\\circ$ prism of index $\\sqrt2$. Find the angle of emergence and the deviation.",
+      steps: [
+        { text: "Normal incidence: $i = 0$, $r_1 = 0$, so $r_2 = A = 30^\\circ$." },
+        { text: "$\\sin e = \\sqrt2\\sin 30^\\circ = \\frac{\\sqrt2}{2}$, so $e = 45^\\circ$." },
+        { text: "$\\delta = i + e - A = 0 + 45^\\circ - 30^\\circ = 15^\\circ$." },
+      ],
+      answer: "$e = 45^\\circ$, $\\delta = 15^\\circ$",
+    },
+    {
+      type: "worked-example",
+      id: "omp1-4-we5",
+      title: "Worked example 5 (thin prism)",
+      problem:
+        "Find the deviation produced by a $5^\\circ$ prism with $n = 1.5$ at small angles of incidence.",
+      steps: [
+        { text: "For a thin prism, $\\delta = (n - 1)A = 0.5 \\times 5^\\circ = 2.5^\\circ$, whatever the (small) angle of incidence." },
+      ],
+      answer: "$\\delta = 2.5^\\circ$",
     },
     {
       type: "callout",
@@ -654,6 +925,7 @@ const lesson04: LessonSeed = {
       content:
         "It is **parallel** to the base. With $r_1 = r_2$ the path inside is symmetric about the prism's bisector, and the only symmetric line crossing both faces is the one parallel to the base.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "omp1-4-q1",
@@ -664,16 +936,20 @@ const lesson04: LessonSeed = {
         { text: "$\\sqrt3$", correct: true, feedback: "$n = \\frac{\\sin 60^\\circ}{\\sin 30^\\circ} = \\sqrt3$." },
         { text: "$2$", feedback: "That is $\\frac{A + \\delta_m}{A}$, a ratio of angles. The formula uses sines of the half-angles: $\\frac{\\sin\\frac{A + \\delta_m}{2}}{\\sin\\frac A2}$." },
       ],
+      hint: "Use the minimum-deviation formula from 1.4, which gives $n$ in terms of $A$ and $\\delta_m$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-4-q2",
       variant: "practice",
-      question: "A thin prism of angle $4^\\circ$ is made of glass with $n = 1.6$. What is its deviation?",
-      options: [
-        { text: "$6.4^\\circ$", feedback: "That is $nA$. The deviation is $(n - 1)A$." },
-        { text: "$1.6^\\circ$", feedback: "Multiply $A$ by $(n - 1) = 0.6$, not by 0.4." },
-        { text: "$2.4^\\circ$", correct: true, feedback: "$\\delta = (n - 1)A = 0.6 \\times 4^\\circ$." },
+      question: "A thin prism of angle $4^\\circ$ is made of glass with $n = 1.6$. What is its deviation, in degrees?",
+      answer: 2.4,
+      unit: "°",
+      hint: "For a thin prism, $\\delta = (n - 1)A$.",
+      solution: "$\\delta = (n - 1)A = 0.6 \\times 4^\\circ = 2.4^\\circ$, whatever the (small) angle of incidence.",
+      commonMistakes: [
+        { answer: 6.4, feedback: "That is $nA$. The deviation is $(n - 1)A$." },
+        { answer: 1.6, feedback: "Multiply $A$ by $(n - 1) = 0.6$, not by 0.4." },
       ],
     },
     {
@@ -686,29 +962,36 @@ const lesson04: LessonSeed = {
         { text: "Parallel to the base", correct: true, feedback: "$r_1 = r_2 = A/2$ makes the internal path symmetric, hence parallel to the base." },
         { text: "Along the normal to the first face", feedback: "That is normal incidence, $r_1 = 0$, which is not minimum deviation." },
       ],
+      hint: "At minimum deviation the path is symmetric, $r_1 = r_2 = A/2$. What does that say about the ray inside an equilateral prism?",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-4-q4",
       variant: "practice",
-      question: "A prism with $A = 60^\\circ$ and $n = \\sqrt2$ is set for minimum deviation. What are $i$ and $\\delta_m$?",
-      options: [
-        { text: "$i = 45^\\circ$, $\\delta_m = 30^\\circ$", correct: true, feedback: "$\\sin i = \\sqrt2\\sin 30^\\circ = \\frac{1}{\\sqrt2}$, $\\delta_m = 2i - A$." },
-        { text: "$i = 30^\\circ$, $\\delta_m = 0^\\circ$", feedback: "$30^\\circ$ is $r_1 = A/2$, the angle inside the glass, not $i$." },
-        { text: "$i = 60^\\circ$, $\\delta_m = 60^\\circ$", feedback: "That would need $n = \\sqrt3$." },
+      question: "A prism with $A = 60^\\circ$ and $n = \\sqrt2$ is set for minimum deviation. What is $\\delta_m$, in degrees?",
+      answer: 30,
+      unit: "°",
+      hint: "At minimum deviation $r_1 = r_2 = \\frac A2$. Find $i$ from Snell, then $\\delta_m = 2i - A$.",
+      solution: "$r_1 = \\dfrac A2 = 30^\\circ$, so $\\sin i = \\sqrt2\\sin 30^\\circ = \\dfrac{1}{\\sqrt2}$ and $i = 45^\\circ$.\n\n$\\delta_m = 2i - A = 90^\\circ - 60^\\circ = 30^\\circ$.",
+      commonMistakes: [
+        { answer: 0, feedback: "You took $i = 30^\\circ$, but $30^\\circ$ is $r_1 = A/2$, the angle inside the glass, not $i$." },
+        { answer: 60, feedback: "That would need $n = \\sqrt3$." },
+        { answer: 24.85, tolerance: 0.1, feedback: "That is the thin-prism rule $(n - 1)A$, which fails for a $60^\\circ$ prism. Use the minimum-deviation formula." },
       ],
     },
     {
       type: "quiz",
       id: "omp1-4-q5",
       variant: "practice",
-      question: "For glass of $n = 1.5$ ($\\theta_c \\approx 41.8^\\circ$), which prism angle lets no light emerge from the second face, whatever the angle of incidence?",
+      multiple: true,
+      question: "For glass of $n = 1.5$ ($\\theta_c \\approx 41.8^\\circ$), select every prism angle that lets no light emerge from the second face, whatever the angle of incidence.",
       options: [
         { text: "$30^\\circ$", feedback: "$30^\\circ < 2\\theta_c$: most incidences get through." },
         { text: "$85^\\circ$", correct: true, feedback: "$85^\\circ > 2\\theta_c = 83.6^\\circ$, so even grazing incidence leaves $r_2 > \\theta_c$." },
         { text: "$60^\\circ$", feedback: "$60^\\circ < 83.6^\\circ$: light emerges for $i > 27.9^\\circ$." },
-        { text: "$45^\\circ$", feedback: "$45^\\circ < 2\\theta_c$, so some rays emerge." },
+        { text: "$88^\\circ$", correct: true, feedback: "$88^\\circ > 83.6^\\circ$: even with $r_1 = \\theta_c$ (grazing incidence), $r_2 = 88^\\circ - 41.8^\\circ = 46.2^\\circ > \\theta_c$." },
       ],
+      hint: "No light emerges for any $i$ when $A > 2\\theta_c$.",
     },
     {
       type: "quiz",
@@ -720,6 +1003,7 @@ const lesson04: LessonSeed = {
         { text: "Because of total internal reflection.", feedback: "TIR limits which angles get through at all; it does not pair them." },
         { text: "Because light paths are reversible: incidence $e$ gives emergence $i$ with the same deviation.", correct: true, feedback: "Swapping $i$ and $e$ leaves $\\delta = i + e - A$ unchanged." },
       ],
+      hint: "Compare a ray that enters at $i$ and leaves at $e$ with a ray sent back along the same path. What can you say about their deviations?",
     },
   ]),
 };
@@ -734,10 +1018,11 @@ const lesson05: LessonSeed = {
       content:
         "Newton let a sunbeam through a prism and got a band of colours from red to violet on the wall. Then he sent one colour through a second prism: it bent again but did not split. White light is a mixture, and the prism sorts it because glass has a slightly different refractive index for each colour. The same fact, turned round, explains the blue sky and the red sunset.",
     },
+    { type: "heading", text: "Why $n$ depends on colour" },
     {
       type: "text",
       content:
-        "**Why $n$ depends on colour.** In glass, the electric field of the light makes bound electrons oscillate, and the re-radiated waves slow the light down. Electrons in glass have natural frequencies in the ultraviolet, so higher-frequency (bluer) light is closer to resonance and is slowed more. Across the visible range the result is well described by **Cauchy's relation**:",
+        "In glass, the electric field of the light makes bound electrons oscillate, and the re-radiated waves slow the light down. Electrons in glass have natural frequencies in the ultraviolet, so higher-frequency (bluer) light is closer to resonance and is slowed more. Across the visible range the result is well described by **Cauchy's relation**:",
     },
     { type: "math", latex: "n(\\lambda) = A + \\frac{B}{\\lambda^2}, \\qquad A, B > 0" },
     {
@@ -767,10 +1052,11 @@ const lesson05: LessonSeed = {
       content:
         "For a thin prism, $\\delta = (n - 1)A$ for each colour, so the violet and red rays leave at an angle apart of\n$\\theta = \\delta_v - \\delta_r = (n_v - n_r)A$ (**angular dispersion**).\nThe **dispersive power** compares the spread to the mean deviation $\\delta = (n - 1)A$ (with $n$ for yellow light):\n$\\omega = \\dfrac{\\delta_v - \\delta_r}{\\delta} = \\dfrac{n_v - n_r}{n - 1}$. It depends only on the material, not on $A$.",
     },
+    { type: "heading", text: "Combining prisms" },
     {
       type: "text",
       content:
-        "**Combining prisms.** Put two thin prisms together, apex to base (so their deviations oppose). Net deviation and net dispersion are the sums with signs:",
+        "Put two thin prisms together, apex to base (so their deviations oppose). Net deviation and net dispersion are the sums with signs:",
     },
     {
       type: "math",
@@ -783,19 +1069,48 @@ const lesson05: LessonSeed = {
         "- **Achromatic combination** (deviation without dispersion): choose $A'$ so that $\\theta_{\\text{net}} = 0$, i.e. $\\omega\\delta + \\omega'\\delta' = 0$. Because flint glass disperses more strongly than crown, a thinner flint prism cancels the colours of a crown prism while leaving some net deviation. Achromatic camera lenses use the same idea.\n- **Direct-vision combination** (dispersion without deviation): choose $A'$ so that $\\delta_{\\text{net}} = 0$. The mean ray goes straight through but the colours still fan out; hand-held spectroscopes use this.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (a crown prism).** A thin crown-glass prism of angle $5^\\circ$ has $n_v = 1.523$, $n_r = 1.513$ and mean $n = 1.518$.\n\n1. Mean deviation: $\\delta = 0.518 \\times 5^\\circ = 2.59^\\circ$.\n2. Angular dispersion: $\\theta = (1.523 - 1.513) \\times 5^\\circ = 0.05^\\circ$. *Why this step:* the violet and red rays each obey $\\delta = (n - 1)A$; their difference only needs $n_v - n_r$.\n3. Dispersive power: $\\omega = \\frac{0.010}{0.518} \\approx 0.0193$, the same for any crown prism of this glass.\n\n**Worked example 2 (making it achromatic, JEE Main).** A $6^\\circ$ prism of the same crown glass ($n_v - n_r = 0.010$, $n = 1.518$) is to be paired with a flint prism ($n_v = 1.665$, $n_r = 1.645$, $n = 1.655$) to cancel dispersion.\n\n1. Zero net dispersion: $0.010 \\times 6^\\circ = 0.020 \\times A'$, so $A' = 3^\\circ$, placed the other way up. *Why this step:* the opposite orientation gives the flint prism's dispersion the opposite sign.\n2. Net deviation: $0.518 \\times 6^\\circ - 0.655 \\times 3^\\circ = 3.108^\\circ - 1.965^\\circ \\approx 1.14^\\circ$. The pair still bends light, but without colour fringes.\n3. For a direct-vision pair instead: $0.518 \\times 6^\\circ = 0.655A'$ gives $A' \\approx 4.75^\\circ$, and the net dispersion is $0.06^\\circ - 0.095^\\circ \\ne 0$.",
+      type: "worked-example",
+      id: "omp1-5-we1",
+      title: "Worked example 1 (a crown prism)",
+      problem:
+        "A thin crown-glass prism of angle $5^\\circ$ has $n_v = 1.523$, $n_r = 1.513$ and mean $n = 1.518$. Find the mean deviation, the angular dispersion and the dispersive power.",
+      steps: [
+        { text: "Mean deviation: $\\delta = 0.518 \\times 5^\\circ = 2.59^\\circ$." },
+        { text: "Angular dispersion: $\\theta = (1.523 - 1.513) \\times 5^\\circ = 0.05^\\circ$. *Why this step:* the violet and red rays each obey $\\delta = (n - 1)A$; their difference only needs $n_v - n_r$." },
+        { text: "Dispersive power: $\\omega = \\frac{0.010}{0.518} \\approx 0.0193$, the same for any crown prism of this glass." },
+      ],
+      answer: "$\\delta = 2.59^\\circ$, $\\theta = 0.05^\\circ$, $\\omega \\approx 0.0193$",
     },
+    {
+      type: "worked-example",
+      id: "omp1-5-we2",
+      title: "Worked example 2 (making it achromatic, JEE Main)",
+      problem:
+        "A $6^\\circ$ prism of the same crown glass ($n_v - n_r = 0.010$, $n = 1.518$) is to be paired with a flint prism ($n_v = 1.665$, $n_r = 1.645$, $n = 1.655$) to cancel dispersion. Find the flint prism's angle and the net deviation. What angle would instead cancel the deviation (a direct-vision pair)?",
+      steps: [
+        { text: "Zero net dispersion: $0.010 \\times 6^\\circ = 0.020 \\times A'$, so $A' = 3^\\circ$, placed the other way up. *Why this step:* the opposite orientation gives the flint prism's dispersion the opposite sign." },
+        { text: "Net deviation: $0.518 \\times 6^\\circ - 0.655 \\times 3^\\circ = 3.108^\\circ - 1.965^\\circ \\approx 1.14^\\circ$. The pair still bends light, but without colour fringes." },
+        { text: "For a direct-vision pair instead: $0.518 \\times 6^\\circ = 0.655A'$ gives $A' \\approx 4.75^\\circ$, and the net dispersion is $0.06^\\circ - 0.095^\\circ \\ne 0$." },
+      ],
+      answer: "Achromatic pair: $A' = 3^\\circ$ (inverted), net deviation $\\approx 1.14^\\circ$. Direct-vision pair: $A' \\approx 4.75^\\circ$.",
+    },
+    { type: "heading", text: "Scattering and the blue sky" },
     {
       type: "text",
       content:
-        "**Scattering.** Air molecules are far smaller than the wavelength of light. Light makes their electrons oscillate, and they re-radiate in all directions. For such small scatterers (Rayleigh scattering), the scattered intensity goes as $\\frac{1}{\\lambda^4}$, so blue is scattered much more than red.\n- **Blue sky:** looking away from the Sun, you see sunlight scattered sideways by air, dominated by blue (violet is scattered even more, but sunlight has less of it and our eyes are less sensitive to it).\n- **Red sunrise and sunset:** sunlight crosses far more air near the horizon; the blue is scattered out of the direct beam and the red remains.\n- **White clouds:** droplets are much larger than $\\lambda$, and large particles scatter all colours about equally.\n- **Rainbow:** dispersion plus one total internal reflection inside each raindrop sends different colours out at slightly different angles (about $42^\\circ$ for red, $40^\\circ$ for violet from the anti-solar point).",
+        "Air molecules are far smaller than the wavelength of light. Light makes their electrons oscillate, and they re-radiate in all directions. For such small scatterers (Rayleigh scattering), the scattered intensity goes as $\\frac{1}{\\lambda^4}$, so blue is scattered much more than red.\n- **Blue sky:** looking away from the Sun, you see sunlight scattered sideways by air, dominated by blue (violet is scattered even more, but sunlight has less of it and our eyes are less sensitive to it).\n- **Red sunrise and sunset:** sunlight crosses far more air near the horizon; the blue is scattered out of the direct beam and the red remains.\n- **White clouds:** droplets are much larger than $\\lambda$, and large particles scatter all colours about equally.\n- **Rainbow:** dispersion plus one total internal reflection inside each raindrop sends different colours out at slightly different angles (about $42^\\circ$ for red, $40^\\circ$ for violet from the anti-solar point).",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (how much bluer?).** Compare Rayleigh scattering of 400 nm and 700 nm light.\n\n1. $\\frac{I_{400}}{I_{700}} = \\left(\\frac{700}{400}\\right)^4 = 1.75^4$.\n2. $1.75^2 = 3.0625$, and $3.0625^2 \\approx 9.4$. Violet-blue light is scattered about 9 times more strongly than red. *Why this step:* a fourth power turns a modest wavelength ratio into a large intensity ratio.",
+      type: "worked-example",
+      id: "omp1-5-we3",
+      title: "Worked example 3 (how much bluer?)",
+      problem:
+        "Compare Rayleigh scattering of 400 nm and 700 nm light: by what factor is the 400 nm light scattered more?",
+      steps: [
+        { text: "$\\frac{I_{400}}{I_{700}} = \\left(\\frac{700}{400}\\right)^4 = 1.75^4$." },
+        { text: "$1.75^2 = 3.0625$, and $3.0625^2 \\approx 9.4$. Violet-blue light is scattered about 9 times more strongly than red. *Why this step:* a fourth power turns a modest wavelength ratio into a large intensity ratio." },
+      ],
+      answer: "About 9.4 times more.",
     },
     {
       type: "callout",
@@ -811,6 +1126,7 @@ const lesson05: LessonSeed = {
       content:
         "The sky is blue over deserts and far inland too. The colour comes from $\\lambda^{-4}$ scattering by air molecules. If anything, the ocean looks blue partly because it reflects the sky.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "omp1-5-q1",
@@ -821,16 +1137,20 @@ const lesson05: LessonSeed = {
         { text: "Red", feedback: "Red has the smallest $n$ in glass, so it deviates least." },
         { text: "All colours are deviated equally", feedback: "Then there would be no spectrum." },
       ],
+      hint: "Recall how deviation depends on refractive index, and how the refractive index of glass varies with wavelength (1.5).",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-5-q2",
       variant: "practice",
-      question: "For a glass, $n_v = 1.66$, $n_r = 1.64$ and $n_y = 1.65$. What is its dispersive power?",
-      options: [
-        { text: "about 0.012", feedback: "You divided by $n_y = 1.65$. The denominator is $n_y - 1$." },
-        { text: "0.02", feedback: "That is $n_v - n_r$ alone. Dispersive power divides it by $n - 1$." },
-        { text: "about 0.031", correct: true, feedback: "$\\omega = \\frac{0.02}{0.65} \\approx 0.031$." },
+      question: "For a glass, $n_v = 1.66$, $n_r = 1.64$ and $n_y = 1.65$. What is its dispersive power? Give a decimal to 3 significant figures.",
+      answer: 0.0308,
+      relTolerance: 0.02,
+      hint: "$\\omega = \\frac{n_v - n_r}{n_y - 1}$.",
+      solution: "$\\omega = \\dfrac{n_v - n_r}{n_y - 1} = \\dfrac{0.02}{0.65} \\approx 0.0308$.",
+      commonMistakes: [
+        { answer: 0.0121, feedback: "You divided by $n_y = 1.65$. The denominator is $n_y - 1$." },
+        { answer: 0.02, feedback: "That is $n_v - n_r$ alone. Dispersive power divides it by $n - 1$." },
       ],
     },
     {
@@ -843,6 +1163,7 @@ const lesson05: LessonSeed = {
         { text: "$0.02^\\circ$", feedback: "Multiply by the prism angle, $4^\\circ$." },
         { text: "$0.08^\\circ$", correct: true, feedback: "$(1.54 - 1.52) \\times 4^\\circ$." },
       ],
+      hint: "For a thin prism $\\delta = (n - 1)A$. Write it for violet and for red and subtract.",
     },
     {
       type: "quiz",
@@ -854,16 +1175,20 @@ const lesson05: LessonSeed = {
         { text: "$2.5^\\circ$", correct: true, feedback: "$0.012 \\times 5 = 0.024 \\times A'$." },
         { text: "$5^\\circ$", feedback: "Equal angles would double the flint's dispersion relative to the crown." },
       ],
+      hint: "For no dispersion the angular dispersions $(n_v - n_r)A$ of the two prisms must cancel.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-5-q5",
       variant: "practice",
-      question: "By what factor is 400 nm light scattered more than 800 nm light by air molecules?",
-      options: [
-        { text: "16", correct: true, feedback: "$\\left(\\frac{800}{400}\\right)^4 = 2^4$." },
-        { text: "2", feedback: "Rayleigh scattering goes as $\\lambda^{-4}$, not $\\lambda^{-1}$." },
-        { text: "4", feedback: "That is $\\lambda^{-2}$. The power is 4." },
+      question: "By what factor is 400 nm light scattered more strongly than 800 nm light by air molecules?",
+      answer: 16,
+      hint: "Rayleigh scattering intensity goes as $\\lambda^{-4}$.",
+      solution: "$\\dfrac{I_{400}}{I_{800}} = \\left(\\dfrac{800}{400}\\right)^4 = 2^4 = 16$.",
+      commonMistakes: [
+        { answer: 2, feedback: "Rayleigh scattering goes as $\\lambda^{-4}$, not $\\lambda^{-1}$." },
+        { answer: 4, feedback: "That is $\\lambda^{-2}$. The power is 4." },
+        { answer: 0.0625, tolerance: 0.001, feedback: "That is the ratio the other way up. The shorter wavelength is scattered *more*." },
       ],
     },
     {
@@ -876,6 +1201,21 @@ const lesson05: LessonSeed = {
         { text: "Water absorbs blue light.", feedback: "Absorption would make clouds yellowish, not white." },
         { text: "Cloud droplets are much larger than the wavelength and scatter all colours about equally.", correct: true, feedback: "The $\\lambda^{-4}$ law holds only for scatterers much smaller than $\\lambda$." },
       ],
+      hint: "Recall when Rayleigh's $1/\\lambda^4$ law applies (1.5), and compare cloud droplets with air molecules in size.",
+    },
+    {
+      type: "quiz",
+      id: "omp1-5-q7",
+      variant: "concept",
+      multiple: true,
+      question: "Select every observation that is explained mainly by $\\lambda^{-4}$ (Rayleigh) scattering by air molecules.",
+      options: [
+        { text: "The clear daytime sky looks blue.", correct: true, feedback: "Sunlight scattered sideways by molecules is dominated by the short wavelengths." },
+        { text: "The Sun looks red at sunset.", correct: true, feedback: "The long path through air scatters the blue out of the direct beam, leaving red." },
+        { text: "Clouds look white.", feedback: "Cloud droplets are much larger than $\\lambda$ and scatter all colours about equally; the $\\lambda^{-4}$ law does not apply." },
+        { text: "A rainbow shows a band of colours.", feedback: "A rainbow comes from dispersion plus internal reflection inside raindrops, not from scattering by molecules." },
+      ],
+      hint: "Rayleigh scattering needs scatterers much smaller than the wavelength.",
     },
   ]),
 };
@@ -897,6 +1237,7 @@ const lesson06: LessonSeed = {
       content:
         "The cornea and the eye lens together form a converging system that makes a real, inverted image on the retina, a fixed distance (about 2.5 cm) behind. To focus objects at different distances, the ciliary muscles change the lens's curvature: **accommodation**.\n- **Far point:** the farthest point seen clearly with a relaxed eye; infinity for a normal eye.\n- **Near point:** the closest point seen clearly with full accommodation; $D = 25$ cm for a normal adult eye (least distance of distinct vision).",
     },
+    { type: "heading", text: "Correcting defects of vision" },
     {
       type: "text",
       content:
@@ -913,10 +1254,32 @@ const lesson06: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (myopia).** A student cannot see clearly beyond 80 cm. What lens does she need?\n\n1. Distant objects ($u = -\\infty$) must appear at her far point: $v = -80$ cm. *Why this step:* the lens's job is to move the image into the range her eye can focus.\n2. $\\frac1f = \\frac1{-80} - \\frac1{-\\infty} = -\\frac1{80}$, so $f = -80$ cm.\n3. $P = \\frac{1}{-0.80} = -1.25$ D, a diverging lens.\n\n**Worked example 2 (hypermetropia).** A man's near point is 75 cm. He wants to read at 25 cm.\n\n1. Object at $u = -25$ cm must have its image at $v = -75$ cm (his near point).\n2. $\\frac1f = \\frac1{-75} - \\frac1{-25} = -\\frac1{75} + \\frac3{75} = \\frac2{75}$, so $f = 37.5$ cm.\n3. $P = \\frac{1}{0.375} \\approx +2.67$ D, a converging lens.",
+      type: "worked-example",
+      id: "omp1-6-we1",
+      title: "Worked example 1 (myopia)",
+      problem:
+        "A student cannot see clearly beyond 80 cm. What lens does she need?",
+      steps: [
+        { text: "Distant objects ($u = -\\infty$) must appear at her far point: $v = -80$ cm. *Why this step:* the lens's job is to move the image into the range her eye can focus." },
+        { text: "$\\frac1f = \\frac1{-80} - \\frac1{-\\infty} = -\\frac1{80}$, so $f = -80$ cm." },
+        { text: "$P = \\frac{1}{-0.80} = -1.25$ D, a diverging lens." },
+      ],
+      answer: "$f = -80$ cm, $P = -1.25$ D (diverging).",
     },
+    {
+      type: "worked-example",
+      id: "omp1-6-we2",
+      title: "Worked example 2 (hypermetropia)",
+      problem:
+        "A man's near point is 75 cm. He wants to read at 25 cm. What lens does he need?",
+      steps: [
+        { text: "Object at $u = -25$ cm must have its image at $v = -75$ cm (his near point)." },
+        { text: "$\\frac1f = \\frac1{-75} - \\frac1{-25} = -\\frac1{75} + \\frac3{75} = \\frac2{75}$, so $f = 37.5$ cm." },
+        { text: "$P = \\frac{1}{0.375} \\approx +2.67$ D, a converging lens." },
+      ],
+      answer: "$f = 37.5$ cm, $P \\approx +2.67$ D (converging).",
+    },
+    { type: "heading", text: "Angular magnification and the simple microscope" },
     {
       type: "text",
       content:
@@ -946,9 +1309,29 @@ const lesson06: LessonSeed = {
         "What you should have seen: at $|u| = 4$ cm the image is at $v = -20$ cm, five times taller. Near $|u| \\approx 4.2$ cm the image sits at 25 cm (the near point: maximum magnification, $M = 6$). At $|u| = 5$ cm the rays leave parallel: image at infinity, relaxed viewing, $M = 5$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (a magnifier, JEE Main).** A lens of $f = 5$ cm is used as a magnifier.\n\n1. Image at the near point: $M = 1 + \\frac{25}{5} = 6$. The object is at $\\frac1{|u|} = \\frac15 + \\frac1{25} = \\frac{6}{25}$, $|u| \\approx 4.17$ cm.\n2. Image at infinity: $M = \\frac{25}{5} = 5$, object at 5 cm. *Why this step:* the relaxed-eye setting trades one unit of magnification for comfort.\n\n**Worked example 4 (presbyopia).** A 50-year-old's near point has moved to 50 cm. Reading glasses: $u = -25$, $v = -50$: $\\frac1f = -\\frac1{50} + \\frac1{25} = \\frac1{50}$, $f = 50$ cm, $P = +2$ D.",
+      type: "worked-example",
+      id: "omp1-6-we3",
+      title: "Worked example 3 (a magnifier, JEE Main)",
+      problem:
+        "A lens of $f = 5$ cm is used as a magnifier. Find the magnification and the object distance (a) with the image at the near point (25 cm), (b) with the image at infinity.",
+      steps: [
+        { text: "Image at the near point: $M = 1 + \\frac{25}{5} = 6$. The object is at $\\frac1{|u|} = \\frac15 + \\frac1{25} = \\frac{6}{25}$, $|u| \\approx 4.17$ cm." },
+        { text: "Image at infinity: $M = \\frac{25}{5} = 5$, object at 5 cm. *Why this step:* the relaxed-eye setting trades one unit of magnification for comfort." },
+      ],
+      answer: "(a) $M = 6$, object at about 4.17 cm; (b) $M = 5$, object at 5 cm.",
+      tryFirst: false,
+    },
+    {
+      type: "worked-example",
+      id: "omp1-6-we4",
+      title: "Worked example 4 (presbyopia)",
+      problem:
+        "A 50-year-old's near point has moved to 50 cm. What reading glasses let her read at 25 cm?",
+      steps: [
+        { text: "Reading glasses: a page at $u = -25$ cm must have its image at her near point, $v = -50$ cm." },
+        { text: "$\\frac1f = -\\frac1{50} + \\frac1{25} = \\frac1{50}$, $f = 50$ cm, $P = +2$ D." },
+      ],
+      answer: "A converging lens of $f = 50$ cm, $P = +2$ D.",
     },
     {
       type: "callout",
@@ -957,15 +1340,20 @@ const lesson06: LessonSeed = {
       content:
         "The object is unchanged, and the image's physical size does not matter by itself. The lens lets you put the object **closer** than 25 cm and still focus on it, so it subtends a larger angle at your eye. Angular magnification is what counts.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-6-q1",
       variant: "practice",
-      question: "A myopic person's far point is 50 cm. What lens lets them see distant objects clearly?",
-      options: [
-        { text: "$+2$ D", feedback: "Myopia needs a diverging lens to push the image of distant objects in to the far point." },
-        { text: "$-2$ D", correct: true, feedback: "$f = -50$ cm, so $P = \\frac{1}{-0.5} = -2$ D." },
-        { text: "$-0.5$ D", feedback: "Power uses metres: $\\frac{1}{0.5} = 2$, not $0.5$." },
+      question: "A myopic person's far point is 50 cm. What is the power of the lens that lets them see distant objects clearly? Give your answer in dioptres, with its sign.",
+      answer: -2,
+      unit: "D",
+      hint: "The lens must image objects at infinity at the far point: $u = -\\infty$, $v = -50$ cm.",
+      solution: "$\\dfrac1f = \\dfrac1v - \\dfrac1u = \\dfrac1{-50} - 0$, so $f = -50$ cm $= -0.5$ m.\n\n$P = \\dfrac{1}{-0.5} = -2$ D, a diverging lens.",
+      commonMistakes: [
+        { answer: 2, feedback: "Myopia needs a diverging lens to push the image of distant objects in to the far point, so $P < 0$." },
+        { answer: -0.5, feedback: "Power uses metres: $\\frac{1}{0.5} = 2$, not $0.5$." },
+        { answer: -0.02, feedback: "Convert to metres first: $f = -0.5$ m, not $-50$." },
       ],
     },
     {
@@ -978,16 +1366,19 @@ const lesson06: LessonSeed = {
         { text: "$+4$ D", feedback: "That is $\\frac{1}{0.25}$, which would bring objects at infinity to 25 cm, not objects at 25 cm to 50 cm." },
         { text: "$+2$ D", correct: true, feedback: "$\\frac1f = \\frac1{-50} - \\frac1{-25} = \\frac1{50}$ cm$^{-1}$, $f = 0.5$ m." },
       ],
+      hint: "The lens must take an object at 25 cm and form its virtual image at the person's near point. Apply the lens formula with signs, then convert $f$ to metres for the power.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-6-q3",
       variant: "practice",
-      question: "A lens of focal length 10 cm is used as a simple microscope with the image at the near point (25 cm). What is the magnification?",
-      options: [
-        { text: "2.5", feedback: "That is the image-at-infinity value $D/f$." },
-        { text: "3.5", correct: true, feedback: "$M = 1 + \\frac{25}{10}$." },
-        { text: "0.4", feedback: "That is $f/D$, upside down." },
+      question: "A lens of focal length 10 cm is used as a simple microscope with the image at the near point (25 cm). What is the angular magnification?",
+      answer: 3.5,
+      hint: "Image at the near point: $M = 1 + \\frac Df$.",
+      solution: "$M = 1 + \\dfrac Df = 1 + \\dfrac{25}{10} = 3.5$.",
+      commonMistakes: [
+        { answer: 2.5, feedback: "That is the image-at-infinity value $D/f$. With the image at the near point there is an extra 1." },
+        { answer: 0.4, feedback: "That is $f/D$, upside down." },
       ],
     },
     {
@@ -1000,6 +1391,7 @@ const lesson06: LessonSeed = {
         { text: "It makes the object physically larger.", feedback: "The object does not change." },
         { text: "It makes a large real image on the retina by itself.", feedback: "The eye lens still forms the retinal image; the magnifier provides a virtual image at a comfortable distance." },
       ],
+      hint: "Apparent size depends on the angle the object subtends at the eye (1.6). What limits how close you can bring an object without help?",
     },
     {
       type: "quiz",
@@ -1011,6 +1403,21 @@ const lesson06: LessonSeed = {
         { text: "The eye lens cannot become powerful enough to focus it on the retina.", correct: true, feedback: "Accommodation has a limit, which sets the near point near 25 cm." },
         { text: "The retina moves backwards.", feedback: "The lens–retina distance is fixed; only the lens changes." },
       ],
+      hint: "Recall how the eye focuses on near objects (1.6) and what fixes the near point.",
+    },
+    {
+      type: "quiz",
+      id: "omp1-6-q6",
+      variant: "practice",
+      multiple: true,
+      question: "A convex lens of focal length 5 cm is used as a magnifying glass by a person with a normal near point of 25 cm. Select every correct statement.",
+      options: [
+        { text: "With the image at the near point, the angular magnification is 6.", correct: true, feedback: "$M = 1 + \\frac Df = 1 + \\frac{25}{5} = 6$." },
+        { text: "With the object at the focus (relaxed eye), the angular magnification is 5.", correct: true, feedback: "Image at infinity: $M = \\frac Df = \\frac{25}{5} = 5$." },
+        { text: "The image it forms is real and inverted.", feedback: "The object is inside F, so the image is virtual and erect, on the object's side." },
+        { text: "The object must be placed beyond the focus to be magnified.", feedback: "Beyond F the lens makes a real image you cannot view as a magnifier. The object goes at or inside F." },
+      ],
+      hint: "Use $M = 1 + \\frac Df$ (near point) and $M = \\frac Df$ (infinity).",
     },
   ]),
 };
@@ -1025,10 +1432,11 @@ const lesson07: LessonSeed = {
       content:
         "A single magnifier tops out at about $\\times 10$: stronger lenses need impossibly short focal lengths. Put two lenses in a row and the magnifications multiply. The first lens (the **objective**) makes a real image; the second (the **eyepiece**) is a magnifier used to look at that image. A microscope does this for tiny nearby objects; a telescope for huge distant ones.",
     },
+    { type: "heading", text: "The compound microscope" },
     {
       type: "text",
       content:
-        "**Compound microscope.** The object sits just outside the focus of a short-focus objective ($f_o$ small), which forms a real, inverted, much magnified image. That image lies just inside the focus of the eyepiece, which acts as a simple microscope. The total magnification is the product:",
+        "The object sits just outside the focus of a short-focus objective ($f_o$ small), which forms a real, inverted, much magnified image. That image lies just inside the focus of the eyepiece, which acts as a simple microscope. The total magnification is the product:",
     },
     {
       type: "math",
@@ -1087,6 +1495,7 @@ const lesson07: LessonSeed = {
       content:
         "What you should have seen: the objective's image is real and on the far side; used as the eyepiece's object, it is magnified a second time, and the magnifications multiply. The final image is inverted relative to the object (only the objective inverts). Undo the ×10 scaling to picture the real instrument: objective image 6 cm behind a 1 cm objective, eyepiece 4 cm beyond that, so the two lenses are 10 cm apart and $M = -25$.",
     },
+    { type: "heading", text: "Astronomical and other telescopes" },
     {
       type: "text",
       content:
@@ -1102,22 +1511,50 @@ const lesson07: LessonSeed = {
       content:
         "**Other telescopes, briefly.** A *terrestrial* telescope adds an erecting lens so that the image is upright (longer tube). A *Galilean* telescope uses a concave eyepiece: short and upright, as in opera glasses. Large research telescopes are **reflectors** (e.g. Cassegrain: a big concave primary mirror and a small convex secondary). Mirrors have no chromatic aberration, a parabolic mirror has no spherical aberration, and a mirror can be supported over its whole back while a big lens can only be held at its rim and sags under its own weight.",
     },
+    { type: "heading", text: "Worked examples: microscope and Moon image" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (compound microscope, JEE Main).** $f_o = 1$ cm, $f_e = 5$ cm, object 1.1 cm from the objective.\n\n1. Objective: $\\frac1{v_o} = \\frac11 - \\frac1{1.1} = \\frac{0.1}{1.1}$, so $v_o = 11$ cm and $m_o = \\frac{11}{-1.1} = -10$.\n2. Final image at the near point: $M_e = 1 + \\frac{25}{5} = 6$, so $M = -60$. The eyepiece's object is at $\\frac1{|u_e|} = \\frac15 + \\frac1{25}$, $|u_e| \\approx 4.17$ cm, so the lenses are $11 + 4.17 \\approx 15.2$ cm apart.\n3. Final image at infinity: $M_e = 5$, $M = -50$, lens separation $11 + 5 = 16$ cm. *Why this step:* here $L = v_o - f_o = 10$ cm and $\\frac{L}{f_o}\\frac{D}{f_e} = 10 \\times 5 = 50$, the approximate formula agrees.\n\n**Worked example 2 (telescope).** $f_o = 150$ cm, $f_e = 5$ cm.\n\n1. Normal adjustment: $M = \\frac{150}{5} = 30$, tube length $L = 155$ cm.\n2. Final image at 25 cm: $M = 30\\left(1 + \\frac{5}{25}\\right) = 36$.",
+      type: "worked-example",
+      id: "omp1-7-we1",
+      title: "Worked example 1 (compound microscope, JEE Main)",
+      problem:
+        "A compound microscope has $f_o = 1$ cm, $f_e = 5$ cm, and the object is 1.1 cm from the objective. Find the magnification and the lens separation with the final image (a) at the near point (25 cm), (b) at infinity.",
+      steps: [
+        { text: "Objective: $\\frac1{v_o} = \\frac11 - \\frac1{1.1} = \\frac{0.1}{1.1}$, so $v_o = 11$ cm and $m_o = \\frac{11}{-1.1} = -10$." },
+        { text: "Final image at the near point: $M_e = 1 + \\frac{25}{5} = 6$, so $M = -60$. The eyepiece's object is at $\\frac1{|u_e|} = \\frac15 + \\frac1{25}$, $|u_e| \\approx 4.17$ cm, so the lenses are $11 + 4.17 \\approx 15.2$ cm apart." },
+        { text: "Final image at infinity: $M_e = 5$, $M = -50$, lens separation $11 + 5 = 16$ cm. *Why this step:* here $L = v_o - f_o = 10$ cm and $\\frac{L}{f_o}\\frac{D}{f_e} = 10 \\times 5 = 50$, the approximate formula agrees." },
+      ],
+      answer: "(a) $M = -60$, separation $\\approx 15.2$ cm; (b) $M = -50$, separation 16 cm.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (image of the Moon).** The Moon (diameter $3.48\\times10^6$ m) is $3.8\\times10^8$ m away. How big is its image formed by the objective above?\n\n1. Angle subtended: $\\alpha = \\frac{3.48\\times10^6}{3.8\\times10^8} \\approx 9.2\\times10^{-3}$ rad. *Why this step:* for a distant object, only the angle matters, and the image of angular size $\\alpha$ at the focus has height $f_o\\alpha$.\n2. Image diameter $= f_o\\alpha = 1.5 \\times 9.2\\times10^{-3} \\approx 1.4\\times10^{-2}$ m, about 1.4 cm. The eyepiece then views this 1.4 cm image from a few cm away.",
+      type: "worked-example",
+      id: "omp1-7-we2",
+      title: "Worked example 2 (telescope)",
+      problem:
+        "A telescope has $f_o = 150$ cm, $f_e = 5$ cm. Find the magnification and tube length in normal adjustment, and the magnification with the final image at 25 cm.",
+      steps: [
+        { text: "Normal adjustment: $M = \\frac{150}{5} = 30$, tube length $L = 155$ cm." },
+        { text: "Final image at 25 cm: $M = 30\\left(1 + \\frac{5}{25}\\right) = 36$." },
+      ],
+      answer: "Normal adjustment: $M = 30$, $L = 155$ cm; image at 25 cm: $M = 36$.",
+    },
+    {
+      type: "worked-example",
+      id: "omp1-7-we3",
+      title: "Worked example 3 (image of the Moon)",
+      problem:
+        "The Moon (diameter $3.48\\times10^6$ m) is $3.8\\times10^8$ m away. How big is its image formed by the objective above?",
+      steps: [
+        { text: "Angle subtended: $\\alpha = \\frac{3.48\\times10^6}{3.8\\times10^8} \\approx 9.2\\times10^{-3}$ rad. *Why this step:* for a distant object, only the angle matters, and the image of angular size $\\alpha$ at the focus has height $f_o\\alpha$." },
+        { text: "Image diameter $= f_o\\alpha = 1.5 \\times 9.2\\times10^{-3} \\approx 1.4\\times10^{-2}$ m, about 1.4 cm. The eyepiece then views this 1.4 cm image from a few cm away." },
+      ],
+      answer: "About 1.4 cm across ($1.4\\times10^{-2}$ m).",
     },
     {
       type: "callout",
       variant: "warning",
       title: "Misconception: \"a telescope makes the image bigger than the object\"",
       content:
-        "The image of the Moon is about 1.4 cm across; the Moon is 3480 km. The telescope makes a tiny image **close to your eye**, so that it subtends a larger angle than the Moon does. Angular magnification, not size, is the point.",
+        "The objective's image of the Moon (Worked example 3) is tiny; the Moon is 3480 km across. The telescope makes a tiny image **close to your eye**, so that it subtends a larger angle than the Moon does. Angular magnification, not size, is the point.",
     },
     {
       type: "callout",
@@ -1126,6 +1563,7 @@ const lesson07: LessonSeed = {
       content:
         "In a microscope the objective has the **shorter** focal length (a few mm), because $|m_o| \\approx \\frac{L}{f_o}$. In a telescope it is the opposite: the objective's focal length is long, because $M = \\frac{f_o}{f_e}$.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "omp1-7-q1",
@@ -1137,16 +1575,19 @@ const lesson07: LessonSeed = {
         { text: "25 and 104 cm", correct: true, feedback: "$M = \\frac{100}{4}$, $L = f_o + f_e$." },
         { text: "29 and 104 cm", feedback: "That uses the near-point formula $\\frac{f_o}{f_e}\\left(1 + \\frac{f_e}{D}\\right)$, which does not apply in normal adjustment." },
       ],
+      hint: "In normal adjustment the final image is at infinity, so the objective's image sits at the eyepiece's focus. Use that for the length, and the focal lengths for $M$.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-7-q2",
       variant: "practice",
-      question: "A microscope's objective gives $m_o = -8$. The eyepiece has $f_e = 5$ cm and the final image is at infinity. What is the magnitude of the magnifying power?",
-      options: [
-        { text: "40", correct: true, feedback: "$8 \\times \\frac{25}{5}$." },
-        { text: "48", feedback: "That uses $1 + \\frac{D}{f_e} = 6$, the near-point value." },
-        { text: "13", feedback: "Magnifications multiply; they do not add." },
+      question: "A microscope's objective gives $m_o = -8$. The eyepiece has $f_e = 5$ cm and the final image is at infinity ($D = 25$ cm). What is the magnitude of the magnifying power?",
+      answer: 40,
+      hint: "The magnifications multiply: $|M| = |m_o|\\cdot M_e$, with $M_e = \\frac{D}{f_e}$ for an image at infinity.",
+      solution: "$M_e = \\dfrac{D}{f_e} = \\dfrac{25}{5} = 5$, so $|M| = 8 \\times 5 = 40$.",
+      commonMistakes: [
+        { answer: 48, feedback: "That uses $1 + \\frac{D}{f_e} = 6$, the near-point value." },
+        { answer: 13, feedback: "Magnifications multiply; they do not add." },
       ],
     },
     {
@@ -1159,6 +1600,7 @@ const lesson07: LessonSeed = {
         { text: "the same size.", feedback: "Only an object at $2F$ gives a same-size image." },
         { text: "far smaller, but close enough to the eyepiece to subtend a larger angle.", correct: true, feedback: "The telescope magnifies angles, not sizes." },
       ],
+      hint: "The objective forms the image in its focal plane. Compare $f_o$ with the Moon's distance, then think about where that image sits relative to the eye.",
     },
     {
       type: "quiz",
@@ -1170,16 +1612,19 @@ const lesson07: LessonSeed = {
         { text: "Both of long focal length", feedback: "Long focal lengths shrink both factors." },
         { text: "Objective of very short focal length, eyepiece of short focal length", correct: true, feedback: "$|M| \\approx \\frac{L}{f_o}\\cdot\\frac{D}{f_e}$: both small, the objective smallest." },
       ],
+      hint: "The magnifying power of a compound microscope is $M \\approx \\dfrac{L}{f_o}\\cdot\\dfrac{D}{f_e}$. What makes each factor large?",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-7-q5",
       variant: "practice",
-      question: "A telescope has $f_o = 100$ cm and $f_e = 5$ cm, with the final image at the near point (25 cm). What is its magnifying power?",
-      options: [
-        { text: "20", feedback: "That is normal adjustment. With the image at the near point there is an extra factor $1 + \\frac{f_e}{D}$." },
-        { text: "24", correct: true, feedback: "$20\\left(1 + \\frac{5}{25}\\right) = 24$." },
-        { text: "120", feedback: "The factor is $1 + \\frac{f_e}{D}$, not $1 + \\frac{D}{f_e}$." },
+      question: "A telescope has $f_o = 100$ cm and $f_e = 5$ cm, with the final image at the near point (25 cm). What is the magnitude of its magnifying power?",
+      answer: 24,
+      hint: "Near-point adjustment: $M = \\frac{f_o}{f_e}\\left(1 + \\frac{f_e}{D}\\right)$.",
+      solution: "$M = \\dfrac{f_o}{f_e}\\left(1 + \\dfrac{f_e}{D}\\right) = 20\\left(1 + \\dfrac{5}{25}\\right) = 20 \\times 1.2 = 24$.",
+      commonMistakes: [
+        { answer: 20, feedback: "That is normal adjustment. With the image at the near point there is an extra factor $1 + \\frac{f_e}{D}$." },
+        { answer: 120, feedback: "The factor is $1 + \\frac{f_e}{D}$, not $1 + \\frac{D}{f_e}$." },
       ],
     },
     {
@@ -1192,6 +1637,21 @@ const lesson07: LessonSeed = {
         { text: "Mirrors magnify more than lenses of the same focal length.", feedback: "Magnification depends on focal lengths, not on reflection versus refraction." },
         { text: "Mirrors form upright images.", feedback: "A concave mirror's image of a distant star field is inverted too." },
       ],
+      hint: "List the practical drawbacks of a lens several metres across, then ask which of them a mirror avoids.",
+    },
+    {
+      type: "quiz",
+      id: "omp1-7-q7",
+      variant: "concept",
+      multiple: true,
+      question: "Select every correct statement about the compound microscope and the astronomical telescope.",
+      options: [
+        { text: "In a compound microscope, the objective has the shorter focal length.", correct: true, feedback: "$|m_o| \\approx \\frac{L}{f_o}$, so the objective's focal length is made as small as possible." },
+        { text: "In normal adjustment, the telescope's lenses are $f_o + f_e$ apart.", correct: true, feedback: "The objective's focus coincides with the eyepiece's focus, so $L = f_o + f_e$." },
+        { text: "Both instruments give a final image that is erect.", feedback: "In both, the objective inverts and the eyepiece does not re-invert, so the final image is inverted." },
+        { text: "Moving a telescope's final image from infinity to the near point reduces its magnifying power.", feedback: "It increases it, by the factor $1 + \\frac{f_e}{D}$." },
+      ],
+      hint: "Recall which lens does the magnifying in each instrument and where the intermediate image sits.",
     },
   ]),
 };
@@ -1214,37 +1674,47 @@ const lessonMastery: LessonSeed = {
         "1. Two surfaces: $\\frac1f = (n_{\\text{rel}} - 1)\\left(\\frac1{R_1} - \\frac1{R_2}\\right)$; a denser surrounding medium weakens or reverses a lens.\n2. Thin lens: $\\frac1v - \\frac1u = \\frac1f$, $m = \\frac vu$; displacement method $f = \\frac{D^2 - x^2}{4D}$, $D \\ge 4f$.\n3. $P = 1/f$ (m); in contact $P = P_1 + P_2$; separated: two steps; silvered lens $P = 2P_L + P_M$.\n4. Prism: $r_1 + r_2 = A$, $\\delta = i + e - A$, $n = \\frac{\\sin\\frac{A + \\delta_m}{2}}{\\sin\\frac A2}$, thin $\\delta = (n - 1)A$.\n5. Dispersion $(n_v - n_r)A$, $\\omega = \\frac{n_v - n_r}{n - 1}$; achromatic: $\\omega\\delta + \\omega'\\delta' = 0$; scattering $\\propto \\lambda^{-4}$.\n6. Eye: spectacles image the desired object into the eye's range; magnifier $M = 1 + \\frac Df$ or $\\frac Df$.\n7. Microscope $M = m_oM_e$; telescope $M = \\frac{f_o}{f_e}$, $L = f_o + f_e$ in normal adjustment.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-8-q1",
       variant: "mastery",
-      question: "A biconvex glass lens ($n = 1.5$) has $f = 10$ cm in air. What is its focal length in a liquid of index 1.25?",
-      options: [
-        { text: "12.5 cm", feedback: "That scales $f$ by the liquid's index. The factor is $\\frac{n - 1}{n_{\\text{rel}} - 1}$." },
-        { text: "40 cm", feedback: "That uses water's $\\frac43$ rather than 1.25." },
-        { text: "$-25$ cm", feedback: "Glass (1.5) is still denser than the liquid (1.25), so the lens still converges." },
-        { text: "25 cm", correct: true, feedback: "$n_{\\text{rel}} = 1.2$; $f$ scales by $\\frac{0.5}{0.2} = 2.5$." },
+      question: "A biconvex glass lens ($n = 1.5$) has $f = 10$ cm in air. What is its focal length in a liquid of index 1.25? Give your answer in cm, with a minus sign if the lens diverges.",
+      answer: 25,
+      unit: "cm",
+      hint: "Only the factor $n_{\\text{rel}} - 1$ changes between the two media.",
+      solution: "In the liquid $n_{\\text{rel}} = \\dfrac{1.5}{1.25} = 1.2$, so $n_{\\text{rel}} - 1 = 0.2$ instead of $0.5$.\n\n$f$ scales by $\\dfrac{0.5}{0.2} = 2.5$: $f = 25$ cm, still converging.",
+      commonMistakes: [
+        { answer: 12.5, feedback: "That scales $f$ by the liquid's index. The factor is $\\frac{n - 1}{n_{\\text{rel}} - 1}$." },
+        { answer: 40, feedback: "That uses water's $\\frac43$ rather than 1.25." },
+        { answer: -25, feedback: "Glass (1.5) is still denser than the liquid (1.25), so the lens still converges." },
       ],
     },
     {
       type: "quiz",
       id: "omp1-8-q2",
       variant: "mastery",
-      question: "An object 2 cm tall is 20 cm from a convex lens of focal length 15 cm. Describe the image.",
+      multiple: true,
+      question: "An object 2 cm tall is 20 cm from a convex lens of focal length 15 cm. Select every correct description of the image.",
       options: [
-        { text: "Virtual, erect, 60 cm on the object's side, 6 cm tall", feedback: "The object is beyond F, so the image is real." },
-        { text: "Real, inverted, 60 cm beyond the lens, 6 cm tall", correct: true, feedback: "$\\frac1v = \\frac1{15} - \\frac1{20} = \\frac1{60}$, $m = \\frac{60}{-20} = -3$." },
-        { text: "Real, inverted, 8.6 cm beyond the lens", feedback: "That adds the reciprocals. $\\frac1v = \\frac1f + \\frac1u$ with $u = -20$." },
+        { text: "Real and inverted", correct: true, feedback: "The object is beyond F, so the image forms on the far side: real and inverted." },
+        { text: "60 cm beyond the lens", correct: true, feedback: "$\\frac1v = \\frac1{15} - \\frac1{20} = \\frac1{60}$, $v = +60$ cm." },
+        { text: "6 cm tall", correct: true, feedback: "$m = \\frac{60}{-20} = -3$, so the image is $3\\times2 = 6$ cm tall." },
+        { text: "Virtual and erect, on the object's side", feedback: "The object is beyond F, so the image is real." },
+        { text: "8.6 cm beyond the lens", feedback: "That adds the reciprocals. $\\frac1v = \\frac1f + \\frac1u$ with $u = -20$." },
       ],
+      hint: "The thin lens formula and magnification (1.2). Check each statement on its own.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-8-q3",
       variant: "mastery",
-      question: "Object and screen are 80 cm apart. Two lens positions 40 cm apart both give sharp images. What is $f$?",
-      options: [
-        { text: "20 cm", feedback: "That is $D/4$, the limiting case where the two positions coincide." },
-        { text: "10 cm", feedback: "Recompute $D^2 - x^2 = 4800$ and $4D = 320$." },
-        { text: "15 cm", correct: true, feedback: "$\\frac{6400 - 1600}{320} = 15$ cm. Check: positions 60 and 20 cm, $\\frac{60 \\times 20}{80} = 15$." },
+      question: "Object and screen are 80 cm apart. Two lens positions 40 cm apart both give sharp images. What is $f$, in cm?",
+      answer: 15,
+      unit: "cm",
+      hint: "Displacement method: $f = \\frac{D^2 - x^2}{4D}$.",
+      solution: "$f = \\dfrac{80^2 - 40^2}{4\\times80} = \\dfrac{6400 - 1600}{320} = 15$ cm.\n\nCheck: positions 60 and 20 cm from the object, and $\\dfrac{60 \\times 20}{80} = 15$. ✓",
+      commonMistakes: [
+        { answer: 20, feedback: "That is $D/4$, the limiting case where the two positions coincide." },
+        { answer: 10, feedback: "Recompute $D^2 - x^2 = 4800$ and $4D = 320$." },
       ],
     },
     {
@@ -1258,6 +1728,7 @@ const lessonMastery: LessonSeed = {
         { text: "$+6.7$ cm", feedback: "That adds the powers as $10 + 5$. The $-5$ D lens subtracts." },
         { text: "$+20$ cm", correct: true, feedback: "$P = +5$ D, $f = 0.2$ m." },
       ],
+      hint: "Lenses in contact (1.3): watch the units when turning a power into a focal length.",
     },
     {
       type: "quiz",
@@ -1270,6 +1741,7 @@ const lessonMastery: LessonSeed = {
         { text: "A concave mirror of focal length 20 cm", feedback: "That is the lens alone, once." },
         { text: "A convex mirror of focal length 5 cm", feedback: "Every element here converges, so the system is concave." },
       ],
+      hint: "A silvered lens: light refracts through the lens, reflects off the silvered face, and refracts again.",
     },
     {
       type: "quiz",
@@ -1281,6 +1753,7 @@ const lessonMastery: LessonSeed = {
         { text: "$\\delta_m = 60^\\circ$, $i = 60^\\circ$", correct: true, feedback: "$\\sin i = \\sqrt3\\sin 30^\\circ = \\frac{\\sqrt3}2$; $\\delta_m = 2i - A$." },
         { text: "$\\delta_m = 43.9^\\circ$, $i = 60^\\circ$", feedback: "That is $(n - 1)A$, valid only for thin prisms." },
       ],
+      hint: "Minimum deviation through a prism (1.4): the path inside the prism is symmetric.",
     },
     {
       type: "quiz",
@@ -1292,16 +1765,20 @@ const lessonMastery: LessonSeed = {
         { text: "$6^\\circ$", feedback: "Equal angles give unequal dispersions here." },
         { text: "$4^\\circ$", correct: true, feedback: "$0.010 \\times 6 = 0.015 A'$." },
       ],
+      hint: "Achromatic combination of prisms (1.5): the two angular dispersions must cancel.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-8-q8",
       variant: "mastery",
-      question: "A person cannot see objects beyond 2 m clearly. What power of lens is needed?",
-      options: [
-        { text: "$-0.5$ D", correct: true, feedback: "$f = -2$ m images infinity at the far point." },
-        { text: "$+0.5$ D", feedback: "Myopia needs a diverging lens." },
-        { text: "$-2$ D", feedback: "$-2$ is the focal length in metres; $P = \\frac{1}{-2}$." },
+      question: "A person cannot see objects beyond 2 m clearly. What power of lens is needed? Give your answer in dioptres, with its sign.",
+      answer: -0.5,
+      unit: "D",
+      hint: "The lens must image distant objects at the far point, 2 m in front of the eye.",
+      solution: "$u = -\\infty$, $v = -2$ m, so $\\dfrac1f = \\dfrac1{-2} - 0$ and $f = -2$ m.\n\n$P = \\dfrac{1}{f} = -0.5$ D, a diverging lens.",
+      commonMistakes: [
+        { answer: 0.5, feedback: "Myopia needs a diverging lens, so the power is negative." },
+        { answer: -2, feedback: "$-2$ is the focal length in metres; $P = \\frac{1}{-2}$." },
       ],
     },
     {
@@ -1315,16 +1792,20 @@ const lessonMastery: LessonSeed = {
         { text: "$|M| = 62.5$, separation 7 cm", feedback: "That uses $\\frac{D}{f_o}\\cdot\\frac{D}{f_e}$. The objective's magnification is $\\frac{v_o}{u_o}$." },
         { text: "$|M| = 20$, separation 15 cm", correct: true, feedback: "$v_o = 10$ cm, $m_o = -4$, $M_e = \\frac{25}{5} = 5$; separation $v_o + f_e$." },
       ],
+      hint: "The compound microscope (1.7): locate the objective's image first.",
     },
     {
-      type: "quiz",
+      type: "numeric",
       id: "omp1-8-q10",
       variant: "mastery",
-      question: "A telescope has $f_o = 120$ cm and $f_e = 5$ cm and is adjusted so the final image is at 25 cm. What is its magnifying power?",
-      options: [
-        { text: "24", feedback: "That is normal adjustment." },
-        { text: "144", feedback: "The extra factor is $1 + \\frac{f_e}{D} = 1.2$, not $1 + \\frac{D}{f_e} = 6$." },
-        { text: "28.8", correct: true, feedback: "$24\\left(1 + \\frac{5}{25}\\right) = 28.8$." },
+      question: "A telescope has $f_o = 120$ cm and $f_e = 5$ cm and is adjusted so the final image is at 25 cm. What is the magnitude of its magnifying power?",
+      answer: 28.8,
+      tolerance: 0.05,
+      hint: "With the final image at the near point there is an extra factor beyond $\\frac{f_o}{f_e}$.",
+      solution: "$M = \\dfrac{f_o}{f_e}\\left(1 + \\dfrac{f_e}{D}\\right) = 24\\left(1 + \\dfrac{5}{25}\\right) = 24 \\times 1.2 = 28.8$.",
+      commonMistakes: [
+        { answer: 24, feedback: "That is normal adjustment. With the image at the near point there is an extra factor $1 + \\frac{f_e}{D}$." },
+        { answer: 144, feedback: "The extra factor is $1 + \\frac{f_e}{D} = 1.2$, not $1 + \\frac{D}{f_e} = 6$." },
       ],
     },
     {
@@ -1350,6 +1831,7 @@ const lessonMastery: LessonSeed = {
         { text: "One image, at the average focal length", feedback: "Each half focuses with its own index, so there are two images." },
         { text: "Two images, at 40 cm and 33.3 cm", feedback: "Those are the focal lengths. The object is at 60 cm, not at infinity." },
       ],
+      hint: "Each half acts as a lens of its own (lensmaker's equation, 1.1), on the same axis.",
     },
   ]),
 };

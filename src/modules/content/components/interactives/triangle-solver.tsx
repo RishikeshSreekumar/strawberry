@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { z } from "zod";
 import type { triangleSolverSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { formatNumber } from "./function-plot";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 
@@ -169,10 +170,10 @@ export function TriangleSolver({ config }: { config: Config }) {
       </div>
 
       <p className="text-center text-xs text-muted-foreground">
-        {config.caption ??
+        <RichText text={config.caption ??
           (config.mode === "ssa"
             ? "Swing side a and watch the number of triangles change from 0 to 2 to 1."
-            : "Two sides and the angle between them determine the triangle completely.")}
+            : "Two sides and the angle between them determine the triangle completely.")} />
       </p>
     </InteractiveFrame>
   );

@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import type { z } from "zod";
 import type { ompRayBenchSchema } from "../../schemas/blocks";
+import { RichText } from "../rich-text";
 import { formatNumber } from "./function-plot";
 import { InteractiveFrame, Latex, SliderRow } from "./ui";
 
@@ -81,7 +82,7 @@ function Slider({ label, range, value, onChange, unit }: { label: string; range:
 function Footer({ caption, onReset }: { caption: string; onReset: () => void }) {
   return (
     <div className="flex items-start justify-between gap-3">
-      <p className="text-xs text-muted-foreground">{caption}</p>
+      <p className="text-xs text-muted-foreground"><RichText text={caption} /></p>
       <button type="button" onClick={onReset} className="shrink-0 rounded-md border bg-background px-2 py-1 text-xs">
         Reset
       </button>

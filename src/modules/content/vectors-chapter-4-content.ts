@@ -40,6 +40,7 @@ const lesson01: LessonSeed = {
       content:
         "The dot product from Chapter 3 cannot describe this. It turns two vectors into a single number, and a number has no direction. The spanner problem needs a product of two vectors that gives a **third direction**, one that neither input points along. That product is the **cross product**, written $\\vec a \\times \\vec b$.",
     },
+    { type: "heading", text: "What the new product should measure" },
     {
       type: "text",
       content:
@@ -74,6 +75,7 @@ const lesson01: LessonSeed = {
       content:
         "Things to notice as you drag the slider:\n\n- At $0^\\circ$ the parallelogram is flat, the area is 0, and the arrow vanishes.\n- The arrow is longest at $90^\\circ$, where $\\sin\\theta = 1$.\n- Between $0^\\circ$ and $180^\\circ$ the arrow points up (+z). Past $180^\\circ$, $\\vec b$ has swung to the other side of the line through $\\vec a$, so the turn from $\\vec a$ to $\\vec b$ is now clockwise from above and the arrow points down.\n- The arrow never leans into the plane of $\\vec a$ and $\\vec b$. It stays perpendicular to both.",
     },
+    { type: "heading", text: "The right-hand rule for direction" },
     {
       type: "callout",
       variant: "definition",
@@ -86,25 +88,84 @@ const lesson01: LessonSeed = {
       content:
         "Check it on the spanner. The spanner (the position of the push, $\\vec r$) points east, the push $\\vec F$ points north. Seen from above, east-to-north is an anticlockwise turn, so the thumb points **up**. That matches a standard right-handed bolt: turned anticlockwise from above, it comes up and loosens. Turned clockwise (push south), it goes down and tightens.",
     },
+    { type: "heading", text: "Worked examples: size and direction" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Take $\\vec a = 3\\hat i$ and $\\vec b = 2\\hat i + 2\\hat j$, the starting picture above (the angle between them is $45^\\circ$).\n\n1. Both lie in the $xy$-plane, so the perpendicular direction is the $z$-axis.\n2. The parallelogram has base $|\\vec a| = 3$ along the x-axis and height 2 (the $y$-coordinate of $\\vec b$), so its area is $3 \\times 2 = 6$. (Check with the formula: $3 \\cdot 2\\sqrt2 \\cdot \\sin 45^\\circ = 6$.)\n3. Fingers along $+x$, curl toward $\\vec b$, which points at $45^\\circ$ up and to the right (into the first quadrant): anticlockwise from above, so the thumb points to $+z$.\n4. Therefore $\\vec a \\times \\vec b = 6\\hat k$.",
+      type: "worked-example",
+      id: "va4-1-we1",
+      title: "Worked example 1",
+      problem:
+        "Take $\\vec a = 3\\hat i$ and $\\vec b = 2\\hat i + 2\\hat j$, the starting picture above (the angle between them is $45^\\circ$). Find the size and direction of $\\vec a \\times \\vec b$.",
+      steps: [
+        { text: "Both lie in the $xy$-plane, so the perpendicular direction is the $z$-axis." },
+        {
+          text: "The parallelogram has base $|\\vec a| = 3$ along the x-axis and height 2 (the $y$-coordinate of $\\vec b$), so its area is $3 \\times 2 = 6$. (Check with the formula: $3 \\cdot 2\\sqrt2 \\cdot \\sin 45^\\circ = 6$.)",
+        },
+        {
+          text: "Fingers along $+x$, curl toward $\\vec b$, which points at $45^\\circ$ up and to the right (into the first quadrant): anticlockwise from above, so the thumb points to $+z$.",
+        },
+      ],
+      answer: "$\\vec a \\times \\vec b = 6\\hat k$",
+    },
+    {
+      type: "worked-example",
+      id: "va4-1-we2",
+      title: "Worked example 2",
+      problem: "Swap the order: with the same vectors, find the size and direction of $\\vec b \\times \\vec a$.",
+      steps: [
+        { text: "The parallelogram is the same shape, so the length is still 6." },
+        {
+          text: "Now the fingers start along $\\vec b$ and curl toward $\\vec a$: that is clockwise when seen from above, so the thumb points to $-z$.",
+        },
+      ],
+      answer: "$\\vec b \\times \\vec a = -6\\hat k$",
     },
     {
       type: "text",
-      content:
-        "**Worked example 2.** Swap the order: $\\vec b \\times \\vec a$ with the same vectors.\n\n1. The parallelogram is the same shape, so the length is still 6.\n2. Now the fingers start along $\\vec b$ and curl toward $\\vec a$: that is clockwise when seen from above, so the thumb points to $-z$.\n3. Therefore $\\vec b \\times \\vec a = -6\\hat k$. Order matters, and reversing it flips the arrow.",
+      content: "Order matters, and reversing it flips the arrow.",
+    },
+    {
+      type: "worked-example",
+      id: "va4-1-we3",
+      title: "Worked example 3 (a solar panel)",
+      problem:
+        "A rectangular rooftop panel in Chennai has one edge $\\vec a = 2\\hat i$ m running east along the roof, and the other edge $\\vec b = 1.2\\hat j + 0.9\\hat k$ m running up the slope, north and upward. Find the size and direction of $\\vec a \\times \\vec b$, the panel's area vector.",
+      steps: [
+        {
+          text: "**Angle.** $\\vec a \\cdot \\vec b = 0$, so the edges meet at $90^\\circ$ and $\\sin\\theta = 1$. *Why:* the size uses $\\sin\\theta$, so find the angle first. A rectangle's edges are perpendicular anyway.",
+        },
+        {
+          text: "**Size.** $|\\vec b| = \\sqrt{1.44 + 0.81} = \\sqrt{2.25} = 1.5$ m, so $|\\vec a \\times \\vec b| = 2 \\times 1.5 \\times 1 = 3$ m², the panel's area.",
+        },
+        {
+          text: "**Direction, part 1.** The arrow must be perpendicular to $\\vec a$ (east), so it has no east component: it lives in the north-up plane. It must also be perpendicular to the slope $\\vec b$. In the north-up plane only two unit directions do that: $(0, -0.6, 0.8)$ (up and south) or its opposite. Check: $(0, -0.6, 0.8)\\cdot(0, 1.2, 0.9) = -0.72 + 0.72 = 0$. *Why:* perpendicular to both inputs pins down a line; the right-hand rule then picks the end.",
+        },
+        {
+          text: "**Direction, part 2.** If $\\vec b$ pointed flat north, east-to-north would give a thumb straight up (Worked example 1's picture). Tilting $\\vec b$ upward tips the thumb backward, toward the south, while it stays perpendicular to $\\vec b$. So the thumb points up and south.",
+        },
+      ],
+      answer:
+        "$\\vec a \\times \\vec b = 3(0, -0.6, 0.8) = -1.8\\hat j + 2.4\\hat k$ m²: an arrow of length 3 pointing up and toward the southern sky, which is where the sun sits at noon in India.",
     },
     {
       type: "text",
-      content:
-        "**Worked example 3 (a solar panel).** A rectangular rooftop panel in Chennai has one edge $\\vec a = 2\\hat i$ m running east along the roof, and the other edge $\\vec b = 1.2\\hat j + 0.9\\hat k$ m running up the slope, north and upward. Find the size and direction of $\\vec a \\times \\vec b$, the panel's area vector.\n\n1. **Angle.** $\\vec a \\cdot \\vec b = 0$, so the edges meet at $90^\\circ$ and $\\sin\\theta = 1$. *Why:* the size uses $\\sin\\theta$, so find the angle first. A rectangle's edges are perpendicular anyway.\n2. **Size.** $|\\vec b| = \\sqrt{1.44 + 0.81} = \\sqrt{2.25} = 1.5$ m, so $|\\vec a \\times \\vec b| = 2 \\times 1.5 \\times 1 = 3$ m², the panel's area.\n3. **Direction, part 1.** The arrow must be perpendicular to $\\vec a$ (east), so it has no east component: it lives in the north-up plane. It must also be perpendicular to the slope $\\vec b$. In the north-up plane only two unit directions do that: $(0, -0.6, 0.8)$ (up and south) or its opposite. Check: $(0, -0.6, 0.8)\\cdot(0, 1.2, 0.9) = -0.72 + 0.72 = 0$. *Why:* perpendicular to both inputs pins down a line; the right-hand rule then picks the end.\n4. **Direction, part 2.** If $\\vec b$ pointed flat north, east-to-north would give a thumb straight up (Worked example 1's picture). Tilting $\\vec b$ upward tips the thumb backward, toward the south, while it stays perpendicular to $\\vec b$. So the thumb points up and south.\n5. **Answer.** $\\vec a \\times \\vec b = 3(0, -0.6, 0.8) = -1.8\\hat j + 2.4\\hat k$ m²: an arrow of length 3 pointing up and toward the southern sky, which is where the sun sits at noon in India. The area vector tells you both how big the panel is and which way it faces.",
+      content: "The area vector tells you both how big the panel is and which way it faces.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (exam style).** $|\\vec a| = 2$, $|\\vec b| = 3$, and the parallelogram on $\\vec a$ and $\\vec b$ has area $3\\sqrt3$. Find the angle between $\\vec a$ and $\\vec b$.\n\n1. Area $= |\\vec a||\\vec b|\\sin\\theta$, so $6\\sin\\theta = 3\\sqrt3$ and $\\sin\\theta = \\frac{\\sqrt3}{2}$. *Why:* the area is the one fact that involves the angle, so solve it for $\\sin\\theta$.\n2. On $0 \\le \\theta \\le 180^\\circ$, two angles have this sine: $\\theta = 60^\\circ$ or $\\theta = 120^\\circ$. *Why both:* a parallelogram with a $60^\\circ$ corner also has a $120^\\circ$ corner, and the two have the same area. Area alone cannot tell them apart.\n3. Answer: $60^\\circ$ or $120^\\circ$. If the question also says $\\vec a\\cdot\\vec b < 0$, only $120^\\circ$ survives (Lesson 4.5 returns to this).",
+      type: "worked-example",
+      id: "va4-1-we4",
+      title: "Worked example 4 (exam style)",
+      problem:
+        "$|\\vec a| = 2$, $|\\vec b| = 3$, and the parallelogram on $\\vec a$ and $\\vec b$ has area $3\\sqrt3$. Find the angle between $\\vec a$ and $\\vec b$.",
+      steps: [
+        {
+          text: "Area $= |\\vec a||\\vec b|\\sin\\theta$, so $6\\sin\\theta = 3\\sqrt3$ and $\\sin\\theta = \\frac{\\sqrt3}{2}$. *Why:* the area is the one fact that involves the angle, so solve it for $\\sin\\theta$.",
+        },
+        {
+          text: "On $0 \\le \\theta \\le 180^\\circ$, two angles have this sine: $\\theta = 60^\\circ$ or $\\theta = 120^\\circ$. *Why both:* a parallelogram with a $60^\\circ$ corner also has a $120^\\circ$ corner, and the two have the same area. Area alone cannot tell them apart.",
+        },
+      ],
+      answer:
+        "$60^\\circ$ or $120^\\circ$. If the question also says $\\vec a\\cdot\\vec b < 0$, only $120^\\circ$ survives (Lesson 4.5 returns to this).",
     },
     {
       type: "callout",
@@ -124,6 +185,7 @@ const lesson01: LessonSeed = {
         ["Measures", "How much they agree (shadow, work)", "How much they turn (area, torque)"],
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va4-1-q1",
@@ -252,6 +314,7 @@ const lesson02: LessonSeed = {
       content:
         "Because $0 \\le \\theta \\le \\pi$, $\\sin\\theta \\ge 0$, so the length is never negative and all the direction information lives in $\\hat n$. Every property below is read straight off this picture, not memorised.",
     },
+    { type: "heading", text: "Properties of the cross product" },
     {
       type: "text",
       content:
@@ -283,6 +346,7 @@ const lesson02: LessonSeed = {
       content:
         "**5. Distributivity: $\\vec a \\times (\\vec b + \\vec c) = \\vec a \\times \\vec b + \\vec a \\times \\vec c$.** Here is the picture argument. Project $\\vec b$ and $\\vec c$ onto the plane perpendicular to $\\vec a$: that keeps only the parts that contribute to area with $\\vec a$. Replacing $\\vec b$ by its part perpendicular to $\\vec a$ does not change $\\vec a \\times \\vec b$: the parallel part lies along $\\vec a$ and spans no area (same base, same height). For a vector $\\vec v$ in that plane, $\\vec a \\times \\vec v$ is just $\\vec v$ rotated by $90^\\circ$ about $\\vec a$ and scaled by $|\\vec a|$. Rotating and scaling a triangle $\\vec b$, $\\vec c$, $\\vec b + \\vec c$ gives another triangle, so the images still add. We accept this and use it heavily in 4.3.",
     },
+    { type: "heading", text: "Cross products of $\\hat i$, $\\hat j$, $\\hat k$" },
     {
       type: "text",
       content:
@@ -318,35 +382,115 @@ const lesson02: LessonSeed = {
       type: "text",
       content: "Read the table as (row) $\\times$ (column). It is antisymmetric across the diagonal, which is anticommutativity in table form.",
     },
+    { type: "heading", text: "Computing with the properties" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** $|\\vec a| = 4$, $|\\vec b| = 3$, and the angle between them is $\\frac{\\pi}{6}$. Find $|\\vec a \\times \\vec b|$.\n\n$|\\vec a \\times \\vec b| = 4 \\cdot 3 \\cdot \\sin\\frac{\\pi}{6} = 12 \\cdot \\frac12 = 6.$",
+      type: "worked-example",
+      id: "va4-2-we1",
+      title: "Worked example 1",
+      problem:
+        "$|\\vec a| = 4$, $|\\vec b| = 3$, and the angle between them is $\\frac{\\pi}{6}$. Find $|\\vec a \\times \\vec b|$.",
+      steps: [{ text: "$|\\vec a \\times \\vec b| = 4 \\cdot 3 \\cdot \\sin\\frac{\\pi}{6} = 12 \\cdot \\frac12 = 6.$" }],
+      answer: "$|\\vec a \\times \\vec b| = 6$",
+    },
+    {
+      type: "worked-example",
+      id: "va4-2-we2",
+      title: "Worked example 2",
+      problem: "Compute $(2\\hat i + 3\\hat j) \\times (\\hat i - \\hat j)$ using only the properties.",
+      steps: [
+        { text: "Distribute: $2\\hat i\\times\\hat i - 2\\hat i\\times\\hat j + 3\\hat j\\times\\hat i - 3\\hat j\\times\\hat j$." },
+        { text: "Self-products vanish: $\\hat i\\times\\hat i = \\hat j\\times\\hat j = \\vec 0$." },
+        { text: "Use the cycle: $\\hat i\\times\\hat j = \\hat k$, $\\hat j\\times\\hat i = -\\hat k$." },
+        { text: "Substitute and collect: $-2\\hat k - 3\\hat k = -5\\hat k$." },
+        {
+          text: "Check the direction: both vectors lie in the $xy$-plane, so the answer must be along $\\hat k$. It is.",
+        },
+      ],
+      answer: "$(2\\hat i + 3\\hat j) \\times (\\hat i - \\hat j) = -5\\hat k$",
+    },
+    {
+      type: "worked-example",
+      id: "va4-2-we3",
+      title: "Worked example 3",
+      problem: "Simplify $(\\vec a - \\vec b) \\times (\\vec a + \\vec b)$.",
+      steps: [
+        { text: "Distribute: $\\vec a\\times\\vec a + \\vec a\\times\\vec b - \\vec b\\times\\vec a - \\vec b\\times\\vec b$." },
+        { text: "$\\vec a\\times\\vec a = \\vec b\\times\\vec b = \\vec 0$." },
+        { text: "$-\\vec b\\times\\vec a = +\\vec a\\times\\vec b$ by anticommutativity." },
+        { text: "Collect the two remaining terms: $\\vec a\\times\\vec b + \\vec a\\times\\vec b = 2(\\vec a\\times\\vec b)$." },
+      ],
+      answer: "$(\\vec a - \\vec b) \\times (\\vec a + \\vec b) = 2(\\vec a\\times\\vec b)$",
     },
     {
       type: "text",
       content:
-        "**Worked example 2.** Compute $(2\\hat i + 3\\hat j) \\times (\\hat i - \\hat j)$ using only the properties.\n\n1. Distribute: $2\\hat i\\times\\hat i - 2\\hat i\\times\\hat j + 3\\hat j\\times\\hat i - 3\\hat j\\times\\hat j$.\n2. Self-products vanish: $\\hat i\\times\\hat i = \\hat j\\times\\hat j = \\vec 0$.\n3. Use the cycle: $\\hat i\\times\\hat j = \\hat k$, $\\hat j\\times\\hat i = -\\hat k$.\n4. Result: $-2\\hat k - 3\\hat k = -5\\hat k$.\n\nCheck the direction: both vectors lie in the $xy$-plane, so the answer must be along $\\hat k$. It is.",
+        "If the product were commutative the answer would have been $\\vec 0$; the order carries real information.",
+    },
+    {
+      type: "worked-example",
+      id: "va4-2-we4",
+      title: "Worked example 4 (a charged particle in a magnet)",
+      problem:
+        "A moving charge in a magnetic field feels the force $\\vec F = q\\,(\\vec v \\times \\vec B)$. A proton ($q = 1.6\\times10^{-19}$ C) moves with $\\vec v = 2\\times10^{6}\\,\\hat i$ m/s through a field $\\vec B = 0.5\\,\\hat j$ T. Find the force.",
+      steps: [
+        {
+          text: "Pull the scalars out: $\\vec v \\times \\vec B = (2\\times10^6)(0.5)\\,(\\hat i \\times \\hat j) = 10^6\\,(\\hat i\\times\\hat j)$. *Why:* property 4 lets numbers leave the product, so only a unit-vector product is left.",
+        },
+        { text: "Use the cycle: $\\hat i \\times \\hat j = \\hat k$, so $\\vec v\\times\\vec B = 10^6\\,\\hat k$." },
+        {
+          text: "Multiply by the charge: $\\vec F = 1.6\\times10^{-19}\\times10^6\\,\\hat k = 1.6\\times10^{-13}\\,\\hat k$ N.",
+        },
+        {
+          text: "Read the answer. The force is perpendicular to the velocity, so it bends the path without speeding the proton up. That is why charges circle in a magnetic field. An electron (negative $q$) would be pushed along $-\\hat k$. A proton moving along $\\hat j$, parallel to $\\vec B$, would feel no force at all, since $\\hat j\\times\\hat j = \\vec 0$.",
+        },
+      ],
+      answer: "$\\vec F = 1.6\\times10^{-13}\\,\\hat k$ N",
+    },
+    {
+      type: "worked-example",
+      id: "va4-2-we5",
+      title: "Worked example 5 (CBSE style)",
+      problem:
+        "$|\\vec a| = 2$, $|\\vec b| = 3$ and the angle between them is $\\frac{\\pi}{6}$. Find $|(\\vec a - 2\\vec b)\\times(3\\vec a + \\vec b)|$.",
+      steps: [
+        {
+          text: "Distribute, keeping every factor in order: $3\\,\\vec a\\times\\vec a + \\vec a\\times\\vec b - 6\\,\\vec b\\times\\vec a - 2\\,\\vec b\\times\\vec b$. *Why:* distributivity works, but only if you never swap the two sides of a $\\times$.",
+        },
+        { text: "Drop the self-products: $\\vec a\\times\\vec a = \\vec b\\times\\vec b = \\vec 0$." },
+        {
+          text: "Turn $\\vec b\\times\\vec a$ into $-\\vec a\\times\\vec b$: $-6\\,\\vec b\\times\\vec a = +6\\,\\vec a\\times\\vec b$. *Why:* now every term is a multiple of the same vector, so they can be added.",
+        },
+        { text: "Total: $\\vec a\\times\\vec b + 6\\,\\vec a\\times\\vec b = 7\\,(\\vec a\\times\\vec b)$." },
+        { text: "$|\\vec a\\times\\vec b| = 2\\cdot3\\cdot\\sin\\frac{\\pi}{6} = 3$, so the answer is $7 \\times 3 = 21$." },
+      ],
+      answer: "$|(\\vec a - 2\\vec b)\\times(3\\vec a + \\vec b)| = 21$",
     },
     {
       type: "text",
       content:
-        "**Worked example 3.** Simplify $(\\vec a - \\vec b) \\times (\\vec a + \\vec b)$.\n\n1. Distribute: $\\vec a\\times\\vec a + \\vec a\\times\\vec b - \\vec b\\times\\vec a - \\vec b\\times\\vec b$.\n2. $\\vec a\\times\\vec a = \\vec b\\times\\vec b = \\vec 0$.\n3. $-\\vec b\\times\\vec a = +\\vec a\\times\\vec b$ by anticommutativity.\n4. Result: $2(\\vec a\\times\\vec b)$.\n\nIf the product were commutative the answer would have been $\\vec 0$; the order carries real information.",
+        "Every product of two combinations of $\\vec a$ and $\\vec b$ collapses to a single multiple of $\\vec a\\times\\vec b$. The multiple is the $2\\times2$ determinant of the coefficients: $\\begin{vmatrix} 1 & -2 \\\\ 3 & 1\\end{vmatrix} = 1 + 6 = 7$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (a charged particle in a magnet).** A moving charge in a magnetic field feels the force $\\vec F = q\\,(\\vec v \\times \\vec B)$. A proton ($q = 1.6\\times10^{-19}$ C) moves with $\\vec v = 2\\times10^{6}\\,\\hat i$ m/s through a field $\\vec B = 0.5\\,\\hat j$ T. Find the force.\n\n1. Pull the scalars out: $\\vec v \\times \\vec B = (2\\times10^6)(0.5)\\,(\\hat i \\times \\hat j) = 10^6\\,(\\hat i\\times\\hat j)$. *Why:* property 4 lets numbers leave the product, so only a unit-vector product is left.\n2. Use the cycle: $\\hat i \\times \\hat j = \\hat k$, so $\\vec v\\times\\vec B = 10^6\\,\\hat k$.\n3. Multiply by the charge: $\\vec F = 1.6\\times10^{-19}\\times10^6\\,\\hat k = 1.6\\times10^{-13}\\,\\hat k$ N.\n4. Read the answer. The force is perpendicular to the velocity, so it bends the path without speeding the proton up. That is why charges circle in a magnetic field. An electron (negative $q$) would be pushed along $-\\hat k$. A proton moving along $\\hat j$, parallel to $\\vec B$, would feel no force at all, since $\\hat j\\times\\hat j = \\vec 0$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (CBSE style).** $|\\vec a| = 2$, $|\\vec b| = 3$ and the angle between them is $\\frac{\\pi}{6}$. Find $|(\\vec a - 2\\vec b)\\times(3\\vec a + \\vec b)|$.\n\n1. Distribute, keeping every factor in order: $3\\,\\vec a\\times\\vec a + \\vec a\\times\\vec b - 6\\,\\vec b\\times\\vec a - 2\\,\\vec b\\times\\vec b$. *Why:* distributivity works, but only if you never swap the two sides of a $\\times$.\n2. Drop the self-products: $\\vec a\\times\\vec a = \\vec b\\times\\vec b = \\vec 0$.\n3. Turn $\\vec b\\times\\vec a$ into $-\\vec a\\times\\vec b$: $-6\\,\\vec b\\times\\vec a = +6\\,\\vec a\\times\\vec b$. *Why:* now every term is a multiple of the same vector, so they can be added.\n4. Total: $\\vec a\\times\\vec b + 6\\,\\vec a\\times\\vec b = 7\\,(\\vec a\\times\\vec b)$.\n5. $|\\vec a\\times\\vec b| = 2\\cdot3\\cdot\\sin\\frac{\\pi}{6} = 3$, so the answer is $7 \\times 3 = 21$.\n\nEvery product of two combinations of $\\vec a$ and $\\vec b$ collapses to a single multiple of $\\vec a\\times\\vec b$. The multiple is the $2\\times2$ determinant of the coefficients: $\\begin{vmatrix} 1 & -2 \\\\ 3 & 1\\end{vmatrix} = 1 + 6 = 7$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 6 (NCERT/JEE classic).** Given $\\vec a\\times\\vec b = \\vec c\\times\\vec d$ and $\\vec a\\times\\vec c = \\vec b\\times\\vec d$, show that $\\vec a - \\vec d$ is parallel to $\\vec b - \\vec c$ (assuming both are non-zero).\n\n1. **Aim.** Parallel means the cross product is zero, so the goal is $(\\vec a - \\vec d)\\times(\\vec b - \\vec c) = \\vec 0$. *Why:* property 3 turns a geometric claim (parallel) into an algebraic one (a product equals $\\vec 0$).\n2. **Expand.** $(\\vec a - \\vec d)\\times(\\vec b - \\vec c) = \\vec a\\times\\vec b - \\vec a\\times\\vec c - \\vec d\\times\\vec b + \\vec d\\times\\vec c$.\n3. **Match the given forms.** $-\\vec d\\times\\vec b = +\\vec b\\times\\vec d$ and $\\vec d\\times\\vec c = -\\vec c\\times\\vec d$. So the expression is $(\\vec a\\times\\vec b - \\vec c\\times\\vec d) - (\\vec a\\times\\vec c - \\vec b\\times\\vec d)$. *Why:* anticommutativity rewrites each term so it matches one of the given equations.\n4. **Use the data.** Each bracket is $\\vec 0$, so the product is $\\vec 0$, and $\\vec a - \\vec d \\parallel \\vec b - \\vec c$.",
+      type: "worked-example",
+      id: "va4-2-we6",
+      title: "Worked example 6 (NCERT/JEE classic)",
+      problem:
+        "Given $\\vec a\\times\\vec b = \\vec c\\times\\vec d$ and $\\vec a\\times\\vec c = \\vec b\\times\\vec d$, show that $\\vec a - \\vec d$ is parallel to $\\vec b - \\vec c$ (assuming both are non-zero).",
+      steps: [
+        {
+          text: "**Aim.** Parallel means the cross product is zero, so the goal is $(\\vec a - \\vec d)\\times(\\vec b - \\vec c) = \\vec 0$. *Why:* property 3 turns a geometric claim (parallel) into an algebraic one (a product equals $\\vec 0$).",
+        },
+        {
+          text: "**Expand.** $(\\vec a - \\vec d)\\times(\\vec b - \\vec c) = \\vec a\\times\\vec b - \\vec a\\times\\vec c - \\vec d\\times\\vec b + \\vec d\\times\\vec c$.",
+        },
+        {
+          text: "**Match the given forms.** $-\\vec d\\times\\vec b = +\\vec b\\times\\vec d$ and $\\vec d\\times\\vec c = -\\vec c\\times\\vec d$. So the expression is $(\\vec a\\times\\vec b - \\vec c\\times\\vec d) - (\\vec a\\times\\vec c - \\vec b\\times\\vec d)$. *Why:* anticommutativity rewrites each term so it matches one of the given equations.",
+        },
+        {
+          text: "**Use the data.** Each bracket is $\\vec 0$, so the product is $\\vec 0$, and $\\vec a - \\vec d \\parallel \\vec b - \\vec c$.",
+        },
+      ],
+      answer: "$(\\vec a - \\vec d)\\times(\\vec b - \\vec c) = \\vec 0$, so $\\vec a - \\vec d \\parallel \\vec b - \\vec c$.",
     },
     {
       type: "callout",
@@ -450,6 +594,7 @@ const lesson02: LessonSeed = {
       content:
         "You cannot cancel $\\vec a$ from a cross product. Take $\\vec a = \\hat i$, $\\vec b = \\hat j$, $\\vec c = \\hat j + \\hat i$. Then $\\vec a \\times \\vec c = \\hat i\\times\\hat j + \\hat i\\times\\hat i = \\hat k = \\vec a \\times \\vec b$, yet $\\vec b \\neq \\vec c$.\n\nWhat the equation really says: $\\vec a \\times (\\vec b - \\vec c) = \\vec 0$, so (for $\\vec a \\neq \\vec 0$) $\\vec b - \\vec c$ is **parallel to** $\\vec a$. Any part of $\\vec b$ along $\\vec a$ is invisible to the cross product, because it adds no area.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va4-2-q7",
@@ -515,6 +660,7 @@ const lesson03: LessonSeed = {
       content:
         "The definition $|\\vec a||\\vec b|\\sin\\theta\\,\\hat n$ is great for understanding and terrible for computing: for $\\vec a = 2\\hat i + 3\\hat j - \\hat k$ you do not know $\\theta$ or $\\hat n$ in advance. The fix is the same trick that gave the component dot product: write both vectors in components, distribute, and let the unit-vector table do the work.",
     },
+    { type: "heading", text: "Deriving the component formula" },
     {
       type: "text",
       content: "Let $\\vec a = a_1\\hat i + a_2\\hat j + a_3\\hat k$ and $\\vec b = b_1\\hat i + b_2\\hat j + b_3\\hat k$. Distributing gives nine terms:",
@@ -552,6 +698,7 @@ const lesson03: LessonSeed = {
       content:
         "Look at the pattern. The $\\hat i$ component uses only the $y$ and $z$ parts (the two directions other than $x$), in the cyclic order $2,3$ minus $3,2$. The $\\hat j$ component follows the cycle $3,1$ minus $1,3$. The $\\hat k$ component: $1,2$ minus $2,1$. Every component is \"next times next-next, minus the reverse\".",
     },
+    { type: "heading", text: "The determinant layout" },
     {
       type: "text",
       content: "The same formula is produced by expanding a $3\\times3$ determinant along its first row:",
@@ -592,30 +739,105 @@ const lesson03: LessonSeed = {
       content:
         "The result must be perpendicular to both inputs, so $(\\vec a \\times \\vec b)\\cdot\\vec a = 0$ and $(\\vec a \\times \\vec b)\\cdot\\vec b = 0$. Two quick dot products catch nearly every sign slip.",
     },
+    { type: "heading", text: "Worked examples: computing cross products" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** $\\vec a = 2\\hat i + 3\\hat j - \\hat k$, $\\vec b = \\hat i - \\hat j + 2\\hat k$.\n\n1. $\\hat i$: $a_2b_3 - a_3b_2 = (3)(2) - (-1)(-1) = 6 - 1 = 5$.\n2. $\\hat j$: $-(a_1b_3 - a_3b_1) = -\\big((2)(2) - (-1)(1)\\big) = -(4 + 1) = -5$.\n3. $\\hat k$: $a_1b_2 - a_2b_1 = (2)(-1) - (3)(1) = -2 - 3 = -5$.\n4. So $\\vec a \\times \\vec b = 5\\hat i - 5\\hat j - 5\\hat k$.\n5. Check: $\\cdot\\,\\vec a = 10 - 15 + 5 = 0$ and $\\cdot\\,\\vec b = 5 + 5 - 10 = 0$. Both zero, so the answer is perpendicular to both.",
+      type: "worked-example",
+      id: "va4-3-we1",
+      title: "Worked example 1",
+      problem: "$\\vec a = 2\\hat i + 3\\hat j - \\hat k$, $\\vec b = \\hat i - \\hat j + 2\\hat k$. Find $\\vec a \\times \\vec b$ and check it.",
+      steps: [
+        { text: "$\\hat i$: $a_2b_3 - a_3b_2 = (3)(2) - (-1)(-1) = 6 - 1 = 5$." },
+        { text: "$\\hat j$: $-(a_1b_3 - a_3b_1) = -\\big((2)(2) - (-1)(1)\\big) = -(4 + 1) = -5$." },
+        { text: "$\\hat k$: $a_1b_2 - a_2b_1 = (2)(-1) - (3)(1) = -2 - 3 = -5$." },
+        { text: "So $\\vec a \\times \\vec b = 5\\hat i - 5\\hat j - 5\\hat k$." },
+        {
+          text: "Check: $\\cdot\\,\\vec a = 10 - 15 + 5 = 0$ and $\\cdot\\,\\vec b = 5 + 5 - 10 = 0$. Both zero, so the answer is perpendicular to both.",
+        },
+      ],
+      answer: "$\\vec a \\times \\vec b = 5\\hat i - 5\\hat j - 5\\hat k$",
+    },
+    {
+      type: "worked-example",
+      id: "va4-3-we2",
+      title: "Worked example 2",
+      problem: "$\\vec a = \\hat i + 2\\hat j + 3\\hat k$, $\\vec b = 4\\hat i + 5\\hat j + 6\\hat k$. Find $\\vec a \\times \\vec b$ and check it.",
+      steps: [
+        { text: "$\\hat i$: $(2)(6) - (3)(5) = 12 - 15 = -3$." },
+        { text: "$\\hat j$: $-\\big((1)(6) - (3)(4)\\big) = -(6 - 12) = 6$." },
+        { text: "$\\hat k$: $(1)(5) - (2)(4) = 5 - 8 = -3$." },
+        { text: "So $\\vec a \\times \\vec b = -3\\hat i + 6\\hat j - 3\\hat k$." },
+        { text: "Check: $\\cdot\\,\\vec a = -3 + 12 - 9 = 0$ and $\\cdot\\,\\vec b = -12 + 30 - 18 = 0$." },
+        {
+          text: "Notice the $\\hat j$ term: the inner bracket was $-6$, and the minus sign in front turned it into $+6$. With the wrong sign you would get $-6$, and the check $\\cdot\\,\\vec a = -3 - 12 - 9 = -24$ would fail loudly.",
+        },
+      ],
+      answer: "$\\vec a \\times \\vec b = -3\\hat i + 6\\hat j - 3\\hat k$",
+    },
+    {
+      type: "worked-example",
+      id: "va4-3-we3",
+      title: "Worked example 3 (missing components)",
+      problem:
+        "$\\vec a = 3\\hat i - \\hat k$, $\\vec b = \\hat j + 2\\hat k$. Write the zeros in explicitly: $\\vec a = (3, 0, -1)$, $\\vec b = (0, 1, 2)$.",
+      steps: [
+        { text: "$\\hat i$: $(0)(2) - (-1)(1) = 1$." },
+        { text: "$\\hat j$: $-\\big((3)(2) - (-1)(0)\\big) = -6$." },
+        { text: "$\\hat k$: $(3)(1) - (0)(0) = 3$." },
+        { text: "So $\\vec a \\times \\vec b = \\hat i - 6\\hat j + 3\\hat k$." },
+        { text: "Check: $\\cdot\\,\\vec a = 3 + 0 - 3 = 0$ and $\\cdot\\,\\vec b = 0 - 6 + 6 = 0$." },
+      ],
+      answer: "$\\vec a \\times \\vec b = \\hat i - 6\\hat j + 3\\hat k$",
+    },
+    {
+      type: "worked-example",
+      id: "va4-3-we4",
+      title: "Worked example 4 (a spinning turntable)",
+      problem:
+        "A body spinning with angular velocity $\\vec\\omega$ moves each of its points with velocity $\\vec v = \\vec\\omega\\times\\vec r$. A turntable spins about the vertical axis with $\\vec\\omega = 2\\hat k$ rad/s. Find the velocity of a point at $\\vec r = 3\\hat i + 4\\hat j + \\hat k$ m.",
+      steps: [
+        {
+          text: "Write both as triples: $\\vec\\omega = (0, 0, 2)$, $\\vec r = (3, 4, 1)$. *Why:* the zeros are easy to lose if you do not write them.",
+        },
+        { text: "$\\hat i$: $(0)(1) - (2)(4) = -8$." },
+        { text: "$\\hat j$: $-\\big((0)(1) - (2)(3)\\big) = -(-6) = 6$." },
+        { text: "$\\hat k$: $(0)(4) - (0)(3) = 0$." },
+        { text: "So $\\vec v = -8\\hat i + 6\\hat j$ m/s, with speed $\\sqrt{64 + 36} = 10$ m/s." },
+        {
+          text: "**Physics check.** The point is $\\sqrt{3^2 + 4^2} = 5$ m from the axis, and a point turning at $2$ rad/s at radius 5 m moves at $2 \\times 5 = 10$ m/s. The formula agrees. The height $z = 1$ does not matter, and $v_z = 0$ because the turntable spins flat. *Why this check:* the cross product only sees the part of $\\vec r$ perpendicular to $\\vec\\omega$, which is exactly the distance from the axis.",
+        },
+      ],
+      answer: "$\\vec v = -8\\hat i + 6\\hat j$ m/s, speed 10 m/s",
+    },
+    {
+      type: "worked-example",
+      id: "va4-3-we5",
+      title: "Worked example 5 (JEE/CBSE: find the vector)",
+      problem:
+        "$\\vec a = \\hat i + \\hat j + \\hat k$. Find $\\vec b$ with $\\vec a\\times\\vec b = \\hat j - \\hat k$ and $\\vec a\\cdot\\vec b = 3$.",
+      steps: [
+        {
+          text: "**Unknowns.** Let $\\vec b = (x, y, z)$. *Why:* three unknown components need three independent equations.",
+        },
+        {
+          text: "**Cross product in components.** $\\vec a\\times\\vec b = \\big((1)z - (1)y,\\ (1)x - (1)z,\\ (1)y - (1)x\\big) = (z - y,\\ x - z,\\ y - x)$.",
+        },
+        {
+          text: "**Match with $(0, 1, -1)$.** $z - y = 0$, $x - z = 1$, $y - x = -1$. These give only two independent facts: $z = y$ and $x = y + 1$. *Why only two:* $\\vec a\\times\\vec b$ cannot see the part of $\\vec b$ along $\\vec a$ (the cancellation misconception from 4.2), so one more equation is needed.",
+        },
+        {
+          text: "**Use the dot product.** $x + y + z = (y + 1) + y + y = 3y + 1 = 3$, so $y = \\frac23$.",
+        },
+        { text: "**Assemble $\\vec b$.** $y = z = \\frac23$ and $x = \\frac53$, so $\\vec b = \\frac13(5\\hat i + 2\\hat j + 2\\hat k)$." },
+        {
+          text: "**Check.** $\\vec a\\times\\vec b = \\big(\\frac23 - \\frac23,\\ \\frac53 - \\frac23,\\ \\frac23 - \\frac53\\big) = (0, 1, -1)$ and $\\vec a\\cdot\\vec b = \\frac{5 + 2 + 2}{3} = 3$. Both hold.",
+        },
+      ],
+      answer: "$\\vec b = \\frac13(5\\hat i + 2\\hat j + 2\\hat k)$",
     },
     {
       type: "text",
       content:
-        "**Worked example 2.** $\\vec a = \\hat i + 2\\hat j + 3\\hat k$, $\\vec b = 4\\hat i + 5\\hat j + 6\\hat k$.\n\n1. $\\hat i$: $(2)(6) - (3)(5) = 12 - 15 = -3$.\n2. $\\hat j$: $-\\big((1)(6) - (3)(4)\\big) = -(6 - 12) = 6$.\n3. $\\hat k$: $(1)(5) - (2)(4) = 5 - 8 = -3$.\n4. So $\\vec a \\times \\vec b = -3\\hat i + 6\\hat j - 3\\hat k$.\n5. Check: $\\cdot\\,\\vec a = -3 + 12 - 9 = 0$ and $\\cdot\\,\\vec b = -12 + 30 - 18 = 0$.\n\nNotice the $\\hat j$ term: the inner bracket was $-6$, and the minus sign in front turned it into $+6$. With the wrong sign you would get $-6$, and the check $\\cdot\\,\\vec a = -3 - 12 - 9 = -24$ would fail loudly.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 (missing components).** $\\vec a = 3\\hat i - \\hat k$, $\\vec b = \\hat j + 2\\hat k$. Write the zeros in explicitly: $\\vec a = (3, 0, -1)$, $\\vec b = (0, 1, 2)$.\n\n1. $\\hat i$: $(0)(2) - (-1)(1) = 1$.\n2. $\\hat j$: $-\\big((3)(2) - (-1)(0)\\big) = -6$.\n3. $\\hat k$: $(3)(1) - (0)(0) = 3$.\n4. So $\\vec a \\times \\vec b = \\hat i - 6\\hat j + 3\\hat k$.\n5. Check: $\\cdot\\,\\vec a = 3 + 0 - 3 = 0$ and $\\cdot\\,\\vec b = 0 - 6 + 6 = 0$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (a spinning turntable).** A body spinning with angular velocity $\\vec\\omega$ moves each of its points with velocity $\\vec v = \\vec\\omega\\times\\vec r$. A turntable spins about the vertical axis with $\\vec\\omega = 2\\hat k$ rad/s. Find the velocity of a point at $\\vec r = 3\\hat i + 4\\hat j + \\hat k$ m.\n\n1. Write both as triples: $\\vec\\omega = (0, 0, 2)$, $\\vec r = (3, 4, 1)$. *Why:* the zeros are easy to lose if you do not write them.\n2. $\\hat i$: $(0)(1) - (2)(4) = -8$.\n3. $\\hat j$: $-\\big((0)(1) - (2)(3)\\big) = -(-6) = 6$.\n4. $\\hat k$: $(0)(4) - (0)(3) = 0$.\n5. So $\\vec v = -8\\hat i + 6\\hat j$ m/s, with speed $\\sqrt{64 + 36} = 10$ m/s.\n6. **Physics check.** The point is $\\sqrt{3^2 + 4^2} = 5$ m from the axis, and a point turning at $2$ rad/s at radius 5 m moves at $2 \\times 5 = 10$ m/s. The formula agrees. The height $z = 1$ does not matter, and $v_z = 0$ because the turntable spins flat. *Why this check:* the cross product only sees the part of $\\vec r$ perpendicular to $\\vec\\omega$, which is exactly the distance from the axis.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (JEE/CBSE: find the vector).** $\\vec a = \\hat i + \\hat j + \\hat k$. Find $\\vec b$ with $\\vec a\\times\\vec b = \\hat j - \\hat k$ and $\\vec a\\cdot\\vec b = 3$.\n\n1. **Unknowns.** Let $\\vec b = (x, y, z)$. *Why:* three unknown components need three independent equations.\n2. **Cross product in components.** $\\vec a\\times\\vec b = \\big((1)z - (1)y,\\ (1)x - (1)z,\\ (1)y - (1)x\\big) = (z - y,\\ x - z,\\ y - x)$.\n3. **Match with $(0, 1, -1)$.** $z - y = 0$, $x - z = 1$, $y - x = -1$. These give only two independent facts: $z = y$ and $x = y + 1$. *Why only two:* $\\vec a\\times\\vec b$ cannot see the part of $\\vec b$ along $\\vec a$ (the cancellation misconception from 4.2), so one more equation is needed.\n4. **Use the dot product.** $x + y + z = (y + 1) + y + y = 3y + 1 = 3$, so $y = \\frac23$.\n5. **Answer.** $\\vec b = \\frac13(5\\hat i + 2\\hat j + 2\\hat k)$.\n6. **Check.** $\\vec a\\times\\vec b = \\big(\\frac23 - \\frac23,\\ \\frac53 - \\frac23,\\ \\frac23 - \\frac53\\big) = (0, 1, -1)$ and $\\vec a\\cdot\\vec b = \\frac{5 + 2 + 2}{3} = 3$. Both hold.\n\nA consistency test first: a given $\\vec a\\times\\vec b$ must be perpendicular to $\\vec a$. Here $(1,1,1)\\cdot(0,1,-1) = 0$, so a solution can exist. If that dot product were not 0, no $\\vec b$ would work.",
+        "A consistency test first: a given $\\vec a\\times\\vec b$ must be perpendicular to $\\vec a$. Here $(1,1,1)\\cdot(0,1,-1) = 0$, so a solution can exist. If that dot product were not 0, no $\\vec b$ would work.",
     },
     {
       type: "interactive",
@@ -634,6 +856,7 @@ const lesson03: LessonSeed = {
           "This starts at worked example 1. Change the components of a, predict the cross product with the formula, then compare with the readout.",
       },
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va4-3-q1",
@@ -773,21 +996,64 @@ const lesson04: LessonSeed = {
           "The shaded parallelogram's area is the length of the normal arrow. The readout also shows the triangle, which is half. Change a and watch both update together.",
       },
     },
+    { type: "heading", text: "Areas from sides and from vertices" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (parallelogram from sides).** Sides $\\vec a = \\hat i + 2\\hat j + 2\\hat k$ and $\\vec b = 2\\hat i + \\hat j - 2\\hat k$.\n\n1. $\\hat i$: $(2)(-2) - (2)(1) = -6$. $\\hat j$: $-\\big((1)(-2) - (2)(2)\\big) = 6$. $\\hat k$: $(1)(1) - (2)(2) = -3$.\n2. $\\vec a \\times \\vec b = -6\\hat i + 6\\hat j - 3\\hat k$ (check: $\\cdot\\,\\vec a = -6 + 12 - 6 = 0$).\n3. Area $= \\sqrt{36 + 36 + 9} = \\sqrt{81} = 9$.\n\nThis is the starting picture in the interactive above.",
+      type: "worked-example",
+      id: "va4-4-we1",
+      title: "Worked example 1 (parallelogram from sides)",
+      problem: "Find the area of the parallelogram with adjacent sides $\\vec a = \\hat i + 2\\hat j + 2\\hat k$ and $\\vec b = 2\\hat i + \\hat j - 2\\hat k$.",
+      steps: [
+        {
+          text: "$\\hat i$: $(2)(-2) - (2)(1) = -6$. $\\hat j$: $-\\big((1)(-2) - (2)(2)\\big) = 6$. $\\hat k$: $(1)(1) - (2)(2) = -3$.",
+        },
+        { text: "$\\vec a \\times \\vec b = -6\\hat i + 6\\hat j - 3\\hat k$ (check: $\\cdot\\,\\vec a = -6 + 12 - 6 = 0$)." },
+        { text: "Area $= \\sqrt{36 + 36 + 9} = \\sqrt{81} = 9$." },
+      ],
+      answer: "Area $= 9$",
     },
     {
       type: "text",
-      content:
-        "**Worked example 2 (triangle from vertices).** $A(1, 1, 2)$, $B(2, 3, 5)$, $C(1, 5, 5)$.\n\n1. $\\overrightarrow{AB} = (1, 2, 3)$, $\\overrightarrow{AC} = (0, 4, 3)$.\n2. $\\hat i$: $(2)(3) - (3)(4) = -6$. $\\hat j$: $-\\big((1)(3) - (3)(0)\\big) = -3$. $\\hat k$: $(1)(4) - (2)(0) = 4$.\n3. $\\overrightarrow{AB} \\times \\overrightarrow{AC} = (-6, -3, 4)$, with length $\\sqrt{36 + 9 + 16} = \\sqrt{61}$.\n4. Area $= \\tfrac12\\sqrt{61}$.",
+      content: "This is the starting picture in the interactive above.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (a shade sail).** A triangular shade sail over a school courtyard is tied at $A(1, 0, 3)$, $B(5, 0, 3)$ and $C(1, 3, 9)$, in metres. The fabric costs ₹250 per m². Roughly how much fabric money is needed?\n\n1. **Sides from one corner.** $\\overrightarrow{AB} = (4, 0, 0)$, $\\overrightarrow{AC} = (0, 3, 6)$. *Why:* the sail is tilted in 3D, so there is no easy base and height to measure. Two sides from a common corner are all the cross product needs.\n2. **Cross.** $\\hat i$: $(0)(6) - (0)(3) = 0$. $\\hat j$: $-\\big((4)(6) - (0)(0)\\big) = -24$. $\\hat k$: $(4)(3) - (0)(0) = 12$. So $\\overrightarrow{AB}\\times\\overrightarrow{AC} = (0, -24, 12)$.\n3. **Length.** $\\sqrt{0 + 576 + 144} = \\sqrt{720} = 12\\sqrt5$.\n4. **Halve for the triangle.** Area $= 6\\sqrt5 \\approx 13.42$ m².\n5. **Cost.** $13.42 \\times 250 \\approx$ ₹3354.\n6. **Cross-check.** $\\overrightarrow{AB}\\cdot\\overrightarrow{AC} = 0$, so the corner at $A$ is a right angle and the area is $\\tfrac12 \\cdot 4 \\cdot |\\overrightarrow{AC}| = \\tfrac12\\cdot4\\cdot3\\sqrt5 = 6\\sqrt5$. It agrees. Measuring only the sail's shadow on the ground, $\\tfrac12\\cdot4\\cdot3 = 6$ m², would badly underestimate the fabric, because the sail rises steeply toward $C$.",
+      type: "worked-example",
+      id: "va4-4-we2",
+      title: "Worked example 2 (triangle from vertices)",
+      problem: "Find the area of the triangle with vertices $A(1, 1, 2)$, $B(2, 3, 5)$, $C(1, 5, 5)$.",
+      steps: [
+        { text: "$\\overrightarrow{AB} = (1, 2, 3)$, $\\overrightarrow{AC} = (0, 4, 3)$." },
+        {
+          text: "$\\hat i$: $(2)(3) - (3)(4) = -6$. $\\hat j$: $-\\big((1)(3) - (3)(0)\\big) = -3$. $\\hat k$: $(1)(4) - (2)(0) = 4$.",
+        },
+        {
+          text: "$\\overrightarrow{AB} \\times \\overrightarrow{AC} = (-6, -3, 4)$, with length $\\sqrt{36 + 9 + 16} = \\sqrt{61}$.",
+        },
+      ],
+      answer: "Area $= \\tfrac12\\sqrt{61}$.",
     },
+    {
+      type: "worked-example",
+      id: "va4-4-we3",
+      title: "Worked example 3 (a shade sail)",
+      problem:
+        "A triangular shade sail over a school courtyard is tied at $A(1, 0, 3)$, $B(5, 0, 3)$ and $C(1, 3, 9)$, in metres. The fabric costs ₹250 per m². Roughly how much fabric money is needed?",
+      steps: [
+        {
+          text: "**Sides from one corner.** $\\overrightarrow{AB} = (4, 0, 0)$, $\\overrightarrow{AC} = (0, 3, 6)$. *Why:* the sail is tilted in 3D, so there is no easy base and height to measure. Two sides from a common corner are all the cross product needs.",
+        },
+        {
+          text: "**Cross.** $\\hat i$: $(0)(6) - (0)(3) = 0$. $\\hat j$: $-\\big((4)(6) - (0)(0)\\big) = -24$. $\\hat k$: $(4)(3) - (0)(0) = 12$. So $\\overrightarrow{AB}\\times\\overrightarrow{AC} = (0, -24, 12)$.",
+        },
+        { text: "**Length.** $\\sqrt{0 + 576 + 144} = \\sqrt{720} = 12\\sqrt5$." },
+        { text: "**Halve for the triangle.** Area $= 6\\sqrt5 \\approx 13.42$ m²." },
+        { text: "**Cost.** $13.42 \\times 250 \\approx$ ₹3354." },
+        {
+          text: "**Cross-check.** $\\overrightarrow{AB}\\cdot\\overrightarrow{AC} = 0$, so the corner at $A$ is a right angle and the area is $\\tfrac12 \\cdot 4 \\cdot |\\overrightarrow{AC}| = \\tfrac12\\cdot4\\cdot3\\sqrt5 = 6\\sqrt5$. It agrees. Measuring only the sail's shadow on the ground, $\\tfrac12\\cdot4\\cdot3 = 6$ m², would badly underestimate the fabric, because the sail rises steeply toward $C$.",
+        },
+      ],
+      answer: "Area $6\\sqrt5 \\approx 13.42$ m², costing about ₹3354",
+    },
+    { type: "heading", text: "Area from the diagonals" },
     {
       type: "text",
       content:
@@ -815,20 +1081,68 @@ const lesson04: LessonSeed = {
         "The half is not optional. The diagonals' cross product is **twice** $\\vec a \\times \\vec b$, as the expansion shows. Forgetting the $\\tfrac12$ doubles the area. Remember which formula has the half by the derivation, not by rote: sides give $|\\vec a\\times\\vec b|$ directly; diagonals give $2(\\vec a\\times\\vec b)$, so you halve.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (from diagonals).** $\\vec d_1 = 3\\hat i + \\hat j - 2\\hat k$, $\\vec d_2 = \\hat i - 3\\hat j + 4\\hat k$.\n\n1. $\\hat i$: $(1)(4) - (-2)(-3) = 4 - 6 = -2$.\n2. $\\hat j$: $-\\big((3)(4) - (-2)(1)\\big) = -(12 + 2) = -14$.\n3. $\\hat k$: $(3)(-3) - (1)(1) = -10$.\n4. $|\\vec d_1 \\times \\vec d_2| = \\sqrt{4 + 196 + 100} = \\sqrt{300} = 10\\sqrt3$.\n5. Area $= \\tfrac12 \\cdot 10\\sqrt3 = 5\\sqrt3$.",
+      type: "worked-example",
+      id: "va4-4-we4",
+      title: "Worked example 4 (from diagonals)",
+      problem: "A parallelogram has diagonals $\\vec d_1 = 3\\hat i + \\hat j - 2\\hat k$ and $\\vec d_2 = \\hat i - 3\\hat j + 4\\hat k$. Find its area.",
+      steps: [
+        { text: "$\\hat i$: $(1)(4) - (-2)(-3) = 4 - 6 = -2$." },
+        { text: "$\\hat j$: $-\\big((3)(4) - (-2)(1)\\big) = -(12 + 2) = -14$." },
+        { text: "$\\hat k$: $(3)(-3) - (1)(1) = -10$." },
+        { text: "$|\\vec d_1 \\times \\vec d_2| = \\sqrt{4 + 196 + 100} = \\sqrt{300} = 10\\sqrt3$." },
+      ],
+      answer: "Area $= \\tfrac12|\\vec d_1 \\times \\vec d_2| = \\tfrac12 \\cdot 10\\sqrt3 = 5\\sqrt3$.",
+    },
+    { type: "heading", text: "Areas without coordinates" },
+    {
+      type: "worked-example",
+      id: "va4-4-we5",
+      title: "Worked example 5 (JEE style: sides built from other vectors)",
+      problem:
+        "$\\vec a$ and $\\vec b$ are unit vectors at $30^\\circ$ to each other. Find the area of the parallelogram with adjacent sides $\\vec p = \\vec a + 2\\vec b$ and $\\vec q = 2\\vec a + \\vec b$.",
+      steps: [
+        { text: "**Area is $|\\vec p\\times\\vec q|$.** *Why:* we are given sides, so no half is needed." },
+        {
+          text: "**Expand in order.** $\\vec p\\times\\vec q = 2\\,\\vec a\\times\\vec a + \\vec a\\times\\vec b + 4\\,\\vec b\\times\\vec a + 2\\,\\vec b\\times\\vec b$.",
+        },
+        {
+          text: "**Simplify.** Self-products vanish and $4\\,\\vec b\\times\\vec a = -4\\,\\vec a\\times\\vec b$, so $\\vec p\\times\\vec q = -3\\,(\\vec a\\times\\vec b)$. (Coefficient check: $\\begin{vmatrix}1 & 2\\\\ 2 & 1\\end{vmatrix} = 1 - 4 = -3$.)",
+        },
+        { text: "**Size of $\\vec a\\times\\vec b$.** $1\\cdot1\\cdot\\sin30^\\circ = \\frac12$." },
+        {
+          text: "**Area.** $|-3| \\cdot \\frac12 = \\frac32$. *Why the absolute value:* the minus sign only says the new parallelogram faces the other way; area is a length and cannot be negative.",
+        },
+      ],
+      answer: "Area $= \\frac32$",
+    },
+    {
+      type: "worked-example",
+      id: "va4-4-we6",
+      title: "Worked example 6 (triangle from position vectors)",
+      problem:
+        "Let $A$, $B$, $C$ have position vectors $\\vec a$, $\\vec b$, $\\vec c$. Show that the area of triangle $ABC$ is $\\tfrac12|\\vec a\\times\\vec b + \\vec b\\times\\vec c + \\vec c\\times\\vec a|$.",
+      steps: [
+        {
+          text: "Start from the vertex formula: $\\overrightarrow{AB}\\times\\overrightarrow{AC} = (\\vec b - \\vec a)\\times(\\vec c - \\vec a)$.",
+        },
+        {
+          text: "Distribute, keeping the order: $\\vec b\\times\\vec c - \\vec b\\times\\vec a - \\vec a\\times\\vec c + \\vec a\\times\\vec a$.",
+        },
+        {
+          text: "$\\vec a\\times\\vec a = \\vec 0$; $-\\vec b\\times\\vec a = \\vec a\\times\\vec b$; $-\\vec a\\times\\vec c = \\vec c\\times\\vec a$.",
+        },
+        {
+          text: "So $\\overrightarrow{AB}\\times\\overrightarrow{AC} = \\vec a\\times\\vec b + \\vec b\\times\\vec c + \\vec c\\times\\vec a$, and the area is half its length.",
+        },
+      ],
+      answer: "Area of $ABC = \\tfrac12|\\vec a\\times\\vec b + \\vec b\\times\\vec c + \\vec c\\times\\vec a|$",
     },
     {
       type: "text",
       content:
-        "**Worked example 5 (JEE style: sides built from other vectors).** $\\vec a$ and $\\vec b$ are unit vectors at $30^\\circ$ to each other. Find the area of the parallelogram with adjacent sides $\\vec p = \\vec a + 2\\vec b$ and $\\vec q = 2\\vec a + \\vec b$.\n\n1. **Area is $|\\vec p\\times\\vec q|$.** *Why:* we are given sides, so no half is needed.\n2. **Expand in order.** $\\vec p\\times\\vec q = 2\\,\\vec a\\times\\vec a + \\vec a\\times\\vec b + 4\\,\\vec b\\times\\vec a + 2\\,\\vec b\\times\\vec b$.\n3. **Simplify.** Self-products vanish and $4\\,\\vec b\\times\\vec a = -4\\,\\vec a\\times\\vec b$, so $\\vec p\\times\\vec q = -3\\,(\\vec a\\times\\vec b)$. (Coefficient check: $\\begin{vmatrix}1 & 2\\\\ 2 & 1\\end{vmatrix} = 1 - 4 = -3$.)\n4. **Size of $\\vec a\\times\\vec b$.** $1\\cdot1\\cdot\\sin30^\\circ = \\frac12$.\n5. **Area.** $|-3| \\cdot \\frac12 = \\frac32$. *Why the absolute value:* the minus sign only says the new parallelogram faces the other way; area is a length and cannot be negative.",
+        "The cyclic pattern $a\\to b\\to c\\to a$ is easy to remember, and it gives a collinearity test straight from position vectors: $A$, $B$, $C$ are collinear exactly when $\\vec a\\times\\vec b + \\vec b\\times\\vec c + \\vec c\\times\\vec a = \\vec 0$.",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 6 (triangle from position vectors).** Let $A$, $B$, $C$ have position vectors $\\vec a$, $\\vec b$, $\\vec c$. Show that the area of triangle $ABC$ is $\\tfrac12|\\vec a\\times\\vec b + \\vec b\\times\\vec c + \\vec c\\times\\vec a|$.\n\n1. Start from the vertex formula: $\\overrightarrow{AB}\\times\\overrightarrow{AC} = (\\vec b - \\vec a)\\times(\\vec c - \\vec a)$.\n2. Distribute, keeping the order: $\\vec b\\times\\vec c - \\vec b\\times\\vec a - \\vec a\\times\\vec c + \\vec a\\times\\vec a$.\n3. $\\vec a\\times\\vec a = \\vec 0$; $-\\vec b\\times\\vec a = \\vec a\\times\\vec b$; $-\\vec a\\times\\vec c = \\vec c\\times\\vec a$.\n4. So $\\overrightarrow{AB}\\times\\overrightarrow{AC} = \\vec a\\times\\vec b + \\vec b\\times\\vec c + \\vec c\\times\\vec a$, and the area is half its length.\n\nThe cyclic pattern $a\\to b\\to c\\to a$ is easy to remember, and it gives a collinearity test straight from position vectors: $A$, $B$, $C$ are collinear exactly when $\\vec a\\times\\vec b + \\vec b\\times\\vec c + \\vec c\\times\\vec a = \\vec 0$.",
-    },
+    { type: "heading", text: "Zero area means collinear points" },
     {
       type: "text",
       content:
@@ -836,9 +1150,17 @@ const lesson04: LessonSeed = {
     },
     { type: "math", latex: "A, B, C \\text{ collinear} \\iff \\overrightarrow{AB} \\times \\overrightarrow{AC} = \\vec 0" },
     {
-      type: "text",
-      content:
-        "**Worked example 7.** Are $A(2, -1, 3)$, $B(3, 1, 2)$, $C(5, 5, 0)$ collinear?\n\n1. $\\overrightarrow{AB} = (1, 2, -1)$, $\\overrightarrow{AC} = (3, 6, -3)$.\n2. $\\overrightarrow{AC} = 3\\,\\overrightarrow{AB}$, so the cross product is $\\vec 0$ (the formula agrees: $(2\\cdot(-3) - (-1)\\cdot6,\\ (-1)\\cdot3 - 1\\cdot(-3),\\ 1\\cdot6 - 2\\cdot3) = (0, 0, 0)$).\n3. Zero area, so yes: the three points are collinear.",
+      type: "worked-example",
+      id: "va4-4-we7",
+      title: "Worked example 7",
+      problem: "Are $A(2, -1, 3)$, $B(3, 1, 2)$, $C(5, 5, 0)$ collinear?",
+      steps: [
+        { text: "$\\overrightarrow{AB} = (1, 2, -1)$, $\\overrightarrow{AC} = (3, 6, -3)$." },
+        {
+          text: "$\\overrightarrow{AC} = 3\\,\\overrightarrow{AB}$, so the cross product is $\\vec 0$ (the formula agrees: $(2\\cdot(-3) - (-1)\\cdot6,\\ (-1)\\cdot3 - 1\\cdot(-3),\\ 1\\cdot6 - 2\\cdot3) = (0, 0, 0)$).",
+        },
+      ],
+      answer: "Zero area, so yes: the three points are collinear.",
     },
     {
       type: "table",
@@ -851,6 +1173,7 @@ const lesson04: LessonSeed = {
         ["Diagonals $\\vec d_1$, $\\vec d_2$", "Parallelogram", "$\\tfrac12|\\vec d_1 \\times \\vec d_2|$"],
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va4-4-q1",
@@ -965,6 +1288,7 @@ const lesson05: LessonSeed = {
       content:
         "The cross product has two halves, a length and a direction. This lesson uses each half on its own: the direction gives **normals**, the length gives **sines**, and the whole vector gives **torque**.",
     },
+    { type: "heading", text: "Normals to two vectors" },
     {
       type: "text",
       content:
@@ -982,20 +1306,72 @@ const lesson05: LessonSeed = {
         "A plane has two faces. Stand on the floor: straight up and straight down are both perpendicular to it. When a question asks for \"a unit vector perpendicular to both $\\vec a$ and $\\vec b$\", both $\\pm\\frac{\\vec a\\times\\vec b}{|\\vec a\\times\\vec b|}$ are correct; when it asks for \"the unit vectors\", give both. Only a stated orientation (\"with the right-hand rule from $\\vec a$ to $\\vec b$\") picks one.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** $\\vec a = 3\\hat i + 2\\hat j + 2\\hat k$, $\\vec b = \\hat i + 2\\hat j - 2\\hat k$. Find the unit vectors perpendicular to both $\\vec a + \\vec b$ and $\\vec a - \\vec b$.\n\n1. $\\vec a + \\vec b = (4, 4, 0)$, $\\vec a - \\vec b = (2, 0, 4)$.\n2. Cross: $\\hat i$: $(4)(4) - (0)(0) = 16$. $\\hat j$: $-\\big((4)(4) - (0)(2)\\big) = -16$. $\\hat k$: $(4)(0) - (4)(2) = -8$. So $(16, -16, -8)$.\n3. Length: $\\sqrt{256 + 256 + 64} = \\sqrt{576} = 24$.\n4. Unit normals: $\\pm\\frac{1}{24}(16, -16, -8) = \\pm\\frac13(2\\hat i - 2\\hat j - \\hat k)$.\n5. Check: $(2, -2, -1)\\cdot(4, 4, 0) = 0$ and $(2, -2, -1)\\cdot(2, 0, 4) = 4 - 4 = 0$.",
+      type: "worked-example",
+      id: "va4-5-we1",
+      title: "Worked example 1",
+      problem:
+        "$\\vec a = 3\\hat i + 2\\hat j + 2\\hat k$, $\\vec b = \\hat i + 2\\hat j - 2\\hat k$. Find the unit vectors perpendicular to both $\\vec a + \\vec b$ and $\\vec a - \\vec b$.",
+      steps: [
+        { text: "$\\vec a + \\vec b = (4, 4, 0)$, $\\vec a - \\vec b = (2, 0, 4)$." },
+        {
+          text: "Cross: $\\hat i$: $(4)(4) - (0)(0) = 16$. $\\hat j$: $-\\big((4)(4) - (0)(2)\\big) = -16$. $\\hat k$: $(4)(0) - (4)(2) = -8$. So $(16, -16, -8)$.",
+        },
+        { text: "Length: $\\sqrt{256 + 256 + 64} = \\sqrt{576} = 24$." },
+        { text: "Unit normals: $\\pm\\frac{1}{24}(16, -16, -8) = \\pm\\frac13(2\\hat i - 2\\hat j - \\hat k)$." },
+        { text: "Check: $(2, -2, -1)\\cdot(4, 4, 0) = 0$ and $(2, -2, -1)\\cdot(2, 0, 4) = 4 - 4 = 0$." },
+      ],
+      answer: "$\\pm\\frac13(2\\hat i - 2\\hat j - \\hat k)$",
+    },
+    {
+      type: "worked-example",
+      id: "va4-5-we2",
+      title: "Worked example 2 (a vector of given length)",
+      problem:
+        "Find the vectors of magnitude 6 perpendicular to both $\\vec a = 2\\hat i - 2\\hat j + \\hat k$ and $\\vec b = \\hat i + 2\\hat j + 2\\hat k$.",
+      steps: [
+        {
+          text: "$\\hat i$: $(-2)(2) - (1)(2) = -6$. $\\hat j$: $-\\big((2)(2) - (1)(1)\\big) = -3$. $\\hat k$: $(2)(2) - (-2)(1) = 6$. So $\\vec a\\times\\vec b = (-6, -3, 6)$.",
+        },
+        { text: "Check: $\\cdot\\,\\vec a = -12 + 6 + 6 = 0$ and $\\cdot\\,\\vec b = -6 - 6 + 12 = 0$." },
+        {
+          text: "Length $\\sqrt{36 + 9 + 36} = 9$, so the unit normals are $\\pm\\frac19(-6, -3, 6) = \\pm\\frac13(-2, -1, 2)$.",
+        },
+        { text: "Scale by 6: $\\pm 2(-2, -1, 2) = \\pm(-4\\hat i - 2\\hat j + 4\\hat k)$." },
+      ],
+      answer: "$\\pm(-4\\hat i - 2\\hat j + 4\\hat k)$",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 (a vector of given length).** Find the vectors of magnitude 6 perpendicular to both $\\vec a = 2\\hat i - 2\\hat j + \\hat k$ and $\\vec b = \\hat i + 2\\hat j + 2\\hat k$.\n\n1. $\\hat i$: $(-2)(2) - (1)(2) = -6$. $\\hat j$: $-\\big((2)(2) - (1)(1)\\big) = -3$. $\\hat k$: $(2)(2) - (-2)(1) = 6$. So $\\vec a\\times\\vec b = (-6, -3, 6)$.\n2. Check: $\\cdot\\,\\vec a = -12 + 6 + 6 = 0$ and $\\cdot\\,\\vec b = -6 - 6 + 12 = 0$.\n3. Length $\\sqrt{36 + 9 + 36} = 9$, so the unit normals are $\\pm\\frac19(-6, -3, 6) = \\pm\\frac13(-2, -1, 2)$.\n4. Scale by 6: $\\pm 2(-2, -1, 2) = \\pm(-4\\hat i - 2\\hat j + 4\\hat k)$.\n\nThe recipe for \"magnitude $k$, perpendicular to both\" is always $\\pm k\\,\\dfrac{\\vec a\\times\\vec b}{|\\vec a\\times\\vec b|}$: find the direction, make it unit, then stretch.",
+        "The recipe for \"magnitude $k$, perpendicular to both\" is always $\\pm k\\,\\dfrac{\\vec a\\times\\vec b}{|\\vec a\\times\\vec b|}$: find the direction, make it unit, then stretch.",
+    },
+    {
+      type: "worked-example",
+      id: "va4-5-we3",
+      title: "Worked example 3 (JEE style: picking the sign)",
+      problem:
+        "Find the vector of magnitude 9 that is perpendicular to both $\\vec a = \\hat i + 2\\hat j$ and $\\vec b = 2\\hat j + \\hat k$ and makes an **acute** angle with the positive $z$-axis.",
+      steps: [
+        {
+          text: "**Direction.** $\\vec a = (1, 2, 0)$, $\\vec b = (0, 2, 1)$. $\\hat i$: $(2)(1) - (0)(2) = 2$. $\\hat j$: $-\\big((1)(1) - (0)(0)\\big) = -1$. $\\hat k$: $(1)(2) - (2)(0) = 2$. So $\\vec a\\times\\vec b = (2, -1, 2)$.",
+        },
+        {
+          text: "**Check.** $(2,-1,2)\\cdot(1,2,0) = 2 - 2 = 0$ and $(2,-1,2)\\cdot(0,2,1) = -2 + 2 = 0$.",
+        },
+        {
+          text: "**Unit, then stretch.** Length $\\sqrt{4 + 1 + 4} = 3$, so the candidates are $\\pm\\frac93(2, -1, 2) = \\pm(6\\hat i - 3\\hat j + 6\\hat k)$.",
+        },
+        {
+          text: "**Pick the sign.** An acute angle with the positive $z$-axis means a positive dot product with $\\hat k$, i.e. a positive $z$-component. *Why:* $\\vec v\\cdot\\hat k = |\\vec v|\\cos\\gamma$, which is positive exactly when the angle $\\gamma$ is acute. Only the plus sign has $z = +6 > 0$.",
+        },
+      ],
+      answer: "$6\\hat i - 3\\hat j + 6\\hat k$.",
     },
     {
       type: "text",
-      content:
-        "**Worked example 3 (JEE style: picking the sign).** Find the vector of magnitude 9 that is perpendicular to both $\\vec a = \\hat i + 2\\hat j$ and $\\vec b = 2\\hat j + \\hat k$ and makes an **acute** angle with the positive $z$-axis.\n\n1. **Direction.** $\\vec a = (1, 2, 0)$, $\\vec b = (0, 2, 1)$. $\\hat i$: $(2)(1) - (0)(2) = 2$. $\\hat j$: $-\\big((1)(1) - (0)(0)\\big) = -1$. $\\hat k$: $(1)(2) - (2)(0) = 2$. So $\\vec a\\times\\vec b = (2, -1, 2)$.\n2. **Check.** $(2,-1,2)\\cdot(1,2,0) = 2 - 2 = 0$ and $(2,-1,2)\\cdot(0,2,1) = -2 + 2 = 0$.\n3. **Unit, then stretch.** Length $\\sqrt{4 + 1 + 4} = 3$, so the candidates are $\\pm\\frac93(2, -1, 2) = \\pm(6\\hat i - 3\\hat j + 6\\hat k)$.\n4. **Pick the sign.** An acute angle with the positive $z$-axis means a positive dot product with $\\hat k$, i.e. a positive $z$-component. *Why:* $\\vec v\\cdot\\hat k = |\\vec v|\\cos\\gamma$, which is positive exactly when the angle $\\gamma$ is acute. Only the plus sign has $z = +6 > 0$.\n5. **Answer.** $6\\hat i - 3\\hat j + 6\\hat k$.\n\nThe cross product finds the line; an extra condition in the question chooses the end.",
+      content: "The cross product finds the line; an extra condition in the question chooses the end.",
     },
+    { type: "heading", text: "Sines and Lagrange's identity" },
     {
       type: "text",
       content:
@@ -1003,9 +1379,18 @@ const lesson05: LessonSeed = {
     },
     { type: "math", latex: "\\sin\\theta = \\frac{|\\vec a \\times \\vec b|}{|\\vec a|\\,|\\vec b|}" },
     {
-      type: "text",
-      content:
-        "**Worked example 4.** Find the angle between $\\vec a = \\hat i + \\hat j$ and $\\vec b = \\hat j + \\hat k$ using the cross product.\n\n1. $\\vec a\\times\\vec b = (1, -1, 1)$, so $|\\vec a\\times\\vec b| = \\sqrt3$.\n2. $|\\vec a||\\vec b| = \\sqrt2\\cdot\\sqrt2 = 2$, so $\\sin\\theta = \\frac{\\sqrt3}{2}$.\n3. That allows **two** angles in $[0, \\pi]$: $\\theta = 60^\\circ$ or $\\theta = 120^\\circ$.\n4. Decide with the dot product: $\\vec a\\cdot\\vec b = 1 > 0$, so the angle is acute. $\\theta = 60^\\circ$.",
+      type: "worked-example",
+      id: "va4-5-we4",
+      title: "Worked example 4",
+      problem:
+        "Find the angle between $\\vec a = \\hat i + \\hat j$ and $\\vec b = \\hat j + \\hat k$ using the cross product.",
+      steps: [
+        { text: "$\\vec a\\times\\vec b = (1, -1, 1)$, so $|\\vec a\\times\\vec b| = \\sqrt3$." },
+        { text: "$|\\vec a||\\vec b| = \\sqrt2\\cdot\\sqrt2 = 2$, so $\\sin\\theta = \\frac{\\sqrt3}{2}$." },
+        { text: "That allows **two** angles in $[0, \\pi]$: $\\theta = 60^\\circ$ or $\\theta = 120^\\circ$." },
+        { text: "Decide with the dot product: $\\vec a\\cdot\\vec b = 1 > 0$, so the angle is acute. $\\theta = 60^\\circ$." },
+      ],
+      answer: "$\\theta = 60^\\circ$",
     },
     {
       type: "callout",
@@ -1036,15 +1421,40 @@ const lesson05: LessonSeed = {
         "The identity above is Pythagoras for the two products: the \"turning\" part and the \"agreeing\" part of $\\vec a$ and $\\vec b$ together make up all of $|\\vec a||\\vec b|$. Use it to get $|\\vec a\\times\\vec b|$ without components.",
     },
     {
+      type: "worked-example",
+      id: "va4-5-we5",
+      title: "Worked example 5",
+      problem: "$|\\vec a| = 2$, $|\\vec b| = 5$ and $\\vec a \\cdot \\vec b = 6$. Find $|\\vec a \\times \\vec b|$.",
+      steps: [
+        {
+          text: "$|\\vec a \\times \\vec b|^2 = |\\vec a|^2|\\vec b|^2 - (\\vec a\\cdot\\vec b)^2 = 4 \\cdot 25 - 36 = 64$.",
+        },
+      ],
+      answer: "$|\\vec a \\times \\vec b| = 8$.",
+    },
+    {
       type: "text",
-      content:
-        "**Worked example 5.** $|\\vec a| = 2$, $|\\vec b| = 5$ and $\\vec a \\cdot \\vec b = 6$. Find $|\\vec a \\times \\vec b|$.\n\n1. $|\\vec a \\times \\vec b|^2 = |\\vec a|^2|\\vec b|^2 - (\\vec a\\cdot\\vec b)^2 = 4 \\cdot 25 - 36 = 64$.\n2. $|\\vec a \\times \\vec b| = 8$.\n\nNo angle, no components, just the identity.",
+      content: "No angle, no components, just the identity.",
+    },
+    {
+      type: "worked-example",
+      id: "va4-5-we6",
+      title: "Worked example 6 (CBSE board favourite)",
+      problem: "$|\\vec a\\times\\vec b|^2 + (\\vec a\\cdot\\vec b)^2 = 144$ and $|\\vec a| = 4$. Find $|\\vec b|$.",
+      steps: [
+        {
+          text: "**Recognise the left side.** By Lagrange's identity it equals $|\\vec a|^2|\\vec b|^2$, whatever the angle. *Why:* the question hides the identity; seeing it is the whole problem.",
+        },
+        { text: "So $16\\,|\\vec b|^2 = 144$, giving $|\\vec b|^2 = 9$." },
+      ],
+      answer: "$|\\vec b| = 3$ (a length is never negative).",
     },
     {
       type: "text",
       content:
-        "**Worked example 6 (CBSE board favourite).** $|\\vec a\\times\\vec b|^2 + (\\vec a\\cdot\\vec b)^2 = 144$ and $|\\vec a| = 4$. Find $|\\vec b|$.\n\n1. **Recognise the left side.** By Lagrange's identity it equals $|\\vec a|^2|\\vec b|^2$, whatever the angle. *Why:* the question hides the identity; seeing it is the whole problem.\n2. So $16\\,|\\vec b|^2 = 144$, giving $|\\vec b|^2 = 9$.\n3. $|\\vec b| = 3$ (a length is never negative).\n\nNotice that the angle between $\\vec a$ and $\\vec b$ could be anything; the sum $\\sin^2\\theta + \\cos^2\\theta = 1$ wipes it out.",
+        "Notice that the angle between $\\vec a$ and $\\vec b$ could be anything; the sum $\\sin^2\\theta + \\cos^2\\theta = 1$ wipes it out.",
     },
+    { type: "heading", text: "Torque as $\\vec r \\times \\vec F$" },
     {
       type: "text",
       content:
@@ -1057,25 +1467,67 @@ const lesson05: LessonSeed = {
         "The size is (lever length) × (force) × $\\sin\\theta$, which is why a longer spanner helps and why pushing along the spanner does nothing. The direction is the axis the bolt turns about, with the right-hand rule giving the sense. Order matters: it is $\\vec r \\times \\vec F$, not $\\vec F \\times \\vec r$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 7.** A spanner lies along $\\vec r = 0.3\\,\\hat i$ m and you push with $\\vec F = 40\\,\\hat j$ N. Then $\\vec\\tau = 0.3 \\cdot 40\\,(\\hat i \\times \\hat j) = 12\\,\\hat k$ N m: 12 N m about the vertical axis, anticlockwise seen from above.",
+      type: "worked-example",
+      id: "va4-5-we9",
+      title: "Worked example 7",
+      problem:
+        "A spanner lies along $\\vec r = 0.3\\,\\hat i$ m and you push with $\\vec F = 40\\,\\hat j$ N. Find the torque.",
+      steps: [
+        { text: "$\\vec\\tau = \\vec r \\times \\vec F = 0.3 \\cdot 40\\,(\\hat i \\times \\hat j) = 12\\,\\hat k$ N m." },
+        { text: "Read it: 12 N m about the vertical axis, anticlockwise seen from above." },
+      ],
+      answer: "$\\vec\\tau = 12\\,\\hat k$ N m",
+    },
+    {
+      type: "worked-example",
+      id: "va4-5-we7",
+      title: "Worked example 8",
+      problem:
+        "A force $\\vec F = 3\\hat i + 2\\hat j + \\hat k$ N acts at a point with position $\\vec r = \\hat i - \\hat j + 2\\hat k$ m relative to the pivot. Find the torque $\\vec\\tau = \\vec r\\times\\vec F$ and its magnitude.",
+      steps: [
+        {
+          text: "$\\hat i$: $(-1)(1) - (2)(2) = -5$. $\\hat j$: $-\\big((1)(1) - (2)(3)\\big) = 5$. $\\hat k$: $(1)(2) - (-1)(3) = 5$.",
+        },
+        { text: "$\\vec \\tau = -5\\hat i + 5\\hat j + 5\\hat k$ N m, with $|\\vec\\tau| = 5\\sqrt3$ N m." },
+        {
+          text: "Check: $\\vec\\tau\\cdot\\vec r = -5 - 5 + 10 = 0$ and $\\vec\\tau\\cdot\\vec F = -15 + 10 + 5 = 0$.",
+        },
+      ],
+      answer: "$\\vec \\tau = -5\\hat i + 5\\hat j + 5\\hat k$ N m, $|\\vec\\tau| = 5\\sqrt3$ N m",
+    },
+    {
+      type: "worked-example",
+      id: "va4-5-we8",
+      title: "Worked example 9 (opening a door)",
+      problem:
+        "A door is hinged along the vertical $z$-axis. Its handle is at $\\vec r = 0.8\\,\\hat i$ m from the hinge line, and you pull with $\\vec F = 12\\hat i + 16\\hat j$ N (partly away from the hinge, partly across the door). Find the torque.",
+      steps: [
+        {
+          text: "Distribute: $\\vec\\tau = \\vec r\\times\\vec F = 0.8\\cdot12\\,(\\hat i\\times\\hat i) + 0.8\\cdot16\\,(\\hat i\\times\\hat j)$. *Why:* splitting $\\vec F$ into parts along and across the door shows which part does the turning.",
+        },
+        {
+          text: "$\\hat i\\times\\hat i = \\vec 0$: the $12\\hat i$ N part pulls straight along the door and turns nothing, however hard you pull.",
+        },
+        {
+          text: "$\\hat i\\times\\hat j = \\hat k$: $\\vec\\tau = 12.8\\,\\hat k$ N m, a turn about the hinge, anticlockwise seen from above.",
+        },
+        {
+          text: "**Check with the angle.** $|\\vec F| = \\sqrt{144 + 256} = 20$ N and $\\sin\\theta = \\frac{16}{20} = 0.8$, so $|\\vec\\tau| = 0.8 \\times 20 \\times 0.8 = 12.8$ N m. It agrees.",
+        },
+      ],
+      answer: "$\\vec\\tau = 12.8\\,\\hat k$ N m",
     },
     {
       type: "text",
       content:
-        "**Worked example 8.** A force $\\vec F = 3\\hat i + 2\\hat j + \\hat k$ N acts at a point with position $\\vec r = \\hat i - \\hat j + 2\\hat k$ m relative to the pivot.\n\n1. $\\hat i$: $(-1)(1) - (2)(2) = -5$. $\\hat j$: $-\\big((1)(1) - (2)(3)\\big) = 5$. $\\hat k$: $(1)(2) - (-1)(3) = 5$.\n2. $\\vec \\tau = -5\\hat i + 5\\hat j + 5\\hat k$ N m, with $|\\vec\\tau| = 5\\sqrt3$ N m.\n3. Check: $\\vec\\tau\\cdot\\vec r = -5 - 5 + 10 = 0$ and $\\vec\\tau\\cdot\\vec F = -15 + 10 + 5 = 0$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 9 (opening a door).** A door is hinged along the vertical $z$-axis. Its handle is at $\\vec r = 0.8\\,\\hat i$ m from the hinge line, and you pull with $\\vec F = 12\\hat i + 16\\hat j$ N (partly away from the hinge, partly across the door). Find the torque.\n\n1. Distribute: $\\vec\\tau = \\vec r\\times\\vec F = 0.8\\cdot12\\,(\\hat i\\times\\hat i) + 0.8\\cdot16\\,(\\hat i\\times\\hat j)$. *Why:* splitting $\\vec F$ into parts along and across the door shows which part does the turning.\n2. $\\hat i\\times\\hat i = \\vec 0$: the $12\\hat i$ N part pulls straight along the door and turns nothing, however hard you pull.\n3. $\\hat i\\times\\hat j = \\hat k$: $\\vec\\tau = 12.8\\,\\hat k$ N m, a turn about the hinge, anticlockwise seen from above.\n4. **Check with the angle.** $|\\vec F| = \\sqrt{144 + 256} = 20$ N and $\\sin\\theta = \\frac{16}{20} = 0.8$, so $|\\vec\\tau| = 0.8 \\times 20 \\times 0.8 = 12.8$ N m. It agrees.\n\nThis is why you push a door at right angles to it, and at the handle side, far from the hinge: both make $|\\vec r|\\sin\\theta$ as large as possible.",
+        "This is why you push a door at right angles to it, and at the handle side, far from the hinge: both make $|\\vec r|\\sin\\theta$ as large as possible.",
     },
     {
       type: "text",
       content:
         "**Torque about a point other than the origin.** The lever arm always runs **from the pivot to the point where the force acts**. About a pivot $Q$, with the force applied at $P$, use $\\vec r = \\overrightarrow{QP} = \\vec P - \\vec Q$, not the position vector of $P$.\n\nExample: $\\vec F = 2\\hat j$ N acts at $P(3, 1, 0)$; find the torque about $Q(1, 1, 0)$. Then $\\vec r = (3, 1, 0) - (1, 1, 0) = (2, 0, 0)$ and $\\vec\\tau = 2\\hat i \\times 2\\hat j = 4\\hat k$ N m. (Using $P$'s position $(3, 1, 0)$ from the origin would wrongly give $6\\hat k$.)",
     },
+    { type: "heading", text: "Deriving the law of sines" },
     {
       type: "text",
       content:
@@ -1109,6 +1561,7 @@ const lesson05: LessonSeed = {
         ["Turning effect of a force", "$\\vec\\tau = \\vec r\\times\\vec F$, with $\\vec r$ from the pivot to the point of action"],
       ],
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va4-5-q1",

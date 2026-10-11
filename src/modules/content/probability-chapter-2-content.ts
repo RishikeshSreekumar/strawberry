@@ -55,10 +55,11 @@ const lesson01: LessonSeed = {
       content:
         "Count it out. The event $B$ = \"sum at least 10\" is $\\{(4,6), (5,5), (6,4), (5,6), (6,5), (6,6)\\}$, which is 6 cells. Inside $B$, the first die is 6 in $(6,4), (6,5), (6,6)$: 3 cells. So once we know $B$ happened,\n\n$$P(\\text{first is } 6 \\mid B) = \\frac{3}{6} = \\frac{1}{2}.$$\n\nThe knowledge tripled the probability, from $\\frac{1}{6}$ to $\\frac{1}{2}$.",
     },
+    { type: "heading", text: "Turning the count into a formula" },
     {
       type: "text",
       content:
-        "**Turning the count into a formula.** With equally likely outcomes we just did\n\n$$P(A \\mid B) = \\frac{n(A \\cap B)}{n(B)}.$$\n\nWe count only the part of $A$ that lies inside $B$, because the rest of $A$ is ruled out, and we divide by the size of the new universe $B$ instead of $S$. Divide the top and bottom by $n(S)$ and the counts become probabilities:",
+        "With equally likely outcomes we just did\n\n$$P(A \\mid B) = \\frac{n(A \\cap B)}{n(B)}.$$\n\nWe count only the part of $A$ that lies inside $B$, because the rest of $A$ is ruled out, and we divide by the size of the new universe $B$ instead of $S$. Divide the top and bottom by $n(S)$ and the counts become probabilities:",
     },
     {
       type: "math",
@@ -93,10 +94,11 @@ const lesson01: LessonSeed = {
         ["$0 \\le P(A \\mid B) \\le 1$", "$A \\cap B$ is a piece of $B$, so its probability is at most $P(B)$"],
       ],
     },
+    { type: "heading", text: "Two-way tables" },
     {
       type: "text",
       content:
-        "**Two-way tables.** Survey data usually arrives already counted. In a class of 100 students, each student was asked whether they play cricket:",
+        "Survey data usually arrives already counted. In a class of 100 students, each student was asked whether they play cricket:",
     },
     {
       type: "table",
@@ -119,46 +121,101 @@ const lesson01: LessonSeed = {
       content:
         "$P(A \\mid B)$ and $P(B \\mid A)$ share a numerator, $P(A \\cap B)$, but divide by different things. Almost everyone with measles has spots, so $P(\\text{spots} \\mid \\text{measles}) \\approx 1$. But most people with spots have acne, chickenpox or a rash, so $P(\\text{measles} \\mid \\text{spots})$ is small. Swapping the two is the single most expensive mistake in probability, and Chapter 3 is built around undoing it.",
     },
+    { type: "heading", text: "Worked examples: finding the new universe" },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** A fair die is rolled and you are told the result is odd. What is the probability that it is prime?\n\n1. New universe: $B = \\{1, 3, 5\\}$, so $n(B) = 3$.\n2. The primes inside $B$ are $\\{3, 5\\}$ (1 is not prime), so $n(A \\cap B) = 2$.\n3. $P(\\text{prime} \\mid \\text{odd}) = \\frac{2}{3}$.\n\nWithout the information the answer would be $\\frac{3}{6} = \\frac{1}{2}$, since the primes are 2, 3 and 5.",
+      type: "worked-example",
+      id: "pr2-1-we1",
+      title: "Worked example 1",
+      problem:
+        "A fair die is rolled and you are told the result is odd. What is the probability that it is prime?",
+      steps: [
+        {
+          text: "New universe: $B = \\{1, 3, 5\\}$, so $n(B) = 3$.",
+        },
+        {
+          text: "The primes inside $B$ are $\\{3, 5\\}$ (1 is not prime), so $n(A \\cap B) = 2$.",
+        },
+        {
+          text: "$P(\\text{prime} \\mid \\text{odd}) = \\frac{2}{3}$.",
+        },
+        {
+          text: "Without the information the answer would be $\\frac{3}{6} = \\frac{1}{2}$, since the primes are 2, 3 and 5.",
+        },
+      ],
+      answer: "$\\frac{2}{3}$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2.** $P(A) = 0.8$, $P(B) = 0.5$ and $P(B \\mid A) = 0.4$. Find $P(A \\cap B)$, $P(A \\mid B)$ and $P(A \\cup B)$.\n\n1. From the definition, $P(A \\cap B) = P(A)\\,P(B \\mid A) = 0.8 \\times 0.4 = 0.32$.\n2. $P(A \\mid B) = \\frac{P(A\\cap B)}{P(B)} = \\frac{0.32}{0.5} = 0.64$.\n3. $P(A \\cup B) = 0.8 + 0.5 - 0.32 = 0.98$.\n\nNotice $P(B \\mid A) = 0.4$ but $P(A \\mid B) = 0.64$. Same overlap, different universe.",
+      type: "worked-example",
+      id: "pr2-1-we2",
+      title: "Worked example 2",
+      problem:
+        "$P(A) = 0.8$, $P(B) = 0.5$ and $P(B \\mid A) = 0.4$. Find $P(A \\cap B)$, $P(A \\mid B)$ and $P(A \\cup B)$.",
+      steps: [
+        {
+          text: "From the definition, $P(A \\cap B) = P(A)\\,P(B \\mid A) = 0.8 \\times 0.4 = 0.32$.",
+        },
+        {
+          text: "$P(A \\mid B) = \\frac{P(A\\cap B)}{P(B)} = \\frac{0.32}{0.5} = 0.64$.",
+        },
+        {
+          text: "$P(A \\cup B) = 0.8 + 0.5 - 0.32 = 0.98$.",
+        },
+        {
+          text: "Notice $P(B \\mid A) = 0.4$ but $P(A \\mid B) = 0.64$. Same overlap, different universe.",
+        },
+      ],
+      answer: "$P(A \\cap B) = 0.32$, $P(A \\mid B) = 0.64$, $P(A \\cup B) = 0.98$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (application): exam results.** In a school, 30% of students fail Physics, 25% fail Maths and 10% fail both. A student is picked at random.\n\n(a) She failed Physics. What is the probability she also failed Maths?\n(b) She failed Maths. What is the probability she also failed Physics?\n(c) She failed at least one subject. What is the probability she failed Maths?\n\nLet $P$ = \"fails Physics\" and $M$ = \"fails Maths\".\n\n1. **(a)** The new universe is the Physics failures: $P(M \\mid P) = \\frac{0.10}{0.30} = \\frac{1}{3}$. *Why:* the 10% who failed both are the only part of $M$ that survives inside $P$.\n2. **(b)** Same overlap, new universe: $P(P \\mid M) = \\frac{0.10}{0.25} = \\frac{2}{5}$. *Why:* the bar is not symmetric, so the denominator switches to $P(M)$.\n3. **(c)** First find the universe: $P(P \\cup M) = 0.30 + 0.25 - 0.10 = 0.45$. Everyone who failed Maths is inside it, so $M \\cap (P \\cup M) = M$. *Why:* when the target sits entirely inside the condition, the intersection is just the target.",
+      type: "worked-example",
+      id: "pr2-1-we3",
+      title: "Worked example 3 (application): exam results",
+      problem:
+        "In a school, 30% of students fail Physics, 25% fail Maths and 10% fail both. A student is picked at random.\n\n(a) She failed Physics. What is the probability she also failed Maths?\n(b) She failed Maths. What is the probability she also failed Physics?\n(c) She failed at least one subject. What is the probability she failed Maths?",
+      steps: [
+        {
+          text: "Let $P$ = \"fails Physics\" and $M$ = \"fails Maths\".",
+        },
+        {
+          text: "**(a)** The new universe is the Physics failures: $P(M \\mid P) = \\frac{0.10}{0.30} = \\frac{1}{3}$. *Why:* the 10% who failed both are the only part of $M$ that survives inside $P$.",
+        },
+        {
+          text: "**(b)** Same overlap, new universe: $P(P \\mid M) = \\frac{0.10}{0.25} = \\frac{2}{5}$. *Why:* the bar is not symmetric, so the denominator switches to $P(M)$.",
+        },
+        {
+          text: "**(c)** First find the universe: $P(P \\cup M) = 0.30 + 0.25 - 0.10 = 0.45$. Everyone who failed Maths is inside it, so $M \\cap (P \\cup M) = M$. *Why:* when the target sits entirely inside the condition, the intersection is just the target.",
+          latex: "P(M \\mid P \\cup M) = \\frac{P(M)}{P(P \\cup M)} = \\frac{0.25}{0.45} = \\frac{5}{9}",
+        },
+        {
+          text: "Three different answers, $\\frac{1}{3}$, $\\frac{2}{5}$ and $\\frac{5}{9}$, all built from the same three percentages. Each question names a different universe, and the whole job is to read which one.",
+        },
+      ],
+      answer: "(a) $\\frac{1}{3}$ (b) $\\frac{2}{5}$ (c) $\\frac{5}{9}$",
     },
     {
-      type: "math",
-      latex:
-        "P(M \\mid P \\cup M) = \\frac{P(M)}{P(P \\cup M)} = \\frac{0.25}{0.45} = \\frac{5}{9}",
+      type: "worked-example",
+      id: "pr2-1-we4",
+      title: "Worked example 4 (exam style)",
+      problem:
+        "A die is thrown three times. Given that the three numbers are all different, find the probability that at least one of them is a 6.",
+      steps: [
+        {
+          text: "**Size the universe.** Ordered triples with all numbers different: $6 \\times 5 \\times 4 = 120$. *Why:* the condition is now the sample space, so count it first; the other $216 - 120 = 96$ triples are gone.",
+        },
+        {
+          text: "**Count the complement inside it.** All different **and** no 6 means choosing from $\\{1, \\dots, 5\\}$: $5 \\times 4 \\times 3 = 60$. *Why:* \"at least one\" is messy to count directly; \"none\" is a single product.",
+        },
+        {
+          text: "**Subtract and divide.** The complement rule holds inside $B$ (see the table above):",
+          latex: "P(\\text{at least one } 6 \\mid \\text{all different}) = 1 - \\frac{60}{120} = \\frac{1}{2}",
+        },
+        {
+          text: "Sanity check by symmetry: three distinct faces out of six means each face has a $\\frac{3}{6}$ chance of being among them, and 6 is just one face. Without the condition the answer is $1 - \\left(\\frac{5}{6}\\right)^3 = \\frac{91}{216} \\approx 0.42$; knowing the numbers are distinct pushes it up to $0.5$.",
+        },
+      ],
+      answer: "$\\frac{1}{2}$",
     },
-    {
-      type: "text",
-      content:
-        "Three different answers, $\\frac{1}{3}$, $\\frac{2}{5}$ and $\\frac{5}{9}$, all built from the same three percentages. Each question names a different universe, and the whole job is to read which one.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (exam style).** A die is thrown three times. Given that the three numbers are all different, find the probability that at least one of them is a 6.\n\n1. **Size the universe.** Ordered triples with all numbers different: $6 \\times 5 \\times 4 = 120$. *Why:* the condition is now the sample space, so count it first; the other $216 - 120 = 96$ triples are gone.\n2. **Count the complement inside it.** All different **and** no 6 means choosing from $\\{1, \\dots, 5\\}$: $5 \\times 4 \\times 3 = 60$. *Why:* \"at least one\" is messy to count directly; \"none\" is a single product.\n3. **Subtract and divide.** The complement rule holds inside $B$ (see the table above):",
-    },
-    {
-      type: "math",
-      latex:
-        "P(\\text{at least one } 6 \\mid \\text{all different}) = 1 - \\frac{60}{120} = \\frac{1}{2}",
-    },
-    {
-      type: "text",
-      content:
-        "Sanity check by symmetry: three distinct faces out of six means each face has a $\\frac{3}{6}$ chance of being among them, and 6 is just one face. Without the condition the answer is $1 - \\left(\\frac{5}{6}\\right)^3 = \\frac{91}{216} \\approx 0.42$; knowing the numbers are distinct pushes it up to $0.5$.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr2-1-q1",
@@ -289,6 +346,7 @@ const lesson02: LessonSeed = {
       content:
         "$P(A \\cap B) = P(A)\\,P(B \\mid A) = P(B)\\,P(A \\mid B)$.\nRead it as a story: **first** $A$ happens, **then**, in the world where $A$ has happened, $B$ happens. It is always true. No independence is needed.",
     },
+    { type: "heading", text: "Draws without replacement" },
     {
       type: "text",
       content:
@@ -316,9 +374,26 @@ const lesson02: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1: two aces.** Two cards are dealt from a shuffled 52-card deck. What is the probability that both are aces?\n\n1. $P(\\text{1st ace}) = \\frac{4}{52}$.\n2. Given the first was an ace, 51 cards remain and only 3 of them are aces: $P(\\text{2nd ace} \\mid \\text{1st ace}) = \\frac{3}{51}$.\n3. Multiply: $\\frac{4}{52} \\times \\frac{3}{51} = \\frac{12}{2652} = \\frac{1}{221}$.\n\n**Check by counting (Chapter 1):** $\\dfrac{\\binom{4}{2}}{\\binom{52}{2}} = \\dfrac{6}{1326} = \\dfrac{1}{221}$. The two methods agree, as they must.",
+      type: "worked-example",
+      id: "pr2-2-we1",
+      title: "Worked example 1: two aces",
+      problem:
+        "Two cards are dealt from a shuffled 52-card deck. What is the probability that both are aces?",
+      steps: [
+        {
+          text: "$P(\\text{1st ace}) = \\frac{4}{52}$.",
+        },
+        {
+          text: "Given the first was an ace, 51 cards remain and only 3 of them are aces: $P(\\text{2nd ace} \\mid \\text{1st ace}) = \\frac{3}{51}$.",
+        },
+        {
+          text: "Multiply: $\\frac{4}{52} \\times \\frac{3}{51} = \\frac{12}{2652} = \\frac{1}{221}$.",
+        },
+        {
+          text: "**Check by counting (Chapter 1):** $\\dfrac{\\binom{4}{2}}{\\binom{52}{2}} = \\dfrac{6}{1326} = \\dfrac{1}{221}$. The two methods agree, as they must.",
+        },
+      ],
+      answer: "$\\frac{1}{221}$",
     },
     {
       type: "callout",
@@ -328,14 +403,26 @@ const lesson02: LessonSeed = {
         "$\\frac{4}{52} \\times \\frac{4}{52} = \\frac{1}{169}$ is the answer **with** replacement, where the first card goes back before the second is drawn. Without replacement the second factor must describe the deck as it now is: 51 cards, 3 aces. Every factor after the first is a conditional probability.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2: defective bulbs.** A box has 10 bulbs, 3 of them defective. Two are taken out one after another without replacement.\n\n- Both defective: $\\frac{3}{10} \\times \\frac{2}{9} = \\frac{6}{90} = \\frac{1}{15}$.\n- Neither defective: $\\frac{7}{10} \\times \\frac{6}{9} = \\frac{42}{90} = \\frac{7}{15}$.\n- Exactly one defective: either defective-then-good, $\\frac{3}{10} \\times \\frac{7}{9} = \\frac{21}{90}$, or good-then-defective, $\\frac{7}{10} \\times \\frac{3}{9} = \\frac{21}{90}$. Together that is $\\frac{42}{90} = \\frac{7}{15}$.\n\nCheck: $\\frac{1}{15} + \\frac{7}{15} + \\frac{7}{15} = 1$. The three cases cover everything.",
+      type: "worked-example",
+      id: "pr2-2-we2",
+      title: "Worked example 2: defective bulbs",
+      problem:
+        "A box has 10 bulbs, 3 of them defective. Two are taken out one after another without replacement. Find the probability that both are defective, that neither is, and that exactly one is.",
+      steps: [
+        {
+          text: "- Both defective: $\\frac{3}{10} \\times \\frac{2}{9} = \\frac{6}{90} = \\frac{1}{15}$.\n- Neither defective: $\\frac{7}{10} \\times \\frac{6}{9} = \\frac{42}{90} = \\frac{7}{15}$.\n- Exactly one defective: either defective-then-good, $\\frac{3}{10} \\times \\frac{7}{9} = \\frac{21}{90}$, or good-then-defective, $\\frac{7}{10} \\times \\frac{3}{9} = \\frac{21}{90}$. Together that is $\\frac{42}{90} = \\frac{7}{15}$.",
+        },
+        {
+          text: "Check: $\\frac{1}{15} + \\frac{7}{15} + \\frac{7}{15} = 1$. The three cases cover everything.",
+        },
+      ],
+      answer: "$\\frac{1}{15}$, $\\frac{7}{15}$ and $\\frac{7}{15}$",
     },
+    { type: "heading", text: "Three events and longer chains" },
     {
       type: "text",
       content:
-        "**Three events.** Apply the rule twice. Treat $A \\cap B$ as a single event and multiply by the chance of $C$ given it:",
+        "Apply the rule twice. Treat $A \\cap B$ as a single event and multiply by the chance of $C$ given it:",
     },
     {
       type: "math",
@@ -345,7 +432,20 @@ const lesson02: LessonSeed = {
     {
       type: "text",
       content:
-        "Each factor conditions on **everything that has already happened**. The chain can be as long as you like.\n\n**Worked example 3.** Three cards are dealt. $P(\\text{all kings}) = \\frac{4}{52} \\times \\frac{3}{51} \\times \\frac{2}{50} = \\frac{24}{132600} = \\frac{1}{5525}$.",
+        "Each factor conditions on **everything that has already happened**. The chain can be as long as you like.",
+    },
+    {
+      type: "worked-example",
+      id: "pr2-2-we5",
+      title: "Worked example 3",
+      problem: "Three cards are dealt. Find $P(\\text{all kings})$.",
+      steps: [
+        {
+          text: "Chain the three conditional probabilities: 4 kings in 52 cards, then 3 in 51, then 2 in 50.",
+          latex: "P(\\text{all kings}) = \\frac{4}{52} \\times \\frac{3}{51} \\times \\frac{2}{50} = \\frac{24}{132600} = \\frac{1}{5525}",
+        },
+      ],
+      answer: "$\\frac{1}{5525}$",
     },
     {
       type: "table",
@@ -357,29 +457,53 @@ const lesson02: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (application): the bunch of keys.** You have 5 similar-looking keys and only one opens your front door. You try them one at a time, putting each wrong key aside. What is the probability that the door opens on the **third** try?\n\n1. **Try 1 fails:** 4 of the 5 keys are wrong, so $\\frac{4}{5}$. *Why:* every key is equally likely to be picked first.\n2. **Try 2 fails, given try 1 failed:** 4 keys remain and 3 are wrong, so $\\frac{3}{4}$. *Why:* the discarded key changed the bunch, so this factor is conditional.\n3. **Try 3 works, given two failures:** 3 keys remain and exactly one is right, so $\\frac{1}{3}$.\n4. Multiply along the story:",
+      type: "worked-example",
+      id: "pr2-2-we3",
+      title: "Worked example 4 (application): the bunch of keys",
+      problem:
+        "You have 5 similar-looking keys and only one opens your front door. You try them one at a time, putting each wrong key aside. What is the probability that the door opens on the **third** try?",
+      steps: [
+        {
+          text: "**Try 1 fails:** 4 of the 5 keys are wrong, so $\\frac{4}{5}$. *Why:* every key is equally likely to be picked first.",
+        },
+        {
+          text: "**Try 2 fails, given try 1 failed:** 4 keys remain and 3 are wrong, so $\\frac{3}{4}$. *Why:* the discarded key changed the bunch, so this factor is conditional.",
+        },
+        {
+          text: "**Try 3 works, given two failures:** 3 keys remain and exactly one is right, so $\\frac{1}{3}$.",
+        },
+        {
+          text: "Multiply along the story:",
+          latex: "P(\\text{opens on try } 3) = \\frac{4}{5} \\times \\frac{3}{4} \\times \\frac{1}{3} = \\frac{1}{5}",
+        },
+        {
+          text: "The answer is $\\frac{1}{5}$ for **every** try from 1 to 5. That makes sense: trying the keys in a random order is the same as shuffling them, and the right key is equally likely to sit in any of the 5 positions. The telescoping product is the multiplication rule's way of proving it. (If you foolishly put wrong keys back, the answer becomes $\\left(\\frac{4}{5}\\right)^2 \\cdot \\frac{1}{5} = \\frac{16}{125}$ instead.)",
+        },
+      ],
+      answer: "$\\frac{1}{5}$",
     },
     {
-      type: "math",
-      latex:
-        "P(\\text{opens on try } 3) = \\frac{4}{5} \\times \\frac{3}{4} \\times \\frac{1}{3} = \\frac{1}{5}",
-    },
-    {
-      type: "text",
-      content:
-        "The answer is $\\frac{1}{5}$ for **every** try from 1 to 5. That makes sense: trying the keys in a random order is the same as shuffling them, and the right key is equally likely to sit in any of the 5 positions. The telescoping product is the multiplication rule's way of proving it. (If you foolishly put wrong keys back, the answer becomes $\\left(\\frac{4}{5}\\right)^2 \\cdot \\frac{1}{5} = \\frac{16}{125}$ instead.)",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (exam style, NCERT/CBSE).** Three cards are drawn one after another, without replacement, from a well-shuffled deck of 52. Find the probability that the first two are kings and the third is an ace.\n\n1. $P(K_1) = \\frac{4}{52}$. *Why:* 4 kings in a full deck.\n2. $P(K_2 \\mid K_1) = \\frac{3}{51}$. *Why:* one king has gone, and the deck has one card fewer.\n3. $P(A_3 \\mid K_1 \\cap K_2) = \\frac{4}{50}$. *Why:* the two cards removed were kings, so **all 4 aces are still there**, now among 50 cards. Only the count of cards drops, not the count of aces.\n4. Chain them together:",
-    },
-    {
-      type: "math",
-      latex:
-        "P(K_1 \\cap K_2 \\cap A_3) = \\frac{4}{52} \\cdot \\frac{3}{51} \\cdot \\frac{4}{50} = \\frac{48}{132600} = \\frac{2}{5525}",
+      type: "worked-example",
+      id: "pr2-2-we4",
+      title: "Worked example 5 (exam style, NCERT/CBSE)",
+      problem:
+        "Three cards are drawn one after another, without replacement, from a well-shuffled deck of 52. Find the probability that the first two are kings and the third is an ace.",
+      steps: [
+        {
+          text: "$P(K_1) = \\frac{4}{52}$. *Why:* 4 kings in a full deck.",
+        },
+        {
+          text: "$P(K_2 \\mid K_1) = \\frac{3}{51}$. *Why:* one king has gone, and the deck has one card fewer.",
+        },
+        {
+          text: "$P(A_3 \\mid K_1 \\cap K_2) = \\frac{4}{50}$. *Why:* the two cards removed were kings, so **all 4 aces are still there**, now among 50 cards. Only the count of cards drops, not the count of aces.",
+        },
+        {
+          text: "Chain them together:",
+          latex: "P(K_1 \\cap K_2 \\cap A_3) = \\frac{4}{52} \\cdot \\frac{3}{51} \\cdot \\frac{4}{50} = \\frac{48}{132600} = \\frac{2}{5525}",
+        },
+      ],
+      answer: "$\\frac{2}{5525}$",
     },
     {
       type: "text",
@@ -393,6 +517,7 @@ const lesson02: LessonSeed = {
       content:
         "$P(A)P(B \\mid A)$ and $P(B)P(A \\mid B)$ give the same number. Tell the story in whichever order makes the conditional probabilities easy to write down. For sequential draws that is almost always the order in which things actually happen.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr2-2-q1",
@@ -533,6 +658,7 @@ const lesson03: LessonSeed = {
           "Same A, but now given sum = 8. Only five cells survive and three have an even first die: P(A | B) = 3/5. These two events are dependent.",
       },
     },
+    { type: "heading", text: "The product test and its consequences" },
     {
       type: "text",
       content:
@@ -555,9 +681,26 @@ const lesson03: LessonSeed = {
         "Check the dice with the product form: $P(A) = \\frac{18}{36} = \\frac{1}{2}$, $P(B) = \\frac{6}{36} = \\frac{1}{6}$, and $P(A \\cap B) = \\frac{3}{36} = \\frac{1}{12} = \\frac{1}{2} \\times \\frac{1}{6}$. Independent. Independence is something you **verify with numbers**, not something you decide by gut feeling.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** A die is rolled. Let $E$ = \"multiple of 3\" = $\\{3, 6\\}$ and $F$ = \"even\" = $\\{2, 4, 6\\}$.\n\n1. $P(E) = \\frac{1}{3}$ and $P(F) = \\frac{1}{2}$.\n2. $E \\cap F = \\{6\\}$, so $P(E \\cap F) = \\frac{1}{6}$.\n3. $\\frac{1}{3} \\times \\frac{1}{2} = \\frac{1}{6}$. **Independent.**\n\nNow replace $E$ by $G = \\{1, 2, 3\\}$. Then $G \\cap F = \\{2\\}$, so $P(G \\cap F) = \\frac{1}{6}$, but $P(G)P(F) = \\frac{1}{4}$. **Dependent**: learning the roll is even makes $G$ less likely, $\\frac{1}{3}$ instead of $\\frac{1}{2}$.",
+      type: "worked-example",
+      id: "pr2-3-we1",
+      title: "Worked example 1",
+      problem:
+        "A die is rolled. Let $E$ = \"multiple of 3\" = $\\{3, 6\\}$ and $F$ = \"even\" = $\\{2, 4, 6\\}$. Are $E$ and $F$ independent?",
+      steps: [
+        {
+          text: "$P(E) = \\frac{1}{3}$ and $P(F) = \\frac{1}{2}$.",
+        },
+        {
+          text: "$E \\cap F = \\{6\\}$, so $P(E \\cap F) = \\frac{1}{6}$.",
+        },
+        {
+          text: "$\\frac{1}{3} \\times \\frac{1}{2} = \\frac{1}{6}$. **Independent.**",
+        },
+        {
+          text: "Now replace $E$ by $G = \\{1, 2, 3\\}$. Then $G \\cap F = \\{2\\}$, so $P(G \\cap F) = \\frac{1}{6}$, but $P(G)P(F) = \\frac{1}{4}$. **Dependent**: learning the roll is even makes $G$ less likely, $\\frac{1}{3}$ instead of $\\frac{1}{2}$.",
+        },
+      ],
+      answer: "Yes: $P(E \\cap F) = \\frac{1}{6} = P(E)P(F)$.",
     },
     {
       type: "text",
@@ -572,41 +715,85 @@ const lesson03: LessonSeed = {
     {
       type: "text",
       content:
-        "The same argument swapped gives $A'$ and $B$, and applying it twice gives $A'$ and $B'$. Directly: $P(A' \\cap B') = 1 - P(A \\cup B) = 1 - P(A) - P(B) + P(A)P(B) = (1 - P(A))(1 - P(B))$.\n\n**Worked example 2.** $A$ and $B$ are independent with $P(A) = 0.3$ and $P(B) = 0.4$.\n- $P(A \\cap B) = 0.12$.\n- $P(A \\cup B) = 0.3 + 0.4 - 0.12 = 0.58$.\n- $P(\\text{neither}) = 0.7 \\times 0.6 = 0.42$, and this matches $1 - 0.58$.",
+        "The same argument swapped gives $A'$ and $B$, and applying it twice gives $A'$ and $B'$. Directly: $P(A' \\cap B') = 1 - P(A \\cup B) = 1 - P(A) - P(B) + P(A)P(B) = (1 - P(A))(1 - P(B))$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (application): is tea preference linked to gender?** A café surveys 200 customers:",
-    },
-    {
-      type: "table",
-      headers: ["", "Prefers tea", "Prefers coffee", "Total"],
-      rows: [
-        ["Men", "54", "66", "120"],
-        ["Women", "36", "44", "80"],
-        ["Total", "90", "110", "200"],
+      type: "worked-example",
+      id: "pr2-3-we4",
+      title: "Worked example 2",
+      problem:
+        "$A$ and $B$ are independent with $P(A) = 0.3$ and $P(B) = 0.4$. Find $P(A \\cap B)$, $P(A \\cup B)$ and $P(\\text{neither})$.",
+      steps: [
+        {
+          text: "$P(A \\cap B) = 0.12$.",
+        },
+        {
+          text: "$P(A \\cup B) = 0.3 + 0.4 - 0.12 = 0.58$.",
+        },
+        {
+          text: "$P(\\text{neither}) = 0.7 \\times 0.6 = 0.42$, and this matches $1 - 0.58$.",
+        },
       ],
+      answer: "$0.12$, $0.58$ and $0.42$",
+    },
+    { type: "heading", text: "Independence in data and equations" },
+    {
+      type: "worked-example",
+      id: "pr2-3-we2",
+      title: "Worked example 3 (application): is tea preference linked to gender?",
+      problem:
+        "A café surveys 200 customers:\n\nLet $M$ = \"is a man\" and $T$ = \"prefers tea\" for a customer picked at random. Are $M$ and $T$ independent?",
+      problemTable: {
+        headers: ["", "Prefers tea", "Prefers coffee", "Total"],
+        rows: [
+          ["Men", "54", "66", "120"],
+          ["Women", "36", "44", "80"],
+          ["Total", "90", "110", "200"],
+        ],
+      },
+      steps: [
+        {
+          text: "**Read off the singles from the margins:** $P(M) = \\frac{120}{200} = 0.6$ and $P(T) = \\frac{90}{200} = 0.45$. *Why:* the product test needs both unconditional probabilities.",
+        },
+        {
+          text: "**Read off the overlap from the cell:** $P(M \\cap T) = \\frac{54}{200} = 0.27$.",
+        },
+        {
+          text: "**Test:** $P(M)P(T) = 0.6 \\times 0.45 = 0.27$. Equal, so **independent**.",
+        },
+        {
+          text: "**Cross-check with the conditional form:** $P(T \\mid M) = \\frac{54}{120} = 0.45$ and $P(T \\mid \\text{woman}) = \\frac{36}{80} = 0.45$. *Why:* independence means every row has the same tea rate as the whole table, and here both rows do.",
+        },
+        {
+          text: "If the men's tea cell had been 60 (with the totals adjusted), $P(T \\mid M) = \\frac{60}{120} = 0.5$ would differ from the women's rate and the events would be dependent. In real survey data exact equality is rare. Deciding whether a small gap is \"real\" is the job of statistics; probability only tells you what exact independence looks like.",
+        },
+      ],
+      answer: "Yes: $P(M)P(T) = 0.27 = P(M \\cap T)$.",
     },
     {
-      type: "text",
-      content:
-        "Let $M$ = \"is a man\" and $T$ = \"prefers tea\" for a customer picked at random.\n\n1. **Read off the singles from the margins:** $P(M) = \\frac{120}{200} = 0.6$ and $P(T) = \\frac{90}{200} = 0.45$. *Why:* the product test needs both unconditional probabilities.\n2. **Read off the overlap from the cell:** $P(M \\cap T) = \\frac{54}{200} = 0.27$.\n3. **Test:** $P(M)P(T) = 0.6 \\times 0.45 = 0.27$. Equal, so **independent**.\n4. **Cross-check with the conditional form:** $P(T \\mid M) = \\frac{54}{120} = 0.45$ and $P(T \\mid \\text{woman}) = \\frac{36}{80} = 0.45$. *Why:* independence means every row has the same tea rate as the whole table, and here both rows do.\n\nIf the men's tea cell had been 60 (with the totals adjusted), $P(T \\mid M) = \\frac{60}{120} = 0.5$ would differ from the women's rate and the events would be dependent. In real survey data exact equality is rare. Deciding whether a small gap is \"real\" is the job of statistics; probability only tells you what exact independence looks like.",
+      type: "worked-example",
+      id: "pr2-3-we3",
+      title: "Worked example 4 (exam style)",
+      problem:
+        "$A$ and $B$ are independent events with $P(A) = 0.4$ and $P(A \\cup B) = 0.6$. Find $P(B)$ and $P(A \\mid B')$.",
+      steps: [
+        {
+          text: "**Write the addition rule with the product built in.** Independence gives $P(A \\cap B) = P(A)P(B)$, so with $p = P(B)$:",
+          latex: "0.6 = 0.4 + p - 0.4p \\;\\Longrightarrow\\; 0.2 = 0.6p \\;\\Longrightarrow\\; p = \\frac{1}{3}",
+        },
+        {
+          text: "*Why:* independence is the extra equation that makes the unknown solvable. Without it, $P(A \\cap B)$ would be a second unknown.",
+        },
+        {
+          text: "**Use the complement result.** $A$ and $B'$ are independent too, so $P(A \\mid B') = P(A) = 0.4$ with no further work.",
+        },
+        {
+          text: "**Check it the long way.** $P(A \\cap B') = P(A) - P(A \\cap B) = 0.4 - \\frac{0.4}{3} = \\frac{4}{15}$ and $P(B') = \\frac{2}{3}$, so $P(A \\mid B') = \\frac{4/15}{2/3} = \\frac{2}{5} = 0.4$. *Why:* in an exam, a one-line check against the definition catches sign and arithmetic slips.",
+        },
+      ],
+      answer: "$P(B) = \\frac{1}{3}$, $P(A \\mid B') = 0.4$",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (exam style).** $A$ and $B$ are independent events with $P(A) = 0.4$ and $P(A \\cup B) = 0.6$. Find $P(B)$ and $P(A \\mid B')$.\n\n1. **Write the addition rule with the product built in.** Independence gives $P(A \\cap B) = P(A)P(B)$, so with $p = P(B)$:",
-    },
-    {
-      type: "math",
-      latex: "0.6 = 0.4 + p - 0.4p \\;\\Longrightarrow\\; 0.2 = 0.6p \\;\\Longrightarrow\\; p = \\frac{1}{3}",
-    },
-    {
-      type: "text",
-      content:
-        "*Why:* independence is the extra equation that makes the unknown solvable. Without it, $P(A \\cap B)$ would be a second unknown.\n\n2. **Use the complement result.** $A$ and $B'$ are independent too, so $P(A \\mid B') = P(A) = 0.4$ with no further work.\n3. **Check it the long way.** $P(A \\cap B') = P(A) - P(A \\cap B) = 0.4 - \\frac{0.4}{3} = \\frac{4}{15}$ and $P(B') = \\frac{2}{3}$, so $P(A \\mid B') = \\frac{4/15}{2/3} = \\frac{2}{5} = 0.4$. *Why:* in an exam, a one-line check against the definition catches sign and arithmetic slips.",
-    },
+    { type: "heading", text: "Edge cases and independent experiments" },
     {
       type: "text",
       content:
@@ -636,10 +823,11 @@ const lesson03: LessonSeed = {
       content:
         "Mutually exclusive means $A$ and $B$ can't happen together: $P(A \\cap B) = 0$. If both have positive probability, then $P(A)P(B) > 0 \\ne 0$, so they are **not** independent. In fact they are strongly dependent: learning $A$ happened drops $P(B \\mid A)$ to 0, however likely $B$ was before. Exclusive is about the sets not overlapping; independent is about how the probabilities multiply.",
     },
+    { type: "heading", text: "Three events: pairwise is not enough" },
     {
       type: "text",
       content:
-        "**Three events: pairwise is not enough.** Toss two fair coins and let $A$ = \"first is H\", $B$ = \"second is H\", $C$ = \"both show the same face\" = $\\{HH, TT\\}$. Each has probability $\\frac{1}{2}$.",
+        "Toss two fair coins and let $A$ = \"first is H\", $B$ = \"second is H\", $C$ = \"both show the same face\" = $\\{HH, TT\\}$. Each has probability $\\frac{1}{2}$.",
     },
     {
       type: "table",
@@ -663,6 +851,7 @@ const lesson03: LessonSeed = {
       content:
         "$A$, $B$, $C$ are **mutually independent** when all four hold:\n$P(A\\cap B) = P(A)P(B)$, $P(A\\cap C) = P(A)P(C)$, $P(B\\cap C) = P(B)P(C)$, and $P(A\\cap B\\cap C) = P(A)P(B)P(C)$.\nPairwise independence is the first three conditions only. It is strictly weaker.\nFor $n$ events, **every** sub-collection of 2 or more must satisfy the product rule. That is $2^n - n - 1$ conditions: 4 for three events, 11 for four.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr2-3-q1",
@@ -796,6 +985,7 @@ const lesson04: LessonSeed = {
           "Each leaf shows the product along its path. The highlighted event 'one of each colour' is the sum of two leaves: 15/56 + 15/56 = 15/28. Tap leaves to build other events, and check that all four leaves add to 1.",
       },
     },
+    { type: "heading", text: "Multiply along, add across" },
     {
       type: "callout",
       variant: "definition",
@@ -826,10 +1016,25 @@ const lesson04: LessonSeed = {
       content:
         "Adding along a branch, as in $\\frac{5}{8} + \\frac{4}{7}$, gives numbers above 1, which is a sure sign of an error. Multiplying across branches, as in $\\frac{15}{56} \\times \\frac{15}{56}$, would be the chance of getting RB in one run and BR in a second, separate run. In a single run the experiment follows exactly one path, so two different leaves can never both happen: \"RB and BR\" has probability 0, and \"RB or BR\" is their sum. **And** moves you along a path; **or** moves you across paths.",
     },
+    { type: "heading", text: "Urn transfers and late buses" },
     {
-      type: "text",
-      content:
-        "**Worked example 1: urn transfer.** Bag I has 3 red and 2 black balls. Bag II has 2 red and 4 black. One ball is moved at random from Bag I to Bag II, and then a ball is drawn from Bag II. What is $P(\\text{red})$? (In the tree, **K** stands for black, so it isn't confused with the blue **B** above.)\n\n1. Stage 1 (the transfer): red with $\\frac{3}{5}$, black with $\\frac{2}{5}$.\n2. Stage 2 (the draw, from a Bag II that now holds 7 balls): after a red transfer, Bag II has 3 red and 4 black, so red has probability $\\frac{3}{7}$. After a black transfer, it has 2 red and 5 black, so red has probability $\\frac{2}{7}$.\n3. Two leaves end in red: $\\frac{3}{5}\\cdot\\frac{3}{7} + \\frac{2}{5}\\cdot\\frac{2}{7} = \\frac{9}{35} + \\frac{4}{35} = \\frac{13}{35}$.",
+      type: "worked-example",
+      id: "pr2-4-we1",
+      title: "Worked example 1: urn transfer",
+      problem:
+        "Bag I has 3 red and 2 black balls. Bag II has 2 red and 4 black. One ball is moved at random from Bag I to Bag II, and then a ball is drawn from Bag II. What is $P(\\text{red})$? (In the tree, **K** stands for black, so it isn't confused with the blue **B** above.)",
+      steps: [
+        {
+          text: "Stage 1 (the transfer): red with $\\frac{3}{5}$, black with $\\frac{2}{5}$.",
+        },
+        {
+          text: "Stage 2 (the draw, from a Bag II that now holds 7 balls): after a red transfer, Bag II has 3 red and 4 black, so red has probability $\\frac{3}{7}$. After a black transfer, it has 2 red and 5 black, so red has probability $\\frac{2}{7}$.",
+        },
+        {
+          text: "Two leaves end in red: $\\frac{3}{5}\\cdot\\frac{3}{7} + \\frac{2}{5}\\cdot\\frac{2}{7} = \\frac{9}{35} + \\frac{4}{35} = \\frac{13}{35}$.",
+        },
+      ],
+      answer: "$\\frac{13}{35}$",
     },
     {
       type: "interactive",
@@ -860,27 +1065,52 @@ const lesson04: LessonSeed = {
         highlight: { label: "red drawn from Bag II", latex: "R", leaves: { matchLastStage: "R" } },
         editable: [{ path: "0", label: "P(\\text{move red})", min: 0, max: 1, step: 0.05 }],
         caption:
-          "The red leaves add to 13/35. Drag the transfer probability and watch P(R) move between 2/7 (always move black) and 3/7 (always move red). It is a weighted average of the two, and Chapter 3 builds on exactly that idea.",
+          "Add the red leaves to check the worked example. Drag the transfer probability and watch P(R) move between 2/7 (always move black) and 3/7 (always move red). It is a weighted average of the two, and Chapter 3 builds on exactly that idea.",
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (application): late for school.** On any morning in the monsoon, it rains with probability $0.3$. If it rains, Kavya's bus is late with probability $0.4$; if it doesn't rain, the bus is late with probability $0.1$. What is the probability that the bus is late on a given morning, and what is the probability that it rains **and** the bus is late?\n\n1. **First fork (weather):** Rain $0.3$, Dry $0.7$. *Why start here:* the lateness probabilities are given **conditional on the weather**, so the weather must come first in the tree.\n2. **Second fork (bus):** after Rain, Late $0.4$ / On time $0.6$; after Dry, Late $0.1$ / On time $0.9$.\n3. **Multiply along each late path:** Rain→Late $= 0.3 \\times 0.4 = 0.12$; Dry→Late $= 0.7 \\times 0.1 = 0.07$.\n4. **Add across the late leaves:**",
+      type: "worked-example",
+      id: "pr2-4-we2",
+      title: "Worked example 2 (application): late for school",
+      problem:
+        "On any morning in the monsoon, it rains with probability $0.3$. If it rains, Kavya's bus is late with probability $0.4$; if it doesn't rain, the bus is late with probability $0.1$. What is the probability that the bus is late on a given morning, and what is the probability that it rains **and** the bus is late?",
+      steps: [
+        {
+          text: "**First fork (weather):** Rain $0.3$, Dry $0.7$. *Why start here:* the lateness probabilities are given **conditional on the weather**, so the weather must come first in the tree.",
+        },
+        {
+          text: "**Second fork (bus):** after Rain, Late $0.4$ / On time $0.6$; after Dry, Late $0.1$ / On time $0.9$.",
+        },
+        {
+          text: "**Multiply along each late path:** Rain→Late $= 0.3 \\times 0.4 = 0.12$; Dry→Late $= 0.7 \\times 0.1 = 0.07$.",
+        },
+        {
+          text: "**Add across the late leaves:**",
+          latex: "P(\\text{late}) = 0.3 \\times 0.4 + 0.7 \\times 0.1 = 0.12 + 0.07 = 0.19",
+        },
+        {
+          text: "\"Rains **and** late\" is a single leaf, $0.12$. \"Late\" is two leaves, $0.19$. The four leaves are $0.12, 0.18, 0.07, 0.63$, which add to 1. Notice that $0.19$ lies between $0.1$ and $0.4$, much closer to $0.1$ because dry mornings are more common: once again, a weighted average.",
+        },
+      ],
+      answer: "$0.19$",
     },
+    { type: "heading", text: "Best of three and the growing urn" },
     {
-      type: "math",
-      latex: "P(\\text{late}) = 0.3 \\times 0.4 + 0.7 \\times 0.1 = 0.12 + 0.07 = 0.19",
-    },
-    {
-      type: "text",
-      content:
-        "\"Rains **and** late\" is a single leaf, $0.12$. \"Late\" is two leaves, $0.19$. The four leaves are $0.12, 0.18, 0.07, 0.63$, which add to 1. Notice that $0.19$ lies between $0.1$ and $0.4$, much closer to $0.1$ because dry mornings are more common: once again, a weighted average.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3: best of three.** Asha beats Ravi in each game with probability $0.6$, and the games are independent. The match goes to whoever wins two games first. What is the probability that Asha wins the match?\n\nA real match stops once someone reaches two wins. A useful trick is to **pretend all three games are always played**. The extra game can't change who won, since a player with 2 wins still has at least 2, and its two branches add to 1, so it doesn't change any probability either. That gives a clean 3-stage tree with the same probability, $0.6$, at every fork.",
+      type: "worked-example",
+      id: "pr2-4-we3",
+      title: "Worked example 3: best of three",
+      problem:
+        "Asha beats Ravi in each game with probability $0.6$, and the games are independent. The match goes to whoever wins two games first. What is the probability that Asha wins the match?",
+      steps: [
+        {
+          text: "A real match stops once someone reaches two wins. A useful trick is to **pretend all three games are always played**. The extra game can't change who won, since a player with 2 wins still has at least 2, and its two branches add to 1, so it doesn't change any probability either. That gives a clean 3-stage tree with the same probability, $0.6$, at every fork.",
+          latex: "P(\\text{Asha}) = \\underbrace{0.6^3}_{WWW} + \\underbrace{3 \\times 0.6^2 \\times 0.4}_{WWL,\\ WLW,\\ LWW} = 0.216 + 0.432 = 0.648",
+        },
+        {
+          text: "The same number comes from the real, stopping version: win the first two ($0.36$), or split the first two in either order and then win the decider ($2 \\times 0.6 \\times 0.4 \\times 0.6 = 0.288$). The total is $0.648$.",
+        },
+      ],
+      answer: "$0.648$",
     },
     {
       type: "interactive",
@@ -895,34 +1125,33 @@ const lesson04: LessonSeed = {
         editable: [{ allStages: true, label: "p", min: 0, max: 1, step: 0.05 }],
         highlight: { label: "Asha wins the match", latex: "M", leaves: ["0.0.0", "0.0.1", "0.1.0", "1.0.0"] },
         caption:
-          "The highlighted leaves are WWW, WWL, WLW and LWW, the paths with at least two wins. Their sum is 0.648. Drag p to 0.5 and the match becomes a fair 1/2. For p above 1/2, the best-of-three format gives the stronger player a bigger edge than a single game would.",
+          "The highlighted leaves are WWW, WWL, WLW and LWW, the paths with at least two wins; add them to check the worked example. Drag p to 0.5 and the match becomes a fair 1/2. For p above 1/2, the best-of-three format gives the stronger player a bigger edge than a single game would.",
       },
     },
     {
-      type: "math",
-      latex:
-        "P(\\text{Asha}) = \\underbrace{0.6^3}_{WWW} + \\underbrace{3 \\times 0.6^2 \\times 0.4}_{WWL,\\ WLW,\\ LWW} = 0.216 + 0.432 = 0.648",
+      type: "worked-example",
+      id: "pr2-4-we4",
+      title: "Worked example 4 (exam style, JEE): the growing urn",
+      problem:
+        "An urn holds 4 red and 6 black balls. A ball is drawn, its colour is noted, and it is put back **together with 2 more balls of the same colour**. A second ball is then drawn. Find the probability that the second ball is red.",
+      steps: [
+        {
+          text: "**Stage 1:** Red $\\frac{4}{10}$, Black $\\frac{6}{10}$.",
+        },
+        {
+          text: "**Rebuild the urn for each branch.** *Why:* the second fork depends on what happened, so write the new contents before writing any probability. After red: 6 red, 6 black (12 balls), so Red has $\\frac{6}{12}$. After black: 4 red, 8 black (12 balls), so Red has $\\frac{4}{12}$.",
+        },
+        {
+          text: "**Multiply along, add across** the two leaves that end in red:",
+          latex: "P(R_2) = \\frac{4}{10}\\cdot\\frac{6}{12} + \\frac{6}{10}\\cdot\\frac{4}{12} = \\frac{24}{120} + \\frac{24}{120} = \\frac{48}{120} = \\frac{2}{5}",
+        },
+        {
+          text: "The answer is $\\frac{2}{5}$, **exactly the same** as for the first draw. That is not a coincidence. Before you look at the first ball, you have no reason to think the second draw is any different from the first, so by symmetry it must have the same distribution. What the first draw does change is the **conditional** chances: $P(R_2 \\mid R_1) = \\frac{1}{2}$ is larger than $\\frac{2}{5}$, so $R_1$ and $R_2$ are dependent. The two draws have the same distribution but are not independent.",
+        },
+      ],
+      answer: "$\\frac{2}{5}$",
     },
-    {
-      type: "text",
-      content:
-        "The same number comes from the real, stopping version: win the first two ($0.36$), or split the first two in either order and then win the decider ($2 \\times 0.6 \\times 0.4 \\times 0.6 = 0.288$). The total is $0.648$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (exam style, JEE): the growing urn.** An urn holds 4 red and 6 black balls. A ball is drawn, its colour is noted, and it is put back **together with 2 more balls of the same colour**. A second ball is then drawn. Find the probability that the second ball is red.\n\n1. **Stage 1:** Red $\\frac{4}{10}$, Black $\\frac{6}{10}$.\n2. **Rebuild the urn for each branch.** *Why:* the second fork depends on what happened, so write the new contents before writing any probability. After red: 6 red, 6 black (12 balls), so Red has $\\frac{6}{12}$. After black: 4 red, 8 black (12 balls), so Red has $\\frac{4}{12}$.\n3. **Multiply along, add across** the two leaves that end in red:",
-    },
-    {
-      type: "math",
-      latex:
-        "P(R_2) = \\frac{4}{10}\\cdot\\frac{6}{12} + \\frac{6}{10}\\cdot\\frac{4}{12} = \\frac{24}{120} + \\frac{24}{120} = \\frac{48}{120} = \\frac{2}{5}",
-    },
-    {
-      type: "text",
-      content:
-        "The answer is $\\frac{2}{5}$, **exactly the same** as for the first draw. That is not a coincidence. Before you look at the first ball, you have no reason to think the second draw is any different from the first, so by symmetry it must have the same distribution. What the first draw does change is the **conditional** chances: $P(R_2 \\mid R_1) = \\frac{1}{2}$ is larger than $\\frac{2}{5}$, so $R_1$ and $R_2$ are dependent. The two draws have the same distribution but are not independent.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr2-4-q1",
@@ -1025,6 +1254,7 @@ const lesson05: LessonSeed = {
       content:
         "A plane has two engines, a bank keeps three backup servers, and a rocket's launch depends on a dozen parts all working. Whether a system survives depends on how its parts are wired together. If the parts fail independently, the product rule from 2.3 answers every such question.",
     },
+    { type: "heading", text: "Series and parallel systems" },
     {
       type: "callout",
       variant: "definition",
@@ -1052,19 +1282,28 @@ const lesson05: LessonSeed = {
         "Series makes a chain weaker than its weakest link. Parallel makes the system stronger than its strongest part. For a mixed system, reduce each parallel block to a single number first, then multiply along the series chain.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (application): a village water supply.** Water reaches a village only if the main valve $A$ works **and** at least one of two pumps $B$, $C$ (installed side by side as backups) works. The parts fail independently. $A$ works with probability $0.9$ and each pump with probability $0.8$. How reliable is the supply?\n\n1. **Collapse the parallel block first.** Both pumps fail with $0.2 \\times 0.2 = 0.04$, so the block works with $1 - 0.04 = 0.96$. *Why:* a parallel block behaves like a single part whose reliability we can compute through its one failure case.\n2. **Now it is a series chain of two \"parts\":** valve ($0.9$) then pump block ($0.96$). *Why:* water needs both, so multiply.",
-    },
-    {
-      type: "math",
-      latex: "P(\\text{water}) = 0.9 \\times \\bigl(1 - 0.2^2\\bigr) = 0.9 \\times 0.96 = 0.864",
+      type: "worked-example",
+      id: "pr2-5-we1",
+      title: "Worked example 1 (application): a village water supply",
+      problem:
+        "Water reaches a village only if the main valve $A$ works **and** at least one of two pumps $B$, $C$ (installed side by side as backups) works. The parts fail independently. $A$ works with probability $0.9$ and each pump with probability $0.8$. How reliable is the supply?",
+      steps: [
+        {
+          text: "**Collapse the parallel block first.** Both pumps fail with $0.2 \\times 0.2 = 0.04$, so the block works with $1 - 0.04 = 0.96$. *Why:* a parallel block behaves like a single part whose reliability we can compute through its one failure case.",
+        },
+        {
+          text: "**Now it is a series chain of two \"parts\":** valve ($0.9$) then pump block ($0.96$). *Why:* water needs both, so multiply.",
+          latex: "P(\\text{water}) = 0.9 \\times \\bigl(1 - 0.2^2\\bigr) = 0.9 \\times 0.96 = 0.864",
+        },
+      ],
+      answer: "$0.864$",
     },
     {
       type: "text",
       content:
         "The backup pump raised the block from $0.8$ to $0.96$, but the system can never beat the single valve's $0.9$. The weak link is now $A$. If the budget allows one more part, a second valve in parallel with $A$ gives $(1 - 0.1^2) \\times 0.96 = 0.99 \\times 0.96 = 0.9504$, which helps more than a third pump would: $0.9 \\times (1 - 0.2^3) = 0.9 \\times 0.992 = 0.8928$.",
     },
+    { type: "heading", text: "Repeated trials: how many shots?" },
     {
       type: "text",
       content:
@@ -1103,9 +1342,26 @@ const lesson05: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2: how many shots?** What is the fewest shots that makes $P(\\text{at least one hit}) > 0.9$?\n\n1. We need $1 - 0.7^n > 0.9$, that is, $0.7^n < 0.1$.\n2. $0.7^6 \\approx 0.118$ is too big. $0.7^7 \\approx 0.082$ is small enough.\n3. So **7 shots**. The probability climbs towards 1 but never reaches it.\n\nFor $0.99$ we need $0.7^n < 0.01$: $0.7^{12} \\approx 0.0138$ is too big and $0.7^{13} \\approx 0.0097$ is small enough, so **13 shots**. Going from 90% to 99% sure costs almost as many extra shots again.",
+      type: "worked-example",
+      id: "pr2-5-we2",
+      title: "Worked example 2: how many shots?",
+      problem:
+        "What is the fewest shots that makes $P(\\text{at least one hit}) > 0.9$?",
+      steps: [
+        {
+          text: "We need $1 - 0.7^n > 0.9$, that is, $0.7^n < 0.1$.",
+        },
+        {
+          text: "$0.7^6 \\approx 0.118$ is too big. $0.7^7 \\approx 0.082$ is small enough.",
+        },
+        {
+          text: "So **7 shots**. The probability climbs towards 1 but never reaches it.",
+        },
+        {
+          text: "For $0.99$ we need $0.7^n < 0.01$: $0.7^{12} \\approx 0.0138$ is too big and $0.7^{13} \\approx 0.0097$ is small enough, so **13 shots**. Going from 90% to 99% sure costs almost as many extra shots again.",
+        },
+      ],
+      answer: "$7$ shots ($13$ for $0.99$).",
     },
     {
       type: "callout",
@@ -1128,29 +1384,77 @@ const lesson05: LessonSeed = {
         outputLabel: "P(at least one succeeds)",
       },
     },
+    { type: "heading", text: "Students, witnesses and taking turns" },
     {
-      type: "text",
-      content:
-        "**Worked example 3: three students.** A problem is given to three students who work independently. They solve it with probabilities $\\frac{1}{2}$, $\\frac{1}{3}$ and $\\frac{1}{4}$. What is the probability that the problem gets solved?\n\n1. It stays unsolved only if all three fail: $\\frac{1}{2} \\cdot \\frac{2}{3} \\cdot \\frac{3}{4} = \\frac{6}{24} = \\frac{1}{4}$.\n2. $P(\\text{solved}) = 1 - \\frac{1}{4} = \\frac{3}{4}$.\n\n**Exactly one solves it:** add the three single-success cases, using complements for the others.\n$\\frac{1}{2}\\cdot\\frac{2}{3}\\cdot\\frac{3}{4} + \\frac{1}{2}\\cdot\\frac{1}{3}\\cdot\\frac{3}{4} + \\frac{1}{2}\\cdot\\frac{2}{3}\\cdot\\frac{1}{4} = \\frac{6}{24} + \\frac{3}{24} + \\frac{2}{24} = \\frac{11}{24}$.",
+      type: "worked-example",
+      id: "pr2-5-we3",
+      title: "Worked example 3: three students",
+      problem:
+        "A problem is given to three students who work independently. They solve it with probabilities $\\frac{1}{2}$, $\\frac{1}{3}$ and $\\frac{1}{4}$. What is the probability that the problem gets solved?",
+      steps: [
+        {
+          text: "It stays unsolved only if all three fail: $\\frac{1}{2} \\cdot \\frac{2}{3} \\cdot \\frac{3}{4} = \\frac{6}{24} = \\frac{1}{4}$.",
+        },
+        {
+          text: "$P(\\text{solved}) = 1 - \\frac{1}{4} = \\frac{3}{4}$.",
+        },
+        {
+          text: "**Exactly one solves it:** add the three single-success cases, using complements for the others.\n$\\frac{1}{2}\\cdot\\frac{2}{3}\\cdot\\frac{3}{4} + \\frac{1}{2}\\cdot\\frac{1}{3}\\cdot\\frac{3}{4} + \\frac{1}{2}\\cdot\\frac{2}{3}\\cdot\\frac{1}{4} = \\frac{6}{24} + \\frac{3}{24} + \\frac{2}{24} = \\frac{11}{24}$.",
+        },
+      ],
+      answer: "$P(\\text{solved}) = \\frac{3}{4}$; exactly one solves it with $\\frac{11}{24}$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (exam style, CBSE): contradicting witnesses.** A speaks the truth in 60% of cases and B in 90% of cases, independently. In what percentage of cases are they likely to **contradict** each other when stating the same fact?\n\n1. **Translate the words into events.** They contradict exactly when one tells the truth and the other lies. *Why:* on a yes/no fact, two truths agree and two lies also agree (both say the same false thing).\n2. **List the two separate cases**, each a product by independence:\n   - A true, B lies: $0.6 \\times 0.1 = 0.06$.\n   - A lies, B true: $0.4 \\times 0.9 = 0.36$.\n3. **Add**, since the two cases can't both happen:",
+      type: "worked-example",
+      id: "pr2-5-we4",
+      title: "Worked example 4 (exam style, CBSE): contradicting witnesses",
+      problem:
+        "A speaks the truth in 60% of cases and B in 90% of cases, independently. In what percentage of cases are they likely to **contradict** each other when stating the same fact?",
+      steps: [
+        {
+          text: "**Translate the words into events.** They contradict exactly when one tells the truth and the other lies. *Why:* on a yes/no fact, two truths agree and two lies also agree (both say the same false thing).",
+        },
+        {
+          text: "**List the two separate cases**, each a product by independence:\n- A true, B lies: $0.6 \\times 0.1 = 0.06$.\n- A lies, B true: $0.4 \\times 0.9 = 0.36$.",
+        },
+        {
+          text: "**Add**, since the two cases can't both happen:",
+          latex: "P(\\text{contradict}) = 0.6 \\times 0.1 + 0.4 \\times 0.9 = 0.06 + 0.36 = 0.42 = 42\\%",
+        },
+        {
+          text: "Check through the complement: they agree with $0.6 \\times 0.9 + 0.4 \\times 0.1 = 0.54 + 0.04 = 0.58$, and $0.42 + 0.58 = 1$. The trap is to answer $0.06$ or $0.36$ alone: \"exactly one\" always means adding every arrangement.",
+        },
+      ],
+      answer: "$42\\%$ of cases.",
     },
     {
-      type: "math",
-      latex: "P(\\text{contradict}) = 0.6 \\times 0.1 + 0.4 \\times 0.9 = 0.06 + 0.36 = 0.42 = 42\\%",
-    },
-    {
-      type: "text",
-      content:
-        "Check through the complement: they agree with $0.6 \\times 0.9 + 0.4 \\times 0.1 = 0.54 + 0.04 = 0.58$, and $0.42 + 0.58 = 1$. The trap is to answer $0.06$ or $0.36$ alone: \"exactly one\" always means adding every arrangement.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5: taking turns.** A and B throw a die alternately, A first. The first to throw a 6 wins. What is $P(\\text{A wins})$?\n\nWrite $p = \\frac{1}{6}$ for a six and $q = \\frac{5}{6}$ for anything else. The throws are independent.\n\n1. A can win on throw 1, 3, 5, and so on. To win on throw 3, both earlier throws must miss: $q \\cdot q \\cdot p$. To win on throw 5, four misses come first: $q^4 p$.\n2. These cases are mutually exclusive, so add them:\n$$P(\\text{A}) = p + q^2 p + q^4 p + \\cdots = \\frac{p}{1 - q^2},$$\na geometric series with ratio $q^2 < 1$.\n3. $P(\\text{A}) = \\dfrac{1/6}{1 - 25/36} = \\dfrac{1/6}{11/36} = \\dfrac{6}{11}$.\n\n**The restart argument** gets there without a series. Either A wins at once (probability $p$), or both miss (probability $q^2$), and then the game is exactly as it was at the start, with A to throw. So $P(\\text{A}) = p + q^2\\,P(\\text{A})$, which gives $P(\\text{A}) = \\frac{p}{1 - q^2} = \\frac{6}{11}$.\n\nCheck: $P(\\text{B}) = \\frac{5}{11}$. Going first is an advantage, but a small one, because a six is rare.",
+      type: "worked-example",
+      id: "pr2-5-we5",
+      title: "Worked example 5: taking turns",
+      problem:
+        "A and B throw a die alternately, A first. The first to throw a 6 wins. What is $P(\\text{A wins})$?",
+      steps: [
+        {
+          text: "Write $p = \\frac{1}{6}$ for a six and $q = \\frac{5}{6}$ for anything else. The throws are independent.",
+        },
+        {
+          text: "A can win on throw 1, 3, 5, and so on. To win on throw 3, both earlier throws must miss: $q \\cdot q \\cdot p$. To win on throw 5, four misses come first: $q^4 p$.",
+        },
+        {
+          text: "These cases are mutually exclusive, so add them. This is a geometric series with ratio $q^2 < 1$:",
+          latex: "P(\\text{A}) = p + q^2 p + q^4 p + \\cdots = \\frac{p}{1 - q^2}",
+        },
+        {
+          text: "$P(\\text{A}) = \\dfrac{1/6}{1 - 25/36} = \\dfrac{1/6}{11/36} = \\dfrac{6}{11}$.",
+        },
+        {
+          text: "**The restart argument** gets there without a series. Either A wins at once (probability $p$), or both miss (probability $q^2$), and then the game is exactly as it was at the start, with A to throw. So $P(\\text{A}) = p + q^2\\,P(\\text{A})$, which gives $P(\\text{A}) = \\frac{p}{1 - q^2} = \\frac{6}{11}$.",
+        },
+        {
+          text: "Check: $P(\\text{B}) = \\frac{5}{11}$. Going first is an advantage, but a small one, because a six is rare.",
+        },
+      ],
+      answer: "$\\frac{6}{11}$",
     },
     {
       type: "callout",
@@ -1159,6 +1463,7 @@ const lesson05: LessonSeed = {
       content:
         "\"**At least one**\" → $1 - P(\\text{none})$.\n\"**All**\" or \"**every**\" → multiply the successes.\n\"**Exactly one**\" → add up the separate cases, each one a product.\nAll three shortcuts depend on independence. Check that it is stated or reasonable before you multiply.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr2-5-q1",
@@ -1286,10 +1591,11 @@ const lesson06: LessonSeed = {
       content:
         "Conditional probability has one rule: **write down exactly which outcomes are still possible, then count**. The famous puzzles all catch people who skip that step and reason from a vague feeling that \"the other one is 50-50\". Here are two classics, each solved twice.",
     },
+    { type: "heading", text: "The two-child problem" },
     {
       type: "text",
       content:
-        "**The two-child problem.** A family has two children. Each child is a boy or a girl with probability $\\frac{1}{2}$, independently. Listing the elder child first, the sample space is\n\n$$S = \\{BB,\\ BG,\\ GB,\\ GG\\},$$\n\nwith each outcome having probability $\\frac{1}{4}$. Now compare two pieces of information.",
+        "A family has two children. Each child is a boy or a girl with probability $\\frac{1}{2}$, independently. Listing the elder child first, the sample space is\n\n$$S = \\{BB,\\ BG,\\ GB,\\ GG\\},$$\n\nwith each outcome having probability $\\frac{1}{4}$. Now compare two pieces of information.",
     },
     {
       type: "table",
@@ -1325,10 +1631,11 @@ const lesson06: LessonSeed = {
       content:
         "Suppose instead that you meet one of the two children at random and it is a boy. Then $P(\\text{met a boy}) = \\frac{1}{2}$ and $P(BB \\text{ and met a boy}) = \\frac{1}{4}$, so $P(BB \\mid \\text{met a boy}) = \\frac{1}{2}$. The event you condition on is \"the child I happened to meet is a boy\", not \"there is at least one boy\". These are different events and they give different answers. Always write the conditioning event out precisely.",
     },
+    { type: "heading", text: "Bertrand's box" },
     {
       type: "text",
       content:
-        "**Bertrand's box.** Three boxes each hold two coins: one has gold–gold (GG), one gold–silver (GS), one silver–silver (SS). You pick a box at random, take out one coin without looking, and it is gold. What is the probability that the other coin in the box is also gold?\n\nThe tempting argument goes: \"It is either the GG box or the GS box, so the answer is $\\frac{1}{2}$.\" That treats the two boxes as equally likely *given what you saw*. They are not.",
+        "Three boxes each hold two coins: one has gold–gold (GG), one gold–silver (GS), one silver–silver (SS). You pick a box at random, take out one coin without looking, and it is gold. What is the probability that the other coin in the box is also gold?\n\nThe tempting argument goes: \"It is either the GG box or the GS box, so the answer is $\\frac{1}{2}$.\" That treats the two boxes as equally likely *given what you saw*. They are not.",
     },
     {
       type: "text",
@@ -1366,47 +1673,76 @@ const lesson06: LessonSeed = {
         "P(GG \\mid \\text{gold}) = \\frac{P(GG)\\,P(\\text{gold} \\mid GG)}{P(\\text{gold})} = \\frac{\\frac{1}{3}\\cdot 1}{\\frac{1}{3}\\cdot 1 + \\frac{1}{3}\\cdot\\frac{1}{2}} = \\frac{1/3}{1/2} = \\frac{2}{3}",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (application): the trick coin.** A friend has two coins in his pocket: one fair, one with heads on both sides. He takes one out at random, tosses it, and it lands heads. What is the probability that it is the double-headed coin?\n\nThe tempting answer is $\\frac{1}{2}$: \"it's one of two coins\". Run the routine instead.\n\n1. **Full sample space with weights.** Coin choice first, then the toss: Fair→H $\\frac{1}{2}\\cdot\\frac{1}{2} = \\frac{1}{4}$, Fair→T $\\frac{1}{4}$, Double→H $\\frac{1}{2}\\cdot 1 = \\frac{1}{2}$. *Why:* the stages have different probabilities, so a tree (not a list of equally likely outcomes) is the honest picture.\n2. **The information as an event:** \"the toss showed heads\" = the two H leaves, total $\\frac{1}{4} + \\frac{1}{2} = \\frac{3}{4}$.\n3. **Divide the target's share by what survives:**",
-    },
-    {
-      type: "math",
-      latex:
-        "P(\\text{double} \\mid H) = \\frac{P(\\text{double} \\cap H)}{P(H)} = \\frac{1/2}{3/4} = \\frac{2}{3}",
+      type: "worked-example",
+      id: "pr2-6-we1",
+      title: "Worked example 1 (application): the trick coin",
+      problem:
+        "A friend has two coins in his pocket: one fair, one with heads on both sides. He takes one out at random, tosses it, and it lands heads. What is the probability that it is the double-headed coin?",
+      steps: [
+        {
+          text: "The tempting answer is $\\frac{1}{2}$: \"it's one of two coins\". Run the routine instead.",
+        },
+        {
+          text: "**Full sample space with weights.** Coin choice first, then the toss: Fair→H $\\frac{1}{2}\\cdot\\frac{1}{2} = \\frac{1}{4}$, Fair→T $\\frac{1}{4}$, Double→H $\\frac{1}{2}\\cdot 1 = \\frac{1}{2}$. *Why:* the stages have different probabilities, so a tree (not a list of equally likely outcomes) is the honest picture.",
+        },
+        {
+          text: "**The information as an event:** \"the toss showed heads\" = the two H leaves, total $\\frac{1}{4} + \\frac{1}{2} = \\frac{3}{4}$.",
+        },
+        {
+          text: "**Divide the target's share by what survives:**",
+          latex: "P(\\text{double} \\mid H) = \\frac{P(\\text{double} \\cap H)}{P(H)} = \\frac{1/2}{3/4} = \\frac{2}{3}",
+        },
+      ],
+      answer: "$\\frac{2}{3}$",
     },
     {
       type: "text",
       content:
         "This is Bertrand's box in disguise. The double-headed coin has two ways to show heads and the fair coin only one, so heads is evidence for the trick coin. Toss again and get heads a second time, and the evidence grows: the practice question below asks you to find how much.",
     },
+    { type: "heading", text: "At least one versus a named card" },
     {
-      type: "text",
-      content:
-        "**Worked example 2: at least one six.** Two dice are rolled and you are told at least one shows a 6. What is the probability that both do?\n\n1. The cells with at least one 6 are the last row and last column of the grid: $6 + 6 - 1 = 11$ cells.\n2. Only $(6,6)$ has both, so the answer is $\\frac{1}{11}$.\n3. Compare \"the **first** die is a 6\", which leaves six cells and gives $\\frac{1}{6}$. As with the children, the vaguer statement gives the smaller answer.",
+      type: "worked-example",
+      id: "pr2-6-we2",
+      title: "Worked example 2: at least one six",
+      problem:
+        "Two dice are rolled and you are told at least one shows a 6. What is the probability that both do?",
+      steps: [
+        {
+          text: "The cells with at least one 6 are the last row and last column of the grid: $6 + 6 - 1 = 11$ cells.",
+        },
+        {
+          text: "Only $(6,6)$ has both, so the answer is $\\frac{1}{11}$.",
+        },
+        {
+          text: "Compare \"the **first** die is a 6\", which leaves six cells and gives $\\frac{1}{6}$. As with the children, the vaguer statement gives the smaller answer.",
+        },
+      ],
+      answer: "$\\frac{1}{11}$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (exam style): the ace of spades.** Two cards are dealt from a shuffled deck. Compare\n\n(a) $P(\\text{both aces} \\mid \\text{at least one ace})$ and (b) $P(\\text{both aces} \\mid \\text{one of them is the ace of spades})$.\n\nThe hands are unordered pairs, all $\\binom{52}{2} = 1326$ equally likely.\n\n1. **(a) Size the universe through its complement.** Hands with no ace: $\\binom{48}{2} = 1128$. So hands with at least one ace: $1326 - 1128 = 198$. *Why:* \"at least one\" is always easier via \"none\". Hands with two aces: $\\binom{4}{2} = 6$.",
-    },
-    {
-      type: "math",
-      latex: "P(\\text{both aces} \\mid \\text{at least one ace}) = \\frac{6}{198} = \\frac{1}{33}",
-    },
-    {
-      type: "text",
-      content:
-        "2. **(b) A named card makes a different universe.** Hands containing the ace of spades: its partner is any of the other 51 cards, so 51 hands. Of those, the partner is an ace in 3. *Why:* conditioning on a **specific** card pins one card down and leaves the other free, just as \"the elder is a boy\" did.",
-    },
-    {
-      type: "math",
-      latex: "P(\\text{both aces} \\mid \\text{ace of spades held}) = \\frac{3}{51} = \\frac{1}{17}",
-    },
-    {
-      type: "text",
-      content:
-        "Naming the suit nearly **doubles** the answer, from $\\frac{1}{33}$ to $\\frac{1}{17}$, even though it sounds like irrelevant detail. The reason is the same as in the two-child problem: \"at least one ace\" admits many one-ace hands (192 of them), while pinning down the ace of spades admits only 48 one-ace hands. The more specific the information, the fewer mixed outcomes survive.",
+      type: "worked-example",
+      id: "pr2-6-we3",
+      title: "Worked example 3 (exam style): the ace of spades",
+      problem:
+        "Two cards are dealt from a shuffled deck. Compare\n\n(a) $P(\\text{both aces} \\mid \\text{at least one ace})$ and (b) $P(\\text{both aces} \\mid \\text{one of them is the ace of spades})$.",
+      steps: [
+        {
+          text: "The hands are unordered pairs, all $\\binom{52}{2} = 1326$ equally likely.",
+        },
+        {
+          text: "**(a) Size the universe through its complement.** Hands with no ace: $\\binom{48}{2} = 1128$. So hands with at least one ace: $1326 - 1128 = 198$. *Why:* \"at least one\" is always easier via \"none\". Hands with two aces: $\\binom{4}{2} = 6$.",
+          latex: "P(\\text{both aces} \\mid \\text{at least one ace}) = \\frac{6}{198} = \\frac{1}{33}",
+        },
+        {
+          text: "**(b) A named card makes a different universe.** Hands containing the ace of spades: its partner is any of the other 51 cards, so 51 hands. Of those, the partner is an ace in 3. *Why:* conditioning on a **specific** card pins one card down and leaves the other free, just as \"the elder is a boy\" did.",
+          latex: "P(\\text{both aces} \\mid \\text{ace of spades held}) = \\frac{3}{51} = \\frac{1}{17}",
+        },
+        {
+          text: "Naming the suit nearly **doubles** the answer, from $\\frac{1}{33}$ to $\\frac{1}{17}$, even though it sounds like irrelevant detail. The reason is the same as in the two-child problem: \"at least one ace\" admits many one-ace hands (192 of them), while pinning down the ace of spades admits only 48 one-ace hands. The more specific the information, the fewer mixed outcomes survive.",
+        },
+      ],
+      answer: "(a) $\\frac{1}{33}$ (b) $\\frac{1}{17}$",
     },
     {
       type: "callout",
@@ -1415,6 +1751,7 @@ const lesson06: LessonSeed = {
       content:
         "1. Write out the full sample space, with each outcome's probability. Use a tree if the stages differ.\n2. Write the information as a precise event, including *how* it was learned.\n3. Cross out everything outside that event.\n4. Divide the target's share by what survives. Don't trust any \"it's obviously 50-50\" shortcut until the count agrees.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "pr2-6-q1",

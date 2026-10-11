@@ -1,32 +1,36 @@
 import { ViewTransition } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronRight, Circle, CircleCheck, CircleDot } from "lucide-react";
+import { ChevronRight, Circle, CircleCheck, CircleDot, PlayCircle } from "lucide-react";
 import { db } from "@/db";
 import { requireUser } from "@/modules/auth/session";
 import {
   getCourseBySlug,
   getCourseOutline,
 } from "@/modules/content/services/content-service";
+import { trackForCourse } from "@/modules/content/lib/catalog";
+import { splitCourseTitle, splitNumberedTitle } from "@/modules/content/lib/titles";
 import {
   getContinueLesson,
   getCourseProgress,
 } from "@/modules/progress/services/progress-service";
-import { Badge } from "@/components/ui/badge";
+import { resolveContinueTarget } from "@/modules/progress/lib/continue-target";
 import { buttonVariants } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { ProgressBar } from "@/components/progress-bar";
 import {
   Collapsible,
   CollapsiblePanel,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { cn } from "@/lib/utils";
 
 function StatusIcon({ status }: { status?: "started" | "completed" }) {
   if (status === "completed")
-    return <CircleCheck className="size-4 shrink-0 text-primary" aria-label="Completed" />;
+    return <CircleCheck className="size-4 shrink-0 text-success" aria-label="Completed" />;
   if (status === "started")
-    return <CircleDot className="size-4 shrink-0 text-primary/60" aria-label="In progress" />;
-  return <Circle className="size-4 shrink-0 text-muted-foreground/40" aria-hidden />;
+    return <CircleDot className="size-4 shrink-0 text-primary" aria-label="In progress" />;
+  return <Circle className="size-4 shrink-0 text-muted-foreground/40" aria-label="Not started" />;
 }
 
 export default async function CoursePage({
@@ -53,22 +57,13 @@ export default async function CoursePage({
   const completed = flat.filter(
     ({ lesson }) => progressByLesson.get(lesson.id) === "completed",
   ).length;
-  const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
+  const percent = total === 0 ? 0 : (completed / total) * 100;
+  const courseDone = total > 0 && completed === total;
+  const continueTarget = resolveContinueTarget(flat, progressByLesson, recent);
 
-  // Continue where you left off; if that lesson is done, advance to the
-  // next uncompleted lesson in course order.
-  let continueTarget = flat[0] ?? null;
-  if (recent) {
-    const idx = flat.findIndex(({ lesson }) => lesson.id === recent.lessonId);
-    continueTarget =
-      recent.status === "completed"
-        ? (flat
-            .slice(idx + 1)
-            .find(({ lesson }) => progressByLesson.get(lesson.id) !== "completed") ??
-          flat[idx] ??
-          null)
-        : (flat[idx] ?? null);
-  }
+  const { name, tagline } = splitCourseTitle(course.title);
+  const track = trackForCourse(course.slug);
+  const nextLesson = continueTarget ? splitNumberedTitle(continueTarget.lesson.title) : null;
 
   return (
     <ViewTransition
@@ -80,91 +75,153 @@ export default async function CoursePage({
         <div className="space-y-4">
           <Breadcrumbs
             items={[
-              { label: "Courses", href: "/courses" },
-              { label: course.title },
+              { label: track?.title ?? "Courses", href: "/courses" },
+              { label: name },
             ]}
           />
-          <ViewTransition name={`course-${course.slug}`} share="morph" default="none">
-            <h1 className="text-4xl font-bold tracking-tight">{course.title}</h1>
-          </ViewTransition>
+          <div className="space-y-2">
+            <ViewTransition name={`course-${course.slug}`} share="morph" default="none">
+              <h1 className="text-4xl font-bold tracking-tight">{name}</h1>
+            </ViewTransition>
+            {tagline && <p className="text-xl text-muted-foreground">{tagline}</p>}
+          </div>
           {course.description && (
-            <p className="text-lg text-muted-foreground">{course.description}</p>
-          )}
-          {total > 0 && (
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="h-2 max-w-xs flex-1 overflow-hidden rounded-full bg-muted">
-                  <div
-                    className="h-full rounded-full bg-primary transition-all"
-                    style={{ width: `${percent}%` }}
-                  />
-                </div>
-                <span className="text-sm text-muted-foreground">
-                  {completed}/{total} lessons
-                </span>
-              </div>
-              {continueTarget && (
-                <Link
-                  href={`/course/${course.slug}/${continueTarget.chapter.slug}/${continueTarget.lesson.slug}`}
-                  transitionTypes={["nav-forward"]}
-                  className={buttonVariants({ size: "lg" })}
-                >
-                  {completed === 0 && !recent ? "Start course" : "Continue learning"}
-                </Link>
-              )}
-            </div>
+            <p className="max-w-3xl text-muted-foreground">{course.description}</p>
           )}
         </div>
 
-        <div className="space-y-3">
-          {outline.map((chapter) => {
+        {total > 0 && (
+          <div className="flex flex-col gap-4 rounded-2xl border bg-card p-5 shadow-xs sm:flex-row sm:items-center sm:justify-between">
+            <div className="min-w-0 flex-1 space-y-2">
+              <div className="flex items-baseline justify-between gap-3 text-sm sm:justify-start">
+                <span className="font-medium">
+                  {courseDone ? "Course complete" : "Your progress"}
+                </span>
+                <span className="tabular-nums text-muted-foreground">
+                  {completed} of {total} lessons · {outline.length} chapters
+                </span>
+              </div>
+              <ProgressBar value={percent} label="Course progress" className="max-w-md" />
+            </div>
+            {continueTarget && nextLesson && (
+              <Link
+                href={`/course/${course.slug}/${continueTarget.chapter.slug}/${continueTarget.lesson.slug}`}
+                transitionTypes={["nav-forward"]}
+                className={buttonVariants({
+                  size: "lg",
+                  variant: courseDone ? "outline" : "default",
+                  className: "h-auto min-h-10 max-w-full gap-2 py-2 whitespace-normal",
+                })}
+              >
+                <PlayCircle aria-hidden />
+                <span className="text-left">
+                  <span className="block text-xs font-normal opacity-80">
+                    {courseDone ? "Review" : recent ? "Continue" : "Start course"}
+                  </span>
+                  <span className="block leading-snug">{nextLesson.text}</span>
+                </span>
+              </Link>
+            )}
+          </div>
+        )}
+
+        <section aria-label="Chapters" className="space-y-3">
+          {outline.map((chapter, chapterIndex) => {
             const done = chapter.lessons.filter(
               (l) => progressByLesson.get(l.id) === "completed",
             ).length;
             const chapterComplete =
               chapter.lessons.length > 0 && done === chapter.lessons.length;
+            const title = splitNumberedTitle(chapter.title);
+            const isCurrentChapter = continueTarget?.chapter.id === chapter.id;
             return (
               <Collapsible
                 key={chapter.id}
-                className="rounded-xl border bg-card shadow-xs"
+                defaultOpen={isCurrentChapter && !courseDone}
+                className={cn(
+                  "rounded-xl border bg-card shadow-xs",
+                  isCurrentChapter && !courseDone && "border-primary/30",
+                )}
               >
-                <CollapsibleTrigger className="group flex w-full items-center justify-between gap-3 rounded-xl p-5 text-left transition-colors hover:bg-accent/30">
-                  <span className="flex min-w-0 items-center gap-2.5">
-                    <ChevronRight
-                      className="size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[panel-open]:rotate-90"
-                      aria-hidden
-                    />
-                    <span className="truncate text-xl font-semibold">
-                      {chapter.title}
+                <CollapsibleTrigger className="group flex w-full items-center gap-4 rounded-xl p-4 text-left transition-colors hover:bg-accent/30 sm:p-5">
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold tabular-nums",
+                      chapterComplete
+                        ? "bg-success/15 text-success"
+                        : "bg-secondary text-secondary-foreground",
+                    )}
+                  >
+                    {chapterComplete ? (
+                      <CircleCheck className="size-5" />
+                    ) : (
+                      (title.number ?? chapterIndex + 1)
+                    )}
+                  </span>
+                  <span className="min-w-0 flex-1 space-y-1.5">
+                    {isCurrentChapter && !courseDone && (
+                      <span className="block text-xs font-medium text-primary">
+                        You&apos;re here
+                      </span>
+                    )}
+                    <span className="block text-lg font-semibold leading-snug">
+                      <span className="sr-only">Chapter {title.number ?? chapterIndex + 1}: </span>
+                      {title.text}
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <ProgressBar
+                        value={(done / Math.max(chapter.lessons.length, 1)) * 100}
+                        label={`${title.text} progress`}
+                        className="w-24"
+                      />
+                      <span className="text-xs tabular-nums text-muted-foreground">
+                        {done}/{chapter.lessons.length} lessons
+                      </span>
                     </span>
                   </span>
-                  <Badge
-                    variant="secondary"
-                    className={chapterComplete ? "text-success" : undefined}
-                  >
-                    {done}/{chapter.lessons.length} done
-                  </Badge>
+                  <ChevronRight
+                    className="size-5 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[panel-open]:rotate-90"
+                    aria-hidden
+                  />
                 </CollapsibleTrigger>
                 <CollapsiblePanel>
-                  <ul className="space-y-1 px-5 pb-5">
-                    {chapter.lessons.map((lesson) => (
-                      <li key={lesson.id}>
-                        <Link
-                          href={`/course/${course.slug}/${chapter.slug}/${lesson.slug}`}
-                          transitionTypes={["nav-forward"]}
-                          className="flex items-center gap-2.5 rounded-md px-2 py-1.5 transition-colors hover:bg-accent/50"
-                        >
-                          <StatusIcon status={progressByLesson.get(lesson.id)} />
-                          <span>{lesson.title}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                  <ol className="space-y-0.5 border-t px-3 py-3 sm:px-4">
+                    {chapter.lessons.map((lesson) => {
+                      const lessonTitle = splitNumberedTitle(lesson.title);
+                      const isNext = continueTarget?.lesson.id === lesson.id && !courseDone;
+                      return (
+                        <li key={lesson.id}>
+                          <Link
+                            href={`/course/${course.slug}/${chapter.slug}/${lesson.slug}`}
+                            transitionTypes={["nav-forward"]}
+                            className={cn(
+                              "flex items-center gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-accent/50",
+                              isNext && "bg-accent/60",
+                            )}
+                          >
+                            <StatusIcon status={progressByLesson.get(lesson.id)} />
+                            {lessonTitle.number && (
+                              <span className="w-8 shrink-0 text-sm tabular-nums text-muted-foreground">
+                                {lessonTitle.number}
+                              </span>
+                            )}
+                            <span className="min-w-0 flex-1">{lessonTitle.text}</span>
+                            {isNext && (
+                              <span className="shrink-0 rounded-full bg-primary px-2 py-0.5 text-xs font-medium text-primary-foreground">
+                                Up next
+                              </span>
+                            )}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ol>
                 </CollapsiblePanel>
               </Collapsible>
             );
           })}
-        </div>
+        </section>
       </div>
     </ViewTransition>
   );

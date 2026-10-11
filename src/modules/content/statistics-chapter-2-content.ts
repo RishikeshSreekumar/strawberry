@@ -78,6 +78,7 @@ const lesson01: LessonSeed = {
           "Both bands balance at 40, but A's dots huddle around it while B's are flung across the whole axis. Drag any of B's dots and watch the mean move while the scatter stays.",
       },
     },
+    { type: "heading", text: "A second number: spread" },
     {
       type: "text",
       content:
@@ -124,32 +125,61 @@ const lesson01: LessonSeed = {
         { text: "The class with more students has the larger spread.", feedback: "Class size does not decide spread. A big class can be tightly bunched." },
       ],
     },
+    { type: "heading", text: "The simplest spread: the range" },
     {
       type: "text",
       content:
-        "**The simplest spread: the range.** Take the gap between the two extremes.",
+        "Take the gap between the two extremes.",
     },
     { type: "math", latex: "\\text{Range} = x_{\\max} - x_{\\min}" },
     {
-      type: "text",
-      content:
-        "**Worked example.** Range of each batsman.\n\n**Step 1.** A: largest 45, smallest 35. Range $= 45 - 35 = 10$ runs.\n**Step 2.** B: largest 110, smallest 0. Range $= 110 - 0 = 110$ runs.\n**Step 3.** Interpret: B's range is eleven times A's, which matches the picture.\n\nThe range has the same units as the data, is quick to compute, and is useful for things like daily temperature swings or quality checks on a production line.",
+      type: "worked-example",
+      id: "st2-1-we1",
+      problem:
+        "Find the range of each batsman's scores.",
+      steps: [
+        { text: "A: largest 45, smallest 35. Range $= 45 - 35 = 10$ runs." },
+        { text: "B: largest 110, smallest 0. Range $= 110 - 0 = 110$ runs." },
+        { text: "Interpret: B's range is eleven times A's, which matches the picture." },
+      ],
+      answer: "A: 10 runs. B: 110 runs",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 (routine): the coefficient of range.** The range carries units, so a 13 °C range cannot be compared fairly with a 10-run range. Dividing by the sum of the extremes gives a unit-free version:",
+        "The range has the same units as the data, is quick to compute, and is useful for things like daily temperature swings or quality checks on a production line.",
+    },
+    {
+      type: "text",
+      content:
+        "The range carries units, so a 13 °C range cannot be compared fairly with a 10-run range. Dividing by the sum of the extremes gives a unit-free version:",
     },
     { type: "math", latex: "\\text{Coefficient of range} = \\frac{x_{\\max} - x_{\\min}}{x_{\\max} + x_{\\min}}" },
     {
-      type: "text",
-      content:
-        "Maximum temperatures (°C) in one week: 18, 22, 25, 31, 27, 20, 24.\n\n**Step 1.** Largest 31, smallest 18. *Why:* the range needs only the extremes, so scan for them; no full sort is needed.\n**Step 2.** Range $= 31 - 18 = 13$ °C.\n**Step 3.** Coefficient of range $= \\frac{13}{31 + 18} = \\frac{13}{49} \\approx 0.27$. *Why divide:* °C over °C cancels the units, so this number can be set beside the coefficient of any other data set.",
+      type: "worked-example",
+      id: "st2-1-we2",
+      title: "Worked example 2 (routine): the coefficient of range",
+      problem:
+        "Maximum temperatures (°C) in one week: 18, 22, 25, 31, 27, 20, 24. Find the range and the coefficient of range.",
+      steps: [
+        { text: "Largest 31, smallest 18. *Why:* the range needs only the extremes, so scan for them; no full sort is needed." },
+        { text: "Range $= 31 - 18 = 13$ °C." },
+        { text: "Coefficient of range $= \\frac{13}{31 + 18} = \\frac{13}{49} \\approx 0.27$. *Why divide:* °C over °C cancels the units, so this number can be set beside the coefficient of any other data set." },
+      ],
+      answer: "Range 13 °C; coefficient of range $\\approx 0.27$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 (application): quality control.** Two machines cut bolts meant to be 50 mm long. Five bolts from each (mm):\nMachine P: 49.8, 50.1, 50.0, 49.9, 50.2\nMachine Q: 49.5, 50.4, 50.0, 49.7, 50.4\n\n**Step 1. Check the centres.** Both lists add to 250.0, so both machines average exactly 50.0 mm. *Why check:* if the means differed, 'which machine is better' would partly be a question of aim, not of consistency.\n**Step 2. Ranges.** P: $50.2 - 49.8 = 0.4$ mm. Q: $50.4 - 49.5 = 0.9$ mm.\n**Step 3. Decide.** Both are on target, but Q's bolts wander more than twice as far. With a tolerance of $50 \\pm 0.3$ mm, every P bolt passes while three of Q's five (49.5, 50.4, 50.4) are rejected.",
+      type: "worked-example",
+      id: "st2-1-we3",
+      title: "Worked example 3 (application): quality control",
+      problem:
+        "Two machines cut bolts meant to be 50 mm long. Five bolts from each (mm):\nMachine P: 49.8, 50.1, 50.0, 49.9, 50.2\nMachine Q: 49.5, 50.4, 50.0, 49.7, 50.4\n\nUse the range to decide which machine is more consistent.",
+      steps: [
+        { text: "**Check the centres.** Both lists add to 250.0, so both machines average exactly 50.0 mm. *Why check:* if the means differed, 'which machine is better' would partly be a question of aim, not of consistency." },
+        { text: "**Ranges.** P: $50.2 - 49.8 = 0.4$ mm. Q: $50.4 - 49.5 = 0.9$ mm." },
+        { text: "**Decide.** Both are on target, but Q's bolts wander more than twice as far. With a tolerance of $50 \\pm 0.3$ mm, every P bolt passes while three of Q's five (49.5, 50.4, 50.4) are rejected." },
+      ],
+      answer: "Both average 50.0 mm, but Q's range (0.9 mm) is more than twice P's (0.4 mm): P is more consistent",
     },
     {
       type: "quiz",
@@ -165,9 +195,18 @@ const lesson01: LessonSeed = {
       hint: "$\\frac{x_{\\max} - x_{\\min}}{x_{\\max} + x_{\\min}}$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (exam style).** A data set has smallest value 15 and range 20. Each value $x$ is replaced by $y = 4 - 3x$. Find the new largest value, smallest value and range.\n\n**Step 1.** Original largest value $= 15 + 20 = 35$.\n**Step 2. Transform both extremes.** $x = 15$ gives $y = 4 - 45 = -41$; $x = 35$ gives $y = 4 - 105 = -101$.\n**Step 3. Watch the roles swap.** *Why:* multiplying by a negative number reverses the order, so the old smallest value becomes the new largest. New largest $= -41$, new smallest $= -101$.\n**Step 4.** New range $= -41 - (-101) = 60 = |-3| \\times 20$. The $+4$ slid every value without changing any gap; the factor $-3$ stretched every gap threefold (and flipped it). Lesson 2.6 shows that every measure of spread behaves this way.",
+      type: "worked-example",
+      id: "st2-1-we4",
+      title: "Worked example 4: exam style",
+      problem:
+        "A data set has smallest value 15 and range 20. Each value $x$ is replaced by $y = 4 - 3x$. Find the new largest value, smallest value and range.",
+      steps: [
+        { text: "Original largest value $= 15 + 20 = 35$." },
+        { text: "**Transform both extremes.** $x = 15$ gives $y = 4 - 45 = -41$; $x = 35$ gives $y = 4 - 105 = -101$." },
+        { text: "**Watch the roles swap.** *Why:* multiplying by a negative number reverses the order, so the old smallest value becomes the new largest. New largest $= -41$, new smallest $= -101$." },
+        { text: "New range $= -41 - (-101) = 60 = |-3| \\times 20$. The $+4$ slid every value without changing any gap; the factor $-3$ stretched every gap threefold (and flipped it). Lesson 2.6 shows that every measure of spread behaves this way." },
+      ],
+      answer: "New largest $-41$, new smallest $-101$, new range 60",
     },
     {
       type: "quiz",
@@ -194,6 +233,7 @@ const lesson01: LessonSeed = {
       content:
         "Try it in the builder above: drag A's highest dot out to 100. A's range balloons from 10 to 65, but the other nine innings are exactly as consistent as before. A good measure of spread should listen to every value, not just the two loudest. The rest of the chapter builds such measures.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st2-1-q2",
@@ -261,20 +301,53 @@ const lesson02: LessonSeed = {
       content:
         "For raw data we use the **median-of-halves** rule: find the median; if $n$ is odd, leave the median out of both halves; then $Q_1$ and $Q_3$ are the medians of the lower and upper halves. Textbooks and calculators use a few slightly different rules, so answers can differ by a small amount on small data sets. The idea never changes.",
     },
+    { type: "heading", text: "Quartiles of raw data" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (odd $n$).** 3, 5, 7, 8, 10, 12, 13, 15, 18, 20, 25.\n\n**Step 1.** Already sorted, $n = 11$. The median is the 6th value: $Q_2 = 12$.\n**Step 2.** Leave 12 out. Lower half: 3, 5, 7, 8, 10, whose median is $Q_1 = 7$.\n**Step 3.** Upper half: 13, 15, 18, 20, 25, whose median is $Q_3 = 18$.\n**Step 4.** $\\text{IQR} = 18 - 7 = 11$. The semi-IQR is 5.5.",
+      type: "worked-example",
+      id: "st2-2-we1",
+      title: "Worked example 1: odd $n$",
+      problem:
+        "3, 5, 7, 8, 10, 12, 13, 15, 18, 20, 25. Find the quartiles and the IQR.",
+      steps: [
+        { text: "Already sorted, $n = 11$. The median is the 6th value: $Q_2 = 12$." },
+        { text: "Leave 12 out. Lower half: 3, 5, 7, 8, 10, whose median is $Q_1 = 7$." },
+        { text: "Upper half: 13, 15, 18, 20, 25, whose median is $Q_3 = 18$." },
+        { text: "$\\text{IQR} = 18 - 7 = 11$. The semi-IQR is 5.5." },
+      ],
+      answer: "$Q_1 = 7$, $Q_2 = 12$, $Q_3 = 18$; IQR 11",
+    },
+    {
+      type: "worked-example",
+      id: "st2-2-we2",
+      title: "Worked example 2: even $n$",
+      problem:
+        "4, 6, 9, 11, 12, 14, 17, 19, 22, 30. Find the quartiles and the IQR.",
+      steps: [
+        { text: "$n = 10$, so the median is the mean of the 5th and 6th values: $Q_2 = \\frac{12 + 14}{2} = 13$." },
+        { text: "The halves split cleanly. Lower half 4, 6, 9, 11, 12 gives $Q_1 = 9$." },
+        { text: "Upper half 14, 17, 19, 22, 30 gives $Q_3 = 19$." },
+        { text: "$\\text{IQR} = 19 - 9 = 10$, semi-IQR 5." },
+      ],
+      answer: "$Q_1 = 9$, $Q_2 = 13$, $Q_3 = 19$; IQR 10",
     },
     {
       type: "text",
       content:
-        "**Worked example 2 (even $n$).** 4, 6, 9, 11, 12, 14, 17, 19, 22, 30.\n\n**Step 1.** $n = 10$, so the median is the mean of the 5th and 6th values: $Q_2 = \\frac{12 + 14}{2} = 13$.\n**Step 2.** The halves split cleanly. Lower half 4, 6, 9, 11, 12 gives $Q_1 = 9$.\n**Step 3.** Upper half 14, 17, 19, 22, 30 gives $Q_3 = 19$.\n**Step 4.** $\\text{IQR} = 19 - 9 = 10$, semi-IQR 5.\n\nNow change the 30 to 300. The range goes from 26 to 296. The IQR stays at 10, because 300 is still just 'the largest value' in the upper half and the median of that half is still 19.",
+        "Now change the 30 to 300. The range goes from 26 to 296. The IQR stays at 10, because 300 is still just 'the largest value' in the upper half and the median of that half is still 19.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2b (application): delivery times.** A food-delivery app logs 12 orders (minutes), already sorted: 18, 22, 25, 25, 27, 29, 30, 31, 33, 35, 38, 95. The 95 was a rider stuck behind a flooded underpass. What spread should the app promise customers?\n\n**Step 1.** $n = 12$, so $Q_2 = \\frac{29 + 30}{2} = 29.5$ and each half has six values.\n**Step 2.** Lower half 18, 22, 25, 25, 27, 29: $Q_1 = \\frac{25 + 25}{2} = 25$.\n**Step 3.** Upper half 30, 31, 33, 35, 38, 95: $Q_3 = \\frac{33 + 35}{2} = 34$. *Why the 95 does not matter:* it is just the last value of the upper half, and the median of that half is decided by its 3rd and 4th values.\n**Step 4.** IQR $= 34 - 25 = 9$ minutes, against a range of $95 - 18 = 77$ minutes. The honest summary is 'the middle half of orders arrive in 25 to 34 minutes'. Quoting the range would describe one bad afternoon, not the service.",
+      type: "worked-example",
+      id: "st2-2-we2b",
+      title: "Worked example 2b (application): delivery times",
+      problem:
+        "A food-delivery app logs 12 orders (minutes), already sorted: 18, 22, 25, 25, 27, 29, 30, 31, 33, 35, 38, 95. The 95 was a rider stuck behind a flooded underpass. What spread should the app promise customers?",
+      steps: [
+        { text: "$n = 12$, so $Q_2 = \\frac{29 + 30}{2} = 29.5$ and each half has six values." },
+        { text: "Lower half 18, 22, 25, 25, 27, 29: $Q_1 = \\frac{25 + 25}{2} = 25$." },
+        { text: "Upper half 30, 31, 33, 35, 38, 95: $Q_3 = \\frac{33 + 35}{2} = 34$. *Why the 95 does not matter:* it is just the last value of the upper half, and the median of that half is decided by its 3rd and 4th values." },
+        { text: "IQR $= 34 - 25 = 9$ minutes, against a range of $95 - 18 = 77$ minutes. The honest summary is 'the middle half of orders arrive in 25 to 34 minutes'. Quoting the range would describe one bad afternoon, not the service." },
+      ],
+      answer: "IQR 9 minutes: the middle half of orders arrive in 25 to 34 minutes",
     },
     {
       type: "quiz",
@@ -313,10 +386,11 @@ const lesson02: LessonSeed = {
       content:
         "The 'quarter' in quartile counts **values**, not size. $Q_1$ is the value with a quarter of the data below it. For heights 150 to 180 cm, $Q_1$ might be 158 cm, nowhere near $\\frac{180}{4} = 45$ cm.",
     },
+    { type: "heading", text: "Grouped data: quartiles by interpolation" },
     {
       type: "text",
       content:
-        "**Grouped data.** When only class frequencies are known, use exactly the same interpolation as the grouped median from Chapter 1.4. There you looked for the value with $\\frac{N}{2}$ items below it. For $Q_1$ look for $\\frac{N}{4}$ items, and for $Q_3$ look for $\\frac{3N}{4}$:",
+        "When only class frequencies are known, use exactly the same interpolation as the grouped median from Chapter 1.4. There you looked for the value with $\\frac{N}{2}$ items below it. For $Q_1$ look for $\\frac{N}{4}$ items, and for $Q_3$ look for $\\frac{3N}{4}$:",
     },
     {
       type: "math",
@@ -337,9 +411,18 @@ const lesson02: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3.** Quartiles for the table above ($N = 40$).\n\n**Step 1.** $\\frac{N}{4} = 10$. The cumulative frequency first reaches 10 in class 10–20, so $l = 10$, $cf = 5$, $f = 8$, $h = 10$.\n**Step 2.** $Q_1 = 10 + \\frac{10 - 5}{8}\\times 10 = 10 + 6.25 = 16.25$.\n**Step 3.** $\\frac{3N}{4} = 30$, which falls in class 30–40: $l = 30$, $cf = 25$, $f = 10$. $Q_3 = 30 + \\frac{30 - 25}{10}\\times 10 = 35$.\n**Step 4.** $\\text{IQR} = 35 - 16.25 = 18.75$, and the semi-IQR is $9.375$.",
+      type: "worked-example",
+      id: "st2-2-we3",
+      title: "Worked example 3",
+      problem:
+        "Quartiles for the table above ($N = 40$). Find $Q_1$, $Q_3$ and the IQR.",
+      steps: [
+        { text: "$\\frac{N}{4} = 10$. The cumulative frequency first reaches 10 in class 10–20, so $l = 10$, $cf = 5$, $f = 8$, $h = 10$." },
+        { text: "$Q_1 = 10 + \\frac{10 - 5}{8}\\times 10 = 10 + 6.25 = 16.25$." },
+        { text: "$\\frac{3N}{4} = 30$, which falls in class 30–40: $l = 30$, $cf = 25$, $f = 10$. $Q_3 = 30 + \\frac{30 - 25}{10}\\times 10 = 35$." },
+        { text: "$\\text{IQR} = 35 - 16.25 = 18.75$, and the semi-IQR is $9.375$." },
+      ],
+      answer: "$Q_1 = 16.25$, $Q_3 = 35$, IQR 18.75",
     },
     {
       type: "text",
@@ -360,9 +443,10 @@ const lesson02: LessonSeed = {
         stats: ["q1", "median", "q3", "iqr"],
         editable: false,
         caption:
-          "Press n/4, n/2 and 3n/4 and read where the line meets the ogive. The ogive line crossings give the grouped estimates 16.25, 25.8 and 35; the stat readouts use the 40 raw values (15.5, 25.5, 34.5). Grouping costs a little accuracy.",
+          "Press n/4, n/2 and 3n/4 and read where the line meets the ogive. The ogive line crossings give the grouped estimates; the stat readouts use the 40 raw values. Compare the two: grouping costs a little accuracy.",
       },
     },
+    { type: "heading", text: "Percentiles and quartile deviation" },
     {
       type: "callout",
       variant: "definition",
@@ -371,28 +455,49 @@ const lesson02: LessonSeed = {
         "The $k$-th **percentile** $P_k$ has $k\\%$ of the data below it. Quartiles are special percentiles: $Q_1 = P_{25}$, $Q_2 = P_{50}$, $Q_3 = P_{75}$. (Deciles cut into tenths: $D_k = P_{10k}$.) For grouped data:\n$P_k = l + \\dfrac{\\frac{kN}{100} - cf}{f}\\times h$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4.** $P_{90}$ for the same table.\n\n**Step 1.** Target position $\\frac{90 \\times 40}{100} = 36$. The $cf$ passes 36 in class 40–50: $l = 40$, $cf = 35$, $f = 5$.\n**Step 2.** $P_{90} = 40 + \\frac{36 - 35}{5}\\times 10 = 42$.\n**Step 3.** Interpret: 90% of the scores are below 42. In a competitive exam, 'the 90th percentile' means exactly this: you scored better than 90% of candidates, whatever your raw mark.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (exam style): quartile deviation and its coefficient.** Daily wages (₹) of 50 workers are grouped below. Find the quartile deviation and the coefficient of quartile deviation, $\\dfrac{Q_3 - Q_1}{Q_3 + Q_1}$.",
-    },
-    {
-      type: "table",
-      headers: ["Wages (₹)", "100–120", "120–140", "140–160", "160–180", "180–200"],
-      rows: [
-        ["Workers $f$", "6", "10", "18", "10", "6"],
-        ["Cumulative $cf$", "6", "16", "34", "44", "50"],
+      type: "worked-example",
+      id: "st2-2-we4",
+      title: "Worked example 4",
+      problem:
+        "$P_{90}$ for the same table. Find it and say what it means.",
+      steps: [
+        { text: "Target position $\\frac{90 \\times 40}{100} = 36$. The $cf$ passes 36 in class 40–50: $l = 40$, $cf = 35$, $f = 5$." },
+        { text: "$P_{90} = 40 + \\frac{36 - 35}{5}\\times 10 = 42$." },
+        { text: "Interpret: 90% of the scores are below 42. In a competitive exam, 'the 90th percentile' means exactly this: you scored better than 90% of candidates, whatever your raw mark." },
       ],
+      answer: "$P_{90} = 42$",
     },
     {
-      type: "text",
-      content:
-        "**Step 1.** $\\frac{N}{4} = 12.5$. The $cf$ first passes 12.5 in class 120–140, so $l = 120$, $cf = 6$, $f = 10$, $h = 20$. *Why not 100–120:* that class holds only 6 workers, short of 12.5.\n**Step 2.** $Q_1 = 120 + \\frac{12.5 - 6}{10}\\times 20 = 120 + 13 = 133$.\n**Step 3.** $\\frac{3N}{4} = 37.5$ falls in 160–180 ($cf$ before it 34, $f = 10$): $Q_3 = 160 + \\frac{37.5 - 34}{10}\\times 20 = 160 + 7 = 167$.\n**Step 4.** Quartile deviation $= \\frac{167 - 133}{2} = 17$ rupees. Coefficient $= \\frac{167 - 133}{167 + 133} = \\frac{34}{300} \\approx 0.113$.\n**Step 5. Sense check.** The frequencies are symmetric about 140–160, and so are the quartiles: the median is $140 + \\frac{25 - 16}{18}\\times 20 = 150$, and 133 and 167 each sit 17 away from it.",
+      type: "worked-example",
+      id: "st2-2-we5",
+      title: "Worked example 5 (exam style): quartile deviation and its coefficient",
+      problem:
+        "Daily wages (₹) of 50 workers are grouped below. Find the quartile deviation and the coefficient of quartile deviation, $\\dfrac{Q_3 - Q_1}{Q_3 + Q_1}$.",
+      problemTable: {
+        headers: ["Wages (₹)", "100–120", "120–140", "140–160", "160–180", "180–200"],
+        rows: [
+          ["Workers $f$", "6", "10", "18", "10", "6"],
+        ],
+      },
+      steps: [
+        {
+          text: "$\\frac{N}{4} = 12.5$. The $cf$ first passes 12.5 in class 120–140, so $l = 120$, $cf = 6$, $f = 10$, $h = 20$. *Why not 100–120:* that class holds only 6 workers, short of 12.5.",
+          table: {
+            headers: ["Wages (₹)", "100–120", "120–140", "140–160", "160–180", "180–200"],
+            rows: [
+              ["Workers $f$", "6", "10", "18", "10", "6"],
+              ["Cumulative $cf$", "6", "16", "34", "44", "50"],
+            ],
+          },
+        },
+        { text: "$Q_1 = 120 + \\frac{12.5 - 6}{10}\\times 20 = 120 + 13 = 133$." },
+        { text: "$\\frac{3N}{4} = 37.5$ falls in 160–180 ($cf$ before it 34, $f = 10$): $Q_3 = 160 + \\frac{37.5 - 34}{10}\\times 20 = 160 + 7 = 167$." },
+        { text: "Quartile deviation $= \\frac{167 - 133}{2} = 17$ rupees. Coefficient $= \\frac{167 - 133}{167 + 133} = \\frac{34}{300} \\approx 0.113$." },
+        { text: "**Sense check.** The frequencies are symmetric about 140–160, and so are the quartiles: the median is $140 + \\frac{25 - 16}{18}\\times 20 = 150$, and 133 and 167 each sit 17 away from it." },
+      ],
+      answer: "Quartile deviation 17 rupees; coefficient $\\approx 0.113$",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st2-2-q2",
@@ -481,15 +586,35 @@ const lesson03: LessonSeed = {
       content:
         "$\\text{MD}(a) = \\dfrac{1}{n}\\sum |x_i - a|$, the average distance of the values from $a$.\nThe centre is usually the mean ($\\text{MD}(\\bar x)$) or the median ($\\text{MD}(M)$). For frequency data: $\\text{MD}(a) = \\dfrac{1}{N}\\sum f_i\\,|x_i - a|$, with $N = \\sum f_i$ and $x_i$ the class midpoints for grouped data.",
     },
+    { type: "heading", text: "Mean deviation of raw data" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 (raw data).** 4, 7, 8, 9, 10, 12, 13, 17. Find the MD about the mean.\n\n**Step 1.** $\\bar{x} = \\frac{80}{8} = 10$.\n**Step 2.** Distances $|x - 10|$: 6, 3, 2, 1, 0, 2, 3, 7.\n**Step 3.** Their sum is 24.\n**Step 4.** $\\text{MD}(\\bar x) = \\frac{24}{8} = 3$. A typical value sits 3 units from the mean.",
+      type: "worked-example",
+      id: "st2-3-we1",
+      title: "Worked example 1: raw data",
+      problem:
+        "4, 7, 8, 9, 10, 12, 13, 17. Find the MD about the mean.",
+      steps: [
+        { text: "$\\bar{x} = \\frac{80}{8} = 10$." },
+        { text: "Distances $|x - 10|$: 6, 3, 2, 1, 0, 2, 3, 7." },
+        { text: "Their sum is 24." },
+        { text: "$\\text{MD}(\\bar x) = \\frac{24}{8} = 3$. A typical value sits 3 units from the mean." },
+      ],
+      answer: "$\\text{MD}(\\bar x) = 3$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1b (application): a shop's week.** Daily sales of a stationery shop (₹ thousand): 12, 15, 9, 18, 14, 11, 19. Find the MD about the median and say what it means for the owner.\n\n**Step 1. Sort:** 9, 11, 12, 14, 15, 18, 19. *Why:* the median is a position in the ordered list.\n**Step 2.** $n = 7$, so the median is the 4th value: $M = 14$.\n**Step 3.** Distances $|x - 14|$: 5, 3, 2, 0, 1, 4, 5, total 20.\n**Step 4.** $\\text{MD}(M) = \\frac{20}{7} \\approx 2.86$, about ₹2,860.\n**Step 5. Interpret.** On a typical day sales land roughly ₹2,900 away from ₹14,000. Here the mean is also $\\frac{98}{7} = 14$, so the MD about the mean is the same 2.86. The two part ways only when mean and median differ.",
+      type: "worked-example",
+      id: "st2-3-we1b",
+      title: "Worked example 1b (application): a shop's week",
+      problem:
+        "Daily sales of a stationery shop (₹ thousand): 12, 15, 9, 18, 14, 11, 19. Find the MD about the median and say what it means for the owner.",
+      steps: [
+        { text: "**Sort:** 9, 11, 12, 14, 15, 18, 19. *Why:* the median is a position in the ordered list." },
+        { text: "$n = 7$, so the median is the 4th value: $M = 14$." },
+        { text: "Distances $|x - 14|$: 5, 3, 2, 0, 1, 4, 5, total 20." },
+        { text: "$\\text{MD}(M) = \\frac{20}{7} \\approx 2.86$, about ₹2,860." },
+        { text: "**Interpret.** On a typical day sales land roughly ₹2,900 away from ₹14,000. Here the mean is also $\\frac{98}{7} = 14$, so the MD about the mean is the same 2.86. The two part ways only when mean and median differ." },
+      ],
+      answer: "$\\text{MD}(M) \\approx 2.86$, about ₹2,860",
     },
     {
       type: "quiz",
@@ -504,10 +629,11 @@ const lesson03: LessonSeed = {
       ],
       hint: "Mean first, then the distances $|x - \\bar x|$.",
     },
+    { type: "heading", text: "Which centre gives the smallest total distance?" },
     {
       type: "text",
       content:
-        "**Which centre gives the smallest total distance?** Take the data 2, 3, 4, 6, 15 (mean 6, median 4). Drag the centre $a$ below and watch $\\sum|x - a|$ in the small graph.",
+        "Take the data 2, 3, 4, 6, 15 (mean 6, median 4). Drag the centre $a$ below and watch $\\sum|x - a|$ in the small graph.",
     },
     {
       type: "interactive",
@@ -560,69 +686,114 @@ const lesson03: LessonSeed = {
         { text: "MD about the mean is 0, since deviations from the mean sum to 0.", feedback: "The *signed* deviations sum to 0; the absolute ones do not. That is the whole reason for the absolute value." },
       ],
     },
+    { type: "heading", text: "Frequency and grouped data" },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (discrete frequency data).** Find the MD about the mean.",
-    },
-    {
-      type: "table",
-      headers: ["$x$", "2", "5", "6", "8", "10", "12", "Total"],
-      rows: [
-        ["$f$", "2", "8", "10", "7", "8", "5", "40"],
-        ["$fx$", "4", "40", "60", "56", "80", "60", "300"],
-        ["$|x - 7.5|$", "5.5", "2.5", "1.5", "0.5", "2.5", "4.5", ""],
-        ["$f|x - 7.5|$", "11", "20", "15", "3.5", "20", "22.5", "92"],
+      type: "worked-example",
+      id: "st2-3-we2",
+      title: "Worked example 2: discrete frequency data",
+      problem:
+        "Find the MD about the mean.",
+      problemTable: {
+        headers: ["$x$", "2", "5", "6", "8", "10", "12", "Total"],
+        rows: [
+          ["$f$", "2", "8", "10", "7", "8", "5", "40"],
+        ],
+      },
+      steps: [
+        {
+          table: {
+            headers: ["$x$", "2", "5", "6", "8", "10", "12", "Total"],
+            rows: [
+              ["$f$", "2", "8", "10", "7", "8", "5", "40"],
+              ["$fx$", "4", "40", "60", "56", "80", "60", "300"],
+              ["$|x - 7.5|$", "5.5", "2.5", "1.5", "0.5", "2.5", "4.5", ""],
+              ["$f|x - 7.5|$", "11", "20", "15", "3.5", "20", "22.5", "92"],
+            ],
+          },
+        },
+        { text: "$\\bar x = \\frac{\\sum fx}{N} = \\frac{300}{40} = 7.5$." },
+        { text: "Distance of each value from 7.5, then multiply by how many times it occurs." },
+        { text: "$\\text{MD}(\\bar x) = \\frac{92}{40} = 2.3$." },
       ],
+      answer: "$\\text{MD}(\\bar x) = 2.3$",
     },
     {
-      type: "text",
-      content:
-        "**Step 1.** $\\bar x = \\frac{\\sum fx}{N} = \\frac{300}{40} = 7.5$.\n**Step 2.** Distance of each value from 7.5, then multiply by how many times it occurs.\n**Step 3.** $\\text{MD}(\\bar x) = \\frac{92}{40} = 2.3$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 2b (discrete frequency data, about the median).** Find the MD about the median.",
-    },
-    {
-      type: "table",
-      headers: ["$x$", "3", "6", "9", "12", "13", "15", "21", "22", "Total"],
-      rows: [
-        ["$f$", "3", "4", "5", "2", "4", "5", "4", "3", "30"],
-        ["$cf$", "3", "7", "12", "14", "18", "23", "27", "30", ""],
-        ["$|x - 13|$", "10", "7", "4", "1", "0", "2", "8", "9", ""],
-        ["$f|x - 13|$", "30", "28", "20", "2", "0", "10", "32", "27", "149"],
+      type: "worked-example",
+      id: "st2-3-we2b",
+      title: "Worked example 2b: discrete frequency data, about the median",
+      problem:
+        "Find the MD about the median.",
+      problemTable: {
+        headers: ["$x$", "3", "6", "9", "12", "13", "15", "21", "22", "Total"],
+        rows: [
+          ["$f$", "3", "4", "5", "2", "4", "5", "4", "3", "30"],
+        ],
+      },
+      steps: [
+        {
+          table: {
+            headers: ["$x$", "3", "6", "9", "12", "13", "15", "21", "22", "Total"],
+            rows: [
+              ["$f$", "3", "4", "5", "2", "4", "5", "4", "3", "30"],
+              ["$cf$", "3", "7", "12", "14", "18", "23", "27", "30", ""],
+              ["$|x - 13|$", "10", "7", "4", "1", "0", "2", "8", "9", ""],
+              ["$f|x - 13|$", "30", "28", "20", "2", "0", "10", "32", "27", "149"],
+            ],
+          },
+        },
+        { text: "$N = 30$ is even, so the median is the mean of the 15th and 16th values. The $cf$ column passes 14 at $x = 12$ and reaches 18 at $x = 13$, so the 15th and 16th values are both 13: $M = 13$." },
+        { text: "Distances $|x - 13|$, each weighted by its frequency, total 149." },
+        { text: "$\\text{MD}(M) = \\frac{149}{30} \\approx 4.97$." },
       ],
+      answer: "$\\text{MD}(M) \\approx 4.97$",
+    },
+    {
+      type: "worked-example",
+      id: "st2-3-we3",
+      title: "Worked example 3: grouped, about the mean",
+      problem:
+        "Classes 10–20, 20–30, …, 70–80 with frequencies 2, 3, 8, 14, 8, 3, 2 ($N = 40$). Find the mean deviation about the mean.",
+      steps: [
+        { text: "Midpoints 15, 25, 35, 45, 55, 65, 75. $\\sum fx = 30 + 75 + 280 + 630 + 440 + 195 + 150 = 1800$, so $\\bar x = 45$." },
+        { text: "$|x - 45|$ = 30, 20, 10, 0, 10, 20, 30." },
+        { text: "$\\sum f|x - 45| = 60 + 60 + 80 + 0 + 80 + 60 + 60 = 400$." },
+        { text: "$\\text{MD}(\\bar x) = \\frac{400}{40} = 10$." },
+      ],
+      answer: "$\\text{MD}(\\bar x) = 10$",
+    },
+    {
+      type: "worked-example",
+      id: "st2-3-we4",
+      title: "Worked example 4: grouped, about the median",
+      problem:
+        "Classes 0–10, 10–20, …, 50–60 with frequencies 6, 7, 15, 16, 4, 2 ($N = 50$). Find the mean deviation about the median.",
+      steps: [
+        { text: "Cumulative frequencies 6, 13, 28, 44, 48, 50. $\\frac{N}{2} = 25$ falls in 20–30: $M = 20 + \\frac{25 - 13}{15}\\times 10 = 28$." },
+        { text: "Midpoints 5, 15, 25, 35, 45, 55, so $|x - 28|$ = 23, 13, 3, 7, 17, 27." },
+        { text: "$f|x - 28|$ = 138, 91, 45, 112, 68, 54, total 508." },
+        { text: "$\\text{MD}(M) = \\frac{508}{50} = 10.16$." },
+      ],
+      answer: "$\\text{MD}(M) = 10.16$",
+    },
+    { type: "heading", text: "Mean deviation of an AP" },
+    {
+      type: "worked-example",
+      id: "st2-3-we5",
+      title: "Worked example 5 (JEE Main style): an AP with an unknown gap",
+      problem:
+        "The mean deviation about the median of the 101 numbers $1, 1 + d, 1 + 2d, \\dots, 1 + 100d$ (with $d > 0$) is 255. Find $d$.",
+      steps: [
+        { text: "**Median.** The terms are already in order and $n = 101$ is odd, so the median is the 51st term: $M = 1 + 50d$." },
+        { text: "**Distances.** The term $1 + kd$ ($k = 0, 1, \\dots, 100$) is at distance $|k - 50|\\,d$ from $M$. *Why write it this way:* the 1s cancel, and every distance becomes a whole number of steps $d$." },
+        { text: "**Sum.** The step counts $|k - 50|$ run $50, 49, \\dots, 1, 0, 1, \\dots, 50$, so:", latex: "\\sum |x - M| = 2(1 + 2 + \\dots + 50)\\,d = 2\\cdot\\frac{50 \\cdot 51}{2}\\,d = 2550\\,d" },
+        { text: "$\\text{MD}(M) = \\frac{2550\\,d}{101} = 255$, so $d = \\frac{255 \\times 101}{2550} = 10.1$." },
+      ],
+      answer: "$d = 10.1$",
     },
     {
       type: "text",
       content:
-        "**Step 1.** $N = 30$ is even, so the median is the mean of the 15th and 16th values. The $cf$ column passes 14 at $x = 12$ and reaches 18 at $x = 13$, so the 15th and 16th values are both 13: $M = 13$.\n**Step 2.** Distances $|x - 13|$, each weighted by its frequency, total 149.\n**Step 3.** $\\text{MD}(M) = \\frac{149}{30} \\approx 4.97$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 3 (grouped, about the mean).** Classes 10–20, 20–30, …, 70–80 with frequencies 2, 3, 8, 14, 8, 3, 2 ($N = 40$).\n\n**Step 1.** Midpoints 15, 25, 35, 45, 55, 65, 75. $\\sum fx = 30 + 75 + 280 + 630 + 440 + 195 + 150 = 1800$, so $\\bar x = 45$.\n**Step 2.** $|x - 45|$ = 30, 20, 10, 0, 10, 20, 30.\n**Step 3.** $\\sum f|x - 45| = 60 + 60 + 80 + 0 + 80 + 60 + 60 = 400$.\n**Step 4.** $\\text{MD}(\\bar x) = \\frac{400}{40} = 10$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 4 (grouped, about the median).** Classes 0–10, 10–20, …, 50–60 with frequencies 6, 7, 15, 16, 4, 2 ($N = 50$).\n\n**Step 1.** Cumulative frequencies 6, 13, 28, 44, 48, 50. $\\frac{N}{2} = 25$ falls in 20–30: $M = 20 + \\frac{25 - 13}{15}\\times 10 = 28$.\n**Step 2.** Midpoints 5, 15, 25, 35, 45, 55, so $|x - 28|$ = 23, 13, 3, 7, 17, 27.\n**Step 3.** $f|x - 28|$ = 138, 91, 45, 112, 68, 54, total 508.\n**Step 4.** $\\text{MD}(M) = \\frac{508}{50} = 10.16$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 (JEE Main style): an AP with an unknown gap.** The mean deviation about the median of the 101 numbers $1, 1 + d, 1 + 2d, \\dots, 1 + 100d$ (with $d > 0$) is 255. Find $d$.\n\n**Step 1. Median.** The terms are already in order and $n = 101$ is odd, so the median is the 51st term: $M = 1 + 50d$.\n**Step 2. Distances.** The term $1 + kd$ ($k = 0, 1, \\dots, 100$) is at distance $|k - 50|\\,d$ from $M$. *Why write it this way:* the 1s cancel, and every distance becomes a whole number of steps $d$.\n**Step 3. Sum.** The step counts $|k - 50|$ run $50, 49, \\dots, 1, 0, 1, \\dots, 50$, so:",
-    },
-    {
-      type: "math",
-      latex: "\\sum |x - M| = 2(1 + 2 + \\dots + 50)\\,d = 2\\cdot\\frac{50 \\cdot 51}{2}\\,d = 2550\\,d",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 4.** $\\text{MD}(M) = \\frac{2550\\,d}{101} = 255$, so $d = \\frac{255 \\times 101}{2550} = 10.1$.\n\nThe pattern generalises: an AP with an odd number $n = 2m + 1$ of terms has MD about the median $\\frac{m(m + 1)}{2m + 1}\\,|d|$. Check with $m = 50$: $\\frac{50 \\cdot 51}{101}\\,d = \\frac{2550}{101}\\,d$.",
+        "The pattern generalises: an AP with an odd number $n = 2m + 1$ of terms has MD about the median $\\frac{m(m + 1)}{2m + 1}\\,|d|$. Check with $m = 50$: $\\frac{50 \\cdot 51}{101}\\,d = \\frac{2550}{101}\\,d$.",
     },
     {
       type: "quiz",
@@ -644,6 +815,7 @@ const lesson03: LessonSeed = {
       content:
         "MD uses every value and has a clear meaning: typical distance from the centre, in the data's own units. Its weakness is the absolute value, which has a corner at 0 and is awkward in algebra. You cannot easily combine the MDs of two groups, for example. That awkwardness is why the next lesson squares instead.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st2-3-q2",
@@ -707,6 +879,7 @@ const lesson04: LessonSeed = {
       content:
         "**Variance:** $\\sigma^2 = \\dfrac{1}{n}\\sum (x_i - \\bar x)^2$, the mean of the squared deviations.\n**Standard deviation:** $\\sigma = \\sqrt{\\sigma^2}$, taken to return to the data's units.",
     },
+    { type: "heading", text: "Variance as an average area" },
     {
       type: "text",
       content:
@@ -727,14 +900,24 @@ const lesson04: LessonSeed = {
       },
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Variance and SD of 2, 4, 4, 4, 5, 5, 7, 9.\n\n**Step 1.** $\\bar x = \\frac{40}{8} = 5$.\n**Step 2.** Deviations: $-3, -1, -1, -1, 0, 0, 2, 4$ (they sum to 0, as they must).\n**Step 3.** Squares: 9, 1, 1, 1, 0, 0, 4, 16, total 32.\n**Step 4.** $\\sigma^2 = \\frac{32}{8} = 4$ and $\\sigma = 2$.",
+      type: "worked-example",
+      id: "st2-4-we1",
+      title: "Worked example 1",
+      problem:
+        "Find the variance and SD of 2, 4, 4, 4, 5, 5, 7, 9.",
+      steps: [
+        { text: "$\\bar x = \\frac{40}{8} = 5$." },
+        { text: "Deviations: $-3, -1, -1, -1, 0, 0, 2, 4$ (they sum to 0, as they must)." },
+        { text: "Squares: 9, 1, 1, 1, 0, 0, 4, 16, total 32." },
+        { text: "$\\sigma^2 = \\frac{32}{8} = 4$ and $\\sigma = 2$." },
+      ],
+      answer: "$\\sigma^2 = 4$, $\\sigma = 2$",
     },
+    { type: "heading", text: "A shortcut, derived" },
     {
       type: "text",
       content:
-        "**A shortcut, derived.** Computing every $x_i - \\bar x$ is painful when $\\bar x$ is an ugly decimal. Expand the square and use $\\sum x_i = n\\bar x$:",
+        "Computing every $x_i - \\bar x$ is painful when $\\bar x$ is an ugly decimal. Expand the square and use $\\sum x_i = n\\bar x$:",
     },
     {
       type: "math",
@@ -752,19 +935,44 @@ const lesson04: LessonSeed = {
         "**Check on the same data.** $\\sum x^2 = 4 + 16 + 16 + 16 + 25 + 25 + 49 + 81 = 232$. Then $\\sigma^2 = \\frac{232}{8} - 5^2 = 29 - 25 = 4$. Same answer, no deviations needed.\n\nA side result: since $\\sigma^2 \\ge 0$, the mean of the squares is never less than the square of the mean, with equality only when every value is the same.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (from sums).** For 10 observations, $\\sum x = 60$ and $\\sum x^2 = 400$.\n\n**Step 1.** $\\bar x = 6$.\n**Step 2.** $\\sigma^2 = \\frac{400}{10} - 6^2 = 40 - 36 = 4$.\n**Step 3.** $\\sigma = 2$.",
+      type: "worked-example",
+      id: "st2-4-we2",
+      title: "Worked example 2: from sums",
+      problem:
+        "For 10 observations, $\\sum x = 60$ and $\\sum x^2 = 400$. Find the variance and SD.",
+      steps: [
+        { text: "$\\bar x = 6$." },
+        { text: "$\\sigma^2 = \\frac{400}{10} - 6^2 = 40 - 36 = 4$." },
+        { text: "$\\sigma = 2$." },
+      ],
+      answer: "$\\sigma^2 = 4$, $\\sigma = 2$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3.** 6, 8, 10, 12, 14. The mean is 10, deviations $-4, -2, 0, 2, 4$, squares 16, 4, 0, 4, 16, total 40. So $\\sigma^2 = 8$ and $\\sigma = 2\\sqrt2 \\approx 2.83$.",
+      type: "worked-example",
+      id: "st2-4-we3",
+      title: "Worked example 3",
+      problem:
+        "Find the variance and SD of 6, 8, 10, 12, 14.",
+      steps: [
+        { text: "The mean is 10, deviations $-4, -2, 0, 2, 4$, squares 16, 4, 0, 4, 16, total 40." },
+        { text: "So $\\sigma^2 = 8$ and $\\sigma = 2\\sqrt2 \\approx 2.83$." },
+      ],
+      answer: "$\\sigma^2 = 8$, $\\sigma = 2\\sqrt2 \\approx 2.83$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3b (application): checking tablets.** A pharmacist weighs six tablets labelled 250 mg: 248, 252, 250, 247, 253, 250. Find the SD.\n\n**Step 1. Mean.** The total is 1500, so $\\bar x = 250$ mg. *Why start here:* when the mean is a whole number the direct method stays clean; when it is an ugly decimal, use the shortcut instead.\n**Step 2. Deviations** from 250: $-2, 2, 0, -3, 3, 0$. They sum to 0, a free arithmetic check.\n**Step 3. Squares:** 4, 4, 0, 9, 9, 0, total 26.\n**Step 4.** $\\sigma^2 = \\frac{26}{6} \\approx 4.33$ mg², so $\\sigma \\approx 2.08$ mg.\n**Step 5. Interpret.** A typical tablet is about 2 mg off the label, under 1% of the dose. The two tablets 3 mg out supply 18 of the 26 squared units: squaring makes the SD listen hardest to the worst tablets, which is exactly what a quality check wants.",
+      type: "worked-example",
+      id: "st2-4-we3b",
+      title: "Worked example 3b (application): checking tablets",
+      problem:
+        "A pharmacist weighs six tablets labelled 250 mg: 248, 252, 250, 247, 253, 250. Find the SD.",
+      steps: [
+        { text: "**Mean.** The total is 1500, so $\\bar x = 250$ mg. *Why start here:* when the mean is a whole number the direct method stays clean; when it is an ugly decimal, use the shortcut instead." },
+        { text: "**Deviations** from 250: $-2, 2, 0, -3, 3, 0$. They sum to 0, a free arithmetic check." },
+        { text: "**Squares:** 4, 4, 0, 9, 9, 0, total 26." },
+        { text: "$\\sigma^2 = \\frac{26}{6} \\approx 4.33$ mg², so $\\sigma \\approx 2.08$ mg." },
+        { text: "**Interpret.** A typical tablet is about 2 mg off the label, under 1% of the dose. The two tablets 3 mg out supply 18 of the 26 squared units: squaring makes the SD listen hardest to the worst tablets, which is exactly what a quality check wants." },
+      ],
+      answer: "$\\sigma \\approx 2.08$ mg",
     },
     {
       type: "quiz",
@@ -779,15 +987,39 @@ const lesson04: LessonSeed = {
       ],
       hint: "Mean, deviations, squares, average, square root.",
     },
+    { type: "heading", text: "Natural numbers and shifted sums" },
     {
-      type: "text",
-      content:
-        "**Worked example 4 (JEE classic): the first $n$ natural numbers.** Find the variance of $1, 2, 3, \\dots, n$.\n\n**Step 1.** $\\bar x = \\frac{1 + 2 + \\dots + n}{n} = \\frac{n(n+1)/2}{n} = \\frac{n+1}{2}$.\n**Step 2.** Mean of the squares: $\\frac{\\sum k^2}{n} = \\frac{n(n+1)(2n+1)/6}{n} = \\frac{(n+1)(2n+1)}{6}$.\n**Step 3.** Shortcut: $\\sigma^2 = \\frac{(n+1)(2n+1)}{6} - \\frac{(n+1)^2}{4} = \\frac{(n+1)\\left[2(2n+1) - 3(n+1)\\right]}{12} = \\frac{(n+1)(n-1)}{12}$.\n**Step 4.** So $\\sigma^2 = \\dfrac{n^2 - 1}{12}$. Check with $n = 5$ (1 to 5): $\\frac{24}{12} = 2$, and directly the squared deviations 4, 1, 0, 1, 4 average to 2. Lesson 2.6 stretches this to any arithmetic progression.",
+      type: "worked-example",
+      id: "st2-4-we4",
+      title: "Worked example 4 (JEE classic): the first $n$ natural numbers",
+      problem:
+        "Find the variance of $1, 2, 3, \\dots, n$.",
+      steps: [
+        { text: "$\\bar x = \\frac{1 + 2 + \\dots + n}{n} = \\frac{n(n+1)/2}{n} = \\frac{n+1}{2}$." },
+        { text: "Mean of the squares: $\\frac{\\sum k^2}{n} = \\frac{n(n+1)(2n+1)/6}{n} = \\frac{(n+1)(2n+1)}{6}$." },
+        { text: "Shortcut: $\\sigma^2 = \\frac{(n+1)(2n+1)}{6} - \\frac{(n+1)^2}{4} = \\frac{(n+1)\\left[2(2n+1) - 3(n+1)\\right]}{12} = \\frac{(n+1)(n-1)}{12}$." },
+        { text: "So $\\sigma^2 = \\dfrac{n^2 - 1}{12}$. Check with $n = 5$ (1 to 5): $\\frac{24}{12} = 2$, and directly the squared deviations 4, 1, 0, 1, 4 average to 2. Lesson 2.6 stretches this to any arithmetic progression." },
+      ],
+      answer: "$\\sigma^2 = \\dfrac{n^2 - 1}{12}$",
+    },
+    {
+      type: "worked-example",
+      id: "st2-4-we5",
+      title: "Worked example 5 (JEE Main style): sums about a convenient point",
+      problem:
+        "For 10 observations, $\\sum (x_i - 5) = 10$ and $\\sum (x_i - 5)^2 = 50$. Find the mean and variance.",
+      steps: [
+        { text: "**Name the shifted values.** Let $u_i = x_i - 5$, so $\\sum u = 10$ and $\\sum u^2 = 50$. *Why:* the data arrive only through $x - 5$, so work with those numbers directly." },
+        { text: "**Mean.** $\\bar u = 1$, and since each $x = u + 5$, $\\bar x = 6$." },
+        { text: "**Variance of $u$.** $\\sigma_u^2 = \\frac{50}{10} - 1^2 = 4$." },
+        { text: "**Variance of $x$.** Each deviation $x_i - \\bar x = (u_i + 5) - (\\bar u + 5) = u_i - \\bar u$ is untouched by the shift, so $\\sigma_x^2 = 4$." },
+      ],
+      answer: "$\\bar x = 6$, $\\sigma^2 = 4$",
     },
     {
       type: "text",
       content:
-        "**Worked example 5 (JEE Main style): sums about a convenient point.** For 10 observations, $\\sum (x_i - 5) = 10$ and $\\sum (x_i - 5)^2 = 50$. Find the mean and variance.\n\n**Step 1. Name the shifted values.** Let $u_i = x_i - 5$, so $\\sum u = 10$ and $\\sum u^2 = 50$. *Why:* the data arrive only through $x - 5$, so work with those numbers directly.\n**Step 2. Mean.** $\\bar u = 1$, and since each $x = u + 5$, $\\bar x = 6$.\n**Step 3. Variance of $u$.** $\\sigma_u^2 = \\frac{50}{10} - 1^2 = 4$.\n**Step 4. Variance of $x$.** Each deviation $x_i - \\bar x = (u_i + 5) - (\\bar u + 5) = u_i - \\bar u$ is untouched by the shift, so $\\sigma_x^2 = 4$.\n\nThe classic slip is to answer $\\frac{50}{10} = 5$. That is the mean squared distance from 5, not from the mean 6, and the identity proved later in this lesson shows the gap is exactly $(\\bar x - 5)^2$:",
+        "The classic slip is to answer $\\frac{50}{10} = 5$. That is the mean squared distance from 5, not from the mean 6, and the identity proved later in this lesson shows the gap is exactly $(\\bar x - 5)^2$:",
     },
     { type: "math", latex: "\\frac{1}{n}\\sum (x_i - 5)^2 = \\sigma^2 + (\\bar x - 5)^2 \\quad\\Rightarrow\\quad 5 = 4 + 1" },
     {
@@ -823,10 +1055,11 @@ const lesson04: LessonSeed = {
       ],
       hint: "Mean of the squares minus square of the mean.",
     },
+    { type: "heading", text: "SD versus MD" },
     {
       type: "text",
       content:
-        "**SD versus MD.** On the data 2, 4, 4, 4, 5, 5, 7, 9 the builder shows MD about the mean $= \\frac{3 + 1 + 1 + 1 + 0 + 0 + 2 + 4}{8} = 1.5$, while SD $= 2$. They measure the same idea in different ways and do not agree. Squaring gives the big deviations extra weight, so SD is always at least as big as MD about the mean, and strictly bigger unless every deviation has the same size.",
+        "On the data 2, 4, 4, 4, 5, 5, 7, 9 the builder shows MD about the mean $= \\frac{3 + 1 + 1 + 1 + 0 + 0 + 2 + 4}{8} = 1.5$, while SD $= 2$. They measure the same idea in different ways and do not agree. Squaring gives the big deviations extra weight, so SD is always at least as big as MD about the mean, and strictly bigger unless every deviation has the same size.",
     },
     {
       type: "quiz",
@@ -844,10 +1077,11 @@ const lesson04: LessonSeed = {
         { text: "4", feedback: "4 is the mean of the data, not a measure of spread." },
       ],
     },
+    { type: "heading", text: "The mean minimises squared distance", level: 3 },
     {
       type: "text",
       content:
-        "**The mean minimises squared distance.** In 2.3 the median minimised $\\sum|x - a|$. For squares, the winner is the mean, and here is why. Write $x - a = (x - \\bar x) + (\\bar x - a)$ and expand; the cross term vanishes because $\\sum (x - \\bar x) = 0$:",
+        "In 2.3 the median minimised $\\sum|x - a|$. For squares, the winner is the mean, and here is why. Write $x - a = (x - \\bar x) + (\\bar x - a)$ and expand; the cross term vanishes because $\\sum (x - \\bar x) = 0$:",
     },
     { type: "math", latex: "\\sum (x_i - a)^2 = \\sum (x_i - \\bar x)^2 + n(\\bar x - a)^2" },
     {
@@ -877,6 +1111,7 @@ const lesson04: LessonSeed = {
       content:
         "When your data are a *sample* and you want to estimate the spread of a whole population, statisticians divide by $n - 1$ instead of $n$. The reason: deviations are measured from the sample's own mean, which sits closer to the data than the true population mean does, so dividing by $n$ comes out slightly too small. Chapter 5 returns to this. In this course, and in CBSE/JEE descriptive statistics, variance divides by $n$.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st2-4-q3",
@@ -924,42 +1159,66 @@ const lesson05: LessonSeed = {
       content:
         "The second form is the shortcut from 2.4 ('mean of squares minus square of mean') with $f$ attached. For grouped data, $x_i$ is the class midpoint, standing in for every value in that class, so the answer is an estimate, just as the grouped mean was in Chapter 1.2.",
     },
+    { type: "heading", text: "Discrete frequency tables" },
     {
-      type: "text",
-      content: "**Worked example 1 (discrete).** Find the variance and SD.",
-    },
-    {
-      type: "table",
-      headers: ["$x$", "4", "8", "11", "17", "20", "24", "32", "Total"],
-      rows: [
-        ["$f$", "3", "5", "9", "5", "4", "3", "1", "30"],
-        ["$fx$", "12", "40", "99", "85", "80", "72", "32", "420"],
-        ["$x - 14$", "−10", "−6", "−3", "3", "6", "10", "18", ""],
-        ["$f(x - 14)^2$", "300", "180", "81", "45", "144", "300", "324", "1374"],
+      type: "worked-example",
+      id: "st2-5-we1",
+      title: "Worked example 1: discrete",
+      problem:
+        "Find the variance and SD.",
+      problemTable: {
+        headers: ["$x$", "4", "8", "11", "17", "20", "24", "32", "Total"],
+        rows: [
+          ["$f$", "3", "5", "9", "5", "4", "3", "1", "30"],
+        ],
+      },
+      steps: [
+        {
+          table: {
+            headers: ["$x$", "4", "8", "11", "17", "20", "24", "32", "Total"],
+            rows: [
+              ["$f$", "3", "5", "9", "5", "4", "3", "1", "30"],
+              ["$fx$", "12", "40", "99", "85", "80", "72", "32", "420"],
+              ["$x - 14$", "−10", "−6", "−3", "3", "6", "10", "18", ""],
+              ["$f(x - 14)^2$", "300", "180", "81", "45", "144", "300", "324", "1374"],
+            ],
+          },
+        },
+        { text: "$\\bar x = \\frac{420}{30} = 14$." },
+        { text: "Square each deviation and weight it by $f$; the total is 1374." },
+        { text: "$\\sigma^2 = \\frac{1374}{30} = 45.8$ and $\\sigma = \\sqrt{45.8} \\approx 6.77$." },
       ],
+      answer: "$\\sigma^2 = 45.8$, $\\sigma \\approx 6.77$",
     },
     {
-      type: "text",
-      content:
-        "**Step 1.** $\\bar x = \\frac{420}{30} = 14$.\n**Step 2.** Square each deviation and weight it by $f$; the total is 1374.\n**Step 3.** $\\sigma^2 = \\frac{1374}{30} = 45.8$ and $\\sigma = \\sqrt{45.8} \\approx 6.77$.",
-    },
-    {
-      type: "text",
-      content: "**Worked example 1b (application): family size, by the shortcut.** A survey of 20 households records the number of children in each.",
-    },
-    {
-      type: "table",
-      headers: ["Children $x$", "0", "1", "2", "3", "4", "Total"],
-      rows: [
-        ["Households $f$", "2", "4", "8", "4", "2", "20"],
-        ["$fx$", "0", "4", "16", "12", "8", "40"],
-        ["$fx^2$", "0", "4", "32", "36", "32", "104"],
+      type: "worked-example",
+      id: "st2-5-we1b",
+      title: "Worked example 1b (application): family size, by the shortcut",
+      problem:
+        "A survey of 20 households records the number of children in each. Find the mean and SD by the shortcut.",
+      problemTable: {
+        headers: ["Children $x$", "0", "1", "2", "3", "4", "Total"],
+        rows: [
+          ["Households $f$", "2", "4", "8", "4", "2", "20"],
+        ],
+      },
+      steps: [
+        {
+          table: {
+            headers: ["Children $x$", "0", "1", "2", "3", "4", "Total"],
+            rows: [
+              ["Households $f$", "2", "4", "8", "4", "2", "20"],
+              ["$fx$", "0", "4", "16", "12", "8", "40"],
+              ["$fx^2$", "0", "4", "32", "36", "32", "104"],
+            ],
+          },
+        },
+        { text: "$\\bar x = \\frac{40}{20} = 2$." },
+        { text: "Mean of the squares: $\\frac{\\sum f x^2}{N} = \\frac{104}{20} = 5.2$. *Why the shortcut here:* each $fx^2$ entry is just the $fx$ entry multiplied by $x$ once more, with no deviations to compute." },
+        { text: "$\\sigma^2 = 5.2 - 2^2 = 1.2$, so $\\sigma \\approx 1.10$ children." },
+        { text: "**Interpret.** A typical household sits about one child away from the average of 2." },
       ],
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1.** $\\bar x = \\frac{40}{20} = 2$.\n**Step 2.** Mean of the squares: $\\frac{\\sum f x^2}{N} = \\frac{104}{20} = 5.2$. *Why the shortcut here:* each $fx^2$ entry is just the $fx$ entry multiplied by $x$ once more, with no deviations to compute.\n**Step 3.** $\\sigma^2 = 5.2 - 2^2 = 1.2$, so $\\sigma \\approx 1.10$ children.\n**Step 4. Interpret.** A typical household sits about one child away from the average of 2.",
+      answer: "Mean 2, $\\sigma^2 = 1.2$, $\\sigma \\approx 1.10$ children",
     },
     {
       type: "quiz",
@@ -986,10 +1245,11 @@ const lesson05: LessonSeed = {
       ],
       hint: "Build the $fx$ and $fx^2$ columns.",
     },
+    { type: "heading", text: "Step deviation, derived" },
     {
       type: "text",
       content:
-        "**Step deviation, derived.** With midpoints like 35, 45, …, 95 the squares get large. In Chapter 1.2 you tamed the mean by coding $u = \\frac{x - A}{h}$. The same code works for variance, and the reason is a two-line argument. Since $x = A + hu$:",
+        "With midpoints like 35, 45, …, 95 the squares get large. In Chapter 1.2 you tamed the mean by coding $u = \\frac{x - A}{h}$. The same code works for variance, and the reason is a two-line argument. Since $x = A + hu$:",
     },
     {
       type: "math",
@@ -1007,28 +1267,45 @@ const lesson05: LessonSeed = {
         "\\sigma_x = h\\,\\sqrt{\\frac{\\sum f u^2}{N} - \\left(\\frac{\\sum f u}{N}\\right)^2}",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (grouped, step deviation).** Find the mean, variance and SD.",
-    },
-    {
-      type: "table",
-      headers: ["Class", "Midpoint $x$", "$f$", "$u = \\frac{x - 65}{10}$", "$fu$", "$fu^2$"],
-      rows: [
-        ["30–40", "35", "3", "−3", "−9", "27"],
-        ["40–50", "45", "7", "−2", "−14", "28"],
-        ["50–60", "55", "12", "−1", "−12", "12"],
-        ["60–70", "65", "15", "0", "0", "0"],
-        ["70–80", "75", "8", "1", "8", "8"],
-        ["80–90", "85", "3", "2", "6", "12"],
-        ["90–100", "95", "2", "3", "6", "18"],
-        ["Total", "", "50", "", "−15", "105"],
+      type: "worked-example",
+      id: "st2-5-we2",
+      title: "Worked example 2: grouped, step deviation",
+      problem:
+        "Find the mean, variance and SD.",
+      problemTable: {
+        headers: ["Class", "$f$"],
+        rows: [
+          ["30–40", "3"],
+          ["40–50", "7"],
+          ["50–60", "12"],
+          ["60–70", "15"],
+          ["70–80", "8"],
+          ["80–90", "3"],
+          ["90–100", "2"],
+        ],
+      },
+      steps: [
+        {
+          text: "Choose $A = 65$ (a central midpoint) and $h = 10$ (the class width), and fill the $u$, $fu$, $fu^2$ columns.",
+          table: {
+            headers: ["Class", "Midpoint $x$", "$f$", "$u = \\frac{x - 65}{10}$", "$fu$", "$fu^2$"],
+            rows: [
+              ["30–40", "35", "3", "−3", "−9", "27"],
+              ["40–50", "45", "7", "−2", "−14", "28"],
+              ["50–60", "55", "12", "−1", "−12", "12"],
+              ["60–70", "65", "15", "0", "0", "0"],
+              ["70–80", "75", "8", "1", "8", "8"],
+              ["80–90", "85", "3", "2", "6", "12"],
+              ["90–100", "95", "2", "3", "6", "18"],
+              ["Total", "", "50", "", "−15", "105"],
+            ],
+          },
+        },
+        { text: "Mean: $\\bar x = 65 + 10\\times\\frac{-15}{50} = 65 - 3 = 62$." },
+        { text: "Coded variance: $\\sigma_u^2 = \\frac{105}{50} - \\left(\\frac{-15}{50}\\right)^2 = 2.1 - 0.09 = 2.01$." },
+        { text: "Multiply back: $\\sigma_x^2 = 10^2 \\times 2.01 = 201$, so $\\sigma_x = \\sqrt{201} \\approx 14.18$." },
       ],
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1.** Choose $A = 65$ (a central midpoint) and $h = 10$ (the class width), and fill the $u$, $fu$, $fu^2$ columns.\n**Step 2.** Mean: $\\bar x = 65 + 10\\times\\frac{-15}{50} = 65 - 3 = 62$.\n**Step 3.** Coded variance: $\\sigma_u^2 = \\frac{105}{50} - \\left(\\frac{-15}{50}\\right)^2 = 2.1 - 0.09 = 2.01$.\n**Step 4.** Multiply back: $\\sigma_x^2 = 10^2 \\times 2.01 = 201$, so $\\sigma_x = \\sqrt{201} \\approx 14.18$.",
+      answer: "Mean 62, $\\sigma^2 = 201$, $\\sigma \\approx 14.18$",
     },
     {
       type: "callout",
@@ -1038,25 +1315,42 @@ const lesson05: LessonSeed = {
         "$\\sqrt{2.01} \\approx 1.42$ is the SD of the **coded** values $u$, not of the data. A spread of 1.42 for marks between 30 and 100 should look absurd. Multiply the SD by $h$ (or the variance by $h^2$) before you stop. And never multiply the variance by just $h$: variance picks up $h^2$.",
     },
     {
-      type: "text",
-      content: "**Worked example 2b (application): commute times.** An office surveys 40 employees about their commute. Find the mean and SD.",
-    },
-    {
-      type: "table",
-      headers: ["Minutes", "Midpoint $x$", "$f$", "$u = \\frac{x - 25}{10}$", "$fu$", "$fu^2$"],
-      rows: [
-        ["0–10", "5", "4", "−2", "−8", "16"],
-        ["10–20", "15", "10", "−1", "−10", "10"],
-        ["20–30", "25", "14", "0", "0", "0"],
-        ["30–40", "35", "8", "1", "8", "8"],
-        ["40–50", "45", "4", "2", "8", "16"],
-        ["Total", "", "40", "", "−2", "50"],
+      type: "worked-example",
+      id: "st2-5-we2b",
+      title: "Worked example 2b (application): commute times",
+      problem:
+        "An office surveys 40 employees about their commute. Find the mean and SD.",
+      problemTable: {
+        headers: ["Minutes", "$f$"],
+        rows: [
+          ["0–10", "4"],
+          ["10–20", "10"],
+          ["20–30", "14"],
+          ["30–40", "8"],
+          ["40–50", "4"],
+        ],
+      },
+      steps: [
+        {
+          text: "Take $A = 25$ (the middle midpoint) and $h = 10$. *Why:* with $A$ in the middle, $u$ runs over the small integers $-2$ to $2$ and the $fu^2$ column stays tiny.",
+          table: {
+            headers: ["Minutes", "Midpoint $x$", "$f$", "$u = \\frac{x - 25}{10}$", "$fu$", "$fu^2$"],
+            rows: [
+              ["0–10", "5", "4", "−2", "−8", "16"],
+              ["10–20", "15", "10", "−1", "−10", "10"],
+              ["20–30", "25", "14", "0", "0", "0"],
+              ["30–40", "35", "8", "1", "8", "8"],
+              ["40–50", "45", "4", "2", "8", "16"],
+              ["Total", "", "40", "", "−2", "50"],
+            ],
+          },
+        },
+        { text: "Mean: $\\bar x = 25 + 10 \\times \\frac{-2}{40} = 25 - 0.5 = 24.5$ minutes." },
+        { text: "$\\sigma_u^2 = \\frac{50}{40} - \\left(\\frac{-2}{40}\\right)^2 = 1.25 - 0.0025 = 1.2475$." },
+        { text: "$\\sigma_x^2 = 10^2 \\times 1.2475 = 124.75$ min², so $\\sigma_x \\approx 11.17$ minutes." },
+        { text: "**Sanity check.** The commutes span 0 to 50 minutes, and an SD of about a quarter of that span is believable. A final answer of 1.12 (forgetting $h$) would not be." },
       ],
-    },
-    {
-      type: "text",
-      content:
-        "**Step 1.** Take $A = 25$ (the middle midpoint) and $h = 10$. *Why:* with $A$ in the middle, $u$ runs over the small integers $-2$ to $2$ and the $fu^2$ column stays tiny.\n**Step 2.** Mean: $\\bar x = 25 + 10 \\times \\frac{-2}{40} = 25 - 0.5 = 24.5$ minutes.\n**Step 3.** $\\sigma_u^2 = \\frac{50}{40} - \\left(\\frac{-2}{40}\\right)^2 = 1.25 - 0.0025 = 1.2475$.\n**Step 4.** $\\sigma_x^2 = 10^2 \\times 1.2475 = 124.75$ min², so $\\sigma_x \\approx 11.17$ minutes.\n**Step 5. Sanity check.** The commutes span 0 to 50 minutes, and an SD of about a quarter of that span is believable. A final answer of 1.12 (forgetting $h$) would not be.",
+      answer: "Mean 24.5 minutes, $\\sigma \\approx 11.17$ minutes",
     },
     {
       type: "quiz",
@@ -1083,20 +1377,43 @@ const lesson05: LessonSeed = {
         { text: "It does appear, but it is small enough to ignore.", feedback: "It cancels exactly: $x - \\bar x = (A + hu) - (A + h\\bar u) = h(u - \\bar u)$." },
       ],
     },
+    { type: "heading", text: "Missing and corrected observations" },
     {
       type: "text",
       content:
         "**Working backwards: missing values (JEE favourite).** Knowing $n$, $\\bar x$ and $\\sigma^2$ gives you both $\\sum x = n\\bar x$ and $\\sum x^2 = n(\\sigma^2 + \\bar x^2)$. That is two equations, so two unknown values can be recovered.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3.** Five observations have mean 4.4 and variance 8.24. Three of them are 1, 2 and 6. Find the other two.\n\n**Step 1.** $\\sum x = 5 \\times 4.4 = 22$, so $x + y = 22 - 9 = 13$.\n**Step 2.** $\\sum x^2 = 5(8.24 + 4.4^2) = 5(8.24 + 19.36) = 138$, so $x^2 + y^2 = 138 - 41 = 97$.\n**Step 3.** $2xy = (x + y)^2 - (x^2 + y^2) = 169 - 97 = 72$, so $xy = 36$.\n**Step 4.** $x, y$ are roots of $t^2 - 13t + 36 = 0$, which gives **4 and 9**.",
+      type: "worked-example",
+      id: "st2-5-we3",
+      title: "Worked example 3",
+      problem:
+        "Five observations have mean 4.4 and variance 8.24. Three of them are 1, 2 and 6. Find the other two.",
+      steps: [
+        { text: "$\\sum x = 5 \\times 4.4 = 22$, so $x + y = 22 - 9 = 13$." },
+        { text: "$\\sum x^2 = 5(8.24 + 4.4^2) = 5(8.24 + 19.36) = 138$, so $x^2 + y^2 = 138 - 41 = 97$." },
+        { text: "$2xy = (x + y)^2 - (x^2 + y^2) = 169 - 97 = 72$, so $xy = 36$." },
+        { text: "$x, y$ are roots of $t^2 - 13t + 36 = 0$, which gives **4 and 9**." },
+      ],
+      answer: "4 and 9",
+    },
+    {
+      type: "worked-example",
+      id: "st2-5-we4",
+      title: "Worked example 4: correcting a wrong entry",
+      problem:
+        "The mean and SD of 20 observations were found to be 10 and 2. Later it was found that the value 8 had been copied as 12. Find the correct mean and SD.",
+      steps: [
+        { text: "**Recover the sums** from the wrong figures: $\\sum x = 20 \\times 10 = 200$ and $\\sum x^2 = 20(2^2 + 10^2) = 2080$." },
+        { text: "**Correct both sums.** Take out the wrong 12 and put in the true 8: $\\sum x = 200 - 12 + 8 = 196$; $\\sum x^2 = 2080 - 144 + 64 = 2000$." },
+        { text: "**Recompute.** Mean $= \\frac{196}{20} = 9.8$. Variance $= \\frac{2000}{20} - 9.8^2 = 100 - 96.04 = 3.96$, so SD $= \\sqrt{3.96} \\approx 1.99$." },
+      ],
+      answer: "Mean 9.8, SD $\\approx 1.99$",
     },
     {
       type: "text",
       content:
-        "**Worked example 4 (correcting a wrong entry).** The mean and SD of 20 observations were found to be 10 and 2. Later it was found that the value 8 had been copied as 12. Find the correct mean and SD.\n\n**Step 1. Recover the sums** from the wrong figures: $\\sum x = 20 \\times 10 = 200$ and $\\sum x^2 = 20(2^2 + 10^2) = 2080$.\n**Step 2. Correct both sums.** Take out the wrong 12 and put in the true 8: $\\sum x = 200 - 12 + 8 = 196$; $\\sum x^2 = 2080 - 144 + 64 = 2000$.\n**Step 3. Recompute.** Mean $= \\frac{196}{20} = 9.8$. Variance $= \\frac{2000}{20} - 9.8^2 = 100 - 96.04 = 3.96$, so SD $= \\sqrt{3.96} \\approx 1.99$.\n\nThe usual slip is fixing $\\sum x$ and forgetting that the wrong value is also hiding inside $\\sum x^2$ as its square.",
+        "The usual slip is fixing $\\sum x$ and forgetting that the wrong value is also hiding inside $\\sum x^2$ as its square.",
     },
     {
       type: "quiz",
@@ -1112,9 +1429,23 @@ const lesson05: LessonSeed = {
       hint: "Use $\\sum x^2 = n(\\sigma^2 + \\bar x^2)$.",
     },
     {
+      type: "worked-example",
+      id: "st2-5-we5",
+      title: "Worked example 5 (CBSE/NCERT style): discarding wrong observations",
+      problem:
+        "The mean and SD of 100 observations were 20 and 3. It was later found that three observations, 21, 21 and 18, were wrong and should be discarded. Find the mean and SD of the rest.",
+      steps: [
+        { text: "**Recover the sums.** $\\sum x = 100 \\times 20 = 2000$ and $\\sum x^2 = 100(3^2 + 20^2) = 40900$. *Why:* a mean or an SD cannot be edited directly, but sums can." },
+        { text: "**Remove the three values from both sums.** $\\sum x = 2000 - 60 = 1940$ and $\\sum x^2 = 40900 - (441 + 441 + 324) = 39694$. Now $n = 97$." },
+        { text: "**Mean.** $\\frac{1940}{97} = 20$, unchanged, because the removed values also average 20." },
+        { text: "**Variance.** $\\frac{39694}{97} - 20^2 \\approx 409.216 - 400 = 9.216$, so SD $\\approx 3.036$." },
+      ],
+      answer: "Mean 20, SD $\\approx 3.036$",
+    },
+    {
       type: "text",
       content:
-        "**Worked example 5 (CBSE/NCERT style): discarding wrong observations.** The mean and SD of 100 observations were 20 and 3. It was later found that three observations, 21, 21 and 18, were wrong and should be discarded. Find the mean and SD of the rest.\n\n**Step 1. Recover the sums.** $\\sum x = 100 \\times 20 = 2000$ and $\\sum x^2 = 100(3^2 + 20^2) = 40900$. *Why:* a mean or an SD cannot be edited directly, but sums can.\n**Step 2. Remove the three values from both sums.** $\\sum x = 2000 - 60 = 1940$ and $\\sum x^2 = 40900 - (441 + 441 + 324) = 39694$. Now $n = 97$.\n**Step 3. Mean.** $\\frac{1940}{97} = 20$, unchanged, because the removed values also average 20.\n**Step 4. Variance.** $\\frac{39694}{97} - 20^2 \\approx 409.216 - 400 = 9.216$, so SD $\\approx 3.036$.\n\nThe SD went *up* slightly. The three discarded values sat close to the mean, so removing them leaves the remaining values relatively more spread out.",
+        "The SD went *up* slightly. The three discarded values sat close to the mean, so removing them leaves the remaining values relatively more spread out.",
     },
     {
       type: "quiz",
@@ -1156,6 +1487,7 @@ const lesson06: LessonSeed = {
           "Move the shift a: every dot slides and the mean slides with it, while the SD does not change. Move the scale b: the mean scales, and the SD scales by |b|. Try b negative: the picture flips, but the SD is still positive.",
       },
     },
+    { type: "heading", text: "How $a + bx$ changes mean and SD" },
     {
       type: "text",
       content:
@@ -1185,14 +1517,29 @@ const lesson06: LessonSeed = {
       ],
     },
     {
-      type: "text",
-      content:
-        "**Worked example 1.** Daily temperatures have mean 20 °C and SD 5 °C. Convert to °F using $F = 32 + 1.8C$.\n\n**Step 1.** Here $a = 32$, $b = 1.8$.\n**Step 2.** Mean: $32 + 1.8 \\times 20 = 68$ °F.\n**Step 3.** SD: $1.8 \\times 5 = 9$ °F. The +32 only relocates the zero, so it plays no part.",
+      type: "worked-example",
+      id: "st2-6-we1",
+      title: "Worked example 1",
+      problem:
+        "Daily temperatures have mean 20 °C and SD 5 °C. Convert to °F using $F = 32 + 1.8C$.",
+      steps: [
+        { text: "Here $a = 32$, $b = 1.8$." },
+        { text: "Mean: $32 + 1.8 \\times 20 = 68$ °F." },
+        { text: "SD: $1.8 \\times 5 = 9$ °F. The +32 only relocates the zero, so it plays no part." },
+      ],
+      answer: "Mean 68 °F, SD 9 °F",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 (negative scale).** $x$ has mean 12 and variance 9. Find the mean and SD of $y = 10 - 3x$.\n\n**Step 1.** $\\bar y = 10 - 3 \\times 12 = -26$.\n**Step 2.** $\\sigma_y^2 = (-3)^2 \\times 9 = 81$, so $\\sigma_y = 9$, not $-9$. A negative $b$ flips the data over, and flipping does not change distances.",
+      type: "worked-example",
+      id: "st2-6-we2",
+      title: "Worked example 2: negative scale",
+      problem:
+        "$x$ has mean 12 and variance 9. Find the mean and SD of $y = 10 - 3x$.",
+      steps: [
+        { text: "$\\bar y = 10 - 3 \\times 12 = -26$." },
+        { text: "$\\sigma_y^2 = (-3)^2 \\times 9 = 81$, so $\\sigma_y = 9$, not $-9$. A negative $b$ flips the data over, and flipping does not change distances." },
+      ],
+      answer: "$\\bar y = -26$, $\\sigma_y = 9$",
     },
     {
       type: "text",
@@ -1217,6 +1564,7 @@ const lesson06: LessonSeed = {
         { text: "39", feedback: "The added 3 shifts every value and the mean equally, so it does not enter the variance." },
       ],
     },
+    { type: "heading", text: "Variance of two groups combined" },
     {
       type: "text",
       content:
@@ -1230,12 +1578,35 @@ const lesson06: LessonSeed = {
     {
       type: "text",
       content:
-        "Each group brings its own internal spread $\\sigma_i^2$, plus extra spread $d_i^2$ because its centre is not the combined centre. Averaging the two variances would miss that second part.\n\n**Worked example 3.** Group 1: 40 students, mean 50, SD 6. Group 2: 60 students, mean 60, SD 8.\n\n**Step 1.** $\\bar x = \\frac{40 \\times 50 + 60 \\times 60}{100} = \\frac{5600}{100} = 56$.\n**Step 2.** $d_1 = 50 - 56 = -6$, $d_2 = 60 - 56 = 4$.\n**Step 3.** $\\sigma^2 = \\frac{40(36 + 36) + 60(64 + 16)}{100} = \\frac{2880 + 4800}{100} = 76.8$.\n**Step 4.** $\\sigma = \\sqrt{76.8} \\approx 8.76$. That is larger than both group SDs, because the gap between the two centres adds spread of its own.",
+        "Each group brings its own internal spread $\\sigma_i^2$, plus extra spread $d_i^2$ because its centre is not the combined centre. Averaging the two variances would miss that second part.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3b (JEE Main style).** Two data sets, each of size 5, have variances 4 and 5 and means 2 and 4. Find the variance of the combined data.\n\n**Step 1.** Combined mean $\\bar x = \\frac{5 \\times 2 + 5 \\times 4}{10} = 3$. *Why first:* both $d_i$ are measured from it.\n**Step 2.** $d_1 = 2 - 3 = -1$ and $d_2 = 4 - 3 = 1$.\n**Step 3.** $\\sigma^2 = \\frac{5(4 + 1) + 5(5 + 1)}{10} = \\frac{25 + 30}{10} = 5.5$.\n**Step 4. Sense check.** The answer exceeds the plain average of the two variances, 4.5, by exactly the between-group part $\\frac{5 \\cdot 1^2 + 5 \\cdot 1^2}{10} = 1$.",
+      type: "worked-example",
+      id: "st2-6-we3",
+      title: "Worked example 3",
+      problem:
+        "Group 1: 40 students, mean 50, SD 6. Group 2: 60 students, mean 60, SD 8. Find the mean and SD of all 100 students together.",
+      steps: [
+        { text: "$\\bar x = \\frac{40 \\times 50 + 60 \\times 60}{100} = \\frac{5600}{100} = 56$." },
+        { text: "$d_1 = 50 - 56 = -6$, $d_2 = 60 - 56 = 4$." },
+        { text: "$\\sigma^2 = \\frac{40(36 + 36) + 60(64 + 16)}{100} = \\frac{2880 + 4800}{100} = 76.8$." },
+        { text: "$\\sigma = \\sqrt{76.8} \\approx 8.76$. That is larger than both group SDs, because the gap between the two centres adds spread of its own." },
+      ],
+      answer: "Combined mean 56, $\\sigma \\approx 8.76$",
+    },
+    {
+      type: "worked-example",
+      id: "st2-6-we3b",
+      title: "Worked example 3b: JEE Main style",
+      problem:
+        "Two data sets, each of size 5, have variances 4 and 5 and means 2 and 4. Find the variance of the combined data.",
+      steps: [
+        { text: "Combined mean $\\bar x = \\frac{5 \\times 2 + 5 \\times 4}{10} = 3$. *Why first:* both $d_i$ are measured from it." },
+        { text: "$d_1 = 2 - 3 = -1$ and $d_2 = 4 - 3 = 1$." },
+        { text: "$\\sigma^2 = \\frac{5(4 + 1) + 5(5 + 1)}{10} = \\frac{25 + 30}{10} = 5.5$." },
+        { text: "**Sense check.** The answer exceeds the plain average of the two variances, 4.5, by exactly the between-group part $\\frac{5 \\cdot 1^2 + 5 \\cdot 1^2}{10} = 1$." },
+      ],
+      answer: "$\\sigma^2 = 5.5$",
     },
     {
       type: "quiz",
@@ -1262,10 +1633,11 @@ const lesson06: LessonSeed = {
       ],
       hint: "Combined mean first, then $d_i = \\bar x_i - \\bar x$.",
     },
+    { type: "heading", text: "Comparing spread across different scales" },
     {
       type: "text",
       content:
-        "**Comparing spread across different scales.** Who is more consistent: a batsman averaging 40 with SD 5, or one averaging 50 with SD 8? Raw SDs are unfair here: a spread of 8 runs matters less for someone who averages 50 than it would for someone who averages 10. Divide the spread by the centre to get a unit-free, relative measure.",
+        "Who is more consistent: a batsman averaging 40 with SD 5, or one averaging 50 with SD 8? Raw SDs are unfair here: a spread of 8 runs matters less for someone who averages 50 than it would for someone who averages 10. Divide the spread by the centre to get a unit-free, relative measure.",
     },
     {
       type: "callout",
@@ -1288,15 +1660,34 @@ const lesson06: LessonSeed = {
         "**Worked example 4.** P is more consistent (12.5% < 16%), while Q scores more on average. Similarly, for a class with heights of mean 160 cm, SD 8 cm (CV 5%) and weights of mean 50 kg, SD 5 kg (CV 10%), weight is the relatively more variable characteristic. Comparing '8 cm' with '5 kg' directly would be meaningless.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 5 (routine, CBSE): means from CVs.** Two distributions have coefficients of variation 60% and 70%, and SDs 21 and 16. Find their means.\n\n**Step 1.** Rearrange $\\text{CV} = \\frac{\\sigma}{\\bar x}\\times 100$ to $\\bar x = \\frac{\\sigma \\times 100}{\\text{CV}}$. *Why rearrange first:* it stops you plugging a number into the wrong slot.\n**Step 2.** First distribution: $\\bar x = \\frac{21 \\times 100}{60} = 35$.\n**Step 3.** Second distribution: $\\bar x = \\frac{16 \\times 100}{70} \\approx 22.86$.",
+      type: "worked-example",
+      id: "st2-6-we5",
+      title: "Worked example 5 (routine, CBSE): means from CVs",
+      problem:
+        "Two distributions have coefficients of variation 60% and 70%, and SDs 21 and 16. Find their means.",
+      steps: [
+        { text: "Rearrange $\\text{CV} = \\frac{\\sigma}{\\bar x}\\times 100$ to $\\bar x = \\frac{\\sigma \\times 100}{\\text{CV}}$. *Why rearrange first:* it stops you plugging a number into the wrong slot." },
+        { text: "First distribution: $\\bar x = \\frac{21 \\times 100}{60} = 35$." },
+        { text: "Second distribution: $\\bar x = \\frac{16 \\times 100}{70} \\approx 22.86$." },
+      ],
+      answer: "35 and about 22.86",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 6 (application): a pay revision.** A company's monthly salaries have mean ₹30,000 and SD ₹4,000. Everyone gets a 10% raise, followed by a flat ₹2,000 allowance. Find the new mean, SD and CV. Did pay become more or less equal in relative terms?\n\n**Step 1. Write the rule.** New salary $y = 2000 + 1.1x$, so $a = 2000$, $b = 1.1$. *Why this form:* the raise multiplies, then the allowance adds.\n**Step 2.** $\\bar y = 2000 + 1.1 \\times 30000 = 35000$, that is ₹35,000.\n**Step 3.** $\\sigma_y = 1.1 \\times 4000 = 4400$, that is ₹4,400. The allowance plays no part.\n**Step 4. CVs.** Before: $\\frac{4000}{30000}\\times 100 \\approx 13.3\\%$. After: $\\frac{4400}{35000}\\times 100 \\approx 12.6\\%$.\n**Step 5. Interpret.** A pure raise ($a = 0$) would leave the CV unchanged, since $\\sigma$ and $\\bar x$ both scale by $b$. The flat allowance lifts the mean without lifting the SD, so relative spread fell: in proportion, salaries became slightly more equal.",
+      type: "worked-example",
+      id: "st2-6-we6",
+      title: "Worked example 6 (application): a pay revision",
+      problem:
+        "A company's monthly salaries have mean ₹30,000 and SD ₹4,000. Everyone gets a 10% raise, followed by a flat ₹2,000 allowance. Find the new mean, SD and CV. Did pay become more or less equal in relative terms?",
+      steps: [
+        { text: "**Write the rule.** New salary $y = 2000 + 1.1x$, so $a = 2000$, $b = 1.1$. *Why this form:* the raise multiplies, then the allowance adds." },
+        { text: "$\\bar y = 2000 + 1.1 \\times 30000 = 35000$, that is ₹35,000." },
+        { text: "$\\sigma_y = 1.1 \\times 4000 = 4400$, that is ₹4,400. The allowance plays no part." },
+        { text: "**CVs.** Before: $\\frac{4000}{30000}\\times 100 \\approx 13.3\\%$. After: $\\frac{4400}{35000}\\times 100 \\approx 12.6\\%$." },
+        { text: "**Interpret.** A pure raise ($a = 0$) would leave the CV unchanged, since $\\sigma$ and $\\bar x$ both scale by $b$. The flat allowance lifts the mean without lifting the SD, so relative spread fell: in proportion, salaries became slightly more equal." },
+      ],
+      answer: "Mean ₹35,000, SD ₹4,400, CV about 12.6% (down from 13.3%): slightly more equal",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "st2-6-q4",

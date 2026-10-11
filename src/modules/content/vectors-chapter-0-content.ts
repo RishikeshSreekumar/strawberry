@@ -59,6 +59,7 @@ const lesson01: LessonSeed = {
       content:
         "Three positions are worth finding on purpose:\n\n**Same direction** (second leg east): you end $3 + 4 = 7$ km away.\n\n**Opposite direction** (second leg west): you end $4 - 3 = 1$ km away.\n\n**At right angles** (second leg north): the two legs and the line home form a right triangle, so the distance is $\\sqrt{3^2 + 4^2} = 5$ km.\n\nThe lengths alone did not decide the answer. The *directions* did. That is the whole reason vectors exist.",
     },
+    { type: "heading", text: "Scalars versus vectors" },
     {
       type: "callout",
       variant: "definition",
@@ -102,48 +103,102 @@ const lesson01: LessonSeed = {
       content:
         "Electric current flows *along* a wire, so it seems to have a direction, yet it is a scalar. The test for a vector is not \"can I point somewhere?\" but \"do two of them combine by the arrow rule?\" At a junction, currents of 2 A and 3 A entering always give 5 A leaving, whatever the angle between the wires. They add like plain numbers, so current is a scalar.",
     },
+    { type: "heading", text: "Distance versus displacement" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — the running track.** An athlete runs one full lap of a 400 m track and stops where she started.\n\n**Step 1.** Distance is the length of the path: 400 m.\n\n**Step 2.** Displacement is the arrow from start to finish. Start and finish are the same point, so the displacement is zero.\n\n**Step 3.** If the lap took 50 s, her average speed was $\\frac{400}{50} = 8$ m/s, but her average velocity was 0. Speed rewards effort; velocity only cares where you got to.",
+      type: "worked-example",
+      id: "va0-1-we1",
+      title: "Worked example 1: the running track",
+      problem: "An athlete runs one full lap of a 400 m track and stops where she started. Find the distance she ran and her displacement.",
+      steps: [
+        { text: "Distance is the length of the path: 400 m." },
+        {
+          text: "Displacement is the arrow from start to finish. Start and finish are the same point, so the displacement is zero.",
+        },
+        {
+          text: "If the lap took 50 s, her average speed was $\\frac{400}{50} = 8$ m/s, but her average velocity was 0. Speed rewards effort; velocity only cares where you got to.",
+        },
+      ],
+      answer: "Distance 400 m, displacement 0.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — half a circle.** A cyclist rides half-way round a circular track of radius 7 m. Find the distance and the size of the displacement (take $\\pi = \\frac{22}{7}$).\n\n**Step 1.** Distance is half the circumference: $\\pi r = \\frac{22}{7} \\times 7 = 22$ m.\n\n**Step 2.** Half-way round a circle you are at the diametrically opposite point, so the displacement is straight across the diameter: $2r = 14$ m.\n\n**Step 3.** Check: the displacement (14 m) is shorter than the distance (22 m). It always is, unless the path was a straight line in one direction, because a straight line is the shortest route between two points.",
+      type: "worked-example",
+      id: "va0-1-we2",
+      title: "Worked example 2: half a circle",
+      problem:
+        "A cyclist rides half-way round a circular track of radius 7 m. Find the distance and the size of the displacement (take $\\pi = \\frac{22}{7}$).",
+      steps: [
+        { text: "Distance is half the circumference: $\\pi r = \\frac{22}{7} \\times 7 = 22$ m." },
+        {
+          text: "Half-way round a circle you are at the diametrically opposite point, so the displacement is straight across the diameter: $2r = 14$ m.",
+        },
+        {
+          text: "Check: the displacement (14 m) is shorter than the distance (22 m). It always is, unless the path was a straight line in one direction, because a straight line is the shortest route between two points.",
+        },
+      ],
+      answer: "Distance 22 m, displacement 14 m.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — right angles.** You walk 6 km north and then 8 km east. The legs are perpendicular, so the displacement is the hypotenuse: $\\sqrt{6^2 + 8^2} = \\sqrt{100} = 10$ km, pointing somewhere between north and east. The distance walked is $6 + 8 = 14$ km.",
+      type: "worked-example",
+      id: "va0-1-we3",
+      title: "Worked example 3: right angles",
+      problem: "You walk 6 km north and then 8 km east. Find the size of your displacement and the distance you walked.",
+      steps: [
+        {
+          text: "The legs are perpendicular, so the displacement is the hypotenuse: $\\sqrt{6^2 + 8^2} = \\sqrt{100} = 10$ km, pointing somewhere between north and east.",
+        },
+        { text: "The distance walked is $6 + 8 = 14$ km." },
+      ],
+      answer: "Displacement 10 km, distance 14 km.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — a flight with a detour.** A small aircraft flies 400 km due west, then 300 km due south, and the whole trip takes 2 hours. Find the distance flown, the displacement (size and direction), the average speed and the average velocity.\n\n**Step 1 (distance).** Add the leg lengths: $400 + 300 = 700$ km.\n*Why this step:* distance is a scalar, the length of the path actually flown, so plain addition is correct here.\n\n**Step 2 (size of displacement).** West and south are at right angles, so the displacement is the hypotenuse of a right triangle with legs 400 and 300:",
+      type: "worked-example",
+      id: "va0-1-we4",
+      title: "Worked example 4: a flight with a detour",
+      problem:
+        "A small aircraft flies 400 km due west, then 300 km due south, and the whole trip takes 2 hours. Find the distance flown, the displacement (size and direction), the average speed and the average velocity.",
+      steps: [
+        {
+          text: "**Distance.** Add the leg lengths: $400 + 300 = 700$ km.\n*Why this step:* distance is a scalar, the length of the path actually flown, so plain addition is correct here.",
+        },
+        {
+          text: "**Size of displacement.** West and south are at right angles, so the displacement is the hypotenuse of a right triangle with legs 400 and 300.\n*Why this step:* the displacement is the single straight arrow from start to finish, and with perpendicular legs that arrow closes a right triangle.",
+          latex: "|\\vec d| = \\sqrt{400^2 + 300^2} = \\sqrt{160000 + 90000} = \\sqrt{250000} = 500 \\text{ km}",
+        },
+        {
+          text: "**Direction.** Measure the angle $\\alpha$ from due west towards south: $\\tan\\alpha = \\dfrac{300}{400} = 0.75$, so $\\alpha \\approx 36.9^\\circ$. The displacement is 500 km, about $36.9^\\circ$ south of west.\n*Why this step:* a vector answer is incomplete without its direction. \"500 km\" alone is only the magnitude.",
+        },
+        {
+          text: "**Averages.** Average speed $= \\dfrac{700}{2} = 350$ km/h. Average velocity $= \\dfrac{500 \\text{ km}}{2 \\text{ h}} = 250$ km/h, about $36.9^\\circ$ south of west.",
+        },
+        {
+          text: "**Check.** The displacement (500 km) is less than the distance (700 km), as it must be for a path that turns.",
+        },
+      ],
+      answer:
+        "Distance 700 km; displacement 500 km, about $36.9^\\circ$ south of west; average speed 350 km/h; average velocity 250 km/h, about $36.9^\\circ$ south of west.",
     },
     {
-      type: "math",
-      latex: "|\\vec d| = \\sqrt{400^2 + 300^2} = \\sqrt{160000 + 90000} = \\sqrt{250000} = 500 \\text{ km}",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* the displacement is the single straight arrow from start to finish, and with perpendicular legs that arrow closes a right triangle.\n\n**Step 3 (direction).** Measure the angle $\\alpha$ from due west towards south: $\\tan\\alpha = \\dfrac{300}{400} = 0.75$, so $\\alpha \\approx 36.9^\\circ$. The displacement is 500 km, about $36.9^\\circ$ south of west.\n*Why this step:* a vector answer is incomplete without its direction. \"500 km\" alone is only the magnitude.\n\n**Step 4 (averages).** Average speed $= \\dfrac{700}{2} = 350$ km/h. Average velocity $= \\dfrac{500 \\text{ km}}{2 \\text{ h}} = 250$ km/h, about $36.9^\\circ$ south of west.\n\n**Check.** The displacement (500 km) is less than the distance (700 km), as it must be for a path that turns.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 — exam style: an arc of a circle.** A particle moves along a circle of radius $r$ and turns through an angle $\\theta$ about the centre. Show that the size of its displacement is $2r\\sin\\frac{\\theta}{2}$, and use it for $r = 10$ m, $\\theta = 60^\\circ$.\n\n**Step 1 (picture).** Let the centre be $O$, the start $A$ and the finish $B$. Then $OA = OB = r$ and $\\angle AOB = \\theta$. The displacement is the chord $\\overrightarrow{AB}$.\n\n**Step 2 (split the triangle).** Triangle $OAB$ is isosceles, so the perpendicular from $O$ to $AB$ bisects both the chord and the angle $\\theta$. Each half is a right triangle with hypotenuse $r$ and angle $\\frac{\\theta}{2}$ at $O$, so each half-chord is $r\\sin\\frac{\\theta}{2}$.\n*Why this step:* cutting an isosceles triangle down its axis of symmetry turns it into two right triangles, where plain trigonometry applies.",
-    },
-    {
-      type: "math",
-      latex: "|\\overrightarrow{AB}| = 2r\\sin\\frac{\\theta}{2}, \\qquad \\text{distance along the arc} = r\\theta \\;\\;(\\theta \\text{ in radians})",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3 (numbers).** For $r = 10$ m and $\\theta = 60^\\circ$: displacement $= 2 \\times 10 \\times \\sin 30^\\circ = 10$ m. The arc length is $10 \\times \\frac{\\pi}{3} \\approx 10.47$ m.\n\n**Check.** For a half-turn, $\\theta = 180^\\circ$ gives $2r\\sin 90^\\circ = 2r$, the diameter, as in Worked example 2. For a full turn, $\\theta = 360^\\circ$ gives $2r\\sin 180^\\circ = 0$, as in Worked example 1. At $60^\\circ$ the triangle $OAB$ is equilateral, so a chord equal to the radius is exactly right.",
+      type: "worked-example",
+      id: "va0-1-we5",
+      title: "Worked example 5: exam style, an arc of a circle",
+      problem:
+        "A particle moves along a circle of radius $r$ and turns through an angle $\\theta$ about the centre. Show that the size of its displacement is $2r\\sin\\frac{\\theta}{2}$, and use it for $r = 10$ m, $\\theta = 60^\\circ$.",
+      steps: [
+        {
+          text: "**Picture.** Let the centre be $O$, the start $A$ and the finish $B$. Then $OA = OB = r$ and $\\angle AOB = \\theta$. The displacement is the chord $\\overrightarrow{AB}$.",
+        },
+        {
+          text: "**Split the triangle.** Triangle $OAB$ is isosceles, so the perpendicular from $O$ to $AB$ bisects both the chord and the angle $\\theta$. Each half is a right triangle with hypotenuse $r$ and angle $\\frac{\\theta}{2}$ at $O$, so each half-chord is $r\\sin\\frac{\\theta}{2}$.\n*Why this step:* cutting an isosceles triangle down its axis of symmetry turns it into two right triangles, where plain trigonometry applies.",
+          latex: "|\\overrightarrow{AB}| = 2r\\sin\\frac{\\theta}{2}, \\qquad \\text{distance along the arc} = r\\theta \\;\\;(\\theta \\text{ in radians})",
+        },
+        {
+          text: "**Numbers.** For $r = 10$ m and $\\theta = 60^\\circ$: displacement $= 2 \\times 10 \\times \\sin 30^\\circ = 10$ m. The arc length is $10 \\times \\frac{\\pi}{3} \\approx 10.47$ m.",
+        },
+        {
+          text: "**Check.** For a half-turn, $\\theta = 180^\\circ$ gives $2r\\sin 90^\\circ = 2r$, the diameter, as in Worked example 2. For a full turn, $\\theta = 360^\\circ$ gives $2r\\sin 180^\\circ = 0$, as in Worked example 1. At $60^\\circ$ the triangle $OAB$ is equilateral, so a chord equal to the radius is exactly right.",
+        },
+      ],
+      answer: "$|\\overrightarrow{AB}| = 2r\\sin\\frac{\\theta}{2}$, which is 10 m for $r = 10$ m, $\\theta = 60^\\circ$ (arc length $\\approx 10.47$ m).",
     },
     {
       type: "callout",
@@ -152,6 +207,7 @@ const lesson01: LessonSeed = {
       content:
         "Two legs $\\vec p$ and $\\vec q$ can combine to any length from $\\big||\\vec p| - |\\vec q|\\big|$ (opposite directions) to $|\\vec p| + |\\vec q|$ (same direction). For 3 and 4 that is every length from 1 to 7. Lesson 0.4 proves this in general.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va0-1-q1",
@@ -316,6 +372,7 @@ const lesson02: LessonSeed = {
       content:
         "A vector is a size together with a direction. The natural picture for that is an arrow: its length shows the size, and the way it points shows the direction. Before we can calculate with arrows, we need names for their parts.",
     },
+    { type: "heading", text: "Naming and measuring an arrow" },
     {
       type: "callout",
       variant: "definition",
@@ -352,6 +409,7 @@ const lesson02: LessonSeed = {
       latex:
         "|\\overrightarrow{AB}| = |\\overrightarrow{BA}| \\qquad\\text{but}\\qquad \\overrightarrow{AB} \\neq \\overrightarrow{BA}",
     },
+    { type: "heading", text: "Free vectors: position doesn't matter" },
     {
       type: "text",
       content:
@@ -402,35 +460,88 @@ const lesson02: LessonSeed = {
           "Drag the tip to change the length or the angle, which gives a different vector. Drag the tail and only the position changes, which leaves the vector as it was.",
       },
     },
+    { type: "heading", text: "Worked examples: describing arrows" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — a square.** $ABCD$ is a square with side 2, labelled anticlockwise from the bottom-left corner $A$.\n\n**Step 1.** $\\overrightarrow{AB}$ runs along the bottom edge, left to right. $\\overrightarrow{DC}$ runs along the top edge, also left to right.\n\n**Step 2.** Both have length 2 and point in the same direction, so $\\overrightarrow{AB} = \\overrightarrow{DC}$, even though they share no points.\n\n**Step 3.** $\\overrightarrow{CD}$ runs along the top edge right to left. It has the same length as $\\overrightarrow{AB}$ but points the opposite way, so $\\overrightarrow{CD} \\neq \\overrightarrow{AB}$.",
+      type: "worked-example",
+      id: "va0-2-we1",
+      title: "Worked example 1: a square",
+      problem: "$ABCD$ is a square with side 2, labelled anticlockwise from the bottom-left corner $A$. Is $\\overrightarrow{AB} = \\overrightarrow{DC}$? Is $\\overrightarrow{CD} = \\overrightarrow{AB}$?",
+      steps: [
+        {
+          text: "$\\overrightarrow{AB}$ runs along the bottom edge, left to right. $\\overrightarrow{DC}$ runs along the top edge, also left to right.",
+        },
+        {
+          text: "Both have length 2 and point in the same direction, so $\\overrightarrow{AB} = \\overrightarrow{DC}$, even though they share no points.",
+        },
+        {
+          text: "$\\overrightarrow{CD}$ runs along the top edge right to left. It has the same length as $\\overrightarrow{AB}$ but points the opposite way, so $\\overrightarrow{CD} \\neq \\overrightarrow{AB}$.",
+        },
+      ],
+      answer: "$\\overrightarrow{AB} = \\overrightarrow{DC}$, but $\\overrightarrow{CD} \\neq \\overrightarrow{AB}$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — a diagonal.** $PQRS$ is a rectangle with $PQ = 8$ and $QR = 6$. Find $|\\overrightarrow{PR}|$ and $|\\overrightarrow{RP}|$.\n\n**Step 1.** $PR$ is a diagonal, the hypotenuse of right triangle $PQR$: $\\sqrt{8^2 + 6^2} = \\sqrt{100} = 10$.\n\n**Step 2.** $|\\overrightarrow{PR}| = 10$, and $|\\overrightarrow{RP}| = 10$ too: reversing an arrow does not change its length.",
+      type: "worked-example",
+      id: "va0-2-we2",
+      title: "Worked example 2: a diagonal",
+      problem:
+        "$PQRS$ is a rectangle with $PQ = 8$ and $QR = 6$. Find $|\\overrightarrow{PR}|$ and $|\\overrightarrow{RP}|$.",
+      steps: [
+        {
+          text: "$PR$ is a diagonal, the hypotenuse of right triangle $PQR$: $\\sqrt{8^2 + 6^2} = \\sqrt{100} = 10$.",
+        },
+        {
+          text: "$|\\overrightarrow{PR}| = 10$, and $|\\overrightarrow{RP}| = 10$ too: reversing an arrow does not change its length.",
+        },
+      ],
+      answer: "$|\\overrightarrow{PR}| = |\\overrightarrow{RP}| = 10$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — the return voyage.** A ship sails from port $P$ to port $Q$: 10 km in the direction $30^\\circ$ north of east. Describe the vector $\\overrightarrow{QP}$ for the trip home, in words and as an angle measured anticlockwise from east.\n\n**Step 1 (magnitude).** $|\\overrightarrow{QP}| = |\\overrightarrow{PQ}| = 10$ km.\n*Why this step:* the journey home covers the same segment, so the length is unchanged.\n\n**Step 2 (direction).** Reversing an arrow turns it through $180^\\circ$. Measured anticlockwise from east, $\\overrightarrow{PQ}$ is at $30^\\circ$, so $\\overrightarrow{QP}$ is at $30^\\circ + 180^\\circ = 210^\\circ$.\n*Why this step:* opposite directions differ by exactly half a turn, whatever the starting angle.\n\n**Step 3 (in words).** $210^\\circ$ is $30^\\circ$ past due west, turning towards south: $\\overrightarrow{QP}$ is 10 km, $30^\\circ$ south of west.\n\n**Check.** \"North of east\" became \"south of west\": *both* compass words flip, and the $30^\\circ$ stays the same.",
+      type: "worked-example",
+      id: "va0-2-we3",
+      title: "Worked example 3: the return voyage",
+      problem:
+        "A ship sails from port $P$ to port $Q$: 10 km in the direction $30^\\circ$ north of east. Describe the vector $\\overrightarrow{QP}$ for the trip home, in words and as an angle measured anticlockwise from east.",
+      steps: [
+        {
+          text: "**Magnitude.** $|\\overrightarrow{QP}| = |\\overrightarrow{PQ}| = 10$ km.\n*Why this step:* the journey home covers the same segment, so the length is unchanged.",
+        },
+        {
+          text: "**Direction.** Reversing an arrow turns it through $180^\\circ$. Measured anticlockwise from east, $\\overrightarrow{PQ}$ is at $30^\\circ$, so $\\overrightarrow{QP}$ is at $30^\\circ + 180^\\circ = 210^\\circ$.\n*Why this step:* opposite directions differ by exactly half a turn, whatever the starting angle.",
+        },
+        {
+          text: "**In words.** $210^\\circ$ is $30^\\circ$ past due west, turning towards south: $\\overrightarrow{QP}$ is 10 km, $30^\\circ$ south of west.",
+        },
+        {
+          text: "**Check.** \"North of east\" became \"south of west\": *both* compass words flip, and the $30^\\circ$ stays the same.",
+        },
+      ],
+      answer: "$\\overrightarrow{QP}$ is 10 km at $210^\\circ$ from east, that is, $30^\\circ$ south of west.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — exam style: equal arrows inside a triangle.** $ABC$ is an equilateral triangle of side 6 and $M$ is the midpoint of $BC$. (a) Is $\\overrightarrow{BM} = \\overrightarrow{MC}$? (b) Is $\\overrightarrow{MB} = \\overrightarrow{MC}$? (c) Find $|\\overrightarrow{AM}|$ and $|\\overrightarrow{MA}|$.\n\n**Step 1 (a).** $\\overrightarrow{BM}$ and $\\overrightarrow{MC}$ both lie along $BC$, both point from the $B$ end towards the $C$ end, and both have length 3. Same magnitude, same direction: **equal**, even though one starts at $B$ and the other at $M$.\n*Why this step:* this is the free-vector idea. Equality asks only about length and direction.\n\n**Step 2 (b).** $\\overrightarrow{MB}$ and $\\overrightarrow{MC}$ both start at $M$ and both have length 3, but one points towards $B$ and the other towards $C$. They are **not equal**; in fact $\\overrightarrow{MB} = -\\overrightarrow{MC}$.\n\n**Step 3 (c).** The median of an equilateral triangle is perpendicular to the base, so triangle $AMB$ has a right angle at $M$ with hypotenuse $AB = 6$ and leg $BM = 3$:",
+      type: "worked-example",
+      id: "va0-2-we4",
+      title: "Worked example 4: exam style, equal arrows inside a triangle",
+      problem:
+        "$ABC$ is an equilateral triangle of side 6 and $M$ is the midpoint of $BC$. (a) Is $\\overrightarrow{BM} = \\overrightarrow{MC}$? (b) Is $\\overrightarrow{MB} = \\overrightarrow{MC}$? (c) Find $|\\overrightarrow{AM}|$ and $|\\overrightarrow{MA}|$.",
+      steps: [
+        {
+          text: "**(a)** $\\overrightarrow{BM}$ and $\\overrightarrow{MC}$ both lie along $BC$, both point from the $B$ end towards the $C$ end, and both have length 3. Same magnitude, same direction: **equal**, even though one starts at $B$ and the other at $M$.\n*Why this step:* this is the free-vector idea. Equality asks only about length and direction.",
+        },
+        {
+          text: "**(b)** $\\overrightarrow{MB}$ and $\\overrightarrow{MC}$ both start at $M$ and both have length 3, but one points towards $B$ and the other towards $C$. They are **not equal**; in fact $\\overrightarrow{MB} = -\\overrightarrow{MC}$.",
+        },
+        {
+          text: "**(c)** The median of an equilateral triangle is perpendicular to the base, so triangle $AMB$ has a right angle at $M$ with hypotenuse $AB = 6$ and leg $BM = 3$:",
+          latex: "|\\overrightarrow{AM}| = \\sqrt{6^2 - 3^2} = \\sqrt{27} = 3\\sqrt3 \\approx 5.20, \\qquad |\\overrightarrow{MA}| = 3\\sqrt3",
+        },
+        {
+          text: "*Why this step:* a magnitude is just a distance, so all the usual geometry (Pythagoras, symmetry) is available to compute it. Reversing to $\\overrightarrow{MA}$ changes the direction only.",
+        },
+      ],
+      answer:
+        "(a) Yes. (b) No: $\\overrightarrow{MB} = -\\overrightarrow{MC}$. (c) $|\\overrightarrow{AM}| = |\\overrightarrow{MA}| = 3\\sqrt3 \\approx 5.20$.",
     },
-    {
-      type: "math",
-      latex: "|\\overrightarrow{AM}| = \\sqrt{6^2 - 3^2} = \\sqrt{27} = 3\\sqrt3 \\approx 5.20, \\qquad |\\overrightarrow{MA}| = 3\\sqrt3",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* a magnitude is just a distance, so all the usual geometry (Pythagoras, symmetry) is available to compute it. Reversing to $\\overrightarrow{MA}$ changes the direction only.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va0-2-q1",
@@ -548,6 +659,7 @@ const lesson03: LessonSeed = {
       content:
         "Once a vector is just a length and a direction, a few special cases and relationships come up again and again. Each gets a name, and the names are precise: two of them in particular (equal and collinear) are easy to mix up.",
     },
+    { type: "heading", text: "The named types at a glance" },
     {
       type: "table",
       headers: ["Type", "Meaning", "Picture"],
@@ -561,6 +673,7 @@ const lesson03: LessonSeed = {
         ["Coplanar vectors", "Vectors whose arrows, slid to a common tail, lie in one plane", "Any two vectors are always coplanar; three may or may not be (Chapter 5 returns to this)"],
       ],
     },
+    { type: "heading", text: "Collinear versus equal vectors" },
     {
       type: "callout",
       variant: "definition",
@@ -617,26 +730,96 @@ const lesson03: LessonSeed = {
           "Sliding the tail gives equal vectors. Turning the arrow through exactly 180° with the same length gives the negative vector. Collapsing the tip onto the tail gives the zero vector.",
       },
     },
+    { type: "heading", text: "Classifying vectors in shapes and on roads" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — the regular hexagon.** $ABCDEF$ is a regular hexagon labelled anticlockwise, with centre $O$. Opposite sides of a regular hexagon are parallel, and joining $O$ to the vertices cuts it into six equilateral triangles.\n\n**Step 1 (equal).** $\\overrightarrow{AB}$ and $\\overrightarrow{ED}$ are opposite sides traced the same way round, so $\\overrightarrow{AB} = \\overrightarrow{ED}$. The radius $\\overrightarrow{OC}$ is also parallel to $AB$, points the same way and has the same length (the triangles are equilateral), so $\\overrightarrow{AB} = \\overrightarrow{OC}$ as well.\n\n**Step 2 (negative).** $\\overrightarrow{DE}$ runs along the same side as $\\overrightarrow{ED}$ the other way, so $\\overrightarrow{DE} = -\\overrightarrow{AB}$.\n\n**Step 3 (collinear, not equal).** The long diagonal $\\overrightarrow{AD}$ passes through $O$ and is parallel to $BC$, pointing the same way, but it is twice as long. So $\\overrightarrow{AD}$ and $\\overrightarrow{BC}$ are collinear but not equal.",
+      type: "worked-example",
+      id: "va0-3-we1",
+      title: "Worked example 1: the regular hexagon",
+      problem:
+        "$ABCDEF$ is a regular hexagon labelled anticlockwise, with centre $O$. Opposite sides of a regular hexagon are parallel, and joining $O$ to the vertices cuts it into six equilateral triangles. Find vectors in the figure equal to $\\overrightarrow{AB}$ and to $-\\overrightarrow{AB}$, and decide whether $\\overrightarrow{AD}$ and $\\overrightarrow{BC}$ are equal.",
+      steps: [
+        {
+          text: "**Equal.** $\\overrightarrow{AB}$ and $\\overrightarrow{ED}$ are opposite sides traced the same way round, so $\\overrightarrow{AB} = \\overrightarrow{ED}$. The radius $\\overrightarrow{OC}$ is also parallel to $AB$, points the same way and has the same length (the triangles are equilateral), so $\\overrightarrow{AB} = \\overrightarrow{OC}$ as well.",
+        },
+        {
+          text: "**Negative.** $\\overrightarrow{DE}$ runs along the same side as $\\overrightarrow{ED}$ the other way, so $\\overrightarrow{DE} = -\\overrightarrow{AB}$.",
+        },
+        {
+          text: "**Collinear, not equal.** The long diagonal $\\overrightarrow{AD}$ passes through $O$ and is parallel to $BC$, pointing the same way, but it is twice as long. So $\\overrightarrow{AD}$ and $\\overrightarrow{BC}$ are collinear but not equal.",
+        },
+      ],
+      answer:
+        "$\\overrightarrow{AB} = \\overrightarrow{ED} = \\overrightarrow{OC}$, $\\overrightarrow{DE} = -\\overrightarrow{AB}$, and $\\overrightarrow{AD}$, $\\overrightarrow{BC}$ are collinear but not equal.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — sorting a list.** In a rectangle $PQRS$ (anticlockwise), classify each pair.\n\n$\\overrightarrow{PQ}$ and $\\overrightarrow{SR}$: opposite sides, same direction, same length, so **equal**.\n\n$\\overrightarrow{PQ}$ and $\\overrightarrow{RS}$: same length, opposite direction, so **negatives** (and therefore collinear).\n\n$\\overrightarrow{PQ}$ and $\\overrightarrow{PS}$: same starting point, so **co-initial**; perpendicular, so not collinear.\n\n$\\overrightarrow{PR}$ and $\\overrightarrow{QS}$: the diagonals have equal length but different directions, so they are **not equal**.",
+      type: "worked-example",
+      id: "va0-3-we2",
+      title: "Worked example 2: sorting a list",
+      problem:
+        "In a rectangle $PQRS$ (anticlockwise), classify each pair (equal, negatives, co-initial, collinear, or not equal):\n- $\\overrightarrow{PQ}$ and $\\overrightarrow{SR}$\n- $\\overrightarrow{PQ}$ and $\\overrightarrow{RS}$\n- $\\overrightarrow{PQ}$ and $\\overrightarrow{PS}$\n- $\\overrightarrow{PR}$ and $\\overrightarrow{QS}$",
+      steps: [
+        {
+          text: "$\\overrightarrow{PQ}$ and $\\overrightarrow{SR}$: opposite sides, same direction, same length, so **equal**.",
+        },
+        {
+          text: "$\\overrightarrow{PQ}$ and $\\overrightarrow{RS}$: same length, opposite direction, so **negatives** (and therefore collinear).",
+        },
+        {
+          text: "$\\overrightarrow{PQ}$ and $\\overrightarrow{PS}$: same starting point, so **co-initial**; perpendicular, so not collinear.",
+        },
+        {
+          text: "$\\overrightarrow{PR}$ and $\\overrightarrow{QS}$: the diagonals have equal length but different directions, so they are **not equal**.",
+        },
+      ],
+      answer:
+        "$\\overrightarrow{PQ} = \\overrightarrow{SR}$, $\\overrightarrow{PQ} = -\\overrightarrow{RS}$, $\\overrightarrow{PQ}$ and $\\overrightarrow{PS}$ are co-initial, and $\\overrightarrow{PR} \\neq \\overrightarrow{QS}$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — traffic on a straight highway.** A highway runs north-south. Car $A$ drives north at 60 km/h, car $B$ drives north at 60 km/h in another lane, car $C$ drives south at 80 km/h and car $D$ drives south at 60 km/h. Classify the velocity pairs.\n\n**Step 1 ($\\vec v_A$, $\\vec v_B$).** Same speed, same direction: **equal**. The different lanes do not matter.\n*Why this step:* velocities are free vectors. Where each car is on the road is position, not velocity.\n\n**Step 2 ($\\vec v_A$, $\\vec v_D$).** Same speed, opposite direction: $\\vec v_D = -\\vec v_A$, **negatives**.\n\n**Step 3 ($\\vec v_A$, $\\vec v_C$).** Opposite directions but different speeds (60 and 80): **collinear (unlike) but not negatives**. In fact $\\vec v_C = -\\tfrac{80}{60}\\vec v_A = -\\tfrac43\\vec v_A$.\n*Why this step:* negatives need equal magnitudes; collinear does not.\n\n**Step 4 (all four).** Every velocity lies along the north-south line, so all four are **collinear** with one another.",
+      type: "worked-example",
+      id: "va0-3-we3",
+      title: "Worked example 3: traffic on a straight highway",
+      problem:
+        "A highway runs north-south. Car $A$ drives north at 60 km/h, car $B$ drives north at 60 km/h in another lane, car $C$ drives south at 80 km/h and car $D$ drives south at 60 km/h. Classify the velocity pairs.",
+      steps: [
+        {
+          text: "**$\\vec v_A$, $\\vec v_B$.** Same speed, same direction: **equal**. The different lanes do not matter.\n*Why this step:* velocities are free vectors. Where each car is on the road is position, not velocity.",
+        },
+        {
+          text: "**$\\vec v_A$, $\\vec v_D$.** Same speed, opposite direction: $\\vec v_D = -\\vec v_A$, **negatives**.",
+        },
+        {
+          text: "**$\\vec v_A$, $\\vec v_C$.** Opposite directions but different speeds (60 and 80): **collinear (unlike) but not negatives**. In fact $\\vec v_C = -\\tfrac{80}{60}\\vec v_A = -\\tfrac43\\vec v_A$.\n*Why this step:* negatives need equal magnitudes; collinear does not.",
+        },
+        {
+          text: "**All four.** Every velocity lies along the north-south line, so all four are **collinear** with one another.",
+        },
+      ],
+      answer:
+        "$\\vec v_A = \\vec v_B$; $\\vec v_D = -\\vec v_A$; $\\vec v_C = -\\tfrac43\\vec v_A$ (collinear, not negatives); all four are collinear.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — exam style: the centre of a square.** $ABCD$ is a square with centre $O$ (where the diagonals meet). Consider $\\overrightarrow{OA}$, $\\overrightarrow{OB}$, $\\overrightarrow{OC}$, $\\overrightarrow{OD}$. Which statements are true? (i) They are co-initial. (ii) They all have the same magnitude. (iii) $\\overrightarrow{OA} = -\\overrightarrow{OC}$. (iv) $\\overrightarrow{AO} = \\overrightarrow{OC}$. (v) $\\overrightarrow{OA}$ and $\\overrightarrow{OB}$ are collinear.\n\n**Step 1 (i) and (ii).** All four start at $O$, so they are co-initial. The diagonals of a square are equal and bisect each other, so each half-diagonal has the same length. Both **true**.\n*Why this step:* write down the geometric facts about the figure first; the vector facts follow from them.\n\n**Step 2 (iii).** $A$, $O$, $C$ lie on one diagonal with $O$ in the middle, so $\\overrightarrow{OA}$ and $\\overrightarrow{OC}$ have equal length and opposite directions. **True**.\n\n**Step 3 (iv).** $\\overrightarrow{AO}$ runs from $A$ to the centre and $\\overrightarrow{OC}$ carries on from the centre to $C$, the same length along the same line in the same direction. **True**, even though they share only the point $O$.\n\n**Step 4 (v).** The diagonals of a square are perpendicular, so $\\overrightarrow{OA}$ and $\\overrightarrow{OB}$ are at $90^\\circ$. **False**: equal length is not enough for collinearity.",
+      type: "worked-example",
+      id: "va0-3-we4",
+      title: "Worked example 4: exam style, the centre of a square",
+      problem:
+        "$ABCD$ is a square with centre $O$ (where the diagonals meet). Consider $\\overrightarrow{OA}$, $\\overrightarrow{OB}$, $\\overrightarrow{OC}$, $\\overrightarrow{OD}$. Which statements are true? (i) They are co-initial. (ii) They all have the same magnitude. (iii) $\\overrightarrow{OA} = -\\overrightarrow{OC}$. (iv) $\\overrightarrow{AO} = \\overrightarrow{OC}$. (v) $\\overrightarrow{OA}$ and $\\overrightarrow{OB}$ are collinear.",
+      steps: [
+        {
+          text: "**(i) and (ii).** All four start at $O$, so they are co-initial. The diagonals of a square are equal and bisect each other, so each half-diagonal has the same length. Both **true**.\n*Why this step:* write down the geometric facts about the figure first; the vector facts follow from them.",
+        },
+        {
+          text: "**(iii).** $A$, $O$, $C$ lie on one diagonal with $O$ in the middle, so $\\overrightarrow{OA}$ and $\\overrightarrow{OC}$ have equal length and opposite directions. **True**.",
+        },
+        {
+          text: "**(iv).** $\\overrightarrow{AO}$ runs from $A$ to the centre and $\\overrightarrow{OC}$ carries on from the centre to $C$, the same length along the same line in the same direction. **True**, even though they share only the point $O$.",
+        },
+        {
+          text: "**(v).** The diagonals of a square are perpendicular, so $\\overrightarrow{OA}$ and $\\overrightarrow{OB}$ are at $90^\\circ$. **False**: equal length is not enough for collinearity.",
+        },
+      ],
+      answer: "(i), (ii), (iii) and (iv) are true; (v) is false.",
     },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va0-3-q1",
@@ -761,6 +944,7 @@ const lesson04: LessonSeed = {
       content:
         "Go back to the walk from Lesson 0.1. You walked $\\vec a$, then $\\vec b$. Where did you end up? Wherever you are, the single arrow from home to there is the one displacement that does the same job as the two legs. That arrow is what we *mean* by $\\vec a + \\vec b$.",
     },
+    { type: "heading", text: "Two pictures of $\\vec a + \\vec b$" },
     {
       type: "callout",
       variant: "definition",
@@ -799,6 +983,7 @@ const lesson04: LessonSeed = {
       content:
         "If $\\vec a$ and $\\vec b$ are drawn from a common point $O$ as two adjacent sides of a parallelogram, then $\\vec a + \\vec b$ is the diagonal through $O$.",
     },
+    { type: "heading", text: "Commutativity, associativity and the polygon law" },
     {
       type: "text",
       content:
@@ -836,6 +1021,7 @@ const lesson04: LessonSeed = {
       content:
         "Chaining the triangle law along any path of arrows gives\n\n$\\overrightarrow{AB} + \\overrightarrow{BC} + \\overrightarrow{CD} + \\cdots + \\overrightarrow{YZ} = \\overrightarrow{AZ}$.\n\nIf the path closes up and returns to its start, the sum is $\\vec 0$. For a triangle, $\\overrightarrow{AB} + \\overrightarrow{BC} + \\overrightarrow{CA} = \\vec 0$. Three forces in equilibrium, drawn tip to tail, form a closed triangle for exactly this reason.",
     },
+    { type: "heading", text: "The length and direction of a sum" },
     {
       type: "callout",
       variant: "definition",
@@ -878,50 +1064,101 @@ const lesson04: LessonSeed = {
       content:
         "It is tempting to write $|\\vec a + \\vec b| = |\\vec a| + |\\vec b|$. Lengths add only when the arrows point the same way. In every other case the sum is shorter, because the straight arrow cuts the corner of the triangle. The readout in the interactive shows \"<\" until you line the arrows up.",
     },
+    { type: "heading", text: "Resultants of forces and velocities" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — two forces.** Forces of 3 N and 5 N act on a particle, with an angle of $60^\\circ$ between them. Find the resultant.\n\n**Step 1.** $R^2 = 3^2 + 5^2 + 2(3)(5)\\cos 60^\\circ = 9 + 25 + 15 = 49$, so $R = 7$ N.\n\n**Step 2.** Direction, measured from the 3 N force: $\\tan\\alpha = \\dfrac{5\\sin 60^\\circ}{3 + 5\\cos 60^\\circ} = \\dfrac{5\\sqrt3/2}{11/2} = \\dfrac{5\\sqrt3}{11} \\approx 0.787$, so $\\alpha \\approx 38.2^\\circ$.\n\n**Step 3 (sense check).** 7 N lies between $5 - 3 = 2$ and $5 + 3 = 8$, as the triangle inequality demands, and $\\alpha < 60^\\circ$, so the resultant lies between the two forces, leaning towards the bigger one.",
+      type: "worked-example",
+      id: "va0-4-we1",
+      title: "Worked example 1: two forces",
+      problem:
+        "Forces of 3 N and 5 N act on a particle, with an angle of $60^\\circ$ between them. Find the resultant.",
+      steps: [
+        { text: "$R^2 = 3^2 + 5^2 + 2(3)(5)\\cos 60^\\circ = 9 + 25 + 15 = 49$, so $R = 7$ N." },
+        {
+          text: "Direction, measured from the 3 N force: $\\tan\\alpha = \\dfrac{5\\sin 60^\\circ}{3 + 5\\cos 60^\\circ} = \\dfrac{5\\sqrt3/2}{11/2} = \\dfrac{5\\sqrt3}{11} \\approx 0.787$, so $\\alpha \\approx 38.2^\\circ$.",
+        },
+        {
+          text: "**Sense check.** 7 N lies between $5 - 3 = 2$ and $5 + 3 = 8$, as the triangle inequality demands, and $\\alpha < 60^\\circ$, so the resultant lies between the two forces, leaning towards the bigger one.",
+        },
+      ],
+      answer: "$R = 7$ N, at about $38.2^\\circ$ to the 3 N force.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — equal forces at $120^\\circ$.** Two forces, each of size $F$, act at $120^\\circ$ to each other.\n\n$R^2 = F^2 + F^2 + 2F^2\\cos 120^\\circ = 2F^2 - F^2 = F^2$, so $R = F$.\n\nThe picture explains it: the parallelogram is a rhombus with a $60^\\circ$ angle, and its short diagonal splits it into two equilateral triangles.\n\n**Consequence.** By symmetry the resultant lies along the bisector of the $120^\\circ$ angle, so it makes $60^\\circ$ with each force. A third force of size $F$ placed at $120^\\circ$ to each of the first two points exactly opposite that bisector, at $180^\\circ$ to the resultant. A force $F$ in exactly the opposite direction to a resultant of size $F$ cancels it, so three equal forces at $120^\\circ$ to one another cancel exactly.",
+      type: "worked-example",
+      id: "va0-4-we2",
+      title: "Worked example 2: equal forces at $120^\\circ$",
+      problem: "Two forces, each of size $F$, act at $120^\\circ$ to each other. Find the size $R$ of their resultant.",
+      steps: [
+        { text: "$R^2 = F^2 + F^2 + 2F^2\\cos 120^\\circ = 2F^2 - F^2 = F^2$, so $R = F$." },
+        {
+          text: "The picture explains it: the parallelogram is a rhombus with a $60^\\circ$ angle, and its short diagonal splits it into two equilateral triangles.",
+        },
+        {
+          text: "**Consequence.** By symmetry the resultant lies along the bisector of the $120^\\circ$ angle, so it makes $60^\\circ$ with each force. A third force of size $F$ placed at $120^\\circ$ to each of the first two points exactly opposite that bisector, at $180^\\circ$ to the resultant. A force $F$ in exactly the opposite direction to a resultant of size $F$ cancels it, so three equal forces at $120^\\circ$ to one another cancel exactly.",
+        },
+      ],
+      answer: "$R = F$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — the polygon law.** In any quadrilateral $ABCD$, simplify $\\overrightarrow{AB} + \\overrightarrow{BC} + \\overrightarrow{CD}$ and $\\overrightarrow{AB} + \\overrightarrow{BC} + \\overrightarrow{CD} + \\overrightarrow{DA}$.\n\nThe first chain runs $A \\to B \\to C \\to D$, so it equals $\\overrightarrow{AD}$. The second returns to $A$, so it equals $\\vec 0$.",
+      type: "worked-example",
+      id: "va0-4-we3",
+      title: "Worked example 3: the polygon law",
+      problem:
+        "In any quadrilateral $ABCD$, simplify $\\overrightarrow{AB} + \\overrightarrow{BC} + \\overrightarrow{CD}$ and $\\overrightarrow{AB} + \\overrightarrow{BC} + \\overrightarrow{CD} + \\overrightarrow{DA}$.",
+      steps: [
+        { text: "The first chain runs $A \\to B \\to C \\to D$, so it equals $\\overrightarrow{AD}$." },
+        { text: "The second returns to $A$, so it equals $\\vec 0$." },
+      ],
+      answer: "$\\overrightarrow{AD}$ and $\\vec 0$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — crossing a river.** A boat heads straight across a river 80 m wide, moving at 4 m/s relative to the water. The river flows at 3 m/s. Find the boat's actual velocity, the time to cross and how far downstream it lands.\n\n**Step 1 (set up the arrows).** The boat's velocity relative to the water, $\\vec u$, points straight across with $|\\vec u| = 4$. The water's velocity $\\vec w$ points downstream with $|\\vec w| = 3$. The actual velocity over the ground is $\\vec v = \\vec u + \\vec w$.\n*Why this step:* each second the boat moves 4 m across *and* is carried 3 m downstream. Two displacements in the same second add by the triangle law.\n\n**Step 2 (resultant).** The two arrows are perpendicular ($\\theta = 90^\\circ$, $\\cos\\theta = 0$):",
+      type: "worked-example",
+      id: "va0-4-we4",
+      title: "Worked example 4: crossing a river",
+      problem:
+        "A boat heads straight across a river 80 m wide, moving at 4 m/s relative to the water. The river flows at 3 m/s. Find the boat's actual velocity, the time to cross and how far downstream it lands.",
+      steps: [
+        {
+          text: "**Set up the arrows.** The boat's velocity relative to the water, $\\vec u$, points straight across with $|\\vec u| = 4$. The water's velocity $\\vec w$ points downstream with $|\\vec w| = 3$. The actual velocity over the ground is $\\vec v = \\vec u + \\vec w$.\n*Why this step:* each second the boat moves 4 m across *and* is carried 3 m downstream. Two displacements in the same second add by the triangle law.",
+        },
+        {
+          text: "**Resultant.** The two arrows are perpendicular ($\\theta = 90^\\circ$, $\\cos\\theta = 0$). Here $\\alpha$ is the angle between the boat's actual path and the straight-across direction:",
+          latex: "|\\vec v| = \\sqrt{4^2 + 3^2 + 2(4)(3)\\cos 90^\\circ} = \\sqrt{16 + 9} = 5 \\text{ m/s}, \\qquad \\tan\\alpha = \\frac{3}{4} \\;\\Rightarrow\\; \\alpha \\approx 36.9^\\circ",
+        },
+        {
+          text: "**Time.** Only the across-the-river part of the motion gets the boat to the other bank: $t = \\dfrac{80}{4} = 20$ s.\n*Why this step:* the current pushes along the bank, so it neither helps nor hinders the crossing.",
+        },
+        { text: "**Drift.** In those 20 s the current carries the boat $3 \\times 20 = 60$ m downstream." },
+        { text: "**Check.** Path length $= 5 \\times 20 = 100$ m, and indeed $\\sqrt{80^2 + 60^2} = 100$." },
+      ],
+      answer:
+        "Velocity 5 m/s at about $36.9^\\circ$ to the straight-across direction; crossing time 20 s; it lands 60 m downstream.",
     },
     {
-      type: "math",
-      latex: "|\\vec v| = \\sqrt{4^2 + 3^2 + 2(4)(3)\\cos 90^\\circ} = \\sqrt{16 + 9} = 5 \\text{ m/s}, \\qquad \\tan\\alpha = \\frac{3}{4} \\;\\Rightarrow\\; \\alpha \\approx 36.9^\\circ",
+      type: "worked-example",
+      id: "va0-4-we5",
+      title: "Worked example 5: exam style (JEE)",
+      problem:
+        "The resultant of two forces $P$ and $Q$ is $R$. If $Q$ is doubled, the resultant is doubled; if instead $Q$ is reversed, the resultant is again doubled. Find $P : Q : R$.",
+      steps: [
+        {
+          text: "**Translate each sentence.** Let $\\theta$ be the angle between the forces and write $c = \\cos\\theta$. Doubling $Q$ keeps $\\theta$; reversing $Q$ replaces $\\theta$ by $180^\\circ - \\theta$, which flips the sign of $c$.\n*Why this step:* each situation is just the length-of-a-sum formula with different data. Three facts, three equations.",
+          latex:
+            "\\begin{aligned} R^2 &= P^2 + Q^2 + 2PQc \\quad &(1)\\\\ 4R^2 &= P^2 + 4Q^2 + 4PQc \\quad &(2)\\\\ 4R^2 &= P^2 + Q^2 - 2PQc \\quad &(3) \\end{aligned}",
+        },
+        {
+          text: "**Eliminate $R$.** (2) and (3) have the same left side, so $4Q^2 + 4PQc = Q^2 - 2PQc$, giving $3Q^2 = -6PQc$, so $2PQc = -Q^2$.",
+        },
+        { text: "**Find $R$.** Put $2PQc = -Q^2$ into (1): $R^2 = P^2 + Q^2 - Q^2 = P^2$, so $R = P$." },
+        {
+          text: "**Find $Q$.** Put it into (3): $4R^2 = P^2 + Q^2 + Q^2$. With $R = P$ this is $4P^2 = P^2 + 2Q^2$, so $Q^2 = \\tfrac32 P^2$ and $Q = \\sqrt{\\tfrac32}\\,P$.",
+        },
+        {
+          text: "**Check.** $c = -\\dfrac{Q}{2P} = -\\dfrac{\\sqrt3}{2\\sqrt2} \\approx -0.61$, a genuine cosine, so the angle (about $128^\\circ$) really exists.",
+        },
+      ],
+      answer: "$P : Q : R = 1 : \\sqrt{\\tfrac32} : 1 = \\sqrt2 : \\sqrt3 : \\sqrt2$.",
     },
-    {
-      type: "text",
-      content:
-        "Here $\\alpha$ is the angle between the boat's actual path and the straight-across direction.\n\n**Step 3 (time).** Only the across-the-river part of the motion gets the boat to the other bank: $t = \\dfrac{80}{4} = 20$ s.\n*Why this step:* the current pushes along the bank, so it neither helps nor hinders the crossing.\n\n**Step 4 (drift).** In those 20 s the current carries the boat $3 \\times 20 = 60$ m downstream.\n\n**Check.** Path length $= 5 \\times 20 = 100$ m, and indeed $\\sqrt{80^2 + 60^2} = 100$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 — exam style (JEE).** The resultant of two forces $P$ and $Q$ is $R$. If $Q$ is doubled, the resultant is doubled; if instead $Q$ is reversed, the resultant is again doubled. Find $P : Q : R$.\n\n**Step 1 (translate each sentence).** Let $\\theta$ be the angle between the forces and write $c = \\cos\\theta$. Doubling $Q$ keeps $\\theta$; reversing $Q$ replaces $\\theta$ by $180^\\circ - \\theta$, which flips the sign of $c$:",
-    },
-    {
-      type: "math",
-      latex:
-        "\\begin{aligned} R^2 &= P^2 + Q^2 + 2PQc \\quad &(1)\\\\ 4R^2 &= P^2 + 4Q^2 + 4PQc \\quad &(2)\\\\ 4R^2 &= P^2 + Q^2 - 2PQc \\quad &(3) \\end{aligned}",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* each situation is just the length-of-a-sum formula with different data. Three facts, three equations.\n\n**Step 2 (eliminate $R$).** (2) and (3) have the same left side, so $4Q^2 + 4PQc = Q^2 - 2PQc$, giving $3Q^2 = -6PQc$, so $2PQc = -Q^2$.\n\n**Step 3 (find $R$).** Put $2PQc = -Q^2$ into (1): $R^2 = P^2 + Q^2 - Q^2 = P^2$, so $R = P$.\n\n**Step 4 (find $Q$).** Put it into (3): $4R^2 = P^2 + Q^2 + Q^2$. With $R = P$ this is $4P^2 = P^2 + 2Q^2$, so $Q^2 = \\tfrac32 P^2$ and $Q = \\sqrt{\\tfrac32}\\,P$.\n\n**Answer.** $P : Q : R = 1 : \\sqrt{\\tfrac32} : 1 = \\sqrt2 : \\sqrt3 : \\sqrt2$.\n\n**Check.** $c = -\\dfrac{Q}{2P} = -\\dfrac{\\sqrt3}{2\\sqrt2} \\approx -0.61$, a genuine cosine, so the angle (about $128^\\circ$) really exists.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va0-4-q1",
@@ -1061,6 +1298,7 @@ const lesson05: LessonSeed = {
           "Slide k from 3 down to -3. The arrow shrinks, vanishes at k = 0, then grows again pointing the other way. Its length is always |k| times the original.",
       },
     },
+    { type: "heading", text: "Scalar multiples and unit vectors" },
     {
       type: "callout",
       variant: "definition",
@@ -1080,8 +1318,22 @@ const lesson05: LessonSeed = {
     {
       type: "text",
       content:
-        "The second form says every vector is (its length) times (its direction). Magnitude and direction, split cleanly.\n\n**Example.** $|\\vec a| = 4$. Find the vector of magnitude 10 in the direction of $\\vec a$.\n\n**Step 1.** The direction is $\\hat a = \\tfrac14\\vec a$.\n\n**Step 2.** Ten units along it: $10\\hat a = \\tfrac{10}{4}\\vec a = \\tfrac52\\vec a$.\n\n**Check.** $|\\tfrac52\\vec a| = \\tfrac52 \\times 4 = 10$. The vector of magnitude 10 in the *opposite* direction would be $-\\tfrac52\\vec a$.",
+        "The second form says every vector is (its length) times (its direction). Magnitude and direction, split cleanly.",
     },
+    {
+      type: "worked-example",
+      id: "va0-5-we1",
+      problem: "$|\\vec a| = 4$. Find the vector of magnitude 10 in the direction of $\\vec a$.",
+      steps: [
+        { text: "The direction is $\\hat a = \\tfrac14\\vec a$." },
+        { text: "Ten units along it: $10\\hat a = \\tfrac{10}{4}\\vec a = \\tfrac52\\vec a$." },
+        {
+          text: "**Check.** $|\\tfrac52\\vec a| = \\tfrac52 \\times 4 = 10$. The vector of magnitude 10 in the *opposite* direction would be $-\\tfrac52\\vec a$.",
+        },
+      ],
+      answer: "$\\tfrac52\\vec a$",
+    },
+    { type: "heading", text: "Subtraction as a tip-to-tip arrow" },
     {
       type: "text",
       content:
@@ -1131,6 +1383,7 @@ const lesson05: LessonSeed = {
       content:
         "Compare it with the sum: the only change is the sign of the cross term. The sum is the long diagonal of the parallelogram when $\\theta$ is acute, the difference is the other diagonal. For unit vectors, $|\\vec a - \\vec b| = \\sqrt3$ gives $3 = 2 - 2\\cos\\theta$, so $\\cos\\theta = -\\tfrac12$ and $\\theta = 120^\\circ$.",
     },
+    { type: "heading", text: "Scaling laws and the collinearity test" },
     {
       type: "text",
       content:
@@ -1167,63 +1420,135 @@ const lesson05: LessonSeed = {
       content:
         "A consequence you will use constantly: if $\\vec a$ and $\\vec b$ are **not** collinear and $x\\vec a + y\\vec b = \\vec 0$, then $x = y = 0$. If $x$ were not zero, we could write $\\vec a = -\\frac{y}{x}\\vec b$, which would make them collinear. So $x = 0$, which leaves $y\\vec b = \\vec 0$. Since $\\vec b \\neq \\vec 0$ (the zero vector is collinear with everything, so a non-collinear pair cannot contain it), $y = 0$ as well. So with two non-collinear vectors you may **compare coefficients**: $x\\vec a + y\\vec b = x'\\vec a + y'\\vec b$ forces $x = x'$ and $y = y'$.",
     },
+    { type: "heading", text: "Applying subtraction and scaling" },
     {
-      type: "text",
-      content:
-        "**Worked example 1 — diagonals of a parallelogram.** $ABCD$ is a parallelogram with $\\overrightarrow{AB} = \\vec a$ and $\\overrightarrow{AD} = \\vec b$.\n\n**Step 1.** $\\overrightarrow{BC} = \\overrightarrow{AD} = \\vec b$ (opposite sides), so $\\overrightarrow{AC} = \\overrightarrow{AB} + \\overrightarrow{BC} = \\vec a + \\vec b$.\n\n**Step 2.** $\\overrightarrow{BD}$ goes from the tip of $\\vec a$ to the tip of $\\vec b$ (both drawn from $A$), so $\\overrightarrow{BD} = \\vec b - \\vec a$.\n\n**Step 3 (reverse).** If the diagonals are given, $\\overrightarrow{AC} = \\vec p$ and $\\overrightarrow{BD} = \\vec q$, then adding and subtracting $\\vec p = \\vec a + \\vec b$ and $\\vec q = \\vec b - \\vec a$ gives\n\n$\\vec a = \\tfrac12(\\vec p - \\vec q)$ and $\\vec b = \\tfrac12(\\vec p + \\vec q)$.",
+      type: "worked-example",
+      id: "va0-5-we2",
+      title: "Worked example 1: diagonals of a parallelogram",
+      problem:
+        "$ABCD$ is a parallelogram with $\\overrightarrow{AB} = \\vec a$ and $\\overrightarrow{AD} = \\vec b$. Express the diagonals $\\overrightarrow{AC}$ and $\\overrightarrow{BD}$ in terms of $\\vec a$ and $\\vec b$. Then, given $\\overrightarrow{AC} = \\vec p$ and $\\overrightarrow{BD} = \\vec q$, express $\\vec a$ and $\\vec b$ in terms of $\\vec p$ and $\\vec q$.",
+      steps: [
+        {
+          text: "$\\overrightarrow{BC} = \\overrightarrow{AD} = \\vec b$ (opposite sides), so $\\overrightarrow{AC} = \\overrightarrow{AB} + \\overrightarrow{BC} = \\vec a + \\vec b$.",
+        },
+        {
+          text: "$\\overrightarrow{BD}$ goes from the tip of $\\vec a$ to the tip of $\\vec b$ (both drawn from $A$), so $\\overrightarrow{BD} = \\vec b - \\vec a$.",
+        },
+        {
+          text: "**Reverse.** If the diagonals are given, $\\overrightarrow{AC} = \\vec p$ and $\\overrightarrow{BD} = \\vec q$, then adding and subtracting $\\vec p = \\vec a + \\vec b$ and $\\vec q = \\vec b - \\vec a$ gives\n\n$\\vec a = \\tfrac12(\\vec p - \\vec q)$ and $\\vec b = \\tfrac12(\\vec p + \\vec q)$.",
+        },
+      ],
+      answer:
+        "$\\overrightarrow{AC} = \\vec a + \\vec b$, $\\overrightarrow{BD} = \\vec b - \\vec a$, and conversely $\\vec a = \\tfrac12(\\vec p - \\vec q)$, $\\vec b = \\tfrac12(\\vec p + \\vec q)$.",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 2 — the median of a triangle.** In triangle $ABC$, $M$ is the midpoint of $BC$. Express $\\overrightarrow{AM}$ in terms of $\\overrightarrow{AB}$ and $\\overrightarrow{AC}$.\n\n**Step 1.** $\\overrightarrow{AM} = \\overrightarrow{AB} + \\overrightarrow{BM}$, and $\\overrightarrow{BM} = \\tfrac12\\overrightarrow{BC}$.\n\n**Step 2.** $\\overrightarrow{BC} = \\overrightarrow{AC} - \\overrightarrow{AB}$ (tip of $\\overrightarrow{AB}$ to tip of $\\overrightarrow{AC}$).\n\n**Step 3.** $\\overrightarrow{AM} = \\overrightarrow{AB} + \\tfrac12\\left(\\overrightarrow{AC} - \\overrightarrow{AB}\\right) = \\tfrac12\\left(\\overrightarrow{AB} + \\overrightarrow{AC}\\right)$.\n\nSo the median is half the diagonal of the parallelogram built on $AB$ and $AC$, which makes sense: the diagonals of a parallelogram bisect each other.",
+      type: "worked-example",
+      id: "va0-5-we3",
+      title: "Worked example 2: the median of a triangle",
+      problem:
+        "In triangle $ABC$, $M$ is the midpoint of $BC$. Express $\\overrightarrow{AM}$ in terms of $\\overrightarrow{AB}$ and $\\overrightarrow{AC}$.",
+      steps: [
+        {
+          text: "$\\overrightarrow{AM} = \\overrightarrow{AB} + \\overrightarrow{BM}$, and $\\overrightarrow{BM} = \\tfrac12\\overrightarrow{BC}$.",
+        },
+        {
+          text: "$\\overrightarrow{BC} = \\overrightarrow{AC} - \\overrightarrow{AB}$ (tip of $\\overrightarrow{AB}$ to tip of $\\overrightarrow{AC}$).",
+        },
+        {
+          text: "$\\overrightarrow{AM} = \\overrightarrow{AB} + \\tfrac12\\left(\\overrightarrow{AC} - \\overrightarrow{AB}\\right) = \\tfrac12\\left(\\overrightarrow{AB} + \\overrightarrow{AC}\\right)$.",
+        },
+        {
+          text: "So the median is half the diagonal of the parallelogram built on $AB$ and $AC$, which makes sense: the diagonals of a parallelogram bisect each other.",
+        },
+      ],
+      answer: "$\\overrightarrow{AM} = \\tfrac12\\left(\\overrightarrow{AB} + \\overrightarrow{AC}\\right)$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 3 — finding $\\lambda$.** $\\vec a$ and $\\vec b$ are not collinear. For which $\\lambda$ are $\\vec p = 2\\vec a + 3\\vec b$ and $\\vec q = \\lambda\\vec a + 6\\vec b$ collinear?\n\n**Step 1.** Collinear means $\\vec q = t\\vec p$ for some $t$: $\\lambda\\vec a + 6\\vec b = 2t\\vec a + 3t\\vec b$.\n\n**Step 2.** Compare coefficients (allowed, since $\\vec a$ and $\\vec b$ are not collinear): $6 = 3t$ gives $t = 2$, and then $\\lambda = 2t = 4$.\n\n**Check.** $\\vec q = 4\\vec a + 6\\vec b = 2(2\\vec a + 3\\vec b) = 2\\vec p$.",
+      type: "worked-example",
+      id: "va0-5-we4",
+      title: "Worked example 3: finding $\\lambda$",
+      problem:
+        "$\\vec a$ and $\\vec b$ are not collinear. For which $\\lambda$ are $\\vec p = 2\\vec a + 3\\vec b$ and $\\vec q = \\lambda\\vec a + 6\\vec b$ collinear?",
+      steps: [
+        {
+          text: "Collinear means $\\vec q = t\\vec p$ for some $t$: $\\lambda\\vec a + 6\\vec b = 2t\\vec a + 3t\\vec b$.",
+        },
+        {
+          text: "Compare coefficients (allowed, since $\\vec a$ and $\\vec b$ are not collinear): $6 = 3t$ gives $t = 2$, and then $\\lambda = 2t = 4$.",
+        },
+        { text: "**Check.** $\\vec q = 4\\vec a + 6\\vec b = 2(2\\vec a + 3\\vec b) = 2\\vec p$." },
+      ],
+      answer: "$\\lambda = 4$",
     },
     {
-      type: "text",
-      content:
-        "**Worked example 4 — relative velocity at a crossroads.** Car $A$ drives north at 40 km/h and car $B$ drives east at 30 km/h. How fast, and in what direction, does car $A$ appear to move to someone sitting in car $B$?\n\n**Step 1 (which operation?).** The velocity of $A$ relative to $B$ is $\\vec v_A - \\vec v_B$.\n*Why this step:* the passenger in $B$ sees everything shifted by $B$'s own motion. Subtracting $\\vec v_B$ is exactly \"what you add to $\\vec v_B$ to get $\\vec v_A$\".\n\n**Step 2 (picture).** $\\vec v_A - \\vec v_B = \\vec v_A + (-\\vec v_B)$: 40 km/h north together with 30 km/h **west**.\n\n**Step 3 (size).** The angle between $\\vec v_A$ and $\\vec v_B$ is $90^\\circ$, so the cross term vanishes:",
+      type: "worked-example",
+      id: "va0-5-we5",
+      title: "Worked example 4: relative velocity at a crossroads",
+      problem:
+        "Car $A$ drives north at 40 km/h and car $B$ drives east at 30 km/h. How fast, and in what direction, does car $A$ appear to move to someone sitting in car $B$?",
+      steps: [
+        {
+          text: "**Which operation?** The velocity of $A$ relative to $B$ is $\\vec v_A - \\vec v_B$.\n*Why this step:* the passenger in $B$ sees everything shifted by $B$'s own motion. Subtracting $\\vec v_B$ is exactly \"what you add to $\\vec v_B$ to get $\\vec v_A$\".",
+        },
+        {
+          text: "**Picture.** $\\vec v_A - \\vec v_B = \\vec v_A + (-\\vec v_B)$: 40 km/h north together with 30 km/h **west**.",
+        },
+        {
+          text: "**Size.** The angle between $\\vec v_A$ and $\\vec v_B$ is $90^\\circ$, so the cross term vanishes:",
+          latex: "|\\vec v_A - \\vec v_B|^2 = 40^2 + 30^2 - 2(40)(30)\\cos 90^\\circ = 1600 + 900 = 2500, \\qquad |\\vec v_A - \\vec v_B| = 50 \\text{ km/h}",
+        },
+        {
+          text: "**Direction.** Measured from north towards west, $\\tan\\phi = \\dfrac{30}{40}$, so $\\phi \\approx 36.9^\\circ$: car $A$ seems to move at 50 km/h, about $36.9^\\circ$ west of north.",
+        },
+        {
+          text: "**Check.** Although $B$ drives east, $A$ appears to drift **west**. That is the negative vector at work, and it matches experience: from a moving car, things you pass seem to slide backwards.",
+        },
+      ],
+      answer: "50 km/h, about $36.9^\\circ$ west of north.",
     },
     {
-      type: "math",
-      latex: "|\\vec v_A - \\vec v_B|^2 = 40^2 + 30^2 - 2(40)(30)\\cos 90^\\circ = 1600 + 900 = 2500, \\qquad |\\vec v_A - \\vec v_B| = 50 \\text{ km/h}",
+      type: "worked-example",
+      id: "va0-5-we6",
+      title: "Worked example 5: exam style, three collinear points",
+      problem:
+        "With respect to an origin $O$, $\\overrightarrow{OA} = \\vec a$, $\\overrightarrow{OB} = \\vec b$ and $\\overrightarrow{OC} = 3\\vec a - 2\\vec b$, where $\\vec a$ and $\\vec b$ are not collinear. Show that $A$, $B$, $C$ lie on one line, and find the ratio $AC : AB$.",
+      steps: [
+        {
+          text: "**Arrows between the points.** Use \"tip minus tail\" (the difference rule):\n\n$\\overrightarrow{AB} = \\vec b - \\vec a$, and $\\overrightarrow{AC} = (3\\vec a - 2\\vec b) - \\vec a = 2\\vec a - 2\\vec b$.\n*Why this step:* statements about points become statements about vectors once every arrow starts from the same point $A$.",
+        },
+        {
+          text: "**Spot the multiple.** $2\\vec a - 2\\vec b = -2(\\vec b - \\vec a)$, so",
+          latex: "\\overrightarrow{AC} = -2\\,\\overrightarrow{AB}",
+        },
+        {
+          text: "**Conclude.** By the collinearity criterion, $\\overrightarrow{AC}$ and $\\overrightarrow{AB}$ are parallel. They also share the point $A$, so they lie along the **same** line, and $A$, $B$, $C$ are collinear.\n*Why this step:* parallel alone would allow two separate parallel lines; the common point $A$ rules that out.",
+        },
+        {
+          text: "**Ratio.** $|\\overrightarrow{AC}| = 2|\\overrightarrow{AB}|$, so $AC : AB = 2 : 1$. The minus sign says $C$ is on the opposite side of $A$ from $B$.",
+        },
+      ],
+      answer: "$A$, $B$, $C$ are collinear, with $AC : AB = 2 : 1$ ($C$ on the opposite side of $A$ from $B$).",
     },
     {
-      type: "text",
-      content:
-        "**Step 4 (direction).** Measured from north towards west, $\\tan\\phi = \\dfrac{30}{40}$, so $\\phi \\approx 36.9^\\circ$: car $A$ seems to move at 50 km/h, about $36.9^\\circ$ west of north.\n\n**Check.** Although $B$ drives east, $A$ appears to drift **west**. That is the negative vector at work, and it matches experience: from a moving car, things you pass seem to slide backwards.",
+      type: "worked-example",
+      id: "va0-5-we7",
+      title: "Worked example 6: exam style (CBSE), the parallelogram identity",
+      problem: "$|\\vec a| = 3$, $|\\vec b| = 5$ and $|\\vec a + \\vec b| = 7$. Find $|\\vec a - \\vec b|$.",
+      steps: [
+        {
+          text: "**Add the two length formulas.** The cross terms $+2|\\vec a||\\vec b|\\cos\\theta$ and $-2|\\vec a||\\vec b|\\cos\\theta$ cancel.\n*Why this step:* we do not know $\\theta$, and adding the formulas removes it without ever finding it. Geometrically: the squares of the two diagonals of a parallelogram add up to the squares of its four sides.",
+          latex: "|\\vec a + \\vec b|^2 + |\\vec a - \\vec b|^2 = 2\\left(|\\vec a|^2 + |\\vec b|^2\\right)",
+        },
+        {
+          text: "**Substitute.** $49 + |\\vec a - \\vec b|^2 = 2(9 + 25) = 68$, so $|\\vec a - \\vec b|^2 = 19$ and $|\\vec a - \\vec b| = \\sqrt{19}$.",
+        },
+        {
+          text: "**Check (the long way).** $49 = 9 + 25 + 30\\cos\\theta$ gives $\\cos\\theta = \\tfrac12$, $\\theta = 60^\\circ$. Then $|\\vec a - \\vec b|^2 = 34 - 30 \\times \\tfrac12 = 19$. The same answer.",
+        },
+      ],
+      answer: "$|\\vec a - \\vec b| = \\sqrt{19}$",
     },
-    {
-      type: "text",
-      content:
-        "**Worked example 5 — exam style: three collinear points.** With respect to an origin $O$, $\\overrightarrow{OA} = \\vec a$, $\\overrightarrow{OB} = \\vec b$ and $\\overrightarrow{OC} = 3\\vec a - 2\\vec b$, where $\\vec a$ and $\\vec b$ are not collinear. Show that $A$, $B$, $C$ lie on one line, and find the ratio $AC : AB$.\n\n**Step 1 (arrows between the points).** Use \"tip minus tail\" (the difference rule):\n\n$\\overrightarrow{AB} = \\vec b - \\vec a$, and $\\overrightarrow{AC} = (3\\vec a - 2\\vec b) - \\vec a = 2\\vec a - 2\\vec b$.\n*Why this step:* statements about points become statements about vectors once every arrow starts from the same point $A$.\n\n**Step 2 (spot the multiple).** $2\\vec a - 2\\vec b = -2(\\vec b - \\vec a)$, so",
-    },
-    {
-      type: "math",
-      latex: "\\overrightarrow{AC} = -2\\,\\overrightarrow{AB}",
-    },
-    {
-      type: "text",
-      content:
-        "**Step 3 (conclude).** By the collinearity criterion, $\\overrightarrow{AC}$ and $\\overrightarrow{AB}$ are parallel. They also share the point $A$, so they lie along the **same** line, and $A$, $B$, $C$ are collinear.\n*Why this step:* parallel alone would allow two separate parallel lines; the common point $A$ rules that out.\n\n**Step 4 (ratio).** $|\\overrightarrow{AC}| = 2|\\overrightarrow{AB}|$, so $AC : AB = 2 : 1$. The minus sign says $C$ is on the opposite side of $A$ from $B$.",
-    },
-    {
-      type: "text",
-      content:
-        "**Worked example 6 — exam style (CBSE): the parallelogram identity.** $|\\vec a| = 3$, $|\\vec b| = 5$ and $|\\vec a + \\vec b| = 7$. Find $|\\vec a - \\vec b|$.\n\n**Step 1 (add the two length formulas).** The cross terms $+2|\\vec a||\\vec b|\\cos\\theta$ and $-2|\\vec a||\\vec b|\\cos\\theta$ cancel:",
-    },
-    {
-      type: "math",
-      latex: "|\\vec a + \\vec b|^2 + |\\vec a - \\vec b|^2 = 2\\left(|\\vec a|^2 + |\\vec b|^2\\right)",
-    },
-    {
-      type: "text",
-      content:
-        "*Why this step:* we do not know $\\theta$, and adding the formulas removes it without ever finding it. Geometrically: the squares of the two diagonals of a parallelogram add up to the squares of its four sides.\n\n**Step 2 (substitute).** $49 + |\\vec a - \\vec b|^2 = 2(9 + 25) = 68$, so $|\\vec a - \\vec b|^2 = 19$ and $|\\vec a - \\vec b| = \\sqrt{19}$.\n\n**Check (the long way).** $49 = 9 + 25 + 30\\cos\\theta$ gives $\\cos\\theta = \\tfrac12$, $\\theta = 60^\\circ$. Then $|\\vec a - \\vec b|^2 = 34 - 30 \\times \\tfrac12 = 19$. The same answer.",
-    },
+    { type: "heading", text: "Check your understanding" },
     {
       type: "quiz",
       id: "va0-5-q1",
